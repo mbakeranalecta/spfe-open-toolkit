@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:group name="resources">
+        <xs:choice>
+            <xs:element name="topic-id">
+                <xs:complexType>
+                    <xs:attribute name="id-ref"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="topic-set-id">
+                <xs:complexType>
+                    <xs:attribute name="id-ref"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="fig-id">
+                <xs:complexType>
+                    <xs:attribute name="id-ref"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:group>
+</xs:schema>

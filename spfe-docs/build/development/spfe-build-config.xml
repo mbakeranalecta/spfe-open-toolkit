@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    <define name="TOPIC_SET_ID" value="spfe-docs"/>
+    <include href="../spfe-docs-config.xml"/>
+    <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
+    <publication-info>
+        <title>SPFE Development</title>
+    </publication-info>
+    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic</topic-type-order>
+    <sources>
+        <topics>
+            <include>${SPFE_DOCS_HOME}/content/development/*.xml</include>
+        </topics>
+        <text-objects>
+            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+        </text-objects>
+        <fragments>
+            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+        </fragments>
+        <graphics>
+            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+        </graphics>
+        <graphics-catalog>
+            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+        </graphics-catalog>
+        <strings>
+            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+        </strings>
+        <synonyms>
+            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+        </synonyms>
+    </sources>
+    <condition-tokens>FOO BAR</condition-tokens>
+    <default-topic-scope>spfe</default-topic-scope>
+    <default-mention-scope>spfe</default-mention-scope>
+    <output-formats>html</output-formats>
+
+    <build>
+        <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
+        <build-directory>${HOME}/spfebuild/spfe-docs/development</build-directory>
+    </build>
+    
+    <deployment>
+        <output-path>${TOPIC_SET_ID}</output-path>
+    </deployment>
+
+    <scripts>
+        <synthesis>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/common/common-topic-synthesis.xsl</script> 
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/generic-topic/generic-topic-synthesis.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/mentions/mentions.xsl</script>
+        </synthesis>
+        <link-catalog>
+            <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
+        </link-catalog>
+        <image-list>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/image-handling/get-image-list.xsl</script>
+        </image-list>
+        <presentation-web>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-toc.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/topic-type/present-generic-topic.xsl</script>
+        </presentation-web>
+    </scripts>
+</spfe>

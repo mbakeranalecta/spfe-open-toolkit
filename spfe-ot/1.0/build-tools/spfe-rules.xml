@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="spfe-rules" basedir="." default="draft">
+
+	<xmlcatalog id="oasis-catalogs">
+		<dtd publicId="-//OASIS//DTD XML Catalogs V1.1//EN" 
+			location="${SPFEOT_HOME}/1.0/schemas/catalog1.1.dtd"/>	
+	</xmlcatalog>
+	<xmlcatalog id="spfe-catalogs">
+		<classpath>
+			<fileset dir="${SPFEOT_HOME}/tools/xml-commons-resolver-1.2">
+				<include name="resolver.jar"/>
+			</fileset>
+			<fileset dir="${SPFEOT_HOME}/tools/config">
+				<include name="CatalogManager.properties"/>
+			</fileset>
+		</classpath>
+		<catalogpath >
+			<fileset 
+				dir="${SPFEOT_HOME}/1.0/schemas"
+				includes="**/catalog.xml"/>
+			<fileset dir="${SPFEOT_HOME}/plugins" 
+				includes="**/catalog.xml"/>			
+			<fileset dir="${HOME}/.spfe" 
+					includes="**/catalog.xml" erroronmissingdir="no"/>
+<!--			<fileset 
+				dir="${spfe.xml-catalog-directory}"
+				includes="**/catalog.xml"/>-->
+		</catalogpath>
+
+	</xmlcatalog>
+
+	<!-- PROPERTY DEFINITIONS -->
+
+	<!-- properties for build files -->
+	<dirname property="spfe.spfe-rules.basedir" file="spfe-rules"/>
+
+	<!-- properties for the temporary files used -->
+	<property name="temp" value="${spfe.build.build-directory}/temp"/>
+	<property name="output" value="${spfe.directories.output}/{spfe.topic-set-id}"/>
+	<!--<property name="spfe.files.synthesis" value="spfe.synthesis.xml"/>-->
+	<property name="spfe.files.presentation" value="spfe.presentation-web.xml"/>
+	<property name="spfe.files.presentation-book" value="spfe.presentation-book.xml"/>
+	<property name="spfe.files.fo-format" value="spfe.fo-format.fo"/>
+
+	<!-- import the common SPFE definitions -->
+	<import file="spfe-common.xml"/>
+
+	<!-- ============= -->
+	<!-- BUILD RELATED -->
+	<!-- ============= -->
+	<!-- provides a property for testing currency of build files -->
+	<!-- FIXME: what about the higher-level build files? -->
+
+	<path id="spfe.buildfiles">
+		<pathelement path="${spfe.spfe-rules.basedir}/${ant.file.spfe-rules}"/>
+		<pathelement path="${spfe.spfe-rules.basedir}/${ant.file.spfe-common}"/>
+	</path>
+
+	<!-- Initialization target -->
+	<target name="-init" depends="-recorder" description="Initialization of properties."
+		unless="already-initialized">
+
+		<!-- avoid running -init twice so we don't run the last-build-crashed test twice -->
+		<property name="already-initialized" value="true"/>
+
+		<!-- check if the last build crashed -->
+		<available property="last-build-crashed" file="${temp}/incomplete.flag"/>
+		<antcall target="-check-last-build-status"/>
+		<echo message="Beginning build of ${spfe.topic-set-id}"/>
+
+		<!-- mkdir in case no link catalogs have been created - make sure file list is created correctly even if empty. -->
+		<mkdir dir="${spfe.build.link-catalog-directory}"/>
+		<mkdir dir="${temp}"/>
+		<mkdir dir="${temp}/synthesis"/>
+	</target>
+
+	<target name="-check-last-build-status" if="last-build-crashed">
+		<echo message="Last build failed. Cleaning up."/>
+		<!--<antcall target="-clean"/>-->
+	</target>
+
+	<!-- recorder target -->
+	<target name="-recorder" if="spfe.topic-set-id">
+		<echo
+			message="Logging to: ${spfe.build.build-directory}/logs/${spfe.topic-set-id}.txt"/>
+		<mkdir dir="${spfe.build.build-directory}/logs"/>
+		<record
+			name="${spfe.build.build-directory}/logs/${spfe.topic-set-id}-log.txt"
+			action="start"/>
+	</target>
+
+	<target name="-get-build-revision">
+		<exec outputproperty="this-revision" executable="svnversion">
+			<arg value="${SPFE_HOME}"/>
+		</exec>
+		<echo message="Current working copy revision is ${this-revision}"/>
+		<condition property="is-working-copy-clean" else="false">
+			<matches pattern="^[0-9]+$" string="${this-revision}"/>
+		</condition>
+		<echo message="Working copy clean: ${is-working-copy-clean}"/>
+	</target>
+
+	<!-- ============ -->
+	<!-- SOURCE FILES -->
+	<!-- ============ -->
+	<!-- provides properties and rules for defining and fetching source files -->
+
+	<!-- TOPICS -->
+	<target name="-get.source-files.topics">
+		<mkdir dir="${temp}/topics"/>
+		<copy todir="${temp}/topics" preservelastmodified="true" flatten="true" verbose="true">
+			<files refid="topics"/>
+		</copy>
+		<fileset id="topic-file-list" dir="${temp}/topics" includes="*.xml"/>
+		<property name="topic-files" refid="topic-file-list"/>
+	</target>
+
+	<!-- TEXT OBJECTS -->
+	<fileset id="spfe.source-files.text-objects" dir="${spfe.sources.text-objects.fileset.dir}"
+		includes="${spfe.sources.text-objects.fileset.includes}"/>
+
+	<target name="-get.source-files.text-objects" if="spfe.source-files.text-objects">
+		<copy todir="${temp}/text-objects" preservelastmodified="true" flatten="true" verbose="true">
+			<fileset refid="spfe.source-files.text-objects"/>
+		</copy>
+		<fileset id="text-objects-file-list" dir="${temp}/text-objects" includes="*.xml"/>
+		<property name="text-objects-files" refid="text-objects-file-list"/>
+		<!-- FIXME: Make the for of the property name consistent -->
+	</target>
+
+	<!-- FIXME: Does this need to be a target or just a property? 
+	<target name="-locate-text-objects-files" depends="-get.source-files.text-objects" if="spfe.source-files.text-objects">
+	</target>-->
+
+	<!-- FIXME: Need an up-to-date target for text objects. -->
+
+	<!-- FRAGMENTS -->
+	<fileset id="spfe.source-files.fragments" dir="${spfe.sources.fragments.fileset.dir}"
+		includes="${spfe.sources.fragments.fileset.includes}"/>
+
+	<target name="-get.source-files.fragments" if="spfe.source-files.fragments">
+		<copy todir="${temp}/fragments" preservelastmodified="true" flatten="true" verbose="true">
+			<fileset refid="spfe.source-files.fragments"/>
+		</copy>
+		<fileset id="fragments-file-list" dir="${temp}/fragments" includes="*.xml"/>
+		<property name="fragment-files" refid="fragments-file-list"/>
+	</target>
+
+	<!-- GRAPHICS -->
+
+	<target name="-get.source-files.graphics-catalog">
+		<copy todir="${temp}" preservelastmodified="true" flatten="true">
+			<files refid="graphics-catalog"/>
+		</copy>
+		<basename property="graphics-catalog-file" file="${graphics-catalog}"/>
+	</target>
+
+	<!-- STRINGS -->
+	<fileset id="spfe.source-files.strings" dir="${spfe.sources.strings.fileset.dir}"
+		includes="${spfe.sources.strings.fileset.includes}"/>
+
+	<target name="-get.source-files.strings" if="spfe.source-files.strings">
+		<copy todir="${temp}/strings" preservelastmodified="yes" flatten="yes" verbose="yes">
+			<fileset refid="spfe.source-files.strings"/>
+		</copy>
+		<fileset id="strings-files" dir="${temp}/strings"/>
+		<property name="strings-files-names" refid="strings-files"/>
+	</target>
+
+	<!-- SYNONYMS -->
+	<fileset id="spfe.source-files.synonyms" dir="${SPFE_HOME}/Content"
+		includes="${spfe.source-files.synonyms}"/>
+
+	<target name="-get.source-files.synonyms" if="spfe.source-files.synonyms">
+		<mkdir dir="${temp}/synonyms"/>
+		<copy todir="${temp}/synonyms" preservelastmodified="yes" flatten="yes" verbose="yes">
+			<fileset refid="spfe.source-files.synonyms"/>
+		</copy>
+		<fileset id="synonyms-files" dir="${temp}/synonyms"/>
+		<property name="synonyms-files-names" refid="synonyms-files"/>
+	</target>
+
+
+	<!-- LINK CATALOG -->
+	<property name="link-catalog-files" refid="link-catalogs"/>
+
+	<target name="-get.externals.graphics.print" depends="-build.image-list.print"
+		if="image-list-print-has-content">
+		<mkdir dir="${temp}/graphics"/>
+		<copy todir="${temp}/graphics" flatten="true" failonerror="true" preservelastmodified="true"
+			verbose="true">
+			<fileset refid="files.graphics.print"/>
+		</copy>
+	</target>
+
+	<!-- HTML -->
+
+	<target name="-get.externals.graphics.html"
+		depends="-build.image-list-html, -get.externals.pdf-graphic"
+		if="image-list-html-has-content">
+		<mkdir dir="${output}/graphics"/>
+		<copy todir="${output}/graphics" flatten="true" failonerror="true"
+			preservelastmodified="true" verbose="true">
+			<fileset refid="files.graphics.html"/>
+		</copy>
+	</target>
+
+	<target name="-get.externals.css">
+		<mkdir dir="${output}"/>
+		<copy todir="${output}" preservelastmodified="true" verbose="true"
+			flatten="true" failonerror="true">
+			<files refid="css"/>
+		</copy>
+	</target>
+
+	<target name="-get.externals.javascript">
+		<mkdir dir="${output}"/>
+		<copy todir="${output}" preservelastmodified="true">
+			<fileset refid="javascript"/>
+		</copy>
+	</target>
+
+	<target name="-get.externals.pdf-graphic" if="spfe.pdf">
+		<mkdir dir="${output}/graphics"/>
+		<copy file="${spfe.source-files.pdf-graphic}" todir="${output}/graphics"
+			preservelastmodified="true"/>
+	</target>
+
+	<!-- PDF -->
+
+	<target name="-get.externals.fo-template-graphics">
+		<mkdir dir="${temp}/graphics"/>
+		<copy todir="${temp}/graphics" preservelastmodified="true" verbose="yes">
+			<fileset dir="${spfe.directories.fo-template.graphics}" id="files.graphics.fo-template"
+			/>
+		</copy>
+	</target>
+
+
+	<!-- =========== -->
+	<!-- BUILD STEPS -->
+	<!-- =========== -->
+	<!-- provides properties and rules for performing the build steps -->
+
+	<!-- SYNTHESIS STEP -->
+
+    <!-- FIXME: this should test the synthesis file set, not a file name. -->
+	<target name="-current.synthesis">
+		<uptodate property="-current.synthesis"
+			targetfile="${temp}/synthesis/spfe.synthesis.xml">
+			<srcresources>
+				<files refid="graphics-catalog"/>
+				<files refid="topics"/>
+				<files refid="text-objects"/>
+				<files refid="fragments"/>
+				<files refid="strings"/>
+				<files refid="graphics-catalog"/>
+				<files refid="link-catalogs"/>
+				<path refid="spfe.buildfiles"/>
+			</srcresources>
+		</uptodate>
+	</target>
+
+	<!-- target to build  synthesis -->
+	<target name="-build.synthesis" depends="--build.synthesis"/>
+	<target name="--build.synthesis" description="synthesis"
+		depends="-get.source-files.topics,
+					 -get.source-files.text-objects,
+					 -get.source-files.fragments,
+					 -get.source-files.strings,
+					 -current.synthesis"
+		unless="-current.synthesis">
+
+		<!-- run the XSLT script to produce the output -->
+		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			style="${spfe.scripts.synthesis}" 
+			in="${spfe.config-file}"
+			out="${temp}/synthesis/spfe.synthesis.xml">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="topic-files" expression="${topic-files}"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="draft" expression="${draft}" if="draft"/>
+			<param name="optional-product" expression="${spfe.optional-product}"
+				if="spfe.optional-product"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+
+
+		<!-- validate the output file -->
+		<xmlvalidate lenient="yes" file="${temp}/synthesis/spfe.synthesis.xml">
+			<!-- make the validation include namespaces -->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+		</xmlvalidate>		
+		
+		<!-- FIXME: figure out why I can't set up the synthesis-file-list here and use it everywhere else -->
+	</target>
+
+	<!-- LINK CATALOG STEP -->
+
+	<!-- check if link-catalog is up to date -->
+
+	<target name="-current.link-catalog">
+		<fileset id="synthesis-file-list" dir="${temp}/synthesis" includes="*.xml"/>
+		<property name="synthesis-files" refid="synthesis-file-list"/>		
+		<uptodate property="-current.link-catalog"
+			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}_${spfe.publication-info.release}.link-catalog">
+			<srcresources>
+				<fileset refid="synthesis-file-list"/>
+				<!-- FIXME: what happens if it doesn't exist? Unnecessary build. -->
+				<path refid="spfe.buildfiles"/>
+			</srcresources>
+		</uptodate>
+	</target>
+
+	<!-- target for link-catalog -->
+	<target name="-build.link-catalog" depends="--build.link-catalog"/>
+	<target name="--build.link-catalog" description="Link catalog step."
+		depends=" -build.synthesis, -current.link-catalog, -get.source-files.synonyms"
+		unless="-current.link-catalog">
+		<fileset id="synthesis-file-list" dir="${temp}/synthesis" includes="*.xml"/>
+		<property name="synthesis-files" refid="synthesis-file-list"/>		
+		
+		<!-- run the XSLT script to produce the output -->
+		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file}"
+			style="${spfe.scripts.link-catalog}"
+			out="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}_${spfe.publication-info.release}.link-catalog.xml">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="synthesis-files" expression="${synthesis-files}"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+		<!-- validate the output file -->
+		<xmlvalidate lenient="yes"
+			file="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}_${spfe.publication-info.release}.link-catalog.xml">
+			<!-- make the validation include namespaces - not needed unless schema-validating -->
+			<!-- <attribute name="http://xml.org/sax/features/namespaces" value="true"/> -->
+		</xmlvalidate>
+	</target>
+
+
+	<!-- PRESENTATION WEB STEP -->
+
+
+	<!-- check to see if the html-presentation is up to date -->
+	<target name="-current.presentation-web">
+		<fileset id="synthesis-file-list" dir="${temp}/synthesis" includes="*.xml"/>
+		<property name="synthesis-files" refid="synthesis-file-list"/>		
+		<uptodate property="-current.presentation-web"
+			targetfile="${temp}/presentation/${spfe.files.presentation}">
+			<srcresources>
+				<fileset refid="synthesis-file-list"/>
+				<path refid="spfe.buildfiles"/>
+			</srcresources>
+		</uptodate>
+	</target>
+
+	<!-- build the presentation -->
+	<target name="-build.presentation-web" depends="--build.presentation-web"/>
+	<target name="--build.presentation-web" description="presentation step."
+		depends="-build.synthesis, 
+									 -current.presentation-web, 
+									 -get.source-files.graphics-catalog,
+									 -get.source-files.strings"
+		unless="-current.presentation-web">
+
+		<!-- run the XSLT script to produce the output -->
+
+		<!-- default to reading all the link catalogs -->
+		<echo>${link-catalog-files}</echo>
+
+		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			style="${spfe.scripts.presentation-web}"
+			in="${spfe.config-file}"
+			out="${temp}/presentation/${spfe.files.presentation}">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="synthesis-files" expression="${synthesis-files}"/>
+			<param name="link-catalog-files" expression="${link-catalog-files}"/>
+
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+
+		<!-- validate the output file -->
+		<xmlvalidate lenient="yes" file="${temp}/presentation/${spfe.files.presentation}">
+			<!-- make the validation include namespaces -->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+		</xmlvalidate>
+	</target>
+
+	<!-- PRESENTATION BOOK STEP -->
+
+	<!-- check to see if the presentation-book is up to date -->
+	<target name="-current.presentation-book">
+		<fileset id="synthesis-file-list" dir="${temp}/synthesis" includes="*.xml"/>
+		<property name="synthesis-files" refid="synthesis-file-list"/>		
+		<uptodate property="-current.presentation-book"
+			targetfile="${temp}/${spfe.files.presentation-book}">
+			<srcresources>
+				<fileset refid="synthesis-file-list"/>
+				<path refid="spfe.buildfiles"/>
+			</srcresources>
+		</uptodate>
+	</target>
+	
+	<!-- build the book presentation -->
+	<target name="-build.presentation-book" depends="--build.presentation-book"/>
+	<target name="--build.presentation-book" description="book presentation step."
+		depends="-build.synthesis, 
+									 -current.presentation-book, 
+									 -get.source-files.graphics-catalog,
+									 -get.source-files.strings"
+		unless="-current.presentation-book">
+
+		<!-- run the XSLT script to produce the output -->
+	<fileset id="synthesis-file-list" dir="${temp}/synthesis" includes="*.xml"/>
+	<property name="synthesis-files" refid="synthesis-file-list"/>		
+
+
+		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file}" 
+			style="${scripts.presentation-book}"
+			out="${temp}/${spfe.files.presentation-book}">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="synthesis-files" expression="${synthesis-files}"/>
+			<param name="link-catalog-files" expression="${link-catalog-files}"/>
+			
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+		<!-- validate the output file -->
+		<xmlvalidate lenient="yes" file="${temp}/${spfe.files.presentation-book}">
+			<!-- make the validation include namespaces -->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+		</xmlvalidate>
+	</target>
+
+	<!-- FORMAT HTML STEP -->
+
+	<!-- check to see if the format is up to date -->
+	<target name="-current.html-format">
+		<uptodate property="-current.html-format" targetfile="${temp}/html-format">
+			<srcresources>
+				<filelist dir="${temp}">
+					<file name="${spfe.files.presentation}"/>
+				</filelist>
+				<!-- even thought this fileset is defined in -build.image-list.html, 
+				we redefine it here because -build.image-list.html will only run if
+				the image list is out of date, and we need to check if the graphics
+				themselves are out of date -->
+<!--				<fileset dir="${spfe.directories.image-source}"
+					includesfile="${temp}/image-list-html"/>-->
+				<filelist dir=".">
+					<file name="${spfe.source-files.pdf-graphic}"/>
+					<file name="${spfe.source-files.javascript.folding}"/>
+					<file name="${spfe.source-files.css}"/>
+				</filelist>
+				<path refid="spfe.buildfiles"/>
+			</srcresources>
+		</uptodate>
+	</target>
+
+	<!-- target to format for html -->
+	<!-- FIXME: need a good way to deal with template files -->
+
+	<target name="-build.html-format" depends="--build.html-format"/>
+	<target name="--build.html-format"
+		depends="-build.presentation-web, 
+	        				 -get.externals.graphics.html,
+
+	        				 -current.html-format"
+		unless="-current.html-format">
+<!--	        				 -get.externals.css,
+	        				 -get.externals.javascript, -->
+		<fileset id="presentation-file-list" dir="${temp}/presentation" includes="*.xml"/>
+		<property name="presentation-files" refid="presentation-file-list"/>		
+		<echo message="${presentation-files}"/>
+
+		<!-- run the XSLT script to produce the output -->
+		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file}" 
+			style="${spfe.scripts.format-html}" out="${temp}/html-format">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="presentation-files" expression="${presentation-files}"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+		
+		
+
+		<!-- FIXME: <xmlvalidate lenient="no" warn="yes" failonerror="no">
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+			<fileset dir="${output}" includes="*.html"/>
+		</xmlvalidate> -->
+		
+	</target>
+
+
+
+
+	<!-- FORMAT FO STEP -->
+
+	<!-- check to see if the format is up to date -->
+	<target name="-current.fo-format">
+		<uptodate property="-current.fo-format" targetfile="${temp}/fo-format">
+			<srcresources>
+				<filelist dir="${temp}">
+					<file name="${spfe.files.presentation}"/>
+				</filelist>
+				<path refid="spfe.buildfiles"/>
+			</srcresources>
+		</uptodate>
+	</target>
+
+	<target name="-build.fo-format" depends="--build.fo-format"/>
+	<target name="--build.fo-format" description="FO formatting"
+		depends="-build.presentation-book, -current.fo-format" unless="-current.fo-format">
+		<!-- run the XSLT script to produce the output -->
+		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${temp}/${spfe.files.presentation-book}" style="${scripts.format-fo}"
+			out="${temp}/${spfe.files.fo-format}">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+		<!-- validate the output file -->
+		<!-- 		<schemavalidate file="${temp}/${spfe.files.fo-format}">
+			<!- - make the validation include namespaces - ->
+			<!- -<attribute name="http://apache.org/xml/features/validation/schema" value="true"/>- ->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+		</schemavalidate>
+ -->
+	</target>
+
+
+	<!-- ENCODE PDF STEP -->
+
+	<!-- no script fileset because all the processing is done by FOP -->
+
+
+
+	<!-- check to see if the format is up to date -->
+	<target name="-current.pdf-encode">
+		<uptodate property="-current.pdf-encode"
+			targetfile="${output}/${spfe.pdf-name}">
+			<srcresources>
+				<filelist dir="${temp}">
+					<file name="${spfe.files.fo-format}"/>
+				</filelist>
+				<!-- even thought this fileset is defined in -build.image-list.print, 
+				we redefine it here because -build.image-list.print will only run if
+				the image list is out of date, and we need to check if the graphics
+				themselves are out of date -->
+<!--				<fileset dir="${spfe.directories.image-source}"
+					includesfile="${temp}/image-list-print"/>-->
+				<fileset refid="files.graphics.fo-template"/>
+				<path refid="spfe.buildfiles"/>
+			</srcresources>
+		</uptodate>
+	</target>
+
+	<target name="-build.pdf-encode" depends="--build.pdf-encode"/>
+	<target name="--build.pdf-encode" description="PDF encoding"
+		depends=" -build.fo-format, -get.externals.graphics.print, -get.externals.fo-template-graphics, -current.pdf-encode"
+		unless="-current.pdf-encode">
+		<!-- run the XSLT script to produce the output -->
+		<!-- make sure the output directory exists -->
+		<mkdir dir="${output}"/>
+		<fop format="application/pdf" fofile="${temp}/${spfe.files.fo-format}"
+			outfile="${output}/${spfe.pdf-name}" basedir="${temp}"
+			userconfig="${temp}/fop.xconf"/>
+		<touch file="${temp}/pdf-format"/>
+	</target>
+
+
+	<!-- REPORT STEP -->
+
+
+	<!-- check to see if the html-presentation is up to date -->
+	<target name="-current.report">
+		<uptodate property="-current.presentation-web"
+			targetfile="${output}/${spfe.report-name}">
+			<srcresources>
+				<fileset refid="spfe.scripts.report.all"/>
+				<fileset refid="synthesis-file-list"/>
+				<path refid="spfe.buildfiles"/>
+			</srcresources>
+		</uptodate>
+	</target>
+
+	<!-- build the report -->
+	<target name="-build.report" description="report generation"
+		depends="-build.synthesis, 
+									 -get.source-files.graphics-catalog,
+									 -get.source-files.strings,
+									 -current.report"
+		unless="-current.report">
+
+		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file" style="${scripts.report}"
+			out="${output}/${spfe.report-name}">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="draft" expression="${draft}" if="draft"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+	</target>
+
+
+	<!-- IMAGE LIST STEP -->
+
+	<!-- check to see if the format is up to date -->
+	<target name="-current.image-list-html">
+		<uptodate property="-current.image-list-html" targetfile="${temp}/image-list-html">
+			<srcresources>
+				<filelist dir="${temp}">
+					<file name="${spfe.files.presentation}"/>
+				</filelist>
+				<path refid="spfe.buildfiles"/>
+			</srcresources>
+		</uptodate>
+	</target>
+
+	<target name="-build.image-list-html"
+		depends="-build.presentation-web, -get.source-files.graphics-catalog, -current.image-list-html"
+		unless="-current.image-list-html">
+		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${temp}/presentation/${spfe.files.presentation}" style="${spfe.scripts.image-list}"
+			out="${temp}/image-list-html">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="graphics-catalog-file" expression="${graphics-catalog-file}"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+<!--		<fileset id="files.graphics.html" dir="${spfe.directories.image-source}"
+			includesfile="${temp}/image-list-html"/>-->
+		<condition property="image-list-html-has-content">
+			<isfileselected file="${temp}/image-list-html">
+				<containsregexp expression="\S+"/>
+			</isfileselected>
+		</condition>
+	</target>
+
+	<!-- check to see if the format is up to date -->
+	<target name="-current.image-list.print">
+		<uptodate property="-current.image-list.print" targetfile="${temp}/image-list-print">
+			<srcresources>
+				<filelist dir="${temp}">
+					<file name="${spfe.files.presentation-book}"/>
+				</filelist>
+				<path refid="spfe.buildfiles"/>
+			</srcresources>
+		</uptodate>
+	</target>
+
+	<target name="-build.image-list.print"
+		depends="-build.presentation-book, -get.source-files.graphics-catalog, -current.image-list.print"
+		unless="-current.image-list.print">
+		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${temp}/${spfe.files.presentation-book}" style="${spfe.scripts.image-list}"
+			out="${temp}/image-list-print">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="graphics-catalog-file" expression="${graphics-catalog-file}"/>
+			<param name="vector-if-available" expression="yes"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+<!--		<fileset id="files.graphics.print" dir="${spfe.directories.image-source}"
+			includesfile="${temp}/image-list-print"/>-->
+		<condition property="image-list-print-has-content">
+			<isfileselected file="${temp}/image-list-print">
+				<containsregexp expression="\S+"/>
+			</isfileselected>
+		</condition>
+	</target>
+
+	<!--===============-->
+	<!-- USER COMMANDS -->
+	<!--===============-->
+
+	<!-- ZIP -->
+	<target name="zip" depends="-init">
+		<antcall target="-zip"/>
+	</target>
+
+	<target name="-zip" depends="-final, pdf">
+		<mkdir dir="${spfe.directories.output.zip}"/>
+		<basename property="zip-prefix" file=""/>
+		<echo message="Zipping ${output}"/>
+		<zip destfile="${spfe.directories.output.zip}/${spfe.zip-file-name}">
+			<zipfileset dir="${output}" prefix="${zip-prefix}"/>
+		</zip>
+	</target>
+
+
+	<!-- DRAFT -->
+	<target name="draft" depends="-init">
+		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
+		<antcall target="-draft"/>
+		<delete file="${temp}/incomplete.flag"/>
+	</target>
+
+	<target name="-draft" depends="-draft-flag, -final" description="Build the draft online output."/>
+
+	<target name="-draft-flag">
+		<!-- this is a separate rule to ensure it runs before -final -->
+		<property name="draft" value="yes"/>
+		<touch file="${temp}/draft.flag" mkdirs="true"/>
+	</target>
+
+	<!-- FINAL -->
+	<target name="final" depends="-init, -final"/>
+	<target name="-final" depends="-force-clean, -build.html-format"
+		description="Build the final online output."/>
+
+	<target name="-force-clean" description="Force clean before final build" depends="-is-draft"
+		if="is-draft" unless="draft">
+		<antcall target="-clean"/>
+	</target>
+
+	<target name="-is-draft">
+		<available property="is-draft" file="${temp}/draft.flag"/>
+	</target>
+
+	<!-- CLEAN -->
+	<target name="clean" depends="-init, -clean"/>
+
+	<target name="-clean" description="Clean temp and output files.">
+		<delete dir="${temp}"/>
+		<delete dir="${output}"/>
+	</target>
+
+	<!-- WIP -->
+	<target name="wip" depends="-init, draft, pdf, -wip"/>
+	<target name="-wip" description="Copy content to the work in progress website">
+		<!-- FIXME: Set failonerror to "no" to solve problems with non-SPFE things where there is nothing to copy. May be a better way to handle this. -->
+		<copy todir="${spfe.directories.internal-web}" preservelastmodified="true" failonerror="no">
+			<fileset dir="${output}"/>
+		</copy>
+	</target>
+
+	<!-- CAT -->
+	<target name="cat" depends="-init">
+		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
+		<antcall target="-cat"/>
+		<delete file="${temp}/incomplete.flag"/>
+	</target>
+
+	<target name="-cat" description="Build all the link catalogs">
+		<antcall target="-build.link-catalog"/>
+	</target>
+
+	<!-- REPORT -->
+	<target name="report" depends="-init">
+		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
+		<antcall target="-report"/>
+		<delete file="${temp}/incomplete.flag"/>
+	</target>
+
+	<target name="-report" description="Build all the report">
+		<antcall target="-build.report"/>
+	</target>
+
+	<!-- PDF -->
+	<target name="pdf" depends="-init, -pdf-skipped-message" description="Build the PDF output."
+		if="spfe.pdf">
+		<antcall target="-build.pdf-encode"/>
+	</target>
+
+	<target name="-pdf-skipped-message" unless="spfe.pdf">
+		<echo message="PDF generation skipped because property spfe.pdf is not set."/>
+	</target>
+
+
+	<target name="test-mail">
+		<property name="test-message"
+			value="Congratulations ${spfe.mail.from}, you have successfully set up your environment to enable the SPFE build to send mail."/>
+		<antcall target="-send-mail">
+			<param name="spfe.mail.to" value="${spfe.mail.from}"/>
+			<param name="mail.subject" value="Test message"/>
+			<param name="mail.message" value="${test-message}"/>
+		</antcall>
+	</target>
+
+	<target name="-send-mail">
+		<mail mailhost="${spfe.mail.smtp.server}" mailport="${spfe.mail.smtp.port}"
+			subject="${mail.subject}" encoding="plain">
+			<from address="${spfe.mail.from}"/>
+			<replyto address="${spfe.mail.from}"/>
+			<to address="${spfe.mail.to}"/>
+			<message>${mail.message}</message>
+		</mail>
+	</target>
+
+	<!-- VALIDATE -->
+	<!-- Not implemented yet -->
+
+	<!-- <target name="validate" description="Validate the authored content." > 
+		<antcall target="-validate"/>
+	</target> -->
+	<target name="-validate" depends="-get.source-files.topics">
+
+		<xmlvalidate lenient="no">
+			<!-- XML CATALOG -->
+			<xmlcatalog>
+				<catalogpath>
+					<file name="${xml.catalog.catalogs}"/>
+				</catalogpath>
+			</xmlcatalog>
+			<!-- make the validation include namespaces -->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+			<fileset dir="${temp}/topics"/>
+		</xmlvalidate>
+	</target>
+	<!--	
+	   3:    <target name="validate-topic-set-files">
+   4:        <!-/- Make sure the files are valid  -/->
+   5:        <xmlvalidate    failonerror="yes" lenient="no" warn="yes"
+   6:                        classname="org.apache.xerces.parsers.SAXParser"
+   7:                        classpath="lib/xerces.jar"
+   8:        >
+   9:            <fileset dir="." includes="**/*.xml"/>
+  10:            <attribute name="http://xml.org/sax/features/validation" value="true"/>
+  11:            <attribute name="http://apache.org/xml/features/validation/schema"  value="true"/>
+  12:        </xmlvalidate>
+  13:        <echo message="Project files have been validated"  />
+  14:    </target>
+-->
+
+</project>

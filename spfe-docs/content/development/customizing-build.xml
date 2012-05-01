@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generic-topic xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic.xsd">
+    <head>
+        <base-uri>http://spfeopentoolkit.org/spfe-docs/content</base-uri>
+        <name>customizing-build</name>
+        <author>mbaker</author>
+        <status>Not started</status>
+        <history>
+            <revision>
+                <date>2012-03-22</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <new-status>Not started</new-status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>{customize} {build}</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Customizing the build</title>
+        <p>The default SPFE build file (<file-name>spfe-rules.xml</file-name>) implements a standard order of build steps which will work for most <feature>topic sets</feature>. You determine which scripts will be called for each stage of the build by configuring the <xml-element-name>/spfe/scripts</xml-element-name> configuration element. However, sometimes you will want to insert additional steps into the build, particularly at the <feature>synthesis</feature> stage. If you have a complex process at any stage of the build, it is better to break it up into multiple steps, each of which does one thing, and which produces an XML file to be read by the next stage of the build.</p>
+        <p>To change the build order, you write an ant rules file describing the steps of your build. You don't have to describe the complete build order in your build file. You can import <file-name>spfe-rules.xml</file-name> into your build file and then override the rules you want to change. To make this easier, <file-name>spfe.rules</file-name> defines an intermediate taget for each build step that has a dependency on the main build rules for that step. Rather than overriding the main build rule, you can just override the intermediate rule and add your custom rules to its dependency list.</p>
+        <p>The main build targets have names starting with two hyphens. For instance, the main synthesis rules is called <code>--build.synthesis</code>. The intermediat build rules have the same name starting with one hyphen, for instance, <code>-build.synthesis</code>. The <code>-build.synthesis</code> rule contains just a dependency on the main build rule, so in <file-name>spfe.rules</file-name> the <code>-build.synthesis</code> rule looks like this:</p>
+        <codeblock>
+<![CDATA[<target name="-build.synthesis" depends="--build.synthesis"/>]]>
+        </codeblock>
+        
+        <p>To override this rule and insert a build step before the main synthesis step, you write a build rules file like this:</p>
+        
+        <codeblock> 
+        <![CDATA[
+<project name="my-custom-build-rules" basedir="." default="draft">
+
+    <import file="${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml"/>
+    
+    <target name="-synthesis" depends="--my-custom-synthesis-rule, --build.synthesis">
+    
+    <target name="--my-custom-synthesis-rule">
+        <!-- your build rules here -->
+    </target>
+</project>
+        ]]>
+        </codeblock>
+        
+        <p>This build rule causes your custom synthesis rule to be called first, and then the standard synthesis rule. Obviously, if you do this you must create XML output in the place the default synthesis rule expects to find it. Alternatively, you can omit the default synthesis rule entirely, in which case your custom synthesis rule must create a syntheis XML document or documents in the place the presentation rule expects to find it.</p>
+        <p>The list of build rules designed to be overridable in this way is:</p>
+        <ul>
+            <li>
+                <p>-build.sysnthesis</p>
+            </li>
+            <li>
+                <p>-build.presentation-web</p>
+            </li>
+            <li>
+                <p>-build.presentation-book</p>
+            </li>
+            <li>
+                <p>-build.html-format</p>
+            </li>
+            <li>
+                <p>-build.fo-format</p>
+            </li>
+            <li>
+                <p>-build.pdf-encode</p>
+            </li>
+        </ul>
+        <p>To make your new build file the build file used for your topic set build, you add a /spfe/build-rules element to the configuration file for that topic set:</p>
+
+<codeblock>
+    <![CDATA[
+<spfe>
+    ...
+    <build-rules>${MY_PROJECT_HOME}/build-tools/my-custom-build-rules.xml</build-rules>
+    ...
+</spfe>
+    ]]>
+</codeblock>
+
+    </body>
+</generic-topic>

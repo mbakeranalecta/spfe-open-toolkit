@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+
+  <public publicId="-//Apache//DTD Resolver Test//EN"
+          uri="file:///local/public-resolver.dtd"/>
+
+  <system systemId="http://example.org/resolver.dtd"
+          uri="file:///local/system-resolver.dtd"/>
+
+  <rewriteSystem systemIdStartString="http://rewrite.example.org/"
+		 rewritePrefix="file:///short/"/>
+
+  <rewriteSystem systemIdStartString="http://rewrite.example.org/longest/"
+		 rewritePrefix="file:///longest/"/>
+
+  <rewriteSystem systemIdStartString="http://rewrite.example.org/long"
+		 rewritePrefix="file:///long/"/>
+
+  <uri name="http://example.org/someURI"
+       uri="file:///local/uri"/>
+
+  <group xml:base="http://www.example.org/">
+    <uri name="http://example.org/someOtherURI"
+	 uri="file:///local/other/uri"/>
+  </group>
+
+  <delegateSystem systemIdStartString="http://delegate.example.org/"
+		  catalog="delegate-system.xml"/>
+
+  <nextCatalog catalog="tr9401.xml"/>
+
+  <systemSuffix systemIdSuffix="/docbookx.dtd"
+		uri="file:///usr/local/xml/docbook/4.4/docbookx.dtd"/>
+
+  <uriSuffix uriSuffix="/html/docbook.xsl"
+	     uri="file:///usr/local/xsl/docbook/html/docbook.xsl"/>
+
+</catalog>

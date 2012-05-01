@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+  <xs:element name="spfe">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="define" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:NCName"/>
+            <xs:attribute name="value"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="include"  maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="href" type="xs:anyURI"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="topic-set-id" type="xs:string" minOccurs="0"/>
+        <xs:element name="publication-info" type="publication-info-type" minOccurs="0"/>
+        <xs:element name="topic-type-order" type="xs:anyURI" minOccurs="0"/>
+        <xs:element name="sources" type="sources-type" minOccurs="0"/>
+        <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
+        <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
+        <xs:element name="default-mention-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
+        <xs:element name="output-formats" minOccurs="0">
+          <xs:simpleType>
+            <xs:list itemType="output-formats-type"/>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="topic-type-aliases" type="topic-type-aliases-type" minOccurs="0"/>
+        <xs:element name="messages" minOccurs="0">
+          <xs:simpleType>
+            <xs:list itemType="messages-type"/>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="wip-site" type="wip-site-type" minOccurs="0"/>
+        <xs:element name="build" type="build-type" minOccurs="0"/>
+        <xs:element name="deployment" type="deployment-type" minOccurs="0"/>
+        <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
+        <xs:element name="other" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                 <xs:attribute name="name"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="doc-set">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="title" type="xs:string"/>
+              <xs:element name="topic-set" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="publication-info-type">
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="title" type="xs:string" minOccurs="0"/>
+        <xs:element name="product" type="xs:string" minOccurs="0"/>
+        <xs:element name="release" type="xs:string" minOccurs="0"/>
+        <xs:element name="copyright" type="xs:string" minOccurs="0"/>
+        <xs:element name="other" minOccurs="0">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:NCName"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+          
+        </xs:element>
+      </xs:choice>
+   </xs:complexType>
+ 
+  <xs:complexType name="sources-type">
+       <xs:choice maxOccurs="unbounded">
+         <xs:element name="topics" type="fileset-type"/>
+         <xs:element name="text-objects" type="fileset-type"/>
+         <xs:element name="fragments" type="fileset-type"/>
+         <xs:element name="graphics" type="fileset-type"/>
+         <xs:element name="graphics-catalog" type="fileset-type"/>
+         <xs:element name="strings" type="fileset-type"/>
+         <xs:element name="link-catalogs" type="fileset-type"/>
+         <xs:element name="synonyms" type="fileset-type"/>
+         <xs:element name="other" minOccurs="0">
+           <xs:complexType>
+             <xs:complexContent>
+               <xs:extension base="fileset-type">
+                 <xs:attribute name="name" type="xs:NCName"/>
+               </xs:extension>
+             </xs:complexContent>
+           </xs:complexType>
+           
+         </xs:element>
+      </xs:choice>
+  </xs:complexType>
+  
+  <xs:complexType name="fileset-type">
+    <xs:sequence>
+      <xs:element name="include" type="xs:anyURI" maxOccurs="unbounded" minOccurs="0"/>
+   </xs:sequence>
+  </xs:complexType>
+  
+
+  
+  <xs:complexType name="topic-type-aliases-type">
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="topic-type" type="topic-type-type"/>
+      </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="topic-type-type">
+      <xs:sequence>
+        <xs:element name="id" type="xs:anyURI"/>
+        <xs:element name="alias" type="xs:string"/>
+        <xs:element name="plural" type="xs:string"/>
+      </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="messages-type" >
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="warning"/>
+      <xs:enumeration value="info"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="output-formats-type" >
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="html"/>
+      <xs:enumeration value="pdf"/>
+      <xs:enumeration value="chm"/>
+      <xs:enumeration value="epub"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="wip-site-type">
+      <xs:sequence>
+        <xs:element name="href"/>
+        <xs:element name="ftp">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="url"/>
+              <xs:element name="user"/>
+              <xs:element name="password"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="path"/>
+      </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="build-type">
+      <xs:all>
+        <xs:element name="build-rules" type="xs:anyURI" minOccurs="0"/>
+        <xs:element name="build-directory" type="xs:string" minOccurs="0"/>
+        <xs:element name="output-directory" type="xs:string" minOccurs="0"/>
+        <xs:element name="link-catalog-directory" type="xs:string" minOccurs="0"/>
+      </xs:all>
+  </xs:complexType>
+  
+  <xs:complexType name="deployment-type">
+    <xs:all>    
+      <!-- FIXME: This need to be expanded for different output types -->
+      <xs:element name="output-path" type="xs:string"/>
+    </xs:all>  
+  </xs:complexType>
+
+  <xs:complexType name="scripts-type">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="synthesis" type="script-list-type"  minOccurs="0"/>
+      <xs:element name="link-catalog" type="script-list-type"  minOccurs="0"/>
+      <xs:element name="image-list" type="script-list-type"  minOccurs="0"/>
+      <xs:element name="presentation-web" type="script-list-type"  minOccurs="0"/>
+      <xs:element name="presentation-book" type="script-list-type"  minOccurs="0"/>
+      <xs:element name="format-html" type="script-list-type"  minOccurs="0"/>
+      <xs:element name="format-book" type="script-list-type"  minOccurs="0"/>
+<!--      <xs:element name="encode-pdf" type="script-list-type"  minOccurs="0"/>-->
+      <!-- Need a different mechanism for specifying the pdf encoding script since
+      it is not a standard SPFE XSLT script, but a third party one with its own rules. 
+      May need to point to an appropriate config file. For instance, FOP uses a 
+      fop.xconf file.-->
+      <xs:element name="other" minOccurs="0">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="script-list-type">
+              <xs:attribute name="name" type="xs:NCName"/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  
+  <xs:complexType name="script-list-type">
+    <xs:sequence>
+      <xs:element name="script" type="xs:anyURI" maxOccurs="unbounded" minOccurs="1"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

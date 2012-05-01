@@ -1,0 +1,2388 @@
+
+C:\Users\Mark\Dropbox\spfe\spfe-docs\build\config-ref>#@ECHO OFF 
+
+C:\Users\Mark\Dropbox\spfe\spfe-docs\build\config-ref>if "spfe-build-config.xml" == "" goto NOCONFIGFILE 
+
+C:\Users\Mark\Dropbox\spfe\spfe-docs\build\config-ref>if not exist spfe-build-config.xml goto CONFIGFILEMISSING 
+
+C:\Users\Mark\Dropbox\spfe\spfe-docs\build\config-ref>set SPFE_TEMP_BUILD_FILE=C:\Users\Mark\AppData\Local\Temp/spfetemp.xml 
+
+C:\Users\Mark\Dropbox\spfe\spfe-docs\build\config-ref>java -classpath C:\Users\Mark\Dropbox\spfe\spfe-ot/tools/saxon9he/saxon9he.jar net.sf.saxon.Transform -s:spfe-build-config.xml -xsl:C:\Users\Mark\Dropbox\spfe\spfe-ot/scripts/config/config.xsl -o:C:\Users\Mark\AppData\Local\Temp/spfetemp.xml HOME=\Users\Mark SPFEOT_HOME=C:\Users\Mark\Dropbox\spfe\spfe-ot SPFE_BUILD_COMMAND=draft 
+
+C:\Users\Mark\Dropbox\spfe\spfe-docs\build\config-ref>ant draft -f C:\Users\Mark\AppData\Local\Temp/spfetemp.xml -lib  \Users\Mark\Dropbox\spfe\spfe-ot\tools\xml-commons-resolver-1.2\resolver.jar -debug       
+Unable to locate tools.jar. Expected to find it in C:\Program Files\Java\jre6\lib\tools.jar
+Apache Ant(TM) version 1.8.3 compiled on February 26 2012
+Buildfile: C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Adding reference: ant.PropertyHelper
+Detected Java version: 1.6 in: C:\Program Files\Java\jre6
+Detected OS: Windows 7
+Adding reference: ant.ComponentHelper
+Setting ro project property: ant.file -> C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Setting ro project property: ant.file.type -> file
+Adding reference: ant.projectHelper
+Adding reference: ant.parsing.context
+Adding reference: ant.targets
+parsing buildfile C:\Users\Mark\AppData\Local\Temp\spfetemp.xml with URI = file:/C:/Users/Mark/AppData/Local/Temp/spfetemp.xml
+Setting ro project property: ant.project.name -> spfe-configuration-reference
+Adding reference: spfe-configuration-reference
+Setting ro project property: ant.project.default-target -> draft
+Setting ro project property: ant.file.spfe-configuration-reference -> C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Setting ro project property: ant.file.type.spfe-configuration-reference -> file
+Project base dir set to: C:\Users\Mark\AppData\Local\Temp
+ +Target: 
+Adding reference: ant.LocalProperties
+parsing buildfile jar:file:/C:/apache-ant-1.8.3/lib/ant.jar!/org/apache/tools/ant/antlib.xml with URI = jar:file:/C:/apache-ant-1.8.3/lib/ant.jar!/org/apache/tools/ant/antlib.xml from a zip file
+ [property] Loading C:\Users\Mark\.spfe\spfe.properties
+ [property] Unable to find property file: C:\Users\Mark\.spfe\spfe.properties
+Setting project property: HOME -> /Users/Mark
+Setting project property: SPFEOT_HOME -> C:/Users/Mark/Dropbox/spfe/spfe-ot
+Setting project property: spfe.config-file -> /Users/Mark/spfebuild/spfe-docs/config-ref/config/spfe-config.xml
+Setting project property: spfe.topic-set-id -> spfe-configuration-reference
+Setting project property: spfe.publication-info.title -> SPFE Configuration Reference
+Setting project property: spfe.publication-info.release -> 1.0 (alpha 1)
+Setting project property: spfe.publication-info.product -> SPFE Open Toolkit
+Setting project property: spfe.publication-info.copyright -> Copyright © 2012 Analecta Communications Inc.
+Setting project property: spfe.wip-site.href -> wip-site.href
+Setting project property: spfe.wip-site.ftp.url -> wip-site.ftp.url
+Setting project property: spfe.wip-site.ftp.user -> wip-site.ftp.user
+Setting project property: spfe.wip-site.ftp.password -> wip-site.ftp.password
+Setting project property: spfe.wip-site.path -> wip-site.ftp
+Setting project property: spfe.messages -> warning info
+Setting project property: spfe.scripts.synthesis -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.synthesis.xsl
+Setting project property: spfe.scripts.link-catalog -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.link-catalog.xsl
+Setting project property: spfe.scripts.image-list -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.image-list.xsl
+Setting project property: spfe.scripts.presentation-web -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.presentation-web.xsl
+Setting project property: spfe.scripts.other.schema-defs -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.other.schema-defs.xsl
+Setting project property: spfe.scripts.format-html -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.format-html.xsl
+Setting project property: spfe.directories.output -> /Users/Mark/spfebuild/spfe-docs/config-ref/output
+Setting project property: spfe.directories.link-catalogs -> /Users/Mark/spfebuild/spfe-docs/link-catalogs
+Setting project property: spfe.directories.build -> /Users/Mark/spfebuild/spfe-docs/config-ref
+Setting project property: spfe.directories.image-source -> /Users/Mark/Dropbox/spfe/spfe-docs/graphics
+Adding reference: topics
+Adding reference: text-objects
+Adding reference: fragments
+Adding reference: graphics
+Adding reference: graphics-catalog
+Adding reference: strings
+Adding reference: link-catalogs
+Adding reference: synonyms
+Adding reference: other.element-descriptions
+Importing file C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml from C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+parsing buildfile C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml with URI = file:/C:/Users/Mark/Dropbox/spfe/spfe-ot/plugins/config-schema-docs/build-tools/config-ref-rules.xml
+Setting ro project property: ant.file.config-ref-rules -> C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml
+Setting ro project property: ant.file.type.config-ref-rules -> file
+ +Target: -build.synthesis
+ +Target: config-ref-rules.-build.synthesis
+ +Target: -get.source-files.element-descriptions
+ +Target: config-ref-rules.-get.source-files.element-descriptions
+ +Target: -current.schema-defs
+ +Target: config-ref-rules.-current.schema-defs
+ +Target: -build.schema-defs
+ +Target: config-ref-rules.-build.schema-defs
+ +Target: --build.synthesis
+ +Target: config-ref-rules.--build.synthesis
+Importing file C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml from C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+parsing buildfile C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml with URI = file:/C:/Users/Mark/Dropbox/spfe/spfe-ot/1.0/build-tools/spfe-rules.xml
+Setting ro project property: ant.file.spfe-rules -> C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml
+Setting ro project property: ant.file.type.spfe-rules -> file
+ +Target: -init
+ +Target: spfe-rules.-init
+ +Target: -check-last-build-status
+ +Target: spfe-rules.-check-last-build-status
+ +Target: -recorder
+ +Target: spfe-rules.-recorder
+ +Target: -get-build-revision
+ +Target: spfe-rules.-get-build-revision
+ +Target: -get.source-files.topics
+ +Target: spfe-rules.-get.source-files.topics
+ +Target: -get.source-files.text-objects
+ +Target: spfe-rules.-get.source-files.text-objects
+ +Target: -get.source-files.fragments
+ +Target: spfe-rules.-get.source-files.fragments
+ +Target: -get.source-files.graphics-catalog
+ +Target: spfe-rules.-get.source-files.graphics-catalog
+ +Target: -get.source-files.strings
+ +Target: spfe-rules.-get.source-files.strings
+ +Target: -get.source-files.synonyms
+ +Target: spfe-rules.-get.source-files.synonyms
+ +Target: -get.source-files.link-catalog
+ +Target: spfe-rules.-get.source-files.link-catalog
+ +Target: -get.externals.graphics.print
+ +Target: spfe-rules.-get.externals.graphics.print
+ +Target: -get.externals.graphics.html
+ +Target: spfe-rules.-get.externals.graphics.html
+ +Target: -get.externals.css
+ +Target: spfe-rules.-get.externals.css
+ +Target: -get.externals.javascript
+ +Target: spfe-rules.-get.externals.javascript
+ +Target: -get.externals.pdf-graphic
+ +Target: spfe-rules.-get.externals.pdf-graphic
+ +Target: -get.externals.fo-template-graphics
+ +Target: spfe-rules.-get.externals.fo-template-graphics
+ +Target: -current.synthesis
+ +Target: spfe-rules.-current.synthesis
+Already defined in main or a previous import, ignore -build.synthesis
+ +Target: spfe-rules.-build.synthesis
+Already defined in main or a previous import, ignore --build.synthesis
+ +Target: spfe-rules.--build.synthesis
+ +Target: -current.link-catalog
+ +Target: spfe-rules.-current.link-catalog
+ +Target: -build.link-catalog
+ +Target: spfe-rules.-build.link-catalog
+ +Target: --build.link-catalog
+ +Target: spfe-rules.--build.link-catalog
+ +Target: -current.presentation-web
+ +Target: spfe-rules.-current.presentation-web
+ +Target: -build.presentation-web
+ +Target: spfe-rules.-build.presentation-web
+ +Target: --build.presentation-web
+ +Target: spfe-rules.--build.presentation-web
+ +Target: -current.presentation-book
+ +Target: spfe-rules.-current.presentation-book
+ +Target: -build.presentation-book
+ +Target: spfe-rules.-build.presentation-book
+ +Target: --build.presentation-book
+ +Target: spfe-rules.--build.presentation-book
+ +Target: -current.html-format
+ +Target: spfe-rules.-current.html-format
+ +Target: -build.html-format
+ +Target: spfe-rules.-build.html-format
+ +Target: --build.html-format
+ +Target: spfe-rules.--build.html-format
+ +Target: -current.fo-format
+ +Target: spfe-rules.-current.fo-format
+ +Target: -build.fo-format
+ +Target: spfe-rules.-build.fo-format
+ +Target: --build.fo-format
+ +Target: spfe-rules.--build.fo-format
+ +Target: -current.pdf-encode
+ +Target: spfe-rules.-current.pdf-encode
+ +Target: -build.pdf-encode
+ +Target: spfe-rules.-build.pdf-encode
+ +Target: --build.pdf-encode
+ +Target: spfe-rules.--build.pdf-encode
+ +Target: -current.report
+ +Target: spfe-rules.-current.report
+ +Target: -build.report
+ +Target: spfe-rules.-build.report
+ +Target: -current.image-list-html
+ +Target: spfe-rules.-current.image-list-html
+ +Target: -build.image-list-html
+ +Target: spfe-rules.-build.image-list-html
+ +Target: -current.image-list.print
+ +Target: spfe-rules.-current.image-list.print
+ +Target: -build.image-list.print
+ +Target: spfe-rules.-build.image-list.print
+ +Target: zip
+ +Target: spfe-rules.zip
+ +Target: -zip
+ +Target: spfe-rules.-zip
+ +Target: draft
+ +Target: spfe-rules.draft
+ +Target: -draft
+ +Target: spfe-rules.-draft
+ +Target: -draft-flag
+ +Target: spfe-rules.-draft-flag
+ +Target: final
+ +Target: spfe-rules.final
+ +Target: -final
+ +Target: spfe-rules.-final
+ +Target: -force-clean
+ +Target: spfe-rules.-force-clean
+ +Target: -is-draft
+ +Target: spfe-rules.-is-draft
+ +Target: clean
+ +Target: spfe-rules.clean
+ +Target: -clean
+ +Target: spfe-rules.-clean
+ +Target: wip
+ +Target: spfe-rules.wip
+ +Target: -wip
+ +Target: spfe-rules.-wip
+ +Target: cat
+ +Target: spfe-rules.cat
+ +Target: -cat
+ +Target: spfe-rules.-cat
+ +Target: report
+ +Target: spfe-rules.report
+ +Target: -report
+ +Target: spfe-rules.-report
+ +Target: pdf
+ +Target: spfe-rules.pdf
+ +Target: -pdf-skipped-message
+ +Target: spfe-rules.-pdf-skipped-message
+ +Target: test-mail
+ +Target: spfe-rules.test-mail
+ +Target: -send-mail
+ +Target: spfe-rules.-send-mail
+ +Target: -validate
+ +Target: spfe-rules.-validate
+Adding reference: oasis-catalogs
+Adding reference: spfe-catalogs
+Setting project property: spfe.spfe-rules.basedir -> C:\Users\Mark\AppData\Local\Temp
+Setting project property: temp -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp
+Setting project property: spfe.files.presentation -> spfe.presentation-web.xml
+Setting project property: spfe.files.presentation-book -> spfe.presentation-book.xml
+Setting project property: spfe.files.fo-format -> spfe.fo-format.fo
+Importing file C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml from C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+parsing buildfile C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml with URI = file:/C:/Users/Mark/Dropbox/spfe/spfe-ot/1.0/build-tools/spfe-common.xml
+Setting ro project property: ant.file.spfe-common -> C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml
+Setting ro project property: ant.file.type.spfe-common -> file
+Finding class org.pyant.tasks.PythonTestTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonTestTask.class
+Finding class org.pyant.tasks.PythonInteractiveBaseTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonInteractiveBaseTask.class
+Finding class org.pyant.tasks.PythonBaseTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonBaseTask.class
+Class org.apache.tools.ant.Task loaded from parent loader (parentFirst)
+Class org.pyant.tasks.PythonBaseTask loaded from ant loader (parentFirst)
+Class org.pyant.tasks.PythonInteractiveBaseTask loaded from ant loader (parentFirst)
+Class org.pyant.tasks.PythonTestTask loaded from ant loader (parentFirst)
+Class org.apache.tools.ant.taskdefs.ExecuteStreamHandler loaded from parent loader (parentFirst)
+Class java.lang.Throwable loaded from parent loader (parentFirst)
+Class java.io.IOException loaded from parent loader (parentFirst)
+Class org.apache.tools.ant.BuildException loaded from parent loader (parentFirst)
+ +Datatype py-test org.pyant.tasks.PythonTestTask
+Finding class org.pyant.tasks.PythonDocTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonDocTask.class
+Class org.pyant.tasks.PythonDocTask loaded from ant loader (parentFirst)
+ +Datatype py-doc org.pyant.tasks.PythonDocTask
+Finding class org.pyant.tasks.PythonRunTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonRunTask.class
+Class org.pyant.tasks.PythonRunTask loaded from ant loader (parentFirst)
+ +Datatype py-run org.pyant.tasks.PythonRunTask
+Finding class org.pyant.tasks.PythonCompileTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonCompileTask.class
+Class org.pyant.tasks.PythonCompileTask loaded from ant loader (parentFirst)
+ +Datatype py-compile org.pyant.tasks.PythonCompileTask
+Finding class org.pyant.tasks.PythonCoverageTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonCoverageTask.class
+Class org.pyant.tasks.PythonCoverageTask loaded from ant loader (parentFirst)
+Class java.util.List loaded from parent loader (parentFirst)
+Class java.io.Writer loaded from parent loader (parentFirst)
+Class java.io.FileWriter loaded from parent loader (parentFirst)
+Class java.lang.Exception loaded from parent loader (parentFirst)
+Class java.lang.InterruptedException loaded from parent loader (parentFirst)
+Class java.util.Collection loaded from parent loader (parentFirst)
+Class java.lang.Object loaded from parent loader (parentFirst)
+Class java.io.Reader loaded from parent loader (parentFirst)
+Class java.io.FileReader loaded from parent loader (parentFirst)
+Class java.util.Comparator loaded from parent loader (parentFirst)
+Class java.io.InputStreamReader loaded from parent loader (parentFirst)
+ +Datatype py-cover org.pyant.tasks.PythonCoverageTask
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\lib with patternSet{ includes: [*.jar] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-pdf-images-1.3 with patternSet{ includes: [*.jar] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\build with patternSet{ includes: [fop.jar, fop-hyph.jar] excludes: [] }
+Finding class org.apache.fop.tools.anttasks.Fop
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\build\fop.jar org/apache/fop/tools/anttasks/Fop.class
+Class org.apache.tools.ant.Task loaded from parent loader (parentFirst)
+Class org.apache.fop.tools.anttasks.Fop loaded from ant loader (parentFirst)
+Class java.lang.Object loaded from parent loader (parentFirst)
+Class java.lang.Throwable loaded from parent loader (parentFirst)
+Class org.apache.tools.ant.BuildException loaded from parent loader (parentFirst)
+Class org.xml.sax.SAXException loaded from parent loader (parentFirst)
+Class java.io.IOException loaded from parent loader (parentFirst)
+Finding class org.apache.fop.apps.FOPException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\build\fop.jar org/apache/fop/apps/FOPException.class
+Class org.apache.fop.apps.FOPException loaded from ant loader (parentFirst)
+Finding class org.apache.commons.logging.Log
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\lib\commons-logging-1.0.4.jar org/apache/commons/logging/Log.class
+Class org.apache.commons.logging.Log loaded from ant loader (parentFirst)
+Class java.util.List loaded from parent loader (parentFirst)
+ +Datatype fop org.apache.fop.tools.anttasks.Fop
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+Adding reference: spfe.buildfiles
+Property "spfe.sources.text-objects.fileset.dir" has not been set
+Property "spfe.sources.text-objects.fileset.includes" has not been set
+Adding reference: spfe.source-files.text-objects
+Property "spfe.sources.fragments.fileset.dir" has not been set
+Property "spfe.sources.fragments.fileset.includes" has not been set
+Adding reference: spfe.source-files.fragments
+Property "spfe.sources.strings.fileset.dir" has not been set
+Property "spfe.sources.strings.fileset.includes" has not been set
+Adding reference: spfe.source-files.strings
+Property "SPFE_HOME" has not been set
+Property "spfe.source-files.synonyms" has not been set
+Adding reference: spfe.source-files.synonyms
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+Setting project property: files.schema-defs -> schema-defs.xml
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+Setting project property: spfe.other.schema-file -> C:/Users/Mark/Dropbox/spfe/spfe-ot/1.0/schemas/config/spfe-config.xsd
+Setting ro project property: ant.project.invoked-targets -> draft
+Attempting to create object of type org.apache.tools.ant.helper.DefaultExecutor
+Adding reference: ant.executor
+Build sequence for target(s) `draft' is [-recorder, -init, draft]
+Complete build sequence is [-recorder, -init, draft, -report, -is-draft, spfe-rules.-force-clean, -current.schema-defs, -build.schema-defs, -get.source-files.element-descriptions, -current.synthesis, --build.synthesis, -build.synthesis, -get.source-files.link-catalog, -current.presentation-web, -get.source-files.graphics-catalog, -get.source-files.strings, --build.presentation-web, -build.presentation-web, -current.image-list-html, -build.image-list-html, -get.externals.pdf-graphic, -get.externals.graphics.html, -current.html-format, --build.html-format, spfe-rules.-build.html-format, spfe-rules.-init, spfe-rules.-recorder, -current.presentation-book, --build.presentation-book, -build.presentation-book, -current.image-list.print, -build.image-list.print, -build.html-format, spfe-rules.-current.pdf-encode, report, spfe-rules.-build.presentation-book, -get.source-files.topics, -validate, -current.report, -force-clean, spfe-rules.-get.externals.javascript, spfe-rules.test-mail, spfe-rules.-get.source-files.text-objects, spfe-rules.-current.image-list-html, spfe-rules.-get.externals.css, -check-last-build-status, spfe-rules.-get.externals.fo-template-graphics, spfe-rules.-check-last-build-status, -get.externals.css, -get.source-files.text-objects, spfe-rules.-build.image-list.print, spfe-rules.-build.presentation-web, spfe-rules.-clean, -pdf-skipped-message, spfe-rules.-report, spfe-rules.-get.source-files.graphics-catalog, spfe-rules.-final, -get.source-files.fragments, spfe-rules.-current.html-format, spfe-rules.--build.html-format, -current.link-catalog, -get.source-files.synonyms, --build.link-catalog, spfe-rules.-validate, -current.fo-format, --build.fo-format, -build.fo-format, -get.externals.graphics.print, -get.externals.fo-template-graphics, -current.pdf-encode, spfe-rules.--build.pdf-encode, config-ref-rules.-current.schema-defs, spfe-rules.-get.source-files.strings, -clean, spfe-rules.clean, --build.pdf-encode, cat, zip, spfe-rules.-pdf-skipped-message, spfe-rules.-cat, -final, pdf, spfe-rules.-zip, config-ref-rules.-build.schema-defs, -send-mail, -draft-flag, spfe-rules.-draft, spfe-rules.cat, spfe-rules.zip, config-ref-rules.--build.synthesis, spfe-rules.-get.source-files.synonyms, spfe-rules.final, spfe-rules.-current.image-list.print, spfe-rules.-get.externals.graphics.html, -wip, wip, -build.pdf-encode, spfe-rules.-current.link-catalog, spfe-rules.-current.presentation-web, spfe-rules.-wip, spfe-rules.--build.link-catalog, spfe-rules.report, spfe-rules.--build.presentation-web, spfe-rules.wip, clean, spfe-rules.-get.externals.pdf-graphic, spfe-rules.--build.synthesis, config-ref-rules.-get.source-files.element-descriptions, spfe-rules.-current.synthesis, -cat, -zip, spfe-rules.-get-build-revision, spfe-rules.-get.source-files.topics, spfe-rules.-current.presentation-book, spfe-rules.-build.report, -get-build-revision, spfe-rules.pdf, final, -get.externals.javascript, spfe-rules.-build.synthesis, test-mail, spfe-rules.draft, spfe-rules.-current.report, spfe-rules.-build.pdf-encode, spfe-rules.-send-mail, spfe-rules.--build.fo-format, spfe-rules.-get.source-files.link-catalog, -build.report, spfe-rules.-get.source-files.fragments, spfe-rules.-build.link-catalog, spfe-rules.--build.presentation-book, spfe-rules.-draft-flag, spfe-rules.-is-draft, spfe-rules.-build.fo-format, -build.link-catalog, config-ref-rules.-build.synthesis, spfe-rules.-build.image-list-html, spfe-rules.-current.fo-format, -draft, spfe-rules.-get.externals.graphics.print, ]
+
+-recorder:
+     [echo] Logging to: /Users/Mark/spfebuild/spfe-docs/config-ref/logs/spfe-configuration-reference.txt
+    [mkdir] Skipping C:\Users\Mark\spfebuild\spfe-docs\config-ref\logs because it already exists.
+setting a recorder for name /Users/Mark/spfebuild/spfe-docs/config-ref/logs/spfe-configuration-reference-log.txt
+
+-init:
+Setting project property: already-initialized -> true
+[available] Found: C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp\incomplete.flag
+Setting project property: last-build-crashed -> true
+Setting ro project property: ant.file -> C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Setting ro project property: ant.file.spfe-common -> C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml
+Setting ro project property: ant.file.type.spfe-configuration-reference -> file
+Setting ro project property: ant.file.type.spfe-common -> file
+Setting ro project property: ant.project.invoked-targets -> draft
+Setting ro project property: ant.file.spfe-rules -> C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml
+Setting ro project property: ant.file.type -> file
+Setting ro project property: ant.project.default-target -> draft
+Setting ro project property: ant.file.config-ref-rules -> C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml
+Setting ro project property: ant.file.type.spfe-rules -> file
+Setting ro project property: ant.file.spfe-configuration-reference -> C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Setting ro project property: ant.project.name -> spfe-configuration-reference
+Setting ro project property: ant.file.type.config-ref-rules -> file
+Setting project property: line.separator -> 
+Setting project property: java.ext.dirs -> C:\Program Files\Java\jre6\lib\ext;C:\Windows\Sun\Java\lib\ext
+Setting project property: spfe.wip-site.ftp.url -> wip-site.ftp.url
+Setting project property: user.name -> Mark
+Setting project property: spfe.publication-info.copyright -> Copyright © 2012 Analecta Communications Inc.
+Setting project property: sun.desktop -> windows
+Setting project property: SPFEOT_HOME -> C:/Users/Mark/Dropbox/spfe/spfe-ot
+Setting project property: java.vendor -> Sun Microsystems Inc.
+Setting project property: sun.java.launcher -> SUN_STANDARD
+Setting project property: files.schema-defs -> schema-defs.xml
+Setting project property: spfe.directories.image-source -> /Users/Mark/Dropbox/spfe/spfe-docs/graphics
+Setting project property: java.endorsed.dirs -> C:\Program Files\Java\jre6\lib\endorsed
+Setting project property: sun.boot.library.path -> C:\Program Files\Java\jre6\bin
+Setting project property: user.home -> C:\Users\Mark
+Setting project property: java.runtime.name -> Java(TM) SE Runtime Environment
+Setting project property: temp -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp
+Setting project property: spfe.spfe-rules.basedir -> C:\Users\Mark\AppData\Local\Temp
+Setting project property: spfe.scripts.format-html -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.format-html.xsl
+Setting project property: os.arch -> amd64
+Setting project property: java.awt.printerjob -> sun.awt.windows.WPrinterJob
+Setting project property: user.variant -> 
+Setting project property: sun.jnu.encoding -> Cp1252
+Setting project property: java.vm.info -> mixed mode
+Setting project property: ant.core.lib -> C:\apache-ant-1.8.3\lib\ant.jar
+Setting project property: java.vm.vendor -> Sun Microsystems Inc.
+Setting project property: java.vendor.url -> http://java.sun.com/
+Setting project property: sun.cpu.isalist -> amd64
+Setting project property: spfe.publication-info.title -> SPFE Configuration Reference
+Setting project property: file.separator -> \
+Setting project property: user.timezone -> 
+Setting project property: spfe.scripts.other.schema-defs -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.other.schema-defs.xsl
+Setting project property: spfe.scripts.synthesis -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.synthesis.xsl
+Setting project property: spfe.scripts.image-list -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.image-list.xsl
+Setting project property: os.name -> Windows 7
+Setting project property: spfe.scripts.link-catalog -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.link-catalog.xsl
+Setting project property: user.country -> CA
+Setting project property: spfe.publication-info.product -> SPFE Open Toolkit
+Setting project property: sun.os.patch.level -> Service Pack 1
+Setting project property: spfe.directories.build -> /Users/Mark/spfebuild/spfe-docs/config-ref
+Setting project property: ant.library.dir -> C:\apache-ant-1.8.3\lib
+Setting project property: spfe.topic-set-id -> spfe-configuration-reference
+Setting project property: spfe.wip-site.path -> wip-site.ftp
+Setting project property: java.runtime.version -> 1.6.0_26-b03
+Setting project property: java.class.path -> C:\apache-ant-1.8.3\bin\..\lib\ant-launcher.jar;C:\Users\Mark\Dropbox\spfe\spfe-docs\build\config-ref\.\;C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip;C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\xml-commons-resolver-1.2\resolver.jar;C:\apache-ant-1.8.3\lib\ant-antlr.jar;C:\apache-ant-1.8.3\lib\ant-apache-bcel.jar;C:\apache-ant-1.8.3\lib\ant-apache-bsf.jar;C:\apache-ant-1.8.3\lib\ant-apache-log4j.jar;C:\apache-ant-1.8.3\lib\ant-apache-oro.jar;C:\apache-ant-1.8.3\lib\ant-apache-regexp.jar;C:\apache-ant-1.8.3\lib\ant-apache-resolver.jar;C:\apache-ant-1.8.3\lib\ant-apache-xalan2.jar;C:\apache-ant-1.8.3\lib\ant-commons-logging.jar;C:\apache-ant-1.8.3\lib\ant-commons-net.jar;C:\apache-ant-1.8.3\lib\ant-jai.jar;C:\apache-ant-1.8.3\lib\ant-javamail.jar;C:\apache-ant-1.8.3\lib\ant-jdepend.jar;C:\apache-ant-1.8.3\lib\ant-jmf.jar;C:\apache-ant-1.8.3\lib\ant-jsch.jar;C:\apache-ant-1.8.3\lib\ant-junit.jar;C:\apache-ant-1.8.3\lib\ant-junit4.jar;C:\apache-ant-1.8.3\lib\ant-launcher.jar;C:\apache-ant-1.8.3\lib\ant-netrexx.jar;C:\apache-ant-1.8.3\lib\ant-swing.jar;C:\apache-ant-1.8.3\lib\ant-testutil.jar;C:\apache-ant-1.8.3\lib\ant.jar
+Setting project property: java.home -> C:\Program Files\Java\jre6
+Setting project property: java.vm.name -> Java HotSpot(TM) 64-Bit Server VM
+Setting project property: user.dir -> C:\Users\Mark\Dropbox\spfe\spfe-docs\build\config-ref
+Setting project property: path.separator -> ;
+Setting project property: file.encoding.pkg -> sun.io
+Setting project property: java.vm.specification.version -> 1.0
+Setting project property: spfe.messages -> warning info
+Setting project property: java.vm.specification.vendor -> Sun Microsystems Inc.
+Setting project property: last-build-crashed -> true
+Setting project property: java.specification.name -> Java Platform API Specification
+Setting project property: spfe.files.presentation-book -> spfe.presentation-book.xml
+Setting project property: sun.management.compiler -> HotSpot 64-Bit Tiered Compilers
+Setting project property: java.vendor.url.bug -> http://java.sun.com/cgi-bin/bugreport.cgi
+Setting project property: awt.toolkit -> sun.awt.windows.WToolkit
+Setting project property: user.language -> en
+Setting project property: java.version -> 1.6.0_26
+Setting project property: spfe.publication-info.release -> 1.0 (alpha 1)
+Setting project property: spfe.wip-site.ftp.password -> wip-site.ftp.password
+Setting project property: java.specification.version -> 1.6
+Setting project property: HOME -> /Users/Mark
+Setting project property: java.vm.version -> 20.1-b02
+Setting project property: java.io.tmpdir -> C:\Users\Mark\AppData\Local\Temp\
+Setting project property: spfe.wip-site.href -> wip-site.href
+Setting project property: spfe.files.presentation -> spfe.presentation-web.xml
+Setting project property: sun.io.unicode.encoding -> UnicodeLittle
+Setting project property: os.version -> 6.1
+Setting project property: file.encoding -> Cp1252
+Setting project property: java.awt.graphicsenv -> sun.awt.Win32GraphicsEnvironment
+Setting project property: spfe.directories.output -> /Users/Mark/spfebuild/spfe-docs/config-ref/output
+Setting project property: spfe.config-file -> /Users/Mark/spfebuild/spfe-docs/config-ref/config/spfe-config.xml
+Setting project property: java.library.path -> C:\Windows\system32;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Perl64\bin;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\jEdit;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Users\Mark\Dropbox\spfe\spfe-ot;C:\apache-ant-1.8.3\bin;.
+Setting project property: java.class.version -> 50.0
+Setting project property: already-initialized -> true
+Setting project property: spfe.wip-site.ftp.user -> wip-site.ftp.user
+Setting project property: ant.version -> Apache Ant(TM) version 1.8.3 compiled on February 26 2012
+Setting project property: ant.home -> C:\apache-ant-1.8.3\bin\..
+Setting project property: java.vm.specification.name -> Java Virtual Machine Specification
+Setting project property: sun.java.command -> org.apache.tools.ant.launch.Launcher -cp .;C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip draft -f C:\Users\Mark\AppData\Local\Temp/spfetemp.xml -lib \Users\Mark\Dropbox\spfe\spfe-ot\tools\xml-commons-resolver-1.2\resolver.jar -debug
+Setting project property: spfe.scripts.presentation-web -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.presentation-web.xsl
+Setting project property: sun.arch.data.model -> 64
+Setting project property: spfe.directories.link-catalogs -> /Users/Mark/spfebuild/spfe-docs/link-catalogs
+Setting project property: sun.cpu.endian -> little
+Setting project property: java.specification.vendor -> Sun Microsystems Inc.
+Setting project property: spfe.files.fo-format -> spfe.fo-format.fo
+Setting project property: sun.boot.class.path -> C:\Program Files\Java\jre6\lib\resources.jar;C:\Program Files\Java\jre6\lib\rt.jar;C:\Program Files\Java\jre6\lib\sunrsasign.jar;C:\Program Files\Java\jre6\lib\jsse.jar;C:\Program Files\Java\jre6\lib\jce.jar;C:\Program Files\Java\jre6\lib\charsets.jar;C:\Program Files\Java\jre6\lib\modules\jdk.boot.jar;C:\Program Files\Java\jre6\classes
+Setting project property: spfe.other.schema-file -> C:/Users/Mark/Dropbox/spfe/spfe-ot/1.0/schemas/config/spfe-config.xsd
+Project base dir set to: C:\Users\Mark\AppData\Local\Temp
+  [antcall] calling target(s) [-check-last-build-status] in build file C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Setting ro project property: ant.file -> C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Adding reference: ant.projectHelper
+Adding reference: ant.parsing.context
+Adding reference: ant.targets
+parsing buildfile C:\Users\Mark\AppData\Local\Temp\spfetemp.xml with URI = file:/C:/Users/Mark/AppData/Local/Temp/spfetemp.xml
+Setting ro project property: ant.project.name -> spfe-configuration-reference
+Adding reference: spfe-configuration-reference
+Setting ro project property: ant.project.default-target -> draft
+Setting ro project property: ant.file.spfe-configuration-reference -> C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Setting ro project property: ant.file.type.spfe-configuration-reference -> file
+Project base dir set to: C:\Users\Mark\AppData\Local\Temp
+ +Target: 
+Adding reference: ant.LocalProperties
+ [property] Loading C:\Users\Mark\.spfe\spfe.properties
+ [property] Unable to find property file: C:\Users\Mark\.spfe\spfe.properties
+Override ignored for property "HOME"
+Override ignored for property "SPFEOT_HOME"
+Override ignored for property "spfe.config-file"
+Override ignored for property "spfe.topic-set-id"
+Override ignored for property "spfe.publication-info.title"
+Override ignored for property "spfe.publication-info.release"
+Override ignored for property "spfe.publication-info.product"
+Override ignored for property "spfe.publication-info.copyright"
+Override ignored for property "spfe.wip-site.href"
+Override ignored for property "spfe.wip-site.ftp.url"
+Override ignored for property "spfe.wip-site.ftp.user"
+Override ignored for property "spfe.wip-site.ftp.password"
+Override ignored for property "spfe.wip-site.path"
+Override ignored for property "spfe.messages"
+Override ignored for property "spfe.scripts.synthesis"
+Override ignored for property "spfe.scripts.link-catalog"
+Override ignored for property "spfe.scripts.image-list"
+Override ignored for property "spfe.scripts.presentation-web"
+Override ignored for property "spfe.scripts.other.schema-defs"
+Override ignored for property "spfe.scripts.format-html"
+Override ignored for property "spfe.directories.output"
+Override ignored for property "spfe.directories.link-catalogs"
+Override ignored for property "spfe.directories.build"
+Override ignored for property "spfe.directories.image-source"
+Adding reference: topics
+Adding reference: text-objects
+Adding reference: fragments
+Adding reference: graphics
+Adding reference: graphics-catalog
+Adding reference: strings
+Adding reference: link-catalogs
+Adding reference: synonyms
+Adding reference: other.element-descriptions
+Importing file C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml from C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+parsing buildfile C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml with URI = file:/C:/Users/Mark/Dropbox/spfe/spfe-ot/plugins/config-schema-docs/build-tools/config-ref-rules.xml
+Setting ro project property: ant.file.config-ref-rules -> C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml
+Setting ro project property: ant.file.type.config-ref-rules -> file
+ +Target: -build.synthesis
+ +Target: config-ref-rules.-build.synthesis
+ +Target: -get.source-files.element-descriptions
+ +Target: config-ref-rules.-get.source-files.element-descriptions
+ +Target: -current.schema-defs
+ +Target: config-ref-rules.-current.schema-defs
+ +Target: -build.schema-defs
+ +Target: config-ref-rules.-build.schema-defs
+ +Target: --build.synthesis
+ +Target: config-ref-rules.--build.synthesis
+Importing file C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml from C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+parsing buildfile C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml with URI = file:/C:/Users/Mark/Dropbox/spfe/spfe-ot/1.0/build-tools/spfe-rules.xml
+Setting ro project property: ant.file.spfe-rules -> C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml
+Setting ro project property: ant.file.type.spfe-rules -> file
+ +Target: -init
+ +Target: spfe-rules.-init
+ +Target: -check-last-build-status
+ +Target: spfe-rules.-check-last-build-status
+ +Target: -recorder
+ +Target: spfe-rules.-recorder
+ +Target: -get-build-revision
+ +Target: spfe-rules.-get-build-revision
+ +Target: -get.source-files.topics
+ +Target: spfe-rules.-get.source-files.topics
+ +Target: -get.source-files.text-objects
+ +Target: spfe-rules.-get.source-files.text-objects
+ +Target: -get.source-files.fragments
+ +Target: spfe-rules.-get.source-files.fragments
+ +Target: -get.source-files.graphics-catalog
+ +Target: spfe-rules.-get.source-files.graphics-catalog
+ +Target: -get.source-files.strings
+ +Target: spfe-rules.-get.source-files.strings
+ +Target: -get.source-files.synonyms
+ +Target: spfe-rules.-get.source-files.synonyms
+ +Target: -get.source-files.link-catalog
+ +Target: spfe-rules.-get.source-files.link-catalog
+ +Target: -get.externals.graphics.print
+ +Target: spfe-rules.-get.externals.graphics.print
+ +Target: -get.externals.graphics.html
+ +Target: spfe-rules.-get.externals.graphics.html
+ +Target: -get.externals.css
+ +Target: spfe-rules.-get.externals.css
+ +Target: -get.externals.javascript
+ +Target: spfe-rules.-get.externals.javascript
+ +Target: -get.externals.pdf-graphic
+ +Target: spfe-rules.-get.externals.pdf-graphic
+ +Target: -get.externals.fo-template-graphics
+ +Target: spfe-rules.-get.externals.fo-template-graphics
+ +Target: -current.synthesis
+ +Target: spfe-rules.-current.synthesis
+Already defined in main or a previous import, ignore -build.synthesis
+ +Target: spfe-rules.-build.synthesis
+Already defined in main or a previous import, ignore --build.synthesis
+ +Target: spfe-rules.--build.synthesis
+ +Target: -current.link-catalog
+ +Target: spfe-rules.-current.link-catalog
+ +Target: -build.link-catalog
+ +Target: spfe-rules.-build.link-catalog
+ +Target: --build.link-catalog
+ +Target: spfe-rules.--build.link-catalog
+ +Target: -current.presentation-web
+ +Target: spfe-rules.-current.presentation-web
+ +Target: -build.presentation-web
+ +Target: spfe-rules.-build.presentation-web
+ +Target: --build.presentation-web
+ +Target: spfe-rules.--build.presentation-web
+ +Target: -current.presentation-book
+ +Target: spfe-rules.-current.presentation-book
+ +Target: -build.presentation-book
+ +Target: spfe-rules.-build.presentation-book
+ +Target: --build.presentation-book
+ +Target: spfe-rules.--build.presentation-book
+ +Target: -current.html-format
+ +Target: spfe-rules.-current.html-format
+ +Target: -build.html-format
+ +Target: spfe-rules.-build.html-format
+ +Target: --build.html-format
+ +Target: spfe-rules.--build.html-format
+ +Target: -current.fo-format
+ +Target: spfe-rules.-current.fo-format
+ +Target: -build.fo-format
+ +Target: spfe-rules.-build.fo-format
+ +Target: --build.fo-format
+ +Target: spfe-rules.--build.fo-format
+ +Target: -current.pdf-encode
+ +Target: spfe-rules.-current.pdf-encode
+ +Target: -build.pdf-encode
+ +Target: spfe-rules.-build.pdf-encode
+ +Target: --build.pdf-encode
+ +Target: spfe-rules.--build.pdf-encode
+ +Target: -current.report
+ +Target: spfe-rules.-current.report
+ +Target: -build.report
+ +Target: spfe-rules.-build.report
+ +Target: -current.image-list-html
+ +Target: spfe-rules.-current.image-list-html
+ +Target: -build.image-list-html
+ +Target: spfe-rules.-build.image-list-html
+ +Target: -current.image-list.print
+ +Target: spfe-rules.-current.image-list.print
+ +Target: -build.image-list.print
+ +Target: spfe-rules.-build.image-list.print
+ +Target: zip
+ +Target: spfe-rules.zip
+ +Target: -zip
+ +Target: spfe-rules.-zip
+ +Target: draft
+ +Target: spfe-rules.draft
+ +Target: -draft
+ +Target: spfe-rules.-draft
+ +Target: -draft-flag
+ +Target: spfe-rules.-draft-flag
+ +Target: final
+ +Target: spfe-rules.final
+ +Target: -final
+ +Target: spfe-rules.-final
+ +Target: -force-clean
+ +Target: spfe-rules.-force-clean
+ +Target: -is-draft
+ +Target: spfe-rules.-is-draft
+ +Target: clean
+ +Target: spfe-rules.clean
+ +Target: -clean
+ +Target: spfe-rules.-clean
+ +Target: wip
+ +Target: spfe-rules.wip
+ +Target: -wip
+ +Target: spfe-rules.-wip
+ +Target: cat
+ +Target: spfe-rules.cat
+ +Target: -cat
+ +Target: spfe-rules.-cat
+ +Target: report
+ +Target: spfe-rules.report
+ +Target: -report
+ +Target: spfe-rules.-report
+ +Target: pdf
+ +Target: spfe-rules.pdf
+ +Target: -pdf-skipped-message
+ +Target: spfe-rules.-pdf-skipped-message
+ +Target: test-mail
+ +Target: spfe-rules.test-mail
+ +Target: -send-mail
+ +Target: spfe-rules.-send-mail
+ +Target: -validate
+ +Target: spfe-rules.-validate
+Adding reference: oasis-catalogs
+Adding reference: spfe-catalogs
+Override ignored for property "spfe.spfe-rules.basedir"
+Override ignored for property "temp"
+Override ignored for property "spfe.files.presentation"
+Override ignored for property "spfe.files.presentation-book"
+Override ignored for property "spfe.files.fo-format"
+Importing file C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml from C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+parsing buildfile C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml with URI = file:/C:/Users/Mark/Dropbox/spfe/spfe-ot/1.0/build-tools/spfe-common.xml
+Setting ro project property: ant.file.spfe-common -> C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml
+Setting ro project property: ant.file.type.spfe-common -> file
+Finding class org.pyant.tasks.PythonTestTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonTestTask.class
+Finding class org.pyant.tasks.PythonInteractiveBaseTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonInteractiveBaseTask.class
+Finding class org.pyant.tasks.PythonBaseTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonBaseTask.class
+Class org.apache.tools.ant.Task loaded from parent loader (parentFirst)
+Class org.pyant.tasks.PythonBaseTask loaded from ant loader (parentFirst)
+Class org.pyant.tasks.PythonInteractiveBaseTask loaded from ant loader (parentFirst)
+Class org.pyant.tasks.PythonTestTask loaded from ant loader (parentFirst)
+Class org.apache.tools.ant.taskdefs.ExecuteStreamHandler loaded from parent loader (parentFirst)
+Class java.lang.Throwable loaded from parent loader (parentFirst)
+Class java.io.IOException loaded from parent loader (parentFirst)
+Class org.apache.tools.ant.BuildException loaded from parent loader (parentFirst)
+Trying to override old definition of task py-test
+ +Datatype py-test org.pyant.tasks.PythonTestTask
+Finding class org.pyant.tasks.PythonDocTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonDocTask.class
+Class org.pyant.tasks.PythonDocTask loaded from ant loader (parentFirst)
+Trying to override old definition of task py-doc
+ +Datatype py-doc org.pyant.tasks.PythonDocTask
+Finding class org.pyant.tasks.PythonRunTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonRunTask.class
+Class org.pyant.tasks.PythonRunTask loaded from ant loader (parentFirst)
+Trying to override old definition of task py-run
+ +Datatype py-run org.pyant.tasks.PythonRunTask
+Finding class org.pyant.tasks.PythonCompileTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonCompileTask.class
+Class org.pyant.tasks.PythonCompileTask loaded from ant loader (parentFirst)
+Trying to override old definition of task py-compile
+ +Datatype py-compile org.pyant.tasks.PythonCompileTask
+Finding class org.pyant.tasks.PythonCoverageTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonCoverageTask.class
+Class org.pyant.tasks.PythonCoverageTask loaded from ant loader (parentFirst)
+Class java.util.List loaded from parent loader (parentFirst)
+Class java.io.Writer loaded from parent loader (parentFirst)
+Class java.io.FileWriter loaded from parent loader (parentFirst)
+Class java.lang.Exception loaded from parent loader (parentFirst)
+Class java.lang.InterruptedException loaded from parent loader (parentFirst)
+Class java.util.Collection loaded from parent loader (parentFirst)
+Class java.lang.Object loaded from parent loader (parentFirst)
+Class java.io.Reader loaded from parent loader (parentFirst)
+Class java.io.FileReader loaded from parent loader (parentFirst)
+Class java.util.Comparator loaded from parent loader (parentFirst)
+Class java.io.InputStreamReader loaded from parent loader (parentFirst)
+Trying to override old definition of task py-cover
+ +Datatype py-cover org.pyant.tasks.PythonCoverageTask
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\lib with patternSet{ includes: [*.jar] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-pdf-images-1.3 with patternSet{ includes: [*.jar] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\build with patternSet{ includes: [fop.jar, fop-hyph.jar] excludes: [] }
+Finding class org.apache.fop.tools.anttasks.Fop
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\build\fop.jar org/apache/fop/tools/anttasks/Fop.class
+Class org.apache.tools.ant.Task loaded from parent loader (parentFirst)
+Class org.apache.fop.tools.anttasks.Fop loaded from ant loader (parentFirst)
+Class java.lang.Object loaded from parent loader (parentFirst)
+Class java.lang.Throwable loaded from parent loader (parentFirst)
+Class org.apache.tools.ant.BuildException loaded from parent loader (parentFirst)
+Class org.xml.sax.SAXException loaded from parent loader (parentFirst)
+Class java.io.IOException loaded from parent loader (parentFirst)
+Finding class org.apache.fop.apps.FOPException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\build\fop.jar org/apache/fop/apps/FOPException.class
+Class org.apache.fop.apps.FOPException loaded from ant loader (parentFirst)
+Finding class org.apache.commons.logging.Log
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\lib\commons-logging-1.0.4.jar org/apache/commons/logging/Log.class
+Class org.apache.commons.logging.Log loaded from ant loader (parentFirst)
+Class java.util.List loaded from parent loader (parentFirst)
+Trying to override old definition of task fop
+ +Datatype fop org.apache.fop.tools.anttasks.Fop
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+Adding reference: spfe.buildfiles
+Property "spfe.sources.text-objects.fileset.dir" has not been set
+Property "spfe.sources.text-objects.fileset.includes" has not been set
+Adding reference: spfe.source-files.text-objects
+Property "spfe.sources.fragments.fileset.dir" has not been set
+Property "spfe.sources.fragments.fileset.includes" has not been set
+Adding reference: spfe.source-files.fragments
+Property "spfe.sources.strings.fileset.dir" has not been set
+Property "spfe.sources.strings.fileset.includes" has not been set
+Adding reference: spfe.source-files.strings
+Property "SPFE_HOME" has not been set
+Property "spfe.source-files.synonyms" has not been set
+Adding reference: spfe.source-files.synonyms
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+Override ignored for property "files.schema-defs"
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+Override ignored for property "spfe.other.schema-file"
+Build sequence for target(s) `-check-last-build-status' is [-check-last-build-status]
+Complete build sequence is [-check-last-build-status, -report, -is-draft, spfe-rules.-force-clean, -recorder, -init, -current.schema-defs, -build.schema-defs, -get.source-files.element-descriptions, -current.synthesis, --build.synthesis, -build.synthesis, -get.source-files.link-catalog, -current.presentation-web, -get.source-files.graphics-catalog, -get.source-files.strings, --build.presentation-web, -build.presentation-web, -current.image-list-html, -build.image-list-html, -get.externals.pdf-graphic, -get.externals.graphics.html, -current.html-format, --build.html-format, spfe-rules.-build.html-format, spfe-rules.-init, spfe-rules.-recorder, -current.presentation-book, --build.presentation-book, -build.presentation-book, -current.image-list.print, -build.image-list.print, -build.html-format, spfe-rules.-current.pdf-encode, report, spfe-rules.-build.presentation-book, -get.source-files.topics, -validate, -current.report, -force-clean, spfe-rules.-get.externals.javascript, spfe-rules.test-mail, spfe-rules.-get.source-files.text-objects, spfe-rules.-current.image-list-html, spfe-rules.-get.externals.css, spfe-rules.-get.externals.fo-template-graphics, spfe-rules.-check-last-build-status, -get.externals.css, -get.source-files.text-objects, spfe-rules.-build.image-list.print, spfe-rules.-build.presentation-web, spfe-rules.-clean, -pdf-skipped-message, spfe-rules.-report, spfe-rules.-get.source-files.graphics-catalog, spfe-rules.-final, -get.source-files.fragments, spfe-rules.-current.html-format, spfe-rules.--build.html-format, -current.link-catalog, -get.source-files.synonyms, --build.link-catalog, spfe-rules.-validate, -current.fo-format, --build.fo-format, -build.fo-format, -get.externals.graphics.print, -get.externals.fo-template-graphics, -current.pdf-encode, spfe-rules.--build.pdf-encode, config-ref-rules.-current.schema-defs, spfe-rules.-get.source-files.strings, -clean, spfe-rules.clean, --build.pdf-encode, cat, zip, spfe-rules.-pdf-skipped-message, spfe-rules.-cat, -final, pdf, spfe-rules.-zip, config-ref-rules.-build.schema-defs, -send-mail, -draft-flag, spfe-rules.-draft, spfe-rules.cat, spfe-rules.zip, config-ref-rules.--build.synthesis, spfe-rules.-get.source-files.synonyms, spfe-rules.final, spfe-rules.-current.image-list.print, spfe-rules.-get.externals.graphics.html, draft, -wip, wip, -build.pdf-encode, spfe-rules.-current.link-catalog, spfe-rules.-current.presentation-web, spfe-rules.-wip, spfe-rules.--build.link-catalog, spfe-rules.report, spfe-rules.--build.presentation-web, spfe-rules.wip, clean, spfe-rules.-get.externals.pdf-graphic, spfe-rules.--build.synthesis, config-ref-rules.-get.source-files.element-descriptions, spfe-rules.-current.synthesis, -cat, -zip, spfe-rules.-get-build-revision, spfe-rules.-get.source-files.topics, spfe-rules.-current.presentation-book, spfe-rules.-build.report, -get-build-revision, spfe-rules.pdf, final, -get.externals.javascript, spfe-rules.-build.synthesis, test-mail, spfe-rules.draft, spfe-rules.-current.report, spfe-rules.-build.pdf-encode, spfe-rules.-send-mail, spfe-rules.--build.fo-format, spfe-rules.-get.source-files.link-catalog, -build.report, spfe-rules.-get.source-files.fragments, spfe-rules.-build.link-catalog, spfe-rules.--build.presentation-book, spfe-rules.-draft-flag, spfe-rules.-is-draft, spfe-rules.-build.fo-format, -build.link-catalog, config-ref-rules.-build.synthesis, spfe-rules.-build.image-list-html, spfe-rules.-current.fo-format, -draft, spfe-rules.-get.externals.graphics.print, ]
+  [antcall] Entering C:\Users\Mark\AppData\Local\Temp\spfetemp.xml...
+Setting ro project property: ant.project.invoked-targets -> -check-last-build-status
+Build sequence for target(s) `-check-last-build-status' is [-check-last-build-status]
+Complete build sequence is [-check-last-build-status, -report, -is-draft, spfe-rules.-force-clean, -recorder, -init, -current.schema-defs, -build.schema-defs, -get.source-files.element-descriptions, -current.synthesis, --build.synthesis, -build.synthesis, -get.source-files.link-catalog, -current.presentation-web, -get.source-files.graphics-catalog, -get.source-files.strings, --build.presentation-web, -build.presentation-web, -current.image-list-html, -build.image-list-html, -get.externals.pdf-graphic, -get.externals.graphics.html, -current.html-format, --build.html-format, spfe-rules.-build.html-format, spfe-rules.-init, spfe-rules.-recorder, -current.presentation-book, --build.presentation-book, -build.presentation-book, -current.image-list.print, -build.image-list.print, -build.html-format, spfe-rules.-current.pdf-encode, report, spfe-rules.-build.presentation-book, -get.source-files.topics, -validate, -current.report, -force-clean, spfe-rules.-get.externals.javascript, spfe-rules.test-mail, spfe-rules.-get.source-files.text-objects, spfe-rules.-current.image-list-html, spfe-rules.-get.externals.css, spfe-rules.-get.externals.fo-template-graphics, spfe-rules.-check-last-build-status, -get.externals.css, -get.source-files.text-objects, spfe-rules.-build.image-list.print, spfe-rules.-build.presentation-web, spfe-rules.-clean, -pdf-skipped-message, spfe-rules.-report, spfe-rules.-get.source-files.graphics-catalog, spfe-rules.-final, -get.source-files.fragments, spfe-rules.-current.html-format, spfe-rules.--build.html-format, -current.link-catalog, -get.source-files.synonyms, --build.link-catalog, spfe-rules.-validate, -current.fo-format, --build.fo-format, -build.fo-format, -get.externals.graphics.print, -get.externals.fo-template-graphics, -current.pdf-encode, spfe-rules.--build.pdf-encode, config-ref-rules.-current.schema-defs, spfe-rules.-get.source-files.strings, -clean, spfe-rules.clean, --build.pdf-encode, cat, zip, spfe-rules.-pdf-skipped-message, spfe-rules.-cat, -final, pdf, spfe-rules.-zip, config-ref-rules.-build.schema-defs, -send-mail, -draft-flag, spfe-rules.-draft, spfe-rules.cat, spfe-rules.zip, config-ref-rules.--build.synthesis, spfe-rules.-get.source-files.synonyms, spfe-rules.final, spfe-rules.-current.image-list.print, spfe-rules.-get.externals.graphics.html, draft, -wip, wip, -build.pdf-encode, spfe-rules.-current.link-catalog, spfe-rules.-current.presentation-web, spfe-rules.-wip, spfe-rules.--build.link-catalog, spfe-rules.report, spfe-rules.--build.presentation-web, spfe-rules.wip, clean, spfe-rules.-get.externals.pdf-graphic, spfe-rules.--build.synthesis, config-ref-rules.-get.source-files.element-descriptions, spfe-rules.-current.synthesis, -cat, -zip, spfe-rules.-get-build-revision, spfe-rules.-get.source-files.topics, spfe-rules.-current.presentation-book, spfe-rules.-build.report, -get-build-revision, spfe-rules.pdf, final, -get.externals.javascript, spfe-rules.-build.synthesis, test-mail, spfe-rules.draft, spfe-rules.-current.report, spfe-rules.-build.pdf-encode, spfe-rules.-send-mail, spfe-rules.--build.fo-format, spfe-rules.-get.source-files.link-catalog, -build.report, spfe-rules.-get.source-files.fragments, spfe-rules.-build.link-catalog, spfe-rules.--build.presentation-book, spfe-rules.-draft-flag, spfe-rules.-is-draft, spfe-rules.-build.fo-format, -build.link-catalog, config-ref-rules.-build.synthesis, spfe-rules.-build.image-list-html, spfe-rules.-current.fo-format, -draft, spfe-rules.-get.externals.graphics.print, ]
+
+-check-last-build-status:
+     [echo] Last build failed. Cleaning up.
+  [antcall] Exiting C:\Users\Mark\AppData\Local\Temp\spfetemp.xml.
+     [echo] Beginning build of spfe-configuration-reference
+    [mkdir] Skipping C:\Users\Mark\spfebuild\spfe-docs\link-catalogs because it already exists.
+    [mkdir] Skipping C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp because it already exists.
+    [mkdir] Skipping C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp\synthesis because it already exists.
+
+draft:
+Setting ro project property: ant.file -> C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Setting ro project property: ant.file.spfe-common -> C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml
+Setting ro project property: ant.file.type.spfe-configuration-reference -> file
+Setting ro project property: ant.file.type.spfe-common -> file
+Setting ro project property: ant.project.invoked-targets -> draft
+Setting ro project property: ant.file.spfe-rules -> C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml
+Setting ro project property: ant.file.type -> file
+Setting ro project property: ant.project.default-target -> draft
+Setting ro project property: ant.file.config-ref-rules -> C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml
+Setting ro project property: ant.file.type.spfe-rules -> file
+Setting ro project property: ant.file.spfe-configuration-reference -> C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Setting ro project property: ant.project.name -> spfe-configuration-reference
+Setting ro project property: ant.file.type.config-ref-rules -> file
+Setting project property: line.separator -> 
+Setting project property: java.ext.dirs -> C:\Program Files\Java\jre6\lib\ext;C:\Windows\Sun\Java\lib\ext
+Setting project property: spfe.wip-site.ftp.url -> wip-site.ftp.url
+Setting project property: user.name -> Mark
+Setting project property: spfe.publication-info.copyright -> Copyright © 2012 Analecta Communications Inc.
+Setting project property: sun.desktop -> windows
+Setting project property: SPFEOT_HOME -> C:/Users/Mark/Dropbox/spfe/spfe-ot
+Setting project property: java.vendor -> Sun Microsystems Inc.
+Setting project property: sun.java.launcher -> SUN_STANDARD
+Setting project property: files.schema-defs -> schema-defs.xml
+Setting project property: spfe.directories.image-source -> /Users/Mark/Dropbox/spfe/spfe-docs/graphics
+Setting project property: java.endorsed.dirs -> C:\Program Files\Java\jre6\lib\endorsed
+Setting project property: sun.boot.library.path -> C:\Program Files\Java\jre6\bin
+Setting project property: user.home -> C:\Users\Mark
+Setting project property: java.runtime.name -> Java(TM) SE Runtime Environment
+Setting project property: temp -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp
+Setting project property: spfe.spfe-rules.basedir -> C:\Users\Mark\AppData\Local\Temp
+Setting project property: spfe.scripts.format-html -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.format-html.xsl
+Setting project property: os.arch -> amd64
+Setting project property: java.awt.printerjob -> sun.awt.windows.WPrinterJob
+Setting project property: user.variant -> 
+Setting project property: sun.jnu.encoding -> Cp1252
+Setting project property: java.vm.info -> mixed mode
+Setting project property: ant.core.lib -> C:\apache-ant-1.8.3\lib\ant.jar
+Setting project property: java.vm.vendor -> Sun Microsystems Inc.
+Setting project property: java.vendor.url -> http://java.sun.com/
+Setting project property: sun.cpu.isalist -> amd64
+Setting project property: spfe.publication-info.title -> SPFE Configuration Reference
+Setting project property: file.separator -> \
+Setting project property: user.timezone -> 
+Setting project property: spfe.scripts.other.schema-defs -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.other.schema-defs.xsl
+Setting project property: spfe.scripts.synthesis -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.synthesis.xsl
+Setting project property: spfe.scripts.image-list -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.image-list.xsl
+Setting project property: os.name -> Windows 7
+Setting project property: spfe.scripts.link-catalog -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.link-catalog.xsl
+Setting project property: user.country -> CA
+Setting project property: spfe.publication-info.product -> SPFE Open Toolkit
+Setting project property: sun.os.patch.level -> Service Pack 1
+Setting project property: spfe.directories.build -> /Users/Mark/spfebuild/spfe-docs/config-ref
+Setting project property: ant.library.dir -> C:\apache-ant-1.8.3\lib
+Setting project property: spfe.topic-set-id -> spfe-configuration-reference
+Setting project property: spfe.wip-site.path -> wip-site.ftp
+Setting project property: java.runtime.version -> 1.6.0_26-b03
+Setting project property: java.class.path -> C:\apache-ant-1.8.3\bin\..\lib\ant-launcher.jar;C:\Users\Mark\Dropbox\spfe\spfe-docs\build\config-ref\.\;C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip;C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\xml-commons-resolver-1.2\resolver.jar;C:\apache-ant-1.8.3\lib\ant-antlr.jar;C:\apache-ant-1.8.3\lib\ant-apache-bcel.jar;C:\apache-ant-1.8.3\lib\ant-apache-bsf.jar;C:\apache-ant-1.8.3\lib\ant-apache-log4j.jar;C:\apache-ant-1.8.3\lib\ant-apache-oro.jar;C:\apache-ant-1.8.3\lib\ant-apache-regexp.jar;C:\apache-ant-1.8.3\lib\ant-apache-resolver.jar;C:\apache-ant-1.8.3\lib\ant-apache-xalan2.jar;C:\apache-ant-1.8.3\lib\ant-commons-logging.jar;C:\apache-ant-1.8.3\lib\ant-commons-net.jar;C:\apache-ant-1.8.3\lib\ant-jai.jar;C:\apache-ant-1.8.3\lib\ant-javamail.jar;C:\apache-ant-1.8.3\lib\ant-jdepend.jar;C:\apache-ant-1.8.3\lib\ant-jmf.jar;C:\apache-ant-1.8.3\lib\ant-jsch.jar;C:\apache-ant-1.8.3\lib\ant-junit.jar;C:\apache-ant-1.8.3\lib\ant-junit4.jar;C:\apache-ant-1.8.3\lib\ant-launcher.jar;C:\apache-ant-1.8.3\lib\ant-netrexx.jar;C:\apache-ant-1.8.3\lib\ant-swing.jar;C:\apache-ant-1.8.3\lib\ant-testutil.jar;C:\apache-ant-1.8.3\lib\ant.jar
+Setting project property: java.home -> C:\Program Files\Java\jre6
+Setting project property: java.vm.name -> Java HotSpot(TM) 64-Bit Server VM
+Setting project property: user.dir -> C:\Users\Mark\Dropbox\spfe\spfe-docs\build\config-ref
+Setting project property: path.separator -> ;
+Setting project property: file.encoding.pkg -> sun.io
+Setting project property: java.vm.specification.version -> 1.0
+Setting project property: spfe.messages -> warning info
+Setting project property: java.vm.specification.vendor -> Sun Microsystems Inc.
+Setting project property: last-build-crashed -> true
+Setting project property: java.specification.name -> Java Platform API Specification
+Setting project property: spfe.files.presentation-book -> spfe.presentation-book.xml
+Setting project property: sun.management.compiler -> HotSpot 64-Bit Tiered Compilers
+Setting project property: java.vendor.url.bug -> http://java.sun.com/cgi-bin/bugreport.cgi
+Setting project property: awt.toolkit -> sun.awt.windows.WToolkit
+Setting project property: user.language -> en
+Setting project property: java.version -> 1.6.0_26
+Setting project property: spfe.publication-info.release -> 1.0 (alpha 1)
+Setting project property: spfe.wip-site.ftp.password -> wip-site.ftp.password
+Setting project property: java.specification.version -> 1.6
+Setting project property: HOME -> /Users/Mark
+Setting project property: java.vm.version -> 20.1-b02
+Setting project property: java.io.tmpdir -> C:\Users\Mark\AppData\Local\Temp\
+Setting project property: spfe.wip-site.href -> wip-site.href
+Setting project property: spfe.files.presentation -> spfe.presentation-web.xml
+Setting project property: sun.io.unicode.encoding -> UnicodeLittle
+Setting project property: os.version -> 6.1
+Setting project property: file.encoding -> Cp1252
+Setting project property: java.awt.graphicsenv -> sun.awt.Win32GraphicsEnvironment
+Setting project property: spfe.directories.output -> /Users/Mark/spfebuild/spfe-docs/config-ref/output
+Setting project property: spfe.config-file -> /Users/Mark/spfebuild/spfe-docs/config-ref/config/spfe-config.xml
+Setting project property: java.library.path -> C:\Windows\system32;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Perl64\bin;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\jEdit;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Users\Mark\Dropbox\spfe\spfe-ot;C:\apache-ant-1.8.3\bin;.
+Setting project property: java.class.version -> 50.0
+Setting project property: already-initialized -> true
+Setting project property: spfe.wip-site.ftp.user -> wip-site.ftp.user
+Setting project property: ant.version -> Apache Ant(TM) version 1.8.3 compiled on February 26 2012
+Setting project property: ant.home -> C:\apache-ant-1.8.3\bin\..
+Setting project property: java.vm.specification.name -> Java Virtual Machine Specification
+Setting project property: sun.java.command -> org.apache.tools.ant.launch.Launcher -cp .;C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip draft -f C:\Users\Mark\AppData\Local\Temp/spfetemp.xml -lib \Users\Mark\Dropbox\spfe\spfe-ot\tools\xml-commons-resolver-1.2\resolver.jar -debug
+Setting project property: spfe.scripts.presentation-web -> /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.presentation-web.xsl
+Setting project property: sun.arch.data.model -> 64
+Setting project property: spfe.directories.link-catalogs -> /Users/Mark/spfebuild/spfe-docs/link-catalogs
+Setting project property: sun.cpu.endian -> little
+Setting project property: java.specification.vendor -> Sun Microsystems Inc.
+Setting project property: spfe.files.fo-format -> spfe.fo-format.fo
+Setting project property: sun.boot.class.path -> C:\Program Files\Java\jre6\lib\resources.jar;C:\Program Files\Java\jre6\lib\rt.jar;C:\Program Files\Java\jre6\lib\sunrsasign.jar;C:\Program Files\Java\jre6\lib\jsse.jar;C:\Program Files\Java\jre6\lib\jce.jar;C:\Program Files\Java\jre6\lib\charsets.jar;C:\Program Files\Java\jre6\lib\modules\jdk.boot.jar;C:\Program Files\Java\jre6\classes
+Setting project property: spfe.other.schema-file -> C:/Users/Mark/Dropbox/spfe/spfe-ot/1.0/schemas/config/spfe-config.xsd
+Project base dir set to: C:\Users\Mark\AppData\Local\Temp
+  [antcall] calling target(s) [-draft] in build file C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Setting ro project property: ant.file -> C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Adding reference: ant.projectHelper
+Adding reference: ant.parsing.context
+Adding reference: ant.targets
+parsing buildfile C:\Users\Mark\AppData\Local\Temp\spfetemp.xml with URI = file:/C:/Users/Mark/AppData/Local/Temp/spfetemp.xml
+Setting ro project property: ant.project.name -> spfe-configuration-reference
+Adding reference: spfe-configuration-reference
+Setting ro project property: ant.project.default-target -> draft
+Setting ro project property: ant.file.spfe-configuration-reference -> C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Setting ro project property: ant.file.type.spfe-configuration-reference -> file
+Project base dir set to: C:\Users\Mark\AppData\Local\Temp
+ +Target: 
+Adding reference: ant.LocalProperties
+ [property] Loading C:\Users\Mark\.spfe\spfe.properties
+ [property] Unable to find property file: C:\Users\Mark\.spfe\spfe.properties
+Override ignored for property "HOME"
+Override ignored for property "SPFEOT_HOME"
+Override ignored for property "spfe.config-file"
+Override ignored for property "spfe.topic-set-id"
+Override ignored for property "spfe.publication-info.title"
+Override ignored for property "spfe.publication-info.release"
+Override ignored for property "spfe.publication-info.product"
+Override ignored for property "spfe.publication-info.copyright"
+Override ignored for property "spfe.wip-site.href"
+Override ignored for property "spfe.wip-site.ftp.url"
+Override ignored for property "spfe.wip-site.ftp.user"
+Override ignored for property "spfe.wip-site.ftp.password"
+Override ignored for property "spfe.wip-site.path"
+Override ignored for property "spfe.messages"
+Override ignored for property "spfe.scripts.synthesis"
+Override ignored for property "spfe.scripts.link-catalog"
+Override ignored for property "spfe.scripts.image-list"
+Override ignored for property "spfe.scripts.presentation-web"
+Override ignored for property "spfe.scripts.other.schema-defs"
+Override ignored for property "spfe.scripts.format-html"
+Override ignored for property "spfe.directories.output"
+Override ignored for property "spfe.directories.link-catalogs"
+Override ignored for property "spfe.directories.build"
+Override ignored for property "spfe.directories.image-source"
+Adding reference: topics
+Adding reference: text-objects
+Adding reference: fragments
+Adding reference: graphics
+Adding reference: graphics-catalog
+Adding reference: strings
+Adding reference: link-catalogs
+Adding reference: synonyms
+Adding reference: other.element-descriptions
+Importing file C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml from C:\Users\Mark\AppData\Local\Temp\spfetemp.xml
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+parsing buildfile C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml with URI = file:/C:/Users/Mark/Dropbox/spfe/spfe-ot/plugins/config-schema-docs/build-tools/config-ref-rules.xml
+Setting ro project property: ant.file.config-ref-rules -> C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml
+Setting ro project property: ant.file.type.config-ref-rules -> file
+ +Target: -build.synthesis
+ +Target: config-ref-rules.-build.synthesis
+ +Target: -get.source-files.element-descriptions
+ +Target: config-ref-rules.-get.source-files.element-descriptions
+ +Target: -current.schema-defs
+ +Target: config-ref-rules.-current.schema-defs
+ +Target: -build.schema-defs
+ +Target: config-ref-rules.-build.schema-defs
+ +Target: --build.synthesis
+ +Target: config-ref-rules.--build.synthesis
+Importing file C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml from C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\config-schema-docs\build-tools\config-ref-rules.xml
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+parsing buildfile C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml with URI = file:/C:/Users/Mark/Dropbox/spfe/spfe-ot/1.0/build-tools/spfe-rules.xml
+Setting ro project property: ant.file.spfe-rules -> C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml
+Setting ro project property: ant.file.type.spfe-rules -> file
+ +Target: -init
+ +Target: spfe-rules.-init
+ +Target: -check-last-build-status
+ +Target: spfe-rules.-check-last-build-status
+ +Target: -recorder
+ +Target: spfe-rules.-recorder
+ +Target: -get-build-revision
+ +Target: spfe-rules.-get-build-revision
+ +Target: -get.source-files.topics
+ +Target: spfe-rules.-get.source-files.topics
+ +Target: -get.source-files.text-objects
+ +Target: spfe-rules.-get.source-files.text-objects
+ +Target: -get.source-files.fragments
+ +Target: spfe-rules.-get.source-files.fragments
+ +Target: -get.source-files.graphics-catalog
+ +Target: spfe-rules.-get.source-files.graphics-catalog
+ +Target: -get.source-files.strings
+ +Target: spfe-rules.-get.source-files.strings
+ +Target: -get.source-files.synonyms
+ +Target: spfe-rules.-get.source-files.synonyms
+ +Target: -get.source-files.link-catalog
+ +Target: spfe-rules.-get.source-files.link-catalog
+ +Target: -get.externals.graphics.print
+ +Target: spfe-rules.-get.externals.graphics.print
+ +Target: -get.externals.graphics.html
+ +Target: spfe-rules.-get.externals.graphics.html
+ +Target: -get.externals.css
+ +Target: spfe-rules.-get.externals.css
+ +Target: -get.externals.javascript
+ +Target: spfe-rules.-get.externals.javascript
+ +Target: -get.externals.pdf-graphic
+ +Target: spfe-rules.-get.externals.pdf-graphic
+ +Target: -get.externals.fo-template-graphics
+ +Target: spfe-rules.-get.externals.fo-template-graphics
+ +Target: -current.synthesis
+ +Target: spfe-rules.-current.synthesis
+Already defined in main or a previous import, ignore -build.synthesis
+ +Target: spfe-rules.-build.synthesis
+Already defined in main or a previous import, ignore --build.synthesis
+ +Target: spfe-rules.--build.synthesis
+ +Target: -current.link-catalog
+ +Target: spfe-rules.-current.link-catalog
+ +Target: -build.link-catalog
+ +Target: spfe-rules.-build.link-catalog
+ +Target: --build.link-catalog
+ +Target: spfe-rules.--build.link-catalog
+ +Target: -current.presentation-web
+ +Target: spfe-rules.-current.presentation-web
+ +Target: -build.presentation-web
+ +Target: spfe-rules.-build.presentation-web
+ +Target: --build.presentation-web
+ +Target: spfe-rules.--build.presentation-web
+ +Target: -current.presentation-book
+ +Target: spfe-rules.-current.presentation-book
+ +Target: -build.presentation-book
+ +Target: spfe-rules.-build.presentation-book
+ +Target: --build.presentation-book
+ +Target: spfe-rules.--build.presentation-book
+ +Target: -current.html-format
+ +Target: spfe-rules.-current.html-format
+ +Target: -build.html-format
+ +Target: spfe-rules.-build.html-format
+ +Target: --build.html-format
+ +Target: spfe-rules.--build.html-format
+ +Target: -current.fo-format
+ +Target: spfe-rules.-current.fo-format
+ +Target: -build.fo-format
+ +Target: spfe-rules.-build.fo-format
+ +Target: --build.fo-format
+ +Target: spfe-rules.--build.fo-format
+ +Target: -current.pdf-encode
+ +Target: spfe-rules.-current.pdf-encode
+ +Target: -build.pdf-encode
+ +Target: spfe-rules.-build.pdf-encode
+ +Target: --build.pdf-encode
+ +Target: spfe-rules.--build.pdf-encode
+ +Target: -current.report
+ +Target: spfe-rules.-current.report
+ +Target: -build.report
+ +Target: spfe-rules.-build.report
+ +Target: -current.image-list-html
+ +Target: spfe-rules.-current.image-list-html
+ +Target: -build.image-list-html
+ +Target: spfe-rules.-build.image-list-html
+ +Target: -current.image-list.print
+ +Target: spfe-rules.-current.image-list.print
+ +Target: -build.image-list.print
+ +Target: spfe-rules.-build.image-list.print
+ +Target: zip
+ +Target: spfe-rules.zip
+ +Target: -zip
+ +Target: spfe-rules.-zip
+ +Target: draft
+ +Target: spfe-rules.draft
+ +Target: -draft
+ +Target: spfe-rules.-draft
+ +Target: -draft-flag
+ +Target: spfe-rules.-draft-flag
+ +Target: final
+ +Target: spfe-rules.final
+ +Target: -final
+ +Target: spfe-rules.-final
+ +Target: -force-clean
+ +Target: spfe-rules.-force-clean
+ +Target: -is-draft
+ +Target: spfe-rules.-is-draft
+ +Target: clean
+ +Target: spfe-rules.clean
+ +Target: -clean
+ +Target: spfe-rules.-clean
+ +Target: wip
+ +Target: spfe-rules.wip
+ +Target: -wip
+ +Target: spfe-rules.-wip
+ +Target: cat
+ +Target: spfe-rules.cat
+ +Target: -cat
+ +Target: spfe-rules.-cat
+ +Target: report
+ +Target: spfe-rules.report
+ +Target: -report
+ +Target: spfe-rules.-report
+ +Target: pdf
+ +Target: spfe-rules.pdf
+ +Target: -pdf-skipped-message
+ +Target: spfe-rules.-pdf-skipped-message
+ +Target: test-mail
+ +Target: spfe-rules.test-mail
+ +Target: -send-mail
+ +Target: spfe-rules.-send-mail
+ +Target: -validate
+ +Target: spfe-rules.-validate
+Adding reference: oasis-catalogs
+Adding reference: spfe-catalogs
+Override ignored for property "spfe.spfe-rules.basedir"
+Override ignored for property "temp"
+Override ignored for property "spfe.files.presentation"
+Override ignored for property "spfe.files.presentation-book"
+Override ignored for property "spfe.files.fo-format"
+Importing file C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml from C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-rules.xml
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+parsing buildfile C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml with URI = file:/C:/Users/Mark/Dropbox/spfe/spfe-ot/1.0/build-tools/spfe-common.xml
+Setting ro project property: ant.file.spfe-common -> C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\build-tools\spfe-common.xml
+Setting ro project property: ant.file.type.spfe-common -> file
+Finding class org.pyant.tasks.PythonTestTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonTestTask.class
+Finding class org.pyant.tasks.PythonInteractiveBaseTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonInteractiveBaseTask.class
+Finding class org.pyant.tasks.PythonBaseTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonBaseTask.class
+Class org.apache.tools.ant.Task loaded from parent loader (parentFirst)
+Class org.pyant.tasks.PythonBaseTask loaded from ant loader (parentFirst)
+Class org.pyant.tasks.PythonInteractiveBaseTask loaded from ant loader (parentFirst)
+Class org.pyant.tasks.PythonTestTask loaded from ant loader (parentFirst)
+Class org.apache.tools.ant.taskdefs.ExecuteStreamHandler loaded from parent loader (parentFirst)
+Class java.lang.Throwable loaded from parent loader (parentFirst)
+Class java.io.IOException loaded from parent loader (parentFirst)
+Class org.apache.tools.ant.BuildException loaded from parent loader (parentFirst)
+Trying to override old definition of task py-test
+ +Datatype py-test org.pyant.tasks.PythonTestTask
+Finding class org.pyant.tasks.PythonDocTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonDocTask.class
+Class org.pyant.tasks.PythonDocTask loaded from ant loader (parentFirst)
+Trying to override old definition of task py-doc
+ +Datatype py-doc org.pyant.tasks.PythonDocTask
+Finding class org.pyant.tasks.PythonRunTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonRunTask.class
+Class org.pyant.tasks.PythonRunTask loaded from ant loader (parentFirst)
+Trying to override old definition of task py-run
+ +Datatype py-run org.pyant.tasks.PythonRunTask
+Finding class org.pyant.tasks.PythonCompileTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonCompileTask.class
+Class org.pyant.tasks.PythonCompileTask loaded from ant loader (parentFirst)
+Trying to override old definition of task py-compile
+ +Datatype py-compile org.pyant.tasks.PythonCompileTask
+Finding class org.pyant.tasks.PythonCoverageTask
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\pyAntTasks-1.3\pyAntTasks-1.3.jar org/pyant/tasks/PythonCoverageTask.class
+Class org.pyant.tasks.PythonCoverageTask loaded from ant loader (parentFirst)
+Class java.util.List loaded from parent loader (parentFirst)
+Class java.io.Writer loaded from parent loader (parentFirst)
+Class java.io.FileWriter loaded from parent loader (parentFirst)
+Class java.lang.Exception loaded from parent loader (parentFirst)
+Class java.lang.InterruptedException loaded from parent loader (parentFirst)
+Class java.util.Collection loaded from parent loader (parentFirst)
+Class java.lang.Object loaded from parent loader (parentFirst)
+Class java.io.Reader loaded from parent loader (parentFirst)
+Class java.io.FileReader loaded from parent loader (parentFirst)
+Class java.util.Comparator loaded from parent loader (parentFirst)
+Class java.io.InputStreamReader loaded from parent loader (parentFirst)
+Trying to override old definition of task py-cover
+ +Datatype py-cover org.pyant.tasks.PythonCoverageTask
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\lib with patternSet{ includes: [*.jar] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-pdf-images-1.3 with patternSet{ includes: [*.jar] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\build with patternSet{ includes: [fop.jar, fop-hyph.jar] excludes: [] }
+Finding class org.apache.fop.tools.anttasks.Fop
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\build\fop.jar org/apache/fop/tools/anttasks/Fop.class
+Class org.apache.tools.ant.Task loaded from parent loader (parentFirst)
+Class org.apache.fop.tools.anttasks.Fop loaded from ant loader (parentFirst)
+Class java.lang.Object loaded from parent loader (parentFirst)
+Class java.lang.Throwable loaded from parent loader (parentFirst)
+Class org.apache.tools.ant.BuildException loaded from parent loader (parentFirst)
+Class org.xml.sax.SAXException loaded from parent loader (parentFirst)
+Class java.io.IOException loaded from parent loader (parentFirst)
+Finding class org.apache.fop.apps.FOPException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\build\fop.jar org/apache/fop/apps/FOPException.class
+Class org.apache.fop.apps.FOPException loaded from ant loader (parentFirst)
+Finding class org.apache.commons.logging.Log
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\fop-0.95\lib\commons-logging-1.0.4.jar org/apache/commons/logging/Log.class
+Class org.apache.commons.logging.Log loaded from ant loader (parentFirst)
+Class java.util.List loaded from parent loader (parentFirst)
+Trying to override old definition of task fop
+ +Datatype fop org.apache.fop.tools.anttasks.Fop
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+Adding reference: spfe.buildfiles
+Property "spfe.sources.text-objects.fileset.dir" has not been set
+Property "spfe.sources.text-objects.fileset.includes" has not been set
+Adding reference: spfe.source-files.text-objects
+Property "spfe.sources.fragments.fileset.dir" has not been set
+Property "spfe.sources.fragments.fileset.includes" has not been set
+Adding reference: spfe.source-files.fragments
+Property "spfe.sources.strings.fileset.dir" has not been set
+Property "spfe.sources.strings.fileset.includes" has not been set
+Adding reference: spfe.source-files.strings
+Property "SPFE_HOME" has not been set
+Property "spfe.source-files.synonyms" has not been set
+Adding reference: spfe.source-files.synonyms
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+Override ignored for property "files.schema-defs"
+Overriding previous definition of reference to ant.projectHelper
+Adding reference: ant.projectHelper
+Override ignored for property "spfe.other.schema-file"
+Build sequence for target(s) `-draft' is [-draft-flag, -is-draft, -force-clean, -recorder, -init, -current.schema-defs, -build.schema-defs, -get.source-files.element-descriptions, -current.synthesis, --build.synthesis, -build.synthesis, -get.source-files.link-catalog, -current.presentation-web, -get.source-files.graphics-catalog, -get.source-files.strings, --build.presentation-web, -build.presentation-web, -current.image-list-html, -build.image-list-html, -get.externals.pdf-graphic, -get.externals.graphics.html, -current.html-format, --build.html-format, -build.html-format, -final, -draft]
+Complete build sequence is [-draft-flag, -is-draft, -force-clean, -recorder, -init, -current.schema-defs, -build.schema-defs, -get.source-files.element-descriptions, -current.synthesis, --build.synthesis, -build.synthesis, -get.source-files.link-catalog, -current.presentation-web, -get.source-files.graphics-catalog, -get.source-files.strings, --build.presentation-web, -build.presentation-web, -current.image-list-html, -build.image-list-html, -get.externals.pdf-graphic, -get.externals.graphics.html, -current.html-format, --build.html-format, -build.html-format, -final, -draft, -report, spfe-rules.-force-clean, spfe-rules.-build.html-format, spfe-rules.-init, spfe-rules.-recorder, -current.presentation-book, --build.presentation-book, -build.presentation-book, -current.image-list.print, -build.image-list.print, spfe-rules.-current.pdf-encode, report, spfe-rules.-build.presentation-book, -get.source-files.topics, -validate, -current.report, spfe-rules.-get.externals.javascript, spfe-rules.test-mail, spfe-rules.-get.source-files.text-objects, spfe-rules.-current.image-list-html, spfe-rules.-get.externals.css, -check-last-build-status, spfe-rules.-get.externals.fo-template-graphics, spfe-rules.-check-last-build-status, -get.externals.css, -get.source-files.text-objects, spfe-rules.-build.image-list.print, spfe-rules.-build.presentation-web, spfe-rules.-clean, -pdf-skipped-message, spfe-rules.-report, spfe-rules.-get.source-files.graphics-catalog, spfe-rules.-final, -get.source-files.fragments, spfe-rules.-current.html-format, spfe-rules.--build.html-format, -current.link-catalog, -get.source-files.synonyms, --build.link-catalog, spfe-rules.-validate, -current.fo-format, --build.fo-format, -build.fo-format, -get.externals.graphics.print, -get.externals.fo-template-graphics, -current.pdf-encode, spfe-rules.--build.pdf-encode, config-ref-rules.-current.schema-defs, spfe-rules.-get.source-files.strings, -clean, spfe-rules.clean, --build.pdf-encode, cat, zip, spfe-rules.-pdf-skipped-message, spfe-rules.-cat, pdf, spfe-rules.-zip, config-ref-rules.-build.schema-defs, -send-mail, spfe-rules.-draft, spfe-rules.cat, spfe-rules.zip, config-ref-rules.--build.synthesis, spfe-rules.-get.source-files.synonyms, spfe-rules.final, spfe-rules.-current.image-list.print, spfe-rules.-get.externals.graphics.html, draft, -wip, wip, -build.pdf-encode, spfe-rules.-current.link-catalog, spfe-rules.-current.presentation-web, spfe-rules.-wip, spfe-rules.--build.link-catalog, spfe-rules.report, spfe-rules.--build.presentation-web, spfe-rules.wip, clean, spfe-rules.-get.externals.pdf-graphic, spfe-rules.--build.synthesis, config-ref-rules.-get.source-files.element-descriptions, spfe-rules.-current.synthesis, -cat, -zip, spfe-rules.-get-build-revision, spfe-rules.-get.source-files.topics, spfe-rules.-current.presentation-book, spfe-rules.-build.report, -get-build-revision, spfe-rules.pdf, final, -get.externals.javascript, spfe-rules.-build.synthesis, test-mail, spfe-rules.draft, spfe-rules.-current.report, spfe-rules.-build.pdf-encode, spfe-rules.-send-mail, spfe-rules.--build.fo-format, spfe-rules.-get.source-files.link-catalog, -build.report, spfe-rules.-get.source-files.fragments, spfe-rules.-build.link-catalog, spfe-rules.--build.presentation-book, spfe-rules.-draft-flag, spfe-rules.-is-draft, spfe-rules.-build.fo-format, -build.link-catalog, config-ref-rules.-build.synthesis, spfe-rules.-build.image-list-html, spfe-rules.-current.fo-format, spfe-rules.-get.externals.graphics.print, ]
+  [antcall] Entering C:\Users\Mark\AppData\Local\Temp\spfetemp.xml...
+Setting ro project property: ant.project.invoked-targets -> -draft
+Build sequence for target(s) `-draft' is [-draft-flag, -is-draft, -force-clean, -recorder, -init, -current.schema-defs, -build.schema-defs, -get.source-files.element-descriptions, -current.synthesis, --build.synthesis, -build.synthesis, -get.source-files.link-catalog, -current.presentation-web, -get.source-files.graphics-catalog, -get.source-files.strings, --build.presentation-web, -build.presentation-web, -current.image-list-html, -build.image-list-html, -get.externals.pdf-graphic, -get.externals.graphics.html, -current.html-format, --build.html-format, -build.html-format, -final, -draft]
+Complete build sequence is [-draft-flag, -is-draft, -force-clean, -recorder, -init, -current.schema-defs, -build.schema-defs, -get.source-files.element-descriptions, -current.synthesis, --build.synthesis, -build.synthesis, -get.source-files.link-catalog, -current.presentation-web, -get.source-files.graphics-catalog, -get.source-files.strings, --build.presentation-web, -build.presentation-web, -current.image-list-html, -build.image-list-html, -get.externals.pdf-graphic, -get.externals.graphics.html, -current.html-format, --build.html-format, -build.html-format, -final, -draft, -report, spfe-rules.-force-clean, spfe-rules.-build.html-format, spfe-rules.-init, spfe-rules.-recorder, -current.presentation-book, --build.presentation-book, -build.presentation-book, -current.image-list.print, -build.image-list.print, spfe-rules.-current.pdf-encode, report, spfe-rules.-build.presentation-book, -get.source-files.topics, -validate, -current.report, spfe-rules.-get.externals.javascript, spfe-rules.test-mail, spfe-rules.-get.source-files.text-objects, spfe-rules.-current.image-list-html, spfe-rules.-get.externals.css, -check-last-build-status, spfe-rules.-get.externals.fo-template-graphics, spfe-rules.-check-last-build-status, -get.externals.css, -get.source-files.text-objects, spfe-rules.-build.image-list.print, spfe-rules.-build.presentation-web, spfe-rules.-clean, -pdf-skipped-message, spfe-rules.-report, spfe-rules.-get.source-files.graphics-catalog, spfe-rules.-final, -get.source-files.fragments, spfe-rules.-current.html-format, spfe-rules.--build.html-format, -current.link-catalog, -get.source-files.synonyms, --build.link-catalog, spfe-rules.-validate, -current.fo-format, --build.fo-format, -build.fo-format, -get.externals.graphics.print, -get.externals.fo-template-graphics, -current.pdf-encode, spfe-rules.--build.pdf-encode, config-ref-rules.-current.schema-defs, spfe-rules.-get.source-files.strings, -clean, spfe-rules.clean, --build.pdf-encode, cat, zip, spfe-rules.-pdf-skipped-message, spfe-rules.-cat, pdf, spfe-rules.-zip, config-ref-rules.-build.schema-defs, -send-mail, spfe-rules.-draft, spfe-rules.cat, spfe-rules.zip, config-ref-rules.--build.synthesis, spfe-rules.-get.source-files.synonyms, spfe-rules.final, spfe-rules.-current.image-list.print, spfe-rules.-get.externals.graphics.html, draft, -wip, wip, -build.pdf-encode, spfe-rules.-current.link-catalog, spfe-rules.-current.presentation-web, spfe-rules.-wip, spfe-rules.--build.link-catalog, spfe-rules.report, spfe-rules.--build.presentation-web, spfe-rules.wip, clean, spfe-rules.-get.externals.pdf-graphic, spfe-rules.--build.synthesis, config-ref-rules.-get.source-files.element-descriptions, spfe-rules.-current.synthesis, -cat, -zip, spfe-rules.-get-build-revision, spfe-rules.-get.source-files.topics, spfe-rules.-current.presentation-book, spfe-rules.-build.report, -get-build-revision, spfe-rules.pdf, final, -get.externals.javascript, spfe-rules.-build.synthesis, test-mail, spfe-rules.draft, spfe-rules.-current.report, spfe-rules.-build.pdf-encode, spfe-rules.-send-mail, spfe-rules.--build.fo-format, spfe-rules.-get.source-files.link-catalog, -build.report, spfe-rules.-get.source-files.fragments, spfe-rules.-build.link-catalog, spfe-rules.--build.presentation-book, spfe-rules.-draft-flag, spfe-rules.-is-draft, spfe-rules.-build.fo-format, -build.link-catalog, config-ref-rules.-build.synthesis, spfe-rules.-build.image-list-html, spfe-rules.-current.fo-format, spfe-rules.-get.externals.graphics.print, ]
+
+-draft-flag:
+Setting project property: draft -> yes
+
+-is-draft:
+[available] Found: C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp\draft.flag
+Setting project property: is-draft -> true
+
+-force-clean:
+Skipped because property 'draft' set.
+
+-recorder:
+     [echo] Logging to: /Users/Mark/spfebuild/spfe-docs/config-ref/logs/spfe-configuration-reference.txt
+    [mkdir] Skipping C:\Users\Mark\spfebuild\spfe-docs\config-ref\logs because it already exists.
+setting a recorder for name /Users/Mark/spfebuild/spfe-docs/config-ref/logs/spfe-configuration-reference-log.txt
+
+-init:
+Skipped because property 'already-initialized' set.
+
+-current.schema-defs:
+Property "source-files.schema" has not been set
+Setting project property: paths.schema -> C:\Users\Mark\AppData\Local\Temp
+Property "source-files.schema" has not been set
+dirset: Setup scanner in dir C:\Users\Mark\AppData\Local\Temp with patternSet{ includes: [**/*.xsd] excludes: [] }
+ [uptodate] ${source-files.schema} omitted as C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp\schema-defs.xml is up to date.
+Setting project property: -current.schema-defs -> true
+ [uptodate] File "C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp\schema-defs.xml" is up-to-date.
+
+-build.schema-defs:
+Skipped because property '-current.schema-defs' set.
+
+-get.source-files.element-descriptions:
+     [copy] C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\schemas\config\element-descriptions.xml omitted as C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp\descriptions\element-descriptions.xml is up to date.
+     [copy] No sources found.
+
+-current.synthesis:
+fileset: Setup scanner in dir C:\Users\Mark\AppData\Local\Temp with patternSet{ includes: [/Users/Mark/Dropbox/spfe/spfe-docs/content/*.xml] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\AppData\Local\Temp with patternSet{ includes: [/Users/Mark/Dropbox/spfe/spfe-docs/content/*.xml] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\AppData\Local\Temp with patternSet{ includes: [/Users/Mark/Dropbox/spfe/spfe-docs/content/*.xml] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\AppData\Local\Temp with patternSet{ includes: [/Users/Mark/Dropbox/spfe/spfe-docs/content/*.xml] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\AppData\Local\Temp with patternSet{ includes: [/Users/Mark/Dropbox/spfe/spfe-docs/content/*.xml] excludes: [] }
+ [uptodate] The targetfile "C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp\synthesis\spfe.synthesis.xml" does not exist.
+
+--build.synthesis:
+Property "source-files.element-descriptions" has not been set
+Setting project property: source-files.descriptions.name -> ${source-files.element-descriptions}
+Adding reference: intros-file-list
+Adding reference: descriptions-file-list
+fileset: Setup scanner in dir C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp with patternSet{ includes: [descriptions/*.xml] excludes: [] }
+Setting project property: descriptions-files -> descriptions\element-descriptions.xml
+Adding reference: abnf-symbols-file-list
+fileset: Setup scanner in dir C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp with patternSet{ includes: [abnf-symbols/*.xml] excludes: [] }
+Setting project property: abnf-symbols-files -> 
+Property "topic-files" has not been set
+     [xslt] Using class org.apache.tools.ant.taskdefs.optional.TraXLiaison
+     [xslt] In file C:\Users\Mark\spfebuild\spfe-docs\config-ref\config\spfe-config.xml time: 1334691513440
+     [xslt] Out file C:\Users\Mark\AppData\Local\Temp\NULL time: 0
+     [xslt] Style file /Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.synthesis.xsl time: 1334691513450
+     [xslt] Processing C:\Users\Mark\spfebuild\spfe-docs\config-ref\config\spfe-config.xml to C:\Users\Mark\AppData\Local\Temp\NULL
+     [xslt] Loading stylesheet C:\Users\Mark\spfebuild\spfe-docs\config-ref\temp\spfe.synthesis.xsl
+Finding class net.sf.saxon.TransformerFactoryImpl
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/TransformerFactoryImpl.class
+Class javax.xml.transform.sax.SAXTransformerFactory loaded from parent loader (parentFirst)
+Class net.sf.saxon.TransformerFactoryImpl loaded from ant loader (parentFirst)
+Class java.lang.Object loaded from parent loader (parentFirst)
+Class java.lang.Throwable loaded from parent loader (parentFirst)
+Class javax.xml.transform.TransformerConfigurationException loaded from parent loader (parentFirst)
+Class org.xml.sax.XMLFilter loaded from parent loader (parentFirst)
+Class javax.xml.transform.sax.TemplatesHandler loaded from parent loader (parentFirst)
+Class javax.xml.transform.sax.TransformerHandler loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.Controller
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/Controller.class
+Class javax.xml.transform.Transformer loaded from parent loader (parentFirst)
+Class net.sf.saxon.Controller loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.IdentityTransformer
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/IdentityTransformer.class
+Class net.sf.saxon.IdentityTransformer loaded from ant loader (parentFirst)
+Class javax.xml.transform.Templates loaded from parent loader (parentFirst)
+Class java.lang.IllegalArgumentException loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.Configuration
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/Configuration.class
+Class java.io.Serializable loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.lib.SourceResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/SourceResolver.class
+Class net.sf.saxon.lib.SourceResolver loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.NotationSet
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NotationSet.class
+Class net.sf.saxon.om.NotationSet loaded from ant loader (parentFirst)
+Class net.sf.saxon.Configuration loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.trans.XPathException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/XPathException.class
+Class javax.xml.transform.TransformerException loaded from parent loader (parentFirst)
+Class net.sf.saxon.trans.XPathException loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.Receiver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/Receiver.class
+Class javax.xml.transform.Result loaded from parent loader (parentFirst)
+Class net.sf.saxon.event.Receiver loaded from ant loader (parentFirst)
+Class java.lang.NullPointerException loaded from parent loader (parentFirst)
+Class java.lang.UnsupportedOperationException loaded from parent loader (parentFirst)
+Class java.util.List loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.value.Value
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/Value.class
+Finding class net.sf.saxon.om.ValueRepresentation
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/ValueRepresentation.class
+Class net.sf.saxon.om.ValueRepresentation loaded from ant loader (parentFirst)
+Class net.sf.saxon.value.Value loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.Closure
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/Closure.class
+Class net.sf.saxon.value.Closure loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.MemoClosure
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/MemoClosure.class
+Class net.sf.saxon.value.MemoClosure loaded from ant loader (parentFirst)
+Class java.lang.AssertionError loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.expr.parser.ExpressionParser
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/parser/ExpressionParser.class
+Class net.sf.saxon.expr.parser.ExpressionParser loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.query.QueryParser
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/query/QueryParser.class
+Class net.sf.saxon.query.QueryParser loaded from ant loader (parentFirst)
+Class java.lang.Exception loaded from parent loader (parentFirst)
+Class javax.xml.transform.TransformerFactoryConfigurationError loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.type.SimpleType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/SimpleType.class
+Finding class net.sf.saxon.type.SchemaType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/SchemaType.class
+Finding class net.sf.saxon.type.SchemaComponent
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/SchemaComponent.class
+Class net.sf.saxon.type.SchemaComponent loaded from ant loader (parentFirst)
+Class net.sf.saxon.type.SchemaType loaded from ant loader (parentFirst)
+Class net.sf.saxon.type.SimpleType loaded from ant loader (parentFirst)
+Class org.xml.sax.SAXNotSupportedException loaded from parent loader (parentFirst)
+Class org.xml.sax.SAXNotRecognizedException loaded from parent loader (parentFirst)
+Class org.xml.sax.SAXException loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.lib.Numberer
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/Numberer.class
+Class net.sf.saxon.lib.Numberer loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.parser.CodeInjector
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/parser/CodeInjector.class
+Class net.sf.saxon.expr.parser.CodeInjector loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.XPathContext
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/XPathContext.class
+Class net.sf.saxon.expr.XPathContext loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.Name10Checker
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/Name10Checker.class
+Finding class net.sf.saxon.om.NameChecker
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NameChecker.class
+Class net.sf.saxon.om.NameChecker loaded from ant loader (parentFirst)
+Class net.sf.saxon.om.Name10Checker loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.Name11Checker
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/Name11Checker.class
+Class net.sf.saxon.om.Name11Checker loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.StringToDouble
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/StringToDouble.class
+Class net.sf.saxon.type.StringToDouble loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.StringToDouble11
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/StringToDouble11.class
+Class net.sf.saxon.value.StringToDouble11 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.URIChecker
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/URIChecker.class
+Class net.sf.saxon.lib.URIChecker loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.trans.LicenseException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/LicenseException.class
+Class java.lang.RuntimeException loaded from parent loader (parentFirst)
+Class net.sf.saxon.trans.LicenseException loaded from ant loader (parentFirst)
+Class java.lang.IllegalAccessException loaded from parent loader (parentFirst)
+Class java.lang.InstantiationException loaded from parent loader (parentFirst)
+Class java.lang.ClassNotFoundException loaded from parent loader (parentFirst)
+Class java.io.IOException loaded from parent loader (parentFirst)
+Class java.lang.ClassCastException loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.type.ValidationException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/ValidationException.class
+Class javax.xml.transform.SourceLocator loaded from parent loader (parentFirst)
+Class org.xml.sax.Locator loaded from parent loader (parentFirst)
+Class net.sf.saxon.type.ValidationException loaded from ant loader (parentFirst)
+Class java.io.FileNotFoundException loaded from parent loader (parentFirst)
+Class java.lang.NumberFormatException loaded from parent loader (parentFirst)
+Class java.io.OutputStream loaded from parent loader (parentFirst)
+Class java.io.FileOutputStream loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.expr.StaticContext
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/StaticContext.class
+Class net.sf.saxon.expr.StaticContext loaded from ant loader (parentFirst)
+Class java.lang.CharSequence loaded from parent loader (parentFirst)
+Class java.lang.IllegalStateException loaded from parent loader (parentFirst)
+Class javax.xml.transform.ErrorListener loaded from parent loader (parentFirst)
+Class javax.xml.transform.URIResolver loaded from parent loader (parentFirst)
+Class org.xml.sax.EntityResolver loaded from parent loader (parentFirst)
+Class java.util.Iterator loaded from parent loader (parentFirst)
+Class org.xml.sax.ext.LexicalHandler loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.lib.CollationURIResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/CollationURIResolver.class
+Class net.sf.saxon.lib.CollationURIResolver loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.CollectionURIResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/CollectionURIResolver.class
+Class net.sf.saxon.lib.CollectionURIResolver loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.ModuleURIResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/ModuleURIResolver.class
+Class net.sf.saxon.lib.ModuleURIResolver loaded from ant loader (parentFirst)
+Class java.lang.Class loaded from parent loader (parentFirst)
+Class java.util.ArrayList loaded from parent loader (parentFirst)
+Class java.lang.Thread loaded from parent loader (parentFirst)
+Class java.lang.ClassLoader loaded from parent loader (parentFirst)
+ResourceStream for edition.properties loaded from ant loader
+Class java.util.Properties loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.java.JavaPlatform
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/java/JavaPlatform.class
+Finding class net.sf.saxon.Platform
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/Platform.class
+Class net.sf.saxon.Platform loaded from ant loader (parentFirst)
+Class net.sf.saxon.java.JavaPlatform loaded from ant loader (parentFirst)
+Class javax.xml.transform.Source loaded from parent loader (parentFirst)
+Class javax.xml.parsers.ParserConfigurationException loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.lib.ExternalObjectModel
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/ExternalObjectModel.class
+Class net.sf.saxon.lib.ExternalObjectModel loaded from ant loader (parentFirst)
+Class java.lang.String loaded from parent loader (parentFirst)
+Class org.xml.sax.ext.DefaultHandler2 loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.lib.StandardURIResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/StandardURIResolver.class
+Finding class net.sf.saxon.trans.NonDelegatingURIResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/NonDelegatingURIResolver.class
+Class net.sf.saxon.trans.NonDelegatingURIResolver loaded from ant loader (parentFirst)
+Class net.sf.saxon.lib.StandardURIResolver loaded from ant loader (parentFirst)
+Class java.net.URISyntaxException loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.event.FilterFactory
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/FilterFactory.class
+Class net.sf.saxon.event.FilterFactory loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.IntegratedFunctionLibrary
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/IntegratedFunctionLibrary.class
+Finding class net.sf.saxon.functions.FunctionLibrary
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/FunctionLibrary.class
+Class net.sf.saxon.functions.FunctionLibrary loaded from ant loader (parentFirst)
+Class net.sf.saxon.functions.IntegratedFunctionLibrary loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.Expression
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/Expression.class
+Finding class net.sf.saxon.trace.InstructionInfo
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trace/InstructionInfo.class
+Finding class net.sf.saxon.event.SaxonLocator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/SaxonLocator.class
+Finding class net.sf.saxon.event.LocationProvider
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/LocationProvider.class
+Class net.sf.saxon.event.LocationProvider loaded from ant loader (parentFirst)
+Class net.sf.saxon.event.SaxonLocator loaded from ant loader (parentFirst)
+Class net.sf.saxon.trace.InstructionInfo loaded from ant loader (parentFirst)
+Class net.sf.saxon.expr.Expression loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.IntegratedFunctionCall
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/IntegratedFunctionCall.class
+Finding class net.sf.saxon.expr.CallableExpression
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/CallableExpression.class
+Class net.sf.saxon.expr.CallableExpression loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.FunctionCall
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/FunctionCall.class
+Class net.sf.saxon.expr.FunctionCall loaded from ant loader (parentFirst)
+Class net.sf.saxon.functions.IntegratedFunctionCall loaded from ant loader (parentFirst)
+Class java.util.Map loaded from parent loader (parentFirst)
+Class java.util.HashMap loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.lib.StandardCollationURIResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/StandardCollationURIResolver.class
+Class net.sf.saxon.lib.StandardCollationURIResolver loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.CollationMap
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/CollationMap.class
+Class net.sf.saxon.expr.CollationMap loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.StringCollator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/StringCollator.class
+Class net.sf.saxon.lib.StringCollator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.StandardCollectionURIResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/StandardCollectionURIResolver.class
+Class net.sf.saxon.lib.StandardCollectionURIResolver loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.pattern.NodeTest
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/NodeTest.class
+Finding class net.sf.saxon.type.ItemType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/ItemType.class
+Class net.sf.saxon.type.ItemType loaded from ant loader (parentFirst)
+Class net.sf.saxon.pattern.NodeTest loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.pattern.NodeKindTest
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/NodeKindTest.class
+Class net.sf.saxon.pattern.NodeKindTest loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.SequenceIterator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/SequenceIterator.class
+Class net.sf.saxon.om.SequenceIterator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.ItemMappingFunction
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/ItemMappingFunction.class
+Class net.sf.saxon.expr.ItemMappingFunction loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.StandardErrorListener
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/StandardErrorListener.class
+Class net.sf.saxon.lib.StandardErrorListener loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.Item
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/Item.class
+Finding class net.sf.saxon.evpull.PullEvent
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/evpull/PullEvent.class
+Class net.sf.saxon.evpull.PullEvent loaded from ant loader (parentFirst)
+Class net.sf.saxon.om.Item loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.MappingFunction
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/MappingFunction.class
+Class net.sf.saxon.expr.MappingFunction loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.StandardModuleURIResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/StandardModuleURIResolver.class
+Class net.sf.saxon.lib.StandardModuleURIResolver loaded from ant loader (parentFirst)
+Class java.io.InputStream loaded from parent loader (parentFirst)
+Class java.io.BufferedInputStream loaded from parent loader (parentFirst)
+Class java.io.Reader loaded from parent loader (parentFirst)
+Class java.io.InputStreamReader loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.om.NamePool
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NamePool.class
+Class net.sf.saxon.om.NamePool loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.QNameException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/QNameException.class
+Class net.sf.saxon.om.QNameException loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.NamePool$NamePoolLimitException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NamePool$NamePoolLimitException.class
+Class net.sf.saxon.om.NamePool$NamePoolLimitException loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.NamePool$NameEntry
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NamePool$NameEntry.class
+Class net.sf.saxon.om.NamePool$NameEntry loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.util.DocumentNumberAllocator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/util/DocumentNumberAllocator.class
+Class net.sf.saxon.tree.util.DocumentNumberAllocator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.DocumentPool
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/DocumentPool.class
+Class net.sf.saxon.om.DocumentPool loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.NodeInfo
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NodeInfo.class
+Class net.sf.saxon.om.NodeInfo loaded from ant loader (parentFirst)
+Class java.util.Set loaded from parent loader (parentFirst)
+Class java.util.HashSet loaded from parent loader (parentFirst)
+Class java.lang.System loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.lib.ParseOptions
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/ParseOptions.class
+Class net.sf.saxon.lib.ParseOptions loaded from ant loader (parentFirst)
+Class java.util.Collection loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.trans.DynamicLoader
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/DynamicLoader.class
+Class net.sf.saxon.trans.DynamicLoader loaded from ant loader (parentFirst)
+Class java.lang.NoClassDefFoundError loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.serialize.MessageEmitter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/MessageEmitter.class
+Finding class net.sf.saxon.serialize.XMLEmitter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/XMLEmitter.class
+Finding class net.sf.saxon.serialize.Emitter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/Emitter.class
+Class net.sf.saxon.serialize.Emitter loaded from ant loader (parentFirst)
+Class net.sf.saxon.serialize.XMLEmitter loaded from ant loader (parentFirst)
+Class net.sf.saxon.serialize.MessageEmitter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.SerializerFactory
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/SerializerFactory.class
+Class net.sf.saxon.lib.SerializerFactory loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.ProxyReceiver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/ProxyReceiver.class
+Finding class net.sf.saxon.event.SequenceReceiver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/SequenceReceiver.class
+Class net.sf.saxon.event.SequenceReceiver loaded from ant loader (parentFirst)
+Class net.sf.saxon.event.ProxyReceiver loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.serialize.UnicodeNormalizer
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/UnicodeNormalizer.class
+Class net.sf.saxon.serialize.UnicodeNormalizer loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.serialize.XML10ContentChecker
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/XML10ContentChecker.class
+Class net.sf.saxon.serialize.XML10ContentChecker loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.serialize.CDATAFilter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/CDATAFilter.class
+Class net.sf.saxon.serialize.CDATAFilter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.serialize.XHTMLURIEscaper
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/XHTMLURIEscaper.class
+Finding class net.sf.saxon.serialize.HTMLURIEscaper
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/HTMLURIEscaper.class
+Class net.sf.saxon.serialize.HTMLURIEscaper loaded from ant loader (parentFirst)
+Class net.sf.saxon.serialize.XHTMLURIEscaper loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.serialize.HTMLIndenter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/HTMLIndenter.class
+Class net.sf.saxon.serialize.HTMLIndenter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.serialize.XMLIndenter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/XMLIndenter.class
+Class net.sf.saxon.serialize.XMLIndenter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.serialize.TEXTEmitter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/TEXTEmitter.class
+Class net.sf.saxon.serialize.TEXTEmitter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.serialize.XHTMLEmitter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/XHTMLEmitter.class
+Class net.sf.saxon.serialize.XHTMLEmitter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.serialize.HTMLEmitter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/HTMLEmitter.class
+Class net.sf.saxon.serialize.HTMLEmitter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.TraceListener
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/TraceListener.class
+Class java.util.EventListener loaded from parent loader (parentFirst)
+Class net.sf.saxon.lib.TraceListener loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.serialize.CharacterMapExpander
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/serialize/CharacterMapExpander.class
+Class net.sf.saxon.serialize.CharacterMapExpander loaded from ant loader (parentFirst)
+Class java.util.Locale loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.trans.CompilerInfo
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/CompilerInfo.class
+Class net.sf.saxon.trans.CompilerInfo loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.OutputURIResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/OutputURIResolver.class
+Class net.sf.saxon.lib.OutputURIResolver loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.StandardOutputResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/StandardOutputResolver.class
+Class net.sf.saxon.lib.StandardOutputResolver loaded from ant loader (parentFirst)
+Class java.net.UnknownServiceException loaded from parent loader (parentFirst)
+Class java.net.MalformedURLException loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.value.DecimalValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/DecimalValue.class
+Finding class net.sf.saxon.value.NumericValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/NumericValue.class
+Class java.lang.Comparable loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.value.AtomicValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/AtomicValue.class
+Finding class net.sf.saxon.om.GroundedValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/GroundedValue.class
+Class net.sf.saxon.om.GroundedValue loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.ConversionResult
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/ConversionResult.class
+Class net.sf.saxon.type.ConversionResult loaded from ant loader (parentFirst)
+Class net.sf.saxon.value.AtomicValue loaded from ant loader (parentFirst)
+Class net.sf.saxon.value.NumericValue loaded from ant loader (parentFirst)
+Class net.sf.saxon.value.DecimalValue loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.EmptySequence
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/EmptySequence.class
+Class net.sf.saxon.value.EmptySequence loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.SingletonItem
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/SingletonItem.class
+Class net.sf.saxon.value.SingletonItem loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.DoubleValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/DoubleValue.class
+Class net.sf.saxon.value.DoubleValue loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.AtomicType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/AtomicType.class
+Finding class net.sf.saxon.type.PlainType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/PlainType.class
+Class net.sf.saxon.type.PlainType loaded from ant loader (parentFirst)
+Class net.sf.saxon.type.AtomicType loaded from ant loader (parentFirst)
+Class java.math.BigDecimal loaded from parent loader (parentFirst)
+Class java.math.BigInteger loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.type.BuiltInAtomicType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/BuiltInAtomicType.class
+Class net.sf.saxon.type.BuiltInAtomicType loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.StringValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/StringValue.class
+Class net.sf.saxon.value.StringValue loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.UntypedAtomicValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/UntypedAtomicValue.class
+Class net.sf.saxon.value.UntypedAtomicValue loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.NamespaceResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NamespaceResolver.class
+Class net.sf.saxon.om.NamespaceResolver loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.SchemaException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/SchemaException.class
+Class net.sf.saxon.type.SchemaException loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.AnySimpleType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/AnySimpleType.class
+Class net.sf.saxon.type.AnySimpleType loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.Type
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/Type.class
+Class net.sf.saxon.type.Type loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.pattern.AnyNodeTest
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/AnyNodeTest.class
+Finding class net.sf.saxon.pattern.QNameTest
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/QNameTest.class
+Class net.sf.saxon.pattern.QNameTest loaded from ant loader (parentFirst)
+Class net.sf.saxon.pattern.AnyNodeTest loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.sort.IntSet
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/sort/IntSet.class
+Class net.sf.saxon.expr.sort.IntSet loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.NodeName
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NodeName.class
+Class net.sf.saxon.om.NodeName loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.AnyItemType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/AnyItemType.class
+Class net.sf.saxon.type.AnyItemType loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.BuiltInType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/BuiltInType.class
+Class net.sf.saxon.type.BuiltInType loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.sort.IntHashMap
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/sort/IntHashMap.class
+Class net.sf.saxon.expr.sort.IntHashMap loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.sort.IntIterator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/sort/IntIterator.class
+Class net.sf.saxon.expr.sort.IntIterator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.AnyType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/AnyType.class
+Finding class net.sf.saxon.type.ComplexType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/ComplexType.class
+Class net.sf.saxon.type.ComplexType loaded from ant loader (parentFirst)
+Class net.sf.saxon.type.AnyType loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.Untyped
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/Untyped.class
+Class net.sf.saxon.type.Untyped loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.ErrorType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/ErrorType.class
+Class net.sf.saxon.type.ErrorType loaded from ant loader (parentFirst)
+Class java.util.regex.Pattern loaded from parent loader (parentFirst)
+Class java.util.concurrent.ConcurrentLinkedQueue loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMEnvelope
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMEnvelope.class
+Class net.sf.saxon.dom.DOMEnvelope loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.JPConverter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/JPConverter.class
+Class net.sf.saxon.expr.JPConverter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMEnvelope$3
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMEnvelope$3.class
+Class net.sf.saxon.dom.DOMEnvelope$3 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.PJConverter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/PJConverter.class
+Class net.sf.saxon.expr.PJConverter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMEnvelope$1
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMEnvelope$1.class
+Class net.sf.saxon.dom.DOMEnvelope$1 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMEnvelope$2
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMEnvelope$2.class
+Class net.sf.saxon.dom.DOMEnvelope$2 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMObjectModel
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMObjectModel.class
+Finding class net.sf.saxon.om.TreeModel
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/TreeModel.class
+Class net.sf.saxon.om.TreeModel loaded from ant loader (parentFirst)
+Class net.sf.saxon.dom.DOMObjectModel loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.TreeModel$TinyTree
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/TreeModel$TinyTree.class
+Class net.sf.saxon.om.TreeModel$TinyTree loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.TreeModel$TinyTreeCondensed
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/TreeModel$TinyTreeCondensed.class
+Class net.sf.saxon.om.TreeModel$TinyTreeCondensed loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.TreeModel$LinkedTree
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/TreeModel$LinkedTree.class
+Class net.sf.saxon.om.TreeModel$LinkedTree loaded from ant loader (parentFirst)
+Class org.w3c.dom.Node loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.om.DocumentInfo
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/DocumentInfo.class
+Class net.sf.saxon.om.DocumentInfo loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMObjectModel$6
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMObjectModel$6.class
+Class net.sf.saxon.dom.DOMObjectModel$6 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMObjectModel$3
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMObjectModel$3.class
+Class net.sf.saxon.dom.DOMObjectModel$3 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMObjectModel$4
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMObjectModel$4.class
+Class net.sf.saxon.dom.DOMObjectModel$4 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMObjectModel$5
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMObjectModel$5.class
+Class net.sf.saxon.dom.DOMObjectModel$5 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMObjectModel$1
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMObjectModel$1.class
+Class net.sf.saxon.dom.DOMObjectModel$1 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMObjectModel$2
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMObjectModel$2.class
+Class net.sf.saxon.dom.DOMObjectModel$2 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.Builder
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/Builder.class
+Class net.sf.saxon.event.Builder loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.dom.DOMWriter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/dom/DOMWriter.class
+Class net.sf.saxon.dom.DOMWriter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.tiny.TinyBuilder
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/tiny/TinyBuilder.class
+Class net.sf.saxon.tree.tiny.TinyBuilder loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.tiny.TinyBuilderCondensed
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/tiny/TinyBuilderCondensed.class
+Class net.sf.saxon.tree.tiny.TinyBuilderCondensed loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.LinkedTreeBuilder
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/LinkedTreeBuilder.class
+Class net.sf.saxon.tree.linked.LinkedTreeBuilder loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.StandardEntityResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/StandardEntityResolver.class
+Class net.sf.saxon.lib.StandardEntityResolver loaded from ant loader (parentFirst)
+java.lang.NoSuchFieldException: _isNotSecureProcessing
+Finding class net.sf.saxon.om.StructuredQName
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/StructuredQName.class
+Class net.sf.saxon.om.StructuredQName loaded from ant loader (parentFirst)
+Couldn't load ResourceStream for META-INF/services/javax.xml.parsers.SAXParserFactory
+Class com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl loaded from parent loader (parentFirst)
+Class com.sun.org.apache.xerces.internal.parsers.XIncludeAwareParserConfiguration loaded from parent loader (parentFirst)
+Class com.sun.org.apache.xerces.internal.impl.dv.dtd.DTDDVFactoryImpl loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.PreparedStylesheet
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/PreparedStylesheet.class
+Finding class net.sf.saxon.expr.instruct.Executable
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/instruct/Executable.class
+Class net.sf.saxon.expr.instruct.Executable loaded from ant loader (parentFirst)
+Class net.sf.saxon.PreparedStylesheet loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.NoElementsSpaceStrippingRule
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NoElementsSpaceStrippingRule.class
+Finding class net.sf.saxon.om.SpaceStrippingRule
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/SpaceStrippingRule.class
+Class net.sf.saxon.om.SpaceStrippingRule loaded from ant loader (parentFirst)
+Class net.sf.saxon.om.NoElementsSpaceStrippingRule loaded from ant loader (parentFirst)
+Class java.io.StringReader loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.NodeFactory
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/NodeFactory.class
+Class net.sf.saxon.tree.linked.NodeFactory loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.instruct.LocationMap
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/instruct/LocationMap.class
+Class net.sf.saxon.expr.instruct.LocationMap loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.StyleNodeFactory
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/StyleNodeFactory.class
+Class net.sf.saxon.style.StyleNodeFactory loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.StyleElement
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/StyleElement.class
+Finding class net.sf.saxon.expr.Container
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/Container.class
+Class net.sf.saxon.expr.Container loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.ElementImpl
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/ElementImpl.class
+Finding class net.sf.saxon.tree.linked.ParentNodeImpl
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/ParentNodeImpl.class
+Finding class net.sf.saxon.tree.linked.NodeImpl
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/NodeImpl.class
+Finding class net.sf.saxon.om.MutableNodeInfo
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/MutableNodeInfo.class
+Class net.sf.saxon.om.MutableNodeInfo loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.FingerprintedNode
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/FingerprintedNode.class
+Class net.sf.saxon.om.FingerprintedNode loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.wrapper.SiblingCountingNode
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/wrapper/SiblingCountingNode.class
+Class net.sf.saxon.tree.wrapper.SiblingCountingNode loaded from ant loader (parentFirst)
+Class net.sf.saxon.tree.linked.NodeImpl loaded from ant loader (parentFirst)
+Class net.sf.saxon.tree.linked.ParentNodeImpl loaded from ant loader (parentFirst)
+Class net.sf.saxon.tree.linked.ElementImpl loaded from ant loader (parentFirst)
+Class net.sf.saxon.style.StyleElement loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLAnalyzeString
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLAnalyzeString.class
+Class net.sf.saxon.style.XSLAnalyzeString loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLApplyImports
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLApplyImports.class
+Class net.sf.saxon.style.XSLApplyImports loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLApplyTemplates
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLApplyTemplates.class
+Class net.sf.saxon.style.XSLApplyTemplates loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLAttribute
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLAttribute.class
+Finding class net.sf.saxon.style.XSLLeafNodeConstructor
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLLeafNodeConstructor.class
+Class net.sf.saxon.style.XSLLeafNodeConstructor loaded from ant loader (parentFirst)
+Class net.sf.saxon.style.XSLAttribute loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLAttributeSet
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLAttributeSet.class
+Finding class net.sf.saxon.style.StylesheetProcedure
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/StylesheetProcedure.class
+Class net.sf.saxon.style.StylesheetProcedure loaded from ant loader (parentFirst)
+Class net.sf.saxon.style.XSLAttributeSet loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLCallTemplate
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLCallTemplate.class
+Class net.sf.saxon.style.XSLCallTemplate loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLCharacterMap
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLCharacterMap.class
+Class net.sf.saxon.style.XSLCharacterMap loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLChoose
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLChoose.class
+Class net.sf.saxon.style.XSLChoose loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLComment
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLComment.class
+Class net.sf.saxon.style.XSLComment loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLCopy
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLCopy.class
+Class net.sf.saxon.style.XSLCopy loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLCopyOf
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLCopyOf.class
+Class net.sf.saxon.style.XSLCopyOf loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLDecimalFormat
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLDecimalFormat.class
+Class net.sf.saxon.style.XSLDecimalFormat loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLDocument
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLDocument.class
+Class net.sf.saxon.style.XSLDocument loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLElement
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLElement.class
+Class net.sf.saxon.style.XSLElement loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLFallback
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLFallback.class
+Class net.sf.saxon.style.XSLFallback loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLForEach
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLForEach.class
+Class net.sf.saxon.style.XSLForEach loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLForEachGroup
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLForEachGroup.class
+Class net.sf.saxon.style.XSLForEachGroup loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLFunction
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLFunction.class
+Class net.sf.saxon.style.XSLFunction loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLIf
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLIf.class
+Class net.sf.saxon.style.XSLIf loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLImport
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLImport.class
+Finding class net.sf.saxon.style.XSLGeneralIncorporate
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLGeneralIncorporate.class
+Class net.sf.saxon.style.XSLGeneralIncorporate loaded from ant loader (parentFirst)
+Class net.sf.saxon.style.XSLImport loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLImportSchema
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLImportSchema.class
+Class net.sf.saxon.style.XSLImportSchema loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLInclude
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLInclude.class
+Class net.sf.saxon.style.XSLInclude loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLKey
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLKey.class
+Class net.sf.saxon.style.XSLKey loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLMatchingSubstring
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLMatchingSubstring.class
+Class net.sf.saxon.style.XSLMatchingSubstring loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLMessage
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLMessage.class
+Class net.sf.saxon.style.XSLMessage loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLNextMatch
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLNextMatch.class
+Class net.sf.saxon.style.XSLNextMatch loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLNumber
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLNumber.class
+Class net.sf.saxon.style.XSLNumber loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLNamespace
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLNamespace.class
+Class net.sf.saxon.style.XSLNamespace loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLNamespaceAlias
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLNamespaceAlias.class
+Class net.sf.saxon.style.XSLNamespaceAlias loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLOtherwise
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLOtherwise.class
+Class net.sf.saxon.style.XSLOtherwise loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLOutput
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLOutput.class
+Class net.sf.saxon.style.XSLOutput loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLOutputCharacter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLOutputCharacter.class
+Class net.sf.saxon.style.XSLOutputCharacter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLParam
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLParam.class
+Finding class net.sf.saxon.style.XSLVariableDeclaration
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLVariableDeclaration.class
+Finding class net.sf.saxon.expr.VariableDeclaration
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/VariableDeclaration.class
+Class net.sf.saxon.expr.VariableDeclaration loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLGeneralVariable
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLGeneralVariable.class
+Class net.sf.saxon.style.XSLGeneralVariable loaded from ant loader (parentFirst)
+Class net.sf.saxon.style.XSLVariableDeclaration loaded from ant loader (parentFirst)
+Class net.sf.saxon.style.XSLParam loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLPerformSort
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLPerformSort.class
+Class net.sf.saxon.style.XSLPerformSort loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLPreserveSpace
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLPreserveSpace.class
+Class net.sf.saxon.style.XSLPreserveSpace loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLProcessingInstruction
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLProcessingInstruction.class
+Class net.sf.saxon.style.XSLProcessingInstruction loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLResultDocument
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLResultDocument.class
+Class net.sf.saxon.style.XSLResultDocument loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLSequence
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLSequence.class
+Class net.sf.saxon.style.XSLSequence loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLSort
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLSort.class
+Finding class net.sf.saxon.style.XSLSortOrMergeKey
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLSortOrMergeKey.class
+Class net.sf.saxon.style.XSLSortOrMergeKey loaded from ant loader (parentFirst)
+Class net.sf.saxon.style.XSLSort loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLStylesheet
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLStylesheet.class
+Class net.sf.saxon.style.XSLStylesheet loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLTemplate
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLTemplate.class
+Class net.sf.saxon.style.XSLTemplate loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLText
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLText.class
+Class net.sf.saxon.style.XSLText loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLValueOf
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLValueOf.class
+Class net.sf.saxon.style.XSLValueOf loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLVariable
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLVariable.class
+Class net.sf.saxon.style.XSLVariable loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLWithParam
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLWithParam.class
+Class net.sf.saxon.style.XSLWithParam loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.XSLWhen
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/XSLWhen.class
+Class net.sf.saxon.style.XSLWhen loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.DataElement
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/DataElement.class
+Class net.sf.saxon.style.DataElement loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.AbsentExtensionElement
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/AbsentExtensionElement.class
+Class net.sf.saxon.style.AbsentExtensionElement loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.LiteralResultElement
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/LiteralResultElement.class
+Class net.sf.saxon.style.LiteralResultElement loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.trans.RuleManager
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/RuleManager.class
+Class net.sf.saxon.trans.RuleManager loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.pattern.Pattern
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/Pattern.class
+Finding class net.sf.saxon.pattern.PatternFinder
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/PatternFinder.class
+Class net.sf.saxon.pattern.PatternFinder loaded from ant loader (parentFirst)
+Class net.sf.saxon.pattern.Pattern loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.pattern.ItemTypePattern
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/ItemTypePattern.class
+Class net.sf.saxon.pattern.ItemTypePattern loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.trans.RuleTarget
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/RuleTarget.class
+Class net.sf.saxon.trans.RuleTarget loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.trans.Mode
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/Mode.class
+Class net.sf.saxon.trans.Mode loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.trans.Mode$RuleFilter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/Mode$RuleFilter.class
+Class net.sf.saxon.trans.Mode$RuleFilter loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.trans.Mode$RuleAction
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/Mode$RuleAction.class
+Class net.sf.saxon.trans.Mode$RuleAction loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.trans.BuiltInRuleSet
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/BuiltInRuleSet.class
+Class net.sf.saxon.trans.BuiltInRuleSet loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.trans.TextOnlyCopyRuleSet
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/TextOnlyCopyRuleSet.class
+Class net.sf.saxon.trans.TextOnlyCopyRuleSet loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.IntegerValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/IntegerValue.class
+Class net.sf.saxon.value.IntegerValue loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.PipelineConfiguration
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/PipelineConfiguration.class
+Class net.sf.saxon.event.PipelineConfiguration loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.BuilderMonitor
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/BuilderMonitor.class
+Class net.sf.saxon.event.BuilderMonitor loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.LinkedBuilderMonitor
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/LinkedBuilderMonitor.class
+Class net.sf.saxon.tree.linked.LinkedBuilderMonitor loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.DocumentImpl
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/DocumentImpl.class
+Finding class net.sf.saxon.om.MutableDocumentInfo
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/MutableDocumentInfo.class
+Class net.sf.saxon.om.MutableDocumentInfo loaded from ant loader (parentFirst)
+Class net.sf.saxon.tree.linked.DocumentImpl loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.ProcInstImpl
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/ProcInstImpl.class
+Class net.sf.saxon.tree.linked.ProcInstImpl loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.TextImpl
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/TextImpl.class
+Class net.sf.saxon.tree.linked.TextImpl loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.CommentImpl
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/CommentImpl.class
+Class net.sf.saxon.tree.linked.CommentImpl loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.NamespaceBinding
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NamespaceBinding.class
+Class net.sf.saxon.om.NamespaceBinding loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.LinkedTreeBuilder$DefaultNodeFactory
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/LinkedTreeBuilder$DefaultNodeFactory.class
+Class net.sf.saxon.tree.linked.LinkedTreeBuilder$DefaultNodeFactory loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.UseWhenFilter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/UseWhenFilter.class
+Class net.sf.saxon.style.UseWhenFilter loaded from ant loader (parentFirst)
+Class java.util.Stack loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.value.DateTimeValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/DateTimeValue.class
+Finding class net.sf.saxon.value.CalendarValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/CalendarValue.class
+Class net.sf.saxon.value.CalendarValue loaded from ant loader (parentFirst)
+Class net.sf.saxon.value.DateTimeValue loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.DurationValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/DurationValue.class
+Class net.sf.saxon.value.DurationValue loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.DayTimeDurationValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/DayTimeDurationValue.class
+Class net.sf.saxon.value.DayTimeDurationValue loaded from ant loader (parentFirst)
+Class java.util.Calendar loaded from parent loader (parentFirst)
+Class java.util.GregorianCalendar loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.value.Int64Value
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/Int64Value.class
+Class net.sf.saxon.value.Int64Value loaded from ant loader (parentFirst)
+Class java.util.TimeZone loaded from parent loader (parentFirst)
+Class java.util.SimpleTimeZone loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.trans.NoDynamicContextException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/trans/NoDynamicContextException.class
+Class net.sf.saxon.trans.NoDynamicContextException loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.StartTagBuffer
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/StartTagBuffer.class
+Class net.sf.saxon.event.StartTagBuffer loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.AttributeCollection
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/AttributeCollection.class
+Class net.sf.saxon.om.AttributeCollection loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.NoOpenStartTagException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/NoOpenStartTagException.class
+Class net.sf.saxon.event.NoOpenStartTagException loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.util.AttributeCollectionImpl
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/util/AttributeCollectionImpl.class
+Class org.xml.sax.Attributes loaded from parent loader (parentFirst)
+Class net.sf.saxon.tree.util.AttributeCollectionImpl loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.StylesheetSpaceStrippingRule
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/StylesheetSpaceStrippingRule.class
+Class net.sf.saxon.om.StylesheetSpaceStrippingRule loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.Stripper
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/Stripper.class
+Class net.sf.saxon.event.Stripper loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.Stripper$StripRuleTarget
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/Stripper$StripRuleTarget.class
+Class net.sf.saxon.event.Stripper$StripRuleTarget loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.Stripper$1
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/Stripper$1.class
+Class net.sf.saxon.event.Stripper$1 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.Stripper$2
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/Stripper$2.class
+Class net.sf.saxon.event.Stripper$2 loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.FingerprintedQName
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/FingerprintedQName.class
+Class net.sf.saxon.om.FingerprintedQName loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.CommentStripper
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/CommentStripper.class
+Class net.sf.saxon.event.CommentStripper loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.util.FastStringBuffer
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/util/FastStringBuffer.class
+Finding class net.sf.saxon.tree.tiny.AppendableCharSequence
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/tiny/AppendableCharSequence.class
+Class net.sf.saxon.tree.tiny.AppendableCharSequence loaded from ant loader (parentFirst)
+Class net.sf.saxon.tree.util.FastStringBuffer loaded from ant loader (parentFirst)
+Class java.lang.IndexOutOfBoundsException loaded from parent loader (parentFirst)
+Class java.lang.StringIndexOutOfBoundsException loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.lib.AugmentedSource
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/AugmentedSource.class
+Class net.sf.saxon.lib.AugmentedSource loaded from ant loader (parentFirst)
+Class java.lang.Boolean loaded from parent loader (parentFirst)
+Class javax.xml.parsers.SAXParserFactory loaded from parent loader (parentFirst)
+Couldn't load ResourceStream for META-INF/services/javax.xml.parsers.SAXParserFactory
+Class com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl loaded from parent loader (parentFirst)
+Class com.sun.org.apache.xerces.internal.parsers.XIncludeAwareParserConfiguration loaded from parent loader (parentFirst)
+Class com.sun.org.apache.xerces.internal.impl.dv.dtd.DTDDVFactoryImpl loaded from parent loader (parentFirst)
+Class javax.xml.parsers.SAXParser loaded from parent loader (parentFirst)
+Class org.xml.sax.XMLReader loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.event.Sender
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/Sender.class
+Class net.sf.saxon.event.Sender loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.TreeReceiver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/TreeReceiver.class
+Class net.sf.saxon.event.TreeReceiver loaded from ant loader (parentFirst)
+Class org.xml.sax.ErrorHandler loaded from parent loader (parentFirst)
+Class org.xml.sax.ContentHandler loaded from parent loader (parentFirst)
+Class org.xml.sax.DTDHandler loaded from parent loader (parentFirst)
+Class java.lang.reflect.Method loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.pull.PullProvider
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pull/PullProvider.class
+Class net.sf.saxon.pull.PullProvider loaded from ant loader (parentFirst)
+Class javax.xml.transform.stax.StAXSource loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.pull.PullSource
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pull/PullSource.class
+Class net.sf.saxon.pull.PullSource loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.evpull.PullEventSource
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/evpull/PullEventSource.class
+Class net.sf.saxon.evpull.PullEventSource loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.EventSource
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/EventSource.class
+Class net.sf.saxon.event.EventSource loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.Transmitter
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/Transmitter.class
+Class net.sf.saxon.event.Transmitter loaded from ant loader (parentFirst)
+Class javax.xml.transform.sax.SAXSource loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.lib.StandardErrorHandler
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/StandardErrorHandler.class
+Class net.sf.saxon.lib.StandardErrorHandler loaded from ant loader (parentFirst)
+Class org.xml.sax.SAXParseException loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.expr.parser.ExpressionLocation
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/parser/ExpressionLocation.class
+Class net.sf.saxon.expr.parser.ExpressionLocation loaded from ant loader (parentFirst)
+Class java.io.PrintStream loaded from parent loader (parentFirst)
+Class java.io.Writer loaded from parent loader (parentFirst)
+Class java.io.PrintWriter loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.event.ReceivingContentHandler
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/ReceivingContentHandler.class
+Class net.sf.saxon.event.ReceivingContentHandler loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.BuiltInListType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/BuiltInListType.class
+Finding class net.sf.saxon.type.ListType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/ListType.class
+Class net.sf.saxon.type.ListType loaded from ant loader (parentFirst)
+Class net.sf.saxon.type.BuiltInListType loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.event.ReceivingContentHandler$LocalLocator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/ReceivingContentHandler$LocalLocator.class
+Finding class net.sf.saxon.event.SourceLocationProvider
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/event/SourceLocationProvider.class
+Class net.sf.saxon.event.SourceLocationProvider loaded from ant loader (parentFirst)
+Class net.sf.saxon.event.ReceivingContentHandler$LocalLocator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.tiny.CharSlice
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/tiny/CharSlice.class
+Class net.sf.saxon.tree.tiny.CharSlice loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.NamespaceConstant
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/NamespaceConstant.class
+Class net.sf.saxon.lib.NamespaceConstant loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.StandardNames
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/StandardNames.class
+Class net.sf.saxon.om.StandardNames loaded from ant loader (parentFirst)
+Class java.lang.StringBuilder loaded from parent loader (parentFirst)
+Class java.lang.Integer loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.tree.iter.AxisIterator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/iter/AxisIterator.class
+Finding class net.sf.saxon.tree.iter.UnfailingIterator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/iter/UnfailingIterator.class
+Class net.sf.saxon.tree.iter.UnfailingIterator loaded from ant loader (parentFirst)
+Class net.sf.saxon.tree.iter.AxisIterator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.SystemIdMap
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/SystemIdMap.class
+Class net.sf.saxon.tree.linked.SystemIdMap loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.linked.LineNumberMap
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/linked/LineNumberMap.class
+Class net.sf.saxon.tree.linked.LineNumberMap loaded from ant loader (parentFirst)
+Class java.util.Arrays loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.om.NoNamespaceName
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NoNamespaceName.class
+Class net.sf.saxon.om.NoNamespaceName loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.om.NamespaceException
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/NamespaceException.class
+Class net.sf.saxon.om.NamespaceException loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.Literal
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/Literal.class
+Class net.sf.saxon.expr.Literal loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.ErrorExpression
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/ErrorExpression.class
+Class net.sf.saxon.expr.ErrorExpression loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.StringLiteral
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/StringLiteral.class
+Class net.sf.saxon.expr.StringLiteral loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.instruct.ValueOf
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/instruct/ValueOf.class
+Finding class net.sf.saxon.expr.instruct.SimpleNodeConstructor
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/instruct/SimpleNodeConstructor.class
+Finding class net.sf.saxon.expr.instruct.Instruction
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/instruct/Instruction.class
+Finding class net.sf.saxon.expr.instruct.TailCallReturner
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/instruct/TailCallReturner.class
+Class net.sf.saxon.expr.instruct.TailCallReturner loaded from ant loader (parentFirst)
+Class net.sf.saxon.expr.instruct.Instruction loaded from ant loader (parentFirst)
+Class net.sf.saxon.expr.instruct.SimpleNodeConstructor loaded from ant loader (parentFirst)
+Class net.sf.saxon.expr.instruct.ValueOf loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.Binding
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/Binding.class
+Class net.sf.saxon.expr.Binding loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.LetExpression
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/LetExpression.class
+Finding class net.sf.saxon.expr.Assignation
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/Assignation.class
+Class net.sf.saxon.expr.Assignation loaded from ant loader (parentFirst)
+Class net.sf.saxon.expr.LetExpression loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.pattern.EmptySequenceTest
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/EmptySequenceTest.class
+Class net.sf.saxon.pattern.EmptySequenceTest loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.ContextItemExpression
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/ContextItemExpression.class
+Class net.sf.saxon.expr.ContextItemExpression loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.pattern.LocationPathPattern
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/LocationPathPattern.class
+Class net.sf.saxon.pattern.LocationPathPattern loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.Whitespace
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/Whitespace.class
+Class net.sf.saxon.value.Whitespace loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.type.ValidationFailure
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/type/ValidationFailure.class
+Class net.sf.saxon.type.ValidationFailure loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.tiny.CompressedWhitespace
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/tiny/CompressedWhitespace.class
+Class net.sf.saxon.tree.tiny.CompressedWhitespace loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.PrincipalStylesheetModule
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/PrincipalStylesheetModule.class
+Finding class net.sf.saxon.style.StylesheetModule
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/StylesheetModule.class
+Class net.sf.saxon.style.StylesheetModule loaded from ant loader (parentFirst)
+Class net.sf.saxon.style.PrincipalStylesheetModule loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.FunctionLibraryList
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/FunctionLibraryList.class
+Finding class net.sf.saxon.query.XQueryFunctionBinder
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/query/XQueryFunctionBinder.class
+Class net.sf.saxon.query.XQueryFunctionBinder loaded from ant loader (parentFirst)
+Class net.sf.saxon.functions.FunctionLibraryList loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.SystemFunctionLibrary
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/SystemFunctionLibrary.class
+Class net.sf.saxon.functions.SystemFunctionLibrary loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.BooleanValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/BooleanValue.class
+Class net.sf.saxon.value.BooleanValue loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.SystemFunction
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/SystemFunction.class
+Class net.sf.saxon.functions.SystemFunction loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.style.StylesheetFunctionLibrary
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/style/StylesheetFunctionLibrary.class
+Class net.sf.saxon.style.StylesheetFunctionLibrary loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.UserFunctionCall
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/UserFunctionCall.class
+Class net.sf.saxon.expr.UserFunctionCall loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.VendorFunctionLibrary
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/VendorFunctionLibrary.class
+Class net.sf.saxon.functions.VendorFunctionLibrary loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.ExtensionFunctionDefinition
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/ExtensionFunctionDefinition.class
+Class net.sf.saxon.lib.ExtensionFunctionDefinition loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.IsWholeNumber
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/IsWholeNumber.class
+Class net.sf.saxon.functions.IsWholeNumber loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.ItemAt
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/ItemAt.class
+Class net.sf.saxon.functions.ItemAt loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.ExtensionFunctionCall
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/ExtensionFunctionCall.class
+Class net.sf.saxon.lib.ExtensionFunctionCall loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.IsWholeNumber$IsWholeNumberCall
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/IsWholeNumber$IsWholeNumberCall.class
+Class net.sf.saxon.functions.IsWholeNumber$IsWholeNumberCall loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.ItemAt$ItemAtCall
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/ItemAt$ItemAtCall.class
+Class net.sf.saxon.functions.ItemAt$ItemAtCall loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.SequenceType
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/SequenceType.class
+Class net.sf.saxon.value.SequenceType loaded from ant loader (parentFirst)
+Class java.util.Collections loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.expr.StaticProperty
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/StaticProperty.class
+Class net.sf.saxon.expr.StaticProperty loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.ConstructorFunctionLibrary
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/ConstructorFunctionLibrary.class
+Class net.sf.saxon.functions.ConstructorFunctionLibrary loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.CastExpression
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/CastExpression.class
+Finding class net.sf.saxon.expr.CastingExpression
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/CastingExpression.class
+Finding class net.sf.saxon.expr.UnaryExpression
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/UnaryExpression.class
+Class net.sf.saxon.expr.UnaryExpression loaded from ant loader (parentFirst)
+Class net.sf.saxon.expr.CastingExpression loaded from ant loader (parentFirst)
+Class net.sf.saxon.expr.CastExpression loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.query.XQueryFunctionLibrary
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/query/XQueryFunctionLibrary.class
+Class net.sf.saxon.query.XQueryFunctionLibrary loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.iter.SingleNodeIterator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/iter/SingleNodeIterator.class
+Finding class net.sf.saxon.tree.iter.ReversibleIterator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/iter/ReversibleIterator.class
+Class net.sf.saxon.tree.iter.ReversibleIterator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.LastPositionFinder
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/LastPositionFinder.class
+Class net.sf.saxon.expr.LastPositionFinder loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.iter.GroundedIterator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/iter/GroundedIterator.class
+Class net.sf.saxon.tree.iter.GroundedIterator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.iter.LookaheadIterator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/iter/LookaheadIterator.class
+Class net.sf.saxon.tree.iter.LookaheadIterator loaded from ant loader (parentFirst)
+Class net.sf.saxon.tree.iter.SingleNodeIterator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.tree.util.Navigator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/tree/util/Navigator.class
+Class net.sf.saxon.tree.util.Navigator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.pattern.NameTest
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/NameTest.class
+Class net.sf.saxon.pattern.NameTest loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.pattern.LocalNameTest
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/LocalNameTest.class
+Class net.sf.saxon.pattern.LocalNameTest loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.pattern.NamespaceTest
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/pattern/NamespaceTest.class
+Class net.sf.saxon.pattern.NamespaceTest loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.functions.DocumentFn
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/DocumentFn.class
+Class net.sf.saxon.functions.DocumentFn loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.parser.PathMap$PathMapNode
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/parser/PathMap$PathMapNode.class
+Class net.sf.saxon.expr.parser.PathMap$PathMapNode loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.parser.PathMap$PathMapRoot
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/parser/PathMap$PathMapRoot.class
+Class net.sf.saxon.expr.parser.PathMap$PathMapRoot loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.evpull.EventIterator
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/evpull/EventIterator.class
+Class net.sf.saxon.evpull.EventIterator loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.RootExpression
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/RootExpression.class
+Finding class net.sf.saxon.expr.SingleNodeExpression
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/SingleNodeExpression.class
+Class net.sf.saxon.expr.SingleNodeExpression loaded from ant loader (parentFirst)
+Class net.sf.saxon.expr.RootExpression loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.TypeCheckerEnvironment
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/TypeCheckerEnvironment.class
+Class net.sf.saxon.TypeCheckerEnvironment loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.expr.sort.ItemOrderComparer
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/expr/sort/ItemOrderComparer.class
+Class net.sf.saxon.expr.sort.ItemOrderComparer loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.value.BigIntegerValue
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/value/BigIntegerValue.class
+Class net.sf.saxon.value.BigIntegerValue loaded from ant loader (parentFirst)
+Class java.lang.ArithmeticException loaded from parent loader (parentFirst)
+Class java.lang.Double loaded from parent loader (parentFirst)
+Class java.lang.Math loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.functions.FormatNumber
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/functions/FormatNumber.class
+Class net.sf.saxon.functions.FormatNumber loaded from ant loader (parentFirst)
+Finding class net.sf.saxon.lib.RelativeURIResolver
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/lib/RelativeURIResolver.class
+Class net.sf.saxon.lib.RelativeURIResolver loaded from ant loader (parentFirst)
+Class java.net.URI loaded from parent loader (parentFirst)
+Finding class net.sf.saxon.om.DocumentURI
+Loaded from C:\Users\Mark\Dropbox\spfe\spfe-ot\tools\saxon9he\saxon9he.jar net/sf/saxon/om/DocumentURI.class
+Class net.sf.saxon.om.DocumentURI loaded from ant loader (parentFirst)
+Class java.io.File loaded from parent loader (parentFirst)
+resolve: 'C:/Users/Mark/Dropbox/spfe/spfe-ot/plugins/config-schema-docs/scripts/synthesis/synthesize-schema-docs.xsl' with base: 'file:/C:/Users/Mark/spfebuild/spfe-docs/config-ref/temp/spfe.synthesis.xsl'
+Class org.apache.tools.ant.types.resolver.ApacheCatalogResolver loaded from parent loader (parentFirst)
+Couldn't load ResourceStream for META-INF/services/javax.xml.parsers.SAXParserFactory
+Class com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl loaded from parent loader (parentFirst)
+Apache resolver library found, xml-commons resolver will be used
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\schemas with patternSet{ includes: [**/catalog.xml] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins with patternSet{ includes: [**/catalog.xml] excludes: [] }
+fileset: Setup scanner in dir C:\Users\Mark\.spfe with patternSet{ includes: [**/catalog.xml] excludes: [] }
+Using catalogpath 'C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\schemas\catalog.xml;C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\catalog.xml'
+Parsing C:\Users\Mark\Dropbox\spfe\spfe-ot\1.0\schemas\catalog.xml
+Class com.sun.org.apache.xerces.internal.parsers.XIncludeAwareParserConfiguration loaded from parent loader (parentFirst)
+Class com.sun.org.apache.xerces.internal.impl.dv.dtd.DTDDVFactoryImpl loaded from parent loader (parentFirst)
+Parsing C:\Users\Mark\Dropbox\spfe\spfe-ot\plugins\catalog.xml
+Class com.sun.org.apache.xerces.internal.parsers.XIncludeAwareParserConfiguration loaded from parent loader (parentFirst)
+Class com.sun.org.apache.xerces.internal.impl.dv.dtd.DTDDVFactoryImpl loaded from parent loader (parentFirst)
+     [xslt] Failed to process C:\Users\Mark\spfebuild\spfe-docs\config-ref\config\spfe-config.xml
+  [antcall] Exiting C:\Users\Mark\AppData\Local\Temp\spfetemp.xml.

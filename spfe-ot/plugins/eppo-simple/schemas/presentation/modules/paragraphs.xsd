@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:group name="paragraphs">
+        <xs:choice>
+            <xs:element name="p" type="p"/>
+        </xs:choice>
+    </xs:group>
+
+
+  <xs:complexType name="p" mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="p-content"/>
+      </xs:choice>
+      <xs:attributeGroup ref="conditions"/>
+  </xs:complexType>
+    
+    <xs:group name="p-content">
+        <xs:choice>
+            <xs:group ref="text-decoration"/>
+            <xs:group ref="mentions"/>
+            <xs:group ref="resources"/>
+        </xs:choice>
+    </xs:group>
+    
+
+   
+</xs:schema>

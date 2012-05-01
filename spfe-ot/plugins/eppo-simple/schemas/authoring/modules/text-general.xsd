@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/lists.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/paragraphs.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/programming.xsd"/>
+    
+    <xs:group name="text-general">
+        <xs:choice>
+            <xs:group ref="paragraphs"/>
+            <xs:group ref="lists"/>
+            <xs:group ref="programming"/>
+        </xs:choice>
+    </xs:group>
+    
+    <xs:complexType name="text-general-type">
+            <xs:group ref="text-general" maxOccurs="unbounded"/>
+    </xs:complexType>
+</xs:schema>

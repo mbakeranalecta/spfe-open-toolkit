@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:group name="tracking">
+        <xs:sequence>
+            <xs:element name="author" type="xs:string"/>
+            <xs:element name="status" type="status"/>
+            <xs:element name="history">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="revision">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="date" type="xs:date"/>
+                                    <xs:element name="author" type="xs:string"/>
+                                    <xs:element name="comment" type="xs:string"/>
+                                    <xs:element name="new-status" type="status"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:simpleType name="status">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Not started"/>
+            <xs:enumeration value="In progress"/>
+            <xs:enumeration value="Ready for technical review"/>
+            <xs:enumeration value="Ready for release review"/>
+            <xs:enumeration value="Ready for final edit"/>
+            <xs:enumeration value="Ready to publish"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

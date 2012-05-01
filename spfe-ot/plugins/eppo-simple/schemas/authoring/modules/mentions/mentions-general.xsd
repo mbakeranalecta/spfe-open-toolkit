@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:simpleType name="mentions-general">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="directory-name"/>
+            <xs:enumeration value="document-name"/>
+            <xs:enumeration value="feature"/>
+            <xs:enumeration value="file-name"/>
+            <xs:enumeration value="product-name"/>
+            <xs:enumeration value="task"/>
+            <xs:enumeration value="term"/>
+            <xs:enumeration value="tool-name"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:group name="mentions-foo">
+        <xs:choice>
+            <xs:element name="foo"/>
+        </xs:choice>
+    </xs:group>
+
+    <xs:group name="mentions-general">
+        <xs:choice>
+            <xs:element name="directory-name"/>
+            <xs:element name="document-name"/>
+            <xs:element name="feature"/>
+            <xs:element name="file-name"/>
+            <xs:element name="product-name"/>
+            <xs:element name="task"/>
+            <xs:element name="term"/>
+            <xs:element name="tool-name"/>
+        </xs:choice>
+    </xs:group>
+</xs:schema>

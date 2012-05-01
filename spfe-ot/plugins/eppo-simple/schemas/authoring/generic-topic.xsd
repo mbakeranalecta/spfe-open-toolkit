@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"  targetNamespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/generic-topic">
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/identity.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/index.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/tracking.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/text-general.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/conditions.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/text-decoration.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/mentions/mentions-general.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/resources.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/roots/generic-topic.xsd"/>
+
+</xs:schema>

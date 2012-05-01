@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="config-ref-rules"  default="draft">
+
+	<!-- import the common SPFE definitions -->
+	<import file="${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml"/>
+
+	
+	<!-- override the intermedia synthesis build taget to add -build.schema-defs to the dependencies -->
+	<target name="-build.synthesis" depends="-build.schema-defs, --build.synthesis"/>
+
+	<!-- define properties for the temporary files used -->
+	<property name="files.schema-defs" value="schema-defs.xml"/>
+
+	<!-- GET TARGETS -->
+	<target name="-get.source-files.element-descriptions">
+		<copy todir="${temp}/descriptions" verbose="true" preservelastmodified="true" flatten="true">
+			<files refid="other.element-descriptions"/>
+		</copy>
+	</target>
+
+
+	<!-- DEPENDENCY TARGETS -->
+	<!-- check to see if schema-defs is up to date -->	
+	<target name="-current.schema-defs">
+		<dirname property="paths.schema" file="${source-files.schema}"/>
+
+		<uptodate property="-current.schema-defs" targetfile="${temp}/${files.schema-defs}">
+			<srcresources>
+				<dirset dir="${paths.schema}" includes="**/*.xsd"/>
+				<filelist dir=".">
+					<file name="${source-files.schema}"/>
+				</filelist>
+			</srcresources>
+		</uptodate>
+	</target>
+	
+
+	<!-- SYNTHESIS TARGETS -->
+	
+	<target name="-build.schema-defs" 
+		description="schema definitions" 
+		depends="-init, -current.schema-defs" unless="-current.schema-defs">
+	
+		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file}" 
+			style="${spfe.scripts.other.schema-defs}"
+			out="${temp}/${files.schema-defs}">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="schema-file" expression="${spfe.other.schema-file}"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="draft" expression="${draft}" if="draft"/>
+			<param name="optional-product" expression="${spfe.optional-product}" if="spfe.optional-product"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+		
+		<!-- validate the output file -->
+		<xmlvalidate lenient="yes" file="${temp}/${files.schema-defs}">
+			<!-- make the validation include namespaces -->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+		</xmlvalidate>
+	</target>
+
+
+
+	<!-- FIXME: Needs its own -current.synthesis because of the different location of the synthesis files. -->
+
+	
+	<!-- target to build schema synthesis -->
+	<target name="--build.synthesis" description="Schema synthesis" 
+	        depends="-build.schema-defs, 
+					 -get.source-files.element-descriptions,
+					 -current.synthesis"
+			unless="-current.synthesis">
+						
+		<!-- run the XSLT script to produce the output -->
+		<basename property="source-files.descriptions.name" file="${source-files.element-descriptions}"/>
+		
+		<fileset id="intros-file-list" dir="${temp}/topics" includes="*.xml"/>
+		<fileset id="descriptions-file-list" dir="${temp}" includes="descriptions/*.xml"/>
+		<property name="descriptions-files" refid="descriptions-file-list"/>
+				<!-- get the list of abnf-symbols files -->
+		<fileset id="abnf-symbols-file-list" dir="${temp}" includes="abnf-symbols/*.xml"/>
+		<property name="abnf-symbols-files" refid="abnf-symbols-file-list"/>
+		
+		
+		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file}"
+			style="${spfe.scripts.synthesis}" 
+			out="NULL">
+			
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="topic-files" expression="${topic-files}"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="schema-defs-file" expression="${temp}/${files.schema-defs}"/>
+ 			<param name="element-description-files" expression="${descriptions-files}"/>
+			<param name="synthesis-directory" expression="${temp}/synthesis"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+		<!-- validate the output file 
+		<xmlvalidate lenient="yes" file="${temp}/${spfe.files.synthesis}">
+			<!-/- make the validation include namespaces -/->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+		</xmlvalidate>-->
+	</target>	
+</project>

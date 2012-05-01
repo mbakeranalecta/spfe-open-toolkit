@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:group name="lists">
+        <xs:choice>
+            <xs:element name="ol" type="list" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="ul" type="list" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice>
+    </xs:group>
+    <xs:complexType name="list">
+        <xs:sequence>
+            <xs:element name="li" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="paragraphs"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

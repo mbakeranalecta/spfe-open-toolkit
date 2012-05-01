@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    <define name="SPFE_DOCS_HOME" value="${HOME}/Dropbox/spfe/spfe-docs"/>
+    
+    <doc-set id="spfe-docs">
+        <title>SPFE Documentation</title>
+        <topic-set>development/spfe-build-config.xml</topic-set>
+        <topic-set>config-ref/spfe-build-config.xml</topic-set>
+    </doc-set>
+    
+    <publication-info>
+        <product>SPFE Open Toolkit</product>
+        <release>1.0 (alpha 1)</release>
+        <copyright>Copyright © 2012 Analecta Communications Inc.</copyright>
+    </publication-info>
+    <topic-type-aliases>
+       <topic-type>
+           <id>document-type-reference</id>
+           <alias>Document Type Reference</alias>
+           <plural>Document Type Reference</plural>
+       </topic-type>
+        <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic</id>
+            <alias>Concept</alias>
+            <plural>Concepts</plural>
+        </topic-type>
+        <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/element-reference</id>
+            <alias>Element</alias>
+            <plural>Elements</plural>
+        </topic-type>
+        
+       <topic-type>
+           <id>overview-topic</id>
+           <alias>Overview</alias>
+           <plural>Overviews</plural>
+       </topic-type>
+       <topic-type>
+           <id>SPFE-authoring-task</id>
+           <alias>Authoring Task</alias>
+           <plural>Authoring Tasks</plural>
+       </topic-type>
+       <topic-type>
+           <id>glossary</id>
+           <alias>Definition</alias>
+           <plural>Definitions</plural>
+       </topic-type>
+       <topic-type>
+           <id>workflow</id>
+           <alias>Workflow</alias>
+           <plural>Workflows</plural>
+       </topic-type>
+       <topic-type>
+           <id>generic-reference-entry</id>
+           <alias>Reference</alias>
+           <plural>Reference entries</plural>
+       </topic-type>
+       <topic-type>
+           <id>build-command-reference-entry</id>
+           <alias>Build command reference entry</alias>
+           <plural>Build command reference</plural>
+       </topic-type>
+       <topic-type>
+           <id>schema-element</id>
+           <alias>Document Type</alias>
+           <plural>Document Types</plural>
+       </topic-type>
+       <topic-type>
+           <id>pathfinder-topic</id>
+           <alias>Pathfinder</alias>
+           <plural>Pathfinders</plural>
+       </topic-type>
+   </topic-type-aliases>
+    
+    <sources>
+        <link-catalogs>
+            <include>${HOME}/spfebuild/spfe-docs/link-catalogs/*.xml</include>
+        </link-catalogs>
+    </sources>
+    
+    <build>
+        <link-catalog-directory>${HOME}/spfebuild/spfe-docs/link-catalogs</link-catalog-directory>
+        <output-directory>${HOME}/spfebuild/spfe-docs/output</output-directory>
+    </build>
+    
+    <messages>warning info</messages>
+    
+    <wip-site>
+        <href>wip-site.href</href>
+        <ftp>
+            <url>wip-site.ftp.url</url>
+            <user>wip-site.ftp.user</user>
+            <password>wip-site.ftp.password</password>
+        </ftp>
+        <path>wip-site.ftp</path>
+    </wip-site>
+    
+    <scripts>
+        <format-html>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/format/html/format-html.xsl</script>
+        </format-html>
+    </scripts>
+       
+</spfe>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
+    <xs:group name="text-decoration">
+        <xs:choice>
+            <xs:element name="bold" type="xs:string"/>
+            <xs:element name="italic" type="xs:string"/>
+            <xs:element name="code"  type="xs:string"/>
+        </xs:choice>
+    </xs:group>
+</xs:schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>org.apache.xml.resolver Release Notes</title><meta content="DocBook XSL Stylesheets V1.71.1" name="generator" /></head><body><div class="article" lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="N10002" />org.apache.xml.resolver Release Notes</h1></div><div><h3 class="subtitle"><i>Version 1.2</i></h3></div><div><p class="copyright">Copyright © 2003, 2006 The Apache Software Foundation.</p></div><div><p class="pubdate">November 2006</p></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#s.v1.2">Apache XML Commons Resolver v1.2</a></span></dt><dt><span class="section"><a href="#s.v1.1">Apache XML Commons Resolver v1.1</a></span></dt><dd><dl><dt><span class="section"><a href="#s.catalogmanager.not.static">The <code class="classname">CatalogManager</code> Is No Longer Static</a></span></dt><dt><span class="section"><a href="#s.system.cats.loaded">System Catalogs Are Always Loaded</a></span></dt><dt><span class="section"><a href="#s.tests">Tests/Examples Available</a></span></dt><dt><span class="section"><a href="#s.bootstrap">Bootstrap resolver for loading catalog files</a></span></dt></dl></dd></dl></div><p>This document offers a brief summary of what has changed in the
+<a href="http://xml.apache.org/commons/" target="_top">Apache XML Commons Resolver</a>
+package. For further information, refer to the commons-dev and commons-cvs mailing lists
+and the <a href="http://xml.apache.org/commons/changes.html" target="_top">Changes</a> notes.
+</p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="s.v1.2" />Apache XML Commons Resolver v1.2</h2></div></div></div><p>
+The resolver now supports
+systemIdSuffix and uriSuffix as defined in the XML Catalogs v1.1
+Committee Specification.
+</p><p>XCatalog support
+(Bugzilla Issue: <a href="http://issues.apache.org/bugzilla/show_bug.cgi?id=38562" target="_top">38562</a>)
+</p><p>
+Fixed several bugs including one involving the use of "file: URLs".
+</p><p>
+</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="s.v1.1" />Apache XML Commons Resolver v1.1</h2></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="s.catalogmanager.not.static" />The <code class="classname">CatalogManager</code> Is No Longer Static</h3></div></div></div><p>The most pervasive change is that the <code class="classname">CatalogManager</code>
+class is no longer static. It's now possible to instantiate several catalog
+managers and each manager can manage several catalogs.</p><p>There is still a single static instance of the
+<code class="classname">CatalogManager</code>, available via
+<code class="methodname">getStaticManager()</code>. This is used by default
+if no other catalog manager is instantiated and used. It behaves as
+the old static one used to.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="s.system.cats.loaded" />System Catalogs Are Always Loaded</h3></div></div></div><p>In the previous version, the system catalogs were not loaded if
+a private catalog was requested. That has changed; the system catalogs are now
+always loaded.</p><p>If you want to avoid loading any system catalogs, establish your own
+<code class="classname">CatalogManager</code> and use the
+<code class="methodname">setCatalogsFiles()</code> method to assure that no system
+catalogs are available.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="s.tests" />Tests/Examples Available</h3></div></div></div><p>There are several tests in the <code class="filename">tests/resolver</code> directory
+that demonstrate how different instantiations can be used.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="s.bootstrap" />Bootstrap resolver for loading catalog files</h3></div></div></div><p>The resolver now includes catalog.{dtd,rng,xsd} and uses a "bootstrap"
+resolver when it is loading catalog files. This avoids the Catch-22 of
+having to resolve this before the resolver is in action ...
+</p><pre class="programlisting">
+&lt;!DOCTYPE catalog PUBLIC "-//OASIS//DTD XML Catalogs V1.0//EN"
+"http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd"&gt;
+&lt;catalog&gt;
+&lt;public publicId="foo" uri="bar"/&gt;
+&lt;/catalog&gt;
+</pre></div></div></div></body></html>

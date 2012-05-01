@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:simpleType name="mentions-xml">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="xml-element-name"/>
+            <xs:enumeration value="xml-attribute-name"/>
+            <xs:enumeration value="xml-namespace-uri"/>
+            <xs:enumeration value="xpath"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:group name="mentions-xml">
+        <xs:choice>
+            <xs:element name="xml-element-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="xpath" use="optional"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="xml-attribute-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="xpath" use="optional"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="xml-namespace-uri"/>
+            <xs:element name="xpath"/>
+        </xs:choice>
+    </xs:group>
+
+
+
+</xs:schema>

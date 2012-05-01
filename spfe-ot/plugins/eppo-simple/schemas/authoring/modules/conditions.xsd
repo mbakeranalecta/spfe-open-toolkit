@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
+    <xs:attributeGroup name="conditions">
+        <xs:attribute name="if">
+            <xs:simpleType>
+                <xs:list itemType="condition-tokens"/>
+            </xs:simpleType>
+        </xs:attribute>        
+    </xs:attributeGroup>
+    
+    <xs:simpleType name="condition-tokens">
+        <xs:annotation>
+            <xs:documentation>Specifies the condition token or tokens that apply to this element. The element will be published only if the condition tokens specified match those specified for the topic set build in which the topic is included.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="#NONE"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

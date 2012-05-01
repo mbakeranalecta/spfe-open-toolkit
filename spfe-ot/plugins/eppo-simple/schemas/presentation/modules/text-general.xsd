@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/lists.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/presentation/modules/paragraphs.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/programming.xsd"/>
+    
+    <xs:group name="text-general">
+        <xs:choice>
+            <xs:group ref="paragraphs"/>
+            <xs:group ref="lists"/>
+            <xs:group ref="programming"/>
+        </xs:choice>
+    </xs:group>
+</xs:schema>
