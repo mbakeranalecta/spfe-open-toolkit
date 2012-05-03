@@ -7,6 +7,5 @@
     <projectTree name="spfe.xpr">
         <folder path="spfe-docs/"/>
         <folder path="spfe-ot/"/>
-        <folder path="../TechPubs/"/>
     </projectTree>
 </project>
