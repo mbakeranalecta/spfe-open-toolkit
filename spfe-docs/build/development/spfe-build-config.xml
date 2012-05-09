@@ -11,25 +11,25 @@
     <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic</topic-type-order>
     <sources>
         <topics>
-            <include>${SPFE_DOCS_HOME}/content/development/*.xml</include>
+            <include>../../content/development/*.xml</include>
         </topics>
         <text-objects>
-            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+            <include>../../content/*.xml</include>
         </text-objects>
         <fragments>
-            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+            <include>../../content/*.xml</include>
         </fragments>
         <graphics>
-            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+            <include>../../content/*.xml</include>
         </graphics>
         <graphics-catalog>
-            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+            <include>../../content/*.xml</include>
         </graphics-catalog>
         <strings>
-            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+            <include>../../content/*.xml</include>
         </strings>
         <synonyms>
-            <include>${SPFE_DOCS_HOME}/content/*.xml</include>
+            <include>../../content/*.xml</include>
         </synonyms>
     </sources>
     <condition-tokens>FOO BAR</condition-tokens>

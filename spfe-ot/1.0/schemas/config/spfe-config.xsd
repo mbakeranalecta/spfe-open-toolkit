@@ -36,6 +36,7 @@
         <xs:element name="build" type="build-type" minOccurs="0"/>
         <xs:element name="deployment" type="deployment-type" minOccurs="0"/>
         <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
+        <xs:element name="style" type="style-type" minOccurs="0"/>
         <xs:element name="other" minOccurs="0" maxOccurs="unbounded">
           <xs:complexType>
             <xs:simpleContent>
@@ -160,6 +161,7 @@
         <xs:element name="build-directory" type="xs:string" minOccurs="0"/>
         <xs:element name="output-directory" type="xs:string" minOccurs="0"/>
         <xs:element name="link-catalog-directory" type="xs:string" minOccurs="0"/>
+        <xs:element name="toc-directory" type="xs:string" minOccurs="0"/>
       </xs:all>
   </xs:complexType>
   
@@ -199,6 +201,12 @@
   <xs:complexType name="script-list-type">
     <xs:sequence>
       <xs:element name="script" type="xs:anyURI" maxOccurs="unbounded" minOccurs="1"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="style-type">
+    <xs:sequence>
+      <xs:element name="html" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 

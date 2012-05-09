@@ -1,0 +1,86 @@
+<!doctype html public "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Tree View</title>
+<link rel="stylesheet" type="text/css" href="css/multi/tree.css">
+<script type="text/javascript" src="build/yahoo.js" ></script>
+<script type="text/javascript" src="build/event.js"></script>
+<script type="text/javascript" src="build/treeview.js" ></script>
+<script type="text/javascript" src="build/jktreeview.js" ></script>
+
+
+<!-- Below is Style sheet for demos. Removed if desired -->
+<style type="text/css">
+
+body {font: normal 11px verdana, sans-serif; color: #333; line-height: 19px;}
+a { text-decoration: underline; color: #46546C; }
+a:hover { text-decoration: underline; color: #4d77c3; }
+#tree1 {width:250px;padding: 10px;float:left;}
+#tree2 {width:250px;padding: 10px;float:left;}
+#tree3 {width:250px;padding: 10px;float:left;}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Folding TreeView Menu demo: <a href="http://www.javascriptkit.com/script/treeview/">More info</a></h2>
+
+<!--Empty DIV tags to contain the treeview demos -->
+<div id="tree1"></div>
+<div id="tree2"></div>
+<div id="tree3" class="treemenu"></div>
+
+
+<script type="text/javascript">
+
+<!-- TreeView Demo 1 //-->
+var pinetree=new jktreeview("tree1")
+pinetree.addItem("JavaScript Kit", "", "http://www.javascriptkit.com")
+pinetree.addItem("Free Scripts", "", "http://www.javascriptkit.com/cutpastejava.shtml")
+var branch3=pinetree.addItem("References") //A TREE BRANCH WITH NO URL FOR ITSELF
+	pinetree.addItem("JavaScript Reference", branch3, "http://www.javascriptkit.com/jsref/") //Add this item to branch3
+	pinetree.addItem("DOM Reference", branch3, "http://www.javascriptkit.com/domref/") //Add this item to branch3
+	pinetree.addItem("CSS Reference", branch3, "http://www.javascriptkit.com/dhtmltutors/cssreference.shtml") //Add this item to branch3
+pinetree.addItem("JavaScript Tutorials", "", "http://www.javascriptkit.com/javatutors/")
+pinetree.addItem("DHTML Tutorials", "", "http://www.javascriptkit.com/dhtmltutors/")
+pinetree.addItem("Webmaster Tutorials", "", "http://www.javascriptkit.com/howto/")
+pinetree.treetop.draw(); //REQUIRED LINE: Initalize tree
+
+
+
+<!-- TreeView Demo 2 //-->
+var oaktree=new jktreeview("tree2")
+oaktree.addItem("Dynamic Drive", "", "http://dynamicdrive.com")
+var branch2=oaktree.addItem("CSS Library", "") //A TREE BRANCH
+	oaktree.addItem("Horizontal Menus", branch2, "http://dynamicdrive.com/style/csslibrary/category/C1/") //Add this item to branch2
+	oaktree.addItem("Vertical Menus", branch2, "http://dynamicdrive.com/style/csslibrary/category/C2/") //Add this item to branch2
+	oaktree.addItem("Form CSS", branch2, "http://dynamicdrive.com/style/csslibrary/category/C6/") //Add this item to branch2
+	var branch2_4=oaktree.addItem("CSS Layouts", branch2, "http://www.dynamicdrive.com/style/layouts/") //A TREE BRANCH WITH URL FOR ITSELF!
+		oaktree.addItem("Two Columns", branch2_4, "http://www.dynamicdrive.com/style/layouts/category/C9/") //Add this item to branch2_4
+		oaktree.addItem("Tree Columns", branch2_4, "http://www.dynamicdrive.com/style/layouts/category/C10/") //Add this item to branch2_4
+oaktree.addItem("Webmaster Tools", "", "http://tools.dynamicdrive.com")
+oaktree.addItem("Help Forums", "", "http://dynamicdrive.com/forums/")
+oaktree.treetop.draw(); //REQUIRED LINE: Initalize tree
+
+
+
+<!-- TreeView Demo 3 //-->
+var palmtree=new jktreeview("tree3")
+palmtree.addItem("Coding Forums", "", "http://www.codingforums.com")
+palmtree.addItem("PHP Reference", "", "http://www.php.net")
+palmtree.addItem("Mozilla Dev Center", "", "http://developer.mozilla.org/en/docs/Main_Page")
+var branch4=palmtree.addItem("CSS Drive") //A TREE BRANCH WITH NO URL FOR ITSELF
+	palmtree.addItem("CSS Gallery", branch4, "http://www.cssdrive.com") //Add this item to branch4
+	palmtree.addItem("Web Design News", branch4, "http://www.cssdrive.com/index.php/news/") //Add this item to branch3
+	palmtree.addItem("CSS Compressor", branch4, "http://www.cssdrive.com/index.php/main/csscompressor/") //Add this item to branch3
+palmtree.addItem("Ajaxian", "", "http://ajaxian.com/")
+palmtree.treetop.draw(); //REQUIRED LINE: Initalize tree
+
+
+</script>
+
+  </body>
+</html>
+ 

@@ -9,7 +9,6 @@
 	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/>
 	<xsl:output indent="no"/>
 
-	<!-- should give list with full paths -->
 	<xsl:param name="link-catalog-files"/>
 	<xsl:variable name="link-catalogs" >
 		<xsl:variable name="temp-link-catalogs">

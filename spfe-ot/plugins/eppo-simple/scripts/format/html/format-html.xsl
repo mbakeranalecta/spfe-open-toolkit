@@ -15,6 +15,33 @@
 		<xsl:sequence select="/config:spfe"/>
 	</xsl:variable>
 	
+	<xsl:param name="toc-files"/>
+	<xsl:variable name="toc" >
+		<xsl:variable name="temp-tocs">
+			<xsl:for-each select="tokenize(translate($toc-files, '\', '/'), $config/config:dir-separator)">
+				<xsl:variable name="toc-file" select="concat('file:///', normalize-space(.))"/>
+				<xsl:call-template name="info">
+					<xsl:with-param name="message" select="'Loading toc file:', $toc-file "/>
+				</xsl:call-template>
+				<xsl:sequence select="document($toc-file)"/>
+			</xsl:for-each>
+		</xsl:variable>
+		<xsl:if test="count(distinct-values($temp-tocs/toc/@topic-set-id)) lt count($temp-tocs/toc)">
+			<xsl:call-template name="error">
+				<xsl:with-param name="message">
+					<xsl:text>Duplicate TOCs detected.&#x000A; There appears to be more than one TOC in scope for the same topics set. Topic set IDs encountered include:&#x000A;</xsl:text>
+					<xsl:for-each select="$temp-tocs/toc">
+						<xsl:value-of select="@topic-set-id,'&#x000A;'"/>
+					</xsl:for-each>
+				</xsl:with-param>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:sequence select="$temp-tocs"/>
+	</xsl:variable>
+	
+	
+
+	
 	<xsl:variable name="draft" as="xs:boolean" select="$config/config:build-command='draft'"/>
 	<xsl:param name="presentation-files"/>
 	<xsl:variable name="presentation-dir" select="concat($config/config:build/config:build-directory, '/temp/presentation/')"/>
@@ -49,6 +76,13 @@
 			<xsl:for-each select="$config/config:format/config:html/config:java-script">
 				<script type="text/javascript" src="{.}">&#160;</script>
 			</xsl:for-each>
+			
+			<link rel="stylesheet" type="text/css" href="style/treeview/css/multi/tree.css">&#160;</link>
+			<script type="text/javascript" src="style/treeview/build/yahoo.js">&#160;</script>
+			<script type="text/javascript" src="style/treeview/build/event.js">&#160;</script>
+			<script type="text/javascript" src="style/treeview/build/treeview.js">&#160;</script>
+			<script type="text/javascript" src="style/treeview/build/jktreeview.js">&#160;</script>
+				
 			<style type="text/css">
 		
 #wrap
@@ -60,13 +94,11 @@
 	clear:both;
 }
 
-#toc
+#toc-container
 {
 	float:left;
 	width:20%;
 	overflow:auto;
-	background-color:LightGrey;
-
 }
 #main
 {
@@ -209,15 +241,22 @@ ul.toc ol {
 						<hr/>
 					</div>
 				</xsl:if>
-				<div id="toc">
-					<h2><xsl:value-of select="ancestor::web/title"/></h2>
-					<xsl:apply-templates select="$presentation//web/toc"/>
+				<div id="toc-container" >
+					<h2>Contents</h2>
+					<xsl:apply-templates select="$toc"/>
+					
 				</div>
+				
+<!--					<ul  class="toc">
+						<xsl:apply-templates select="$toc"/>
+					</ul>-->
+				
 				<div id="main">
 					<xsl:apply-templates/>
 				</div>
 			</xsl:with-param>
 		</xsl:call-template>
+		<xsl:apply-templates select="$toc" mode="index-page"/>
 	</xsl:template>
 
 	
@@ -783,23 +822,142 @@ ul.toc ol {
 		</li>
 	</xsl:template>
 	
-
+	
 	<xsl:template match="toc">
+		<xsl:variable name="branch" select="generate-id()"/>
+		<xsl:variable name="toc-id" select="concat('toc', $branch)"/>
+		
+		<div id="{$branch}" class="treemenu">&#160;</div>
+		<script type="text/javascript">
+			<xsl:text>&#x000A;var </xsl:text>
+			<xsl:value-of select="$toc-id"/>
+			<xsl:text>=new jktreeview("</xsl:text>
+			<xsl:value-of select="$branch"/>
+			<xsl:text>")&#x000A;</xsl:text>
 
-		<ul  class="toc">
-			<xsl:apply-templates mode="index-page"/>
-			<xsl:if test="$draft">
-				<li><a href="index-of-review-notes.html" target="doc">*** Index of Review Notes ***</a></li>
-				<li><a href="index-of-author-notes.html" target="doc">*** Index of Author Notes ***</a></li>
+			<xsl:text>	var </xsl:text>
+			<xsl:value-of select="$branch"/>
+			<xsl:text>=</xsl:text>
+			<xsl:value-of select="$toc-id"/>
+			<xsl:text>.addItem("</xsl:text>
+			<xsl:value-of select="@title"/>
+			<xsl:text>")&#x000A;</xsl:text> 	
+			
+			<xsl:apply-templates>
+				<xsl:with-param name="branch" select="$branch"/>
+				<xsl:with-param name="relative-path" select="concat('../', @topic-set-id, '/')"/>
+				<xsl:with-param name="toc-id" select="$toc-id"/>
+			</xsl:apply-templates>		
+			
+			<xsl:text>&#x000A;</xsl:text>
+			<xsl:value-of select="$toc-id"/>
+			<xsl:text>.treetop.draw(); //Initalize tree&#x000A;</xsl:text>
+			<!-- test to expand the ToC for the current topic set -->
+			<xsl:if test="@topic-set-id eq $config/config:topic-set-id">
+				<xsl:text>&#x000A;</xsl:text>
+				<xsl:value-of select="$toc-id"/>
+				<xsl:text>.treetop.expandAll(); //Expand tree&#x000A;</xsl:text>
 			</xsl:if>
-		</ul>
+			</script>	
+		
+		
+
+<!--
+		<li><xsl:value-of select="@title"/>
+			<ul>-->
+
+
+		
+<!--				<xsl:if test="$draft">
+					<li><a href="index-of-review-notes.html" target="doc">*** Index of Review Notes ***</a></li>
+					<li><a href="index-of-author-notes.html" target="doc">*** Index of Author Notes ***</a></li>
+				</xsl:if>
+			</ul>
+		</li>-->
 	</xsl:template>
 	
 	<xsl:template match="node">
-		<li>
+		<xsl:param name="branch"/>
+		<xsl:param name="relative-path"/>
+		<xsl:param name="toc-id"/>
+		
+		<xsl:variable name="href">
+			<xsl:choose>
+				<!-- link to internal anchor of parent node page -->
+				<xsl:when test="contains(@id, '#')">
+					<xsl:value-of select="concat($relative-path, substring-before(@id, '#'),
+						'.html#',
+						substring-after(@id, '#'))"/>
+				</xsl:when>
+				
+				<xsl:when test="@id">
+					<xsl:value-of select="concat($relative-path, @id, '.html')"/>
+				</xsl:when>
+				
+				<xsl:when test="@group-id">
+					<xsl:value-of select="concat($relative-path, sf:title2anchor(@group-id), '.html')"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:variable name="new-branch" select="concat($branch, '_', generate-id())"/>
+
+		<xsl:choose>
+			<xsl:when test="normalize-space($href) ne '' and node">
+				<xsl:text>var </xsl:text>
+				<xsl:value-of select="$new-branch"/>
+				<xsl:text>=</xsl:text>
+				<xsl:value-of select="$toc-id"/>
+				<xsl:text>.addItem("</xsl:text>
+				<xsl:value-of select="@name"/>
+				<xsl:text>", </xsl:text>
+				<xsl:value-of select="$branch"/>
+				<xsl:text>, "</xsl:text>
+				<xsl:value-of select="$href"/>
+				<xsl:text>") //node and href&#x000A;</xsl:text>
+				<xsl:apply-templates>
+					<xsl:with-param name="branch" select="$new-branch"/>
+					<xsl:with-param name="relative-path" select="$relative-path"/>
+					<xsl:with-param name="toc-id" select="$toc-id"/>
+				</xsl:apply-templates>
+			</xsl:when>
+			
+			<xsl:when test="normalize-space($href)">
+				<xsl:value-of select="$toc-id"/>
+				<xsl:text>.addItem("</xsl:text>
+				<xsl:value-of select="@name"></xsl:value-of>
+				<xsl:text>", </xsl:text>
+				<xsl:value-of select="$branch"/>
+				<xsl:text>, "</xsl:text>
+				<xsl:value-of select="$href"/>
+				<xsl:text>") //href&#x000A;</xsl:text>				
+			</xsl:when>
+			
+			<xsl:when test="node">
+				<xsl:text>var </xsl:text>
+				<xsl:value-of select="$new-branch"/>
+				<xsl:text>=</xsl:text>
+				<xsl:value-of select="$toc-id"/>
+				<xsl:text>.addItem("</xsl:text>			
+				<xsl:value-of select="@name"/>
+				<xsl:text>", </xsl:text>
+				<xsl:value-of select="$branch"/>
+				<xsl:text>) //node&#x000A;</xsl:text>
+				<xsl:apply-templates>
+					<xsl:with-param name="branch" select="$new-branch"/>
+					<xsl:with-param name="relative-path" select="$relative-path"/>
+					<xsl:with-param name="toc-id" select="$toc-id"/>
+				</xsl:apply-templates>
+			</xsl:when>
+			<xsl:otherwise>
+				<!-- ERROR? -->
+			</xsl:otherwise>
+		</xsl:choose>
+
+		
+<!--		<li>
 			<xsl:choose>
 				
-				<!-- link to internal anchor of parent node page -->
+				<!-\- link to internal anchor of parent node page -\->
 				<xsl:when test="contains(@id, '#')">
 					<a href="{substring-before(@id, '#')}.html#{substring-after(@id, '#')}" target="doc">
 						<xsl:value-of select="@name"/>
@@ -826,9 +984,9 @@ ul.toc ol {
 				</xsl:when>
 				
 				<xsl:otherwise>
-					<!--<a href="{sf:title2anchor(@topic-type)}.html" target="doc">-->
-						<xsl:value-of select="@name"/>
-					<!--</a>-->
+					<!-\-<a href="{sf:title2anchor(@topic-type)}.html" target="doc">-\->
+					<xsl:value-of select="@name"/>
+					<!-\-</a>-\->
 				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:if test="node">
@@ -837,7 +995,7 @@ ul.toc ol {
 				</ul>
 			</xsl:if>
 		</li>
-	</xsl:template>
+-->	</xsl:template>
 	
 	<xsl:template name="output-review-note-index">
 		<xsl:call-template name="output-html-page">

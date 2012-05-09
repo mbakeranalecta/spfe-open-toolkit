@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <define name="SPFE_DOCS_HOME" value="${HOME}/Dropbox/spfe/spfe-docs"/>
     
     <doc-set id="spfe-docs">
         <title>SPFE Documentation</title>
@@ -77,11 +76,15 @@
         <link-catalogs>
             <include>${HOME}/spfebuild/spfe-docs/link-catalogs/*.xml</include>
         </link-catalogs>
+        <tocs>
+            <include>${HOME}/spfebuild/spfe-docs/tocs/*.toc.xml</include>
+        </tocs>
     </sources>
     
     <build>
         <link-catalog-directory>${HOME}/spfebuild/spfe-docs/link-catalogs</link-catalog-directory>
         <output-directory>${HOME}/spfebuild/spfe-docs/output</output-directory>
+        <toc-directory>${HOME}/spfebuild/spfe-docs/tocs</toc-directory>
     </build>
     
     <messages>warning info</messages>
@@ -101,5 +104,9 @@
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/format/html/format-html.xsl</script>
         </format-html>
     </scripts>
-       
+    
+    <style>
+        <html>${SPFEOT_HOME}/plugins/eppo-simple/style/html</html>
+    </style>
+    
 </spfe>

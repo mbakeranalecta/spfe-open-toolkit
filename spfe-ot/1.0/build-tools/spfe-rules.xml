@@ -36,14 +36,11 @@
 
 	<!-- properties for the temporary files used -->
 	<property name="temp" value="${spfe.build.build-directory}/temp"/>
-	<property name="output" value="${spfe.directories.output}/{spfe.topic-set-id}"/>
+	<property name="output" value="${spfe.build.output-directory}/${spfe.topic-set-id}"/>
 	<!--<property name="spfe.files.synthesis" value="spfe.synthesis.xml"/>-->
 	<property name="spfe.files.presentation" value="spfe.presentation-web.xml"/>
 	<property name="spfe.files.presentation-book" value="spfe.presentation-book.xml"/>
 	<property name="spfe.files.fo-format" value="spfe.fo-format.fo"/>
-
-	<!-- import the common SPFE definitions -->
-	<import file="spfe-common.xml"/>
 
 	<!-- ============= -->
 	<!-- BUILD RELATED -->
@@ -205,6 +202,14 @@
 		</copy>
 	</target>
 
+	<target name="-get.externals.style.html">
+		<mkdir dir="${output}/style"/>
+		<copy todir="${output}/style" preservelastmodified="true" verbose="true"
+			flatten="false" failonerror="true">
+			<fileset dir="${spfe.style.html}"/>
+		</copy>
+	</target>
+	
 	<target name="-get.externals.css">
 		<mkdir dir="${output}"/>
 		<copy todir="${output}" preservelastmodified="true" verbose="true"
@@ -212,7 +217,7 @@
 			<files refid="css"/>
 		</copy>
 	</target>
-
+	
 	<target name="-get.externals.javascript">
 		<mkdir dir="${output}"/>
 		<copy todir="${output}" preservelastmodified="true">
@@ -362,15 +367,13 @@
 	<target name="-build.presentation-web" depends="--build.presentation-web"/>
 	<target name="--build.presentation-web" description="presentation step."
 		depends="-build.synthesis, 
-									 -current.presentation-web, 
-									 -get.source-files.graphics-catalog,
-									 -get.source-files.strings"
+				 -build.link-catalog,
+				 -current.presentation-web, 
+				 -get.source-files.graphics-catalog,
+				 -get.source-files.strings"
 		unless="-current.presentation-web">
 
 		<!-- run the XSLT script to produce the output -->
-
-		<!-- default to reading all the link catalogs -->
-		<echo>${link-catalog-files}</echo>
 
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			style="${spfe.scripts.presentation-web}"
@@ -471,15 +474,18 @@
 	<target name="-build.html-format" depends="--build.html-format"/>
 	<target name="--build.html-format"
 		depends="-build.presentation-web, 
-	        				 -get.externals.graphics.html,
-
-	        				 -current.html-format"
+	        	 -get.externals.graphics.html,
+	        	 -get.externals.style.html,
+  				 -current.html-format"
 		unless="-current.html-format">
 <!--	        				 -get.externals.css,
 	        				 -get.externals.javascript, -->
 		<fileset id="presentation-file-list" dir="${temp}/presentation" includes="*.xml"/>
-		<property name="presentation-files" refid="presentation-file-list"/>		
-		<echo message="${presentation-files}"/>
+		<property name="presentation-files" refid="presentation-file-list"/>
+		<property name="toc-files" refid="tocs"/>	
+		
+		
+
 
 		<!-- run the XSLT script to produce the output -->
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
@@ -488,6 +494,7 @@
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 			<param name="presentation-files" expression="${presentation-files}"/>
+			<param name="toc-files" expression="${toc-files}"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
 			</factory>
@@ -698,7 +705,7 @@
 		<antcall target="-zip"/>
 	</target>
 
-	<target name="-zip" depends="-final, pdf">
+<!--	<target name="-zip" depends="-final, pdf">
 		<mkdir dir="${spfe.directories.output.zip}"/>
 		<basename property="zip-prefix" file=""/>
 		<echo message="Zipping ${output}"/>
@@ -706,7 +713,7 @@
 			<zipfileset dir="${output}" prefix="${zip-prefix}"/>
 		</zip>
 	</target>
-
+-->
 
 	<!-- DRAFT -->
 	<target name="draft" depends="-init">

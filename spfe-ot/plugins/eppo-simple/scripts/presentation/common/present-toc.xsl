@@ -22,148 +22,150 @@
 	</xsl:variable>
 
 	<xsl:template name="toc">
-		<toc>
-			<xsl:choose>
-				<!-- If there is a TOC file for this media, use it to create TOC -->
-				<xsl:when test="$media = tokenize(document($toc-file)/toc/@media, '\s+')">
-					
-					<xsl:call-template name="info">
-						<xsl:with-param name="message" select="'Processing toc file ', $toc-file, 'for', $media"/>
-					</xsl:call-template>
-					
-					<xsl:variable name="toc-topics" select="document($toc-file)//topic/@name" as="xs:string*"/>
-					<xsl:variable name="topic-set-topics" select="$synthesis//topic/name" as="xs:string*"/>
-					
-					<!-- Make sure the list of topics in the TOC matches the list of topics in the topic-set -->
-					<xsl:if test="not(every $t in $toc-topics satisfies $t = $topic-set-topics)">
-						<xsl:call-template name="error">
-							<xsl:with-param name="message">
-								<xsl:text>Toc file </xsl:text>
-								<xsl:value-of select="$toc-file"/>
-								<xsl:text> includes topics not found in topic set. Non-matching topic names are: </xsl:text>
-								<xsl:value-of select="string-join($toc-topics[not(.=$topic-set-topics)], ', ')"/>
-							</xsl:with-param>
+		<xsl:result-document href="file:///{$config/config:build/config:toc-directory}/{$config/config:topic-set-id}.toc.xml" method="xml" indent="no" omit-xml-declaration="no">
+			<toc topic-set-id="{$config/config:topic-set-id}" title="{$title-string}">
+				<xsl:choose>
+					<!-- If there is a TOC file for this media, use it to create TOC -->
+					<xsl:when test="$media = tokenize(document($toc-file)/toc/@media, '\s+')">
+						
+						<xsl:call-template name="info">
+							<xsl:with-param name="message" select="'Processing toc file ', $toc-file, 'for', $media"/>
 						</xsl:call-template>
-					</xsl:if>
-					<xsl:if test="not(every $t in $topic-set-topics satisfies $t = $toc-topics)">
-						<xsl:call-template name="error">
-							<xsl:with-param name="message">
-								<xsl:text>Toc file </xsl:text>
-								<xsl:value-of select="$toc-file"/>
-								<xsl:text> does not include all topics found in topic set. Omitted topics are: </xsl:text>
-								<xsl:value-of select="string-join($topic-set-topics[not(.=$toc-topics)], ', ')"/>
+						
+						<xsl:variable name="toc-topics" select="document($toc-file)//topic/@name" as="xs:string*"/>
+						<xsl:variable name="topic-set-topics" select="$synthesis//topic/name" as="xs:string*"/>
+						
+						<!-- Make sure the list of topics in the TOC matches the list of topics in the topic-set -->
+						<xsl:if test="not(every $t in $toc-topics satisfies $t = $topic-set-topics)">
+							<xsl:call-template name="error">
+								<xsl:with-param name="message">
+									<xsl:text>Toc file </xsl:text>
+									<xsl:value-of select="$toc-file"/>
+									<xsl:text> includes topics not found in topic set. Non-matching topic names are: </xsl:text>
+									<xsl:value-of select="string-join($toc-topics[not(.=$topic-set-topics)], ', ')"/>
 								</xsl:with-param>
-						</xsl:call-template>
-					</xsl:if>
-					
-					
-					<xsl:for-each select="document($toc-file)//topic">
-						
-					<xsl:variable name="this-topic" select="$synthesis/ss:synthesis/ss:topic[name=current()/@name]"/>
-						
-					<xsl:choose>
-							<xsl:when test="$this-topic">
-								<node id="{$this-topic/name}"
-									name="{$this-topic/title}">
-								</node>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:call-template name="warning">
-									<xsl:with-param name="message">
-										<xsl:text>Topic listed in toc file not found: </xsl:text>
-										<xsl:value-of select="@name"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if test="not(every $t in $topic-set-topics satisfies $t = $toc-topics)">
+							<xsl:call-template name="error">
+								<xsl:with-param name="message">
+									<xsl:text>Toc file </xsl:text>
+									<xsl:value-of select="$toc-file"/>
+									<xsl:text> does not include all topics found in topic set. Omitted topics are: </xsl:text>
+									<xsl:value-of select="string-join($topic-set-topics[not(.=$toc-topics)], ', ')"/>
 									</xsl:with-param>
-								</xsl:call-template>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:for-each>
-				</xsl:when>
-				
-				<!-- If not TOC file, create TOC based on topic types -->
-				<xsl:otherwise>	
-					<!-- Allow the presentation script to add entires before main TOC -->
-					<xsl:call-template name="toc-prefix-entries"/>
-					
-					<xsl:variable name="topics" select="$synthesis/ss:synthesis/ss:topic"/>
-
-					
-					<!-- Make sure there is an entry on the topic type order list for every topic type. Exclude topic types starting with "spfe." -->
-					<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic[not(@virtual-type)]/@type union $synthesis/ss:synthesis/ss:topic[not(starts-with(@virtual-type, 'spfe.'))]/@virtual-type)"/>
-					
-					<xsl:if test="count($topic-types-found[not(.=$topic-type-order)])">
-						<xsl:call-template name="error">
-							<xsl:with-param name="message" select="'Topic type(s) missing from spfe.topic-type-order-list property: ', string-join($topic-types-found[not(.=$topic-type-order)], ', ')"/>
-						</xsl:call-template>
-					</xsl:if>
-					
-					<!-- make sure there is a topic type alias for every topic in the topic type order list 
-					<xsl:if test="$topic-type-order[not(.=$topic-type-alias-list/topic-type/id)]">-->
-					<xsl:if test="not(every $x in $topic-type-order satisfies $x = $topic-type-alias-list/config:topic-type/config:id)">
-						<xsl:call-template name="error">
-							<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list:', string-join($topic-type-order[not(.=$topic-type-alias-list/config:topic-type/config:id)], ', ')"/>
-						</xsl:call-template>
-					</xsl:if>
-
-					<xsl:for-each select="$topic-type-order">
-						<xsl:variable name="this-topic-type" select="."/>
+							</xsl:call-template>
+						</xsl:if>
 						
 						
-						
-						<xsl:variable name="included-topics" select="($topics[@type=$this-topic-type] union $topics[@virtual-type=$this-topic-type]) except $topics[@virtual-type!=$this-topic-type]"/>
-						
-					
-						<xsl:variable name="topics-of-this-type">
-							<topics-of-type type="{$this-topic-type}">
-								<xsl:for-each select="$included-topics">
-									<xsl:sequence select="."/>
-								</xsl:for-each>
-							</topics-of-type>
-						</xsl:variable>
-					
+						<xsl:for-each select="document($toc-file)//topic">
+							
+						<xsl:variable name="this-topic" select="$synthesis/ss:synthesis/ss:topic[name=current()/@name]"/>
+							
 						<xsl:choose>
-							<!-- if only one topic of this type, promote to top level -->
-							<xsl:when test="count($included-topics) = 1">
-								<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
-							</xsl:when>
-							<!-- if more than one topic, create group -->
-							<xsl:when test="$included-topics">
-								<xsl:variable name="title-page" select="$synthesis/ss:synthesis/ss:topic[@virtual-type='spfe.title-page'][ss:name=$this-topic-type]"/>
-								<xsl:choose> <!-- is there a title page for this type? -->
-									<xsl:when test="count($title-page) gt 1">
-										<xsl:call-template name="error">
-											<xsl:with-param name="message">
-												<xsl:text>More than one title page was found for the topic type </xsl:text>
-												<xsl:value-of select="$this-topic-type"/>
-											</xsl:with-param>
-										</xsl:call-template>
-									</xsl:when>
-									<xsl:when test="$title-page"><!-- yes -->
-										<node id="{$this-topic-type}"  name="{$title-page/title}">
-											<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
-										</node>
-									</xsl:when>
-									<xsl:otherwise> <!-- no -->
-										<node topic-type="{$this-topic-type}"  name="{$topic-type-alias-list/config:topic-type[config:id=$this-topic-type]/config:plural}">
-											<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
-										</node>
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:when>
-							<xsl:otherwise>
-							<!-- if no topics, no heading -->
-								<xsl:call-template name="warning">
-									<xsl:with-param name="message" select="'No topics found for topic type ', $this-topic-type, ' in the topic type order list. This might be because all the topics of that type are grouped with other topics, or because there are no topics of that type. No type grouping will be created in the TOC'"/>
-								</xsl:call-template>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:for-each>
-					<!-- allow the presenation script to add entries after the main toc -->
-					<xsl:call-template name="toc-suffix-entries"/>
-
-				</xsl:otherwise>
-			</xsl:choose>
-			<xsl:call-template name="additional-toc-entries"/> 
-		</toc>	
+								<xsl:when test="$this-topic">
+									<node id="{$this-topic/name}"
+										name="{$this-topic/title}">
+									</node>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:call-template name="warning">
+										<xsl:with-param name="message">
+											<xsl:text>Topic listed in toc file not found: </xsl:text>
+											<xsl:value-of select="@name"/>
+										</xsl:with-param>
+									</xsl:call-template>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:for-each>
+					</xsl:when>
+					
+					<!-- If not TOC file, create TOC based on topic types -->
+					<xsl:otherwise>	
+						<!-- Allow the presentation script to add entires before main TOC -->
+						<xsl:call-template name="toc-prefix-entries"/>
+						
+						<xsl:variable name="topics" select="$synthesis/ss:synthesis/ss:topic"/>
+	
+						
+						<!-- Make sure there is an entry on the topic type order list for every topic type. Exclude topic types starting with "spfe." -->
+						<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic[not(@virtual-type)]/@type union $synthesis/ss:synthesis/ss:topic[not(starts-with(@virtual-type, 'spfe.'))]/@virtual-type)"/>
+						
+						<xsl:if test="count($topic-types-found[not(.=$topic-type-order)])">
+							<xsl:call-template name="error">
+								<xsl:with-param name="message" select="'Topic type(s) missing from spfe.topic-type-order-list property: ', string-join($topic-types-found[not(.=$topic-type-order)], ', ')"/>
+							</xsl:call-template>
+						</xsl:if>
+						
+						<!-- make sure there is a topic type alias for every topic in the topic type order list 
+						<xsl:if test="$topic-type-order[not(.=$topic-type-alias-list/topic-type/id)]">-->
+						<xsl:if test="not(every $x in $topic-type-order satisfies $x = $topic-type-alias-list/config:topic-type/config:id)">
+							<xsl:call-template name="error">
+								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list:', string-join($topic-type-order[not(.=$topic-type-alias-list/config:topic-type/config:id)], ', ')"/>
+							</xsl:call-template>
+						</xsl:if>
+	
+						<xsl:for-each select="$topic-type-order">
+							<xsl:variable name="this-topic-type" select="."/>
+							
+							
+							
+							<xsl:variable name="included-topics" select="($topics[@type=$this-topic-type] union $topics[@virtual-type=$this-topic-type]) except $topics[@virtual-type!=$this-topic-type]"/>
+							
+						
+							<xsl:variable name="topics-of-this-type">
+								<topics-of-type type="{$this-topic-type}">
+									<xsl:for-each select="$included-topics">
+										<xsl:sequence select="."/>
+									</xsl:for-each>
+								</topics-of-type>
+							</xsl:variable>
+						
+							<xsl:choose>
+								<!-- if only one topic of this type, promote to top level -->
+								<xsl:when test="count($included-topics) = 1">
+									<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
+								</xsl:when>
+								<!-- if more than one topic, create group -->
+								<xsl:when test="$included-topics">
+									<xsl:variable name="title-page" select="$synthesis/ss:synthesis/ss:topic[@virtual-type='spfe.title-page'][ss:name=$this-topic-type]"/>
+									<xsl:choose> <!-- is there a title page for this type? -->
+										<xsl:when test="count($title-page) gt 1">
+											<xsl:call-template name="error">
+												<xsl:with-param name="message">
+													<xsl:text>More than one title page was found for the topic type </xsl:text>
+													<xsl:value-of select="$this-topic-type"/>
+												</xsl:with-param>
+											</xsl:call-template>
+										</xsl:when>
+										<xsl:when test="$title-page"><!-- yes -->
+											<node id="{$this-topic-type}"  name="{$title-page/title}">
+												<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
+											</node>
+										</xsl:when>
+										<xsl:otherwise> <!-- no -->
+											<node topic-type="{$this-topic-type}"  name="{$topic-type-alias-list/config:topic-type[config:id=$this-topic-type]/config:plural}">
+												<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
+											</node>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:when>
+								<xsl:otherwise>
+								<!-- if no topics, no heading -->
+									<xsl:call-template name="warning">
+										<xsl:with-param name="message" select="'No topics found for topic type ', $this-topic-type, ' in the topic type order list. This might be because all the topics of that type are grouped with other topics, or because there are no topics of that type. No type grouping will be created in the TOC'"/>
+									</xsl:call-template>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:for-each>
+						<!-- allow the presenation script to add entries after the main toc -->
+						<xsl:call-template name="toc-suffix-entries"/>
+	
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:call-template name="additional-toc-entries"/> 
+			</toc>	
+		</xsl:result-document>	
 	</xsl:template>
 	
 	<!-- fallback entries for prefix and suffix entries -->
