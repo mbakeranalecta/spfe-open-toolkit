@@ -15,15 +15,4 @@
       <xs:attributeGroup ref="conditions"/>
   </xs:complexType>
     
-    <xs:group name="p-content">
-        <xs:choice>
-            <xs:group ref="text-decoration"/>
-            <xs:group ref="mentions-general"/>
-            <xs:group ref="mentions-xml"/>
-            <xs:group ref="resources"/>
-        </xs:choice>
-    </xs:group>
-    
-
-   
 </xs:schema>

@@ -28,6 +28,18 @@ xmlns:ed="http://spfeopentoolkit.org/spfe-ot/plugins/config-schema-docs/schemas/
 exclude-result-prefixes="#all">
 	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
 <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/synthesis/common/synthesize-text-structures.xsl"/>
+	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/synthesis/strings/synthesize-strings.xsl"/>
+	
+<!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
+<xsl:variable name="strings">
+	<xsl:for-each select="$element-source//ed:string[not(parent::ed:string-ref)], $config/config:string">
+		<!-- remove them from source namespace -->
+		<string>
+			<xsl:copy-of select="@*"/>
+			<xsl:copy-of select="./node()"/>
+		</string>
+	</xsl:for-each>
+</xsl:variable>
 
 <xsl:output method="xml" indent="yes"/>
 
@@ -84,7 +96,6 @@ Main template
 -->
 	
 <xsl:template name="main">
-	
 	
 		<!-- Create the schema element topic set -->
 		<xsl:for-each-group select="$doctypes/doctype" group-by="@name">

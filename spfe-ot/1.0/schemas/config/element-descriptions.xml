@@ -66,14 +66,7 @@
         <xpath>/spfe/define</xpath>
         <description>
             <p>The <xml-element-name>define</xml-element-name> element is used to define string
-                constants that can be used to define other properites. One of the most common uses
-                of a define is to define the root directory of the content set so that this can be
-                used to define the location of files in the content set when setting other
-                properties. For example, the SPFE documentation build configuration defines
-                <code>SPFE_DOCS_HOME</code> like this:</p>
-            <codeblock>
-<![CDATA[<define name="SPFE_DOCS_HOME" value="${HOME}/Dropbox/spfe/spfe-docs"/>]]>
-            </codeblock>
+                constants that can be used to define other properites. </p>
             <p>To use a defined value in setting another property you surround the property name
                 with <code>${</code> and <code>}</code>, as in the use of the <code>HOME</code>
                 constant in the example above. The variables <code>HOME</code> (the user's home
@@ -742,7 +735,11 @@
     <element-description>
         <xpath>/spfe/scripts/synthesis/script</xpath>
         <description>
-            <p>The full path to a sysnthesis script file.</p>
+            <p>
+                <string id="script-description">The full path to <string-ref id-ref="script-type"/> script file.</string>
+            <string-ref id-ref="script-description">
+                <string id="script-type">a synthesis</string>
+            </string-ref></p>
         </description>
         <build-property></build-property>
         <include-behavior></include-behavior>
@@ -760,7 +757,9 @@
     <element-description>
         <xpath>/spfe/scripts/link-catalog/script</xpath>
         <description>
-            <p>The full path to a link catalog script.</p>
+            <p><string-ref id-ref="script-description">
+                <string id="script-type">a link-catalog</string>
+            </string-ref></p>
         </description>
         <build-property></build-property>
         <include-behavior></include-behavior>
@@ -778,7 +777,9 @@
     <element-description>
         <xpath>/spfe/scripts/image-list/script</xpath>
         <description>
-            <p>The full path of an image list script.</p>
+            <p><string-ref id-ref="script-description">
+                <string id="script-type">an image list</string>
+            </string-ref></p>
         </description>
         <build-property></build-property>
         <include-behavior></include-behavior>
@@ -796,7 +797,9 @@
     <element-description>
         <xpath>/spfe/scripts/presentation-web/script</xpath>
         <description>
-            <p>The full path of a web presentation script.</p>
+            <p><string-ref id-ref="script-description">
+                <string id="script-type">a web presentation</string>
+            </string-ref></p>
         </description>
         <build-property></build-property>
         <include-behavior></include-behavior>
@@ -814,7 +817,9 @@
     <element-description>
         <xpath>/spfe/scripts/presentation-book/script</xpath>
         <description>
-            <p>The full path of a web presentation script.</p>
+            <p><string-ref id-ref="script-description">
+                <string id="script-type">a book presentation</string>
+            </string-ref></p>
         </description>
         <build-property></build-property>
         <include-behavior></include-behavior>
@@ -832,7 +837,9 @@
     <element-description>
         <xpath>/spfe/scripts/format-html/script</xpath>
         <description>
-            <p>The full path to a HTML format script.</p>
+            <p><string-ref id-ref="script-description">
+                <string id="script-type">an html format</string>
+            </string-ref>.</p>
         </description>
         <build-property></build-property>
         <include-behavior></include-behavior>
@@ -850,7 +857,9 @@
     <element-description>
         <xpath>/spfe/scripts/format-book/script</xpath>
         <description>
-            <p>The full path of a book formatting script.</p>
+            <p><string-ref id-ref="script-description">
+                <string id="script-type">a book formatting</string>
+            </string-ref>.</p>
         </description>
         <build-property></build-property>
         <include-behavior></include-behavior>
