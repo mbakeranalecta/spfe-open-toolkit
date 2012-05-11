@@ -206,7 +206,7 @@
   
   <xs:complexType name="style-type">
     <xs:sequence>
-      <xs:element name="html" type="xs:string"/>
+      <xs:element name="html-style-directories" type="fileset-type"/>
     </xs:sequence>
   </xs:complexType>
 

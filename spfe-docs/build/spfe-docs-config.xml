@@ -106,7 +106,9 @@
     </scripts>
     
     <style>
-        <html>${SPFEOT_HOME}/plugins/eppo-simple/style/html</html>
+        <html-style-directories>
+            <include>${SPFEOT_HOME}/plugins/eppo-simple/style/html</include>
+        </html-style-directories>
     </style>
     
 </spfe>

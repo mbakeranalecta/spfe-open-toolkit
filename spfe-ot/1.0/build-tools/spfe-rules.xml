@@ -204,9 +204,9 @@
 
 	<target name="-get.externals.style.html">
 		<mkdir dir="${output}/style"/>
-		<copy todir="${output}/style" preservelastmodified="true" 
+		<copy todir="${output}/style" preservelastmodified="true" verbose="true"
 			flatten="false" failonerror="true">
-			<fileset dir="${spfe.style.html}"/>
+			<resources refid="spfe.style.html-style-directories"/>
 		</copy>
 	</target>
 	

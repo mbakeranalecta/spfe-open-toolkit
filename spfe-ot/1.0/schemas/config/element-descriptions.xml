@@ -205,6 +205,14 @@
                 one from the top-level configuration file using a predicate of <code>[1]</code> on
                 the xpath that selects this setting.</p>
         </include-behavior>
+        <attributes>
+            <attribute>
+                <name>name</name>
+                <description>
+                    <p>The name of the other publication information field.</p>
+                </description>
+            </attribute>
+        </attributes>
     </element-description>
     <element-description>
         <xpath>/spfe/topic-type-order</xpath>
@@ -458,6 +466,14 @@
             <p>The set of file selectors from included configuration files are added to the file
                 selectors in the current configuration file.</p>
         </include-behavior>
+        <attributes>
+            <attribute>
+                <name>name</name>
+                <description>
+                    <p>The name of the type of other source.</p>
+                </description>
+            </attribute>
+        </attributes>
     </element-description>
     
     <element-description>
@@ -664,6 +680,17 @@
             <p>Specifies the directory where the link catalogs will be created. The link catalogs that will be read when linking the topic set are specified by <xml-element-name>/spfe/sources/link-catalogs</xml-element-name></p>
         </description>
         <build-property>spfe.directories.link-catalogs</build-property>
+        <include-behavior>
+            <p>The definition in the current file takes precedence over definitions in included files.</p>
+        </include-behavior>
+    </element-description>
+    
+    <element-description>
+        <xpath>/spfe/build/toc-directory</xpath>
+        <description>
+            <p>Specifies the directory where the toc files for the topics set will be created. When building a documentation set, each topic set in the documentation set will read all the toc files in the toc directory, allowing each topic set to present a complete TOC for the entire documentation set.</p>
+        </description>
+        <build-property>spfe.directories.toc-directory</build-property>
         <include-behavior>
             <p>The definition in the current file takes precedence over definitions in included files.</p>
         </include-behavior>
@@ -894,7 +921,7 @@
     <element-description>
         <xpath>/spfe/format</xpath>
         <description>
-            <p>A container for formatting information to be passesd to the formatting scripts.</p>
+            <p>A container for formatting information to be passed to the formatting scripts.</p>
         </description>
         <build-property></build-property>
         <include-behavior></include-behavior>
@@ -948,6 +975,16 @@
         <build-property></build-property>
         <include-behavior><p><xml-element-name>/spfe/doc-set</xml-element-name> elements in included configuration files are ignored.</p></include-behavior>
     </element-description>
+    
+    <element-description>
+        <xpath>/spfe/style</xpath>
+        <description>
+            <p>A container element for settings related to style information used by the build tools.</p>
+        </description>
+        <build-property></build-property>
+        <include-behavior></include-behavior>
+    </element-description>
+    
     
 </element-descriptions>
 

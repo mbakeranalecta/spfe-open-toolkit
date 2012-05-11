@@ -210,7 +210,7 @@ Main content processing templates
 					</xsl:when>
 					<xsl:otherwise><!-- If not found, report warning. -->
 						<xsl:call-template name="warning">
-							<xsl:with-param name="message" select="'Element description not found ', $xpath"/>
+							<xsl:with-param name="message" select="'Element description not found ', string($xpath)"/>
 						</xsl:call-template>
 					</xsl:otherwise>
 				</xsl:choose>
@@ -244,7 +244,7 @@ Main content processing templates
 							<xsl:variable name="authored" select="$source[ed:xpath=$xpath]/ed:attributes/ed:attribute[ed:name=$attribute-name]/*"/>
 							<xsl:if test="not($authored)">
 								<xsl:call-template name="warning">
-									<xsl:with-param name="message" select="'Attribute description not found ', xpath"/>
+									<xsl:with-param name="message" select="'Attribute description not found ', string(xpath)"/>
 								</xsl:call-template>
 							</xsl:if>
 							<xsl:apply-templates select="$authored"/>

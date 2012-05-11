@@ -343,8 +343,15 @@
                       </xsl:otherwise>
                   </xsl:choose>
                   
-                  <property name="spfe.style.html" value="{spfe:URL-to-local(resolve-uri($config/style/html[1],base-uri($config/style/html[1])))}"/>
+                  <resources id="spfe.style.html-style-directories">
+
+                          <xsl:for-each select="$config/style/html-style-directories/include">
+                              <fileset dir="{spfe:URL-to-local(resolve-uri(. ,base-uri(.)))}"/>
+                          </xsl:for-each>
                       
+                  </resources>
+                      
+               
                   
                   <xsl:for-each select="$config/other">
                       <property name="spfe.other.{@name}" value="{.}"/>
