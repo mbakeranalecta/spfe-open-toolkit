@@ -6,7 +6,6 @@
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 	exclude-result-prefixes="#all">
 	
-	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/>
 	<xsl:output indent="no"/>
 
 	<xsl:param name="link-catalog-files"/>
@@ -33,7 +32,9 @@
 		<xsl:sequence select="$temp-link-catalogs"/>
 	</xsl:variable>
 	
-	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases"/>
+<!--	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases"/>-->
+	
+	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
 	
 	<xsl:variable name="topic-set-id" select="$config/config:topic-set-id"/>
 	
@@ -271,15 +272,13 @@
 			<xsl:value-of select="$target-directory"/>
 		</xsl:variable>
 		
-		<xsl:message select="'$target-directory-path =', $target-directory-path"/>
-	
 		<xsl:variable name="target-file"  select="string($target-page/@file)"/>		
 		
 		<xsl:variable name="target-anchor" select="if ($target-page[1]/target[key=$target][@type=$type][1]/@anchor) then concat('#', $target-page[1]/target[key=$target][@type=$type][1]/@anchor) else ''"/>
 		<xsl:variable name="topic-type-alias">
 			<xsl:choose>
-				<xsl:when test="$topic-type-alias-list/topic-type[id=$target-page/@topic-type]">
-					<xsl:value-of select="$topic-type-alias-list/topic-type[id=$target-page/@topic-type]/alias"/>
+				<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$target-page/@topic-type]">
+					<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$target-page/@topic-type]/alias"/>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="warning">
@@ -633,7 +632,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="mention-not-resolved">
-						<xsl:with-param name="message" select="concat(@type, ' name ', @scope, ' not resolved.')"/> 
+						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved.')"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
 				</xsl:otherwise>
@@ -663,7 +662,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="mention-not-resolved">
-						<xsl:with-param name="message" select="concat(@type, ' name ', @scope, ' not resolved.')"/> 
+						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved.')"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
 				</xsl:otherwise>
@@ -769,7 +768,7 @@
 				</xsl:variable>
 				<xsl:call-template name="mention-not-resolved">
 					<xsl:with-param name="message">
-						<xsl:value-of select="$type"/> string not found: <xsl:value-of select="$target"/>.
+						<xsl:value-of select="$type"/> string not found: &quot;<xsl:value-of select="$target"/>&quot;.
 					</xsl:with-param>
 				</xsl:call-template>
 				<xsl:sequence select="$content"/>

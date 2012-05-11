@@ -4,18 +4,18 @@
     xmlns:mention="mention">
     
     <xsl:template match="*:task">
-        <mention type="task" key="{.}"><xsl:apply-templates/></mention>
+        <mention type="task" key="{normalize-space(.)}"><xsl:apply-templates/></mention>
     </xsl:template>
     <xsl:template match="*:term">
-        <mention type="term" key="{.}"><xsl:apply-templates/></mention>
+        <mention type="term" key="{normalize-space(.)}"><xsl:apply-templates/></mention>
     </xsl:template>
     <xsl:template match="*:feature">
-        <mention type="feature" key="{.}"><xsl:apply-templates/></mention>
+        <mention type="feature" key="{normalize-space(.)}"><xsl:apply-templates/></mention>
     </xsl:template>
 
 
     <xsl:template match="*:xml-element-name">
-        <name type="xpath" key="{if (@xpath) then @xpath else .}">
+        <name type="xpath" key="{normalize-space(if (@xpath) then @xpath else .)}">
             <xsl:if test="@namespace">
                 <xsl:attribute name="namespace" select="@namespace"/> 
             </xsl:if>
@@ -24,7 +24,7 @@
     </xsl:template>    
     
     <xsl:template match="*:xml-attribute-name">
-        <name type="xpath" key="{if (@xpath) then @xpath else .}">
+        <name type="xpath" key="{normalize-space(if (@xpath) then @xpath else .)}">
             <xsl:if test="@namespace">
                 <xsl:attribute name="namespace" select="@namespace"/> 
             </xsl:if>
@@ -33,7 +33,7 @@
     </xsl:template>   
     
     <xsl:template match="*:xpath">
-        <name type="xpath" key="{.}">
+        <name type="xpath" key="{normalize-space(.)}">
             <xsl:if test="@namespace">
                 <xsl:attribute name="namespace" select="@namespace"/> 
             </xsl:if>
@@ -42,35 +42,35 @@
     </xsl:template>
     
     <xsl:template match="*:directory-name">
-        <name type="directory-name" key="{.}">
+        <name type="directory-name" key="{normalize-space(.)}">
             <xsl:apply-templates/>
         </name>
     </xsl:template>
     <xsl:template match="*:document-name">
-        <name type="document-name" key="{.}">
+        <name type="document-name" key="{normalize-space(.)}">
             <xsl:apply-templates/>
         </name>
     </xsl:template>
     <xsl:template match="*:file-name">
-        <name type="file-name" key="{.}">
+        <name type="file-name" key="{normalize-space(.)}">
             <xsl:apply-templates/>
         </name>
     </xsl:template>
     
     <xsl:template match="*:product-name">
-        <name type="product-name" key="{.}">
+        <name type="product-name" key="{normalize-space(.)}">
             <xsl:apply-templates/>
         </name>
     </xsl:template>
 
     <xsl:template match="*:tool-name">
-        <name type="tool-name" key="{.}">
+        <name type="tool-name" key="{normalize-space(.)}">
             <xsl:apply-templates/>
         </name>
     </xsl:template>    
     
     <xsl:template match="*:xml-namespace-uri">
-        <name type="xml-namspace-uri" key="{.}">
+        <name type="xml-namspace-uri" key="{normalize-space(.)}">
             <xsl:apply-templates/>
         </name>
     </xsl:template>

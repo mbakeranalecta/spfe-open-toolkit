@@ -87,8 +87,6 @@ Main template
 
 <!-- show context - experimental -->
 <xsl:template name="show-context">
-
-
 	<xsl:variable name="topic-type" select="if (ancestor::ss:topic/@virtual-type) then ancestor::ss:topic/@virtual-type else ancestor::ss:topic/@type"/>
 	
 	<!-- copied from present-references - refactor -->

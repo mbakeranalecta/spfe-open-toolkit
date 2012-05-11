@@ -5,14 +5,13 @@
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
  exclude-result-prefixes="#all">
 
-	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-abnf.xsl"/>
 	
 	<!--================================================
 	link-xpath-segments function
 
 	Called recursivly to link the segments of an xpath back 
 	to the element named in each segment.
-===================================================-->
+	===================================================-->
 <xsl:function name="sf:link-xpath-segments">
 	<xsl:param name="xpath"/>
 		<xsl:sequence select="sf:link-xpath-segments($xpath, '', 1)"/>
@@ -383,48 +382,11 @@
 		<labeled-item>
 			<label>XML data type</label> 
 			<item>
-				<xsl:choose>
-					<xsl:when test="syntax">
-						<p>
-							<fold-toggle id="{generate-id()}" initial-state="folded">
-								<xsl:value-of select="$type"/>
-							</fold-toggle>
-						</p>
-							<fold id="{generate-id()}" type="text-object" initial-state="closed" reference-text="{$type}">
-								<xsl:apply-templates select="syntax/production[symbol=$type]/description/*"/>
-								<p><bold>ABNF for <xsl:value-of select="$type"/></bold></p>
-								<code-block>
-								<xsl:for-each select="syntax/production">
-									<xsl:call-template name="format-expanded-abnf">
-										<xsl:with-param name="production" select="."/>
-									</xsl:call-template>
-								</xsl:for-each>
-							</code-block>	
-						</fold>
-					</xsl:when>
-					<xsl:otherwise>
-						<p>
-							<xsl:value-of select="$type"/>
-						</p>
-					</xsl:otherwise>
-				</xsl:choose>
-			</item>
-		</labeled-item>	
-		
-		<!-- Destination data type - hide for MILS - FIXME:
-		<labeled-item>
-			<label>Destination data type</label>
-			<item>
 				<p>
-					<xsl:choose>
-						<xsl:when test="not(target/type)">N/A</xsl:when> 
-						<xsl:otherwise>
-							<xsl:value-of select="sf:lookup(target/type,'data-type')"/>
-						</xsl:otherwise>
-					</xsl:choose>
+					<xsl:value-of select="$type"/>
 				</p>
 			</item>
-		</labeled-item>-->
+		</labeled-item>	
 		
 		<!-- not specified -->
 		<labeled-item>
