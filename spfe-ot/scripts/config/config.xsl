@@ -307,19 +307,7 @@
                           <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
                       </xsl:for-each>
                   </files>
-                  
-      <!--            <files id="css">
-                      <xsl:for-each select="$config/sources/css/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-                  <fileset id="javascript" dir=".">
-                      <xsl:for-each select="$config/sources/css/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
-                      </xsl:for-each>
-                  </fileset>
-       -->           
+                           
                   <files id="synonyms">
                       <xsl:for-each select="$config/sources/synonyms/include">
                           <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
@@ -344,14 +332,10 @@
                   </xsl:choose>
                   
                   <resources id="spfe.style.html-style-directories">
-
                           <xsl:for-each select="$config/style/html-style-directories/include">
                               <fileset dir="{spfe:URL-to-local(resolve-uri(. ,base-uri(.)))}"/>
                           </xsl:for-each>
-                      
                   </resources>
-                      
-               
                   
                   <xsl:for-each select="$config/other">
                       <property name="spfe.other.{@name}" value="{.}"/>

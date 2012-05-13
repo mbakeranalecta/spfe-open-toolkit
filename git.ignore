@@ -1,0 +1,19 @@
+# Backup files
+*~
+*.bak
+
+# Windows image file caches
+Thumbs.db 
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Oxygen
+*.xpr
+
+#Personal
+
+copyright-notice.txt

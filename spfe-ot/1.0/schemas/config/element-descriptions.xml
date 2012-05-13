@@ -407,7 +407,7 @@
         <xpath>/spfe/sources/link-catalogs</xpath>
         <description>
             <p>A container element for a list of file selectors that select the link-catalog files to be
-                used for linking topics. The setting becomes an ANT fileset expression in the build file.</p>
+                used for linking topics. The setting becomes an ANT files expression in the build file.</p>
             <p>The link catalogs for the current topic set will be created in the location specified by <xml-element-name>/spfe/build/link-catalog-directory</xml-element-name>. Make sure that the path specified by <xml-element-name>spfe/build/link-catalog-directory</xml-element-name> is included in those specified by <xml-element-name>/spfe/sources/link-catalogs</xml-element-name>.</p>
             <p>You can also include link catalogs for other topic sets in the documentation set, or link catalogs from other documentation sets, in the list of link catalogs used to link the current topic set. The simplest way to have the entire documentation set use the same link catalogs is to set <xml-element-name>/spfe/sources/link-catalogs</xml-element-name> and <xml-element-name>spfe/build/link-catalog-directory</xml-element-name> to the same directory, and to define them both in the  shared configuration file for the documentation set.</p>
         </description>
@@ -417,7 +417,7 @@
                 selectors in the current configuration file.</p>
         </include-behavior>
     </element-description>
-
+    
     <element-description>
         <xpath>/spfe/sources/link-catalogs/include</xpath>
         <description>
@@ -429,7 +429,34 @@
                 selectors in the current configuration file.</p>
         </include-behavior>
     </element-description>
-
+    
+    <element-description>
+        <xpath>/spfe/sources/tocs</xpath>
+        <description>
+            <p>A container element for a list of file selectors that select the <feature>TOC files</feature> to be
+                used for creating tables of contents. The setting becomes an ANT files expression in the build file.</p>
+            <p>The toc file for the current topic set will be created in the location specified by <xml-element-name>/spfe/build/toc-directory</xml-element-name>. Make sure that the path specified by <xml-element-name>spfe/build/toc-directory</xml-element-name> is included in those specified by <xml-element-name>/spfe/sources/tocs</xml-element-name>.</p>
+            <p>You can also include toc files for other topic sets in the documentation set, or TOCs from other documentation sets, in the list of TOCs used in the current topic set. The simplest way to have the entire documentation set use the same TOC files is to set <xml-element-name>/spfe/sources/tocs</xml-element-name> and <xml-element-name>spfe/build/toc-directory</xml-element-name> to the same directory, and to define them both in the shared configuration file for the documentation set.</p>
+        </description>
+        <build-property>tocs</build-property>
+        <include-behavior>
+            <p>The set of file selectors from included configuration files are added to the file
+                selectors in the current configuration file.</p>
+        </include-behavior>
+    </element-description>
+    
+    <element-description>
+        <xpath>/spfe/sources/tocs/include</xpath>
+        <description>
+            <p>A path expression indicating <feature>TOC files</feature> to include in the build. You can use wild cards. This path expression is used to create an <xml-element-name>include</xml-element-name> element in an ANT <xml-element-name>files</xml-element-name> element that is used to copy <feature>link catalog</feature> files to the build diretory for inclusion in the build.</p>
+        </description>
+        <build-property></build-property>
+        <include-behavior>
+            <p>The set of file selectors from included configuration files are added to the file
+                selectors in the current configuration file.</p>
+        </include-behavior>
+    </element-description>
+    
     <element-description>
         <xpath>/spfe/sources/synonyms</xpath>
         <description>
@@ -677,7 +704,7 @@
     <element-description>
         <xpath>/spfe/build/link-catalog-directory</xpath>
         <description>
-            <p>Specifies the directory where the link catalogs will be created. The link catalogs that will be read when linking the topic set are specified by <xml-element-name>/spfe/sources/link-catalogs</xml-element-name></p>
+            <p>Specifies the directory where the link catalogs will be created. The link catalogs that will be read when linking the topic set are specified by <xml-element-name>/spfe/sources/link-catalogs</xml-element-name>.</p>
         </description>
         <build-property>spfe.directories.link-catalogs</build-property>
         <include-behavior>
@@ -688,7 +715,7 @@
     <element-description>
         <xpath>/spfe/build/toc-directory</xpath>
         <description>
-            <p>Specifies the directory where the toc files for the topics set will be created. When building a documentation set, each topic set in the documentation set will read all the toc files in the toc directory, allowing each topic set to present a complete TOC for the entire documentation set.</p>
+            <p>Specifies the directory where the TOC files will be created by the topic set build. The TOCs that will be read when linking the topic set are specified by <xml-element-name>/spfe/sources/tocs</xml-element-name>.</p>
         </description>
         <build-property>spfe.directories.toc-directory</build-property>
         <include-behavior>
@@ -956,6 +983,14 @@
         <include-behavior>
             <p><xml-element-name>/spfe/doc-set</xml-element-name> elements in included configuration files are ignored.</p>
         </include-behavior>
+        <attributes>
+            <attribute>
+                <name>id</name>
+                <description>
+                    <p>An ID for the topic set. This value is used as the name of a directory containing the documentation set build inside the the build directory.</p>
+                </description>
+            </attribute>
+        </attributes>
     </element-description>
     
     <element-description>
@@ -983,6 +1018,28 @@
         </description>
         <build-property></build-property>
         <include-behavior></include-behavior>
+    </element-description>
+    
+    <element-description>
+        <xpath>/spfe/style/html-style-directories</xpath>
+        <description>
+            <p>A container element for a list of directories containing style files for HTML output. The specified directories will be copied into a <directory-name>style</directory-name> directory in the output directory. All subdirectories and their files will be copied as well. In the build file, it becomes an ANT <xml-element-name>resources</xml-element-name> element with the <xml-attribute-name>id</xml-attribute-name> of <code>spfe.style.html-style-directories</code>.</p>
+        </description>
+        <build-property>spfe.style.html-style-directories</build-property>
+        <include-behavior>
+            <p>Entires in included files will be added to the those in the including file.</p>
+        </include-behavior>
+    </element-description>
+    
+    <element-description>
+        <xpath>/spfe/style/html-style-directories/include</xpath>
+        <description>
+            <p>A path expression indicating style directories to be copied to the output. This path expression is used to create an <xml-element-name>include</xml-element-name> element in an ANT <xml-element-name>resources</xml-element-name> element that is used to copy style files to the output diretory.</p>
+        </description>
+        <build-property></build-property>
+        <include-behavior>
+            <p>Entires in included files will be added to the those in the including file.</p>
+        </include-behavior>
     </element-description>
     
     

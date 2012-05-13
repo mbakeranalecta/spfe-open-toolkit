@@ -204,24 +204,9 @@
 
 	<target name="-get.externals.style.html">
 		<mkdir dir="${output}/style"/>
-		<copy todir="${output}/style" preservelastmodified="true" verbose="true"
+		<copy todir="${output}/style" preservelastmodified="true"
 			flatten="false" failonerror="true">
 			<resources refid="spfe.style.html-style-directories"/>
-		</copy>
-	</target>
-	
-	<target name="-get.externals.css">
-		<mkdir dir="${output}"/>
-		<copy todir="${output}" preservelastmodified="true" verbose="true"
-			flatten="true" failonerror="true">
-			<files refid="css"/>
-		</copy>
-	</target>
-	
-	<target name="-get.externals.javascript">
-		<mkdir dir="${output}"/>
-		<copy todir="${output}" preservelastmodified="true">
-			<fileset refid="javascript"/>
 		</copy>
 	</target>
 
@@ -478,8 +463,7 @@
 	        	 -get.externals.style.html,
   				 -current.html-format"
 		unless="-current.html-format">
-<!--	        				 -get.externals.css,
-	        				 -get.externals.javascript, -->
+
 		<fileset id="presentation-file-list" dir="${temp}/presentation" includes="*.xml"/>
 		<property name="presentation-files" refid="presentation-file-list"/>
 		<property name="toc-files" refid="tocs"/>	
