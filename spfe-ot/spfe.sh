@@ -15,6 +15,12 @@ if [ -e "$1" ]; then
     SPFEOT_HOME=$SPFEOT_HOME \
     SPFE_BUILD_COMMAND=$2
     
+    rc=$?
+    if [[ $rc != 0 ]] ; then
+        echo "An error occurred interpreting the configuration file."
+        exit $rc
+    fi
+    
     ant $2 -f $SPFE_TEMP_BUILD_FILE -lib $SPFEOT_HOME/tools/xml-commons-resolver-1.2/resolver.jar $3 $4 $5 $6 $7 $8
   
 else
