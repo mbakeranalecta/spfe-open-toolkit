@@ -191,8 +191,20 @@
                 <xsl:value-of select="substring-after($URL,'file:/')"/>
             </xsl:when>
             <!-- UNIX style -->
+            <xsl:when test="matches($URL, 'file:/')">
+                <xsl:value-of select="substring-after($URL,'file:/')"/>
+            </xsl:when>
+            <!-- unsupported protocol -->
+            <xsl:when test="matches($URL, '[:alpha:]:/')">
+                <xsl:message terminate="yes">
+                    <xsl:text>ERROR: A URL with an unsupported protocal was specified in a config file. The URL is: </xsl:text>
+                    <xsl:value-of select="$URL"/>
+                </xsl:message>
+            </xsl:when>
+            
+            <!-- already local -->
             <xsl:otherwise>
-                <xsl:value-of select="substring-after($URL,'file:')"/>
+                <xsl:value-of select="$URL"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
