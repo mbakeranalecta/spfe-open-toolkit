@@ -185,14 +185,17 @@
     
     <xsl:function name="spfe:URL-to-local">
         <xsl:param name="URL"/>
+        <xsl:message select="'$URL', $URL"></xsl:message>
         <xsl:choose>
             <!-- Windows style -->
             <xsl:when test="matches($URL, 'file:/[:alpha:]/')">
+                <xsl:message>Windows</xsl:message>
                 <xsl:value-of select="substring-after($URL,'file:/')"/>
             </xsl:when>
             <!-- UNIX style -->
             <xsl:when test="matches($URL, 'file:/')">
-                <xsl:value-of select="substring-after($URL,'file:/')"/>
+                <xsl:message>UNIX</xsl:message>
+                <xsl:value-of select="substring-after($URL,'file:')"/>
             </xsl:when>
             <!-- unsupported protocol -->
             <xsl:when test="matches($URL, '[:alpha:]:/')">
@@ -204,6 +207,7 @@
             
             <!-- already local -->
             <xsl:otherwise>
+                <xsl:message>local</xsl:message>
                 <xsl:value-of select="$URL"/>
             </xsl:otherwise>
         </xsl:choose>
