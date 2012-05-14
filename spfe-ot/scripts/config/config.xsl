@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2012 Analecta Communications Inc. -->
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:c="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
@@ -23,7 +24,7 @@
     
     <xsl:template name="get-config-docs">
         <xsl:param name="config-doc"/>
-         <xsl:apply-templates select="$config-doc/spfe/include" mode="get-config-docs"/>
+        <xsl:apply-templates select="$config-doc/spfe/include" mode="get-config-docs"/>
     </xsl:template>
     
     <xsl:template match="include" mode="get-config-docs">
@@ -52,15 +53,14 @@
         </xsl:for-each>    
     </xsl:variable>
 
-    
- 
     <xsl:template match="spfe/include" mode="load-config-doc">
         <xsl:apply-templates/>
     </xsl:template>
     
-    <xsl:template match="@*|node()" mode="load-config-doc">
+    <xsl:template match="*" mode="load-config-doc">
         <xsl:copy>
-            <xsl:apply-templates select="@*|node()" mode="load-config-doc"/>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates mode="load-config-doc"/>
         </xsl:copy>
     </xsl:template>
     

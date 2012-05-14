@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <generic-topic xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic.xsd">
@@ -31,6 +33,8 @@
             <p>The simplest schema you can create is a generic topic schema that uses only components from <feature>EPPO-simple</feature>. The easiest way to do this is to make a copy of the appropriate topic type schema from <feature>EPPO-simple</feature>. Topic type schemas in <feature>EPPO-simple</feature> consist entirely of include statements that pull in various schema modules to make up a complete topic type schema. This topic, for instance, is written in the genetric topic schema of the SPFE-docs schema set, which is entirely composed of modules from EPPO-simple, pulled together and assigned to a SPFE Docs namespace by the following schema file:</p>
             <codeblock><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic"
     xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic.xsd">

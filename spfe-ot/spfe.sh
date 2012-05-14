@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.
+# (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved.
+
 if [ -e "$1" ]; then
 
     SPFE_TEMP_BUILD_FILE=$(tempfile)

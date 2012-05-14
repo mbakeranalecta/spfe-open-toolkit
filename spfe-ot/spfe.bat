@@ -1,4 +1,6 @@
 @ECHO OFF
+REM This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.
+REM (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved.
 if "%1"=="" goto NOCONFIGFILE
 if not exist %1 goto CONFIGFILEMISSING
 
