@@ -110,7 +110,7 @@ Main template
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-
+	<!-- FIXME: should be a proper context container, not a table. -->
 	<table hint="context">
 		<tr>
 			<td><bold>Topic&#160;type</bold></td>
@@ -175,7 +175,7 @@ Main template
 </xsl:template>
 
 <xsl:template name="see-also-footer">		
-
+	<!-- FIXME: Should be a proper see-also container, not a table. -->
 			<xsl:variable name="see-also-links">
 				<xsl:for-each select="index/reference[sf:target-exists(key[1], type, ancestor::topic/@default-reference-scope)]">
 					<xsl:call-template name="output-link">

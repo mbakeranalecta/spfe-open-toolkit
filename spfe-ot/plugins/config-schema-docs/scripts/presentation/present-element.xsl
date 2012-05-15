@@ -135,7 +135,6 @@
 			<xsl:with-param name="message" select="'Creating page ', xpath/text()"/>
 		</xsl:call-template>
 		<page type="API" name="{translate(xpath, '/:', '__')}">
-			<anchor name="{translate(xpath, '/:', '__')}"/>
 			
 			<title>Element: <xsl:value-of select="$name"/></title>
 			
