@@ -5,8 +5,7 @@
 
     <xs:group name="identity">
         <xs:sequence>
-            <xs:element name="base-uri" type="xs:anyURI"/>
-            <xs:element name="name" type="xs:NMTOKEN"/>
+            <xs:element name="uri" type="xs:anyURI"/>
         </xs:sequence>
     </xs:group>
 </xs:schema>

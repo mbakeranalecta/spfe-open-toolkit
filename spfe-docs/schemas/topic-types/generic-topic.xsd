@@ -3,7 +3,8 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic"
-    xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic.xsd">
+    xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic.xsd"
+    xmlns:sd="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic">
     
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/identity.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/index.xsd"/>
@@ -15,5 +16,12 @@
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/resources.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/roots/generic-topic.xsd"/>
     
-    
+    <xs:group name="p-content">
+        <xs:choice>
+            <xs:group ref="sd:text-decoration"/>
+            <xs:group ref="sd:mentions-general"/>
+            <xs:group ref="sd:mentions-xml"/>
+            <xs:group ref="sd:resources"/>
+        </xs:choice>
+    </xs:group>
 </xs:schema>

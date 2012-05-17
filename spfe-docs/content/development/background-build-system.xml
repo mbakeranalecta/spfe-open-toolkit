@@ -5,8 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic.xsd">
     <head>
-        <base-uri>http://spfeopentoolkit.org/spfe-docs/content</base-uri>
-        <name>background-build-system</name>
+        <uri>http://spfeopentoolkit.org/spfe-docs/content/development/background-build-system</uri>
         <author>mbaker</author>
         <status>In progress</status>
         <history>
