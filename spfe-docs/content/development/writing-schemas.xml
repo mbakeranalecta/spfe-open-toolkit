@@ -5,7 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic.xsd">
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/content/development/writing-schemas</uri>
+        <uri>http://spfeopentoolkit.org/spfe-docs/content/development/writing-schemas.xml</uri>
         <author>mbaker</author>
         <status>Not started</status>
         <history>

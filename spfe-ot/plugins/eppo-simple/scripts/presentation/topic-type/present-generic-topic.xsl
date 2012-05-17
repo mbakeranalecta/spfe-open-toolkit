@@ -23,7 +23,7 @@
 	<xsl:template match="gt:generic-topic">
 		<xsl:choose>
 			<xsl:when test="$media='online'"> 
-				<page status="{gt:head/gt:tracking/gt:status}" name="{gt:head/gt:name}">
+				<page status="{gt:head/gt:tracking/gt:status}" name="{ancestor::ss:topic/@local-name}">
 					<xsl:call-template name="show-context"/>
 					<xsl:apply-templates /> 
 					<xsl:call-template name="see-also-footer"/>		

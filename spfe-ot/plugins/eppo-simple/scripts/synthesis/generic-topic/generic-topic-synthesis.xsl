@@ -16,6 +16,11 @@ xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:gt="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic"
 exclude-result-prefixes="#all">
 	
+	<xsl:function name="sf:name-from-uri">
+		<xsl:param name="uri"/>
+		<xsl:value-of select="substring-before(tokenize($uri, '/')[count(tokenize($uri, '/'))], '.xml')"/>
+	</xsl:function>
+	
 	<xsl:template match="gt:generic-topic">
 		<xsl:variable name="conditions" select="@if"/>
 			<xsl:choose>
@@ -23,8 +28,8 @@ exclude-result-prefixes="#all">
 					<ss:topic 
 						element-name="{name()}" 
 						type="{namespace-uri()}" 
-						full-name="{concat(gt:head/gt:base-uri, '/', gt:head/gt:name)}"
-						local-name="{gt:head/gt:name}"
+						full-name="{gt:head/gt:uri}"
+						local-name="{sf:name-from-uri(gt:head/gt:uri)}"
 						title="{gt:body/gt:title}">
 						<xsl:if test="gt:head/gt:virtual-type">
 							<xsl:attribute name="virtual-type" select="gt:head/gt:virtual-type"/>
