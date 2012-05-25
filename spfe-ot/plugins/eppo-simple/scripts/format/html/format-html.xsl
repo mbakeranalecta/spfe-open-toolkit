@@ -191,18 +191,7 @@ ul.toc ol {
 				</xsl:choose>
 			</xsl:with-param>
 		</xsl:call-template>
-
-		<xsl:apply-templates select="$presentation//web/page"/>
-	<!--	<xsl:apply-templates select="$presentation//web/toc"/>
--->
-		<xsl:call-template name="index-page"/>
-<!-- 		<xsl:call-template name="xref-sets-pages"/>
- -->
-
-		<xsl:if test="$draft">
-			<xsl:call-template name="output-review-note-index"/>
-			<xsl:call-template name="output-author-note-index"/>
-		</xsl:if>
+		<xsl:apply-templates select="$presentation/web/page"/>
 	</xsl:template>
 	
 	<xsl:template match="page">
@@ -248,10 +237,6 @@ ul.toc ol {
 					<xsl:apply-templates select="$toc"/>
 					
 				</div>
-				
-<!--					<ul  class="toc">
-						<xsl:apply-templates select="$toc"/>
-					</ul>-->
 				
 				<div id="main">
 					<xsl:apply-templates/>
@@ -745,7 +730,7 @@ ul.toc ol {
 	
 	<!-- GENERATED PAGES -->
 	
-	<!-- title page -->
+	<!-- index page -->
 	<xsl:template name="index-page">
 		<xsl:if test="not($presentation//page/@name='index')">
 			<xsl:call-template name="output-html-page">
@@ -754,81 +739,35 @@ ul.toc ol {
 				</xsl:with-param>
 				<xsl:with-param name="content">
 					<xsl:apply-templates select="$presentation//toc" mode="index-page"/>
-	
+					<div id="toc-container" >
+						<h2>Contents</h2>
+						<xsl:apply-templates select="$toc"/>
+						
+					</div>
+					
+					<div id="main">
+						<h1><xsl:value-of select="$title-string"></xsl:value-of></h1>
 						<p hint="copyright"><xsl:value-of select="$config/config:publication-info/config:copyright"/></p>
+					</div>	
+						
 				</xsl:with-param>
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template match="toc" mode="index-page">
-		<h2>
-			<xsl:value-of select="$title-string"/>
-		</h2>
-
-		<!-- FIXME: What to do about pdf file name, pdf gif file? -->
-		<xsl:if test="$config/config:publication-info/config:pdf-file">
-			<a href="{$config/config:publication-info/config:pdf-file}" target="_blank">
-				<img border="0" src="images/pdf.gif" alt="PDF version" title="PDF version"/>
-				<xsl:text> As one document for printing</xsl:text>
-			</a>
-		</xsl:if>
-		
-		<ul>
-			<xsl:apply-templates mode="index-page"/>
-			<xsl:if test="$draft">
-				<li><a href="index-of-review-notes.html" target="doc">*** Index of Review Notes ***</a></li>
-				<li><a href="index-of-author-notes.html" target="doc">*** Index of Author Notes ***</a></li>
-			</xsl:if>
-		</ul>
-	</xsl:template>
-	
-	<xsl:template match="node" mode="index-page">
-		<li>
-			<xsl:choose>
-				<!-- link to internal anchor of parent node page -->
-				<xsl:when test="contains(@id, '#')">
-					<a href="{substring-before(@id, '#')}.html#{substring-after(@id, '#')}">
-						<xsl:value-of select="@name"/>
-					</a>
-				</xsl:when>
-
-				<xsl:when test="@id">
-					<a href="{@id}.html">
-						<xsl:value-of select="@name"/>
-					</a>
-					<xsl:text> </xsl:text>
-					<xsl:if test="$draft">
-						<xsl:variable name="status" select="//page[@name=current()/@id]/@status"/>
-						<span class="status-{translate($status, ' ', '_')}">
-							<xsl:value-of select="$status"/>
-						</span>
-					</xsl:if>
-				</xsl:when>
-				<xsl:when test="@group-id">
-					<a href="{sf:title2anchor(@group-id)}.html">
-						<xsl:value-of select="@name"/>
-					</a>
-				</xsl:when>
-				<xsl:otherwise>
-					<!--<a href="{sf:title2anchor(@topic-type)}.html">-->
-						<xsl:value-of select="@name"/>
-					<!--</a>-->
-				</xsl:otherwise>
-			</xsl:choose>
-			<xsl:if test="node">
-				<ul>
-					<xsl:apply-templates mode="index-page"/>
-				</ul>
-			</xsl:if>
-		</li>
-	</xsl:template>
-	
-	
 	<xsl:template match="toc">
 		<xsl:variable name="branch" select="generate-id()"/>
 		<xsl:variable name="toc-id" select="concat('toc', $branch)"/>
-		
+	
+		<xsl:variable name="relative-path">
+			<xsl:for-each select="tokenize($config/config:deployment/config:output-path, '/')">
+				<xsl:text>../</xsl:text>
+			</xsl:for-each>
+			<xsl:if test="normalize-space(@deployment-relative-path)">
+				<xsl:value-of select="normalize-space(@deployment-relative-path)"/>
+				<xsl:text>/</xsl:text>
+			</xsl:if>
+		</xsl:variable>
 		<div id="{$branch}" class="treemenu">&#160;</div>
 		<script type="text/javascript">
 			<xsl:text>&#x000A;var </xsl:text>
@@ -843,11 +782,17 @@ ul.toc ol {
 			<xsl:value-of select="$toc-id"/>
 			<xsl:text>.addItem("</xsl:text>
 			<xsl:value-of select="@title"/>
-			<xsl:text>")&#x000A;</xsl:text> 	
+			<!-- if there is an index page, link to it -->
+			<xsl:if test="@index">
+				<xsl:text>", "", "</xsl:text> 
+				<xsl:if test="$relative-path"></xsl:if>
+				<xsl:value-of select="concat($relative-path, @index, '.html')"/>
+			</xsl:if>
+			<xsl:text>")&#x000A;</xsl:text>	
 			
 			<xsl:apply-templates>
 				<xsl:with-param name="branch" select="$branch"/>
-				<xsl:with-param name="relative-path" select="concat('../', @topic-set-id, '/')"/>
+				<xsl:with-param name="relative-path" select="$relative-path"/>
 				<xsl:with-param name="toc-id" select="$toc-id"/>
 			</xsl:apply-templates>		
 			
@@ -861,21 +806,6 @@ ul.toc ol {
 				<xsl:text>.treetop.expandAll(); //Expand tree&#x000A;</xsl:text>
 			</xsl:if>
 			</script>	
-		
-		
-
-<!--
-		<li><xsl:value-of select="@title"/>
-			<ul>-->
-
-
-		
-<!--				<xsl:if test="$draft">
-					<li><a href="index-of-review-notes.html" target="doc">*** Index of Review Notes ***</a></li>
-					<li><a href="index-of-author-notes.html" target="doc">*** Index of Author Notes ***</a></li>
-				</xsl:if>
-			</ul>
-		</li>-->
 	</xsl:template>
 	
 	<xsl:template match="node">
@@ -954,100 +884,11 @@ ul.toc ol {
 				<!-- ERROR? -->
 			</xsl:otherwise>
 		</xsl:choose>
-
-		
-<!--		<li>
-			<xsl:choose>
-				
-				<!-\- link to internal anchor of parent node page -\->
-				<xsl:when test="contains(@id, '#')">
-					<a href="{substring-before(@id, '#')}.html#{substring-after(@id, '#')}" target="doc">
-						<xsl:value-of select="@name"/>
-					</a>
-				</xsl:when>
-				
-				<xsl:when test="@id">
-					<a href="{@id}.html" target="doc">
-						<xsl:value-of select="@name"/>
-					</a>
-					<xsl:text> </xsl:text>
-					<xsl:if test="$draft">
-						<xsl:variable name="status" select="//page[@name=current()/@id]/@status"/>
-						<span class="status-{translate($status, ' ', '_')}">
-							<xsl:value-of select="$status"/>
-						</span>
-					</xsl:if>
-				</xsl:when>
-				
-				<xsl:when test="@group-id">
-					<a href="{sf:title2anchor(@group-id)}.html" target="doc">
-						<xsl:value-of select="@name"/>
-					</a>
-				</xsl:when>
-				
-				<xsl:otherwise>
-					<!-\-<a href="{sf:title2anchor(@topic-type)}.html" target="doc">-\->
-					<xsl:value-of select="@name"/>
-					<!-\-</a>-\->
-				</xsl:otherwise>
-			</xsl:choose>
-			<xsl:if test="node">
-				<ul>
-					<xsl:apply-templates/>
-				</ul>
-			</xsl:if>
-		</li>
--->	</xsl:template>
-	
-	<xsl:template name="output-review-note-index">
-		<xsl:call-template name="output-html-page">
-			<xsl:with-param name="file-name">index-of-review-notes.html</xsl:with-param> 
-			<xsl:with-param name="title">Index of Review Notes</xsl:with-param>
-			<xsl:with-param name="content">
-				<h2>Index of Review Notes</h2>
-				<xsl:for-each select="//page">
-					<xsl:if test=".//review-note">
-						<h3><xsl:value-of select="title"/></h3>
-						<ul>
-							<xsl:for-each select=".//review-note">
-								<li>
-									<a href="{ancestor::page/@name}.html#review-note:{position()}">
-										[<xsl:value-of select="position()"/>]
-									</a>
-									<xsl:value-of select="."/>
-								</li>
-							</xsl:for-each>
-						</ul>
-					</xsl:if>
-				</xsl:for-each>
-			</xsl:with-param>
-		</xsl:call-template>
 	</xsl:template>
 	
-	<xsl:template name="output-author-note-index">
-		<xsl:call-template name="output-html-page">
-			<xsl:with-param name="file-name">index-of-author-notes.html</xsl:with-param> 
-			<xsl:with-param name="title">Index of Author Notes</xsl:with-param>
-			<xsl:with-param name="content">
-				<h2>Index of Author Notes</h2>
-				<xsl:for-each select="//page">
-					<xsl:if test=".//author-note">
-						<h3><xsl:value-of select="title"/></h3>
-						<ul>
-							<xsl:for-each select=".//author-note">
-								<li>
-									<a href="{ancestor::page/@name}.html#author-note:{position()}">
-										[<xsl:value-of select="position()"/>]
-									</a>
-									<xsl:value-of select="."/>
-								</li>
-							</xsl:for-each>
-						</ul>
-					</xsl:if>
-				</xsl:for-each>
-			</xsl:with-param>
-		</xsl:call-template>
-	</xsl:template>
+	
+	
+	
 	
 	<xsl:template match="procedure">
 		<xsl:apply-templates/>

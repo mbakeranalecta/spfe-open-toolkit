@@ -36,7 +36,7 @@
 
 	<!-- properties for the temporary files used -->
 	<property name="temp" value="${spfe.build.build-directory}/temp"/>
-	<property name="output" value="${spfe.build.output-directory}/${spfe.topic-set-id}"/>
+	<property name="output" value="${spfe.build.output-directory}"/>
 	<!--<property name="spfe.files.synthesis" value="spfe.synthesis.xml"/>-->
 	<property name="spfe.files.presentation" value="spfe.presentation-web.xml"/>
 	<property name="spfe.files.presentation-book" value="spfe.presentation-book.xml"/>

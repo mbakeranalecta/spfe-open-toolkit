@@ -25,7 +25,7 @@
 
 	<xsl:template name="toc">
 		<xsl:result-document href="file:///{$config/config:build/config:toc-directory}/{$config/config:topic-set-id}.toc.xml" method="xml" indent="no" omit-xml-declaration="no">
-			<toc topic-set-id="{$config/config:topic-set-id}" title="{$title-string}">
+			<toc topic-set-id="{$config/config:topic-set-id}" deployment-relative-path="{$config/config:deployment/config:output-path}" title="{$title-string}">
 				<xsl:choose>
 					<!-- If there is a TOC file for this media, use it to create TOC -->
 					<xsl:when test="$media = tokenize(document($toc-file)/toc/@media, '\s+')">
@@ -84,10 +84,14 @@
 					
 					<!-- If not TOC file, create TOC based on topic types -->
 					<xsl:otherwise>	
+						<xsl:if test="$synthesis/ss:synthesis/ss:topic[matches(@local-name, '^[iI][nN][dD][eE][xX]$')]">
+							<xsl:attribute name="index">index</xsl:attribute>
+						</xsl:if>
 						<!-- Allow the presentation script to add entires before main TOC -->
 						<xsl:call-template name="toc-prefix-entries"/>
 						
-						<xsl:variable name="topics" select="$synthesis/ss:synthesis/ss:topic"/>
+						<!-- Get all the topics, but omit any named index -->
+						<xsl:variable name="topics" select="$synthesis/ss:synthesis/ss:topic[not(matches(@local-name, '^[iI][nN][dD][eE][xX]$'))]"/>
 	
 						
 						<!-- Make sure there is an entry on the topic type order list for every topic type. Exclude topic types starting with "spfe." -->
@@ -131,26 +135,11 @@
 								<!-- if more than one topic, create group -->
 								<xsl:when test="$included-topics">
 									<xsl:variable name="title-page" select="$synthesis/ss:synthesis/ss:topic[@virtual-type='spfe.title-page'][ss:name=$this-topic-type]"/>
-									<xsl:choose> <!-- is there a title page for this type? -->
-										<xsl:when test="count($title-page) gt 1">
-											<xsl:call-template name="error">
-												<xsl:with-param name="message">
-													<xsl:text>More than one title page was found for the topic type </xsl:text>
-													<xsl:value-of select="$this-topic-type"/>
-												</xsl:with-param>
-											</xsl:call-template>
-										</xsl:when>
-										<xsl:when test="$title-page"><!-- yes -->
-											<node id="{$this-topic-type}"  name="{$title-page/title}">
-												<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
-											</node>
-										</xsl:when>
-										<xsl:otherwise> <!-- no -->
-											<node topic-type="{$this-topic-type}"  name="{$topic-type-alias-list/config:topic-type[config:id=$this-topic-type]/config:plural}">
-												<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
-											</node>
-										</xsl:otherwise>
-									</xsl:choose>
+
+									<node topic-type="{$this-topic-type}"  name="{$topic-type-alias-list/config:topic-type[config:id=$this-topic-type]/config:plural}">
+										<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
+									</node>
+
 								</xsl:when>
 								<xsl:otherwise>
 								<!-- if no topics, no heading -->

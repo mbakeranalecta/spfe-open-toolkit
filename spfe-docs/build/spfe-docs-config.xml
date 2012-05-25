@@ -6,6 +6,7 @@
     
     <doc-set id="spfe-docs">
         <title>SPFE Documentation</title>
+        <topic-set>spfe-docs/spfe-build-config.xml</topic-set>
         <topic-set>development/spfe-build-config.xml</topic-set>
         <topic-set>config-ref/spfe-build-config.xml</topic-set>
     </doc-set>

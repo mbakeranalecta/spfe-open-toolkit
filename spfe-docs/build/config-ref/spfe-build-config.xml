@@ -8,7 +8,7 @@
     <define name="TOPIC_SET_ID" value="spfe-configuration-reference"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <publication-info>
-        <title>SPFE Configuration Reference</title>
+        <title>SPFE Configuration Settings</title>
     </publication-info>
     <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/element-reference</topic-type-order>
     <sources>
@@ -38,7 +38,7 @@
         </other>
 
     </sources>
-    <condition-tokens>FOO BAR</condition-tokens>
+
     <default-topic-scope>spfe</default-topic-scope>
     <default-mention-scope>spfe</default-mention-scope>
     <output-formats>html</output-formats>

@@ -214,6 +214,10 @@
             <!-- if the config file specifies a doc set, create a build file for doc set -->
             <xsl:when test="/spfe/doc-set">
                 <xsl:variable name="source" select="/"/>
+                
+                <!-- TO DO: check that all the topic sets have unique IDs -->
+                <!-- TO DO: check that all the topic sets have unique build directories -->
+                
                 <project name="{/spfe/doc-set/@id}" default="{$SPFE_BUILD_COMMAND}">
                     <target name="{$SPFE_BUILD_COMMAND}"> 
                       <xsl:for-each select="$config/doc-set/topic-set">
@@ -229,7 +233,7 @@
                               <param name="SPFEOT_HOME" expression="{$SPFEOT_HOME}"/> 
                               <param name="SPFE_BUILD_COMMAND" expression="{$SPFE_BUILD_COMMAND}"/> 
                           </xslt>
-
+                          
                           <ant antfile="{$antfile}"
                                target="{$SPFE_BUILD_COMMAND}"/>
                       </xsl:for-each>
@@ -266,7 +270,10 @@
                   </xsl:for-each>
                  
                   <xsl:sequence select="spfe:xml2properties(($config/build/build-directory)[1], 'spfe.build')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/build/output-directory)[1], 'spfe.build')"/>
+                  
+                  <!--<xsl:sequence select="spfe:xml2properties(($config/build/output-directory)[1], 'spfe.build')"/>-->
+                  <property name="spfe.build.output-directory" value="{if (normalize-space(($config/deployment/output-path)[1])) then concat(($config/build/output-directory)[1], '/', ($config/deployment/output-path)[1]) else ($config/build/output-directory)[1]}"/>
+                  
                   <xsl:sequence select="spfe:xml2properties(($config/build/link-catalog-directory)[1], 'spfe.build')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/build/build-rules)[1], 'spfe.build')"/>
                   

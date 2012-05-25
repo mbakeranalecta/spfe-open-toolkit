@@ -4,16 +4,16 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <define name="TOPIC_SET_ID" value="spfe-development"/>
+    <define name="TOPIC_SET_ID" value="spfe-docs"/>
     <include href="../spfe-docs-config.xml"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <publication-info>
-        <title>SPFE Development</title>
+        <title>SPFE Documentation</title>
     </publication-info>
     <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic</topic-type-order>
     <sources>
         <topics>
-            <include>../../content/development/*.xml</include>
+            <include>../../content/spfe-docs/*.xml</include>
         </topics>
         <text-objects>
             <include>../../content/*.xml</include>
@@ -34,18 +34,19 @@
             <include>../../content/*.xml</include>
         </synonyms>
     </sources>
-
+    
     <default-topic-scope>spfe</default-topic-scope>
     <default-mention-scope>spfe</default-mention-scope>
     <output-formats>html</output-formats>
 
     <build>
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
-        <build-directory>${HOME}/spfebuild/spfe-docs/development</build-directory>
+        <build-directory>${HOME}/spfebuild/spfe-docs/spfe-docs</build-directory>
     </build>
     
     <deployment>
-        <output-path>${TOPIC_SET_ID}</output-path>
+        <!-- output-path is blank because this is a doc-set level project -->
+        <output-path></output-path>
     </deployment>
 
     <scripts>
