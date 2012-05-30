@@ -187,18 +187,19 @@
         <xsl:param name="URL"/>
         <xsl:choose>
             <!-- Windows style -->
-            <xsl:when test="matches($URL, 'file:/[a-zA-Z]:/')">
+            <xsl:when test="matches($URL, '^file:/[a-zA-Z]:/')">
                 <xsl:value-of select="substring-after($URL,'file:/')"/>
             </xsl:when>
-            <xsl:when test="matches($URL, '[a-zA-Z]:/')">
+            <!-- Windows system path -->
+            <xsl:when test="matches($URL, '^[a-zA-Z]:/')">
                 <xsl:value-of select="$URL"/>
-            </xsl:when>
+            </xsl:when>            
             <!-- UNIX style -->
-            <xsl:when test="matches($URL, 'file:/')">
+            <xsl:when test="matches($URL, '^file:/')">
                 <xsl:value-of select="substring-after($URL,'file:')"/>
             </xsl:when>
             <!-- unsupported protocol -->
-            <xsl:when test="matches($URL, '[a-zA-Z]+:/')">
+            <xsl:when test="matches($URL, '^[a-zA-Z]+:/')">
                 <xsl:message terminate="yes">
                     <xsl:text>ERROR: A URL with an unsupported protocal was specified in a config file. The URL is: </xsl:text>
                     <xsl:value-of select="$URL"/>
@@ -254,7 +255,7 @@
                               <arg value="-f"/>
                               <arg value="{$antfile}"/>
                               <arg value="-lib"/>
-                              <arg value="%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar"/>
+                              <arg value="$SPFEOT_HOME/tools/xml-commons-resolver-1.2/resolver.jar"/>
                               <arg value="{$SPFE_BUILD_COMMAND}"/>
                               <arg value="-emacs"/>
                           </exec>
