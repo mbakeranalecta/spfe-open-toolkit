@@ -187,15 +187,18 @@
         <xsl:param name="URL"/>
         <xsl:choose>
             <!-- Windows style -->
-            <xsl:when test="matches($URL, 'file:/[:alpha:]/')">
+            <xsl:when test="matches($URL, 'file:/[a-zA-Z]:/')">
                 <xsl:value-of select="substring-after($URL,'file:/')"/>
+            </xsl:when>
+            <xsl:when test="matches($URL, '[a-zA-Z]:/')">
+                <xsl:value-of select="$URL"/>
             </xsl:when>
             <!-- UNIX style -->
             <xsl:when test="matches($URL, 'file:/')">
                 <xsl:value-of select="substring-after($URL,'file:')"/>
             </xsl:when>
             <!-- unsupported protocol -->
-            <xsl:when test="matches($URL, '[:alpha:]:/')">
+            <xsl:when test="matches($URL, '[a-zA-Z]+:/')">
                 <xsl:message terminate="yes">
                     <xsl:text>ERROR: A URL with an unsupported protocal was specified in a config file. The URL is: </xsl:text>
                     <xsl:value-of select="$URL"/>
@@ -234,8 +237,30 @@
                               <param name="SPFE_BUILD_COMMAND" expression="{$SPFE_BUILD_COMMAND}"/> 
                           </xslt>
                           
-                          <ant antfile="{$antfile}"
-                               target="{$SPFE_BUILD_COMMAND}"/>
+                          <!-- Using <exec> rather than <ant> to avoid a memory exhaustion error that occurs when running <ant>. -->
+                          
+                          <exec executable="cmd" osfamily="windows">
+                              <arg value="/c"/>
+                              <arg value="ant.bat"/>
+                              <arg value="-f"/>
+                              <arg value="{$antfile}"/>
+                              <arg value="-lib"/>
+                              <arg value="%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar"/> 
+                              <arg value="{$SPFE_BUILD_COMMAND}"/>                              
+                              <arg value="-emacs"/>
+                          </exec>
+                          
+                          <exec executable="ant" osfamily="unix">
+                              <arg value="-f"/>
+                              <arg value="{$antfile}"/>
+                              <arg value="-lib"/>
+                              <arg value="%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar"/>
+                              <arg value="{$SPFE_BUILD_COMMAND}"/>
+                              <arg value="-emacs"/>
+                          </exec>
+                          
+<!--                          <ant antfile="{$antfile}"
+                               target="{$SPFE_BUILD_COMMAND}"/>-->
                       </xsl:for-each>
                     </target>
                 </project> 
@@ -281,6 +306,7 @@
                   
                   <files id="topics">
                       <xsl:for-each select="$config/sources/topics/include">
+                          <xsl:comment select="resolve-uri(.,base-uri(.))"/>
                           <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
                       </xsl:for-each>
                   </files>

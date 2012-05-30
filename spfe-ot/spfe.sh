@@ -21,7 +21,7 @@ if [ -e "$1" ]; then
         exit $rc
     fi
     
-    ant $2 -f $SPFE_TEMP_BUILD_FILE -lib $SPFEOT_HOME/tools/xml-commons-resolver-1.2/resolver.jar $3 $4 $5 $6 $7 $8
+    ant $2 -f $SPFE_TEMP_BUILD_FILE -lib $SPFEOT_HOME/tools/xml-commons-resolver-1.2/resolver.jar -emacs  $3 $4 $5 $6 $7 $8
   
 else
 

@@ -62,7 +62,15 @@
 		<!-- check if the last build crashed -->
 		<available property="last-build-crashed" file="${temp}/incomplete.flag"/>
 		<antcall target="-check-last-build-status"/>
+		
+		<echo/>
+		<echo/>
+		<echo>=====================================================</echo>
 		<echo message="Beginning build of ${spfe.topic-set-id}"/>
+		<echo>=====================================================</echo>
+		<echo/>
+		<echo/>
+		
 
 		<!-- mkdir in case no link catalogs have been created - make sure file list is created correctly even if empty. -->
 		<mkdir dir="${spfe.build.link-catalog-directory}"/>
@@ -202,10 +210,9 @@
 
 	<!-- SYNTHESIS STEP -->
 
-    <!-- FIXME: this should test the synthesis file set, not a file name. -->
 	<target name="-current.synthesis">
 		<uptodate property="-current.synthesis"
-			targetfile="${temp}/synthesis/spfe.synthesis.xml">
+			targetfile="${temp}/synthesis.flag">
 			<srcresources>
 				<files refid="graphics-catalog"/>
 				<files refid="topics"/>
@@ -214,7 +221,6 @@
 				<files refid="strings"/>
 				<files refid="graphics-catalog"/>
 				<files refid="link-catalogs"/>
-				<path refid="spfe.buildfiles"/>
 			</srcresources>
 		</uptodate>
 	</target>
@@ -251,16 +257,8 @@
 	<!-- check if link-catalog is up to date -->
 
 	<target name="-current.link-catalog">
-		<fileset id="synthesis-file-list" dir="${temp}/synthesis" includes="*.xml"/>
-		<property name="synthesis-files" refid="synthesis-file-list"/>		
 		<uptodate property="-current.link-catalog"
-			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}_${spfe.publication-info.release}.link-catalog">
-			<srcresources>
-				<fileset refid="synthesis-file-list"/>
-				<!-- FIXME: what happens if it doesn't exist? Unnecessary build? -->
-				<path refid="spfe.buildfiles"/>
-			</srcresources>
-		</uptodate>
+			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}_${spfe.publication-info.release}.link-catalog" srcfile="{temp}/synthesis.flag"/>
 	</target>
 
 	<!-- target for link-catalog -->
@@ -290,15 +288,7 @@
 
 	<!-- check to see if the html-presentation is up to date -->
 	<target name="-current.presentation-web">
-		<fileset id="synthesis-file-list" dir="${temp}/synthesis" includes="*.xml"/>
-		<property name="synthesis-files" refid="synthesis-file-list"/>		
-		<uptodate property="-current.presentation-web"
-			targetfile="${temp}/presentation/${spfe.files.presentation}">
-			<srcresources>
-				<fileset refid="synthesis-file-list"/>
-				<path refid="spfe.buildfiles"/>
-			</srcresources>
-		</uptodate>
+		<uptodate property="-current.presentation-web" srcfile="${temp}/synthesis.flag" targetfile="${temp}/presentation/presentation-web.flag"/>
 	</target>
 
 	<!-- build the presentation -->
@@ -316,7 +306,7 @@
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			style="${spfe.scripts.presentation-web}"
 			in="${spfe.config-file}"
-			out="${temp}/presentation.flag">
+			out="${temp}/presentation-web.flag">
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="synthesis-files" expression="${synthesis-files}"/>
 			<param name="link-catalog-files" expression="${link-catalog-files}"/>
@@ -331,15 +321,7 @@
 
 	<!-- check to see if the presentation-book is up to date -->
 	<target name="-current.presentation-book">
-		<fileset id="synthesis-file-list" dir="${temp}/synthesis" includes="*.xml"/>
-		<property name="synthesis-files" refid="synthesis-file-list"/>		
-		<uptodate property="-current.presentation-book"
-			targetfile="${temp}/${spfe.files.presentation-book}">
-			<srcresources>
-				<fileset refid="synthesis-file-list"/>
-				<path refid="spfe.buildfiles"/>
-			</srcresources>
-		</uptodate>
+		<uptodate property="-current.presentation-book" srcfile="${temp}/synthesis.flag" targetfile="${temp}/presentation/presentation-book.flag"/>
 	</target>
 	
 	<!-- build the book presentation -->
@@ -359,7 +341,7 @@
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			in="${spfe.config-file}" 
 			style="${scripts.presentation-book}"
-			out="${temp}/${spfe.files.presentation-book}">
+			out="${temp}/presentation-book.flag">
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="synthesis-files" expression="${synthesis-files}"/>
 			<param name="link-catalog-files" expression="${link-catalog-files}"/>
@@ -374,25 +356,7 @@
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.html-format">
-		<uptodate property="-current.html-format" targetfile="${temp}/html-format">
-			<srcresources>
-				<filelist dir="${temp}">
-					<file name="${spfe.files.presentation}"/>
-				</filelist>
-				<!-- even thought this fileset is defined in -build.image-list.html, 
-				we redefine it here because -build.image-list.html will only run if
-				the image list is out of date, and we need to check if the graphics
-				themselves are out of date -->
-<!--				<fileset dir="${spfe.directories.image-source}"
-					includesfile="${temp}/image-list-html"/>-->
-				<filelist dir=".">
-					<file name="${spfe.source-files.pdf-graphic}"/>
-					<file name="${spfe.source-files.javascript.folding}"/>
-					<file name="${spfe.source-files.css}"/>
-				</filelist>
-				<path refid="spfe.buildfiles"/>
-			</srcresources>
-		</uptodate>
+		<uptodate property="-current.html-format" targetfile="${temp}/html-format.flag" srcfile="${temp}/presentation-web.flag"/>
 	</target>
 
 	<!-- target to format for html -->
@@ -413,7 +377,7 @@
 		<!-- run the XSLT script to produce the output -->
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			in="${spfe.config-file}" 
-			style="${spfe.scripts.format-html}" out="${temp}/html-format">
+			style="${spfe.scripts.format-html}" out="${temp}/html-format.flag">
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 			<param name="presentation-files" expression="${presentation-files}"/>
@@ -431,14 +395,7 @@
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.fo-format">
-		<uptodate property="-current.fo-format" targetfile="${temp}/fo-format">
-			<srcresources>
-				<filelist dir="${temp}">
-					<file name="${spfe.files.presentation}"/>
-				</filelist>
-				<path refid="spfe.buildfiles"/>
-			</srcresources>
-		</uptodate>
+		<uptodate property="-current.fo-format" targetfile="${temp}/fo-format.flag" srcfile="{temp}/presentation-book.flag"/>
 	</target>
 
 	<target name="-build.fo-format" depends="--build.fo-format"/>
@@ -465,22 +422,7 @@
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.pdf-encode">
-		<uptodate property="-current.pdf-encode"
-			targetfile="${output}/${spfe.pdf-name}">
-			<srcresources>
-				<filelist dir="${temp}">
-					<file name="${spfe.files.fo-format}"/>
-				</filelist>
-				<!-- even thought this fileset is defined in -build.image-list.print, 
-				we redefine it here because -build.image-list.print will only run if
-				the image list is out of date, and we need to check if the graphics
-				themselves are out of date -->
-<!--				<fileset dir="${spfe.directories.image-source}"
-					includesfile="${temp}/image-list-print"/>-->
-				<fileset refid="files.graphics.fo-template"/>
-				<path refid="spfe.buildfiles"/>
-			</srcresources>
-		</uptodate>
+		<uptodate property="-current.pdf-encode"  targetfile="${output}/${spfe.pdf-name}" srcfile="{temp}/fo-format.flag"/>
 	</target>
 
 	<target name="-build.pdf-encode" depends="--build.pdf-encode"/>
@@ -493,7 +435,7 @@
 		<fop format="application/pdf" fofile="${temp}/${spfe.files.fo-format}"
 			outfile="${output}/${spfe.pdf-name}" basedir="${temp}"
 			userconfig="${temp}/fop.xconf"/>
-		<touch file="${temp}/pdf-format"/>
+		<touch file="${temp}/pdf-format.flag"/>
 	</target>
 
 
@@ -502,14 +444,7 @@
 
 	<!-- check to see if the html-presentation is up to date -->
 	<target name="-current.report">
-		<uptodate property="-current.presentation-web"
-			targetfile="${output}/${spfe.report-name}">
-			<srcresources>
-				<fileset refid="spfe.scripts.report.all"/>
-				<fileset refid="synthesis-file-list"/>
-				<path refid="spfe.buildfiles"/>
-			</srcresources>
-		</uptodate>
+		<uptodate property="-current.presentation-web" targetfile="${output}/${spfe.report-name}" srcfile="{temp}/synthesis.flag"/>
 	</target>
 
 	<!-- build the report -->
@@ -537,14 +472,7 @@
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.image-list-html">
-		<uptodate property="-current.image-list-html" targetfile="${temp}/image-list-html">
-			<srcresources>
-				<filelist dir="${temp}">
-					<file name="${spfe.files.presentation}"/>
-				</filelist>
-				<path refid="spfe.buildfiles"/>
-			</srcresources>
-		</uptodate>
+		<uptodate property="-current.image-list-html" targetfile="${temp}/image-list-html" srcfile="${temp}/presentation-web.flag"/>
 	</target>
 
 	<target name="-build.image-list-html"
@@ -573,14 +501,7 @@
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.image-list.print">
-		<uptodate property="-current.image-list.print" targetfile="${temp}/image-list-print">
-			<srcresources>
-				<filelist dir="${temp}">
-					<file name="${spfe.files.presentation-book}"/>
-				</filelist>
-				<path refid="spfe.buildfiles"/>
-			</srcresources>
-		</uptodate>
+		<uptodate property="-current.image-list.print" targetfile="${temp}/image-list-print" srcfile="{temp}/presentation-book.flag"/>
 	</target>
 
 	<target name="-build.image-list.print"

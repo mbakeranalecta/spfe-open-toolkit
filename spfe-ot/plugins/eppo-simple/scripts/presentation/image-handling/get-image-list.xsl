@@ -23,11 +23,12 @@ exclude-result-prefixes="#all">
 	
 	<xsl:variable name="synthesis">
 		<xsl:for-each select="tokenize($synthesis-files, $config/config:dir-separator)">
-			<xsl:sequence select="doc(concat($synthesis-dir, .))"/>	
+			<xsl:sequence select="doc(concat('file:///',translate($synthesis-dir,'\','/'), .))"/>	
 		</xsl:for-each>
 	</xsl:variable>
 	
 <xsl:template name="main">
+	<xsl:message select="$synthesis-files"></xsl:message>
 	<xsl:apply-templates select="$synthesis"/>
 </xsl:template>
 
