@@ -39,8 +39,9 @@ Main template
 =============
 -->
 <xsl:template name="main">
-	<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
-		<title><xsl:value-of select="$config/config:publication-info/config:title"/></title>
+	<xsl:result-document href="file:///{concat($config/config:build/config:build-directory, '/temp/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
+			<title><xsl:value-of select="$config/config:publication-info/config:title"/></title>
 				
 			<!-- create a toc page -->
 			<xsl:variable name="toc">
@@ -64,7 +65,8 @@ Main template
 			<xsl:apply-templates select="$synthesis/ss:synthesis/*"/>
 			<xsl:call-template name="create-generated-topics"/>
 
-	</xsl:element>
+		</xsl:element>
+	</xsl:result-document>
 </xsl:template>
 
 <xsl:template name="create-generated-topics"/>

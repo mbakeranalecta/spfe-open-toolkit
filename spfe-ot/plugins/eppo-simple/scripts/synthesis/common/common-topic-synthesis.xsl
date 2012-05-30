@@ -56,10 +56,12 @@ Main template
 
 	<xsl:template name="main" >
 		<!-- Create the root "synthesis element" -->
-		<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set="{$config/config:topic-set-id}"> 
-			<xsl:apply-templates select="$topics"/>
-			<xsl:apply-templates select="$text-objects"/>
-		</ss:synthesis>
+		<xsl:result-document href="file:///{concat($config/config:build/config:build-directory, '/temp/synthesis/synthesis.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set="{$config/config:topic-set-id}"> 
+				<xsl:apply-templates select="$topics"/>
+				<xsl:apply-templates select="$text-objects"/>
+			</ss:synthesis>
+		</xsl:result-document>
 	</xsl:template>
 	
 
