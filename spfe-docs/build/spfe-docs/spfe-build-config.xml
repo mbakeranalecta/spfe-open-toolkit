@@ -7,6 +7,7 @@
     <define name="TOPIC_SET_ID" value="spfe-docs"/>
     <include href="../spfe-docs-config.xml"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
+    <topic-set-type>docset</topic-set-type>
     <publication-info>
         <title>SPFE Documentation</title>
     </publication-info>
@@ -63,7 +64,6 @@
         </image-list>
         <presentation-web>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-toc.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/topic-type/present-generic-topic.xsl</script>
         </presentation-web>
     </scripts>

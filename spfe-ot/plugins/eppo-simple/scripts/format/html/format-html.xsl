@@ -233,9 +233,7 @@ ul.toc ol {
 					</div>
 				</xsl:if>
 				<div id="toc-container" >
-					<h2>Contents</h2>
 					<xsl:apply-templates select="$toc"/>
-					
 				</div>
 				
 				<div id="main">

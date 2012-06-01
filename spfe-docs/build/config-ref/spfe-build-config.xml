@@ -7,6 +7,7 @@
     <include href="../spfe-docs-config.xml"/>
     <define name="TOPIC_SET_ID" value="spfe-configuration-reference"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
+    <topic-set-type>reference</topic-set-type>
     <publication-info>
         <title>SPFE Configuration Settings</title>
     </publication-info>
@@ -57,10 +58,13 @@
         <synthesis>
             <script>${SPFEOT_HOME}/plugins/config-schema-docs/scripts/synthesis/synthesize-schema-docs.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/mentions/mentions.xsl</script>
-        </synthesis>
+        </synthesis>        
         <link-catalog>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/link-catalog/doctype-ref/doctype-link-catalog.xsl</script>
         </link-catalog>
+        <toc>
+ <script>${SPFEOT_HOME}/plugins/config-schema-docs/scripts/toc/schema-toc.xsl</script>
+        </toc>
         <image-list>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/image-handling/get-image-list.xsl</script>
         </image-list>

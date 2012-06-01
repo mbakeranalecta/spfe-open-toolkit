@@ -147,6 +147,7 @@
     </xsl:template>
     
     <xsl:template match="/">
+       
         <xsl:call-template name="create-build-file"/>
         <xsl:if test="not(/spfe/doc-set)">
           <xsl:call-template name="create-config-file"/>
@@ -223,46 +224,94 @@
                 <!-- TO DO: check that all the topic sets have unique build directories -->
                 
                 <project name="{/spfe/doc-set/@id}" default="{$SPFE_BUILD_COMMAND}">
-                    <target name="{$SPFE_BUILD_COMMAND}"> 
-                      <xsl:for-each select="$config/doc-set/topic-set">
-                          <xsl:variable name="antfile" 
-                              select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
-                          <echo>Running config.xsl on <xsl:value-of select="spfe:URL-to-local(resolve-uri(., base-uri($source)))"/></echo>
-                          <xslt classpath="{translate($SPFEOT_HOME, '\', '/')}/tools/saxon9he/saxon9he.jar"
-                              style="{translate($SPFEOT_HOME, '\', '/')}/scripts/config/config.xsl" 
-                              in="{spfe:URL-to-local(resolve-uri(., base-uri($source)))}"
-                              out="{$antfile}"
-                              force="yes">
-                              <param name="HOME" expression="{$HOME}"/> 
-                              <param name="SPFEOT_HOME" expression="{$SPFEOT_HOME}"/> 
-                              <param name="SPFE_BUILD_COMMAND" expression="{$SPFE_BUILD_COMMAND}"/> 
-                          </xslt>
-                          
-                          <!-- Using <exec> rather than <ant> to avoid a memory exhaustion error that occurs when running <ant>. -->
-                          
-                          <exec executable="cmd" osfamily="windows">
-                              <arg value="/c"/>
-                              <arg value="ant.bat"/>
-                              <arg value="-f"/>
-                              <arg value="{$antfile}"/>
-                              <arg value="-lib"/>
-                              <arg value="%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar"/> 
-                              <arg value="{$SPFE_BUILD_COMMAND}"/>                              
-                              <arg value="-emacs"/>
-                          </exec>
-                          
-                          <exec executable="ant" osfamily="unix">
-                              <arg value="-f"/>
-                              <arg value="{$antfile}"/>
-                              <arg value="-lib"/>
-                              <arg value="$SPFEOT_HOME/tools/xml-commons-resolver-1.2/resolver.jar"/>
-                              <arg value="{$SPFE_BUILD_COMMAND}"/>
-                              <arg value="-emacs"/>
-                          </exec>
-                          
-<!--                          <ant antfile="{$antfile}"
-                               target="{$SPFE_BUILD_COMMAND}"/>-->
-                      </xsl:for-each>
+                    
+                    <target name="config">
+                        <xsl:for-each select="$config/doc-set/topic-set">
+                            <xsl:variable name="antfile" 
+                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                            
+                            <xslt classpath="{translate($SPFEOT_HOME, '\', '/')}/tools/saxon9he/saxon9he.jar"
+                                style="{translate($SPFEOT_HOME, '\', '/')}/scripts/config/config.xsl" 
+                                in="{spfe:URL-to-local(resolve-uri(., base-uri($source)))}"
+                                out="{$antfile}"
+                                force="yes">
+                                <param name="HOME" expression="{$HOME}"/> 
+                                <param name="SPFEOT_HOME" expression="{$SPFEOT_HOME}"/> 
+                                <param name="SPFE_BUILD_COMMAND" expression="{$SPFE_BUILD_COMMAND}"/> 
+                            </xslt>
+                        </xsl:for-each>                        
+                    </target>
+                    
+                    <target name="clean" depends="config"> 
+                        <xsl:for-each select="$config/doc-set/topic-set">
+                            <xsl:variable name="antfile" 
+                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                            
+                            <xsl:call-template name="create-run-command">
+                                <xsl:with-param name="build-command" select="'clean'"/>
+                                <xsl:with-param name="antfile" select="$antfile"/>
+                            </xsl:call-template>
+                        </xsl:for-each>
+                    </target>
+                    
+                    <target name="cat" depends="config"> 
+                        <xsl:for-each select="$config/doc-set/topic-set">
+                            <xsl:variable name="antfile" 
+                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                            
+                            <xsl:call-template name="create-run-command">
+                                <xsl:with-param name="build-command" select="'cat'"/>
+                                <xsl:with-param name="antfile" select="$antfile"/>
+                            </xsl:call-template>
+                        </xsl:for-each>
+                    </target>
+                    
+                    <target name="toc" depends="config"> 
+                        <xsl:for-each select="$config/doc-set/topic-set">
+                            <xsl:variable name="antfile" 
+                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                            
+                            <xsl:call-template name="create-run-command">
+                                <xsl:with-param name="build-command" select="'toc'"/>
+                                <xsl:with-param name="antfile" select="$antfile"/>
+                            </xsl:call-template>
+                        </xsl:for-each>
+                    </target>
+                    
+                    <target name="draft" depends="config, toc, cat"> 
+                        <xsl:for-each select="$config/doc-set/topic-set">
+                            <xsl:variable name="antfile" 
+                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                            
+                            <xsl:call-template name="create-run-command">
+                                <xsl:with-param name="build-command" select="'draft'"/>
+                                <xsl:with-param name="antfile" select="$antfile"/>
+                            </xsl:call-template>
+                        </xsl:for-each>
+                    </target>
+                    
+                    <target name="final" depends="config, toc, cat"> 
+                        <xsl:for-each select="$config/doc-set/topic-set">
+                            <xsl:variable name="antfile" 
+                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                            
+                            <xsl:call-template name="create-run-command">
+                                <xsl:with-param name="build-command" select="'final'"/>
+                                <xsl:with-param name="antfile" select="$antfile"/>
+                            </xsl:call-template>
+                        </xsl:for-each>
+                    </target>
+                    
+                    <target name="pdf" depends="config, toc, cat"> 
+                        <xsl:for-each select="$config/doc-set/topic-set">
+                            <xsl:variable name="antfile" 
+                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                            
+                            <xsl:call-template name="create-run-command">
+                                <xsl:with-param name="build-command" select="'pdf'"/>
+                                <xsl:with-param name="antfile" select="$antfile"/>
+                            </xsl:call-template>
+                        </xsl:for-each>
                     </target>
                 </project> 
             </xsl:when>
@@ -274,7 +323,9 @@
                   <property name="HOME" value="{translate($HOME, '\', '/')}"/>
                   <property name="SPFEOT_HOME" value="{translate($SPFEOT_HOME, '\', '/')}"/>
                   <property name="spfe.config-file" value="{translate(($config/build/build-directory)[1], '\', '/')}/config/spfe-config.xml"/>
+                  <property name="SPFE_BUILD_COMMAND" value="{$SPFE_BUILD_COMMAND}"/>
                   <xsl:sequence select="spfe:xml2properties(($config/topic-set-id)[1], 'spfe')"/>
+                  <xsl:sequence select="spfe:xml2properties(($config/topic-set-type)[1], 'spfe')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/publication-info/title)[1], 'spfe.publication-info')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/publication-info/release)[1], 'spfe.publication-info')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/publication-info/product)[1], 'spfe.publication-info')"/>
@@ -297,17 +348,16 @@
                  
                   <xsl:sequence select="spfe:xml2properties(($config/build/build-directory)[1], 'spfe.build')"/>
                   
-                  <!--<xsl:sequence select="spfe:xml2properties(($config/build/output-directory)[1], 'spfe.build')"/>-->
                   <property name="spfe.build.output-directory" value="{if (normalize-space(($config/deployment/output-path)[1])) then concat(($config/build/output-directory)[1], '/', ($config/deployment/output-path)[1]) else ($config/build/output-directory)[1]}"/>
                   
                   <xsl:sequence select="spfe:xml2properties(($config/build/link-catalog-directory)[1], 'spfe.build')"/>
+                  <xsl:sequence select="spfe:xml2properties(($config/build/toc-directory)[1], 'spfe.build')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/build/build-rules)[1], 'spfe.build')"/>
                   
                   <xsl:sequence select="spfe:xml2properties(($config/deployment/output-path)[1], 'spfe.deployment')"/>
                   
                   <files id="topics">
                       <xsl:for-each select="$config/sources/topics/include">
-                          <xsl:comment select="resolve-uri(.,base-uri(.))"/>
                           <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
                       </xsl:for-each>
                   </files>
@@ -393,6 +443,36 @@
         
     </xsl:template>
     
+    <xsl:template name="create-run-command">
+        <xsl:param name="build-command"/>
+        <xsl:param name="antfile"/>
+            <!-- Using <exec> rather than <ant> to avoid a memory exhaustion error that occurs when running <ant>. -->
+            
+            <exec executable="cmd" failonerror="yes" osfamily="windows">
+                <arg value="/c"/>
+                <arg value="ant.bat"/>
+                <arg value="-f"/>
+                <arg value="{$antfile}"/>
+                <arg value="-lib"/>
+                <arg value="%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar"/> 
+                <arg value="{$build-command}"/>                              
+                <arg value="-emacs"/>
+            </exec>
+            
+            <exec executable="ant"  failonerror="yes" osfamily="unix">
+                <arg value="-f"/>
+                <arg value="{$antfile}"/>
+                <arg value="-lib"/>
+                <arg value="$SPFEOT_HOME/tools/xml-commons-resolver-1.2/resolver.jar"/>
+                <arg value="{$build-command}"/>
+                <arg value="-emacs"/>
+            </exec>
+            
+            <!--                          <ant antfile="{$antfile}"
+                               target="{$SPFE_BUILD_COMMAND}"/>-->
+
+    </xsl:template>
+    
 
     
     <xsl:template name="create-config-file">
@@ -408,6 +488,7 @@
                 <xsl:copy-of select="$config/relative-to-list" copy-namespaces="no"/>
                 <xsl:copy-of select="$config/topic-type-aliases" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/topic-set-id)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/topic-set-type)[1]" copy-namespaces="no"/>
                 <publication-info>
                     <xsl:copy-of select="($config/publication-info/title)[1]" copy-namespaces="no"/>
                     <xsl:copy-of select="($config/publication-info/release)[1]" copy-namespaces="no"/>
@@ -453,17 +534,17 @@
     
     <xsl:namespace-alias stylesheet-prefix="gen" result-prefix="xsl"/>
     <xsl:template name="create-script-files">
-        <xsl:for-each select="$config/scripts/*">
+        <xsl:for-each-group select="$config/scripts/*" group-by="name()">
             <xsl:variable name="script-type" select="if (name()='other') then concat('other.',@name) else name()"/>            
             <xsl:result-document href="file:///{$build-dir}/spfe.{$script-type}.xsl" method="xml" indent="yes" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                     version="2.0" >
-                    <xsl:for-each select="c:script">
+                    <xsl:for-each select="current-group()[1]/c:script">
                         <!-- FIXME: need to figure out if this should be import or include -->
                         <gen:import href="file:///{.}"/>
                     </xsl:for-each>
                 </gen:stylesheet>
             </xsl:result-document>
-        </xsl:for-each>
+        </xsl:for-each-group>
     </xsl:template>
 </xsl:stylesheet>

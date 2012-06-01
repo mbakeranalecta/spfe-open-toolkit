@@ -17,6 +17,7 @@
           </xs:complexType>
         </xs:element>
         <xs:element name="topic-set-id" type="xs:string" minOccurs="0"/>
+        <xs:element name="topic-set-type" type="xs:string" minOccurs="0"/>
         <xs:element name="publication-info" type="publication-info-type" minOccurs="0"/>
         <xs:element name="topic-type-order" type="xs:anyURI" minOccurs="0"/>
         <xs:element name="sources" type="sources-type" minOccurs="0"/>
@@ -52,6 +53,7 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="title" type="xs:string"/>
+              <xs:element name="topic-set-type-order" type="xs:string"/>
               <xs:element name="topic-set" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"/>
             </xs:sequence>
             <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
@@ -179,6 +181,7 @@
     <xs:choice maxOccurs="unbounded">
       <xs:element name="synthesis" type="script-list-type"  minOccurs="0"/>
       <xs:element name="link-catalog" type="script-list-type"  minOccurs="0"/>
+      <xs:element name="toc" type="script-list-type"  minOccurs="0"/>
       <xs:element name="image-list" type="script-list-type"  minOccurs="0"/>
       <xs:element name="presentation-web" type="script-list-type"  minOccurs="0"/>
       <xs:element name="presentation-book" type="script-list-type"  minOccurs="0"/>

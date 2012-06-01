@@ -7,8 +7,6 @@
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  exclude-result-prefixes="#all">
 	
-<!-- <xsl:include href="present-toc.xsl"/> -->
-
 <!-- processing directives -->
 <xsl:output method="xml" indent="yes"/>
 	
@@ -25,11 +23,9 @@
 	</xsl:variable>
 
 	<xsl:param name="synthesis-files"/>
-	<xsl:variable name="synthesis-dir" select="concat($config/config:build/config:build-directory, '/temp/synthesis/')"/>
-	
 	<xsl:variable name="synthesis">
 		<xsl:for-each select="tokenize($synthesis-files, $config/config:dir-separator)">
-			<xsl:sequence select="doc(concat('file:///',translate($synthesis-dir,'\','/'), .))"/>	
+			<xsl:sequence select="doc(concat('file:///',translate(.,'\','/')))"/>	
 		</xsl:for-each>
 	</xsl:variable>
 
@@ -43,23 +39,7 @@ Main template
 		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
 			<title><xsl:value-of select="$config/config:publication-info/config:title"/></title>
 				
-			<!-- create a toc page -->
-			<xsl:variable name="toc">
-				<xsl:call-template name="toc"/>
-			</xsl:variable>
-			
-			<xsl:sequence select="$toc"/>
-			
-			<!-- create a page for each topic, ordering according to the toc. -->
-			<!-- this ordering is important for correct PDF generation -->
-			<xsl:for-each select="$toc//node">
-				<xsl:variable name="node-id" select="@id"/>
-				<xsl:apply-templates select="$synthesis/ss:synthesis/generic-topic[name=$node-id]"/>
-			</xsl:for-each>
-
-			
-			<!-- create a toc 
-			<xsl:call-template name="toc"/>-->
+			<xsl:message select="'$synthesis-files', $synthesis-files"/>
 
 			<!-- process the topics --> 
 			<xsl:apply-templates select="$synthesis/ss:synthesis/*"/>

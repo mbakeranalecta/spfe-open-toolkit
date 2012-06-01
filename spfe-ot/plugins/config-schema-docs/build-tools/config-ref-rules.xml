@@ -49,7 +49,6 @@
 			<param name="schema-file" expression="${spfe.other.schema-file}"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 			<param name="draft" expression="${draft}" if="draft"/>
-			<param name="optional-product" expression="${spfe.optional-product}" if="spfe.optional-product"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
 			</factory>

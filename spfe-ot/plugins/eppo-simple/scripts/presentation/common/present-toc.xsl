@@ -9,8 +9,23 @@
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  exclude-result-prefixes="#all">
-
+	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
 	
+	<xsl:variable name="config" as="element(config:spfe)">
+		<xsl:sequence select="/config:spfe"/>
+	</xsl:variable>
+	
+	<xsl:param name="synthesis-files"/>
+	
+	<xsl:variable name="synthesis">
+		<xsl:for-each select="tokenize($synthesis-files, $config/config:dir-separator)">
+			<xsl:sequence select="doc(concat('file:///',translate(.,'\','/')))"/>	
+		</xsl:for-each>
+	</xsl:variable>
+	
+	<!-- FIXME: hack -->
+	<xsl:variable name="media">online</xsl:variable>
+
 	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
 	
 	<xsl:variable name="topic-type-order" select="tokenize($config/config:topic-type-order, ',\s*')" as="xs:string*"/>
@@ -23,9 +38,9 @@
 		<xsl:value-of select="$config/config:publication-info/config:release"/>
 	</xsl:variable>
 
-	<xsl:template name="toc">
-		<xsl:result-document href="file:///{$config/config:build/config:toc-directory}/{$config/config:topic-set-id}.toc.xml" method="xml" indent="no" omit-xml-declaration="no">
-			<toc topic-set-id="{$config/config:topic-set-id}" deployment-relative-path="{$config/config:deployment/config:output-path}" title="{$title-string}">
+	<xsl:template name="main">
+		<xsl:result-document href="file:///{$config/config:build/config:toc-directory}/{$config/config:topic-set-id}.toc.xml" method="xml" indent="yes" omit-xml-declaration="no">
+			<toc topic-set-id="{$config/config:topic-set-id}" topic-set-type="{$config/config:topic-set-type}" deployment-relative-path="{$config/config:deployment/config:output-path}" title="{$title-string}">
 				<xsl:choose>
 					<!-- If there is a TOC file for this media, use it to create TOC -->
 					<xsl:when test="$media = tokenize(document($toc-file)/toc/@media, '\s+')">

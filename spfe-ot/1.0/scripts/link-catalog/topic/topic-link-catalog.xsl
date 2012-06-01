@@ -18,11 +18,10 @@
 	</xsl:variable>
 
 	<xsl:param name="synthesis-files"/>
-	<xsl:variable name="synthesis-dir" select="concat($config/config:build/config:build-directory, '/temp/synthesis/')"/>
 	
 	<xsl:variable name="synthesis">
 		<xsl:for-each select="tokenize($synthesis-files, $config/config:dir-separator)">
-			<xsl:sequence select="doc(concat('file:///',translate($synthesis-dir,'\','/'), .))"/>	
+			<xsl:sequence select="doc(concat('file:///',translate(.,'\','/')))"/>	
 		</xsl:for-each>
 	</xsl:variable>
 	
