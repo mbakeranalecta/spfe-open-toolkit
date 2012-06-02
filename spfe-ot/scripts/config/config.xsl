@@ -235,6 +235,7 @@
                                 in="{spfe:URL-to-local(resolve-uri(href, base-uri($source)))}"
                                 out="{$antfile}"
                                 force="yes">
+                                <factory name="net.sf.saxon.TransformerFactoryImpl"/>
                                 <param name="HOME" expression="{$HOME}"/> 
                                 <param name="SPFEOT_HOME" expression="{$SPFEOT_HOME}"/> 
                                 <param name="SPFE_BUILD_COMMAND" expression="{$SPFE_BUILD_COMMAND}"/> 
