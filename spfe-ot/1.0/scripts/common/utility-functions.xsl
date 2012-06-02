@@ -91,35 +91,6 @@
 	</xsl:choose>
 </xsl:template>
 
-<xsl:function name="sf:lookup">
-	<xsl:param name="value"/>
-	<xsl:param name="table"/>
-	<xsl:variable name="result"  select="document('')/xsl:stylesheet/sf:lookup-table[@name=$table]/sf:lookup[@value=$value]/@result"/>
-	<xsl:choose>
-		<xsl:when test="$result">
-			<xsl:value-of select="$result"/>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:call-template name="warning">
-				<xsl:with-param name="message" select="'Look up failed for', concat($value, ' in ', $table)"/>
-			</xsl:call-template>
-			<xsl:value-of select="$value"/>	
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:function>
-
-	<sf:lookup-table name="data-type">
-		<sf:lookup value="boolean" result="Boolean"/>
-		<sf:lookup value="int" result="Signed 32 bit integer"/>
-		<sf:lookup value="uint" result="Unsigned 32 bit integer"/>
-		<sf:lookup value="ulong" result="Unsigned 32 bit integer"/>
-		<sf:lookup value="string" result="String"/>
-		<sf:lookup value="PORT_DIRECTION_TYPE" result="PORT_DIRECTION_TYPE, as defined in apex/apexType.h"/>
-	</sf:lookup-table>
-	
-	
-	<xsl:param name="trademark-list-file"/>
-	<xsl:variable name="trademark-list" select="document($trademark-list-file)/trademark-list"/>
 	
 	<xsl:function name="sf:matching-substring">
 		<xsl:param name="string" as="xs:string"/>
@@ -188,7 +159,10 @@
 	
 	<xsl:template name="error">
 		<xsl:param name="message"/>
-		<xsl:message select="'ERROR: ', string-join($message,'')" terminate="{$terminate-on-error}"/>
+		<xsl:message>**********************************************************</xsl:message>
+		<xsl:message select="'ERROR: ', string-join($message,'')"/>
+		<xsl:message>**********************************************************</xsl:message>
+		<xsl:message terminate="{$terminate-on-error}"/>
 	</xsl:template>
 	
 	<xsl:function name="sf:lower-case">

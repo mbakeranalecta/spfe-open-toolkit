@@ -6,11 +6,22 @@
     
     <doc-set id="spfe-docs">
         <title>SPFE Documentation</title>
-        <topic-set-type-order>docset, guide, referece</topic-set-type-order>
-        <topic-set>spfe-docs/spfe-build-config.xml</topic-set>
-        <topic-set>development/spfe-build-config.xml</topic-set>
-        <topic-set>config-ref/spfe-build-config.xml</topic-set>
-    </doc-set>
+        <topic-set-type-order>docset, guide, reference</topic-set-type-order>
+        <topic-sets>
+            <topic-set>
+                <id>spfe-docs-docset</id>
+                <href>topic-sets/spfe-docs-docset.xml</href>
+            </topic-set>
+            <topic-set>
+                <id>spfe-development</id>
+                <href>topic-sets/spfe-development.xml</href>
+            </topic-set>
+            <topic-set>
+                <id>spfe-configuration-reference</id>
+                <href>topic-sets/spfe-configuration-reference.xml</href>
+            </topic-set>
+        </topic-sets>
+     </doc-set>
     
     <publication-info>
         <product>SPFE Open Toolkit</product>

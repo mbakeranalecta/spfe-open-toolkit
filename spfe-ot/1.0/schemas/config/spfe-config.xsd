@@ -54,7 +54,20 @@
             <xs:sequence>
               <xs:element name="title" type="xs:string"/>
               <xs:element name="topic-set-type-order" type="xs:string"/>
-              <xs:element name="topic-set" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"/>
+              <xs:element name="topic-sets" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="topic-set" maxOccurs="unbounded" minOccurs="1">
+                       <xs:complexType>
+                         <xs:sequence>
+                           <xs:element name="id" type="xs:NCName"/>
+                           <xs:element name="href" type="xs:anyURI"/>
+                         </xs:sequence>
+                       </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
             </xs:sequence>
             <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
           </xs:complexType>

@@ -226,13 +226,13 @@
                 <project name="{/spfe/doc-set/@id}" default="{$SPFE_BUILD_COMMAND}">
                     
                     <target name="config">
-                        <xsl:for-each select="$config/doc-set/topic-set">
+                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                                select="concat($source/spfe/doc-set/@id, '-', id, '.xml')"/>
                             
                             <xslt classpath="{translate($SPFEOT_HOME, '\', '/')}/tools/saxon9he/saxon9he.jar"
                                 style="{translate($SPFEOT_HOME, '\', '/')}/scripts/config/config.xsl" 
-                                in="{spfe:URL-to-local(resolve-uri(., base-uri($source)))}"
+                                in="{spfe:URL-to-local(resolve-uri(href, base-uri($source)))}"
                                 out="{$antfile}"
                                 force="yes">
                                 <param name="HOME" expression="{$HOME}"/> 
@@ -243,9 +243,9 @@
                     </target>
                     
                     <target name="clean" depends="config"> 
-                        <xsl:for-each select="$config/doc-set/topic-set">
+                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
                             
                             <xsl:call-template name="create-run-command">
                                 <xsl:with-param name="build-command" select="'clean'"/>
@@ -255,9 +255,9 @@
                     </target>
                     
                     <target name="cat" depends="config"> 
-                        <xsl:for-each select="$config/doc-set/topic-set">
+                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
                             
                             <xsl:call-template name="create-run-command">
                                 <xsl:with-param name="build-command" select="'cat'"/>
@@ -267,9 +267,9 @@
                     </target>
                     
                     <target name="toc" depends="config"> 
-                        <xsl:for-each select="$config/doc-set/topic-set">
+                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
                             
                             <xsl:call-template name="create-run-command">
                                 <xsl:with-param name="build-command" select="'toc'"/>
@@ -279,9 +279,9 @@
                     </target>
                     
                     <target name="draft" depends="config, toc, cat"> 
-                        <xsl:for-each select="$config/doc-set/topic-set">
+                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
                             
                             <xsl:call-template name="create-run-command">
                                 <xsl:with-param name="build-command" select="'draft'"/>
@@ -291,9 +291,9 @@
                     </target>
                     
                     <target name="final" depends="config, toc, cat"> 
-                        <xsl:for-each select="$config/doc-set/topic-set">
+                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
                             
                             <xsl:call-template name="create-run-command">
                                 <xsl:with-param name="build-command" select="'final'"/>
@@ -303,9 +303,9 @@
                     </target>
                     
                     <target name="pdf" depends="config, toc, cat"> 
-                        <xsl:for-each select="$config/doc-set/topic-set">
+                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, position(), '.xml')"/>
+                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
                             
                             <xsl:call-template name="create-run-command">
                                 <xsl:with-param name="build-command" select="'pdf'"/>
@@ -521,6 +521,7 @@
                     </output-path>
                 </deployment>
                 <xsl:copy-of select="($config/format)[1]" copy-namespaces="no"/>    
+                <xsl:copy-of select="($config/doc-set)[1]" copy-namespaces="no"/>    
                 <other>
                  <xsl:for-each select="$config/other">
                      <xsl:element name="{@name}">
