@@ -15,12 +15,6 @@
         </xs:restriction>
     </xs:simpleType>
     
-    <xs:group name="mentions-foo">
-        <xs:choice>
-            <xs:element name="foo"/>
-        </xs:choice>
-    </xs:group>
-
     <xs:group name="mentions-general">
         <xs:choice>
             <xs:element name="directory-name"/>

@@ -40,11 +40,8 @@
 	</xsl:variable>
 
 	<xsl:param name="topic-set-id"/>
-
 	<xsl:param name="draft">no</xsl:param>
-
 	<xsl:param name="optional-product"/>
-
 	<xsl:param name="default-topic-scope"/>
 
 

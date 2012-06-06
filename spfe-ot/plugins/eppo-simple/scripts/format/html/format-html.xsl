@@ -11,7 +11,7 @@
 				xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 				exclude-result-prefixes="#all">
 	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/>
-	<xsl:output method="xml" indent="no"/>
+	<xsl:output method="xml" indent="yes"/>
 	
 	<xsl:variable name="config" as="element(config:spfe)">
 		<xsl:sequence select="/config:spfe"/>
@@ -136,11 +136,41 @@
 			</xsl:for-each>
 			
 			<link rel="stylesheet" type="text/css" href="style/treeview/css/multi/tree.css">&#160;</link>
-			<script type="text/javascript" src="style/treeview/build/yahoo.js">&#160;</script>
+			<link rel="stylesheet" type="text/css" href="style/colorbox/colorbox.css" >&#160;</link>
+			<script src="style/jquery-1.7.2.min.js">&#160;</script>
+			<script src="style/colorbox/jquery.colorbox-min.js">&#160;</script>
+			<script type="text/javascript" src="style/jstree/jquery.jstree.js">&#160;</script>
+			<script>
+			$(document).ready(function(){
+				$(".inline").colorbox({inline:true, width:"50%"});
+			});
+			</script>
+			
+<!--			<script type="text/javascript" src="style/treeview/build/yahoo.js">&#160;</script>
 			<script type="text/javascript" src="style/treeview/build/event.js">&#160;</script>
 			<script type="text/javascript" src="style/treeview/build/treeview.js">&#160;</script>
 			<script type="text/javascript" src="style/treeview/build/jktreeview.js">&#160;</script>
-				
+			<script type="text/javascript" src="style/folding.js">&#160;</script>-->
+			
+			<script type="text/javascript" class="source below">
+$(function () {
+	$("#toc")
+		.jstree({         
+		    "themes" : {
+            "theme" : "default",
+            "dots" : false,
+            "icons" : false
+        },
+        "plugins" : ["themes","html_data"] })
+		// 1) the loaded event fires as soon as data is parsed and inserted
+		.bind("loaded.jstree", function (event, data) { })
+		// 2) but if you are using the cookie plugin or the core `initially_open` option:
+		.one("reopen.jstree", function (event, data) { })
+		// 3) but if you are using the cookie plugin or the UI `initially_select` option:
+		.one("reselect.jstree", function (event, data) { });
+});
+</script>
+			
 			<style type="text/css">
 		
 #wrap
@@ -289,12 +319,18 @@ ul.toc ol {
 					</div>
 				</xsl:if>
 				<div id="toc-container" >
-					<xsl:apply-templates select="$toc"/>
+					<div id="toc">
+						<ul>
+							<xsl:apply-templates select="$toc"/>
+						</ul>
+					</div>
 				</div>
 				
 				<div id="main">
 					<xsl:apply-templates/>
 				</div>
+				
+				<xsl:call-template name="output-xref-sets"/>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
@@ -667,31 +703,47 @@ ul.toc ol {
 	</xsl:template>
 			
 	<xsl:template match="xref-set">
-		<xsl:variable name="title-prefix" select="if(ancestor::table[@hint='context']) then 'See also for:' else 'Links for:'"/>
-		<xsl:variable name="class" select="if (xref/@class = 'gloss') then 'gloss' else 'default'"/>
-		<a class="fold" onclick="toggle_visibility('link-fold-{generate-id()}');" title="{if(ancestor::table[@hint='context']) then 'See also - ' else ''}{string-join(xref/@title, '; ')}"><xsl:value-of select="content"/></a>
-		<span style="display: none;" class="fold" id="link-fold-{generate-id()}">			
-			<span  style="display:block; font-weight:bold"><xsl:value-of select="$title-prefix, text"/>
-				<a style="float:right" class="fold" onclick="toggle_visibility('link-fold-{generate-id()}');">[x]</a>
-			</span>
-			<span  style="display:list; list-style-type:disc; list-style-position: inside; ">
-				<xsl:for-each select="xref">
-					<span style="display:list-item">
-						<xsl:value-of select="@topic-type"/>
-						<xsl:text>: </xsl:text>
-						<a href="{@target}" class="default" >
-							<xsl:if test="@onclick">
-								<xsl:attribute name="onClick" select="@onclick"/>
-							</xsl:if>
-							<xsl:value-of select="@topic-title"/>
-						</a>
-						<xsl:text> (</xsl:text>
-						<xsl:value-of select="@topic-product"/>
-						<xsl:text>)</xsl:text>
-					</span>
-				</xsl:for-each>
-			</span>
-		</span>
+		<!-- FIXME: This should have a title, but it interferes with colorbox. Fix? Alternative? -->
+		<!-- title="{if(ancestor::table[@hint='context']) then 'See also - ' else ''}{string-join(xref/@title, '; ')}" -->
+		<a class='inline' href="#{generate-id()}" >
+			<xsl:value-of select="content"/>
+		</a>
+	</xsl:template>
+	
+	<xsl:template name="output-xref-sets">
+		<div style='display:none'>
+		<xsl:for-each select="//xref-set">
+		
+			<div id='{generate-id()}' style='padding:10px; background:#fff;'>
+				
+				<xsl:variable name="class" select="if (xref/@class = 'gloss') then 'gloss' else 'default'"/>
+				<h4>Resources on "<xsl:value-of select="content"/>"</h4>
+				
+						
+
+				<div  style="display:list; list-style-type:disc; list-style-position: inside; ">
+					<xsl:for-each select="xref">
+						<span style="display:list-item">
+							<xsl:value-of select="@topic-type"/>
+							<xsl:text>: </xsl:text>
+							<a href="{@target}" class="default" >
+								<xsl:if test="@onclick">
+									<xsl:attribute name="onClick" select="@onclick"/>
+								</xsl:if>
+								<xsl:value-of select="@topic-title"/>
+							</a><!--
+							<xsl:text> (</xsl:text>
+							<xsl:value-of select="@topic-product"/>
+							<xsl:text>)</xsl:text>-->
+						</span>
+					</xsl:for-each>
+				</div>
+		
+			</div>
+		</xsl:for-each>
+		</div>
+		
+		
 	</xsl:template>
 
 	<xsl:template match="xlink">
@@ -781,32 +833,6 @@ ul.toc ol {
 	</xsl:template>
 	
 	
-	<!-- GENERATED PAGES -->
-	
-	<!-- index page -->
-	<xsl:template name="index-page">
-		<xsl:if test="not($presentation//page/@name='index')">
-			<xsl:call-template name="output-html-page">
-				<xsl:with-param name="file-name">index.html</xsl:with-param> 
-				<xsl:with-param name="title" select="$title-string">
-				</xsl:with-param>
-				<xsl:with-param name="content">
-					<xsl:apply-templates select="$presentation//toc" mode="index-page"/>
-					<div id="toc-container" >
-						<h2>Contents</h2>
-						<xsl:apply-templates select="$toc"/>
-						
-					</div>
-					
-					<div id="main">
-						<h1><xsl:value-of select="$title-string"></xsl:value-of></h1>
-						<p hint="copyright"><xsl:value-of select="$config/config:publication-info/config:copyright"/></p>
-					</div>	
-						
-				</xsl:with-param>
-			</xsl:call-template>
-		</xsl:if>
-	</xsl:template>
 	
 	<xsl:template match="toc">
 		<xsl:variable name="branch" select="generate-id()"/>
@@ -821,50 +847,25 @@ ul.toc ol {
 				<xsl:text>/</xsl:text>
 			</xsl:if>
 		</xsl:variable>
-		<div id="{$branch}" class="treemenu">&#160;</div>
-		<script type="text/javascript">
-			<xsl:text>&#x000A;var </xsl:text>
-			<xsl:value-of select="$toc-id"/>
-			<xsl:text>=new jktreeview("</xsl:text>
-			<xsl:value-of select="$branch"/>
-			<xsl:text>")&#x000A;</xsl:text>
+		
+		<li id="{generate-id()}" class="jstree-open">
+			<a href="{if (@index) then concat($relative-path, @index, '.html') else '#'}">
+				<xsl:value-of select="@title"/>
+			</a>
+			<xsl:if test="node">
+				<ul>
+					<xsl:apply-templates>
+						<xsl:with-param name="relative-path" select="$relative-path"/>
+					</xsl:apply-templates>
+				</ul>
+			</xsl:if>
+		</li>
+		
 
-			<xsl:text>	var </xsl:text>
-			<xsl:value-of select="$branch"/>
-			<xsl:text>=</xsl:text>
-			<xsl:value-of select="$toc-id"/>
-			<xsl:text>.addItem("</xsl:text>
-			<xsl:value-of select="@title"/>
-			<!-- if there is an index page, link to it -->
-			<xsl:if test="@index">
-				<xsl:text>", "", "</xsl:text> 
-				<xsl:if test="$relative-path"></xsl:if>
-				<xsl:value-of select="concat($relative-path, @index, '.html')"/>
-			</xsl:if>
-			<xsl:text>")&#x000A;</xsl:text>	
-			
-			<xsl:apply-templates>
-				<xsl:with-param name="branch" select="$branch"/>
-				<xsl:with-param name="relative-path" select="$relative-path"/>
-				<xsl:with-param name="toc-id" select="$toc-id"/>
-			</xsl:apply-templates>		
-			
-			<xsl:text>&#x000A;</xsl:text>
-			<xsl:value-of select="$toc-id"/>
-			<xsl:text>.treetop.draw(); //Initalize tree&#x000A;</xsl:text>
-			<!-- test to expand the ToC for the current topic set -->
-			<xsl:if test="@topic-set-id eq $config/config:topic-set-id">
-				<xsl:text>&#x000A;</xsl:text>
-				<xsl:value-of select="$toc-id"/>
-				<xsl:text>.treetop.expandAll(); //Expand tree&#x000A;</xsl:text>
-			</xsl:if>
-			</script>	
 	</xsl:template>
 	
 	<xsl:template match="node">
-		<xsl:param name="branch"/>
 		<xsl:param name="relative-path"/>
-		<xsl:param name="toc-id"/>
 		
 		<xsl:variable name="href">
 			<xsl:choose>
@@ -884,59 +885,39 @@ ul.toc ol {
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
-		<xsl:variable name="new-branch" select="concat($branch, '_', generate-id())"/>
-
-		<xsl:choose>
-			<xsl:when test="normalize-space($href) ne '' and node">
-				<xsl:text>var </xsl:text>
-				<xsl:value-of select="$new-branch"/>
-				<xsl:text>=</xsl:text>
-				<xsl:value-of select="$toc-id"/>
-				<xsl:text>.addItem("</xsl:text>
-				<xsl:value-of select="@name"/>
-				<xsl:text>", </xsl:text>
-				<xsl:value-of select="$branch"/>
-				<xsl:text>, "</xsl:text>
-				<xsl:value-of select="$href"/>
-				<xsl:text>") //node and href&#x000A;</xsl:text>
-				<xsl:apply-templates>
-					<xsl:with-param name="branch" select="$new-branch"/>
-					<xsl:with-param name="relative-path" select="$relative-path"/>
-					<xsl:with-param name="toc-id" select="$toc-id"/>
-				</xsl:apply-templates>
-			</xsl:when>
-			
-			<xsl:when test="normalize-space($href)">
-				<xsl:value-of select="$toc-id"/>
-				<xsl:text>.addItem("</xsl:text>
-				<xsl:value-of select="@name"></xsl:value-of>
-				<xsl:text>", </xsl:text>
-				<xsl:value-of select="$branch"/>
-				<xsl:text>, "</xsl:text>
-				<xsl:value-of select="$href"/>
-				<xsl:text>") //href&#x000A;</xsl:text>				
-			</xsl:when>
-			
-			<xsl:when test="node">
-				<xsl:text>var </xsl:text>
-				<xsl:value-of select="$new-branch"/>
-				<xsl:text>=</xsl:text>
-				<xsl:value-of select="$toc-id"/>
-				<xsl:text>.addItem("</xsl:text>			
-				<xsl:value-of select="@name"/>
-				<xsl:text>", </xsl:text>
-				<xsl:value-of select="$branch"/>
-				<xsl:text>) //node&#x000A;</xsl:text>
-				<xsl:apply-templates>
-					<xsl:with-param name="branch" select="$new-branch"/>
-					<xsl:with-param name="relative-path" select="$relative-path"/>
-					<xsl:with-param name="toc-id" select="$toc-id"/>
-				</xsl:apply-templates>
-			</xsl:when>
-			<xsl:otherwise>
-				<!-- ERROR? -->
-			</xsl:otherwise>
-		</xsl:choose>
+		
+			<xsl:choose>
+				<xsl:when test="normalize-space($href) ne '' and node">
+					<li id="{generate-id()}" class="jstree-open">
+						<a href="{$href}"><xsl:value-of select="@name"/></a>
+						<ul>
+							<xsl:apply-templates>
+								<xsl:with-param name="relative-path" select="$relative-path"/>
+							</xsl:apply-templates>
+						</ul>
+					</li>
+				</xsl:when>
+				
+				<xsl:when test="normalize-space($href)">
+					<li id="{generate-id()}" class="jstree-open">
+						<a href="{$href}"><xsl:value-of select="@name"/></a>
+					</li>
+				</xsl:when>
+				
+				<xsl:when test="node">
+					<li id="{generate-id()}" class="jstree-open">
+						<a href="#"><xsl:value-of select="@name"/></a>
+						<ul>
+							<xsl:apply-templates>
+								<xsl:with-param name="relative-path" select="$relative-path"/>
+							</xsl:apply-templates>
+						</ul>
+					</li>
+				</xsl:when>
+				<xsl:otherwise>
+					<!-- ERROR? -->
+				</xsl:otherwise>
+			</xsl:choose>
 	</xsl:template>
 	
 	

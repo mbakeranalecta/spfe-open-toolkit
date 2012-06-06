@@ -4,7 +4,7 @@
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     >
     <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-toc.xsl"/>
-    <xsl:template match="topics-of-type[@type='http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/element-reference']" mode="toc">
+    <xsl:template match="topics-of-type[@type='http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/configuration-reference']" mode="toc">
         <xsl:for-each-group select="//topic" group-by="schema-element/doctype">
             <xsl:sort select="current-grouping-key()"/>
             <xsl:call-template name="make-schema-toc">

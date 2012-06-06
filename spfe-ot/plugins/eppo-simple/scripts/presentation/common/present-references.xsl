@@ -34,14 +34,8 @@
 		<xsl:sequence select="$temp-link-catalogs"/>
 	</xsl:variable>
 	
-<!--	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases"/>-->
-	
-	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
-	
 	<xsl:variable name="topic-set-id" select="$config/config:topic-set-id"/>
 	
-
-
 	<xsl:function name="sf:target-exists" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
@@ -258,14 +252,9 @@
 		<xsl:param name="content"/>
 		<xsl:param name="see-also" as="xs:boolean" select="false()"/>
 		
-		<xsl:variable name="target-plugin-id"  select="$target-page/parent::link-catalog/@plugin-id"/>
-		<xsl:variable name="target-plugin-dir" select="$target-page/parent::link-catalog/@plugin-dir"/>
-		
 		<xsl:variable name="target-topic-set" select="$target-page/parent::link-catalog/@topic-set-id"/>
-		
+
 		<xsl:variable name="target-directory" select="$target-page/parent::link-catalog/@output-directory"/>
-		
-		<xsl:variable name="mark-optional-product" select="if ($target-page/@optional-product and (string($target-page/@optional-product) ne string(ancestor::topic/@optional-product))) then true() else false()"/>
 		
 		<xsl:variable name="target-directory-path" >
 			<xsl:for-each select="tokenize($target-page/parent::link-catalog/@output-directory, '/')">
@@ -277,23 +266,7 @@
 		<xsl:variable name="target-file"  select="string($target-page/@file)"/>		
 		
 		<xsl:variable name="target-anchor" select="if ($target-page[1]/target[key=$target][@type=$type][1]/@anchor) then concat('#', $target-page[1]/target[key=$target][@type=$type][1]/@anchor) else ''"/>
-		<xsl:variable name="topic-type-alias">
-			<xsl:choose>
-				<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$target-page/@topic-type]">
-					<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$target-page/@topic-type]/alias"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:call-template name="warning">
-						<xsl:with-param name="message">
-							<xsl:text>No topic type alias found for topic type </xsl:text>
-							<xsl:value-of select="$target-page/@topic-type"/>
-							<xsl:text>. Using the topic type name instead.</xsl:text>
-						</xsl:with-param>
-					</xsl:call-template>
-					<xsl:value-of select="$target-page/@topic-type"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
+
 		
 		<xref hint="{$type}">
 			<xsl:attribute name="target">
@@ -339,33 +312,23 @@
 						<xsl:value-of select="$target-content"/>
 					</xsl:when>
  					<xsl:otherwise>
-						<xsl:value-of select="$topic-type-alias"/>
+ 						<xsl:value-of select="$target-page/@topic-type-alias"/>
 						<xsl:text>: </xsl:text>
 						<xsl:value-of select="$target-page/@title"/>
 						<xsl:text> (</xsl:text>
 						<xsl:value-of select="$target-page/parent::link-catalog/@product"/>
 						<xsl:text>)</xsl:text>
-
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
 			
 			<xsl:attribute name="title" select="$title"/>
-			
-			<xsl:attribute name="topic-type" select="$topic-type-alias"/>
+			<xsl:attribute name="topic-type" select="$target-page/@topic-type-alias"/>
 			<xsl:attribute name="topic-title" select="$target-page/@title"/>
 			<xsl:attribute name="topic-product" select="normalize-space($target-page/parent::link-catalog/@product)"/>
-			
-			
 			<xsl:attribute name="class" select="$class"/>
-			
 			<xsl:attribute name="scope" select="$target-page/@scope"/>
 
-			<!-- only need "onclick" if the target is outside this topic set -->
-			<xsl:if test="$target-plugin-id ne $target-plugin-dir and $topic-set-id ne $target-topic-set">
-				<!-- "/help/" is used to identify paths in the Eclipse documentation browser (Info Center) -->
-				<xsl:attribute name="onclick">if( this.href.match("/help/") ) {this.href = this.href.replace("<xsl:value-of select="$target-plugin-dir"/>", "<xsl:value-of select="$target-plugin-id"/>");}</xsl:attribute>
-			</xsl:if>
 			<xsl:choose>
 				<xsl:when test="$see-also">
 					<xsl:sequence select="$title"/>

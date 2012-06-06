@@ -123,6 +123,7 @@ Main template
 		
 </xsl:template>
 
+	
 
 <!-- 
 =================================
@@ -144,7 +145,28 @@ Main content processing templates
 	select=" if ($doctype) 
 					 then concat('/',$doctype,  substring-after($xpath, $doctype))
 					 else $xpath"/> 
-					 
+	
+	<!-- FIXME: this is mostly generic code, should be refactored. -->
+	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
+	<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/configuration-reference</xsl:variable> 
+	<xsl:variable name="topic-type-alias">
+		<xsl:choose>
+			<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
+				<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="error">
+					<xsl:with-param name="message">
+						<xsl:text>No topic type alias found for topic type </xsl:text>
+						<xsl:value-of select="$topic-type"/>
+						<xsl:text>.</xsl:text>
+					</xsl:with-param>
+				</xsl:call-template>
+				<xsl:value-of select="$topic-type"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	
 	
 					 
 	<!-- is it this doctype or a group, but not clear we need this check again -->				 
@@ -153,9 +175,10 @@ Main content processing templates
 		
 		<ss:topic 
 			element-name="{name()}" 
-			type="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/element-reference" 
-			full-name="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/element-reference/{translate(xpath, '/:', '__')}"
+			type="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/configuration-reference" 
+			full-name="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/configuration-reference/{translate(xpath, '/:', '__')}"
 			local-name="{translate(xpath, '/:', '__')}"
+			topic-type-alias="{$topic-type-alias}"
 			title="{name}">
 
 

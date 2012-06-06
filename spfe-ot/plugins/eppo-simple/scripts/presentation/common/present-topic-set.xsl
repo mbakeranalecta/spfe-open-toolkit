@@ -73,30 +73,12 @@ Main template
 <xsl:template name="show-context">
 	<xsl:variable name="topic-type" select="if (ancestor::ss:topic/@virtual-type) then ancestor::ss:topic/@virtual-type else ancestor::ss:topic/@type"/>
 	
-	<!-- copied from present-references - refactor -->
-		<xsl:variable name="topic-type-alias">
 
-			<xsl:choose>
-				<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
-					<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:call-template name="warning">
-						<xsl:with-param name="message">
-							<xsl:text>No topic type alias found for topic type </xsl:text>
-							<xsl:value-of select="$topic-type"/>
-							<xsl:text>. Using the topic type name instead.</xsl:text>
-						</xsl:with-param>
-					</xsl:call-template>
-					<xsl:value-of select="$topic-type"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
 	<!-- FIXME: should be a proper context container, not a table. -->
 	<table hint="context">
 		<tr>
 			<td><bold>Topic&#160;type</bold></td>
-			<td><xsl:value-of select="$topic-type-alias"/></td>
+			<td><xsl:value-of select="ancestor::ss:topic/@topic-type-alias"/></td>
 		</tr>
 		<tr>
 			<td><bold>Product</bold></td>

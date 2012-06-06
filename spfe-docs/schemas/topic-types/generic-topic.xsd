@@ -23,4 +23,8 @@
             <xs:group ref="resources"/>
         </xs:choice>
     </xs:group>
+    
+    <xs:simpleType name="mentions-type">
+        <xs:union memberTypes="mentions-general mentions-xml"/>
+    </xs:simpleType>
 </xs:schema>

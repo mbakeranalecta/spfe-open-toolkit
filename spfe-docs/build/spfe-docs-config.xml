@@ -29,62 +29,16 @@
         <copyright>Copyright © 2012 Analecta Communications Inc.</copyright>
     </publication-info>
     <topic-type-aliases>
-       <topic-type>
-           <id>document-type-reference</id>
-           <alias>Document Type Reference</alias>
-           <plural>Document Type Reference</plural>
-       </topic-type>
         <topic-type>
             <id>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic</id>
             <alias>Concept</alias>
             <plural>Concepts</plural>
         </topic-type>
         <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/element-reference</id>
-            <alias>Element</alias>
-            <plural>Elements</plural>
+            <id>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/configuration-reference</id>
+            <alias>Configuration setting</alias>
+            <plural>Configuration settings</plural>
         </topic-type>
-        
-       <topic-type>
-           <id>overview-topic</id>
-           <alias>Overview</alias>
-           <plural>Overviews</plural>
-       </topic-type>
-       <topic-type>
-           <id>SPFE-authoring-task</id>
-           <alias>Authoring Task</alias>
-           <plural>Authoring Tasks</plural>
-       </topic-type>
-       <topic-type>
-           <id>glossary</id>
-           <alias>Definition</alias>
-           <plural>Definitions</plural>
-       </topic-type>
-       <topic-type>
-           <id>workflow</id>
-           <alias>Workflow</alias>
-           <plural>Workflows</plural>
-       </topic-type>
-       <topic-type>
-           <id>generic-reference-entry</id>
-           <alias>Reference</alias>
-           <plural>Reference entries</plural>
-       </topic-type>
-       <topic-type>
-           <id>build-command-reference-entry</id>
-           <alias>Build command reference entry</alias>
-           <plural>Build command reference</plural>
-       </topic-type>
-       <topic-type>
-           <id>schema-element</id>
-           <alias>Document Type</alias>
-           <plural>Document Types</plural>
-       </topic-type>
-       <topic-type>
-           <id>pathfinder-topic</id>
-           <alias>Pathfinder</alias>
-           <plural>Pathfinders</plural>
-       </topic-type>
    </topic-type-aliases>
     
     <sources>

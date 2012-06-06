@@ -116,7 +116,7 @@
 	
 	<xsl:key name="topic" match="topic" use="@name"/>
 	
-	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/element-reference']">
+	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/configuration-reference']">
 		<xsl:apply-templates/>
 	</xsl:template>
 	

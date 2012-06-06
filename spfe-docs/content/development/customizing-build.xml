@@ -21,6 +21,10 @@
                 <type>task</type>
                 <term>{customize} {build}</term>
             </entry>
+            <entry>
+                <type>xpath</type>
+                <term>/spfe</term>
+            </entry>
         </index>
     </head>
     <body>

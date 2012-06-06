@@ -5,13 +5,13 @@
     version="2.0"
     xmlns:mention="mention">
     
-    <xsl:template match="*:task">
+    <xsl:template match="*:body//*:task">
         <mention type="task" key="{normalize-space(.)}"><xsl:apply-templates/></mention>
     </xsl:template>
-    <xsl:template match="*:term">
+    <xsl:template match="*:body//*:term">
         <mention type="term" key="{normalize-space(.)}"><xsl:apply-templates/></mention>
     </xsl:template>
-    <xsl:template match="*:feature">
+    <xsl:template match="*:body//*:feature">
         <mention type="feature" key="{normalize-space(.)}"><xsl:apply-templates/></mention>
     </xsl:template>
 
