@@ -33,9 +33,11 @@
 
 
 	<xsl:template match="/">
-		<xsl:call-template name="info">
-			<xsl:with-param name="message" select="'Applying condition tokens:', $condition-tokens"/>
-		</xsl:call-template>
+		<xsl:if test="normalize-space($condition-tokens)">
+			<xsl:call-template name="info">
+				<xsl:with-param name="message" select="'Applying condition tokens:', $condition-tokens"/>
+			</xsl:call-template>
+		</xsl:if>
 		<xsl:apply-templates/>
 	</xsl:template>
 	
