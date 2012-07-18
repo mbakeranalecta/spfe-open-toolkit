@@ -114,8 +114,19 @@
         <xsl:apply-templates select="$raw-config" mode="resolve-config"/>
     </xsl:variable>
     
-    <xsl:template match="@*|node()" mode="resolve-config" priority="-1">
+    <!-- copy the attribute nodes from the config files -->
+    <xsl:template match="@*" mode="resolve-config" priority="-1">
         <xsl:copy>
+            <xsl:apply-templates mode="resolve-config"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- copy the element nodes from the config files -->
+    <!-- add a base-uri attribute to each so we can resolve relative URIs 
+         correctly based on the config file in which they occurred -->
+    <xsl:template match="*" mode="resolve-config" priority="-1">
+        <xsl:copy>
+            <xsl:attribute name="base-uri" select="base-uri(.)"/>
             <xsl:apply-templates select="@*|node()" mode="resolve-config"/>
         </xsl:copy>
     </xsl:template>
@@ -353,75 +364,77 @@
                   
                   <xsl:sequence select="spfe:xml2properties(($config/build/link-catalog-directory)[1], 'spfe.build')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/build/toc-directory)[1], 'spfe.build')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/build/build-rules)[1], 'spfe.build')"/>
+                  <xsl:sequence select="spfe:xml2properties((spfe:URL-to-local(resolve-uri(($config/build/build-rules)[1], ($config/build/build-rules)[1]/@base-uri))), 'spfe.build')"/>
                   
                   <xsl:sequence select="spfe:xml2properties(($config/deployment/output-path)[1], 'spfe.deployment')"/>
                   
                   <files id="topics">
                       <xsl:for-each select="$config/sources/topics/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
                       </xsl:for-each>
                   </files>
                   
                   <files id="text-objects">
                       <xsl:for-each select="$config/sources/text-objects/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
                       </xsl:for-each>
                   </files>
                   
                   <files id="fragments">
                       <xsl:for-each select="$config/sources/fragments/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
                       </xsl:for-each>
                   </files>
                   
                   <files id="graphics">
                       <xsl:for-each select="$config/sources/graphics/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
                       </xsl:for-each>
                   </files>
                   
                   <files id="graphics-catalog">
                       <xsl:for-each select="$config/sources/graphics-catalog/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
                       </xsl:for-each>
                   </files>
                   
                   <files id="strings">
                       <xsl:for-each select="$config/sources/strings/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
                       </xsl:for-each>
                   </files>
                   
                   <files id="link-catalogs">
                       <xsl:for-each select="$config/sources/link-catalogs/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
                       </xsl:for-each>
                   </files>
                   
                   <files id="tocs">
                       <xsl:for-each select="$config/sources/tocs/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
                       </xsl:for-each>
                   </files>
                            
                   <files id="synonyms">
                       <xsl:for-each select="$config/sources/synonyms/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
                       </xsl:for-each>
                   </files>
                   
                   <xsl:for-each select="$config/sources/other">
                       <files id="other.{@name}">
                           <xsl:for-each select="include">
-                              <include name="{spfe:URL-to-local(resolve-uri(.,base-uri(.)))}"/>
+                              <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
                           </xsl:for-each>
                       </files>
                   </xsl:for-each>
                   
                   <xsl:choose>
                       <xsl:when test="$config/build/build-rules[1]">
-                          <import file="{$config/build/build-rules[1]}"/>
+                          <xsl:for-each select="$config/build/build-rules[1]">
+                            <import file="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                          </xsl:for-each>
                       </xsl:when>
                       <xsl:otherwise>
                           <import file="{$config/SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml"/>
@@ -429,9 +442,9 @@
                   </xsl:choose>
                   
                   <resources id="spfe.style.html-style-directories">
-                          <xsl:for-each select="$config/style/html-style-directories/include">
-                              <fileset dir="{spfe:URL-to-local(resolve-uri(. ,base-uri(.)))}"/>
-                          </xsl:for-each>
+                      <xsl:for-each select="$config/style/html-style-directories/include">
+                          <fileset dir="{spfe:URL-to-local(resolve-uri(. ,@base-uri))}"/>
+                      </xsl:for-each>
                   </resources>
                   
                   <xsl:for-each select="$config/other">
@@ -543,7 +556,8 @@
                     version="2.0" >
                     <xsl:for-each select="current-group()[1]/c:script">
                         <!-- FIXME: need to figure out if this should be import or include -->
-                        <gen:import href="file:///{.}"/>
+<!--                        <gen:import href="file:///{.}"/>
+-->                        <gen:import href="{resolve-uri(.,@base-uri)}"/>
                     </xsl:for-each>
                 </gen:stylesheet>
             </xsl:result-document>
