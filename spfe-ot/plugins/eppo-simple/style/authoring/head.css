@@ -1,0 +1,136 @@
+
+head
+{
+ display:block;
+ padding: 1em;
+ border-style:outset;
+ background-color:silver;
+}
+
+uri 
+{
+    display:block;
+    border-style:inset;
+    margin: .5em;
+    background-color:white;
+}
+
+uri:before
+{
+    content: "URI:";
+    background-color:silver;
+    padding: 2px;
+    font-weight:bold;
+    display:block;
+    
+}
+
+head>author 
+{
+    display:block;
+    border-style:inset;
+    margin: .5em;
+    background-color:white;
+}
+
+head>author:before
+{
+    content: "Author:";
+    background-color:silver;
+    padding: 2px;
+    font-weight:bold;
+    display:block;
+}
+
+status 
+{
+    display:block;
+    border-style:inset;
+    margin: .5em;
+    background-color:white;
+}
+
+status:before
+{
+    content: "Status:";
+    background-color:silver;
+    padding: 2px;
+    font-weight:bold;
+    display:block;
+}
+
+history 
+{
+    display:table;
+    border-style:inset;
+    margin: .5em;
+    background-color:white;
+    width:100%;
+}
+
+history:before
+{
+    content: "History:";
+    background-color:silver;
+    padding: 2px;
+    font-weight:bold;
+    display: block;
+}
+
+history>revision
+{
+    display:table-row;
+}
+
+history>revision>date
+{
+    display:table-column;
+}
+
+history>revision>author
+{
+    display:table-column;
+}
+
+history>revision>comment
+{
+    display:table-column;
+}
+
+history>revision>new-status
+{
+    display:table-column;
+}
+
+index 
+{
+    display:table;
+    border-style:inset;
+    margin: .5em;
+    background-color:white;
+    width:100%;
+}
+
+index::before
+{
+    display: block;
+    content: "Index:";
+    background-color:silver;
+    padding: 2px;
+    font-weight:bold;
+}
+
+index>entry
+{
+    display:table-row;
+}
+
+index>entry>type
+{
+    display:table-column;
+}
+
+index>entry>term
+{
+    display:table-column;
+}
