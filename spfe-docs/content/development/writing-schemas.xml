@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<generic-topic xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic"
+<generic-topic xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
     <head>
         <uri>http://spfeopentoolkit.org/spfe-docs/content/development/writing-schemas.xml</uri>
         <author>mbaker</author>

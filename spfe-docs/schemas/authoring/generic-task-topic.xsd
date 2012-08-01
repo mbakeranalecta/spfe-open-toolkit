@@ -3,8 +3,8 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     elementFormDefault="qualified"  
-    targetNamespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/generic-topic"
-              xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/generic-topic">
+    targetNamespace="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic"
+    xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic">
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/identity.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/index.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/tracking.xsd"/>
@@ -12,18 +12,20 @@
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/conditions.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/text-decoration.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/mentions/mentions-general.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/mentions/mentions-xml.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/resources.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/roots/generic-topic.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/roots/generic-task-topic.xsd"/>
 
     <xs:group name="p-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>
             <xs:group ref="mentions-general"/>
+            <xs:group ref="mentions-xml"/>
             <xs:group ref="resources"/>
         </xs:choice>
     </xs:group>
     
     <xs:simpleType name="mentions-type">
-        <xs:union memberTypes="mentions-general"/>
+        <xs:union memberTypes="mentions-general mentions-xml"/>
     </xs:simpleType>
 </xs:schema>

@@ -10,7 +10,7 @@
             <xs:element name="history">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="revision">
+                        <xs:element name="revision" maxOccurs="unbounded" minOccurs="1">
                             <xs:complexType>
                                 <xs:sequence>
                                     <xs:element name="date" type="xs:date"/>

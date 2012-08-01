@@ -6,8 +6,8 @@
 		<xs:sequence>
 			<xs:element name="index">
 				<xs:complexType>
-					<xs:sequence maxOccurs="unbounded" minOccurs="1">
-						<xs:element name="entry">
+					<xs:sequence>
+						<xs:element name="entry" maxOccurs="unbounded" minOccurs="1">
 							<xs:complexType>
 								<xs:sequence minOccurs="1" maxOccurs="1">
 									<xs:element name="type" type="mentions-type" maxOccurs="1"
