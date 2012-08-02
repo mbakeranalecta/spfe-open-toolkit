@@ -1,0 +1,15 @@
+p>bold
+{
+    font-weight:bold;
+}
+
+p>italic
+{
+    font-style:italic;
+}
+
+p>code
+{
+    font-family:monospace;
+    font-weight:bold;
+}

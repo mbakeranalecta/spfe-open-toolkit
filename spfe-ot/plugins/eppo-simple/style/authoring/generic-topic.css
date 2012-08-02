@@ -1,0 +1,28 @@
+@import url("text-general.css");
+@import url("mentions-general.css");
+@import url("mentions-xml.css");
+@import url("conditions.css");
+@import url("text-decoration.css");
+
+/* mentions-xml is not part of the default mentions for eppo-simple, 
+   but is part of the default CSS, for simplicity sake, until Oxygen 
+   gives us the ability to load CSS by URL via a catalog. */
+generic-topic
+{
+    display:block;
+    font-family:serif;
+}
+
+body
+{
+    display:block;
+    margin-top:2em;
+}
+
+title
+{
+    display:block;
+    font-family:sans-serif;
+    font-size:large;
+}
+

@@ -1,0 +1,39 @@
+p>directory-name
+{
+   font-weight:bold;
+}
+
+p>document-name
+{
+   font-weight:bold;
+}
+
+p>feature
+{
+   font-weight:normal;
+}
+
+p>file-name
+{
+   font-weight:bold;
+}
+
+p>product-name
+{
+   font-weight:bold;
+}
+
+p>task
+{
+   font-weight:normal;
+}
+
+p>term
+{
+   font-weight:normal;
+}
+
+p>tool-name
+{
+   font-weight:bold;
+}

@@ -5,6 +5,7 @@ head
  padding: 1em;
  border-style:outset;
  background-color:silver;
+ font-family:sans-serif;
 }
 
 uri 
@@ -22,6 +23,7 @@ uri:before
     padding: 2px;
     font-weight:bold;
     display:block;
+    font-size:small;
     
 }
 
@@ -39,6 +41,7 @@ head>author:before
     background-color:silver;
     padding: 2px;
     font-weight:bold;
+    font-size:small;
     display:block;
 }
 
@@ -56,6 +59,7 @@ status:before
     background-color:silver;
     padding: 2px;
     font-weight:bold;
+    font-size:small;
     display:block;
 }
 
@@ -74,6 +78,7 @@ history:before
     background-color:silver;
     padding: 2px;
     font-weight:bold;
+    font-size:small;
     display: block;
 }
 
@@ -118,6 +123,7 @@ index::before
     background-color:silver;
     padding: 2px;
     font-weight:bold;
+    font-size:small;
 }
 
 index>entry

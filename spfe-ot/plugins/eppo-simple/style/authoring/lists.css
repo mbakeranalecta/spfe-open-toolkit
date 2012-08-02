@@ -1,0 +1,26 @@
+
+ul {
+	display: block;
+	margin: 0.5em 0 0.5em 1.5em;
+	list-style-type: disc;
+	 
+}
+ol {
+	display: block;
+	margin: 0.5em 0 0.5em 1.5em;
+	counter-reset:item
+}
+ul li {
+	display: list-item;
+}
+ol li {
+	list-style-type: decimal;
+	display:list-item;
+}
+li ol li {
+	list-style-type: lower-alpha;
+	 
+}
+li ul li {
+	list-style-type:circle; 
+}
