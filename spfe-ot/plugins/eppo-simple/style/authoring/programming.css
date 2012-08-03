@@ -2,4 +2,7 @@ codeblock
 {
     display:block;
     white-space:pre;
+    font-family:monospace;
+    font-weight:bold;
+    margin-top:1em;
 }

@@ -15,6 +15,13 @@
     </xs:group>
     
     <xs:complexType name="text-general-type">
+        <xs:group ref="text-general" maxOccurs="unbounded"/>
+    </xs:complexType>
+    
+    <xs:complexType name="paragraph-first-text-general-type">
+        <xs:sequence>
+            <xs:group ref="paragraphs" maxOccurs="1" minOccurs="1"/>
             <xs:group ref="text-general" maxOccurs="unbounded"/>
+        </xs:sequence>
     </xs:complexType>
 </xs:schema>

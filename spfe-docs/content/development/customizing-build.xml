@@ -36,11 +36,25 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
        </understanding>
        <planning>
            <planning-question>
-               <planning-question-title></planning-question-title>
-               <planning-question-body></planning-question-body>
-               <how-to-answer-title></how-to-answer-title>
-               <how-to-answer-body></how-to-answer-body>
-           </planning-question>
+                <planning-question-title>Do I need to change the build order?</planning-question-title>
+                <planning-question-body>
+                    <p>The default build order invokes a single build file for the synthesis, presentation, format, and encode stages. If you want to break any of these stages up into multiple steps, you will need to change the build order.</p>
+                </planning-question-body>
+                <how-to-answer-body>
+                    <p>The most common reason for changing the build order is to do custom processing of source files to create topics, or to combine externally sourced material with authord material to produce topics. You would then run a regualar or custom synthesis step on the resulting topic files.</p>
+                </how-to-answer-body>
+            </planning-question>
+            <planning-question>
+                <planning-question-title/>
+                <planning-question-body>
+                    <p>foobar</p>
+                    <codeblock>ghtyuer</codeblock>
+                    <p/>
+                </planning-question-body>
+                <how-to-answer-body>
+                    <p/>
+                </how-to-answer-body>
+            </planning-question>
        </planning>
         
 
@@ -90,7 +104,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <p>-build.pdf-encode</p>
             </li>
         </ul>
-        <p>To make your new build file the build file used for your topic set build, you add a /spfe/build-rules element to the configuration file for that topic set:</p>
+        <p>To make your new build file the build file used for your topic set build, you add a <xml-element-name>/spfe/build-rules</xml-element-name> element to the configuration file for that topic set:</p>
 
 <codeblock>
     <![CDATA[

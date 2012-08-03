@@ -3,25 +3,29 @@ head
 {
  display:block;
  padding: 1em;
- border-style:outset;
  background-color:silver;
  font-family:sans-serif;
 }
 
-uri 
+head:before
+{
+    font-weight:bold;
+    font-size:larger;
+    content: "Head";
+    font-family:sans-serif;
+}
+
+head>uri 
 {
     display:block;
-    border-style:inset;
-    margin: .5em;
     background-color:white;
 }
 
-uri:before
+head>uri:before
 {
     content: "URI:";
     background-color:silver;
     padding: 2px;
-    font-weight:bold;
     display:block;
     font-size:small;
     
@@ -30,8 +34,6 @@ uri:before
 head>author 
 {
     display:block;
-    border-style:inset;
-    margin: .5em;
     background-color:white;
 }
 
@@ -40,103 +42,99 @@ head>author:before
     content: "Author:";
     background-color:silver;
     padding: 2px;
-    font-weight:bold;
     font-size:small;
     display:block;
 }
 
-status 
+head>status 
 {
     display:block;
-    border-style:inset;
-    margin: .5em;
     background-color:white;
 }
 
-status:before
+head>status:before
 {
     content: "Status:";
     background-color:silver;
     padding: 2px;
-    font-weight:bold;
     font-size:small;
     display:block;
 }
 
-history 
+head>history 
 {
     display:table;
-    border-style:inset;
-    margin: .5em;
     background-color:white;
     width:100%;
 }
 
-history:before
+head>history:before
 {
     content: "History:";
     background-color:silver;
     padding: 2px;
-    font-weight:bold;
     font-size:small;
     display: block;
 }
 
-history>revision
+head>history>revision
 {
     display:table-row;
 }
 
-history>revision>date
+head>history>revision>date
 {
     display:table-column;
+    border-bottom: 1px solid silver;
 }
 
-history>revision>author
+head>history>revision>author
 {
     display:table-column;
+    border-bottom: 1px solid silver;
 }
 
-history>revision>comment
+head>history>revision>comment
 {
     display:table-column;
+    border-bottom: 1px solid silver;
 }
 
-history>revision>new-status
+head>history>revision>new-status
 {
     display:table-column;
+    border-bottom: 1px solid silver;
 }
 
-index 
+head>index 
 {
     display:table;
-    border-style:inset;
-    margin: .5em;
     background-color:white;
     width:100%;
 }
 
-index::before
+head>index::before
 {
     display: block;
     content: "Index:";
     background-color:silver;
     padding: 2px;
-    font-weight:bold;
     font-size:small;
 }
 
-index>entry
+head>index>entry
 {
     display:table-row;
 }
 
-index>entry>type
+head>index>entry>type
 {
     display:table-column;
+    border-bottom: 1px solid silver;
 }
 
-index>entry>term
+head>index>entry>term
 {
     display:table-column;
+    border-bottom: 1px solid silver;
 }

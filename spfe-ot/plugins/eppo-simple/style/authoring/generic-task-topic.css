@@ -1,0 +1,135 @@
+
+generic-task-topic
+{
+    display:block;
+    font-family:serif;
+}
+
+generic-task-topic>body
+{
+    display:block;
+    background-color:#FFDEAD;
+    padding: 1em;
+}
+
+generic-task-topic>head:before
+{
+    font-weight:bold;
+    font-size:larger;
+    content: "Generic task topic";
+    font-family:sans-serif;
+}
+
+
+
+generic-task-topic>body>*
+{
+    background-color:white;
+}
+
+generic-task-topic>body>title
+{
+    display:block;
+    font-family:sans-serif;
+    font-size:large;
+}
+
+generic-task-topic>body>title:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "Title:";
+    font-size:small;
+}
+
+
+understanding:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "Understanding:";
+    font-size:small;
+    margin-top: 2em;
+}
+
+planning
+{
+    border-left: 2em solid #FFDEAD;;
+}
+
+planning:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "Planning:";
+    font-size:small;
+    margin-top: 2em;
+}
+
+planning>planning-question
+{
+    border: 1pt groove white;
+    padding: 1em;
+    background-color:#FFDEAD; 
+    padding-left: 1em;
+}
+
+planning>planning-question>*
+{
+    background-color:white;
+}
+
+planning>planning-question:before
+{
+    display:block;
+    content: "Planning question";
+    background-color:#FFDEAD;
+    font-family:sans-serif;
+    font-size:small;  
+/*    margin-top: 1em;*/
+    padding-top:1em;
+}
+
+planning>planning-question>planning-question-title
+{
+    display:block;
+    font-family:sans-serif;
+    font-size:larger;
+}
+
+planning>planning-question>planning-question-body:before
+{
+    display:block;
+    content: "Explanation of planning question";
+    background-color:#FFDEAD;
+    font-family:sans-serif;
+    font-size:small;  
+    margin-top: 1em;}
+
+/*planning>planning-question>how-to-answer-body
+{
+    padding-left:2em;
+}*/
+
+planning>planning-question>how-to-answer-body:before
+{
+    display:block;
+    content: "How to answer the planning question";
+    background-color:#FFDEAD;
+    font-family:sans-serif;
+    font-size:small;  
+    margin-top: 1em;
+}
+
+doing:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "Doing:";
+    font-size:small;
+    margin-top: 2em;
+}
