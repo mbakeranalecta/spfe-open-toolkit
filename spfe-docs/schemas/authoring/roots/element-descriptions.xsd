@@ -13,31 +13,38 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="schema-namespace" type="xs:string"/>
-                <xs:element name="element-description" maxOccurs="unbounded">
+                <xs:element name="body">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="xpath" type="xs:string"/>
-                            <xs:element name="description" type="text-general-type"/>
-                            <xs:element name="build-property" type="xs:string"/>
-                            <xs:element name="include-behavior" type="text-general-type"/>
-                            <xs:element name="values" minOccurs="0">
+                            <xs:element name="schema-namespace" type="xs:string"/>
+                            <xs:element name="element-description" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="unspecified" minOccurs="0" maxOccurs="1" type="text-general-type"/>
-                                        <xs:sequence maxOccurs="unbounded" minOccurs="0">
-                                            <xs:element name="value" type="xs:string"/>
-                                            <xs:element name="description" type="text-general-type"/>
-                                        </xs:sequence>
+                                        <xs:element name="xpath" type="xs:string"/>
+                                        <xs:element name="description" type="text-general-type"/>
+                                        <xs:element name="build-property" type="xs:string"/>
+                                        <xs:element name="include-behavior" type="text-general-type"/>
+                                        <xs:element name="values" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="unspecified" minOccurs="0" maxOccurs="1" type="text-general-type"/>
+                                                    <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                                                        <xs:element name="value" type="xs:string"/>
+                                                        <xs:element name="description" type="text-general-type"/>
+                                                    </xs:sequence>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="restrictions" type="restrictionsType"/>
+                                        <xs:element minOccurs="0" name="attributes" type="attributesType"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element minOccurs="0" name="restrictions" type="restrictionsType"/>
-                            <xs:element minOccurs="0" name="attributes" type="attributesType"/>
+                            
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-            </xs:sequence>
+           </xs:sequence>
         </xs:complexType>
     </xs:element>
     

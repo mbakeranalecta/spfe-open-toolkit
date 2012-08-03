@@ -62,6 +62,7 @@ exclude-result-prefixes="#all">
 
 	<xsl:variable name="element-description-dir" select="concat($config/config:build/config:build-directory, '/temp/')"/>
 	
+	<!-- FIXME: This is not loading the schema namespace element (which is not currently used) -->
 	<xsl:variable name="element-source" as="element(ed:element-description)*">
 		<xsl:for-each select="tokenize($element-description-files, $config/config:dir-separator)">
 			<xsl:sequence select="doc(concat('file:///', $element-description-dir, .))//ed:element-description"/>	

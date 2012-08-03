@@ -20,8 +20,6 @@ generic-task-topic>head:before
     font-family:sans-serif;
 }
 
-
-
 generic-task-topic>body>*
 {
     background-color:white;
@@ -77,22 +75,6 @@ planning>planning-question
     padding-left: 1em;
 }
 
-planning>planning-question>*
-{
-    background-color:white;
-}
-
-planning>planning-question:before
-{
-    display:block;
-    content: "Planning question";
-    background-color:#FFDEAD;
-    font-family:sans-serif;
-    font-size:small;  
-/*    margin-top: 1em;*/
-    padding-top:1em;
-}
-
 planning>planning-question>planning-question-title
 {
     display:block;
@@ -109,10 +91,6 @@ planning>planning-question>planning-question-body:before
     font-size:small;  
     margin-top: 1em;}
 
-/*planning>planning-question>how-to-answer-body
-{
-    padding-left:2em;
-}*/
 
 planning>planning-question>how-to-answer-body:before
 {

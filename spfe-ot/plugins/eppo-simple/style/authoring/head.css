@@ -7,14 +7,6 @@ head
  font-family:sans-serif;
 }
 
-head:before
-{
-    font-weight:bold;
-    font-size:larger;
-    content: "Head";
-    font-family:sans-serif;
-}
-
 head>uri 
 {
     display:block;
