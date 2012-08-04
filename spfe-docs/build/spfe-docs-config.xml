@@ -30,7 +30,7 @@
     </publication-info>
     <topic-type-aliases>
         <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic</id>
+            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic</id>
             <alias>Concept</alias>
             <plural>Concepts</plural>
         </topic-type>

@@ -3,30 +3,13 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <!-- ===================================================
 	synthesize-schema-docs.xsl
-
-	The stylesheet pulls in element, attribute, and type definitions from the file 
-	created by schema-read.xsl and pulls in information from the authored files
-	to create a complete set of reference topics that can then be output to 
-	different media.
-	
-	Also uses the authored file componet-source to build component reference,
-	pulling definitions generated from CDF files from component-defs-file.
-
-	Revisions:
-
-	2005-07-15 gmb First version
-	2005-12-08 gmb Added support for component reference
-	2006-04-25 gmb Blended updates from 1.4.3
-	2006-07-04 gmb Added support for shared library API schema
-	2006-08-21 gmb Changed copy method and added docs
-	2006-10-22 gmb Changed to support doctype instead of schema-based docs
 =======================================================-->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-xmlns:ed="http://spfeopentoolkit.org/spfe-ot/plugins/config-schema-docs/schemas/element-descriptions"
+xmlns:ed="http://spfeopentoolkit.org/spfe-docs/schemas/config-element-descriptions"
 exclude-result-prefixes="#all">
 	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
 <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/synthesis/common/synthesize-text-structures.xsl"/>
@@ -99,7 +82,6 @@ Main template
 -->
 	
 <xsl:template name="main">
-	
 		<!-- Create the schema element topic set -->
 		<xsl:for-each-group select="$doctypes/doctype" group-by="@name">
 			<xsl:variable name="root" select=".[sf:get-longest(@xpath)]/@xpath"/>

@@ -201,19 +201,6 @@
 
 	<!-- SYNTHESIS STEP -->
 
-	<target name="-current.synthesis">
-		<uptodate property="-current.synthesis"
-			targetfile="${temp}/synthesis.flag">
-			<srcresources>
-				<files refid="topics"/>
-				<files refid="text-objects"/>
-				<files refid="fragments"/>
-				<files refid="strings"/>
-				<files refid="graphics-catalog"/>
-				<files refid="link-catalogs"/>
-			</srcresources>
-		</uptodate>
-	</target>
 
 	<!-- target to build  synthesis -->
 	<target name="-build.synthesis" depends="--build.synthesis"/>
@@ -221,9 +208,7 @@
 		depends="-get.source-files.topics,
 					 -get.source-files.text-objects,
 					 -get.source-files.fragments,
-					 -get.source-files.strings,
-					 -current.synthesis"
-		unless="-current.synthesis">
+					 -get.source-files.strings">
 
 		<!-- run the XSLT script to produce the output -->
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"

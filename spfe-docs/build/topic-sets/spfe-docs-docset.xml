@@ -11,7 +11,7 @@
     <publication-info>
         <title>SPFE Documentation</title>
     </publication-info>
-    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/generic-topic</topic-type-order>
+    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic</topic-type-order>
     <sources>
         <topics>
             <include>../../content/spfe-docs/*.xml</include>

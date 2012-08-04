@@ -69,9 +69,7 @@
 	<!-- target to build schema synthesis -->
 	<target name="--build.synthesis" description="Schema synthesis" 
 	        depends="-build.schema-defs, 
-					 -get.source-files.element-descriptions,
-					 -current.synthesis"
-			unless="-current.synthesis">
+					 -get.source-files.element-descriptions">
 						
 		<!-- run the XSLT script to produce the output -->
 		<basename property="source-files.descriptions.name" file="${source-files.element-descriptions}"/>

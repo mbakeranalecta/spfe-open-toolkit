@@ -116,9 +116,7 @@
     
     <!-- copy the attribute nodes from the config files -->
     <xsl:template match="@*" mode="resolve-config" priority="-1">
-        <xsl:copy>
-            <xsl:apply-templates mode="resolve-config"/>
-        </xsl:copy>
+        <xsl:copy-of select="."/>
     </xsl:template>
     
     <!-- copy the element nodes from the config files -->
