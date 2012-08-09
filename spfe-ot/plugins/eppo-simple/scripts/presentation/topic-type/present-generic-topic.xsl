@@ -6,8 +6,8 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ xmlns:gt="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/generic-topic"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
- xmlns:gt="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic"
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  exclude-result-prefixes="#all">
  
@@ -15,7 +15,7 @@
 	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-references.xsl"/>
 	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-text-structures.xsl"/>
 	
-	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic']">
+	<xsl:template match="ss:topic">
 		<xsl:apply-templates/>
 	</xsl:template>
 

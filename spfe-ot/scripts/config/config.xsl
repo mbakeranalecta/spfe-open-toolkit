@@ -554,8 +554,10 @@
                     version="2.0" >
                     <xsl:for-each select="current-group()[1]/c:script">
                         <!-- FIXME: need to figure out if this should be import or include -->
+                        <!-- FIXME: looks like include may be preferable to avoid complexities with include precedence -->
+                        <!-- FIXME: But examine if this mechanism is actually worthwhile. -->
 <!--                        <gen:import href="file:///{.}"/>
--->                        <gen:import href="{resolve-uri(.,@base-uri)}"/>
+-->                        <gen:include href="{resolve-uri(.,@base-uri)}"/>
                     </xsl:for-each>
                 </gen:stylesheet>
             </xsl:result-document>

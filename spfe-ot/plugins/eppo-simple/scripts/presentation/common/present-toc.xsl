@@ -112,6 +112,8 @@
 						<!-- Make sure there is an entry on the topic type order list for every topic type. Exclude topic types starting with "spfe." -->
 						<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic[not(@virtual-type)]/@type union $synthesis/ss:synthesis/ss:topic[not(starts-with(@virtual-type, 'spfe.'))]/@virtual-type)"/>
 						
+						<xsl:message select="'$topic-types-found:', $topic-types-found"></xsl:message>
+						
 						<xsl:if test="count($topic-types-found[not(.=$topic-type-order)])">
 							<xsl:call-template name="error">
 								<xsl:with-param name="message" select="'Topic type(s) missing from spfe.topic-type-order-list property: ', string-join($topic-types-found[not(.=$topic-type-order)], ', ')"/>
@@ -186,6 +188,9 @@
 	
 	<!-- Default topics-of-type template - may be overridden for specific types -->
 	<xsl:template match="topics-of-type" mode="toc">
+		<xsl:call-template name="info">
+			<xsl:with-param name="message" select="'Applying default TOC template to topics of type', string(@type)"/>
+		</xsl:call-template>
 		<xsl:for-each select="ss:topic">
 			<xsl:sort select="@title"/>
 			<node id="{@local-name}" name="{@title}"/>

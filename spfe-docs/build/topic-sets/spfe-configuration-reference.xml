@@ -11,7 +11,7 @@
     <publication-info>
         <title>SPFE Configuration Settings</title>
     </publication-info>
-    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/configuration-reference</topic-type-order>
+    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</topic-type-order>
     <sources>
         <topics>
             <include>../../content/config-ref/*.xml</include>

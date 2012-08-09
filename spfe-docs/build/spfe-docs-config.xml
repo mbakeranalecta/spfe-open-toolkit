@@ -35,7 +35,7 @@
             <plural>Concepts</plural>
         </topic-type>
         <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/configuration-reference</id>
+            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</id>
             <alias>Configuration setting</alias>
             <plural>Configuration settings</plural>
         </topic-type>

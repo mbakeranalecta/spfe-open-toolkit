@@ -19,6 +19,7 @@
  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" 
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  exclude-result-prefixes="#all"
 >
@@ -56,13 +57,13 @@
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:choose>
 			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
-				<xsl:copy copy-namespaces="no">
+				<xsl:element name="{local-name()}" namespace="{$output-namespace}">
 					<xsl:copy-of select="@*" copy-namespaces="no"/>
 					
-					<xsl:if test="(parent::p and not(@scope)) or name()='code-block'">
+					<xsl:if test="(parent::*:p and not(@scope)) or name()='code-block'">
 						<xsl:choose>
-							<xsl:when test="ancestor::topic/@default-reference-scope">
-								<xsl:attribute name="scope" select="ancestor::topic/@default-reference-scope"/>
+							<xsl:when test="ancestor::ss:topic/@default-reference-scope">
+								<xsl:attribute name="scope" select="ancestor::ss:topic/@default-reference-scope"/>
 							</xsl:when>
 							<xsl:when test="$default-reference-scope">
 								<xsl:attribute name="scope" select="$default-reference-scope"/>
@@ -71,7 +72,7 @@
 					</xsl:if>
 					
 					<xsl:apply-templates mode="#current"/>
-				</xsl:copy>
+				</xsl:element>
 			</xsl:when>
 			<xsl:otherwise>
 				<!-- suppress the element -->

@@ -104,7 +104,7 @@ element-descriptions>body>element-description>build-property
 {
     display:block;
     background-color:white;
-    content:"\200B";
+    -oxy-show-placeholder: always;
 }
 element-descriptions>body>element-description>include-behavior:before
 {
@@ -120,7 +120,7 @@ element-descriptions>body>element-description>include-behavior
 {
     display:inline;
     background-color:white;
-    content:"\200B";
+    -oxy-show-placeholder: always;
 }
 
 

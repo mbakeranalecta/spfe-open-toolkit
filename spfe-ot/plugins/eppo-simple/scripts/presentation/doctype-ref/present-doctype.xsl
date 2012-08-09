@@ -6,7 +6,8 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
- exclude-result-prefixes="#all">
+ exclude-result-prefixes="#all"
+ xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry">
  
 <xsl:import href="utility-functions.xsl"/> 
 <!-- <xsl:import href="present-generic-topic.xsl"/> -->
@@ -31,7 +32,7 @@
 	</xsl:for-each>
 </xsl:variable>
 
-  <xsl:template match="topics-of-type[@type='schema-element']"  mode="toc">
+  <xsl:template match="topics-of-type[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry']"  mode="toc">
 		<xsl:for-each-group select="$synthesis/synthesis/topic" group-by="tokenize(schema-element/xpath, '/')[. ne ''][1]">
 			<xsl:sort select="name"/>
 			<xsl:call-template name="make-schema-toc">

@@ -23,7 +23,7 @@
 		<xsl:sequence select="/config:spfe"/>
 	</xsl:variable>
 	
-	<!-- FIXME: Generalize the load function. Remove need for hard coded sourcd dirs. See schema docs.-->
+	<!-- FIXME: Generalize the load function. Remove need for hard coded source dirs. See schema docs.-->
 	<xsl:param name="topic-files"/>
 	<xsl:variable name="topics-dir" select="concat($config/config:build/config:build-directory, '/temp/topics/')"/>
 	
@@ -39,9 +39,6 @@
 		<xsl:sequence select="document(tokenize($text-objects-files, $config/config:dir-separator))//text-object"/>
 	</xsl:variable>
 
-	<xsl:param name="topic-set-id"/>
-	<xsl:param name="draft">no</xsl:param>
-	<xsl:param name="optional-product"/>
 	<xsl:param name="default-topic-scope"/>
 
 
@@ -67,12 +64,6 @@ Main template
 		<xsl:copy-of select="@*" copy-namespaces="no"/>
 		
 		<xsl:attribute name="default-reference-scope" select="$default-reference-scope"/>
-		
-		<!-- add optional-product attribute-->
-		<xsl:if test="$optional-product">
-			<xsl:attribute name="optional-product" select="$optional-product"/>
-		</xsl:if>				
-		
 		<!-- add scope attributes, if scope meets conditions -->
 		<xsl:choose>
 			<xsl:when test="scope">
@@ -93,18 +84,7 @@ Main template
 			</xsl:when>	
 		</xsl:choose>
 	</xsl:template>
-	
-	<xsl:template match="topic" priority="-1">
-		<xsl:call-template name="error">
-			<xsl:with-param name="message">
-				<xsl:text>A topic element was found for which no synthesis-level topic template exists. For topic: </xsl:text>
-				<xsl:value-of select="name"/>
-			</xsl:with-param>
-		</xsl:call-template>
-	</xsl:template>
 
-	<xsl:template match="scope"/>
-	
 </xsl:stylesheet>
 
 

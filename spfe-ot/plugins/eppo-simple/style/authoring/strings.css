@@ -1,0 +1,24 @@
+string
+{
+
+   border: 1px solid #FFDEAD;
+}
+
+string-ref
+{
+    
+}
+
+string:before
+{
+    content:"string: " attr(id);
+    background-color: #FFDEAD;
+    font-size: small;
+}
+
+string-ref:before
+{
+    content:"string-ref:" oxy_xpath(oxy_concat("//string[@id='", attr(id-ref), "']")) ;
+    background-color: #FFDEAD;
+    font-size: small;
+}

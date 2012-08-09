@@ -5,7 +5,9 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
- exclude-result-prefixes="#all">
+ xmlns:re="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry"
+ exclude-result-prefixes="#all" 
+ xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry">
 
 	
 	<!--================================================
@@ -114,14 +116,13 @@
 		=================
 	-->
 	
-	<xsl:key name="topic" match="topic" use="@name"/>
 	
-	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/topic-types/configuration-reference']">
+	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry']">
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<!-- topic -->
-	<xsl:template match="topic">
+	<!-- spfe-configuration-reference-entry -->
+	<xsl:template match="spfe-configuration-reference-entry">
 		<xsl:apply-templates/>
 	</xsl:template>
 	
@@ -153,8 +154,6 @@
 				</item>
 			</labeled-item>	
 			
-
-
 			<labeled-item>
 				<label>Use</label>
 				<!-- FIXME: need a more sophisticated reading of schema groups 
@@ -281,17 +280,20 @@
 		</page>
 	</xsl:template>
 	
+	<!-- FIXME: redundant ? -->
 	<xsl:template	 match="xpath">
 		<name hint="xpath">
 			<xsl:sequence select="sf:link-xpath-segments(xpath)"/>
 		</name>
 	</xsl:template>
 	
+	<!-- FIXME: Some redundant element names here -->
 	<xsl:template match="required-by|verified-by|location|unspecified|special|precis"> 
 		<xsl:apply-templates/>	
 	</xsl:template>
 	
-	<xsl:template match="type"/>
+	<xsl:template match="schema-element/type"/>
+	<xsl:template match="schema-element/name"/>
 	
 	<!-- 
 		============================
@@ -327,20 +329,17 @@
 		=========================
 	-->
 	<xsl:template name="format-attribute">
-		<xsl:variable name="self" select="xpath"/>
 		<anchor name="{name}"/>
 		<subhead>Attribute: <xsl:value-of select="name"/></subhead>
-		
+
 		<labeled-item>
 			<label>XPath</label>
-			<item hint="xpath"><xsl:sequence select="sf:link-doc-xpath(doc-xpath)"/></item>
+			<item>
+				<p><xsl:sequence select="sf:link-doc-xpath(doc-xpath)"/></p>
+			</item>
 		</labeled-item>	
 		
-<!-- 		<labeled-item>
-			<label>Schema XPath</label>
-			<item hint="xpath"><xsl:sequence select="sf:link-xpath-segments($self)"/></item>	
-		</labeled-item>	
- -->		
+	
 		<!-- description -->	
 		<labeled-item>
 			<label>Description</label>
@@ -362,21 +361,6 @@
 				</p>
 			</item>
 		</labeled-item>
-		
-		<!-- Target location - Not used in MILS FIXME: implement field choice mechanism from component ref
-		<labeled-item>
-			<label>Target location</label>
-			<item>
-				<p>
-					<xsl:choose>
-						<xsl:when test="target/location">
-							<xsl:apply-templates select="target/location"/>
-						</xsl:when>
-						<xsl:otherwise>None</xsl:otherwise>
-					</xsl:choose>
-				</p>
-			</item>
-		</labeled-item>-->
 		
 		<!-- XML data type -->
 		<xsl:variable name="type" select="type"/>

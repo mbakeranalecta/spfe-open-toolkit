@@ -5,6 +5,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 	exclude-result-prefixes="#all">
 	
@@ -181,7 +182,7 @@
 		
 		<xsl:if test="count($target-page[1]/target[@type=$type][key=$target]) gt 1">
 			<xsl:call-template name="warning">
-				<xsl:with-param name="message" select="'Detected a target page that contains more than one target of the same name and type. The target is:', $target, '. The type is:', $type, '. This may be due to errors in sources such as API references that do not detect this class of error. If you get this warning, you should investigate to see if you need to file a defect against the product.'"/>
+				<xsl:with-param name="message" select="'Detected a target page that contains more than one target of the same name and type. The target is:', $target, '. The type is:', $type, '.'"/>
 
 			</xsl:call-template>
 		</xsl:if>
@@ -487,7 +488,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="mention-not-resolved">
-					<xsl:with-param name="message" select="'Term not found in glossary: &quot;', $term, '&quot;'"/> 
+					<xsl:with-param name="message" select="'Term  &quot;', $term, '&quot; not resolved.'"/> 
 				</xsl:call-template>
 				<xsl:apply-templates/>
 			</xsl:otherwise>
@@ -612,10 +613,17 @@
 	
 	
 
-	<xsl:template match="*:name">
-		<!-- FIXME: handle namespace of the name -->
+	<xsl:template match="*:p/*:name">
+		<!-- FIXME: handle namespace of the name? -->
+		<xsl:if test="not(@key)">
+			<xsl:call-template name="warning">
+				<xsl:with-param name="message" 
+					select="'&quot;name&quot; mention element found with no &quot;key&quot; attribute:', . "/>
+				
+			</xsl:call-template>
+		</xsl:if>
 		<xsl:variable name="content" select="normalize-space(.)"/>
-		<name type="@type">
+		<name type="{@type}">
 			<xsl:choose>
 				<xsl:when test="sf:target-exists(@key, @type, @scope)">
 					<xsl:call-template name="output-link">
@@ -627,7 +635,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="mention-not-resolved">
-						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved.')"/> 
+						<xsl:with-param name="message" select="concat(@type, ' name &quot;', (if (@key) then @key else .), '&quot; not resolved.')"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
 				</xsl:otherwise>
@@ -790,5 +798,6 @@
 		</xsl:analyze-string>
 	</xsl:function>
 				
-
+	<!-- FIXME: Targets to absorb fields from the synthesis wrapper. Proper fix is to put all the refernceces into the EPPO simple namespace to avoid *: matches, which are always susceptible to matching other things. Might also consider writing the mentions p//mention, but this has implications for any use of mention markup outside paragraphs. When this is fixed, remove the ss namespace declaration from the stylesheet element. -->
+	<xsl:template match="ss:*"/>
 </xsl:stylesheet>

@@ -89,9 +89,7 @@ Main template
 					<xsl:attribute name="scope" select="$config/config:default-topic-scope"/>
 				</xsl:when>
 			</xsl:choose>
-			<xsl:if test="$config/config:optional-product">
-				<xsl:attribute name="optional-product" select="$config/config:optional-product"/>
-			</xsl:if>
+
 			<!-- topic references -->
 			<target type="topic">
 				<label>

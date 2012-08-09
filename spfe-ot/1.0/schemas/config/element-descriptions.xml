@@ -522,7 +522,7 @@
         <element-description>
             <xpath>/spfe/wip-site</xpath>
             <description>
-                <p>A container element for configuration information on the <feature>work in porgress site</feature>.</p>
+                <p>A container element for configuration information on the <feature>work in progress site</feature>.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -863,7 +863,7 @@
         <element-description>
             <xpath>/spfe/doc-set</xpath>
             <description>
-                <p>A container element for information on a documentation set. A documentation set is a collection of topic sets. To define a documentation set, you list the configuration files for each topic set in the documentation set using a <xml-element-name>/spfe/doc-set/topic-set</xml-element-name> element.</p>
+                <p>A container element for information on a documentation set. A documentation set is a collection of topic sets. To define a documentation set, you list the configuration files for each topic set in the documentation set using a <xml-element-name>/spfe/doc-set/topic-sets/topic-set</xml-element-name> element.</p>
                 <p>To build a full documentation set, you simply run the <tool-name>spfe</tool-name> build tool with a configuration file that contains a <xml-element-name xpath="/spfe/doc-set">doc-set</xml-element-name> element directly (not via inclusion). The build tool will then run whichever build command you have specified on all the topic sets in the documentation set, as well as creating the files that belong to the documentation set as a whole.</p>
             </description>
             <build-property/>
@@ -890,7 +890,7 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/doc-set/topic-set</xpath>
+            <xpath>/spfe/doc-set/topic-sets/topic-set</xpath>
             <description>
                 <p>The path to a topic-set configuration file for a topic set to be included in the documentation set.</p>
             </description>
