@@ -18,7 +18,17 @@ string:before
 
 string-ref:before
 {
-    content:"string-ref:" oxy_xpath(oxy_concat("//string[@id='", attr(id-ref), "']")) ;
+    content:"string-ref:" 
+            oxy_xpath(
+                oxy_concat(
+                    "if (//string[@id='",
+                    attr(id-ref),
+                    "']) then //string[@id='", 
+                    attr(id-ref), 
+                    "'] else ' id = ",
+                    attr(id-ref),
+                    "'")
+                 ) ;
     background-color: #FFDEAD;
     font-size: small;
 }
