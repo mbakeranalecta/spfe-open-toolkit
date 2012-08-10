@@ -77,25 +77,30 @@ head>history>revision
 head>history>revision>date
 {
     display:table-column;
-    border-bottom: 1px solid silver;
+    border: 1px solid silver;
+    -oxy-show-placeholder: always;
+    -oxy-placeholder-content: "YYYY-MM-DD";
 }
 
 head>history>revision>author
 {
     display:table-column;
-    border-bottom: 1px solid silver;
+    border: 1px solid silver;
+    -oxy-show-placeholder: always;
 }
 
 head>history>revision>comment
 {
     display:table-column;
-    border-bottom: 1px solid silver;
+    border: 1px solid silver;
+    -oxy-show-placeholder: always;
 }
 
 head>history>revision>new-status
 {
     display:table-column;
-    border-bottom: 1px solid silver;
+    border: 1px solid silver;
+    -oxy-show-placeholder: always;
 }
 
 head>index 
