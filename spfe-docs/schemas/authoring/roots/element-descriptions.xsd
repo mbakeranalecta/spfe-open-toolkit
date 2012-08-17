@@ -21,7 +21,7 @@
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="xpath" type="xs:string"/>
-                                        <xs:element name="description" type="text-general-type"/>
+                                        <xs:element name="description" type="paragraph-first-text-general-type"/>
                                         <xs:element name="build-property" type="xs:string"/>
                                         <xs:element name="include-behavior" type="text-general-type"/>
                                         <xs:element name="values" minOccurs="0">
@@ -60,9 +60,7 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="name" type="xs:string"/>
-                        <xs:element name="description" type="text-general-type"/>
-                        <xs:element name="required-by" minOccurs="0" type="text-general-type"/>
-                        <xs:element name="verified-by" minOccurs="0" type="text-general-type"/>
+                        <xs:element name="description" type="paragraph-first-text-general-type"/>
                         <xs:element name="target" minOccurs="0">
                             <xs:complexType>
                                 <xs:all>
@@ -77,7 +75,7 @@
                                     <xs:element name="unspecified" type="text-general-type" minOccurs="0" maxOccurs="1"/>
                                     <xs:sequence maxOccurs="unbounded" minOccurs="0">
                                         <xs:element name="value" type="xs:string"/>
-                                        <xs:element name="description" type="text-general-type"/>
+                                        <xs:element name="description" type="paragraph-first-text-general-type"/>
                                     </xs:sequence>
                                 </xs:sequence>
                             </xs:complexType>
@@ -95,6 +93,7 @@
             <xs:group ref="text-decoration"/>
             <xs:group ref="mentions-general"/>
             <xs:group ref="mentions-xml"/>
+            <xs:group ref="mentions-spfe-build"/>
             <xs:group ref="resources"/>
             <xs:group ref="substitutions"/>
         </xs:choice>
@@ -105,6 +104,7 @@
         <xs:choice>
             <xs:group ref="mentions-xml"/>			
             <xs:group ref="mentions-general"/>
+            <xs:group ref="mentions-spfe-build"/>
         </xs:choice>
     </xs:group>
     

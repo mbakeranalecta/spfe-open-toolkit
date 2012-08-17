@@ -68,15 +68,14 @@ Main template
 	</xsl:template>
 
 	<xsl:template match="ss:synthesis">
-		<link-catalog topic-set-id="{$config/config:topic-set-id}"
+		<link-catalog topic-set-id="{@topic-set-id}"
 			output-directory="{$config/config:deployment/config:output-path}"
-			product="{$config/config:publication-info/config:product}"
-			release="{$config/config:publication-info/config:release}"
+			title="{@title}"
 			time-stamp="{current-dateTime()}">
 			<xsl:apply-templates/>
 		</link-catalog>
 	</xsl:template>
-
+	
 	<xsl:template match="ss:topic">
 		<xsl:variable name="name" select="@local-name"/>
 		<page name="{@local-name}" title="{@title}" file="{@local-name}.html"
@@ -102,7 +101,12 @@ Main template
 			<!-- read the internal index to locate references in this topic -->
 			<xsl:for-each select="descendant::*:index/*:entry[normalize-space(.) ne '']">
 				<!-- collect up all the references -->
-				<target type="{*:type}" flag="{*:term}">
+				<target type="{*:type}">
+					<xsl:if test="*:namespace">					
+						<namespace>
+							<xsl:value-of select="*:namespace"/>
+						</namespace>
+					</xsl:if>					
 					<original-key>
 						<xsl:value-of select="translate(*:term[1], '{}', '')"/>
 						<xsl:if test="*:term[2]">

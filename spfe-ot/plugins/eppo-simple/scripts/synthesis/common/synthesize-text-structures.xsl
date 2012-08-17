@@ -97,12 +97,7 @@
 	</xsl:choose>
 </xsl:template>
 	
-	<xsl:template match="string-id">
-		<xsl:variable name="string-content">
-			<xsl:sequence  select="sf:string(@id-ref)"/>
-		</xsl:variable>
-		<xsl:apply-templates select="$string-content"/>
-	</xsl:template>
+
 	
 	<xsl:template match="fragment-internal">
 		<xsl:variable name="conditions" select="@if"/>

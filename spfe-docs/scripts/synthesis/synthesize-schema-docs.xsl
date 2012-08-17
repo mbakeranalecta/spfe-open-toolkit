@@ -37,7 +37,6 @@ exclude-result-prefixes="#all" >
 
 <xsl:param name="schema-defs-file"/>
 <xsl:variable name="schema-defs">
-	<xsl:message select="$schema-defs-file"/>
 	<xsl:call-template name="attach-source">
 		<xsl:with-param name="source" select="$schema-defs-file"/>
 	</xsl:call-template>
@@ -89,7 +88,7 @@ Main template
 			 indent="yes"
 			 omit-xml-declaration="no" 
 			 href="file:///{$synthesis-directory}/{@name}.xml">
-			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set="{$config/config:topic-set-id}"> 
+			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
 					<!-- Use for-each-group to filter out duplicate xpaths -->
 					<xsl:for-each-group select="$schema-defs/schema-definitions/schema-element[starts-with(xpath, $root) or belongs-to-group]" group-by="xpath">
 						<xsl:apply-templates select=".">
@@ -145,7 +144,9 @@ Main content processing templates
 		</xsl:choose>
 	</xsl:variable>
 						 
-	<!-- is it this doctype or a group, but not clear we need this check again -->				 
+	<!-- is it this doctype or a group, but not clear we need this check again -->			
+	
+	<!-- FIXME: Should this be separated into a config specific script? -->
 	<xsl:if test="($current-doctype = $doctype) or not($doctype)">		
 				
 		<ss:topic 
@@ -159,11 +160,13 @@ Main content processing templates
 			<ss:index>
 				<ss:entry>
 					<ss:type>xpath</ss:type>
+					<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</ss:namespace>
 					<ss:term><xsl:value-of select="$xpath"/></ss:term>
 				</ss:entry>
 				<xsl:for-each select="attributes/attribute">
 					<ss:entry>
 						<ss:type>xpath</ss:type>
+						<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</ss:namespace>
 						<ss:term><xsl:value-of select="xpath"/></ss:term>
 					</ss:entry>
 					
@@ -363,8 +366,8 @@ Content fix-up templates
 <!-- FIXME: Are these in the right namespace to match?" -->
 
 <!-- Fix up attribute name xpaths -->
-<xsl:template match="ed:xml-attribute-name">
-	<xsl:variable name="context-element" select="ancestor::element/name"/>
+<xsl:template match="ed:spfe-config-attribute-name">
+	<xsl:variable name="context-element" select="ancestor::ed:element-description/ed:xpath"/>
 	<xsl:variable name="data-content" select="."/>
 	<xsl:variable name="xpath" select="@xpath"/>
 	<xsl:variable name="all-attributes" select="
@@ -399,11 +402,12 @@ Content fix-up templates
 					
 					<!-- If not, we have a problem -->
 					<xsl:otherwise>
+						<xsl:attribute name="key" select="$data-content"/>
 						<xsl:call-template name="warning">
 							<xsl:with-param name="message">
-								<xsl:text>Ambiguous attribute name </xsl:text>
+								<xsl:text>Ambiguous SPFE config attribute name "</xsl:text>
 								<xsl:value-of select="$data-content"/>
-								<xsl:text> Context element is:</xsl:text>
+								<xsl:text>". Context element is:</xsl:text>
 								<xsl:value-of select="$context-element"/>
 								<xsl:text> Attributes are: </xsl:text>
 								<xsl:value-of select="$all-attributes[starts-with(., $context-element)]"/>
@@ -422,7 +426,7 @@ Content fix-up templates
 </xsl:template>
 
 <!-- Fix up element name xpaths -->
-<xsl:template match="ed:xml-element-name">
+	<xsl:template match="ed:spfe-config-element-name">
 	<xsl:variable name="context-element" select="ancestor::ed:element-description/ed:xpath"/>
 	<xsl:variable name="data-content" select="."/>
 	<xsl:variable name="xpath" select="@xpath"/>
@@ -460,11 +464,12 @@ Content fix-up templates
 					
 					<!-- If not, we have a problem -->
 					<xsl:otherwise>
+						<xsl:attribute name="key" select="$data-content"/>
 						<xsl:call-template name="warning">
 							<xsl:with-param name="message">
-								<xsl:text>Ambiguous element name </xsl:text>
+								<xsl:text>Ambiguous SPFE config element name "</xsl:text>
 								<xsl:value-of select="$data-content"/>
-								<xsl:text> Context element is:</xsl:text>
+								<xsl:text>". Context element is:</xsl:text>
 								<xsl:value-of select="$context-element"/>
 								<xsl:text> Elements are: </xsl:text>
 								<xsl:value-of select="$all-elements[ends-with(., $data-content)]"/>

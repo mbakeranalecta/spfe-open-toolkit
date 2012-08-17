@@ -67,6 +67,7 @@ element-descriptions>body>element-description>xpath
     display:block;
     font-family:sans-serif;
     font-size:large;
+    -oxy-show-placeholder: always;
 }
 
 element-descriptions>body>element-description>xpath:before
@@ -79,6 +80,12 @@ element-descriptions>body>element-description>xpath:before
     padding-top:1em;
 }
 
+    
+    
+element-descriptions>body>element-description>description
+{
+    -oxy-show-placeholder: always;
+}
 element-descriptions>body>element-description>description:before
 {
     display:block;
@@ -97,6 +104,7 @@ element-descriptions>body>element-description>build-property:before
     content: "If the configuration element becomes an ANT build propery, write the property name:";
     font-size:small;
     padding-top:1em;
+
 }
 
 /* to create an empty input field we use a zero-width space to give the empty element height */
@@ -152,6 +160,7 @@ element-descriptions>body>element-description>attributes>attribute
     padding: 1em;
     background-color:#FFDEAD; 
     padding-left: 1em;
+    -oxy-show-placeholder: always;
 }
 
 element-descriptions>body>element-description>attributes>attribute>*
@@ -175,7 +184,8 @@ element-descriptions>body>element-description>attributes>attribute>name
     display:block;
     font-family:sans-serif;
     font-size:large;
-}
+    -oxy-show-placeholder: always;
+ }
 
 element-descriptions>body>element-description>attributes>attribute>name:before
 {

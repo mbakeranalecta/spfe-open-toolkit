@@ -23,11 +23,12 @@
         </topic-sets>
      </doc-set>
     
-    <publication-info>
-        <product>SPFE Open Toolkit</product>
-        <release>1.0 (alpha 1)</release>
-        <copyright>Copyright © 2012 Analecta Communications Inc.</copyright>
-    </publication-info>
+     <strings>
+        <string id="eppo-simple-topic-set-product">SPFE Open Toolkit</string>
+        <string id="eppo-simple-topic-set-release">1.0 (alpha 1)</string>
+        <string id="eppo-simple-topic-set-copyright">Copyright © 2012 Analecta Communications Inc.</string>
+    </strings>
+    
     <topic-type-aliases>
         <topic-type>
             <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic</id>

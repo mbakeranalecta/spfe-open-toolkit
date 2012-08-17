@@ -18,7 +18,6 @@
         </xs:element>
         <xs:element name="topic-set-id" type="xs:string" minOccurs="0"/>
         <xs:element name="topic-set-type" type="xs:string" minOccurs="0"/>
-        <xs:element name="publication-info" type="publication-info-type" minOccurs="0"/>
         <xs:element name="topic-type-order" type="xs:anyURI" minOccurs="0"/>
         <xs:element name="sources" type="sources-type" minOccurs="0"/>
         <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
@@ -49,6 +48,23 @@
             </xs:simpleContent>
           </xs:complexType>
         </xs:element>
+        
+        <xs:element name="strings" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+             <xs:element name="string" maxOccurs="unbounded">
+               <xs:complexType>
+                 <xs:simpleContent>
+                   <xs:extension base="xs:string">
+                     <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
+                   </xs:extension>
+                 </xs:simpleContent>
+               </xs:complexType>
+             </xs:element>
+            </xs:sequence>   
+          </xs:complexType>
+        </xs:element>
+        
         <xs:element name="doc-set">
           <xs:complexType>
             <xs:sequence>
@@ -76,25 +92,6 @@
     </xs:complexType>
   </xs:element>
   
-  <xs:complexType name="publication-info-type">
-      <xs:choice maxOccurs="unbounded">
-        <xs:element name="title" type="xs:string" minOccurs="0"/>
-        <xs:element name="product" type="xs:string" minOccurs="0"/>
-        <xs:element name="release" type="xs:string" minOccurs="0"/>
-        <xs:element name="copyright" type="xs:string" minOccurs="0"/>
-        <xs:element name="other" minOccurs="0">
-          <xs:complexType>
-            <xs:simpleContent>
-              <xs:extension base="xs:string">
-                <xs:attribute name="name" type="xs:NCName"/>
-              </xs:extension>
-            </xs:simpleContent>
-          </xs:complexType>
-          
-        </xs:element>
-      </xs:choice>
-   </xs:complexType>
- 
   <xs:complexType name="sources-type">
        <xs:choice maxOccurs="unbounded">
          <xs:element name="topics" type="fileset-type"/>
@@ -228,5 +225,6 @@
       <xs:element name="html-style-directories" type="fileset-type"/>
     </xs:sequence>
   </xs:complexType>
+
 
 </xs:schema>

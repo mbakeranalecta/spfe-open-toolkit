@@ -33,12 +33,16 @@
 	<xsl:param name="toc-file"/>
 
 	<xsl:variable name="title-string">
-		<xsl:value-of select="$config/config:publication-info/config:title"/>
+		<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/>
+		<xsl:text>, </xsl:text>
+		<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
+<!--		<xsl:value-of select="$config/config:publication-info/config:title"/>
 		<xsl:text>, </xsl:text>
 		<xsl:value-of select="$config/config:publication-info/config:release"/>
-	</xsl:variable>
+-->	</xsl:variable>
 
 	<xsl:template name="main">
+
 		<xsl:result-document href="file:///{$config/config:build/config:toc-directory}/{$config/config:topic-set-id}.toc.xml" method="xml" indent="yes" omit-xml-declaration="no">
 			<toc topic-set-id="{$config/config:topic-set-id}" topic-set-type="{$config/config:topic-set-type}" deployment-relative-path="{$config/config:deployment/config:output-path}" title="{$title-string}">
 				<xsl:choose>
@@ -112,8 +116,6 @@
 						<!-- Make sure there is an entry on the topic type order list for every topic type. Exclude topic types starting with "spfe." -->
 						<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic[not(@virtual-type)]/@type union $synthesis/ss:synthesis/ss:topic[not(starts-with(@virtual-type, 'spfe.'))]/@virtual-type)"/>
 						
-						<xsl:message select="'$topic-types-found:', $topic-types-found"></xsl:message>
-						
 						<xsl:if test="count($topic-types-found[not(.=$topic-type-order)])">
 							<xsl:call-template name="error">
 								<xsl:with-param name="message" select="'Topic type(s) missing from spfe.topic-type-order-list property: ', string-join($topic-types-found[not(.=$topic-type-order)], ', ')"/>
@@ -151,8 +153,6 @@
 								</xsl:when>
 								<!-- if more than one topic, create group -->
 								<xsl:when test="$included-topics">
-									<xsl:variable name="title-page" select="$synthesis/ss:synthesis/ss:topic[@virtual-type='spfe.title-page'][ss:name=$this-topic-type]"/>
-
 									<node topic-type="{$this-topic-type}"  name="{$topic-type-alias-list/config:topic-type[config:id=$this-topic-type]/config:plural}">
 										<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
 									</node>
@@ -160,9 +160,11 @@
 								</xsl:when>
 								<xsl:otherwise>
 								<!-- if no topics, no heading -->
-									<xsl:call-template name="warning">
-										<xsl:with-param name="message" select="'No topics found for topic type ', $this-topic-type, ' in the topic type order list. This might be because all the topics of that type are grouped with other topics, or because there are no topics of that type. No type grouping will be created in the TOC'"/>
-									</xsl:call-template>
+									<xsl:if test="not($synthesis/ss:synthesis/ss:topic[matches(@local-name, '^[iI][nN][dD][eE][xX]$')][@type=$this-topic-type])">
+										<xsl:call-template name="warning">
+											<xsl:with-param name="message" select="'No topics found for topic type ', $this-topic-type, ' in the topic type order list. This might be because all the topics of that type are grouped with other topics, or because there are no topics of that type. No type grouping will be created in the TOC.'"/>
+										</xsl:call-template>
+									</xsl:if>
 								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:for-each>

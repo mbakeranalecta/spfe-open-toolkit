@@ -8,9 +8,6 @@
     <define name="TOPIC_SET_ID" value="spfe-configuration-reference"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <topic-set-type>reference</topic-set-type>
-    <publication-info>
-        <title>SPFE Configuration Settings</title>
-    </publication-info>
     <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</topic-type-order>
     <sources>
         <topics>
@@ -57,6 +54,7 @@
     <scripts>
         <synthesis>
             <script>../../scripts/synthesis/synthesize-schema-docs.xsl</script>
+            <script>../../scripts/synthesis/mentions-spfe-build.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/mentions/mentions.xsl</script>
         </synthesis>        
         <link-catalog>
@@ -75,6 +73,10 @@
             <script>../../scripts/synthesis/schema-defs.xsl</script>
         </other>
     </scripts>
+    
+    <strings>
+        <string id="eppo-simple-topic-set-title">SPFE Configuration Settings</string>
+    </strings>
     
     <other name="schema-file">${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</other>
 </spfe>

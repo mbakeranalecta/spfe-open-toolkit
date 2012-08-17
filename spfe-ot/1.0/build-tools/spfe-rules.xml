@@ -93,7 +93,7 @@
 		
 		<!-- FIXME: switch scripts to use full paths -->
 		<!-- These echos are to test how the lists are created on each platform -->
-		<!-- Note inconsistency between handling of files and fileset WRT ; vs : -->
+		<!-- Note inconsistency between handling of files and fileset WRT ; vs : 
 		<echo/>
 		<echo>${topic-files}</echo>
 		
@@ -106,7 +106,7 @@
 		<echo/>
 		<echo>${show-topic-files}</echo>
 		
-		
+		-->
 		
 	</target>
 
@@ -236,7 +236,7 @@
 
 	<target name="-current.link-catalog">
 		<uptodate property="-current.link-catalog"
-			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}_${spfe.publication-info.release}.link-catalog" srcfile="{temp}/synthesis.flag"/>
+			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog" srcfile="{temp}/synthesis.flag"/>
 	</target>
 
 	<!-- target for link-catalog -->
@@ -249,7 +249,7 @@
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			in="${spfe.config-file}"
 			style="${spfe.scripts.link-catalog}"
-			out="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}_${spfe.publication-info.release}.link-catalog.xml">
+			out="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog.xml">
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="synthesis-files" expression="${synthesis-files}"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">

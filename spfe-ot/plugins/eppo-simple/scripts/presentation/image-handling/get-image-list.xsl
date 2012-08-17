@@ -27,7 +27,6 @@ exclude-result-prefixes="#all">
 	</xsl:variable>
 	
 <xsl:template name="main">
-	<xsl:message select="$synthesis-files"></xsl:message>
 	<xsl:apply-templates select="$synthesis"/>
 </xsl:template>
 
@@ -40,9 +39,6 @@ exclude-result-prefixes="#all">
 <xsl:template match="fig">
 		<xsl:variable name="uri" select="string(@uri)"/>
 		<xsl:variable name="fig-id" select="string(@id)"/>
-		
-		<xsl:message select="."/>
-		<xsl:message select="@uri, '|', $fig-id"/>
 		
 		<xsl:variable name="this-graphic">
 			<xsl:choose>
@@ -76,11 +72,5 @@ exclude-result-prefixes="#all">
 				</xsl:choose>
 			</xsl:variable>
 			<xsl:value-of select="$graphic-file"/>
-<!-- 			<xsl:if test="not(file:exists(file:new($graphic-file)))"  xmlns:file="java.io.File">
-				<xsl:call-template name="warning">
-					<xsl:with-param name="message" select="'File not found: ', $graphic-file">
-				</xsl:with-param>
-			</xsl:call-template>
-		</xsl:if>
- -->	</xsl:template>
+	</xsl:template>
 </xsl:stylesheet>

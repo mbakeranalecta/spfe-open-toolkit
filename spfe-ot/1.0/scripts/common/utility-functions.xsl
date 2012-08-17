@@ -12,20 +12,6 @@
 <xsl:param name="terminate-on-error">yes</xsl:param>
 <xsl:variable name="verbosity" select="tokenize($message-types, ' ')"/>
 
-	<xsl:param name="strings-files"/>
-
-	<xsl:variable name="strings">
-		<xsl:if test="not($strings-files)">
-			<xsl:call-template name="error">
-				<xsl:with-param name="message">The parameter "strings-files" was not specified.</xsl:with-param>
-			</xsl:call-template>
-		</xsl:if>
-		<strings>
-			<xsl:for-each select="tokenize($strings-files, $config/config:dir-separator)" xml:base="strings/">
-				<xsl:sequence select="document(translate(.,'\','/'))/strings/string"/>
-			</xsl:for-each>
-		</strings>
-	</xsl:variable>
 
 	<xsl:function name="sf:file-set">
 		<xsl:param name="file-list"/>
@@ -199,13 +185,14 @@ select="translate($text,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz
 	</xsl:function>
 
 	<xsl:function name="sf:string" >
-		<xsl:param name="name"/>
-		<xsl:if test="not($strings/strings/string[@name=$name])">
+		<xsl:param name="strings" as="element()*"/>
+		<xsl:param name="id"/>
+		<xsl:if test="not($strings/*:string[@id=$id])">
 			<xsl:call-template name="error">
-				<xsl:with-param name="message">String lookup failed for string name <xsl:value-of select="$name"/>. No matching name found in strings file.</xsl:with-param>
+				<xsl:with-param name="message">String lookup failed for string ID <xsl:value-of select="$id"/>. No matching string found.</xsl:with-param>
 			</xsl:call-template>
 		</xsl:if>
-		<xsl:sequence select="$strings/strings/string[@name=$name]/node()"/>
+		<xsl:sequence select="$strings/*:string[@id=$id]/node()"/>
 	</xsl:function>
 
 	<!-- returns the index of the longest of a set of strings -->

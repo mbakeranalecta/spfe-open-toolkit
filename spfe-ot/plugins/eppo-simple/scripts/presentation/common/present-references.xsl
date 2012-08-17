@@ -105,8 +105,7 @@
 			</xsl:when>
 			<xsl:when test="not(sf:contains-any($target, $key-sets[$index]/key))">
 				<xsl:value-of select="false()"/>
-<!-- 				<xsl:message select="'$target=', $target, ' key=', $key-sets[$index]/key"/>
- -->			</xsl:when>
+			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="sf:try-key-set($target, $key-sets, $index + 1)"/>
 			</xsl:otherwise>
@@ -316,9 +315,6 @@
  						<xsl:value-of select="$target-page/@topic-type-alias"/>
 						<xsl:text>: </xsl:text>
 						<xsl:value-of select="$target-page/@title"/>
-						<xsl:text> (</xsl:text>
-						<xsl:value-of select="$target-page/parent::link-catalog/@product"/>
-						<xsl:text>)</xsl:text>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
@@ -326,7 +322,6 @@
 			<xsl:attribute name="title" select="$title"/>
 			<xsl:attribute name="topic-type" select="$target-page/@topic-type-alias"/>
 			<xsl:attribute name="topic-title" select="$target-page/@title"/>
-			<xsl:attribute name="topic-product" select="normalize-space($target-page/parent::link-catalog/@product)"/>
 			<xsl:attribute name="class" select="$class"/>
 			<xsl:attribute name="scope" select="$target-page/@scope"/>
 
@@ -394,7 +389,6 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-				
 		
 		<xsl:variable name="target-directory-path" >
 			<xsl:for-each select="tokenize($target-directory, '/')">
@@ -408,32 +402,24 @@
 		<xsl:variable name="target-anchor" select="if ($target-page[1]/target[key=$target][@type=$type]/@anchor) then concat('#', $target-page[1]/target[key=$target][@type=$type]/@anchor) else ''"/>
 
 		<xsl:choose>
-					
-					<!-- this book -->
-					<xsl:when test="$topic-set-id eq $target-topic-set">
-						<cross-ref 
-							type="{$type}"
-							target="{$target}"/>
-					</xsl:when>
-					
-					<!-- outside this book -->
-					<xsl:otherwise>
-						<bold>
-							<xsl:value-of select="$target-page/@title"/>
-						</bold>
-						<xsl:text> in </xsl:text>
-						<xsl:variable name="title-string">
-							<xsl:value-of select="$link-catalogs/link-catalog[@topic-set-id=$target-topic-set]/@product"/>
-							<xsl:text> </xsl:text>
-							<xsl:value-of select="$link-catalogs/link-catalog[@topic-set-id=$target-topic-set]/@doctype"/>
-							<xsl:text>, </xsl:text>
-							<xsl:value-of select="$link-catalogs/link-catalog[@topic-set-id=$target-topic-set]/@release"/>
-						</xsl:variable>
-						<italic>
-							<xsl:value-of select="$title-string"/>
-						</italic> 
-					</xsl:otherwise>
-				</xsl:choose>
+			<!-- this book -->
+			<xsl:when test="$topic-set-id eq $target-topic-set">
+				<cross-ref 
+					type="{$type}"
+					target="{$target}"/>
+			</xsl:when>
+			
+			<!-- outside this book -->
+			<xsl:otherwise>
+				<bold>
+					<xsl:value-of select="$target-page/@title"/>
+				</bold>
+				<xsl:text> in </xsl:text>
+				<italic>
+					<xsl:value-of select="$link-catalogs/link-catalog[@topic-set-id=$target-topic-set]/@title"/>
+				</italic> 
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<!-- link-xpath template -->

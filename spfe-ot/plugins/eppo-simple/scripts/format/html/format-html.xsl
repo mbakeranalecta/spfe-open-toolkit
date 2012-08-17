@@ -110,12 +110,6 @@
 		</xsl:for-each>
 	</xsl:variable>
 
-	<xsl:variable name="title-string">
-		<xsl:value-of select="$config/config:publication-info/config:title"/>
-		<xsl:text>, </xsl:text>
-		<xsl:value-of select="$config/config:publication-info/config:release"/>
-	</xsl:variable>
-	
 	<xsl:strip-space elements="name"/>
 	
 	<xsl:function name="sf:html-header">

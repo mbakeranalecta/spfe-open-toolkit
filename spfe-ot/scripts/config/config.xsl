@@ -336,11 +336,6 @@
                   <property name="SPFE_BUILD_COMMAND" value="{$SPFE_BUILD_COMMAND}"/>
                   <xsl:sequence select="spfe:xml2properties(($config/topic-set-id)[1], 'spfe')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/topic-set-type)[1], 'spfe')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/publication-info/title)[1], 'spfe.publication-info')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/publication-info/release)[1], 'spfe.publication-info')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/publication-info/product)[1], 'spfe.publication-info')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/publication-info/copyright)[1], 'spfe.publication-info')"/>
-                  <xsl:sequence select="spfe:xml2properties($config/publication-info/other, 'spfe.publication-info')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/wip-site)[1], 'spfe')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/messages)[1], 'spfe')"/>
                   
@@ -480,9 +475,6 @@
                 <arg value="-emacs"/>
             </exec>
             
-            <!--                          <ant antfile="{$antfile}"
-                               target="{$SPFE_BUILD_COMMAND}"/>-->
-
     </xsl:template>
     
 
@@ -501,13 +493,6 @@
                 <xsl:copy-of select="$config/topic-type-aliases" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/topic-set-id)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/topic-set-type)[1]" copy-namespaces="no"/>
-                <publication-info>
-                    <xsl:copy-of select="($config/publication-info/title)[1]" copy-namespaces="no"/>
-                    <xsl:copy-of select="($config/publication-info/release)[1]" copy-namespaces="no"/>
-                    <xsl:copy-of select="($config/publication-info/product)[1]" copy-namespaces="no"/>
-                    <xsl:copy-of select="($config/publication-info/copyright)[1]" copy-namespaces="no"/>
-                </publication-info>
-
                 <xsl:copy-of select="($config/topic-type-order)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/messages)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/condition-tokens)[1]" copy-namespaces="no"/>
@@ -534,6 +519,14 @@
                 </deployment>
                 <xsl:copy-of select="($config/format)[1]" copy-namespaces="no"/>    
                 <xsl:copy-of select="($config/doc-set)[1]" copy-namespaces="no"/>    
+                
+                <strings>
+                    
+                    <xsl:for-each-group select="$config/strings/string" group-by="@id">
+                        <xsl:copy-of select="current-group()[1]"  copy-namespaces="no"/>
+                    </xsl:for-each-group>
+                </strings>
+                
                 <other>
                  <xsl:for-each select="$config/other">
                      <xsl:element name="{@name}">

@@ -37,10 +37,8 @@ Main template
 <xsl:template name="main">
 	<xsl:result-document href="file:///{concat($config/config:build/config:build-directory, '/temp/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
 		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
-			<title><xsl:value-of select="$config/config:publication-info/config:title"/></title>
+			<title><xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/></title>
 				
-			<xsl:message select="'$synthesis-files', $synthesis-files"/>
-
 			<!-- process the topics --> 
 			<xsl:apply-templates select="$synthesis/ss:synthesis/*"/>
 			<xsl:call-template name="create-generated-topics"/>
@@ -83,9 +81,9 @@ Main template
 		<tr>
 			<td><bold>Product</bold></td>
 			<td>
-				<xsl:value-of select="$config/config:publication-info/config:product"/>
+				<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-product')"/>
 				<xsl:text> </xsl:text>
-				<xsl:value-of select="$config/config:publication-info/config:release"/>
+				<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
 			</td>
 		</tr>
 		<xsl:if test="index/reference/key[normalize-space(.) ne '']">

@@ -8,9 +8,9 @@
     <include href="../spfe-docs-config.xml"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <topic-set-type>guide</topic-set-type>
-    <publication-info>
-        <title>SPFE Development</title>
-    </publication-info>
+    <strings>
+        <string id="eppo-simple-topic-set-title">SPFE Development Guide</string>
+    </strings>
     <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic</topic-type-order>
     <sources>
         <topics>

@@ -2,39 +2,35 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:simpleType name="mentions-xml">
+    <xs:simpleType name="mentions-spfe-build">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="xml-element-name"/>
-            <xs:enumeration value="xml-attribute-name"/>
-            <xs:enumeration value="xml-namespace-uri"/>
-            <xs:enumeration value="xpath"/>
+            <xs:enumeration value="spfe-config-element-name"/>
+            <xs:enumeration value="spfe-config-attribute-name"/>
+            <xs:enumeration value="spfe-build-property"/>
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:group name="mentions-xml">
+    <xs:group name="mentions-spfe-build">
         <xs:choice>
-            <xs:element name="xml-element-name">
+            <xs:element name="spfe-config-element-name">
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
                             <xs:attribute name="xpath" use="optional"/>
-                            <xs:attribute name="namespace-uri" type="xs:anyURI" use="optional"/>
                         </xs:extension>
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="xml-attribute-name">
+            <xs:element name="spfe-config-attribute-name">
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
                             <xs:attribute name="xpath" use="optional"/>
-                            <xs:attribute name="namespace-uri" type="xs:anyURI" use="optional"/>
                         </xs:extension>
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="xml-namespace-uri"/>
-            <xs:element name="xpath"/>
+            <xs:element name="spfe-build-property" type="xs:NCName"/>
         </xs:choice>
     </xs:group>
 
