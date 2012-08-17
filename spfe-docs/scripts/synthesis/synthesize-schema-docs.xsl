@@ -29,32 +29,16 @@ exclude-result-prefixes="#all" >
 	</xsl:for-each>
 </xsl:variable>
 
-
 <xsl:output method="xml" indent="yes" />
 
-<xsl:param name="topic-set-id"/>
 <xsl:param name="synthesis-directory"/>
 
 <xsl:param name="schema-defs-file"/>
-<xsl:variable name="schema-defs">
-	<xsl:call-template name="attach-source">
-		<xsl:with-param name="source" select="$schema-defs-file"/>
-	</xsl:call-template>
-</xsl:variable>
+<xsl:variable name="schema-defs" select="sf:get-sources($schema-defs-file)"/>
 
 <xsl:param name="element-description-files"/>
+<xsl:variable name="element-source" select="sf:get-sources($element-description-files)"/>
 
-	<!-- FIXME: Generalize the load function -->
-
-	<xsl:variable name="element-description-dir" select="concat($config/config:build/config:build-directory, '/temp/')"/>
-	
-	<!-- FIXME: This is not loading the schema namespace element (which is not currently used) -->
-	<xsl:variable name="element-source" as="element(ed:element-description)*">
-		<xsl:for-each select="tokenize($element-description-files, $config/config:dir-separator)">
-			<xsl:sequence select="doc(concat('file:///', $element-description-dir, .))//ed:element-description"/>	
-		</xsl:for-each>
-	</xsl:variable>
-	
 <xsl:variable name="config" as="element(config:spfe)">
 	<xsl:sequence select="/config:spfe"/>
 </xsl:variable>
@@ -88,11 +72,11 @@ Main template
 			 indent="yes"
 			 omit-xml-declaration="no" 
 			 href="file:///{$synthesis-directory}/{@name}.xml">
-			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
+			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
 					<!-- Use for-each-group to filter out duplicate xpaths -->
 					<xsl:for-each-group select="$schema-defs/schema-definitions/schema-element[starts-with(xpath, $root) or belongs-to-group]" group-by="xpath">
 						<xsl:apply-templates select=".">
-							<xsl:with-param name="source" select="$element-source"/>
+							<xsl:with-param name="source" select="$element-source//ed:element-description"/>
 							<xsl:with-param name="current-doctype" select="$current-doctype"/>
 						</xsl:apply-templates>
 					</xsl:for-each-group>
@@ -156,21 +140,29 @@ Main content processing templates
 			local-name="{translate(xpath, '/:', '__')}"
 			topic-type-alias="{$topic-type-alias}"
 			title="{name}">
-			
+			<xsl:variable name="xpath" select="normalize-space(xpath)"/>
 			<ss:index>
 				<ss:entry>
 					<ss:type>xpath</ss:type>
 					<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</ss:namespace>
 					<ss:term><xsl:value-of select="$xpath"/></ss:term>
 				</ss:entry>
-				<xsl:for-each select="attributes/attribute">
+				
+				<xsl:for-each select="//schema-attribute[starts-with(normalize-space(xpath), concat($xpath, '/@'))]">
 					<ss:entry>
 						<ss:type>xpath</ss:type>
 						<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</ss:namespace>
 						<ss:term><xsl:value-of select="xpath"/></ss:term>
+						<ss:anchor><xsl:value-of select="name"></xsl:value-of></ss:anchor>
 					</ss:entry>
-					
 				</xsl:for-each>
+				<xsl:if test="normalize-space($source[ed:xpath=$xpath]/ed:build-property)">
+					<ss:entry>
+						<ss:type>spfe-build-property</ss:type>
+						<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/build</ss:namespace>
+						<ss:term><xsl:value-of select="normalize-space($source[ed:xpath=$xpath]/ed:build-property)"/></ss:term>
+					</ss:entry>					
+				</xsl:if>
 			</ss:index>
 			
 			<!-- FIXME: Need to generate an index element for the link catalog -->
@@ -395,8 +387,10 @@ Content fix-up templates
 					</xsl:when>
 					
 					<!-- Is it the name of an attribute of the current element? -->
-					<xsl:when test="ancestor::element/attributes/attribute[ends-with(name, $data-content)]">
-						<xsl:attribute name="key" select="concat($context-element, '/@', $data-content)"/>
+					<!-- FIXME: This is using the ed source rather than the schema defs -->
+<!--					<xsl:when test="ancestor::ed:element-description/ed:attributes/ed:attribute[ends-with(ed:name, $data-content)]">-->
+					<xsl:when test="concat($context-element, '/@', $data-content) = $all-attributes">
+							<xsl:attribute name="key" select="concat($context-element, '/@', $data-content)"/>
 						<xsl:apply-templates/>
 					</xsl:when>
 					

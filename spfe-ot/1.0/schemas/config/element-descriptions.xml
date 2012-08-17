@@ -352,7 +352,7 @@
         <element-description>
             <xpath>/spfe/condition-tokens</xpath>
             <description>
-                <p>The <spfe-config-element-name>conditions-token</spfe-config-element-name> element specifies the <feature>condition tokens</feature> that will be applied to the build.</p>
+                <p>The <spfe-config-element-name>condition-tokens</spfe-config-element-name> element specifies the <feature>condition tokens</feature> that will be applied to the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -884,7 +884,7 @@
         <element-description>
             <xpath>/spfe/style/html-style-directories</xpath>
             <description>
-                <p>A container element for a list of directories containing style files for HTML output. The specified directories will be copied into a <directory-name>style</directory-name> directory in the output directory. All subdirectories and their files will be copied as well. In the build file, it becomes an ANT <xml-element-name namespace-uri="ANT">resources</xml-element-name> element with the <spfe-config-attribute-name>id</spfe-config-attribute-name> of <code>spfe.style.html-style-directories</code>.</p>
+                <p>A container element for a list of directories containing style files for HTML output. The specified directories will be copied into a <directory-name>style</directory-name> directory in the output directory. All subdirectories and their files will be copied as well. In the build file, it becomes an ANT <xml-element-name namespace-uri="ANT">resources</xml-element-name> element with the <xml-attribute-name namespace-uri="ANT">id</xml-attribute-name> of <code>spfe.style.html-style-directories</code>.</p>
             </description>
             <build-property>spfe.style.html-style-directories</build-property>
             <include-behavior>

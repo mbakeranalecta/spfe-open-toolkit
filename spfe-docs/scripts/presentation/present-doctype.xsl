@@ -28,11 +28,6 @@
 <xsl:param name="media">online</xsl:param>
 
 <xsl:param name="synthesis-files"/>
-  
-  <xsl:variable name="synthesis">
-    <xsl:for-each select="tokenize($synthesis-files, $config/config:dir-separator)">
-      <xsl:sequence select="doc(concat('file:///',translate(.,'\','/')))"/>	
-    </xsl:for-each>
-  </xsl:variable>
+<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
   	
 </xsl:stylesheet>

@@ -23,21 +23,11 @@
 		<xsl:sequence select="/config:spfe"/>
 	</xsl:variable>
 	
-	<!-- FIXME: Generalize the load function. Remove need for hard coded source dirs. See schema docs.-->
 	<xsl:param name="topic-files"/>
-	<xsl:variable name="topics-dir" select="concat($config/config:build/config:build-directory, '/temp/topics/')"/>
-	
-	<!-- FIXME: switch to sending in full paths, then use config:dir-separator in the regex -->
-	<xsl:variable name="topics">
-		<xsl:for-each select="tokenize($topic-files, ';')">
-			<xsl:sequence select="doc(concat('file:///',translate($topics-dir,'\','/'), .))"/>	
-		</xsl:for-each>
-	</xsl:variable>
+	<xsl:variable name="topics" select="sf:get-sources($topic-files)"/>
 	
 	<xsl:param name="text-objects-files"/>
-	<xsl:variable name="text-objects"  xml:base="text-objects/">
-		<xsl:sequence select="document(tokenize($text-objects-files, $config/config:dir-separator))//text-object"/>
-	</xsl:variable>
+	<xsl:variable name="text-objects"  select="sf:get-sources($text-objects-files)"/>
 
 	<xsl:param name="default-topic-scope"/>
 

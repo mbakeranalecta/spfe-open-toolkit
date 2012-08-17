@@ -9,19 +9,13 @@
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 	exclude-result-prefixes="#all">
 	
+	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
+	
 	<xsl:output indent="no"/>
 
 	<xsl:param name="link-catalog-files"/>
 	<xsl:variable name="link-catalogs" >
-		<xsl:variable name="temp-link-catalogs">
-			<xsl:for-each select="tokenize(translate($link-catalog-files, '\', '/'), $config/config:dir-separator)">
-				<xsl:variable name="catalog-file" select="concat('file:///', normalize-space(.))"/>
-				<xsl:call-template name="info">
-					<xsl:with-param name="message" select="'Loading link catalog file:', $catalog-file "/>
-				</xsl:call-template>
-				<xsl:sequence select="document($catalog-file)"/>
-			</xsl:for-each>
-		</xsl:variable>
+		<xsl:variable name="temp-link-catalogs" select="sf:get-sources($link-catalog-files, 'Loading link catalog file:')"/>
 		<xsl:if test="count(distinct-values($temp-link-catalogs/link-catalog/@topic-set-id)) lt count($temp-link-catalogs/link-catalog)">
 			<xsl:call-template name="error">
 				<xsl:with-param name="message">
@@ -35,7 +29,7 @@
 		<xsl:sequence select="$temp-link-catalogs"/>
 	</xsl:variable>
 	
-	<xsl:variable name="topic-set-id" select="$config/config:topic-set-id"/>
+	<xsl:variable name="topic-set-id" select="/ss:synthesis/@topic-set-id"/>
 	
 	<xsl:function name="sf:target-exists" as="xs:boolean">
 		<xsl:param name="target"/>
@@ -62,7 +56,7 @@
 		<xsl:param name="type"/>
 		<xsl:param name="scope"/>
 		<xsl:param name="self"/>
-		<xsl:value-of select="if ($link-catalogs//target[parent::page/@name ne $self][@type=$type][key=$target][sf:in-scope(parent::page,$scope)] or sf:multi-key-match($target, $type, $scope)) then true() else false()"/>
+		<xsl:value-of select="if ($link-catalogs//target[parent::page/@full-name ne $self][@type=$type][key=$target][sf:in-scope(parent::page,$scope)] or sf:multi-key-match($target, $type, $scope)) then true() else false()"/>
 	</xsl:function>
 	
 	<xsl:function name="sf:multi-key-match" as="xs:boolean">
@@ -169,14 +163,14 @@
 		<xsl:param name="see-also" as="xs:boolean" select="false()"/>
 		<xsl:param name="scope"/>
 		<!-- check that we are not linking to the current page -->
-		<xsl:variable name="current-page" select="if (ancestor::topic/name) then ancestor::topic/name else 'no-current-page'"/>
+		<xsl:variable name="current-page" select="if (ancestor::ss:topic/@full-name) then ancestor::ss:topic/@full-name else 'no-current-page'"/>
 		
 		<xsl:variable name="target-page" as="node()*"> 		
 			<!-- single key lookup -->
-			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@name ne $current-page][sf:in-scope(ancestor-or-self::page,$scope)][target/key=$target]"/>	
+			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page][sf:in-scope(ancestor-or-self::page,$scope)][target/key=$target]"/>	
 			
 			<!-- multi-key lookup -->
-			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@name ne $current-page][sf:in-scope(ancestor-or-self::page,$scope)]/target[sf:try-key-set($target, key-set)]/.."/>	
+			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page][sf:in-scope(ancestor-or-self::page,$scope)]/target[sf:try-key-set($target, key-set)]/.."/>	
 		</xsl:variable>
 		
 		<xsl:if test="count($target-page[1]/target[@type=$type][key=$target]) gt 1">
@@ -272,7 +266,7 @@
 			<xsl:attribute name="target">
 				<xsl:choose>
 					<!-- this page -->
-					<xsl:when test="ancestor::topic/name=$target-page[1]/@name">
+					<xsl:when test="ancestor::topic/name=$target-page[1]/@full-name">
 						<xsl:choose>
 							<xsl:when test="not($target-anchor='')">
 								 <xsl:value-of select="$target-anchor"/>
@@ -345,7 +339,7 @@
 		<xsl:variable name="target-page" select="$link-catalogs/link-catalog/page[target/@type=$type][target/key=$target][sf:in-scope(.,$scope)]"/>
 				
 		<xsl:choose>
-			<xsl:when test="(count($target-page/page/@file) > 1) or (count($link-catalogs/link-catalog/page[@name=$target-page/@name][@scope=$scope]) > 1)">
+			<xsl:when test="(count($target-page/page/@file) > 1) or (count($link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][@scope=$scope]) > 1)">
 				<xsl:call-template name="error">
 					<xsl:with-param name="message">More than one destination found for the cross reference <xsl:value-of select="$target"/>. Unable to proceed.</xsl:with-param>
 				</xsl:call-template>
@@ -371,10 +365,10 @@
 		<xsl:variable name="target-topic-set">
 			<xsl:choose>
 				<xsl:when test="$scope">
-					<xsl:value-of select="$link-catalogs/link-catalog/page[@name=$target-page/@name][sf:in-scope(.,$scope)]/parent::link-catalog/@topic-set-id"/>
+					<xsl:value-of select="$link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][sf:in-scope(.,$scope)]/parent::link-catalog/@topic-set-id"/>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="$link-catalogs/link-catalog[page/@name=$target-page/@name]/@topic-set-id"/>
+					<xsl:value-of select="$link-catalogs/link-catalog[page/@full-name=$target-page/@full-name]/@topic-set-id"/>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -382,10 +376,10 @@
 		<xsl:variable name="target-directory">
 			<xsl:choose>
 				<xsl:when test="$scope">
-					<xsl:value-of select="$link-catalogs/link-catalog/page[@name=$target-page/@name][sf:in-scope(.,$scope)]/parent::link-catalog/@topic-set-id"/>
+					<xsl:value-of select="$link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][sf:in-scope(.,$scope)]/parent::link-catalog/@topic-set-id"/>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="$link-catalogs/link-catalog/page[@name=$target-page/@name][sf:in-scope(.,$scope)]/parent::link-catalog/@output-directory"/>
+					<xsl:value-of select="$link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][sf:in-scope(.,$scope)]/parent::link-catalog/@output-directory"/>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -451,12 +445,7 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<!-- ==========================================================================
-		link-term function
-		
-		link-term is called to create a link to the glossary. It checks that the 
-		link target exists. If it is not, it prints an error on the command line.
-		=============================================================================-->
+
 	<!-- DOCUMENT GROUP -->
 	<xsl:template match="*:term">
 		<xsl:variable name="term" select="normalize-space(.)"/>
@@ -584,7 +573,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="mention-not-resolved">
-						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved.')"/> 
+						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved.')"/>
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
 				</xsl:otherwise>

@@ -23,13 +23,15 @@
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  exclude-result-prefixes="#all"
 >
-
+	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
+	
 <xsl:param name="condition-tokens"/>
 <xsl:param name="default-reference-scope"/>
 
 	<xsl:param name="fragment-files"/>
-	<xsl:variable name="fragments"  xml:base="fragments/">
-		<xsl:apply-templates mode="process-fragments" select="document(tokenize($fragment-files, $config/config:dir-separator))"/>
+	<xsl:variable name="unresolved-fragments" select="sf:get-sources($fragment-files)"/>
+	<xsl:variable name="fragments">
+		<xsl:apply-templates mode="process-fragments" select="$unresolved-fragments"/>
 	</xsl:variable>
 
 

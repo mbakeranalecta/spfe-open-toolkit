@@ -13,15 +13,11 @@
 <xsl:variable name="verbosity" select="tokenize($message-types, ' ')"/>
 
 
-	<xsl:function name="sf:file-set">
-		<xsl:param name="file-list"/>
-		<xsl:sequence select="document(tokenize(translate($file-list,'\','/'), $config/config:dir-separator))"/>
-	</xsl:function>
 	
-	<xsl:function name="sf:get-base-routine-name" as="xs:string">
+<!--	<xsl:function name="sf:get-base-routine-name" as="xs:string">
 		<xsl:param name="routine-name"/>
 		<xsl:value-of select="string(if (contains($routine-name, '(')) then normalize-space(normalize-space(substring-before($routine-name,'('))) else $routine-name)"/>
-	</xsl:function>
+	</xsl:function>-->
 	
 
 <xsl:function name="sf:title2anchor">
@@ -29,9 +25,9 @@
 	<xsl:value-of select='translate( normalize-space($title), " :&apos;[]", "-----")'/>
 </xsl:function>
 
-	<xsl:function name="sf:fix-up-path-string" as="xs:string">
+<!--	<xsl:function name="sf:fix-up-path-string" as="xs:string">
 		<xsl:param name="path-string"/>
-		<!-- add leading slash -->
+		<!-\- add leading slash -\->
 		<xsl:choose>
 			<xsl:when test="not(matches($path-string, '^/'))">
 				<xsl:value-of select="concat('/',$path-string)"/>
@@ -40,9 +36,9 @@
 				<xsl:value-of select="$path-string"/>
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:function>
+	</xsl:function>-->
 
-<!-- print count: transform a number to a word -->
+<!-- print count: transform a number to a word 
 <xsl:function name="sf:print-count">
 	<xsl:param name="count"/>
 	<xsl:choose>
@@ -60,25 +56,28 @@
 		<xsl:when test="$count = 12">twelve</xsl:when>
 		<xsl:otherwise><xsl:value-of select="$count"/></xsl:otherwise>
 	</xsl:choose>
-</xsl:function>
-	 
-<!-- FIXME: this is outmoded and not used consistently -->
-<xsl:template name="attach-source">
-	<xsl:param name="source"/>
-	<xsl:choose>
-		<xsl:when test="doc-available(concat('file:///',$source))">
-			<xsl:sequence select="document(concat('file:///',$source))"/>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:call-template name="error">
-				<xsl:with-param name="message" select="'Source not found', $source"/>
-			</xsl:call-template>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
+</xsl:function>-->
 
+<xsl:function name="sf:get-sources">
+	<xsl:param name="file-list"/>
+	<xsl:sequence select="sf:get-sources($file-list, '')"></xsl:sequence>
+</xsl:function>
+<xsl:function name="sf:get-sources">
+	<xsl:param name="file-list"/>
+	<xsl:param name="load-message"/>
 	
-	<xsl:function name="sf:matching-substring">
+	<xsl:for-each select="tokenize(translate($file-list, '\', '/'), $config/config:dir-separator)">
+		<xsl:variable name="one-file" select="concat('file:///', normalize-space(.))"/>
+		<xsl:if test="normalize-space($load-message)">
+			<xsl:call-template name="info">
+				<xsl:with-param name="message" select="$load-message, $one-file "/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:sequence select="document($one-file)"/>
+	</xsl:for-each>
+</xsl:function>	
+	
+<!--	<xsl:function name="sf:matching-substring">
 		<xsl:param name="string" as="xs:string"/>
 		<xsl:param name="regex"  as="xs:string"/>
 		
@@ -103,10 +102,10 @@
 	<xsl:function name="sf:substring-after-regex">
 		<xsl:param name="string" as="xs:string"/>
 		<xsl:param name="regex" as="xs:string"/>
-		<!-- <xsl:value-of select="replace($string, concat('^',$regex), '')"/>-->
+		<!-\- <xsl:value-of select="replace($string, concat('^',$regex), '')"/>-\->
 		<xsl:variable name="foo" select="replace($string, concat('^',$regex), '')"/>
 		<xsl:value-of select="$foo"/>
-	</xsl:function>
+	</xsl:function>-->
 
 	
 	<xsl:template name="info">
@@ -151,20 +150,6 @@
 		<xsl:message terminate="{$terminate-on-error}"/>
 	</xsl:template>
 	
-	<xsl:function name="sf:lower-case">
-		<xsl:param name="text"/>
-		<xsl:value-of
-select="translate($text,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-	</xsl:function>
-
-	<xsl:function name="sf:title-case">
-		<xsl:param name="text"/>
-		<xsl:variable name="words" select="tokenize($text, '\s')"/>
-		<xsl:for-each select="$words">
-			<xsl:value-of select="translate(substring($words, 1, 1),'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/> 
-			<xsl:value-of select="translate(substring($words,2),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-		</xsl:for-each>	
-	</xsl:function>
 
 	<xsl:function name="sf:path-depth">
 		<!-- Calculates the depth of an XPath by counting the number of 
@@ -178,7 +163,7 @@ select="translate($text,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz
 		<xsl:value-of select="count(tokenize($path, '/')[. ne ''])"/>
 	</xsl:function>
 
-		<xsl:function name="sf:get-file-name-from-path">
+	<xsl:function name="sf:get-file-name-from-path">
 		<xsl:param name="path"/>
 		<xsl:variable name="tokens" select="tokenize($path, '/')"/>
 		<xsl:value-of select="subsequence($tokens, count($tokens))"/>

@@ -74,13 +74,8 @@
 		<!-- run the XSLT script to produce the output -->
 		<basename property="source-files.descriptions.name" file="${source-files.element-descriptions}"/>
 		
-		<fileset id="intros-file-list" dir="${temp}/topics" includes="*.xml"/>
-		<fileset id="descriptions-file-list" dir="${temp}" includes="descriptions/*.xml"/>
+		<files id="descriptions-file-list" includes="${temp}/descriptions/*.xml"/>
 		<property name="descriptions-files" refid="descriptions-file-list"/>
-				<!-- get the list of abnf-symbols files -->
-		<fileset id="abnf-symbols-file-list" dir="${temp}" includes="abnf-symbols/*.xml"/>
-		<property name="abnf-symbols-files" refid="abnf-symbols-file-list"/>
-		
 		
 		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			in="${spfe.config-file}"

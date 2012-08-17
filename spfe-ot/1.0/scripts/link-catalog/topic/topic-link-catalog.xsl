@@ -16,12 +16,7 @@
 	</xsl:variable>
 
 	<xsl:param name="synthesis-files"/>
-
-	<xsl:variable name="synthesis">
-		<xsl:for-each select="tokenize($synthesis-files, $config/config:dir-separator)">
-			<xsl:sequence select="doc(concat('file:///',translate(.,'\','/')))"/>
-		</xsl:for-each>
-	</xsl:variable>
+	<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
 
 
 	<!-- processing directives -->
@@ -78,8 +73,12 @@ Main template
 	
 	<xsl:template match="ss:topic">
 		<xsl:variable name="name" select="@local-name"/>
-		<page name="{@local-name}" title="{@title}" file="{@local-name}.html"
-			topic-type="{if (@virtual-type) then @virtual-type else @type}" topic-type-alias="{@topic-type-alias}">
+		<page local-name="{@local-name}" 
+			  full-name="{@full-name}"
+			  title="{@title}" 
+			  file="{@local-name}.html"
+			  topic-type="{if (@virtual-type) then @virtual-type else @type}" 
+			  topic-type-alias="{@topic-type-alias}">
 			<xsl:choose>
 				<xsl:when test="@scope">
 					<xsl:attribute name="scope" select="@scope"/>

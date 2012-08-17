@@ -88,7 +88,7 @@
 		<copy todir="${temp}/topics" preservelastmodified="true" flatten="true" verbose="true">
 			<files refid="topics"/>
 		</copy>
-		<fileset id="topic-file-list" dir="${temp}/topics" includes="*.xml"/>
+		<files id="topic-file-list" includes="${temp}/topics/*.xml"/>
 		<property name="topic-files" refid="topic-file-list"/>
 		
 		<!-- FIXME: switch scripts to use full paths -->
@@ -116,7 +116,7 @@
 		<copy todir="${temp}/text-objects" preservelastmodified="true" flatten="true" verbose="true">
 			<files refid="text-objects"/>
 		</copy>
-		<fileset id="text-objects-file-list" dir="${temp}/text-objects" includes="*.xml"/>
+		<files id="text-objects-file-list" includes="${temp}/text-objects/*.xml"/>
 		<property name="text-objects-files" refid="text-objects-file-list"/>
 		<!-- FIXME: Make the for of the property name consistent -->
 	</target>
@@ -127,7 +127,7 @@
 		<copy todir="${temp}/fragments" preservelastmodified="true" flatten="true" verbose="true">
 			<files refid="fragments"/>
 		</copy>
-		<fileset id="fragments-file-list" dir="${temp}/fragments" includes="*.xml"/>
+		<files id="fragments-file-list" includes="${temp}/fragments/*.xml"/>
 		<property name="fragment-files" refid="fragments-file-list"/>
 	</target>
 
@@ -146,7 +146,7 @@
 		<copy todir="${temp}/strings" preservelastmodified="yes" flatten="yes" verbose="yes">
 			<files refid="strings"/>
 		</copy>
-		<fileset id="strings-files" dir="${temp}/strings"/>
+		<files id="strings-files" include="${temp}/strings/*.xml"/>
 		<property name="strings-files-names" refid="strings-files"/>
 	</target>
 
@@ -363,7 +363,7 @@
   				 -current.html-format"
 		unless="-current.html-format">
 
-		<fileset id="presentation-file-list" dir="${temp}/presentation" includes="*.xml"/>
+		<files id="presentation-file-list" includes="${temp}/presentation/*.xml"/>
 		<property name="presentation-files" refid="presentation-file-list"/>
 		<property name="toc-files" refid="tocs"/>	
 		
@@ -396,7 +396,7 @@
 	<target name="--build.fo-format" description="FO formatting"
 		depends="-build.presentation-book, -current.fo-format" unless="-current.fo-format">
 		
-		<fileset id="presentation-file-list" dir="${temp}/presentation" includes="*.xml"/>
+		<files id="presentation-file-list" includes="${temp}/presentation/*.xml"/>
 		<property name="presentation-files" refid="presentation-file-list"/>
 		<property name="toc-files" refid="tocs"/>	
 		

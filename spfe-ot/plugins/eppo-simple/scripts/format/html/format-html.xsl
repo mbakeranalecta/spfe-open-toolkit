@@ -19,15 +19,7 @@
 	
 	<xsl:param name="toc-files"/>
 	<xsl:variable name="unsorted-toc" >
-		<xsl:variable name="temp-tocs">
-			<xsl:for-each select="tokenize(translate($toc-files, '\', '/'), $config/config:dir-separator)">
-				<xsl:variable name="toc-file" select="concat('file:///', normalize-space(.))"/>
-				<xsl:call-template name="info">
-					<xsl:with-param name="message" select="'Loading toc file:', $toc-file "/>
-				</xsl:call-template>
-				<xsl:sequence select="document($toc-file)"/>
-			</xsl:for-each>
-		</xsl:variable>
+		<xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file:')"/>
 		<xsl:if test="count(distinct-values($temp-tocs/toc/@topic-set-id)) lt count($temp-tocs/toc)">
 			<xsl:call-template name="error">
 				<xsl:with-param name="message">
@@ -97,18 +89,11 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
-	
-
-	
 	<xsl:variable name="draft" as="xs:boolean" select="$config/config:build-command='draft'"/>
-	<xsl:param name="presentation-files"/>
-	<xsl:variable name="presentation-dir" select="concat($config/config:build/config:build-directory, '/temp/presentation/')"/>
 	
-	<xsl:variable name="presentation">
-		<xsl:for-each select="tokenize($presentation-files, $config/config:dir-separator)">
-			<xsl:sequence select="doc(concat('file:///', $presentation-dir, .))"/>	
-		</xsl:for-each>
-	</xsl:variable>
+	<xsl:param name="presentation-files"/>
+	<xsl:variable name="presentation" select="sf:get-sources($presentation-files)"/>
+
 
 	<xsl:strip-space elements="name"/>
 	
