@@ -64,7 +64,7 @@ Main template
 <xsl:template name="main">
 		<!-- Create the schema element topic set -->
 		<xsl:for-each-group select="$doctypes/doctype" group-by="@name">
-			<xsl:variable name="root" select=".[sf:get-longest(@xpath)]/@xpath"/>
+			<xsl:variable name="root" select=".[sf:longest-string(@xpath)]/@xpath"/>
 			<xsl:variable name="current-doctype" select="@name"/>
 			
 		<xsl:result-document 
@@ -116,7 +116,7 @@ Main content processing templates
 				<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="error">
+				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">
 						<xsl:text>No topic type alias found for topic type </xsl:text>
 						<xsl:value-of select="$topic-type"/>
@@ -228,7 +228,7 @@ Main content processing templates
 							<xsl:apply-templates select="$source[ed:xpath=$xpath]/ed:include-behavior"/>
 						</xsl:when>
 						<xsl:otherwise><!-- If not found, report warning. -->
-							<xsl:call-template name="warning">
+							<xsl:call-template name="sf:warning">
 								<xsl:with-param name="message" select="'Element description not found ', string($xpath)"/>
 							</xsl:call-template>
 						</xsl:otherwise>
@@ -281,7 +281,7 @@ Main content processing templates
 								</xsl:element>
 								<xsl:variable name="authored" select="$source[ed:xpath=$xpath]/ed:attributes/ed:attribute[ed:name=$attribute-name]/*"/>
 								<xsl:if test="not($authored)">
-									<xsl:call-template name="warning">
+									<xsl:call-template name="sf:warning">
 										<xsl:with-param name="message" select="'Attribute description not found ', string(xpath)"/>
 									</xsl:call-template>
 								</xsl:if>
@@ -397,7 +397,7 @@ Content fix-up templates
 					<!-- If not, we have a problem -->
 					<xsl:otherwise>
 						<xsl:attribute name="key" select="$data-content"/>
-						<xsl:call-template name="warning">
+						<xsl:call-template name="sf:warning">
 							<xsl:with-param name="message">
 								<xsl:text>Ambiguous SPFE config attribute name "</xsl:text>
 								<xsl:value-of select="$data-content"/>
@@ -459,7 +459,7 @@ Content fix-up templates
 					<!-- If not, we have a problem -->
 					<xsl:otherwise>
 						<xsl:attribute name="key" select="$data-content"/>
-						<xsl:call-template name="warning">
+						<xsl:call-template name="sf:warning">
 							<xsl:with-param name="message">
 								<xsl:text>Ambiguous SPFE config element name "</xsl:text>
 								<xsl:value-of select="$data-content"/>
@@ -520,7 +520,7 @@ Content fix-up templates
 			</xsl:when>
 			
 			<xsl:otherwise>
-				<xsl:call-template name="error">
+				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">
 						<xsl:text>Unable to figure out which elements the element </xsl:text>
 						<xsl:value-of select="$xpath"/>

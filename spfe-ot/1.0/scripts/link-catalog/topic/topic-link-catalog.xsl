@@ -23,6 +23,7 @@
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:strip-space elements="element-name attribute-name xpath attribute-value code term"/>
 
+	<!-- FIXME: this needs redoing in a way that is compatible with config -->
 	<xsl:param name="synonyms-files-names"/>
 	<xsl:variable name="synonyms-text" xml:base="synonyms/">
 		<xsl:for-each
@@ -51,8 +52,7 @@
 		</synonyms>
 	</xsl:variable>
 
-
-	<!-- 
+<!-- 
 =============
 Main template
 =============
@@ -109,7 +109,7 @@ Main template
 					<original-key>
 						<xsl:value-of select="translate(*:term[1], '{}', '')"/>
 						<xsl:if test="*:term[2]">
-							<xsl:call-template name="warning">
+							<xsl:call-template name="sf:warning">
 								<xsl:with-param name="message">only one term allowed per reference -
 									please split up your terms: term 1 is "<xsl:value-of
 										select="*:term[1]"/>", term 2 is "<xsl:value-of

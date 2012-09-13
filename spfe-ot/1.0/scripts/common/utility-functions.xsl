@@ -12,56 +12,16 @@
 <xsl:param name="terminate-on-error">yes</xsl:param>
 <xsl:variable name="verbosity" select="tokenize($message-types, ' ')"/>
 
-
-	
-<!--	<xsl:function name="sf:get-base-routine-name" as="xs:string">
-		<xsl:param name="routine-name"/>
-		<xsl:value-of select="string(if (contains($routine-name, '(')) then normalize-space(normalize-space(substring-before($routine-name,'('))) else $routine-name)"/>
-	</xsl:function>-->
-	
-
 <xsl:function name="sf:title2anchor">
 	<xsl:param name="title"/>
 	<xsl:value-of select='translate( normalize-space($title), " :&apos;[]", "-----")'/>
 </xsl:function>
 
-<!--	<xsl:function name="sf:fix-up-path-string" as="xs:string">
-		<xsl:param name="path-string"/>
-		<!-\- add leading slash -\->
-		<xsl:choose>
-			<xsl:when test="not(matches($path-string, '^/'))">
-				<xsl:value-of select="concat('/',$path-string)"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$path-string"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:function>-->
-
-<!-- print count: transform a number to a word 
-<xsl:function name="sf:print-count">
-	<xsl:param name="count"/>
-	<xsl:choose>
-		<xsl:when test="$count = 1">one</xsl:when>
-		<xsl:when test="$count = 2">two</xsl:when>
-		<xsl:when test="$count = 3">three</xsl:when>
-		<xsl:when test="$count = 4">four</xsl:when>
-		<xsl:when test="$count = 5">five</xsl:when>
-		<xsl:when test="$count = 6">six</xsl:when>
-		<xsl:when test="$count = 7">seven</xsl:when>
-		<xsl:when test="$count = 8">eight</xsl:when>
-		<xsl:when test="$count = 9">nine</xsl:when>
-		<xsl:when test="$count = 10">ten</xsl:when>
-		<xsl:when test="$count = 11">eleven</xsl:when>
-		<xsl:when test="$count = 12">twelve</xsl:when>
-		<xsl:otherwise><xsl:value-of select="$count"/></xsl:otherwise>
-	</xsl:choose>
-</xsl:function>-->
-
 <xsl:function name="sf:get-sources">
 	<xsl:param name="file-list"/>
 	<xsl:sequence select="sf:get-sources($file-list, '')"></xsl:sequence>
 </xsl:function>
+	
 <xsl:function name="sf:get-sources">
 	<xsl:param name="file-list"/>
 	<xsl:param name="load-message"/>
@@ -69,7 +29,7 @@
 	<xsl:for-each select="tokenize(translate($file-list, '\', '/'), $config/config:dir-separator)">
 		<xsl:variable name="one-file" select="concat('file:///', normalize-space(.))"/>
 		<xsl:if test="normalize-space($load-message)">
-			<xsl:call-template name="info">
+			<xsl:call-template name="sf:info">
 				<xsl:with-param name="message" select="$load-message, $one-file "/>
 			</xsl:call-template>
 		</xsl:if>
@@ -77,52 +37,21 @@
 	</xsl:for-each>
 </xsl:function>	
 	
-<!--	<xsl:function name="sf:matching-substring">
-		<xsl:param name="string" as="xs:string"/>
-		<xsl:param name="regex"  as="xs:string"/>
-		
-		<xsl:if test="$string = ''">
-			<xsl:message>WARNING: Empty string supplied to sf:matching-substring.</xsl:message>
-		</xsl:if>
-		
-		<xsl:analyze-string select="$string" regex="{$regex}">
-			<xsl:matching-substring>
-				<xsl:value-of select="regex-group(0)"/>
-			</xsl:matching-substring>
-		</xsl:analyze-string>
-	</xsl:function>
-			
-	<xsl:function name="sf:starts-with-regex" as="xs:boolean">
-		<xsl:param name="string" as="xs:string"/>
-		<xsl:param name="regex" as="xs:string"/>
-		<xsl:variable name="foo" select="matches($string, concat('^(', $regex, ').*'))"/>
-		<xsl:value-of select="$foo"/>
-	</xsl:function>
-	
-	<xsl:function name="sf:substring-after-regex">
-		<xsl:param name="string" as="xs:string"/>
-		<xsl:param name="regex" as="xs:string"/>
-		<!-\- <xsl:value-of select="replace($string, concat('^',$regex), '')"/>-\->
-		<xsl:variable name="foo" select="replace($string, concat('^',$regex), '')"/>
-		<xsl:value-of select="$foo"/>
-	</xsl:function>-->
-
-	
-	<xsl:template name="info">
+	<xsl:template name="sf:info">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='info'">
 			<xsl:message select="'Info: ', $message"/>
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template name="debug">
+	<xsl:template name="sf:debug">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='debug'">
 			<xsl:message select="'Debug: ', $message"/>
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template name="warning">
+	<xsl:template name="sf:warning">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='warning'">
 			<xsl:message>
@@ -132,7 +61,7 @@
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template name="mention-not-resolved">
+	<xsl:template name="sf:mention-not-resolved">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='warning'">
 			<xsl:message>
@@ -142,7 +71,7 @@
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template name="error">
+	<xsl:template name="sf:error">
 		<xsl:param name="message"/>
 		<xsl:message>**********************************************************</xsl:message>
 		<xsl:message select="'ERROR: ', string-join($message,'')"/>
@@ -173,7 +102,7 @@
 		<xsl:param name="strings" as="element()*"/>
 		<xsl:param name="id"/>
 		<xsl:if test="not($strings/*:string[@id=$id])">
-			<xsl:call-template name="error">
+			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message">String lookup failed for string ID <xsl:value-of select="$id"/>. No matching string found.</xsl:with-param>
 			</xsl:call-template>
 		</xsl:if>
@@ -181,7 +110,7 @@
 	</xsl:function>
 
 	<!-- returns the index of the longest of a set of strings -->
-	<xsl:function name="sf:get-longest" as="xs:integer">
+	<xsl:function name="sf:longest-string" as="xs:integer">
 		<xsl:param name="strings"/>
 		<xsl:value-of select="sf:get-longest($strings,1,1)"/>
 	</xsl:function>
@@ -221,6 +150,11 @@
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:function>
+	
+	<xsl:function name="sf:file-name-from-uri">
+		<xsl:param name="uri"/>
+		<xsl:value-of select="substring-before(tokenize($uri, '/')[count(tokenize($uri, '/'))], '.xml')"/>
+	</xsl:function>
 
 <xsl:function name="sf:satisfies-condition" as="xs:boolean">
 	<xsl:param name="conditions-list"/>

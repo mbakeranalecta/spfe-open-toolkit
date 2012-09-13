@@ -37,7 +37,7 @@
 
 	<xsl:template match="/">
 		<xsl:if test="normalize-space($condition-tokens)">
-			<xsl:call-template name="info">
+			<xsl:call-template name="sf:info">
 				<xsl:with-param name="message" select="'Applying condition tokens:', $condition-tokens"/>
 			</xsl:call-template>
 		</xsl:if>
@@ -86,7 +86,7 @@
 	<xsl:template match="code-block/text() | terminal-session/*">
 		<xsl:choose>
 			<xsl:when test="contains(., '&#09;')">
-			<xsl:call-template name="error">
+			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message">Tab character found in <xsl:value-of select="parent::*/name()"/> element. Tabs cannot be formatted reliably. Replace tabs with spaces.</xsl:with-param>
 			</xsl:call-template>
 		</xsl:when>
@@ -122,7 +122,7 @@
 					<xsl:sequence select="$matching-fragment/fragment/*"/>
 				</xsl:when>
 				<xsl:when test="$fragment-count gt 1">
-					<xsl:call-template name="error">
+					<xsl:call-template name="sf:error">
 						<xsl:with-param name="message">
 							<xsl:text>More than one fragment matching the fragment id </xsl:text>
 							<xsl:value-of select="$id"/>
@@ -131,7 +131,7 @@
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:call-template name="error">
+					<xsl:call-template name="sf:error">
 						<xsl:with-param name="message">
 							<xsl:text>No fragment was found matching the fragment id </xsl:text>
 							<xsl:value-of select="$id"/>

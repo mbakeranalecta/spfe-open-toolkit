@@ -44,7 +44,7 @@
 					<!-- If there is a TOC file for this media, use it to create TOC -->
 					<xsl:when test="$media = tokenize(document($toc-file)/toc/@media, '\s+')">
 						
-						<xsl:call-template name="info">
+						<xsl:call-template name="sf:info">
 							<xsl:with-param name="message" select="'Processing toc file ', $toc-file, 'for', $media"/>
 						</xsl:call-template>
 						
@@ -53,7 +53,7 @@
 						
 						<!-- Make sure the list of topics in the TOC matches the list of topics in the topic-set -->
 						<xsl:if test="not(every $t in $toc-topics satisfies $t = $topic-set-topics)">
-							<xsl:call-template name="error">
+							<xsl:call-template name="sf:error">
 								<xsl:with-param name="message">
 									<xsl:text>Toc file </xsl:text>
 									<xsl:value-of select="$toc-file"/>
@@ -63,7 +63,7 @@
 							</xsl:call-template>
 						</xsl:if>
 						<xsl:if test="not(every $t in $topic-set-topics satisfies $t = $toc-topics)">
-							<xsl:call-template name="error">
+							<xsl:call-template name="sf:error">
 								<xsl:with-param name="message">
 									<xsl:text>Toc file </xsl:text>
 									<xsl:value-of select="$toc-file"/>
@@ -85,7 +85,7 @@
 									</node>
 								</xsl:when>
 								<xsl:otherwise>
-									<xsl:call-template name="warning">
+									<xsl:call-template name="sf:warning">
 										<xsl:with-param name="message">
 											<xsl:text>Topic listed in toc file not found: </xsl:text>
 											<xsl:value-of select="@name"/>
@@ -112,7 +112,7 @@
 						<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic[not(@virtual-type)]/@type union $synthesis/ss:synthesis/ss:topic[not(starts-with(@virtual-type, 'spfe.'))]/@virtual-type)"/>
 						
 						<xsl:if test="count($topic-types-found[not(.=$topic-type-order)])">
-							<xsl:call-template name="error">
+							<xsl:call-template name="sf:error">
 								<xsl:with-param name="message" select="'Topic type(s) missing from spfe.topic-type-order-list property: ', string-join($topic-types-found[not(.=$topic-type-order)], ', ')"/>
 							</xsl:call-template>
 						</xsl:if>
@@ -120,7 +120,7 @@
 						<!-- make sure there is a topic type alias for every topic in the topic type order list 
 						<xsl:if test="$topic-type-order[not(.=$topic-type-alias-list/topic-type/id)]">-->
 						<xsl:if test="not(every $x in $topic-type-order satisfies $x = $topic-type-alias-list/config:topic-type/config:id)">
-							<xsl:call-template name="error">
+							<xsl:call-template name="sf:error">
 								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list:', string-join($topic-type-order[not(.=$topic-type-alias-list/config:topic-type/config:id)], ', ')"/>
 							</xsl:call-template>
 						</xsl:if>
@@ -156,7 +156,7 @@
 								<xsl:otherwise>
 								<!-- if no topics, no heading -->
 									<xsl:if test="not($synthesis/ss:synthesis/ss:topic[matches(@local-name, '^[iI][nN][dD][eE][xX]$')][@type=$this-topic-type])">
-										<xsl:call-template name="warning">
+										<xsl:call-template name="sf:warning">
 											<xsl:with-param name="message" select="'No topics found for topic type ', $this-topic-type, ' in the topic type order list. This might be because all the topics of that type are grouped with other topics, or because there are no topics of that type. No type grouping will be created in the TOC.'"/>
 										</xsl:call-template>
 									</xsl:if>
@@ -185,7 +185,7 @@
 	
 	<!-- Default topics-of-type template - may be overridden for specific types -->
 	<xsl:template match="topics-of-type" mode="toc">
-		<xsl:call-template name="info">
+		<xsl:call-template name="sf:info">
 			<xsl:with-param name="message" select="'Applying default TOC template to topics of type', string(@type)"/>
 		</xsl:call-template>
 		<xsl:for-each select="ss:topic">

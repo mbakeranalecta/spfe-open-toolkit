@@ -8,6 +8,7 @@
 				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 				xmlns="http://www.w3.org/1999/xhtml" 
 				xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:lf="local-functions"
 				xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 				exclude-result-prefixes="#all">
 	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/>
@@ -21,7 +22,7 @@
 	<xsl:variable name="unsorted-toc" >
 		<xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file:')"/>
 		<xsl:if test="count(distinct-values($temp-tocs/toc/@topic-set-id)) lt count($temp-tocs/toc)">
-			<xsl:call-template name="error">
+			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message">
 					<xsl:text>Duplicate TOCs detected.&#x000A; There appears to be more than one TOC in scope for the same topics set. Topic set IDs encountered include:&#x000A;</xsl:text>
 					<xsl:for-each select="$temp-tocs/toc">
@@ -42,7 +43,7 @@
 				<xsl:variable name="topic-set-types-found" select="distinct-values($unsorted-toc/toc/@topic-set-type)"/>
 				
 				<!-- Make sure all the topic set types appear on the topic type order list -->
-				<xsl:call-template name="info">
+				<xsl:call-template name="sf:info">
 					<xsl:with-param name="message">
 						<xsl:text>Ordering the TOC acording the the topic set type list:</xsl:text>
 						<xsl:value-of select="$config/config:doc-set/config:topic-set-type-order"/>
@@ -50,7 +51,7 @@
 				</xsl:call-template>				
 				
 				<xsl:if test="count($topic-set-types-found[not(.=$topic-set-type-order)])">
-					<xsl:call-template name="error">
+					<xsl:call-template name="sf:error">
 						<xsl:with-param name="message" select="'Topic type(s) missing from topic type order list: ', string-join($topic-set-types-found[not(.=$topic-set-type-order)], ', ')"/>
 					</xsl:call-template>
 				</xsl:if>
@@ -64,7 +65,7 @@
 
 			</xsl:when>
 			<xsl:when test="$config/config:doc-set/config:topic-sets">
-				<xsl:call-template name="warning">
+				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message">
 						<!-- FIXME: Should test for the two conditions mentioned below. -->
 						<xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/doc-set configuration setting. External TOC files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
@@ -77,7 +78,7 @@
 				
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="warning">
+				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message">
 						<xsl:text>Doc set configuration not found in config file. TOC will be in alphabetical order by topic-set-type.</xsl:text>
 					</xsl:with-param>
@@ -97,7 +98,7 @@
 
 	<xsl:strip-space elements="name"/>
 	
-	<xsl:function name="sf:html-header">
+	<xsl:function name="lf:html-header">
 		<xsl:param name="title"/>
 		<head>
 			<title><xsl:value-of select="$title"/></title>
@@ -220,13 +221,13 @@ ul.toc ol {
 		<xsl:param name="title"/>
 		<xsl:param name="content"/>
 		<!-- info -->
-		<xsl:call-template name="info">
+		<xsl:call-template name="sf:info">
 			<xsl:with-param name="message" select="concat('Formatting page: ', $file-name)"/>
 		</xsl:call-template>
 
 		<xsl:result-document href="file:///{$config/config:build/config:output-directory}/{$config/config:deployment/config:output-path}/{$file-name}" method="xml" indent="no" omit-xml-declaration="no" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 			<html xml:lang="en" lang="en">
-				<xsl:sequence select="sf:html-header($title)"/>
+				<xsl:sequence select="lf:html-header($title)"/>
 				<xsl:choose>
 					<xsl:when test="$content/*:frameset">
 						<xsl:sequence select="$content"/>
@@ -244,7 +245,7 @@ ul.toc ol {
 		
 
 	<xsl:template name="main">
-		<xsl:call-template name="info">
+		<xsl:call-template name="sf:info">
 			<xsl:with-param name="message">
 				<xsl:choose>
 					<xsl:when test="$config/config:build-command eq'draft'">
@@ -794,7 +795,7 @@ ul.toc ol {
 			</xsl:when>
 
 			<xsl:otherwise>
-				<xsl:call-template name="error">
+				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">Unknown cross-reference type "<xsl:value-of select="$type"/>.</xsl:with-param>
 				</xsl:call-template>
 			</xsl:otherwise>

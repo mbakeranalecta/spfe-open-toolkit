@@ -9,7 +9,7 @@
 <xsl:template match="schema-definitions">
 	<xsl:for-each select="schema-element[@doc-element='true']">
 		<xsl:variable name="file-name" select="concat(name, '-doctype-elements.xml')"/>
-		<xsl:call-template name="info">
+		<xsl:call-template name="sf:info">
 			<xsl:with-param name="message" select="'Creating template:', $file-name, 'in', $output-dir"/>
 		</xsl:call-template>
 		<xsl:result-document href="file:///{$output-dir}/{$file-name}" method="xml" indent="yes" omit-xml-declaration="no">

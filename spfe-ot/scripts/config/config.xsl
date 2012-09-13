@@ -500,20 +500,25 @@
                 <xsl:copy-of select="($config/default-mention-scope)[1]" copy-namespaces="no"/>
                 <build>
                     <output-directory>
+                        <xsl:attribute name="base-uri" select="base-uri(.)"/>
                         <xsl:value-of select="translate(($config/build/output-directory)[1], '\', '/')"/>
                     </output-directory>
                     <build-directory>
+                        <xsl:attribute name="base-uri" select="base-uri(.)"/>
                         <xsl:copy-of select="translate(($config/build/build-directory)[1], '\', '/')"/>
                     </build-directory>
                     <link-catalog-directory>
+                        <xsl:attribute name="base-uri" select="base-uri(.)"/>
                         <xsl:copy-of select="translate(($config/build/link-catalog-directory)[1], '\', '/')"/>
                     </link-catalog-directory>
                     <toc-directory>
+                        <xsl:attribute name="base-uri" select="base-uri(.)"/>
                         <xsl:copy-of select="translate(($config/build/toc-directory)[1], '\', '/')"/>
                     </toc-directory>
                 </build>
                 <deployment>
                     <output-path>
+                        <xsl:attribute name="base-uri" select="base-uri(.)"/>
                         <xsl:value-of select="translate(($config/deployment/output-path)[1], '\', '/')"/>
                     </output-path>
                 </deployment>
@@ -530,6 +535,7 @@
                 <other>
                  <xsl:for-each select="$config/other">
                      <xsl:element name="{@name}">
+                         <xsl:attribute name="base-uri" select="base-uri(.)"/>
                          <xsl:value-of select="."/>
                      </xsl:element>
                  </xsl:for-each>

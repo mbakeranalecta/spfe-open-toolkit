@@ -5,6 +5,7 @@
  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+ xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:gt="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/generic-topic"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
@@ -35,7 +36,7 @@
 				</chapter>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="error">
+				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message" select="'Unknown media specified: ', $media"/>
 				</xsl:call-template>
 			</xsl:otherwise>
@@ -51,7 +52,7 @@
 	</xsl:template>
 	
 	<xsl:template match="gt:section">
-		<xsl:if test="$config/config:build-command='draft' or sf:section-has-content(gt:title/following-sibling::*) ">
+		<xsl:if test="$config/config:build-command='draft' or esf:section-has-content(gt:title/following-sibling::*) ">
 		<section>
 			<anchor name="{sf:title2anchor(gt:title)}"/>
 			<xsl:apply-templates/>

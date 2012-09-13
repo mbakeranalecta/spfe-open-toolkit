@@ -5,6 +5,7 @@
 version="2.0"
  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  exclude-result-prefixes="#all"
 >
@@ -15,7 +16,7 @@ version="2.0"
 <xsl:param name="graphics-catalog-file"/>
 <xsl:variable name="graphics-catalog" select="document($graphics-catalog-file)/graphics-catalog"/>
 
-	<xsl:function name="sf:section-has-content" as="xs:boolean">
+	<xsl:function name="esf:section-has-content" as="xs:boolean">
 		<xsl:param name="content"/>
 		<xsl:value-of select="(normalize-space
 				(string-join
@@ -76,7 +77,7 @@ version="2.0"
 					</xsl:choose>
 				</xsl:when>
 				<xsl:otherwise>
-						<xsl:call-template name="warning">
+						<xsl:call-template name="sf:warning">
 						<xsl:with-param name="message">Text object <xsl:value-of select="$id"/> not found.</xsl:with-param>
 					</xsl:call-template>
 				</xsl:otherwise>
@@ -123,7 +124,7 @@ version="2.0"
 	
 	<xsl:template match="*:terminal-session/*:entry">
 		<xsl:if test="normalize-space(.)">
-			<xsl:sequence select="sf:process-placeholders(., 'code', 'placeholder')"/>
+			<xsl:sequence select="esf:process-placeholders(., 'code', 'placeholder')"/>
 	<!-- 			<bold><xsl:apply-templates/></bold> -->		
 		</xsl:if>
 	</xsl:template>
@@ -240,7 +241,7 @@ version="2.0"
 					<xsl:sequence select="$graphics-catalog/graphic[id eq $fig-id]/*"/>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:call-template name="warning">
+					<xsl:call-template name="sf:warning">
 						<xsl:with-param name="message">
 							<xsl:text>Figure not found: </xsl:text>
 							<xsl:value-of select="if ($uri) then $uri else $fig-id"/>
@@ -284,7 +285,7 @@ version="2.0"
 							</fig>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:call-template name="error">
+							<xsl:call-template name="sf:error">
 								<xsl:with-param name="message" select="'Unknown media speficied: ', $media"/>
 							</xsl:call-template>
 						</xsl:otherwise>
@@ -323,7 +324,7 @@ version="2.0"
 			<xsl:analyze-string select="." regex="([a-zA-z0-9]+)(\s*\()">
 				<xsl:matching-substring>
 					<xsl:choose>
-						<xsl:when test="sf:target-exists(regex-group(1), 'routine', $scope)">
+						<xsl:when test="esf:target-exists(regex-group(1), 'routine', $scope)">
 							<xsl:variable name="routine">
 								<routine-name scope="{$scope}"><xsl:value-of select="regex-group(1)"/></routine-name>
 							</xsl:variable>

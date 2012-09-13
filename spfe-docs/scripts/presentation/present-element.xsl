@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
-	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+<xsl:stylesheet version="2.0"
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+ xmlns:lf="local-functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
  xmlns:re="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry"
@@ -16,20 +18,20 @@
 	Called recursivly to link the segments of an xpath back 
 	to the element named in each segment.
 	===================================================-->
-<xsl:function name="sf:link-xpath-segments">
+<xsl:function name="lf:link-xpath-segments">
 	<xsl:param name="xpath"/>
-		<xsl:sequence select="sf:link-xpath-segments($xpath, '', 1)"/>
+		<xsl:sequence select="lf:link-xpath-segments($xpath, '', 1)"/>
 </xsl:function>
 
-<xsl:function name="sf:link-doc-xpath">
+<xsl:function name="lf:link-doc-xpath">
 	<xsl:param name="doc-xpath"/>
 	<!--find the source-->
 	<xsl:variable name="xpath" select="$synthesis//schema-element[doc-xpath=$doc-xpath]/xpath, $synthesis//schema-element/attributes/attribute[doc-xpath=$doc-xpath]/xpath"/>
 	<xsl:variable name="consumed" select="substring-before($xpath,$doc-xpath)"/>
-	<xsl:sequence select="sf:link-xpath-segments($xpath, $consumed, 1)"/>
+	<xsl:sequence select="lf:link-xpath-segments($xpath, $consumed, 1)"/>
 </xsl:function>
 
-<xsl:function name="sf:link-xpath-segments">
+<xsl:function name="lf:link-xpath-segments">
 	<xsl:param name="xpath"/>
 	<xsl:param name="consumed"/>
 	<xsl:param name="depth"/>
@@ -52,9 +54,9 @@
 	<!-- output this segment with link -->
 	<xsl:text>/</xsl:text>
 	<!-- call the link template -->
-	<xsl:sequence select="sf:link-xpath(concat($consumed, '/', $segment),$segment)"/> 
+	<xsl:sequence select="lf:link-xpath(concat($consumed, '/', $segment),$segment)"/> 
 	<!-- recursive call -->
-	<xsl:sequence select="sf:link-xpath-segments($xpath, concat($consumed, '/', $segment), $depth+1)"/>
+	<xsl:sequence select="lf:link-xpath-segments($xpath, concat($consumed, '/', $segment), $depth+1)"/>
 	</xsl:if>
 </xsl:function>
 
@@ -66,14 +68,14 @@
 	link target exists. If it is not, it prints an error on the command line.
 =============================================================================-->
 
-<xsl:function name="sf:link-xpath">
+<xsl:function name="lf:link-xpath">
 	<xsl:param name="target" as="xs:string"/>
 	<xsl:param name="link-text" as="xs:string"/>
 	<xsl:variable name="targets" select="$synthesis//schema-element, $synthesis//attribute"/>
 	<!--Determine whether or not the target exists. -->
 	<xsl:choose>
 		<xsl:when test="count($targets[xpath = $target]) > 1">
-			<xsl:call-template name="warning">
+			<xsl:call-template name="sf:warning">
 				<xsl:with-param name="message" select="'Ambiguous xpath ', $target"/>
 			</xsl:call-template>
 			<!-- output plain text -->
@@ -81,7 +83,7 @@
 		</xsl:when>			
 		<xsl:when test="not($targets[xpath = $target])">
 			<!-- if it does not exist, report the error but continue, outputting plain text -->
-			<xsl:call-template name="warning">
+			<xsl:call-template name="sf:warning">
 				<xsl:with-param name="message" select="'Unknown xpath', $target"/>
 			</xsl:call-template>
 			<!-- output plain text -->
@@ -132,7 +134,7 @@
 		<xsl:variable name="name" select="name"/>
 		
 		<!-- info -->
-		<xsl:call-template name="info">
+		<xsl:call-template name="sf:info">
 			<xsl:with-param name="message" select="'Creating page ', xpath/text()"/>
 		</xsl:call-template>
 		<page type="API" name="{translate(xpath, '/:', '__')}">
@@ -142,7 +144,7 @@
 			<labeled-item>
 				<label>XPath</label>
 				<item>
-					<p><xsl:sequence select="sf:link-doc-xpath(doc-xpath)"/></p>
+					<p><xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/></p>
 				</item>
 			</labeled-item>	
 			
@@ -243,7 +245,7 @@
 						<xsl:variable name="child-xpath" select="."/>
 						<p>
 							<name hint="element-name">
-								<xsl:sequence select="sf:link-xpath($child-xpath,//schema-element[xpath eq $child-xpath]/name)"/> 
+								<xsl:sequence select="lf:link-xpath($child-xpath,//schema-element[xpath eq $child-xpath]/name)"/> 
 							</name>
 						</p>
 					</xsl:for-each>
@@ -283,7 +285,7 @@
 	<!-- FIXME: redundant ? -->
 	<xsl:template	 match="xpath">
 		<name hint="xpath">
-			<xsl:sequence select="sf:link-xpath-segments(xpath)"/>
+			<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
 		</name>
 	</xsl:template>
 	
@@ -335,7 +337,7 @@
 		<labeled-item>
 			<label>XPath</label>
 			<item>
-				<p><xsl:sequence select="sf:link-doc-xpath(doc-xpath)"/></p>
+				<p><xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/></p>
 			</item>
 		</labeled-item>	
 		

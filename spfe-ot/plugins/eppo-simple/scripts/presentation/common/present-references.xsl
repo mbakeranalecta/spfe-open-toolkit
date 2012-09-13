@@ -4,6 +4,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+	xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
+	xmlns:lf="local-functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
@@ -17,7 +19,7 @@
 	<xsl:variable name="link-catalogs" >
 		<xsl:variable name="temp-link-catalogs" select="sf:get-sources($link-catalog-files, 'Loading link catalog file:')"/>
 		<xsl:if test="count(distinct-values($temp-link-catalogs/link-catalog/@topic-set-id)) lt count($temp-link-catalogs/link-catalog)">
-			<xsl:call-template name="error">
+			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message">
 					<xsl:text>Duplicate link catalogs detected.&#x000A; There appears to be more than one link catalog in scope for the same topics set. Topic set IDs encountered include:&#x000A;</xsl:text>
 					<xsl:for-each select="$temp-link-catalogs/link-catalog">
@@ -31,42 +33,42 @@
 	
 	<xsl:variable name="topic-set-id" select="/ss:synthesis/@topic-set-id"/>
 	
-	<xsl:function name="sf:target-exists" as="xs:boolean">
+	<xsl:function name="esf:target-exists" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
-		<xsl:value-of select="sf:target-exists($target, $type, '')"/>
+		<xsl:value-of select="esf:target-exists($target, $type, '')"/>
 	</xsl:function> 
 	
-	<xsl:function name="sf:target-exists" as="xs:boolean">
+	<xsl:function name="esf:target-exists" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
 		<xsl:param name="scope"/>
-		<xsl:value-of select="if ($link-catalogs//target[@type=$type][key=$target][sf:in-scope(parent::page,$scope)] or sf:multi-key-match($target, $type, $scope)) then true() else false()"/>
+		<xsl:value-of select="if ($link-catalogs//target[@type=$type][key=$target][esf:in-scope(parent::page,$scope)] or esf:multi-key-match($target, $type, $scope)) then true() else false()"/>
 	</xsl:function>
 	
-	<xsl:function name="sf:target-exists-not-self" as="xs:boolean">
+	<xsl:function name="esf:target-exists-not-self" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
 		<xsl:param name="self"/>
-		<xsl:value-of select="sf:target-exists-not-self($target, $type, '', $self)"/>
+		<xsl:value-of select="esf:target-exists-not-self($target, $type, '', $self)"/>
 	</xsl:function> 
 	
-	<xsl:function name="sf:target-exists-not-self" as="xs:boolean">
+	<xsl:function name="esf:target-exists-not-self" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
 		<xsl:param name="scope"/>
 		<xsl:param name="self"/>
-		<xsl:value-of select="if ($link-catalogs//target[parent::page/@full-name ne $self][@type=$type][key=$target][sf:in-scope(parent::page,$scope)] or sf:multi-key-match($target, $type, $scope)) then true() else false()"/>
+		<xsl:value-of select="if ($link-catalogs//target[parent::page/@full-name ne $self][@type=$type][key=$target][esf:in-scope(parent::page,$scope)] or esf:multi-key-match($target, $type, $scope)) then true() else false()"/>
 	</xsl:function>
 	
-	<xsl:function name="sf:multi-key-match" as="xs:boolean">
+	<xsl:function name="esf:multi-key-match" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
 		<xsl:param name="scope"/>
 		
 
 		<xsl:variable name="in-scope-key-sets-of-this-type">
-			<xsl:for-each select="$link-catalogs//target[@type=$type][sf:in-scope(parent::page, $scope)][key-set]">
+			<xsl:for-each select="$link-catalogs//target[@type=$type][esf:in-scope(parent::page, $scope)][key-set]">
 				<target>
 					<xsl:copy-of select="key-set"/>
 				</target>
@@ -74,19 +76,19 @@
 		</xsl:variable>
 		<xsl:variable name="matching-keysets" as="xs:boolean*">
 			<xsl:for-each select="$in-scope-key-sets-of-this-type/target">	
-				<xsl:value-of select="sf:try-key-set($target, key-set)"/>
+				<xsl:value-of select="lf:try-key-set($target, key-set)"/>
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:value-of select="$matching-keysets=true()"/>
 	</xsl:function>
 	
-	<xsl:function name="sf:try-key-set" as="xs:boolean">
+	<xsl:function name="lf:try-key-set" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="key-sets"/>
-		<xsl:value-of select="sf:try-key-set($target, $key-sets, 1)"/>
+		<xsl:value-of select="lf:try-key-set($target, $key-sets, 1)"/>
 	</xsl:function>
 
-	<xsl:function name="sf:try-key-set" as="xs:boolean">
+	<xsl:function name="lf:try-key-set" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="key-sets"/>
 		<xsl:param name="index"/>
@@ -97,23 +99,23 @@
 			<xsl:when test="$index gt count($key-sets)">
 				<xsl:value-of select="true()"/>
 			</xsl:when>
-			<xsl:when test="not(sf:contains-any($target, $key-sets[$index]/key))">
+			<xsl:when test="not(lf:contains-any($target, $key-sets[$index]/key))">
 				<xsl:value-of select="false()"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="sf:try-key-set($target, $key-sets, $index + 1)"/>
+				<xsl:value-of select="lf:try-key-set($target, $key-sets, $index + 1)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
 	 
 	<!-- recursive contains-any function -->
-	<xsl:function name="sf:contains-any" as="xs:boolean">
+	<xsl:function name="lf:contains-any" as="xs:boolean">
 	 	<xsl:param name="string"/>
 	 	<xsl:param name="list" as="xs:string*"/>
-	 	<xsl:value-of select="sf:contains-any($string, $list, 1)"/>
+	 	<xsl:value-of select="lf:contains-any($string, $list, 1)"/>
  	</xsl:function>
 	
-	<xsl:function name="sf:contains-any" as="xs:boolean">
+	<xsl:function name="lf:contains-any" as="xs:boolean">
 	 	<xsl:param name="string"/>
 	 	<xsl:param name="list"/>
 	 	<xsl:param name="index"/>
@@ -125,19 +127,19 @@
 	 			<xsl:value-of select="true()"/>
 	 		</xsl:when>
 	 		<xsl:otherwise>
-	 			<xsl:value-of select="sf:contains-any($string, $list, $index+1)"/>
+	 			<xsl:value-of select="lf:contains-any($string, $list, $index+1)"/>
 	 		</xsl:otherwise>
 	 	</xsl:choose>
 	 </xsl:function>
 	 		
 	
-	<!-- sf:in-scope function
+	<!-- in-scope function
 	A page is considered to be in scope for a reference if:
 	a. the page is unscoped
 	b. the reference is unscoped
 	c. the page and the reference are scoped and have a scope token in common
 	-->
-	<xsl:function name="sf:in-scope" as="xs:boolean">
+	<xsl:function name="esf:in-scope" as="xs:boolean">
 		<xsl:param name="page"/>
 		<xsl:param name="scope"/>
 		<xsl:variable name="page-scope-list" select="tokenize($page/@scope, '\s+')"/>
@@ -167,14 +169,14 @@
 		
 		<xsl:variable name="target-page" as="node()*"> 		
 			<!-- single key lookup -->
-			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page][sf:in-scope(ancestor-or-self::page,$scope)][target/key=$target]"/>	
+			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page][esf:in-scope(ancestor-or-self::page,$scope)][target/key=$target]"/>	
 			
 			<!-- multi-key lookup -->
-			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page][sf:in-scope(ancestor-or-self::page,$scope)]/target[sf:try-key-set($target, key-set)]/.."/>	
+			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page][esf:in-scope(ancestor-or-self::page,$scope)]/target[lf:try-key-set($target, key-set)]/.."/>	
 		</xsl:variable>
 		
 		<xsl:if test="count($target-page[1]/target[@type=$type][key=$target]) gt 1">
-			<xsl:call-template name="warning">
+			<xsl:call-template name="sf:warning">
 				<xsl:with-param name="message" select="'Detected a target page that contains more than one target of the same name and type. The target is:', $target, '. The type is:', $type, '.'"/>
 
 			</xsl:call-template>
@@ -272,7 +274,7 @@
 								 <xsl:value-of select="$target-anchor"/>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:call-template name="warning">
+								<xsl:call-template name="sf:warning">
 									<xsl:with-param name="message">
 										<xsl:text>A page is linking to itself. This is a tool problem, not a content problem. The tools should not generate links to the current page. Report this as bug. Include the following information in the bug report: &#x000A;</xsl:text>
 										<xsl:value-of select="'Reference-type=', $type, '&#x000A;'"/>
@@ -336,11 +338,11 @@
 		<xsl:param name="type"/>
 		<xsl:param name="scope"/>
 				
-		<xsl:variable name="target-page" select="$link-catalogs/link-catalog/page[target/@type=$type][target/key=$target][sf:in-scope(.,$scope)]"/>
+		<xsl:variable name="target-page" select="$link-catalogs/link-catalog/page[target/@type=$type][target/key=$target][esf:in-scope(.,$scope)]"/>
 				
 		<xsl:choose>
 			<xsl:when test="(count($target-page/page/@file) > 1) or (count($link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][@scope=$scope]) > 1)">
-				<xsl:call-template name="error">
+				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">More than one destination found for the cross reference <xsl:value-of select="$target"/>. Unable to proceed.</xsl:with-param>
 				</xsl:call-template>
 			</xsl:when>
@@ -365,7 +367,7 @@
 		<xsl:variable name="target-topic-set">
 			<xsl:choose>
 				<xsl:when test="$scope">
-					<xsl:value-of select="$link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][sf:in-scope(.,$scope)]/parent::link-catalog/@topic-set-id"/>
+					<xsl:value-of select="$link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][esf:in-scope(.,$scope)]/parent::link-catalog/@topic-set-id"/>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="$link-catalogs/link-catalog[page/@full-name=$target-page/@full-name]/@topic-set-id"/>
@@ -376,10 +378,10 @@
 		<xsl:variable name="target-directory">
 			<xsl:choose>
 				<xsl:when test="$scope">
-					<xsl:value-of select="$link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][sf:in-scope(.,$scope)]/parent::link-catalog/@topic-set-id"/>
+					<xsl:value-of select="$link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][esf:in-scope(.,$scope)]/parent::link-catalog/@topic-set-id"/>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="$link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][sf:in-scope(.,$scope)]/parent::link-catalog/@output-directory"/>
+					<xsl:value-of select="$link-catalogs/link-catalog/page[@full-name=$target-page/@full-name][esf:in-scope(.,$scope)]/parent::link-catalog/@output-directory"/>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -424,9 +426,9 @@
 		
 		<!--Determine whether or not the target exists. -->
 		<xsl:choose>
-			<xsl:when test="not(sf:target-exists($target, 'xpath', $scope))">
+			<xsl:when test="not(esf:target-exists($target, 'xpath', $scope))">
 				<!-- if it does not exist, output warning and continue, outputting plain text -->
-				<xsl:call-template name="warning">
+				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message" select="'Unknown xpath ', $target"/>
 				</xsl:call-template>
 				<!-- output plain text -->
@@ -452,7 +454,7 @@
 		<xsl:variable name="scope" select="@scope"/>
 		<xsl:choose>
 			<!-- make sure that the target exists -->
-			<xsl:when test="sf:target-exists($term, 'term', $scope)">
+			<xsl:when test="esf:target-exists($term, 'term', $scope)">
 				<xsl:call-template name="output-link">
 					<xsl:with-param name="target" select="$term"/>
 					<xsl:with-param name="type">term</xsl:with-param>
@@ -462,7 +464,7 @@
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="mention-not-resolved">
+				<xsl:call-template name="sf:mention-not-resolved">
 					<xsl:with-param name="message" select="'Term  &quot;', $term, '&quot; not resolved.'"/> 
 				</xsl:call-template>
 				<xsl:apply-templates/>
@@ -476,7 +478,7 @@
 		
 		<xsl:choose>
 			<!-- make sure that the target exists -->
-			<xsl:when test="sf:target-exists($topic, 'topic', $scope)">
+			<xsl:when test="esf:target-exists($topic, 'topic', $scope)">
 				<!-- paper or online -->
 				<xsl:choose>
 					<xsl:when test="$media='paper'">
@@ -492,7 +494,7 @@
 								<xsl:with-param name="target" select="$topic"/>
 								<xsl:with-param name="type">topic</xsl:with-param>
 								<xsl:with-param name="content" as="xs:string">
-									<xsl:value-of select="$link-catalogs//target[@type='topic'][key=$topic][sf:in-scope(parent::page, $scope)]/parent::page/@title"/>
+									<xsl:value-of select="$link-catalogs//target[@type='topic'][key=$topic][esf:in-scope(parent::page, $scope)]/parent::page/@title"/>
 								</xsl:with-param>
 							<xsl:with-param name="scope" select="$scope"/>
 							</xsl:call-template>
@@ -501,7 +503,7 @@
 				</xsl:choose>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="error">
+				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message" select="'Topic not found: ', $topic"/> 
 				</xsl:call-template>
 				<xsl:apply-templates/>
@@ -517,7 +519,7 @@
 
 		<xsl:choose>
 			<!-- make sure that the target exists -->
-			<xsl:when test="sf:target-exists($topic-set, 'topic-set', '')">
+			<xsl:when test="esf:target-exists($topic-set, 'topic-set', '')">
 				<!-- paper or online -->
 				<xsl:choose>
 					<xsl:when test="$media='paper'">
@@ -538,7 +540,7 @@
 				</xsl:choose>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="error">
+				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message" select="'Topic set not found: ', $topic-set"/> 
 				</xsl:call-template>
 				<xsl:apply-templates/>
@@ -563,7 +565,7 @@
 	<xsl:template match="*:mention">
 		<xsl:variable name="content" select="normalize-space(.)"/>
 			<xsl:choose>
-				<xsl:when test="sf:target-exists(@key, @type, @scope)">
+				<xsl:when test="esf:target-exists(@key, @type, @scope)">
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="@key"/>
 						<xsl:with-param name="type" select="@type"/>
@@ -572,7 +574,7 @@
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:call-template name="mention-not-resolved">
+					<xsl:call-template name="sf:mention-not-resolved">
 						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved.')"/>
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
@@ -591,7 +593,7 @@
 	<xsl:template match="*:p/*:name">
 		<!-- FIXME: handle namespace of the name? -->
 		<xsl:if test="not(@key)">
-			<xsl:call-template name="warning">
+			<xsl:call-template name="sf:warning">
 				<xsl:with-param name="message" 
 					select="'&quot;name&quot; mention element found with no &quot;key&quot; attribute:', . "/>
 				
@@ -600,7 +602,7 @@
 		<xsl:variable name="content" select="normalize-space(.)"/>
 		<name type="{@type}">
 			<xsl:choose>
-				<xsl:when test="sf:target-exists(@key, @type, @scope)">
+				<xsl:when test="esf:target-exists(@key, @type, @scope)">
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="@key"/>
 						<xsl:with-param name="type" select="@type"/>
@@ -609,7 +611,7 @@
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:call-template name="mention-not-resolved">
+					<xsl:call-template name="sf:mention-not-resolved">
 						<xsl:with-param name="message" select="concat(@type, ' name &quot;', (if (@key) then @key else .), '&quot; not resolved.')"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
@@ -632,7 +634,7 @@
 	<xsl:template match="*:table-id">
 		<xsl:variable name="table-id" select="@id-ref"/>
 		<xsl:if test="not(ancestor::topic//table[@id=$table-id]/title)">
-			<xsl:call-template name="error">
+			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message" select="'No table/title element found for referenced table:', $table-id, '. A title is required for all referenced tables.'"/>
 			</xsl:call-template>
 		</xsl:if>
@@ -643,7 +645,7 @@
 		<xsl:variable name="fig-id" select="@id-ref"/>
 		<xsl:variable name="uri" select="@uri"/>
 		<xsl:if test="not(ancestor::topic//fig[@id=$fig-id or @uri=$uri]/title)">
-			<xsl:call-template name="error">
+			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message" select="'No fig/title element found for referenced fig:', if($uri) then $uri else $fig-id, '. A title is required for all referenced figs.'"/>
 			</xsl:call-template>
 		</xsl:if>
@@ -702,7 +704,7 @@
 		<xsl:variable name="target" select="if (@key) then normalize-space(@key) else normalize-space(.)"/>
 		<xsl:choose>
 			<!-- make sure that the target exists -->
-			<xsl:when test="sf:target-exists($target, $type, $scope)">
+			<xsl:when test="esf:target-exists($target, $type, $scope)">
 				<xsl:call-template name="output-link">
 					<xsl:with-param name="target" select="$target"/>
 					<xsl:with-param name="type" select="$type"/>
@@ -714,7 +716,7 @@
 				<xsl:variable name="not-resolved-message">
 					<xsl:value-of select="$type"/> string not found: <xsl:value-of select="$target"/>.
 				</xsl:variable>
-				<xsl:call-template name="mention-not-resolved">
+				<xsl:call-template name="sf:mention-not-resolved">
 					<xsl:with-param name="message">
 						<xsl:value-of select="$type"/> string not found: &quot;<xsl:value-of select="$target"/>&quot;.
 					</xsl:with-param>
@@ -724,11 +726,11 @@
 		</xsl:choose>
 	</xsl:template>
 	
-	<xsl:function name="sf:process-placeholders" as="node()*">
+	<xsl:function name="esf:process-placeholders" as="node()*">
 	<!-- Processes a string to determine if it contains placeholder markup in 
 	     the form of a string contained between "{" and "}". Recognizes "{{}"
 	     as an escape sequence for a literal "{". Nesting of placeholders is
-	     not supported. The use of a literal "{" or "}" inside the placeholer 
+	     not supported. The use of a literal "{" or "}" inside the placeholder 
 	     string is not supported. Does not attempt to detect or report these
 	     conditions, however.
 	     

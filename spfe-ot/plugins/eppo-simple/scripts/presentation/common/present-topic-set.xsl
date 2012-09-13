@@ -2,7 +2,8 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
- xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+	xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
+	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  exclude-result-prefixes="#all">
@@ -46,7 +47,7 @@ Main template
 <xsl:template name="create-generated-topics"/>
 
 <xsl:template match="ss:topic" priority="-1">
-	<xsl:call-template name="error">
+	<xsl:call-template name="sf:error">
 		<xsl:with-param name="message">
 			<xsl:text>A topic of an unregconized topic type was included in the topic set build. The root element name is "</xsl:text>
 			<xsl:value-of select="@element-name"/>
@@ -89,7 +90,7 @@ Main template
 					<xsl:for-each select="index/reference">
 						<xsl:variable name="key-text" select="translate(key[1], '{}', '')"/>
 						<xsl:choose>
-							<xsl:when test="sf:target-exists-not-self(key[1], type, ancestor::topic/@default-reference-scope, ancestor::topic/name)">
+							<xsl:when test="esf:target-exists-not-self(key[1], type, ancestor::topic/@default-reference-scope, ancestor::topic/name)">
 								<xsl:call-template name="output-link">
 									<xsl:with-param name="target" select="key[1]"/>
 									<xsl:with-param name="type" select="type"/>
@@ -107,7 +108,7 @@ Main template
 			</tr>
 			
 <!-- 					<xsl:variable name="see-also-links">
-				<xsl:for-each select="index/reference[sf:target-exists-not-self(key[1], type, ancestor::topic/@default-reference-scope, ancestor::topic/name)]">
+				<xsl:for-each select="index/reference[esf:target-exists-not-self(key[1], type, ancestor::topic/@default-reference-scope, ancestor::topic/name)]">
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="key[1]"/>
 						<xsl:with-param name="type" select="type"/>
@@ -135,7 +136,7 @@ Main template
 <xsl:template name="see-also-footer">		
 	<!-- FIXME: Should be a proper see-also container, not a table. -->
 			<xsl:variable name="see-also-links">
-				<xsl:for-each select="index/reference[sf:target-exists(key[1], type, ancestor::topic/@default-reference-scope)]">
+				<xsl:for-each select="index/reference[esf:target-exists(key[1], type, ancestor::topic/@default-reference-scope)]">
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="key[1]"/>
 						<xsl:with-param name="type" select="type"/>

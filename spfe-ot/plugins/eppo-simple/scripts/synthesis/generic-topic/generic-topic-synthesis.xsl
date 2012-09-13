@@ -14,10 +14,7 @@ exclude-result-prefixes="#all">
 	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
 	
 	
-	<xsl:function name="sf:name-from-uri">
-		<xsl:param name="uri"/>
-		<xsl:value-of select="substring-before(tokenize($uri, '/')[count(tokenize($uri, '/'))], '.xml')"/>
-	</xsl:function>
+
 	
 	<xsl:template match="*:generic-topic">
 		<xsl:variable name="conditions" select="@if"/>
@@ -29,7 +26,7 @@ exclude-result-prefixes="#all">
 					<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:call-template name="error">
+					<xsl:call-template name="sf:error">
 						<xsl:with-param name="message">
 							<xsl:text>No topic type alias found for topic type </xsl:text>
 							<xsl:value-of select="$topic-type"/>
@@ -48,7 +45,7 @@ exclude-result-prefixes="#all">
 					type="{namespace-uri()}" 
 					topic-type-alias="{$topic-type-alias}"
 					full-name="{*:head/*:uri}"
-					local-name="{sf:name-from-uri(*:head/*:uri)}"
+					local-name="{sf:file-name-from-uri(*:head/*:uri)}"
 					title="{*:body/*:title}">
 					<xsl:if test="*:head/*:virtual-type">
 						<xsl:attribute name="virtual-type" select="*:head/*:virtual-type"/>
@@ -61,7 +58,7 @@ exclude-result-prefixes="#all">
 				</ss:topic>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="info">
+				<xsl:call-template name="sf:info">
 					<xsl:with-param name="message">
 						<xsl:text>Suppressing topic </xsl:text>
 						<xsl:value-of select="name"/>

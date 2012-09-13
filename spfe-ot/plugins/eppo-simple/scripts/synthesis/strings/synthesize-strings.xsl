@@ -4,7 +4,9 @@
 
 <!-- Stylesheets that import this stylesheets must define the $strings variable. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="2.0" exclude-result-prefixes="#all">
+    version="2.0" 
+    xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+    exclude-result-prefixes="#all">
     
     <xsl:template match="*:string-ref">
         <xsl:param name="local-strings" as="element()*" tunnel="yes"/>
@@ -13,7 +15,7 @@
 
         <xsl:choose>
             <xsl:when test="$substitution[2]">
-                <xsl:call-template name="error">
+                <xsl:call-template name="sf:error">
                     <xsl:with-param name="message">
                         <xsl:text>Multiple strings found with string id </xsl:text>
                         <xsl:value-of select="$id"/>
@@ -30,7 +32,7 @@
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="error">
+                <xsl:call-template name="sf:error">
                     <xsl:with-param name="message">
                         <xsl:text>No string found with string id </xsl:text>
                         <xsl:value-of select="$id"/>
