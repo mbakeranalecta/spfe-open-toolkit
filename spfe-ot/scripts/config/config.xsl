@@ -553,10 +553,12 @@
                     version="2.0" >
                     <xsl:for-each select="current-group()[1]/c:script">
                         <!-- FIXME: need to figure out if this should be import or include -->
-                        <!-- FIXME: looks like include may be preferable to avoid complexities with include precedence -->
+                        <!-- FIXME: looks like include may be preferable to avoid complexities with import precedence -->
                         <!-- FIXME: But examine if this mechanism is actually worthwhile. -->
-<!--                        <gen:import href="file:///{.}"/>
--->                        <gen:include href="{resolve-uri(.,@base-uri)}"/>
+<!--                        <gen:import href="file:///{.}"/>--> 
+                        <!-- I'm not clear why resolve-uri seems to include the file:/ protocol string in Linux and not Windows, but it does, so we need to check.-->
+                        <xsl:variable name="uri" select="resolve-uri(.,@base-uri)"/>
+                       <gen:include href="{if (starts-with($uri, 'file:/')) then $uri else concat('file:/', $uri)}"/>
                     </xsl:for-each>
                 </gen:stylesheet>
             </xsl:result-document>
