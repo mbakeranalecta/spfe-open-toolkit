@@ -5,10 +5,10 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
-	exclude-result-prefixes="xs">
+	exclude-result-prefixes="#all">
 
 <!-- =============================================================
-	read-schema.xsl
+	dchema-defs.xsl
 	
 	Reads a schema and pulls out the elements, attributes, and simple types 
 	 This stylesheet starts from the element named in the "start-from" variable. 
@@ -23,9 +23,8 @@
 	the output of this stylesheet lists every context in which each element and attribute can
 	possibly occur. For simpleTypes, it just dumps the definitions.
 	 
-	 Note that it has been tested against all the known schema mechanisms used in the ARINC
-	schemas to date, but has not been verified to work with all possible schema mechnanisms that
-	might be used in the future.
+	 Note that it has been tested against all the known schema mechanisms used in the SPFE
+	schemas to date, but has not been verified to work with all possible schema mechnanisms.
 	  
 	 The output of this stylesheet is a simple dump of elements, attributes and types. Nothing
 	 is sorted, and elements and attributes are mixed in together in the order they were found.
@@ -35,11 +34,6 @@
 	 a parameter to every template. Each template adds to this and passes it on. Natural 
 	 recursion of XSLT takes care of the rest. Path is written out for each element and
 	attribute encountered.
-	
-	 Revisions
-	 
-	2005-07-15 gmb First version.
-	2006-11-14 gmb Updated to XSLT 2.0, doc-element identification added
 ===============================================================-->
 	<!-- get the namespace prefix used in the source  
 	<xsl:variable name="xsd-prefix" select="substring-before(name(xs:schema), local-name(xs:schema))"/> -->

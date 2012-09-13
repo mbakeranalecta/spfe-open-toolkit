@@ -5,13 +5,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <include href="../spfe-docs-config.xml"/>
-    <define name="TOPIC_SET_ID" value="spfe-configuration-reference"/>
+    <define name="TOPIC_SET_ID" value="spfe-function-reference"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <topic-set-type>reference</topic-set-type>
-    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</topic-type-order>
+    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</topic-type-order>
     <sources>
         <topics>
-            <include>../../content/config-ref/*.xml</include>
+            <include>../../content/xsl-function-ref/*.xml</include>
         </topics>
         <text-objects>
             <include>../../content/*.xml</include>
@@ -31,8 +31,12 @@
         <synonyms>
             <include>../../content/*.xml</include>
         </synonyms>
-        <other name="element-descriptions">
-            <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
+        <other name="function-descriptions">
+            <include>../../content/xsl-function-ref/function-descriptions.xml</include>
+        </other>
+        <other name="xslt-files">
+            <include>${SPFEOT_HOME}/1.0/scripts/**/*.xsl</include>
+            <include>${SPFEOT_HOME}/1.0/scripts/**/*.xslt</include>
         </other>
     </sources>
 
@@ -40,10 +44,9 @@
     <default-mention-scope>spfe</default-mention-scope>
     <output-formats>html</output-formats>
 
-
     <build>
-        <build-rules>../../build-tools/config-ref-rules.xml</build-rules>               
-        <build-directory>${HOME}/spfebuild/spfe-docs/config-ref</build-directory>
+        <build-rules>../../build-tools/function-ref-rules.xml</build-rules>               
+        <build-directory>${HOME}/spfebuild/spfe-docs/function-ref</build-directory>
     </build>
 
     <deployment>
@@ -52,7 +55,7 @@
     
     <scripts>
         <synthesis>
-            <script>../../scripts/synthesis/synthesize-schema-docs.xsl</script>
+            <script>../../scripts/synthesis/synthesize-function-docs.xsl</script>
             <script>../../scripts/synthesis/mentions-spfe-build.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/mentions/mentions.xsl</script>
         </synthesis>        
@@ -60,7 +63,7 @@
             <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
         </link-catalog>
         <toc>
-            <script>../../scripts/toc/schema-toc.xsl</script>
+            <script>../../scripts/toc/function-toc.xsl</script>
         </toc>
         <image-list>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/image-handling/get-image-list.xsl</script>
@@ -68,14 +71,14 @@
         <presentation-web>
             <script>../../scripts/presentation/present-doctype.xsl</script>
         </presentation-web>
-        <other name="schema-defs">
-            <script>../../scripts/synthesis/schema-defs.xsl</script>
+        <other name="function-defs">
+            <script>../../scripts/synthesis/xsl-function-ref/xsl-function-ref-get-function-defs.xsl</script>
         </other>
     </scripts>
     
     <strings>
-        <string id="eppo-simple-topic-set-title">SPFE Configuration Settings</string>
+        <string id="eppo-simple-topic-set-title">SPFE Function Reference</string>
     </strings>
     
-    <other name="schema-file">${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</other>
+
 </spfe>

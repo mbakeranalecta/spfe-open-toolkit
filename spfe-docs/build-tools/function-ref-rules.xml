@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="function-ref-rules"  default="draft">
+
+	<!-- import the common SPFE definitions -->
+	<import file="${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml"/>
+
+	
+	<!-- override the intermedia synthesis build taget to add -build.function-defs to the dependencies -->
+	<target name="-build.synthesis" depends="-build.function-defs, --build.synthesis"/>
+
+	<!-- define properties for the temporary files used -->
+	<property name="files.function-defs" value="function-defs.xml"/>
+
+	<!-- GET TARGETS -->
+	<target name="-get.source-files.function-descriptions">
+		<copy todir="${temp}/descriptions" verbose="true" preservelastmodified="true" flatten="true">
+			<files refid="other.function-descriptions"/>
+		</copy>
+	</target>
+
+
+	<!-- DEPENDENCY TARGETS -->
+	<!-- check to see if function-defs is up to date -->	
+	<target name="-current.function-defs">
+		<dirname property="paths.functions" file="${source-files.functions}"/>
+
+		<uptodate property="-current.functions-defs" targetfile="${temp}/${files.function-defs}">
+			<srcresources>
+				<dirset dir="${paths.functions}" includes="**/*.xsd"/>
+				<filelist dir=".">
+					<file name="${source-files.functions}"/>
+				</filelist>
+			</srcresources>
+		</uptodate>
+	</target>
+	
+
+	<!-- SYNTHESIS TARGETS -->
+	
+	<target name="-build.function-defs" 
+		description="functions definitions" 
+		depends="-init, -current.function-defs" unless="-current.function-defs">
+		
+		<property name="xslt-files" refid="other.xslt-files"/>
+	
+		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file}" 
+			style="${spfe.scripts.other.function-defs}"
+			out="${temp}/${files.function-defs}">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="xslt-files" expression="${xslt-files}"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="draft" expression="${draft}" if="draft"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+		
+		<!-- validate the output file -->
+		<xmlvalidate lenient="yes" file="${temp}/${files.function-defs}">
+			<!-- make the validation include namespaces -->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+		</xmlvalidate>
+	</target>
+
+
+
+	<!-- FIXME: Needs its own -current.synthesis because of the different location of the synthesis files. -->
+
+	
+	<!-- target to build function-ref synthesis -->
+	<target name="--build.synthesis" description="Fucntion ref synthesis" 
+	        depends="-build.function-defs, 
+					 -get.source-files.function-descriptions">
+						
+		<!-- run the XSLT script to produce the output -->
+		<basename property="source-files.descriptions.name" file="${source-files.function-descriptions}"/>
+		
+		<files id="descriptions-file-list" includes="${temp}/descriptions/*.xml"/>
+		<property name="descriptions-files" refid="descriptions-file-list"/>
+		
+		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file}"
+			style="${spfe.scripts.synthesis}" 
+			out="NULL">
+			
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="topic-files" expression="${topic-files}"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="function-defs-file" expression="${temp}/${files.function-defs}"/>
+ 			<param name="function-description-files" expression="${descriptions-files}"/>
+			<param name="synthesis-directory" expression="${temp}/synthesis"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+		<!-- validate the output file 
+		<xmlvalidate lenient="yes" file="${temp}/${spfe.files.synthesis}">
+			<!-/- make the validation include namespaces -/->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+		</xmlvalidate>-->
+	</target>	
+</project>
