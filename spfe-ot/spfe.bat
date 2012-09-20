@@ -5,7 +5,7 @@ if "%1"=="" goto NOCONFIGFILE
 if not exist %1 goto CONFIGFILEMISSING
 
 set SPFE_TEMP_BUILD_FILE=%TEMP%/spfetemp%RANDOM%.xml
-java -classpath %SPFEOT_HOME%/tools/saxon9he/saxon9he.jar net.sf.saxon.Transform -s:%1 -xsl:%SPFEOT_HOME%/scripts/config/config.xsl -o:%SPFE_TEMP_BUILD_FILE% HOME=%HOMEDRIVE%%HOMEPATH% SPFEOT_HOME=%SPFEOT_HOME% SPFE_BUILD_COMMAND=%2
+java -classpath "%SPFEOT_HOME%/tools/saxon9he/saxon9he.jar" net.sf.saxon.Transform -s:%1 -xsl:"%SPFEOT_HOME%"/scripts/config/config.xsl -o:"%SPFE_TEMP_BUILD_FILE%" HOME="%HOMEDRIVE%%HOMEPATH%" SPFEOT_HOME="%SPFEOT_HOME%" SPFE_BUILD_COMMAND=%2
 
 IF %ERRORLEVEL% NEQ 0 goto CONFIGERROR 
 
