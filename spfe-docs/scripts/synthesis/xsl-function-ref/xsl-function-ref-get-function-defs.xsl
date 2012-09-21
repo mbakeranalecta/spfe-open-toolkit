@@ -5,6 +5,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+    exclude-result-prefixes="#all"
     version="2.0"
     >
 
@@ -20,9 +21,9 @@
     <xsl:variable name="xslt-file-set" select="sf:get-sources($xslt-files)"/>
     
     <xsl:template name="main">
-      <function-definitions>
+      <function-and-template-definitions>
         <xsl:apply-templates select="$xslt-file-set"/>
-      </function-definitions>
+      </function-and-template-definitions>
     </xsl:template>
     
     <xsl:template match="xsl:*">
@@ -34,11 +35,14 @@
     <xsl:template match="xsl:function">
         <function-definition>
             <name>
-                <xsl:value-of select="substring-before(@name, ':')"/>
+                <xsl:value-of select="substring-after(@name, ':')"/>
             </name>
             <local-prefix>
                 <xsl:value-of select="substring-before(@name, ':')"/>
             </local-prefix>
+            <return-type>
+                <xsl:value-of select="if (@as) then @as else 'item()*'"/>
+            </return-type>
             <source-file>
                 <xsl:value-of select="base-uri()"></xsl:value-of>
             </source-file>
@@ -49,12 +53,46 @@
                 <xsl:for-each select="xsl:param">
                     <parameter>
                         <name><xsl:value-of select="@name"/></name>
-                        <type><xsl:value-of select="@as"/></type>
+                        <type><xsl:value-of select="if (@as) then @as else 'item()*'"/></type>
                     </parameter>
                 </xsl:for-each>
             </parameters>
+            <definition>
+                <xsl:sequence select="." exclude-result-prefixes="#all"/>
+            </definition>
         </function-definition>
     </xsl:template>
+    
+    <xsl:template match="xsl:template[@name]">
+        <template-definition>
+            <name>
+                <xsl:value-of select="substring-after(@name, ':')"/>
+            </name>
+            <local-prefix>
+                <xsl:value-of select="substring-before(@name, ':')"/>
+            </local-prefix>
+            <return-type>
+                <xsl:value-of select="if (@as) then @as else 'item()*'"/>
+            </return-type>
+            <source-file>
+                <xsl:value-of select="base-uri()"></xsl:value-of>
+            </source-file>
+            <namespace-uri>
+                <xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
+            </namespace-uri>
+            <parameters>
+                <xsl:for-each select="xsl:param">
+                    <parameter>
+                        <name><xsl:value-of select="@name"/></name>
+                        <type><xsl:value-of select="if (@as) then @as else 'item()*'"/></type>
+                    </parameter>
+                </xsl:for-each>
+            </parameters>
+            <definition>
+                <xsl:sequence select="." exclude-result-prefixes="#all" />
+            </definition>
+        </template-definition>
+    </xsl:template>    
    
 
     
