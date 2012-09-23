@@ -350,9 +350,8 @@
                       </xsl:choose>
                       
                   </xsl:for-each>
-                 
-                  <xsl:sequence select="spfe:xml2properties(($config/build/build-directory)[1], 'spfe.build')"/>
-                  
+
+                  <property name="spfe.build.build-directory" value="{($config/build/build-directory)[1]}"/>
                   <property name="spfe.build.output-directory" value="{if (normalize-space(($config/deployment/output-path)[1])) then concat(($config/build/output-directory)[1], '/', ($config/deployment/output-path)[1]) else ($config/build/output-directory)[1]}"/>
                   
                   <xsl:sequence select="spfe:xml2properties(($config/build/link-catalog-directory)[1], 'spfe.build')"/>
@@ -505,7 +504,7 @@
                     </output-directory>
                     <build-directory>
                         <xsl:attribute name="base-uri" select="base-uri(.)"/>
-                        <xsl:copy-of select="translate(($config/build/build-directory)[1], '\', '/')"/>
+                        <xsl:copy-of select=" escape-html-uri( translate(($config/build/build-directory)[1], '\', '/'))"/>
                     </build-directory>
                     <link-catalog-directory>
                         <xsl:attribute name="base-uri" select="base-uri(.)"/>

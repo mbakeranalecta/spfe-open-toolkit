@@ -33,6 +33,7 @@
 
 	<!-- properties for the temporary files used -->
 	<property name="temp" value="${spfe.build.build-directory}/temp"/>
+	<makeurl file="${spfe.build.build-directory}/temp" property="temp-url"/>
 	<property name="output" value="${spfe.build.output-directory}"/>
 
 	<target name="-begin-message">
@@ -88,10 +89,10 @@
 		<copy todir="${temp}/topics" preservelastmodified="true" flatten="true" verbose="true">
 			<files refid="topics"/>
 		</copy>
-		<files id="topic-file-list" includes="${temp}/topics/*.xml"/>
-		<property name="topic-files" refid="topic-file-list"/>
+		<fileset id="topic-file-list" dir="${temp}" includes="topics/*.xml"/>
+		<pathconvert dirsep="/" pathsep=";" property="topic-files" refid="topic-file-list"/>
+	
 		
-		<!-- FIXME: switch scripts to use full paths -->
 		<!-- These echos are to test how the lists are created on each platform -->
 		<!-- Note inconsistency between handling of files and fileset WRT ; vs : 
 		<echo/>
@@ -226,8 +227,8 @@
 	</target>
 	
 	<target name="-get-synthesis-file-list">
-		<files id="synthesis-file-list" includes="${temp}/synthesis/*.xml"/>
-		<property name="synthesis-files" refid="synthesis-file-list"/>		
+		<fileset id="synthesis-file-list" dir="${temp}" includes="synthesis/*.xml"/>
+		<pathconvert dirsep="/" pathsep=";" property="synthesis-files" refid="synthesis-file-list"/>
 	</target>
 
 	<!-- LINK CATALOG STEP -->
@@ -363,9 +364,10 @@
   				 -current.html-format"
 		unless="-current.html-format">
 
-		<files id="presentation-file-list" includes="${temp}/presentation/*.xml"/>
-		<property name="presentation-files" refid="presentation-file-list"/>
-		<property name="toc-files" refid="tocs"/>	
+		<fileset dir="${temp}" id="presentation-file-list" includes="presentation/*.xml"/>
+		<pathconvert dirsep="/" pathsep=";" property="presentation-files" refid="presentation-file-list"/>
+		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
+
 		
 		<!-- run the XSLT script to produce the output -->
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
@@ -396,9 +398,10 @@
 	<target name="--build.fo-format" description="FO formatting"
 		depends="-build.presentation-book, -current.fo-format" unless="-current.fo-format">
 		
-		<files id="presentation-file-list" includes="${temp}/presentation/*.xml"/>
-		<property name="presentation-files" refid="presentation-file-list"/>
-		<property name="toc-files" refid="tocs"/>	
+		<fileset id="presentation-file-list" dir="${temp}" includes="presentation/*.xml"/>
+		<pathconvert dirsep="/" pathsep=";" property="presentation-files" refid="presentation-file-list"/>
+
+		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
 		
 		<!-- run the XSLT script to produce the output -->
 		
