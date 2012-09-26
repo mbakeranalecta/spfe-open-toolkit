@@ -15,17 +15,20 @@
 			</fileset>
 		</classpath>
 		<catalogpath >
-			<fileset 
-				dir="${SPFEOT_HOME}/1.0/schemas"
-				includes="**/catalog.xml"/>
-			<fileset dir="${SPFEOT_HOME}/plugins" 
-				includes="**/catalog.xml"/>			
-			<fileset dir="${HOME}/.spfe" 
-					includes="**/catalog.xml" erroronmissingdir="no"/>
-<!--			<fileset 
-				dir="${spfe.xml-catalog-directory}"
-				includes="**/catalog.xml"/>-->
-		</catalogpath>
+			<fileset dir="${SPFEOT_HOME}/1.0/schemas">
+				<include name="**/catalog.xml"/>
+			</fileset>
+			<fileset dir="${SPFEOT_HOME}/plugins">
+				<include name="**/catalog.xml"/>
+			</fileset> 
+			<fileset dir="${HOME}/.spfe" erroronmissingdir="no">
+				<include name="**/catalog.xml"/>
+			</fileset> 
+					 
+<!--			<fileset dir="${spfe.xml-catalog-directory}">
+				<include name="**/catalog.xml"/>
+			</fileset>
+-->		</catalogpath>
 
 	</xmlcatalog>
 
@@ -33,7 +36,7 @@
 
 	<!-- properties for the temporary files used -->
 	<property name="temp" value="${spfe.build.build-directory}/temp"/>
-	<makeurl file="${spfe.build.build-directory}/temp" property="temp-url"/>
+
 	<property name="output" value="${spfe.build.output-directory}"/>
 
 	<target name="-begin-message">
@@ -89,26 +92,10 @@
 		<copy todir="${temp}/topics" preservelastmodified="true" flatten="true" verbose="true">
 			<files refid="topics"/>
 		</copy>
-		<fileset id="topic-file-list" dir="${temp}" includes="topics/*.xml"/>
+		<fileset id="topic-file-list" dir="${temp}">
+			<include name="topics/*.xml"/>
+		</fileset>
 		<pathconvert dirsep="/" pathsep=";" property="topic-files" refid="topic-file-list"/>
-	
-		
-		<!-- These echos are to test how the lists are created on each platform -->
-		<!-- Note inconsistency between handling of files and fileset WRT ; vs : 
-		<echo/>
-		<echo>${topic-files}</echo>
-		
-		<property name="show-topics" refid="topics"/>
-		<echo/>
-		<echo>${show-topics}</echo>
-		
-		<files id="show-topic-file-list" includes="${temp}/topics/*.xml"/>
-		<property name="show-topic-files" refid="show-topic-file-list"/>
-		<echo/>
-		<echo>${show-topic-files}</echo>
-		
-		-->
-		
 	</target>
 
 	<!-- TEXT OBJECTS -->
@@ -117,7 +104,9 @@
 		<copy todir="${temp}/text-objects" preservelastmodified="true" flatten="true" verbose="true">
 			<files refid="text-objects"/>
 		</copy>
-		<files id="text-objects-file-list" includes="${temp}/text-objects/*.xml"/>
+		<files id="text-objects-file-list">
+			<include name="${temp}/text-objects/*.xml"/>
+		</files>
 		<property name="text-objects-files" refid="text-objects-file-list"/>
 		<!-- FIXME: Make the for of the property name consistent -->
 	</target>
@@ -128,7 +117,9 @@
 		<copy todir="${temp}/fragments" preservelastmodified="true" flatten="true" verbose="true">
 			<files refid="fragments"/>
 		</copy>
-		<files id="fragments-file-list" includes="${temp}/fragments/*.xml"/>
+		<files id="fragments-file-list">
+			<include name="${temp}/fragments/*.xml"/>
+		</files> 
 		<property name="fragment-files" refid="fragments-file-list"/>
 	</target>
 
@@ -152,8 +143,8 @@
 	</target>
 
 	<!-- LINK CATALOG -->
-	<property name="link-catalog-files" refid="link-catalogs"/>
-
+	<pathconvert dirsep="/" pathsep=";" property="link-catalog-files" refid="link-catalogs"/>
+	
 
 	<!-- HTML -->
 
@@ -227,7 +218,9 @@
 	</target>
 	
 	<target name="-get-synthesis-file-list">
-		<fileset id="synthesis-file-list" dir="${temp}" includes="synthesis/*.xml"/>
+		<fileset id="synthesis-file-list" dir="${temp}">
+			<include name="synthesis/*.xml"/>
+		</fileset> 
 		<pathconvert dirsep="/" pathsep=";" property="synthesis-files" refid="synthesis-file-list"/>
 	</target>
 
@@ -364,7 +357,9 @@
   				 -current.html-format"
 		unless="-current.html-format">
 
-		<fileset dir="${temp}" id="presentation-file-list" includes="presentation/*.xml"/>
+		<fileset dir="${temp}" id="presentation-file-list">
+			<include name="presentation/*.xml"/>
+		</fileset>
 		<pathconvert dirsep="/" pathsep=";" property="presentation-files" refid="presentation-file-list"/>
 		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
 
@@ -398,7 +393,9 @@
 	<target name="--build.fo-format" description="FO formatting"
 		depends="-build.presentation-book, -current.fo-format" unless="-current.fo-format">
 		
-		<fileset id="presentation-file-list" dir="${temp}" includes="presentation/*.xml"/>
+		<fileset id="presentation-file-list" dir="${temp}">
+			<include name="presentation/*.xml"/>
+		</fileset> 
 		<pathconvert dirsep="/" pathsep=";" property="presentation-files" refid="presentation-file-list"/>
 
 		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	

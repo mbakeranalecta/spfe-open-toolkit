@@ -185,7 +185,7 @@
 			
 			<xsl:if  test="normalize-space(include-behavior)">			
 				<labeled-item>
-					<label>Treatment of value in indcluded files</label>
+					<label>Treatment of values in included files</label>
 					<!-- FIXME: need a more sophisticated reading of schema groups 
 					     to define usage more accurately-->
 					<item>

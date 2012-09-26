@@ -26,7 +26,9 @@
 
 		<uptodate property="-current.schema-defs" targetfile="${temp}/${files.schema-defs}">
 			<srcresources>
-				<dirset dir="${paths.schema}" includes="**/*.xsd"/>
+				<dirset dir="${paths.schema}">
+					<include name="**/*.xsd"/>
+				</dirset> 
 				<filelist dir=".">
 					<file name="${source-files.schema}"/>
 				</filelist>
@@ -74,7 +76,9 @@
 		<!-- run the XSLT script to produce the output -->
 		<basename property="source-files.descriptions.name" file="${source-files.element-descriptions}"/>
 		
-		<files id="descriptions-file-list" includes="${temp}/descriptions/*.xml"/>
+		<files id="descriptions-file-list">
+			<include name="${temp}/descriptions/*.xml"/>
+		</files>
 		<property name="descriptions-files" refid="descriptions-file-list"/>
 		
 		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"

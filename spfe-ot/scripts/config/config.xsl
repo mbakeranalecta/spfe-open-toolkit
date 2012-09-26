@@ -9,11 +9,14 @@
     xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" exclude-result-prefixes="#all">
     <xsl:output method="xml" indent="yes"/>
 
-    <xsl:variable name="build-dir" select="translate(($config/build/build-directory)[1], '\', '/')"/>
-    
+
     <xsl:param name="HOME"/>
     <xsl:param name="SPFEOT_HOME"/>
+    <xsl:param name="SPFE_BUILD_DIR"/>
     <xsl:param name="SPFE_BUILD_COMMAND"/>
+    
+    
+    <xsl:variable name="build-dir" select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> 
     
     <xsl:variable name="config-docs" as="xs:string*">
         <xsl:value-of select="base-uri()"/>
@@ -156,7 +159,6 @@
     </xsl:template>
     
     <xsl:template match="/">
-       
         <xsl:call-template name="create-build-file"/>
         <xsl:if test="not(/spfe/doc-set)">
           <xsl:call-template name="create-config-file"/>
@@ -195,7 +197,8 @@
     
     <xsl:function name="spfe:URL-to-local">
         <xsl:param name="URL"/>
-        <xsl:choose>
+        <xsl:variable name="newURL">
+            <xsl:choose>
             <!-- Windows style -->
             <xsl:when test="matches($URL, '^file:/[a-zA-Z]:/')">
                 <xsl:value-of select="substring-after($URL,'file:/')"/>
@@ -221,6 +224,8 @@
                 <xsl:value-of select="$URL"/>
             </xsl:otherwise>
         </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="replace($newURL, '%20', ' ')"/>
     </xsl:function>
     
     <xsl:template name="create-build-file">
@@ -228,7 +233,6 @@
             <!-- if the config file specifies a doc set, create a build file for doc set -->
             <xsl:when test="/spfe/doc-set">
                 <xsl:variable name="source" select="/"/>
-                
                 <!-- TO DO: check that all the topic sets have unique IDs -->
                 <!-- TO DO: check that all the topic sets have unique build directories -->
                 
@@ -248,6 +252,7 @@
                                 <param name="HOME" expression="{$HOME}"/> 
                                 <param name="SPFEOT_HOME" expression="{$SPFEOT_HOME}"/> 
                                 <param name="SPFE_BUILD_COMMAND" expression="{$SPFE_BUILD_COMMAND}"/> 
+                                <param name="SPFE_BUILD_DIR" expression="{$SPFE_BUILD_DIR}"/> 
                             </xslt>
                         </xsl:for-each>                        
                     </target>
@@ -332,7 +337,7 @@
                   <property file="{translate($HOME, '\', '/')}/.spfe/spfe.properties"/>
                   <property name="HOME" value="{translate($HOME, '\', '/')}"/>
                   <property name="SPFEOT_HOME" value="{translate($SPFEOT_HOME, '\', '/')}"/>
-                  <property name="spfe.config-file" value="{translate(($config/build/build-directory)[1], '\', '/')}/config/spfe-config.xml"/>
+                  <property name="spfe.config-file" value="{translate($build-dir, '\', '/')}/config/spfe-config.xml"/>
                   <property name="SPFE_BUILD_COMMAND" value="{$SPFE_BUILD_COMMAND}"/>
                   <xsl:sequence select="spfe:xml2properties(($config/topic-set-id)[1], 'spfe')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/topic-set-type)[1], 'spfe')"/>
@@ -351,7 +356,7 @@
                       
                   </xsl:for-each>
 
-                  <property name="spfe.build.build-directory" value="{($config/build/build-directory)[1]}"/>
+                  <property name="spfe.build.build-directory" value="{$build-dir}"/>
                   <property name="spfe.build.output-directory" value="{if (normalize-space(($config/deployment/output-path)[1])) then concat(($config/build/output-directory)[1], '/', ($config/deployment/output-path)[1]) else ($config/build/output-directory)[1]}"/>
                   
                   <xsl:sequence select="spfe:xml2properties(($config/build/link-catalog-directory)[1], 'spfe.build')"/>
@@ -402,6 +407,10 @@
                       </xsl:for-each>
                   </files>
                   
+<!--                  <pathconvert pathsep=" " property="doc.files.list" refid="headers">
+                      <map from='${source.main.dir}' to='"${source.main.dir}"' />
+                  </pathconvert>
+-->                  
                   <files id="tocs">
                       <xsl:for-each select="$config/sources/tocs/include">
                           <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
@@ -476,11 +485,9 @@
             
     </xsl:template>
     
-
-    
     <xsl:template name="create-config-file">
-        <xsl:message select="concat('Generating config file: ', 'file:///', translate(($config/build/build-directory)[1], '\','/'), '/config/spfe-config.xml')"/>
-         <xsl:result-document href="file:///{translate(($config/build/build-directory)[1], '\','/')}/config/spfe-config.xml" method="xml" indent="yes" xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+        <xsl:message select="concat('Generating config file: ', 'file:///', translate($build-dir, '\','/'), '/config/spfe-config.xml')"/>
+        <xsl:result-document href="file:///{translate($build-dir, '\','/')}/config/spfe-config.xml" method="xml" indent="yes" xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
             <spfe>
                 <dir-separator>
                     <xsl:value-of select="if (translate($HOME, '\', '/') eq $HOME) then ':' else ';'"/>
@@ -504,7 +511,7 @@
                     </output-directory>
                     <build-directory>
                         <xsl:attribute name="base-uri" select="base-uri(.)"/>
-                        <xsl:copy-of select=" escape-html-uri( translate(($config/build/build-directory)[1], '\', '/'))"/>
+                        <xsl:copy-of select="translate($build-dir, '\', '/')"/>
                     </build-directory>
                     <link-catalog-directory>
                         <xsl:attribute name="base-uri" select="base-uri(.)"/>
