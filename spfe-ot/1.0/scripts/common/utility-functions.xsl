@@ -26,7 +26,7 @@
 	<xsl:param name="file-list"/>
 	<xsl:param name="load-message"/>
 	
-	<xsl:for-each select="tokenize(translate($file-list, '\', '/'), $config/config:dir-separator)">
+	<xsl:for-each select="tokenize(translate($file-list, '\', '/'), ';')">
 		<xsl:variable name="one-file" select="concat('file:///', normalize-space(.))"/>
 		<xsl:if test="normalize-space($load-message)">
 			<xsl:call-template name="sf:info">
