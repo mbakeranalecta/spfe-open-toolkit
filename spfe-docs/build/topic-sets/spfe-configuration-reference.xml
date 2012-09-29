@@ -52,7 +52,7 @@
     
     <scripts>
         <synthesis>
-            <script>../../scripts/synthesis/synthesize-schema-docs.xsl</script>
+            <script>../../scripts/synthesis/config-ref/synthesize-config-ref.xsl</script>
             <script>../../scripts/synthesis/mentions-spfe-build.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/mentions/mentions.xsl</script>
         </synthesis>        
@@ -69,7 +69,7 @@
             <script>../../scripts/presentation/present-doctype.xsl</script>
         </presentation-web>
         <other name="schema-defs">
-            <script>../../scripts/synthesis/schema-defs.xsl</script>
+            <script>../../scripts/synthesis/config-ref/schema-defs.xsl</script>
         </other>
     </scripts>
     
