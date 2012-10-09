@@ -104,8 +104,8 @@
 			<title><xsl:value-of select="$title"/></title>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 			<xsl:if test="$config/config:build-command eq 'draft'">
-				<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"/>
-				<META HTTP-EQUIV="Pragma" CONTENT="no-cache"/>
+				<meta http-equiv="Cache-Control" content="no-cache"/>
+				<meta http-equiv="Pragma" content="no-cache"/>
 				<meta http-equiv="expires" content="FRI, 13 APR 1999 01:00:00 GMT"/> 
 			</xsl:if>
 			<xsl:for-each select="$config/config:format/config:html/config:css">
@@ -115,41 +115,34 @@
 				<script type="text/javascript" src="{.}">&#160;</script>
 			</xsl:for-each>
 			
-			<link rel="stylesheet" type="text/css" href="style/treeview/css/multi/tree.css">&#160;</link>
-			<link rel="stylesheet" type="text/css" href="style/colorbox/colorbox.css" >&#160;</link>
-			<script src="style/jquery-1.7.2.min.js">&#160;</script>
-			<script src="style/colorbox/jquery.colorbox-min.js">&#160;</script>
+			<link rel="stylesheet" type="text/css" href="style/treeview/css/multi/tree.css"/>
+			<link rel="stylesheet" type="text/css" href="style/colorbox/colorbox.css"/> 
+			<script type="text/javascript" src="style/jquery-1.7.2.min.js">&#160;</script>
+			<script type="text/javascript" src="style/colorbox/jquery.colorbox-min.js">&#160;</script>
 			<script type="text/javascript" src="style/jstree/jquery.jstree.js">&#160;</script>
-			<script>
+			<script type="text/javascript" >
 			$(document).ready(function(){
 				$(".inline").colorbox({inline:true, width:"50%"});
 			});
 			</script>
-			
-<!--			<script type="text/javascript" src="style/treeview/build/yahoo.js">&#160;</script>
-			<script type="text/javascript" src="style/treeview/build/event.js">&#160;</script>
-			<script type="text/javascript" src="style/treeview/build/treeview.js">&#160;</script>
-			<script type="text/javascript" src="style/treeview/build/jktreeview.js">&#160;</script>
-			<script type="text/javascript" src="style/folding.js">&#160;</script>-->
-			
 			<script type="text/javascript" class="source below">
-$(function () {
-	$("#toc")
-		.jstree({         
-		    "themes" : {
-            "theme" : "default",
-            "dots" : false,
-            "icons" : false
-        },
-        "plugins" : ["themes","html_data"] })
-		// 1) the loaded event fires as soon as data is parsed and inserted
-		.bind("loaded.jstree", function (event, data) { })
-		// 2) but if you are using the cookie plugin or the core `initially_open` option:
-		.one("reopen.jstree", function (event, data) { })
-		// 3) but if you are using the cookie plugin or the UI `initially_select` option:
-		.one("reselect.jstree", function (event, data) { });
-});
-</script>
+			$(function () {
+				$("#toc")
+					.jstree({         
+					    "themes" : {
+			            "theme" : "default",
+			            "dots" : false,
+			            "icons" : false
+			        },
+			        "plugins" : ["themes","html_data"] })
+					// 1) the loaded event fires as soon as data is parsed and inserted
+					.bind("loaded.jstree", function (event, data) { })
+					// 2) but if you are using the cookie plugin or the core `initially_open` option:
+					.one("reopen.jstree", function (event, data) { })
+					// 3) but if you are using the cookie plugin or the UI `initially_select` option:
+					.one("reselect.jstree", function (event, data) { });
+			});
+			</script>
 			
 			<style type="text/css">
 		
