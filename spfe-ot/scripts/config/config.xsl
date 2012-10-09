@@ -461,7 +461,7 @@
                 <arg value="-f"/>
                 <arg value="{$antfile}"/>
                 <arg value="-lib"/>
-                <arg value="%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar"/> 
+                <arg value='"%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar"'/> 
                 <arg value="{$build-command}"/>                              
                 <arg value="-emacs"/>
             </exec>
@@ -470,7 +470,7 @@
                 <arg value="-f"/>
                 <arg value="{$antfile}"/>
                 <arg value="-lib"/>
-                <arg value="$SPFEOT_HOME/tools/xml-commons-resolver-1.2/resolver.jar"/>
+                <arg value='"$SPFEOT_HOME/tools/xml-commons-resolver-1.2/resolver.jar"'/>
                 <arg value="{$build-command}"/>
                 <arg value="-emacs"/>
             </exec>
