@@ -115,6 +115,7 @@
 				<script type="text/javascript" src="{.}">&#160;</script>
 			</xsl:for-each>
 			
+			<link rel="stylesheet" type="text/css" href="style/eppo-simple.css"/>
 			<link rel="stylesheet" type="text/css" href="style/treeview/css/multi/tree.css"/>
 			<link rel="stylesheet" type="text/css" href="style/colorbox/colorbox.css"/> 
 			<script type="text/javascript" src="style/jquery-1.7.2.min.js">&#160;</script>
@@ -142,53 +143,7 @@
 					// 3) but if you are using the cookie plugin or the UI `initially_select` option:
 					.one("reselect.jstree", function (event, data) { });
 			});
-			</script>
-			
-			<style type="text/css">
-		
-#wrap
-{
-	margin:0 auto;
-}
-#draft-header
-{
-	clear:both;
-}
-
-#toc-container
-{
-	float:left;
-	width:20%;
-	overflow:auto;
-}
-#main
-{
-	float:right;
-	width:80%;
-
-}
-
-#footer
-{
-	clear:both;
-}
-				
-ul.toc li {
-
-
-}
-ul.toc a, ul.toc span {
-
-}
-ul.toc a {
-
-}
-ul.toc ol {
-
-}
-
-			</style>
-			
+			</script>			
 		</head>
 	</xsl:function>
 	
@@ -299,8 +254,10 @@ ul.toc ol {
 					</div>
 				</div>
 				
-				<div id="main">
-					<xsl:apply-templates/>
+				<div id="main-container">
+					<div id="main">
+						<xsl:apply-templates/>
+					</div>
 				</div>
 				
 				<xsl:call-template name="output-xref-sets"/>
@@ -489,14 +446,7 @@ ul.toc ol {
 	
 	<xsl:template match="label">
 		<dt>
-			<xsl:choose>
-				<xsl:when test="child::*">
-					<xsl:apply-templates/>
-				</xsl:when>
-				<xsl:otherwise>
-					<b class="cBold"><xsl:apply-templates/></b>
-				</xsl:otherwise>
-			</xsl:choose>
+			<xsl:apply-templates/>
 		</dt>
 	</xsl:template>
 	

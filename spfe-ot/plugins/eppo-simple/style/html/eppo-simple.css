@@ -1,0 +1,59 @@
+#wrap
+{
+	margin:0 auto;
+}
+#draft-header
+{
+	clear:both;
+}
+
+#toc-container
+{
+	float:left;
+	width:20%;
+	overflow:auto;
+}
+
+#main
+{
+    margin: 1em 1em 1em 1em;
+}
+
+#main-container
+{
+	float:right;
+	width:80%;
+}
+
+#footer
+{
+	clear:both;
+}
+				
+ul.toc li 
+{
+
+}
+ul.toc a, ul.toc span 
+{
+
+}
+ul.toc a 
+{
+
+}
+ul.toc ol 
+{
+
+}
+
+h1, h2, h3, h4, h5, h6, dt
+{
+    font-family:calibri, arial, helvetica, sans-serif;
+    font-weight:bold;
+}
+
+p
+{
+    font-family:cambria, roman, 'times new roman', times, serif
+}
