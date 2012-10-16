@@ -3,7 +3,6 @@
 
 	<!-- import the common SPFE definitions -->
 	<import file="${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml"/>
-
 	
 	<!-- override the intermedia synthesis build taget to add -build.function-defs to the dependencies -->
 	<target name="-build.synthesis" depends="-build.function-defs, --build.synthesis"/>
@@ -17,7 +16,6 @@
 			<files refid="other.function-descriptions"/>
 		</copy>
 	</target>
-
 
 	<!-- DEPENDENCY TARGETS -->
 	<!-- check to see if function-defs is up to date -->	
@@ -35,7 +33,6 @@
 			</srcresources>
 		</uptodate>
 	</target>
-	
 
 	<!-- SYNTHESIS TARGETS -->
 	

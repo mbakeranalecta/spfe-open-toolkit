@@ -40,7 +40,12 @@
             <alias>Configuration setting</alias>
             <plural>Configuration settings</plural>
         </topic-type>
-   </topic-type-aliases>
+        <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xsl-function-reference-entry</id>
+            <alias>XSLT Function reference</alias>
+            <plural>XSLT Function reference</plural>
+        </topic-type>
+    </topic-type-aliases>
     
     <sources>
         <link-catalogs>

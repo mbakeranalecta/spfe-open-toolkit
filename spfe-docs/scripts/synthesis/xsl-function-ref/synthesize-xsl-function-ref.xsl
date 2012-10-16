@@ -16,11 +16,11 @@ exclude-result-prefixes="#all" >
 <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/synthesis/common/synthesize-text-structures.xsl"/>
 <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/synthesis/strings/synthesize-strings.xsl"/>
 	
-<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xsl-function-reference-entry</xsl:variable>	
+	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xsl-function-reference-entry</xsl:variable>	
 	
 <!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
 <xsl:variable name="strings">
-	<xsl:for-each select="$element-source//ed:string[not(parent::ed:string-ref)], $config/config:string">
+	<xsl:for-each select="$function-source//fd:string[not(parent::fd:string-ref)], $config/config:string">
 		<!-- remove them from source namespace -->
 		<string>
 			<xsl:copy-of select="@*"/>
@@ -34,7 +34,7 @@ exclude-result-prefixes="#all" >
 <xsl:param name="synthesis-directory"/>
 
 <xsl:param name="function-defs-file"/>
-<xsl:variable name="function-defs" select="sf:get-sources($schema-defs-file)"/>
+<xsl:variable name="function-defs" select="sf:get-sources($function-defs-file)"/>
 
 <xsl:param name="function-description-files"/>
 <xsl:variable name="function-source" select="sf:get-sources($function-description-files)"/>
@@ -51,19 +51,15 @@ Main template
 -->
 	
 <xsl:template name="main">
-
-		<xsl:result-document 
-			 method="xml" 
-			 indent="yes"
-			 omit-xml-declaration="no" 
-			 href="file:///{$synthesis-directory}/synthesis.xml">
-			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
-
-						<xsl:apply-templates select="$function-defs/function-and-template-definitions"/>
-
-			</ss:synthesis>
-		</xsl:result-document>
-		
+	<xsl:result-document 
+		 method="xml" 
+		 indent="yes"
+		 omit-xml-declaration="no" 
+		 href="file:///{$synthesis-directory}/synthesis.xml">
+		<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
+			<xsl:apply-templates select="$function-defs/function-and-template-definitions/*"/>
+		</ss:synthesis>
+	</xsl:result-document>
 </xsl:template>
 
 <!-- 
@@ -74,8 +70,8 @@ Main content processing templates
 
 <!-- Schema element template -->
 <xsl:template match="function-definition" >
-	<xsl:variable name="name" select="name"/>
-	<xsl:variable name="namespace-uri" select="namespace-uri"/>
+	<xsl:variable name="name" select="string(name)"/>
+	<xsl:variable name="namespace-uri" select="string(namespace-uri)"/>
 
 	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
 	<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xsl-function-reference-entry</xsl:variable> 
@@ -97,145 +93,80 @@ Main content processing templates
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
+	
+
+
 						 
 		<ss:topic 
 			element-name="{name()}" 
 		type="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry" 
 		full-name="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry/{translate(xpath, '/:', '__')}"
-			local-name="{translate(xpath, '/:', '__')}"
+			local-name="{name}"
 			topic-type-alias="{$topic-type-alias}"
 			title="{name}">
 			<ss:index>
 				<ss:entry>
-					<ss:type>xsl-function</ss:type>
-					<ss:namespace><xsl:variable name="$namespace-uri"/></ss:namespace>
+					<ss:type>spfe-xsl-function-reference-entry</ss:type>
+					<ss:namespace><xsl:value-of select="$namespace-uri"/></ss:namespace>
 					<ss:term><xsl:value-of select="$name"/></ss:term>
 				</ss:entry>
 			</ss:index>
 			
-			<!-- FIXME: Need to generate an index element for the link catalog -->
-		
 			<xsl:element name="spfe-xsl-function-reference-entry" namespace="{$output-namespace}">
-				
-
 				<xsl:element name="xsl-function" namespace="{$output-namespace}">
 					
-					
-					<!-- RESUME HERE -->
-					
-					
-
-					<xsl:element name="namespace" namespace="{$output-namespace}">
-						<xsl:value-of select="ancestor::schema-definitions/@namespace"/>
-					</xsl:element> 
-					<xsl:element name="doctype" namespace="{$output-namespace}">
-						<xsl:value-of select="$doctype"/>
-					</xsl:element>
-					<xsl:element name="doc-xpath" namespace="{$output-namespace}">
-						<xsl:value-of select="$doc-xpath"/>
-					</xsl:element>
-					<xsl:element name="xpath" namespace="{$output-namespace}">
-						<xsl:value-of select="$xpath"/>
-					</xsl:element>
-					<xsl:element name="group" namespace="{$output-namespace}">
-						<xsl:value-of select="$group"/>
-					</xsl:element>
-					<xsl:element name="allowed-in" namespace="{$output-namespace}">
-						<xsl:variable name="allowed-in-list"> 
-							<xsl:call-template name="create-allowed-in-list">
-								<xsl:with-param name="group" select="$group"/>
-								<xsl:with-param name="xpath" select="$xpath"/>
-							</xsl:call-template>
-						</xsl:variable>
-						<xsl:for-each-group select="$allowed-in-list/xpath" group-by="text()">
-							<xsl:sequence select="current-group()[1]"/>
-						</xsl:for-each-group>
-					</xsl:element>
-
-					<!-- Copy the extracted element info. -->
 					<xsl:element name="name" namespace="{$output-namespace}">
 						<xsl:value-of select="name"/>
+					</xsl:element> 
+					<xsl:element name="local-prefix" namespace="{$output-namespace}">
+						<xsl:value-of select="local-prefix"/>
 					</xsl:element>
-					<xsl:element name="type" namespace="{$output-namespace}">
-						<xsl:value-of select="type"/>
+					<xsl:element name="return-type" namespace="{$output-namespace}">
+						<xsl:value-of select="return-type"/>
 					</xsl:element>
-					<xsl:element name="use" namespace="{$output-namespace}">
-						<xsl:value-of select="use"/>
+					<xsl:element name="source-file" namespace="{$output-namespace}">
+						<xsl:value-of select="source-file"/>
 					</xsl:element>
-					<xsl:element name="default" namespace="{$output-namespace}">
-						<xsl:value-of select="default"/>
+					<xsl:element name="namespace-uri" namespace="{$output-namespace}">
+						<xsl:value-of select="$namespace-uri"/>
 					</xsl:element>
-					<xsl:element name="minOccurs" namespace="{$output-namespace}">
-						<xsl:value-of select="minOccurs"/>
-					</xsl:element>
-					<xsl:element name="maxOccurs" namespace="{$output-namespace}">
-						<xsl:value-of select="maxOccurs"/>
+					<xsl:element name="definition" namespace="{$output-namespace}">
+						<xsl:copy-of select="definition/*"/>
 					</xsl:element>
 					
-					<!-- Select and copy the authored element info. -->
+					<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
+					
+					<!-- Select and copy the authored function info. -->
 					<xsl:choose>
 						<!-- Test that the information exists. -->
-						<xsl:when test="exists($source[ed:xpath=$xpath]/*)">
-							<xsl:apply-templates select="$source[ed:xpath=$xpath]/ed:description"/>
-							<xsl:apply-templates select="$source[ed:xpath=$xpath]/ed:build-property"/>
-							<xsl:apply-templates select="$source[ed:xpath=$xpath]/ed:include-behavior"/>
+						<xsl:when test="exists($function-description/*)">
+							
+							<xsl:apply-templates select="$function-description/fd:description"/>
+
 						</xsl:when>
 						<xsl:otherwise><!-- If not found, report warning. -->
 							<xsl:call-template name="sf:warning">
-								<xsl:with-param name="message" select="'Element description not found ', string($xpath)"/>
+								<xsl:with-param name="message" select="'Function description not found ', string($name)"/>
 							</xsl:call-template>
 						</xsl:otherwise>
 					</xsl:choose>
 				
-					<!-- Calculate children -->
-					<xsl:variable name="xpath" select="xpath"/>
-					<xsl:element name="children" namespace="{$output-namespace}">
-						<!-- children by xpath -->
-						<xsl:for-each-group select="/schema-definitions/schema-element  
-							[starts-with(xpath, concat($xpath, '/'))]
-							[not(contains(substring(xpath,string-length($xpath)+2),'/'))]" group-by="xpath">
-							<xsl:element name="child" namespace="{$output-namespace}">
-								<xsl:value-of select="xpath"/>
-							</xsl:element>
-						</xsl:for-each-group>
-						<!-- children by group -->
-						<xsl:call-template name="get-group-children">
-							<xsl:with-param name="xpath" select="$xpath"/>
-						</xsl:call-template>
-					</xsl:element>
-					
-					<xsl:element name="attributes" namespace="{$output-namespace}">
-						<xsl:for-each select="root()/schema-definitions/schema-attribute[starts-with(xpath, concat($xpath, '/@'))]"> 
-							<xsl:element name="attribute" namespace="{$output-namespace}">
-								
-								<!-- Copy the extracted element info. -->
-								<xsl:element name="xpath" namespace="{$output-namespace}">
-									<xsl:value-of select="xpath"/>
+
+					<xsl:element name="parameters" namespace="{$output-namespace}">
+						<!-- parameters by name -->
+						<xsl:for-each select="parameters/parameter">
+							<xsl:variable name="parameter-name" select="name"/>
+							<xsl:element name="parameter" namespace="{$output-namespace}">																		<xsl:element name="name" namespace="{$output-namespace}">
+									<xsl:value-of select="$parameter-name"/>
 								</xsl:element>
 								<xsl:element name="type" namespace="{$output-namespace}">
 									<xsl:value-of select="type"/>
 								</xsl:element>
-								<xsl:element name="use" namespace="{$output-namespace}">
-									<xsl:value-of select="use"/>
-								</xsl:element>
-								<xsl:element name="default" namespace="{$output-namespace}">
-									<xsl:value-of select="default"/>
-								</xsl:element>
-								<xsl:element name="minOccurs" namespace="{$output-namespace}">
-									<xsl:value-of select="minOccurs"/>
-								</xsl:element>
-								<xsl:element name="maxOccurs" namespace="{$output-namespace}">
-									<xsl:value-of select="maxOccurs"/>
-								</xsl:element>
-								
-								<xsl:variable name="attribute-name" select="name"/>
-								<xsl:element name="doc-xpath" namespace="{$output-namespace}">
-									<xsl:value-of select="concat($doc-xpath, '/@', $attribute-name)"/>
-								</xsl:element>
-								<xsl:variable name="authored" select="$source[ed:xpath=$xpath]/ed:attributes/ed:attribute[ed:name=$attribute-name]/*"/>
+	
+								<xsl:variable name="authored" select="$function-description/fd:parameters/fd:parameter[fd:name = $parameter-name]/*"/>
 								<xsl:if test="not($authored)">
 									<xsl:call-template name="sf:warning">
-										<xsl:with-param name="message" select="'Attribute description not found ', string(xpath)"/>
+										<xsl:with-param name="message" select="'Parameter description not found ', string($parameter-name)"/>
 									</xsl:call-template>
 								</xsl:if>
 								<xsl:apply-templates select="$authored"/>
@@ -247,243 +178,10 @@ Main content processing templates
 		</ss:topic>
 </xsl:template>
 	
-	<xsl:template match="ed:description">
+	<xsl:template match="fd:description">
 		<xsl:element name="description" namespace="{$output-namespace}">
 			<xsl:apply-templates/>
 		</xsl:element>
 	</xsl:template>
-	
-	<xsl:template match="ed:build-property">
-		<xsl:element name="build-property" namespace="{$output-namespace}">
-			<xsl:apply-templates/>
-		</xsl:element>
-	</xsl:template>
-	
-	<xsl:template match="ed:include-behavior">
-		<xsl:element name="include-behavior" namespace="{$output-namespace}">
-			<xsl:apply-templates/>
-		</xsl:element>
-	</xsl:template>
-	
-<xsl:template name="get-group-children">
-	<xsl:param name="xpath"/>
-	<xsl:for-each select="/schema-definitions/schema-group-ref[referenced-in-xpath eq $xpath]">
-		<xsl:variable name="referenced-group" select="referenced-group"/>
-<!-- each element that is in the group and has only one step in its path (so not the children of the element at the group level -->
-		<xsl:for-each-group select="/schema-definitions/schema-element[belongs-to-group eq $referenced-group][not(contains(xpath, '/'))]" group-by="xpath">
-			<xsl:element name="chils" namespace="{$output-namespace}">
-				<xsl:value-of select="xpath"/>
-			</xsl:element>
-		</xsl:for-each-group>
-		<xsl:call-template name="get-nested-groups">
-			<xsl:with-param name="referenced-group" select="$referenced-group"/>
-		</xsl:call-template>
-	</xsl:for-each>
-</xsl:template>
-
-<xsl:template name="get-nested-groups">
-	<xsl:param name="referenced-group"/>
-	<xsl:for-each select="/schema-definitions/schema-group-ref[referenced-in-group eq $referenced-group]">
-		<xsl:variable name="referenced-group" select="referenced-group"/>
-		<!-- each element that is in the group and has only one step in its path (so not the children of the element at the group level -->
-		<xsl:for-each-group select="/schema-definitions/schema-element[belongs-to-group eq $referenced-group][not(contains(xpath, '/'))]" group-by="xpath">
-			<xsl:element name="child" namespace="{$output-namespace}">
-				<xsl:value-of select="xpath"/>
-			</xsl:element>
-		</xsl:for-each-group>
-		<xsl:call-template name="get-nested-groups">
-			<xsl:with-param name="referenced-group" select="$referenced-group"/>
-		</xsl:call-template>
-	</xsl:for-each>
-</xsl:template>
-
-
-<!-- prevent getting two copies of name one from source, one from authored content -->
-<xsl:template match="ed:attribute/name"/>
-
-<!-- 
-=================================
-Content fix-up templates
-=================================
--->
-
-<!-- FIXME: Are these in the right namespace to match?" -->
-
-<!-- Fix up attribute name xpaths -->
-<xsl:template match="ed:spfe-config-attribute-name">
-	<xsl:variable name="context-element" select="ancestor::ed:element-description/ed:xpath"/>
-	<xsl:variable name="data-content" select="."/>
-	<xsl:variable name="xpath" select="@xpath"/>
-	<xsl:variable name="all-attributes" select="
-	$schema-defs/schema-definitions/schema-attribute/xpath"/>
-	
-	<xsl:element name="name" namespace="{$output-namespace}" >
-		<xsl:attribute name="type">xpath</xsl:attribute>
-		<xsl:choose>
-			<!-- check the cases where there is no 'xpath' attribute -->
-			<xsl:when test="not(@xpath)">
-				<xsl:choose>
-				
-					<!-- Is it a full attribute path? -->
-					<xsl:when test="contains($data-content, '/@')">
-						<!-- make the xpath explicit -->
-						<xsl:attribute name="key" select="$data-content"/>
-						<xsl:apply-templates/>
-					</xsl:when>
-					
-					<!-- Is it an unambiguous partial attribute path? -->
-					<xsl:when test="count($all-attributes[ends-with(., $data-content)])=1">
-						<!-- make the xpath explicit -->
-						<xsl:attribute name="key" select="$all-attributes[ends-with(., $data-content)]"/>
-						<xsl:apply-templates/>
-					</xsl:when>
-					
-					<!-- Is it the name of an attribute of the current element? -->
-					<!-- FIXME: This is using the ed source rather than the schema defs -->
-<!--					<xsl:when test="ancestor::ed:element-description/ed:attributes/ed:attribute[ends-with(ed:name, $data-content)]">-->
-					<xsl:when test="concat($context-element, '/@', $data-content) = $all-attributes">
-							<xsl:attribute name="key" select="concat($context-element, '/@', $data-content)"/>
-						<xsl:apply-templates/>
-					</xsl:when>
-					
-					<!-- If not, we have a problem -->
-					<xsl:otherwise>
-						<xsl:attribute name="key" select="$data-content"/>
-						<xsl:call-template name="sf:warning">
-							<xsl:with-param name="message">
-								<xsl:text>Ambiguous SPFE config attribute name "</xsl:text>
-								<xsl:value-of select="$data-content"/>
-								<xsl:text>". Context element is:</xsl:text>
-								<xsl:value-of select="$context-element"/>
-								<xsl:text> Attributes are: </xsl:text>
-								<xsl:value-of select="$all-attributes[starts-with(., $context-element)]"/>
-							</xsl:with-param>
-						</xsl:call-template>
-						<xsl:apply-templates/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:attribute name="key" select="@xpath"/>
-				<xsl:apply-templates/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:element>
-</xsl:template>
-
-<!-- Fix up element name xpaths -->
-	<xsl:template match="ed:spfe-config-element-name">
-	<xsl:variable name="context-element" select="ancestor::ed:element-description/ed:xpath"/>
-	<xsl:variable name="data-content" select="."/>
-	<xsl:variable name="xpath" select="@xpath"/>
-	<xsl:variable name="all-elements" select="
-	$schema-defs/schema-definitions/schema-element/xpath"/>
-	<xsl:element name="name" namespace="{$output-namespace}">
-		<xsl:attribute name="type">xpath</xsl:attribute>		
-		<xsl:choose>
-			<!-- check the cases where there is no 'xpath' attribute -->
-			<xsl:when test="not(@xpath)">
-				<xsl:choose>
-				
-					<!-- Is it a full element path? -->
-					<xsl:when test="$all-elements=$data-content">
-						<!-- make the xpath explicit -->
-						<xsl:attribute name="key" select="$data-content"/>
-					</xsl:when>
-					
-					<!-- Is it the name of the current element? -->
-					<xsl:when test="$context-element[ends-with(., $data-content)]">
-						<xsl:attribute name="key" select="$context-element"/>
-					</xsl:when>
-					
-					<!-- Is it an unambiguous partial element path? -->
-					<xsl:when test="count($all-elements[ends-with(., $data-content)])=1">
-						<!-- make the xpath explicit -->
-						<xsl:attribute name="key" select="$all-elements[ends-with(., $data-content)]"/>
-					</xsl:when>
-					
-					<!-- Is it the name of a child of the current element? -->
-					<xsl:when test="$all-elements=concat($context-element, '/', $data-content)">
-						<xsl:attribute name="key" select="concat($context-element, '/', $data-content)"/>
-					</xsl:when>
-
-					
-					<!-- If not, we have a problem -->
-					<xsl:otherwise>
-						<xsl:attribute name="key" select="$data-content"/>
-						<xsl:call-template name="sf:warning">
-							<xsl:with-param name="message">
-								<xsl:text>Ambiguous SPFE config element name "</xsl:text>
-								<xsl:value-of select="$data-content"/>
-								<xsl:text>". Context element is:</xsl:text>
-								<xsl:value-of select="$context-element"/>
-								<xsl:text> Elements are: </xsl:text>
-								<xsl:value-of select="$all-elements[ends-with(., $data-content)]"/>
-							</xsl:with-param>
-						</xsl:call-template>
-					</xsl:otherwise>
-					
-				</xsl:choose>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:attribute name="key" select="@xpath"/>
-			</xsl:otherwise>
-		</xsl:choose>
-		<xsl:apply-templates/>
-	</xsl:element>
-</xsl:template>
-
-<xsl:template name="create-allowed-in-list">
-	<xsl:param name="group"/>
-	<xsl:param name="xpath"/>
-	<!-- include the containing element if there is one -->
-	<xsl:if test="contains($xpath, '/')">
-		<xsl:element name="xpath" namespace="{$output-namespace}">
-			<xsl:value-of select="string-join(tokenize($xpath, '/')[position() != last()], '/')"/>
-		</xsl:element>
-	</xsl:if>
-	<xsl:call-template name="recurse-allowed-in-list">
-		<xsl:with-param name="group" select="$group"/>
-		<xsl:with-param name="xpath" select="$xpath"/>
-	</xsl:call-template>
-</xsl:template>
-
-<xsl:template name="recurse-allowed-in-list">
-	<xsl:param name="group"/>
-	<xsl:param name="xpath"/>
-	
-	<xsl:for-each select="//schema-group-ref[referenced-group=$group]">
-
-		<xsl:variable name="ref-group" select="//schema-group-ref[referenced-group=$group]/referenced-in-group"/>
-
-		<xsl:choose>
-		
-			<xsl:when test="referenced-in-xpath">
-				<xsl:element name="xpath" namespace="{$output-namespace}">
-					<xsl:value-of select="referenced-in-xpath"/>
-				</xsl:element>
-			</xsl:when>
-			
-			<xsl:when test="//schema-group-ref[referenced-group=$group]">
-				<xsl:call-template name="recurse-allowed-in-list">
-					<xsl:with-param name="group" select="$ref-group"/>
-					<xsl:with-param name="xpath" select="$xpath"/>
-				</xsl:call-template>
-			</xsl:when>
-			
-			<xsl:otherwise>
-				<xsl:call-template name="sf:error">
-					<xsl:with-param name="message">
-						<xsl:text>Unable to figure out which elements the element </xsl:text>
-						<xsl:value-of select="$xpath"/>
-						<xsl:text> is allowed in. This may be due to the use of some feature of W3C schemas that synthesize-schema-docs.xsl was not designed to handle.</xsl:text>
-					</xsl:with-param>
-				</xsl:call-template>
-			</xsl:otherwise>
-			
-		</xsl:choose>
-	</xsl:for-each>
-</xsl:template>
-
 </xsl:stylesheet>
 

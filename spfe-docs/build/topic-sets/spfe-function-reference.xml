@@ -32,7 +32,7 @@
             <include>../../content/*.xml</include>
         </synonyms>
         <other name="function-descriptions">
-            <include>../../content/xsl-function-ref/function-descriptions.xml</include>
+            <include>${SPFEOT_HOME}/1.0/scripts/common/function-and-template-descriptions.xml</include>
         </other>
         <other name="xslt-files">
             <include>${SPFEOT_HOME}/1.0/scripts/**/*.xsl</include>
@@ -55,7 +55,7 @@
     
     <scripts>
         <synthesis>
-            <script>../../scripts/synthesis/synthesize-function-docs.xsl</script>
+            <script>../../scripts/synthesis/xsl-function-ref/synthesize-xsl-function-ref.xsl</script>
             <script>../../scripts/synthesis/mentions-spfe-build.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/mentions/mentions.xsl</script>
         </synthesis>        
