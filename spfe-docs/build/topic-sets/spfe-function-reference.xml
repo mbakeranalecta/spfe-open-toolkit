@@ -62,14 +62,14 @@
         <link-catalog>
             <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
         </link-catalog>
-        <toc>
-            <script>../../scripts/toc/function-toc.xsl</script>
-        </toc>
+<!--         <toc>
+           <script>../../scripts/toc/function-toc.xsl</script>
+        </toc>-->
         <image-list>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/image-handling/get-image-list.xsl</script>
         </image-list>
         <presentation-web>
-            <script>../../scripts/presentation/present-doctype.xsl</script>
+            <script>../../scripts/presentation/present-function-ref.xsl</script>
         </presentation-web>
         <other name="function-defs">
             <script>../../scripts/synthesis/xsl-function-ref/xsl-function-ref-get-function-defs.xsl</script>
