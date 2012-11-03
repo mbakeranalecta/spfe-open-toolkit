@@ -71,6 +71,7 @@ Main template
 		</link-catalog>
 	</xsl:template>
 	
+	<!-- FIXME: should this match be qualified by a type parameter? -->
 	<xsl:template match="ss:topic">
 		<xsl:variable name="name" select="@local-name"/>
 		<page local-name="{@local-name}" 

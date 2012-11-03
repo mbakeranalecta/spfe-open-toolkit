@@ -146,22 +146,27 @@ Main template
 							<xsl:element name="parameters" namespace="{$output-namespace}">
 								<!-- parameters by name -->
 								<!-- FIXME: need to detect optional parameters -->
-								<xsl:for-each-group select="parameters/parameter" group-by="name">
+								<xsl:variable name="parent-group" select="current-group()"/>
+								<xsl:for-each-group select="current-group()/parameters/parameter" group-by="name">
 									<xsl:variable name="parameter-name" select="name[1]"/>
-									<xsl:element name="parameter" namespace="{$output-namespace}">																					<xsl:element name="name" namespace="{$output-namespace}">
+									<xsl:element name="parameter" namespace="{$output-namespace}">	
+										<xsl:if test="$parent-group[not(parameters/parameter/name = current-grouping-key())]"><xsl:attribute name="optional">yes</xsl:attribute></xsl:if>
+										<xsl:element name="name" namespace="{$output-namespace}">
 											<xsl:value-of select="$parameter-name"/>
 										</xsl:element>
 										<xsl:element name="type" namespace="{$output-namespace}">
 											<xsl:value-of select="type[1]"/>
 										</xsl:element>
 										
-										<xsl:variable name="authored" select="$function-description/fd:parameters/fd:parameter[fd:name = $parameter-name]/*"/>
+										<xsl:variable name="authored" select="$function-description/fd:parameters/fd:parameter[fd:name = $parameter-name]/fd:description"/>
 										<xsl:if test="not($authored)">
 											<xsl:call-template name="sf:warning">
 												<xsl:with-param name="message" select="'Parameter description not found ', string($parameter-name)"/>
 											</xsl:call-template>
 										</xsl:if>
-										<xsl:apply-templates select="$authored"/>
+										
+											<xsl:apply-templates select="$authored"/>
+										
 									</xsl:element>
 								</xsl:for-each-group>
 							</xsl:element>

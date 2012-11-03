@@ -47,7 +47,8 @@
 		<xsl:call-template name="sf:info">
 			<xsl:with-param name="message" select="'Creating page ', $display-name"/>
 		</xsl:call-template>
-    <page type="API" name="{sf:title2anchor($display-name)}">
+    <!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
+    <page type="API" name="{name}">
 			
 		  <title>Function: <xsl:value-of select="$display-name"/></title>
 			
