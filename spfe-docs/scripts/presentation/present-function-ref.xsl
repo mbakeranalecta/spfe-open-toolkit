@@ -75,28 +75,42 @@
 			</labeled-item>	
 			
     	<labeled-item>
-    		<label>Definition</label>
-    		<item>
-    			<codeblock>
-    				<xsl:apply-templates select="definition/*"/>
-    			</codeblock>
-    		</item>
-    	</labeled-item>
-    	
-    	<labeled-item>
     		<label>Return value</label>
     		<item>
-    			<p>Return type: <xsl:value-of ></xsl:value-of>
-    				<xsl:sequence select="return-value/type"/>
-    			</p>
+    			<p>Return type: <xsl:value-of select="return-value/type"/></p>
     			<xsl:apply-templates select="return-value/description"/>
     		</item>
     	</labeled-item>
+    	
+    	<subhead>Parameters</subhead>
+    	<xsl:for-each select="parameters/parameter">
+    		<labeled-item>
+    			<label><xsl:value-of select="name"/></label>
+    			<item>
+    				<p>Type: <xsl:value-of select="type"/></p>
+    				<xsl:apply-templates select="description"/>
+    			</item>
+    		</labeled-item>
+    	</xsl:for-each>
+    	
+   		<subhead>Definition</subhead>
+	    	<codeblock>
+	    		<xsl:apply-templates select="definition/*"/>
+	    	</codeblock>
+    	
+    	
+    	
     	
     </page>
   </xsl:template>
 	
 	<xsl:template match="xsl:*">
+		<xsl:variable name="indent">
+			<xsl:for-each select="ancestor::xsl:*">
+				<xsl:text>&#xa0;&#xa0;</xsl:text>
+			</xsl:for-each>
+		</xsl:variable>
+		<xsl:value-of select="$indent"/>
 		<xsl:text>&lt;</xsl:text>
 		<xsl:value-of select="name()"/>
 		<xsl:text> </xsl:text>
@@ -119,6 +133,7 @@
 			<xsl:when test="child::*">
 				<xsl:text>&gt;&#xa;</xsl:text>				
 				<xsl:apply-templates/>
+				<xsl:value-of select="$indent"/>
 				<xsl:text>&lt;/</xsl:text>
 				<xsl:value-of select="name()"/>
 				<xsl:text>&gt;&#xa;</xsl:text>		
