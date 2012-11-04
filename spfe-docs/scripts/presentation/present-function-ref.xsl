@@ -97,11 +97,7 @@
 	    	<codeblock>
 	    		<xsl:apply-templates select="definition/*"/>
 	    	</codeblock>
-    	
-    	
-    	
-    	
-    </page>
+    	</page>
   </xsl:template>
 	
 	<xsl:template match="xsl:*">
