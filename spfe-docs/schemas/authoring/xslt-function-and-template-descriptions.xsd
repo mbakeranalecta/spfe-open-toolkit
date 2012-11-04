@@ -8,7 +8,8 @@
 	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/tracking.xsd"/>
 	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/conditions.xsd"/>
 	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/text-decoration.xsd"/>	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/strings.xsd"/>
-	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/mentions/mentions-xml.xsd"/>		
+	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/mentions/mentions-xml.xsd"/>
+	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/mentions/mentions-xslt.xsd"/>		
 	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/mentions/mentions-general.xsd"/>
 	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/mentions/mentions-spfe-build.xsd"/>	
 	

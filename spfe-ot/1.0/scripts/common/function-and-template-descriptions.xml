@@ -24,10 +24,15 @@
         <function-description>
             <name>title2anchor</name>
             <description>
-                <p>You can use the title2anchor function to convert a title text into a string that can be used as an anchor value. The function works by changing all characters not allowed in an anchor into underscores.</p>
+                <p>You can use the <xslt-function-name>title2anchor</xslt-function-name> function to convert a title text into a string that can be used as an anchor value. The function works by changing all characters not allowed in an anchor into underscores.</p>
                 <p>Typical uses for this function occur in the presentation stage where you want to create an anchor so that a link can be created to a point inside a topic. Where no other identifier is available, you can use title2anchor to create a suitable anchor value.</p>
 
             </description>
+            <return-value>
+                <description>
+                    <p>Returns a string that has been stripped of characters that would not be legal in an HTML anchor string.</p>
+                </description>
+            </return-value>
             <parameters>
                 <parameter>
                     <name>title</name>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:simpleType name="mentions-xslt">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="xslt-function-name"/>
+            <xs:enumeration value="xslt-template-name"/>
+            <xs:enumeration value="xslt-function-parameter-name"/>
+            <xs:enumeration value="xslt-template-parameter-name"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:group name="mentions-xslt">
+        <xs:choice>
+            <xs:element name="xslt-function-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="xpath" use="optional"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="xslt-template-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="xpath" use="optional"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="xslt-function-parameter-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="parent-function" use="optional"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        <xs:element name="xslt-template-parameter-name">
+            <xs:complexType>
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="parent-template" use="optional"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:element>
+        </xs:choice>
+    </xs:group>
+
+
+
+</xs:schema>

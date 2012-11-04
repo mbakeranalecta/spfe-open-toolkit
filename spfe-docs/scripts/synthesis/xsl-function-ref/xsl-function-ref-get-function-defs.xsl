@@ -5,13 +5,14 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+    xmlns="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"
     exclude-result-prefixes="#all"
     version="2.0"
     >
 
     <xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/>
     
-    <xsl:output indent="yes"/>
+    <xsl:output indent="yes" xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"/>
     
     <xsl:variable name="config" as="element(config:spfe)">
         <xsl:sequence select="/config:spfe"/>

@@ -10,6 +10,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:fd="http://spfeopentoolkit.org/spfe-docs/schemas/xslt-function-and-template-descriptions"
+xmlns:xfd="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"
+xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry"
 exclude-result-prefixes="#all" >
 	
 <xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
@@ -54,16 +56,16 @@ Main template
 	<xsl:apply-templates select="$function-defs"/>
 </xsl:template>
 
-<xsl:template match="function-and-template-definitions">
+<xsl:template match="xfd:function-and-template-definitions">
 	<xsl:result-document 
 		 method="xml" 
 		 indent="yes"
 		 omit-xml-declaration="no" 
 		 href="file:///{$synthesis-directory}/synthesis.xml">
 		<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
-			<xsl:for-each-group select="function-definition" group-by="concat(namespace-uri, name)">
-				<xsl:variable name="name" select="string(name[1])"/>
-				<xsl:variable name="namespace-uri" select="string(namespace-uri[1])"/>
+			<xsl:for-each-group select="xfd:function-definition" group-by="concat(xfd:namespace-uri, xfd:name)">
+				<xsl:variable name="name" select="string(xfd:name[1])"/>
+				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
 				
 				<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
 				<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</xsl:variable> 
@@ -89,10 +91,10 @@ Main template
 				<ss:topic 
 					element-name="{name()}" 
 					type="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry" 
-					full-name="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry/{concat(local-prefix, '_', name)}"
-					local-name="{name}"
+					full-name="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry/{concat(xfd:local-prefix, '_', xfd:name)}"
+					local-name="{xfd:name}"
 					topic-type-alias="{$topic-type-alias}"
-					title="{name}">
+					title="{xfd:name}">
 					<ss:index>
 						<ss:entry>
 							<ss:type>spfe-xslt-function-reference-entry</ss:type>
@@ -101,30 +103,18 @@ Main template
 						</ss:entry>
 					</ss:index>
 					
-					<xsl:element name="spfe-xslt-function-reference-entry" namespace="{$output-namespace}">
-						<xsl:element name="xsl-function" namespace="{$output-namespace}">
-							
-							<xsl:element name="name" namespace="{$output-namespace}">
-								<xsl:value-of select="name[1]"/>
-							</xsl:element> 
-							<xsl:element name="local-prefix" namespace="{$output-namespace}">
-								<xsl:value-of select="local-prefix[1]"/>
-							</xsl:element>
-							<xsl:element name="return-type" namespace="{$output-namespace}">
-								<xsl:value-of select="return-type[1]"/>
-							</xsl:element>
-							<xsl:for-each select="source-file">
-								<xsl:element name="source-file" namespace="{$output-namespace}">
-									<xsl:value-of select="."/>
-								</xsl:element>
+					<spfe-xslt-function-reference-entry>
+						<xsl-function>
+							<name><xsl:value-of select="xfd:name[1]"/></name>
+							<local-prefix><xsl:value-of select="xfd:local-prefix[1]"/></local-prefix>
+							<xsl:for-each select="xfd:source-file">
+								<source-file><xsl:value-of select="."/></source-file>
 							</xsl:for-each>
-							<xsl:element name="namespace-uri" namespace="{$output-namespace}">
-								<xsl:value-of select="$namespace-uri"/>
-							</xsl:element>
-							<xsl:for-each select="definition">
-								<xsl:element name="definition" namespace="{$output-namespace}">
+							<namespace-uri><xsl:value-of select="$namespace-uri"/></namespace-uri>
+							<xsl:for-each select="xfd:definition">
+								<definition>
 									<xsl:copy-of select="./*"/>
-								</xsl:element>
+								</definition>
 							</xsl:for-each>
 							
 							<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
@@ -142,21 +132,26 @@ Main template
 								</xsl:otherwise>
 							</xsl:choose>
 							
+							<return-value>
+								<type>
+									<xsl:value-of select="xfd:return-type"/>
+								</type>
+								<xsl:apply-templates select="$function-description/fd:return-value/fd:description"/>
+							</return-value>
 							
-							<xsl:element name="parameters" namespace="{$output-namespace}">
+							
+							<parameters>
 								<!-- parameters by name -->
 								<!-- FIXME: need to detect optional parameters -->
 								<xsl:variable name="parent-group" select="current-group()"/>
-								<xsl:for-each-group select="current-group()/parameters/parameter" group-by="name">
-									<xsl:variable name="parameter-name" select="name[1]"/>
-									<xsl:element name="parameter" namespace="{$output-namespace}">	
-										<xsl:if test="$parent-group[not(parameters/parameter/name = current-grouping-key())]"><xsl:attribute name="optional">yes</xsl:attribute></xsl:if>
-										<xsl:element name="name" namespace="{$output-namespace}">
-											<xsl:value-of select="$parameter-name"/>
-										</xsl:element>
-										<xsl:element name="type" namespace="{$output-namespace}">
-											<xsl:value-of select="type[1]"/>
-										</xsl:element>
+								<xsl:for-each-group select="current-group()/xfd:parameters/xfd:parameter" group-by="xfd:name">
+									<xsl:variable name="parameter-name" select="xfd:name[1]"/>
+									<parameter>	
+										<xsl:if test="$parent-group[not(xfd:parameters/xfd:parameter/xfd:name = current-grouping-key())]">
+											<xsl:attribute name="optional">yes</xsl:attribute>
+										</xsl:if>
+										<name><xsl:value-of select="$parameter-name"/></name>
+										<type><xsl:value-of select="xfd:type[1]"/></type>
 										
 										<xsl:variable name="authored" select="$function-description/fd:parameters/fd:parameter[fd:name = $parameter-name]/fd:description"/>
 										<xsl:if test="not($authored)">
@@ -165,36 +160,27 @@ Main template
 											</xsl:call-template>
 										</xsl:if>
 										
-											<xsl:apply-templates select="$authored"/>
+										<xsl:apply-templates select="$authored"/>
 										
-									</xsl:element>
+									</parameter>
 								</xsl:for-each-group>
-							</xsl:element>
-						</xsl:element>
-					</xsl:element>
+							</parameters>
+						</xsl-function>
+					</spfe-xslt-function-reference-entry>
 				</ss:topic>
 			</xsl:for-each-group>
 			
-			<xsl:apply-templates select="$function-defs/function-and-template-definitions/*"/>
+			<xsl:apply-templates select="$function-defs/xfd:function-and-template-definitions/*"/>
 		</ss:synthesis>
 	</xsl:result-document>
 </xsl:template>
 
-<!-- 
-=================================
-Main content processing templates
-=================================
--->
+<xsl:template match="xfd:function-definition" />
 
-<!-- Schema element template -->
-<xsl:template match="function-definition" >
-
+<xsl:template match="fd:description">
+	<description>
+		<xsl:apply-templates/>
+	</description>
 </xsl:template>
-	
-	<xsl:template match="fd:description">
-		<xsl:element name="description" namespace="{$output-namespace}">
-			<xsl:apply-templates/>
-		</xsl:element>
-	</xsl:template>
 </xsl:stylesheet>
 
