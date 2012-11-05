@@ -80,7 +80,7 @@
 	</xsl:template>
 	
 
-	<xsl:function name="sf:path-depth">
+	<xsl:function name="sf:path-depth" as="xs:integer">
 		<!-- Calculates the depth of an XPath by counting the number of 
 		elements in the path. It uses tokenize to count but throws away 
 		the empty string item that would be created by a leading or trailing 
@@ -112,10 +112,10 @@
 	<!-- returns the index of the longest of a set of strings -->
 	<xsl:function name="sf:longest-string" as="xs:integer">
 		<xsl:param name="strings"/>
-		<xsl:value-of select="sf:get-longest($strings,1,1)"/>
+		<xsl:value-of select="sf:longest-string($strings,1,1)"/>
 	</xsl:function>
 	
-	<xsl:function name="sf:get-longest" as="xs:integer">
+	<xsl:function name="sf:longest-string" as="xs:integer">
 	<xsl:param name="strings"/>
 	<xsl:param name="current"/>
 	<xsl:param name="longest"/>
@@ -128,14 +128,19 @@
 					</xsl:when>
 				</xsl:choose>
 			</xsl:variable>
-			<xsl:value-of select="sf:get-longest($strings,$current + 1, $new-longest)"/>
+			<xsl:value-of select="sf:longest-string($strings,$current + 1, $new-longest)"/>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:value-of select="$longest"/>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:function>
-
+	
+	<xsl:function name="sf:file-name-from-uri">
+		<xsl:param name="uri"/>
+		<xsl:value-of select="substring-before(tokenize($uri, '/')[count(tokenize($uri, '/'))], '.xml')"/>
+	</xsl:function>
+	
 <xsl:function name="sf:conditions-met" as="xs:boolean">
 	<xsl:param name="conditions"/>
 	<xsl:param name="condition-tokens"/>
@@ -151,11 +156,6 @@
 	</xsl:choose>
 </xsl:function>
 	
-	<xsl:function name="sf:file-name-from-uri">
-		<xsl:param name="uri"/>
-		<xsl:value-of select="substring-before(tokenize($uri, '/')[count(tokenize($uri, '/'))], '.xml')"/>
-	</xsl:function>
-
 <xsl:function name="sf:satisfies-condition" as="xs:boolean">
 	<xsl:param name="conditions-list"/>
 	<xsl:param name="tokens-list"/>

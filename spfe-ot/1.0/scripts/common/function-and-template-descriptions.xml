@@ -24,13 +24,13 @@
         <function-description>
             <name>title2anchor</name>
             <description>
-                <p>You can use the <xslt-function-name>title2anchor</xslt-function-name> function to convert a title text into a string that can be used as an anchor value. The function works by changing all characters not allowed in an anchor into underscores.</p>
+                <p>You can use the <xslt-function-name>sf:title2anchor</xslt-function-name> function to convert a title text into a string that can be used as an anchor value. The function works by changing all characters not allowed in an anchor into underscores.</p>
                 <p>Typical uses for this function occur in the presentation stage where you want to create an anchor so that a link can be created to a point inside a topic. Where no other identifier is available, you can use title2anchor to create a suitable anchor value.</p>
 
             </description>
             <return-value>
                 <description>
-                    <p>Returns a string that has been stripped of characters that would not be legal in an HTML anchor string.</p>
+                    <p>Returns a string in which the characters that would not be legal in an HTML anchor string have been converted to underscores.</p>
                 </description>
             </return-value>
             <parameters>
@@ -45,24 +45,24 @@
         <function-description>
             <name>conditions-met</name>
             <description>
-                <p></p>
+                <p>The <xslt-function-name>sf:conditions-met</xslt-function-name> function is used to determine if a conditional element meets the conditions applied to the build. </p>
             </description>
             <return-value>
                 <description>
-                    <p></p>
+                    <p>The return value is a boolean with true indicating that the conditions were met and fasle that the conditions were not met.</p>
                 </description>
             </return-value>
             <parameters>
                 <parameter>
                     <name>conditions</name>
                     <description>
-                        <p></p>
+                        <p>The list of conditions applied to the element.</p>
                     </description>
                 </parameter>
                 <parameter>
                     <name>condition-tokens</name>
                     <description>
-                        <p></p>
+                        <p>The list of condition tokens applied to the build.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -70,18 +70,18 @@
         <function-description>
             <name>file-name-from-uri</name>
             <description>
-                <p></p>
+                <p>The <xslt-function-name>sf:file-name-from-uri</xslt-function-name> function returns the file name portion of a URI string.</p>
             </description>
             <return-value>
                 <description>
-                    <p></p>
+                    <p>Returns the file name portion of a URI string.</p>
                 </description>
             </return-value>
             <parameters>
                 <parameter>
                     <name>uri</name>
                     <description>
-                        <p></p>
+                        <p>The URI for which the file name is to be returned.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -89,74 +89,44 @@
         <function-description>
             <name>get-file-name-from-path</name>
             <description>
-                <p></p>
+                <p>Returns the file name portion of a local path.</p>
             </description>
             <return-value>
                 <description>
-                    <p></p>
+                    <p>The file name portion of the path.</p>
                 </description>
             </return-value>
             <parameters>
                 <parameter>
                     <name>path</name>
                     <description>
-                        <p></p>
+                        <p>The path for which the file name is to be returned.</p>
                     </description>
                 </parameter>
             </parameters>
         </function-description>
-        <function-description>
-            <name>get-longest</name>
-            <description>
-                <p></p>
-            </description>
-            <return-value>
-                <description>
-                    <p></p>
-                </description>
-            </return-value>
-            <parameters>
-                <parameter>
-                    <name>strings</name>
-                    <description>
-                        <p></p>
-                    </description>
-                </parameter>
-                <parameter>
-                    <name>current</name>
-                    <description>
-                        <p></p>
-                    </description>
-                </parameter>
-                <parameter>
-                    <name>longest</name>
-                    <description>
-                        <p></p>
-                    </description>
-                </parameter>
-            </parameters>
-        </function-description>
+        
         <function-description>
             <name>get-sources</name>
             <description>
-                <p></p>
+                <p>The <xslt-function-name>sf:get-sources</xslt-function-name> is used to load a set of XML source files into a variable. It takes a string value that contains a set of file paths separated by semicolons. The function will fix directory separators charactres in the file paths. You should use the sf:get-sources function to load sourse files, irrespective of whether you are laoding one file or several. This makes your script resiliant if the number of source files should change, and also allows for more flecibity in downstream processes, allowing them to produce one file or many.</p>
             </description>
             <return-value>
                 <description>
-                    <p></p>
+                    <p>Returns a sequence of XML documents named in the file list.</p>
                 </description>
             </return-value>
             <parameters>
                 <parameter>
                     <name>file-list</name>
                     <description>
-                        <p></p>
+                        <p>A string containing a list of XML file paths separated by semi-colons.</p>
                     </description>
                 </parameter>
                 <parameter>
                     <name>load-message</name>
                     <description>
-                        <p></p>
+                        <p>A string containing an optional message to be displayed by the script when loading a file. If specified, the message will be prepended to the name of each file as it is loaded, and displayed by a call to the <xslt-function-name>sf:info</xslt-function-name> function.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -164,18 +134,18 @@
         <function-description>
             <name>longest-string</name>
             <description>
-                <p></p>
+                <p>The <xslt-function-name>sf:longest-string</xslt-function-name> function returns the index of the longest string in a sequence of strings.</p>
             </description>
             <return-value>
                 <description>
-                    <p></p>
+                    <p>The index of the longest string.</p>
                 </description>
             </return-value>
             <parameters>
                 <parameter>
                     <name>strings</name>
                     <description>
-                        <p></p>
+                        <p>A sequence of strings.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -183,18 +153,18 @@
         <function-description>
             <name>path-depth</name>
             <description>
-                <p></p>
+                <p>The <xslt-function-name>path-depth</xslt-function-name> calculates the depth of an XPath by counting the number of elements in the path. It uses tokenize to count but throws away the empty string item that would be created by a leading or trailing slash. Thus <code>foo/bar</code>, <code>/foo/bar</code>, and <code>/foo/bar/</code>, are all counted as having a path depth of 2. Will count a concluding attribute on a path as part of the depth. Presumably works for file paths as well, as long as they are in UNIX form, but it won't distinguish path elements from drive letters or the protocol parts of a URI.</p>
             </description>
             <return-value>
                 <description>
-                    <p></p>
+                    <p>The number of elements in an XPath expression.</p>
                 </description>
             </return-value>
             <parameters>
                 <parameter>
                     <name>path</name>
                     <description>
-                        <p></p>
+                        <p>The path expression.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -202,30 +172,30 @@
         <function-description>
             <name>satisfies-condition</name>
             <description>
-                <p></p>
+                <p>A recursive function that checks a series of conditions against a series of conditiont tokens and returns true if there is a match. It takes account of conditions joined by a plus sign, returning true only if both conditions are satisfied. This is a helper function for the <xslt-function-name>xs:conditions-met</xslt-function-name> function.</p>
             </description>
             <return-value>
                 <description>
-                    <p></p>
+                    <p>True if the conditions match, otherwise false.</p>
                 </description>
             </return-value>
             <parameters>
                 <parameter>
                     <name>conditions-list</name>
                     <description>
-                        <p></p>
+                        <p>A sequence consisting of conditions attached to an element.</p>
                     </description>
                 </parameter>
                 <parameter>
                     <name>tokens-list</name>
                     <description>
-                        <p></p>
+                        <p>A sequence consisting of the condition tokens specified in the build.</p>
                     </description>
                 </parameter>
                 <parameter>
                     <name>index</name>
                     <description>
-                        <p></p>
+                        <p>The index in the <xslt-function-parameter-name>tokens-list</xslt-function-parameter-name> to check in this recursion.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -233,24 +203,24 @@
         <function-description>
             <name>string</name>
             <description>
-                <p></p>
+                <p>The <xslt-function-name>string</xslt-function-name> function is used to resolve <feature>strings</feature>.</p>
             </description>
             <return-value>
                 <description>
-                    <p></p>
+                    <p>The string that corresponds to the string ID.</p>
                 </description>
             </return-value>
             <parameters>
                 <parameter>
                     <name>strings</name>
                     <description>
-                        <p></p>
+                        <p>A sequence of string elements.</p>
                     </description>
                 </parameter>
                 <parameter>
                     <name>id</name>
                     <description>
-                        <p></p>
+                        <p>The ID of the string to return.</p>
                     </description>
                 </parameter>
             </parameters>

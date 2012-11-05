@@ -111,7 +111,7 @@ Main template
 								<source-file><xsl:value-of select="."/></source-file>
 							</xsl:for-each>
 							<namespace-uri><xsl:value-of select="$namespace-uri"/></namespace-uri>
-							<xsl:for-each select="xfd:definition">
+							<xsl:for-each select="current-group()/xfd:definition">
 								<definition>
 									<xsl:copy-of select="./*"/>
 								</definition>
@@ -169,8 +169,6 @@ Main template
 					</spfe-xslt-function-reference-entry>
 				</ss:topic>
 			</xsl:for-each-group>
-			
-			<xsl:apply-templates select="$function-defs/xfd:function-and-template-definitions/*"/>
 		</ss:synthesis>
 	</xsl:result-document>
 </xsl:template>

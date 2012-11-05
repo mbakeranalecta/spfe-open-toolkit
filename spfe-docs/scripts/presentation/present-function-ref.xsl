@@ -93,11 +93,16 @@
     		</labeled-item>
     	</xsl:for-each>
     	
+
+    	
    		<subhead>Definition</subhead>
-	    	<codeblock>
-	    		<xsl:apply-templates select="definition/*"/>
-	    	</codeblock>
-    	</page>
+    	<xsl:for-each select="definition">
+    		<codeblock language="XSLT">
+    			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
+    			<xsl:apply-templates select="*"/>
+    		</codeblock>
+    	</xsl:for-each>
+    </page>
   </xsl:template>
 	
 	<xsl:template match="xsl:*">
