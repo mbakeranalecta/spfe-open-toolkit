@@ -42,8 +42,13 @@
         </topic-type>
         <topic-type>
             <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</id>
-            <alias>XSLT Function reference</alias>
-            <plural>XSLT Function reference</plural>
+            <alias>XSLT Function Reference</alias>
+            <plural>XSLT Function Reference</plural>
+        </topic-type>
+        <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry</id>
+            <alias>XSLT Template Reference</alias>
+            <plural>XSLT Template Reference</plural>
         </topic-type>
     </topic-type-aliases>
     

@@ -63,6 +63,7 @@ Main template
 		 omit-xml-declaration="no" 
 		 href="file:///{$synthesis-directory}/synthesis.xml">
 		<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
+			
 			<xsl:for-each-group select="xfd:function-definition" group-by="concat(xfd:namespace-uri, xfd:name)">
 				<xsl:variable name="name" select="string(xfd:name[1])"/>
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
@@ -89,7 +90,6 @@ Main template
 				</xsl:variable>
 				
 				<ss:topic 
-					element-name="{name()}" 
 					type="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry" 
 					full-name="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry/{concat(xfd:local-prefix, '_', xfd:name)}"
 					local-name="{xfd:name}"
@@ -98,6 +98,11 @@ Main template
 					<ss:index>
 						<ss:entry>
 							<ss:type>spfe-xslt-function-reference-entry</ss:type>
+							<ss:namespace><xsl:value-of select="$namespace-uri"/></ss:namespace>
+							<ss:term><xsl:value-of select="$name"/></ss:term>
+						</ss:entry>
+						<ss:entry>
+							<ss:type>xslt-function-name</ss:type>
 							<ss:namespace><xsl:value-of select="$namespace-uri"/></ss:namespace>
 							<ss:term><xsl:value-of select="$name"/></ss:term>
 						</ss:entry>
@@ -169,11 +174,113 @@ Main template
 					</spfe-xslt-function-reference-entry>
 				</ss:topic>
 			</xsl:for-each-group>
+			<xsl:for-each-group select="xfd:template-definition" group-by="concat(xfd:namespace-uri, xfd:name)">
+				<xsl:variable name="name" select="string(xfd:name[1])"/>
+				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
+				
+				<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
+				<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry</xsl:variable> 
+				
+				<xsl:variable name="topic-type-alias">
+					<xsl:choose>
+						<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
+							<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:call-template name="sf:error">
+								<xsl:with-param name="message">
+									<xsl:text>No topic type alias found for topic type </xsl:text>
+									<xsl:value-of select="$topic-type"/>
+									<xsl:text>.</xsl:text>
+								</xsl:with-param>
+							</xsl:call-template>
+							<xsl:value-of select="$topic-type"/>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+				
+				<ss:topic 
+					type="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry" 
+					full-name="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry/{concat(xfd:local-prefix, '_', xfd:name)}"
+					local-name="{xfd:name}"
+					topic-type-alias="{$topic-type-alias}"
+					title="{xfd:name}">
+					<ss:index>
+						<ss:entry>
+							<ss:type>spfe-xslt-template-reference-entry</ss:type>
+							<ss:namespace><xsl:value-of select="$namespace-uri"/></ss:namespace>
+							<ss:term><xsl:value-of select="$name"/></ss:term>
+						</ss:entry>
+						<ss:entry>
+							<ss:type>xslt-template-name</ss:type>
+							<ss:namespace><xsl:value-of select="$namespace-uri"/></ss:namespace>
+							<ss:term><xsl:value-of select="$name"/></ss:term>
+						</ss:entry>
+					</ss:index>
+					
+					<spfe-xslt-template-reference-entry>
+						<xsl-template>
+							<name><xsl:value-of select="xfd:name[1]"/></name>
+							<local-prefix><xsl:value-of select="xfd:local-prefix[1]"/></local-prefix>
+							<xsl:for-each select="xfd:source-file">
+								<source-file><xsl:value-of select="."/></source-file>
+							</xsl:for-each>
+							<namespace-uri><xsl:value-of select="$namespace-uri"/></namespace-uri>
+							<xsl:for-each select="current-group()/xfd:definition">
+								<definition>
+									<xsl:copy-of select="./*"/>
+								</definition>
+							</xsl:for-each>
+							
+							<xsl:variable name="template-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:template-description[fd:name eq $name]"/>
+							
+							<!-- Select and copy the authored template info. -->
+							<xsl:choose>
+								<!-- Test that the information exists. -->
+								<xsl:when test="exists($template-description/*)">
+									<xsl:apply-templates select="$template-description/fd:description"/>
+								</xsl:when>
+								<xsl:otherwise><!-- If not found, report warning. -->
+									<xsl:call-template name="sf:warning">
+										<xsl:with-param name="message" select="'Template description not found ', string($name)"/>
+									</xsl:call-template>
+								</xsl:otherwise>
+							</xsl:choose>
+							
+							<parameters>
+								<!-- parameters by name -->
+								<!-- FIXME: need to detect optional parameters -->
+								<xsl:variable name="parent-group" select="current-group()"/>
+								<xsl:for-each-group select="current-group()/xfd:parameters/xfd:parameter" group-by="xfd:name">
+									<xsl:variable name="parameter-name" select="xfd:name[1]"/>
+									<parameter>	
+										<xsl:if test="$parent-group[not(xfd:parameters/xfd:parameter/xfd:name = current-grouping-key())]">
+											<xsl:attribute name="optional">yes</xsl:attribute>
+										</xsl:if>
+										<name><xsl:value-of select="$parameter-name"/></name>
+										<type><xsl:value-of select="xfd:type[1]"/></type>
+										
+										<xsl:variable name="authored" select="$template-description/fd:parameters/fd:parameter[fd:name = $parameter-name]/fd:description"/>
+										<xsl:if test="not($authored)">
+											<xsl:call-template name="sf:warning">
+												<xsl:with-param name="message" select="'Parameter description not found ', string($parameter-name)"/>
+											</xsl:call-template>
+										</xsl:if>
+										
+										<xsl:apply-templates select="$authored"/>
+										
+									</parameter>
+								</xsl:for-each-group>
+							</parameters>
+						</xsl-template>
+					</spfe-xslt-template-reference-entry>
+				</ss:topic>
+			</xsl:for-each-group>
 		</ss:synthesis>
 	</xsl:result-document>
 </xsl:template>
 
-<xsl:template match="xfd:function-definition" />
+<xsl:template match="xfd:template-definition" />
 
 <xsl:template match="fd:description">
 	<description>

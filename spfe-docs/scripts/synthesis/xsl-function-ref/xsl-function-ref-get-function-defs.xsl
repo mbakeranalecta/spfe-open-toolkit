@@ -33,7 +33,7 @@
     
     <xsl:template match="*/text()"/>
     
-    <xsl:template match="xsl:function">
+    <xsl:template match="xsl:function[namespace-uri-for-prefix(substring-before(@name, ':'), .) = 'http://spfeopentoolkit.org/spfe-ot/1.0/functions']">
         <function-definition>
             <name>
                 <xsl:value-of select="substring-after(@name, ':')"/>
@@ -45,7 +45,7 @@
                 <xsl:value-of select="if (@as) then @as else 'item()*'"/>
             </return-type>
             <source-file>
-                <xsl:value-of select="base-uri()"></xsl:value-of>
+                <xsl:value-of select="concat('$SPFEOT_HOME',substring-after(base-uri(), $config/config:spfeot-home))"/>
             </source-file>
             <namespace-uri>
                 <xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
@@ -64,7 +64,8 @@
         </function-definition>
     </xsl:template>
     
-    <xsl:template match="xsl:template[@name]">
+    <!-- Find named templates that are in the http://spfeopentoolkit.org/spfe-ot/1.0/functions namespace -->
+    <xsl:template match="xsl:template[namespace-uri-for-prefix(substring-before(@name, ':'), .) = 'http://spfeopentoolkit.org/spfe-ot/1.0/functions']">
         <template-definition>
             <name>
                 <xsl:value-of select="substring-after(@name, ':')"/>
@@ -72,11 +73,8 @@
             <local-prefix>
                 <xsl:value-of select="substring-before(@name, ':')"/>
             </local-prefix>
-            <return-type>
-                <xsl:value-of select="if (@as) then @as else 'item()*'"/>
-            </return-type>
             <source-file>
-                <xsl:value-of select="base-uri()"></xsl:value-of>
+                <xsl:value-of select="concat('$SPFEOT_HOME',substring-after(base-uri(), $config/config:spfeot-home))"/>
             </source-file>
             <namespace-uri>
                 <xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>

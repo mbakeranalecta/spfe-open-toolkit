@@ -60,6 +60,52 @@
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
+
+
+    <xsl:template match="*:xslt-function-name">
+        <xsl:element name="name" namespace="{$output-namespace}">
+            <xsl:attribute name="type">xslt-function-name</xsl:attribute>
+            <xsl:attribute name="key" select="normalize-space(.)"/>
+            <xsl:if test="@namespace">
+                <xsl:attribute name="namespace" select="@namespace"/> 
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:element>
+    </xsl:template>   
+    
+    <xsl:template match="*:xslt-template-name">
+        <xsl:element name="name" namespace="{$output-namespace}">
+            <xsl:attribute name="type">xslt-template-name</xsl:attribute>
+            <xsl:attribute name="key" select="normalize-space(.)"/>
+            <xsl:if test="@namespace">
+                <xsl:attribute name="namespace" select="@namespace"/> 
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:element>
+    </xsl:template>   
+    
+
+    <xsl:template match="*:xslt-function-parameter-name">
+        <xsl:element name="name" namespace="{$output-namespace}">
+            <xsl:attribute name="type">xpath</xsl:attribute>
+            <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
+            <xsl:if test="@namespace">
+                <xsl:attribute name="namespace" select="concat('{', @parent-function-namespace, '}', @parent-function-name)"/> 
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:element>
+    </xsl:template>   
+    
+    <xsl:template match="*:xslt-template-parameter-name">
+        <xsl:element name="name" namespace="{$output-namespace}">
+            <xsl:attribute name="type">xslt-template-parameter-name</xsl:attribute>
+            <xsl:attribute name="key" select="normalize-space(.)"/>
+            <xsl:if test="@namespace">
+                <xsl:attribute name="namespace" select="concat('{', @parent-template-namespace, '}', @parent-template-name)"/> 
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:element>
+    </xsl:template>   
     
     <xsl:template match="*:directory-name
                        | *:document-name

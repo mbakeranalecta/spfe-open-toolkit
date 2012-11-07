@@ -30,27 +30,31 @@
 <xsl:param name="synthesis-files"/>
 <xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
   
-  <xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry']">
+	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry']">
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<!-- spfe-configuration-reference-entry -->
+	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry']">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<!-- spfe-function-reference-entry -->
 	<xsl:template match="spfe-xslt-function-reference-entry">
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<!-- schema-element -->
-  <xsl:template match="xsl-function">
-		<xsl:variable name="display-name" select="concat(local-prefix, ':', name)"/>
+	<!-- XSL function -->
+	<xsl:template match="xsl-function">
+		<xsl:variable name="display-name" select="name"/>
 		
 		<!-- info -->
 		<xsl:call-template name="sf:info">
 			<xsl:with-param name="message" select="'Creating page ', $display-name"/>
 		</xsl:call-template>
-    <!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
-    <page type="API" name="{name}">
+		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
+		<page type="API" name="{name}">
 			
-		  <title>Function: <xsl:value-of select="$display-name"/></title>
+			<title>Function: <xsl:value-of select="$display-name"/></title>
 			
 			<p>
 				<bold>
@@ -74,36 +78,96 @@
 				</item>
 			</labeled-item>	
 			
-    	<labeled-item>
-    		<label>Return value</label>
-    		<item>
-    			<p>Return type: <xsl:value-of select="return-value/type"/></p>
-    			<xsl:apply-templates select="return-value/description"/>
-    		</item>
-    	</labeled-item>
-    	
-    	<subhead>Parameters</subhead>
-    	<xsl:for-each select="parameters/parameter">
-    		<labeled-item>
-    			<label><xsl:value-of select="name"/></label>
-    			<item>
-    				<p>Type: <xsl:value-of select="type"/></p>
-    				<xsl:apply-templates select="description"/>
-    			</item>
-    		</labeled-item>
-    	</xsl:for-each>
-    	
-
-    	
-   		<subhead>Definition</subhead>
-    	<xsl:for-each select="definition">
-    		<codeblock language="XSLT">
+			<labeled-item>
+				<label>Return value</label>
+				<item>
+					<p>Return type: <xsl:value-of select="return-value/type"/></p>
+					<xsl:apply-templates select="return-value/description"/>
+				</item>
+			</labeled-item>
+			
+			<labeled-item>
+				<label>Source file</label>
+				<item>
+					<p><xsl:value-of select="source-file"/></p>
+				</item>
+			</labeled-item>
+			
+			<subhead>Parameters</subhead>
+			<xsl:for-each select="parameters/parameter">
+				<labeled-item>
+					<label><xsl:value-of select="name"/></label>
+					<item>
+						<p>Type: <xsl:value-of select="type"/></p>
+						<xsl:apply-templates select="description"/>
+					</item>
+				</labeled-item>
+			</xsl:for-each>
+			
+			<subhead>Definition</subhead>
+			<xsl:for-each select="definition">
+				<codeblock language="XSLT">
     			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
     			<xsl:apply-templates select="*"/>
     		</codeblock>
-    	</xsl:for-each>
-    </page>
-  </xsl:template>
+			</xsl:for-each>
+		</page>
+	</xsl:template>
+	
+	<!-- spfe-template-reference-entry -->
+	<xsl:template match="spfe-xslt-template-reference-entry">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<!-- XSL template -->
+	<xsl:template match="xsl-template">
+		<xsl:variable name="display-name" select="name"/>
+		
+		<!-- info -->
+		<xsl:call-template name="sf:info">
+			<xsl:with-param name="message" select="'Creating page ', $display-name"/>
+		</xsl:call-template>
+		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
+		<!-- FIXME: Is the page type attribute used for anything? Should it be? -->
+		<page type="API" name="{name}">
+			
+			<title>Template: <xsl:value-of select="$display-name"/></title>
+			
+			<labeled-item>
+				<label>Description</label>
+				<item>
+					<xsl:if test="not(description)"><p/></xsl:if>
+					<xsl:apply-templates select="description"/>
+				</item>
+			</labeled-item>	
+			
+			<labeled-item>
+				<label>Source file</label>
+				<item>
+					<p><xsl:value-of select="source-file"/></p>
+				</item>
+			</labeled-item>
+
+			<subhead>Parameters</subhead>
+			<xsl:for-each select="parameters/parameter">
+				<labeled-item>
+					<label><xsl:value-of select="name"/></label>
+					<item>
+						<p>Type: <xsl:value-of select="type"/></p>
+						<xsl:apply-templates select="description"/>
+					</item>
+				</labeled-item>
+			</xsl:for-each>
+			
+			<subhead>Definition</subhead>
+			<xsl:for-each select="definition">
+				<codeblock language="XSLT">
+    			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
+    			<xsl:apply-templates select="*"/>
+    		</codeblock>
+			</xsl:for-each>
+		</page>
+	</xsl:template>
 	
 	<xsl:template match="xsl:*">
 		<xsl:variable name="indent">

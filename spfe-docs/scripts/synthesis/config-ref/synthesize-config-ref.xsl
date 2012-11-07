@@ -134,7 +134,6 @@ Main content processing templates
 	<xsl:if test="($current-doctype = $doctype) or not($doctype)">		
 				
 		<ss:topic 
-			element-name="{name()}" 
 			type="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry" 
 			full-name="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry/{translate(xpath, '/:', '__')}"
 			local-name="{translate(xpath, '/:', '__')}"

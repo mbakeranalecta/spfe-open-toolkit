@@ -17,7 +17,7 @@
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
-                            <xs:attribute name="xpath" use="optional"/>
+                            <xs:attribute name="namespace" use="optional"/>
                         </xs:extension>
                     </xs:simpleContent>
                 </xs:complexType>
@@ -26,7 +26,7 @@
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
-                            <xs:attribute name="xpath" use="optional"/>
+                            <xs:attribute name="namespace" use="optional"/>
                         </xs:extension>
                     </xs:simpleContent>
                 </xs:complexType>
@@ -36,6 +36,7 @@
                     <xs:simpleContent>
                         <xs:extension base="xs:string">
                             <xs:attribute name="parent-function" use="optional"/>
+                            <xs:attribute name="parent-function-namespace" use="optional"/>
                         </xs:extension>
                     </xs:simpleContent>
                 </xs:complexType>
@@ -45,6 +46,7 @@
                 <xs:simpleContent>
                     <xs:extension base="xs:string">
                         <xs:attribute name="parent-template" use="optional"/>
+                        <xs:attribute name="parent-function-namespace" use="optional"/>
                     </xs:extension>
                 </xs:simpleContent>
             </xs:complexType>

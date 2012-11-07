@@ -24,7 +24,7 @@
         <function-description>
             <name>title2anchor</name>
             <description>
-                <p>You can use the <xslt-function-name>sf:title2anchor</xslt-function-name> function to convert a title text into a string that can be used as an anchor value. The function works by changing all characters not allowed in an anchor into underscores.</p>
+                <p>You can use the <xslt-function-name>title2anchor</xslt-function-name> function to convert a title text into a string that can be used as an anchor value. The function works by changing all characters not allowed in an anchor into underscores.</p>
                 <p>Typical uses for this function occur in the presentation stage where you want to create an anchor so that a link can be created to a point inside a topic. Where no other identifier is available, you can use title2anchor to create a suitable anchor value.</p>
 
             </description>
@@ -45,7 +45,7 @@
         <function-description>
             <name>conditions-met</name>
             <description>
-                <p>The <xslt-function-name>sf:conditions-met</xslt-function-name> function is used to determine if a conditional element meets the conditions applied to the build. </p>
+                <p>The <xslt-function-name>conditions-met</xslt-function-name> function is used to determine if a conditional element meets the conditions applied to the build. </p>
             </description>
             <return-value>
                 <description>
@@ -70,7 +70,7 @@
         <function-description>
             <name>file-name-from-uri</name>
             <description>
-                <p>The <xslt-function-name>sf:file-name-from-uri</xslt-function-name> function returns the file name portion of a URI string.</p>
+                <p>The <xslt-function-name>file-name-from-uri</xslt-function-name> function returns the file name portion of a URI string.</p>
             </description>
             <return-value>
                 <description>
@@ -109,7 +109,7 @@
         <function-description>
             <name>get-sources</name>
             <description>
-                <p>The <xslt-function-name>sf:get-sources</xslt-function-name> is used to load a set of XML source files into a variable. It takes a string value that contains a set of file paths separated by semicolons. The function will fix directory separators charactres in the file paths. You should use the sf:get-sources function to load sourse files, irrespective of whether you are laoding one file or several. This makes your script resiliant if the number of source files should change, and also allows for more flecibity in downstream processes, allowing them to produce one file or many.</p>
+                <p>The <xslt-function-name>get-sources</xslt-function-name> is used to load a set of XML source files into a variable. It takes a string value that contains a set of file paths separated by semicolons. The function will fix directory separators charactres in the file paths. You should use the <xslt-function-name>get-sources</xslt-function-name> function to load sourse files, irrespective of whether you are laoding one file or several. This makes your script resiliant if the number of source files should change, and also allows for more flecibity in downstream processes, allowing them to produce one file or many.</p>
             </description>
             <return-value>
                 <description>
@@ -126,7 +126,7 @@
                 <parameter>
                     <name>load-message</name>
                     <description>
-                        <p>A string containing an optional message to be displayed by the script when loading a file. If specified, the message will be prepended to the name of each file as it is loaded, and displayed by a call to the <xslt-function-name>sf:info</xslt-function-name> function.</p>
+                        <p>A string containing an optional message to be displayed by the script when loading a file. If specified, the message will be prepended to the name of each file as it is loaded, and displayed by a call to the <xslt-function-name>info</xslt-function-name> function.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -134,7 +134,7 @@
         <function-description>
             <name>longest-string</name>
             <description>
-                <p>The <xslt-function-name>sf:longest-string</xslt-function-name> function returns the index of the longest string in a sequence of strings.</p>
+                <p>The <xslt-function-name>longest-string</xslt-function-name> function returns the index of the longest string in a sequence of strings.</p>
             </description>
             <return-value>
                 <description>

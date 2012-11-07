@@ -41,7 +41,6 @@ exclude-result-prefixes="#all">
 		<xsl:choose>
 			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
 				<ss:topic 
-					element-name="{name()}" 
 					type="{namespace-uri()}" 
 					topic-type-alias="{$topic-type-alias}"
 					full-name="{*:head/*:uri}"
