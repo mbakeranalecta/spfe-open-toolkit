@@ -820,9 +820,15 @@
 			<xsl:choose>
 				<xsl:when test="normalize-space($href) ne '' and node">
 					<li id="{generate-id()}" class="{$open-state-class}">
-						<xsl:if test="$page-name=@id">
-							<xsl:attribute name="style">background-color:white; font-weight:bold</xsl:attribute>
-						</xsl:if>
+						<xsl:choose>
+							<xsl:when test="$page-name=@id">
+								<xsl:attribute name="style">background:white; font-weight:bold</xsl:attribute>
+							</xsl:when>
+							<xsl:otherwise>
+								<!-- FIXME: This is a hack, pulling in value from jstree stylesheet -->
+								<xsl:attribute name="style">background:#ffffee; font-weight:normal</xsl:attribute>
+							</xsl:otherwise>
+						</xsl:choose>
 						<a href="{$href}"><xsl:value-of select="@name"/></a>
 						<ul>
 							<xsl:apply-templates>
@@ -834,9 +840,15 @@
 				
 				<xsl:when test="normalize-space($href)">
 					<li id="{generate-id()}" class="{$open-state-class}">
-						<xsl:if test="$page-name=@id">
-							<xsl:attribute name="style">background-color:white; font-weight:bold</xsl:attribute>
-						</xsl:if>
+						<xsl:choose>
+							<xsl:when test="$page-name=@id">
+								<xsl:attribute name="style">background:white; font-weight:bold</xsl:attribute>
+							</xsl:when>
+							<xsl:otherwise>
+								<!-- FIXME: This is a hack, pulling in value from jstree stylesheet -->
+								<xsl:attribute name="style">background:#ffffee; font-weight:normal</xsl:attribute>
+							</xsl:otherwise>
+						</xsl:choose>
 						<a href="{$href}"><xsl:value-of select="@name"/></a>
 					</li>
 				</xsl:when>
