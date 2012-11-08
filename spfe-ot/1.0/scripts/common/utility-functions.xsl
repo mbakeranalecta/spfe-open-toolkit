@@ -181,4 +181,34 @@
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:function>
+
+	<xsl:function name="sf:relative-from-absolute-path" as="xs:string">
+		<xsl:param name="path"/>
+		<xsl:param name="relative-to"/>
+		<xsl:value-of select="sf:relative-from-absolute-path($path, $relative-to, '')"/>
+	</xsl:function>
+	
+	<xsl:function name="sf:relative-from-absolute-path" as="xs:string">
+		<xsl:param name="path"/>
+		<xsl:param name="relative-to"/>
+		<xsl:param name="prefix"/>
+		
+		<xsl:variable name="relative-to-uri" select="sf:path-after-protocol-part(resolve-uri($relative-to))"/>
+		<xsl:variable name="path-uri" select="sf:path-after-protocol-part(resolve-uri($path,$relative-to-uri))"/>
+		<xsl:value-of select="concat($prefix,substring-after($path-uri, $relative-to-uri))"/>
+	</xsl:function>
+	
+	<xsl:function name="sf:path-after-protocol-part" as="xs:string">
+		<xsl:param name="path"/>
+		<xsl:analyze-string select="$path" regex="^([a-zA-Z]{{2,}}://?/?)?(.+)">
+			<xsl:matching-substring>
+				<xsl:value-of select="regex-group(2)"/>
+			</xsl:matching-substring>
+			<xsl:non-matching-substring>
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message" select="'sf:path-following-protocol-part: invlaid path argument', $path"/>
+				</xsl:call-template>
+			</xsl:non-matching-substring>
+		</xsl:analyze-string>
+	</xsl:function>
 </xsl:stylesheet>

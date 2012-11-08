@@ -45,7 +45,7 @@
                 <xsl:value-of select="if (@as) then @as else 'item()*'"/>
             </return-type>
             <source-file>
-                <xsl:value-of select="concat('$SPFEOT_HOME',substring-after(base-uri(), $config/config:spfeot-home))"/>
+                <xsl:value-of select="base-uri()"/>
             </source-file>
             <namespace-uri>
                 <xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
@@ -74,7 +74,7 @@
                 <xsl:value-of select="substring-before(@name, ':')"/>
             </local-prefix>
             <source-file>
-                <xsl:value-of select="concat('$SPFEOT_HOME',substring-after(base-uri(), $config/config:spfeot-home))"/>
+                <xsl:value-of select="base-uri()"/>
             </source-file>
             <namespace-uri>
                 <xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>

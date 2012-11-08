@@ -113,7 +113,9 @@ Main template
 							<name><xsl:value-of select="xfd:name[1]"/></name>
 							<local-prefix><xsl:value-of select="xfd:local-prefix[1]"/></local-prefix>
 							<xsl:for-each select="xfd:source-file">
-								<source-file><xsl:value-of select="."/></source-file>
+								<source-file>
+									<xsl:value-of select=" sf:relative-from-absolute-path(., $config/config:spfeot-home,'$SPFEOT_HOME')"/>
+								</source-file>
 							</xsl:for-each>
 							<namespace-uri><xsl:value-of select="$namespace-uri"/></namespace-uri>
 							<xsl:for-each select="current-group()/xfd:definition">
@@ -223,7 +225,9 @@ Main template
 							<name><xsl:value-of select="xfd:name[1]"/></name>
 							<local-prefix><xsl:value-of select="xfd:local-prefix[1]"/></local-prefix>
 							<xsl:for-each select="xfd:source-file">
-								<source-file><xsl:value-of select="."/></source-file>
+								<source-file>
+									<xsl:value-of select=" sf:relative-from-absolute-path(., $config/config:spfeot-home,'$SPFEOT_HOME')"/>
+								</source-file>
 							</xsl:for-each>
 							<namespace-uri><xsl:value-of select="$namespace-uri"/></namespace-uri>
 							<xsl:for-each select="current-group()/xfd:definition">
