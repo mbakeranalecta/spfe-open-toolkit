@@ -24,7 +24,7 @@
 		<xsl:if test="count(distinct-values($temp-tocs/toc/@topic-set-id)) lt count($temp-tocs/toc)">
 			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message">
-					<xsl:text>Duplicate TOCs detected.&#x000A; There appears to be more than one TOC in scope for the same topics set. Topic set IDs encountered include:&#x000A;</xsl:text>
+					<xsl:text>Duplicate TOCs detected.&#x000A; There appears to be more than one TOC in scope for the same topic set. Topic set IDs encountered include:&#x000A;</xsl:text>
 					<xsl:for-each select="$temp-tocs/toc">
 						<xsl:value-of select="@topic-set-id,'&#x000A;'"/>
 					</xsl:for-each>
@@ -209,6 +209,7 @@
 	</xsl:template>
 	
 	<xsl:template match="page">
+		<xsl:variable name="page-name" select="string(@name)"/>
 		<xsl:call-template name="output-html-page">
 			<xsl:with-param name="file-name" select="concat(normalize-space(@name), '.html')"/> 
 			<xsl:with-param name="title" select="title"/>
@@ -249,7 +250,9 @@
 				<div id="toc-container" >
 					<div id="toc">
 						<ul>
-							<xsl:apply-templates select="$toc"/>
+							<xsl:apply-templates select="$toc">
+								<xsl:with-param name="page-name" select="$page-name" tunnel="yes"/>
+							</xsl:apply-templates>
 						</ul>
 					</div>
 				</div>
@@ -758,10 +761,12 @@
 	
 	
 	<xsl:template match="toc">
+		<xsl:param name="page-name" tunnel="yes"/>
 		<xsl:variable name="branch" select="generate-id()"/>
 		<xsl:variable name="toc-id" select="concat('toc', $branch)"/>
-	
-		<xsl:variable name="relative-path">
+		<xsl:variable name="open-state-class" select="if ($page-name = descendant::node/@id) then 'jstree-open' else 'jstree-closed'"></xsl:variable>
+		
+    	<xsl:variable name="relative-path">
 			<xsl:for-each select="tokenize($config/config:deployment/config:output-path, '/')">
 				<xsl:text>../</xsl:text>
 			</xsl:for-each>
@@ -771,13 +776,14 @@
 			</xsl:if>
 		</xsl:variable>
 		
-		<li id="{generate-id()}" class="jstree-open">
+		<li id="{generate-id()}" class="{$open-state-class}">
 			<a href="{if (@index) then concat($relative-path, @index, '.html') else '#'}">
 				<xsl:value-of select="@title"/>
 			</a>
 			<xsl:if test="node">
 				<ul>
 					<xsl:apply-templates>
+						<xsl:with-param name="page-name" select="$page-name"/>
 						<xsl:with-param name="relative-path" select="$relative-path"/>
 					</xsl:apply-templates>
 				</ul>
@@ -789,6 +795,8 @@
 	
 	<xsl:template match="node">
 		<xsl:param name="relative-path"/>
+		<xsl:param name="page-name" tunnel="yes"/>
+		<xsl:variable name="open-state-class" select="if ($page-name = descendant::node/@id) then 'jstree-open' else 'jstree-closed'"/>
 		
 		<xsl:variable name="href">
 			<xsl:choose>
@@ -811,7 +819,10 @@
 		
 			<xsl:choose>
 				<xsl:when test="normalize-space($href) ne '' and node">
-					<li id="{generate-id()}" class="jstree-open">
+					<li id="{generate-id()}" class="{$open-state-class}">
+						<xsl:if test="$page-name=@id">
+							<xsl:attribute name="style">background-color:white; font-weight:bold</xsl:attribute>
+						</xsl:if>
 						<a href="{$href}"><xsl:value-of select="@name"/></a>
 						<ul>
 							<xsl:apply-templates>
@@ -822,13 +833,16 @@
 				</xsl:when>
 				
 				<xsl:when test="normalize-space($href)">
-					<li id="{generate-id()}" class="jstree-open">
+					<li id="{generate-id()}" class="{$open-state-class}">
+						<xsl:if test="$page-name=@id">
+							<xsl:attribute name="style">background-color:white; font-weight:bold</xsl:attribute>
+						</xsl:if>
 						<a href="{$href}"><xsl:value-of select="@name"/></a>
 					</li>
 				</xsl:when>
 				
 				<xsl:when test="node">
-					<li id="{generate-id()}" class="jstree-open">
+					<li id="{generate-id()}" class="{$open-state-class}">
 						<a href="#"><xsl:value-of select="@name"/></a>
 						<ul>
 							<xsl:apply-templates>
