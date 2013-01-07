@@ -84,7 +84,7 @@
 		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			in="${spfe.config-file}"
 			style="${spfe.scripts.synthesis}" 
-			out="NULL">
+			out="${temp}/synthesis.flag">
 			
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="topic-files" expression="${topic-files}"/>
