@@ -15,7 +15,7 @@ if [ -e "$1" ]; then
 
     java -classpath $SPFEOT_HOME/tools/saxon9he/saxon9he.jar net.sf.saxon.Transform \
     -s:$1 \
-    -xsl:$SPFEOT_HOME/scripts/config/config.xsl \
+    -xsl:$SPFEOT_HOME/1.0/scripts/config/config.xsl \
     -o:$SPFE_TEMP_BUILD_FILE \
     HOME=$HOME \
     SPFEOT_HOME=$SPFEOT_HOME \

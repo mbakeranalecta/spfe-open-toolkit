@@ -31,9 +31,12 @@
         <synonyms>
             <include>../../content/*.xml</include>
         </synonyms>
-        <other name="element-descriptions">
+        <authored-content-for-merge>
             <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
-        </other>
+        </authored-content-for-merge>
+<!--        <other name="element-descriptions">
+            <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
+        </other>-->
     </sources>
 
     <default-topic-scope>spfe</default-topic-scope>
@@ -42,7 +45,8 @@
 
 
     <build>
-        <build-rules>../../build-tools/config-ref-rules.xml</build-rules>               
+        <!--<build-rules>../../build-tools/config-ref-rules.xml</build-rules> --> 
+        <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules> 
         <build-directory>${HOME}/spfebuild/spfe-docs/config-ref</build-directory>
     </build>
 
@@ -51,6 +55,9 @@
     </deployment>
     
     <scripts>
+        <extract>
+            <script>../../scripts/synthesis/config-ref/schema-defs.xsl</script>
+        </extract>
         <synthesis>
             <script>../../scripts/synthesis/config-ref/synthesize-config-ref.xsl</script>
             <script>../../scripts/synthesis/mentions-spfe-build.xsl</script>
@@ -68,10 +75,10 @@
         <presentation-web>
             <script>../../scripts/presentation/present-doctype.xsl</script>
         </presentation-web>
-        <other name="schema-defs">
+<!--        <other name="schema-defs">
             <script>../../scripts/synthesis/config-ref/schema-defs.xsl</script>
         </other>
-    </scripts>
+-->    </scripts>
     
     <strings>
         <string id="eppo-simple-topic-set-title">SPFE Configuration Settings</string>

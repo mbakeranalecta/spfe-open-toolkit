@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<project name="XML-source-extract-rules"  default="draft">
+	
+	<!-- import the common SPFE definitions -->
+	<import file="${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml"/>
+	
+	<!-- override the intermediate synthesis build taget to add -build.extracted-content to the dependencies -->
+	<target name="-build.synthesis" depends="-build.extracted-content, --build.synthesis"/>
+
+	<!-- define properties for the temporary files used -->
+	<property name="files.extracted-content" value="extracted-content.xml"/>
+
+	<!-- GET TARGETS -->
+	<target name="-get.source-files.authored-content">
+		<copy todir="${temp}/authored-content" verbose="true" preservelastmodified="true" flatten="true">
+			<files refid="other.authored-content"/>
+		</copy>
+	</target>
+
+	<!-- DEPENDENCY TARGETS -->
+	<!-- check to see if extracted-content is up to date -->	
+	<target name="-current.extracted-content">
+		<dirname property="paths.functions" file="${source-files.functions}"/>
+
+		<uptodate property="-current.functions-defs" targetfile="${temp}/${files.extracted-content}">
+			<srcresources>
+				<dirset dir="${paths.functions}">
+                    <include name="**/*.xsd"/>
+                </dirset>
+				<filelist dir=".">
+					<file name="${source-files.functions}"/>
+				</filelist>
+			</srcresources>
+		</uptodate>
+	</target>
+
+	<!-- SYNTHESIS TARGETS -->
+	
+	<target name="-build.extracted-content" 
+		description="functions definitions" 
+		depends="-init, -current.extracted-content" unless="-current.extracted-content">
+		
+		<property name="extracted-content" refid="other.extracted-content"/>
+		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file}" 
+			style="${spfe.scripts.other.extracted-content}"
+			out="${temp}/${files.extracted-content}">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="xslt-files" expression="${xslt-files}"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="draft" expression="${draft}" if="draft"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+		
+		<!-- validate the output file -->
+		<xmlvalidate lenient="yes" file="${temp}/${files.extracted-content}">
+			<!-- make the validation include namespaces -->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+		</xmlvalidate>
+	</target>
+
+
+
+	<!-- FIXME: Needs its own -current.synthesis because of the different location of the synthesis files. -->
+
+	
+	<!-- target to build synthesis -->
+	<target name="--build.synthesis" description="XML source extract synthesis" 
+	        depends="-build.extracted-content, 
+					 -get.source-files.authored-content">
+						
+		<basename property="source-files.authored-content.name" file="${source-files.authored-content}"/>
+		
+		<files id="authored-content-file-list">
+            <include name="${temp}/authored-content/*.xml"/>
+        </files>
+		<property name="authored-content-files" refid="authored-content-file-list"/>
+		
+		<!-- run the XSLT script to produce the output -->
+		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file}"
+			style="${spfe.scripts.synthesis}" 
+			out="${temp}/synthesis.flag">
+			
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="topic-files" expression="${topic-files}"/>
+			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			<param name="extracted-content-file" expression="${temp}/${files.extracted-content}"/>
+ 			<param name="authored-content-files" expression="${authored-content-files}"/>
+			<param name="synthesis-directory" expression="${temp}/synthesis"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+		<!-- validate the output file 
+		<xmlvalidate lenient="yes" file="${temp}/${spfe.files.synthesis}">
+			<!-/- make the validation include namespaces -/->
+			<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+		</xmlvalidate>-->
+	</target>	
+</project>

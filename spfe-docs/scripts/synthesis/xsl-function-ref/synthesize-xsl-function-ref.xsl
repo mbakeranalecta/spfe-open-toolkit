@@ -38,8 +38,8 @@ exclude-result-prefixes="#all" >
 <xsl:param name="function-defs-file"/>
 <xsl:variable name="function-defs" select="sf:get-sources($function-defs-file)"/>
 
-<xsl:param name="function-description-files"/>
-<xsl:variable name="function-source" select="sf:get-sources($function-description-files)"/>
+<xsl:param name="authored-content-files"/>
+<xsl:variable name="function-source" select="sf:get-sources($authored-content-files)"/>
 
 <xsl:variable name="config" as="element(config:spfe)">
 	<xsl:sequence select="/config:spfe"/>

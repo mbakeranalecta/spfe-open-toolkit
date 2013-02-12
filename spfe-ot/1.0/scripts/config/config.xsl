@@ -365,6 +365,12 @@
                   
                   <xsl:sequence select="spfe:xml2properties(($config/deployment/output-path)[1], 'spfe.deployment')"/>
                   
+                  <files id="authored-content-for-merge">
+                      <xsl:for-each select="$config/sources/authored-content-for-merge/include">
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                      </xsl:for-each>
+                  </files>
+                  
                   <files id="topics">
                       <xsl:for-each select="$config/sources/topics/include">
                           <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>

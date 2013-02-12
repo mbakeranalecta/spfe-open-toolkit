@@ -9,7 +9,7 @@ echo Building in directory: %SPFE_BUILD_DIR%
 
 set SPFE_TEMP_BUILD_FILE=%SPFE_BUILD_DIR%/temp/spfebuild.xml
 
-java -classpath "%SPFEOT_HOME%/tools/saxon9he/saxon9he.jar" net.sf.saxon.Transform -s:%1  -xsl:"%SPFEOT_HOME%"/scripts/config/config.xsl -o:"%SPFE_TEMP_BUILD_FILE%" HOME="%HOMEDRIVE%%HOMEPATH%" SPFEOT_HOME="%SPFEOT_HOME%" SPFE_BUILD_DIR="%SPFE_BUILD_DIR%" SPFE_BUILD_COMMAND=%2
+java -classpath "%SPFEOT_HOME%/tools/saxon9he/saxon9he.jar" net.sf.saxon.Transform -s:%1  -xsl:"%SPFEOT_HOME%"/1.0/scripts/config/config.xsl -o:"%SPFE_TEMP_BUILD_FILE%" HOME="%HOMEDRIVE%%HOMEPATH%" SPFEOT_HOME="%SPFEOT_HOME%" SPFE_BUILD_DIR="%SPFE_BUILD_DIR%" SPFE_BUILD_COMMAND=%2
 
 IF %ERRORLEVEL% NEQ 0 goto CONFIGERROR 
 
