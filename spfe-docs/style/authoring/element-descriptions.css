@@ -107,13 +107,13 @@ element-descriptions>body>element-description>build-property:before
 
 }
 
-/* to create an empty input field we use a zero-width space to give the empty element height */
 element-descriptions>body>element-description>build-property
 {
     display:block;
     background-color:white;
     -oxy-show-placeholder: always;
 }
+
 element-descriptions>body>element-description>include-behavior:before
 {
     display:block;
