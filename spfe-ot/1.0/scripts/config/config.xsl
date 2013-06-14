@@ -244,7 +244,7 @@
                                 select="concat($source/spfe/doc-set/@id, '-', id, '.xml')"/>
                             
                             <xslt classpath="{translate($SPFEOT_HOME, '\', '/')}/tools/saxon9he/saxon9he.jar"
-                                style="{translate($SPFEOT_HOME, '\', '/')}/scripts/config/config.xsl" 
+                                style="{translate($SPFEOT_HOME, '\', '/')}/1.0/scripts/config/config.xsl" 
                                 in="{spfe:URL-to-local(resolve-uri(href, base-uri($source)))}"
                                 out="{$antfile}"
                                 force="yes">

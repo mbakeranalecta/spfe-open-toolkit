@@ -16,14 +16,22 @@
                 <id>spfe-development</id>
                 <href>topic-sets/spfe-development.xml</href>
             </topic-set>
+<!--   
             <topic-set>
                 <id>spfe-function-reference</id>
                 <href>topic-sets/spfe-function-reference.xml</href>
             </topic-set>
+        <topic-set>
+                <id>spfe-function-reference</id>
+                <href>topic-sets/spfe-function-reference.xml</href>
+            </topic-set>
+
+
             <topic-set>
                 <id>spfe-configuration-reference</id>
                 <href>topic-sets/spfe-configuration-reference.xml</href>
             </topic-set>
+-->
         </topic-sets>
      </doc-set>
     
@@ -39,6 +47,7 @@
             <alias>Concept</alias>
             <plural>Concepts</plural>
         </topic-type>
+<!--
         <topic-type>
             <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</id>
             <alias>Configuration setting</alias>
@@ -50,10 +59,16 @@
             <plural>XSLT Function Reference</plural>
         </topic-type>
         <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</id>
+            <alias>XSLT Function Reference</alias>
+            <plural>XSLT Function Reference</plural>
+        </topic-type>
+        <topic-type>
             <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry</id>
             <alias>XSLT Template Reference</alias>
             <plural>XSLT Template Reference</plural>
         </topic-type>
+ -->
     </topic-type-aliases>
     
     <sources>
