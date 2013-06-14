@@ -6,7 +6,7 @@
     
     <doc-set id="spfe-docs">
         <title>SPFE Documentation</title>
-        <topic-set-type-order>docset, guide, reference</topic-set-type-order>
+        <topic-set-type-order>docset, guide, task, reference</topic-set-type-order>
         <topic-sets>
             <topic-set>
                 <id>spfe-docs-docset</id>
@@ -16,17 +16,15 @@
                 <id>spfe-development</id>
                 <href>topic-sets/spfe-development.xml</href>
             </topic-set>
+            <topic-set>
+                <id>spfe-development-tasks</id>
+                <href>topic-sets/spfe-development-tasks.xml</href>
+            </topic-set>
 <!--   
             <topic-set>
                 <id>spfe-function-reference</id>
                 <href>topic-sets/spfe-function-reference.xml</href>
             </topic-set>
-        <topic-set>
-                <id>spfe-function-reference</id>
-                <href>topic-sets/spfe-function-reference.xml</href>
-            </topic-set>
-
-
             <topic-set>
                 <id>spfe-configuration-reference</id>
                 <href>topic-sets/spfe-configuration-reference.xml</href>
@@ -47,16 +45,16 @@
             <alias>Concept</alias>
             <plural>Concepts</plural>
         </topic-type>
+        <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic</id>
+            <alias>Tasks</alias>
+            <plural>Tasks</plural>
+        </topic-type>
 <!--
         <topic-type>
             <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</id>
             <alias>Configuration setting</alias>
             <plural>Configuration settings</plural>
-        </topic-type>
-        <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</id>
-            <alias>XSLT Function Reference</alias>
-            <plural>XSLT Function Reference</plural>
         </topic-type>
         <topic-type>
             <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</id>

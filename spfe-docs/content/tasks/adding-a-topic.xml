@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<?xml-stylesheet type="text/css" href="../../../spfe-ot/plugins/eppo-simple/style/authoring/generic-task-topic.css"?>
+<?xml-stylesheet type="text/css" href="../../style/authoring/spfe-docs.css"?>
+<generic-task-topic xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic
+    http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
+
+    <head>
+        <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/adding-a-topic.xml</uri>
+        <author>jkeffer</author>
+        <status>In progress</status>
+        <history>
+            <revision>
+                <date>2013-06-14</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <new-status>In progress</new-status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>new topic</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>adding a topic</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Adding a new topic</title>
+        <understanding>
+            <p>A new topic is a new web page or a new section in a print document. A topic must
+                follow a schema and it must belong to a topic-set. A topic appears under the
+                topic-set folder in an HTML document or as an entry in a print document's table of
+                contents.</p>
+       </understanding>
+       <planning>
+           <planning-question>
+               <planning-question-title>What do I need before adding a new topic?</planning-question-title>
+                <planning-question-body>
+                   <p>Before you add a topic, you must decide whether to use an existing schema or
+                        whether to use a new schema.</p>
+                    <ul>
+                        <li>
+                        <p> If you add your topic to an existing topic-set, your topic must use the
+                                corresponding schema.</p>
+                        </li>
+                        <li><p>If your topic uses a new schema, you must first <task>add a topic-set</task>.</p>
+                        </li>
+                    </ul>
+                </planning-question-body>
+                <how-to-answer-body>
+                    <p>Based on the content of your topic, determine if you can use an existing custom schema or an EPPO simple schema.</p>
+                </how-to-answer-body>
+            </planning-question>
+       </planning>
+<doing>
+    <p>Create a new file for your topic and follow the schema you selected to add your content. Be
+                sure to validate your XML content before building the documents. If your content is
+                invalid, the <feature>doc-set</feature> or <feature>topic-set</feature> will build,
+                but it will not include the new topic. To add the topic to a topic-setc:</p>
+            <ul>
+                <li>
+                    <p>If you store your topic source file in a directory that is already included
+                        in the topic-set configuration file, the build automatically adds the topic
+                        to the document.</p>
+                </li>
+                <li>
+                    <p>If you store your topic file in a new directory, add the new directory path
+                        to the <![CDATA[<sources>]]> element of the topic-set configuration file.</p>
+                </li>
+            </ul>
+    <p>When you build your documents, if your topic appears in the output under the correct topic-set and contains the correct content, you have successfully added a topic to a topic-set.</p>
+        </doing>
+    </body>
+</generic-task-topic>

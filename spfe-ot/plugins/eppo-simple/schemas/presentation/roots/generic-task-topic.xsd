@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="generic-task-topic">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="head">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:group ref="identity"/>
+                            <xs:group ref="tracking"/>
+                            <xs:group ref="index"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="body">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="title"/>
+                            <xs:element name="understanding" maxOccurs="1" minOccurs="1">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:group ref="text-general" maxOccurs="unbounded" minOccurs="1"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="planning" maxOccurs="1" minOccurs="1"
+                                type="planning-question-type"/>
+                            <xs:element name="doing" maxOccurs="1" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:group ref="text-general" maxOccurs="unbounded" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="planning-question-type">
+        <xs:sequence>
+            <xs:element name="planning-question" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="planning-question-title" type="xs:string"/>
+                        <xs:element name="planning-question-body" type="paragraph-first-text-general-type"/>
+                        <xs:element name="how-to-answer-body" type="paragraph-first-text-general-type"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+</xs:schema>
