@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-task-topic xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic
+http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
+
+    <head>
+        <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/adding-a-topic-set.xml</uri>
+        <author>jkeffer</author>
+        <status>Not started</status>
+        <history>
+            <revision>
+                <date>2013-06-04</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <new-status>Not started</new-status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>topic-set</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>add a topic-set</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Adding a new topic-set</title>
+        <understanding>
+            <p>A topic-set is a collection of topics. In most cases, a topic-set belongs to a <feature>doc-set</feature>.</p>
+       </understanding>
+       <planning>
+           <planning-question>
+               <planning-question-title>What do I need before adding a new topic-set?</planning-question-title>
+                <planning-question-body>
+                    <p>Before you begin</p>
+                </planning-question-body>
+                <how-to-answer-body>
+                    <p>Answer</p>
+                </how-to-answer-body>
+            </planning-question>
+       </planning>
+       <doing>        
+            <p>This is how you add a new topic-set.</p>
+       </doing>
+    </body>
+</generic-task-topic>

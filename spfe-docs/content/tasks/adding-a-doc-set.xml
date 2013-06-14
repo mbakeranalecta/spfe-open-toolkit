@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-task-topic xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic
+http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
+
+    <head>
+        <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/adding-a-doc-set.xml</uri>
+        <author>mbaker</author>
+        <status>In progress</status>
+        <history>
+            <revision>
+                <date>2013-06-14</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <new-status>Not started</new-status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>doc-set</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>add a doc-set</term>
+            </entry>
+            <entry>
+                <type>xpath</type>
+                <term>/spfe</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Adding a new doc-set</title>
+        <understanding>
+            <p></p>
+       </understanding>
+       <planning>
+           <planning-question>
+                <planning-question-title></planning-question-title>
+                <planning-question-body>
+                    <p></p>
+                </planning-question-body>
+                <how-to-answer-body>
+                    <p></p>
+                </how-to-answer-body>
+            </planning-question>
+       </planning>
+        
+
+<doing>        
+    <p></p>
+</doing>
+    </body>
+</generic-task-topic>

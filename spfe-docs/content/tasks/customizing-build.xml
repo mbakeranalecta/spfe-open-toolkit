@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<?xml-stylesheet type="text/css" href="../../style/authoring/spfe-docs.css"?>
 <generic-task-topic xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic
 http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
 
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/content/development/customizing-build.xml</uri>
+        <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/customizing-build.xml</uri>
         <author>mbaker</author>
         <status>In progress</status>
         <history>
@@ -21,8 +22,14 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
         <index>
             <entry>
                 <type>task</type>
+                <term>customize build system</term>
+            </entry>
+            <!--
+            <entry>
+                <type>task</type>
                 <term>{customize} {build}</term>
             </entry>
+            -->
             <entry>
                 <type>xpath</type>
                 <term>/spfe</term>
@@ -52,7 +59,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
 
 <doing>        
     <p>To change the build order, you write an ant rules file describing the steps of your build. You don't have to describe the complete build order in your build file. You can import <file-name>spfe-rules.xml</file-name> into your build file and then override the rules you want to change. To make this easier, <file-name>spfe.rules</file-name> defines an intermediate taget for each build step that has a dependency on the main build rules for that step. Rather than overriding the main build rule, you can just override the intermediate rule and add your custom rules to its dependency list.</p>
-        <p>The main build targets have names starting with two hyphens. For instance, the main synthesis rules is called <code>--build.synthesis</code>. The intermediat build rules have the same name starting with one hyphen, for instance, <code>-build.synthesis</code>. The <code>-build.synthesis</code> rule contains just a dependency on the main build rule, so in <file-name>spfe.rules</file-name> the <code>-build.synthesis</code> rule looks like this:</p>
+        <p>The main build targets have names starting with two hyphens. For instance, the main synthesis rules is called <code>--build.synthesis</code>. The intermediate build rules have the same name starting with one hyphen, for instance, <code>-build.synthesis</code>. The <code>-build.synthesis</code> rule contains just a dependency on the main build rule, so in <file-name>spfe.rules</file-name> the <code>-build.synthesis</code> rule looks like this:</p>
         <codeblock>
 <![CDATA[<target name="-build.synthesis" depends="--build.synthesis"/>]]>
         </codeblock>
