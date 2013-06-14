@@ -19,6 +19,12 @@
                 <comment>New topic</comment>
                 <new-status>In progress</new-status>
             </revision>
+            <revision>
+                <date>2013-06-14</date>
+                <author>jkeffer</author>
+                <comment>Remove some incorrect content.</comment>
+                <new-status>In progress</new-status>
+            </revision>
         </history>
         <index>
             <entry>
@@ -34,7 +40,7 @@
     <body>
         <title>Adding a new topic</title>
         <understanding>
-            <p>A new topic is a new web page or a new section in a print document. A topic must
+            <p>A topic is a web page or a section in a print document. A topic must
                 follow a schema and it must belong to a topic-set. A topic appears under the
                 topic-set folder in an HTML document or as an entry in a print document's table of
                 contents.</p>
@@ -60,10 +66,7 @@
             </planning-question>
        </planning>
 <doing>
-    <p>Create a new file for your topic and follow the schema you selected to add your content. Be
-                sure to validate your XML content before building the documents. If your content is
-                invalid, the <feature>doc-set</feature> or <feature>topic-set</feature> will build,
-                but it will not include the new topic. To add the topic to a topic-setc:</p>
+    <p>Create a new file for your topic and follow the schema you selected to add your content. To add the topic to a topic-setc:</p>
             <ul>
                 <li>
                     <p>If you store your topic source file in a directory that is already included
