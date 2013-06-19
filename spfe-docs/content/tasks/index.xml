@@ -25,6 +25,26 @@
     </head>
     <body>
         <title>SPFE Development Tasks</title>
-        <p>Here is a list of SPFE tasks.</p>
+        <understanding><p>If you have successfully completed the steps in <task>getting started</task>, you are now ready to create your own documents using the SPFE build system. You need to perform the following tasks:</p>
+            <ul>
+                <li>
+                    <p><task>Create the SFPE configuration file</task></p>
+                </li>
+                <li>
+                    <p><task>Add a topic-set</task></p>
+                </li>
+                <li>
+                    <p><task>Add a topic</task></p>
+                </li>
+                <li>
+                    <p><task>Add a doc-set</task></p>
+                </li>
+                <li>
+                    <p>You may also want to <task>customize build system</task></p>
+                </li>
+            </ul>
+        </understanding>
+        <planning></planning>
+        <doing></doing>
     </body>
 </generic-task-topic>

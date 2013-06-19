@@ -16,9 +16,14 @@
                 <id>spfe-development</id>
                 <href>topic-sets/spfe-development.xml</href>
             </topic-set>
+
             <topic-set>
                 <id>spfe-development-tasks</id>
                 <href>topic-sets/spfe-development-tasks.xml</href>
+            </topic-set>
+            <topic-set>
+                <id>spfe-test</id>
+                <href>topic-sets/spfe-test.xml</href>
             </topic-set>
 <!--   
             <topic-set>
@@ -36,7 +41,7 @@
      <strings>
         <string id="eppo-simple-topic-set-product">SPFE Open Toolkit</string>
         <string id="eppo-simple-topic-set-release">1.0 (alpha 1)</string>
-        <string id="eppo-simple-topic-set-copyright">Copyright © 2012 Analecta Communications Inc.</string>
+        <string id="eppo-simple-topic-set-copyright">Copyright © 2013 Analecta Communications Inc.</string>
     </strings>
     
     <topic-type-aliases>
