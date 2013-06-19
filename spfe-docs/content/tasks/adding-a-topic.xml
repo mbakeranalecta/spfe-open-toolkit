@@ -33,7 +33,7 @@
             </entry>
             <entry>
                 <type>task</type>
-                <term>adding a topic</term>
+                <term>add a topic</term>
             </entry>
         </index>
     </head>
@@ -43,30 +43,28 @@
             <p>A topic is a web page or a section in a print document. A topic must
                 follow a schema and it must belong to a topic-set. A topic appears under the
                 topic-set folder in an HTML document or as an entry in a print document's table of
-                contents.</p>
+                contents. It is not possible to present topics in a specific order within a topic-set.</p>
        </understanding>
        <planning>
            <planning-question>
                <planning-question-title>What do I need before adding a new topic?</planning-question-title>
                 <planning-question-body>
-                   <p>Before you add a topic, you must decide whether to use an existing schema or
-                        whether to use a new schema.</p>
+                   <p>Before you add a topic, you must decide whether to use an existing custom schema or EPPO simple schema or whether to use a new schema.</p>
+                </planning-question-body>
+                <how-to-answer-body>
                     <ul>
                         <li>
-                        <p> If you add your topic to an existing topic-set, your topic must use the
+                            <p> If you add your topic to an existing topic-set, your topic must use the
                                 corresponding schema.</p>
                         </li>
                         <li><p>If your topic uses a new schema, you must first <task>add a topic-set</task>.</p>
                         </li>
                     </ul>
-                </planning-question-body>
-                <how-to-answer-body>
-                    <p>Based on the content of your topic, determine if you can use an existing custom schema or an EPPO simple schema.</p>
                 </how-to-answer-body>
             </planning-question>
        </planning>
 <doing>
-    <p>Create a new file for your topic and follow the schema you selected to add your content. To add the topic to a topic-setc:</p>
+    <p>Create a new file for your topic and follow the schema you selected to add your content. To add the topic to a topic-set:</p>
             <ul>
                 <li>
                     <p>If you store your topic source file in a directory that is already included
@@ -75,7 +73,7 @@
                 </li>
                 <li>
                     <p>If you store your topic file in a new directory, add the new directory path
-                        to the <![CDATA[<sources>]]> element of the topic-set configuration file.</p>
+                        to the <xml-element-name>sources</xml-element-name> element of the topic-set configuration file.</p>
                 </li>
             </ul>
     <p>When you build your documents, if your topic appears in the output under the correct topic-set and contains the correct content, you have successfully added a topic to a topic-set.</p>

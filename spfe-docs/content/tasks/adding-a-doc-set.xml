@@ -8,8 +8,8 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
 
     <head>
         <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/adding-a-doc-set.xml</uri>
-        <author>mbaker</author>
-        <status>In progress</status>
+        <author>jkeffer</author>
+        <status>Not started</status>
         <history>
             <revision>
                 <date>2013-06-14</date>
@@ -34,25 +34,38 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
         </index>
     </head>
     <body>
-        <title>Adding a new doc-set</title>
+        <title>Adding a new documentation set</title>
         <understanding>
-            <p></p>
+            <p>A documentation set (<xml-element-name>doc-set</xml-element-name>) groups one or more related topic sets into a complete document. For example, a website could be a single doc-set composed of topic sets to group related web pages.</p>
        </understanding>
        <planning>
            <planning-question>
-                <planning-question-title></planning-question-title>
+                <planning-question-title>Do I need a doc-set?</planning-question-title>
                 <planning-question-body>
-                    <p></p>
+                    <p>You need a doc-set to group related topic-sets into a single document.</p>
                 </planning-question-body>
                 <how-to-answer-body>
-                    <p></p>
+                    <p>While you can put all your topics into a single <feature>topic-set</feature>, if you use a doc-set with mulitple topic-sets, you can present and group your topic-sets in a specific order in the document output.</p>
                 </how-to-answer-body>
             </planning-question>
        </planning>
-        
-
-<doing>        
-    <p></p>
-</doing>
+        <doing>        
+            <p>A doc-set is specified in the <feature>SPFE configuration file</feature> used to build the documents. The you cannot define a doc-set in a separate file and use an include element to incorporate it. A doc-set must have at least one topic-set. A doc-set has the following mandatory elements:
+            </p>
+            <ul>
+                <li>
+                    <p><xml-element-name>id</xml-element-name></p>
+                </li>
+                <li>
+                    <p><xml-element-name>title</xml-element-name>: The title of the doc-set to display </p>
+                </li>
+                <li>
+                    <p><xml-element-name>topic-set-type-order</xml-element-name>: The order in which the topic-sets are shown in the document output.</p>
+                </li>
+                <li>
+                    <p><xml-element-name>topic-sets</xml-element-name>: The list of topic-sets to include in the doc-set</p>
+                </li>    
+            </ul>
+        </doing>
     </body>
 </generic-task-topic>
