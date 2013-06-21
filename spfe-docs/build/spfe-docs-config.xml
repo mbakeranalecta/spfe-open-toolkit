@@ -21,10 +21,12 @@
                 <id>spfe-development-tasks</id>
                 <href>topic-sets/spfe-development-tasks.xml</href>
             </topic-set>
+            <!-- 
             <topic-set>
                 <id>spfe-test</id>
                 <href>topic-sets/spfe-test.xml</href>
             </topic-set>
+             -->
 <!--   
             <topic-set>
                 <id>spfe-function-reference</id>

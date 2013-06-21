@@ -5,7 +5,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic
 http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
-
     <head>
         <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/creating-the-configuration-file.xml</uri>
         <author>jkeffer</author>

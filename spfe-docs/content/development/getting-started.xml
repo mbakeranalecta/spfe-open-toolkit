@@ -16,6 +16,12 @@
                 <comment>New topic</comment>
                 <new-status>In progress</new-status>
             </revision>
+            <revision>
+            <date>2013-06-21</date>
+            <author>jkeffer</author>
+            <comment>Submit for review</comment>
+            <new-status>Ready for technical review</new-status>
+            </revision>
         </history>
         <index>
             <entry>
@@ -25,14 +31,12 @@
         </index>
     </head>
     <body>
-        <title>Getting started with the SPFE build system</title>
-        
+        <title>Getting started with the SPFE build system</title>      
         <p>You can run the SPFE build system on Windows or Linux. To begin building your documents
-            with SPFE, you need to download SPFE from GitHub at <xpath>https://github.com/mbakeranalecta/spfe-open-toolkit</xpath>. You also need to ensure that you have the required third-party packages installed on your computer and your environment variables set up.
+            with SPFE, you need to download the SPFE Toolkit from GitHub at <xpath>https://github.com/mbakeranalecta/spfe-open-toolkit</xpath>. You also need to ensure that you have the required third-party packages installed on your computer and your environment variables set up.
         </p>     
         <section>
-            <title>Installing third-party packages</title>
-            
+            <title>Installing third-party packages</title>           
             <p>To use the SPFE build system, you need to install Apache ANT and the Java Development Kit (JDK). Note that both ANT and SPFE require Java.
             </p>
             <p> Visit
@@ -40,7 +44,7 @@
                 to get information about Java and to download the installer. If you use a Linux
                 distribution that includes a package management system, such as RedHat or Debian, 
                 you may be able to install Java using the package manager. Ensure that you install the
-                <bold>Java Deveopment Kit</bold>, not the Java Runtime Environment.</p>
+                <bold>Java Development Kit</bold>, not the Java Runtime Environment.</p>
             <p>You can download ANT from http://ant.apache.org. If you use Linux, you may be able to install it using the package management system or by using an RPM from the website. For full installation instructions, follow the instructions in the ANT manual on the ANT website.</p> 
         </section>
         <section>
@@ -54,21 +58,22 @@
                     <p>JAVA_HOME</p>
                 </li>
             </ul>
-            <p>If you use Windows:</p>
+            <p>For example:</p>
+            <p>Windows:</p>
                     <codeblock>
                     ANT_HOME=c:\ant
                     JAVA_HOME=c:\jdk-1.5.0.05 
                     </codeblock>
-            <p>If you use Linux:</p>
+            <p>Linux:</p>
                <codeblock>
                    ANT_HOME=/usr/local/ant
                    AVA_HOME=/usr/local/jdk-1.5.0.05
                </codeblock>
-            <p>Ensure that your PATH includes ANT_HOME\bin. For example:</p>
+            <p>Ensure that your PATH includes ANT_HOME\bin.</p>
              <p> You also need to set up the SPFE environment variable SPFEOT_HOME and include it in your path. For example:</p>
             <ul>
                 <li>
-                    <p>Windows: If you installed SPFE in C:\Users\youname\Documents:  
+                    <p>Windows: If you installed SPFE in C:\Users\yourname\Documents:  
                     <code>SPFEOT_HOME=C:\Users\yourname\Documents\spfe\spfe-ot</code>
                     </p>
                 </li>
@@ -81,26 +86,27 @@
         </section>
         <section>
             <title>Building the SPFE documentation</title>
-            <p> In the SPFEOT_HOME directory, you need to ensure that the file <bold>spfe</bold> 
+            <p> In the SPFEOT_HOME directory, you need to ensure that the file <file-name>spfe</file-name> 
                 uses the correct script for the operating system. By default, it uses the
-                script for Linux (spfe.sh). If you use Windows, edit the spfe file and change the
-                first line to <code>spfe.bat</code>.</p>
+                script for Linux (<file-name>spfe.sh</file-name>). If you use Windows, edit the file <file-name>spfe</file-name> and change the
+                first line to <file-name>spfe.bat</file-name>.</p>
             <p> To verify that you set up the build environment correctly, build the SPFE HTML
                 documentation.</p>
                 <ol>
-                <li>
-                    <p>Open a terminal window and change to the directory
-                    <directory-name>&lt;spfe-installation path>/spfe-docs/build</directory-name>.</p></li>
-                <li>
-                    <p>Type: <code>spfe spfe-docs-config.xml draft</code>.</p>
-                </li>
+                    <li>
+                        <p>Open a terminal window and change to the directory
+                        <directory-name>&lt;spfe-installation path>/spfe-docs/build</directory-name>.</p></li>
+                    <li>
+                        <p>Type: <code>spfe spfe-docs-config.xml draft</code>.</p>
+                    </li>
                 </ol>
-                <p>The build system creates a directory <bold>spfebuild</bold> in your home
+                <p>The build system creates a directory <directory-name>spfebuild</directory-name> in your home
                 directory. For example, in Windows the directory
                 <code>C:\Users\yourname\spfebuild\spfe-docs\output</code> contains the HTML files
-                for the SPFE docs. Open the file <code>spfebuild\spfe-docs\output\index.html</code>
+                for the SPFE docs. Open the file <file-name>spfebuild\spfe-docs\output\index.html</file-name>
                 in any standard browser. If you can view the SPFE Documentation in your browser, you
                 have successfully set up your build environment and built the SPFE documents.</p>
+            <p>As a next step, you might want to read about how the <feature>build system</feature> works.</p>
         </section>
     </body>
 </generic-topic>

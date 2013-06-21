@@ -17,15 +17,27 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <comment>New topic</comment>
                 <new-status>Not started</new-status>
             </revision>
+            <revision>
+                <date>2013-06-14</date>
+                <author>jkeffer</author>
+                <comment>Initial content</comment>
+                <new-status>In progress</new-status>
+            </revision>
+            <revision>
+                <date>2013-06-21</date>
+                <author>jkeffer</author>
+                <comment>Update content</comment>
+                <new-status>In progress</new-status>
+            </revision>
         </history>
         <index>
             <entry>
                 <type>feature</type>
-                <term>doc-set</term>
+                <term>document set</term>
             </entry>
             <entry>
                 <type>task</type>
-                <term>add a doc-set</term>
+                <term>add a document set</term>
             </entry>
             <entry>
                 <type>xpath</type>
@@ -45,12 +57,12 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                     <p>You need a doc-set to group related topic-sets into a single document.</p>
                 </planning-question-body>
                 <how-to-answer-body>
-                    <p>While you can put all your topics into a single <feature>topic-set</feature>, if you use a doc-set with mulitple topic-sets, you can present and group your topic-sets in a specific order in the document output.</p>
+                    <p>While you can put all your topics into a single <feature>topic set</feature>, if you use a doc-set with muli\tiple topic-sets, you can present your topic-sets in a specific order in the document output.</p>
                 </how-to-answer-body>
             </planning-question>
        </planning>
         <doing>        
-            <p>A doc-set is specified in the <feature>SPFE configuration file</feature> used to build the documents. The you cannot define a doc-set in a separate file and use an include element to incorporate it. A doc-set must have at least one topic-set. A doc-set has the following mandatory elements:
+            <p>A doc-set is specified in the <feature>SPFE configuration file</feature> used to build the documents. You cannot define a doc-set in a separate file and use an include element to incorporate it. A doc-set must have at least one topic-set.You need the following mandatory elements:
             </p>
             <ul>
                 <li>
