@@ -74,33 +74,98 @@ head>history>revision
     display:table-row;
 }
 
+head>history>revision:first-child>date:before
+{
+    content:"Date";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:silver;
+}
+
 head>history>revision>date
 {
     display:table-column;
-    border: 1px solid silver;
+    border-bottom: 1px solid silver;
+    border-left: 1px solid silver;
     -oxy-show-placeholder: always;
     -oxy-placeholder-content: "YYYY-MM-DD";
+}
+
+head>history>revision>date {
+    content:
+        oxy_datePicker(
+            columns, 16, 
+            edit, "#text",
+            format, "yyyy-MM-dd");
+    visibility: -oxy-collapse-text;
+}
+
+head>history>revision:first-child>author:before
+{
+    content:"Author";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:silver;
 }
 
 head>history>revision>author
 {
     display:table-column;
-    border: 1px solid silver;
+    border-bottom: 1px solid silver;
+    border-left: 1px solid silver;
     -oxy-show-placeholder: always;
+}
+
+head>history>revision:first-child>comment:before
+{
+    content:"Comment";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:silver;
+
 }
 
 head>history>revision>comment
 {
     display:table-column;
-    border: 1px solid silver;
+    border-bottom: 1px solid silver;
+    border-left: 1px solid silver;
     -oxy-show-placeholder: always;
+}
+
+
+head>history>revision:first-child>new-status:before
+{
+    content:"Status";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:silver;
 }
 
 head>history>revision>new-status
 {
     display:table-column;
-    border: 1px solid silver;
+    border-bottom: 1px solid silver;
+    border-left: 1px solid silver;
     -oxy-show-placeholder: always;
+}
+
+head>history>revision>new-status
+{
+     visibility:-oxy-collapse-text;
+     content: 
+        oxy_editor(
+            type, combo, 
+            edit, "#text", 
+            editable, false);
 }
 
 head>index 
@@ -124,14 +189,43 @@ head>index>entry
     display:table-row;
 }
 
+head>index>entry:first-child>type:before
+{
+    content:"Subject-affinity type";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:silver;
+}
+
 head>index>entry>type
 {
     display:table-column;
     border-bottom: 1px solid silver;
+    border-left: 1px solid silver;
 }
-
+head>index>entry>type
+{
+     visibility:-oxy-collapse-text;
+     content: 
+        oxy_editor(
+            type, combo, 
+            edit, "#text", 
+            editable, false);
+}
+head>index>entry:first-child>term:before
+{
+    content:"Subject-affinity text. If a phrase, use {...} to surround important words";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:silver;
+}
 head>index>entry>term
 {
     display:table-column;
     border-bottom: 1px solid silver;
+    border-left: 1px solid silver;
 }
