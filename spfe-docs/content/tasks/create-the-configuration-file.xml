@@ -35,13 +35,13 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
     <body>
         <title>Creating the SPFE configuration file</title>  
         <understanding>
-            <p></p>
+            <p>The elements in the main SPFE configuration file define the content of the documentation set and the scripts to process the content.</p>
        </understanding>
        <planning>
            <planning-question>
                 <planning-question-title>Where do I start?</planning-question-title>
                 <planning-question-body>
-                    <p>To get started with the SPFE</p>
+                    <p>To get started with the SPFE build system</p>
                 </planning-question-body>
                 <how-to-answer-body>
                     <p></p>

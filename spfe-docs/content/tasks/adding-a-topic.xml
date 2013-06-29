@@ -35,7 +35,7 @@
         <index>
             <entry>
                 <type>feature</type>
-                <term>new topic</term>
+                <term>topic</term>
             </entry>
             <entry>
                 <type>task</type>
@@ -46,46 +46,38 @@
     <body>
         <title>Adding a new topic</title>
         <understanding>
-            <p>A topic is a web page or a section in a print document. A topic must belong to a topic set and use the schema associated with the topic set. A topic appears under the
-                topic set folder in an HTML document or as an entry in a print document's table of
-                contents. It is not possible to present topics in a specific order within a topic set.</p>
+            <p>For a topic to appear in a documentation set, a <feature>topic set</feature> must
+                include it. A topic appears under a topic set in the table of contents. .</p>
        </understanding>
        <planning>
            <planning-question>
-               <planning-question-title>What do I need before adding a new topic?</planning-question-title>
+               <planning-question-title>What do I need to add a new topic?</planning-question-title>
                 <planning-question-body>
                    <p>Before you add a topic, you must decide what schema to use.</p>
                 </planning-question-body>
                 <how-to-answer-body>
-                    <ul>
-                        <li>
-                            <p>You can use an existing schema and an existing topic set that uses the schema.</p>
-                        </li>
-                        <li>
-                            <p>If your topic uses a new schema or a schema that does not have an associated topic set, you must first <task>add a topic set</task>.
-                            </p>
-                        </li>
-                    </ul>
+                    <p>You can use an existing schema and an existing <feature>topic set</feature> that uses
+                                the schema can include your topic. If your topic uses a new schema or a schema that does
+                                not have an associated topic set, it will not appear in a
+                                documentation set until a topic set includes it.
+                    </p>
                 </how-to-answer-body>
             </planning-question>
        </planning>
 <doing>
     <p>To add a new topic, create a file for your topic that includes the content that follows the
-                schema you selected. To add the topic to a topic set, do one of the following:</p>
-            <ul>
-                <li>
-                    <p>Store your topic source file in a directory that is already included
-                        in the topic set configuration file. The build system automatically adds the topic
-                        to the document under the topic set folder..</p>
-                </li>
-                <li>
-                    <p>Store your topic file in a new directory and add the directory path to the
+                schema you selected. A topic set includes a topic file based on the attribues of the
+                <xml-element-name>sources</xml-element-name> element.</p>
+                    <p>If you store your topic source file in a directory that is already included
+                        in the topic set configuration file, the build system automatically includes
+                        the topic in the topic set and it appears under the topic set in the table
+                        of contents.</p>
+
+                    <p>If you store your topic file in a new directory, the new directory path must be added to the
                         <xml-element-name>sources</xml-element-name> element of the topic set
-                        configuration. file.</p>
-                </li>
-            </ul>
-    <p>When you build your documents, if your topic appears in the document under the correct topic
-                set and contains the correct content, you have successfully added a topic to the document.</p>
+                        configuration file.</p>
+    <p>When you build your documents, if your topic appears in the documentation set under the correct topic
+                set in the table of contents and contains the correct content, you have successfully added a topic to the documentation set.</p>
         </doing>
     </body>
 </generic-task-topic>

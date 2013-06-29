@@ -106,7 +106,6 @@
                 for the SPFE docs. Open the file <file-name>spfebuild\spfe-docs\output\index.html</file-name>
                 in any standard browser. If you can view the SPFE Documentation in your browser, you
                 have successfully set up your build environment and built the SPFE documents.</p>
-            <p>As a next step, you might want to read about how the <feature>build system</feature> works.</p>
         </section>
     </body>
 </generic-topic>
