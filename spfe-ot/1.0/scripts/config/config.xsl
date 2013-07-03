@@ -501,8 +501,13 @@
                 <build-command><xsl:value-of select="$SPFE_BUILD_COMMAND"/></build-command>
                 <user-home><xsl:value-of select="translate($HOME, '\', '/')"/></user-home>
                 <spfeot-home><xsl:value-of select="translate($SPFEOT_HOME, '\', '/')"/></spfeot-home>
-                <xsl:copy-of select="$config/relative-to-list" copy-namespaces="no"/>
-                <xsl:copy-of select="$config/topic-type-aliases" copy-namespaces="no"/>
+                <relative-to-list>
+                    <xsl:copy-of select="$config/relative-to-list/*" copy-namespaces="no"/>  
+                </relative-to-list>
+                <topic-type-aliases>
+                    <xsl:copy-of select="$config/topic-type-aliases/*" copy-namespaces="no"/>
+                </topic-type-aliases>
+                
                 <xsl:copy-of select="($config/topic-set-id)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/topic-set-type)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/topic-type-order)[1]" copy-namespaces="no"/>
