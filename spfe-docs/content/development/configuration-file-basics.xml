@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<?xml-stylesheet type="text/css" href="../../style/authoring/spfe-docs.css"?>
+<generic-topic xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic
+http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
+
+    <head>
+        <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/configuration-file-basics.xml</uri>
+        <author>jkeffer</author>
+        <status>In progress</status>
+        <history>
+            <revision>
+                <date>2012-03-22</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <new-status>Not started</new-status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>configuration file</term>
+            </entry>
+            <entry>
+                <type>xpath</type>
+                <term>/spfe</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Configuration file basics</title>
+   
+        <p>The SPFE configuration file is the core of the SPFE
+            <xfeature>build system</xfeature>. It defines the XML elements that
+            specify the content to include in the documentation set and the scripts to generate the
+            output. You can define a single configuration file for the documentation set; however,
+            unless you have a very simple documentation set, it is usually best to divide the
+            configuration elements into different files and use an
+            <xml-element-name>include</xml-element-name> element to import other configuration
+            files. This enables you to maximize reuse and modularity. The set of configuration files
+            makes up the complete set of elements that the build system needs to build the
+            documentation set.</p>
+        <p>SPFE provides the <file-name>spfe-config.xsd</file-name> schema. You can define your own
+            schema, which may include the spfe-config schema and you can add elements that are
+            specific to your documentation set. Each configuration file used to build the
+            documentation set must follow the same schema.</p>
+        <p>Items that apply to the entire documentation set should be specified in the main
+            configuration file (the file specified as a parameter when you run the <tool-name>spfe</tool-name>
+            build tool). You can override the value of elements as needed in other configuration
+            files.</p>
+        <p>The following elements must be defined in the main configuration file: </p>
+        <ul>
+            <li>
+                <p><xml-element-name>spfe</xml-element-name>: The root element of the configuration
+                    file; each configuration file must specify this element</p>
+            </li>
+            <li>
+                <p><xml-element-name>doc-set</xml-element-name>: If you use a <feature>documentation
+                        set</feature>, you must define the elements here</p>
+            </li>
+            <li>
+                <p/>
+            </li>
+        </ul>
+        <p>The following elements are good candidates to specify in the main configuration file:</p>
+        <ul>
+            <li>
+                <p><xml-element-name>topic-type-alias</xml-element-name>: If you want to specify a
+                    user-friendly name for a topic schema and you have multiple topic sets for a topic schema, it is a good idea to define this element in the main configuration file.</p>
+            </li>
+        </ul>
+    </body>
+</generic-topic>

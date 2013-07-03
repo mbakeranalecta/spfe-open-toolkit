@@ -22,14 +22,8 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
         <index>
             <entry>
                 <type>task</type>
-                <term>customize build system</term>
+                <term>{customize} {build} system</term>
             </entry>
-            <!--
-            <entry>
-                <type>task</type>
-                <term>{customize} {build}</term>
-            </entry>
-            -->
             <entry>
                 <type>xpath</type>
                 <term>/spfe</term>

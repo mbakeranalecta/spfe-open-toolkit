@@ -28,15 +28,21 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <comment>Update content</comment>
                 <new-status>In progress</new-status>
             </revision>
+            <revision>
+                <date>2013-07-02</date>
+                <author>jkeffer</author>
+                <comment>Update content</comment>
+                <new-status>Ready for technical review</new-status>
+            </revision>
         </history>
         <index>
             <entry>
                 <type>feature</type>
-                <term>document set</term>
+                <term>{documentation set}</term>
             </entry>
             <entry>
                 <type>task</type>
-                <term>{add} a {document set}</term>
+                <term>{add} a {documentation set}</term>
             </entry>
             <entry>
                 <type>xpath</type>
@@ -48,7 +54,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
         <title>Adding a new documentation set</title>
         <understanding>
             <p>A documentation set (<xml-element-name>doc-set</xml-element-name>) is a collection of
-                one or more related topic sets. The topic sets in the documentation set can use
+                one or more related topic sets, each of which can use
                 different schemas.</p>
        </understanding>
        <planning>
@@ -61,45 +67,43 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <how-to-answer-body>
                     <p>It is not necessary to create a collection of topic sets; you can put all
                         your topics into a single <feature>topic set</feature>. However, if you use
-                        a documentation set with multiple topic sets, you can present your topic
-                        sets in a specific order in the table of contents in the output. A
-                        documentation set also enables you to reuse topic sets in different
-                        documentation sets.</p>
+                        a documentation set, you can present multiple topic sets in a specific order
+                        in the table of contents in the output. A documentation set also enables you
+                        to reuse topic sets in different documentation sets.</p>
                 </how-to-answer-body>
             </planning-question>
        </planning>
         <doing>        
             <p>To add a documentation set, you define the
-                <xml-element-name>doc-set</xml-element-name> in the <feature>SPFE configuration
-                    file</feature> used to build the documents. A documentation set must have at
-                least one topic set. You cannot define a doc-set in a separate file and use an
-                include element to incorporate it. You can only define one
-                <xml-element-name>doc-set</xml-element-name> in the SPFE configuration file. If you
-                include more than one definition, either in the SPFE configuration file or in an
-                include file, the build system ignores the subsequent definitions. You need the
-                following mandatory elements: </p>
+                <xml-element-name>doc-set</xml-element-name> element in the SPFE
+                    <feature>configuration file</feature> used to build the documents; you cannot
+                include a doc-set definition in a separate file. You can only define one doc-set;
+                the build system ignores the subsequent definitions. A documentation set must have
+                at least one topic set. You need the following mandatory attributes and elements: </p>
             <ul>
                 <li>
-                    <p><xml-attribute-name>id</xml-attribute-name>: The name of the document set; it
-                        should be a valid directory name for the operating system, as it is used as
-                        a subdirectory name under the <xml-element-name>build</xml-element-name>
-                        directory</p>
+                    <p><xml-attribute-name>/spfe/doc-set/@id</xml-attribute-name>: The name of the
+                        document set. The build system uses the value to create a subdirectory name
+                        under the <xml-element-name>/spfe/build</xml-element-name> directory and it
+                        must be a valid directory name in the operating system that runs the build
+                        system. </p>
                 </li>
                 <li>
-                    <p><xml-element-name>title</xml-element-name>: The title of the document set to display in the output</p>
+                    <p><xml-element-name>/spfe/doc-set/title</xml-element-name>: The title of the
+                        documentation set to display in the output</p>
                 </li>
                 <li>
-                    <p><xml-element-name>topic-set-type-order</xml-element-name>: The order in which
-                        the topic sets are shown in the table of contents of the documentation
-                        set</p>
+                    <p><xml-element-name>/spfe/doc-set/topic-set-type-order</xml-element-name>: The
+                        order in which the topic sets are shown in the table of contents of the
+                        documentation set</p>
                 </li>
                 <li>
-                    <p><xml-element-name>topic-sets</xml-element-name>: The list of the
-                        configuration files of the topic sets to include in the doc set; the value
-                        of the <xml-attribute-name>id</xml-attribute-name> attribute should normally
-                        match the <xml-element-name>topic-set-id</xml-element-name> in the topic set
-                        configuration file; the <xml-attribute-name>href</xml-attribute-name>
-                        attribute is the path and file name of the topic set configuration file </p>
+                    <p><xml-element-name>/spfe/doc-set/topic-sets</xml-element-name>: The list of
+                        the topic sets to include in the documentation set; the value of the
+                        <xml-attribute-name>id</xml-attribute-name> attribute should match the
+                        <xml-element-name>topic-set-id</xml-element-name> the for the topic set and
+                        the <xml-attribute-name>href</xml-attribute-name> attribute is the path and
+                        file name of the topic set configuration file</p>
                 </li>    
             </ul>
             <p>The following shows the doc-set definition for the SPFE documentation set:</p>
@@ -123,15 +127,20 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                     </topic-set>
                 </doc-set>]]>
             </codeblock>
-            <p>You can see that this documentation set includes three topic sets, each with their own
-                configuration file, which is specified by the
-                <xml-attribute-name>href</xml-attribute-name> attribute of the
-                <xml-element-name>topic-set</xml-element-name> element.</p>
-            <p>To add an index topic to introduce the documentation set, you need a <feature>topic
-                    set</feature> that includes an index page.</p>
-            <p>When you run the build command using the configuration file where the document set is
-                defined, if you see the topic sets in the table of contents in the output, you have
-                successfully added a document set.</p>
+            <p>This documentation set includes three topic sets, each with their own configuration
+                file, which is specified by the <xml-attribute-name>href</xml-attribute-name>
+                attribute of the
+                <xml-element-name>/spfe/doc-set/topic-sets/topic-set</xml-element-name> element.
+                Each topic set configuration file contains a
+                <xml-element-name>/spfe/topic-set-type</xml-element-name> element that matches one
+                of the values in the
+                <xml-element-name>/spfe/doc-set/topic-set-type-order</xml-element-name> element.</p>
+            <p>To add an index page to introduce the documentation set, you need to <task>add a
+                    topic set</task> that includes an index topic.</p>
+            <p>Run the <tool-name>spfe</tool-name> build script and specify the configuration file
+                that contains the <xml-element-name>doc-set </xml-element-name> element as the first
+                parameter. If you see the topic sets in the table of contents of your documentation
+                set, you have successfully added a documentation set.</p>
         </doing>
     </body>
 </generic-task-topic>
