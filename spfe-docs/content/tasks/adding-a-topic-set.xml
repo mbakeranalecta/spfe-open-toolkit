@@ -117,7 +117,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                Key elements:
                <xml-element-name>/spfe/topic-set-id</xml-element-name>, 
                <xml-element-name>string</xml-element-name> - name that appears in the TOC
-               <xml-element-name>default-topic-scope</xml-element-name>, <xml-element-name>default-mention-scope</xml-element-name>
+               <xml-element-name>default-topic-scope</xml-element-name>, <xml-element-name>default-subject-affinity-scope</xml-element-name>
            </p>
             <p>When you build your documents, if your topic set appears in the table of contents in the order you specified by using the topic-set-type, you have successfully added your topic set.</p>   
        </doing>

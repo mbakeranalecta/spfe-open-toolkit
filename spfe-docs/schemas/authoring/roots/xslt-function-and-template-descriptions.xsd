@@ -62,19 +62,19 @@
     <xs:group name="p-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>
-            <xs:group ref="mentions"/>
+            <xs:group ref="subject-affinities"/>
             <xs:group ref="resources"/>
             <xs:group ref="substitutions"/>
         </xs:choice>
     </xs:group>
 
 
-    <xs:group name="mentions">
+    <xs:group name="subject-affinities">
         <xs:choice>
-            <xs:group ref="mentions-xml"/>
-            <xs:group ref="mentions-xslt"/>
-            <xs:group ref="mentions-general"/>
-            <xs:group ref="mentions-spfe-build"/>
+            <xs:group ref="subject-affinities-xml"/>
+            <xs:group ref="subject-affinities-xslt"/>
+            <xs:group ref="subject-affinities-general"/>
+            <xs:group ref="subject-affinities-spfe-build"/>
         </xs:choice>
     </xs:group>
 

@@ -372,9 +372,9 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/default-mention-scope</xpath>
+            <xpath>/spfe/default-subject-affinity-scope</xpath>
             <description>
-                <p>Specifies the <feature>mention scope</feature> tokens to be applied to all mentions in all topics in the build by default. Effectively, specifying this setting applies scope to mentions that do not specify a scope. Mentions that declare their own scope are not affected by this setting.</p>
+                <p>Specifies the <feature>subject-affinity scope</feature> tokens to be applied to all subject-affinities in all topics in the build by default. Effectively, specifying this setting applies scope to subject-affinities that do not specify a scope. Subject affinities that declare their own scope are not affected by this setting.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -633,7 +633,7 @@
         <element-description>
             <xpath>/spfe/scripts/link-catalog</xpath>
             <description>
-                <p>Container element for a list of link-catalog scripts. The link-catalog step is considered to be a sub step of the presentation process. In most cases, however, the link catalog build will be run separately from the full doc build. This is to allow you to build all the link catalogs for all the topic sets in the documentation set, so that topics can link to topics in other topic sets by reading the entire collection of link catalogs to resolve mentions.</p>
+                <p>Container element for a list of link-catalog scripts. The link-catalog step is considered to be a sub step of the presentation process. In most cases, however, the link catalog build will be run separately from the full doc build. This is to allow you to build all the link catalogs for all the topic sets in the documentation set, so that topics can link to topics in other topic sets by reading the entire collection of link catalogs to resolve subject-affinities.</p>
             </description>
             <build-property/>
             <include-behavior/>

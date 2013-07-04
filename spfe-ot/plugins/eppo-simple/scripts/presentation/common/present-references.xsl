@@ -464,7 +464,7 @@
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="sf:mention-not-resolved">
+				<xsl:call-template name="sf:subject-affinity-not-resolved">
 					<xsl:with-param name="message" select="'Term  &quot;', $term, '&quot; not resolved.'"/> 
 				</xsl:call-template>
 				<xsl:apply-templates/>
@@ -562,7 +562,7 @@
 		</xlink>	
 	</xsl:template>
 
-	<xsl:template match="*:mention">
+	<xsl:template match="*:subject-affinity">
 		<xsl:variable name="content" select="normalize-space(.)"/>
 			<xsl:choose>
 				<xsl:when test="esf:target-exists(@key, @type, @scope)">
@@ -574,7 +574,7 @@
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:call-template name="sf:mention-not-resolved">
+					<xsl:call-template name="sf:subject-affinity-not-resolved">
 						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved.')"/>
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
@@ -595,7 +595,7 @@
 		<xsl:if test="not(@key)">
 			<xsl:call-template name="sf:warning">
 				<xsl:with-param name="message" 
-					select="'&quot;name&quot; mention element found with no &quot;key&quot; attribute:', . "/>
+					select="'&quot;name&quot; subject-affinity element found with no &quot;key&quot; attribute:', . "/>
 				
 			</xsl:call-template>
 		</xsl:if>
@@ -611,7 +611,7 @@
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:call-template name="sf:mention-not-resolved">
+					<xsl:call-template name="sf:subject-affinity-not-resolved">
 						<xsl:with-param name="message" select="concat(@type, ' name &quot;', (if (@key) then @key else .), '&quot; not resolved.')"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
@@ -716,7 +716,7 @@
 				<xsl:variable name="not-resolved-message">
 					<xsl:value-of select="$type"/> string not found: <xsl:value-of select="$target"/>.
 				</xsl:variable>
-				<xsl:call-template name="sf:mention-not-resolved">
+				<xsl:call-template name="sf:subject-affinity-not-resolved">
 					<xsl:with-param name="message">
 						<xsl:value-of select="$type"/> string not found: &quot;<xsl:value-of select="$target"/>&quot;.
 					</xsl:with-param>
@@ -775,6 +775,6 @@
 		</xsl:analyze-string>
 	</xsl:function>
 				
-	<!-- FIXME: Targets to absorb fields from the synthesis wrapper. Proper fix is to put all the refernceces into the EPPO simple namespace to avoid *: matches, which are always susceptible to matching other things. Might also consider writing the mentions p//mention, but this has implications for any use of mention markup outside paragraphs. When this is fixed, remove the ss namespace declaration from the stylesheet element. -->
+	<!-- FIXME: Targets to absorb fields from the synthesis wrapper. Proper fix is to put all the refernceces into the EPPO simple namespace to avoid *: matches, which are always susceptible to matching other things. Might also consider writing the subject-affinities p//subject-affinity, but this has implications for any use of subject-affinity markup outside paragraphs. When this is fixed, remove the ss namespace declaration from the stylesheet element. -->
 	<xsl:template match="ss:*"/>
 </xsl:stylesheet>

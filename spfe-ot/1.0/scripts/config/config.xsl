@@ -501,11 +501,10 @@
                 <build-command><xsl:value-of select="$SPFE_BUILD_COMMAND"/></build-command>
                 <user-home><xsl:value-of select="translate($HOME, '\', '/')"/></user-home>
                 <spfeot-home><xsl:value-of select="translate($SPFEOT_HOME, '\', '/')"/></spfeot-home>
-                <relative-to-list>
-                    <xsl:copy-of select="$config/relative-to-list/*" copy-namespaces="no"/>  
-                </relative-to-list>
                 <topic-type-aliases>
-                    <xsl:copy-of select="$config/topic-type-aliases/*" copy-namespaces="no"/>
+                    <xsl:for-each-group select="$config/topic-type-aliases/topic-type" group-by="id">
+                        <xsl:copy-of select="current-group()[1]"  copy-namespaces="no"/>
+                    </xsl:for-each-group>
                 </topic-type-aliases>
 
                 <xsl:copy-of select="($config/topic-set-id)[1]" copy-namespaces="no"/>
@@ -514,7 +513,7 @@
                 <xsl:copy-of select="($config/messages)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/condition-tokens)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/default-topic-scope)[1]" copy-namespaces="no"/>
-                <xsl:copy-of select="($config/default-mention-scope)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/default-subject-affinity-scope)[1]" copy-namespaces="no"/>
                 <build>
                     <output-directory>
                         <xsl:attribute name="base-uri" select="base-uri(.)"/>
@@ -543,7 +542,6 @@
                 <xsl:copy-of select="($config/doc-set)[1]" copy-namespaces="no"/>    
                 
                 <strings>
-                    
                     <xsl:for-each-group select="$config/strings/string" group-by="@id">
                         <xsl:copy-of select="current-group()[1]"  copy-namespaces="no"/>
                     </xsl:for-each-group>

@@ -10,7 +10,7 @@
 						<xs:element name="entry" maxOccurs="unbounded" minOccurs="1">
 							<xs:complexType>
 								<xs:sequence minOccurs="1" maxOccurs="1">
-									<xs:element name="type" type="mentions-type" maxOccurs="1"
+									<xs:element name="type" type="subject-affinities-type" maxOccurs="1"
 										minOccurs="1"/>
 									<xs:element name="term" type="xs:string" minOccurs="1"/>
 								</xs:sequence>

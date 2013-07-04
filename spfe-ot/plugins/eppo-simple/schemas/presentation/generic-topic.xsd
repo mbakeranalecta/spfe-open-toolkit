@@ -8,7 +8,7 @@
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/presentation/modules/text-general.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/conditions.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/text-decoration.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/presentation/modules/mentions.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/presentation/modules/subject-affinities.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/modules/resources.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/basic/authoring/roots/generic-topic.xsd"/>
 

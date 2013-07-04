@@ -61,11 +61,11 @@
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template name="sf:mention-not-resolved">
+	<xsl:template name="sf:subject-affinity-not-resolved">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='warning'">
 			<xsl:message>
-				<xsl:text>Mention not resolved: </xsl:text>
+				<xsl:text>subject-affinity not resolved: </xsl:text>
 				<xsl:sequence select="$message"/>
 			</xsl:message>
 		</xsl:if>
