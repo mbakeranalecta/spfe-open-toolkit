@@ -80,17 +80,18 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
        <doing>        
            <p>Normally, you define the elements specific to your topic set in a separate
                 configuration file and include the main configuration file. This enables you to
-                import common values and override the elements that are specific to your topic set.
-                If you use a separate configuration file, you must include the
-                <xml-element-name>spfe</xml-element-name> element. </p>
+                import common values and override the elements that are specific to your topic set,
+                which maximizes reuse. If you use a separate configuration file, you must include
+                the <xml-element-name>spfe</xml-element-name> element. </p>
            <p>You need the following elements for a topic set: </p>
            <ul>
                <li>
                    <p><xml-element-name>/spfe/topic-set-id</xml-element-name>: A unqiue value that
                         identifies the topic set. The build system uses the value to create file
                         names and it must be a valid file name in the operating system that runs the
-                        build system. If you define a topic-set-id, the output for the topic set is
-                        stored in a subdirectory with the same name under
+                        build system. If you define a
+                        <xml-element-name>/spfe/topic-set-id</xml-element-name>, the output for the
+                        topic set is stored in a subdirectory with the same name under
                         the<xml-element-name>/spfe/build/build-directory</xml-element-name>.</p>
                </li>
                <li>
@@ -108,46 +109,49 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                         this element is optional, without it, the topic set has no content.</p>
                </li>
                <li>
-                   <p><xml-element-name>/spfe/default-topic-scope</xml-element-name></p>
-               </li>
-               <li>
-                   <p><xml-element-name>default-mention-scope</xml-element-name></p>
-               </li>
-               <li>
                    <p><xml-element-name>/spfe/output-format</xml-element-name>: The document formats
-                        that you want the build system to create</p>
+                        that you want the build system to create for this topic-set.</p>
                </li>
                <li>
                    <p><xml-element-name>/spfe/build/build-rules</xml-element-name>: The name of the
-                        ANT build rules file that specifies which build script files are called and
-                        the order in which to run the scripts.</p>
+                        ANT build rules file uses the elements in the configuration files to specify
+                        which build script files are called and the order in which to run the
+                        scripts. Each topic set can use a different rules file.</p>
                </li>
                <li>
                     <p><xml-element-name>/spfe/build/build-directory</xml-element-name>: Directory
                         location used to store temporary files and the output generated during the
-                        build process</p>
+                        build process. If none of the configuration files specify this element, the
+                        build system appends the value of
+                        <xml-attribute-name>/spfe/doc-set/@id</xml-attribute-name> to the value of
+                        the SPFE_BUILD_DIR environment variable.</p>
                 </li>
                 <li>
                     <p><xml-element-name>/spfe/build/output-directory</xml-element-name>: Path to
-                        the folder that</p>
+                        the folder that contains the output files for the topic-set. If you do not
+                        specify a value, the default EPPO build scripts fail.  </p>
                 </li>
                <li>
-                   <p><xml-element-name>/spfe/deployment/output-path</xml-element-name>: The path to the folder that contains the document output. The build system appends the value of this element to <xml-element-name>/spfe/build/output-directory.</xml-element-name></p>
+                   <p><xml-element-name>/spfe/deployment/output-path</xml-element-name>: The path to
+                        the folder that contains the document output. The build system appends the
+                        value of this element to
+                        <xml-element-name>/spfe/build/output-directory</xml-element-name>. If you do
+                        not specify a value for this element,  the directory
+                        <xml-element-name>/spfe/build/output-directory</xml-element-name> contains
+                        the topic set output files. If topic sets have topic files with the same
+                        name (for example, index.html), the files are overwritten. It is a good
+                        practice to use a separate directory for the output of each topic set.</p>
                </li>
                <li>
                    <p><xml-element-name>/spfe/scripts</xml-element-name>: The list of scripts to
                         process the topic set. If you use an existing schema, you can reuse the
-                        existing scripts.</p>
+                        existing scripts. If you specify scripts that all topic-sets use in the main
+                        configuration file, you only need to specify topic set specific scripts
+                        here.</p>
                </li>
            </ul>
            <p>If you want content at the top level folder, you need an index topic.</p>
-           <codeblock>
-                       <![CDATA[<define name="TOPIC_SET_ID" value="spfe-development-tasks"/>
-                       <topic-set-id>${TOPIC_SET_ID}</topic-set-id>]]>
-                   </codeblock>
-           <p><xml-element-name>string</xml-element-name> - name that appears in the TOC
-           </p>
-            <p>When you build the documentation set that includes your topic-set, if your topic set
+            <p>When you build the documentation set that includes your topic set, if your topic set
                 appears in the table of contents in the order you specified, you have successfully
                 added your topic set to the document.</p>   
        </doing>

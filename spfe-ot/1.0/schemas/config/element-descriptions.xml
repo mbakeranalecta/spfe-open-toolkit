@@ -562,7 +562,7 @@
         <element-description>
             <xpath>/spfe/build/build-directory</xpath>
             <description>
-                <p>Specifies the build directory.</p>
+                <p>Specifies the build directory. The default is the value of <spfe-config-element-name>/spfe/doc-set element</spfe-config-element-name>.</p>
             </description>
             <build-property>spfe.directories.build</build-property>
             <include-behavior>
@@ -822,13 +822,13 @@
                 <attribute>
                     <name>id</name>
                     <description>
-                        <p>An ID for the topic set. This value is used as the name of a directory containing the documentation set build inside the build directory.</p>
+                        <p>An ID for the documentation set. This value is used as the name of a directory containing the documentation set build inside the build directory.</p>
                     </description>
                 </attribute>
             </attributes>
         </element-description>
 
-        <element-description>
+        <element-description>        
             <xpath>/spfe/doc-set/title</xpath>
             <description>
                 <p>The title of the documentation set.</p>
@@ -847,7 +847,7 @@
         <element-description>
             <xpath>/spfe/doc-set/topic-sets/topic-set/id</xpath>
             <description>
-                <p>The topic set id of the included <feature>topic set</feature>, as defined in that topic set's configuration file in the <spfe-config-element-name>/spfe/topic-set-id</spfe-config-element-name> element. </p>
+                <p>The topic set id of the included <feature>topic set</feature>, it should normally match the <spfe-config-element-name>/spfe/topic-set-id</spfe-config-element-name> element in the topic set's configuration file. It is also used to form file names and should be a valid file name on all target operating systems.</p>
             </description>
             <build-property/>
             <include-behavior/>

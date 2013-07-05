@@ -83,27 +83,27 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
             <ul>
                 <li>
                     <p><xml-attribute-name>/spfe/doc-set/@id</xml-attribute-name>: The name of the
-                        document set. The build system uses the value to create a subdirectory name
-                        under the <xml-element-name>/spfe/build</xml-element-name> directory and it
-                        must be a valid directory name in the operating system that runs the build
-                        system. </p>
+                        documentation set. The build system uses the value to create a subdirectory
+                        name under the <xml-element-name>/spfe/build</xml-element-name> directory
+                        and it must be a valid directory name in the operating system that runs the
+                        build system. </p>
                 </li>
                 <li>
                     <p><xml-element-name>/spfe/doc-set/title</xml-element-name>: The title of the
-                        documentation set to display in the output</p>
+                        documentation set to display in the output.</p>
                 </li>
                 <li>
                     <p><xml-element-name>/spfe/doc-set/topic-set-type-order</xml-element-name>: The
-                        order in which the topic sets are shown in the table of contents of the
-                        documentation set</p>
+                        order in which you want to present the topic sets in the table of contents
+                        of the documentation set.</p>
                 </li>
                 <li>
                     <p><xml-element-name>/spfe/doc-set/topic-sets</xml-element-name>: The list of
-                        the topic sets to include in the documentation set; the value of the
+                        the topic sets to include in the documentation set. The value of the
                         <xml-attribute-name>id</xml-attribute-name> attribute should match the
-                        <xml-element-name>topic-set-id</xml-element-name> the for the topic set and
-                        the <xml-attribute-name>href</xml-attribute-name> attribute is the path and
-                        file name of the topic set configuration file</p>
+                        <xml-element-name>topic-set-id</xml-element-name> for the topic set and the
+                        <xml-attribute-name>href</xml-attribute-name> attribute is the path and file
+                        name of the topic set configuration file.</p>
                 </li>    
             </ul>
             <p>The following shows the doc-set definition for the SPFE documentation set:</p>
@@ -135,8 +135,8 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <xml-element-name>/spfe/topic-set-type</xml-element-name> element that matches one
                 of the values in the
                 <xml-element-name>/spfe/doc-set/topic-set-type-order</xml-element-name> element.</p>
-            <p>To add an index page to introduce the documentation set, you need to <task>add a
-                    topic set</task> that includes an index topic.</p>
+            <p>To add an index page to for the documentation set, you need to <task>add a topic
+                    set</task> that includes an index topic.</p>
             <p>Run the <tool-name>spfe</tool-name> build script and specify the configuration file
                 that contains the <xml-element-name>doc-set </xml-element-name> element as the first
                 parameter. If you see the topic sets in the table of contents of your documentation

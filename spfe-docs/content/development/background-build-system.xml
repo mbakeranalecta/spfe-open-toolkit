@@ -26,7 +26,7 @@
     <body>
         <title>How the build system works</title>
         <p>This is the background on how the build system works.</p>
-        <p>The build tool for a SPFE build is a shell script (UNIX) or batch file (Windows) called <tool-name>spfe</tool-name>. This script takes two parameters, a <feature>SPFE configuration file</feature> and a <feature>build command</feature>. It runs an XSLT script (<file-name>spfe-ot/scripts/config/config.xsl</file-name>), which reads the specified configuration file, resolves any inclusions, and create three outputs:</p>
+        <p>The build tool for a SPFE build is a shell script (UNIX) or batch file (Windows) called <tool-name>spfe</tool-name>. This script takes two parameters, a <feature>configuration file</feature> and a <feature>build command</feature>. It runs an XSLT script (<file-name>spfe-ot/scripts/config/config.xsl</file-name>), which reads the specified configuration file, resolves any inclusions, and create three outputs:</p>
         <ol>
             <li>
                 <p>A fully resolved configuration file (in which all includes have been processes and all defines have been expanded). This file is created in a /config directory under the build directory (which is given by the configuration setting <xml-element-name>/spfe/build/build-directory</xml-element-name>). This config file is passed to every script in the rest of the build process, making all the relevant configuration information available to all scripts. This allows the scripts to have a uniform interface, which reduces the need to <task>customize build rules</task> when writing your own scripts.</p>

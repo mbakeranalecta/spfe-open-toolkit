@@ -66,7 +66,8 @@
 <doing>
     <p>To add a new topic, create a file for your topic that includes the content that follows the
                 schema you selected. A topic set includes a topic file based on the attribues of the
-                <xml-element-name>/spfe/sources/topics</xml-element-name> element.</p>
+                <xml-element-name>/spfe/sources/topics</xml-element-name> element in the topic
+                configuration file.</p>
                     <p>If you store your topic source file in a directory that is already included
                         in the topic set configuration file, the build system automatically includes
                         the topic in the topic set and it appears under the topic set in the table

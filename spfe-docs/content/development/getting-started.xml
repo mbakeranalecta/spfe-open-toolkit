@@ -86,10 +86,12 @@
         </section>
         <section>
             <title>Building the SPFE documentation</title>
-            <p> In the SPFEOT_HOME directory, you need to ensure that the file <file-name>spfe</file-name> 
-                uses the correct script for the operating system. By default, it uses the
-                script for Linux (<file-name>spfe.sh</file-name>). If you use Windows, edit the file <file-name>spfe</file-name> and change the
-                first line to <file-name>spfe.bat</file-name>.</p>
+            <p> In the SPFEOT_HOME directory, you need to ensure that the
+                    <file-name>spfe</file-name> build tool file uses the correct script for the
+                operating system. By default, it uses the file  for Linux
+                    (<file-name>spfe.sh</file-name>). If you use Windows, edit the file
+                    <file-name>spfe</file-name> and change the first line to
+                    <file-name>spfe.bat</file-name>.</p>
             <p> To verify that you set up the build environment correctly, build the SPFE HTML
                 documentation.</p>
                 <ol>
@@ -100,12 +102,13 @@
                         <p>Type: <code>spfe spfe-docs-config.xml draft</code>.</p>
                     </li>
                 </ol>
-                <p>The build system creates a directory <directory-name>spfebuild</directory-name> in your home
-                directory. For example, in Windows the directory
-                <code>C:\Users\yourname\spfebuild\spfe-docs\output</code> contains the HTML files
-                for the SPFE docs. Open the file <file-name>spfebuild\spfe-docs\output\index.html</file-name>
-                in any standard browser. If you can view the SPFE Documentation in your browser, you
-                have successfully set up your build environment and built the SPFE documents.</p>
+                <p>The build system creates a directory <directory-name>spfebuild</directory-name>
+                in your home directory. For example, in Windows the directory
+                    <directory-name><code>C:\Users\yourname\spfebuild\spfe-docs\output</code></directory-name>
+                contains the HTML files for the SPFE docs. Open the file
+                    <file-name>spfebuild\spfe-docs\output\index.html</file-name> in any standard
+                browser. If you can view the SPFE Documentation in your browser, you have
+                successfully set up your build environment and built the SPFE documents.</p>
         </section>
     </body>
 </generic-topic>
