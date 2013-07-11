@@ -53,11 +53,11 @@
             <xpath>/spfe/define</xpath>
             <description>
                 <p>The <spfe-config-element-name>define</spfe-config-element-name> element is used to define string constants that can be used to define other properties. </p> <p>To use a defined value in setting another property you surround the property name with <code>${</code> and <code>}</code>, as in the use of the <code>HOME</code> constant in the example above. The variables <code>HOME</code> (the user's home directory) and <code>SPFEOT_HOME</code> (the location of the SPFE Open Toolkit) are predefined. (<code>HOME</code> is taken from the operating system, and <code>SPFTOT_HOME</code> must be set as an environment variable when you <task>install the SPFE Open Toolkit</task>).</p>
-                <p>You can use one constant to define the value of another constant. The build tools will raise and error if a circular definition is found. (That is, don't define A using B and then try to define B using A.)</p>
+                <p>You can use one constant to define the value of another constant. The build tools will raise an error if a circular definition is found. (That is, don't define A using B and then try to define B using A.)</p>
             </description>
             <build-property/>
             <include-behavior>
-                <p>Definitions from included files are added to the definitions in the current file and the combined set of definitions is used in expanding constants in the property definitions in all files. (In other words, there it makes no difference where a particular constant is defined.)</p> <p>A definition in the current file with the same name as a definition in an included file overrides the definition from an included file.</p>
+                <p>Definitions from included files are added to the definitions in the current file and the combined set of definitions is used to expand constants in the property definitions in all files.; it makes no difference where a particular constant is defined.</p> <p>A definition in the current file with the same name as a definition in an included file overrides the definition from an included file.</p>
             </include-behavior>
             <attributes>
                 <attribute>
@@ -289,7 +289,7 @@
         <element-description>
             <xpath>/spfe/sources/tocs/include</xpath>
             <description>
-                <p>A path expression indicating <feature>TOC files</feature> to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>link catalog</feature> files to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating <feature>TOC files</feature> to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>TOC files</feature> to the build directory for inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -923,7 +923,7 @@
         <element-description>
             <xpath>/spfe/strings</xpath>
             <description>
-                <p>A container element for a list of <spfe-config-element-name>string</spfe-config-element-name> elements that define <feature>strings</feature> used by the tools or in  content.</p>
+                <p>A container element for a list of <spfe-config-element-name>string</spfe-config-element-name> elements that define <feature>strings</feature> used by the tools or in content.</p>
             </description>
             <build-property/>
             <include-behavior>
