@@ -78,9 +78,9 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <xml-element-name>/spfe/doc-set</xml-element-name> element in the main SPFE
                     <feature>configuration file</feature>; you cannot include a
                 <xml-element-name>doc-set</xml-element-name> definition in a separate file. You can
-                only define one <xml-element-name>doc-set</xml-element-name>; the build system
-                ignores the subsequent definitions. A documentation set must have at least one topic
-                set. You need the following mandatory attributes and elements: </p>
+                only define one <xml-element-name>doc-set</xml-element-name> element; the build
+                system ignores the subsequent definitions. A documentation set must have at least
+                one topic set. You need the following mandatory attributes and elements: </p>
             <ul>
                 <li>
                     <p><xml-attribute-name>/spfe/doc-set/@id</xml-attribute-name>: The name of the

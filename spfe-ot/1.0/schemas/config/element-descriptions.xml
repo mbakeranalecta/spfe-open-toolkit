@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/style/authoring/element-descriptions.css"?>
 <element-descriptions
     xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/config-element-descriptions"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -14,6 +15,12 @@
                 <date>2012-04-04</date>
                 <author>Mark Baker</author>
                 <comment>new</comment>
+                <new-status>In progress</new-status>
+            </revision>
+            <revision>
+                <date>2013-07-12</date>
+                <author>jkeffer</author>
+                <comment>Spelling and minor wording changes</comment>
                 <new-status>In progress</new-status>
             </revision>
         </history>
@@ -44,7 +51,11 @@
                 <attribute>
                     <name>href</name>
                     <description>
-                        <p>The URL of the file to load. Note that XML Catalogs are not use to resolve this URL. To ensure portability of your configuration file, either use a relative URL or use <spfe-config-element-name>/spfe/define</spfe-config-element-name> to create a constant for the root of the file path.</p>
+                        <p>The URL of the file to load. Note that XML Catalogs are not used to
+                            resolve this URL. To ensure portability of your configuration file,
+                            either use a relative URL or use
+                            <spfe-config-element-name>/spfe/define</spfe-config-element-name> to
+                            create a constant for the root of the file path.</p>
                     </description>
                 </attribute>
             </attributes>

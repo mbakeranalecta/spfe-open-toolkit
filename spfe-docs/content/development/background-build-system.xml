@@ -38,7 +38,7 @@
                 <feature>configuration file</feature> and a <feature>build command</feature>. It
             runs an XSLT script (<file-name>spfe-ot/scripts/config/config.xsl</file-name>), which
             reads the specified configuration file, resolves any inclusions, and creates three
-            outputs for each topic set:</p>
+            outputs:</p>
         <ol>
             <li>
                 <p>A fully resolved configuration file (in which all includes have been processed
@@ -64,7 +64,7 @@
                     SPFE build rules file,
                         <file-name>spfe-ot/1.0/build-tools/spfe-rules.xml</file-name>. The build
                     file is created in the directory spfebuild/temp under the user's HOME directory
-                    (this is hard coded in the <tool-name>spfe</tool-name> build tool).</p>
+                    (hard coded in the <tool-name>spfe</tool-name> build tool).</p>
             </li>
         </ol>
         <p>Next, the <tool-name>spfe</tool-name> build tool runs ANT on the generated ANT build
@@ -111,7 +111,7 @@
             encoding. However, in practice more steps may be involved. For instance, the creation of
             the link catalogs is a separate step run on the synthesis files. The presentation
             scripts then take both the synthesis files and the link catalog files as input and
-            outputs the presentation file or files which are the input to the formatting stage. If
+            output the presentation file or files which are the input to the formatting stage. If
             the build uses content from sources other than content created by authors, (for example,
             the build for the SPFE Configuration Reference extracts content from the configuration
             schema), extraction is a separate step at the synthesis stage.</p>

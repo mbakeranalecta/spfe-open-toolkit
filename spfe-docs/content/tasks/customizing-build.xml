@@ -31,7 +31,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
         </index>
     </head>
     <body>
-        <title>Customizing the build</title>
+        <title>Customizing the build steps</title>
         <understanding>
             <p>The default SPFE build file (<file-name>spfe-rules.xml</file-name>) implements a
                 standard order of build steps which work for most <feature>topic sets</feature>. The

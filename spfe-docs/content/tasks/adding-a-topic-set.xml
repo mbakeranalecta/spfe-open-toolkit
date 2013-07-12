@@ -30,6 +30,12 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <comment>Update content</comment>
                 <new-status>In progress</new-status>
             </revision>
+            <revision>
+                <date>2013-07-12</date>
+                <author>jkeffer</author>
+                <comment>Update content</comment>
+                <new-status>Ready for technical review</new-status>
+            </revision>
         </history>
         <index>
             <entry>
@@ -66,11 +72,11 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                     <ul>
                         <li>
                             <p>Introduce a new schema—the topics in a topic set follow the same
-                                schema</p>
+                                schema.</p>
                         </li>
                         <li>
                             <p>Add new entry to the table of contents—there is one entry for each
-                                topic set in the table of contents</p>
+                                topic set in the table of contents.</p>
                         </li>
                     </ul>
             </how-to-answer-body>
@@ -128,7 +134,9 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                    <p><xml-element-name>/spfe/sources</xml-element-name>: The list of files that
                         contain the contents of the topics. Content categories include text,
                         graphics, and information from outside sources that make up the topic
-                        content. You can specify more than one entry for each source category.</p>
+                        content. You can specify more than one entry for each source category. If
+                        your topic set does not contain any content, it does not appear in the table
+                        of contents of the documentation set.</p>
                </li>
                <li>
                    <p><xml-element-name>/spfe/output-format</xml-element-name>: The document formats
@@ -150,7 +158,8 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                         build process. If none of the configuration files specify this element, the
                         build system appends the value of
                         <xml-attribute-name>/spfe/doc-set/@id</xml-attribute-name> to the value of
-                        the SPFE_BUILD_DIR environment variable.</p>
+                        the SPFE_BUILD_DIR environment variable that is defined in the
+                            <tool-name>spfe</tool-name> build tool file.</p>
                 </li>
                 <li>
                     <p><xml-element-name>/spfe/build/output-directory</xml-element-name>: The path

@@ -19,10 +19,16 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
                 <new-status>Not started</new-status>
             </revision>
             <revision>
-                <date>2012-07-05</date>
+                <date>2013-07-05</date>
                 <author>jkeffer</author>
                 <comment>Initial content</comment>
                 <new-status>In progress</new-status>
+            </revision>
+            <revision>
+                <date>2013-07-12</date>
+                <author>jkeffer</author>
+                <comment>Updates to content and structure</comment>
+                <new-status>Ready for technical review</new-status>
             </revision>
         </history>
         <index>
@@ -39,15 +45,16 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
     <body>
         <title>Configuration file overview</title>
    
-        <p>The SPFE configuration file is the core of the SPFE Toolkit <feature>build
-                system</feature>. It defines the XML elements that specify the content to include in
-            the documentation set and the scripts to process the content to generate the output. You
-            can use a single configuration file for the documentation set; however, unless you have
-            a very simple documentation set, you should divide the configuration elements into a
-            main configuration file and separate configuration files for each topic set. To maximize
-            reuse and modularity, you use an <xml-element-name>include</xml-element-name> element to
-            import other configuration files. The set of configuration files makes up the complete
-            set of elements that the build system needs to build the documentation set.</p>
+        <p>The contents of the SPFE configuration file determine the behaviour of the SPFE Toolkit
+                <feature>build system</feature>. It defines the XML elements that specify the
+            content to include in the documentation set and the scripts to process the content to
+            generate the output. You can use a single configuration file for the documentation set;
+            however, unless you have a very simple documentation set, you should divide the
+            configuration elements into a main configuration file and separate configuration files
+            for each topic set. To maximize reuse and modularity, you use an
+            <xml-element-name>include</xml-element-name> element to import other configuration
+            files. The set of configuration files makes up the complete set of elements that the
+            build system needs to build the documentation set.</p>
         <p>SPFE provides the <file-name>spfe-config.xsd</file-name> configuration schema. You can
             define your own configuration schema, which can reuse the
                 <file-name>spfe-config.xsd</file-name> schema and you can define additional elements
