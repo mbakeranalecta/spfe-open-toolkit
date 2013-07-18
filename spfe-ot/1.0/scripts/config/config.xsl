@@ -17,12 +17,12 @@
     
     <xsl:variable name="build-dir">
         <xsl:choose>
-            <xsl:when test="not(/spfe/build/build-directory)">
-            <xsl:value-of select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> 
+            <xsl:when test="/spfe/build/build-directory">
+                <xsl:value-of select="translate(($config/build/build-directory)[1], '\', '/')"/>
             </xsl:when>
-        <xsl:otherwise>
-            <xsl:value-of select="translate(($config/build/build-directory)[1], '\', '/')"/>
-        </xsl:otherwise>
+            <xsl:otherwise>
+                <xsl:value-of select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> 
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     
