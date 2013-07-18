@@ -15,8 +15,19 @@
     <xsl:param name="SPFE_BUILD_DIR"/>
     <xsl:param name="SPFE_BUILD_COMMAND"/>
     
+    <xsl:variable name="build-dir">
+        <xsl:choose>
+            <xsl:when test="not(/spfe/build/build-directory)">
+            <xsl:value-of select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> 
+            </xsl:when>
+        <xsl:otherwise>
+            <xsl:value-of select="translate(($config/build/build-directory)[1], '\', '/')"/>
+        </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     
-    <xsl:variable name="build-dir" select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> 
+ <!--           <xsl:variable name="build-dir" select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> -->
+    
     
     <xsl:variable name="config-docs" as="xs:string*">
         <xsl:value-of select="base-uri()"/>
