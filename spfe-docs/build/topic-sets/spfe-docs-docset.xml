@@ -44,7 +44,7 @@
 
     <build>
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
-        <build-directory>${HOME}/spfebuild/spfe-docs/spfe-docs</build-directory>
+        <build-directory>${SPFE_DOCS_BUILD}/spfe-docs</build-directory>
     </build>
     
     <deployment>

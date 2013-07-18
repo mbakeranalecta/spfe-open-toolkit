@@ -47,7 +47,7 @@
     <build>
         <!--<build-rules>../../build-tools/config-ref-rules.xml</build-rules> --> 
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules> 
-        <build-directory>${HOME}/spfebuild/spfe-docs/config-ref</build-directory>
+        <build-directory>${SPFE_DOCS_BUILD}/config-ref</build-directory>
     </build>
 
     <deployment>

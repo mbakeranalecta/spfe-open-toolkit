@@ -4,6 +4,7 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
+    <define name="SPFE_DOCS_BUILD" value="${HOME}/spfebuild/spfe-docs"/>
     <doc-set id="spfe-docs">
         <title>SPFE Documentation</title>
         <topic-set-type-order>docset, guide, task, reference</topic-set-type-order>
@@ -78,17 +79,17 @@
     
     <sources>
         <link-catalogs>
-            <include>${HOME}/spfebuild/spfe-docs/link-catalogs/*.xml</include>
+            <include>${SPFE_DOCS_BUILD}/link-catalogs/*.xml</include>
         </link-catalogs>
         <tocs>
-            <include>${HOME}/spfebuild/spfe-docs/tocs/*.toc.xml</include>
+            <include>${SPFE_DOCS_BUILD}/tocs/*.toc.xml</include>
         </tocs>
     </sources>
     
     <build>
-        <link-catalog-directory>${HOME}/spfebuild/spfe-docs/link-catalogs</link-catalog-directory>
-        <output-directory>${HOME}/spfebuild/spfe-docs/output</output-directory>
-        <toc-directory>${HOME}/spfebuild/spfe-docs/tocs</toc-directory>
+        <link-catalog-directory>${SPFE_DOCS_BUILD}/link-catalogs</link-catalog-directory>
+        <output-directory>${SPFE_DOCS_BUILD}/output</output-directory>
+        <toc-directory>${SPFE_DOCS_BUILD}/tocs</toc-directory>
     </build>
     
     <messages>warning info</messages>
