@@ -4,7 +4,8 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
-    <define name="SPFE_DOCS_BUILD" value="${HOME}/spfebuild/spfe-docs"/>
+    <define name="SPFE_BUILD" value="${HOME}/spfebuild/build"/>
+    <define name="SPFE_DOCS" value="${HOME}/spfebuild/spfe-docs"/>
     <doc-set id="spfe-docs">
         <title>SPFE Documentation</title>
         <topic-set-type-order>docset, guide, task, reference</topic-set-type-order>
@@ -28,8 +29,8 @@
                 <href>topic-sets/spfe-test.xml</href>
             </topic-set>
              -->
-<!--   
-            <topic-set>
+   
+<!--            <topic-set>
                 <id>spfe-function-reference</id>
                 <href>topic-sets/spfe-function-reference.xml</href>
             </topic-set>
@@ -58,7 +59,6 @@
             <alias>Tasks</alias>
             <plural>Tasks</plural>
         </topic-type>
-<!--
         <topic-type>
             <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</id>
             <alias>Configuration setting</alias>
@@ -74,22 +74,22 @@
             <alias>XSLT Template Reference</alias>
             <plural>XSLT Template Reference</plural>
         </topic-type>
- -->
     </topic-type-aliases>
     
     <sources>
         <link-catalogs>
-            <include>${SPFE_DOCS_BUILD}/link-catalogs/*.xml</include>
+            <include>${SPFE_BUILD}/link-catalogs/*.xml</include>
         </link-catalogs>
         <tocs>
-            <include>${SPFE_DOCS_BUILD}/tocs/*.toc.xml</include>
+            <include>${SPFE_BUILD}/tocs/*.toc.xml</include>
         </tocs>
     </sources>
     
     <build>
-        <link-catalog-directory>${SPFE_DOCS_BUILD}/link-catalogs</link-catalog-directory>
-        <output-directory>${SPFE_DOCS_BUILD}/output</output-directory>
-        <toc-directory>${SPFE_DOCS_BUILD}/tocs</toc-directory>
+        <link-catalog-directory>${SPFE_BUILD}/link-catalogs</link-catalog-directory>
+        <output-directory>${SPFE_DOCS}/output</output-directory>
+        <toc-directory>${SPFE_BUILD}/tocs</toc-directory>
+        <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
     </build>
     
     <messages>warning info</messages>

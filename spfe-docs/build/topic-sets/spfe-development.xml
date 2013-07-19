@@ -41,8 +41,7 @@
     <output-formats>html</output-formats>
 
     <build>
-        <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
-        <build-directory>${SPFE_DOCS_BUILD}/development</build-directory>
+        <build-directory>${SPFE_BUILD}/development</build-directory>
     </build>
     
     <deployment>
