@@ -65,11 +65,11 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                         single documention set.</p>
                 </planning-question-body>
                 <how-to-answer-body>
-                    <p>It is not necessary to create a collection of topic sets; you can put all
-                        your topics into a single <feature>topic set</feature>. However, if you use
-                        a documentation set, you can present multiple topic sets in a specific order
-                        in the table of contents in the output. A documentation set also enables you
-                        to reuse topic sets in different documentation sets.</p>
+                    <p>It is not necessary to create a collection of topic sets; you use a single
+                            <feature>topic set</feature> to include all your topics. However, if you
+                        use a documentation set, you can present multiple topic sets in a specific
+                        order in the table of contents in the output. A documentation set also
+                        enables you to reuse topic sets in different documentation sets.</p>
                 </how-to-answer-body>
             </planning-question>
        </planning>
@@ -141,13 +141,13 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 of the values in the
                 <xml-element-name>/spfe/doc-set/topic-set-type-order</xml-element-name> element.</p>
             <p>To add an index page for the documentation set, you need to <task>add a topic
-                    set</task> that includes an index topic and include the topic set in the list of
-                topic sets. For example, the topic set <bold>spfe-docs-docset</bold>
-                contains the index topic for the SPFE documentation set.</p>
+                    set</task> that includes an index topic and includes the topic set in the list
+                of topic sets. For example, the topic set <bold>spfe-docs-docset</bold> contains the
+                index topic for the SPFE documentation set.</p>
             <p>Run the <tool-name>spfe</tool-name> build tool and specify the configuration file
                 that contains the <xml-element-name>doc-set </xml-element-name> element as the first
-                parameter. If you see the topic sets in the table of contents of your documentation
-                set, you have successfully added a documentation set.</p>
+                parameter. If you see the topic sets that your documentation set includes in the
+                table of contents you have successfully added a documentation set.</p>
         </doing>
     </body>
 </generic-task-topic>

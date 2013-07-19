@@ -45,7 +45,10 @@
                 distribution that includes a package management system, such as RedHat or Debian, 
                 you may be able to install Java using the package manager. Ensure that you install the
                 <bold>Java Development Kit</bold>, not the Java Runtime Environment.</p>
-            <p>You can download ANT from http://ant.apache.org. If you use Linux, you may be able to install it using the package management system or by using an RPM from the website. For full installation instructions, follow the instructions in the ANT manual on the ANT website.</p> 
+            <p>You can download ANT from <xpath>http://ant.apache.org</xpath>. If you use Linux, you
+                may be able to install it using the package management system or by using an RPM
+                from the website. For full installation instructions, follow the instructions in the
+                ANT manual on the ANT website.</p> 
         </section>
         <section>
             <title>Setting up the environment variables</title>

@@ -83,20 +83,20 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
             </planning-question>
        </planning>
        <doing>        
-           <p>Normally, you define the elements specific to your topic set in a separate
-                configuration file and include the main <feature>configuration file</feature>. This
-                enables you to import common values from the main configuration file and override
-                the elements that are specific to your topic set, which maximizes reuse.</p>
+           <p>You should define the elements specific to your topic set in a separate configuration
+                file and include the main <feature>configuration file</feature>. This enables you to
+                import common values from the main configuration file and override the elements that
+                are specific to your topic set, which maximizes reuse.</p>
            <p>You need the following elements for a topic set: </p>
            <ul>
                <li>
-                    <p><xml-element-name>/spfe</xml-element-name>: This is the root element of the
-                        configuration file; each configuration file must define this element.</p>
+                    <p><xml-element-name>/spfe</xml-element-name>: The root element of the
+                        configuration file. Each configuration file must define this element.</p>
                 </li>
                 <li>
                     <p><xml-element-name>/spfe/include</xml-element-name>: The path and file name of
                         a configuration file to import. Add an element for each configuration file
-                        you want to import. The topic set configuration file should contain the main
+                        you want to import. The topic set configuration file should include the main
                         configuration file.</p>
                 </li>
                 <li>
@@ -108,11 +108,13 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                <li>
                    <p><xml-element-name>/spfe/topic-set-id</xml-element-name>: A unique value that
                         identifies the topic set. The build system uses the value to create file
-                        names and it must be a valid file name in the operating system that runs the
-                        build system. If you define a
-                        <xml-element-name>/spfe/topic-set-id</xml-element-name>, the output for the
-                        topic set is stored in a subdirectory with the same name under
-                        the<xml-element-name>/spfe/build/build-directory</xml-element-name>.</p>
+                        names and it must be a valid file name in the operating system (minus the
+                        file extension) that runs the build system. The
+                        <xml-element-name>/spfe/topic-set-id</xml-element-name> is used as part of
+                        the path to the build output if you do not define
+                        <xml-element-name>/spfe/build/build-directory</xml-element-name>.<code>    
+&lt;define name="TOPIC_SET_ID" value="spfe-development-tasks"/>
+&lt;topic-set-id>${TOPIC_SET_ID}&lt;/topic-set-id></code></p>
                </li>
                <li>
                     <p><xml-element-name>/spfe/topic-set-type</xml-element-name>: The value
@@ -120,7 +122,8 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                         must match one of the entries in the
                         <xml-element-name>/spfe/doc-set/topic-set-type-order</xml-element-name> If
                         there is no matching entry, the build fails and you see the log message:
-                        "ERROR: Topic type(s) missing from topic type order list".</p>
+                        "ERROR: Topic type(s) missing from topic type order
+                        list".<code> &lt;topic-set-type>task&lt;/topic-set-type></code></p>
                 </li>
                 <li>
                     <p><xml-element-name>/spfe/topic-type-order</xml-element-name>: If there is no
@@ -131,17 +134,27 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                         fails.</p>
                 </li>
                <li>
-                   <p><xml-element-name>/spfe/sources</xml-element-name>: The list of files that
-                        contain the contents of the topics. Content categories include text,
-                        graphics, and information from outside sources that make up the topic
-                        content. You can specify more than one entry for each source category. If
-                        your topic set does not contain any content, it does not appear in the table
-                        of contents of the documentation set.</p>
+                   <p><xml-element-name>/spfe/sources</xml-element-name>: The list of categories
+                        that contain the contents of the topics. Topic content can be a combination
+                        of text, graphics, and information from outside sources. You can specify
+                        more than one entry for each source category. If your topic set does not
+                        include any topics, it does not appear in the table of contents of the
+                        documentation set.</p>
                </li>
                <li>
-                   <p><xml-element-name>/spfe/output-format</xml-element-name>: The document formats
-                        that you want the build system to create for this topic-set. Currently, SPFE
-                        only provides formatting scripts for HTML output.</p>
+                   <p><xml-element-name>/spfe/scripts</xml-element-name>: The list of scripts to
+                        build the topic set. Override and add to the list of scripts defined in the
+                        main configuration file to perform any special processing required for the
+                        topic set. If you specify scripts that all topic sets use in the main
+                        configuration file, you only need to specify topic set specific scripts
+                        here. If you use an existing schema, you can specify the existing scripts.
+                        If the topic set uses a new topic schema, you need to write new scripts to
+                        process the schema.</p>
+               </li>
+               <li>
+                   <p><xml-element-name>/spfe/output-formats</xml-element-name>: The document
+                        formats that you want the build system to create for this topic-set.
+                        Currently, SPFE only provides formatting scripts for HTML output.</p>
                </li>
                <li>
                    <p><xml-element-name>/spfe/build/build-rules</xml-element-name>: The name of the
@@ -149,27 +162,25 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                             <file-name>config.xsl</file-name> uses the elements in the configuration
                         files along with the build-rules file to specify which build script files
                         are called and the order in which to run the scripts. Each topic set can use
-                        a different rules file. If you <feature>customize the build</feature>, you
-                        need to specify a custom build-rules file.</p>
+                        a different rules file. The default build rules file is
+                            <file-name>spfe-ot/1.0/build-tools/spfe-rules.xml</file-name>. If you
+                            <feature>customize the build</feature>, you need to specify a custom
+                        build rules file.</p>
                </li>
                <li>
-                    <p><xml-element-name>/spfe/build/build-directory</xml-element-name>: The
-                        directory used to store temporary files and the output generated during the
-                        build process. If none of the configuration files specify this element, the
-                        build system appends the value of
-                        <xml-attribute-name>/spfe/doc-set/@id</xml-attribute-name> to the value of
-                        the SPFE_BUILD_DIR environment variable that is defined in the
-                            <tool-name>spfe</tool-name> build tool file.</p>
-                </li>
-                <li>
-                    <p><xml-element-name>/spfe/build/output-directory</xml-element-name>: The path
-                        to the folder that contains the output files for the topic-set. If you do
-                        not specify a value, the default EPPO build scripts fail. </p>
-                </li>
+                   <p>
+                        <xml-element-name>/spfe/build/build-directory</xml-element-name>: The
+                        directory used to store temporary files generated during the build process.
+                        Each topic set should specify its own build directory; however, if none of
+                        the configuration files specify this element, the default directory path is
+                        composed of the value of SPFE_BUILD_DIR environment variable that is defined
+                        in the <tool-name>spfe</tool-name> build tool file, the value of
+                        /spfe/doc-set/@id and the value of /spfe/topic-set-id. </p>
+               </li>
                <li>
                    <p><xml-element-name>/spfe/deployment/output-path</xml-element-name>: The path to
-                        the folder that contains the document output. The build system appends the
-                        value of this element to
+                        the directory that contains the topic set output (HTML files, PDF files,
+                        etc.). The build system appends the value of this element to
                         <xml-element-name>/spfe/build/output-directory</xml-element-name>. If you do
                         not specify a value for this element, the value of the
                         element<xml-element-name>/spfe/build/output-directory</xml-element-name>
@@ -178,16 +189,8 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                         more than one topic set, you should use a separate directory for the output
                         of each topic set.</p>
                </li>
-               <li>
-                   <p><xml-element-name>/spfe/scripts</xml-element-name>: The list of scripts for
-                        each stage of the build  process for the topic set. If you use an existing
-                        schema, you can specify the existing scripts. If you specify scripts that
-                        all topic sets use in the main configuration file, you only need to specify
-                        topic set specific scripts here. If the topic set uses a new schema, you
-                        need to write new scripts to process the schema.</p>
-               </li>
            </ul>
-           <p>If you want content at the top level folder, you need an index topic.</p>
+           <p>If you want content at the top level in the table of contents (for example, an introduction to the topic set), you need an index topic for HTML output.</p>
             <p>When you build the documentation set that includes your topic set, if your topic set
                 appears in the table of contents in the order you specified, you have successfully
                 added your topic set to the documentation set.</p>   
