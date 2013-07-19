@@ -98,7 +98,7 @@
         <element-description>
             <xpath>/spfe/topic-type-order</xpath>
             <description>
-                <p>The order in which topic types are listed in the TOC if <feature>topic type ordering</feature> is used.</p>
+                <p>The order in which topic types are listed in the table of contents if <feature>topic type ordering</feature> is used. For this element to take effect, you need to define <spfe-config-element-name>/spfe/sources/tocs</spfe-config-element-name>.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -119,7 +119,7 @@
         <element-description>
             <xpath>/spfe/sources/topics</xpath>
             <description>
-                <p>A container element for a list of file selectors that select the topic files to be included in the build. Becomes an ANT <xml-element-name xpath="" namespace-uri="ANT">fileset</xml-element-name> expression in the build file.</p>
+                <p>A container element for a list of file selectors that select the topic files to include in the build. Becomes an ANT <xml-element-name xpath="" namespace-uri="ANT">fileset</xml-element-name> expression in the build file.</p>
             </description>
             <build-property>topics</build-property>
             <include-behavior>
@@ -142,7 +142,10 @@
         <element-description>
             <xpath>/spfe/sources/text-objects</xpath>
             <description>
-                <p>A container element for a list of file selectors that select the text-object files to be included in the build. Becomes an ANT <xml-element-name namespace-uri="ANT">fileset</xml-element-name> expression in the build file.</p>
+                <p>A container element for a list of file selectors that select the text-object
+                    files to include in the build. Becomes an ANT
+                    <xml-element-name namespace-uri="ANT">fileset</xml-element-name> expression in
+                    the build file.</p>
             </description>
             <build-property>text-objects</build-property>
             <include-behavior>
@@ -164,7 +167,10 @@
         <element-description>
             <xpath>/spfe/sources/fragments</xpath>
             <description>
-                <p>A container element for a list of file selectors that select the fragment files to be included in the build. Becomes an ANT <xml-element-name namespace-uri="ANT">fileset</xml-element-name> expression in the build file.</p>
+                <p>A container element for a list of file selectors that select the fragment files
+                    to include in the build. Becomes an ANT
+                    <xml-element-name namespace-uri="ANT">fileset</xml-element-name> expression in
+                    the build file.</p>
             </description>
             <build-property>fragments</build-property>
             <include-behavior>
@@ -263,9 +269,27 @@
         <element-description>
             <xpath>/spfe/sources/link-catalogs</xpath>
             <description>
-                <p>A container element for a list of file selectors that select the link-catalog files to be used for linking topics. The setting becomes an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> expression in the build file.</p>
-                <p>The link catalogs for the current topic set will be created in the location specified by <spfe-config-element-name>/spfe/build/link-catalog-directory</spfe-config-element-name>. Make sure that the path specified by <spfe-config-element-name>spfe/build/link-catalog-directory</spfe-config-element-name> is included in those specified by <spfe-config-element-name>/spfe/sources/link-catalogs</spfe-config-element-name>.</p>
-                <p>You can also include link catalogs for other topic sets in the documentation set, or link catalogs from other documentation sets, in the list of link catalogs used to link the current topic set. The simplest way to have the entire documentation set use the same link catalogs is to set <spfe-config-element-name>/spfe/sources/link-catalogs</spfe-config-element-name> and <spfe-config-element-name>spfe/build/link-catalog-directory</spfe-config-element-name> to the same directory, and to define them both in the shared configuration file for the documentation set.</p>
+                <p>A container element for a list of file selectors that select the link-catalog
+                    files to be used for linking topics. The setting becomes an ANT
+                    <xml-element-name namespace-uri="ANT">files</xml-element-name> expression in the
+                    build file.</p>
+                <p>The link catalogs for the current topic set will be created in the location
+                    specified by
+                    <spfe-config-element-name>/spfe/build/link-catalog-directory</spfe-config-element-name>.
+                    Make sure that the path specified by
+                    <spfe-config-element-name>spfe/build/link-catalog-directory</spfe-config-element-name>
+                    is included in those specified by
+                    <spfe-config-element-name>/spfe/sources/link-catalogs</spfe-config-element-name>.</p>
+                <p>You can also include link catalogs for other topic sets in the documentation set,
+                    or link catalogs from other documentation sets, in the list of link catalogs
+                    used to link the current topic set. The simplest way to have the entire
+                    documentation set use the same link catalogs is to set
+                    <spfe-config-element-name>/spfe/sources/link-catalogs</spfe-config-element-name>
+                    and
+                    <spfe-config-element-name>spfe/build/link-catalog-directory</spfe-config-element-name>
+                    to the same directory, and to define them both in the main configuration file
+                    for the documentation set. If you do not define a link catalog element, the
+                    build does not generate links.</p>
             </description>
             <build-property>link-catalogs</build-property>
             <include-behavior>
@@ -276,7 +300,12 @@
         <element-description>
             <xpath>/spfe/sources/link-catalogs/include</xpath>
             <description>
-                <p>A path expression indicating <feature>link catalog</feature> files to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>link catalog</feature> files to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating <feature>link catalog</feature> files to include in
+                    the build. You can use wild cards. This path expression is used to create an
+                    <spfe-config-element-name>include</spfe-config-element-name> element in an ANT
+                    <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is
+                    used to copy <feature>link catalog</feature> files to the build directory for
+                    inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -287,9 +316,27 @@
         <element-description>
             <xpath>/spfe/sources/tocs</xpath>
             <description>
-                <p>A container element for a list of file selectors that select the <feature>TOC files</feature> to be used for creating tables of contents. The setting becomes an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> expression in the build file.</p>
-                <p>The TOC file for the current topic set will be created in the location specified by <spfe-config-element-name>/spfe/build/toc-directory</spfe-config-element-name>. Make sure that the path specified by <spfe-config-element-name>spfe/build/toc-directory</spfe-config-element-name> is included in those specified by <spfe-config-element-name>/spfe/sources/tocs</spfe-config-element-name>.</p>
-                <p>You can also include TOC files for other topic sets in the documentation set, or TOCs from other documentation sets, in the list of TOCs used in the current topic set. The simplest way to have the entire documentation set use the same TOC files is to set <spfe-config-element-name>/spfe/sources/tocs</spfe-config-element-name> and <spfe-config-element-name>spfe/build/toc-directory</spfe-config-element-name> to the same directory, and to define them both in the shared configuration file for the documentation set.</p>
+                <p>A container element for a list of file selectors that select the <feature>TOC
+                        files</feature> to be used for creating tables of contents. The setting
+                    becomes an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name>
+                    expression in the build file.</p>
+                <p>The TOC file for the current topic set will be created in the location specified
+                    by
+                    <spfe-config-element-name>/spfe/build/toc-directory</spfe-config-element-name>.
+                    Make sure that the path specified by
+                    <spfe-config-element-name>spfe/build/toc-directory</spfe-config-element-name> is
+                    included in those specified by
+                    <spfe-config-element-name>/spfe/sources/tocs</spfe-config-element-name>.</p>
+                <p>You can also include TOC files for other topic sets in the documentation set, or
+                    TOCs from other documentation sets, in the list of TOCs used in the current
+                    topic set. The simplest way to have the entire documentation set use the same
+                    TOC files is to set
+                    <spfe-config-element-name>/spfe/sources/tocs</spfe-config-element-name> and
+                    <spfe-config-element-name>spfe/build/toc-directory</spfe-config-element-name> to
+                    the same directory, and to define them both in the shared configuration file for
+                    the documentation set. If you do not define a tocs element, the output does not
+                    show a table of contents; the build generates the toc files, but the
+                    presentation scripts do not include them.</p>
             </description>
             <build-property>tocs</build-property>
             <include-behavior>
@@ -396,7 +443,8 @@
         <element-description>
             <xpath>/spfe/output-formats</xpath>
             <description>
-                <p>Specifies the output formats to be created.</p>
+                <p>Specifies the output formats to be created. Valid values are <code>html</code>,
+                    <code>pdf</code>, <code>chm</code>, and <code>epub</code>.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -407,18 +455,27 @@
         <element-description>
             <xpath>/spfe/topic-type-aliases</xpath>
             <description>
-                <p>Topic types in SPFE are identified by the namespace identifier of the topic schema. In some cases, however, we need to display the topic type to the user. For this purpose we need a user-friendly alias for the topic type. The <spfe-config-element-name>topic-type-aliases</spfe-config-element-name> element is a container for a list of topic type aliases that the build tools can use to display a user-friendly name for a topic type.</p>
+                <p>Topic types in SPFE are identified by the namespace identifier of the topic
+                    schema. In some cases, however, we need to display the topic type to the user.
+                    For this purpose we need a user-friendly alias for the topic type. The
+                    <spfe-config-element-name>topic-type-aliases</spfe-config-element-name> element
+                    is a container for a list of topic type aliases that the build scripts can use
+                    to display a user-friendly name for a topic type.</p>
             </description>
             <build-property/>
             <include-behavior>
-                <p>Items in the topic types alias list from the current and all included configuration files are combined into a single list. In the event that the same topic type is listed more than once, the first definition in the configuration file highest in the include sequence will be used.</p>
+                <p>The build scripts combine the items in the topic type alias list from the current
+                    and all included configuration files into a single list. In the event that there
+                    is more than one instance of same topic type, the first definition in the
+                    configuration file highest in the include sequence will be used.</p>
             </include-behavior>
         </element-description>
 
         <element-description>
             <xpath>/spfe/topic-type-aliases/topic-type</xpath>
             <description>
-                <p>Contains an item in the <feature>topic type alias</feature> list.</p>
+                <p>A container for the settings for each item in the <feature>topic type
+                        alias</feature> list.</p>
             </description>
             <build-property/>
             <include-behavior/>
@@ -573,7 +630,12 @@
         <element-description>
             <xpath>/spfe/build/build-directory</xpath>
             <description>
-                <p>Specifies the build directory. The default is the value of <spfe-config-element-name>/spfe/doc-set element</spfe-config-element-name>.</p>
+                <p>Specifies the build directory used to store temporary files and the output
+                    generated during the build process. The default is the value of
+                    <spfe-config-element-name>/spfe/topic-set-id</spfe-config-element-name> appended
+                    to the value of
+                    <spfe-config-element-name>/spfe/doc-set element</spfe-config-element-name>
+                    appended to the value of the environment variable SPFE_BUILD_DIR.</p>
             </description>
             <build-property>spfe.directories.build</build-property>
             <include-behavior>
@@ -604,7 +666,12 @@
         <element-description>
             <xpath>/spfe/deployment/output-path</xpath>
             <description>
-                <p>The path where the topic set files will be located relative to the root of the location where the documentation set is deployed. For local build purposes, the location were the topic set files will be located is this path appended to the path specified by <spfe-config-element-name>/spfe/build/output-directory</spfe-config-element-name>. </p>
+                <p>The path where the topic set files will be located relative to the root of the
+                    location where the documentation set is deployed. For local build purposes, the
+                    location of the topic set files is the value of this path appended to the path
+                    specified by
+                    <spfe-config-element-name>/spfe/build/output-directory</spfe-config-element-name>.
+                </p>
             </description>
             <build-property/>
             <include-behavior/>
@@ -916,7 +983,7 @@
         <element-description>
             <xpath>/spfe/topic-set-type</xpath>
             <description>
-                <p>This setting allows you to assign a type string to a <feature>topic set</feature>. This lets you group topic sets in output, and determine the order in which topic sets type appear in the <feature>documentation set</feature> table of contents. The order is set using the <spfe-config-element-name>/spfe/doc-set/topic-set-type-order</spfe-config-element-name> setting. There are no special limits or requirements on this value. You can use any topic set type names that make sense in your environment. </p>
+                <p>This setting enables you to assign a type string to a <feature>topic set</feature>. You can use this element to group topic sets in output, and determine the order in which topic sets type appear in the <feature>documentation set</feature> table of contents. The order is set using the <spfe-config-element-name>/spfe/doc-set/topic-set-type-order</spfe-config-element-name> element. There are no special limits or requirements on this value. You can use any topic set type names that make sense in your environment. </p>
             </description>
             <build-property/>
             <include-behavior>
@@ -926,7 +993,7 @@
         <element-description>
             <xpath>/spfe/doc-set/topic-set-type-order</xpath>
             <description>
-                <p>A string specifying the order in which topic set type will be listed in the TOC for a documentation set. It consists of topic set type names separated by spaces. The topic set type name for a topic set is set by the <spfe-config-element-name>/spfe/topic-set-type</spfe-config-element-name> setting.</p>
+                <p>A string specifying the order in which the topic set type appears in the table of contents for a documentation set. It consists of topic set type names separated by spaces. The topic set type name for a topic set is set by the <spfe-config-element-name>/spfe/topic-set-type</spfe-config-element-name> element.</p>
             </description>
             <build-property/>
             <include-behavior/>
