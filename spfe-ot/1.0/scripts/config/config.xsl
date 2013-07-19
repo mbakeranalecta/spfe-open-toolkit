@@ -225,7 +225,7 @@
             <!-- unsupported protocol -->
             <xsl:when test="matches($URL, '^[a-zA-Z]+:/')">
                 <xsl:message terminate="yes">
-                    <xsl:text>ERROR: A URL with an unsupported protocal was specified in a config file. The URL is: </xsl:text>
+                    <xsl:text>ERROR: A URL with an unsupported protocol was specified in a config file. The URL is: </xsl:text>
                     <xsl:value-of select="$URL"/>
                 </xsl:message>
             </xsl:when>
