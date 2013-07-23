@@ -365,6 +365,10 @@
 		<h2><xsl:apply-templates/></h2>
 	</xsl:template>
 	
+	<xsl:template match="planning-question/title">
+		<h2><xsl:apply-templates/></h2>
+	</xsl:template>
+	
 	<xsl:template match="procedure/title">
 		<h3><xsl:apply-templates/></h3>
 	</xsl:template>
