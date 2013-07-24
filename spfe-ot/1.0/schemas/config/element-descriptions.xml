@@ -23,6 +23,12 @@
                 <comment>Spelling and minor wording changes</comment>
                 <new-status>In progress</new-status>
             </revision>
+            <revision>
+                <date>2013-07-24</date>
+                <author>jkeffer</author>
+                <comment>Match info in other topics and add subject affinities</comment>
+                <new-status>In progress</new-status>
+            </revision>
         </history>
     </head>
     <body>
@@ -63,12 +69,24 @@
         <element-description>
             <xpath>/spfe/define</xpath>
             <description>
-                <p>The <spfe-config-element-name>define</spfe-config-element-name> element is used to define string constants that can be used to define other properties. </p> <p>To use a defined value in setting another property you surround the property name with <code>${</code> and <code>}</code>, as in the use of the <code>HOME</code> constant in the example above. The variables <code>HOME</code> (the user's home directory) and <code>SPFEOT_HOME</code> (the location of the SPFE Open Toolkit) are predefined. (<code>HOME</code> is taken from the operating system, and <code>SPFTOT_HOME</code> must be set as an environment variable when you <task>install the SPFE Open Toolkit</task>).</p>
-                <p>You can use one constant to define the value of another constant. The build tools will raise an error if a circular definition is found. (That is, don't define A using B and then try to define B using A.)</p>
+                <p>The <spfe-config-element-name>define</spfe-config-element-name> element is used
+                    to define string constants that can be used to define other properties. </p>
+                <p> For example,
+                    <code><![CDATA[<define name="SPFE_BUILD" value="${HOME}/spfebuild/build"/>]]></code>/></p>
+                <p>To use a defined value in setting another property you surround the property name
+                    with <code>${</code> and <code>}</code>, as in the use of the <code>HOME</code>
+                    constant in the example above. The variables <code>HOME</code> (the user's home
+                    directory) and <code>SPFEOT_HOME</code> (the location of the SPFE Open Toolkit)
+                    are predefined. (<code>HOME</code> is taken from the operating system, and you
+                    must set an environment variable <code>SPFTOT_HOME</code> when you <task>install
+                        the SPFE Open Toolkit</task>).</p>
+                <p>You can use one constant to define the value of another constant. The build tools
+                    will raise an error if a circular definition is found. (That is, don't define A
+                    using B and then try to define B using A.)</p>
             </description>
             <build-property/>
             <include-behavior>
-                <p>Definitions from included files are added to the definitions in the current file and the combined set of definitions is used to expand constants in the property definitions in all files.; it makes no difference where a particular constant is defined.</p> <p>A definition in the current file with the same name as a definition in an included file overrides the definition from an included file.</p>
+                <p>Definitions from included files are added to the definitions in the current file and the combined set of definitions is used to expand constants in the property definitions in all files; it makes no difference where a particular constant is defined.</p> <p>A definition in the current file with the same name as a definition in an included file overrides the definition from an included file.</p>
             </include-behavior>
             <attributes>
                 <attribute>
@@ -88,7 +106,11 @@
         <element-description>
             <xpath>/spfe/topic-set-id</xpath>
             <description>
-                <p>The <spfe-config-element-name>topic-set-id</spfe-config-element-name> element specifies the identifier for the current <feature>topic set</feature>. This identifier can be used to create a reference to the topic set. It is also used to create file and directory names, so it should be a value that is a valid file name (minus extension) on all target systems.</p>
+                <p>The <spfe-config-element-name>topic-set-id</spfe-config-element-name> element
+                    specifies the identifier for the current <feature>topic set</feature>. This
+                    identifier can be used to create a reference to the topic set. It is also used
+                    to create file and directory names, so it should be a value that is a valid file
+                    name (minus the extension) on all target operating systems.</p>
             </description>
             <build-property>spfe.topic-set-id</build-property>
             <include-behavior>
@@ -597,7 +619,7 @@
         <element-description>
             <xpath>/spfe/build/output-directory</xpath>
             <description>
-                <p>Specifies the directory where the build output will be created.</p>
+                <p>Specifies the directory where the final build output will be created.</p>
             </description>
             <build-property>spfe.directories.output</build-property>
             <include-behavior>
@@ -630,12 +652,14 @@
         <element-description>
             <xpath>/spfe/build/build-directory</xpath>
             <description>
-                <p>Specifies the build directory used to store temporary files and the output
-                    generated during the build process. The default is the value of
+                <p>Specifies the <feature>build directory</feature> used to store temporary files
+                    (logs, fully resolved configuration files, scripts) generated during the build
+                    process. The default is the value of
                     <spfe-config-element-name>/spfe/topic-set-id</spfe-config-element-name> appended
                     to the value of
                     <spfe-config-element-name>/spfe/doc-set element</spfe-config-element-name>
-                    appended to the value of the environment variable SPFE_BUILD_DIR.</p>
+                    appended to the value of the environment variable
+                    <code>SPFE_BUILD_DIR</code>.</p>
             </description>
             <build-property>spfe.directories.build</build-property>
             <include-behavior>
@@ -646,7 +670,7 @@
         <element-description>
             <xpath>/spfe/build/build-rules</xpath>
             <description>
-                <p>Specifies the ANT build rules file to be used to build the current topic set.</p>
+                <p>Specifies the ANT build rules file to use to build the current topic set.</p>
             </description>
             <build-property>spfe.build-rules</build-property>
             <include-behavior>
@@ -657,7 +681,8 @@
         <element-description>
             <xpath>/spfe/deployment</xpath>
             <description>
-                <p>Settings related to the deployment environment (the environment into which the documentation set will be deployed.</p>
+                <p>Settings related to the deployment environment (the environment into which the
+                    documentation set will be deployed).</p>
             </description>
             <build-property/>
             <include-behavior> </include-behavior>
@@ -670,8 +695,7 @@
                     location where the documentation set is deployed. For local build purposes, the
                     location of the topic set files is the value of this path appended to the path
                     specified by
-                    <spfe-config-element-name>/spfe/build/output-directory</spfe-config-element-name>.
-                </p>
+                    <spfe-config-element-name>/spfe/build/output-directory</spfe-config-element-name>.</p>
             </description>
             <build-property/>
             <include-behavior/>
@@ -745,7 +769,12 @@
         <element-description>
             <xpath>/spfe/scripts/image-list</xpath>
             <description>
-                <p>A container for a list of image-list scripts. Unless you have introduced custom image handling into your system, the default image handling script should work for all topic types. The image-list script is part of the format step. It generate a list of all the graphics included in the presentation so that the build scripts can copy those graphics to the appropriate location in the output.</p>
+                <p>A container for a list of image-list scripts. Unless you have introduced custom
+                    image handling into your system, the default image handling script should work
+                    for all topic types. The image-list script is part of the format step. It
+                    generates a list of all the graphics included in the presentation so that the
+                    build scripts can copy those graphics to the appropriate location in the
+                    output.</p>
             </description>
             <build-property/>
             <include-behavior/>
@@ -889,8 +918,19 @@
         <element-description>
             <xpath>/spfe/doc-set</xpath>
             <description>
-                <p>A container element for information on a documentation set. A documentation set is a collection of topic sets. To define a documentation set, you list the configuration files for each topic set in the documentation set using a <spfe-config-element-name>/spfe/doc-set/topic-sets/topic-set</spfe-config-element-name> element.</p>
-                <p>To build a full documentation set, you simply run the <tool-name>spfe</tool-name> build tool with a configuration file that contains a <spfe-config-element-name xpath="/spfe/doc-set">doc-set</spfe-config-element-name> element directly (not via inclusion). The build tool will then run whichever build command you have specified on all the topic sets in the documentation set, as well as creating the files that belong to the documentation set as a whole.</p>
+                <p>A container element for information on a documentation set. A documentation set
+                    is a collection of <feature>topic sets</feature>. To define a documentation set,
+                    you list the configuration files for each topic set in the documentation set
+                    using a
+                    <spfe-config-element-name>/spfe/doc-set/topic-sets/topic-set</spfe-config-element-name>
+                    element.</p>
+                <p>To build a full documentation set, you simply run the <tool-name>spfe</tool-name>
+                    build tool with a configuration file that contains a
+                    <spfe-config-element-name xpath="/spfe/doc-set">doc-set</spfe-config-element-name>
+                    element directly (not via inclusion). The build tool will then run whichever
+                    build command you have specified on all the topic sets in the documentation set,
+                    as well as creating the files that belong to the documentation set as a
+                    whole.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -900,7 +940,9 @@
                 <attribute>
                     <name>id</name>
                     <description>
-                        <p>An ID for the documentation set. This value is used as the name of a directory containing the documentation set build inside the build directory.</p>
+                        <p>An ID for the <feature>documentation set</feature>. This value is used as
+                            the name of a directory containing the documentation set build inside
+                            the <feature>build directory</feature>.</p>
                     </description>
                 </attribute>
             </attributes>
@@ -909,7 +951,7 @@
         <element-description>        
             <xpath>/spfe/doc-set/title</xpath>
             <description>
-                <p>The title of the documentation set.</p>
+                <p>The title of the <feature>documentation set</feature>.</p>
             </description>
             <build-property/>
             <include-behavior/>
@@ -942,7 +984,8 @@
         <element-description>
             <xpath>/spfe/doc-set/topic-sets/topic-set</xpath>
             <description>
-                <p>The path to a topic-set configuration file for a topic set to be included in the documentation set.</p>
+                <p>The path to a topic set configuration file for a <feature>topic set </feature>to
+                    be included in the <feature>documentation set</feature>.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -966,7 +1009,7 @@
             </description>
             <build-property>spfe.style.html-style-directories</build-property>
             <include-behavior>
-                <p>Entires in included files will be added to the those in the including file.</p>
+                <p>Entries in included files will be added to the those in the including file.</p>
             </include-behavior>
         </element-description>
 
@@ -977,13 +1020,22 @@
             </description>
             <build-property/>
             <include-behavior>
-                <p>Entires in included files will be added to the those in the including file.</p>
+                <p>Entries in included files will be added to the those in the including file.</p>
             </include-behavior>
         </element-description>
         <element-description>
             <xpath>/spfe/topic-set-type</xpath>
             <description>
-                <p>This setting enables you to assign a type string to a <feature>topic set</feature>. You can use this element to group topic sets in output, and determine the order in which topic sets type appear in the <feature>documentation set</feature> table of contents. The order is set using the <spfe-config-element-name>/spfe/doc-set/topic-set-type-order</spfe-config-element-name> element. There are no special limits or requirements on this value. You can use any topic set type names that make sense in your environment. </p>
+                <p>This setting enables you to assign a type string to a <feature>topic
+                        set</feature>. You can use this element to group topic sets in output, and
+                    determine the order in which topic sets type appear in the
+                        <feature>documentation set</feature> table of contents. The order is set
+                    using the
+                    <spfe-config-element-name>/spfe/doc-set/topic-set-type-order</spfe-config-element-name>
+                    element. There are no special limits or requirements on this value. You can use
+                    any topic set type names that make sense in your environment.  The value must
+                    match one of the values in the element
+                    <spfe-config-element-name>/spfe/doc-set/topic-set-type-order</spfe-config-element-name>.</p>
             </description>
             <build-property/>
             <include-behavior>

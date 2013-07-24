@@ -62,7 +62,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <planning-question-title>Do I need a documentation set?</planning-question-title>
                 <planning-question-body>
                     <p>You need to define a documentation set to group related topic sets into a
-                        single documention set.</p>
+                        single documentation set.</p>
                 </planning-question-body>
                 <how-to-answer-body>
                     <p>It is not necessary to create a collection of topic sets; you use a single
@@ -84,10 +84,9 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
             <ul>
                 <li>
                     <p><xml-attribute-name>/spfe/doc-set/@id</xml-attribute-name>: The name of the
-                        documentation set. The build system uses the value to create a subdirectory
-                        name under the directory defined in the
-                        <xml-element-name>/spfe/build</xml-element-name> element and it must be a
-                        valid directory name in the operating system that runs the build system. </p>
+                        documentation set. The build system uses the value to create a directory
+                        name and it must be a valid directory name in the operating system that runs
+                        the build system. </p>
                 </li>
                 <li>
                     <p><xml-element-name>/spfe/doc-set/title</xml-element-name>: The title of the
@@ -108,7 +107,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                         <xml-element-name>/spfe/topic-set-id</xml-element-name> for the topic set
                         and the
                         <xml-attribute-name>/spfe/doc-set/topic-sets@href</xml-attribute-name>
-                        attribute is the path and file name of the topic set configuration file.</p>
+                        attribute is the URL of the topic set configuration file.</p>
                 </li>    
             </ul>
             <p>The following shows the doc-set definition for the SPFE documentation set:</p>
@@ -135,8 +134,9 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
             <p>This documentation set includes three topic sets, each with their own configuration
                 file, which is specified by the <xml-attribute-name>href</xml-attribute-name>
                 attribute of the
-                <xml-element-name>/spfe/doc-set/topic-sets/topic-set</xml-element-name> element.
-                Each topic set configuration file defines a
+                <xml-element-name>/spfe/doc-set/topic-sets/topic-set</xml-element-name> element. The
+                path is relative to the location of the configuration file that defines the doc-set
+                element. Each topic set configuration file defines a
                 <xml-element-name>/spfe/topic-set-type</xml-element-name> element that matches one
                 of the values in the
                 <xml-element-name>/spfe/doc-set/topic-set-type-order</xml-element-name> element.</p>

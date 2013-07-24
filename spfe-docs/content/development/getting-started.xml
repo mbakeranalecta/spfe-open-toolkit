@@ -28,13 +28,19 @@
                 <type>task</type>
                 <term>getting started</term>
             </entry>
+            <entry>
+                <type>task</type>
+                <term>{install} {the SPFE Open Toolkit}</term>
+            </entry>
         </index>
     </head>
     <body>
         <title>Getting started with the SPFE build system</title>      
         <p>You can run the SPFE build system on Windows or Linux. To begin building your documents
-            with SPFE, you need to download the SPFE Toolkit from GitHub at <xpath>https://github.com/mbakeranalecta/spfe-open-toolkit</xpath>. You also need to ensure that you have the required third-party packages installed on your computer and your environment variables set up.
-        </p>     
+            with SPFE, you need to download the SPFE Toolkit from GitHub at
+                <xpath>https://github.com/mbakeranalecta/spfe-open-toolkit</xpath>. You also need to
+            ensure that you have the required third-party packages installed on your computer and
+            that you set the required environment variables. </p>     
         <section>
             <title>Installing third-party packages</title>           
             <p>To use the SPFE build system, you need to install Apache ANT and the Java Development Kit (JDK). Note that both ANT and SPFE require Java.
@@ -73,7 +79,7 @@
                    AVA_HOME=/usr/local/jdk-1.5.0.05
                </codeblock>
             <p>Ensure that your PATH environment variable includes ANT_HOME\bin.</p>
-             <p> You also need to set up the SPFE environment variable SPFEOT_HOME and include it in
+             <p> You also need to set the SPFE environment variable SPFEOT_HOME and include it in
                 your PATH environment variable. For example:</p>
             <ul>
                 <li>
@@ -100,9 +106,10 @@
                 <ol>
                     <li>
                         <p>Open a terminal window and change to the directory
-                        <directory-name>&lt;spfe-installation path>/spfe-docs/build</directory-name>.</p></li>
+                            <directory-name>&lt;spfe-installation
+                            path>/spfe-docs/build</directory-name></p></li>
                     <li>
-                        <p>Type: <code>spfe spfe-docs-config.xml draft</code>.</p>
+                        <p>Type <code>spfe spfe-docs-config.xml draft</code></p>
                     </li>
                 </ol>
                 <p>The build system creates the  <directory-name>spfebuild</directory-name>

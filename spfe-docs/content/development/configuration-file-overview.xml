@@ -93,8 +93,8 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
             <li>
                 <p>/<xml-element-name>spfe/strings</xml-element-name>: If your content or build
                     scripts require specific strings, define the list of strings in this container
-                    element. For example, the default EPPO build scripts require a string for the
-                    product name, copyright, and release number.</p>
+                    element. For example, the default EPPO build scripts require a strings
+                    definition for each of the product name, copyright, and release number.</p>
             </li>
             <li>
                 <p><xml-element-name>/spfe/scripts</xml-element-name> and

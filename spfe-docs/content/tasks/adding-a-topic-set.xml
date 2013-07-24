@@ -43,6 +43,10 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <term>topic set</term>
             </entry>
             <entry>
+                <type>feature</type>
+                <term>topic sets</term>
+            </entry>
+            <entry>
                 <type>task</type>
                 <term>{add} a {topic set}</term>
             </entry>
@@ -102,19 +106,17 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <li>
                     <p><xml-element-name>/spfe/strings</xml-element-name>: If your content or build
                         scripts require specific strings, define the list of strings in this
-                        container element. For example, the default EPPO build scripts require a
+                        container element. For example, the  EPPO Simple build scripts require a
                         string for the topic set title.</p>
                 </li>
                <li>
                    <p><xml-element-name>/spfe/topic-set-id</xml-element-name>: A unique value that
                         identifies the topic set. The build system uses the value to create file
-                        names and it must be a valid file name in the operating system (minus the
-                        file extension) that runs the build system. The
+                        names and it must be a valid file name (minus the file extension) in the
+                        operating system that runs the build system. The
                         <xml-element-name>/spfe/topic-set-id</xml-element-name> is used as part of
                         the path to the build output if you do not define
-                        <xml-element-name>/spfe/build/build-directory</xml-element-name>.<code>    
-&lt;define name="TOPIC_SET_ID" value="spfe-development-tasks"/>
-&lt;topic-set-id>${TOPIC_SET_ID}&lt;/topic-set-id></code></p>
+                        <xml-element-name>/spfe/build/build-directory</xml-element-name>.</p>
                </li>
                <li>
                     <p><xml-element-name>/spfe/topic-set-type</xml-element-name>: The value
@@ -122,8 +124,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                         must match one of the entries in the
                         <xml-element-name>/spfe/doc-set/topic-set-type-order</xml-element-name> If
                         there is no matching entry, the build fails and you see the log message:
-                        "ERROR: Topic type(s) missing from topic type order
-                        list".<code> &lt;topic-set-type>task&lt;/topic-set-type></code></p>
+                        "ERROR: Topic type(s) missing from topic type order list".</p>
                 </li>
                 <li>
                     <p><xml-element-name>/spfe/topic-type-order</xml-element-name>: If there is no
@@ -154,28 +155,29 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                <li>
                    <p><xml-element-name>/spfe/output-formats</xml-element-name>: The document
                         formats that you want the build system to create for this topic-set.
-                        Currently, SPFE only provides formatting scripts for HTML output.</p>
+                        Currently, EPPO Simple only has a format script for HTML output.</p>
                </li>
                <li>
                    <p><xml-element-name>/spfe/build/build-rules</xml-element-name>: The name of the
                         ANT build rules file to use for the topic set. The script
                             <file-name>config.xsl</file-name> uses the elements in the configuration
-                        files along with the build-rules file to specify which build script files
-                        are called and the order in which to run the scripts. Each topic set can use
-                        a different rules file. The default build rules file is
+                        files along with the build rules file to specify which build script files to
+                        run and the order in which to run the scripts. Each topic set can use a
+                        different rules file. The default build rules file is
                             <file-name>spfe-ot/1.0/build-tools/spfe-rules.xml</file-name>. If you
-                            <feature>customize the build</feature>, you need to specify a custom
+                            <task>customize the build system</task>, you need to specify a custom
                         build rules file.</p>
                </li>
                <li>
                    <p>
                         <xml-element-name>/spfe/build/build-directory</xml-element-name>: The
                         directory used to store temporary files generated during the build process.
-                        Each topic set should specify its own build directory; however, if none of
-                        the configuration files specify this element, the default directory path is
-                        composed of the value of SPFE_BUILD_DIR environment variable that is defined
-                        in the <tool-name>spfe</tool-name> build tool file, the value of
-                        /spfe/doc-set/@id and the value of /spfe/topic-set-id. </p>
+                        Each topic set should specify its own <feature>build directory</feature>;
+                        however, if none of the configuration files specify this element, the
+                        default directory path is composed of the value of SPFE_BUILD_DIR
+                        environment variable that is defined in the <tool-name>spfe</tool-name>
+                        build tool file, the value of /spfe/doc-set/@id and the value of
+                        /spfe/topic-set-id. </p>
                </li>
                <li>
                    <p><xml-element-name>/spfe/deployment/output-path</xml-element-name>: The path to

@@ -34,30 +34,9 @@
     <body>
         <title>SPFE Development Tasks</title>
         <understanding>
-            <p>The topics in this topic set describe the tasks you may need to do to develop documentation sets using SPFE.</p>
+            <p>The topics in this topic set describe the tasks you may need to do to develop documentation sets with SPFE.</p>
         </understanding>
         <planning/>
-        <doing>
-            <!--  
-            <p>You need to perform the following tasks:</p>
-            <ul>
-                <li>
-                    <p><task>Create the SFPE configuration file</task></p>
-                </li>
-                <li>
-                    <p><task>Add a topic-set</task></p>
-                </li>
-                <li>
-                    <p><task>Add a topic</task></p>
-                </li>
-                <li>
-                    <p><task>You may want to add a doc-set</task></p>
-                </li>
-                <li>
-                    <p>You may also want to <task>customize the build system</task></p>
-                </li>
-            </ul>
-             -->
-        </doing>
+        <doing/>
     </body>
 </generic-task-topic>
