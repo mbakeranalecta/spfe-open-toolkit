@@ -20,7 +20,7 @@
     <xs:group name="p-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>
-            <xs:group ref="mentions"/>
+            <xs:group ref="subject-affinities"/>
             <xs:group ref="resources"/>
         </xs:choice>
     </xs:group>

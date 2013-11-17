@@ -40,7 +40,7 @@
     </sources>
 
     <default-topic-scope>spfe</default-topic-scope>
-    <default-mention-scope>spfe</default-mention-scope>
+    <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
     <output-formats>html</output-formats>
 
 
@@ -60,8 +60,8 @@
         </extract>
         <synthesis>
             <script>../../scripts/synthesis/config-ref/synthesize-config-ref.xsl</script>
-            <script>../../scripts/synthesis/mentions-spfe-build.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/mentions/mentions.xsl</script>
+            <script>../../scripts/synthesis/subject-affinities-spfe-build.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/subject-affinities/subject-affinities.xsl</script>
         </synthesis>        
         <link-catalog>
             <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>

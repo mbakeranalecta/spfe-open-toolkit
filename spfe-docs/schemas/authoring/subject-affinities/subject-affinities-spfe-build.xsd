@@ -2,7 +2,7 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:simpleType name="mentions-spfe-build">
+    <xs:simpleType name="subject-affinities-spfe-build">
         <xs:restriction base="xs:string">
             <xs:enumeration value="spfe-config-element-name"/>
             <xs:enumeration value="spfe-config-attribute-name"/>
@@ -10,7 +10,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:group name="mentions-spfe-build">
+    <xs:group name="subject-affinities-spfe-build">
         <xs:choice>
             <xs:element name="spfe-config-element-name">
                 <xs:complexType>

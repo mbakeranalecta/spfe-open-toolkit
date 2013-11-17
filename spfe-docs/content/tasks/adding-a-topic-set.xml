@@ -30,12 +30,6 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <comment>Update content</comment>
                 <new-status>In progress</new-status>
             </revision>
-            <revision>
-                <date>2013-07-12</date>
-                <author>jkeffer</author>
-                <comment>Update content</comment>
-                <new-status>Ready for technical review</new-status>
-            </revision>
         </history>
         <index>
             <entry>
@@ -43,159 +37,89 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <term>topic set</term>
             </entry>
             <entry>
-                <type>feature</type>
-                <term>topic sets</term>
-            </entry>
-            <entry>
                 <type>task</type>
-                <term>{add} a {topic set}</term>
+                <term>add a topic set</term>
             </entry>
         </index>
     </head>
     <body>
         <title>Adding a new topic set</title>
         <understanding>
-            <p>A topic set is a collection of related topics that follow the same topic schema.
-                Multiple topic sets can use the same topic schema. </p>
-            <p>Typically, a <feature>documentation set</feature> includes a topic set and the topic
-                set appears in the table of contents of a documentation set that includes it. </p>
+            <p>A topic set is a collection of related topics that follow the same schema and multiple topic sets can use the same schema. A topic set appears in the HTML output as a folder in
+                the table of contents or a chapter in a print document. Individual topics in the topic set folder are presented in alphabetical order.</p>
+                
+             <p>A document must have at least one topic set. Typically, a topic set
+                belongs to a <feature>document set</feature>.</p>
        </understanding>
        <planning>
            <planning-question>
-               <planning-question-title>Do I need a new topic set?</planning-question-title>
+               <planning-question-title>Do I neeed to create a new topic set?</planning-question-title>
                 <planning-question-body>
-                    <p>You could have a single topic set that contains all the topics; however, you
-                        typically want to use a topic set to group topics with related content and
-                        present the topic sets in a specific order in the table of contents. You may
-                        also want topics to follow different schemas. Grouping topics into different
-                        topic sets enables you to reuse topics in different topic sets and multiple
-                        documentation sets can reuse topic sets.</p>
+                    <p>You could have a single topic set that contains all the topics; however, you typically want to group topics and present the topic set groups in a specific order in the table of contents. You may also want topics to follow different schemas.</p>
                 </planning-question-body>
                 <how-to-answer-body>
-                    <p>You need a new topic set if you want to:</p>
+                    <p>If you want to do any of the following, you need a new topic set:</p>
                     <ul>
                         <li>
-                            <p>Introduce a new schema—the topics in a topic set follow the same
-                                schema.</p>
+                            <p>Create a new document—every document needs at least one topic set</p>
                         </li>
                         <li>
-                            <p>Add new entry to the table of contents—there is one entry for each
-                                topic set in the table of contents.</p>
+                            <p>Introduce a new schema—the topics in a topic set follow a single schema</p>
+                        </li>
+                        <li>
+                            <p>Group new or existing topics under a different folder or chapter in the TOC—there is one folder for each topic set in the table of contents</p>
+                        </li>
+                        <li>
+                            <p>Change the order of topic sets in the TOC—the order of the folders in the table of contents is based on the <xml-element-name>topic-set-order</xml-element-name> element in the configuration file</p>
                         </li>
                     </ul>
             </how-to-answer-body>
             </planning-question>
        </planning>
        <doing>        
-           <p>You should define the elements specific to your topic set in a separate configuration
-                file and include the main <feature>configuration file</feature>. This enables you to
-                import common values from the main configuration file and override the elements that
-                are specific to your topic set, which maximizes reuse.</p>
-           <p>You need the following elements for a topic set: </p>
+           <p>To add a topic set to the build, perform the following steps:</p>
+           <ol>
+               <li>
+                   <p>Create a topic set configuration file</p>
+               </li>
+               <li>
+                   <p>Add a new <xml-element-name>/spfe/doc-set/topic-sets/topic-set</xml-element-name> to the <feature>SPFE configuration file</feature></p>
+               </li>
+           </ol>
+           <p>In the topic set configuration file, include the following elements:</p>
            <ul>
                <li>
-                    <p><xml-element-name>/spfe</xml-element-name>: The root element of the
-                        configuration file. Each configuration file must define this element.</p>
-                </li>
-                <li>
-                    <p><xml-element-name>/spfe/include</xml-element-name>: The path and file name of
-                        a configuration file to import. Add an element for each configuration file
-                        you want to import. The topic set configuration file should include the main
-                        configuration file.</p>
-                </li>
-                <li>
-                    <p><xml-element-name>/spfe/strings</xml-element-name>: If your content or build
-                        scripts require specific strings, define the list of strings in this
-                        container element. For example, the  EPPO Simple build scripts require a
-                        string for the topic set title.</p>
-                </li>
-               <li>
-                   <p><xml-element-name>/spfe/topic-set-id</xml-element-name>: A unique value that
-                        identifies the topic set. The build system uses the value to create file
-                        names and it must be a valid file name (minus the file extension) in the
-                        operating system that runs the build system. The
-                        <xml-element-name>/spfe/topic-set-id</xml-element-name> is used as part of
-                        the path to the build output if you do not define
-                        <xml-element-name>/spfe/build/build-directory</xml-element-name>.</p>
+                   <p><xml-element-name>spfe</xml-element-name>: The root element that specifies the schema of the configuration file. SPFE provides the spfe-config schema, or you can define your own. Each build configuration file in the document must follow the same schema.</p>
                </li>
                <li>
-                    <p><xml-element-name>/spfe/topic-set-type</xml-element-name>: The value
-                        determines the location of the topic set in the table of contents and it
-                        must match one of the entries in the
-                        <xml-element-name>/spfe/doc-set/topic-set-type-order</xml-element-name> If
-                        there is no matching entry, the build fails and you see the log message:
-                        "ERROR: Topic type(s) missing from topic type order list".</p>
-                </li>
-                <li>
-                    <p><xml-element-name>/spfe/topic-type-order</xml-element-name>: If there is no
-                        <xml-element-name>/spfe/sources/tocs</xml-element-name> element defined,
-                        this element determines the order in the table of contents for the topics in
-                        the topic set. If you do not define the this element or the
-                        <xml-element-name>/spfe/sources/tocs</xml-element-name> element, the build
-                        fails.</p>
-                </li>
-               <li>
-                   <p><xml-element-name>/spfe/sources</xml-element-name>: The list of categories
-                        that contain the contents of the topics. Topic content can be a combination
-                        of text, graphics, and information from outside sources. You can specify
-                        more than one entry for each source category. If your topic set does not
-                        include any topics, it does not appear in the table of contents of the
-                        documentation set.</p>
+                   <p>Define a unique TOPIC_SET_ID and a <xml-element-name>topic-set-id</xml-element-name> element, for example: <code><![CDATA[<define name="TOPIC_SET_ID" value="spfe-development-tasks"/>
+                        <topic-set-id>${TOPIC_SET_ID}</topic-set-id>]]></code></p>
                </li>
                <li>
-                   <p><xml-element-name>/spfe/scripts</xml-element-name>: The list of scripts to
-                        build the topic set. Override and add to the list of scripts defined in the
-                        main configuration file to perform any special processing required for the
-                        topic set. If you specify scripts that all topic sets use in the main
-                        configuration file, you only need to specify topic set specific scripts
-                        here. If you use an existing schema, you can specify the existing scripts.
-                        If the topic set uses a new topic schema, you need to write new scripts to
-                        process the schema.</p>
+                   <p><xml-element-name>/spfe/topic-set-type</xml-element-name>: It determines where your topic set appears in the table of contents and it must match one of the entries in the <xml-element-name>topic-set-type-order</xml-element-name> element in the SPFE configuration file</p>
                </li>
                <li>
-                   <p><xml-element-name>/spfe/output-formats</xml-element-name>: The document
-                        formats that you want the build system to create for this topic-set.
-                        Currently, EPPO Simple only has a format script for HTML output.</p>
+                   <p><xml-element-name>/spfe/sources</xml-element-name>: The list of directories that contain the contents of the topics</p>
                </li>
                <li>
-                   <p><xml-element-name>/spfe/build/build-rules</xml-element-name>: The name of the
-                        ANT build rules file to use for the topic set. The script
-                            <file-name>config.xsl</file-name> uses the elements in the configuration
-                        files along with the build rules file to specify which build script files to
-                        run and the order in which to run the scripts. Each topic set can use a
-                        different rules file. The default build rules file is
-                            <file-name>spfe-ot/1.0/build-tools/spfe-rules.xml</file-name>. If you
-                            <task>customize the build system</task>, you need to specify a custom
-                        build rules file.</p>
+                   <p><xml-element-name>/spfe/build</xml-element-name>: The parameters that specify where to store files generated during the build</p>
                </li>
                <li>
-                   <p>
-                        <xml-element-name>/spfe/build/build-directory</xml-element-name>: The
-                        directory used to store temporary files generated during the build process.
-                        Each topic set should specify its own <feature>build directory</feature>;
-                        however, if none of the configuration files specify this element, the
-                        default directory path is composed of the value of SPFE_BUILD_DIR
-                        environment variable that is defined in the <tool-name>spfe</tool-name>
-                        build tool file, the value of /spfe/doc-set/@id and the value of
-                        /spfe/topic-set-id. </p>
+                   <p><xml-element-name>/spfe/deployment</xml-element-name>: The path to the output folder</p>
                </li>
                <li>
-                   <p><xml-element-name>/spfe/deployment/output-path</xml-element-name>: The path to
-                        the directory that contains the topic set output (HTML files, PDF files,
-                        etc.). The build system appends the value of this element to
-                        <xml-element-name>/spfe/build/output-directory</xml-element-name>. If you do
-                        not specify a value for this element, the value of the
-                        element<xml-element-name>/spfe/build/output-directory</xml-element-name>
-                        contains the topic set output files. If topic sets have topic files with the
-                        same name (for example, index.html), the files are overwritten. If you have
-                        more than one topic set, you should use a separate directory for the output
-                        of each topic set.</p>
+                   <p><xml-element-name>/spfe/scripts</xml-element-name>: the list of scripts to process the topic set; if you use an existing schema, you can reuse the existing scripts</p>
                </li>
            </ul>
-           <p>If you want content at the top level in the table of contents (for example, an introduction to the topic set), you need an index topic for HTML output.</p>
-            <p>When you build the documentation set that includes your topic set, if your topic set
-                appears in the table of contents in the order you specified, you have successfully
-                added your topic set to the documentation set.</p>   
+           <p>If you want content at the top level folder, you need an index topic.</p>
+           <p>
+ 
+               Key elements:
+               <xml-element-name>/spfe/topic-set-id</xml-element-name>, 
+               <xml-element-name>string</xml-element-name> - name that appears in the TOC
+               <xml-element-name>default-topic-scope</xml-element-name>, <xml-element-name>default-subject-affinity-scope</xml-element-name>
+           </p>
+            <p>When you build your documents, if your topic set appears in the table of contents in the order you specified by using the topic-set-type, you have successfully added your topic set.</p>   
        </doing>
     </body>
 </generic-task-topic>

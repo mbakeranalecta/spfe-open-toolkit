@@ -15,19 +15,8 @@
     <xsl:param name="SPFE_BUILD_DIR"/>
     <xsl:param name="SPFE_BUILD_COMMAND"/>
     
-    <xsl:variable name="build-dir">
-        <xsl:choose>
-            <xsl:when test="/spfe/build/build-directory">
-                <xsl:value-of select="translate(($config/build/build-directory)[1], '\', '/')"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> 
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
     
- <!--           <xsl:variable name="build-dir" select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> -->
-    
+    <xsl:variable name="build-dir" select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> 
     
     <xsl:variable name="config-docs" as="xs:string*">
         <xsl:value-of select="base-uri()"/>
@@ -517,15 +506,14 @@
                         <xsl:copy-of select="current-group()[1]"  copy-namespaces="no"/>
                     </xsl:for-each-group>
                 </topic-type-aliases>
-                
-                
+
                 <xsl:copy-of select="($config/topic-set-id)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/topic-set-type)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/topic-type-order)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/messages)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/condition-tokens)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/default-topic-scope)[1]" copy-namespaces="no"/>
-                <xsl:copy-of select="($config/default-mention-scope)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/default-subject-affinity-scope)[1]" copy-namespaces="no"/>
                 <build>
                     <output-directory>
                         <xsl:attribute name="base-uri" select="base-uri(.)"/>
@@ -554,7 +542,6 @@
                 <xsl:copy-of select="($config/doc-set)[1]" copy-namespaces="no"/>    
                 
                 <strings>
-                    
                     <xsl:for-each-group select="$config/strings/string" group-by="@id">
                         <xsl:copy-of select="current-group()[1]"  copy-namespaces="no"/>
                     </xsl:for-each-group>

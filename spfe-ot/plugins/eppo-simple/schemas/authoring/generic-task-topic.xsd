@@ -11,19 +11,19 @@
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/text-general.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/conditions.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/text-decoration.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/mentions/mentions-general.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/subject-affinities/subject-affinities-general.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/resources.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/roots/generic-task-topic.xsd"/>
 
     <xs:group name="p-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>
-            <xs:group ref="mentions-general"/>
+            <xs:group ref="subject-affinities-general"/>
             <xs:group ref="resources"/>
         </xs:choice>
     </xs:group>
     
-    <xs:simpleType name="mentions-type">
-        <xs:union memberTypes="mentions-general"/>
+    <xs:simpleType name="subject-affinities-type">
+        <xs:union memberTypes="subject-affinities-general"/>
     </xs:simpleType>
 </xs:schema>

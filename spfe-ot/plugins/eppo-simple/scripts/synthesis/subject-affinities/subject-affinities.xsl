@@ -5,7 +5,7 @@
     version="2.0">
     
     <xsl:template match="*:body//*:task">
-        <xsl:element name="mention" namespace="{$output-namespace}">
+        <xsl:element name="subject-affinity" namespace="{$output-namespace}">
             <xsl:attribute name="type">task</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
             <xsl:apply-templates/>
@@ -13,7 +13,7 @@
     </xsl:template>
     
     <xsl:template match="*:body//*:term">
-        <xsl:element name="mention" namespace="{$output-namespace}">
+        <xsl:element name="subject-affinity" namespace="{$output-namespace}">
             <xsl:attribute name="type">term</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
             <xsl:apply-templates/>
@@ -21,7 +21,7 @@
     </xsl:template>
     
     <xsl:template match="*:body//*:feature">
-        <xsl:element name="mention" namespace="{$output-namespace}">
+        <xsl:element name="subject-affinity" namespace="{$output-namespace}">
             <xsl:attribute name="type">feature</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
             <xsl:apply-templates/>

@@ -24,7 +24,7 @@
         <xs:element name="sources" type="sources-type" minOccurs="0"/>
         <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
         <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
-        <xs:element name="default-mention-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
+        <xs:element name="default-subject-affinity-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
         <xs:element name="output-formats" minOccurs="0">
           <xs:simpleType>
             <xs:list itemType="output-formats-type"/>

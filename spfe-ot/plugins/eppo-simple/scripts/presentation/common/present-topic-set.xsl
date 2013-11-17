@@ -46,11 +46,11 @@ Main template
 </xsl:template>
 
 <xsl:template name="create-generated-topics"/>
-
+	
 <xsl:template match="ss:topic" priority="-1">
 	<xsl:call-template name="sf:error">
 		<xsl:with-param name="message">
-			<xsl:text>A topic of an unregconized topic type was included in the topic set build. The root element name is "</xsl:text>
+			<xsl:text>A topic of an unrecognised topic type was included in the topic set build. The root element name is "</xsl:text>
 			<xsl:value-of select="name(descendant::*[namespace-uri() ne 'http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis'][1])"/>
 			<xsl:text>". The topic name is "</xsl:text>
 			<xsl:value-of select="@local-name"/>
