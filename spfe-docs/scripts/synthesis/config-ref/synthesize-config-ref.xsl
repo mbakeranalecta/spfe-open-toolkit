@@ -33,11 +33,11 @@ exclude-result-prefixes="#all" >
 
 <xsl:param name="synthesis-directory"/>
 
-<xsl:param name="schema-defs-file"/>
-<xsl:variable name="schema-defs" select="sf:get-sources($schema-defs-file)"/>
+<xsl:param name="extracted-content-files"/>
+<xsl:variable name="schema-defs" select="sf:get-sources($extracted-content-files)"/>
 
-<xsl:param name="element-description-files"/>
-<xsl:variable name="element-source" select="sf:get-sources($element-description-files)"/>
+<xsl:param name="authored-content-files"/>
+<xsl:variable name="element-source" select="sf:get-sources($authored-content-files)"/>
 
 <xsl:variable name="config" as="element(config:spfe)">
 	<xsl:sequence select="/config:spfe"/>
@@ -62,7 +62,16 @@ Main template
 -->
 	
 <xsl:template name="main">
-		<!-- Create the schema element topic set -->
+<!--		<xsl:message>
+======================================================
+	</xsl:message>
+	<xsl:message select="'$authored-content-files=',$authored-content-files"/>
+	<xsl:message select="'$extracted-content-files=',$extracted-content-files"/>
+	<xsl:message terminate="yes">
+======================================================
+	</xsl:message>-->
+	
+	<!-- Create the schema element topic set -->
 		<xsl:for-each-group select="$doctypes/doctype" group-by="@name">
 			<xsl:variable name="root" select=".[sf:longest-string(@xpath)]/@xpath"/>
 			<xsl:variable name="current-doctype" select="@name"/>

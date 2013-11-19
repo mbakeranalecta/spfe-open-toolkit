@@ -35,8 +35,8 @@ exclude-result-prefixes="#all" >
 
 <xsl:param name="synthesis-directory"/>
 
-<xsl:param name="function-defs-file"/>
-<xsl:variable name="function-defs" select="sf:get-sources($function-defs-file)"/>
+	<xsl:param name="extracted-content-files"/>
+	<xsl:variable name="function-defs" select="sf:get-sources($extracted-content-files)"/>
 
 <xsl:param name="authored-content-files"/>
 <xsl:variable name="function-source" select="sf:get-sources($authored-content-files)"/>

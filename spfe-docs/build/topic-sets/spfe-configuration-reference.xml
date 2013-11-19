@@ -34,9 +34,9 @@
         <authored-content-for-merge>
             <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
         </authored-content-for-merge>
-<!--        <other name="element-descriptions">
-            <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
-        </other>-->
+        <files-to-extract-content-from>
+            <include>${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</include>
+        </files-to-extract-content-from>
     </sources>
 
     <default-topic-scope>spfe</default-topic-scope>
@@ -45,8 +45,9 @@
 
 
     <build>
-<!--        <build-rules>../../build-tools/config-ref-rules.xml</build-rules> --> 
-<!--        <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules> -->
+        <build-rules>../../build-tools/config-ref-rules.xml</build-rules>  
+
+       <!-- <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules>--> 
         <build-directory>${SPFE_BUILD}/config-ref</build-directory>
     </build>
 
@@ -60,7 +61,7 @@
         </extract>
         <synthesis>
             <script>../../scripts/synthesis/config-ref/synthesize-config-ref.xsl</script>
-            <script>../../scripts/synthesis/subject-affinities-spfe-build.xsl</script>
+            <script>../../scripts/synthesis/subject-affinities.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/subject-affinities/subject-affinities.xsl</script>
         </synthesis>        
         <link-catalog>

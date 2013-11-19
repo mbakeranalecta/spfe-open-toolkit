@@ -225,5 +225,24 @@
                 </parameter>
             </parameters>
         </function-description>
+        <template-description>
+            <name>error</name>
+            <description>
+                <p>Used to report an error in a script. The error template terminates the script unless the <code>terminate-on-error</code> parameter is set to false.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p></p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>message</name>
+                    <description>
+                        <p>The error message to report. The template outputs this message prefixed with "ERROR: ".</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </template-description>
     </body>
 </function-and-template-descriptions>

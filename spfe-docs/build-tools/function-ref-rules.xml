@@ -40,7 +40,8 @@
 		description="functions definitions" 
 		depends="-init, -current.function-defs" unless="-current.function-defs">
 		
-		<property name="xslt-files" refid="other.xslt-files"/>
+		<!--<property name="xslt-files" refid="other.xslt-files"/>-->
+		<pathconvert property="xslt-files" refid="other.xslt-files" pathsep=";" dirsep="/"/>
 		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			in="${spfe.config-file}" 
 			style="${spfe.scripts.other.function-defs}"
@@ -67,7 +68,7 @@
 
 	
 	<!-- target to build function-ref synthesis -->
-	<target name="--build.synthesis" description="Fucntion ref synthesis" 
+	<target name="--build.synthesis" description="Function ref synthesis" 
 	        depends="-build.function-defs, 
 					 -get.source-files.function-descriptions">
 						

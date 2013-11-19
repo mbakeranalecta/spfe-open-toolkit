@@ -371,6 +371,12 @@
                       </xsl:for-each>
                   </files>
                   
+                  <files id="files-to-extract-content-from">
+                      <xsl:for-each select="$config/sources/files-to-extract-content-from/include">
+                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                      </xsl:for-each>
+                  </files>
+                  
                   <files id="topics">
                       <xsl:for-each select="$config/sources/topics/include">
                           <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>

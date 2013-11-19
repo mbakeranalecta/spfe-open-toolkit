@@ -14,7 +14,7 @@
 	<!-- GET TARGETS -->
 	<target name="-get.source-files.element-descriptions">
 		<copy todir="${temp}/descriptions" verbose="true" preservelastmodified="true" flatten="true">
-			<files refid="other.element-descriptions"/>
+			<files refid="authored-content-for-merge"/>
 		</copy>
 	</target>
 
@@ -42,13 +42,15 @@
 	<target name="-build.schema-defs" 
 		description="schema definitions" 
 		depends="-init, -current.schema-defs" unless="-current.schema-defs">
-	
+		
+		<pathconvert property="files-to-extract-content-from" refid="files-to-extract-content-from" pathsep=";" dirsep="/"/>
+		
 		<xslt  classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			in="${spfe.config-file}" 
-			style="${spfe.scripts.other.schema-defs}"
+			style="${spfe.scripts.extract}"
 			out="${temp}/${files.schema-defs}">
 			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="schema-file" expression="${spfe.other.schema-file}"/>
+			<param name="files-to-extract-content-from" expression="${files-to-extract-content-from}"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 			<param name="draft" expression="${draft}" if="draft"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
@@ -89,8 +91,8 @@
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="topic-files" expression="${topic-files}"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-			<param name="schema-defs-file" expression="${temp}/${files.schema-defs}"/>
- 			<param name="element-description-files" expression="${descriptions-files}"/>
+			<param name="extracted-content-files" expression="${temp}/${files.schema-defs}"/>
+ 			<param name="authored-content-files" expression="${descriptions-files}"/>
 			<param name="synthesis-directory" expression="${temp}/synthesis"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>

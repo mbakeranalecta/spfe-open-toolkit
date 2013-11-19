@@ -18,8 +18,8 @@
         <xsl:sequence select="/config:spfe"/>
     </xsl:variable>
     
-    <xsl:param name="xslt-files"/>
-    <xsl:variable name="xslt-file-set" select="sf:get-sources($xslt-files)"/>
+    <xsl:param name="files-to-extract-content-from"/>
+    <xsl:variable name="xslt-file-set" select="sf:get-sources($files-to-extract-content-from)"/>
     
     <xsl:template name="main">
       <function-and-template-definitions>

@@ -5,10 +5,12 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	exclude-result-prefixes="#all">
-
+	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/>
+	
 <!-- =============================================================
-	dchema-defs.xsl
+	schema-defs.xsl
 	
 	Reads a schema and pulls out the elements, attributes, and simple types 
 	 This stylesheet starts from the element named in the "start-from" variable. 
@@ -68,12 +70,8 @@
 	<!--<xsl:variable name="topics-dir" select="resolve-uri('topics/', base-uri(.))"/>-->
 	<xsl:variable name="topics-dir" select="concat($config/config:directories/config:build, '/temp/topics/')"/>
 	
-	<xsl:param name="schema-file"/>	
-	<xsl:variable name="schema">
-		<xsl:call-template name="read-schema">
-			<xsl:with-param name="file-name" select="$schema-file"/>
-		</xsl:call-template>
-	</xsl:variable>
+	<xsl:param name="files-to-extract-content-from"/>	
+	<xsl:variable name="schema" select="sf:get-sources($files-to-extract-content-from)"/>
 	
 	<xsl:template name="read-schema">
 		<xsl:param name="file-name"/>

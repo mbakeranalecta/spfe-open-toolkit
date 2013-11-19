@@ -25,7 +25,15 @@
 <xsl:function name="sf:get-sources">
 	<xsl:param name="file-list"/>
 	<xsl:param name="load-message"/>
-	
+<!--  FIXME: This text is firing in spfe-docs even though it is building correctly???
+		<xsl:if test="normalize-space($file-list)=''">
+		<xsl:call-template name="sf:error">
+			<xsl:with-param name="message">
+				<xsl:text>Empty file list passed to sf:get-sources function. This may be because a configuration file is point to a file that does not exist on the system. Check your configuration.</xsl:text>
+			</xsl:with-param>
+		</xsl:call-template>
+	</xsl:if>
+-->	
 	<xsl:for-each select="tokenize(translate($file-list, '\', '/'), ';')">
 		<xsl:variable name="one-file" select="concat('file:///', normalize-space(.))"/>
 		<xsl:if test="normalize-space($load-message)">
