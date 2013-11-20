@@ -20,18 +20,12 @@
 	</target>
 
 	<!-- DEPENDENCY TARGETS -->
-	<!-- check to see if extracted-content is up to date -->	
+	<!-- check to see if extracted-content is up to date -->
+	<!-- FIXME: Need to test that this is working correctly both ways. -->	
 	<target name="-current.extracted-content">
-		<dirname property="paths.functions" file="${source-files.functions}"/>
-
 		<uptodate property="-current.functions-defs" targetfile="${temp}/${files.extracted-content}">
 			<srcresources>
-				<dirset dir="${paths.functions}">
-                    <include name="**/*.xsd"/>
-                </dirset>
-				<filelist dir=".">
-					<file name="${source-files.functions}"/>
-				</filelist>
+				<files refid="files-to-extract-content-from"/>
 			</srcresources>
 		</uptodate>
 	</target>
