@@ -45,7 +45,6 @@
     <output-formats>html</output-formats>
 
     <build>
-        <!--<build-rules>../../build-tools/function-ref-rules.xml</build-rules> -->              
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules> 
         <build-directory>${SPFE_BUILD}/function-ref</build-directory>
     </build>
