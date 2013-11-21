@@ -52,7 +52,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
             however, unless you have a very simple documentation set, you should divide the
             configuration elements into a main configuration file and a separate configuration file
             for each topic set. To maximize reuse and modularity, you use an
-            <xml-element-name>include</xml-element-name> element to import other configuration
+            <spfe-config-element-name>include</spfe-config-element-name> element to import other configuration
             files. The set of configuration files makes up the complete set of elements that the
             build system needs to build the documentation set.</p>
         <p>SPFE provides the <file-name>spfe-config.xsd</file-name> configuration schema. If you
@@ -68,11 +68,11 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
         <p>The following elements must be defined in the main configuration file: </p>
         <ul>
             <li>
-                <p><xml-element-name>/spfe</xml-element-name>: This is the root element of the
+                <p><spfe-config-element-name>/spfe</spfe-config-element-name>: This is the root element of the
                     configuration file; each configuration file must define this element.</p>
             </li>
             <li>
-                <p><xml-element-name>/spfe/doc-set</xml-element-name>: If you use a
+                <p><spfe-config-element-name>/spfe/doc-set</spfe-config-element-name>: If you use a
                         <feature>documentation set</feature>, you must define the element and its
                     child elements here.</p>
             </li>
@@ -81,49 +81,49 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
             them in the main configuration file:</p>
         <ul>
             <li>
-                <p><xml-element-name>/spfe/topic-type-aliases</xml-element-name>: If you want to use
+                <p><spfe-config-element-name>/spfe/topic-type-aliases</spfe-config-element-name>: If you want to use
                     a user-friendly name for a topic set in the table of contents, and you have
                     multiple topic sets that use the same topic schema, define this element in the
                     main configuration file. The value of the
-                    /<xml-attribute-name>spfe/topic-aliases/topic-type/@alias</xml-attribute-name>
+                    /<spfe-config-attribute-name>spfe/topic-aliases/topic-type/@alias</spfe-config-attribute-name>
                     attribute appears in the table of contents for the documentation set. Each topic
                     set schema can have only one alias, even if multiple topic sets use the same
                     schema.</p>
             </li>
             <li>
-                <p>/<xml-element-name>spfe/strings</xml-element-name>: If your content or build
+                <p>/<spfe-config-element-name>spfe/strings</spfe-config-element-name>: If your content or build
                     scripts require specific strings, define the list of strings in this container
                     element. For example, the default EPPO build scripts require a strings
                     definition for each of the product name, copyright, and release number.</p>
             </li>
             <li>
-                <p><xml-element-name>/spfe/scripts</xml-element-name> and
-                    <xml-element-name>/spfe/sources</xml-element-name>: If one or more topic sets
+                <p><spfe-config-element-name>/spfe/scripts</spfe-config-element-name> and
+                    <spfe-config-element-name>/spfe/sources</spfe-config-element-name>: If one or more topic sets
                     use the same scripts or the same content, define these elements in the main
                     configuration file. The topic set configuration files add the additional
                     elements required for the topic set.</p>
             </li>
             <li>
-                <p><xml-element-name>/spfe/output-formats</xml-element-name>: Define this element in
+                <p><spfe-config-element-name>/spfe/output-formats</spfe-config-element-name>: Define this element in
                     the main configuration file if all topic sets support at least one common output
                     format. Topic set configuration files can also define this element to add
                     additional output formats.</p>
             </li>
             <li>
-                <p><xml-element-name>/spfe/style/html-output-directories</xml-element-name>: The
+                <p><spfe-config-element-name>/spfe/style/html-output-directories</spfe-config-element-name>: The
                     style sheets to format HTML output. There should be an overall style sheet and
                     individual topic sets can define this element to add additional style
                     sheets.</p>
             </li>
             <li>
-                <p><xml-element-name>/spfe/messages</xml-element-name>: The message types the build
+                <p><spfe-config-element-name>/spfe/messages</spfe-config-element-name>: The message types the build
                     system generates. You usually want the to view the same message types for all
                     stages of the build. If you use the SPFE Toolkit in an automated build system,
                     you can parse the SPFE output logs for build status information.</p>
             </li>
 
             <li>
-                <p><xml-element-name>/spfe/build/output-directory</xml-element-name>: The path to
+                <p><spfe-config-element-name>/spfe/build/output-directory</spfe-config-element-name>: The path to
                     the directory that contains the final output files (for example, HTML or PDF
                     files generated during the formatting or encoding stage) for the documentation
                     set. If you do not specify a value, the default EPPO build scripts fail. You
@@ -131,7 +131,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
                     output files for each topic set have a common root directory. </p>
             </li>
             <li>
-                <p><xml-element-name>/spfe/wip-site</xml-element-name>: If you want to make a
+                <p><spfe-config-element-name>/spfe/wip-site</spfe-config-element-name>: If you want to make a
                     documentation set under development available for internal viewing, define the
                     appropriate child elements for your test site. You need to modify the build
                     scripts to use this feature of the SPFE Toolkit.</p>
