@@ -4,7 +4,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     <xs:simpleType name="subject-affinities-spfe-build">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="spfe-config-element-name"/>
+            <xs:enumeration value="config-setting"/>
             <xs:enumeration value="spfe-config-attribute-name"/>
             <xs:enumeration value="spfe-build-property"/>
         </xs:restriction>
@@ -12,7 +12,7 @@
 
     <xs:group name="subject-affinities-spfe-build">
         <xs:choice>
-            <xs:element name="spfe-config-element-name">
+            <xs:element name="config-setting">
                 <xs:complexType>
                     <xs:simpleContent>
                         <xs:extension base="xs:string">

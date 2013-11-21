@@ -4,7 +4,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0">
 
-    <xsl:template match="*:spfe-config-element-name">
+    <xsl:template match="*:config-setting">
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">xpath</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>

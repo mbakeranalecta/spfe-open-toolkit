@@ -428,7 +428,7 @@ Content fix-up templates
 </xsl:template>
 
 <!-- Fix up element name xpaths -->
-	<xsl:template match="ed:spfe-config-element-name">
+	<xsl:template match="ed:config-setting">
 	<xsl:variable name="context-element" select="ancestor::ed:element-description/ed:xpath"/>
 	<xsl:variable name="data-content" select="."/>
 	<xsl:variable name="xpath" select="@xpath"/>

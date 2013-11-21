@@ -36,8 +36,8 @@
         <element-description>
             <xpath>/spfe</xpath>
             <description>
-                <p>The <spfe-config-element-name>spfe</spfe-config-element-name> element is the root element of a SPFE configuration file.</p>
-                <p>You can spread your configuration over multiple configuration files. Each file must have a <spfe-config-element-name>spfe</spfe-config-element-name> root element. The <tool-name>spfe</tool-name> command requires a spfe configuration file as a parameter. This is the configuration file that defines the properties for an individual build. It may include more general property files that are shared by multiple builds. You include other spfe configuration files using the <spfe-config-element-name>/spfe/include</spfe-config-element-name> element.</p>
+                <p>The <config-setting>spfe</config-setting> element is the root element of a SPFE configuration file.</p>
+                <p>You can spread your configuration over multiple configuration files. Each file must have a <config-setting>spfe</config-setting> root element. The <tool-name>spfe</tool-name> command requires a spfe configuration file as a parameter. This is the configuration file that defines the properties for an individual build. It may include more general property files that are shared by multiple builds. You include other spfe configuration files using the <config-setting>/spfe/include</config-setting> element.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -47,7 +47,7 @@
         <element-description>
             <xpath>/spfe/include</xpath>
             <description>
-                <p>The <spfe-config-element-name>include</spfe-config-element-name> element is used to include other SPFE configuration files in the current configuration file. Depending on the include behavior for each element, the elements in the current file will either be added to the elements in the included file or will replace the elements in the included file. See the <bold>Include Behavior</bold> section of each entry in this reference to see how each element is handled.</p>
+                <p>The <config-setting>include</config-setting> element is used to include other SPFE configuration files in the current configuration file. Depending on the include behavior for each element, the elements in the current file will either be added to the elements in the included file or will replace the elements in the included file. See the <bold>Include Behavior</bold> section of each entry in this reference to see how each element is handled.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -60,7 +60,7 @@
                         <p>The URL of the file to load. Note that XML Catalogs are not used to
                             resolve this URL. To ensure portability of your configuration file,
                             either use a relative URL or use
-                            <spfe-config-element-name>/spfe/define</spfe-config-element-name> to
+                            <config-setting>/spfe/define</config-setting> to
                             create a constant for the root of the file path.</p>
                     </description>
                 </attribute>
@@ -69,7 +69,7 @@
         <element-description>
             <xpath>/spfe/define</xpath>
             <description>
-                <p>The <spfe-config-element-name>define</spfe-config-element-name> element is used
+                <p>The <config-setting>define</config-setting> element is used
                     to define string constants that can be used to define other properties. </p>
                 <p> For example,
                     <code><![CDATA[<define name="SPFE_BUILD" value="${HOME}/spfebuild/build"/>]]></code>/></p>
@@ -106,7 +106,7 @@
         <element-description>
             <xpath>/spfe/topic-set-id</xpath>
             <description>
-                <p>The <spfe-config-element-name>topic-set-id</spfe-config-element-name> element
+                <p>The <config-setting>topic-set-id</config-setting> element
                     specifies the identifier for the current <feature>topic set</feature>. This
                     identifier can be used to create a reference to the topic set. It is also used
                     to create file and directory names, so it should be a value that is a valid file
@@ -120,7 +120,7 @@
         <element-description>
             <xpath>/spfe/topic-type-order</xpath>
             <description>
-                <p>The order in which topic types are listed in the table of contents if <feature>topic type ordering</feature> is used. For this element to take effect, you need to define <spfe-config-element-name>/spfe/sources/tocs</spfe-config-element-name>.</p>
+                <p>The order in which topic types are listed in the table of contents if <feature>topic type ordering</feature> is used. For this element to take effect, you need to define <config-setting>/spfe/sources/tocs</config-setting>.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -134,7 +134,7 @@
             </description>
             <build-property/>
             <include-behavior>
-                <p>The sub-elements in the current file individually take precedence over the same sub-element in an included file. This means that you cannot override the entire <spfe-config-element-name>sources</spfe-config-element-name> element in the current file, only the individual sub files.</p>
+                <p>The sub-elements in the current file individually take precedence over the same sub-element in an included file. This means that you cannot override the entire <config-setting>sources</config-setting> element in the current file, only the individual sub files.</p>
             </include-behavior>
         </element-description>
 
@@ -152,7 +152,7 @@
         <element-description>
             <xpath>/spfe/sources/topics/include</xpath>
             <description>
-                <p>A path expression indicating topic files to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy topic files to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating topic files to include in the build. You can use wild cards. This path expression is used to create an <config-setting>include</config-setting> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy topic files to the build directory for inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -178,7 +178,7 @@
         <element-description>
             <xpath>/spfe/sources/text-objects/include</xpath>
             <description>
-                <p>A path expression indicating <feature>text object</feature> files to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy text object files to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating <feature>text object</feature> files to include in the build. You can use wild cards. This path expression is used to create an <config-setting>include</config-setting> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy text object files to the build directory for inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -203,7 +203,7 @@
         <element-description>
             <xpath>/spfe/sources/fragments/include</xpath>
             <description>
-                <p>A path expression indicating fragment files to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy fragment files to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating fragment files to include in the build. You can use wild cards. This path expression is used to create an <config-setting>include</config-setting> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy fragment files to the build directory for inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -236,7 +236,7 @@
         <element-description>
             <xpath>/spfe/sources/graphics/include</xpath>
             <description>
-                <p>A path expression indicating graphics files to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy graphics files to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating graphics files to include in the build. You can use wild cards. This path expression is used to create an <config-setting>include</config-setting> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy graphics files to the build directory for inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -258,7 +258,7 @@
         <element-description>
             <xpath>/spfe/sources/graphics-catalog/include</xpath>
             <description>
-                <p>A path expression indicating <feature>graphics catalog</feature> files to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>graphics catalog</feature> files to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating <feature>graphics catalog</feature> files to include in the build. You can use wild cards. This path expression is used to create an <config-setting>include</config-setting> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>graphics catalog</feature> files to the build directory for inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -280,7 +280,7 @@
         <element-description>
             <xpath>/spfe/sources/strings/include</xpath>
             <description>
-                <p>A path expression indicating <feature>strings</feature> files to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>strings</feature> files to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating <feature>strings</feature> files to include in the build. You can use wild cards. This path expression is used to create an <config-setting>include</config-setting> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>strings</feature> files to the build directory for inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -297,18 +297,18 @@
                     build file.</p>
                 <p>The link catalogs for the current topic set will be created in the location
                     specified by
-                    <spfe-config-element-name>/spfe/build/link-catalog-directory</spfe-config-element-name>.
+                    <config-setting>/spfe/build/link-catalog-directory</config-setting>.
                     Make sure that the path specified by
-                    <spfe-config-element-name>spfe/build/link-catalog-directory</spfe-config-element-name>
+                    <config-setting>spfe/build/link-catalog-directory</config-setting>
                     is included in those specified by
-                    <spfe-config-element-name>/spfe/sources/link-catalogs</spfe-config-element-name>.</p>
+                    <config-setting>/spfe/sources/link-catalogs</config-setting>.</p>
                 <p>You can also include link catalogs for other topic sets in the documentation set,
                     or link catalogs from other documentation sets, in the list of link catalogs
                     used to link the current topic set. The simplest way to have the entire
                     documentation set use the same link catalogs is to set
-                    <spfe-config-element-name>/spfe/sources/link-catalogs</spfe-config-element-name>
+                    <config-setting>/spfe/sources/link-catalogs</config-setting>
                     and
-                    <spfe-config-element-name>spfe/build/link-catalog-directory</spfe-config-element-name>
+                    <config-setting>spfe/build/link-catalog-directory</config-setting>
                     to the same directory, and to define them both in the main configuration file
                     for the documentation set. If you do not define a link catalog element, the
                     build does not generate links.</p>
@@ -324,7 +324,7 @@
             <description>
                 <p>A path expression indicating <feature>link catalog</feature> files to include in
                     the build. You can use wild cards. This path expression is used to create an
-                    <spfe-config-element-name>include</spfe-config-element-name> element in an ANT
+                    <config-setting>include</config-setting> element in an ANT
                     <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is
                     used to copy <feature>link catalog</feature> files to the build directory for
                     inclusion in the build.</p>
@@ -344,17 +344,17 @@
                     expression in the build file.</p>
                 <p>The TOC file for the current topic set will be created in the location specified
                     by
-                    <spfe-config-element-name>/spfe/build/toc-directory</spfe-config-element-name>.
+                    <config-setting>/spfe/build/toc-directory</config-setting>.
                     Make sure that the path specified by
-                    <spfe-config-element-name>spfe/build/toc-directory</spfe-config-element-name> is
+                    <config-setting>spfe/build/toc-directory</config-setting> is
                     included in those specified by
-                    <spfe-config-element-name>/spfe/sources/tocs</spfe-config-element-name>.</p>
+                    <config-setting>/spfe/sources/tocs</config-setting>.</p>
                 <p>You can also include TOC files for other topic sets in the documentation set, or
                     TOCs from other documentation sets, in the list of TOCs used in the current
                     topic set. The simplest way to have the entire documentation set use the same
                     TOC files is to set
-                    <spfe-config-element-name>/spfe/sources/tocs</spfe-config-element-name> and
-                    <spfe-config-element-name>spfe/build/toc-directory</spfe-config-element-name> to
+                    <config-setting>/spfe/sources/tocs</config-setting> and
+                    <config-setting>spfe/build/toc-directory</config-setting> to
                     the same directory, and to define them both in the shared configuration file for
                     the documentation set. If you do not define a tocs element, the output does not
                     show a table of contents; the build generates the toc files, but the
@@ -369,7 +369,7 @@
         <element-description>
             <xpath>/spfe/sources/tocs/include</xpath>
             <description>
-                <p>A path expression indicating <feature>TOC files</feature> to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>TOC files</feature> to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating <feature>TOC files</feature> to include in the build. You can use wild cards. This path expression is used to create an <config-setting>include</config-setting> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>TOC files</feature> to the build directory for inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -391,7 +391,7 @@
         <element-description>
             <xpath>/spfe/sources/synonyms/include</xpath>
             <description>
-                <p>A path expression indicating <feature>synonyms</feature> files to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>synonyms</feature> files to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating <feature>synonyms</feature> files to include in the build. You can use wild cards. This path expression is used to create an <config-setting>include</config-setting> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy <feature>synonyms</feature> files to the build directory for inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -421,7 +421,7 @@
         <element-description>
             <xpath>/spfe/sources/other/include</xpath>
             <description>
-                <p>A path expression indicating other files to include in the build. You can use wild cards. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy other files to the build directory for inclusion in the build.</p>
+                <p>A path expression indicating other files to include in the build. You can use wild cards. This path expression is used to create an <config-setting>include</config-setting> element in an ANT <xml-element-name namespace-uri="ANT">files</xml-element-name> element that is used to copy other files to the build directory for inclusion in the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -432,7 +432,7 @@
         <element-description>
             <xpath>/spfe/condition-tokens</xpath>
             <description>
-                <p>The <spfe-config-element-name>condition-tokens</spfe-config-element-name> element specifies the <feature>condition tokens</feature> that will be applied to the build.</p>
+                <p>The <config-setting>condition-tokens</config-setting> element specifies the <feature>condition tokens</feature> that will be applied to the build.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -480,7 +480,7 @@
                 <p>Topic types in SPFE are identified by the namespace identifier of the topic
                     schema. In some cases, however, we need to display the topic type to the user.
                     For this purpose we need a user-friendly alias for the topic type. The
-                    <spfe-config-element-name>topic-type-aliases</spfe-config-element-name> element
+                    <config-setting>topic-type-aliases</config-setting> element
                     is a container for a list of topic type aliases that the build scripts can use
                     to display a user-friendly name for a topic type.</p>
             </description>
@@ -515,7 +515,7 @@
         <element-description>
             <xpath>/spfe/topic-type-aliases/topic-type/alias</xpath>
             <description>
-                <p>The alias for the topic type <spfe-config-element-name xpath="/spfe/topic-type-aliases/topic-type/id">id</spfe-config-element-name>, that is, a reader-friendly name for the topic type.</p>
+                <p>The alias for the topic type <config-setting xpath="/spfe/topic-type-aliases/topic-type/id">id</config-setting>, that is, a reader-friendly name for the topic type.</p>
             </description>
             <build-property/>
             <include-behavior/>
@@ -524,7 +524,7 @@
         <element-description>
             <xpath>/spfe/topic-type-aliases/topic-type/plural</xpath>
             <description>
-                <p>The plural version of the <spfe-config-element-name xpath="/spfe/topic-type-aliases/topic-type/alias">alias</spfe-config-element-name> for the topic type <spfe-config-element-name xpath="/spfe/topic-type-aliases/topic-type/id">id</spfe-config-element-name>.</p>
+                <p>The plural version of the <config-setting xpath="/spfe/topic-type-aliases/topic-type/alias">alias</config-setting> for the topic type <config-setting xpath="/spfe/topic-type-aliases/topic-type/id">id</config-setting>.</p>
             </description>
             <build-property/>
             <include-behavior/>
@@ -630,7 +630,7 @@
         <element-description>
             <xpath>/spfe/build/link-catalog-directory</xpath>
             <description>
-                <p>Specifies the directory where the link catalogs will be created. The link catalogs that will be read when linking the topic set are specified by <spfe-config-element-name>/spfe/sources/link-catalogs</spfe-config-element-name>.</p>
+                <p>Specifies the directory where the link catalogs will be created. The link catalogs that will be read when linking the topic set are specified by <config-setting>/spfe/sources/link-catalogs</config-setting>.</p>
             </description>
             <build-property>spfe.directories.link-catalogs</build-property>
             <include-behavior>
@@ -641,7 +641,7 @@
         <element-description>
             <xpath>/spfe/build/toc-directory</xpath>
             <description>
-                <p>Specifies the directory where the TOC files will be created by the topic set build. The TOCs that will be read when linking the topic set are specified by <spfe-config-element-name>/spfe/sources/tocs</spfe-config-element-name>.</p>
+                <p>Specifies the directory where the TOC files will be created by the topic set build. The TOCs that will be read when linking the topic set are specified by <config-setting>/spfe/sources/tocs</config-setting>.</p>
             </description>
             <build-property>spfe.directories.toc-directory</build-property>
             <include-behavior>
@@ -655,9 +655,9 @@
                 <p>Specifies the <feature>build directory</feature> used to store temporary files
                     (logs, fully resolved configuration files, scripts) generated during the build
                     process. The default is the value of
-                    <spfe-config-element-name>/spfe/topic-set-id</spfe-config-element-name> appended
+                    <config-setting>/spfe/topic-set-id</config-setting> appended
                     to the value of
-                    <spfe-config-element-name>/spfe/doc-set element</spfe-config-element-name>
+                    <config-setting>/spfe/doc-set element</config-setting>
                     appended to the value of the environment variable
                     <code>SPFE_BUILD_DIR</code>.</p>
             </description>
@@ -695,7 +695,7 @@
                     location where the documentation set is deployed. For local build purposes, the
                     location of the topic set files is the value of this path appended to the path
                     specified by
-                    <spfe-config-element-name>/spfe/build/output-directory</spfe-config-element-name>.</p>
+                    <config-setting>/spfe/build/output-directory</config-setting>.</p>
             </description>
             <build-property/>
             <include-behavior/>
@@ -704,7 +704,7 @@
         <element-description>
             <xpath>/spfe/scripts</xpath>
             <description>
-                <p>A container for the list of scripts to be used for each stage of the build process. Each build script for each stage should be written to use the standard SPFE interface for a script at that stage (which you can determine by examining the <file-name>spfe.rules</file-name> build rules file). Listing the full path of the script for each stage in this list will then cause that script to be called at the appropriate stage of the build process. If you need to change the interface to a script at a particular stage, you can override the build rule for that step by specifying a build rule with the same name as the one in <file-name>spfe.rules</file-name>. If you need to add additional steps, you can use the <spfe-config-element-name>/spfe/scripts/other</spfe-config-element-name>. If you do this, you must override the normal sequence in which the scripts are run in your local build rules file (the one specified by <spfe-config-element-name>/spfe/build/build-rules</spfe-config-element-name>).</p>
+                <p>A container for the list of scripts to be used for each stage of the build process. Each build script for each stage should be written to use the standard SPFE interface for a script at that stage (which you can determine by examining the <file-name>spfe.rules</file-name> build rules file). Listing the full path of the script for each stage in this list will then cause that script to be called at the appropriate stage of the build process. If you need to change the interface to a script at a particular stage, you can override the build rule for that step by specifying a build rule with the same name as the one in <file-name>spfe.rules</file-name>. If you need to add additional steps, you can use the <config-setting>/spfe/scripts/other</config-setting>. If you do this, you must override the normal sequence in which the scripts are run in your local build rules file (the one specified by <config-setting>/spfe/build/build-rules</config-setting>).</p>
                 <p>You may specify more than one script for each stage. The build will create a temporary script file that includes each of the scripts listed for each stage. One, and only one, of the included scripts must have a template named "main", which the build rule will call as the initial template (unless you have overridden the build rule for this step in your custom build file.</p>
                 <p>This mechanism for building the final script by including a list of specified scripts allows you to customize the build for each topic set while maintaining a high degree of modularity and reuse in your script collections. A typical way to use this mechanism would be to include a separate script at the presentation stage for each of the topic types included in the build. This mechanism does not prevent you from including one script file in another in the normal way, it just gives you a more flexible way of managing modular script files and assembling the right set for each topic set.</p>
             </description>
@@ -899,7 +899,7 @@
         <element-description>
             <xpath>/spfe/other</xpath>
             <description>
-                <p>You can use the <spfe-config-element-name>/spfe/other</spfe-config-element-name> element to add additional configuration settings to be used by your scripts of build files.</p>
+                <p>You can use the <config-setting>/spfe/other</config-setting> element to add additional configuration settings to be used by your scripts of build files.</p>
             </description>
             <build-property>spfe.other.{name}</build-property>
             <include-behavior>
@@ -922,11 +922,11 @@
                     is a collection of <feature>topic sets</feature>. To define a documentation set,
                     you list the configuration files for each topic set in the documentation set
                     using a
-                    <spfe-config-element-name>/spfe/doc-set/topic-sets/topic-set</spfe-config-element-name>
+                    <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting>
                     element.</p>
                 <p>To build a full documentation set, you simply run the <tool-name>spfe</tool-name>
                     build tool with a configuration file that contains a
-                    <spfe-config-element-name xpath="/spfe/doc-set">doc-set</spfe-config-element-name>
+                    <config-setting xpath="/spfe/doc-set">doc-set</config-setting>
                     element directly (not via inclusion). The build tool will then run whichever
                     build command you have specified on all the topic sets in the documentation set,
                     as well as creating the files that belong to the documentation set as a
@@ -934,7 +934,7 @@
             </description>
             <build-property/>
             <include-behavior>
-                <p><spfe-config-element-name>/spfe/doc-set</spfe-config-element-name> elements in included configuration files are ignored.</p>
+                <p><config-setting>/spfe/doc-set</config-setting> elements in included configuration files are ignored.</p>
             </include-behavior>
             <attributes>
                 <attribute>
@@ -967,7 +967,7 @@
         <element-description>
             <xpath>/spfe/doc-set/topic-sets/topic-set/id</xpath>
             <description>
-                <p>The topic set id of the included <feature>topic set</feature>, it should normally match the <spfe-config-element-name>/spfe/topic-set-id</spfe-config-element-name> element in the topic set's configuration file. It is also used to form file names and should be a valid file name on all target operating systems.</p>
+                <p>The topic set id of the included <feature>topic set</feature>, it should normally match the <config-setting>/spfe/topic-set-id</config-setting> element in the topic set's configuration file. It is also used to form file names and should be a valid file name on all target operating systems.</p>
             </description>
             <build-property/>
             <include-behavior/>
@@ -989,7 +989,7 @@
             </description>
             <build-property/>
             <include-behavior>
-                <p><spfe-config-element-name>/spfe/doc-set</spfe-config-element-name> elements in included configuration files are ignored.</p>
+                <p><config-setting>/spfe/doc-set</config-setting> elements in included configuration files are ignored.</p>
             </include-behavior>
         </element-description>
 
@@ -1016,7 +1016,7 @@
         <element-description>
             <xpath>/spfe/style/html-style-directories/include</xpath>
             <description>
-                <p>A path expression indicating style directories to be copied to the output. This path expression is used to create an <spfe-config-element-name>include</spfe-config-element-name> element in an ANT <xml-element-name namespace-uri="ANT">resources</xml-element-name> element that is used to copy style files to the output directory.</p>
+                <p>A path expression indicating style directories to be copied to the output. This path expression is used to create an <config-setting>include</config-setting> element in an ANT <xml-element-name namespace-uri="ANT">resources</xml-element-name> element that is used to copy style files to the output directory.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -1031,11 +1031,11 @@
                     determine the order in which topic sets type appear in the
                         <feature>documentation set</feature> table of contents. The order is set
                     using the
-                    <spfe-config-element-name>/spfe/doc-set/topic-set-type-order</spfe-config-element-name>
+                    <config-setting>/spfe/doc-set/topic-set-type-order</config-setting>
                     element. There are no special limits or requirements on this value. You can use
                     any topic set type names that make sense in your environment.  The value must
                     match one of the values in the element
-                    <spfe-config-element-name>/spfe/doc-set/topic-set-type-order</spfe-config-element-name>.</p>
+                    <config-setting>/spfe/doc-set/topic-set-type-order</config-setting>.</p>
             </description>
             <build-property/>
             <include-behavior>
@@ -1045,7 +1045,7 @@
         <element-description>
             <xpath>/spfe/doc-set/topic-set-type-order</xpath>
             <description>
-                <p>A string specifying the order in which the topic set type appears in the table of contents for a documentation set. It consists of topic set type names separated by spaces. The topic set type name for a topic set is set by the <spfe-config-element-name>/spfe/topic-set-type</spfe-config-element-name> element.</p>
+                <p>A string specifying the order in which the topic set type appears in the table of contents for a documentation set. It consists of topic set type names separated by spaces. The topic set type name for a topic set is set by the <config-setting>/spfe/topic-set-type</config-setting> element.</p>
             </description>
             <build-property/>
             <include-behavior/>
@@ -1053,7 +1053,7 @@
         <element-description>
             <xpath>/spfe/strings</xpath>
             <description>
-                <p>A container element for a list of <spfe-config-element-name>string</spfe-config-element-name> elements that define <feature>strings</feature> used by the tools or in content.</p>
+                <p>A container element for a list of <config-setting>string</config-setting> elements that define <feature>strings</feature> used by the tools or in content.</p>
             </description>
             <build-property/>
             <include-behavior>

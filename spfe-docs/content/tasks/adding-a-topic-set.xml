@@ -70,7 +70,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                             <p>Group new or existing topics under a different folder or chapter in the TOC—there is one folder for each topic set in the table of contents</p>
                         </li>
                         <li>
-                            <p>Change the order of topic sets in the TOC—the order of the folders in the table of contents is based on the <spfe-config-element-name>topic-set-order</spfe-config-element-name> element in the configuration file</p>
+                            <p>Change the order of topic sets in the TOC—the order of the folders in the table of contents is based on the <config-setting>topic-set-order</config-setting> element in the configuration file</p>
                         </li>
                     </ul>
             </how-to-answer-body>
@@ -83,41 +83,41 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                    <p>Create a topic set configuration file</p>
                </li>
                <li>
-                   <p>Add a new <spfe-config-element-name>/spfe/doc-set/topic-sets/topic-set</spfe-config-element-name> to the <feature>SPFE configuration file</feature></p>
+                   <p>Add a new <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting> to the <feature>SPFE configuration file</feature></p>
                </li>
            </ol>
            <p>In the topic set configuration file, include the following elements:</p>
            <ul>
                <li>
-                   <p><spfe-config-element-name>spfe</spfe-config-element-name>: The root element that specifies the schema of the configuration file. SPFE provides the spfe-config schema, or you can define your own. Each build configuration file in the document must follow the same schema.</p>
+                   <p><config-setting>spfe</config-setting>: The root element that specifies the schema of the configuration file. SPFE provides the spfe-config schema, or you can define your own. Each build configuration file in the document must follow the same schema.</p>
                </li>
                <li>
-                   <p>Define a unique TOPIC_SET_ID and a <spfe-config-element-name>topic-set-id</spfe-config-element-name> element, for example: <code><![CDATA[<define name="TOPIC_SET_ID" value="spfe-development-tasks"/>
+                   <p>Define a unique TOPIC_SET_ID and a <config-setting>topic-set-id</config-setting> element, for example: <code><![CDATA[<define name="TOPIC_SET_ID" value="spfe-development-tasks"/>
                         <topic-set-id>${TOPIC_SET_ID}</topic-set-id>]]></code></p>
                </li>
                <li>
-                   <p><spfe-config-element-name>/spfe/topic-set-type</spfe-config-element-name>: It determines where your topic set appears in the table of contents and it must match one of the entries in the <spfe-config-element-name>topic-set-type-order</spfe-config-element-name> element in the SPFE configuration file</p>
+                   <p><config-setting>/spfe/topic-set-type</config-setting>: It determines where your topic set appears in the table of contents and it must match one of the entries in the <config-setting>topic-set-type-order</config-setting> element in the SPFE configuration file</p>
                </li>
                <li>
-                   <p><spfe-config-element-name>/spfe/sources</spfe-config-element-name>: The list of directories that contain the contents of the topics</p>
+                   <p><config-setting>/spfe/sources</config-setting>: The list of directories that contain the contents of the topics</p>
                </li>
                <li>
-                   <p><spfe-config-element-name>/spfe/build</spfe-config-element-name>: The parameters that specify where to store files generated during the build</p>
+                   <p><config-setting>/spfe/build</config-setting>: The parameters that specify where to store files generated during the build</p>
                </li>
                <li>
-                   <p><spfe-config-element-name>/spfe/deployment</spfe-config-element-name>: The path to the output folder</p>
+                   <p><config-setting>/spfe/deployment</config-setting>: The path to the output folder</p>
                </li>
                <li>
-                   <p><spfe-config-element-name>/spfe/scripts</spfe-config-element-name>: the list of scripts to process the topic set; if you use an existing schema, you can reuse the existing scripts</p>
+                   <p><config-setting>/spfe/scripts</config-setting>: the list of scripts to process the topic set; if you use an existing schema, you can reuse the existing scripts</p>
                </li>
            </ul>
            <p>If you want content at the top level folder, you need an index topic.</p>
            <p>
  
                Key elements:
-               <spfe-config-element-name>/spfe/topic-set-id</spfe-config-element-name>, 
-               <spfe-config-element-name>string</spfe-config-element-name> - name that appears in the TOC
-               <spfe-config-element-name>default-topic-scope</spfe-config-element-name>, <spfe-config-element-name>default-subject-affinity-scope</spfe-config-element-name>
+               <config-setting>/spfe/topic-set-id</config-setting>, 
+               <config-setting>string</config-setting> - name that appears in the TOC
+               <config-setting>default-topic-scope</config-setting>, <config-setting>default-subject-affinity-scope</config-setting>
            </p>
             <p>When you build your documents, if your topic set appears in the table of contents in the order you specified by using the topic-set-type, you have successfully added your topic set.</p>   
        </doing>
