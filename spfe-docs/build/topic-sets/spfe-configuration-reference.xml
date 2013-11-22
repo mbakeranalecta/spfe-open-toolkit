@@ -65,9 +65,9 @@
         <link-catalog>
             <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
         </link-catalog>
-        <toc>
-            <script>../../scripts/toc/schema-toc.xsl</script>
-        </toc>
+        <manifest>
+            <script>../../scripts/manifest/schema-manifest.xsl</script>
+        </manifest>
         <image-list>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/image-handling/get-image-list.xsl</script>
         </image-list>

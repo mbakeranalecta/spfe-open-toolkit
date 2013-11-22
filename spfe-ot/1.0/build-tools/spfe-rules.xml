@@ -254,17 +254,17 @@
 		</xslt>
 	</target>
 	
-	<!-- target for toc -->
-	<target name="-build.toc" depends="--build.toc"/>
-	<target name="--build.toc" description="TOC step."
+	<!-- target for manifest -->
+	<target name="-build.manifest" depends="--build.manifest"/>
+	<target name="--build.manifest" description="manifest step."
 		depends=" -build.synthesis, -get-synthesis-file-list, -current.link-catalog"
 		unless="-current.link-catalog">
 		
 		<!-- run the XSLT script to produce the output -->
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			in="${spfe.config-file}"
-			style="${spfe.scripts.toc}"
-			out="${spfe.build.toc-directory}/${spfe.topic-set-id}.toc.xml">
+			style="${spfe.scripts.manifest}"
+			out="${spfe.build.manifest-directory}/${spfe.topic-set-id}.manifest.xml">
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="synthesis-files" expression="${synthesis-files}"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
@@ -288,7 +288,7 @@
 		depends="-build.synthesis, 
 				 -get-synthesis-file-list,
 				 -build.link-catalog,
-				 -build.toc,
+				 -build.manifest,
 				 -current.presentation-web, 
 				 -get.source-files.graphics-catalog,
 				 -get.source-files.strings"
@@ -363,7 +363,7 @@
 			<include name="presentation/*.xml"/>
 		</fileset>
 		<pathconvert dirsep="/" pathsep=";" property="presentation-files" refid="presentation-file-list"/>
-		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
+		<pathconvert property="manifest-files"  dirsep="/" pathsep=";" refid="tocs"/>	
 
 		
 		<!-- run the XSLT script to produce the output -->
@@ -373,7 +373,7 @@
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 			<param name="presentation-files" expression="${presentation-files}"/>
-			<param name="toc-files" expression="${toc-files}"/>
+			<param name="manifest-files" expression="${manifest-files}"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
 			</factory>
@@ -400,7 +400,7 @@
 		</fileset> 
 		<pathconvert dirsep="/" pathsep=";" property="presentation-files" refid="presentation-file-list"/>
 
-		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
+		<pathconvert property="manifest-files"  dirsep="/" pathsep=";" refid="tocs"/>	
 		
 		<!-- run the XSLT script to produce the output -->
 		
@@ -410,7 +410,7 @@
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 			<param name="presentation-files" expression="${presentation-files}"/>
-			<param name="toc-files" expression="${toc-files}"/>
+			<param name="manifest-files" expression="${manifest-files}"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
 			</factory>
@@ -606,15 +606,15 @@
 		<antcall target="-build.link-catalog"/>
 	</target>
 	
-	<!-- TOC -->
-	<target name="toc" depends="-init">
+	<!-- manifest -->
+	<target name="manifest" depends="-init">
 		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
-		<antcall target="-toc"/>
+		<antcall target="-manifest"/>
 		<delete file="${temp}/incomplete.flag"/>
 	</target>
 	
-	<target name="-toc" description="Build all tocs">
-		<antcall target="-build.toc"/>
+	<target name="-manifest" description="Build all tocs">
+		<antcall target="-build.manifest"/>
 	</target>
 	
 	<!-- REPORT -->

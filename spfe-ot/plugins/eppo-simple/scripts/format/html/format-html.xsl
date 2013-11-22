@@ -18,14 +18,14 @@
 		<xsl:sequence select="/config:spfe"/>
 	</xsl:variable>
 	
-	<xsl:param name="toc-files"/>
-	<xsl:variable name="unsorted-toc" >
-		<xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file:')"/>
-		<xsl:if test="count(distinct-values($temp-tocs/toc/@topic-set-id)) lt count($temp-tocs/toc)">
+	<xsl:param name="manifest-files"/>
+	<xsl:variable name="unsorted-manifest" >
+		<xsl:variable name="temp-tocs" select="sf:get-sources($manifest-files, 'Loading manifest file:')"/>
+		<xsl:if test="count(distinct-values($temp-tocs/manifest/@topic-set-id)) lt count($temp-tocs/manifest)">
 			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message">
-					<xsl:text>Duplicate TOCs detected.&#x000A; There appears to be more than one TOC in scope for the same topic set. Topic set IDs encountered include:&#x000A;</xsl:text>
-					<xsl:for-each select="$temp-tocs/toc">
+					<xsl:text>Duplicate TOCs detected.&#x000A; There appears to be more than one manifest in scope for the same topic set. Topic set IDs encountered include:&#x000A;</xsl:text>
+					<xsl:for-each select="$temp-tocs/manifest">
 						<xsl:value-of select="@topic-set-id,'&#x000A;'"/>
 					</xsl:for-each>
 				</xsl:with-param>
@@ -34,18 +34,18 @@
 		<xsl:sequence select="$temp-tocs"/>
 	</xsl:variable>
 	
-	<xsl:variable name="toc">
+	<xsl:variable name="manifest">
 		<xsl:choose>
 			<xsl:when test="normalize-space($config/config:doc-set/config:topic-set-type-order)">
 				<xsl:variable name="topic-set-type-order" select="tokenize($config/config:doc-set/config:topic-set-type-order, ',\s*')"/>
 				
 				<!-- Make sure there is an entry on the topic set type order list for every topic set type. -->
-				<xsl:variable name="topic-set-types-found" select="distinct-values($unsorted-toc/toc/@topic-set-type)"/>
+				<xsl:variable name="topic-set-types-found" select="distinct-values($unsorted-manifest/manifest/@topic-set-type)"/>
 				
 				<!-- Make sure all the topic set types appear on the topic type order list -->
 				<xsl:call-template name="sf:info">
 					<xsl:with-param name="message">
-						<xsl:text>Ordering the TOC acording the the topic set type list:</xsl:text>
+						<xsl:text>Ordering the manifest acording the the topic set type list:</xsl:text>
 						<xsl:value-of select="$config/config:doc-set/config:topic-set-type-order"/>
 					</xsl:with-param>
 				</xsl:call-template>				
@@ -58,7 +58,7 @@
 
 				<xsl:for-each select="$topic-set-type-order">
 					<xsl:variable name="this-topic-set-type" select="."/>
-					<xsl:for-each select="$unsorted-toc/toc[@topic-set-type eq $this-topic-set-type]">
+					<xsl:for-each select="$unsorted-manifest/manifest[@topic-set-type eq $this-topic-set-type]">
 						<xsl:sequence select="."/>
 					</xsl:for-each>
 				</xsl:for-each>
@@ -68,22 +68,22 @@
 				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message">
 						<!-- FIXME: Should test for the two conditions subject-affinityed below. -->
-						<xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/doc-set configuration setting. External TOC files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
+						<xsl:text>Topic set type order not specified. manifest will be in the order topic sets are listed in the /spfe/doc-set configuration setting. External manifest files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
 				<xsl:for-each select="$config/config:doc-set/config:topic-sets/config:topic-set">
 					<xsl:variable name="id" select="config:id"/>
-					<xsl:sequence select="$unsorted-toc/toc[@topic-set-id eq $id]"/>
+					<xsl:sequence select="$unsorted-manifest/manifest[@topic-set-id eq $id]"/>
 				</xsl:for-each>
 				
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message">
-						<xsl:text>Doc set configuration not found in config file. TOC will be in alphabetical order by topic-set-type.</xsl:text>
+						<xsl:text>Doc set configuration not found in config file. manifest will be in alphabetical order by topic-set-type.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
-				<xsl:for-each select="$unsorted-toc/toc">
+				<xsl:for-each select="$unsorted-manifest/manifest">
 					<xsl:sort select="@topic-set-type"/>
 					<xsl:sequence select="."/>
 				</xsl:for-each>
@@ -128,7 +128,7 @@
 			</script>
 			<script type="text/javascript" class="source below">
 			$(function () {
-				$("#toc")
+				$("#manifest")
 					.jstree({         
 					    "themes" : {
 			            "theme" : "default",
@@ -247,10 +247,10 @@
 						<hr/>
 					</div>
 				</xsl:if>
-				<div id="toc-container" >
-					<div id="toc">
+				<div id="manifest-container" >
+					<div id="manifest">
 						<ul>
-							<xsl:apply-templates select="$toc">
+							<xsl:apply-templates select="$manifest">
 								<xsl:with-param name="page-name" select="$page-name" tunnel="yes"/>
 							</xsl:apply-templates>
 						</ul>
@@ -347,7 +347,7 @@
 
 	<xsl:template match="page/title">
 		<h1><xsl:apply-templates/></h1>
-		<!-- page toc -->
+		<!-- page manifest -->
 		<xsl:if test="count(../section/title) gt 1">
 			<ul>
 				<xsl:for-each select="../section/title">
@@ -764,10 +764,10 @@
 	
 	
 	
-	<xsl:template match="toc">
+	<xsl:template match="manifest">
 		<xsl:param name="page-name" tunnel="yes"/>
 		<xsl:variable name="branch" select="generate-id()"/>
-		<xsl:variable name="toc-id" select="concat('toc', $branch)"/>
+		<xsl:variable name="manifest-id" select="concat('manifest', $branch)"/>
 		<xsl:variable name="open-state-class" select="if ($page-name = descendant::node/@id) then 'jstree-open' else 'jstree-closed'"></xsl:variable>
 		
     	<xsl:variable name="relative-path">

@@ -80,15 +80,15 @@
         <link-catalogs>
             <include>${SPFE_BUILD}/link-catalogs/*.xml</include>
         </link-catalogs>
-        <tocs>
-            <include>${SPFE_BUILD}/tocs/*.toc.xml</include>
-        </tocs>
+        <manifests>
+            <include>${SPFE_BUILD}/manifests/*.manifest.xml</include>
+        </manifests>
     </sources>
     
     <build>
         <link-catalog-directory>${SPFE_BUILD}/link-catalogs</link-catalog-directory>
         <output-directory>${SPFE_DOCS}/output</output-directory>
-        <toc-directory>${SPFE_BUILD}/tocs</toc-directory>
+        <manifest-directory>${SPFE_BUILD}/manifests</manifest-directory>
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
     </build>
     
@@ -108,9 +108,9 @@
         <format-html>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/format/html/format-html.xsl</script>
         </format-html>
-        <toc>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-toc.xsl</script>
-        </toc>
+        <manifest>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-manifest.xsl</script>
+        </manifest>
     </scripts>
     
     <style>

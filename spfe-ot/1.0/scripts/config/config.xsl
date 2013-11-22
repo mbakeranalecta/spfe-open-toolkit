@@ -281,19 +281,19 @@
                         </xsl:for-each>
                     </target>
                     
-                    <target name="toc" depends="config"> 
+                    <target name="manifest" depends="config"> 
                         <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
                                 select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
                             
                             <xsl:call-template name="create-run-command">
-                                <xsl:with-param name="build-command" select="'toc'"/>
+                                <xsl:with-param name="build-command" select="'manifest'"/>
                                 <xsl:with-param name="antfile" select="$antfile"/>
                             </xsl:call-template>
                         </xsl:for-each>
                     </target>
                     
-                    <target name="draft" depends="config, toc, cat"> 
+                    <target name="draft" depends="config, manifest, cat"> 
                         <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
                                 select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
@@ -305,7 +305,7 @@
                         </xsl:for-each>
                     </target>
                     
-                    <target name="final" depends="config, toc, cat"> 
+                    <target name="final" depends="config, manifest, cat"> 
                         <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
                                 select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
@@ -317,7 +317,7 @@
                         </xsl:for-each>
                     </target>
                     
-                    <target name="pdf" depends="config, toc, cat"> 
+                    <target name="pdf" depends="config, manifest, cat"> 
                         <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                             <xsl:variable name="antfile" 
                                 select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
@@ -360,7 +360,7 @@
                   <property name="spfe.build.output-directory" value="{if (normalize-space(($config/deployment/output-path)[1])) then concat(($config/build/output-directory)[1], '/', ($config/deployment/output-path)[1]) else ($config/build/output-directory)[1]}"/>
                   
                   <xsl:sequence select="spfe:xml2properties(($config/build/link-catalog-directory)[1], 'spfe.build')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/build/toc-directory)[1], 'spfe.build')"/>
+                  <xsl:sequence select="spfe:xml2properties(($config/build/manifest-directory)[1], 'spfe.build')"/>
                   <xsl:sequence select="spfe:xml2properties((spfe:URL-to-local(resolve-uri(($config/build/build-rules)[1], ($config/build/build-rules)[1]/@base-uri))), 'spfe.build')"/>
                   
                   <xsl:sequence select="spfe:xml2properties(($config/deployment/output-path)[1], 'spfe.deployment')"/>
@@ -533,10 +533,10 @@
                         <xsl:attribute name="base-uri" select="base-uri(.)"/>
                         <xsl:copy-of select="translate(($config/build/link-catalog-directory)[1], '\', '/')"/>
                     </link-catalog-directory>
-                    <toc-directory>
+                    <manifest-directory>
                         <xsl:attribute name="base-uri" select="base-uri(.)"/>
-                        <xsl:copy-of select="translate(($config/build/toc-directory)[1], '\', '/')"/>
-                    </toc-directory>
+                        <xsl:copy-of select="translate(($config/build/manifest-directory)[1], '\', '/')"/>
+                    </manifest-directory>
                 </build>
                 <deployment>
                     <output-path>
