@@ -50,7 +50,7 @@
                 to get information about Java and to download the installer. If you use a Linux
                 distribution that includes a package management system, such as RedHat or Debian, 
                 you may be able to install Java using the package manager. Ensure that you install the
-                <bold>Java Development Kit</bold>, not the Java Runtime Environment.</p>
+                <tool-name>Java Development Kit</tool-name>, not the <tool-name>Java Runtime Environment</tool-name>.</p>
             <p>You can download ANT from <url>http://ant.apache.org</url>. If you use Linux, you
                 may be able to install it using the package management system or by using an RPM
                 from the website. For full installation instructions, follow the instructions in the
@@ -78,17 +78,17 @@
                    ANT_HOME=/usr/local/ant
                    AVA_HOME=/usr/local/jdk-1.5.0.05
                </codeblock>
-            <p>Ensure that your PATH environment variable includes ANT_HOME\bin.</p>
+            <p>Ensure that your <code>PATH</code> environment variable includes ANT_HOME\bin.</p>
              <p> You also need to set the SPFE environment variable SPFEOT_HOME and include it in
                 your PATH environment variable. For example:</p>
             <ul>
                 <li>
-                    <p>Windows: If you installed SPFE in C:\Users\yourname\Documents:  
+                    <p>Windows: If you installed SPFE in <directory-name>C:\Users\yourname\Documents</directory-name>:  
                     <code>SPFEOT_HOME=C:\Users\yourname\Documents\spfe\spfe-ot</code>
                     </p>
                 </li>
                 <li>
-                    <p>Linux: If you installed SPFE in /home/yourname:  
+                    <p>Linux: If you installed SPFE in <directory-name>/home/yourname</directory-name>:  
                     <code>SPFEOT_HOME=/home/yourname/spfe/spfe-ot</code>
                     </p>
                 </li>
