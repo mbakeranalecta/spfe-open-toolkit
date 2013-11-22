@@ -13,16 +13,14 @@
         </xsl:element>
     </xsl:template>    
     
-    <xsl:template match="*:spfe-config-attribute-name">
+    <xsl:template match="*:ant-element">
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">xpath</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
-            <xsl:attribute name="namespace">http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</xsl:attribute>             <xsl:if test="@namespace">
-                <xsl:attribute name="namespace" select="@namespace"/> 
-            </xsl:if>
+            <xsl:attribute name="namespace">ANT</xsl:attribute> 
             <xsl:apply-templates/>
         </xsl:element>
-    </xsl:template>   
+    </xsl:template> 
     
     <xsl:template match="*:spfe-build-property">
         <xsl:element name="name" namespace="{$output-namespace}">

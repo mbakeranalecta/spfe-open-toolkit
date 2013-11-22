@@ -62,19 +62,10 @@ Main template
 -->
 	
 <xsl:template name="main">
-<!--		<xsl:message>
-======================================================
-	</xsl:message>
-	<xsl:message select="'$authored-content-files=',$authored-content-files"/>
-	<xsl:message select="'$extracted-content-files=',$extracted-content-files"/>
-	<xsl:message terminate="yes">
-======================================================
-	</xsl:message>-->
-	
 	<!-- Create the schema element topic set -->
-		<xsl:for-each-group select="$doctypes/doctype" group-by="@name">
-			<xsl:variable name="root" select=".[sf:longest-string(@xpath)]/@xpath"/>
-			<xsl:variable name="current-doctype" select="@name"/>
+	<xsl:for-each-group select="$doctypes/doctype" group-by="@name">
+		<xsl:variable name="root" select=".[sf:longest-string(@xpath)]/@xpath"/>
+		<xsl:variable name="current-doctype" select="@name"/>
 			
 		<xsl:result-document 
 			 method="xml" 
@@ -82,17 +73,16 @@ Main template
 			 omit-xml-declaration="no" 
 			 href="file:///{$synthesis-directory}/{@name}.xml">
 			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
-					<!-- Use for-each-group to filter out duplicate xpaths -->
-					<xsl:for-each-group select="$schema-defs/schema-definitions/schema-element[starts-with(xpath, $root) or belongs-to-group]" group-by="xpath">
-						<xsl:apply-templates select=".">
-							<xsl:with-param name="source" select="$element-source//ed:element-description"/>
-							<xsl:with-param name="current-doctype" select="$current-doctype"/>
-						</xsl:apply-templates>
-					</xsl:for-each-group>
-				</ss:synthesis>
-			</xsl:result-document>
-		</xsl:for-each-group>
-		
+				<!-- Use for-each-group to filter out duplicate xpaths -->
+				<xsl:for-each-group select="$schema-defs/schema-definitions/schema-element[starts-with(xpath, $root) or belongs-to-group]" group-by="xpath">
+					<xsl:apply-templates select=".">
+						<xsl:with-param name="source" select="$element-source//ed:element-description"/>
+						<xsl:with-param name="current-doctype" select="$current-doctype"/>
+					</xsl:apply-templates>
+				</xsl:for-each-group>
+			</ss:synthesis>
+		</xsl:result-document>
+	</xsl:for-each-group>
 </xsl:template>
 
 <!-- 
@@ -366,7 +356,7 @@ Content fix-up templates
 <!-- FIXME: Are these in the right namespace to match?" -->
 
 <!-- Fix up attribute name xpaths -->
-<xsl:template match="ed:spfe-config-attribute-name">
+<xsl:template match="ed:config-setting">
 	<xsl:variable name="context-element" select="ancestor::ed:element-description/ed:xpath"/>
 	<xsl:variable name="data-content" select="."/>
 	<xsl:variable name="xpath" select="@xpath"/>

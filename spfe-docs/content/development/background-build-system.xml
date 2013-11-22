@@ -78,7 +78,7 @@
             set. </p>
         <p>If the configuration file defines a <config-setting>/spfe/doc-set</config-setting>
             element, the <file-name>config.xsl</file-name> script creates a file for each topic set
-            listed in the <config-setting xpath="/spfe/doc-set">/spfe/doc-set</config-setting>
+            listed in the <config-setting>/spfe/doc-set</config-setting>
             element. Each file contains the properties and definitions for the topic set. The build
             file contains the information to run the build command for each topic set and uses the
             topic set specific files. Essentially, each topic set build is done independently using

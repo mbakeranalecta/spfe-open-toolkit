@@ -112,7 +112,8 @@
                        | *:file-name
                        | *:product-name
                        | *:tool-name
-                       | *:xml-namespace-uri">
+                       | *:xml-namespace-uri
+                       | *:url">
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type" select="local-name()"/>
             <xsl:attribute name="key" select="normalize-space(.)"/>

@@ -60,7 +60,7 @@
                     output and provided as input to each stage of the build in the subdirectory
                         <directory-name>temp</directory-name>. If you do not define this element,
                     the default is composed of the values of
-                    <code>SPFE_BUILD_DIR</code>/<spfe-config-attribute-name>doc-set@id</spfe-config-attribute-name>/<config-setting>topic-set-id</config-setting>. </p>
+                    <code>SPFE_BUILD_DIR</code>/<config-setting>doc-set@id</config-setting>/<config-setting>topic-set-id</config-setting>. </p>
             </li>
             <li>
                 <p><config-setting>/spfe/build/link-catalog-directory</config-setting>: Stores

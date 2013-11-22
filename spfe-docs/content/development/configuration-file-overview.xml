@@ -37,7 +37,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
                 <term>{configuration file}</term>
             </entry>
             <entry>
-                <type>xpath</type>
+                <type>config-setting</type>
                 <term>/spfe</term>
             </entry>
         </index>
@@ -85,7 +85,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
                     a user-friendly name for a topic set in the table of contents, and you have
                     multiple topic sets that use the same topic schema, define this element in the
                     main configuration file. The value of the
-                    /<spfe-config-attribute-name>spfe/topic-aliases/topic-type/@alias</spfe-config-attribute-name>
+                    /<config-setting>spfe/topic-aliases/topic-type/@alias</config-setting>
                     attribute appears in the table of contents for the documentation set. Each topic
                     set schema can have only one alias, even if multiple topic sets use the same
                     schema.</p>

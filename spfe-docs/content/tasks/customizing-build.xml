@@ -31,7 +31,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
             </entry>
             -->
             <entry>
-                <type>xpath</type>
+                <type>config-setting</type>
                 <term>/spfe</term>
             </entry>
         </index>

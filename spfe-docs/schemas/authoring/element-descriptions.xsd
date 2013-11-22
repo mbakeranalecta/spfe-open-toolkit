@@ -8,7 +8,9 @@
 	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/tracking.xsd"/>
 	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/conditions.xsd"/>
 	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/text-decoration.xsd"/>	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/strings.xsd"/>
-	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/subject-affinities/subject-affinities-xml.xsd"/>		
+	<xs:include
+		schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/subject-affinities/subject-affinities-spfe-build.xsd"/>		
+	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/subject-affinities/subject-affinities-xml.xsd"/>
 	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/modules/subject-affinities/subject-affinities-general.xsd"/>
 	<xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/subject-affinities/subject-affinities-spfe-build.xsd"/>	
 	

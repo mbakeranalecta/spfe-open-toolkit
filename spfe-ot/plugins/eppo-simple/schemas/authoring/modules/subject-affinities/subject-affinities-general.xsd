@@ -14,7 +14,7 @@
             <xs:enumeration value="tool-name"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:group name="subject-affinities-general">
         <xs:choice>
             <xs:element name="directory-name"/>
@@ -25,6 +25,7 @@
             <xs:element name="task"/>
             <xs:element name="term"/>
             <xs:element name="tool-name"/>
+            <xs:element name="url"/>
         </xs:choice>
     </xs:group>
 </xs:schema>

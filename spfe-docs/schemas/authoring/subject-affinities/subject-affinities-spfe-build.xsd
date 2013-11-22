@@ -5,7 +5,7 @@
     <xs:simpleType name="subject-affinities-spfe-build">
         <xs:restriction base="xs:string">
             <xs:enumeration value="config-setting"/>
-            <xs:enumeration value="spfe-config-attribute-name"/>
+            <xs:enumeration value="config-setting"/>
             <xs:enumeration value="spfe-build-property"/>
         </xs:restriction>
     </xs:simpleType>
@@ -21,16 +21,9 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="spfe-config-attribute-name">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attribute name="xpath" use="optional"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xs:element>
             <xs:element name="spfe-build-property" type="xs:NCName"/>
+            <xs:element name="ant-element" type="xs:string"> </xs:element>
+
         </xs:choice>
     </xs:group>
 

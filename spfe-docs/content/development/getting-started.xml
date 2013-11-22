@@ -38,7 +38,7 @@
         <title>Getting started with the SPFE build system</title>      
         <p>You can run the SPFE build system on Windows or Linux. To begin building your documents
             with SPFE, you need to download the SPFE Toolkit from GitHub at
-                <xpath>https://github.com/mbakeranalecta/spfe-open-toolkit</xpath>. You also need to
+                <url>http://github.com/mbakeranalecta/spfe-open-toolkit</url>. You also need to
             ensure that you have the required third-party packages installed on your computer and
             that you set the required environment variables. </p>     
         <section>
@@ -46,12 +46,12 @@
             <p>To use the SPFE build system, you need to install Apache ANT and the Java Development Kit (JDK). Note that both ANT and SPFE require Java.
             </p>
             <p> Visit
-                    <xpath>http://www.oracle.com/technetwork/java/javase/overview/index.html</xpath>
+                    <url>http://www.oracle.com/technetwork/java/javase/overview/index.html</url>
                 to get information about Java and to download the installer. If you use a Linux
                 distribution that includes a package management system, such as RedHat or Debian, 
                 you may be able to install Java using the package manager. Ensure that you install the
                 <bold>Java Development Kit</bold>, not the Java Runtime Environment.</p>
-            <p>You can download ANT from <xpath>http://ant.apache.org</xpath>. If you use Linux, you
+            <p>You can download ANT from <url>http://ant.apache.org</url>. If you use Linux, you
                 may be able to install it using the package management system or by using an RPM
                 from the website. For full installation instructions, follow the instructions in the
                 ANT manual on the ANT website.</p> 

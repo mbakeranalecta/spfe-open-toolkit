@@ -45,7 +45,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <term>{add} a {documentation set}</term>
             </entry>
             <entry>
-                <type>xpath</type>
+                <type>config-setting</type>
                 <term>/spfe</term>
             </entry>
         </index>
@@ -83,7 +83,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 one topic set. You need the following mandatory attributes and elements: </p>
             <ul>
                 <li>
-                    <p><spfe-config-attribute-name>/spfe/doc-set/@id</spfe-config-attribute-name>: The name of the
+                    <p><config-setting>/spfe/doc-set/@id</config-setting>: The name of the
                         documentation set. The build system uses the value to create a directory
                         name and it must be a valid directory name in the operating system that runs
                         the build system. </p>
@@ -102,11 +102,11 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 <li>
                     <p><config-setting>/spfe/doc-set/topic-sets</config-setting>: The list of
                         the topic sets to include in the documentation set. The value of the
-                        <spfe-config-attribute-name>/spfe/doc-set/topic-sets@id</spfe-config-attribute-name>
+                        <config-setting>/spfe/doc-set/topic-sets@id</config-setting>
                         attribute should match the
                         <config-setting>/spfe/topic-set-id</config-setting> for the topic set
                         and the
-                        <spfe-config-attribute-name>/spfe/doc-set/topic-sets@href</spfe-config-attribute-name>
+                        <config-setting>/spfe/doc-set/topic-sets@href</config-setting>
                         attribute is the URL of the topic set configuration file.</p>
                 </li>    
             </ul>
@@ -132,7 +132,7 @@ http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
                 </doc-set>]]>
             </codeblock>
             <p>This documentation set includes three topic sets, each with their own configuration
-                file, which is specified by the <spfe-config-attribute-name>href</spfe-config-attribute-name>
+                file, which is specified by the <config-setting>href</config-setting>
                 attribute of the
                 <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting> element. The
                 path is relative to the location of the configuration file that defines the doc-set

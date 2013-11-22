@@ -71,7 +71,7 @@
 
     <xs:group name="subject-affinities">
         <xs:choice>
-            <xs:group ref="subject-affinities-xml"/>
+           <!-- <xs:group ref="subject-affinities-xml"/>-->
             <xs:group ref="subject-affinities-xslt"/>
             <xs:group ref="subject-affinities-general"/>
             <xs:group ref="subject-affinities-spfe-build"/>
