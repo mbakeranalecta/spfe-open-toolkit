@@ -18,14 +18,14 @@
 		<xsl:sequence select="/config:spfe"/>
 	</xsl:variable>
 	
-	<xsl:param name="manifest-files"/>
-	<xsl:variable name="unsorted-manifest" >
-		<xsl:variable name="temp-tocs" select="sf:get-sources($manifest-files, 'Loading manifest file:')"/>
-		<xsl:if test="count(distinct-values($temp-tocs/manifest/@topic-set-id)) lt count($temp-tocs/manifest)">
+	<xsl:param name="toc-files"/>
+	<xsl:variable name="unsorted-toc" >
+		<xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file:')"/>
+		<xsl:if test="count(distinct-values($temp-tocs/toc/@topic-set-id)) lt count($temp-tocs/toc)">
 			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message">
-					<xsl:text>Duplicate TOCs detected.&#x000A; There appears to be more than one manifest in scope for the same topic set. Topic set IDs encountered include:&#x000A;</xsl:text>
-					<xsl:for-each select="$temp-tocs/manifest">
+					<xsl:text>Duplicate TOCs detected.&#x000A; There appears to be more than one TOC in scope for the same topic set. Topic set IDs encountered include:&#x000A;</xsl:text>
+					<xsl:for-each select="$temp-tocs/toc">
 						<xsl:value-of select="@topic-set-id,'&#x000A;'"/>
 					</xsl:for-each>
 				</xsl:with-param>
@@ -34,18 +34,18 @@
 		<xsl:sequence select="$temp-tocs"/>
 	</xsl:variable>
 	
-	<xsl:variable name="manifest">
+	<xsl:variable name="toc">
 		<xsl:choose>
 			<xsl:when test="normalize-space($config/config:doc-set/config:topic-set-type-order)">
 				<xsl:variable name="topic-set-type-order" select="tokenize($config/config:doc-set/config:topic-set-type-order, ',\s*')"/>
 				
 				<!-- Make sure there is an entry on the topic set type order list for every topic set type. -->
-				<xsl:variable name="topic-set-types-found" select="distinct-values($unsorted-manifest/manifest/@topic-set-type)"/>
+				<xsl:variable name="topic-set-types-found" select="distinct-values($unsorted-toc/toc/@topic-set-type)"/>
 				
 				<!-- Make sure all the topic set types appear on the topic type order list -->
 				<xsl:call-template name="sf:info">
 					<xsl:with-param name="message">
-						<xsl:text>Ordering the manifest acording the the topic set type list:</xsl:text>
+						<xsl:text>Ordering the TOC acording the the topic set type list:</xsl:text>
 						<xsl:value-of select="$config/config:doc-set/config:topic-set-type-order"/>
 					</xsl:with-param>
 				</xsl:call-template>				
@@ -58,7 +58,7 @@
 
 				<xsl:for-each select="$topic-set-type-order">
 					<xsl:variable name="this-topic-set-type" select="."/>
-					<xsl:for-each select="$unsorted-manifest/manifest[@topic-set-type eq $this-topic-set-type]">
+					<xsl:for-each select="$unsorted-toc/toc[@topic-set-type eq $this-topic-set-type]">
 						<xsl:sequence select="."/>
 					</xsl:for-each>
 				</xsl:for-each>
@@ -68,22 +68,22 @@
 				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message">
 						<!-- FIXME: Should test for the two conditions subject-affinityed below. -->
-						<xsl:text>Topic set type order not specified. manifest will be in the order topic sets are listed in the /spfe/doc-set configuration setting. External manifest files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
+						<xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/doc-set configuration setting. External TOC files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
 				<xsl:for-each select="$config/config:doc-set/config:topic-sets/config:topic-set">
 					<xsl:variable name="id" select="config:id"/>
-					<xsl:sequence select="$unsorted-manifest/manifest[@topic-set-id eq $id]"/>
+					<xsl:sequence select="$unsorted-toc/toc[@topic-set-id eq $id]"/>
 				</xsl:for-each>
 				
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message">
-						<xsl:text>Doc set configuration not found in config file. manifest will be in alphabetical order by topic-set-type.</xsl:text>
+						<xsl:text>Doc set configuration not found in config file. TOC will be in alphabetical order by topic-set-type.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
-				<xsl:for-each select="$unsorted-manifest/manifest">
+				<xsl:for-each select="$unsorted-toc/toc">
 					<xsl:sort select="@topic-set-type"/>
 					<xsl:sequence select="."/>
 				</xsl:for-each>
@@ -116,34 +116,6 @@
 			</xsl:for-each>
 			
 			<link rel="stylesheet" type="text/css" href="style/eppo-simple.css"/>
-			<link rel="stylesheet" type="text/css" href="style/treeview/css/multi/tree.css"/>
-			<link rel="stylesheet" type="text/css" href="style/colorbox/colorbox.css"/> 
-			<script type="text/javascript" src="style/jquery-1.7.2.min.js">&#160;</script>
-			<script type="text/javascript" src="style/colorbox/jquery.colorbox-min.js">&#160;</script>
-			<script type="text/javascript" src="style/jstree/jquery.jstree.js">&#160;</script>
-			<script type="text/javascript" >
-			$(document).ready(function(){
-				$(".inline").colorbox({inline:true, width:"50%"});
-			});
-			</script>
-			<script type="text/javascript" class="source below">
-			$(function () {
-				$("#manifest")
-					.jstree({         
-					    "themes" : {
-			            "theme" : "default",
-			            "dots" : false,
-			            "icons" : false
-			        },
-			        "plugins" : ["themes","html_data"] })
-					// 1) the loaded event fires as soon as data is parsed and inserted
-					.bind("loaded.jstree", function (event, data) { })
-					// 2) but if you are using the cookie plugin or the core `initially_open` option:
-					.one("reopen.jstree", function (event, data) { })
-					// 3) but if you are using the cookie plugin or the UI `initially_select` option:
-					.one("reselect.jstree", function (event, data) { });
-			});
-			</script>			
 		</head>
 	</xsl:function>
 	
@@ -247,15 +219,6 @@
 						<hr/>
 					</div>
 				</xsl:if>
-				<div id="manifest-container" >
-					<div id="manifest">
-						<ul>
-							<xsl:apply-templates select="$manifest">
-								<xsl:with-param name="page-name" select="$page-name" tunnel="yes"/>
-							</xsl:apply-templates>
-						</ul>
-					</div>
-				</div>
 				
 				<div id="main-container">
 					<div id="main">
@@ -286,7 +249,7 @@
 			</h4>
 		</xsl:if>
 		<table>
-			<xsl:attribute name="class" select="if (@hint) then @hint else 'BA_basic'"/>
+			<xsl:attribute name="class" select="if (@hint) then @hint else 'simple'"/>
 			<xsl:apply-templates>
 				<xsl:with-param name="column-width-weights" select="@column-width-weights" tunnel="yes"/>
 			</xsl:apply-templates>
@@ -347,7 +310,7 @@
 
 	<xsl:template match="page/title">
 		<h1><xsl:apply-templates/></h1>
-		<!-- page manifest -->
+		<!-- page toc -->
 		<xsl:if test="count(../section/title) gt 1">
 			<ul>
 				<xsl:for-each select="../section/title">
@@ -463,10 +426,10 @@
 	
 	<xsl:template match="note">
 		<div align="left">
-			<table class="N1_note" border="0" cellpadding="0" cellspacing="6">
+			<table class="note" border="0" cellpadding="0" cellspacing="6">
 				<tr align="left" valign="top">
 					<td/>
-					<td class="N1_note_content">
+					<td class="note-content">
 						<xsl:apply-templates/>
 					</td>
 				</tr>
@@ -479,21 +442,21 @@
 	</xsl:template>
 	
 	<xsl:template match="note/p[1]">
-		<p class="pzzBodyNote">
+		<p class="note-body">
 			<b class="cBold">NOTE: </b>
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>		
 	
 	<xsl:template match="caution/p[1]">
-		<p class="pzzBodyNote">
+		<p class="caution-body">
 			<b class="cBold">CAUTION: </b>
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>	
 	
 	<xsl:template match="warning/p[1]">
-		<p class="pzzBodyNote">
+		<p class="warning-body">
 			<b class="cBold">WARNING: </b>
 			<xsl:apply-templates/>
 		</p>
@@ -501,10 +464,10 @@
 	
 	<xsl:template match="caution">
 		<div align="left">
-			<table class="C1_caution" border="0" cellpadding="0" cellspacing="6">
+			<table class="caution" border="0" cellpadding="0" cellspacing="6">
 				<tr align="left" valign="top">
 					<td/>
-					<td class="C1_caution_content">
+					<td class="caution-content">
 						<xsl:apply-templates/>
 					</td>
 				</tr>
@@ -523,10 +486,10 @@
 	
 	<xsl:template match="warning">
 		<div align="left">
-			<table class="W1_warning" border="0" cellpadding="0" cellspacing="6">
+			<table class="warning" border="0" cellpadding="0" cellspacing="6">
 				<tr align="left" valign="top">
 					<td/>
-					<td class="W1_warning_content">
+					<td class="warning-content">
 						<xsl:apply-templates/>
 					</td>
 				</tr>
@@ -592,7 +555,7 @@
 	<xsl:template match="xref">
 		<xsl:variable name="class" select="if (@class) then @class else 'default'"/>
 		<xsl:variable name="target" select="@target"/>
-		<a href ="{$target}" class="{$class}" title="{if(ancestor::table[@hint='context']) then 'See also - ' else ''}{@title}">
+		<a href ="{$target}" class="{$class}" title="{if(ancestor::context) then 'See also - ' else ''}{@title}">
       <xsl:if test="@onclick">
         <xsl:attribute name="onClick" select="@onclick"/>
       </xsl:if>
@@ -634,7 +597,7 @@
 			
 	<xsl:template match="xref-set">
 		<!-- FIXME: This should have a title, but it interferes with colorbox. Fix? Alternative? -->
-		<!-- title="{if(ancestor::table[@hint='context']) then 'See also - ' else ''}{string-join(xref/@title, '; ')}" -->
+		<!-- title="{if(ancestor::context) then 'See also - ' else ''}{string-join(xref/@title, '; ')}" -->
 		<a class='inline' href="#{generate-id()}" >
 			<xsl:value-of select="content"/>
 		</a>
@@ -761,122 +724,7 @@
 	<xsl:template match="placeholder|italic">
 		<em><xsl:apply-templates/></em>
 	</xsl:template>
-	
-	
-	
-	<xsl:template match="manifest">
-		<xsl:param name="page-name" tunnel="yes"/>
-		<xsl:variable name="branch" select="generate-id()"/>
-		<xsl:variable name="manifest-id" select="concat('manifest', $branch)"/>
-		<xsl:variable name="open-state-class" select="if ($page-name = descendant::node/@id) then 'jstree-open' else 'jstree-closed'"></xsl:variable>
 		
-    	<xsl:variable name="relative-path">
-			<xsl:for-each select="tokenize($config/config:deployment/config:output-path, '/')">
-				<xsl:text>../</xsl:text>
-			</xsl:for-each>
-			<xsl:if test="normalize-space(@deployment-relative-path)">
-				<xsl:value-of select="normalize-space(@deployment-relative-path)"/>
-				<xsl:text>/</xsl:text>
-			</xsl:if>
-		</xsl:variable>
-		
-		<li id="{generate-id()}" class="{$open-state-class}">
-			<a href="{if (@index) then concat($relative-path, @index, '.html') else '#'}">
-				<xsl:value-of select="@title"/>
-			</a>
-			<xsl:if test="node">
-				<ul>
-					<xsl:apply-templates>
-						<xsl:with-param name="page-name" select="$page-name"/>
-						<xsl:with-param name="relative-path" select="$relative-path"/>
-					</xsl:apply-templates>
-				</ul>
-			</xsl:if>
-		</li>
-		
-
-	</xsl:template>
-	
-	<xsl:template match="node">
-		<xsl:param name="relative-path"/>
-		<xsl:param name="page-name" tunnel="yes"/>
-		<xsl:variable name="open-state-class" select="if ($page-name = descendant::node/@id) then 'jstree-open' else 'jstree-closed'"/>
-		
-		<xsl:variable name="href">
-			<xsl:choose>
-				<!-- link to internal anchor of parent node page -->
-				<xsl:when test="contains(@id, '#')">
-					<xsl:value-of select="concat($relative-path, substring-before(@id, '#'),
-						'.html#',
-						substring-after(@id, '#'))"/>
-				</xsl:when>
-				
-				<xsl:when test="@id">
-					<xsl:value-of select="concat($relative-path, @id, '.html')"/>
-				</xsl:when>
-				
-				<xsl:when test="@group-id">
-					<xsl:value-of select="concat($relative-path, sf:title2anchor(@group-id), '.html')"/>
-				</xsl:when>
-			</xsl:choose>
-		</xsl:variable>
-		
-			<xsl:choose>
-				<xsl:when test="normalize-space($href) ne '' and node">
-					<li id="{generate-id()}" class="{$open-state-class}">
-						<xsl:choose>
-							<xsl:when test="$page-name=@id">
-								<xsl:attribute name="style">background:white; font-weight:bold</xsl:attribute>
-							</xsl:when>
-							<xsl:otherwise>
-								<!-- FIXME: This is a hack, pulling in value from jstree stylesheet -->
-								<xsl:attribute name="style">background:#ffffee; font-weight:normal</xsl:attribute>
-							</xsl:otherwise>
-						</xsl:choose>
-						<a href="{$href}"><xsl:value-of select="@name"/></a>
-						<ul>
-							<xsl:apply-templates>
-								<xsl:with-param name="relative-path" select="$relative-path"/>
-							</xsl:apply-templates>
-						</ul>
-					</li>
-				</xsl:when>
-				
-				<xsl:when test="normalize-space($href)">
-					<li id="{generate-id()}" class="{$open-state-class}">
-						<xsl:choose>
-							<xsl:when test="$page-name=@id">
-								<xsl:attribute name="style">background:white; font-weight:bold</xsl:attribute>
-							</xsl:when>
-							<xsl:otherwise>
-								<!-- FIXME: This is a hack, pulling in value from jstree stylesheet -->
-								<xsl:attribute name="style">background:#ffffee; font-weight:normal</xsl:attribute>
-							</xsl:otherwise>
-						</xsl:choose>
-						<a href="{$href}"><xsl:value-of select="@name"/></a>
-					</li>
-				</xsl:when>
-				
-				<xsl:when test="node">
-					<li id="{generate-id()}" class="{$open-state-class}">
-						<a href="#"><xsl:value-of select="@name"/></a>
-						<ul>
-							<xsl:apply-templates>
-								<xsl:with-param name="relative-path" select="$relative-path"/>
-							</xsl:apply-templates>
-						</ul>
-					</li>
-				</xsl:when>
-				<xsl:otherwise>
-					<!-- ERROR? -->
-				</xsl:otherwise>
-			</xsl:choose>
-	</xsl:template>
-	
-	
-	
-	
-	
 	<xsl:template match="procedure">
 		<xsl:apply-templates/>
 	</xsl:template>
