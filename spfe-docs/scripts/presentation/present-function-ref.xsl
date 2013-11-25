@@ -54,6 +54,8 @@
 		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
 		<page type="API" name="{name}">
 			
+
+			<xsl:call-template name="show-header"/>
 			<title>Function: <xsl:value-of select="$display-name"/></title>
 			
 			<p>
@@ -111,6 +113,7 @@
     			<xsl:apply-templates select="*"/>
     		</codeblock>
 			</xsl:for-each>
+			<xsl:call-template name="show-footer"/>		
 		</page>
 	</xsl:template>
 	

@@ -31,10 +31,7 @@
 		<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/>
 		<xsl:text>, </xsl:text>
 		<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
-<!--		<xsl:value-of select="$config/config:publication-info/config:title"/>
-		<xsl:text>, </xsl:text>
-		<xsl:value-of select="$config/config:publication-info/config:release"/>
--->	</xsl:variable>
+	</xsl:variable>
 
 	<xsl:template name="main">
 

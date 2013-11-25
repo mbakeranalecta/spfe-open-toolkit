@@ -138,7 +138,7 @@
 			<xsl:with-param name="message" select="'Creating page ', xpath/text()"/>
 		</xsl:call-template>
 		<page type="API" name="{translate(xpath, '/:', '__')}">
-			
+			<xsl:call-template name="show-header"/>		
 			<title>Element: <xsl:value-of select="$name"/></title>
 			
 			<labeled-item>
@@ -279,6 +279,7 @@
 				<xsl:sort select="name"/>
 				<xsl:call-template name="format-attribute"/>
 			</xsl:for-each>
+			<xsl:call-template name="show-footer"/>		
 		</page>
 	</xsl:template>
 	

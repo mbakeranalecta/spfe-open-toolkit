@@ -25,9 +25,9 @@
 		<xsl:choose>
 			<xsl:when test="$media='online'"> 
 				<page status="{gt:head/gt:tracking/gt:status}" name="{ancestor::ss:topic/@local-name}">
-					<xsl:call-template name="show-context"/>
+					<xsl:call-template name="show-header"/>
 					<xsl:apply-templates /> 
-					<xsl:call-template name="see-also-footer"/>		
+					<xsl:call-template name="show-footer"/>		
 				</page>
 			</xsl:when>
 			<xsl:when test="$media='paper'">

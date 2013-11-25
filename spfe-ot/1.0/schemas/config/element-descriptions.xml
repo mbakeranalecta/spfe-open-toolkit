@@ -984,7 +984,7 @@
         <element-description>
             <xpath>/spfe/doc-set/topic-sets/topic-set</xpath>
             <description>
-                <p>The path to a topic set configuration file for a <feature>topic set </feature>to
+                <p>The path to a topic set configuration file for a <feature>topic set</feature> to
                     be included in the <feature>documentation set</feature>.</p>
             </description>
             <build-property/>

@@ -231,6 +231,13 @@
 		</xsl:call-template>
 	</xsl:template>
 
+	<xsl:template match="header">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template match="footer">
+		<xsl:apply-templates/>
+	</xsl:template>
 	
 	<xsl:template match="section">
 		<xsl:apply-templates/>

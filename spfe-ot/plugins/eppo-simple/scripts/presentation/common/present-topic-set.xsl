@@ -17,16 +17,26 @@
 
 <!-- parameters -->
 
-<xsl:param name="presentation-schema">presentation.xsd</xsl:param>
+<xsl:param name="presentation-schema">eppo-simple-web-presentation.xsd</xsl:param>
 <xsl:param name="draft">no</xsl:param>
 
-	<xsl:variable name="config" as="element(config:spfe)">
-		<xsl:sequence select="/config:spfe"/>
-	</xsl:variable>
+<xsl:variable name="config" as="element(config:spfe)">
+	<xsl:sequence select="/config:spfe"/>
+</xsl:variable>
 
-	<xsl:param name="synthesis-files"/>
-	<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
+<xsl:param name="synthesis-files"/>
+<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
 
+<xsl:variable name="topic-set-title">
+	<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/>
+	<xsl:text>, </xsl:text>
+	<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
+</xsl:variable>
+	
+<xsl:variable name="doc-set-title">
+	<xsl:value-of select="$config/config:doc-set/config:title"/>
+</xsl:variable>
+	
 <!--  
 =============
 Main template
@@ -64,14 +74,11 @@ Main template
 <xsl:template match="topic/name" mode="#all"/>	
 <xsl:template match="tracking" mode="#all"/>
 
-
-<!-- show context - experimental -->
-<xsl:template name="show-context">
+<xsl:template name="show-header">
 	<xsl:variable name="topic-type" select="if (ancestor::ss:topic/@virtual-type) then ancestor::ss:topic/@virtual-type else ancestor::ss:topic/@type"/>
-	
-
-	<!-- FIXME: should be a proper context container, not a table. -->
-	<table hint="context">
+	<header>
+		<p><xsl:value-of select="$doc-set-title"/> > <xsl:value-of select="$topic-set-title"/></p>
+	<table>
 		<tr>
 			<td><bold>Topic&#160;type</bold></td>
 			<td><xsl:value-of select="ancestor::ss:topic/@topic-type-alias"/></td>
@@ -108,34 +115,13 @@ Main template
 				</td>
 			</tr>
 			
-<!-- 					<xsl:variable name="see-also-links">
-				<xsl:for-each select="index/reference[esf:target-exists-not-self(key[1], type, ancestor::topic/@default-reference-scope, ancestor::topic/name)]">
-					<xsl:call-template name="output-link">
-						<xsl:with-param name="target" select="key[1]"/>
-						<xsl:with-param name="type" select="type"/>
-						<xsl:with-param name="content" select="translate(key[1], '{}', '')"/>
-						<xsl:with-param name="scope" select="ancestor::topic/@default-reference-scope"/> 
-					</xsl:call-template>
-				</xsl:for-each>	
-			</xsl:variable>
-			<xsl:if test="$see-also-links/xref | $see-also-links/xref-set">
-				<tr>
-					<td><bold>See also for</bold></td>
-					<td>
-						<xsl:for-each select="$see-also-links/xref | $see-also-links/xref-set">
-							<xsl:sequence select="."/>
-							<xsl:if test="position() != last()">, </xsl:if>
-						</xsl:for-each>
-					</td>
-				</tr>
-
- 			</xsl:if>
--->				</xsl:if>
+		</xsl:if>
 	</table>
+	</header>
 </xsl:template>
 
-<xsl:template name="see-also-footer">		
-	<!-- FIXME: Should be a proper see-also container, not a table. -->
+<xsl:template name="show-footer">		
+	
 			<xsl:variable name="see-also-links">
 				<xsl:for-each select="index/reference[esf:target-exists(key[1], type, ancestor::topic/@default-reference-scope)]">
 					<xsl:call-template name="output-link">
