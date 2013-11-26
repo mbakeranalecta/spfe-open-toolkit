@@ -116,37 +116,6 @@
 			</xsl:for-each>
 			
 			<link rel="stylesheet" type="text/css" href="style/eppo-simple.css"/>
-<<<<<<< HEAD
-=======
-			<link rel="stylesheet" type="text/css" href="style/treeview/css/multi/tree.css"/>
-			<link rel="stylesheet" type="text/css" href="style/colorbox/colorbox.css"/> 
-			<script type="text/javascript" src="style/jquery-1.7.2.min.js">&#160;</script>
-			<script type="text/javascript" src="style/colorbox/jquery.colorbox-min.js">&#160;</script>
-			<script type="text/javascript" src="style/jstree/jquery.jstree.js">&#160;</script>
-			<script type="text/javascript" >
-			$(document).ready(function(){
-				$(".inline").colorbox({inline:true, width:"50%"});
-			});
-			</script>
-			<script type="text/javascript" class="source below">
-			$(function () {
-				$("#toc")
-					.jstree({         
-					    "themes" : {
-			            "theme" : "default",
-			            "dots" : false,
-			            "icons" : false
-			        },
-			        "plugins" : ["themes","html_data"] })
-					// 1) the loaded event fires as soon as data is parsed and inserted
-					.bind("loaded.jstree", function (event, data) { })
-					// 2) but if you are using the cookie plugin or the core `initially_open` option:
-					.one("reopen.jstree", function (event, data) { })
-					// 3) but if you are using the cookie plugin or the UI `initially_select` option:
-					.one("reselect.jstree", function (event, data) { });
-			});
-			</script>			
->>>>>>> parent of edb8f6d... Renamed "toc" to "manifest" because more accurate
 		</head>
 	</xsl:function>
 	
@@ -250,18 +219,6 @@
 						<hr/>
 					</div>
 				</xsl:if>
-<<<<<<< HEAD
-=======
-				<div id="toc-container" >
-					<div id="toc">
-						<ul>
-							<xsl:apply-templates select="$toc">
-								<xsl:with-param name="page-name" select="$page-name" tunnel="yes"/>
-							</xsl:apply-templates>
-						</ul>
-					</div>
-				</div>
->>>>>>> parent of edb8f6d... Renamed "toc" to "manifest" because more accurate
 				
 				<div id="main-container">
 					<div id="main">
@@ -774,49 +731,6 @@
 	<xsl:template match="placeholder|italic">
 		<em><xsl:apply-templates/></em>
 	</xsl:template>
-<<<<<<< HEAD
-=======
-	
-	
-	
-	<xsl:template match="toc">
-		<xsl:param name="page-name" tunnel="yes"/>
-		<xsl:variable name="branch" select="generate-id()"/>
-		<xsl:variable name="toc-id" select="concat('toc', $branch)"/>
-		<xsl:variable name="open-state-class" select="if ($page-name = descendant::node/@id) then 'jstree-open' else 'jstree-closed'"></xsl:variable>
-		
-    	<xsl:variable name="relative-path">
-			<xsl:for-each select="tokenize($config/config:deployment/config:output-path, '/')">
-				<xsl:text>../</xsl:text>
-			</xsl:for-each>
-			<xsl:if test="normalize-space(@deployment-relative-path)">
-				<xsl:value-of select="normalize-space(@deployment-relative-path)"/>
-				<xsl:text>/</xsl:text>
-			</xsl:if>
-		</xsl:variable>
-		
-		<li id="{generate-id()}" class="{$open-state-class}">
-			<a href="{if (@index) then concat($relative-path, @index, '.html') else '#'}">
-				<xsl:value-of select="@title"/>
-			</a>
-			<xsl:if test="node">
-				<ul>
-					<xsl:apply-templates>
-						<xsl:with-param name="page-name" select="$page-name"/>
-						<xsl:with-param name="relative-path" select="$relative-path"/>
-					</xsl:apply-templates>
-				</ul>
-			</xsl:if>
-		</li>
-		
-
-	</xsl:template>
-	
-	<xsl:template match="node">
-		<xsl:param name="relative-path"/>
-		<xsl:param name="page-name" tunnel="yes"/>
-		<xsl:variable name="open-state-class" select="if ($page-name = descendant::node/@id) then 'jstree-open' else 'jstree-closed'"/>
->>>>>>> parent of edb8f6d... Renamed "toc" to "manifest" because more accurate
 		
 	<xsl:template match="procedure">
 		<xsl:apply-templates/>
