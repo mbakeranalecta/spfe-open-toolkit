@@ -145,7 +145,7 @@
 			<xsl:with-param name="message" select="concat('Formatting page: ', $file-name)"/>
 		</xsl:call-template>
 
-		<xsl:result-document href="file:///{$config/config:build/config:output-directory}/{$config/config:deployment/config:output-path}/{$file-name}" method="xml" indent="no" omit-xml-declaration="no" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		<xsl:result-document href="file:///{$config/config:build/config:output-directory}/{$config/config:deployment/config:output-path}/{$file-name}" method="html" indent="no" omit-xml-declaration="no" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 			<html xml:lang="en" lang="en">
 				<xsl:sequence select="lf:html-header($title)"/>
 				<xsl:choose>
@@ -168,7 +168,7 @@
 		<xsl:call-template name="sf:info">
 			<xsl:with-param name="message">
 				<xsl:choose>
-					<xsl:when test="$config/config:build-command eq'draft'">
+					<xsl:when test="$config/config:build-command eq 'draft'">
 						<xsl:text>Creating a draft format because build command was "draft".</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
@@ -178,6 +178,7 @@
 			</xsl:with-param>
 		</xsl:call-template>
 		<xsl:apply-templates select="$presentation/web/page"/>
+		<xsl:apply-templates select="$toc"/>
 	</xsl:template>
 	
 	<xsl:template match="page">
@@ -563,9 +564,9 @@
 		<xsl:variable name="class" select="if (@class) then @class else 'default'"/>
 		<xsl:variable name="target" select="@target"/>
 		<a href ="{$target}" class="{$class}" title="{if(ancestor::context) then 'See also - ' else ''}{@title}">
-      <xsl:if test="@onclick">
-        <xsl:attribute name="onClick" select="@onclick"/>
-      </xsl:if>
+			<xsl:if test="@onclick">
+				<xsl:attribute name="onClick" select="@onclick"/>
+			</xsl:if>
 			<xsl:apply-templates/>
 		</a>
 	</xsl:template>
@@ -740,5 +741,76 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 
+
+<!-- TOC templates -->
 	
+	<xsl:template match="toc[@topic-set-id=$config/config:topic-set-id]">
+		<!-- FIXME: This is a copy of the page template. Make sure to match changes between the two, and eventially factor out similar code. -->
+		<xsl:variable name="page-name">List of Topics</xsl:variable>
+		<xsl:call-template name="output-html-page">
+			<xsl:with-param name="file-name" select="concat(normalize-space(@topic-set-id), '-toc.html')"/> 
+			<xsl:with-param name="title" select="@title"/>
+			<xsl:with-param name="content">
+				<xsl:if test="$draft">
+					<div id="draft-header">
+						<p class="status-{translate(@status,' ', '_')}">
+							<b class="cBold">Topic Name: </b>
+							<xsl:value-of select="@name"/>
+							<b class="cBold"> Topic Status: </b>
+							<xsl:value-of select="@status"/>
+						</p>
+						<xsl:if test=".//review-note">
+							<p>
+								<b>Index of review notes: </b> 
+								<xsl:for-each select=".//review-note">
+									<a href="#review-note:{position()}">
+										[<xsl:value-of select="position()"/>]
+									</a>
+									<xsl:text> </xsl:text>
+								</xsl:for-each>
+							</p>
+						</xsl:if>
+						<xsl:if test=".//author-note">
+							<p>
+								<b>Index of author notes: </b> 
+								<xsl:for-each select=".//author-note">
+									<a href="#author-note:{position()}">
+										[<xsl:value-of select="position()"/>]
+									</a>
+									<xsl:text> </xsl:text>
+								</xsl:for-each>
+							</p>
+						</xsl:if>
+						<hr/>
+					</div>
+				</xsl:if>
+				
+				<div id="main-container">
+					<div id="main">
+						<h1><xsl:value-of select="@title"/></h1>
+						<xsl:apply-templates/>
+					</div>
+				</div>
+				
+				<xsl:call-template name="output-xref-sets"/>
+			</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+	
+	<xsl:template match="toc/node">
+		<ul>
+			<xsl:apply-templates/>
+		</ul>
+	</xsl:template>
+	
+	<xsl:template match="node">
+		<li>
+			<p><a href="{normalize-space(@id)}.html"><xsl:value-of select="@name"/></a></p>
+			<xsl:if test="node">
+				<ul>
+					<xsl:apply-templates/>
+				</ul>
+			</xsl:if>
+		</li>
+	</xsl:template>
 </xsl:stylesheet>

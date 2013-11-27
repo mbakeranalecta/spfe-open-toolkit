@@ -77,7 +77,16 @@ Main template
 <xsl:template name="show-header">
 	<xsl:variable name="topic-type" select="if (ancestor::ss:topic/@virtual-type) then ancestor::ss:topic/@virtual-type else ancestor::ss:topic/@type"/>
 	<header>
-		<p><xsl:value-of select="$doc-set-title"/> > <xsl:value-of select="$topic-set-title"/></p>
+		<p>
+			<xsl:value-of select="$doc-set-title"/>   
+			>      
+			<xsl:call-template name="output-link">
+				<xsl:with-param name="target" select="concat(normalize-space(@topic-set-id), '-toc')"/>
+				<xsl:with-param name="type" select="'toc'"/>
+				<xsl:with-param name="content" select="$topic-set-title"/>
+				<xsl:with-param name="scope" select="ancestor::topic/@default-reference-scope"/> 
+			</xsl:call-template>
+			</p>
 	<table>
 		<tr>
 			<td><bold>Topic&#160;type</bold></td>
