@@ -8,7 +8,7 @@
     http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
     
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/dummy.xml</uri>
+        <uri>http://spfeopentoolkit.org/spfe-docs/content/development/directory-structure.xml</uri>
         <author>jkeffer</author>
         <status>In progress</status>
         <history>
