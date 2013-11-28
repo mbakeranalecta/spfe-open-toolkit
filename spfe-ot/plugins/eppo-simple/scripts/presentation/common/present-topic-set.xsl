@@ -37,6 +37,11 @@
 	<xsl:value-of select="$config/config:doc-set/config:title"/>
 </xsl:variable>
 	
+<xsl:variable name="topic-set-id">
+	<xsl:value-of select="$config/config:topic-set-id"/>
+</xsl:variable>
+	
+	
 <!--  
 =============
 Main template
@@ -80,12 +85,9 @@ Main template
 		<p>
 			<xsl:value-of select="$doc-set-title"/>   
 			>      
-			<xsl:call-template name="output-link">
-				<xsl:with-param name="target" select="concat(normalize-space(@topic-set-id), '-toc')"/>
-				<xsl:with-param name="type" select="'toc'"/>
-				<xsl:with-param name="content" select="$topic-set-title"/>
-				<xsl:with-param name="scope" select="ancestor::topic/@default-reference-scope"/> 
-			</xsl:call-template>
+			<xref target="{concat(normalize-space($topic-set-id), '-toc.html')}" class="toc">
+				<xsl:value-of select="$topic-set-title"/>
+			</xref>
 			</p>
 	<table>
 		<tr>
