@@ -83,9 +83,11 @@ Main template
 	<xsl:variable name="topic-type" select="if (ancestor::ss:topic/@virtual-type) then ancestor::ss:topic/@virtual-type else ancestor::ss:topic/@type"/>
 	<header>
 		<p>
-			<xsl:value-of select="$doc-set-title"/>   
+			<xref target="../index.html" class="toc">
+				<xsl:value-of select="$doc-set-title"/>   
+			</xref>
 			>      
-			<xref target="{concat(normalize-space($topic-set-id), '-toc.html')}" class="toc">
+			<xref target="{normalize-space($topic-set-id)}-toc.html" class="toc">
 				<xsl:value-of select="$topic-set-title"/>
 			</xref>
 			</p>
