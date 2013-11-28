@@ -49,10 +49,6 @@
         <build-directory>${SPFE_BUILD}/config-ref</build-directory>
     </build>
 
-    <deployment>
-        <output-path>${TOPIC_SET_ID}</output-path>
-    </deployment>
-    
     <scripts>
         <extract>
             <script>../../scripts/synthesis/config-ref/schema-defs.xsl</script>

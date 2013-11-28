@@ -9,11 +9,13 @@
     <doc-set id="spfe-docs">
         <title>SPFE Documentation</title>
         <topic-set-type-order>docset, guide, task, reference</topic-set-type-order>
+        <home-topic-set>spfe-docs-docset</home-topic-set>
         <topic-sets>
             <topic-set>
                 <id>spfe-docs-docset</id>
                 <href>topic-sets/spfe-docs-docset.xml</href>
             </topic-set>
+            
             <topic-set>
                 <id>spfe-development</id>
                 <href>topic-sets/spfe-development.xml</href>
@@ -23,22 +25,16 @@
                 <id>spfe-development-tasks</id>
                 <href>topic-sets/spfe-development-tasks.xml</href>
             </topic-set>
-            <!-- 
-            <topic-set>
-                <id>spfe-test</id>
-                <href>topic-sets/spfe-test.xml</href>
-            </topic-set>
-             -->
-   
+            
             <topic-set>
                 <id>spfe-function-reference</id>
                 <href>topic-sets/spfe-function-reference.xml</href>
             </topic-set>
+            
             <topic-set>
                 <id>spfe-configuration-reference</id>
                 <href>topic-sets/spfe-configuration-reference.xml</href>
             </topic-set>
-
         </topic-sets>
      </doc-set>
     

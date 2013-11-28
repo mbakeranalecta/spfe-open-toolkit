@@ -64,7 +64,7 @@ Main template
 
 	<xsl:template match="ss:synthesis">
 		<link-catalog topic-set-id="{@topic-set-id}"
-			output-directory="{$config/config:deployment/config:output-path}"
+			output-directory="{@topic-set-id}"
 			title="{@title}"
 			time-stamp="{current-dateTime()}">
 			<xsl:apply-templates/>

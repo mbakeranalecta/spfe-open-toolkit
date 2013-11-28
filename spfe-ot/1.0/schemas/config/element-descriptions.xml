@@ -689,19 +689,6 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/deployment/output-path</xpath>
-            <description>
-                <p>The path where the topic set files will be located relative to the root of the
-                    location where the documentation set is deployed. For local build purposes, the
-                    location of the topic set files is the value of this path appended to the path
-                    specified by
-                    <config-setting>/spfe/build/output-directory</config-setting>.</p>
-            </description>
-            <build-property/>
-            <include-behavior/>
-        </element-description>
-
-        <element-description>
             <xpath>/spfe/scripts</xpath>
             <description>
                 <p>A container for the list of scripts to be used for each stage of the build process. Each build script for each stage should be written to use the standard SPFE interface for a script at that stage (which you can determine by examining the <file-name>spfe.rules</file-name> build rules file). Listing the full path of the script for each stage in this list will then cause that script to be called at the appropriate stage of the build process. If you need to change the interface to a script at a particular stage, you can override the build rule for that step by specifying a build rule with the same name as the one in <file-name>spfe.rules</file-name>. If you need to add additional steps, you can use the <config-setting>/spfe/scripts/other</config-setting>. If you do this, you must override the normal sequence in which the scripts are run in your local build rules file (the one specified by <config-setting>/spfe/build/build-rules</config-setting>).</p>

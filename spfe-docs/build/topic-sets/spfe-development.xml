@@ -44,10 +44,6 @@
         <build-directory>${SPFE_BUILD}/development</build-directory>
     </build>
     
-    <deployment>
-        <output-path>${TOPIC_SET_ID}</output-path>
-    </deployment>
-
     <scripts>
         <synthesis>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/common/common-topic-synthesis.xsl</script> 

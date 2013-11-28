@@ -43,14 +43,9 @@
     <output-formats>html</output-formats>
 
     <build>
-        <build-directory>${SPFE_BUILD}/spfe-docs</build-directory>
+        <build-directory>${SPFE_BUILD}/spfe-docs/docset</build-directory>
     </build>
     
-    <deployment>
-        <!-- output-path is blank because this is a doc-set level project -->
-        <output-path></output-path>
-    </deployment>
-
     <scripts>
         <synthesis>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/common/common-topic-synthesis.xsl</script> 

@@ -39,7 +39,7 @@
 	<xsl:template name="main">
 
 		<xsl:result-document href="file:///{$config/config:build/config:toc-directory}/{$config/config:topic-set-id}.toc.xml" method="xml" indent="yes" omit-xml-declaration="no">
-			<toc topic-set-id="{$config/config:topic-set-id}" topic-set-type="{$config/config:topic-set-type}" deployment-relative-path="{$config/config:deployment/config:output-path}" title="{$title-string}">
+			<toc topic-set-id="{$config/config:topic-set-id}" topic-set-type="{$config/config:topic-set-type}" deployment-relative-path="{$config/config:topic-set-id}" title="{$title-string}">
 				<xsl:choose>
 					<!-- If there is a TOC file for this media, use it to create TOC -->
 					<xsl:when test="$media = tokenize(document($toc-file)/toc/@media, '\s+')">

@@ -39,7 +39,6 @@
         </xs:element>
         <xs:element name="wip-site" type="wip-site-type" minOccurs="0"/>
         <xs:element name="build" type="build-type" minOccurs="0"/>
-        <xs:element name="deployment" type="deployment-type" minOccurs="0"/>
         <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
         <xs:element name="style" type="style-type" minOccurs="0"/>
         <xs:element name="other" minOccurs="0" maxOccurs="unbounded">
@@ -73,6 +72,7 @@
             <xs:sequence>
               <xs:element name="title" type="xs:string"/>
               <xs:element name="topic-set-type-order" type="xs:string"/>
+              <xs:element name="home-topic-set" type="xs:string"/>
               <xs:element name="topic-sets" minOccurs="1" maxOccurs="1">
                 <xs:complexType>
                   <xs:sequence>
@@ -175,6 +175,7 @@
     </xs:sequence>
   </xs:complexType>
 
+  <!-- FIXME: this uses directory where it should use path and vice versa. -->
   <xs:complexType name="build-type">
     <xs:all>
       <xs:element name="build-rules" type="xs:anyURI" minOccurs="0"/>
@@ -182,13 +183,6 @@
       <xs:element name="output-directory" type="xs:string" minOccurs="0"/>
       <xs:element name="link-catalog-directory" type="xs:string" minOccurs="0"/>
       <xs:element name="toc-directory" type="xs:string" minOccurs="0"/>
-    </xs:all>
-  </xs:complexType>
-
-  <xs:complexType name="deployment-type">
-    <xs:all>
-      <!-- FIXME: This need to be expanded for different output types -->
-      <xs:element name="output-path" type="xs:string"/>
     </xs:all>
   </xs:complexType>
 

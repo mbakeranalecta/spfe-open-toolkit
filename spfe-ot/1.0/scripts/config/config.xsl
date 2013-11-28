@@ -357,13 +357,13 @@
                   </xsl:for-each>
 
                   <property name="spfe.build.build-directory" value="{$build-dir}"/>
-                  <property name="spfe.build.output-directory" value="{if (normalize-space(($config/deployment/output-path)[1])) then concat(($config/build/output-directory)[1], '/', ($config/deployment/output-path)[1]) else ($config/build/output-directory)[1]}"/>
+                  <property name="spfe.build.output-directory" value="{concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1]) }"/>
                   
                   <xsl:sequence select="spfe:xml2properties(($config/build/link-catalog-directory)[1], 'spfe.build')"/>
                   <xsl:sequence select="spfe:xml2properties(($config/build/toc-directory)[1], 'spfe.build')"/>
                   <xsl:sequence select="spfe:xml2properties((spfe:URL-to-local(resolve-uri(($config/build/build-rules)[1], ($config/build/build-rules)[1]/@base-uri))), 'spfe.build')"/>
-                  
-                  <xsl:sequence select="spfe:xml2properties(($config/deployment/output-path)[1], 'spfe.deployment')"/>
+                  <property name="spfe.deployment" value="{concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1])}"/>
+                  <!--<xsl:sequence select="spfe:xml2properties(concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1]), 'spfe.deployment')"/>-->
                   
                   <files id="authored-content-for-merge">
                       <xsl:for-each select="$config/sources/authored-content-for-merge/include">
@@ -520,6 +520,8 @@
                 <xsl:copy-of select="($config/condition-tokens)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/default-topic-scope)[1]" copy-namespaces="no"/>
                 <xsl:copy-of select="($config/default-subject-affinity-scope)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/home-topic-set)[1]" copy-namespaces="no"/>
+                
                 <build>
                     <output-directory>
                         <xsl:attribute name="base-uri" select="base-uri(.)"/>
@@ -538,12 +540,6 @@
                         <xsl:copy-of select="translate(($config/build/toc-directory)[1], '\', '/')"/>
                     </toc-directory>
                 </build>
-                <deployment>
-                    <output-path>
-                        <xsl:attribute name="base-uri" select="base-uri(.)"/>
-                        <xsl:value-of select="translate(($config/deployment/output-path)[1], '\', '/')"/>
-                    </output-path>
-                </deployment>
                 <xsl:copy-of select="($config/format)[1]" copy-namespaces="no"/>    
                 <xsl:copy-of select="($config/doc-set)[1]" copy-namespaces="no"/>    
                 
