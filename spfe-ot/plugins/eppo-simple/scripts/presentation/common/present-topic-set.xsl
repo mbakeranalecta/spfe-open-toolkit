@@ -83,6 +83,8 @@ Main template
 	<xsl:variable name="topic-type" select="if (ancestor::ss:topic/@virtual-type) then ancestor::ss:topic/@virtual-type else ancestor::ss:topic/@type"/>
 	<header>
 		<p>
+			<xref target="../{$config/config:doc-set/config:home-topic-set}/index.html" class="toc">Home</xref>   
+			| 
 			<xref target="../{$config/config:doc-set/config:home-topic-set}/index.html" class="toc">
 				<xsl:value-of select="$doc-set-title"/>   
 			</xref>
