@@ -85,15 +85,18 @@ Main template
 	<xsl:variable name="topic-type" select="if (ancestor::ss:topic/@virtual-type) then ancestor::ss:topic/@virtual-type else ancestor::ss:topic/@type"/>
 	<header>
 		<p>
-			<xref target="../{$config/config:doc-set/config:home-topic-set}/index.html" class="toc">Home</xref>   
+			<xref target="../{$config/config:doc-set/config:home-topic-set}/index.html" >Home</xref>   
 			| 
-			<xref target="../index.html" class="toc">
+			<xref target="../{$config/config:doc-set/config:home-topic-set}/{$config/config:doc-set/config:home-topic-set}-toc.html" class="toc">
 				<xsl:value-of select="$doc-set-title"/>   
 			</xref>
-			>      
-			<xref target="{normalize-space($topic-set-id)}-toc.html" class="toc">
-				<xsl:value-of select="$topic-set-title"/>
-			</xref>
+			
+			<xsl:if test="normalize-space($config/config:doc-set/config:home-topic-set) ne normalize-space($topic-set-id)">
+				>      
+				<xref target="{normalize-space($topic-set-id)}-toc.html">
+					<xsl:value-of select="$topic-set-title"/>
+				</xref>
+			</xsl:if>
 			</p>
 	<table>
 		<tr>
