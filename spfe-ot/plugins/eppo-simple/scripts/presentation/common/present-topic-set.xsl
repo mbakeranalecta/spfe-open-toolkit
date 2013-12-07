@@ -50,7 +50,9 @@ Main template
 <xsl:template name="main">
 	<xsl:result-document href="file:///{concat($config/config:build/config:build-directory, '/temp/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
 		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
-			<title><xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/></title>
+			<title>
+				<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/>
+			</title>
 				
 			<!-- process the topics --> 
 			<xsl:apply-templates select="$synthesis/ss:synthesis/*"/>
@@ -85,7 +87,7 @@ Main template
 		<p>
 			<xref target="../{$config/config:doc-set/config:home-topic-set}/index.html" class="toc">Home</xref>   
 			| 
-			<xref target="../{$config/config:doc-set/config:home-topic-set}/index.html" class="toc">
+			<xref target="../index.html" class="toc">
 				<xsl:value-of select="$doc-set-title"/>   
 			</xref>
 			>      

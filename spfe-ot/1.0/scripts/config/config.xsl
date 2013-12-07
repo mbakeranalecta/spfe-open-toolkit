@@ -15,6 +15,7 @@
     <xsl:param name="SPFE_BUILD_DIR"/>
     <xsl:param name="SPFE_BUILD_COMMAND"/>
     
+    <xsl:variable name="source" select="/"/>
     
     <xsl:variable name="build-dir" select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> 
     
@@ -164,6 +165,7 @@
           <xsl:call-template name="create-config-file"/>
           <xsl:call-template name="create-script-files"/>
         </xsl:if>
+        <xsl:call-template name="create-root-index"/>
     </xsl:template>
     
     <xsl:function name="spfe:xml2properties">
@@ -228,243 +230,276 @@
         <xsl:value-of select="replace($newURL, '%20', ' ')"/>
     </xsl:function>
     
+    <xsl:template name="create-docset-build-file">
+
+        <!-- TO DO: check that all the topic sets have unique IDs -->
+        <!-- TO DO: check that all the topic sets have unique build directories -->
+        
+        <project name="{/spfe/doc-set/@id}" default="{$SPFE_BUILD_COMMAND}">
+            
+            <target name="config">
+                <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
+                    <xsl:variable name="antfile" 
+                        select="concat($source/spfe/doc-set/@id, '-', id, '.xml')"/>
+                    
+                    <xslt classpath="{translate($SPFEOT_HOME, '\', '/')}/tools/saxon9he/saxon9he.jar"
+                        style="{translate($SPFEOT_HOME, '\', '/')}/1.0/scripts/config/config.xsl" 
+                        in="{spfe:URL-to-local(resolve-uri(href, base-uri($source)))}"
+                        out="{$antfile}"
+                        force="yes">
+                        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+                        <param name="HOME" expression="{$HOME}"/> 
+                        <param name="SPFEOT_HOME" expression="{$SPFEOT_HOME}"/> 
+                        <param name="SPFE_BUILD_COMMAND" expression="{$SPFE_BUILD_COMMAND}"/> 
+                        <param name="SPFE_BUILD_DIR" expression="{$SPFE_BUILD_DIR}"/> 
+                    </xslt>
+                </xsl:for-each>                        
+            </target>
+            
+            <target name="clean" depends="config"> 
+                <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
+                    <xsl:variable name="antfile" 
+                        select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
+                    
+                    <xsl:call-template name="create-run-command">
+                        <xsl:with-param name="build-command" select="'clean'"/>
+                        <xsl:with-param name="antfile" select="$antfile"/>
+                    </xsl:call-template>
+                </xsl:for-each>
+            </target>
+            
+            <target name="cat" depends="config"> 
+                <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
+                    <xsl:variable name="antfile" 
+                        select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
+                    
+                    <xsl:call-template name="create-run-command">
+                        <xsl:with-param name="build-command" select="'cat'"/>
+                        <xsl:with-param name="antfile" select="$antfile"/>
+                    </xsl:call-template>
+                </xsl:for-each>
+            </target>
+            
+            <target name="toc" depends="config"> 
+                <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
+                    <xsl:variable name="antfile" 
+                        select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
+                    
+                    <xsl:call-template name="create-run-command">
+                        <xsl:with-param name="build-command" select="'toc'"/>
+                        <xsl:with-param name="antfile" select="$antfile"/>
+                    </xsl:call-template>
+                </xsl:for-each>
+            </target>
+            
+            <target name="draft" depends="config, toc, cat"> 
+                <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
+                    <xsl:variable name="antfile" 
+                        select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
+                    
+                    <xsl:call-template name="create-run-command">
+                        <xsl:with-param name="build-command" select="'draft'"/>
+                        <xsl:with-param name="antfile" select="$antfile"/>
+                    </xsl:call-template>
+                </xsl:for-each>
+            </target>
+            
+            <target name="final" depends="config, toc, cat"> 
+                <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
+                    <xsl:variable name="antfile" 
+                        select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
+                    
+                    <xsl:call-template name="create-run-command">
+                        <xsl:with-param name="build-command" select="'final'"/>
+                        <xsl:with-param name="antfile" select="$antfile"/>
+                    </xsl:call-template>
+                </xsl:for-each>
+            </target>
+            
+            <target name="pdf" depends="config, toc, cat"> 
+                <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
+                    <xsl:variable name="antfile" 
+                        select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
+                    
+                    <xsl:call-template name="create-run-command">
+                        <xsl:with-param name="build-command" select="'pdf'"/>
+                        <xsl:with-param name="antfile" select="$antfile"/>
+                    </xsl:call-template>
+                </xsl:for-each>
+            </target>
+ 
+        </project> 
+    </xsl:template>
+    
+    <xsl:template name="create-root-index">
+        <!-- FIXME: This may not be the right place to do this. Need a more general/configurable solution. -->
+        <xsl:message select="'Generating root index file.'"/>
+        <xsl:variable name="redirect-to" select="concat($config/doc-set/home-topic-set , '/index.html')"/>
+        <xsl:result-document href="file:///{translate(($config/build/output-directory)[1], '\','/')}/index.html" method="html" >
+            <!--<!DOCTYPE HTML>-->
+            <html>
+                <head>
+                    <meta charset="UTF-8"/>
+                    <meta http-equiv="refresh" content="1;url={$redirect-to}"/>
+                    <script type="text/javascript">
+                        window.location.href = "<xsl:value-of select="$redirect-to"/>"
+                    </script>
+                    <title>Page Redirection</title>
+                </head>
+                <body>
+                    <!-- Note: don't tell people to `click` the link, just tell them that it is a link. -->
+                    If you are not redirected automatically, follow the <a href='{$redirect-to}'>link to example</a>
+                </body>
+            </html>
+        </xsl:result-document>
+    </xsl:template>
+    
+    <xsl:template name="create-topicset-build-file">
+        <project name="{$config/topic-set-id}" basedir="." default="draft">
+            <property file="{translate($HOME, '\', '/')}/.spfe/spfe.properties"/>
+            <property name="HOME" value="{translate($HOME, '\', '/')}"/>
+            <property name="SPFEOT_HOME" value="{translate($SPFEOT_HOME, '\', '/')}"/>
+            <property name="spfe.config-file" value="{translate($build-dir, '\', '/')}/config/spfe-config.xml"/>
+            <property name="SPFE_BUILD_COMMAND" value="{$SPFE_BUILD_COMMAND}"/>
+            <xsl:sequence select="spfe:xml2properties(($config/topic-set-id)[1], 'spfe')"/>
+            <xsl:sequence select="spfe:xml2properties(($config/topic-set-type)[1], 'spfe')"/>
+            <xsl:sequence select="spfe:xml2properties(($config/wip-site)[1], 'spfe')"/>
+            <xsl:sequence select="spfe:xml2properties(($config/messages)[1], 'spfe')"/>
+            
+            <xsl:for-each select="$config/scripts/*">
+                <xsl:choose>
+                    <xsl:when test="name()='other'">
+                        <property name="spfe.scripts.other.{@name}" value="{$build-dir}/spfe.other.{@name}.xsl"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <property name="spfe.scripts.{name()}" value="{$build-dir}/spfe.{name()}.xsl"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                
+            </xsl:for-each>
+            
+            <property name="spfe.build.build-directory" value="{$build-dir}"/>
+            <property name="spfe.build.output-directory" value="{concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1]) }"/>
+            
+            <xsl:sequence select="spfe:xml2properties(($config/build/link-catalog-directory)[1], 'spfe.build')"/>
+            <xsl:sequence select="spfe:xml2properties(($config/build/toc-directory)[1], 'spfe.build')"/>
+            <xsl:sequence select="spfe:xml2properties((spfe:URL-to-local(resolve-uri(($config/build/build-rules)[1], ($config/build/build-rules)[1]/@base-uri))), 'spfe.build')"/>
+            <property name="spfe.deployment" value="{concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1])}"/>
+            <!--<xsl:sequence select="spfe:xml2properties(concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1]), 'spfe.deployment')"/>-->
+            
+            <files id="authored-content-for-merge">
+                <xsl:for-each select="$config/sources/authored-content-for-merge/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <files id="files-to-extract-content-from">
+                <xsl:for-each select="$config/sources/files-to-extract-content-from/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <files id="topics">
+                <xsl:for-each select="$config/sources/topics/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <files id="text-objects">
+                <xsl:for-each select="$config/sources/text-objects/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <files id="fragments">
+                <xsl:for-each select="$config/sources/fragments/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <files id="graphics">
+                <xsl:for-each select="$config/sources/graphics/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <files id="graphics-catalog">
+                <xsl:for-each select="$config/sources/graphics-catalog/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <files id="strings">
+                <xsl:for-each select="$config/sources/strings/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <files id="link-catalogs">
+                <xsl:for-each select="$config/sources/link-catalogs/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <!--                  <pathconvert pathsep=" " property="doc.files.list" refid="headers">
+                      <map from='${source.main.dir}' to='"${source.main.dir}"' />
+                  </pathconvert>
+-->                  
+            <files id="tocs">
+                <xsl:for-each select="$config/sources/tocs/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <files id="synonyms">
+                <xsl:for-each select="$config/sources/synonyms/include">
+                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                </xsl:for-each>
+            </files>
+            
+            <xsl:for-each select="$config/sources/other">
+                <files id="other.{@name}">
+                    <xsl:for-each select="include">
+                        <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                    </xsl:for-each>
+                </files>
+            </xsl:for-each>
+            
+            <xsl:choose>
+                <xsl:when test="$config/build/build-rules[1]">
+                    <xsl:for-each select="$config/build/build-rules[1]">
+                        <import file="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <import file="{$config/SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            
+            <resources id="spfe.style.html-style-directories">
+                <xsl:for-each select="$config/style/html-style-directories/include">
+                    <fileset dir="{spfe:URL-to-local(resolve-uri(. ,@base-uri))}"/>
+                </xsl:for-each>
+            </resources>
+            
+            <xsl:for-each select="$config/other">
+                <property name="spfe.other.{@name}" value="{.}"/>
+            </xsl:for-each>
+            
+        </project>
+        
+    </xsl:template>
+      
     <xsl:template name="create-build-file">
         <xsl:choose>
             <!-- if the config file specifies a doc set, create a build file for doc set -->
             <xsl:when test="/spfe/doc-set">
-                <xsl:variable name="source" select="/"/>
-                <!-- TO DO: check that all the topic sets have unique IDs -->
-                <!-- TO DO: check that all the topic sets have unique build directories -->
-                
-                <project name="{/spfe/doc-set/@id}" default="{$SPFE_BUILD_COMMAND}">
-                    
-                    <target name="config">
-                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
-                            <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, '-', id, '.xml')"/>
-                            
-                            <xslt classpath="{translate($SPFEOT_HOME, '\', '/')}/tools/saxon9he/saxon9he.jar"
-                                style="{translate($SPFEOT_HOME, '\', '/')}/1.0/scripts/config/config.xsl" 
-                                in="{spfe:URL-to-local(resolve-uri(href, base-uri($source)))}"
-                                out="{$antfile}"
-                                force="yes">
-                                <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-                                <param name="HOME" expression="{$HOME}"/> 
-                                <param name="SPFEOT_HOME" expression="{$SPFEOT_HOME}"/> 
-                                <param name="SPFE_BUILD_COMMAND" expression="{$SPFE_BUILD_COMMAND}"/> 
-                                <param name="SPFE_BUILD_DIR" expression="{$SPFE_BUILD_DIR}"/> 
-                            </xslt>
-                        </xsl:for-each>                        
-                    </target>
-                    
-                    <target name="clean" depends="config"> 
-                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
-                            <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
-                            
-                            <xsl:call-template name="create-run-command">
-                                <xsl:with-param name="build-command" select="'clean'"/>
-                                <xsl:with-param name="antfile" select="$antfile"/>
-                            </xsl:call-template>
-                        </xsl:for-each>
-                    </target>
-                    
-                    <target name="cat" depends="config"> 
-                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
-                            <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
-                            
-                            <xsl:call-template name="create-run-command">
-                                <xsl:with-param name="build-command" select="'cat'"/>
-                                <xsl:with-param name="antfile" select="$antfile"/>
-                            </xsl:call-template>
-                        </xsl:for-each>
-                    </target>
-                    
-                    <target name="toc" depends="config"> 
-                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
-                            <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
-                            
-                            <xsl:call-template name="create-run-command">
-                                <xsl:with-param name="build-command" select="'toc'"/>
-                                <xsl:with-param name="antfile" select="$antfile"/>
-                            </xsl:call-template>
-                        </xsl:for-each>
-                    </target>
-                    
-                    <target name="draft" depends="config, toc, cat"> 
-                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
-                            <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
-                            
-                            <xsl:call-template name="create-run-command">
-                                <xsl:with-param name="build-command" select="'draft'"/>
-                                <xsl:with-param name="antfile" select="$antfile"/>
-                            </xsl:call-template>
-                        </xsl:for-each>
-                    </target>
-                    
-                    <target name="final" depends="config, toc, cat"> 
-                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
-                            <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
-                            
-                            <xsl:call-template name="create-run-command">
-                                <xsl:with-param name="build-command" select="'final'"/>
-                                <xsl:with-param name="antfile" select="$antfile"/>
-                            </xsl:call-template>
-                        </xsl:for-each>
-                    </target>
-                    
-                    <target name="pdf" depends="config, toc, cat"> 
-                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
-                            <xsl:variable name="antfile" 
-                                select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
-                            
-                            <xsl:call-template name="create-run-command">
-                                <xsl:with-param name="build-command" select="'pdf'"/>
-                                <xsl:with-param name="antfile" select="$antfile"/>
-                            </xsl:call-template>
-                        </xsl:for-each>
-                    </target>
-                </project> 
+                <xsl:call-template name="create-docset-build-file"/>
             </xsl:when>
             
             <!-- otherwise, create build file for topic-set -->
             <xsl:otherwise>  
-              <project name="{$config/topic-set-id}" basedir="." default="draft">
-                  <property file="{translate($HOME, '\', '/')}/.spfe/spfe.properties"/>
-                  <property name="HOME" value="{translate($HOME, '\', '/')}"/>
-                  <property name="SPFEOT_HOME" value="{translate($SPFEOT_HOME, '\', '/')}"/>
-                  <property name="spfe.config-file" value="{translate($build-dir, '\', '/')}/config/spfe-config.xml"/>
-                  <property name="SPFE_BUILD_COMMAND" value="{$SPFE_BUILD_COMMAND}"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/topic-set-id)[1], 'spfe')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/topic-set-type)[1], 'spfe')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/wip-site)[1], 'spfe')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/messages)[1], 'spfe')"/>
-                  
-                  <xsl:for-each select="$config/scripts/*">
-                      <xsl:choose>
-                          <xsl:when test="name()='other'">
-                              <property name="spfe.scripts.other.{@name}" value="{$build-dir}/spfe.other.{@name}.xsl"/>
-                          </xsl:when>
-                          <xsl:otherwise>
-                              <property name="spfe.scripts.{name()}" value="{$build-dir}/spfe.{name()}.xsl"/>
-                          </xsl:otherwise>
-                      </xsl:choose>
-                      
-                  </xsl:for-each>
-
-                  <property name="spfe.build.build-directory" value="{$build-dir}"/>
-                  <property name="spfe.build.output-directory" value="{concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1]) }"/>
-                  
-                  <xsl:sequence select="spfe:xml2properties(($config/build/link-catalog-directory)[1], 'spfe.build')"/>
-                  <xsl:sequence select="spfe:xml2properties(($config/build/toc-directory)[1], 'spfe.build')"/>
-                  <xsl:sequence select="spfe:xml2properties((spfe:URL-to-local(resolve-uri(($config/build/build-rules)[1], ($config/build/build-rules)[1]/@base-uri))), 'spfe.build')"/>
-                  <property name="spfe.deployment" value="{concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1])}"/>
-                  <!--<xsl:sequence select="spfe:xml2properties(concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1]), 'spfe.deployment')"/>-->
-                  
-                  <files id="authored-content-for-merge">
-                      <xsl:for-each select="$config/sources/authored-content-for-merge/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-                  <files id="files-to-extract-content-from">
-                      <xsl:for-each select="$config/sources/files-to-extract-content-from/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-                  <files id="topics">
-                      <xsl:for-each select="$config/sources/topics/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-                  <files id="text-objects">
-                      <xsl:for-each select="$config/sources/text-objects/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-                  <files id="fragments">
-                      <xsl:for-each select="$config/sources/fragments/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-                  <files id="graphics">
-                      <xsl:for-each select="$config/sources/graphics/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-                  <files id="graphics-catalog">
-                      <xsl:for-each select="$config/sources/graphics-catalog/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-                  <files id="strings">
-                      <xsl:for-each select="$config/sources/strings/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-                  <files id="link-catalogs">
-                      <xsl:for-each select="$config/sources/link-catalogs/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-<!--                  <pathconvert pathsep=" " property="doc.files.list" refid="headers">
-                      <map from='${source.main.dir}' to='"${source.main.dir}"' />
-                  </pathconvert>
--->                  
-                  <files id="tocs">
-                      <xsl:for-each select="$config/sources/tocs/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                           
-                  <files id="synonyms">
-                      <xsl:for-each select="$config/sources/synonyms/include">
-                          <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                      </xsl:for-each>
-                  </files>
-                  
-                  <xsl:for-each select="$config/sources/other">
-                      <files id="other.{@name}">
-                          <xsl:for-each select="include">
-                              <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                          </xsl:for-each>
-                      </files>
-                  </xsl:for-each>
-                  
-                  <xsl:choose>
-                      <xsl:when test="$config/build/build-rules[1]">
-                          <xsl:for-each select="$config/build/build-rules[1]">
-                            <import file="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                          </xsl:for-each>
-                      </xsl:when>
-                      <xsl:otherwise>
-                          <import file="{$config/SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml"/>
-                      </xsl:otherwise>
-                  </xsl:choose>
-                  
-                  <resources id="spfe.style.html-style-directories">
-                      <xsl:for-each select="$config/style/html-style-directories/include">
-                          <fileset dir="{spfe:URL-to-local(resolve-uri(. ,@base-uri))}"/>
-                      </xsl:for-each>
-                  </resources>
-                  
-                  <xsl:for-each select="$config/other">
-                      <property name="spfe.other.{@name}" value="{.}"/>
-                  </xsl:for-each>
-                  
-              </project>
+                <xsl:call-template name="create-topicset-build-file"/>
             </xsl:otherwise>
         </xsl:choose>
         
