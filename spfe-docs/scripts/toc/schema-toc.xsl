@@ -4,7 +4,7 @@
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:re="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry">
     
-    <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-toc.xsl"/>
+    <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/toc/common/toc.xsl"/>
     
     <xsl:template match="topics-of-type[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry']" mode="toc">
         

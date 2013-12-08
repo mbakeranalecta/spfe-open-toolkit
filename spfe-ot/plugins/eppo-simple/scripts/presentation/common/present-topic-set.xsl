@@ -97,46 +97,46 @@ Main template
 					<xsl:value-of select="$topic-set-title"/>
 				</xref>
 			</xsl:if>
-			</p>
-	<table>
-		<tr>
-			<td><bold>Topic&#160;type</bold></td>
-			<td><xsl:value-of select="ancestor::ss:topic/@topic-type-alias"/></td>
-		</tr>
-		<tr>
-			<td><bold>Product</bold></td>
-			<td>
-				<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-product')"/>
-				<xsl:text> </xsl:text>
-				<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
-			</td>
-		</tr>
-		<xsl:if test="index/reference/key[normalize-space(.) ne '']">
+		</p>
+		<table>
 			<tr>
-				<td><bold>Tags</bold></td>
+				<td><bold>Topic&#160;type</bold></td>
+				<td><xsl:value-of select="ancestor::ss:topic/@topic-type-alias"/></td>
+			</tr>
+			<tr>
+				<td><bold>Product</bold></td>
 				<td>
-					<xsl:for-each select="index/reference">
-						<xsl:variable name="key-text" select="translate(key[1], '{}', '')"/>
-						<xsl:choose>
-							<xsl:when test="esf:target-exists-not-self(key[1], type, ancestor::topic/@default-reference-scope, ancestor::topic/name)">
-								<xsl:call-template name="output-link">
-									<xsl:with-param name="target" select="key[1]"/>
-									<xsl:with-param name="type" select="type"/>
-									<xsl:with-param name="content" select="$key-text"/>
-									<xsl:with-param name="scope" select="ancestor::topic/@default-reference-scope"/> 
-								</xsl:call-template>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="$key-text"/>
-							</xsl:otherwise>
-						</xsl:choose>
-						<xsl:if test="position() != last()">, </xsl:if>
-					</xsl:for-each>
+					<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-product')"/>
+					<xsl:text> </xsl:text>
+					<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
 				</td>
 			</tr>
-			
-		</xsl:if>
-	</table>
+			<xsl:if test="index/reference/key[normalize-space(.) ne '']">
+				<tr>
+					<td><bold>Tags</bold></td>
+					<td>
+						<xsl:for-each select="index/reference">
+							<xsl:variable name="key-text" select="translate(key[1], '{}', '')"/>
+							<xsl:choose>
+								<xsl:when test="esf:target-exists-not-self(key[1], type, ancestor::topic/@default-reference-scope, ancestor::topic/name)">
+									<xsl:call-template name="output-link">
+										<xsl:with-param name="target" select="key[1]"/>
+										<xsl:with-param name="type" select="type"/>
+										<xsl:with-param name="content" select="$key-text"/>
+										<xsl:with-param name="scope" select="ancestor::topic/@default-reference-scope"/> 
+									</xsl:call-template>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="$key-text"/>
+								</xsl:otherwise>
+							</xsl:choose>
+							<xsl:if test="position() != last()">, </xsl:if>
+						</xsl:for-each>
+					</td>
+				</tr>
+				
+			</xsl:if>
+		</table>
 	</header>
 </xsl:template>
 

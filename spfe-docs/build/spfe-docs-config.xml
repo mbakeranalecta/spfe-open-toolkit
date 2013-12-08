@@ -105,7 +105,7 @@
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/format/html/format-html.xsl</script>
         </format-html>
         <toc>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-toc.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/toc/common/toc.xsl</script>
         </toc>
     </scripts>
     
