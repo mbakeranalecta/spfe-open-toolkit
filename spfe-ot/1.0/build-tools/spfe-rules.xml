@@ -293,6 +293,7 @@
 				 -get.source-files.graphics-catalog,
 				 -get.source-files.strings"
 		unless="-current.presentation-web">
+		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
 
 		<!-- run the XSLT script to produce the output -->
 
@@ -303,7 +304,7 @@
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="synthesis-files" expression="${synthesis-files}"/>
 			<param name="link-catalog-files" expression="${link-catalog-files}"/>
-
+			<param name="toc-files" expression="${toc-files}"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
 			</factory>
@@ -363,7 +364,7 @@
 			<include name="presentation/*.xml"/>
 		</fileset>
 		<pathconvert dirsep="/" pathsep=";" property="presentation-files" refid="presentation-file-list"/>
-		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
+
 
 		
 		<!-- run the XSLT script to produce the output -->
@@ -373,7 +374,7 @@
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 			<param name="presentation-files" expression="${presentation-files}"/>
-			<param name="toc-files" expression="${toc-files}"/>
+
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
 			</factory>

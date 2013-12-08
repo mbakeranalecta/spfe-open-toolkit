@@ -60,6 +60,7 @@
         <presentation-web>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/topic-type/present-generic-topic.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set-toc.xsl</script>
         </presentation-web>
     </scripts>
 </spfe>

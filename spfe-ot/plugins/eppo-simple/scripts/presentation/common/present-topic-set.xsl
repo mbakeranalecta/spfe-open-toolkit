@@ -62,7 +62,9 @@ Main template
 	</xsl:result-document>
 </xsl:template>
 
-<xsl:template name="create-generated-topics"/>
+<xsl:template name="create-generated-topics">
+	<xsl:call-template name="create-toc-page"/>
+</xsl:template>
 	
 <xsl:template match="ss:topic" priority="-1">
 	<xsl:call-template name="sf:error">
@@ -99,7 +101,7 @@ Main template
 			</xsl:if>
 		</p>
 		<table>
-			<tr>
+<!--			<tr>
 				<td><bold>Topic&#160;type</bold></td>
 				<td><xsl:value-of select="ancestor::ss:topic/@topic-type-alias"/></td>
 			</tr>
@@ -110,7 +112,7 @@ Main template
 					<xsl:text> </xsl:text>
 					<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
 				</td>
-			</tr>
+			</tr>-->
 			<xsl:if test="index/reference/key[normalize-space(.) ne '']">
 				<tr>
 					<td><bold>Tags</bold></td>

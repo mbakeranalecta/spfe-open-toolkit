@@ -62,12 +62,6 @@
 	</xsl:template>
 
 
-<!--	<xsl:template match="gt:planning/gt:planning-question-title">	
-		<planning-question-title>
-				<xsl:apply-templates/>
-		</planning-question-title>
-	</xsl:template>
--->
 	<xsl:template match="gt:planning/gt:planning-question/gt:planning-question-title">	
 		<title>
 			<xsl:apply-templates/>

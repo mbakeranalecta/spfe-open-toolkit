@@ -69,6 +69,7 @@
         </image-list>
         <presentation-web>
             <script>../../scripts/presentation/present-doctype.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set-toc.xsl</script>
         </presentation-web>
 <!--        <other name="schema-defs">
             <script>../../scripts/synthesis/config-ref/schema-defs.xsl</script>

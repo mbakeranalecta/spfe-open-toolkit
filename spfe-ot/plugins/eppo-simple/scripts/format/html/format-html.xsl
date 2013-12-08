@@ -18,78 +18,7 @@
 		<xsl:sequence select="/config:spfe"/>
 	</xsl:variable>
 	
-	<xsl:param name="toc-files"/>
-	<xsl:variable name="unsorted-toc" >
-		<xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file:')"/>
-		<xsl:if test="count(distinct-values($temp-tocs/toc/@topic-set-id)) lt count($temp-tocs/toc)">
-			<xsl:call-template name="sf:error">
-				<xsl:with-param name="message">
-					<xsl:text>Duplicate TOCs detected.&#x000A; There appears to be more than one TOC in scope for the same topic set. Topic set IDs encountered include:&#x000A;</xsl:text>
-					<xsl:for-each select="$temp-tocs/toc">
-						<xsl:value-of select="@topic-set-id,'&#x000A;'"/>
-					</xsl:for-each>
-				</xsl:with-param>
-			</xsl:call-template>
-		</xsl:if>
-		<xsl:sequence select="$temp-tocs"/>
-	</xsl:variable>
-	
-	<xsl:variable name="toc">
-		<xsl:choose>
-			<xsl:when test="normalize-space($config/config:doc-set/config:topic-set-type-order)">
-				<xsl:variable name="topic-set-type-order" select="tokenize($config/config:doc-set/config:topic-set-type-order, ',\s*')"/>
-				
-				<!-- Make sure there is an entry on the topic set type order list for every topic set type. -->
-				<xsl:variable name="topic-set-types-found" select="distinct-values($unsorted-toc/toc/@topic-set-type)"/>
-				
-				<!-- Make sure all the topic set types appear on the topic type order list -->
-				<xsl:call-template name="sf:info">
-					<xsl:with-param name="message">
-						<xsl:text>Ordering the TOC acording the the topic set type list:</xsl:text>
-						<xsl:value-of select="$config/config:doc-set/config:topic-set-type-order"/>
-					</xsl:with-param>
-				</xsl:call-template>				
-				
-				<xsl:if test="count($topic-set-types-found[not(.=$topic-set-type-order)])">
-					<xsl:call-template name="sf:error">
-						<xsl:with-param name="message" select="'Topic type(s) missing from topic type order list: ', string-join($topic-set-types-found[not(.=$topic-set-type-order)], ', ')"/>
-					</xsl:call-template>
-				</xsl:if>
 
-				<xsl:for-each select="$topic-set-type-order">
-					<xsl:variable name="this-topic-set-type" select="."/>
-					<xsl:for-each select="$unsorted-toc/toc[@topic-set-type eq $this-topic-set-type]">
-						<xsl:sequence select="."/>
-					</xsl:for-each>
-				</xsl:for-each>
-
-			</xsl:when>
-			<xsl:when test="$config/config:doc-set/config:topic-sets">
-				<xsl:call-template name="sf:warning">
-					<xsl:with-param name="message">
-						<!-- FIXME: Should test for the two conditions subject-affinityed below. -->
-						<xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/doc-set configuration setting. External TOC files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
-					</xsl:with-param>
-				</xsl:call-template>
-				<xsl:for-each select="$config/config:doc-set/config:topic-sets/config:topic-set">
-					<xsl:variable name="id" select="config:id"/>
-					<xsl:sequence select="$unsorted-toc/toc[@topic-set-id eq $id]"/>
-				</xsl:for-each>
-				
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="sf:warning">
-					<xsl:with-param name="message">
-						<xsl:text>Doc set configuration not found in config file. TOC will be in alphabetical order by topic-set-type.</xsl:text>
-					</xsl:with-param>
-				</xsl:call-template>
-				<xsl:for-each select="$unsorted-toc/toc">
-					<xsl:sort select="@topic-set-type"/>
-					<xsl:sequence select="."/>
-				</xsl:for-each>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
 	<xsl:variable name="draft" as="xs:boolean" select="$config/config:build-command='draft'"/>
 	
 	<xsl:param name="presentation-files"/>
@@ -178,7 +107,6 @@
 			</xsl:with-param>
 		</xsl:call-template>
 		<xsl:apply-templates select="$presentation/web/page"/>
-		<xsl:apply-templates select="$toc"/>
 	</xsl:template>
 	
 	<xsl:template match="page">
@@ -739,78 +667,5 @@
 	
 	<xsl:template match="step">
 		<xsl:apply-templates/>
-	</xsl:template>
-
-
-<!-- TOC templates -->
-	
-	<xsl:template match="toc[@topic-set-id=$config/config:topic-set-id]">
-		<!-- FIXME: This is a copy of the page template. Make sure to match changes between the two, and eventially factor out similar code. -->
-		<xsl:variable name="page-name">List of Topics</xsl:variable>
-		<xsl:call-template name="output-html-page">
-			<xsl:with-param name="file-name" select="concat(normalize-space(@topic-set-id), '-toc.html')"/> 
-			<xsl:with-param name="title" select="@title"/>
-			<xsl:with-param name="content">
-				<xsl:if test="$draft">
-					<div id="draft-header">
-						<p class="status-{translate(@status,' ', '_')}">
-							<b class="cBold">Topic Name: </b>
-							<xsl:value-of select="@name"/>
-							<b class="cBold"> Topic Status: </b>
-							<xsl:value-of select="@status"/>
-						</p>
-						<xsl:if test=".//review-note">
-							<p>
-								<b>Index of review notes: </b> 
-								<xsl:for-each select=".//review-note">
-									<a href="#review-note:{position()}">
-										[<xsl:value-of select="position()"/>]
-									</a>
-									<xsl:text> </xsl:text>
-								</xsl:for-each>
-							</p>
-						</xsl:if>
-						<xsl:if test=".//author-note">
-							<p>
-								<b>Index of author notes: </b> 
-								<xsl:for-each select=".//author-note">
-									<a href="#author-note:{position()}">
-										[<xsl:value-of select="position()"/>]
-									</a>
-									<xsl:text> </xsl:text>
-								</xsl:for-each>
-							</p>
-						</xsl:if>
-						<hr/>
-					</div>
-				</xsl:if>
-				
-				<div id="main-container">
-					<div id="main">
-						<h1><xsl:value-of select="@title"/></h1>
-						<xsl:apply-templates/>
-					</div>
-				</div>
-				
-				<xsl:call-template name="output-xref-sets"/>
-			</xsl:with-param>
-		</xsl:call-template>
-	</xsl:template>
-	
-	<xsl:template match="toc/node">
-		<ul>
-			<xsl:apply-templates/>
-		</ul>
-	</xsl:template>
-	
-	<xsl:template match="node">
-		<li>
-			<p><a href="{normalize-space(@id)}.html"><xsl:value-of select="@name"/></a></p>
-			<xsl:if test="node">
-				<ul>
-					<xsl:apply-templates/>
-				</ul>
-			</xsl:if>
-		</li>
 	</xsl:template>
 </xsl:stylesheet>

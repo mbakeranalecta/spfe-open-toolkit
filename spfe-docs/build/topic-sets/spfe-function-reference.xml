@@ -69,6 +69,7 @@
         </image-list>
         <presentation-web>
             <script>../../scripts/presentation/present-function-ref.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set-toc.xsl</script>
         </presentation-web>
 <!--        <other name="function-defs">
             <script>../../scripts/synthesis/xsl-function-ref/xsl-function-ref-get-function-defs.xsl</script>
