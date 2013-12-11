@@ -127,7 +127,6 @@
         <p>If the user's HOME directory is C:\Users\username, the paths resolve to:</p>
         <p><config-setting>/spfe/build/build-directory</config-setting>:
             <code>C:\Users\username\spfebuild\build\tasks</code>.</p>
-     </p>
     </body>
     
 </generic-topic>

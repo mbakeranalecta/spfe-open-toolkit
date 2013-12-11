@@ -356,7 +356,7 @@ Content fix-up templates
 <!-- FIXME: Are these in the right namespace to match?" -->
 
 <!-- Fix up attribute name xpaths -->
-<xsl:template match="ed:config-setting">
+<!--<xsl:template match="ed:config-setting">
 	<xsl:variable name="context-element" select="ancestor::ed:element-description/ed:xpath"/>
 	<xsl:variable name="data-content" select="."/>
 	<xsl:variable name="xpath" select="@xpath"/>
@@ -366,33 +366,33 @@ Content fix-up templates
 	<xsl:element name="name" namespace="{$output-namespace}" >
 		<xsl:attribute name="type">xpath</xsl:attribute>
 		<xsl:choose>
-			<!-- check the cases where there is no 'xpath' attribute -->
+			<!-\- check the cases where there is no 'xpath' attribute -\->
 			<xsl:when test="not(@xpath)">
 				<xsl:choose>
 				
-					<!-- Is it a full attribute path? -->
+					<!-\- Is it a full attribute path? -\->
 					<xsl:when test="contains($data-content, '/@')">
-						<!-- make the xpath explicit -->
+						<!-\- make the xpath explicit -\->
 						<xsl:attribute name="key" select="$data-content"/>
 						<xsl:apply-templates/>
 					</xsl:when>
 					
-					<!-- Is it an unambiguous partial attribute path? -->
+					<!-\- Is it an unambiguous partial attribute path? -\->
 					<xsl:when test="count($all-attributes[ends-with(., $data-content)])=1">
-						<!-- make the xpath explicit -->
+						<!-\- make the xpath explicit -\->
 						<xsl:attribute name="key" select="$all-attributes[ends-with(., $data-content)]"/>
 						<xsl:apply-templates/>
 					</xsl:when>
 					
-					<!-- Is it the name of an attribute of the current element? -->
-					<!-- FIXME: This is using the ed source rather than the schema defs -->
-<!--					<xsl:when test="ancestor::ed:element-description/ed:attributes/ed:attribute[ends-with(ed:name, $data-content)]">-->
+					<!-\- Is it the name of an attribute of the current element? -\->
+					<!-\- FIXME: This is using the ed source rather than the schema defs -\->
+<!-\-					<xsl:when test="ancestor::ed:element-description/ed:attributes/ed:attribute[ends-with(ed:name, $data-content)]">-\->
 					<xsl:when test="concat($context-element, '/@', $data-content) = $all-attributes">
 							<xsl:attribute name="key" select="concat($context-element, '/@', $data-content)"/>
 						<xsl:apply-templates/>
 					</xsl:when>
 					
-					<!-- If not, we have a problem -->
+					<!-\- If not, we have a problem -\->
 					<xsl:otherwise>
 						<xsl:attribute name="key" select="$data-content"/>
 						<xsl:call-template name="sf:warning">
@@ -415,7 +415,7 @@ Content fix-up templates
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:element>
-</xsl:template>
+</xsl:template>-->
 
 <!-- Fix up element name xpaths -->
 	<xsl:template match="ed:config-setting">
