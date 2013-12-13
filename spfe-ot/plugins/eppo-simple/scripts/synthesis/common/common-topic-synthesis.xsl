@@ -30,7 +30,8 @@
 	<xsl:variable name="text-objects"  select="sf:get-sources($text-objects-files)"/>
 
 	<xsl:param name="default-topic-scope"/>
-
+	
+	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
 
  <!-- 
 =============
@@ -46,6 +47,17 @@ Main template
 				<xsl:apply-templates select="$text-objects"/>
 			</ss:synthesis>
 		</xsl:result-document>
+	</xsl:template>
+	
+	<!-- catch and root node that does not have a specific processing attached to it -->
+	<xsl:template match="/*" priority="-1">
+		<xsl:call-template name="sf:error">
+			<xsl:with-param name="message">
+				<xsl:text>Unknown document root element </xsl:text><xsl:value-of select="local-name()"/> 
+				<xsl:text>encountered with a namespace of </xsl:text> <xsl:value-of select="namespace-uri()"/>. 
+				<xsl:text>You probably need to add a synthesis script for this topic type to the build configuration for the topic set.</xsl:text>
+			</xsl:with-param>
+		</xsl:call-template>
 	</xsl:template>
 	
 

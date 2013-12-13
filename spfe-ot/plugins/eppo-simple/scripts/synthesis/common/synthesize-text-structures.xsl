@@ -56,6 +56,7 @@
 	</xsl:template>
 
 	<xsl:template name="apply-conditions">
+		<xsl:param name="output-namespace" tunnel="yes"/>
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:choose>
 			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">

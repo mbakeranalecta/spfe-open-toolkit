@@ -9,17 +9,10 @@ xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 exclude-result-prefixes="#all">
 	
-	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/generic-topic</xsl:variable>
-
-	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
-	
-	
-
-	
 	<xsl:template match="*:generic-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
-		
+		<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/generic-topic</xsl:variable>		
 		<xsl:variable name="topic-type-alias">
 			<xsl:choose>
 				<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
@@ -52,7 +45,9 @@ exclude-result-prefixes="#all">
 					<xsl:element name="{local-name()}" namespace="{$output-namespace}">
 						<xsl:copy-of select="@*"/>
 						<xsl:call-template name="apply-topic-attributes"/>
-						<xsl:apply-templates/>
+						<xsl:apply-templates>
+							<xsl:with-param name="output-namespace" tunnel="yes" select="$output-namespace"/>
+						</xsl:apply-templates>
 					</xsl:element>
 				</ss:topic>
 			</xsl:when>

@@ -11,7 +11,8 @@
     <strings>
         <string id="eppo-simple-topic-set-title">SPFE Development Guide</string>
     </strings>
-    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic</topic-type-order>
+    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic,
+        http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic</topic-type-order>
     <sources>
         <topics>
             <include>../../content/development/*.xml</include>
@@ -48,7 +49,7 @@
         <synthesis>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/common/common-topic-synthesis.xsl</script> 
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/generic-topic/generic-topic-synthesis.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/subject-affinities/subject-affinities.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/generic-task-topic/generic-task-topic-synthesis.xsl</script>            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/subject-affinities/subject-affinities.xsl</script>
             <script>../../scripts/synthesis/subject-affinities.xsl</script>
         </synthesis>
         <link-catalog>
@@ -60,7 +61,7 @@
         <presentation-web>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/topic-type/present-generic-topic.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set-toc.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/topic-type/present-generic-task-topic.xsl</script>            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set-toc.xsl</script>
         </presentation-web>
     </scripts>
 </spfe>
