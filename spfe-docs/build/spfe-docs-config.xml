@@ -22,11 +22,6 @@
             </topic-set>
 
             <topic-set>
-                <id>spfe-development-tasks</id>
-                <href>topic-sets/spfe-development-tasks.xml</href>
-            </topic-set>
-            
-            <topic-set>
                 <id>spfe-function-reference</id>
                 <href>topic-sets/spfe-function-reference.xml</href>
             </topic-set>

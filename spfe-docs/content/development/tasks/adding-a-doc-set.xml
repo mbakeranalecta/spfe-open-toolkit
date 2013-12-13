@@ -6,7 +6,7 @@
 http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
 
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/adding-a-doc-set.xml</uri>
+        <uri>http://spfeopentoolkit.org/spfe-docs/content/development/adding-a-doc-set.xml</uri>
         <author>jkeffer</author>
         <status>Not started</status>
         <history>

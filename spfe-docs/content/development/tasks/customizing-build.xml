@@ -8,7 +8,7 @@
 http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic.xsd">
 
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/customizing-build.xml</uri>
+        <uri>http://spfeopentoolkit.org/spfe-docs/content/development/customizing-build.xml</uri>
         <author>mbaker</author>
         <status>In progress</status>
         <history>
