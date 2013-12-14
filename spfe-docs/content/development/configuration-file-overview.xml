@@ -5,7 +5,7 @@
 <generic-topic xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic
-http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
 
     <head>
         <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/configuration-file-overview.xml</uri>
