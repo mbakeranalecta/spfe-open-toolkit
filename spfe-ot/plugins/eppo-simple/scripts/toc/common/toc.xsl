@@ -23,7 +23,7 @@
 
 	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
 	
-	<xsl:variable name="topic-type-order" select="tokenize($config/config:topic-type-order, ',\s*')" as="xs:string*"/>
+	
 	
 	<xsl:param name="toc-file"/>
 
@@ -114,26 +114,25 @@
 						<!-- Make sure there is an entry on the topic type order list for every topic type. Exclude topic types starting with "spfe." -->
 						<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic[not(@virtual-type)]/@type union $synthesis/ss:synthesis/ss:topic[not(starts-with(@virtual-type, 'spfe.'))]/@virtual-type)"/>
 						
-						<xsl:if test="count($topic-types-found[not(.=$topic-type-order)])">
+						<xsl:if test="count($topic-types-found[not(.=$config/config:topic-type-order/config:topic-type)])">
 							<xsl:call-template name="sf:error">
-								<xsl:with-param name="message" select="'Topic type(s) missing from spfe.topic-type-order-list property: ', string-join($topic-types-found[not(.=$topic-type-order)], ', ')"/>
+								<xsl:with-param name="message" select="'Topic type(s) missing from spfe.topic-type-order-list property: ', string-join($topic-types-found[not(.=$config/config:topic-type-order/config:topic-type)], ', ')"/>
 							</xsl:call-template>
 						</xsl:if>
 						
-						<!-- make sure there is a topic type alias for every topic in the topic type order list 
-						<xsl:if test="$topic-type-order[not(.=$topic-type-alias-list/topic-type/id)]">-->
-						<xsl:if test="not(every $x in $topic-type-order satisfies $x = $topic-type-alias-list/config:topic-type/config:id)">
+						<!-- make sure there is a topic type alias for every topic in the topic type order list -->
+						<xsl:if test="not(every $x in $config/config:topic-type-order/config:topic-type satisfies $x = $topic-type-alias-list/config:topic-type/config:id)">
 							<xsl:call-template name="sf:error">
-								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list:', string-join($topic-type-order[not(.=$topic-type-alias-list/config:topic-type/config:id)], ', ')"/>
+								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list:', string-join($config/config:topic-type-order/config:topic-type[not(.=$topic-type-alias-list/config:topic-type/config:id)], ', ')"/>
 							</xsl:call-template>
 						</xsl:if>
 	
-						<xsl:for-each select="$topic-type-order">
+						<xsl:for-each select="$config/config:topic-type-order/config:topic-type">
 							<xsl:variable name="this-topic-type" select="."/>
-							
-							
-							
-							<xsl:variable name="included-topics" select="($topics[@type=$this-topic-type] union $topics[@virtual-type=$this-topic-type]) except $topics[@virtual-type!=$this-topic-type]"/>
+							<xsl:variable name="included-topics" 
+								select="($topics[@type=$this-topic-type] 
+								union $topics[@virtual-type=$this-topic-type]) 
+								except $topics[@virtual-type!=$this-topic-type]"/>
 							
 						
 							<xsl:variable name="topics-of-this-type">

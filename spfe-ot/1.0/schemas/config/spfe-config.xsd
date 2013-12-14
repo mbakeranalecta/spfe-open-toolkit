@@ -20,7 +20,13 @@
         </xs:element>
         <xs:element name="topic-set-id" type="xs:string" minOccurs="0"/>
         <xs:element name="topic-set-type" type="xs:string" minOccurs="0"/>
-        <xs:element name="topic-type-order" type="xs:anyURI" minOccurs="0"/>
+        <xs:element name="topic-type-order" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="topic-type" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="sources" type="sources-type" minOccurs="0"/>
         <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
         <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
@@ -71,7 +77,13 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="title" type="xs:string"/>
-              <xs:element name="topic-set-type-order" type="xs:string"/>
+              <xs:element name="topic-set-type-order">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="topic-set-type" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="home-topic-set" type="xs:string"/>
               <xs:element name="topic-sets" minOccurs="1" maxOccurs="1">
                 <xs:complexType>

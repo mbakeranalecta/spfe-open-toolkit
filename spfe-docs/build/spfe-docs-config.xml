@@ -8,7 +8,12 @@
     <define name="SPFE_DOCS" value="${HOME}/spfebuild/spfe-docs"/>
     <doc-set id="spfe-docs">
         <title>SPFE Documentation</title>
-        <topic-set-type-order>docset, guide, task, reference</topic-set-type-order>
+        <topic-set-type-order>
+            <topic-set-type>docset</topic-set-type>
+            <topic-set-type>guide</topic-set-type>
+            <topic-set-type>task</topic-set-type>
+            <topic-set-type>reference</topic-set-type>
+        </topic-set-type-order>
         <home-topic-set>spfe-docs-docset</home-topic-set>
         <topic-sets>
             <topic-set>

@@ -11,8 +11,10 @@
     <strings>
         <string id="eppo-simple-topic-set-title">SPFE Development Guide</string>
     </strings>
-    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic,
-        http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic</topic-type-order>
+    <topic-type-order>
+        <topic-type>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic</topic-type>
+        <topic-type>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic</topic-type>
+    </topic-type-order>
     <sources>
         <topics>
             <include>../../content/development/*.xml</include>

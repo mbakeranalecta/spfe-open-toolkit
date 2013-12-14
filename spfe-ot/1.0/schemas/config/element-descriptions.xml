@@ -120,12 +120,20 @@
         <element-description>
             <xpath>/spfe/topic-type-order</xpath>
             <description>
-                <p>The order in which topic types are listed in the table of contents if <feature>topic type ordering</feature> is used. For this element to take effect, you need to define <config-setting>/spfe/sources/tocs</config-setting>.</p>
+                <p>The order in which topic types are listed in the table of contents if <feature>topic type ordering</feature> is used. To define the order manually, define <config-setting>/spfe/sources/tocs</config-setting>.</p>
             </description>
             <build-property/>
             <include-behavior>
                 <p>The value in the current configuration file overrides values in any included configuration files.</p>
             </include-behavior>
+        </element-description>
+        <element-description>
+            <xpath>/spfe/topic-type-order/topic-type</xpath>
+            <description>
+                <p>The URI of a <feature>topic type</feature> in the <feature>topic type order list</feature>.</p>
+            </description>
+            <build-property></build-property>
+            <include-behavior></include-behavior>
         </element-description>
         <element-description>
             <xpath>/spfe/sources</xpath>

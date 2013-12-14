@@ -8,7 +8,9 @@
     <define name="TOPIC_SET_ID" value="spfe-configuration-reference"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <topic-set-type>reference</topic-set-type>
-    <topic-type-order>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</topic-type-order>
+    <topic-type-order>
+        <topic-type>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</topic-type>
+    </topic-type-order>
     <sources>
         <topics>
             <include>../../content/config-ref/*.xml</include>
