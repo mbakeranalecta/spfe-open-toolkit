@@ -14,7 +14,7 @@
     </strings>
     
     <topic-type-order>
-        <topic-type>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic</topic-type>
+        <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</topic-type>
     </topic-type-order>
     
     <sources>

@@ -46,12 +46,12 @@
     
     <topic-type-aliases>
         <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-topic</id>
+            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</id>
             <alias>Concept</alias>
             <plural>Concepts</plural>
         </topic-type>
         <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic</id>
+            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</id>
             <alias>Tasks</alias>
             <plural>Tasks</plural>
         </topic-type>

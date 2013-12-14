@@ -3,9 +3,9 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <?xml-stylesheet type="text/css" href="../../../../spfe-docs/style/authoring/element-descriptions.css"?>
 <element-descriptions
-    xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/config-element-descriptions"
+    xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-element-descriptions"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/schemas/config-element-descriptions  http://spfeopentoolkit.org/spfe-docs/schemas/authoring/element-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-element-descriptions  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/element-descriptions.xsd">
     <head>
         <uri>http://spfeopentoolkit.org/spfe-docs/schemas/config-element-descriptions/element-descriptions</uri>
         <author>Mark Baker</author>
