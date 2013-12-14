@@ -53,30 +53,27 @@
 
     <scripts>
         <extract>
-            <script>../../scripts/synthesis/config-ref/schema-defs.xsl</script>
+            <script>../../topic-types/config-reference/scripts/extract/schema-defs.xsl</script>
         </extract>
         <synthesis>
-            <script>../../scripts/synthesis/config-ref/synthesize-config-ref.xsl</script>
-            <script>../../scripts/synthesis/subject-affinities.xsl</script>
+            <script>../../topic-types/config-reference/scripts/synthesis/synthesize-config-ref.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/subject-affinities/subject-affinities.xsl</script>
+            <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
         </synthesis>        
         <link-catalog>
             <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
         </link-catalog>
         <toc>
-            <script>../../scripts/toc/schema-toc.xsl</script>
+            <script>../../topic-types/config-reference/scripts/toc/schema-toc.xsl</script>
         </toc>
         <image-list>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/image-handling/get-image-list.xsl</script>
         </image-list>
         <presentation-web>
-            <script>../../scripts/presentation/present-doctype.xsl</script>
+            <script>../../topic-types/config-reference/scripts/presentation/present-doctype.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set-toc.xsl</script>
         </presentation-web>
-<!--        <other name="schema-defs">
-            <script>../../scripts/synthesis/config-ref/schema-defs.xsl</script>
-        </other>
--->    </scripts>
+    </scripts>
     
     <strings>
         <string id="eppo-simple-topic-set-title">SPFE Configuration Settings</string>

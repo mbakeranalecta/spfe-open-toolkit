@@ -54,6 +54,7 @@
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/common/common-topic-synthesis.xsl</script> 
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/generic-topic/generic-topic-synthesis.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/subject-affinities/subject-affinities.xsl</script>
+            <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
         </synthesis>
         <link-catalog>
             <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
