@@ -104,6 +104,8 @@
         <presentation-web>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-references.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-text-structures.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-header-and-footer.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-topic-set.xsl</script>
         </presentation-web>
         <format-html>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/format/html/format-html.xsl</script>

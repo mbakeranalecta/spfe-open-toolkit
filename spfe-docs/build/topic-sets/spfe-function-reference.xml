@@ -70,6 +70,7 @@
         <presentation-web>
             <script>../../topic-types/function-and-template-reference/scripts/presentation/present-function-ref.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-topic-set-toc.xsl</script>
+
         </presentation-web>
     </scripts>
     

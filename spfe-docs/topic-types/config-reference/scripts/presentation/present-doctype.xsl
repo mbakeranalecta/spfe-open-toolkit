@@ -10,24 +10,24 @@
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  exclude-result-prefixes="#all">
  
-  <xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
-<!--  <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-references.xsl"/>
+<!--  <xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
+  <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-references.xsl"/>
   <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-text-structures.xsl"/>
   <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-topic-set.xsl"/>
 -->
   <xsl:include href="present-element.xsl"/>
-<xsl:param name="draft">no</xsl:param>
+<!--<xsl:param name="draft">no</xsl:param>
 
   <xsl:variable name="config" as="element(config:spfe)">
     <xsl:sequence select="/config:spfe"/>
-  </xsl:variable>
+  </xsl:variable>-->
   
-<!-- processing directives -->
-<xsl:output method="xml" indent="yes"/>
+<!-- processing directives 
+<xsl:output method="xml" indent="yes"/>-->
 
-<xsl:param name="media">online</xsl:param>
+<!--<xsl:param name="media">online</xsl:param>
 
 <xsl:param name="synthesis-files"/>
-<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
+<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>-->
   	
 </xsl:stylesheet>

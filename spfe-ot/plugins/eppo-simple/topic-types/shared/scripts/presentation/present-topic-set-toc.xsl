@@ -85,6 +85,11 @@
     
     <!-- TOC templates -->
     <xsl:template name="create-toc-page">
+        <xsl:variable name="topic-set-title">
+            <xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/>
+            <xsl:text>, </xsl:text>
+            <xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
+        </xsl:variable>
         <page status="generated" name="{$config/config:topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
             <title>List of topics in <xsl:value-of select="$topic-set-title"></xsl:value-of></title>        
