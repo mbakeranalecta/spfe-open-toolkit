@@ -33,13 +33,9 @@
 	<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
 </xsl:variable>
 	
-<xsl:variable name="doc-set-title">
-	<xsl:value-of select="$config/config:doc-set/config:title"/>
-</xsl:variable>
+<xsl:variable name="doc-set-title" select="$config/config:doc-set/config:title"/>
 	
-<xsl:variable name="topic-set-id">
-	<xsl:value-of select="$config/config:topic-set-id"/>
-</xsl:variable>
+<!--<xsl:variable name="topic-set-id" select="$config/config:topic-set-id"/>-->
 	
 	
 <!--  
@@ -93,26 +89,14 @@ Main template
 				<xsl:value-of select="$doc-set-title"/>   
 			</xref>
 			
-			<xsl:if test="normalize-space($config/config:doc-set/config:home-topic-set) ne normalize-space($topic-set-id)">
+			<xsl:if test="normalize-space($config/config:doc-set/config:home-topic-set) ne normalize-space($config/config:topic-set-id)">
 				>      
-				<xref target="{normalize-space($topic-set-id)}-toc.html">
+				<xref target="{normalize-space($config/config:topic-set-id)}-toc.html">
 					<xsl:value-of select="$topic-set-title"/>
 				</xref>
 			</xsl:if>
 		</p>
 		<table>
-<!--			<tr>
-				<td><bold>Topic&#160;type</bold></td>
-				<td><xsl:value-of select="ancestor::ss:topic/@topic-type-alias"/></td>
-			</tr>
-			<tr>
-				<td><bold>Product</bold></td>
-				<td>
-					<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-product')"/>
-					<xsl:text> </xsl:text>
-					<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
-				</td>
-			</tr>-->
 			<xsl:if test="index/reference/key[normalize-space(.) ne '']">
 				<tr>
 					<td><bold>Tags</bold></td>
@@ -143,7 +127,6 @@ Main template
 </xsl:template>
 
 <xsl:template name="show-footer">		
-	
 			<xsl:variable name="see-also-links">
 				<xsl:for-each select="index/reference[esf:target-exists(key[1], type, ancestor::topic/@default-reference-scope)]">
 					<xsl:call-template name="output-link">

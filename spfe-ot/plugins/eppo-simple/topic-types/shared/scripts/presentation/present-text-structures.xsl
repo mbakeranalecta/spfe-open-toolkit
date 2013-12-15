@@ -9,7 +9,7 @@ version="2.0"
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  exclude-result-prefixes="#all"
 >
-<xsl:output indent="no"/>
+<!--<xsl:output indent="no"/>-->
 <xsl:strip-space elements="terminal-session"/>
 
 <xsl:param name="image-directory">images</xsl:param>

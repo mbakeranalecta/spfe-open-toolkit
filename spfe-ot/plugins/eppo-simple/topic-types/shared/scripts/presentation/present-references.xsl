@@ -13,7 +13,7 @@
 	
 	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
 	
-	<xsl:output indent="no"/>
+	<!--<xsl:output indent="no"/>-->
 
 	<xsl:param name="link-catalog-files"/>
 	<xsl:variable name="link-catalogs" >
@@ -31,7 +31,7 @@
 		<xsl:sequence select="$temp-link-catalogs"/>
 	</xsl:variable>
 	
-	<xsl:variable name="topic-set-id" select="/ss:synthesis/@topic-set-id"/>
+<!--	<xsl:variable name="topic-set-id" select="/ss:synthesis/@topic-set-id"/>-->
 	
 	<xsl:function name="esf:target-exists" as="xs:boolean">
 		<xsl:param name="target"/>
@@ -288,7 +288,7 @@
 					</xsl:when>
 					
 					<!-- this topic-set -->
-					<xsl:when test="$topic-set-id=$target-topic-set">
+					<xsl:when test="$config/config:topic-set-id=$target-topic-set">
 						 <xsl:value-of select="concat($target-file, $target-anchor)"/>
 					</xsl:when>
 					
@@ -399,7 +399,7 @@
 
 		<xsl:choose>
 			<!-- this book -->
-			<xsl:when test="$topic-set-id eq $target-topic-set">
+			<xsl:when test="$config/config:topic-set-id eq $target-topic-set">
 				<cross-ref 
 					type="{$type}"
 					target="{$target}"/>

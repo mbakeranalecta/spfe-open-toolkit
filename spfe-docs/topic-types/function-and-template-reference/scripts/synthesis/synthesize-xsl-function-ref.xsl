@@ -15,8 +15,8 @@ xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function
 exclude-result-prefixes="#all" >
 	
 <xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
-<xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/synthesis/common/synthesize-text-structures.xsl"/>
-<xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/synthesis/strings/synthesize-strings.xsl"/>
+<!--<xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/synthesis/common/synthesize-text-structures.xsl"/>
+<xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/synthesis/strings/synthesize-strings.xsl"/>-->
 	
 	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</xsl:variable>	
 	

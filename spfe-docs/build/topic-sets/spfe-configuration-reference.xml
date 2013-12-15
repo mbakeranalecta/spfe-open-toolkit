@@ -57,7 +57,7 @@
         </extract>
         <synthesis>
             <script>../../topic-types/config-reference/scripts/synthesis/synthesize-config-ref.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/synthesis/subject-affinities/subject-affinities.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
             <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
         </synthesis>        
         <link-catalog>
@@ -67,11 +67,11 @@
             <script>../../topic-types/config-reference/scripts/toc/schema-toc.xsl</script>
         </toc>
         <image-list>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/image-handling/get-image-list.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/get-image-list.xsl</script>
         </image-list>
         <presentation-web>
             <script>../../topic-types/config-reference/scripts/presentation/present-doctype.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/presentation/common/present-topic-set-toc.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-topic-set-toc.xsl</script>
         </presentation-web>
     </scripts>
     

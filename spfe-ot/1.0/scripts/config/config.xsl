@@ -603,7 +603,7 @@
             <xsl:result-document href="file:///{$build-dir}/spfe.{$script-type}.xsl" method="xml" indent="yes" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                     version="2.0" >
-                    <xsl:for-each select="current-group()[1]/c:script">
+                    <xsl:for-each select="current-group()/c:script">
                         <!-- FIXME: need to figure out if this should be import or include -->
                         <!-- FIXME: looks like include may be preferable to avoid complexities with import precedence -->
                         <!-- FIXME: But examine if this mechanism is actually worthwhile. -->

@@ -8,8 +8,8 @@
     xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     exclude-result-prefixes="#all">
     
-    <!-- processing directives -->
-    <xsl:output method="xml" indent="yes"/>
+    <!-- processing directives 
+    <xsl:output method="xml" indent="yes"/>-->
     
     <xsl:param name="toc-files"/>
     <xsl:variable name="unsorted-toc" >
