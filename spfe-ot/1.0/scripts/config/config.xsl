@@ -441,10 +441,6 @@
                 </xsl:for-each>
             </files>
             
-            <!--                  <pathconvert pathsep=" " property="doc.files.list" refid="headers">
-                      <map from='${source.main.dir}' to='"${source.main.dir}"' />
-                  </pathconvert>
--->                  
             <files id="tocs">
                 <xsl:for-each select="$config/sources/tocs/include">
                     <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>

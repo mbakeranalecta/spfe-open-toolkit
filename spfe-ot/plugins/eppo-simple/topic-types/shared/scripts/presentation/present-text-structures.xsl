@@ -125,7 +125,6 @@ version="2.0"
 	<xsl:template match="*:terminal-session/*:entry">
 		<xsl:if test="normalize-space(.)">
 			<xsl:sequence select="esf:process-placeholders(., 'code', 'placeholder')"/>
-	<!-- 			<bold><xsl:apply-templates/></bold> -->		
 		</xsl:if>
 	</xsl:template>
 	

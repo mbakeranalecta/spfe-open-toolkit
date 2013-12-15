@@ -12,24 +12,11 @@
  exclude-result-prefixes="#all">
  
   <xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
-<!--  <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-references.xsl"/>
-  <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-text-structures.xsl"/>
-  <xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-topic-set.xsl"/>-->
 
-<!--<xsl:param name="draft">no</xsl:param>-->
-
-<!--  <xsl:variable name="config" as="element(config:spfe)">
-    <xsl:sequence select="/config:spfe"/>
-  </xsl:variable>-->
   
-<!-- processing directives -->
-<xsl:output method="xml" indent="yes" cdata-section-elements="codeblock"/>
+	<!-- processing directives -->
+	<xsl:output method="xml" indent="yes" cdata-section-elements="codeblock"/>
 
-<!--<xsl:param name="media">online</xsl:param>-->
-
-<!--<xsl:param name="synthesis-files"/>
-<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>-->
-  
 	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry']">
 		<xsl:apply-templates/>
 	</xsl:template>

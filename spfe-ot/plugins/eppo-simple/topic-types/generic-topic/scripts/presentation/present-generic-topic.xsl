@@ -13,8 +13,6 @@
  exclude-result-prefixes="#all">
  
 	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/>
-<!--	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-references.xsl"/>
-	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/scripts/presentation/common/present-text-structures.xsl"/>-->
 	
 	<xsl:template match="ss:topic">
 		<xsl:apply-templates/>
@@ -65,8 +63,5 @@
 				<xsl:apply-templates/>
 			</title>
 	</xsl:template>
-
-
-
-
+	
 </xsl:stylesheet>

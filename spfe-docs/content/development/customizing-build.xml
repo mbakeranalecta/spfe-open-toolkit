@@ -24,12 +24,6 @@
                 <type>task</type>
                 <term>customize build system</term>
             </entry>
-            <!--
-            <entry>
-                <type>task</type>
-                <term>{customize} {build}</term>
-            </entry>
-            -->
             <entry>
                 <type>config-setting</type>
                 <term>/spfe</term>

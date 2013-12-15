@@ -32,11 +32,6 @@
 	<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
 </xsl:variable>
 	
-<xsl:variable name="doc-set-title" select="$config/config:doc-set/config:title"/>
-	
-<!--<xsl:variable name="topic-set-id" select="$config/config:topic-set-id"/>-->
-	
-	
 <!--  
 =============
 Main template
@@ -78,6 +73,4 @@ Main template
 <xsl:template match="topic/name" mode="#all"/>	
 <xsl:template match="tracking" mode="#all"/>
 
-
-	
 </xsl:stylesheet>

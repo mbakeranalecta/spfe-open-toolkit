@@ -12,8 +12,6 @@
 	exclude-result-prefixes="#all">
 	
 	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
-	
-	<!--<xsl:output indent="no"/>-->
 
 	<xsl:param name="link-catalog-files"/>
 	<xsl:variable name="link-catalogs" >
@@ -30,8 +28,6 @@
 		</xsl:if>
 		<xsl:sequence select="$temp-link-catalogs"/>
 	</xsl:variable>
-	
-<!--	<xsl:variable name="topic-set-id" select="/ss:synthesis/@topic-set-id"/>-->
 	
 	<xsl:function name="esf:target-exists" as="xs:boolean">
 		<xsl:param name="target"/>
@@ -513,9 +509,7 @@
 
 	<xsl:template match="*:topic-set-id">
 		<xsl:variable name="topic-set" select="@id-ref"/>
-		<!-- topic set IDs would seem to be inherently unscoped, since the are unique. Howeve, need to make sure we understand the interactions fully 
-		before removing the code altogether. -->
-		<!-- <xsl:variable name="scope" select="@scope"/> -->
+		<!-- topic set IDs would seem to be inherently unscoped, since the are unique. However, need to make sure we understand the interactions fully before removing the code altogether. -->
 
 		<xsl:choose>
 			<!-- make sure that the target exists -->

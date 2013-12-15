@@ -8,9 +8,6 @@
     xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     exclude-result-prefixes="#all">
     
-    <!-- processing directives 
-    <xsl:output method="xml" indent="yes"/>-->
-    
     <xsl:param name="toc-files"/>
     <xsl:variable name="unsorted-toc" >
         <xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file:')"/>
@@ -87,7 +84,7 @@
     <xsl:template name="create-toc-page">
         <page status="generated" name="{$config/config:topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
-            <title>List of topic sets in <xsl:value-of select="$doc-set-title"></xsl:value-of></title>       
+            <title>List of topic sets in <xsl:value-of select="$config/config:doc-set/config:title"></xsl:value-of></title>       
             <ul>
                 <xsl:apply-templates select="$toc"/>
             </ul>
