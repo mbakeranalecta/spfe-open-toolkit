@@ -70,7 +70,7 @@
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/get-image-list.xsl</script>
         </image-list>
         <presentation-web>
-            <script>../../topic-types/config-reference/scripts/presentation/present-doctype.xsl</script>
+            <script>../../topic-types/config-reference/scripts/presentation/present-config-ref.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-topic-set-toc.xsl</script>
         </presentation-web>
     </scripts>
