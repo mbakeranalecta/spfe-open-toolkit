@@ -5,7 +5,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <include href="../spfe-docs-config.xml"/>
+    <include href="../../topic-types/config-reference/config.xml"/>
     <define name="TOPIC_SET_ID" value="spfe-configuration-reference"/>
+    <script-style>topic-set</script-style>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <topic-set-type>reference</topic-set-type>
     <topic-type-order>
@@ -50,30 +52,6 @@
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules> 
         <build-directory>${SPFE_BUILD}/config-ref</build-directory>
     </build>
-
-    <scripts>
-        <extract>
-            <script>../../topic-types/config-reference/scripts/extract/schema-defs.xsl</script>
-        </extract>
-        <synthesis>
-            <script>../../topic-types/config-reference/scripts/synthesis/synthesize-config-ref.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
-            <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
-        </synthesis>        
-        <link-catalog>
-            <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
-        </link-catalog>
-        <toc>
-            <script>../../topic-types/config-reference/scripts/toc/schema-toc.xsl</script>
-        </toc>
-        <image-list>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/get-image-list.xsl</script>
-        </image-list>
-        <presentation-web>
-            <script>../../topic-types/config-reference/scripts/presentation/present-config-ref.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-topic-set-toc.xsl</script>
-        </presentation-web>
-    </scripts>
     
     <strings>
         <string id="eppo-simple-topic-set-title">SPFE Configuration Settings</string>

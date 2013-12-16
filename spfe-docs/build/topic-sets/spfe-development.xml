@@ -6,8 +6,11 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <define name="TOPIC_SET_ID" value="spfe-development"/>
     <include href="../spfe-docs-config.xml"/>
+    <include href="../../topic-types/generic-topic/config.xml"/>
+    <include href="../../topic-types/generic-task-topic/config.xml"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <topic-set-type>guide</topic-set-type>
+    <script-style>topic-set</script-style>
     <strings>
         <string id="eppo-simple-topic-set-title">SPFE Development Guide</string>
     </strings>

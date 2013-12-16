@@ -123,6 +123,20 @@
         <xsl:copy-of select="."/>
     </xsl:template>
     
+<!--    <!-\- copy any style scoped elements that match current style-\->
+    <xsl:template match="*[@style]" mode="resolve-config">
+        <xsl:message>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</xsl:message>
+        <xsl:message select="."/>
+        <xsl:message>-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-</xsl:message>
+        <xsl:message select="(ancestor::spfe/style)[1]"/>
+        <xsl:message>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</xsl:message>
+        <xsl:message select="$raw-config"></xsl:message>
+        <xsl:message>==============================================================</xsl:message>
+        <xsl:if test="tokenize(@style, '\s+') = tokenize((ancestor::spfe/style)[1], '\s+')">
+            <xsl:copy-of select="."/>
+        </xsl:if>
+    </xsl:template>-->
+    
     <!-- copy the element nodes from the config files -->
     <!-- add a base-uri attribute to each so we can resolve relative URIs 
          correctly based on the config file in which they occurred -->
@@ -594,20 +608,31 @@
     
     <xsl:namespace-alias stylesheet-prefix="gen" result-prefix="xsl"/>
     <xsl:template name="create-script-files">
+        <xsl:variable name="script-style" select="$config/script-style"/>
         <xsl:for-each-group select="$config/scripts/*" group-by="name()">
             <xsl:variable name="script-type" select="if (name()='other') then concat('other.',@name) else name()"/>            
             <xsl:result-document href="file:///{$build-dir}/spfe.{$script-type}.xsl" method="xml" indent="yes" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                     version="2.0" >
-                    <xsl:for-each select="current-group()/c:script">
+                    <xsl:for-each-group select="current-group()/c:script" group-by="resolve-uri(.,@base-uri)">
                         <!-- FIXME: need to figure out if this should be import or include -->
                         <!-- FIXME: looks like include may be preferable to avoid complexities with import precedence -->
                         <!-- FIXME: But examine if this mechanism is actually worthwhile. -->
 <!--                        <gen:import href="file:///{.}"/>--> 
                         <!-- I'm not clear why resolve-uri seems to include the file:/ protocol string in Linux and not Windows, but it does, so we need to check.-->
                         <xsl:variable name="uri" select="resolve-uri(.,@base-uri)"/>
-                       <gen:include href="{if (starts-with($uri, 'file:/')) then $uri else concat('file:/', $uri)}"/>
-                    </xsl:for-each>
+                        <xsl:choose>
+                            <xsl:when test="@style">
+                                <xsl:message select="tokenize(@style, '\s+'),' | ', tokenize($script-style, '\s+')"/>
+                                <xsl:if test="tokenize(@style, '\s+') = tokenize($script-style, '\s+')">               
+                                     <gen:include href="{if (starts-with($uri, 'file:/')) then $uri else concat('file:/', $uri)}"/>   
+                                </xsl:if>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <gen:include href="{if (starts-with($uri, 'file:/')) then $uri else concat('file:/', $uri)}"/> 
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each-group>
                 </gen:stylesheet>
             </xsl:result-document>
         </xsl:for-each-group>

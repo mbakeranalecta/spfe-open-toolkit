@@ -21,12 +21,13 @@
         <xs:element name="topic-set-id" type="xs:string" minOccurs="0"/>
         <xs:element name="topic-set-type" type="xs:string" minOccurs="0"/>
         <xs:element name="topic-type-order" minOccurs="0">
-          <xs:complexType>
+           <xs:complexType>
             <xs:sequence>
               <xs:element name="topic-type" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="script-style" type="xs:NMTOKENS"/>
         <xs:element name="sources" type="sources-type" minOccurs="0"/>
         <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
         <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
@@ -80,7 +81,8 @@
               <xs:element name="topic-set-type-order">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="topic-set-type" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"/>
+                    <xs:element name="topic-set-type" minOccurs="1" maxOccurs="unbounded"
+                      type="xs:anyURI"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -228,7 +230,16 @@
 
   <xs:complexType name="script-list-type">
     <xs:sequence>
-      <xs:element name="script" type="xs:anyURI" maxOccurs="unbounded" minOccurs="1"/>
+     <!-- <xs:element name="script" type="xs:anyURI" maxOccurs="unbounded" minOccurs="1"/>-->
+      <xs:element name="script" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:anyURI">
+              <xs:attribute name="style"/>  
+            </xs:extension>   
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
 

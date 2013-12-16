@@ -6,8 +6,10 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <define name="TOPIC_SET_ID" value="spfe-docs-docset"/>
     <include href="../spfe-docs-config.xml"/>
+    <include href="../../topic-types/generic-topic/config.xml"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <topic-set-type>docset</topic-set-type>
+    <script-style>doc-set</script-style>
    
     <strings>
         <string id="eppo-simple-topic-set-title">SPFE Documentation</string>
@@ -49,23 +51,4 @@
         <build-directory>${SPFE_BUILD}/spfe-docs/docset</build-directory>
     </build>
     
-    <scripts>
-        <synthesis>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/common-topic-synthesis.xsl</script> 
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/generic-topic-synthesis.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
-            <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
-        </synthesis>
-        <link-catalog>
-            <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
-        </link-catalog>
-        <image-list>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/get-image-list.xsl</script>
-        </image-list>
-        <presentation-web>
-            
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-generic-topic.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-doc-set-toc.xsl</script>
-        </presentation-web>
-    </scripts>
 </spfe>
