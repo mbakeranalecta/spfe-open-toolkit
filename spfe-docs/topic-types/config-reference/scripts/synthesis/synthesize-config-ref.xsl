@@ -12,7 +12,7 @@ xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:ed="http://spfeopentoolkit.org/spfe-docs/schemas/config-element-descriptions"
 exclude-result-prefixes="#all" >
 	
-<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
+
 	
 <xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</xsl:variable>	
 	

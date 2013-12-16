@@ -4,9 +4,6 @@
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:re="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry">
     
-    <xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
-    
-    
     <xsl:template match="topics-of-type[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry']" mode="toc">
         
         <xsl:for-each-group select="//re:spfe-configuration-reference-entry" group-by="re:schema-element/re:doctype">

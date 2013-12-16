@@ -14,8 +14,7 @@
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	exclude-result-prefixes="#all">
-	
-	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
+
 	<xsl:import href="synthesize-text-structures.xsl"/>
 	<xsl:output method="xml" indent="no"/>
 

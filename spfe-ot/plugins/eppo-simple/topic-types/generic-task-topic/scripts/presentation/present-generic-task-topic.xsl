@@ -12,7 +12,6 @@
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  exclude-result-prefixes="#all">
  
-	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/>
 	<xsl:template match="ss:topic">
 		<xsl:apply-templates/>
 	</xsl:template>

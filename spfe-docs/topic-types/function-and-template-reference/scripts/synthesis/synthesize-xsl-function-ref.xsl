@@ -14,8 +14,6 @@ xmlns:xfd="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definit
 xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry"
 exclude-result-prefixes="#all" >
 	
-<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
-	
 	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</xsl:variable>	
 	
 <!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->

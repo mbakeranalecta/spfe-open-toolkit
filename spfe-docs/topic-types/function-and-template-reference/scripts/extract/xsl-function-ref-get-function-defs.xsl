@@ -9,9 +9,7 @@
     exclude-result-prefixes="#all"
     version="2.0"
     >
-
-    <xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/>
-    
+   
     <xsl:output indent="yes" xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"/>
     
     <xsl:variable name="config" as="element(config:spfe)">

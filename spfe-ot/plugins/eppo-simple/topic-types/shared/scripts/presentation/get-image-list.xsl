@@ -6,8 +6,7 @@ version="2.0"
 xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 exclude-result-prefixes="#all">
-	
-<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
+
 <xsl:param name="graphics-catalog-file"/>
 <xsl:variable name="graphics-catalog" select="document($graphics-catalog-file)/graphics-catalog"/>
 

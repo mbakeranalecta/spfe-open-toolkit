@@ -10,9 +10,6 @@
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
  xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry"
  exclude-result-prefixes="#all">
- 
-  <xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/> 
-
   
 	<!-- processing directives -->
 	<xsl:output method="xml" indent="yes" cdata-section-elements="codeblock"/>

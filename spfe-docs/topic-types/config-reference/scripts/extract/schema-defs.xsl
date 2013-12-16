@@ -7,7 +7,7 @@
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	exclude-result-prefixes="#all">
-	<xsl:import href="http://spfeopentoolkit.org/spfe-ot/1.0/scripts/common/utility-functions.xsl"/>
+
 	
 <!-- =============================================================
 	schema-defs.xsl
