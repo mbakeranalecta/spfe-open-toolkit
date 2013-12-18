@@ -20,7 +20,7 @@
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
-											<String>${framework}/../../style/authoring/spfe-docs.css</String>
+											<String>${framework}../../../../../topic-types/shared/authoring/css/spfe-docs.css</String>
 										</field>
 										<field name="title">
 											<String>SPFE Docs Document-view</String>
@@ -133,7 +133,7 @@
 						<documentTypeRule-array>
 							<documentTypeRule>
 								<field name="namespace">
-									<String>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/generic-task-topic</String>
+									<String>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</String>
 								</field>
 								<field name="rootElem">
 									<String>*</String>

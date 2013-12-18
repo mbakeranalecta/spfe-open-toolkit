@@ -102,14 +102,14 @@
     
     <scripts>
         <format-html>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/scripts/format/html/format-html.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-html.xsl</script>
             <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
         </format-html>
     </scripts>
     
     <style>
         <html-style-directories>
-            <include>${SPFEOT_HOME}/plugins/eppo-simple/style/html</include>
+            <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css</include>
         </html-style-directories>
     </style>
     
