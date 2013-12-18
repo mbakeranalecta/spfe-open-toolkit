@@ -56,17 +56,17 @@
             <plural>Tasks</plural>
         </topic-type>
         <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</id>
+            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</id>
             <alias>Configuration setting</alias>
             <plural>Configuration settings</plural>
         </topic-type>
         <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</id>
+            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</id>
             <alias>XSLT Function Reference</alias>
             <plural>XSLT Function Reference</plural>
         </topic-type>
         <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry</id>
+            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</id>
             <alias>XSLT Template Reference</alias>
             <plural>XSLT Template Reference</plural>
         </topic-type>

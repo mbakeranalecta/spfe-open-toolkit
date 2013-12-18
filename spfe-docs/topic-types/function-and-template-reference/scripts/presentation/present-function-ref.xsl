@@ -8,17 +8,17 @@
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
- xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry"
+ xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
  exclude-result-prefixes="#all">
   
 	<!-- processing directives -->
 	<xsl:output method="xml" indent="yes" cdata-section-elements="codeblock"/>
 
-	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry']">
+	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference']">
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry']">
+	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference']">
 		<xsl:apply-templates/>
 	</xsl:template>
 	

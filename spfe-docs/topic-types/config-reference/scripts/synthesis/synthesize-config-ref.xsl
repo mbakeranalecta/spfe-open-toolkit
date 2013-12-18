@@ -14,7 +14,7 @@ exclude-result-prefixes="#all" >
 	
 
 	
-<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</xsl:variable>	
+<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xsl:variable>	
 	
 <!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
 <xsl:variable name="strings">
@@ -106,7 +106,7 @@ Main content processing templates
 	
 	<!-- FIXME: this is mostly generic code, should be refactored. -->
 	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
-	<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</xsl:variable> 
+	<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xsl:variable> 
 	<xsl:variable name="topic-type-alias">
 		<xsl:choose>
 			<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
@@ -131,8 +131,8 @@ Main content processing templates
 	<xsl:if test="($current-doctype = $doctype) or not($doctype)">		
 				
 		<ss:topic 
-			type="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry" 
-			full-name="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry/{translate(xpath, '/:', '__')}"
+			type="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference" 
+			full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/{translate(xpath, '/:', '__')}"
 			local-name="{translate(xpath, '/:', '__')}"
 			topic-type-alias="{$topic-type-alias}"
 			title="{name}">

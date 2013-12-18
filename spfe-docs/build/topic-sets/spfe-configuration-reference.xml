@@ -11,7 +11,7 @@
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <topic-set-type>reference</topic-set-type>
     <topic-type-order>
-        <topic-type>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry</topic-type>
+        <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</topic-type>
     </topic-type-order>
     <sources>
         <topics>

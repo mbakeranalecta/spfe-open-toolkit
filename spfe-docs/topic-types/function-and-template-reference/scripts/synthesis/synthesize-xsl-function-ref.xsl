@@ -11,10 +11,10 @@ xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:fd="http://spfeopentoolkit.org/spfe-docs/schemas/xslt-function-and-template-descriptions"
 xmlns:xfd="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"
-xmlns="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry"
+xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
 exclude-result-prefixes="#all" >
 	
-	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</xsl:variable>	
+	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xsl:variable>	
 	
 <!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
 <xsl:variable name="strings">
@@ -65,7 +65,7 @@ Main template
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
 				
 				<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
-				<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</xsl:variable> 
+				<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xsl:variable> 
 				
 				<xsl:variable name="topic-type-alias">
 					<xsl:choose>
@@ -86,8 +86,8 @@ Main template
 				</xsl:variable>
 				
 				<ss:topic 
-					type="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry" 
-					full-name="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry/{concat(xfd:local-prefix, '_', xfd:name)}"
+					type="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference" 
+					full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference/{concat(xfd:local-prefix, '_', xfd:name)}"
 					local-name="{xfd:name}"
 					topic-type-alias="{$topic-type-alias}"
 					title="{xfd:name}">
@@ -177,7 +177,7 @@ Main template
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
 				
 				<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
-				<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry</xsl:variable> 
+				<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</xsl:variable> 
 				
 				<xsl:variable name="topic-type-alias">
 					<xsl:choose>
@@ -198,8 +198,8 @@ Main template
 				</xsl:variable>
 				
 				<ss:topic 
-					type="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry" 
-					full-name="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry/{concat(xfd:local-prefix, '_', xfd:name)}"
+					type="http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference" 
+					full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference/{concat(xfd:local-prefix, '_', xfd:name)}"
 					local-name="{xfd:name}"
 					topic-type-alias="{$topic-type-alias}"
 					title="{xfd:name}">

@@ -1068,7 +1068,7 @@
                 <attribute>
                     <name>id</name>
                     <description>
-                        <p>The ID of the string. The string id is used to insert the string into a script of a piece of content. The markup used to insert a string may vary from one document type to another. In <tool-name>EPPO-Simple</tool-name>, the <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/schemas/authoring/generic-topic">string-ref</xml-element-name> element is used.</p>
+                        <p>The ID of the string. The string id is used to insert the string into a script of a piece of content. The markup used to insert a string may vary from one document type to another. In <tool-name>EPPO-Simple</tool-name>, the <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/generic-topic">string-ref</xml-element-name> element is used.</p>
                     </description>
                 </attribute>
             </attributes>

@@ -7,9 +7,9 @@
  xmlns:lf="local-functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
- xmlns:re="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry"
+ xmlns:re="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference"
  exclude-result-prefixes="#all" 
- xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry">
+ xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference">
 
 	
 	<!--================================================
@@ -119,7 +119,7 @@
 	-->
 	
 	
-	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-configuration-reference-entry']">
+	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference']">
 		<xsl:apply-templates/>
 	</xsl:template>
 	

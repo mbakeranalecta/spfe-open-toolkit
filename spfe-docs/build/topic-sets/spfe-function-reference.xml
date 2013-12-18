@@ -11,8 +11,8 @@
     <topic-set-type>reference</topic-set-type>
     <script-style>topic-set</script-style>
     <topic-type-order>
-        <topic-type>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-function-reference-entry</topic-type> 
-        <topic-type>http://spfeopentoolkit.org/spfe-docs/schemas/authoring/spfe-xslt-template-reference-entry</topic-type>
+        <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</topic-type> 
+        <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</topic-type>
     </topic-type-order>
     <sources>
         <topics>
