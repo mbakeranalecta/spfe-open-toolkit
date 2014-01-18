@@ -8,7 +8,7 @@
     http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/generic-task-topic.xsd">
 
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/content/development/customizing-build.xml</uri>
+        <id>customizing-build</id>
         <author>mbaker</author>
         <status>In progress</status>
         <history>
@@ -16,7 +16,7 @@
                 <date>2012-03-22</date>
                 <author>mbaker</author>
                 <comment>New topic</comment>
-                <new-status>Not started</new-status>
+                <status>Not started</status>
             </revision>
         </history>
         <index>

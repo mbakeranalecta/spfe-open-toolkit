@@ -8,7 +8,7 @@
     http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
 
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/content/tasks/configuration-file-overview.xml</uri>
+        <id>configuration-file-overview</id>
         <author>jkeffer</author>
         <status>In progress</status>
         <history>
@@ -16,19 +16,19 @@
                 <date>2012-03-22</date>
                 <author>jkeffer</author>
                 <comment>New topic</comment>
-                <new-status>Not started</new-status>
+                <status>Not started</status>
             </revision>
             <revision>
                 <date>2013-07-05</date>
                 <author>jkeffer</author>
                 <comment>Initial content</comment>
-                <new-status>In progress</new-status>
+                <status>In progress</status>
             </revision>
             <revision>
                 <date>2013-07-12</date>
                 <author>jkeffer</author>
                 <comment>Updates to content and structure</comment>
-                <new-status>Ready for technical review</new-status>
+                <status>Ready for technical review</status>
             </revision>
         </history>
         <index>

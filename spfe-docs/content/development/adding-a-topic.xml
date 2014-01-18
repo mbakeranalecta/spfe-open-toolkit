@@ -9,27 +9,26 @@
     http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/generic-task-topic.xsd">
 
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/content/development/adding-a-topic.xml</uri>
+        <id>adding-a-topic</id>
         <author>jkeffer</author>
-        <status>In progress</status>
         <history>
             <revision>
                 <date>2013-06-14</date>
                 <author>jkeffer</author>
                 <comment>New topic</comment>
-                <new-status>In progress</new-status>
+                <status>In progress</status>
             </revision>
             <revision>
                 <date>2013-06-14</date>
                 <author>jkeffer</author>
                 <comment>Remove some incorrect content.</comment>
-                <new-status>In progress</new-status>
+                <status>In progress</status>
             </revision>
             <revision>
                 <date>2013-06-21</date>
                 <author>jkeffer</author>
                 <comment>Remove some incorrect content.</comment>
-                <new-status>Ready for technical review</new-status>
+                <status>Ready for technical review</status>
             </revision>
         </history>
         <index>

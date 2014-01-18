@@ -6,7 +6,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/content/development/background-build-system.xml</uri>
+        <id>background-build-system</id>
         <author>mbaker</author>
         <status>In progress</status>
         <history>
@@ -14,13 +14,13 @@
                 <date>2012-04-22</date>
                 <author>mbaker</author>
                 <comment>New topic</comment>
-                <new-status>In progress</new-status>
+                <status>In progress</status>
             </revision>
             <revision>
                 <date>2013-07-11</date>
                 <author>jkeffer</author>
                 <comment>Updates for current toolkit functionality</comment>
-                <new-status>In progress</new-status>
+                <status>In progress</status>
             </revision>
         </history>
         <index>

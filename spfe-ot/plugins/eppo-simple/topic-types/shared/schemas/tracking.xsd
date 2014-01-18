@@ -6,7 +6,6 @@
     <xs:group name="tracking">
         <xs:sequence>
             <xs:element name="author" type="xs:string"/>
-            <xs:element name="status" type="status"/>
             <xs:element name="history">
                 <xs:complexType>
                     <xs:sequence>
@@ -16,7 +15,7 @@
                                     <xs:element name="date" type="xs:date"/>
                                     <xs:element name="author" type="xs:string"/>
                                     <xs:element name="comment" type="xs:string"/>
-                                    <xs:element name="new-status" type="status"/>
+                                    <xs:element name="status" type="status"/>
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>

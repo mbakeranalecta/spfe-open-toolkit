@@ -7,27 +7,26 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-element-descriptions  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/element-descriptions.xsd">
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/schemas/config-element-descriptions/element-descriptions</uri>
+        <id>element-descriptions</id>
         <author>Mark Baker</author>
-        <status>In progress</status>
         <history>
             <revision>
                 <date>2012-04-04</date>
                 <author>Mark Baker</author>
                 <comment>new</comment>
-                <new-status>In progress</new-status>
+                <status>In progress</status>
             </revision>
             <revision>
                 <date>2013-07-12</date>
                 <author>jkeffer</author>
                 <comment>Spelling and minor wording changes</comment>
-                <new-status>In progress</new-status>
+                <status>In progress</status>
             </revision>
             <revision>
                 <date>2013-07-24</date>
                 <author>jkeffer</author>
                 <comment>Match info in other topics and add subject affinities</comment>
-                <new-status>In progress</new-status>
+                <status>In progress</status>
             </revision>
         </history>
     </head>

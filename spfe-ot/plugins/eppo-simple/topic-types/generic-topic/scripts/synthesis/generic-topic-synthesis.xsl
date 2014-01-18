@@ -36,8 +36,8 @@ exclude-result-prefixes="#all">
 				<ss:topic 
 					type="{namespace-uri()}" 
 					topic-type-alias="{$topic-type-alias}"
-					full-name="{*:head/*:uri}"
-					local-name="{sf:file-name-from-uri(*:head/*:uri)}"
+					full-name="{concat(namespace-uri(), '/', *:head/*:id)}"
+					local-name="{*:head/*:id}"
 					title="{*:body/*:title}">
 					<xsl:if test="*:head/*:virtual-type">
 						<xsl:attribute name="virtual-type" select="*:head/*:virtual-type"/>

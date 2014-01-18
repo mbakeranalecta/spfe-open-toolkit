@@ -6,16 +6,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions.xsd">
     <head>
-        <uri>http://spfeopentoolkit.org/spfe-docs/schemas/xslt-function-and-template-descriptions/function-and-template-descriptions.xml</uri>
+        <id>function-and-template-descriptions</id>
         <virtual-type/>
         <author>mbaker</author>
-        <status>In progress</status>
         <history>
             <revision>
                 <date>2012-09-21</date>
                 <author>mbaker</author>
                 <comment>New document.</comment>
-                <new-status>In progress</new-status>
+                <status>In progress</status>
             </revision>
         </history>
     </head>

@@ -140,7 +140,7 @@ head>history>revision>comment
 }
 
 
-head>history>revision:first-child>new-status:before
+head>history>revision:first-child>status:before
 {
     content:"Status";
     display:block;
@@ -150,7 +150,7 @@ head>history>revision:first-child>new-status:before
     background-color:silver;
 }
 
-head>history>revision>new-status
+head>history>revision>status
 {
     display:table-column;
     border-bottom: 1px solid silver;
@@ -158,7 +158,7 @@ head>history>revision>new-status
     -oxy-show-placeholder: always;
 }
 
-head>history>revision>new-status
+head>history>revision>status
 {
      visibility:-oxy-collapse-text;
      content: 

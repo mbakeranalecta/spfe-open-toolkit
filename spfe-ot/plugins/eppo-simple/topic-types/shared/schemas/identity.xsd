@@ -5,7 +5,8 @@
 
     <xs:group name="identity">
         <xs:sequence>
-            <xs:element name="uri" type="xs:anyURI"/>
+            <xs:element name="id" type="xs:NCName"/>
+            <xs:element name="scope" type="xs:NMTOKENS" maxOccurs="1" minOccurs="0"/>
             <xs:element minOccurs="0" name="virtual-type" type="xs:anyURI"/>
         </xs:sequence>
     </xs:group>
