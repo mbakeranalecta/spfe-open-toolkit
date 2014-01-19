@@ -142,6 +142,16 @@
 			</xsl:choose>
 		</xsl:if>
 	</xsl:template>
+	
+	<!-- Make sure that the fig href is an absolute URI so that we know where to copy it from -->
+	<xsl:template match="*:fig">
+		<xsl:copy>
+			<xsl:attribute name="href" select="resolve-uri(@href, base-uri(.))"/>
+			<xsl:for-each select="@*[not(name()='href')]">
+				<xsl:copy/>
+			</xsl:for-each>
+		</xsl:copy>
+	</xsl:template>
 										 
 	
 </xsl:stylesheet>
