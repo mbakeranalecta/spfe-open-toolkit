@@ -226,8 +226,12 @@ version="2.0"
 	</xsl:template>
 
 	<xsl:template match="*:fig">
+		<xsl:if test="@id">
+			<anchor name="fig:{@id}"/>
+		</xsl:if>
+		<fig id="{@id}" href="{$image-directory}/{sf:get-file-name-from-path(@href)}"/>
 		<!-- Note that this function believes what the graphics catalog tells it. It does not check that the graphic the catalog points to exists or is the right size, etc. -->
-		<xsl:variable name="fig-id" select="@id"/>
+<!--		<xsl:variable name="fig-id" select="@id"/>
 		<xsl:variable name="uri" select="@uri"/>
 		<anchor name="fig:{if($uri) then generate-id($uri) else @id}"/>
 		
@@ -267,7 +271,7 @@ version="2.0"
 							</fig>
 						</xsl:when>
 						<xsl:when test="$media='paper'">
-							<!-- get the best available format for print -->
+							<!-\- get the best available format for print -\->
 							<xsl:variable name="selected-graphic" select=" if ($this-graphic/vector) then $this-graphic/vector else $this-graphic/raster"/>
 							<fig id="{if($uri) then generate-id($uri) else $fig-id}" uri="{$uri}">
 								<xsl:attribute name="file">
@@ -291,7 +295,7 @@ version="2.0"
 					</xsl:choose>
 				</xsl:when>
 		</xsl:choose>
-	</xsl:template>
+-->	</xsl:template>
 	
 	<xsl:template match="*:fig/*:title">
 		<title>
