@@ -190,11 +190,8 @@
 	<!-- target to build  synthesis -->
 	<target name="-build.synthesis" depends="--build.synthesis"/>
 	<target name="--build.synthesis" description="synthesis"
-		depends="-get.source-files.topics,
-					 -get.source-files.text-objects,
-					 -get.source-files.fragments,
-					 -get.source-files.strings">
-
+		>
+		<pathconvert dirsep="/" pathsep=";" property="topic-files" refid="topics"/>
 		<!-- run the XSLT script to produce the output -->
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			style="${spfe.scripts.synthesis}" 
