@@ -145,9 +145,10 @@
 		depends="-build.image-list-html"
 		if="image-list-html-has-content">
 		<mkdir dir="${output}/graphics"/>
+		<property name="the-list" refid="files.graphics.html" />
 		<copy todir="${output}/graphics" flatten="true" failonerror="true"
 			preservelastmodified="true" verbose="true">
-			<fileset refid="files.graphics.html"/>
+			<files refid="files.graphics.html"/>
 		</copy>
 	</target>
 
@@ -476,8 +477,8 @@
 				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
 			</factory>
 		</xslt>
-<!--		<fileset id="files.graphics.html" dir="${spfe.directories.image-source}"
-			includesfile="${temp}/image-list-html"/>-->
+		<files id="files.graphics.html"
+			includesfile="${temp}/image-list-html"/>
 		<condition property="image-list-html-has-content">
 			<isfileselected file="${temp}/image-list-html">
 				<containsregexp expression="\S+"/>
