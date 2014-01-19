@@ -27,12 +27,12 @@ exclude-result-prefixes="#all">
 </xsl:template>
 
 <xsl:template match="*">
-	<xsl:apply-templates select="//fig"/>
+	<xsl:apply-templates select="//*:fig"/>
 </xsl:template>
 
 <xsl:template match="text()"/>
 
-<xsl:template match="fig">
+<xsl:template match="*:fig">
 		<xsl:variable name="uri" select="string(@uri)"/>
 		<xsl:variable name="fig-id" select="string(@id)"/>
 		
