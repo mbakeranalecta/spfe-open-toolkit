@@ -5,12 +5,14 @@
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/lists.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/paragraphs.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/programming.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/graphics.xsd"/>
     
     <xs:group name="text-general">
         <xs:choice>
             <xs:group ref="paragraphs"/>
             <xs:group ref="lists"/>
             <xs:group ref="programming"/>
+            <xs:group ref="graphics"/>
         </xs:choice>
     </xs:group>
     
