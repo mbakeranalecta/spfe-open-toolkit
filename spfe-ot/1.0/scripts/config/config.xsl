@@ -618,7 +618,6 @@
                         <xsl:variable name="uri" select="resolve-uri(.,@base-uri)"/>
                         <xsl:choose>
                             <xsl:when test="@style">
-                                <xsl:message select="tokenize(@style, '\s+'),' | ', tokenize($script-style, '\s+')"/>
                                 <xsl:if test="tokenize(@style, '\s+') = tokenize($script-style, '\s+')">               
                                      <gen:include href="{if (starts-with($uri, 'file:/')) then $uri else concat('file:/', $uri)}"/>   
                                 </xsl:if>
