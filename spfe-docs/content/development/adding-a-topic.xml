@@ -75,6 +75,9 @@
                     <p>If you store your topic file in a new directory, the new directory path must be added to the
                         <config-setting>/spfe/sources/topics</config-setting> element of the topic set
                         configuration file.</p>
+    
+    <fig href="../images/grid-view.png"/>
+    
     <p>When you run the <tool-name>spfe</tool-name> build tool, if your topic appears in the documentation set under the correct topic
                 set in the table of contents and contains the correct content, you have successfully added a topic to the documentation set.</p>
         </doing>
