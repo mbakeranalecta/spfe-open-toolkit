@@ -12,7 +12,8 @@ version="2.0"
 <!--<xsl:output indent="no"/>-->
 <xsl:strip-space elements="terminal-session"/>
 
-<xsl:param name="image-directory">images</xsl:param>
+<!-- This should be in config. -->
+<xsl:param name="image-directory">graphics</xsl:param>
 
 	<xsl:function name="esf:section-has-content" as="xs:boolean">
 		<xsl:param name="content"/>
