@@ -125,15 +125,6 @@
 		<property name="fragment-files" refid="fragments-file-list"/>
 	</target>
 
-	<!-- GRAPHICS -->
-
-	<target name="-get.source-files.graphics-catalog">
-		<copy todir="${temp}" preservelastmodified="true" flatten="true">
-			<files refid="graphics-catalog"/>
-		</copy>
-		<basename property="graphics-catalog-file" file="${graphics-catalog}"/>
-	</target>
-
 	<!-- STRINGS -->
 
 	<target name="-get.source-files.strings" if="spfe.source-files.strings">
@@ -290,7 +281,6 @@
 				 -build.link-catalog,
 				 -build.toc,
 				 -current.presentation-web, 
-				 -get.source-files.graphics-catalog,
 				 -get.source-files.strings"
 		unless="-current.presentation-web">
 		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
@@ -323,7 +313,6 @@
 	<target name="--build.presentation-book" description="book presentation step."
 		depends="-build.synthesis,  -get-synthesis-file-list,
 									 -current.presentation-book, 
-									 -get.source-files.graphics-catalog,
 									 -get.source-files.strings"
 		unless="-current.presentation-book">
 
@@ -452,7 +441,6 @@
 	<!-- build the report -->
 	<target name="-build.report" description="report generation"
 		depends="-build.synthesis, 
-									 -get.source-files.graphics-catalog,
 									 -get.source-files.strings,
 									 -current.report"
 		unless="-current.report">
@@ -478,7 +466,7 @@
 	</target>
 
 	<target name="-build.image-list-html"
-		depends="-build.presentation-web, -get.source-files.graphics-catalog, -current.image-list-html"
+		depends="-build.presentation-web, -current.image-list-html"
 		unless="-current.image-list-html">
 		
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
@@ -487,7 +475,6 @@
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="synthesis-files" expression="${synthesis-files}"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-			<param name="graphics-catalog-file" expression="${graphics-catalog-file}"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
 			</factory>
@@ -507,7 +494,7 @@
 	</target>
 
 	<target name="-build.image-list.print"
-		depends="-build.presentation-book, -get.source-files.graphics-catalog, -current.image-list.print"
+		depends="-build.presentation-book, -current.image-list.print"
 		unless="-current.image-list.print">
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			in="${spfe.config-file}" style="${spfe.scripts.image-list}"
@@ -515,7 +502,6 @@
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="synthesis-files" expression="${synthesis-files}"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-			<param name="graphics-catalog-file" expression="${graphics-catalog-file}"/>
 			<param name="vector-if-available" expression="yes"/>
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>

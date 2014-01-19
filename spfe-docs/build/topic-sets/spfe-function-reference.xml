@@ -27,9 +27,6 @@
         <graphics>
             <include>../../content/*.xml</include>
         </graphics>
-        <graphics-catalog>
-            <include>../../content/*.xml</include>
-        </graphics-catalog>
         <strings>
             <include>../../content/*.xml</include>
         </strings>

@@ -13,8 +13,6 @@ version="2.0"
 <xsl:strip-space elements="terminal-session"/>
 
 <xsl:param name="image-directory">images</xsl:param>
-<xsl:param name="graphics-catalog-file"/>
-<xsl:variable name="graphics-catalog" select="document($graphics-catalog-file)/graphics-catalog"/>
 
 	<xsl:function name="esf:section-has-content" as="xs:boolean">
 		<xsl:param name="content"/>

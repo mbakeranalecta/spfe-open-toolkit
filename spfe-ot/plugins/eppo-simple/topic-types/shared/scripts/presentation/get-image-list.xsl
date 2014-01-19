@@ -7,9 +7,6 @@ xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 exclude-result-prefixes="#all">
 
-<xsl:param name="graphics-catalog-file"/>
-<xsl:variable name="graphics-catalog" select="document($graphics-catalog-file)/graphics-catalog"/>
-
 <xsl:param name="vector-if-available">no</xsl:param>
 
 <xsl:output method="text"/>
@@ -36,7 +33,7 @@ exclude-result-prefixes="#all">
 		<xsl:variable name="uri" select="string(@uri)"/>
 		<xsl:variable name="fig-id" select="string(@id)"/>
 		
-		<xsl:variable name="this-graphic">
+<!--		<xsl:variable name="this-graphic">
 			<xsl:choose>
 				<xsl:when test="$graphics-catalog/graphic[uri eq $uri]">
 					<xsl:sequence select="$graphics-catalog/graphic[uri eq $uri]/*"/>
@@ -66,7 +63,7 @@ exclude-result-prefixes="#all">
 						<xsl:value-of select="concat($this-graphic/raster, '&#xA;')"/>
 					</xsl:otherwise>
 				</xsl:choose>
-			</xsl:variable>
-			<xsl:value-of select="$graphic-file"/>
+			</xsl:variable>-->
+			<!--<xsl:value-of select="$graphic-file"/>-->
 	</xsl:template>
 </xsl:stylesheet>

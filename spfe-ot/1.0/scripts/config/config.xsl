@@ -437,12 +437,7 @@
                 </xsl:for-each>
             </files>
             
-            <files id="graphics-catalog">
-                <xsl:for-each select="$config/sources/graphics-catalog/include">
-                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                </xsl:for-each>
-            </files>
-            
+   
             <files id="strings">
                 <xsl:for-each select="$config/sources/strings/include">
                     <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>

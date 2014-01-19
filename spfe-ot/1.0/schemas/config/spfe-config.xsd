@@ -115,7 +115,6 @@
       <xs:element name="text-objects" type="fileset-type"/>
       <xs:element name="fragments" type="fileset-type"/>
       <xs:element name="graphics" type="fileset-type"/>
-      <xs:element name="graphics-catalog" type="fileset-type"/>
       <xs:element name="strings" type="fileset-type"/>
       <xs:element name="link-catalogs" type="fileset-type"/>
       <xs:element name="tocs" type="fileset-type"/>
