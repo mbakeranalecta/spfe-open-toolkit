@@ -67,25 +67,6 @@
             </parameters>
         </function-description>
         <function-description>
-            <name>file-name-from-uri</name>
-            <description>
-                <p>The <xslt-function-name>file-name-from-uri</xslt-function-name> function returns the file name portion of a URI string.</p>
-            </description>
-            <return-value>
-                <description>
-                    <p>Returns the file name portion of a URI string.</p>
-                </description>
-            </return-value>
-            <parameters>
-                <parameter>
-                    <name>uri</name>
-                    <description>
-                        <p>The URI for which the file name is to be returned.</p>
-                    </description>
-                </parameter>
-            </parameters>
-        </function-description>
-        <function-description>
             <name>get-file-name-from-path</name>
             <description>
                 <p>Returns the file name portion of a local path.</p>

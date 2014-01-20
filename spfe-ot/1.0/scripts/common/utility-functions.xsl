@@ -25,7 +25,7 @@
 <xsl:function name="sf:get-sources">
 	<xsl:param name="file-list"/>
 	<xsl:param name="load-message"/>
-<!--  FIXME: This text is firing in spfe-docs even though it is building correctly???
+<!--  FIXME: This test is firing in spfe-docs even though it is building correctly???
 		<xsl:if test="normalize-space($file-list)=''">
 		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">
@@ -144,11 +144,6 @@
 	</xsl:choose>
 </xsl:function>
 	
-	<xsl:function name="sf:file-name-from-uri">
-		<xsl:param name="uri"/>
-		<xsl:value-of select="substring-before(tokenize($uri, '/')[count(tokenize($uri, '/'))], '.xml')"/>
-	</xsl:function>
-	
 <xsl:function name="sf:conditions-met" as="xs:boolean">
 	<xsl:param name="conditions"/>
 	<xsl:param name="condition-tokens"/>
@@ -212,11 +207,91 @@
 			<xsl:matching-substring>
 				<xsl:value-of select="regex-group(2)"/>
 			</xsl:matching-substring>
-			<xsl:non-matching-substring>
-				<xsl:call-template name="sf:error">
-					<xsl:with-param name="message" select="'sf:path-following-protocol-part: invlaid path argument', $path"/>
-				</xsl:call-template>
-			</xsl:non-matching-substring>
 		</xsl:analyze-string>
 	</xsl:function>
+	
+	<xsl:function name="sf:local-path-from-uri">
+		<xsl:param name="local-path"/>
+		<xsl:value-of select="sf:pct-decode(sf:path-after-protocol-part($local-path))"/>
+	</xsl:function>
+	
+	<!-- Adapted from code published by James A. Robinson at http://www.oxygenxml.com/archives/xsl-list/200911/msg00300.html -->
+	<!-- Function to decode percent-encoded characters  -->
+	<xsl:function name="sf:pct-decode" as="xs:string?">
+		<xsl:param name="in" as="xs:string"/>
+		<xsl:sequence select="sf:pct-decode($in, ())"/>
+	</xsl:function>
+	<xsl:function name="sf:pct-decode" as="xs:string?">
+		<xsl:param name="in" as="xs:string"/>
+		<xsl:param name="seq" as="xs:string*"/>
+		
+		<xsl:choose>
+			<xsl:when test="not($in)">
+				<xsl:sequence select="string-join($seq, '')"/>
+			</xsl:when>
+			<xsl:when test="starts-with($in, '%')">
+				<xsl:choose>
+					<xsl:when test="matches(substring($in, 2, 2), '^[0-9A-Fa-f][0-9A-Fa-f]$')">
+						<xsl:variable name="s" as="xs:string" select="substring($in, 2, 2)"/>
+						<xsl:variable name="d" as="xs:integer" select="sf:hex-to-dec(upper-case($s))"/>
+						<xsl:variable name="c" as="xs:string" select="codepoints-to-string($d)"/>
+						<xsl:sequence select="sf:pct-decode(substring($in, 4), ($seq, $c))"/>
+					</xsl:when>
+					<xsl:when test="contains(substring($in, 2), '%')">
+						<xsl:variable name="s" as="xs:string" select="substring-before(substring($in, 2), '%')"/>
+						<xsl:sequence select="sf:pct-decode(substring($in, 2 + string-length($s)), ($seq, '%', $s))"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:sequence select="string-join(($seq, $in), '')"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:when test="contains($in, '%')">
+				<xsl:variable name="s" as="xs:string" select="substring-before($in, '%')"/>
+				<xsl:sequence select="sf:pct-decode(substring($in, string-length($s)+1), ($seq, $s))"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="string-join(($seq, $in), '')"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	<!-- Function to convert a hexadecimal string into decimal -->
+	<xsl:function name="sf:hex-to-dec" as="xs:integer">
+		<xsl:param name="hex" as="xs:string"/>
+		
+		<xsl:variable name="len" as="xs:integer" select="string-length($hex)"/>
+		<xsl:choose>
+			<xsl:when test="$len eq 0">
+				<xsl:sequence select="0"/>
+			</xsl:when>
+			<xsl:when test="$len eq 1">
+				<xsl:sequence select="
+					if ($hex eq '0')       then 0
+					else if ($hex eq '1')       then 1
+					else if ($hex eq '2')       then 2
+					else if ($hex eq '3')       then 3
+					else if ($hex eq '4')       then 4
+					else if ($hex eq '5')       then 5
+					else if ($hex eq '6')       then 6
+					else if ($hex eq '7')       then 7
+					else if ($hex eq '8')       then 8
+					else if ($hex eq '9')       then 9
+					else if ($hex = ('A', 'a')) then 10
+					else if ($hex = ('B', 'b')) then 11
+					else if ($hex = ('C', 'c')) then 12
+					else if ($hex = ('D', 'd')) then 13
+					else if ($hex = ('E', 'e')) then 14
+					else if ($hex = ('F', 'f')) then 15
+					else error(xs:QName('sf:hex-to-dec'))
+					"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="
+					(16 * sf:hex-to-dec(substring($hex, 1, $len - 1)))
+					+ sf:hex-to-dec(substring($hex, $len))"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
 </xsl:stylesheet>
