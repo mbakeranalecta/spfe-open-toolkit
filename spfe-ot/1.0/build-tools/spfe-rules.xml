@@ -83,61 +83,6 @@
 			action="start"/>
 	</target>
 
-	<!-- ============ -->
-	<!-- SOURCE FILES -->
-	<!-- ============ -->
-	<!-- provides properties and rules for defining and fetching source files -->
-
-	<!-- TOPICS -->
-	<target name="-get.source-files.topics">
-		<mkdir dir="${temp}/topics"/>
-		<copy todir="${temp}/topics" preservelastmodified="true" flatten="true" verbose="true">
-			<files refid="topics"/>
-		</copy>
-		<fileset id="topic-file-list" dir="${temp}">
-			<include name="topics/*.xml"/>
-		</fileset>
-		<pathconvert dirsep="/" pathsep=";" property="topic-files" refid="topic-file-list"/>
-	</target>
-
-	<!-- TEXT OBJECTS -->
-
-	<target name="-get.source-files.text-objects" if="spfe.source-files.text-objects">
-		<copy todir="${temp}/text-objects" preservelastmodified="true" flatten="true" verbose="true">
-			<files refid="text-objects"/>
-		</copy>
-		<files id="text-objects-file-list">
-			<include name="${temp}/text-objects/*.xml"/>
-		</files>
-		<property name="text-objects-files" refid="text-objects-file-list"/>
-		<!-- FIXME: Make the for of the property name consistent -->
-	</target>
-
-	<!-- FRAGMENTS -->
-
-	<target name="-get.source-files.fragments" if="spfe.source-files.fragments">
-		<copy todir="${temp}/fragments" preservelastmodified="true" flatten="true" verbose="true">
-			<files refid="fragments"/>
-		</copy>
-		<files id="fragments-file-list">
-			<include name="${temp}/fragments/*.xml"/>
-		</files> 
-		<property name="fragment-files" refid="fragments-file-list"/>
-	</target>
-
-	<!-- STRINGS -->
-
-	<target name="-get.source-files.strings" if="spfe.source-files.strings">
-		<copy todir="${temp}/strings" preservelastmodified="yes" flatten="yes" verbose="yes">
-			<files refid="strings"/>
-		</copy>
-		<files id="strings-files" include="${temp}/strings/*.xml"/>
-		<property name="strings-files-names" refid="strings-files"/>
-	</target>
-
-	<!-- LINK CATALOG -->
-	<pathconvert dirsep="/" pathsep=";" property="link-catalog-files" refid="link-catalogs"/>
-	
 
 	<!-- HTML -->
 
@@ -278,8 +223,7 @@
 				 -get-synthesis-file-list,
 				 -build.link-catalog,
 				 -build.toc,
-				 -current.presentation-web, 
-				 -get.source-files.strings"
+				 -current.presentation-web"
 		unless="-current.presentation-web">
 		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
 
@@ -310,8 +254,7 @@
 	<target name="-build.presentation-book" depends="--build.presentation-book"/>
 	<target name="--build.presentation-book" description="book presentation step."
 		depends="-build.synthesis,  -get-synthesis-file-list,
-									 -current.presentation-book, 
-									 -get.source-files.strings"
+									 -current.presentation-book"
 		unless="-current.presentation-book">
 
 		<!-- run the XSLT script to produce the output -->
@@ -438,9 +381,7 @@
 
 	<!-- build the report -->
 	<target name="-build.report" description="report generation"
-		depends="-build.synthesis, 
-									 -get.source-files.strings,
-									 -current.report"
+		depends="-build.synthesis, -current.report"
 		unless="-current.report">
 
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
