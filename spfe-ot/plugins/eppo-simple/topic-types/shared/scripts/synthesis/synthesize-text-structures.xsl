@@ -21,6 +21,7 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+ xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
  exclude-result-prefixes="#all"
 >
 	
@@ -145,12 +146,13 @@
 	
 	<!-- Make sure that the fig href is an absolute URI so that we know where to copy it from -->
 	<xsl:template match="*:fig">
-		<xsl:copy>
+		<fig>
 			<xsl:attribute name="href" select="resolve-uri(@href, base-uri(.))"/>
 			<xsl:for-each select="@*[not(name()='href')]">
 				<xsl:copy/>
 			</xsl:for-each>
-		</xsl:copy>
+			<xsl:apply-templates/>
+		</fig>
 	</xsl:template>
 										 
 	

@@ -228,20 +228,29 @@
 	</xsl:template>
 	
 	<!-- FIG -->
+	<!-- FIXME: alt should be supplied from the default caption if not present in source -->
 	<xsl:template match="fig">
-		<xsl:if test="title">
+		<xsl:if test="caption/title">
 			<h4>
 				<xsl:text>Figure&#160;</xsl:text>
-				<xsl:value-of select="count(ancestor::page//fig/title intersect preceding::fig/title)+1"/>
+				<xsl:value-of select="count(ancestor::page//fig/caption/title intersect preceding::fig/caption/title)+1"/>
 				<xsl:text>&#160;&#160;&#160;</xsl:text>
-				<xsl:value-of select="title"/>
+				<xsl:value-of select="caption/title"/>
 			</h4>
 		</xsl:if>
-		<img src="{@href}" alt="{title}" title="{title}"/>
+		<img src="{@href}" alt="{alt}" title="{caption/title}"/>
 		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template match="caption/p">
+		<p class="fig-caption">
+			<xsl:apply-templates/>
+		</p>
 	</xsl:template>
 
 	<!-- TITLES -->
+	
+	<xsl:template match="fig/caption/title"/>
 
 	<xsl:template match="page/title">
 		<h1><xsl:apply-templates/></h1>

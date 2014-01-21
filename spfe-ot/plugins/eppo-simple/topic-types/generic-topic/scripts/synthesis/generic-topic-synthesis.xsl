@@ -2,17 +2,20 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+<xsl:stylesheet version="2.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 exclude-result-prefixes="#all">
 	
+	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</xsl:variable>
+	
 	<xsl:template match="*:generic-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
-		<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</xsl:variable>		
+				
 		<xsl:variable name="topic-type-alias">
 			<xsl:choose>
 				<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">

@@ -228,75 +228,18 @@ version="2.0"
 		<xsl:if test="@id">
 			<anchor name="fig:{@id}"/>
 		</xsl:if>
-		<fig id="{@id}" href="{$image-directory}/{sf:get-file-name-from-path(@href)}"/>
-		<!-- Note that this function believes what the graphics catalog tells it. It does not check that the graphic the catalog points to exists or is the right size, etc. -->
-<!--		<xsl:variable name="fig-id" select="@id"/>
-		<xsl:variable name="uri" select="@uri"/>
-		<anchor name="fig:{if($uri) then generate-id($uri) else @id}"/>
-		
-		<xsl:variable name="this-graphic">
-			<xsl:choose>
-				<xsl:when test="$graphics-catalog/graphic[uri eq $uri]">
-					<xsl:sequence select="$graphics-catalog/graphic[uri eq $uri]/*"/>
-				</xsl:when>
-				<xsl:when test="$graphics-catalog/graphic[id eq $fig-id]">
-					<xsl:sequence select="$graphics-catalog/graphic[id eq $fig-id]/*"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:call-template name="sf:warning">
-						<xsl:with-param name="message">
-							<xsl:text>Figure not found: </xsl:text>
-							<xsl:value-of select="if ($uri) then $uri else $fig-id"/>
-							<xsl:text>. Referenced in topic </xsl:text>
-							<xsl:value-of select="ancestor::*:topic/*:name"/>
-							<xsl:text>.</xsl:text>
-						</xsl:with-param>
-					</xsl:call-template>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-		
-			<xsl:choose>
-				<xsl:when test="$this-graphic">
-					<xsl:choose>
-						<xsl:when test="$media='online'">
-							<fig id="{if($uri) then generate-id($uri) else $fig-id}" uri="{$uri}">
-								<xsl:attribute name="href">
-									<xsl:value-of select="$image-directory"/>
-									<xsl:text>/</xsl:text>
-									<xsl:value-of select="sf:get-file-name-from-path($this-graphic/raster)"/>
-								</xsl:attribute>
-								<xsl:apply-templates/>
-							</fig>
-						</xsl:when>
-						<xsl:when test="$media='paper'">
-							<!-\- get the best available format for print -\->
-							<xsl:variable name="selected-graphic" select=" if ($this-graphic/vector) then $this-graphic/vector else $this-graphic/raster"/>
-							<fig id="{if($uri) then generate-id($uri) else $fig-id}" uri="{$uri}">
-								<xsl:attribute name="file">
-									<xsl:value-of select="$image-directory"/>
-									<xsl:text>/</xsl:text>
-									<xsl:value-of select="sf:get-file-name-from-path($selected-graphic)"/>
-								</xsl:attribute>
-								<xsl:attribute name="height" select="$selected-graphic/@height"/>
-								<xsl:attribute name="width" select="$selected-graphic/@width"/>
-								<xsl:if test="$selected-graphic/@dpi">
-									<xsl:attribute name="dpi" select="$selected-graphic/@dpi"/>
-								</xsl:if>
-								<xsl:apply-templates/>
-							</fig>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:call-template name="sf:error">
-								<xsl:with-param name="message" select="'Unknown media speficied: ', $media"/>
-							</xsl:call-template>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:when>
-		</xsl:choose>
--->	</xsl:template>
+		<fig id="{@id}" href="{$image-directory}/{sf:get-file-name-from-path(@href)}">
+			<xsl:apply-templates/>
+		</fig>
+	</xsl:template>
 	
-	<xsl:template match="*:fig/*:title">
+	<xsl:template match="*:caption">
+		<caption>
+			<xsl:apply-templates/>
+		</caption>
+	</xsl:template>
+	
+	<xsl:template match="*:caption/*:title">
 		<title>
 			<xsl:apply-templates/>
 		</title>
