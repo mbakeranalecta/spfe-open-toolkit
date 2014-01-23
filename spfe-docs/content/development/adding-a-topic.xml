@@ -83,6 +83,15 @@
             <p>You can have more than one paragraph in a caption.</p>
         </caption>
     </fig>
+    <fig href="../images/grid-view.png"/>
+    
+    <fig href="../images/grid-view2.png" id="test-graphic2">
+        <caption>
+            <title>Test graphic2</title>
+            <p>This is a test graphic to show that we can do graphics. This is the caption attached to the graphic.</p>
+            <p>You can have more than one paragraph in a caption.</p>
+        </caption>
+    </fig>
     
     <p>When you run the <tool-name>spfe</tool-name> build tool, if your topic appears in the documentation set under the correct topic
                 set in the table of contents and contains the correct content, you have successfully added a topic to the documentation set.</p>

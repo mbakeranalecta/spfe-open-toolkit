@@ -6,6 +6,7 @@ version="2.0"
 xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record"
 exclude-result-prefixes="#all">
 
 <xsl:param name="vector-if-available">no</xsl:param>
@@ -23,17 +24,18 @@ exclude-result-prefixes="#all">
 <xsl:template name="main">
 	<xsl:apply-templates select="$synthesis"/>
 </xsl:template>
+	
+<!-- FIXME: Right now this gets all formats. Need to just get the ones that will be used.
+		May involve moving this step to format stage. -->
 
 <xsl:template match="*">
-	<xsl:apply-templates select="//*:fig"/>
+	<xsl:apply-templates select="//gr:fig/gr:formats/gr:format/gr:uri"/>
 </xsl:template>
 
 <xsl:template match="text()"/>
 
-<xsl:template match="*:fig">
-		<xsl:variable name="uri" select="string(@uri)"/>
-		<xsl:variable name="fig-id" select="string(@id)"/>
-	<xsl:value-of select="concat(sf:local-path-from-uri(@href), '&#xA;')"/>
+<xsl:template match="gr:uri">
+	<xsl:value-of select="concat(sf:local-path-from-uri(.), '&#xA;')"/>
 </xsl:template>
 	
 </xsl:stylesheet>

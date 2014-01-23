@@ -12,8 +12,7 @@ version="2.0"
 <!--<xsl:output indent="no"/>-->
 <xsl:strip-space elements="terminal-session"/>
 
-<!-- This should be in config. -->
-<xsl:param name="image-directory">graphics</xsl:param>
+
 
 	<xsl:function name="esf:section-has-content" as="xs:boolean">
 		<xsl:param name="content"/>
@@ -224,27 +223,6 @@ version="2.0"
 		</title>
 	</xsl:template>
 
-	<xsl:template match="*:fig">
-		<xsl:if test="@id">
-			<anchor name="fig:{@id}"/>
-		</xsl:if>
-		<fig id="{@id}" href="{$image-directory}/{sf:get-file-name-from-path(@href)}">
-			<xsl:apply-templates/>
-		</fig>
-	</xsl:template>
-	
-	<xsl:template match="*:caption">
-		<caption>
-			<xsl:apply-templates/>
-		</caption>
-	</xsl:template>
-	
-	<xsl:template match="*:caption/*:title">
-		<title>
-			<xsl:apply-templates/>
-		</title>
-	</xsl:template>
-	
 	<xsl:template match="*:qa">
 		<labeled-item>
 			<xsl:apply-templates/>
