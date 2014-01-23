@@ -51,7 +51,7 @@
         <synthesis>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/common-topic-synthesis.xsl</script> 
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/generic-topic-synthesis.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-task-topic/scripts/synthesis/generic-task-topic-synthesis.xsl</script>              <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/object-types/graphics/scripts/synthesis/synthesis-fig.xsl</script> <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-task-topic/scripts/synthesis/generic-task-topic-synthesis.xsl</script>              <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
             <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
         </synthesis>
         <link-catalog>
