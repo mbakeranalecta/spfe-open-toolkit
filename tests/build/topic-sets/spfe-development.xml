@@ -43,10 +43,6 @@
     <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
     <output-formats>html</output-formats>
 
-    <build>
-        <build-directory>${SPFE_BUILD}/development</build-directory>
-    </build>
-    
     <scripts>
         <synthesis>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/common-topic-synthesis.xsl</script> 

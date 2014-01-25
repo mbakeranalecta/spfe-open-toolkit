@@ -98,13 +98,13 @@
             separate files for the build from the final output of the documentation set.</p>
         <codeblock><![CDATA[
 <define name="SPFE_BUILD" value="${HOME}/spfebuild/build"/>
-<define name="SPFE_DOCS" value="${HOME}/spfebuild/spfe-docs"/>]]>
+<define name="SPFE_DOCSET" value="${HOME}/spfebuild/spfe-docs"/>]]>
         </codeblock>
         <p>The following elements are defined in spfe-docs-config.xml:</p>
         <codeblock><![CDATA[    
 <build>
     <link-catalog-directory>${SPFE_BUILD}/link-catalogs</link-catalog-directory>
-    <output-directory>${SPFE_DOCS}/output</output-directory>
+    <output-directory>${SPFE_DOCSET}/output</output-directory>
     <toc-directory>${SPFE_BUILD}/tocs</toc-directory>
 </build>]]>
         </codeblock>

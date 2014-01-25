@@ -15,10 +15,19 @@
     <xsl:param name="SPFE_BUILD_DIR"/>
     <xsl:param name="SPFE_BUILD_COMMAND"/>
     
+    <xsl:variable name="home" select="translate($HOME, '\', '/')"/>
+    <xsl:variable name="spfeot-home" select="translate($SPFEOT_HOME, '\', '/')"/>
+    <xsl:variable name="build-directory" select="translate($SPFE_BUILD_DIR, '\', '/')"/>
+    <xsl:variable name="link-catalog-directory" select="concat($build-directory, '/link-catalogs')"/>
+    <xsl:variable name="toc-directory" select="concat($build-directory, '/tocs')"/>
+ 
+    
     <xsl:variable name="source" select="/"/>
     
-    <xsl:variable name="build-dir" select="translate(concat($SPFE_BUILD_DIR, '/', $config/doc-set/@id, '/', ($config/topic-set-id)[1]), '\', '/')"/> 
+    <xsl:variable name="docset-home" select="concat($build-directory, '/', $config/doc-set/@id)"/>
+    <xsl:variable name="topicset-home" select="concat($docset-home, '/', $config/topic-set-id)"/>
     
+   
     <xsl:variable name="config-docs" as="xs:string*">
         <xsl:value-of select="base-uri()"/>
         <xsl:call-template name="get-config-docs">
@@ -70,8 +79,8 @@
     
     <xsl:variable name="defines" as="element(define)*">
         <xsl:variable name="raw-defines" as="element(define)*">
-            <c:define name="HOME" value="{translate($HOME, '\', '/')}"/>
-            <c:define name="SPFEOT_HOME" value="{translate($SPFEOT_HOME, '\', '/')}"/>
+            <c:define name="HOME" value="{$home}"/>
+            <c:define name="SPFEOT_HOME" value="{$spfeot-home}"/>
           <xsl:for-each select="$raw-config//define">
               <xsl:copy-of select="."/>
           </xsl:for-each>
@@ -122,20 +131,6 @@
     <xsl:template match="@*" mode="resolve-config" priority="-1">
         <xsl:copy-of select="."/>
     </xsl:template>
-    
-<!--    <!-\- copy any style scoped elements that match current style-\->
-    <xsl:template match="*[@style]" mode="resolve-config">
-        <xsl:message>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</xsl:message>
-        <xsl:message select="."/>
-        <xsl:message>-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-</xsl:message>
-        <xsl:message select="(ancestor::spfe/style)[1]"/>
-        <xsl:message>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</xsl:message>
-        <xsl:message select="$raw-config"></xsl:message>
-        <xsl:message>==============================================================</xsl:message>
-        <xsl:if test="tokenize(@style, '\s+') = tokenize((ancestor::spfe/style)[1], '\s+')">
-            <xsl:copy-of select="."/>
-        </xsl:if>
-    </xsl:template>-->
     
     <!-- copy the element nodes from the config files -->
     <!-- add a base-uri attribute to each so we can resolve relative URIs 
@@ -256,8 +251,8 @@
                     <xsl:variable name="antfile" 
                         select="concat($source/spfe/doc-set/@id, '-', id, '.xml')"/>
                     
-                    <xslt classpath="{translate($SPFEOT_HOME, '\', '/')}/tools/saxon9he/saxon9he.jar"
-                        style="{translate($SPFEOT_HOME, '\', '/')}/1.0/scripts/config/config.xsl" 
+                    <xslt classpath="{$spfeot-home}/tools/saxon9he/saxon9he.jar"
+                        style="{$spfeot-home}/1.0/scripts/config/config.xsl" 
                         in="{spfe:URL-to-local(resolve-uri(href, base-uri($source)))}"
                         out="{$antfile}"
                         force="yes">
@@ -349,7 +344,7 @@
         <!-- FIXME: This may not be the right place to do this. Need a more general/configurable solution. -->
         <xsl:message select="'Generating root index file.'"/>
         <xsl:variable name="redirect-to" select="concat($config/doc-set/home-topic-set , '/index.html')"/>
-        <xsl:result-document href="file:///{translate(($config/build/output-directory)[1], '\','/')}/index.html" method="html" >
+        <xsl:result-document href="file:///{$docset-home}/index.html" method="html" >
             <!--<!DOCTYPE HTML>-->
             <html>
                 <head>
@@ -370,10 +365,10 @@
     
     <xsl:template name="create-topicset-build-file">
         <project name="{$config/topic-set-id}" basedir="." default="draft">
-            <property file="{translate($HOME, '\', '/')}/.spfe/spfe.properties"/>
-            <property name="HOME" value="{translate($HOME, '\', '/')}"/>
-            <property name="SPFEOT_HOME" value="{translate($SPFEOT_HOME, '\', '/')}"/>
-            <property name="spfe.config-file" value="{translate($build-dir, '\', '/')}/config/spfe-config.xml"/>
+            <property file="{$home}/.spfe/spfe.properties"/>
+            <property name="HOME" value="{$home}"/>
+            <property name="SPFEOT_HOME" value="{$spfeot-home}"/>
+            <property name="spfe.config-file" value="{$build-directory}/config/spfe-config.xml"/>
             <property name="SPFE_BUILD_COMMAND" value="{$SPFE_BUILD_COMMAND}"/>
             <xsl:sequence select="spfe:xml2properties(($config/topic-set-id)[1], 'spfe')"/>
             <xsl:sequence select="spfe:xml2properties(($config/topic-set-type)[1], 'spfe')"/>
@@ -383,23 +378,22 @@
             <xsl:for-each select="$config/scripts/*">
                 <xsl:choose>
                     <xsl:when test="name()='other'">
-                        <property name="spfe.scripts.other.{@name}" value="{$build-dir}/spfe.other.{@name}.xsl"/>
+                        <property name="spfe.scripts.other.{@name}" value="{$build-directory}/spfe.other.{@name}.xsl"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <property name="spfe.scripts.{name()}" value="{$build-dir}/spfe.{name()}.xsl"/>
+                        <property name="spfe.scripts.{name()}" value="{$build-directory}/spfe.{name()}.xsl"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 
             </xsl:for-each>
             
-            <property name="spfe.build.build-directory" value="{$build-dir}"/>
+            <property name="spfe.build.build-directory" value="{$build-directory}"/>
             <property name="spfe.build.output-directory" value="{concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1]) }"/>
+            <property name="spfe.build.link-catalog-directory" value="{$link-catalog-directory}"/>
+            <property name="spfe.build.toc-directory" value="{$toc-directory}"/>
             
-            <xsl:sequence select="spfe:xml2properties(($config/build/link-catalog-directory)[1], 'spfe.build')"/>
-            <xsl:sequence select="spfe:xml2properties(($config/build/toc-directory)[1], 'spfe.build')"/>
             <xsl:sequence select="spfe:xml2properties((spfe:URL-to-local(resolve-uri(($config/build/build-rules)[1], ($config/build/build-rules)[1]/@base-uri))), 'spfe.build')"/>
             <property name="spfe.deployment" value="{concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1])}"/>
-            <!--<xsl:sequence select="spfe:xml2properties(concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1]), 'spfe.deployment')"/>-->
             
             <files id="authored-content-for-merge">
                 <xsl:for-each select="$config/sources/authored-content-for-merge/include">
@@ -538,15 +532,16 @@
     </xsl:template>
     
     <xsl:template name="create-config-file">
-        <xsl:message select="concat('Generating config file: ', 'file:///', translate($build-dir, '\','/'), '/config/spfe-config.xml')"/>
-        <xsl:result-document href="file:///{translate($build-dir, '\','/')}/config/spfe-config.xml" method="xml" indent="yes" xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+        <xsl:message select="concat('Generating config file: ', 'file:///', $build-directory, '/config/spfe-config.xml')"/>
+        <xsl:result-document href="file:///{$build-directory}/config/spfe-config.xml" method="xml" indent="yes" xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
             <spfe>
                 <dir-separator>
-                    <xsl:value-of select="if (translate($HOME, '\', '/') eq $HOME) then ':' else ';'"/>
+                    <!-- detect OS based on separator in $HOME -->
+                    <xsl:value-of select="if ($home eq $HOME) then ':' else ';'"/>
                 </dir-separator>
                 <build-command><xsl:value-of select="$SPFE_BUILD_COMMAND"/></build-command>
-                <user-home><xsl:value-of select="translate($HOME, '\', '/')"/></user-home>
-                <spfeot-home><xsl:value-of select="translate($SPFEOT_HOME, '\', '/')"/></spfeot-home>
+                <user-home><xsl:value-of select="$home"/></user-home>
+                <spfeot-home><xsl:value-of select="$spfeot-home"/></spfeot-home>
                 <topic-type-aliases>
                     <xsl:for-each-group select="$config/topic-type-aliases/topic-type" group-by="id">
                         <xsl:copy-of select="current-group()[1]"  copy-namespaces="no"/>
@@ -564,20 +559,16 @@
                 
                 <build>
                     <output-directory>
-                        <xsl:attribute name="base-uri" select="base-uri(.)"/>
-                        <xsl:value-of select="translate(($config/build/output-directory)[1], '\', '/')"/>
+                        <xsl:value-of select="$topicset-home"/>
                     </output-directory>
                     <build-directory>
-                        <xsl:attribute name="base-uri" select="base-uri(.)"/>
-                        <xsl:copy-of select="translate($build-dir, '\', '/')"/>
+                        <xsl:value-of select="$build-directory"/>
                     </build-directory>
                     <link-catalog-directory>
-                        <xsl:attribute name="base-uri" select="base-uri(.)"/>
-                        <xsl:copy-of select="translate(($config/build/link-catalog-directory)[1], '\', '/')"/>
+                        <xsl:value-of select="$link-catalog-directory"/>
                     </link-catalog-directory>
                     <toc-directory>
-                        <xsl:attribute name="base-uri" select="base-uri(.)"/>
-                        <xsl:copy-of select="translate(($config/build/toc-directory)[1], '\', '/')"/>
+                        <xsl:value-of select="$toc-directory"/>
                     </toc-directory>
                 </build>
                 <xsl:copy-of select="($config/format)[1]" copy-namespaces="no"/>    
@@ -606,7 +597,7 @@
         <xsl:variable name="script-style" select="$config/script-style"/>
         <xsl:for-each-group select="$config/scripts/*" group-by="name()">
             <xsl:variable name="script-type" select="if (name()='other') then concat('other.',@name) else name()"/>            
-            <xsl:result-document href="file:///{$build-dir}/spfe.{$script-type}.xsl" method="xml" indent="yes" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
+            <xsl:result-document href="file:///{$build-directory}/spfe.{$script-type}.xsl" method="xml" indent="yes" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                     version="2.0" >
                     <xsl:for-each-group select="current-group()/c:script" group-by="resolve-uri(.,@base-uri)">
