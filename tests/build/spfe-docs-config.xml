@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    
+    <define name="SPFE_BUILD" value="${HOME}/spfebuild/test/build"/>
+    <define name="SPFE_DOCS" value="${HOME}/spfebuild/test/spfe-docs"/>
+    <doc-set id="spfe-docs">
+        <title>SPFE Documentation</title>
+        <topic-set-type-order>
+            <topic-set-type>docset</topic-set-type>
+            <topic-set-type>guide</topic-set-type>
+            <topic-set-type>task</topic-set-type>
+            <topic-set-type>reference</topic-set-type>
+        </topic-set-type-order>
+        <home-topic-set>spfe-docs-docset</home-topic-set>
+        <topic-sets>
+            <topic-set>
+                <id>spfe-docs-docset</id>
+                <href>topic-sets/spfe-docs-docset.xml</href>
+            </topic-set>
+            
+            <topic-set>
+                <id>spfe-development</id>
+                <href>topic-sets/spfe-development.xml</href>
+            </topic-set>
+
+            <topic-set>
+                <id>spfe-function-reference</id>
+                <href>topic-sets/spfe-function-reference.xml</href>
+            </topic-set>
+            
+            <topic-set>
+                <id>spfe-configuration-reference</id>
+                <href>topic-sets/spfe-configuration-reference.xml</href>
+            </topic-set>
+        </topic-sets>
+     </doc-set>
+    
+     <strings>
+        <string id="eppo-simple-topic-set-product">SPFE Open Toolkit</string>
+        <string id="eppo-simple-topic-set-release">1.0 (alpha 1)</string>
+        <string id="eppo-simple-topic-set-copyright">Copyright © 2013 Analecta Communications Inc.</string>
+    </strings>
+    
+    <topic-type-aliases>
+        <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</id>
+            <alias>Concept</alias>
+            <plural>Concepts</plural>
+        </topic-type>
+        <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</id>
+            <alias>Tasks</alias>
+            <plural>Tasks</plural>
+        </topic-type>
+        <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</id>
+            <alias>Configuration setting</alias>
+            <plural>Configuration settings</plural>
+        </topic-type>
+        <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</id>
+            <alias>XSLT Function Reference</alias>
+            <plural>XSLT Function Reference</plural>
+        </topic-type>
+        <topic-type>
+            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</id>
+            <alias>XSLT Template Reference</alias>
+            <plural>XSLT Template Reference</plural>
+        </topic-type>
+    </topic-type-aliases>
+    
+    <sources>
+        <link-catalogs>
+            <include>${SPFE_BUILD}/link-catalogs/*.xml</include>
+        </link-catalogs>
+        <tocs>
+            <include>${SPFE_BUILD}/tocs/*.toc.xml</include>
+        </tocs>
+    </sources>
+    
+    <build>
+        <link-catalog-directory>${SPFE_BUILD}/link-catalogs</link-catalog-directory>
+        <output-directory>${SPFE_DOCS}/output</output-directory>
+        <toc-directory>${SPFE_BUILD}/tocs</toc-directory>
+        <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
+    </build>
+    
+    <messages>warning info</messages>
+    
+    <wip-site>
+        <href>wip-site.href</href>
+        <ftp>
+            <url>wip-site.ftp.url</url>
+            <user>wip-site.ftp.user</user>
+            <password>wip-site.ftp.password</password>
+        </ftp>
+        <path>wip-site.ftp</path>
+    </wip-site>
+    
+    <scripts>
+        <format-html>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-html.xsl</script>
+            <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
+        </format-html>
+    </scripts>
+    
+    <style>
+        <html-style-directories>
+            <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css</include>
+        </html-style-directories>
+    </style>
+    
+</spfe>

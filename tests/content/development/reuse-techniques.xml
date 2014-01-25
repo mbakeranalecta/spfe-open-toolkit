@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-topic xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    <head>
+        <id>reuse-techniques</id>
+        <author>mbaker</author>
+        <status>In progress</status>
+        <history>
+            <revision>
+                <date>2012-06-30</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>reuse</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Reuse in SPFE and EPPO Simple</title>
+        
+        <p>As a processing architecture, SPFE allows you to implement many kinds of reuse in your schemas and processing scripts. The SPFE architecture itself neither implements nor prevents any method of reuse. SPFE principles, which exist to ensure the long term manageability of your system, do suggest a set of rules which any reuse scheme should follow. The EPPO Simple schema set, which is provided with the SPFE Open Toolkit as a set of components from which users can borrow to create their schemas and scripts, does implement a number of reuse techniques. Some of these techniques are more in the spirit of the SPFE principles than others. There are techniques that writers are used to, and which are useful, but which stretch or outright violate SPFE principles. These are supported, but you should limit the use of them, and consider alternatives.</p>
+        
+        <section>
+            <title>Reuse by reference</title>
+            
+            <p>Reuse of content generally means to take the same piece of text and display it in two different information products. However, the actual point of reuse is to make a piece of content available to a reader in more than one context, and one way to do that is by referring or linking to content resources from multiple places. On paper, the idea of including the same piece of content in multiple discrete publications makes sense. On the web, it is usually more apt to provide a link to a single piece of content rather than to include it inline in multiple places. If your <term>primary media</term> is online, your first reuse option is to link to content. SPFE <feature>soft linking</feature> makes this easy, and, indeed, provides a great deal of automatic reuse by providing links automatically to topics on any concept or object marked up with <feature>subject-affinity markup</feature>.</p>
+            
+            <p>Reuse by reference should be considered your first avenue of content reuse in a SPFE system.</p>
+        </section>
+        
+        <section>
+            <title>Reuse by inclusion</title>
+            <p>In SPFE, unlike DITA, a topic is always a complete and standalone object. You cannot nest one topic inside another topic. This restriction exists to allow topics in SPFE to be strongly typed, which allows SPFE to do assembly and linking of topic sets by query rather than by hand. However, SPFE does allow for content to be managed in units smaller than a topic. EPPO Simple includes support for three such units: <feature>text objects</feature>, <feature>fragments</feature>, and <feature>strings</feature>.</p>
+            
+            <p>A <feature>text object</feature> is a piece of text smaller than a topic, but which is nevertheless a complete and strongly typed piece of content. A text object may be included in a topic in the same way as a graphic object like a picture or a video. It has a structure of its own, and does not depend on or become part of the structure of the topic in which it appears. For display purposes, the text object may be presented as a sidebar or a pop-up, or may simply be included inline at the point it is referenced. Like a topic, a text object should be indexed, and may be pulled in as a result of soft linking. Like a graphic object, it may also be called in explicitly by its URI, though generally the reliance on soft linking is recommended over explicit inclusion by URI.</p>
+            
+            <p>A fragment is a piece of miscellaneous text that can be inserted into a topic by its URI. Unlike a text object, it is not strongly typed, is not indexed, and cannot be included by soft linking. In other words, a fragment works very much like a FrameMaker text insert. A fragment becomes part of the structure of the topic into which it is included. The topic type schema must explicitly support fragments in order for a fragment to be used. To preserve the SPFE principle that every content object must be valid in itself, fragments cannot be used in any way that makes the resolution of the fragment essential to the validation of the structure of the topic into which it is inserted. In practice, this means that fragments can only be inserted at the text structured level of a schema (that is, as siblings to paragraphs, lists, etc. It also means that fragments can only contain text structure level elements (including other fragment references).</p>
+            
+            <p>One consequence of this restriction is that if you wanted, for instance, to include the same section in multiple topics, you could not include the entire <config-setting>section</config-setting> element in the fragment. You would have to create the <config-setting>section</config-setting> element and its <config-setting>title</config-setting> element  in both topics, and then pull in the fragment containing the body of the section.</p>
+            
+            <p>Despite these restrictions, a fragment is not a completely generic object. Each schema may declare its own set of text-structure level elements, and its own set of sub-paragraph <feature>subject-affinity elements</feature>. Thus a fragment needs to use the same text-structure and subject-affinity elements as the content into which it is being inserted. This restriction can be enforced ether at the schema level or at the processing level, but the inclusion of an incompatible fragment must be detected at the synthesis stage at the latest to avoid an error at a later processing stage or in the output.</p> 
+            
+            <p>This means, of course, that the fragments feature does not support the arbitrary inclusion of text fragments from one domain to the another. SPFE considers this type of reuse to be not worth the content management overhead it creates. The inclusion of text objects across domains is possible, but it requires specific support in the processing scripts. As a weakly typed system, DITA does support such borrowings. As a strongly typed systems, SPFE does not support the arbitrary inclusion of content types from other systems.</p>
+            
+            <p><feature>Strings</feature> are essentially a version of fragments that are implemented at the sub-paragraph level rather than the text-structure level. All the same caveats apply to strings as apply to fragments. Additionally, however, strings can be defined in the SPFE configuration file, and may therefore by used by the processing scripts as well as included in topic paragraphs. </p>
+        </section>
+        
+        <section>
+            <title>Reuse by condition</title>
+            <p>Conditionalizing text is another form of reuse. Essentially, it allows you to reuse the bulk of a topic while changing certain parts of it to fit in a new situation. The problem with conditional text is that the variable text is generally stored inline in the topic, meaning that the topic is only reusable in those context for which the appropriate condition exists in the text. For this reason, it is better to express conditions in terms of real world objects rather than publications or media. This keeps the use of conditional text in line with the SPFE principle that there should be no application semantics in the text. A condition that applies to a real world object is data about the subject of the topic, not about how it will be used or processed.</p>
+            
+            <p>Conditional text in EPPO Simple is provided by the use of an <config-setting>if</config-setting> attribute on selected elements, including the top level topic element. There is no separate conditional element that can be wrapped around a bunch of text to make it conditional. However, you can define a fragment inline and then apply the if attribute to the fragment, which allows you to make a bunch of text-structure elements conditional without applying the condition to them individually.</p>
+            <p>The problem with making an element conditional is ensuring that the topic remains valid after the conditions have been applied. There are three cases to consider.</p>
+            <ol>
+                <li>
+                    <p>Elements that are required and occur only once should never be made conditional, since omitting them will always make the topic invalid. Such elements should not support the <config-setting>if</config-setting> attribute.</p>
+                </li>
+                <li>
+                    <p>Elements that are omissible and may occur multiple times can always be made conditional, and should support the <config-setting>if</config-setting> attribute.</p>
+                </li>
+                <li>
+                    <p>Elements that must occur at least once, but may occur multiple times, present a problem. (List item elements are a good example.) There are legitimate cases for making some or even all of such elements conditional, as long as no one combination of conditions can result in all the elements being omitted. There is no easy way to test for this possibility at authoring time, so if you allow the <config-setting>if</config-setting> attribute on elements of this type, you should check that it does not result in an invalid topic being created when the conditions are resolved. The best way to do this is probably by checking the schema validity of the synthesis output file. This will generally be a good idea anyway, as it helps to test the integrity of the synthesis scrips.</p>
+                </li>
+            </ol>
+        </section>
+        
+        <section>
+            <title>Reuse by URI remapping</title>
+            <p>If you include text objects, graphic objects, fragment files, or string files in your topics by referencing them with their URIs, you can substitute a different set of objects, fragments, or strings by remapping the URIs in the <feature>SPFE configuration file</feature>. This could be used to bring in different language versions of files, or bring in different branding files.</p>
+        </section>
+    </body>
+</generic-topic>

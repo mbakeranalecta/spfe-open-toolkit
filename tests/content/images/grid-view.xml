@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphic-record xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphic-record.xsd">
+    
+    
+    <name>Grid View</name>
+    <alt>Screen shot of the Grid View.</alt>
+    <formats>
+        <format>
+            <type>png</type>
+            <uri>grid-view.png</uri>
+        </format>
+    </formats>
+    <default-caption>
+        <title>Grid View</title>
+        <p>This is the grid view.</p>
+    </default-caption>
+</graphic-record>

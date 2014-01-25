@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<?xml-stylesheet type="text/css" href="../../style/authoring/spfe-docs.css"?>
+<generic-task-topic xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/generic-task-topic.xsd">
+
+    <head>
+        <id>adding-a-topic-set</id>
+        <author>jkeffer</author>
+        <history>
+            <revision>
+                <date>2013-06-04</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <status>Not started</status>
+            </revision>
+            <revision>
+                <date>2013-06-14</date>
+                <author>jkeffer</author>
+                <comment>Add first content</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2013-06-21</date>
+                <author>jkeffer</author>
+                <comment>Update content</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>topic set</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>add a topic set</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Adding a new topic set</title>
+        <understanding>
+            <p>A topic set is a collection of related topics that follow the same schema and multiple topic sets can use the same schema. A topic set appears in the HTML output as a folder in
+                the table of contents or a chapter in a print document. Individual topics in the topic set folder are presented in alphabetical order.</p>
+                
+             <p>A document must have at least one topic set. Typically, a topic set
+                belongs to a <feature>document set</feature>.</p>
+       </understanding>
+       <planning>
+           <planning-question>
+               <planning-question-title>Do I neeed to create a new topic set?</planning-question-title>
+                <planning-question-body>
+                    <p>You could have a single topic set that contains all the topics; however, you typically want to group topics and present the topic set groups in a specific order in the table of contents. You may also want topics to follow different schemas.</p>
+                </planning-question-body>
+                <how-to-answer-body>
+                    <p>If you want to do any of the following, you need a new topic set:</p>
+                    <ul>
+                        <li>
+                            <p>Create a new document—every document needs at least one topic set</p>
+                        </li>
+                        <li>
+                            <p>Introduce a new schema—the topics in a topic set follow a single schema</p>
+                        </li>
+                        <li>
+                            <p>Group new or existing topics under a different folder or chapter in the TOC—there is one folder for each topic set in the table of contents</p>
+                        </li>
+                        <li>
+                            <p>Change the order of topic sets in the TOC—the order of the folders in the table of contents is based on the <config-setting>topic-set-order</config-setting> element in the configuration file</p>
+                        </li>
+                    </ul>
+            </how-to-answer-body>
+            </planning-question>
+       </planning>
+       <doing>        
+           <p>To add a topic set to the build, perform the following steps:</p>
+           <ol>
+               <li>
+                   <p>Create a topic set configuration file</p>
+               </li>
+               <li>
+                   <p>Add a new <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting> to the <feature>SPFE configuration file</feature></p>
+               </li>
+           </ol>
+           <p>In the topic set configuration file, include the following elements:</p>
+           <ul>
+               <li>
+                   <p><config-setting>spfe</config-setting>: The root element that specifies the schema of the configuration file. SPFE provides the spfe-config schema, or you can define your own. Each build configuration file in the document must follow the same schema.</p>
+               </li>
+               <li>
+                   <p>Define a unique TOPIC_SET_ID and a <config-setting>topic-set-id</config-setting> element, for example: <code><![CDATA[<define name="TOPIC_SET_ID" value="spfe-development-tasks"/>
+                        <topic-set-id>${TOPIC_SET_ID}</topic-set-id>]]></code></p>
+               </li>
+               <li>
+                   <p><config-setting>/spfe/topic-set-type</config-setting>: It determines where your topic set appears in the table of contents and it must match one of the entries in the <config-setting>topic-set-type-order</config-setting> element in the SPFE configuration file</p>
+               </li>
+               <li>
+                   <p><config-setting>/spfe/sources</config-setting>: The list of directories that contain the contents of the topics</p>
+               </li>
+               <li>
+                   <p><config-setting>/spfe/build</config-setting>: The parameters that specify where to store files generated during the build</p>
+               </li>
+               <li>
+                   <p><config-setting>/spfe/deployment</config-setting>: The path to the output folder</p>
+               </li>
+               <li>
+                   <p><config-setting>/spfe/scripts</config-setting>: the list of scripts to process the topic set; if you use an existing schema, you can reuse the existing scripts</p>
+               </li>
+           </ul>
+           <p>If you want content at the top level folder, you need an index topic.</p>
+           <p>
+ 
+               Key elements:
+               <config-setting>/spfe/topic-set-id</config-setting>, 
+               <config-setting>string</config-setting> - name that appears in the TOC
+               <config-setting>default-topic-scope</config-setting>, <config-setting>default-subject-affinity-scope</config-setting>
+           </p>
+            <p>When you build your documents, if your topic set appears in the table of contents in the order you specified by using the topic-set-type, you have successfully added your topic set.</p>   
+       </doing>
+    </body>
+</generic-task-topic>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    <include href="../spfe-docs-config.xml"/>
+    <include href="../../topic-types/config-reference/config.xml"/>
+    <define name="TOPIC_SET_ID" value="spfe-configuration-reference"/>
+    <script-style>topic-set</script-style>
+    <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
+    <topic-set-type>reference</topic-set-type>
+    <topic-type-order>
+        <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</topic-type>
+    </topic-type-order>
+    <sources>
+        <topics>
+            <include>../../content/config-ref/*.xml</include>
+        </topics>
+        <text-objects>
+            <include>../../content/*.xml</include>
+        </text-objects>
+        <fragments>
+            <include>../../content/*.xml</include>
+        </fragments>
+        <graphics>
+            <include>../../content/*.xml</include>
+        </graphics>
+        <strings>
+            <include>../../content/*.xml</include>
+        </strings>
+        <synonyms>
+            <include>../../content/*.xml</include>
+        </synonyms>
+        <authored-content-for-merge>
+            <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
+        </authored-content-for-merge>
+        <files-to-extract-content-from>
+            <include>${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</include>
+        </files-to-extract-content-from>
+    </sources>
+
+    <default-topic-scope>spfe</default-topic-scope>
+    <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
+    <output-formats>html</output-formats>
+
+
+    <build>
+        <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules> 
+        <build-directory>${SPFE_BUILD}/config-ref</build-directory>
+    </build>
+    
+    <strings>
+        <string id="eppo-simple-topic-set-title">SPFE Configuration Settings</string>
+    </strings>
+    
+    <other name="schema-file">${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</other>
+</spfe>
