@@ -66,10 +66,6 @@
 		<xsl:value-of select="xs:schema/xs:element[1]/@name"/>
 	</xsl:param>
 	
-
-	<!--<xsl:variable name="topics-dir" select="resolve-uri('topics/', base-uri(.))"/>-->
-	<xsl:variable name="topics-dir" select="concat($config/config:directories/config:build, '/temp/topics/')"/>
-	
 	<xsl:param name="files-to-extract-content-from"/>	
 	<xsl:variable name="schema" select="sf:get-sources($files-to-extract-content-from)"/>
 	

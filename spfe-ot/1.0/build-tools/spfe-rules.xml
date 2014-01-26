@@ -37,7 +37,7 @@
 	<!-- PROPERTY DEFINITIONS -->
 
 	<!-- properties for the temporary files used -->
-	<property name="temp" value="${spfe.build.build-directory}/temp"/>
+	<property name="temp" value="${spfe.build.build-directory}"/>
 
 	<property name="output" value="${spfe.build.output-directory}"/>
 
@@ -226,7 +226,7 @@
 				 -current.presentation-web"
 		unless="-current.presentation-web">
 		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
-
+		<pathconvert property="link-catalog-files"  dirsep="/" pathsep=";" refid="link-catalogs"/>	
 		<!-- run the XSLT script to produce the output -->
 
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
@@ -319,7 +319,7 @@
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.fo-format">
-		<uptodate property="-current.fo-format" targetfile="${temp}/fo-format.flag" srcfile="{temp}/presentation-book.flag"/>
+		<uptodate property="-current.fo-format" targetfile="${temp}/fo-format.flag" srcfile="${temp}/presentation-book.flag"/>
 	</target>
 
 	<target name="-build.fo-format" depends="--build.fo-format"/>
@@ -332,7 +332,6 @@
 		<pathconvert dirsep="/" pathsep=";" property="presentation-files" refid="presentation-file-list"/>
 
 		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
-		
 		<!-- run the XSLT script to produce the output -->
 		
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"

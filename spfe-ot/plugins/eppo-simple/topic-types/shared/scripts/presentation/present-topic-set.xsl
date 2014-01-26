@@ -56,7 +56,8 @@ Main template
 	<xsl:call-template name="create-toc-page"/>
 </xsl:template>
 	
-<xsl:template match="ss:topic" priority="-1">
+<xsl:template match="ss:topic" >
+	<xsl:message>Default ss:topic called.</xsl:message>
 	<!-- This can be overridden by specific topic types processing that wants to do something specific here. -->
 	<xsl:apply-templates/>
 </xsl:template>
