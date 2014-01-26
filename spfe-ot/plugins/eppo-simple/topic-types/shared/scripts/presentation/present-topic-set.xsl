@@ -38,7 +38,7 @@ Main template
 =============
 -->
 <xsl:template name="main">
-	<xsl:result-document href="file:///{concat($config/config:build/config:build-directory, '/temp/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+	<xsl:result-document href="file:///{concat($config/config:build/config:build-directory, '/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
 		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
 			<title>
 				<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/>
@@ -57,17 +57,8 @@ Main template
 </xsl:template>
 	
 <xsl:template match="ss:topic" priority="-1">
-	<xsl:call-template name="sf:error">
-		<xsl:with-param name="message">
-			<xsl:text>A topic of an unrecognised topic type was included in the topic set build. The root element name is "</xsl:text>
-			<xsl:value-of select="name(descendant::*[namespace-uri() ne 'http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis'][1])"/>
-			<xsl:text>". The topic name is "</xsl:text>
-			<xsl:value-of select="@local-name"/>
-			<xsl:text>". The topic type is "</xsl:text>
-			<xsl:value-of select="@type"/>
-			<xsl:text>".</xsl:text>
-		</xsl:with-param>
-	</xsl:call-template>
+	<!-- This can be overridden by specific topic types processing that wants to do something specific here. -->
+	<xsl:apply-templates/>
 </xsl:template>
 
 <xsl:template match="topic/name" mode="#all"/>	

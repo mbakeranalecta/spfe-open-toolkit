@@ -14,13 +14,6 @@
 	<!-- processing directives -->
 	<xsl:output method="xml" indent="yes" cdata-section-elements="codeblock"/>
 
-	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference']">
-		<xsl:apply-templates/>
-	</xsl:template>
-	
-	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference']">
-		<xsl:apply-templates/>
-	</xsl:template>
 	
 	<!-- spfe-function-reference-entry -->
 	<xsl:template match="spfe-xslt-function-reference-entry">

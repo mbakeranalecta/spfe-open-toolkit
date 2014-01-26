@@ -119,10 +119,6 @@
 	-->
 	
 	
-	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference']">
-		<xsl:apply-templates/>
-	</xsl:template>
-	
 	<!-- spfe-configuration-reference-entry -->
 	<xsl:template match="spfe-configuration-reference-entry">
 		<xsl:apply-templates/>
