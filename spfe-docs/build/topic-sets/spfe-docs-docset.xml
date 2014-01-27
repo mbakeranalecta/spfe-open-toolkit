@@ -44,8 +44,4 @@
     <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
     <output-formats>html</output-formats>
 
-    <build>
-        <build-directory>${SPFE_BUILD}/spfe-docs/docset</build-directory>
-    </build>
-    
 </spfe>

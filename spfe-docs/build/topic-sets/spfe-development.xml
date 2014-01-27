@@ -42,9 +42,5 @@
     <default-topic-scope>spfe</default-topic-scope>
     <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
     <output-formats>html</output-formats>
-
-    <build>
-        <build-directory>${SPFE_BUILD}/development</build-directory>
-    </build>
     
 </spfe>

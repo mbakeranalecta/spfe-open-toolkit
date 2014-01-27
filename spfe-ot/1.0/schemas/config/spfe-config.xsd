@@ -21,7 +21,7 @@
         <xs:element name="topic-set-id" type="xs:string" minOccurs="0"/>
         <xs:element name="topic-set-type" type="xs:string" minOccurs="0"/>
         <xs:element name="topic-type-order" minOccurs="0">
-           <xs:complexType>
+          <xs:complexType>
             <xs:sequence>
               <xs:element name="topic-type" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"/>
             </xs:sequence>
@@ -116,8 +116,6 @@
       <xs:element name="fragments" type="fileset-type"/>
       <xs:element name="graphics" type="fileset-type"/>
       <xs:element name="strings" type="fileset-type"/>
-      <xs:element name="link-catalogs" type="fileset-type"/>
-      <xs:element name="tocs" type="fileset-type"/>
       <xs:element name="synonyms" type="fileset-type"/>
       <xs:element name="files-to-extract-content-from" type="fileset-type"/>
       <xs:element name="authored-content-for-merge" type="fileset-type"/>
@@ -192,10 +190,6 @@
   <xs:complexType name="build-type">
     <xs:all>
       <xs:element name="build-rules" type="xs:anyURI" minOccurs="0"/>
-      <xs:element name="build-directory" type="xs:string" minOccurs="0"/>
-      <xs:element name="output-directory" type="xs:string" minOccurs="0"/>
-      <xs:element name="link-catalog-directory" type="xs:string" minOccurs="0"/>
-      <xs:element name="toc-directory" type="xs:string" minOccurs="0"/>
     </xs:all>
   </xs:complexType>
 
@@ -229,13 +223,13 @@
 
   <xs:complexType name="script-list-type">
     <xs:sequence>
-     <!-- <xs:element name="script" type="xs:anyURI" maxOccurs="unbounded" minOccurs="1"/>-->
+      <!-- <xs:element name="script" type="xs:anyURI" maxOccurs="unbounded" minOccurs="1"/>-->
       <xs:element name="script" maxOccurs="unbounded">
         <xs:complexType>
           <xs:simpleContent>
             <xs:extension base="xs:anyURI">
-              <xs:attribute name="style"/>  
-            </xs:extension>   
+              <xs:attribute name="style"/>
+            </xs:extension>
           </xs:simpleContent>
         </xs:complexType>
       </xs:element>
