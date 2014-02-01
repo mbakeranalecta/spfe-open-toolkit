@@ -4,7 +4,7 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
-    <doc-set id="spfe-docs">
+    <doc-set id="tests">
         <title>SPFE Documentation</title>
         <topic-set-type-order>
             <topic-set-type>docset</topic-set-type>
