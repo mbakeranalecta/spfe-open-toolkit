@@ -27,8 +27,6 @@
         <title>Writing Schemas</title>
         <p>Before you can create content, you must create a schema for that content. You may choose to use one of the schemas from the <feature>EPPO-simple</feature> schema set, which is supplied as a plugin to the SPFE Open Toolkit, or create your own schema by reusing schema elements from <feature>EPPO-simple</feature>. You can also create your own schemas from scratch, as long as you follow the <feature>schema constraints</feature>, though if you decide to do so, you will need to create all the synthesis and presentation code to processes them. In most cases, it makes sense to create your own schema, even if you are not making major modifications to the schemas from the toolkit or plugins. Creating a basic schema for your project, however, is pretty simple.</p>
         
-        <p>Link test <config-setting>/spfe</config-setting> right here.</p>
-        
         <p>If you decide to write your own schemas, you may also choose to write them using the same conventions used in <feature>EPPO-simple</feature>. Doing so will allow you to take advantage of those features of the toolkit that assume schemas are written in this way. This may reduce the amount of code you have to write by allowing you to reuse more code from the toolkit or plugins.</p>
         <section>
             <title>Creating an authoring schema</title>
