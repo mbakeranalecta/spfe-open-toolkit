@@ -94,7 +94,7 @@
     
     <xsl:template match="toc[@topic-set-id ne $config/config:doc-set/config:home-topic-set]">
         <li>
-            <p><xref target="../{normalize-space(@deployment-relative-path)}/{normalize-space(@topic-set-id)}-toc.html"><xsl:value-of select="@title"/></xref></p>
+            <p><xref target="{normalize-space(@deployment-relative-path)}/{normalize-space(@topic-set-id)}-toc.html"><xsl:value-of select="@title"/></xref></p>
         </li>
     </xsl:template>
     <xsl:template match="toc"/>

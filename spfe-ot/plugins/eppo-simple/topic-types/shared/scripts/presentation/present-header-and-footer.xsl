@@ -14,18 +14,29 @@
             <xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/>
             <xsl:text>, </xsl:text>
             <xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
+        </xsl:variable>   
+        <xsl:variable name="doc-set-title" select="$config/config:doc-set/config:title"/>
+        
+        <xsl:variable name="is-home-topic-set" select="normalize-space($config/config:doc-set/config:home-topic-set) eq normalize-space($config/config:topic-set-id)"/>
+        
+        <xsl:variable name="doc-set-index-file">
+            <xsl:value-of select="if ($is-home-topic-set) then 'index.html' else '../index.html'"/>
+        </xsl:variable>
+        <xsl:variable name="doc-set-toc-file">
+            <xsl:value-of select="if ($is-home-topic-set) 
+                                  then concat($config/config:doc-set/config:home-topic-set, '-toc.html') 
+                                  else concat('../', $config/config:doc-set/config:home-topic-set,'-toc.html')"/>
         </xsl:variable>
         
-        <xsl:variable name="doc-set-title" select="$config/config:doc-set/config:title"/>
         <header>
             <p>
-                <xref target="../{$config/config:doc-set/config:home-topic-set}/index.html" >Home</xref>   
+                <xref target="{$doc-set-index-file}" >Home</xref>   
                 | 
-                <xref target="../{$config/config:doc-set/config:home-topic-set}/{$config/config:doc-set/config:home-topic-set}-toc.html" class="toc">
+                <xref target="{$doc-set-toc-file}">
                     <xsl:value-of select="$doc-set-title"/>   
                 </xref>
                 
-                <xsl:if test="normalize-space($config/config:doc-set/config:home-topic-set) ne normalize-space($config/config:topic-set-id)">
+                <xsl:if test="not($is-home-topic-set)">
                     >      
                     <xref target="{normalize-space($config/config:topic-set-id)}-toc.html">
                         <xsl:value-of select="$topic-set-title"/>

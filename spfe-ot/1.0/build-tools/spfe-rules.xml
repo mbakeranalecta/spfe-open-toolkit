@@ -300,7 +300,8 @@
 		<!-- run the XSLT script to produce the output -->
 		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
 			in="${spfe.config-file}" 
-			style="${spfe.scripts.format-html}" out="${temp}/html-format.flag">
+			style="${spfe.scripts.format-html}" 
+			out="${temp}/html-format.flag">
 			<xmlcatalog refid="spfe-catalogs"/>
 			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 			<param name="presentation-files" expression="${presentation-files}"/>

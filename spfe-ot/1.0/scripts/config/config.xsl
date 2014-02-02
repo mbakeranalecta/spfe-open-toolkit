@@ -20,9 +20,18 @@
     <xsl:variable name="spfeot-home" select="translate($SPFEOT_HOME, '\', '/')"/>
     <xsl:variable name="build-directory" select="translate($SPFE_BUILD_DIR, '\', '/')"/>
     <xsl:variable name="docset-build" select="concat($build-directory,  '/', $config/doc-set/@id, '/build')"></xsl:variable>
-    <xsl:variable name="topicset-build" select="concat($docset-build, '/', $config/topic-set-id)"/>
-    <xsl:variable name="docset-home" select="concat($build-directory, '/', $config/doc-set/@id,'/output')"/>
-    <xsl:variable name="topicset-home" select="concat($docset-home, '/', $config/topic-set-id)"/> 
+    <xsl:variable name="topic-set-build" select="concat($docset-build, '/', $config/topic-set-id)"/>
+    <xsl:variable name="doc-set-home" select="concat($build-directory, '/', $config/doc-set/@id,'/output')"/>
+    <xsl:variable name="topicset-home">
+        <xsl:choose>
+            <xsl:when test="$config/topic-set-id eq $config/doc-set/home-topic-set">
+                <xsl:value-of select="$doc-set-home"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat($doc-set-home, '/', $config/topic-set-id)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>  
     <xsl:variable name="link-catalog-directory" select="concat($docset-build, '/link-catalogs')"/>
     <xsl:variable name="toc-directory" select="concat($docset-build, '/tocs')"/>
     
@@ -174,7 +183,7 @@
           <xsl:call-template name="create-config-file"/>
           <xsl:call-template name="create-script-files"/>
         </xsl:if>
-        <xsl:call-template name="create-root-index"/>
+        <!--<xsl:call-template name="create-root-index"/>-->
     </xsl:template>
     
     <xsl:function name="spfe:xml2properties">
@@ -340,12 +349,12 @@
         </project> 
     </xsl:template>
     
-    <xsl:template name="create-root-index">
-        <!-- FIXME: This may not be the right place to do this. Need a more general/configurable solution. -->
+<!--    <xsl:template name="create-root-index">
+        <!-\- FIXME: This may not be the right place to do this. Need a more general/configurable solution. -\->
         <xsl:message select="'Generating root index file.'"/>
         <xsl:variable name="redirect-to" select="concat($config/doc-set/home-topic-set , '/index.html')"/>
         <xsl:result-document href="file:///{$docset-home}/index.html" method="html" >
-            <!--<!DOCTYPE HTML>-->
+            <!-\-<!DOCTYPE HTML>-\->
             <html>
                 <head>
                     <meta charset="UTF-8"/>
@@ -356,19 +365,19 @@
                     <title>Page Redirection</title>
                 </head>
                 <body>
-                    <!-- Note: don't tell people to `click` the link, just tell them that it is a link. -->
+                    <!-\- Note: don't tell people to `click` the link, just tell them that it is a link. -\->
                     If you are not redirected automatically, follow the <a href='{$redirect-to}'>link to example</a>
                 </body>
             </html>
         </xsl:result-document>
     </xsl:template>
-    
-    <xsl:template name="create-topicset-build-file">
+-->    
+    <xsl:template name="create-topic-set-build-file">
         <project name="{$config/topic-set-id}" basedir="." default="draft">
             <property file="{$home}/.spfe/spfe.properties"/>
             <property name="HOME" value="{$home}"/>
             <property name="SPFEOT_HOME" value="{$spfeot-home}"/>
-            <property name="spfe.config-file" value="{$topicset-build}/config/spfe-config.xml"/>
+            <property name="spfe.config-file" value="{$topic-set-build}/config/spfe-config.xml"/>
             <property name="SPFE_BUILD_COMMAND" value="{$SPFE_BUILD_COMMAND}"/>
             <xsl:sequence select="spfe:xml2properties(($config/topic-set-id)[1], 'spfe')"/>
             <xsl:sequence select="spfe:xml2properties(($config/topic-set-type)[1], 'spfe')"/>
@@ -378,16 +387,17 @@
             <xsl:for-each select="$config/scripts/*">
                 <xsl:choose>
                     <xsl:when test="name()='other'">
-                        <property name="spfe.scripts.other.{@name}" value="{$topicset-build}/spfe.other.{@name}.xsl"/>
+                        <property name="spfe.scripts.other.{@name}" value="{$topic-set-build}/spfe.other.{@name}.xsl"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <property name="spfe.scripts.{name()}" value="{$topicset-build}/spfe.{name()}.xsl"/>
+                        <property name="spfe.scripts.{name()}" value="{$topic-set-build}/spfe.{name()}.xsl"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 
             </xsl:for-each>
             
-            <property name="spfe.build.build-directory" value="{$topicset-build}"/>
+            <property name="spfe.build.build-directory" value="{$topic-set-build}"/>
+
             <property name="spfe.build.output-directory" value="{$topicset-home}"/>
             <property name="spfe.build.link-catalog-directory" value="{$link-catalog-directory}"/>
             <property name="spfe.build.toc-directory" value="{$toc-directory}"/>
@@ -494,7 +504,7 @@
             
             <!-- otherwise, create build file for topic-set -->
             <xsl:otherwise>  
-                <xsl:call-template name="create-topicset-build-file"/>
+                <xsl:call-template name="create-topic-set-build-file"/>
             </xsl:otherwise>
         </xsl:choose>
         
@@ -528,8 +538,8 @@
     </xsl:template>
     
     <xsl:template name="create-config-file">
-        <xsl:message select="concat('Generating config file: ', 'file:///', $topicset-build, '/config/spfe-config.xml')"/>
-        <xsl:result-document href="file:///{$topicset-build}/config/spfe-config.xml" method="xml" indent="yes" xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+        <xsl:message select="concat('Generating config file: ', 'file:///', $topic-set-build, '/config/spfe-config.xml')"/>
+        <xsl:result-document href="file:///{$topic-set-build}/config/spfe-config.xml" method="xml" indent="yes" xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
             <spfe>
                 <dir-separator>
                     <!-- detect OS based on separator in $HOME -->
@@ -555,10 +565,10 @@
                 
                 <build>
                     <output-directory>
-                        <xsl:value-of select="$docset-home"/>
+                        <xsl:value-of select="$topicset-home"/>
                     </output-directory>
                     <build-directory>
-                        <xsl:value-of select="$topicset-build"/>
+                        <xsl:value-of select="$topic-set-build"/>
                     </build-directory>
                     <link-catalog-directory>
                         <xsl:value-of select="$link-catalog-directory"/>
@@ -593,7 +603,7 @@
         <xsl:variable name="script-style" select="$config/script-style"/>
         <xsl:for-each-group select="$config/scripts/*" group-by="name()">
             <xsl:variable name="script-type" select="if (name()='other') then concat('other.',@name) else name()"/>            
-            <xsl:result-document href="file:///{$topicset-build}/spfe.{$script-type}.xsl" method="xml" indent="yes" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
+            <xsl:result-document href="file:///{$topic-set-build}/spfe.{$script-type}.xsl" method="xml" indent="yes" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                     version="2.0" >
                     <xsl:for-each-group select="current-group()/c:script" group-by="resolve-uri(.,@base-uri)">

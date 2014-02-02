@@ -73,7 +73,7 @@
 			<xsl:with-param name="message" select="concat('Formatting page: ', $file-name)"/>
 		</xsl:call-template>
 
-		<xsl:result-document href="file:///{$config/config:build/config:output-directory}/{$config/config:topic-set-id}/{$file-name}" method="html" indent="no" omit-xml-declaration="no" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		<xsl:result-document href="file:///{$config/config:build/config:output-directory}/{$file-name}" method="html" indent="no" omit-xml-declaration="no" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 			<html xml:lang="en" lang="en">
 				<xsl:sequence select="lf:html-header($title)"/>
 				<xsl:choose>
