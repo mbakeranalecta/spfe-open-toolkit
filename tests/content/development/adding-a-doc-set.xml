@@ -101,11 +101,11 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
                 <li>
                     <p><config-setting>/spfe/doc-set/topic-sets</config-setting>: The list of
                         the topic sets to include in the documentation set. The value of the
-                        <config-setting>/spfe/doc-set/topic-sets@id</config-setting>
+                        <config-setting>/spfe/doc-set/topic-sets/topic-set/id</config-setting>
                         attribute should match the
                         <config-setting>/spfe/topic-set-id</config-setting> for the topic set
                         and the
-                        <config-setting>/spfe/doc-set/topic-sets@href</config-setting>
+                        <config-setting>/spfe/doc-set/topic-sets/topic-set/href</config-setting>
                         attribute is the URL of the topic set configuration file.</p>
                 </li>    
             </ul>
