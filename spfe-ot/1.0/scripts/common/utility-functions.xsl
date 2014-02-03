@@ -294,4 +294,36 @@
 		</xsl:choose>
 	</xsl:function>
 	
+	<!-- Display first n words -->
+	<xsl:function name="sf:first-n-words" as="xs:string">
+		<xsl:param name="text"/>
+		<xsl:param name="words"/>
+		<xsl:param name="suffix"/>
+		<xsl:variable name="text-string" select="normalize-space($text)"/>
+		<xsl:variable name="regex" select="concat('^([^\s]+\s*){1,', $words, '}')"/>
+		<xsl:if test="$text-string">
+			<xsl:analyze-string select="$text-string" regex="{$regex}" flags="s">
+				<xsl:matching-substring>
+					<xsl:value-of select="concat(regex-group(0), $suffix)"/>
+				</xsl:matching-substring>
+			</xsl:analyze-string>
+		</xsl:if>
+	</xsl:function>
+	
+	<!-- Escape string for XML -->
+	<xsl:function name="sf:escape-for-xml">
+		<xsl:param name="string"/>
+		<xsl:analyze-string select="$string" regex="&lt;|&amp;">
+			<xsl:matching-substring>
+				<xsl:choose>
+					<xsl:when test=".='&lt;'">&amp;lt;</xsl:when>
+					<xsl:when test=".='&amp;'">&amp;amp;</xsl:when>
+				</xsl:choose>
+			</xsl:matching-substring>
+			<xsl:non-matching-substring>
+				<xsl:value-of select="."/>
+			</xsl:non-matching-substring>
+		</xsl:analyze-string>
+	</xsl:function>
+	
 </xsl:stylesheet>

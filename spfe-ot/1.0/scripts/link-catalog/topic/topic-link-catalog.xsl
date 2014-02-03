@@ -77,7 +77,8 @@ Main template
 			  title="{@title}" 
 			  file="{@local-name}.html"
 			  topic-type="{if (@virtual-type) then @virtual-type else @type}" 
-			  topic-type-alias="{@topic-type-alias}">
+			  topic-type-alias="{@topic-type-alias}"
+			  excerpt="{@excerpt}">
 			<xsl:choose>
 				<xsl:when test="@scope">
 					<xsl:attribute name="scope" select="@scope"/>
@@ -86,7 +87,7 @@ Main template
 					<xsl:attribute name="scope" select="$config/config:default-topic-scope"/>
 				</xsl:when>
 			</xsl:choose>
-
+			
 			<!-- topic references -->
 			<target type="topic">
 				<label>
