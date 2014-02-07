@@ -53,7 +53,7 @@
             <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
         </synthesis>
         <link-catalog>
-            <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
         </link-catalog>
         <image-list>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/get-image-list.xsl</script>

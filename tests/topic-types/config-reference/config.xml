@@ -14,7 +14,7 @@
           <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
       </synthesis>        
       <link-catalog>
-          <script>${SPFEOT_HOME}/1.0/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
+          <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
           <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
       </link-catalog>
       <toc>
