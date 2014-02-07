@@ -15,24 +15,7 @@ exclude-result-prefixes="#all">
 	<xsl:template match="*:generic-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
-				
-		<xsl:variable name="topic-type-alias">
-			<xsl:choose>
-				<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
-					<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:call-template name="sf:error">
-						<xsl:with-param name="message">
-							<xsl:text>No topic type alias found for topic type </xsl:text>
-							<xsl:value-of select="$topic-type"/>
-							<xsl:text>.</xsl:text>
-						</xsl:with-param>
-					</xsl:call-template>
-					<xsl:value-of select="$topic-type"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
+		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias($topic-type, $topic-type-alias-list)"/>		
 		
 		<xsl:choose>
 			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">

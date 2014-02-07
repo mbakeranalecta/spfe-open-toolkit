@@ -295,11 +295,11 @@
 	</xsl:function>
 	
 	<!-- Display first n words -->
-	<xsl:function name="sf:first-n-words" as="xs:string">
+	<xsl:function name="sf:first-n-words">
 		<xsl:param name="text"/>
-		<xsl:param name="words"/>
-		<xsl:param name="suffix"/>
-		<xsl:variable name="text-string" select="normalize-space($text)"/>
+		<xsl:param name="words" as="xs:integer"/>
+		<xsl:param name="suffix" as="xs:string"/>
+		<xsl:variable name="text-string" select="normalize-space(string($text))"/>
 		<xsl:variable name="regex" select="concat('^([^\s]+\s*){1,', $words, '}')"/>
 		<xsl:if test="$text-string">
 			<xsl:analyze-string select="$text-string" regex="{$regex}" flags="s">
@@ -313,7 +313,7 @@
 	<!-- Escape string for XML -->
 	<xsl:function name="sf:escape-for-xml">
 		<xsl:param name="string"/>
-		<xsl:analyze-string select="$string" regex="&lt;|&amp;">
+		<xsl:analyze-string select="string($string)" regex="&lt;|&amp;">
 			<xsl:matching-substring>
 				<xsl:choose>
 					<xsl:when test=".='&lt;'">&amp;lt;</xsl:when>
@@ -325,5 +325,26 @@
 			</xsl:non-matching-substring>
 		</xsl:analyze-string>
 	</xsl:function>
+	
+	<xsl:function name="sf:get-topic-type-alias">
+		<xsl:param name="topic-type"/>
+		<xsl:param name="topic-type-alias-list"/>
+		<xsl:choose>
+			<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
+				<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message">
+						<xsl:text>No topic type alias found for topic type </xsl:text>
+						<xsl:value-of select="$topic-type"/>
+						<xsl:text>.</xsl:text>
+					</xsl:with-param>
+				</xsl:call-template>
+				<xsl:value-of select="$topic-type"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
 	
 </xsl:stylesheet>

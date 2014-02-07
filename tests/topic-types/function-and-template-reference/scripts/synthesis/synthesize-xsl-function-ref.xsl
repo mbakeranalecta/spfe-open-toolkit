@@ -67,30 +67,17 @@ Main template
 				<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
 				<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xsl:variable> 
 				
-				<xsl:variable name="topic-type-alias">
-					<xsl:choose>
-						<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
-							<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:call-template name="sf:error">
-								<xsl:with-param name="message">
-									<xsl:text>No topic type alias found for topic type </xsl:text>
-									<xsl:value-of select="$topic-type"/>
-									<xsl:text>.</xsl:text>
-								</xsl:with-param>
-							</xsl:call-template>
-							<xsl:value-of select="$topic-type"/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:variable>
+				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias($topic-type, $topic-type-alias-list)"/>	
+				<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
 				
 				<ss:topic 
 					type="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference" 
 					full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference/{concat(xfd:local-prefix, '_', xfd:name)}"
 					local-name="{xfd:name}"
 					topic-type-alias="{$topic-type-alias}"
-					title="{xfd:name}">
+					title="{xfd:name}"
+					excerpt="{sf:escape-for-xml(sf:first-n-words($function-description/fd:description/fd:p[1], 30, ' ...'))}">
+										
 					<ss:index>
 						<ss:entry>
 							<ss:type>spfe-xslt-function-reference-entry</ss:type>
@@ -119,8 +106,6 @@ Main template
 									<xsl:copy-of select="./*"/>
 								</definition>
 							</xsl:for-each>
-							
-							<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
 							
 							<!-- Select and copy the authored function info. -->
 							<xsl:choose>

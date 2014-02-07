@@ -44,11 +44,11 @@
     <body>
         <title>Adding a new topic set</title>
         <understanding>
-            <p>A topic set is a collection of related topics that follow the same schema and multiple topic sets can use the same schema. A topic set appears in the HTML output as a folder in
+            <p>A <feature>topic set</feature> is a collection of related <feature>topics</feature>. A topic set appears in the HTML output as a folder in
                 the table of contents or a chapter in a print document. Individual topics in the topic set folder are presented in alphabetical order.</p>
                 
-             <p>A document must have at least one topic set. Typically, a topic set
-                belongs to a <feature>document set</feature>.</p>
+             <p>A <feature>documentation set</feature> must have at least one <feature>topic set</feature>. Typically, a topic set
+                belongs to a <feature>documentation set</feature>.</p>
        </understanding>
        <planning>
            <planning-question>
