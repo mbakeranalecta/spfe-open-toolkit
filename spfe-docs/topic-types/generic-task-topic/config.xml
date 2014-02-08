@@ -5,22 +5,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
 
-    <synthesis>
-
-    </synthesis>
-    <link-catalog>
-
-    </link-catalog>
-    <image-list>
-
-    </image-list>
-    <presentation-web>
-
-    </presentation-web>
-    <toc>
-        <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/toc/toc.xsl</script>
-        <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
-    </toc>    
     <scripts>
         <synthesis>
             <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/common-topic-synthesis.xsl</script> 

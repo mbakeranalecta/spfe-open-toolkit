@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="15.0" xml:space="preserve">
+<serialized version="15.2" xml:space="preserve">
 	<map>
 		<entry>
 			<String>document.types</String>
@@ -14,16 +14,19 @@
 					<field name="classpath">
 						<String-array/>
 					</field>
+					<field name="parentClassLoaderID">
+						<null/>
+					</field>
 					<field name="authorExtensionDescriptor">
 						<authorExtension>
 							<field name="cssDescriptors">
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
-											<String>${framework}../../../../../topic-types/shared/authoring/css/spfe-docs.css</String>
+											<String>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-task-topic/authoring/css/generic-task-topic.css</String>
 										</field>
 										<field name="title">
-											<String>SPFE Docs Document-view</String>
+											<String>SPFE Docs Generic Task Topic</String>
 										</field>
 										<field name="alternate">
 											<Boolean>false</Boolean>
@@ -133,7 +136,7 @@
 						<documentTypeRule-array>
 							<documentTypeRule>
 								<field name="namespace">
-									<String>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</String>
+									<String>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</String>
 								</field>
 								<field name="rootElem">
 									<String>*</String>
