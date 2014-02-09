@@ -4,6 +4,7 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
+    <include href="../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml"/>
     <doc-set id="tests">
         <title>SPFE Documentation</title>
         <topic-set-type-order>
@@ -86,12 +87,6 @@
         <path>wip-site.ftp</path>
     </wip-site>
     
-    <scripts>
-        <format-html>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-html.xsl</script>
-            <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
-        </format-html>
-    </scripts>
     
     <style>
         <html-style-directories>

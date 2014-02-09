@@ -4,6 +4,8 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
+    <include href="../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml"/>
+    
     <define name="SPFE_BUILD" value="${HOME}/spfebuild/build"/>
     <define name="SPFE_DOCSET" value="${HOME}/spfebuild/spfe-docs"/>
     <doc-set id="spfe-docs">
@@ -72,19 +74,7 @@
         </topic-type>
     </topic-type-aliases>
     
-    <sources>
-        <link-catalogs>
-            <include>${SPFE_BUILD}/link-catalogs/*.xml</include>
-        </link-catalogs>
-        <tocs>
-            <include>${SPFE_BUILD}/tocs/*.toc.xml</include>
-        </tocs>
-    </sources>
-    
     <build>
-        <link-catalog-directory>${SPFE_BUILD}/link-catalogs</link-catalog-directory>
-        <output-directory>${SPFE_DOCSET}/output</output-directory>
-        <toc-directory>${SPFE_BUILD}/tocs</toc-directory>
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
     </build>
     
@@ -99,13 +89,6 @@
         </ftp>
         <path>wip-site.ftp</path>
     </wip-site>
-    
-    <scripts>
-        <format-html>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-html.xsl</script>
-            <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
-        </format-html>
-    </scripts>
     
     <style>
         <html-style-directories>

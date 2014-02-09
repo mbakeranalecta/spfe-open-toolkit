@@ -6,7 +6,6 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
     <head>
         <id>reuse-techniques</id>
-        <author>mbaker</author>
         <history>
             <revision>
                 <date>2012-06-30</date>

@@ -5,7 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <include href="../spfe-docs-config.xml"/>
-    <include href="../../topic-types/config-reference/config.xml"/>
+    <include href="../../../spfe-docs/topic-types/config-reference/config.xml"/>
     <define name="TOPIC_SET_ID" value="spfe-configuration-reference"/>
     <script-style>topic-set</script-style>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
@@ -14,24 +14,6 @@
         <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</topic-type>
     </topic-type-order>
     <sources>
-        <topics>
-            <include>../../content/config-ref/*.xml</include>
-        </topics>
-        <text-objects>
-            <include>../../content/*.xml</include>
-        </text-objects>
-        <fragments>
-            <include>../../content/*.xml</include>
-        </fragments>
-        <graphics>
-            <include>../../content/*.xml</include>
-        </graphics>
-        <strings>
-            <include>../../content/*.xml</include>
-        </strings>
-        <synonyms>
-            <include>../../content/*.xml</include>
-        </synonyms>
         <authored-content-for-merge>
             <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
         </authored-content-for-merge>

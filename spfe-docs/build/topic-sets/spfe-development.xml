@@ -22,21 +22,6 @@
         <topics>
             <include>../../content/development/*.xml</include>
         </topics>
-        <text-objects>
-            <include>../../content/*.xml</include>
-        </text-objects>
-        <fragments>
-            <include>../../content/*.xml</include>
-        </fragments>
-        <graphics>
-            <include>../../content/*.xml</include>
-        </graphics>
-        <strings>
-            <include>../../content/*.xml</include>
-        </strings>
-        <synonyms>
-            <include>../../content/*.xml</include>
-        </synonyms>
     </sources>
 
     <default-topic-scope>spfe</default-topic-scope>

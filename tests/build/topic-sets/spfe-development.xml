@@ -6,8 +6,8 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <define name="TOPIC_SET_ID" value="spfe-development"/>
     <include href="../spfe-docs-config.xml"/>
-    <include href="../../topic-types/generic-topic/config.xml"/>
-    <include href="../../topic-types/generic-task-topic/config.xml"/>
+    <include href="../../../spfe-docs/topic-types/generic-topic/config.xml"/>
+    <include href="../../../spfe-docs/topic-types/generic-task-topic/config.xml"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <topic-set-type>guide</topic-set-type>
     <script-style>topic-set</script-style>
@@ -20,49 +20,12 @@
     </topic-type-order>
     <sources>
         <topics>
-            <include>../../content/development/*.xml</include>
+            <include>../../../spfe-docs/content/development/*.xml</include>
         </topics>
-        <text-objects>
-            <include>../../content/*.xml</include>
-        </text-objects>
-        <fragments>
-            <include>../../content/*.xml</include>
-        </fragments>
-        <graphics>
-            <include>../../content/*.xml</include>
-        </graphics>
-        <strings>
-            <include>../../content/*.xml</include>
-        </strings>
-        <synonyms>
-            <include>../../content/*.xml</include>
-        </synonyms>
     </sources>
 
     <default-topic-scope>spfe</default-topic-scope>
     <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
     <output-formats>html</output-formats>
 
-    <scripts>
-        <synthesis>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/common-topic-synthesis.xsl</script> 
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/generic-topic-synthesis.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/object-types/graphics/scripts/synthesis/synthesis-fig.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-task-topic/scripts/synthesis/generic-task-topic-synthesis.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
-            <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
-        </synthesis>
-        <link-catalog>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
-        </link-catalog>
-        <image-list>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/get-image-list.xsl</script>
-        </image-list>
-        <presentation-web>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-generic-topic.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-task-topic/scripts/presentation/present-generic-task-topic.xsl</script>       
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-topic-set-toc.xsl</script>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/object-types/graphics/scripts/presentation/presentation-fig.xsl</script>
-        </presentation-web>
-    </scripts>
 </spfe>

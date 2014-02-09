@@ -7,7 +7,6 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
     <head>
         <id>getting-started</id>
-        <author>jkeffer</author>
         <history>
             <revision>
                 <date>2013-06-07</date>

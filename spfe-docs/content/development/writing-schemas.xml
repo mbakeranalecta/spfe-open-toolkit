@@ -6,7 +6,6 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
     <head>
         <id>writing-schemas</id>
-        <author>mbaker</author>
         <history>
             <revision>
                 <date>2011-12-17</date>

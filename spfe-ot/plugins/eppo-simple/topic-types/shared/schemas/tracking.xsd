@@ -5,7 +5,6 @@
 
     <xs:group name="tracking">
         <xs:sequence>
-            <xs:element name="author" type="xs:string"/>
             <xs:element name="history">
                 <xs:complexType>
                     <xs:sequence>

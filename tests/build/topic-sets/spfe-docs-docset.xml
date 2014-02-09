@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <define name="TOPIC_SET_ID" value="spfe-docs-docset"/>
     <include href="../spfe-docs-config.xml"/>
-    <include href="../../topic-types/generic-topic/config.xml"/>
+    <include href="../../../spfe-docs/topic-types/generic-topic/config.xml"/>
     <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
     <topic-set-type>docset</topic-set-type>
     <script-style>doc-set</script-style>
@@ -21,23 +21,8 @@
     
     <sources>
         <topics>
-            <include>../../content/spfe-docs/*.xml</include>
+            <include>../../../spfe-docs/content/spfe-docs/*.xml</include>
         </topics>
-        <text-objects>
-            <include>../../content/*.xml</include>
-        </text-objects>
-        <fragments>
-            <include>../../content/*.xml</include>
-        </fragments>
-        <graphics>
-            <include>../../content/*.xml</include>
-        </graphics>
-        <strings>
-            <include>../../content/*.xml</include>
-        </strings>
-        <synonyms>
-            <include>../../content/*.xml</include>
-        </synonyms>
     </sources>
     
     <default-topic-scope>spfe</default-topic-scope>
