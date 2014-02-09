@@ -43,29 +43,21 @@
     <body>
         <title>Adding a new topic set</title>
         <understanding>
-            <p>A topic set is a collection of related topics that follow the same schema and multiple topic sets can use the same schema. A topic set appears in the HTML output as a folder in
-                the table of contents or a chapter in a print document. Individual topics in the topic set folder are presented in alphabetical order.</p>
+            <p>A topic set is a collection of related topics.</p>
                 
-             <p>A document must have at least one topic set. Typically, a topic set
-                belongs to a <feature>document set</feature>.</p>
+             <p>A <feature>documentation set</feature> must have at least one topic set. </p>
        </understanding>
        <planning>
            <planning-question>
-               <planning-question-title>Do I neeed to create a new topic set?</planning-question-title>
+               <planning-question-title>Do I need to create a new topic set?</planning-question-title>
                 <planning-question-body>
-                    <p>You could have a single topic set that contains all the topics; however, you typically want to group topics and present the topic set groups in a specific order in the table of contents. You may also want topics to follow different schemas.</p>
+                    <p>You could have a single topic set that contains all the topics; however, in a large <feature>documentation set</feature> it may be preferable to group topics into multiple topic sets related to particular roles or different aspects of a product.</p>
                 </planning-question-body>
                 <how-to-answer-body>
                     <p>If you want to do any of the following, you need a new topic set:</p>
                     <ul>
                         <li>
-                            <p>Create a new document—every document needs at least one topic set</p>
-                        </li>
-                        <li>
-                            <p>Introduce a new schema—the topics in a topic set follow a single schema</p>
-                        </li>
-                        <li>
-                            <p>Group new or existing topics under a different folder or chapter in the TOC—there is one folder for each topic set in the table of contents</p>
+                            <p>Create a new <feature>documentation set</feature>—every documentation set needs at least one topic set</p>
                         </li>
                         <li>
                             <p>Change the order of topic sets in the TOC—the order of the folders in the table of contents is based on the <config-setting>topic-set-order</config-setting> element in the configuration file</p>
