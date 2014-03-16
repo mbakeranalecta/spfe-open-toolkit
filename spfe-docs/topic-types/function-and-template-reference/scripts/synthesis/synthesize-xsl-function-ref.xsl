@@ -68,14 +68,14 @@ Main template
 				<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xsl:variable> 
 				
 				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias($topic-type, $topic-type-alias-list)"/>	
-				
+				<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
 				<ss:topic 
 					type="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference" 
 					full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference/{concat(xfd:local-prefix, '_', xfd:name)}"
 					local-name="{xfd:name}"
 					topic-type-alias="{$topic-type-alias}"
 					title="{xfd:name}"
-					excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::*:p[1], 30, ' ...'))}">
+					excerpt="{sf:escape-for-xml(sf:first-n-words($function-description/fd:description/fd:p[1], 30, ' ...'))}">
 					
 					<ss:index>
 						<ss:entry>
@@ -105,8 +105,6 @@ Main template
 									<xsl:copy-of select="./*"/>
 								</definition>
 							</xsl:for-each>
-							
-							<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
 							
 							<!-- Select and copy the authored function info. -->
 							<xsl:choose>

@@ -9,6 +9,7 @@
       </extract>
       <synthesis>
           <script>../../topic-types/config-reference/scripts/synthesis/synthesize-config-ref.xsl</script>
+          <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/synthesize-text-structures.xsl</script>
           <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
           <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
           <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>

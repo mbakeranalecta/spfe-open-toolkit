@@ -56,13 +56,11 @@
 	</xsl:template>
 
 	<xsl:template name="apply-conditions">
-		<xsl:param name="output-namespace" tunnel="yes"/>
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:choose>
 			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
 				<xsl:element name="{local-name()}" namespace="{$output-namespace}">
 					<xsl:copy-of select="@*" copy-namespaces="no"/>
-					
 					<xsl:if test="(parent::*:p and not(@scope)) or name()='code-block'">
 						<xsl:choose>
 							<xsl:when test="ancestor::ss:topic/@default-reference-scope">

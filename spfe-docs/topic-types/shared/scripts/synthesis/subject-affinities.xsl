@@ -5,7 +5,6 @@
     version="2.0">
 
     <xsl:template match="*:config-setting">
-        <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">xpath</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
@@ -15,7 +14,6 @@
     </xsl:template>    
     
     <xsl:template match="*:ant-element">
-        <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">xpath</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
@@ -25,7 +23,6 @@
     </xsl:template> 
     
     <xsl:template match="*:spfe-build-property">
-        <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">spfe-build-property</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>

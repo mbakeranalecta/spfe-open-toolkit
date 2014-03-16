@@ -10,6 +10,7 @@
         <synthesis>
             <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/common-topic-synthesis.xsl</script> 
+            <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/synthesize-text-structures.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/generic-topic-synthesis.xsl</script>
             <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
             <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>

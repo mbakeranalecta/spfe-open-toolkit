@@ -32,7 +32,7 @@ exclude-result-prefixes="#all">
 						<xsl:copy-of select="@*"/>
 						<xsl:call-template name="apply-topic-attributes"/>
 						<xsl:apply-templates>
-							<xsl:with-param name="output-namespace" tunnel="yes" select="$output-namespace"/>
+
 						</xsl:apply-templates>
 					</xsl:element>
 				</ss:topic>

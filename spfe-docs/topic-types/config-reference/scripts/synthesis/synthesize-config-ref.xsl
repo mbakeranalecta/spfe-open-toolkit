@@ -136,7 +136,8 @@ Main content processing templates
 			full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/{translate(xpath, '/:', '__')}"
 			local-name="{translate(xpath, '/:', '__')}"
 			topic-type-alias="{$topic-type-alias}"
-			title="{name}">
+			title="{name}"
+			excerpt="{sf:escape-for-xml(sf:first-n-words($source[ed:xpath=$xpath]/ed:description/ed:p[1], 30, ' ...'))}">
 			<xsl:variable name="xpath" select="normalize-space(xpath)"/>
 			<ss:index>
 				<ss:entry>
