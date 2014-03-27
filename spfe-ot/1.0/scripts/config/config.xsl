@@ -54,29 +54,48 @@
         <xsl:choose>
             <xsl:when test="doc-available($included-doc)">
                 <xsl:value-of select="$included-doc"/>
+                <xsl:message  select="'Getting config file: ', $included-doc"/>
                 <xsl:call-template name="get-config-docs">
                     <xsl:with-param name="config-doc" select="doc($included-doc)"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:message select="'Include file not found:',$included-doc"></xsl:message>
+                <xsl:message select="'Include file not found:',$included-doc"/>
             </xsl:otherwise>
         </xsl:choose>  
     </xsl:template>
     
+    <xsl:template match="topic-sets/topic-set"  mode="get-config-docs">
+        <xsl:variable name="topic-set-config" select="resolve-uri(href, base-uri())"/>
+        <xsl:choose>
+            <xsl:when test="doc-available($topic-set-config)">
+                <xsl:value-of select="$topic-set-config"/>
+                <xsl:message  select="'Getting topic set file: ', $topic-set-config"/>
+                <xsl:call-template name="get-config-docs">
+                    <xsl:with-param name="config-doc" select="doc($topic-set-config)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message select="'Topic-set file not found:',$topic-set-config"/>
+            </xsl:otherwise>
+        </xsl:choose>  
+        
+    </xsl:template>
+    
+    
     <xsl:template match="@*|node()" mode="get-config-docs">
-        <xsl:apply-templates/>
+        <xsl:apply-templates mode="get-config-docs"/>
     </xsl:template>
 
     <xsl:variable name="raw-config" as="element(spfe)*">
         <xsl:for-each select="$config-docs">
             <xsl:message  select="'Loading config file: ', ."/>
-            <xsl:apply-templates select="doc(.)" mode="load-config-doc"/>
+            <xsl:apply-templates select="doc(.)/spfe" mode="load-config-doc"/>
         </xsl:for-each>    
     </xsl:variable>
 
     <xsl:template match="spfe/include" mode="load-config-doc">
-        <xsl:apply-templates/>
+        <xsl:apply-templates mode="load-config-doc"/>
     </xsl:template>
     
     <xsl:template match="*" mode="load-config-doc">
@@ -178,13 +197,18 @@
     </xsl:template>
     
     <xsl:template match="/">
+        <xsl:message select="'Root match on file ', base-uri()"/>
         <xsl:call-template name="create-build-file"/>
         <xsl:if test="not(/spfe/doc-set)">
+            <xsl:message terminate="yes">ERROR: /spfe/doc-set not found in <xsl:value-of select="base-uri()"/>.</xsl:message>
+<!--          
           <xsl:call-template name="create-config-file"/>
-          <xsl:call-template name="create-script-files"/>
+          <xsl:call-template name="create-script-files"/>-->
         </xsl:if>
-        <!--<xsl:call-template name="create-root-index"/>-->
     </xsl:template>
+    
+
+    
     
     <xsl:function name="spfe:xml2properties">
         <!-- Convert an XML structure into a set of property statements -->
@@ -248,14 +272,14 @@
         <xsl:value-of select="replace($newURL, '%20', ' ')"/>
     </xsl:function>
     
-    <xsl:template name="create-docset-build-file">
+    <xsl:template name="create-build-file">
 
         <!-- TO DO: check that all the topic sets have unique IDs -->
         <!-- TO DO: check that all the topic sets have unique build directories -->
         
         <project name="{/spfe/doc-set/@id}" default="{$SPFE_BUILD_COMMAND}">
-            
-            <target name="config">
+            <import file="{$spfeot-home}/1.0/build-tools/spfe-rules.xml"/>
+<!--            <target name="config">
                 <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                     <xsl:variable name="antfile" 
                         select="concat($source/spfe/doc-set/@id, '-', id, '.xml')"/>
@@ -273,8 +297,8 @@
                     </xslt>
                 </xsl:for-each>                        
             </target>
-            
-            <target name="clean" depends="config"> 
+-->            
+            <target name="clean"> 
                 <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                     <xsl:variable name="antfile" 
                         select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
@@ -286,7 +310,7 @@
                 </xsl:for-each>
             </target>
             
-            <target name="cat" depends="config"> 
+            <target name="cat"> 
                 <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                     <xsl:variable name="antfile" 
                         select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
@@ -298,7 +322,11 @@
                 </xsl:for-each>
             </target>
             
-            <target name="toc" depends="config"> 
+            <target name="list-pages" depends="cat, -list">
+                
+            </target>
+            
+            <target name="toc"> 
                 <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                     <xsl:variable name="antfile" 
                         select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
@@ -310,7 +338,7 @@
                 </xsl:for-each>
             </target>
             
-            <target name="draft" depends="config, toc, cat"> 
+            <target name="draft" depends="toc, cat, list-pages"> 
                 <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                     <xsl:variable name="antfile" 
                         select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
@@ -322,7 +350,7 @@
                 </xsl:for-each>
             </target>
             
-            <target name="final" depends="config, toc, cat"> 
+            <target name="final" depends="toc, cat"> 
                 <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                     <xsl:variable name="antfile" 
                         select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
@@ -334,7 +362,7 @@
                 </xsl:for-each>
             </target>
             
-            <target name="pdf" depends="config, toc, cat"> 
+            <target name="pdf" depends="toc, cat"> 
                 <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
                     <xsl:variable name="antfile" 
                         select="concat($source/spfe/doc-set/@id, '-', id,  '.xml')"/>
@@ -349,29 +377,7 @@
         </project> 
     </xsl:template>
     
-<!--    <xsl:template name="create-root-index">
-        <!-\- FIXME: This may not be the right place to do this. Need a more general/configurable solution. -\->
-        <xsl:message select="'Generating root index file.'"/>
-        <xsl:variable name="redirect-to" select="concat($config/doc-set/home-topic-set , '/index.html')"/>
-        <xsl:result-document href="file:///{$docset-home}/index.html" method="html" >
-            <!-\-<!DOCTYPE HTML>-\->
-            <html>
-                <head>
-                    <meta charset="UTF-8"/>
-                    <meta http-equiv="refresh" content="1;url={$redirect-to}"/>
-                    <script type="text/javascript">
-                        window.location.href = "<xsl:value-of select="$redirect-to"/>"
-                    </script>
-                    <title>Page Redirection</title>
-                </head>
-                <body>
-                    <!-\- Note: don't tell people to `click` the link, just tell them that it is a link. -\->
-                    If you are not redirected automatically, follow the <a href='{$redirect-to}'>link to example</a>
-                </body>
-            </html>
-        </xsl:result-document>
-    </xsl:template>
--->    
+   
     <xsl:template name="create-topic-set-build-file">
         <project name="{$config/topic-set-id}" basedir="." default="draft">
             <property file="{$home}/.spfe/spfe.properties"/>
@@ -495,21 +501,21 @@
         
     </xsl:template>
       
-    <xsl:template name="create-build-file">
+ <!--   <xsl:template name="create-build-file">
         <xsl:choose>
-            <!-- if the config file specifies a doc set, create a build file for doc set -->
+            <!-\- if the config file specifies a doc set, create a build file for doc set -\->
             <xsl:when test="/spfe/doc-set">
                 <xsl:call-template name="create-docset-build-file"/>
             </xsl:when>
             
-            <!-- otherwise, create build file for topic-set -->
+            <!-\- otherwise, create build file for topic-set -\->
             <xsl:otherwise>  
                 <xsl:call-template name="create-topic-set-build-file"/>
             </xsl:otherwise>
         </xsl:choose>
         
     </xsl:template>
-    
+-->    
     <xsl:template name="create-run-command">
         <xsl:param name="build-command"/>
         <xsl:param name="antfile"/>
@@ -536,7 +542,96 @@
             </exec>
             
     </xsl:template>
+ 
+    <xsl:template name="create-expanded-config-file">
+        <xsl:message select="concat('Generating expanded config file: ', 'file:///', $docset-build, '/config/spfe-config.xml')"/>
+        <xsl:result-document 
+            href="file:///{$docset-build}/config/spfe-config.xml" 
+            method="xml" 
+            indent="yes" 
+            xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" 
+            xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+            <spfe>
+                <dir-separator>
+                    <!-- detect OS based on separator in $HOME -->
+                    <xsl:value-of select="if ($home eq $HOME) then ':' else ';'"/>
+                </dir-separator>
+                <build-command><xsl:value-of select="$SPFE_BUILD_COMMAND"/></build-command>
+                <user-home><xsl:value-of select="$home"/></user-home>
+                <spfeot-home><xsl:value-of select="$spfeot-home"/></spfeot-home>
+                              
+                <doc-set>
+                    <title><xsl:value-of select="$config/doc-set/title"/></title>
+                    <topic-set-type-order>
+                        <xsl:for-each select="$config/doc-set/topic-set-type-order/topic-set-type">
+                            <topic-set-type>
+                                <xsl:apply-templates/>
+                            </topic-set-type>
+                        </xsl:for-each>
+                    </topic-set-type-order>
+                    <home-topic-set><xsl:value-of select="$config/doc-set/home-topic-set"/></home-topic-set>
+                    <topic-sets>
+                        <xsl:for-each select="$config/doc-set/topic-sets/topic-set">
+                            <topic-set>
+                                <id><xsl:value-of select="id"/></id>
+                                <href><xsl:value-of select="href"/></href>
+                            </topic-set>
+                        </xsl:for-each>
+                    </topic-sets>    
+                </doc-set>
+                
+                <topic-type-aliases>
+                    <xsl:for-each-group select="$config/topic-type-aliases/topic-type" group-by="id">
+                        <xsl:copy-of select="current-group()[1]"  copy-namespaces="no"/>
+                    </xsl:for-each-group>
+                </topic-type-aliases>
+                
+                <xsl:copy-of select="($config/topic-set-id)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/topic-set-type)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/topic-type-order)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/messages)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/condition-tokens)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/default-topic-scope)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/default-subject-affinity-scope)[1]" copy-namespaces="no"/>
+                <xsl:copy-of select="($config/home-topic-set)[1]" copy-namespaces="no"/>
+                
+                <build>
+                    <output-directory>
+                        <xsl:value-of select="$topicset-home"/>
+                    </output-directory>
+                    <build-directory>
+                        <xsl:value-of select="$topic-set-build"/>
+                    </build-directory>
+                    <link-catalog-directory>
+                        <xsl:value-of select="$link-catalog-directory"/>
+                    </link-catalog-directory>
+                    <toc-directory>
+                        <xsl:value-of select="$toc-directory"/>
+                    </toc-directory>
+                </build>
+                
+                <!-- this is not catching anything. What was it for? -->
+                <xsl:copy-of select="($config/format)[1]" copy-namespaces="no"/>    
+                
+                <strings>
+                    <xsl:for-each-group select="$config/strings/string" group-by="@id">
+                        <xsl:copy-of select="current-group()[1]"  copy-namespaces="no"/>
+                    </xsl:for-each-group>
+                </strings>
+                
+                <other>
+                    <xsl:for-each select="$config/other">
+                        <xsl:element name="{@name}">
+                            <xsl:attribute name="base-uri" select="base-uri(.)"/>
+                            <xsl:value-of select="."/>
+                        </xsl:element>
+                    </xsl:for-each>
+                </other>
+            </spfe>
+        </xsl:result-document>
+    </xsl:template>
     
+ 
     <xsl:template name="create-config-file">
         <xsl:message select="concat('Generating config file: ', 'file:///', $topic-set-build, '/config/spfe-config.xml')"/>
         <xsl:result-document href="file:///{$topic-set-build}/config/spfe-config.xml" method="xml" indent="yes" xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">

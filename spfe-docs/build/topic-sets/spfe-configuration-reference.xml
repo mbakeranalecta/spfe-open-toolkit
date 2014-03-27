@@ -4,7 +4,6 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <include href="../spfe-docs-config.xml"/>
     <include href="../../topic-types/config-reference/config.xml"/>
     <define name="TOPIC_SET_ID" value="spfe-configuration-reference"/>
     <script-style>topic-set</script-style>

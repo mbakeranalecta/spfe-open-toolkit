@@ -159,6 +159,7 @@
 		</fileset> 
 		<pathconvert dirsep="/" pathsep=";" property="synthesis-files" refid="synthesis-file-list"/>
 	</target>
+	
 
 	<!-- LINK CATALOG STEP -->
 
@@ -188,6 +189,35 @@
 		</xslt>
 	</target>
 	
+	<!-- LIST PAGES STEP -->
+	
+	<!-- check if list page file is up to date -->
+	
+	<target name="-current.list-pages">
+		<uptodate property="-current.list-pages"
+			targetfile="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages" srcfile="{temp}/synthesis.flag"/>
+	</target>
+	
+	<!-- target for list-pages -->
+	<!-- note that this target is called once at the docset level -->
+	
+	<target name="-build.list-pages" depends="--build.list-pages"/>
+	<target name="--build.list-pages" description="List page step."
+		    unless="-current.list-pages">
+		
+		<!-- run the XSLT script to produce the output -->
+		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
+			in="${spfe.config-file}"
+			style="${spfe.scripts.list-pages}"
+			out="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages.xml">
+			<xmlcatalog refid="spfe-catalogs"/>
+			<param name="synthesis-files" expression="${synthesis-files}"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
+			</factory>
+		</xslt>
+	</target>
+
 	<!-- target for toc -->
 	<target name="-build.toc" depends="--build.toc"/>
 	<target name="--build.toc" description="TOC step."
@@ -530,6 +560,17 @@
 	
 	<target name="-cat" description="Build all the link catalogs">
 		<antcall target="-build.link-catalog"/>
+	</target>
+
+	<!-- LIST -->
+	<target name="list" depends="-init">
+		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
+		<antcall target="-list"/>
+		<delete file="${temp}/incomplete.flag"/>
+	</target>
+	
+	<target name="-list" description="Build all the list pages">
+		<antcall target="-build.list-pages"/>
 	</target>
 	
 	<!-- TOC -->
