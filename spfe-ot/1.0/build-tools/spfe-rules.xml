@@ -4,8 +4,8 @@
 <project name="spfe-rules" basedir="." default="draft">
 
 	<xmlcatalog id="oasis-catalogs">
-		<dtd publicId="-//OASIS//DTD XML Catalogs V1.1//EN" 
-			location="${SPFEOT_HOME}/1.0/schemas/catalog1.1.dtd"/>	
+		<dtd publicId="-//OASIS//DTD XML Catalogs V1.1//EN"
+			location="${SPFEOT_HOME}/1.0/schemas/catalog1.1.dtd"/>
 	</xmlcatalog>
 	<xmlcatalog id="spfe-catalogs">
 		<classpath>
@@ -16,23 +16,39 @@
 				<include name="CatalogManager.properties"/>
 			</fileset>
 		</classpath>
-		<catalogpath >
+		<catalogpath>
 			<fileset dir="${SPFEOT_HOME}/1.0/schemas">
 				<include name="**/catalog.xml"/>
 			</fileset>
 			<fileset dir="${SPFEOT_HOME}/plugins">
 				<include name="**/catalog.xml"/>
-			</fileset> 
+			</fileset>
 			<fileset dir="${HOME}/.spfe" erroronmissingdir="no">
 				<include name="**/catalog.xml"/>
-			</fileset> 
-					 
-<!--			<fileset dir="${spfe.xml-catalog-directory}">
-				<include name="**/catalog.xml"/>
 			</fileset>
--->		</catalogpath>
+		</catalogpath>
 
 	</xmlcatalog>
+
+	<!-- MACRO DEFINITIONS -->
+	<macrodef name="saxon-xslt">
+		<attribute name="style"/>
+		<attribute name="in"/>
+		<attribute name="out"/>
+		<attribute name="initial-template" value="main"/>
+		<element name="params"/>
+		<sequential>
+			<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar" style="@{style}" in="@{in}"
+				out="@{out}">
+				<xmlcatalog refid="spfe-catalogs"/>
+				<params/>
+				<factory name="net.sf.saxon.TransformerFactoryImpl">
+					<attribute name="http://saxon.sf.net/feature/initialTemplate"
+						value="@{initial-template}"/>
+				</factory>
+			</xslt>
+		</sequential>
+	</macrodef>
 
 	<!-- PROPERTY DEFINITIONS -->
 
@@ -52,8 +68,8 @@
 	</target>
 
 	<!-- Initialization target -->
-	<target name="-init" depends="-begin-message, -recorder" description="Initialization of properties."
-		unless="already-initialized">
+	<target name="-init" depends="-begin-message, -recorder"
+		description="Initialization of properties." unless="already-initialized">
 
 		<!-- avoid running -init twice so we don't run the last-build-crashed test twice -->
 		<property name="already-initialized" value="true"/>
@@ -61,11 +77,12 @@
 		<!-- check if the last build crashed -->
 		<available property="last-build-crashed" file="${temp}/incomplete.flag"/>
 		<antcall target="-check-last-build-status"/>
-		
+
 		<!-- mkdir in case no link catalogs have been created - make sure file list is created correctly even if empty. -->
 		<mkdir dir="${spfe.build.link-catalog-directory}"/>
 		<mkdir dir="${temp}"/>
 		<mkdir dir="${temp}/synthesis"/>
+		<!-- FIXME: is this still needed? -->
 	</target>
 
 	<target name="-check-last-build-status" if="last-build-crashed">
@@ -75,22 +92,19 @@
 
 	<!-- recorder target -->
 	<target name="-recorder" if="spfe.topic-set-id">
-		<echo
-			message="Logging to: ${spfe.build.build-directory}/logs/${spfe.topic-set-id}.txt"/>
+		<echo message="Logging to: ${spfe.build.build-directory}/logs/${spfe.topic-set-id}.txt"/>
 		<mkdir dir="${spfe.build.build-directory}/logs"/>
-		<record
-			name="${spfe.build.build-directory}/logs/${spfe.topic-set-id}-log.txt"
+		<record name="${spfe.build.build-directory}/logs/${spfe.topic-set-id}-log.txt"
 			action="start"/>
 	</target>
 
 
 	<!-- HTML -->
 
-	<target name="-get.externals.graphics.html"
-		depends="-build.image-list-html"
+	<target name="-get.externals.graphics.html" depends="-build.image-list-html"
 		if="image-list-html-has-content">
 		<mkdir dir="${output}/graphics"/>
-		<property name="the-list" refid="files.graphics.html" />
+		<property name="the-list" refid="files.graphics.html"/>
 		<copy todir="${output}/graphics" flatten="true" failonerror="true"
 			preservelastmodified="true" verbose="true">
 			<files refid="files.graphics.html"/>
@@ -99,8 +113,7 @@
 
 	<target name="-get.externals.style.html">
 		<mkdir dir="${output}/style"/>
-		<copy todir="${output}/style" preservelastmodified="true"
-			flatten="false" failonerror="true">
+		<copy todir="${output}/style" preservelastmodified="true" flatten="false" failonerror="true">
 			<resources refid="spfe.style.html-style-directories"/>
 		</copy>
 	</target>
@@ -135,31 +148,26 @@
 
 	<!-- target to build  synthesis -->
 	<target name="-build.synthesis" depends="--build.synthesis"/>
-	<target name="--build.synthesis" description="synthesis"
-		>
+	<target name="--build.synthesis" description="synthesis">
 		<pathconvert dirsep="/" pathsep=";" property="topic-files" refid="topics"/>
 		<!-- run the XSLT script to produce the output -->
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			style="${spfe.scripts.synthesis}" 
-			in="${spfe.config-file}"
+		<saxon-xslt style="${spfe.scripts.synthesis}" in="${spfe.config-file}"
 			out="${temp}/synthesis.flag">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="topic-files" expression="${topic-files}"/>
-			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-			<param name="draft" expression="${draft}" if="draft"/>
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
+			<params>
+				<param name="topic-files" expression="${topic-files}"/>
+				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+				<param name="draft" expression="${draft}" if="draft"/>
+			</params>
+		</saxon-xslt>
 	</target>
-	
+
 	<target name="-get-synthesis-file-list">
 		<fileset id="synthesis-file-list" dir="${temp}">
 			<include name="synthesis/*.xml"/>
-		</fileset> 
+		</fileset>
 		<pathconvert dirsep="/" pathsep=";" property="synthesis-files" refid="synthesis-file-list"/>
 	</target>
-	
+
 
 	<!-- LINK CATALOG STEP -->
 
@@ -167,7 +175,8 @@
 
 	<target name="-current.link-catalog">
 		<uptodate property="-current.link-catalog"
-			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog" srcfile="{temp}/synthesis.flag"/>
+			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog"
+			srcfile="{temp}/synthesis.flag"/>
 	</target>
 
 	<!-- target for link-catalog -->
@@ -175,47 +184,39 @@
 	<target name="--build.link-catalog" description="Link catalog step."
 		depends=" -build.synthesis,  -get-synthesis-file-list, -current.link-catalog"
 		unless="-current.link-catalog">
-		
+
 		<!-- run the XSLT script to produce the output -->
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			in="${spfe.config-file}"
-			style="${spfe.scripts.link-catalog}"
+		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.link-catalog}"
 			out="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog.xml">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="synthesis-files" expression="${synthesis-files}"/>
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
+			<params>
+				<param name="synthesis-files" expression="${synthesis-files}"/>
+			</params>
+		</saxon-xslt>
 	</target>
-	
+
 	<!-- LIST PAGES STEP -->
-	
+
 	<!-- check if list page file is up to date -->
-	
+
 	<target name="-current.list-pages">
 		<uptodate property="-current.list-pages"
-			targetfile="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages" srcfile="{temp}/synthesis.flag"/>
+			targetfile="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages"
+			srcfile="{temp}/synthesis.flag"/>
 	</target>
-	
+
 	<!-- target for list-pages -->
 	<!-- note that this target is called once at the docset level -->
-	
+
 	<target name="-build.list-pages" depends="--build.list-pages"/>
-	<target name="--build.list-pages" description="List page step."
-		    unless="-current.list-pages">
-		
+	<target name="--build.list-pages" description="List page step." unless="-current.list-pages">
+
 		<!-- run the XSLT script to produce the output -->
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			in="${spfe.config-file}"
-			style="${spfe.scripts.list-pages}"
+		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.list-pages}"
 			out="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages.xml">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="synthesis-files" expression="${synthesis-files}"/>
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
+			<params>
+				<param name="synthesis-files" expression="${synthesis-files}"/>
+			</params>
+		</saxon-xslt>
 	</target>
 
 	<!-- target for toc -->
@@ -223,27 +224,24 @@
 	<target name="--build.toc" description="TOC step."
 		depends=" -build.synthesis, -get-synthesis-file-list, -current.link-catalog"
 		unless="-current.link-catalog">
-		
+
 		<!-- run the XSLT script to produce the output -->
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			in="${spfe.config-file}"
-			style="${spfe.scripts.toc}"
+		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.toc}"
 			out="${spfe.build.toc-directory}/${spfe.topic-set-id}.toc.xml">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="synthesis-files" expression="${synthesis-files}"/>
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
+			<params>
+				<param name="synthesis-files" expression="${synthesis-files}"/>
+			</params>
+		</saxon-xslt>
 	</target>
-	
-	
+
+
 	<!-- PRESENTATION WEB STEP -->
 
 
 	<!-- check to see if the html-presentation is up to date -->
 	<target name="-current.presentation-web">
-		<uptodate property="-current.presentation-web" srcfile="${temp}/synthesis.flag" targetfile="${temp}/presentation/presentation-web.flag"/>
+		<uptodate property="-current.presentation-web" srcfile="${temp}/synthesis.flag"
+			targetfile="${temp}/presentation/presentation-web.flag"/>
 	</target>
 
 	<!-- build the presentation -->
@@ -255,31 +253,28 @@
 				 -build.toc,
 				 -current.presentation-web"
 		unless="-current.presentation-web">
-		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
-		<pathconvert property="link-catalog-files"  dirsep="/" pathsep=";" refid="link-catalogs"/>	
+		<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
+		<pathconvert property="link-catalog-files" dirsep="/" pathsep=";" refid="link-catalogs"/>
 		<!-- run the XSLT script to produce the output -->
 
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			style="${spfe.scripts.presentation-web}"
-			in="${spfe.config-file}"
+		<saxon-xslt style="${spfe.scripts.presentation-web}" in="${spfe.config-file}"
 			out="${temp}/presentation-web.flag">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="synthesis-files" expression="${synthesis-files}"/>
-			<param name="link-catalog-files" expression="${link-catalog-files}"/>
-			<param name="toc-files" expression="${toc-files}"/>
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
+			<params>
+				<param name="synthesis-files" expression="${synthesis-files}"/>
+				<param name="link-catalog-files" expression="${link-catalog-files}"/>
+				<param name="toc-files" expression="${toc-files}"/>
+			</params>
+		</saxon-xslt>
 	</target>
 
 	<!-- PRESENTATION BOOK STEP -->
 
 	<!-- check to see if the presentation-book is up to date -->
 	<target name="-current.presentation-book">
-		<uptodate property="-current.presentation-book" srcfile="${temp}/synthesis.flag" targetfile="${temp}/presentation/presentation-book.flag"/>
+		<uptodate property="-current.presentation-book" srcfile="${temp}/synthesis.flag"
+			targetfile="${temp}/presentation/presentation-book.flag"/>
 	</target>
-	
+
 	<!-- build the book presentation -->
 	<target name="-build.presentation-book" depends="--build.presentation-book"/>
 	<target name="--build.presentation-book" description="book presentation step."
@@ -291,25 +286,21 @@
 
 
 
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			in="${spfe.config-file}" 
-			style="${scripts.presentation-book}"
+		<saxon-xslt in="${spfe.config-file}" style="${scripts.presentation-book}"
 			out="${temp}/presentation-book.flag">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="synthesis-files" expression="${synthesis-files}"/>
-			<param name="link-catalog-files" expression="${link-catalog-files}"/>
-			
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
+			<params>
+				<param name="synthesis-files" expression="${synthesis-files}"/>
+				<param name="link-catalog-files" expression="${link-catalog-files}"/>
+			</params>
+		</saxon-xslt>
 	</target>
 
 	<!-- FORMAT HTML STEP -->
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.html-format">
-		<uptodate property="-current.html-format" targetfile="${temp}/html-format.flag" srcfile="${temp}/presentation-web.flag"/>
+		<uptodate property="-current.html-format" targetfile="${temp}/html-format.flag"
+			srcfile="${temp}/presentation-web.flag"/>
 	</target>
 
 	<target name="-build.html-format" depends="--build.html-format"/>
@@ -323,23 +314,19 @@
 		<fileset dir="${temp}" id="presentation-file-list">
 			<include name="presentation/*.xml"/>
 		</fileset>
-		<pathconvert dirsep="/" pathsep=";" property="presentation-files" refid="presentation-file-list"/>
+		<pathconvert dirsep="/" pathsep=";" property="presentation-files"
+			refid="presentation-file-list"/>
 
 
-		
+
 		<!-- run the XSLT script to produce the output -->
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			in="${spfe.config-file}" 
-			style="${spfe.scripts.format-html}" 
+		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.format-html}"
 			out="${temp}/html-format.flag">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-			<param name="presentation-files" expression="${presentation-files}"/>
-
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
+			<params>
+				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+				<param name="presentation-files" expression="${presentation-files}"/>
+			</params>
+		</saxon-xslt>
 	</target>
 
 
@@ -350,33 +337,31 @@
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.fo-format">
-		<uptodate property="-current.fo-format" targetfile="${temp}/fo-format.flag" srcfile="${temp}/presentation-book.flag"/>
+		<uptodate property="-current.fo-format" targetfile="${temp}/fo-format.flag"
+			srcfile="${temp}/presentation-book.flag"/>
 	</target>
 
 	<target name="-build.fo-format" depends="--build.fo-format"/>
 	<target name="--build.fo-format" description="FO formatting"
 		depends="-build.presentation-book, -current.fo-format" unless="-current.fo-format">
-		
+
 		<fileset id="presentation-file-list" dir="${temp}">
 			<include name="presentation/*.xml"/>
-		</fileset> 
-		<pathconvert dirsep="/" pathsep=";" property="presentation-files" refid="presentation-file-list"/>
+		</fileset>
+		<pathconvert dirsep="/" pathsep=";" property="presentation-files"
+			refid="presentation-file-list"/>
 
-		<pathconvert property="toc-files"  dirsep="/" pathsep=";" refid="tocs"/>	
+		<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
 		<!-- run the XSLT script to produce the output -->
-		
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			in="${spfe.config-file}" 
-			style="${scripts.format-fo}" out="${temp}/fo-format.flag">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-			<param name="presentation-files" expression="${presentation-files}"/>
-			<param name="toc-files" expression="${toc-files}"/>
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
-		
+
+		<saxon-xslt in="${spfe.config-file}" style="${scripts.format-fo}"
+			out="${temp}/fo-format.flag">
+			<params>
+				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+				<param name="presentation-files" expression="${presentation-files}"/>
+				<param name="toc-files" expression="${toc-files}"/>
+			</params>
+		</saxon-xslt>
 	</target>
 
 
@@ -384,7 +369,8 @@
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.pdf-encode">
-		<uptodate property="-current.pdf-encode"  targetfile="${output}/${spfe.pdf-name}" srcfile="{temp}/fo-format.flag"/>
+		<uptodate property="-current.pdf-encode" targetfile="${output}/${spfe.pdf-name}"
+			srcfile="{temp}/fo-format.flag"/>
 	</target>
 
 	<target name="-build.pdf-encode" depends="--build.pdf-encode"/>
@@ -395,8 +381,7 @@
 		<!-- make sure the output directory exists -->
 		<mkdir dir="${output}"/>
 		<fop format="application/pdf" fofile="${temp}/spfe.fo-format.fo"
-			outfile="${output}/${spfe.pdf-name}" basedir="${temp}"
-			userconfig="${temp}/fop.xconf"/>
+			outfile="${output}/${spfe.pdf-name}" basedir="${temp}" userconfig="${temp}/fop.xconf"/>
 		<touch file="${temp}/pdf-format.flag"/>
 	</target>
 
@@ -406,24 +391,21 @@
 
 	<!-- check to see if the html-presentation is up to date -->
 	<target name="-current.report">
-		<uptodate property="-current.presentation-web" targetfile="${output}/${spfe.report-name}" srcfile="{temp}/synthesis.flag"/>
+		<uptodate property="-current.presentation-web" targetfile="${output}/${spfe.report-name}"
+			srcfile="{temp}/synthesis.flag"/>
 	</target>
 
 	<!-- build the report -->
 	<target name="-build.report" description="report generation"
-		depends="-build.synthesis, -current.report"
-		unless="-current.report">
+		depends="-build.synthesis, -current.report" unless="-current.report">
 
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			in="${spfe.config-file}" style="${scripts.report}"
+		<saxon-xslt in="${spfe.config-file}" style="${scripts.report}"
 			out="${output}/${spfe.report-name}">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-			<param name="draft" expression="${draft}" if="draft"/>
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
+			<params>
+				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+				<param name="draft" expression="${draft}" if="draft"/>
+			</params>
+		</saxon-xslt>
 	</target>
 
 
@@ -431,25 +413,22 @@
 
 	<!-- check to see if the image-list is up to date -->
 	<target name="-current.image-list-html">
-		<uptodate property="-current.image-list-html" targetfile="${temp}/image-list-html" srcfile="${temp}/presentation-web.flag"/>
+		<uptodate property="-current.image-list-html" targetfile="${temp}/image-list-html"
+			srcfile="${temp}/presentation-web.flag"/>
 	</target>
 
 	<target name="-build.image-list-html"
 		depends="-build.presentation-web, -current.image-list-html"
 		unless="-current.image-list-html">
-		
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			in="${spfe.config-file}" style="${spfe.scripts.image-list}"
+
+		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.image-list}"
 			out="${temp}/image-list-html">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="synthesis-files" expression="${synthesis-files}"/>
-			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
-		<files id="files.graphics.html"
-			includesfile="${temp}/image-list-html"/>
+			<params>
+				<param name="synthesis-files" expression="${synthesis-files}"/>
+				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+			</params>
+		</saxon-xslt>
+		<files id="files.graphics.html" includesfile="${temp}/image-list-html"/>
 		<condition property="image-list-html-has-content">
 			<isfileselected file="${temp}/image-list-html">
 				<containsregexp expression="\S+"/>
@@ -459,24 +438,22 @@
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.image-list.print">
-		<uptodate property="-current.image-list.print" targetfile="${temp}/image-list-print" srcfile="{temp}/presentation-book.flag"/>
+		<uptodate property="-current.image-list.print" targetfile="${temp}/image-list-print"
+			srcfile="{temp}/presentation-book.flag"/>
 	</target>
 
 	<target name="-build.image-list.print"
 		depends="-build.presentation-book, -current.image-list.print"
 		unless="-current.image-list.print">
-		<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"
-			in="${spfe.config-file}" style="${spfe.scripts.image-list}"
+		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.image-list}"
 			out="${temp}/image-list-print">
-			<xmlcatalog refid="spfe-catalogs"/>
-			<param name="synthesis-files" expression="${synthesis-files}"/>
-			<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-			<param name="vector-if-available" expression="yes"/>
-			<factory name="net.sf.saxon.TransformerFactoryImpl">
-				<attribute name="http://saxon.sf.net/feature/initialTemplate" value="main"/>
-			</factory>
-		</xslt>
-<!--		<fileset id="files.graphics.print" dir="${spfe.directories.image-source}"
+			<params>
+				<param name="synthesis-files" expression="${synthesis-files}"/>
+				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+				<param name="vector-if-available" expression="yes"/>
+			</params>
+		</saxon-xslt>
+		<!--		<fileset id="files.graphics.print" dir="${spfe.directories.image-source}"
 			includesfile="${temp}/image-list-print"/>-->
 		<condition property="image-list-print-has-content">
 			<isfileselected file="${temp}/image-list-print">
@@ -494,7 +471,7 @@
 		<antcall target="-zip"/>
 	</target>
 
-<!--	<target name="-zip" depends="-final, pdf">
+	<!--	<target name="-zip" depends="-final, pdf">
 		<mkdir dir="${spfe.directories.output.zip}"/>
 		<basename property="zip-prefix" file=""/>
 		<echo message="Zipping ${output}"/>
@@ -557,7 +534,7 @@
 		<antcall target="-cat"/>
 		<delete file="${temp}/incomplete.flag"/>
 	</target>
-	
+
 	<target name="-cat" description="Build all the link catalogs">
 		<antcall target="-build.link-catalog"/>
 	</target>
@@ -568,22 +545,22 @@
 		<antcall target="-list"/>
 		<delete file="${temp}/incomplete.flag"/>
 	</target>
-	
+
 	<target name="-list" description="Build all the list pages">
 		<antcall target="-build.list-pages"/>
 	</target>
-	
+
 	<!-- TOC -->
 	<target name="toc" depends="-init">
 		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
 		<antcall target="-toc"/>
 		<delete file="${temp}/incomplete.flag"/>
 	</target>
-	
+
 	<target name="-toc" description="Build all tocs">
 		<antcall target="-build.toc"/>
 	</target>
-	
+
 	<!-- REPORT -->
 	<target name="report" depends="-init">
 		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
