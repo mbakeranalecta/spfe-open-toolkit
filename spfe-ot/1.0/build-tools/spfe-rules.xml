@@ -101,22 +101,51 @@
 
 	<!-- HTML -->
 
-	<target name="-get.externals.graphics.html" depends="-build.image-list-html"
+	<macrodef name="get.externals.graphics.html">
+		<!--		depends="-build.image-list-html"
 		if="image-list-html-has-content">
-		<mkdir dir="${output}/graphics"/>
-		<property name="the-list" refid="files.graphics.html"/>
-		<copy todir="${output}/graphics" flatten="true" failonerror="true"
-			preservelastmodified="true" verbose="true">
-			<files refid="files.graphics.html"/>
-		</copy>
-	</target>
+-->
+		<attribute name="topic-set-id"/>
+		<attribute name="output"/>
+		<sequential>
 
-	<target name="-get.externals.style.html">
-		<mkdir dir="${output}/style"/>
-		<copy todir="${output}/style" preservelastmodified="true" flatten="false" failonerror="true">
-			<resources refid="spfe.style.html-style-directories"/>
-		</copy>
-	</target>
+			<get-synthesis-file-list topic-set-id="@{topic-set-id}"/>
+			<!-- build a list of images referenced in synthesis files -->
+			<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.image-list}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/temp/image-list-html">
+				<params>
+					<param name="synthesis-files" expression="${synthesis-files}"/>
+					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+				</params>
+			</saxon-xslt>
+
+			<files id="files.graphics.html"
+				includesfile="${spfe.build.build-directory}/@{topic-set-id}/temp/image-list-html"/>
+
+			<!--			<condition property="image-list-html-has-content">
+				<isfileselected file="${spfe.build.build-directory}/@{topic-set-id}/temp/image-list-html">
+					<containsregexp expression="\S+"/>
+				</isfileselected>
+			</condition>-->
+
+			<mkdir dir="@{output}/graphics"/>
+			<copy todir="@{output}/graphics" flatten="true" failonerror="false"
+				preservelastmodified="true" verbose="true">
+				<files refid="files.graphics.html"/>
+			</copy>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="get.externals.style.html">
+		<attribute name="output"/>
+		<sequential>
+			<mkdir dir="@{output}/style"/>
+			<copy todir="@{output}/style" preservelastmodified="true" flatten="false"
+				failonerror="true">
+				<resources refid="spfe.style.html-style-directories"/>
+			</copy>
+		</sequential>
+	</macrodef>
 
 
 	<!-- PDF -->
@@ -148,25 +177,37 @@
 
 	<!-- target to build  synthesis -->
 	<target name="-build.synthesis" depends="--build.synthesis"/>
-	<target name="--build.synthesis" description="synthesis">
-		<pathconvert dirsep="/" pathsep=";" property="topic-files" refid="topics"/>
-		<!-- run the XSLT script to produce the output -->
-		<saxon-xslt style="${spfe.scripts.synthesis}" in="${spfe.config-file}"
-			out="${temp}/synthesis.flag">
-			<params>
-				<param name="topic-files" expression="${topic-files}"/>
-				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-				<param name="draft" expression="${draft}" if="draft"/>
-			</params>
-		</saxon-xslt>
-	</target>
+	<macrodef name="build.synthesis" description="synthesis">
+		<attribute name="style"/>
+		<attribute name="topic-set-id"/>
+		<element name="files" id="topics"/>
+		<sequential>
+			<files id="topics"/>
+			<pathconvert dirsep="/" pathsep=";" property="topic-files" refid="topics"/>
+			<!-- run the XSLT script to produce the output -->
+			<saxon-xslt style="@{style}" in="${spfe.config-file}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/temp/synthesis.flag">
+				<params>
+					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<param name="topic-files" expression="${topic-files}"/>
+					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+					<param name="draft" expression="${draft}" if="draft"/>
+				</params>
+			</saxon-xslt>
+		</sequential>
+	</macrodef>
 
-	<target name="-get-synthesis-file-list">
-		<fileset id="synthesis-file-list" dir="${temp}">
-			<include name="synthesis/*.xml"/>
-		</fileset>
-		<pathconvert dirsep="/" pathsep=";" property="synthesis-files" refid="synthesis-file-list"/>
-	</target>
+
+	<macrodef name="get-synthesis-file-list">
+		<attribute name="topic-set-id"/>
+		<sequential>
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}/temp">
+				<include name="synthesis/*.xml"/>
+			</fileset>
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+				refid="synthesis-files"/>
+		</sequential>
+	</macrodef>
 
 
 	<!-- LINK CATALOG STEP -->
@@ -180,19 +221,23 @@
 	</target>
 
 	<!-- target for link-catalog -->
-	<target name="-build.link-catalog" depends="--build.link-catalog"/>
-	<target name="--build.link-catalog" description="Link catalog step."
-		depends=" -build.synthesis,  -get-synthesis-file-list, -current.link-catalog"
-		unless="-current.link-catalog">
-
-		<!-- run the XSLT script to produce the output -->
-		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.link-catalog}"
-			out="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog.xml">
-			<params>
-				<param name="synthesis-files" expression="${synthesis-files}"/>
-			</params>
-		</saxon-xslt>
-	</target>
+	<target name="-build.link-catalog" depends="-build.synthesis, --build.link-catalog"/>
+	<macrodef name="build.link-catalog" description="Link catalog step.">
+		<!-- FIXME		depends="-current.link-catalog"
+		unless="-current.link-catalog">-->
+		<attribute name="style"/>
+		<attribute name="topic-set-id"/>
+		<sequential>
+			<get-synthesis-file-list topic-set-id="@{topic-set-id}"/>
+			<!-- run the XSLT script to produce the output -->
+			<saxon-xslt in="${spfe.config-file}" style="@{style}"
+				out="${spfe.build.link-catalog-directory}/@{topic-set-id}.link-catalog.xml">
+				<params>
+					<param name="synthesis-files" expression="${synthesis-file-list}"/>
+				</params>
+			</saxon-xslt>
+		</sequential>
+	</macrodef>
 
 	<!-- LIST PAGES STEP -->
 
@@ -208,31 +253,37 @@
 	<!-- note that this target is called once at the docset level -->
 
 	<target name="-build.list-pages" depends="--build.list-pages"/>
-	<target name="--build.list-pages" description="List page step." unless="-current.list-pages">
-
+	<macrodef name="build.list-pages" description="List page step.">
+		<!--unless="-current.list-pages">-->
+		<get-synthesis-file-list topic-set-id="@{spfe.topic-set-id}"/>
 		<!-- run the XSLT script to produce the output -->
 		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.list-pages}"
 			out="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages.xml">
 			<params>
-				<param name="synthesis-files" expression="${synthesis-files}"/>
+				<param name="synthesis-files" expression="${synthesis-file-list}"/>
 			</params>
 		</saxon-xslt>
-	</target>
+	</macrodef>
 
 	<!-- target for toc -->
-	<target name="-build.toc" depends="--build.toc"/>
-	<target name="--build.toc" description="TOC step."
-		depends=" -build.synthesis, -get-synthesis-file-list, -current.link-catalog"
-		unless="-current.link-catalog">
+	<target name="-build.toc" depends=" -build.synthesis, --build.toc"/>
+	<macrodef name="--build.toc" description="TOC step.">
+		<!-- FIXME		depends="  -current.link-catalog" unless="-current.link-catalog">-->
+		<attribute name="style"/>
+		<attribute name="topic-set-id"/>
+		<sequential>
+			<get-synthesis-file-list topic-set-id="@{topic-set-id}"/>
 
-		<!-- run the XSLT script to produce the output -->
-		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.toc}"
-			out="${spfe.build.toc-directory}/${spfe.topic-set-id}.toc.xml">
-			<params>
-				<param name="synthesis-files" expression="${synthesis-files}"/>
-			</params>
-		</saxon-xslt>
-	</target>
+			<!-- run the XSLT script to produce the output -->
+			<saxon-xslt in="${spfe.config-file}" style="@{sytle}"
+				out="${spfe.build.toc-directory}/@{topic-set-id}.toc.xml">
+				<params>
+					<param name="topic-set-id" value="@{topic-set-id}"/>
+					<param name="synthesis-files" expression="${synthesis-file-list}"/>
+				</params>
+			</saxon-xslt>
+		</sequential>
+	</macrodef>
 
 
 	<!-- PRESENTATION WEB STEP -->
@@ -245,27 +296,30 @@
 	</target>
 
 	<!-- build the presentation -->
-	<target name="-build.presentation-web" depends="--build.presentation-web"/>
-	<target name="--build.presentation-web" description="presentation step."
-		depends="-build.synthesis, 
-				 -get-synthesis-file-list,
-				 -build.link-catalog,
-				 -build.toc,
-				 -current.presentation-web"
-		unless="-current.presentation-web">
-		<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
-		<pathconvert property="link-catalog-files" dirsep="/" pathsep=";" refid="link-catalogs"/>
-		<!-- run the XSLT script to produce the output -->
-
-		<saxon-xslt style="${spfe.scripts.presentation-web}" in="${spfe.config-file}"
-			out="${temp}/presentation-web.flag">
-			<params>
-				<param name="synthesis-files" expression="${synthesis-files}"/>
-				<param name="link-catalog-files" expression="${link-catalog-files}"/>
-				<param name="toc-files" expression="${toc-files}"/>
-			</params>
-		</saxon-xslt>
-	</target>
+	<target name="-build.presentation-web"
+		depends="-build.synthesis, -build.link-catalog,
+				 -build.toc, --build.presentation-web"/>
+	<macrodef name="build.presentation-web" description="presentation step.">
+		<!--		depends="-current.presentation-web"
+		unless="-current.presentation-web">-->
+		<attribute name="style"/>
+		<attribute name="topic-set-id"/>
+		<sequential>
+			<get-synthesis-file-list topic-set-id="@{spfe.topic-set-id}"/>
+			<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
+			<pathconvert property="link-catalog-files" dirsep="/" pathsep=";" refid="link-catalogs"/>
+			<!-- run the XSLT script to produce the output -->
+			<saxon-xslt style="@${style}" in="${spfe.config-file}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/temp/presentation-web.flag">
+				<params>
+					<param name="topic-set-id" value="@{topic-set-id}"/>
+					<param name="synthesis-files" expression="${synthesis-files}"/>
+					<param name="link-catalog-files" expression="${link-catalog-files}"/>
+					<param name="toc-files" expression="${toc-files}"/>
+				</params>
+			</saxon-xslt>
+		</sequential>
+	</macrodef>
 
 	<!-- PRESENTATION BOOK STEP -->
 
@@ -276,24 +330,28 @@
 	</target>
 
 	<!-- build the book presentation -->
-	<target name="-build.presentation-book" depends="--build.presentation-book"/>
-	<target name="--build.presentation-book" description="book presentation step."
-		depends="-build.synthesis,  -get-synthesis-file-list,
-									 -current.presentation-book"
-		unless="-current.presentation-book">
+	<target name="-build.presentation-book" depends="-build.synthesis,--build.presentation-book"/>
+	<macrodef name="--build.presentation-book" description="book presentation step.">
+		<!--		depends="  -current.presentation-book" unless="-current.presentation-book">-->
 
-		<!-- run the XSLT script to produce the output -->
-
-
-
-		<saxon-xslt in="${spfe.config-file}" style="${scripts.presentation-book}"
-			out="${temp}/presentation-book.flag">
-			<params>
-				<param name="synthesis-files" expression="${synthesis-files}"/>
-				<param name="link-catalog-files" expression="${link-catalog-files}"/>
-			</params>
-		</saxon-xslt>
-	</target>
+		<attribute name="style"/>
+		<attribute name="topic-set-id"/>
+		<sequential>
+			<get-synthesis-file-list topic-set-id="@{spfe.topic-set-id}"/>
+			<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
+			<pathconvert property="link-catalog-files" dirsep="/" pathsep=";" refid="link-catalogs"/>
+			<!-- run the XSLT script to produce the output -->
+			<saxon-xslt in="${spfe.config-file}" style="${scripts.presentation-book}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/temp/presentation-book.flag">
+				<params>
+					<param name="topic-set-id" value="@{topic-set-id}"/>
+					<param name="synthesis-files" expression="${synthesis-files}"/>
+					<param name="link-catalog-files" expression="${link-catalog-files}"/>
+					<param name="toc-files" expression="${toc-files}"/>
+				</params>
+			</saxon-xslt>
+		</sequential>
+	</macrodef>
 
 	<!-- FORMAT HTML STEP -->
 
@@ -303,31 +361,34 @@
 			srcfile="${temp}/presentation-web.flag"/>
 	</target>
 
-	<target name="-build.html-format" depends="--build.html-format"/>
-	<target name="--build.html-format"
-		depends="-build.presentation-web, 
-	        	 -get.externals.graphics.html,
+	<target name="-build.html-format" depends="-build.presentation-web, --build.html-format"/>
+	<macrodef name="--build.html-format">
+		<!--		depends="
 	        	 -get.externals.style.html,
   				 -current.html-format"
-		unless="-current.html-format">
-
-		<fileset dir="${temp}" id="presentation-file-list">
-			<include name="presentation/*.xml"/>
-		</fileset>
-		<pathconvert dirsep="/" pathsep=";" property="presentation-files"
-			refid="presentation-file-list"/>
-
-
-
-		<!-- run the XSLT script to produce the output -->
-		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.format-html}"
-			out="${temp}/html-format.flag">
-			<params>
-				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-				<param name="presentation-files" expression="${presentation-files}"/>
-			</params>
-		</saxon-xslt>
-	</target>
+		unless="-current.html-format">-->
+		<attribute name="style"/>
+		<attribute name="topic-set-id"/>
+		<attribute name="output"/>
+		<sequential>
+			<property name="temp" value="${spfe.build.build-directory}/@{topic-set-id}/temp"/>
+			<get.externals.graphics.html topic-set-id="@{topic-set-id}" output="@{output}"/>
+			<get.externals.style.html output="@{output}"/>
+			<fileset dir="${temp}" id="presentation-file-list">
+				<include name="presentation/*.xml"/>
+			</fileset>
+			<pathconvert dirsep="/" pathsep=";" property="presentation-files"
+				refid="presentation-file-list"/>
+			<!-- run the XSLT script to produce the output -->
+			<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.format-html}"
+				out="${temp}/html-format.flag">
+				<params>
+					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+					<param name="presentation-files" expression="${presentation-files}"/>
+				</params>
+			</saxon-xslt>
+		</sequential>
+	</macrodef>
 
 
 
@@ -341,28 +402,33 @@
 			srcfile="${temp}/presentation-book.flag"/>
 	</target>
 
-	<target name="-build.fo-format" depends="--build.fo-format"/>
-	<target name="--build.fo-format" description="FO formatting"
-		depends="-build.presentation-book, -current.fo-format" unless="-current.fo-format">
+	<target name="-build.fo-format" depends="-build.presentation-book, --build.fo-format"/>
+	<macrodef name="build.fo-format" description="FO formatting">
+		<!--depends=" -current.fo-format" unless="-current.fo-format"-->
+		<attribute name="style"/>
+		<attribute name="topic-set-id"/>
+		<attribute name="output"/>
+		<sequential>
+			<property name="temp" value="${spfe.build.build-directory}/@{topic-set-id}/temp"/>
+			<fileset id="presentation-file-list" dir="${temp}">
+				<include name="presentation/*.xml"/>
+			</fileset>
+			<pathconvert dirsep="/" pathsep=";" property="presentation-files"
+				refid="presentation-file-list"/>
 
-		<fileset id="presentation-file-list" dir="${temp}">
-			<include name="presentation/*.xml"/>
-		</fileset>
-		<pathconvert dirsep="/" pathsep=";" property="presentation-files"
-			refid="presentation-file-list"/>
+			<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
+			<!-- run the XSLT script to produce the output -->
 
-		<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
-		<!-- run the XSLT script to produce the output -->
-
-		<saxon-xslt in="${spfe.config-file}" style="${scripts.format-fo}"
-			out="${temp}/fo-format.flag">
-			<params>
-				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-				<param name="presentation-files" expression="${presentation-files}"/>
-				<param name="toc-files" expression="${toc-files}"/>
-			</params>
-		</saxon-xslt>
-	</target>
+			<saxon-xslt in="${spfe.config-file}" style="@{style}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/temp/fo-format.flag">
+				<params>
+					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+					<param name="presentation-files" expression="${presentation-files}"/>
+					<param name="toc-files" expression="${toc-files}"/>
+				</params>
+			</saxon-xslt>
+		</sequential>
+	</macrodef>
 
 
 	<!-- ENCODE PDF STEP -->
@@ -373,29 +439,36 @@
 			srcfile="{temp}/fo-format.flag"/>
 	</target>
 
-	<target name="-build.pdf-encode" depends="--build.pdf-encode"/>
-	<target name="--build.pdf-encode" description="PDF encoding"
-		depends=" -build.fo-format, -get.externals.graphics.print, -get.externals.style.print, -current.pdf-encode"
-		unless="-current.pdf-encode">
+	<target name="-build.pdf-encode" depends=" -build.fo-format, --build.pdf-encode"/>
+	<macrodef name="build.pdf-encode" description="PDF encoding">
+		<!--		depends=" -get.externals.graphics.print, 
+		-get.externals.style.print, 
+		-current.pdf-encode"
+		unless="-current.pdf-encode"-->
 		<!-- run the XSLT script to produce the output -->
 		<!-- make sure the output directory exists -->
-		<mkdir dir="${output}"/>
-		<fop format="application/pdf" fofile="${temp}/spfe.fo-format.fo"
-			outfile="${output}/${spfe.pdf-name}" basedir="${temp}" userconfig="${temp}/fop.xconf"/>
-		<touch file="${temp}/pdf-format.flag"/>
-	</target>
+		<attribute name="output"/>
+		<sequential>
+			<property name="temp" value="${spfe.build.build-directory}/@{topic-set-id}/temp"/>
+			<mkdir dir="@{output}"/>
+			<fop format="application/pdf" fofile="${temp}/spfe.fo-format.fo"
+				outfile="@{output}/${spfe.pdf-name}" basedir="${temp}"
+				userconfig="${temp}/fop.xconf"/>
+			<touch file="${temp}/pdf-format.flag"/>
+		</sequential>
+	</macrodef>
 
 
 	<!-- REPORT STEP -->
 
 
-	<!-- check to see if the html-presentation is up to date -->
+	<!-- check to see if the html-presentation is up to date 
 	<target name="-current.report">
 		<uptodate property="-current.presentation-web" targetfile="${output}/${spfe.report-name}"
 			srcfile="{temp}/synthesis.flag"/>
-	</target>
+	</target>-->
 
-	<!-- build the report -->
+	<!-- build the report 
 	<target name="-build.report" description="report generation"
 		depends="-build.synthesis, -current.report" unless="-current.report">
 
@@ -406,7 +479,7 @@
 				<param name="draft" expression="${draft}" if="draft"/>
 			</params>
 		</saxon-xslt>
-	</target>
+	</target>-->
 
 
 	<!-- IMAGE LIST STEP -->
@@ -415,25 +488,6 @@
 	<target name="-current.image-list-html">
 		<uptodate property="-current.image-list-html" targetfile="${temp}/image-list-html"
 			srcfile="${temp}/presentation-web.flag"/>
-	</target>
-
-	<target name="-build.image-list-html"
-		depends="-build.presentation-web, -current.image-list-html"
-		unless="-current.image-list-html">
-
-		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.image-list}"
-			out="${temp}/image-list-html">
-			<params>
-				<param name="synthesis-files" expression="${synthesis-files}"/>
-				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-			</params>
-		</saxon-xslt>
-		<files id="files.graphics.html" includesfile="${temp}/image-list-html"/>
-		<condition property="image-list-html-has-content">
-			<isfileselected file="${temp}/image-list-html">
-				<containsregexp expression="\S+"/>
-			</isfileselected>
-		</condition>
 	</target>
 
 	<!-- check to see if the format is up to date -->
@@ -513,19 +567,18 @@
 	<!-- CLEAN -->
 	<target name="clean" depends="-init, -clean"/>
 
-	<target name="-clean" description="Clean temp and output files.">
-		<delete dir="${temp}"/>
-		<delete dir="${output}"/>
+	<target name="-clean" description="Clean build directory.">
+		<delete dir="${spfe.build.build-directory}"/>
 	</target>
 
-	<!-- WIP -->
+<!--	<!-\- WIP -\->
 	<target name="wip" depends="-init, draft, pdf, -wip"/>
 	<target name="-wip" description="Copy content to the work in progress website">
-		<!-- FIXME: Set failonerror to "no" to solve problems with non-SPFE things where there is nothing to copy. May be a better way to handle this. -->
+		<!-\- FIXME: Set failonerror to "no" to solve problems with non-SPFE things where there is nothing to copy. May be a better way to handle this. -\->
 		<copy todir="${spfe.directories.internal-web}" preservelastmodified="true" failonerror="no">
 			<fileset dir="${output}"/>
 		</copy>
-	</target>
+	</target>-->
 
 	<!-- CAT -->
 	<!-- Is all this antcall stuff needed, or will a simple dependency do? -->
