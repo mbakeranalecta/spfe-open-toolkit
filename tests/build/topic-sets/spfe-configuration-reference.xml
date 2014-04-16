@@ -4,36 +4,40 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <include href="../spfe-docs-config.xml"/>
-    <include href="../../../spfe-docs/topic-types/config-reference/config.xml"/>
-    <define name="TOPIC_SET_ID" value="spfe-configuration-reference"/>
-    <script-style>topic-set</script-style>
-    <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
-    <topic-set-type>reference</topic-set-type>
-    <topic-type-order>
-        <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</topic-type>
-    </topic-type-order>
-    <sources>
-        <authored-content-for-merge>
-            <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
-        </authored-content-for-merge>
-        <files-to-extract-content-from>
-            <include>${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</include>
-        </files-to-extract-content-from>
-    </sources>
 
-    <default-topic-scope>spfe</default-topic-scope>
-    <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
-    <output-formats>html</output-formats>
+    <topic-set>
+        <topic-set-id>spfe-configuration-reference</topic-set-id>
+        <topic-set-type>reference</topic-set-type>
+        <topic-types>
+            <included-topic-types>
+                <topic-type>
+                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xmlns>
+                    <href>../../../spfe-docs/topic-types/config-reference/config.xml</href>
+                </topic-type>
+            </included-topic-types>
+            <topic-type-order>
+                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</topic-type-xmlns>
+        </topic-type-order>
+        </topic-types>
 
+        <sources>
+            <authored-content>
+                <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
+            </authored-content>
+            <sources-to-extract-content-from>
+                <include>${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</include>
+            </sources-to-extract-content-from>
+        </sources>
 
-    <build>
-        <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules> 
-    </build>
-    
-    <strings>
-        <string id="eppo-simple-topic-set-title">SPFE Configuration Settings</string>
-    </strings>
-    
-    <other name="schema-file">${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</other>
+        <default-topic-scope>spfe</default-topic-scope>
+        <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
+        <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules>
+        
+
+        <strings>
+            <string id="eppo-simple-topic-set-title">SPFE Configuration Settings</string>
+        </strings>
+
+        <other name="schema-file">${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</other>
+    </topic-set>
 </spfe>

@@ -14,9 +14,9 @@ if [ -e "$1" ]; then
     SPFE_TEMP_BUILD_FILE=$SPFE_BUILD_DIR/temp/spfebuild.xml
 
     java -classpath $SPFEOT_HOME/tools/saxon9he/saxon9he.jar net.sf.saxon.Transform \
-    -s:$1 \
     -xsl:$SPFEOT_HOME/1.0/scripts/config/config.xsl \
-    -o:$SPFE_TEMP_BUILD_FILE \
+    -it:main \
+    configfile=$PWD/$1 \
     HOME=$HOME \
     SPFEOT_HOME=$SPFEOT_HOME \
     SPFE_BUILD_DIR=$SPFE_BUILD_DIR \

@@ -15,7 +15,6 @@ exclude-result-prefixes="#all">
 	<xsl:template match="*:generic-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
-	
 		
 		<xsl:choose>
 			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">

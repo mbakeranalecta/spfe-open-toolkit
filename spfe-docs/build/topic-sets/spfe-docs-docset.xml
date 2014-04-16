@@ -4,43 +4,48 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <define name="TOPIC_SET_ID" value="spfe-docs-docset"/>
-    <include href="../../topic-types/generic-topic/config.xml"/>
-    <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
-    <topic-set-type>docset</topic-set-type>
-    <script-style>doc-set</script-style>
-   
-    <strings>
-        <string id="eppo-simple-topic-set-title">SPFE Documentation</string>
-    </strings>
-    
-    <topic-type-order>
-        <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</topic-type>
-    </topic-type-order>
-    
-    <sources>
-        <topics>
-            <include>../../content/spfe-docs/*.xml</include>
-        </topics>
-        <text-objects>
-            <include>../../content/*.xml</include>
-        </text-objects>
-        <fragments>
-            <include>../../content/*.xml</include>
-        </fragments>
-        <graphics>
-            <include>../../content/*.xml</include>
-        </graphics>
-        <strings>
-            <include>../../content/*.xml</include>
-        </strings>
-        <synonyms>
-            <include>../../content/*.xml</include>
-        </synonyms>
-    </sources>
-    
-    <default-topic-scope>spfe</default-topic-scope>
-    <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
-    <output-formats>html</output-formats>
 
+    <topic-set>
+        <topic-set-id>spfe-docs-docset</topic-set-id>
+        <topic-set-type>docset</topic-set-type>
+        <topic-types>
+            <included-topic-types>
+                <topic-type>
+                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>
+                    <href>../../topic-types/generic-topic/config.xml</href>
+                </topic-type>
+            </included-topic-types>
+            <topic-type-order>
+                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</topic-type-xmlns>
+            </topic-type-order>
+        </topic-types>
+
+        <sources>
+            <topics>
+                <include>../../content/spfe-docs/*.xml</include>
+            </topics>
+            <text-objects>
+                <include>../../content/*.xml</include>
+            </text-objects>
+            <fragments>
+                <include>../../content/*.xml</include>
+            </fragments>
+            <graphics>
+                <include>../../content/*.xml</include>
+            </graphics>
+            <strings>
+                <include>../../content/*.xml</include>
+            </strings>
+            <synonyms>
+                <include>../../content/*.xml</include>
+            </synonyms>
+        </sources>
+
+        <default-topic-scope>spfe</default-topic-scope>
+        <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
+
+        <strings>
+            <string id="eppo-simple-topic-set-title">SPFE Documentation</string>
+        </strings>
+    </topic-set>
 </spfe>

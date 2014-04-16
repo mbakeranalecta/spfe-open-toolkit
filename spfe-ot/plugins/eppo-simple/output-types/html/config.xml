@@ -6,10 +6,13 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
 
 
-    <scripts>
-        <format-html>
-            <script>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-html.xsl</script>
-            <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
-        </format-html>
-    </scripts>
+    <output-format>
+        <name>html</name>
+        <scripts>
+            <format-html>
+                <script>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-html.xsl</script>
+                <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
+            </format-html>
+        </scripts>
+    </output-format>
 </spfe>

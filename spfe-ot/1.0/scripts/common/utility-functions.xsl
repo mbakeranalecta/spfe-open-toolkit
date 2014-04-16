@@ -326,22 +326,45 @@
 		</xsl:analyze-string>
 	</xsl:function>
 	
-	<xsl:function name="sf:get-topic-type-alias">
-		<xsl:param name="topic-type"/>
-		<xsl:param name="topic-type-alias-list"/>
+	<xsl:function name="sf:get-topic-type-alias-singular">
+		<xsl:param name="topic-type-xmlns"/>
 		<xsl:choose>
-			<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
-				<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
+			<xsl:when test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular">
+				<xsl:value-of select="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">
-						<xsl:text>No topic type alias found for topic type </xsl:text>
-						<xsl:value-of select="$topic-type"/>
+						<xsl:text>No singular topic type alias found for topic type </xsl:text>
+						<xsl:value-of select="$topic-type-xmlns"/>
 						<xsl:text>.</xsl:text>
+						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:text>/spfe/topic-type/aliases/singular.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
-				<xsl:value-of select="$topic-type"/>
+				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->
+				<xsl:value-of select="$topic-type-xmlns"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<xsl:function name="sf:get-topic-type-alias-plural">
+		<xsl:param name="topic-type-xmlns"/>
+		<xsl:choose>
+			<xsl:when test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural">
+				<xsl:value-of select="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message">
+						<xsl:text>No plural topic type alias found for topic type </xsl:text>
+						<xsl:value-of select="$topic-type-xmlns"/>
+						<xsl:text>.</xsl:text>
+						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:text>/spfe/topic-type/aliases/singular.</xsl:text>
+					</xsl:with-param>
+				</xsl:call-template>
+				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->
+				<xsl:value-of select="$topic-type-xmlns"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>

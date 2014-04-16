@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<generic-topic xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic"
+<docset-home-topic xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic/schemas/docset-home-topic.xsd">
     <head>
         <id>index</id>
         <history>
@@ -25,4 +25,4 @@
         <title>SPFE Documentation</title>
         <p>The SPFE Documentation includes information on the <feature>SPFE Open Toolkit</feature> and the <feature>EPPO Simple schema set</feature>.</p>
     </body>
-</generic-topic>
+</docset-home-topic>

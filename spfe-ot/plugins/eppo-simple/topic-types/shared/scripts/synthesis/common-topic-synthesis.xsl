@@ -21,17 +21,13 @@
 		<xsl:sequence select="/config:spfe"/>
 	</xsl:variable>
 	
-	<xsl:param name="topic-files"/>
-	<xsl:variable name="topics" select="sf:get-sources($topic-files)"/>
+	<xsl:param name="authored-content-files"/>
+	<xsl:variable name="topics" select="sf:get-sources($authored-content-files)"/>
 	
-	<xsl:param name="text-objects-files"/>
-	<xsl:variable name="text-objects"  select="sf:get-sources($text-objects-files)"/>
-
 	<xsl:param name="default-topic-scope"/>
+	<xsl:param name="topic-set-id"/>
 	
-	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
-
- <!-- 
+<!-- 
 =============
 Main template
 =============
@@ -39,10 +35,9 @@ Main template
 
 	<xsl:template name="main" >
 		<!-- Create the root "synthesis element" -->
-		<xsl:result-document href="file:///{concat($config/config:build/config:build-directory, '/synthesis/synthesis.xml')}" method="xml" indent="no" omit-xml-declaration="no">
-			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
+		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/synthesis/synthesis.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$topic-set-id}" title="{sf:string($config//config:strings, 'eppo-simple-topic-set-product')} {sf:string($config//config:strings, 'eppo-simple-topic-set-release')}"> 
 				<xsl:apply-templates select="$topics"/>
-				<xsl:apply-templates select="$text-objects"/>
 			</ss:synthesis>
 		</xsl:result-document>
 	</xsl:template>

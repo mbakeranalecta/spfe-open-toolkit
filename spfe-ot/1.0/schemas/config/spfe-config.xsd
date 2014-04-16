@@ -7,65 +7,68 @@
   <xs:element name="spfe">
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:element name="define" maxOccurs="unbounded" minOccurs="0">
-          <xs:complexType>
-            <xs:attribute name="name" type="xs:NCName"/>
-            <xs:attribute name="value"/>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="include" maxOccurs="unbounded" minOccurs="0">
-          <xs:complexType>
-            <xs:attribute name="href" type="xs:anyURI"/>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="topic-set-id" type="xs:string" minOccurs="0"/>
-        <xs:element name="topic-set-type" type="xs:string" minOccurs="0"/>
-        <xs:element name="topic-type-order" minOccurs="0">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="topic-type" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"/>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="script-style" type="xs:NMTOKENS"/>
-        <xs:element name="sources" type="sources-type" minOccurs="0"/>
-        <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
-        <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
-        <xs:element name="default-subject-affinity-scope" minOccurs="0" maxOccurs="1"
-          type="xs:string"/>
-        <xs:element name="output-formats" minOccurs="0">
-          <xs:simpleType>
-            <xs:list itemType="output-formats-type"/>
-          </xs:simpleType>
-        </xs:element>
-        <xs:element name="topic-type-aliases" type="topic-type-aliases-type" minOccurs="0"/>
-        <xs:element name="messages" minOccurs="0">
-          <xs:simpleType>
-            <xs:list itemType="messages-type"/>
-          </xs:simpleType>
-        </xs:element>
-        <xs:element name="wip-site" type="wip-site-type" minOccurs="0"/>
-        <xs:element name="build" type="build-type" minOccurs="0"/>
-        <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
-        <xs:element name="style" type="style-type" minOccurs="0"/>
-        <xs:element name="other" minOccurs="0" maxOccurs="unbounded">
-          <xs:complexType>
-            <xs:simpleContent>
-              <xs:extension base="xs:string">
-                <xs:attribute name="name"/>
-              </xs:extension>
-            </xs:simpleContent>
-          </xs:complexType>
-        </xs:element>
 
-        <xs:element name="strings" minOccurs="0">
+        <xs:element name="topic-set">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="string" maxOccurs="unbounded">
+              <xs:element name="topic-set-id" type="xs:string"/>
+              <xs:element name="topic-set-type" type="xs:string"/>
+              <xs:element name="topic-types">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="included-topic-types">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element maxOccurs="unbounded" name="topic-type">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="xmlns" type="xs:anyURI"/>
+                                <xs:element name="href" type="xs:anyURI"/>
+                                <xs:element name="aliases" type="topic-type-aliases-type"
+                                  minOccurs="0"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="topic-type-order" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="topic-type-xmlns" minOccurs="1" maxOccurs="unbounded"
+                            type="xs:anyURI"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="sources" type="sources-type"/>
+              <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
+              <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
+              <xs:element name="default-subject-affinity-scope" minOccurs="0" maxOccurs="1"
+                type="xs:string"/>
+              <xs:element name="build-rules" type="xs:anyURI" minOccurs="0"/>
+              <xs:element name="strings" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="string" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="other" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
-                      <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
+                      <xs:attribute name="name"/>
                     </xs:extension>
                   </xs:simpleContent>
                 </xs:complexType>
@@ -73,10 +76,10 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-
         <xs:element name="doc-set">
           <xs:complexType>
             <xs:sequence>
+              <xs:element name="doc-set-id" type="xs:NMTOKEN"/>
               <xs:element name="title" type="xs:string"/>
               <xs:element name="topic-set-type-order">
                 <xs:complexType>
@@ -93,7 +96,7 @@
                     <xs:element name="topic-set" maxOccurs="unbounded" minOccurs="1">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="id" type="xs:NCName"/>
+                          <xs:element name="topic-set-id" type="xs:NCName"/>
                           <xs:element name="href" type="xs:anyURI"/>
                         </xs:sequence>
                       </xs:complexType>
@@ -101,8 +104,70 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
+              <xs:element name="style" type="style-type" minOccurs="0"/>
+              <xs:element name="messages" minOccurs="0">
+                <xs:simpleType>
+                  <xs:list itemType="messages-type"/>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="output-formats" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="output-format">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="output-format-name"/>
+                          <xs:element name="href" type="xs:anyURI"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="wip-site" type="wip-site-type" minOccurs="0"/>
+              <xs:element name="strings" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="string" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="other" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="name"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
             </xs:sequence>
-            <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="topic-type">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="xmlns" type="xs:anyURI"/>
+              <xs:element name="aliases" type="topic-type-aliases-type" minOccurs="0"/>
+              <xs:element name="scripts" type="scripts-type"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="output-format">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="output-format-name"/>
+              <xs:element name="scripts" type="scripts-type"/>
+            </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>
@@ -111,14 +176,9 @@
 
   <xs:complexType name="sources-type">
     <xs:choice maxOccurs="unbounded">
-      <xs:element name="topics" type="fileset-type"/>
-      <xs:element name="text-objects" type="fileset-type"/>
-      <xs:element name="fragments" type="fileset-type"/>
+      <xs:element name="authored-content" type="fileset-type"/>
       <xs:element name="graphics" type="fileset-type"/>
-      <xs:element name="strings" type="fileset-type"/>
-      <xs:element name="synonyms" type="fileset-type"/>
-      <xs:element name="files-to-extract-content-from" type="fileset-type"/>
-      <xs:element name="authored-content-for-merge" type="fileset-type"/>
+      <xs:element name="sources-to-extract-content-from" type="fileset-type"/>
       <xs:element name="other" minOccurs="0">
         <xs:complexType>
           <xs:complexContent>
@@ -142,16 +202,13 @@
 
   <xs:complexType name="topic-type-aliases-type">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="topic-type" type="topic-type-type"/>
+      <xs:element name="singular" type="xs:string"/>
+      <xs:element name="plural" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="topic-type-type">
-    <xs:sequence>
-      <xs:element name="id" type="xs:anyURI"/>
-      <xs:element name="alias" type="xs:string"/>
-      <xs:element name="plural" type="xs:string"/>
-    </xs:sequence>
+    <xs:sequence> </xs:sequence>
   </xs:complexType>
 
   <xs:simpleType name="messages-type">
@@ -161,7 +218,7 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="output-formats-type">
+  <xs:simpleType name="output-format-name">
     <xs:restriction base="xs:string">
       <xs:enumeration value="html"/>
       <xs:enumeration value="pdf"/>
@@ -172,7 +229,7 @@
 
   <xs:complexType name="wip-site-type">
     <xs:sequence>
-      <xs:element name="href"/>
+      <xs:element name="url"/>
       <xs:element name="ftp">
         <xs:complexType>
           <xs:sequence>
@@ -187,11 +244,6 @@
   </xs:complexType>
 
   <!-- FIXME: this uses directory where it should use path and vice versa. -->
-  <xs:complexType name="build-type">
-    <xs:all>
-      <xs:element name="build-rules" type="xs:anyURI" minOccurs="0"/>
-    </xs:all>
-  </xs:complexType>
 
   <xs:complexType name="scripts-type">
     <xs:choice maxOccurs="unbounded">
@@ -227,9 +279,7 @@
       <xs:element name="script" maxOccurs="unbounded">
         <xs:complexType>
           <xs:simpleContent>
-            <xs:extension base="xs:anyURI">
-              <xs:attribute name="style"/>
-            </xs:extension>
+            <xs:extension base="xs:anyURI"> </xs:extension>
           </xs:simpleContent>
         </xs:complexType>
       </xs:element>

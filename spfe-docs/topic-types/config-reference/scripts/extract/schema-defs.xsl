@@ -39,6 +39,8 @@
 ===============================================================-->
 	<!-- get the namespace prefix used in the source  
 	<xsl:variable name="xsd-prefix" select="substring-before(name(xs:schema), local-name(xs:schema))"/> -->
+	
+	<xsl:param name="topic-set-id"/>
 
 	<xsl:variable name="config" as="element(config:spfe)">
 		<xsl:sequence select="/config:spfe"/>
@@ -66,8 +68,18 @@
 		<xsl:value-of select="xs:schema/xs:element[1]/@name"/>
 	</xsl:param>
 	
-	<xsl:param name="files-to-extract-content-from"/>	
-	<xsl:variable name="schema" select="sf:get-sources($files-to-extract-content-from)"/>
+	<xsl:param name="sources-to-extract-content-from"/>	
+	<xsl:variable name="schema" select="sf:get-sources($sources-to-extract-content-from)"/>
+	
+	<xsl:template name="main" >
+		<!-- Create the root "extracted-content element" -->
+		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/extracted/schema-defs.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+ 
+			<xsl:apply-templates select="$schema"/>
+
+		</xsl:result-document>
+	</xsl:template>
+	
 	
 	<xsl:template name="read-schema">
 		<xsl:param name="file-name"/>
@@ -82,10 +94,6 @@
 	<xsl:output method="xml" indent="yes"/>
 	
 	<xsl:key name="attribute-type" match="xs:attribute" use="@type"/>
-	
-	<xsl:template name="main">
-		<xsl:apply-templates select="$schema"/>
-	</xsl:template>
 	
 	<xsl:template match="xs:schema">
 	

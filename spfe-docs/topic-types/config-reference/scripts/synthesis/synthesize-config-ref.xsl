@@ -70,8 +70,8 @@ Main template
 			 method="xml" 
 			 indent="yes"
 			 omit-xml-declaration="no" 
-			 href="file:///{$synthesis-directory}/{@name}.xml">
-			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
+			 href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/synthesis/synthesis.xml')}">
+			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config//config:strings, 'eppo-simple-topic-set-product')} {sf:string($config//config:strings, 'eppo-simple-topic-set-release')}"> 
 				<!-- Use for-each-group to filter out duplicate xpaths -->
 				<xsl:for-each-group select="$schema-defs/schema-definitions/schema-element[starts-with(xpath, $root) or belongs-to-group]" group-by="xpath">
 					<xsl:apply-templates select=".">
@@ -105,26 +105,7 @@ Main content processing templates
 					 then concat('/',$doctype,  substring-after($xpath, $doctype))
 					 else $xpath"/> 
 	
-	<!-- FIXME: this is mostly generic code, should be refactored. -->
-	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
-	<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xsl:variable> 
-	<xsl:variable name="topic-type-alias">
-		<xsl:choose>
-			<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
-				<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="sf:error">
-					<xsl:with-param name="message">
-						<xsl:text>No topic type alias found for topic type </xsl:text>
-						<xsl:value-of select="$topic-type"/>
-						<xsl:text>.</xsl:text>
-					</xsl:with-param>
-				</xsl:call-template>
-				<xsl:value-of select="$topic-type"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
+	<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference')"/>
 						 
 	<!-- is it this doctype or a group, but not clear we need this check again -->			
 	

@@ -35,7 +35,7 @@
 		<attribute name="style"/>
 		<attribute name="in"/>
 		<attribute name="out"/>
-		<attribute name="initial-template" value="main"/>
+		<attribute name="initial-template" default="main"/>
 		<element name="params"/>
 		<sequential>
 			<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar" style="@{style}" in="@{in}"
@@ -61,7 +61,7 @@
 		<echo/>
 		<echo/>
 		<echo>=====================================================</echo>
-		<echo>Beginning ${ant.project.invoked-targets} build of ${spfe.topic-set-id}</echo>
+		<echo>Beginning ${ant.project.invoked-targets} build of ${spfe.doc-set-id}</echo>
 		<echo>====================================================</echo>
 		<echo/>
 		<echo/>
@@ -81,13 +81,17 @@
 		<!-- mkdir in case no link catalogs have been created - make sure file list is created correctly even if empty. -->
 		<mkdir dir="${spfe.build.link-catalog-directory}"/>
 		<mkdir dir="${temp}"/>
-		<mkdir dir="${temp}/synthesis"/>
-		<!-- FIXME: is this still needed? -->
 	</target>
 
 	<target name="-check-last-build-status" if="last-build-crashed">
-		<echo message="Last build failed. Cleaning up."/>
-		<antcall target="-clean"/>
+		<echo/>
+		<echo/>
+		<echo>===========================================================================</echo>
+		<echo>Last build failed and left a mess. Please run 'spfe -clean'. and try again.</echo>
+		<echo>===========================================================================</echo>
+		<echo/>
+		<echo/>
+		<fail/>
 	</target>
 
 	<!-- recorder target -->
@@ -109,7 +113,13 @@
 		<attribute name="output"/>
 		<sequential>
 
-			<get-synthesis-file-list topic-set-id="@{topic-set-id}"/>
+			<local name="synthesis-files"/>
+			<local name="synthesis-files-list"/>
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+				<include name="synthesis/*.xml"/>
+			</fileset>
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+				refid="synthesis-files"/>
 			<!-- build a list of images referenced in synthesis files -->
 			<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.image-list}"
 				out="${spfe.build.build-directory}/@{topic-set-id}/temp/image-list-html">
@@ -147,7 +157,7 @@
 		</sequential>
 	</macrodef>
 
-
+	
 	<!-- PDF -->
 
 	<target name="-get.externals.style.print">
@@ -172,40 +182,89 @@
 	<!-- =========== -->
 	<!-- provides properties and rules for performing the build steps -->
 
-	<!-- SYNTHESIS STEP -->
+	<!-- define properties for the temporary files used -->
+	<!--<property name="files.extracted-content" value="extracted-content.xml"/>-->
 
-
-	<!-- target to build  synthesis -->
-	<target name="-build.synthesis" depends="--build.synthesis"/>
-	<macrodef name="build.synthesis" description="synthesis">
-		<attribute name="style"/>
-		<attribute name="topic-set-id"/>
-		<element name="files" id="topics"/>
+	<!-- GET TARGETS
+	<macrodef name="-get.source-files.authored-content">
 		<sequential>
-			<files id="topics"/>
-			<pathconvert dirsep="/" pathsep=";" property="topic-files" refid="topics"/>
-			<!-- run the XSLT script to produce the output -->
-			<saxon-xslt style="@{style}" in="${spfe.config-file}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/temp/synthesis.flag">
+			<copy todir="${temp}/authored-content" verbose="true" preservelastmodified="true"
+				flatten="true">
+				<files refid="authored-content-for-merge"/>
+			</copy>
+		</sequential>
+	</macrodef> -->
+
+	<!-- DEPENDENCY TARGETS -->
+	<!-- check to see if extracted-content is up to date -->
+	<!-- FIXME: Need to test that this is working correctly both ways.
+	<target name="-current.extracted-content">
+		<uptodate property="-current.functions-defs" targetfile="${temp}/${files.extracted-content}">
+			<srcresources>
+				<files refid="sources-to-extract-content-from"/>
+			</srcresources>
+		</uptodate>
+	</target> -->
+
+	<!-- EXTRACT TARGET -->
+	<target name="-build.extracted-content" depends="--build.extracted-content"/>
+	<macrodef name="build.extracted-content" description="extract content from source files">
+		<attribute name="topic-set-id"/>
+		<attribute name="style"/>
+		<attribute name="sources-to-extract-content-from"/>
+		<sequential>
+			<saxon-xslt 
+				style="@{style}" 
+				in="${spfe.config-file}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/extracted.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="topic-files" expression="${topic-files}"/>
+					<param name="sources-to-extract-content-from"	expression="@{sources-to-extract-content-from}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 					<param name="draft" expression="${draft}" if="draft"/>
 				</params>
 			</saxon-xslt>
+
+			<!--<!-\- validate the output file -\->
+			<xmlvalidate lenient="yes" file="${temp}/${files.extracted-content}">
+				<!-\- make the validation include namespaces -\->
+				<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+			</xmlvalidate>-->
 		</sequential>
 	</macrodef>
 
 
-	<macrodef name="get-synthesis-file-list">
+	<!-- SYNTHESIS STEP -->
+	<target name="-build.synthesis" depends="-build.extracted-content, --build.synthesis"/>
+	<!-- macro to build synthesis -->
+	<macrodef name="build.synthesis" description="synthesis">
+		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
+		<attribute name="authored-content-files" default=""/>
 		<sequential>
-			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}/temp">
-				<include name="synthesis/*.xml"/>
+			<echo>Building synthesis for @{topic-set-id}.</echo>
+			<!-- run the XSLT script to produce the output -->
+			
+			<local name="extracted-files"/>
+			<local name="extracted-files-list"/>
+			<fileset id="extracted-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+				<include name="extracted/*.xml"/>
 			</fileset>
-			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
-				refid="synthesis-files"/>
+			<pathconvert dirsep="/" pathsep=";" property="extracted-files-list"
+				refid="extracted-files"/>
+			
+			<saxon-xslt 
+				style="@{style}" 
+				in="${spfe.config-file}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag">
+				<params>
+					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<param name="authored-content-files" expression="@{authored-content-files}"/>
+					<param name="extracted-content-files" expression="${extracted-files-list}"/>
+					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+					<param name="draft" expression="${draft}" if="draft"/>
+				</params>
+			</saxon-xslt>
 		</sequential>
 	</macrodef>
 
@@ -217,7 +276,7 @@
 	<target name="-current.link-catalog">
 		<uptodate property="-current.link-catalog"
 			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog"
-			srcfile="{temp}/synthesis.flag"/>
+			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"/>
 	</target>
 
 	<!-- target for link-catalog -->
@@ -228,7 +287,13 @@
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<sequential>
-			<get-synthesis-file-list topic-set-id="@{topic-set-id}"/>
+			<local name="synthesis-files"/>
+			<local name="synthesis-files-list"/>
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+				<include name="synthesis/*.xml"/>
+			</fileset>
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+				refid="synthesis-files"/>
 			<!-- run the XSLT script to produce the output -->
 			<saxon-xslt in="${spfe.config-file}" style="@{style}"
 				out="${spfe.build.link-catalog-directory}/@{topic-set-id}.link-catalog.xml">
@@ -246,23 +311,25 @@
 	<target name="-current.list-pages">
 		<uptodate property="-current.list-pages"
 			targetfile="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages"
-			srcfile="{temp}/synthesis.flag"/>
+			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"/>
 	</target>
 
 	<!-- target for list-pages -->
-	<!-- note that this target is called once at the docset level -->
+	<!-- note that this target is called once at the doc set level -->
 
 	<target name="-build.list-pages" depends="--build.list-pages"/>
 	<macrodef name="build.list-pages" description="List page step.">
 		<!--unless="-current.list-pages">-->
-		<get-synthesis-file-list topic-set-id="@{spfe.topic-set-id}"/>
-		<!-- run the XSLT script to produce the output -->
-		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.list-pages}"
-			out="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages.xml">
-			<params>
-				<param name="synthesis-files" expression="${synthesis-file-list}"/>
-			</params>
-		</saxon-xslt>
+		<sequential>
+			
+			<!-- run the XSLT script to produce the output -->
+			<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.list-pages}"
+				out="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages.xml">
+				<params>
+					<param name="synthesis-files" expression="${synthesis-file-list}"/>
+				</params>
+			</saxon-xslt>
+		</sequential>
 	</macrodef>
 
 	<!-- target for toc -->
@@ -272,7 +339,14 @@
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<sequential>
-			<get-synthesis-file-list topic-set-id="@{topic-set-id}"/>
+			<echo>--build.toc macro</echo>
+			<local name="synthesis-files"/>
+			<local name="synthesis-files-list"/>
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+				<include name="synthesis/*.xml"/>
+			</fileset>
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+				refid="synthesis-files"/>
 
 			<!-- run the XSLT script to produce the output -->
 			<saxon-xslt in="${spfe.config-file}" style="@{sytle}"
@@ -291,7 +365,8 @@
 
 	<!-- check to see if the html-presentation is up to date -->
 	<target name="-current.presentation-web">
-		<uptodate property="-current.presentation-web" srcfile="${temp}/synthesis.flag"
+		<uptodate property="-current.presentation-web"
+			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"
 			targetfile="${temp}/presentation/presentation-web.flag"/>
 	</target>
 
@@ -305,7 +380,13 @@
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<sequential>
-			<get-synthesis-file-list topic-set-id="@{spfe.topic-set-id}"/>
+			<local name="synthesis-files"/>
+			<local name="synthesis-files-list"/>
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+				<include name="synthesis/*.xml"/>
+			</fileset>
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+				refid="synthesis-files"/>
 			<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
 			<pathconvert property="link-catalog-files" dirsep="/" pathsep=";" refid="link-catalogs"/>
 			<!-- run the XSLT script to produce the output -->
@@ -325,7 +406,8 @@
 
 	<!-- check to see if the presentation-book is up to date -->
 	<target name="-current.presentation-book">
-		<uptodate property="-current.presentation-book" srcfile="${temp}/synthesis.flag"
+		<uptodate property="-current.presentation-book"
+			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"
 			targetfile="${temp}/presentation/presentation-book.flag"/>
 	</target>
 
@@ -337,7 +419,13 @@
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<sequential>
-			<get-synthesis-file-list topic-set-id="@{spfe.topic-set-id}"/>
+			<local name="synthesis-files"/>
+			<local name="synthesis-files-list"/>
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+				<include name="synthesis/*.xml"/>
+			</fileset>
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+				refid="synthesis-files"/>
 			<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
 			<pathconvert property="link-catalog-files" dirsep="/" pathsep=";" refid="link-catalogs"/>
 			<!-- run the XSLT script to produce the output -->
@@ -447,6 +535,7 @@
 		unless="-current.pdf-encode"-->
 		<!-- run the XSLT script to produce the output -->
 		<!-- make sure the output directory exists -->
+		<attribute name="topic-set-id"/>
 		<attribute name="output"/>
 		<sequential>
 			<property name="temp" value="${spfe.build.build-directory}/@{topic-set-id}/temp"/>
@@ -465,7 +554,7 @@
 	<!-- check to see if the html-presentation is up to date 
 	<target name="-current.report">
 		<uptodate property="-current.presentation-web" targetfile="${output}/${spfe.report-name}"
-			srcfile="{temp}/synthesis.flag"/>
+			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"/>
 	</target>-->
 
 	<!-- build the report 
@@ -552,13 +641,7 @@
 
 	<!-- FINAL -->
 	<target name="final" depends="-init, -final"/>
-	<target name="-final" depends="-force-clean, -build.html-format"
-		description="Build the final online output."/>
-
-	<target name="-force-clean" description="Force clean before final build" depends="-is-draft"
-		if="is-draft" unless="draft">
-		<antcall target="-clean"/>
-	</target>
+	<target name="-final" depends="-build.html-format" description="Build the final online output."/>
 
 	<target name="-is-draft">
 		<available property="is-draft" file="${temp}/draft.flag"/>
@@ -568,10 +651,13 @@
 	<target name="clean" depends="-init, -clean"/>
 
 	<target name="-clean" description="Clean build directory.">
-		<delete dir="${spfe.build.build-directory}"/>
+		<retry retrycount="32" retrydelay="100">
+			<delete dir="${spfe.docset-build-root-directory}/build" deleteonexit="true"
+				performGCOnFailedDelete="true"/>
+		</retry>
 	</target>
 
-<!--	<!-\- WIP -\->
+	<!--	<!-\- WIP -\->
 	<target name="wip" depends="-init, draft, pdf, -wip"/>
 	<target name="-wip" description="Copy content to the work in progress website">
 		<!-\- FIXME: Set failonerror to "no" to solve problems with non-SPFE things where there is nothing to copy. May be a better way to handle this. -\->

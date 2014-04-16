@@ -20,10 +20,6 @@
 	<!-- FIXME: hack -->
 	<xsl:variable name="media">online</xsl:variable>
 
-	<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
-	
-	
-	
 	<xsl:param name="toc-file"/>
 
 	<xsl:variable name="title-string">
@@ -120,7 +116,8 @@
 						</xsl:if>
 						
 						<!-- make sure there is a topic type alias for every topic in the topic type order list -->
-						<xsl:if test="not(every $x in $config/config:topic-type-order/config:topic-type satisfies $x = $topic-type-alias-list/config:topic-type/config:id)">
+						<!-- FIXME: This check could be moved to the config script -->
+						<xsl:if test="not(every $x in $config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type-order/config:topic-type-xmlns satisfies $x = $config/config:topic-type/config:xmlns)">
 							<xsl:call-template name="sf:error">
 								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list:', string-join($config/config:topic-type-order/config:topic-type[not(.=$topic-type-alias-list/config:topic-type/config:id)], ', ')"/>
 							</xsl:call-template>

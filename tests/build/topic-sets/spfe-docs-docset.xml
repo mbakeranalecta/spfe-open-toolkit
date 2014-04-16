@@ -4,29 +4,33 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <define name="TOPIC_SET_ID" value="spfe-docs-docset"/>
-    <include href="../spfe-docs-config.xml"/>
-    <include href="../../../spfe-docs/topic-types/generic-topic/config.xml"/>
-    <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
-    <topic-set-type>docset</topic-set-type>
-    <script-style>doc-set</script-style>
-   
-    <strings>
-        <string id="eppo-simple-topic-set-title">SPFE Documentation</string>
-    </strings>
-    
-    <topic-type-order>
-        <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</topic-type>
-    </topic-type-order>
-    
-    <sources>
-        <topics>
-            <include>../../../spfe-docs/content/spfe-docs/*.xml</include>
-        </topics>
-    </sources>
-    
-    <default-topic-scope>spfe</default-topic-scope>
-    <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
-    <output-formats>html</output-formats>
-    
+
+    <topic-set>
+        <topic-set-id>spfe-docs-docset</topic-set-id>
+        <topic-set-type>docset</topic-set-type>
+        <topic-types>
+            <included-topic-types>
+                <topic-type>
+                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>
+                    <href>../../../spfe-docs/topic-types/generic-topic/config.xml</href>
+                </topic-type>
+            </included-topic-types>
+            <topic-type-order>
+                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</topic-type-xmlns>
+            </topic-type-order>
+        </topic-types>
+
+        <sources>
+            <authored-content>
+                <include>../../../spfe-docs/content/spfe-docs/*.xml</include>
+            </authored-content>
+        </sources>
+
+        <default-topic-scope>spfe</default-topic-scope>
+        <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
+
+        <strings>
+            <string id="eppo-simple-topic-set-title">SPFE Documentation</string>
+        </strings>
+    </topic-set>
 </spfe>

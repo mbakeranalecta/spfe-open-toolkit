@@ -4,38 +4,49 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <include href="../spfe-docs-config.xml"/>
-    <include href="../../../spfe-docs/topic-types/function-and-template-reference/config.xml"/>
-    <define name="TOPIC_SET_ID" value="spfe-function-reference"/>
-    <topic-set-id>${TOPIC_SET_ID}</topic-set-id>
-    <topic-set-type>reference</topic-set-type>
-    <script-style>topic-set</script-style>
-    <topic-type-order>
-        <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</topic-type> 
-        <topic-type>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</topic-type>
-    </topic-type-order>
-    <sources>
-        <authored-content-for-merge>
-            <include>${SPFEOT_HOME}/1.0/scripts/common/function-and-template-descriptions.xml</include>
-        </authored-content-for-merge>
-        <files-to-extract-content-from>
-            <include>${SPFEOT_HOME}/1.0/scripts/**/*.xsl</include>
-            <include>${SPFEOT_HOME}/1.0/scripts/**/*.xslt</include>
-        </files-to-extract-content-from>
-    </sources>
+    <topic-set>
+        <topic-set-id>spfe-function-reference</topic-set-id>
+        <topic-set-type>reference</topic-set-type>
+        <topic-types>
+            <included-topic-types>
+                <topic-type>
+                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions</xmlns>
+                    <href>../../../spfe-docs/topic-types/function-and-template-reference/config.xml</href>
+                </topic-type>
+                <topic-type>
+                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xmlns>
+                    <href>../../../spfe-docs/topic-types/function-and-template-reference/config.xml</href>
+                </topic-type>
+                <topic-type>
+                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</xmlns>
+                    <href>../../../spfe-docs/topic-types/function-and-template-reference/config.xml</href>
+                </topic-type>
+            </included-topic-types>
+            <topic-type-order>
+                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</topic-type-xmlns>
+                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</topic-type-xmlns>
+            </topic-type-order>
+        </topic-types>
 
-    <default-topic-scope>spfe</default-topic-scope>
-    <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
-    <output-formats>html</output-formats>
+        <sources>
+            <authored-content>
+                <include>../../../spfe-docs/content/xsl-function-ref/*.xml</include>
+                <include>${SPFEOT_HOME}/1.0/scripts/common/function-and-template-descriptions.xml</include>
+            </authored-content>
+            <sources-to-extract-content-from>
+                <include>${SPFEOT_HOME}/1.0/scripts/**/*.xsl</include>
+                <include>${SPFEOT_HOME}/1.0/scripts/**/*.xslt</include>
+            </sources-to-extract-content-from>
+        </sources>
 
-    <build>
-        <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules> 
-    </build>
+        <default-topic-scope>spfe</default-topic-scope>
+        <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
 
-    
-    <strings>
-        <string id="eppo-simple-topic-set-title">SPFE Function Reference</string>
-    </strings>
-    
+        <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules>
+        
+        <strings>
+            <string id="eppo-simple-topic-set-title">SPFE Function Reference</string>
+        </strings>
+    </topic-set>
 
 </spfe>

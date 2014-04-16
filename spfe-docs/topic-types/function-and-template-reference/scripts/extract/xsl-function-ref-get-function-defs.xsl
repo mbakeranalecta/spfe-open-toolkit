@@ -17,15 +17,20 @@
         <xsl:sequence select="/config:spfe"/>
     </xsl:variable>
     
-    <xsl:param name="files-to-extract-content-from"/>
-    <xsl:variable name="xslt-file-set" select="sf:get-sources($files-to-extract-content-from)"/>
+    <xsl:param name="topic-set-id"/>
     
-    <xsl:template name="main">
-      <function-and-template-definitions>
-        <xsl:apply-templates select="$xslt-file-set"/>
-      </function-and-template-definitions>
+    <xsl:param name="sources-to-extract-content-from"/>
+    <xsl:variable name="xslt-file-set" select="sf:get-sources($sources-to-extract-content-from)"/>
+    
+    <xsl:template name="main" >
+        <!-- Create the root "extracted-content element" -->
+        <xsl:result-document href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/extracted/function-and-template-definitions.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+            <function-and-template-definitions>
+                <xsl:apply-templates select="$xslt-file-set"/>
+            </function-and-template-definitions>
+        </xsl:result-document>
     </xsl:template>
-    
+        
     <xsl:template match="xsl:*">
         <xsl:apply-templates/>
     </xsl:template>

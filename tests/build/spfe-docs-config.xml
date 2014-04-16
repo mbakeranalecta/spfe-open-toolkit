@@ -3,9 +3,8 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    
-    <include href="../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml"/>
-    <doc-set id="tests">
+    <doc-set>
+        <doc-set-id>tests</doc-set-id>
         <title>SPFE Documentation</title>
         <topic-set-type-order>
             <topic-set-type>docset</topic-set-type>
@@ -15,83 +14,60 @@
         </topic-set-type-order>
         <home-topic-set>spfe-docs-docset</home-topic-set>
         <topic-sets>
+
             <topic-set>
-                <id>spfe-docs-docset</id>
+                <topic-set-id>spfe-docs-docset</topic-set-id>
                 <href>topic-sets/spfe-docs-docset.xml</href>
             </topic-set>
             
             <topic-set>
-                <id>spfe-development</id>
+                <topic-set-id>spfe-development</topic-set-id>
                 <href>topic-sets/spfe-development.xml</href>
-            </topic-set>
+            </topic-set>            
+
 
             <topic-set>
-                <id>spfe-function-reference</id>
+                <topic-set-id>spfe-function-reference</topic-set-id>
                 <href>topic-sets/spfe-function-reference.xml</href>
             </topic-set>
             
             <topic-set>
-                <id>spfe-configuration-reference</id>
+                <topic-set-id>spfe-configuration-reference</topic-set-id>
                 <href>topic-sets/spfe-configuration-reference.xml</href>
             </topic-set>
         </topic-sets>
+        <style>
+            <html-style-directories>
+                <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css</include>
+            </html-style-directories>
+        </style>
+        <messages>warning info</messages>
+        <output-formats>
+            <output-format>
+                <name>html</name>
+                <href>../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml</href>
+            </output-format>
+        </output-formats>
+        
+        <wip-site>
+            <url>wip-site.href</url>
+            <ftp>
+                <url>wip-site.ftp.url</url>
+                <user>wip-site.ftp.user</user>
+                <password>wip-site.ftp.password</password>
+            </ftp>
+            <path>wip-site.ftp</path>
+        </wip-site>
+
+        <strings>
+            <string id="eppo-simple-topic-set-product">SPFE Open Toolkit</string>
+            <string id="eppo-simple-topic-set-release">1.0 (alpha 1)</string>
+            <string id="eppo-simple-topic-set-copyright">Copyright © 2013 Analecta Communications Inc.</string>
+        </strings>
      </doc-set>
     
-     <strings>
-        <string id="eppo-simple-topic-set-product">SPFE Open Toolkit</string>
-        <string id="eppo-simple-topic-set-release">1.0 (alpha 1)</string>
-        <string id="eppo-simple-topic-set-copyright">Copyright © 2013 Analecta Communications Inc.</string>
-    </strings>
+
+
     
-    <topic-type-aliases>
-        <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</id>
-            <alias>Concept</alias>
-            <plural>Concepts</plural>
-        </topic-type>
-        <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</id>
-            <alias>Tasks</alias>
-            <plural>Tasks</plural>
-        </topic-type>
-        <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</id>
-            <alias>Configuration setting</alias>
-            <plural>Configuration settings</plural>
-        </topic-type>
-        <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</id>
-            <alias>XSLT Function Reference</alias>
-            <plural>XSLT Function Reference</plural>
-        </topic-type>
-        <topic-type>
-            <id>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</id>
-            <alias>XSLT Template Reference</alias>
-            <plural>XSLT Template Reference</plural>
-        </topic-type>
-    </topic-type-aliases>
-    
-    <build>
-        <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
-    </build>
-    
-    <messages>warning info</messages>
-    
-    <wip-site>
-        <href>wip-site.href</href>
-        <ftp>
-            <url>wip-site.ftp.url</url>
-            <user>wip-site.ftp.user</user>
-            <password>wip-site.ftp.password</password>
-        </ftp>
-        <path>wip-site.ftp</path>
-    </wip-site>
-    
-    
-    <style>
-        <html-style-directories>
-            <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css</include>
-        </html-style-directories>
-    </style>
-    
+
 </spfe>

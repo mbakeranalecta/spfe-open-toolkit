@@ -13,14 +13,12 @@ exclude-result-prefixes="#all">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
 		<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-task-topic</xsl:variable>		
-
-		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias($topic-type, $topic-type-alias-list)"/>
 		
 		<xsl:choose>
 			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
 				<ss:topic 
 					type="{namespace-uri()}" 
-					topic-type-alias="{$topic-type-alias}"
+					topic-type-alias="{sf:get-topic-type-alias-singular($topic-type)}"
 					full-name="{concat(namespace-uri(), '/', *:head/*:id)}"
 					local-name="{*:head/*:id}"
 					title="{*:body/*:title}"

@@ -28,6 +28,8 @@ exclude-result-prefixes="#all" >
 </xsl:variable>
 
 <xsl:output method="xml" indent="yes" />
+	
+<xsl:param name="topic-set-id"/>
 
 <xsl:param name="synthesis-directory"/>
 
@@ -57,17 +59,14 @@ Main template
 		 method="xml" 
 		 indent="yes"
 		 omit-xml-declaration="no" 
-		 href="file:///{$synthesis-directory}/synthesis.xml">
-		<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config/config:strings, 'eppo-simple-topic-set-product')} {sf:string($config/config:strings, 'eppo-simple-topic-set-release')}"> 
+		 href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/synthesis/synthesis.xml')}">
+		<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$config/config:topic-set-id}" title="{sf:string($config//config:strings, 'eppo-simple-topic-set-product')} {sf:string($config//config:strings, 'eppo-simple-topic-set-release')}"> 
 			
 			<xsl:for-each-group select="xfd:function-definition" group-by="concat(xfd:namespace-uri, xfd:name)">
 				<xsl:variable name="name" select="string(xfd:name[1])"/>
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
 				
-				<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
-				<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xsl:variable> 
-				
-				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias($topic-type, $topic-type-alias-list)"/>	
+				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference')"/>	
 				<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
 				<ss:topic 
 					type="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference" 
@@ -159,33 +158,13 @@ Main template
 			<xsl:for-each-group select="xfd:template-definition" group-by="concat(xfd:namespace-uri, xfd:name)">
 				<xsl:variable name="name" select="string(xfd:name[1])"/>
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
-				
-				<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type-aliases" as="element(config:topic-type-aliases)"/>
-				<xsl:variable name="topic-type">http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</xsl:variable> 
-				
-				<xsl:variable name="topic-type-alias">
-					<xsl:choose>
-						<xsl:when test="$topic-type-alias-list/config:topic-type[config:id=$topic-type]">
-							<xsl:value-of select="$topic-type-alias-list/config:topic-type[config:id=$topic-type]/config:alias"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:call-template name="sf:error">
-								<xsl:with-param name="message">
-									<xsl:text>No topic type alias found for topic type </xsl:text>
-									<xsl:value-of select="$topic-type"/>
-									<xsl:text>.</xsl:text>
-								</xsl:with-param>
-							</xsl:call-template>
-							<xsl:value-of select="$topic-type"/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:variable>
-				
+							
 				<ss:topic 
 					type="http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference" 
 					full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference/{concat(xfd:local-prefix, '_', xfd:name)}"
 					local-name="{xfd:name}"
-					topic-type-alias="{$topic-type-alias}"
+					topic-type-alias=
+					"{sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference')}"
 					title="{xfd:name}">
 					<ss:index>
 						<ss:entry>
