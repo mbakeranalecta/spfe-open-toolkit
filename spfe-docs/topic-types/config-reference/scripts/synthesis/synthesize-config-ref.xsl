@@ -13,6 +13,7 @@ xmlns:ed="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/sche
           
 exclude-result-prefixes="#all" >
 	
+<xsl:param name="topic-set-id"/>
 
 	
 <xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xsl:variable>	

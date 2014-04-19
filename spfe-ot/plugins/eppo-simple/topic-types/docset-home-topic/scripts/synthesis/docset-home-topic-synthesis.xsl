@@ -12,7 +12,7 @@ exclude-result-prefixes="#all">
 	
 	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</xsl:variable>
 	
-	<xsl:template match="*:generic-topic">
+	<xsl:template match="*:docset-home-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
 		

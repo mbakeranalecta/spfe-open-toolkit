@@ -27,9 +27,9 @@
 <xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
 
 <xsl:variable name="topic-set-title">
-	<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/>
+	<xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-title')"/>
 	<xsl:text>, </xsl:text>
-	<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-release')"/>
+	<xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-release')"/>
 </xsl:variable>
 	
 <!--  
@@ -41,7 +41,7 @@ Main template
 	<xsl:result-document href="file:///{concat($config/config:build/config:build-directory, '/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
 		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
 			<title>
-				<xsl:value-of select="sf:string($config/config:strings, 'eppo-simple-topic-set-title')"/>
+				<xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-title')"/>
 			</title>
 				
 			<!-- process the topics --> 

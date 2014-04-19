@@ -118,12 +118,13 @@
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
 				<include name="synthesis/*.xml"/>
 			</fileset>
-			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
 			<!-- build a list of images referenced in synthesis files -->
 			<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.image-list}"
 				out="${spfe.build.build-directory}/@{topic-set-id}/temp/image-list-html">
 				<params>
+					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 				</params>
@@ -271,13 +272,13 @@
 
 	<!-- LINK CATALOG STEP -->
 
-	<!-- check if link-catalog is up to date -->
+	<!-- check if link-catalog is up to date 
 
 	<target name="-current.link-catalog">
 		<uptodate property="-current.link-catalog"
 			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog"
 			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"/>
-	</target>
+	</target>-->
 
 	<!-- target for link-catalog -->
 	<target name="-build.link-catalog" depends="-build.synthesis, --build.link-catalog"/>
@@ -292,13 +293,17 @@
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
 				<include name="synthesis/*.xml"/>
 			</fileset>
-			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
+
 			<!-- run the XSLT script to produce the output -->
-			<saxon-xslt in="${spfe.config-file}" style="@{style}"
-				out="${spfe.build.link-catalog-directory}/@{topic-set-id}.link-catalog.xml">
+			<saxon-xslt 
+				in="${spfe.config-file}" 
+				style="@{style}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/link-catalog.flag">
 				<params>
-					<param name="synthesis-files" expression="${synthesis-file-list}"/>
+					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<param name="synthesis-files" expression="${synthesis-files-list}"/>
 				</params>
 			</saxon-xslt>
 		</sequential>
@@ -323,10 +328,12 @@
 		<sequential>
 			
 			<!-- run the XSLT script to produce the output -->
-			<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.list-pages}"
+			<saxon-xslt in="${spfe.config-file}" 
+				style="${spfe.scripts.list-pages}"
 				out="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages.xml">
 				<params>
-					<param name="synthesis-files" expression="${synthesis-file-list}"/>
+					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<param name="synthesis-files" expression="${synthesis-files-list}"/>
 				</params>
 			</saxon-xslt>
 		</sequential>
@@ -334,26 +341,34 @@
 
 	<!-- target for toc -->
 	<target name="-build.toc" depends=" -build.synthesis, --build.toc"/>
-	<macrodef name="--build.toc" description="TOC step.">
+	<macrodef name="build.toc" description="TOC step.">
 		<!-- FIXME		depends="  -current.link-catalog" unless="-current.link-catalog">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<sequential>
-			<echo>--build.toc macro</echo>
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
 				<include name="synthesis/*.xml"/>
 			</fileset>
-			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
+				refid="synthesis-files"/>
+			<local name="synthesis-files"/>
+			<local name="synthesis-files-list"/>
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+				<include name="synthesis/*.xml"/>
+			</fileset>
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
 
 			<!-- run the XSLT script to produce the output -->
-			<saxon-xslt in="${spfe.config-file}" style="@{sytle}"
-				out="${spfe.build.toc-directory}/@{topic-set-id}.toc.xml">
+			<saxon-xslt 
+				in="${spfe.config-file}" 
+				style="@{style}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/toc.flag">
 				<params>
-					<param name="topic-set-id" value="@{topic-set-id}"/>
-					<param name="synthesis-files" expression="${synthesis-file-list}"/>
+					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<param name="synthesis-files" expression="${synthesis-files-list}"/>
 				</params>
 			</saxon-xslt>
 		</sequential>
@@ -382,21 +397,31 @@
 		<sequential>
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
+			<local name="toc-files"/>
+			<local name="toc-files-list"/>
+			<local name="link-catalog-files"/>
+			<local name="link-catalog-list"/>
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
 				<include name="synthesis/*.xml"/>
 			</fileset>
-			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
-			<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
-			<pathconvert property="link-catalog-files" dirsep="/" pathsep=";" refid="link-catalogs"/>
+			<fileset id="toc-files" dir="${spfe.build.toc-directory}">
+				<include name="*.xml"/>
+			</fileset>
+			<pathconvert property="toc-files-list" dirsep="/" pathsep=";" refid="toc-files"/>
+			<fileset id="link-catalog-files" dir="${spfe.build.link-catalog-directory}">
+				<include name="*.xml"/>
+			</fileset>			
+			<pathconvert property="link-catalog-files-list" dirsep="/" pathsep=";" refid="link-catalog-files"/>
 			<!-- run the XSLT script to produce the output -->
-			<saxon-xslt style="@${style}" in="${spfe.config-file}"
+			<saxon-xslt style="@{style}" in="${spfe.config-file}"
 				out="${spfe.build.build-directory}/@{topic-set-id}/temp/presentation-web.flag">
 				<params>
-					<param name="topic-set-id" value="@{topic-set-id}"/>
-					<param name="synthesis-files" expression="${synthesis-files}"/>
+					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<param name="synthesis-files" expression="${synthesis-files-list}"/>
 					<param name="link-catalog-files" expression="${link-catalog-files}"/>
-					<param name="toc-files" expression="${toc-files}"/>
+					<param name="toc-files" expression="${toc-files-list}"/>
 				</params>
 			</saxon-xslt>
 		</sequential>
@@ -424,7 +449,7 @@
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
 				<include name="synthesis/*.xml"/>
 			</fileset>
-			<pathconvert dirsep="/" pathsep=";" property="synthesis-file-list"
+			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
 			<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
 			<pathconvert property="link-catalog-files" dirsep="/" pathsep=";" refid="link-catalogs"/>
@@ -471,6 +496,7 @@
 			<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.format-html}"
 				out="${temp}/html-format.flag">
 				<params>
+					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 					<param name="presentation-files" expression="${presentation-files}"/>
 				</params>
@@ -510,6 +536,7 @@
 			<saxon-xslt in="${spfe.config-file}" style="@{style}"
 				out="${spfe.build.build-directory}/@{topic-set-id}/temp/fo-format.flag">
 				<params>
+					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 					<param name="presentation-files" expression="${presentation-files}"/>
 					<param name="toc-files" expression="${toc-files}"/>
@@ -564,6 +591,7 @@
 		<saxon-xslt in="${spfe.config-file}" style="${scripts.report}"
 			out="${output}/${spfe.report-name}">
 			<params>
+			
 				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 				<param name="draft" expression="${draft}" if="draft"/>
 			</params>
@@ -591,6 +619,7 @@
 		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.image-list}"
 			out="${temp}/image-list-print">
 			<params>
+				<param name="topic-set-id" expression="@{topic-set-id}"/>
 				<param name="synthesis-files" expression="${synthesis-files}"/>
 				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 				<param name="vector-if-available" expression="yes"/>

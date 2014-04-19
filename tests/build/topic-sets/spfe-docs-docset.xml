@@ -11,12 +11,12 @@
         <topic-types>
             <included-topic-types>
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>
-                    <href>../../../spfe-docs/topic-types/generic-topic/config.xml</href>
+                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic</xmlns>
+                    <href>../../../spfe-docs/topic-types/docset-home-topic/config.xml</href>
                 </topic-type>
             </included-topic-types>
             <topic-type-order>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</topic-type-xmlns>
+                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic</topic-type-xmlns>
             </topic-type-order>
         </topic-types>
 

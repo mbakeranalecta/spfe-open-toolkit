@@ -16,7 +16,7 @@
 	<xsl:param name="synthesis-files"/>
 	<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
 
-
+	<xsl:param name="topic-set-id"/>
 	<!-- processing directives -->
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:strip-space elements="element-name attribute-name xpath attribute-value code term"/>
@@ -56,8 +56,12 @@ Main template
 =============
 -->
 
-	<xsl:template name="main">
-		<xsl:apply-templates select="$synthesis"/>
+	
+	<xsl:template name="main" >
+		<!-- Create the root "synthesis element" -->
+		<xsl:result-document href="file:///{concat($config/config:link-catalog-directory, '/', $topic-set-id, '.link-catalog.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+			<xsl:apply-templates select="$synthesis"/>
+		</xsl:result-document>
 	</xsl:template>
 
 	<xsl:template match="ss:synthesis">
