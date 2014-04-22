@@ -282,7 +282,7 @@
 					</xsl:when>
 					
 					<!-- this topic-set -->
-					<xsl:when test="$config/config:topic-set-id=$target-topic-set">
+					<xsl:when test="$topic-set-id=$target-topic-set">
 						 <xsl:value-of select="concat($target-file, $target-anchor)"/>
 					</xsl:when>
 					
@@ -393,7 +393,7 @@
 
 		<xsl:choose>
 			<!-- this book -->
-			<xsl:when test="$config/config:topic-set-id eq $target-topic-set">
+			<xsl:when test="$topic-set-id eq $target-topic-set">
 				<cross-ref 
 					type="{$type}"
 					target="{$target}"/>

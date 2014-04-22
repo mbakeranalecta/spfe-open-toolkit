@@ -420,7 +420,7 @@
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files-list}"/>
-					<param name="link-catalog-files" expression="${link-catalog-files}"/>
+					<param name="link-catalog-files" expression="${link-catalog-files-list}"/>
 					<param name="toc-files" expression="${toc-files-list}"/>
 				</params>
 			</saxon-xslt>

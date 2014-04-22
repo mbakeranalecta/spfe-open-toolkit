@@ -82,7 +82,7 @@
     
     <!-- TOC templates -->
     <xsl:template name="create-toc-page">
-        <page status="generated" name="{$config/config:topic-set-id}-toc">
+        <page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
             <title>List of topic sets in <xsl:value-of select="$config/config:doc-set/config:title"></xsl:value-of></title>       
             <ul>

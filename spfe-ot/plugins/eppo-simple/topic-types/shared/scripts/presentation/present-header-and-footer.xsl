@@ -17,7 +17,7 @@
         </xsl:variable>   
         <xsl:variable name="doc-set-title" select="$config/config:doc-set/config:title"/>
         
-        <xsl:variable name="is-home-topic-set" select="normalize-space($config/config:doc-set/config:home-topic-set) eq normalize-space($config/config:topic-set-id)"/>
+        <xsl:variable name="is-home-topic-set" select="normalize-space($config/config:doc-set/config:home-topic-set) eq normalize-space($topic-set-id)"/>
         
         <xsl:variable name="doc-set-index-file">
             <xsl:value-of select="if ($is-home-topic-set) then 'index.html' else '../index.html'"/>
@@ -38,7 +38,7 @@
                 
                 <xsl:if test="not($is-home-topic-set)">
                     >      
-                    <xref target="{normalize-space($config/config:topic-set-id)}-toc.html">
+                    <xref target="{normalize-space($topic-set-id)}-toc.html">
                         <xsl:value-of select="$topic-set-title"/>
                     </xref>
                 </xsl:if>

@@ -18,6 +18,8 @@
 
 <xsl:param name="presentation-schema">eppo-simple-web-presentation.xsd</xsl:param>
 <xsl:param name="draft">no</xsl:param>
+	
+<xsl:param name="topic-set-id"/>
 
 <xsl:variable name="config" as="element(config:spfe)">
 	<xsl:sequence select="/config:spfe"/>
@@ -38,7 +40,7 @@ Main template
 =============
 -->
 <xsl:template name="main">
-	<xsl:result-document href="file:///{concat($config/config:build/config:build-directory, '/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+	<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
 		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
 			<title>
 				<xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-title')"/>

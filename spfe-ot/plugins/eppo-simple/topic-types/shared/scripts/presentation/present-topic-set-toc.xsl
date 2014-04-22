@@ -90,7 +90,7 @@
             <xsl:text>, </xsl:text>
             <xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-release')"/>
         </xsl:variable>
-        <page status="generated" name="{$config/config:topic-set-id}-toc">
+        <page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
             <title>List of topics in <xsl:value-of select="$topic-set-title"></xsl:value-of></title>        
             <xsl:apply-templates select="$toc"/>
@@ -98,7 +98,7 @@
         </page>
     </xsl:template>
     
-    <xsl:template match="toc[@topic-set-id=$config/config:topic-set-id]">
+    <xsl:template match="toc[@topic-set-id=$topic-set-id]">
          <xsl:apply-templates/> 
     </xsl:template>
     <xsl:template match="toc"/>

@@ -9,12 +9,15 @@ if not exist %1 goto CONFIGFILEMISSING
 echo Building in directory: %SPFE_BUILD_DIR%
 
 set SPFE_TEMP_BUILD_FILE=%SPFE_BUILD_DIR%/spfebuild.xml
+REM $env:ANT_OPTS = "-XX:PermSize=512m"
+rem set ANT_OPTS = -XX:PermSize=512m
 
 java -classpath "%SPFEOT_HOME%/tools/saxon9he/saxon9he.jar" net.sf.saxon.Transform -it:main  -xsl:"%SPFEOT_HOME%"/1.0/scripts/config/config.xsl  -o:"%SPFE_TEMP_BUILD_FILE%" configfile="%~dpnx1" HOME="%HOMEDRIVE%%HOMEPATH%" SPFEOT_HOME="%SPFEOT_HOME%" SPFE_BUILD_DIR="%SPFE_BUILD_DIR%" SPFE_BUILD_COMMAND=%2
 
 IF %ERRORLEVEL% NEQ 0 goto CONFIGERROR 
-
+env
 ant %2 -f "%SPFE_TEMP_BUILD_FILE%" -lib  "%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar" -emacs %3 %4 %5 %6 %7 %8 
+
 
 
 goto END
@@ -31,7 +34,6 @@ goto END
     echo An error occurred interpreting the configuration file.
 	goto END
 :CLEAN
-    echo rmdir /s "%SPFE_BUILD_DIR%"
     rmdir /s "%SPFE_BUILD_DIR%"
 
 :END

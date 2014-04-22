@@ -12,6 +12,7 @@ if [ -e "$1" ]; then
     echo "Building in directory: $SPFE_BUILD_DIR"
 
     SPFE_TEMP_BUILD_FILE=$SPFE_BUILD_DIR/temp/spfebuild.xml
+    ANT_OPTS = "-XX:PermSize=512m"
 
     java -classpath $SPFEOT_HOME/tools/saxon9he/saxon9he.jar net.sf.saxon.Transform \
     -xsl:$SPFEOT_HOME/1.0/scripts/config/config.xsl \
