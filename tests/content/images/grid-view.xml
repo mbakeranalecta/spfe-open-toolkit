@@ -5,10 +5,11 @@
     
     <name>Grid View</name>
     <alt>Screen shot of the Grid View.</alt>
+    <uri>http://spfeopentoolkit.org/tests/content/development/graphics-test</uri>
     <formats>
         <format>
             <type>png</type>
-            <uri>grid-view.png</uri>
+            <href>grid-view.png</href>
         </format>
     </formats>
     <default-caption>

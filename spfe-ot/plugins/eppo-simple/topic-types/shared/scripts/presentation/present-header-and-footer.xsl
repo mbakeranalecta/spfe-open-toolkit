@@ -10,11 +10,8 @@
     <xsl:template name="show-header">
         <xsl:variable name="topic-type" select="if (ancestor::ss:topic/@virtual-type) then ancestor::ss:topic/@virtual-type else ancestor::ss:topic/@type"/>
         
-        <xsl:variable name="topic-set-title">
-            <xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-title')"/>
-            <xsl:text>, </xsl:text>
-            <xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-release')"/>
-        </xsl:variable>   
+        <xsl:variable name="topic-set-title" select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+
         <xsl:variable name="doc-set-title" select="$config/config:doc-set/config:title"/>
         
         <xsl:variable name="is-home-topic-set" select="normalize-space($config/config:doc-set/config:home-topic-set) eq normalize-space($topic-set-id)"/>

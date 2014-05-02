@@ -45,7 +45,7 @@
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules>
         
         <strings>
-            <string id="eppo-simple-topic-set-title">SPFE Function Reference</string>
+            <string id="eppo-simple-topic-set-title">SPFE Functions and Templates</string>
         </strings>
     </topic-set>
 

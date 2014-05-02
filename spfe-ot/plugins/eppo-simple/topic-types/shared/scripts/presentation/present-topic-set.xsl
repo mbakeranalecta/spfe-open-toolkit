@@ -28,12 +28,7 @@
 <xsl:param name="synthesis-files"/>
 <xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
 
-<xsl:variable name="topic-set-title">
-	<xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-title')"/>
-	<xsl:text>, </xsl:text>
-	<xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-release')"/>
-</xsl:variable>
-	
+<xsl:variable name="topic-set-title" select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 <!--  
 =============
 Main template
@@ -43,7 +38,7 @@ Main template
 	<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
 		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
 			<title>
-				<xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-title')"/>
+				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 			</title>
 				
 			<!-- process the topics --> 
@@ -59,7 +54,6 @@ Main template
 </xsl:template>
 	
 <xsl:template match="ss:topic" >
-	<xsl:message>Default ss:topic called.</xsl:message>
 	<!-- This can be overridden by specific topic types processing that wants to do something specific here. -->
 	<xsl:apply-templates/>
 </xsl:template>

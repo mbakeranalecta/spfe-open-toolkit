@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-topic xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    
+    <head>
+        <id>graphic-test</id>
+        <history>
+            <revision>
+                <date>2104-04-22</date>
+                <author>mbaker</author>
+                <comment>Creating a test for graphic support features.</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>{graphics}</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Graphics test.</title>
+        <p>A graphic of the Oxygen Grid view should appear below the paragraph with the caption specified here.</p>
+        <fig href="../images/grid-view.png">
+            <caption><p>This the grid view.</p></caption>
+        </fig>
+        
+        <p>A graphic of the Oxygen Grid view should appear below the paragraph with the default caption.</p>
+        <fig href="../images/grid-view.png"/>
+        
+        <p>Here is a graphic for which no graphic record exists:</p>
+        <fig href="../images/grid-view2.png"/>
+        
+        <p>This is a fig specified using the graphic record file name. It should appear just the same as the first graphic.</p>
+        <fig href="../images/grid-view.xml">
+            <caption><p>This the grid view.</p></caption>
+        </fig>
+        
+        <p>This is a fig specified using the graphic URI. It should appear just the same as the first graphic.</p>
+        <fig href="http://spfeopentoolkit.org/tests/content/development/graphics-test">
+            <caption><p>This the grid view.</p></caption>
+        </fig>
+
+        
+     </body>
+    
+</generic-topic>

@@ -21,6 +21,7 @@
 	<xsl:variable name="draft" as="xs:boolean" select="$config/config:build-command='draft'"/>
 	
 	<xsl:param name="presentation-files"/>
+	<xsl:param name="topic-set-id"/>
 	<xsl:variable name="presentation" select="sf:get-sources($presentation-files)"/>
 
 
@@ -73,7 +74,7 @@
 			<xsl:with-param name="message" select="concat('Formatting page: ', $file-name)"/>
 		</xsl:call-template>
 
-		<xsl:result-document href="file:///{$config/config:build/config:output-directory}/{$file-name}" method="html" indent="no" omit-xml-declaration="no" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		<xsl:result-document href="file:///{$config/config:doc-set-output}/{$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:output-directory}{$file-name}" method="html" indent="no" omit-xml-declaration="no" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 			<html xml:lang="en" lang="en">
 				<xsl:sequence select="lf:html-header($title)"/>
 				<xsl:choose>

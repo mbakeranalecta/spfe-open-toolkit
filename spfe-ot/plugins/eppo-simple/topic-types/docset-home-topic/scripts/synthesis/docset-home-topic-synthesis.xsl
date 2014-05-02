@@ -10,7 +10,7 @@ xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 exclude-result-prefixes="#all">
 	
-	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</xsl:variable>
+	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/docset-home-topic</xsl:variable>
 	
 	<xsl:template match="*:docset-home-topic">
 		<xsl:variable name="conditions" select="@if"/>

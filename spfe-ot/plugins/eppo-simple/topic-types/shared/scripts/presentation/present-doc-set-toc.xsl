@@ -56,7 +56,7 @@
             <xsl:when test="$config/config:doc-set/config:topic-sets">
                 <xsl:call-template name="sf:warning">
                     <xsl:with-param name="message">
-                        <!-- FIXME: Should test for the two conditions subject-affinityed below. -->
+                        <!-- FIXME: Should test for the two conditions subject-affinities below. -->
                         <xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/doc-set configuration setting. External TOC files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
                     </xsl:with-param>
                 </xsl:call-template>
@@ -94,7 +94,7 @@
     
     <xsl:template match="toc[@topic-set-id ne $config/config:doc-set/config:home-topic-set]">
         <li>
-            <p><xref target="{normalize-space(@deployment-relative-path)}/{normalize-space(@topic-set-id)}-toc.html"><xsl:value-of select="@title"/></xref></p>
+            <p><xref target="{normalize-space(@deployment-relative-path)}{normalize-space(@topic-set-id)}-toc.html"><xsl:value-of select="@title"/></xref></p>
         </li>
     </xsl:template>
     <xsl:template match="toc"/>

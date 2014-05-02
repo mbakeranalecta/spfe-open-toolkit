@@ -6,6 +6,7 @@
             <xs:sequence>
                 <xs:element name="name"/>
                 <xs:element name="alt"/>
+                <xs:element minOccurs="0" name="uri" type="xs:anyURI"/>
                 <xs:element name="formats" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence maxOccurs="unbounded">
@@ -13,7 +14,7 @@
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="type"/>
-                                        <xs:element name="uri" type="xs:anyURI"/>
+                                        <xs:element name="href" type="xs:anyURI"/>
                                         <xs:element name="height" minOccurs="0"/>
                                         <xs:element name="width" minOccurs="0"/>
                                         <xs:element name="dpi" minOccurs="0"/>

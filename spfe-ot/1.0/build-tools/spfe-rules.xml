@@ -109,6 +109,7 @@
 		<!--		depends="-build.image-list-html"
 		if="image-list-html-has-content">
 -->
+		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<attribute name="output"/>
 		<sequential>
@@ -121,8 +122,10 @@
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
 			<!-- build a list of images referenced in synthesis files -->
-			<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.image-list}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/temp/image-list-html">
+			<saxon-xslt 
+				in="${spfe.config-file}" 
+				style="@{style}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/image-list-html">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files}"/>
@@ -415,8 +418,10 @@
 			</fileset>			
 			<pathconvert property="link-catalog-files-list" dirsep="/" pathsep=";" refid="link-catalog-files"/>
 			<!-- run the XSLT script to produce the output -->
-			<saxon-xslt style="@{style}" in="${spfe.config-file}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/temp/presentation-web.flag">
+			<saxon-xslt 
+				style="@{style}" 
+				in="${spfe.config-file}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/presentation-web.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files-list}"/>
@@ -454,8 +459,10 @@
 			<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
 			<pathconvert property="link-catalog-files" dirsep="/" pathsep=";" refid="link-catalogs"/>
 			<!-- run the XSLT script to produce the output -->
-			<saxon-xslt in="${spfe.config-file}" style="${scripts.presentation-book}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/temp/presentation-book.flag">
+			<saxon-xslt 
+				in="${spfe.config-file}" 
+				style="@{style}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/presentation-book.flag">
 				<params>
 					<param name="topic-set-id" value="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files}"/>
@@ -469,32 +476,36 @@
 	<!-- FORMAT HTML STEP -->
 
 	<!-- check to see if the format is up to date -->
-	<target name="-current.html-format">
-		<uptodate property="-current.html-format" targetfile="${temp}/html-format.flag"
+	<target name="-current.format-html">
+		<uptodate property="-current.format-html" targetfile="${temp}/format-html.flag"
 			srcfile="${temp}/presentation-web.flag"/>
 	</target>
 
-	<target name="-build.html-format" depends="-build.presentation-web, --build.html-format"/>
-	<macrodef name="--build.html-format">
+	<target name="-build.format-html" depends="-build.presentation-web, --build.format-html"/>
+	<macrodef name="build.format-html">
 		<!--		depends="
 	        	 -get.externals.style.html,
-  				 -current.html-format"
-		unless="-current.html-format">-->
+  				 -current.format-html"
+		unless="-current.format-html">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
-		<attribute name="output"/>
 		<sequential>
 			<property name="temp" value="${spfe.build.build-directory}/@{topic-set-id}/temp"/>
-			<get.externals.graphics.html topic-set-id="@{topic-set-id}" output="@{output}"/>
+<!--			<get.externals.graphics.html topic-set-id="@{topic-set-id}" output="@{output}"/>
 			<get.externals.style.html output="@{output}"/>
-			<fileset dir="${temp}" id="presentation-file-list">
+-->						
+			<local name="presentation-files"/>
+			<local name="presentation-files-list"/>
+			<fileset dir="${spfe.build.build-directory}/@{topic-set-id}" id="presentation-file-list">
 				<include name="presentation/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="presentation-files"
 				refid="presentation-file-list"/>
 			<!-- run the XSLT script to produce the output -->
-			<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.format-html}"
-				out="${temp}/html-format.flag">
+			<saxon-xslt 
+				in="${spfe.config-file}" 
+				style="@{style}"
+				out="${spfe.build.build-directory}/@{topic-set-id}/format-html.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
@@ -503,10 +514,7 @@
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
-
-
-
-
+	
 	<!-- FORMAT FO STEP -->
 	<!-- FIXME: Need to make sure this is non-intersecting with the web presentation files -->
 
@@ -616,7 +624,9 @@
 	<target name="-build.image-list.print"
 		depends="-build.presentation-book, -current.image-list.print"
 		unless="-current.image-list.print">
-		<saxon-xslt in="${spfe.config-file}" style="${spfe.scripts.image-list}"
+		<saxon-xslt 
+			in="${spfe.config-file}" 
+			style="${spfe.scripts.image-list}"
 			out="${temp}/image-list-print">
 			<params>
 				<param name="topic-set-id" expression="@{topic-set-id}"/>
@@ -670,7 +680,7 @@
 
 	<!-- FINAL -->
 	<target name="final" depends="-init, -final"/>
-	<target name="-final" depends="-build.html-format" description="Build the final online output."/>
+	<target name="-final" depends="-build.format-html" description="Build the final online output."/>
 
 	<target name="-is-draft">
 		<available property="is-draft" file="${temp}/draft.flag"/>

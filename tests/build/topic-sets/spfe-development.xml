@@ -28,6 +28,7 @@
         <sources>
             <authored-content>
                 <include>../../../spfe-docs/content/development/*.xml</include>
+                <include>../../content/development/*.xml</include>
             </authored-content>
         </sources>
 
@@ -35,7 +36,7 @@
         <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>     
         <strings>
-            <string id="eppo-simple-topic-set-title">SPFE Development Guide</string>
+            <string id="eppo-simple-topic-set-title">SPFE Development</string>
         </strings>
     </topic-set>
 </spfe>

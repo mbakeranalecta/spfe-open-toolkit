@@ -247,8 +247,10 @@
 		<xsl:variable name="target-directory" select="$target-page/parent::link-catalog/@output-directory"/>
 		
 		<xsl:variable name="target-directory-path" >
-			<xsl:for-each select="tokenize($target-page/parent::link-catalog/@output-directory, '/')">
-				<xsl:text>../</xsl:text>
+			<xsl:for-each select="tokenize($target-directory, '/')">
+				<xsl:if test="position()!=last()">
+					<xsl:text>../</xsl:text>
+				</xsl:if>
 			</xsl:for-each>
 			<xsl:value-of select="$target-directory"/>
 		</xsl:variable>
@@ -288,7 +290,7 @@
 					
 					<!-- outside this topic-set -->
 					<xsl:otherwise>
-						<xsl:value-of select="concat($target-directory-path, '/', $target-file, $target-anchor)"/>
+						<xsl:value-of select="concat($target-directory-path, $target-file, $target-anchor)"/>
 					</xsl:otherwise>
 					
 				</xsl:choose>
@@ -382,7 +384,9 @@
 		
 		<xsl:variable name="target-directory-path" >
 			<xsl:for-each select="tokenize($target-directory, '/')">
-				<xsl:text>../</xsl:text>
+				<xsl:if test="position()!=last()">
+					<xsl:text>../</xsl:text>
+				</xsl:if>
 			</xsl:for-each>
 			<xsl:value-of select="$target-directory"/>
 		</xsl:variable>

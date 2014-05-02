@@ -7,23 +7,23 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:gt="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-task-topic"
+	xmlns:dh="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/docset-home-topic"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 	exclude-result-prefixes="#all">
 	
 	<!-- topic -->
-	<xsl:template match="gt:generic-task-topic">
+	<xsl:template match="dh:docset-home-topic">
 		<xsl:choose>
 			<xsl:when test="$media='online'"> 
-				<page status="{gt:head/gt:history/gt:revision[last()]/gt:status}" name="{ancestor::ss:topic/@local-name}">
+				<page status="{dh:head/dh:history/dh:revision[last()]/dh:status}" name="{ancestor::ss:topic/@local-name}">
 					<xsl:call-template name="show-header"/>
 					<xsl:apply-templates /> 
 					<xsl:call-template name="show-footer"/>		
 				</page>
 			</xsl:when>
 			<xsl:when test="$media='paper'">
-				<chapter status="{gt:head/gt:tracking/gt:status}" name="{gt:name}">
+				<chapter status="{dh:head/dh:tracking/dh:status}" name="{dh:name}">
 					<xsl:apply-templates/>
 				</chapter>
 			</xsl:when>
@@ -35,30 +35,11 @@
 		</xsl:choose>
 	</xsl:template>
 	
-	<xsl:template match="gt:head"/>
+	<xsl:template match="dh:head"/>
 	
-	<xsl:template match="gt:generic-task-topic/gt:title">
+	<xsl:template match="dh:docset-home-topic/dh:title">
 		<title>
 			<xsl:apply-templates/>
 		</title>
 	</xsl:template>
-	
-	
-	<xsl:template match="gt:planning-question">
-		<xsl:if test="$config/config:build-command='draft' or esf:section-has-content(gt:planning-question-title/following-sibling::*) ">
-			<planning-question>
-				<anchor name="{sf:title2anchor(gt:planning-question-title)}"/>
-				<xsl:apply-templates/>
-			</planning-question>
-		</xsl:if>	
-	</xsl:template>
-	
-	
-	<xsl:template match="gt:planning/gt:planning-question/gt:planning-question-title">	
-		<title>
-			<xsl:apply-templates/>
-		</title>
-	</xsl:template>
-	
-	
 </xsl:stylesheet>

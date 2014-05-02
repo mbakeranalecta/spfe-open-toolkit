@@ -7,7 +7,7 @@
     http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/generic-task-topic.xsd">
 
     <head>
-        <author>jkeffer</author>
+        <id>adding-a-topic</id>
         <history>
             <revision>
                 <date>2013-06-14</date>

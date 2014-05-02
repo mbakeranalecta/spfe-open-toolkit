@@ -24,14 +24,8 @@
 
 	<xsl:param name="toc-file"/>
 
-	<xsl:variable name="title-string">
-		<xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-title')"/>
-		<xsl:text>, </xsl:text>
-		<xsl:value-of select="sf:string($config//config:strings, 'eppo-simple-topic-set-release')"/>
-<!--		<xsl:value-of select="$config/config:publication-info/config:title"/>
-		<xsl:text>, </xsl:text>
-		<xsl:value-of select="$config/config:publication-info/config:release"/>
--->	</xsl:variable>
+	<xsl:variable name="title-string" select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+	
 
 	<xsl:template name="main">
 
@@ -39,7 +33,7 @@
 			<toc 
 				topic-set-id="{$topic-set-id}" 
 				topic-set-type="{$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-set-type}" 
-				deployment-relative-path="{$topic-set-id}" 
+				deployment-relative-path="{$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:output-directory}" 
 				title="{$title-string}">
 				<xsl:choose>
 					<!-- If there is a TOC file for this media, use it to create TOC -->
