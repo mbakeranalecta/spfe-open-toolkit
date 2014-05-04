@@ -49,6 +49,7 @@ version="2.0"
 	</xsl:template>
 	
 	<xsl:template match="*:body">
+		<xsl:message select="'###',namespace-uri()"/>
 		<xsl:apply-templates/>
 	</xsl:template>
 	

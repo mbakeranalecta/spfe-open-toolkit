@@ -42,7 +42,7 @@
         </fig>
         
         <p>This is a fig specified using the graphic URI. It should appear just the same as the first graphic.</p>
-        <fig href="http://spfeopentoolkit.org/tests/content/development/graphics-test">
+        <fig uri="http://spfeopentoolkit.org/tests/content/development/graphics-test">
             <caption><p>This the grid view.</p></caption>
         </fig>
 

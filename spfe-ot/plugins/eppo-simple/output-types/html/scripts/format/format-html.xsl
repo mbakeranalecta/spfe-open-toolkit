@@ -273,8 +273,18 @@
 		<h2><xsl:apply-templates/></h2>
 	</xsl:template>
 	
-	<xsl:template match="planning-question/title">
+	
+	
+	<xsl:template match="qa/title">
 		<h2><xsl:apply-templates/></h2>
+	</xsl:template>
+	
+	<xsl:template match="qa/question">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template match="qa/answer">
+		<xsl:apply-templates/>
 	</xsl:template>
 	
 	<xsl:template match="procedure/title">
@@ -309,9 +319,9 @@
 
 	<xsl:template match="code-sample/title">
 		<h4>
-				<xsl:text>Example&#160;</xsl:text>
-				<xsl:value-of select="count(ancestor::page//code-sample/title intersect preceding::code-sample/title)+1"/>
-				<xsl:text>&#160;&#160;&#160;</xsl:text>
+			<xsl:text>Example&#160;</xsl:text>
+			<xsl:value-of select="count(ancestor::page//code-sample/title intersect preceding::code-sample/title)+1"/>
+			<xsl:text>&#160;&#160;&#160;</xsl:text>
 			<xsl:apply-templates/>
 		</h4>
 	</xsl:template>
@@ -675,6 +685,16 @@
 	</xsl:template>
 	
 	<xsl:template match="step">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template match="*" priority="-1">
+		<xsl:call-template name="sf:warning">
+			<xsl:with-param name="message">
+				<xsl:text>Unknown element found in presentation: </xsl:text>
+				<xsl:value-of select="name()"/>
+			</xsl:with-param>
+		</xsl:call-template>
 		<xsl:apply-templates/>
 	</xsl:template>
 </xsl:stylesheet>

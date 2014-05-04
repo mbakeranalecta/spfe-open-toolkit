@@ -2,17 +2,17 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    
+
     <xs:group name="graphics">
         <xs:choice>
             <xs:element name="fig" type="fig-type"/>
         </xs:choice>
     </xs:group>
-    
-    
+
+
     <xs:complexType name="fig-type">
-        <xs:sequence >
-            <xs:element name="caption"  minOccurs="0">
+        <xs:sequence>
+            <xs:element name="caption" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="title" type="xs:string" minOccurs="0"/>
@@ -22,8 +22,8 @@
             </xs:element>
         </xs:sequence>
         <xs:attributeGroup ref="conditions"/>
-        <xs:attribute name="href" type="xs:anyURI" use="required"/>
-        <xs:attribute name="id" type="xs:NCName"/>
+        <xs:attribute name="href" type="xs:anyURI"/>
+        <xs:attribute name="uri" type="xs:anyURI"/>
     </xs:complexType>
-    
+
 </xs:schema>

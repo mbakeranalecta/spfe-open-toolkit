@@ -60,5 +60,14 @@ Main template
 
 <xsl:template match="topic/name" mode="#all"/>	
 <xsl:template match="tracking" mode="#all"/>
+	
+	<xsl:template match="*" priority="-1">
+		<xsl:call-template name="sf:warning">
+			<xsl:with-param name="message">
+				<xsl:text>Unknown element found in synthesis: </xsl:text>
+				<xsl:value-of select="name()"/>
+			</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
 
 </xsl:stylesheet>

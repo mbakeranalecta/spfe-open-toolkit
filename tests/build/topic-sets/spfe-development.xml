@@ -24,7 +24,15 @@
             </topic-type-order>
 
         </topic-types>
-
+        <object-types>
+            <included-object-types>
+                <object-type>
+                    <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record</xmlns>
+                    <href>../../../spfe-docs/object-types/graphics/config.xml</href>
+                </object-type>
+            </included-object-types>
+        </object-types>
+        
         <sources>
             <authored-content>
                 <include>../../../spfe-docs/content/development/*.xml</include>

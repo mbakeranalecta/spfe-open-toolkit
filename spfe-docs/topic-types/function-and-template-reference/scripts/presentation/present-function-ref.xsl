@@ -22,7 +22,7 @@
 	
 	<!-- XSL function -->
 	<xsl:template match="xsl-function">
-		<xsl:variable name="display-name" select="name"/>
+		<xsl:variable name="display-name" select="name/text()"/>
 		
 		<!-- info -->
 		<xsl:call-template name="sf:info">
@@ -101,7 +101,7 @@
 	
 	<!-- XSL template -->
 	<xsl:template match="xsl-template">
-		<xsl:variable name="display-name" select="name"/>
+		<xsl:variable name="display-name" select="name/text()"/>
 		
 		<!-- info -->
 		<xsl:call-template name="sf:info">

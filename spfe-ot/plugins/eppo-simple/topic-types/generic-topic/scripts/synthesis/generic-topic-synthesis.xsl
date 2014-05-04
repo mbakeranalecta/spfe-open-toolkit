@@ -10,12 +10,12 @@ xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 exclude-result-prefixes="#all">
 	
-	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</xsl:variable>
+
 	
 	<xsl:template match="*:generic-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
-	
+		<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</xsl:variable>
 		
 		<xsl:choose>
 			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
@@ -33,6 +33,7 @@ exclude-result-prefixes="#all">
 						<xsl:copy-of select="@*"/>
 						<xsl:call-template name="apply-topic-attributes"/>
 						<xsl:apply-templates>
+							<xsl:with-param name="output-namespace" tunnel="yes" select="$output-namespace"/>
 						</xsl:apply-templates>
 					</xsl:element>
 				</ss:topic>

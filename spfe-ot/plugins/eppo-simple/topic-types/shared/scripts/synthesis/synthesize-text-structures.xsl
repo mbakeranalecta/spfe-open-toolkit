@@ -21,7 +21,6 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
  xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
- xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
  exclude-result-prefixes="#all"
 >
 	
@@ -56,6 +55,7 @@
 	</xsl:template>
 
 	<xsl:template name="apply-conditions">
+		<xsl:param name="output-namespace" tunnel="yes"/>
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:choose>
 			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
@@ -73,6 +73,7 @@
 					</xsl:if>
 					
 					<xsl:apply-templates mode="#current"/>
+					
 				</xsl:element>
 			</xsl:when>
 			<xsl:otherwise>
@@ -82,7 +83,7 @@
 	</xsl:template>
 	
 	<!-- changed code-block to code-block/text() to ensure conditions are applied to code-block -->
-	<xsl:template match="code-block/text() | terminal-session/*">
+	<xsl:template match="*:code-block/text() | *:terminal-session/*/text()">
 		<xsl:choose>
 			<xsl:when test="contains(., '&#09;')">
 			<xsl:call-template name="sf:error">
@@ -92,7 +93,9 @@
 		<xsl:otherwise>
 			<xsl:copy copy-namespaces="no">
 				<xsl:copy-of select="@*"/>
-				<xsl:apply-templates/>
+				<xsl:apply-templates>
+					<xsl:with-param name="output-namespace" tunnel="yes"/>
+				</xsl:apply-templates>
 			</xsl:copy>
 		</xsl:otherwise>
 	</xsl:choose>
@@ -100,7 +103,7 @@
 	
 
 	
-	<xsl:template match="fragment-internal">
+	<xsl:template match="*:fragment-internal">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:if test="sf:conditions-met($conditions, $condition-tokens)">
 			<xsl:apply-templates/>
@@ -108,7 +111,7 @@
 	</xsl:template>
 
 	
-	<xsl:template match="fragment-id">
+	<xsl:template match="*:fragment-id">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:if test="sf:conditions-met($conditions, $condition-tokens)">
 			<xsl:variable name="id" select="@id-ref"/>

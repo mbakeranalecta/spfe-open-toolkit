@@ -42,7 +42,7 @@ Main template
 		</xsl:result-document>
 	</xsl:template>
 	
-	<!-- catch and root node that does not have a specific processing attached to it -->
+	<!-- catch any root node that does not have a specific processing attached to it -->
 	<xsl:template match="/*" priority="-1">
 		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">

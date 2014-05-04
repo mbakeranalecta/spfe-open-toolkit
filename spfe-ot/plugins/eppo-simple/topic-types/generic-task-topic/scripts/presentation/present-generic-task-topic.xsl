@@ -46,10 +46,10 @@
 	
 	<xsl:template match="gt:planning-question">
 		<xsl:if test="$config/config:build-command='draft' or esf:section-has-content(gt:planning-question-title/following-sibling::*) ">
-			<planning-question>
+			<qa>
 				<anchor name="{sf:title2anchor(gt:planning-question-title)}"/>
 				<xsl:apply-templates/>
-			</planning-question>
+			</qa>
 		</xsl:if>	
 	</xsl:template>
 	
@@ -60,5 +60,37 @@
 		</title>
 	</xsl:template>
 	
+	<xsl:template match="gt:understanding">	
+		<title>Understand</title>
+			<xsl:apply-templates/>
+		
+	</xsl:template>
 	
+	<xsl:template match="gt:planning">	
+		<title>Plan</title>
+			<xsl:apply-templates/>
+		
+	</xsl:template>
+	
+<!--	<xsl:template match="gt:planning-question">
+		<xsl:apply-templates/>
+	</xsl:template>-->
+	
+	<xsl:template match="gt:planning-question-body">
+		<question>
+			<xsl:apply-templates/>
+		</question>
+	</xsl:template>
+	
+	<xsl:template match="gt:how-to-answer-body">
+		<answer>
+			<xsl:apply-templates/>
+		</answer>
+	</xsl:template>
+	
+	<xsl:template match="gt:doing">	
+		<title>Do</title>
+			<xsl:apply-templates/>
+		
+	</xsl:template>	
 </xsl:stylesheet>

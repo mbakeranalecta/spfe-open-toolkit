@@ -43,6 +43,26 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="object-types">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="included-object-types">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element maxOccurs="unbounded" name="object-type">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="xmlns" type="xs:anyURI"/>
+                                <xs:element name="href" type="xs:anyURI"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="sources" type="sources-type"/>
               <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
               <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
@@ -158,6 +178,14 @@
             <xs:sequence>
               <xs:element name="xmlns" type="xs:anyURI"/>
               <xs:element name="aliases" type="topic-type-aliases-type" minOccurs="0"/>
+              <xs:element name="scripts" type="scripts-type"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="object-type">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="xmlns" type="xs:anyURI"/>
               <xs:element name="scripts" type="scripts-type"/>
             </xs:sequence>
           </xs:complexType>
@@ -291,6 +319,4 @@
       <xs:element name="html-style-directories" type="fileset-type"/>
     </xs:sequence>
   </xs:complexType>
-
-
 </xs:schema>
