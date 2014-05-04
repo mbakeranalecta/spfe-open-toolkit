@@ -12,14 +12,22 @@
         <!-- FIXME: is this regex smart enough? -->
         <!-- FIXME: Stop this from reloading the source file -->
  
-        <xsl:variable name="graphic-record-file" select="replace(@href,'(.+)\..+$','$1.xml')"/>
-        <xsl:variable name="graphic-record-file-uri"
-            select="resolve-uri($graphic-record-file, base-uri(.))"/>
-        <xsl:message select="$graphic-record-file-uri"/>
+        <!-- Need to do matches before replace here because replace returns the original string if no match. -->
+        <xsl:variable name="graphic-record-file" select="if (matches(@href, '(.+)\.[a-zA-Z0-9]+$')) then replace(@href,'(.+)\.[a-zA-Z0-9]+$','$1.xml') else ''"/>
 
+        <!-- check that $graphic-record-file has content of this will return base URI of source file -->
+        <xsl:variable name="graphic-record-file-uri"
+            select="if ($graphic-record-file ne '') then resolve-uri($graphic-record-file, base-uri(.)) else 'NONE'"/>
+        <xsl:message select="string(@href), $graphic-record-file, $graphic-record-file-uri"/>
         <xsl:choose>
-            <!-- FIXME: test for href to avoid looping on no href. need cleaner solution. -->
-            <xsl:when test="@href and doc-available($graphic-record-file-uri)">
+            <!-- The graphic is specified by uri - an identifier, not a location -->
+            <xsl:when test="@uri=$config/config:graphic-record/config:uri">
+                <!-- FIXME: Test for named graphic. To be implemented. -->
+            </xsl:when>       
+            
+            <!-- There is a graphic record file the matches the name of the graphic specified in an href -->
+            
+            <xsl:when test="doc-available($graphic-record-file-uri)">
                 <xsl:variable name="graphic-record"
                     select="document($graphic-record-file-uri)"/>
                 <xsl:element name="fig" namespace="{$output-namespace}">
@@ -31,11 +39,9 @@
                     </xsl:apply-templates>
                 </xsl:element>
             </xsl:when>
-
-            <xsl:when test="@uri=$config/config:graphic-record/config:uri">
-                <!-- FIXME: Test for named graphic. To be implemented. -->
-            </xsl:when>
-            <xsl:when test="matches(@href, '.+\.([^/\.\\]+)$')">
+            
+            <!-- The graphic is specified in an href -->
+            <xsl:when test="@href">
                 <xsl:call-template name="sf:warning">
                     <xsl:with-param name="message">
                         <xsl:text>No graphic record found for fig </xsl:text>
@@ -81,7 +87,7 @@
     <xsl:template match="gr:href">
         <xsl:param name="graphic-record-file-uri" tunnel="yes"/>
         <gr:href>
-            <xsl:value-of select="resolve-uri(gr:href, $graphic-record-file-uri)"/>
+            <xsl:value-of select="resolve-uri(., $graphic-record-file-uri)"/>
         </gr:href>
     </xsl:template>
 
