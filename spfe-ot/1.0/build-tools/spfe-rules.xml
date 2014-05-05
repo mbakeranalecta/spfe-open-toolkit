@@ -105,10 +105,10 @@
 
 	<!-- HTML -->
 
-	<macrodef name="get.externals.graphics.html">
-		<!--		depends="-build.image-list-html"
+<!--	<macrodef name="get.externals.graphics.html">
+		<!-\-		depends="-build.image-list-html"
 		if="image-list-html-has-content">
--->
+-\->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<attribute name="output"/>
@@ -121,7 +121,7 @@
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
-			<!-- build a list of images referenced in synthesis files -->
+			<!-\- build a list of images referenced in synthesis files -\->
 			<saxon-xslt 
 				in="${spfe.config-file}" 
 				style="@{style}"
@@ -136,11 +136,11 @@
 			<files id="files.graphics.html"
 				includesfile="${spfe.build.build-directory}/@{topic-set-id}/temp/image-list-html"/>
 
-			<!--			<condition property="image-list-html-has-content">
+			<!-\-			<condition property="image-list-html-has-content">
 				<isfileselected file="${spfe.build.build-directory}/@{topic-set-id}/temp/image-list-html">
 					<containsregexp expression="\S+"/>
 				</isfileselected>
-			</condition>-->
+			</condition>-\->
 
 			<mkdir dir="@{output}/graphics"/>
 			<copy todir="@{output}/graphics" flatten="true" failonerror="false"
@@ -148,7 +148,7 @@
 				<files refid="files.graphics.html"/>
 			</copy>
 		</sequential>
-	</macrodef>
+	</macrodef>-->
 
 	<macrodef name="get.externals.style.html">
 		<attribute name="output"/>
@@ -496,6 +496,7 @@
 -->						
 			<local name="presentation-files"/>
 			<local name="presentation-files-list"/>
+			<local name="files.images.html"/>
 			<fileset dir="${spfe.build.build-directory}/@{topic-set-id}" id="presentation-file-list">
 				<include name="presentation/*.xml"/>
 			</fileset>
@@ -512,6 +513,23 @@
 					<param name="presentation-files" expression="${presentation-files}"/>
 				</params>
 			</saxon-xslt>
+			
+			<!-- copy the image files to the image directory using list created by format script -->
+			<echo>${spfe.build.build-directory}/@{topic-set-id}/image-list.txt</echo>
+			<files id="files.images.html"
+				includesfile="${spfe.build.build-directory}/@{topic-set-id}/image-list.txt"/>
+			
+			<pathconvert dirsep="/" pathsep=";" property="echo-files"
+				refid="files.images.html"/>
+			
+			<echo>${echo-files}</echo>
+			
+			<mkdir dir="${spfe.build.output-directory}/@{topic-set-id}/images"/>
+			<copy todir="${spfe.build.output-directory}/@{topic-set-id}/images" flatten="true" failonerror="false"
+				preservelastmodified="true" verbose="true">
+				<files refid="files.images.html"/>
+			</copy>
+			
 		</sequential>
 	</macrodef>
 	

@@ -68,9 +68,9 @@
                                 <gr:type>
                                     <xsl:value-of select="replace(@href, '.+\.([^/\.\\]+)$', '$1')"/>
                                 </gr:type>
-                                <gr:uri>
+                                <gr:href>
                                     <xsl:value-of select="resolve-uri(@href, base-uri(.))"/>
-                                </gr:uri>
+                                </gr:href>
                             </gr:format>
                         </gr:formats>
                     </gr:graphic-record>
