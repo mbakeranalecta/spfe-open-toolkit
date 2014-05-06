@@ -18,7 +18,6 @@
         <!-- check that $graphic-record-file has content of this will return base URI of source file -->
         <xsl:variable name="graphic-record-file-uri"
             select="if ($graphic-record-file ne '') then resolve-uri($graphic-record-file, base-uri(.)) else 'NONE'"/>
-        <xsl:message select="string(@href), $graphic-record-file, $graphic-record-file-uri"/>
         <xsl:choose>
             <!-- The graphic is specified by uri - an identifier, not a location -->
             <xsl:when test="@uri=$config/config:graphic-record/config:uri">

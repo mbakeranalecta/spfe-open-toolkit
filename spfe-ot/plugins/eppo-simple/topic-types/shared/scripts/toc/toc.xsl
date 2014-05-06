@@ -113,9 +113,6 @@
 						
 						<xsl:variable name="topic-type-order-list" select="$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type-order/config:topic-type-xmlns/text()"/>
 						<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type/config:xmlns/text()"/>
-<!--						<xsl:message select="'$topic-type-order-list:', string-join($topic-type-order-list, ' ')"/>
-						<xsl:message select="'$topic-type-alias-list:', string-join($topic-type-alias-list, ' ')"/>	
-						<xsl:message select="'$topic-types-found', $topic-types-found"/>-->
 						
 						<xsl:if test="count($topic-types-found[not(.=$topic-type-alias-list)])">
 							<xsl:call-template name="sf:error">
