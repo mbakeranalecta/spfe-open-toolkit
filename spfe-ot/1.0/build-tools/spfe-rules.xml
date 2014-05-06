@@ -497,6 +497,7 @@
 			<local name="presentation-files"/>
 			<local name="presentation-files-list"/>
 			<local name="files.images.html"/>
+			<local name="echo-files"/>
 			<fileset dir="${spfe.build.build-directory}/@{topic-set-id}" id="presentation-file-list">
 				<include name="presentation/*.xml"/>
 			</fileset>
@@ -515,14 +516,9 @@
 			</saxon-xslt>
 			
 			<!-- copy the image files to the image directory using list created by format script -->
-			<echo>${spfe.build.build-directory}/@{topic-set-id}/image-list.txt</echo>
+			<!-- Need the excludes="*" because otherwise an empty incluesfile means copy everything -->
 			<files id="files.images.html"
-				includesfile="${spfe.build.build-directory}/@{topic-set-id}/image-list.txt"/>
-			
-			<pathconvert dirsep="/" pathsep=";" property="echo-files"
-				refid="files.images.html"/>
-			
-			<echo>${echo-files}</echo>
+				includesfile="${spfe.build.build-directory}/@{topic-set-id}/image-list.txt" excludes="*"/>
 			
 			<mkdir dir="${spfe.build.output-directory}/@{topic-set-id}/images"/>
 			<copy todir="${spfe.build.output-directory}/@{topic-set-id}/images" flatten="true" failonerror="false"
