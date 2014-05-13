@@ -13,55 +13,49 @@
         <xsl:if test="@id">
             <anchor name="fig:{@id}"/>
         </xsl:if>
-        <!-- FIXME: This just chooses the first format. Need logic to choose best available or
-        pass that task to format layer.-->
         <fig>
             <xsl:if test="@id">
                 <xs:attribute name="fig" select="fig:{@id}"/>
             </xsl:if>
-            <xsl:apply-templates/>
+            <xsl:if test="not(*:title) and gr:graphic-record/gr:default-title">
+                <title>
+                    <xsl:value-of select="gr:graphic-record/gr:default-title"/>
+                </title>
+            </xsl:if>   
+            <xsl:if test="not(*:caption) and gr:graphic-record/gr:default-caption">
+                <caption>
+                    <xsl:apply-templates select="gr:graphic-record/gr:default-caption"/>
+                </caption>
+            </xsl:if>   
+            <xsl:apply-templates/> 
         </fig>
     </xsl:template>
     
     <xsl:template match="gr:graphic-record">
         <gr:graphic-record>
+            <!-- copy everything except the default caption -->
             <xsl:copy-of  select="gr:name" copy-namespaces="no"/>
             <xsl:copy-of  select="gr:alt" copy-namespaces="no"/>
             <xsl:copy-of  select="gr:uri" copy-namespaces="no"/>
             <xsl:copy-of select="gr:formats" copy-namespaces="no"/>
             <xsl:copy-of select="gr:source" copy-namespaces="no"/>
         </gr:graphic-record>
-        <xsl:choose>
-            <xsl:when test="*:caption">
-                <xsl:apply-templates/>
-            </xsl:when>
-            <xsl:when test="gr:default-caption">
-                <caption>
-                    <xsl:apply-templates select="gr:default-caption" mode="replace-caption"/>
-                </caption>
-            </xsl:when>
-        </xsl:choose>
     </xsl:template>
-
-    <xsl:template match="gr:caption" mode="replace-caption">
+    
+    <xsl:template match="*:fig/*:caption">
         <caption>
             <xsl:apply-templates/>
         </caption>
     </xsl:template>
     
-    <xsl:template match="gr:caption/gr:title" mode="replace-caption">
+    <xsl:template match="*:fig/*:title">
         <title>
             <xsl:apply-templates/>
         </title>
     </xsl:template>
     
-    <xsl:template match="gr:p" mode="replace-caption">
-        <p>
-            <xsl:apply-templates/>
-        </p>
-    </xsl:template>
-    
-    <xsl:template match="gr:*"/>
+  
+    <xsl:template match="gr:*" />
     <!-- mop up any left over text fields -->
     
 </xsl:stylesheet>

@@ -36,6 +36,7 @@
                     <xsl:apply-templates select="$graphic-record">
                         <xsl:with-param name="graphic-record-file-uri" select="$graphic-record-file-uri" tunnel="yes"/>
                     </xsl:apply-templates>
+                    <xsl:apply-templates/>
                 </xsl:element>
             </xsl:when>
             
@@ -81,6 +82,13 @@
             <xsl:otherwise>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="*:fig/*:caption | *:fig/*:title">
+        <xsl:param name="output-namespace" tunnel="yes"/>
+        <xsl:element name="{local-name()}" namespace="{$output-namespace}">
+            <xsl:apply-templates/>
+        </xsl:element>
     </xsl:template>
     
     <xsl:template match="gr:href">

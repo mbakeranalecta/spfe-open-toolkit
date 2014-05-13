@@ -32,10 +32,10 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
+                <xs:element name="default-title" type="xs:string" minOccurs="0"/>
                 <xs:element name="default-caption" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="title" type="xs:string" minOccurs="0"/>
                             <xs:element name="p" minOccurs="0" maxOccurs="unbounded"
                                 type="xs:string"/>
                         </xs:sequence>

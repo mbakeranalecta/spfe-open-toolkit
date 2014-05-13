@@ -241,13 +241,13 @@
 	<!-- FIG -->
 	<!-- FIXME: alt should be supplied from the default caption if not present in source -->
 	<xsl:template match="fig">
-		<xsl:if test="caption/title">
+		<xsl:if test="title">
 			<h4>
 				<xsl:text>Figure&#160;</xsl:text>
 				<xsl:value-of
-					select="count(ancestor::page//fig/caption/title intersect preceding::fig/caption/title)+1"/>
+					select="count(ancestor::page//fig/title intersect preceding::fig/title)+1"/>
 				<xsl:text>&#160;&#160;&#160;</xsl:text>
-				<xsl:value-of select="caption/title"/>
+				<xsl:value-of select="title"/>
 			</h4>
 		</xsl:if>
 		<!-- Select preferred format -->
@@ -300,7 +300,7 @@
 
 	<!-- TITLES -->
 
-	<xsl:template match="fig/caption/title"/>
+	<xsl:template match="fig/title"/>
 
 	<xsl:template match="page/title">
 		<h1>

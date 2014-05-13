@@ -12,10 +12,10 @@
 
     <xs:complexType name="fig-type">
         <xs:sequence>
+            <xs:element name="title" type="xs:string" minOccurs="0"/>
             <xs:element name="caption" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="title" type="xs:string" minOccurs="0"/>
                         <xs:group ref="paragraphs" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:complexType>

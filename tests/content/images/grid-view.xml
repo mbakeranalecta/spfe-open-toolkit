@@ -12,8 +12,9 @@
             <href>grid-view.png</href>
         </format>
     </formats>
+    <default-title>Grid View (title from the graphic record)</default-title>
     <default-caption>
-        <title>Grid View</title>
-        <p>This is the grid view.</p>
+
+        <p>This is the grid view. (Caption from the graphic record.)</p>
     </default-caption>
 </graphic-record>

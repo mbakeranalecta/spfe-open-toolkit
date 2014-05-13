@@ -27,7 +27,10 @@
         <title>Graphics test</title>
         <p>Graphic specified using an href (<code>href="../images/grid-view.png"</code>) with caption. An associated graphics record file exists. A graphic of the Oxygen Grid view should appear below the paragraph with the caption specified here.</p>
         <fig href="../images/grid-view.png">
-            <caption><p>This the grid view.</p></caption>
+            <title>The Grid View (title from topic source)</title>
+            <caption>
+                <p>This the grid view. (Caption from the topic source.)</p>
+            </caption>
         </fig>
         
         <p>Graphic specified using an href (<code>href="../images/grid-view.png"</code>) with no caption. An associated graphics record exists. A graphic of the Oxygen Grid view should appear below the paragraph with the default caption from the graphic record file.</p>
@@ -38,12 +41,12 @@
         
         <p>This is a fig specified using the graphic record file name in the href (<code>href="../images/grid-view.xml"</code>). It should appear just the same as the first graphic.</p>
         <fig href="../images/grid-view.xml">
-            <caption><p>This the grid view.</p></caption>
+            <caption><p>This the grid view. (Caption from the source topic).</p></caption>
         </fig>
         
         <p>This is a fig specified using the graphic URI (<code>uri="http://spfeopentoolkit.org/tests/content/development/graphics-test"</code>). It should appear just the same as the first graphic if the graphic record is included in config, otherwise not.</p>
         <fig uri="http://spfeopentoolkit.org/tests/content/development/graphics-test">
-            <caption><p>This the grid view.</p></caption>
+            <title>The Grid View (title from the topic source)</title>
         </fig>
 
         
