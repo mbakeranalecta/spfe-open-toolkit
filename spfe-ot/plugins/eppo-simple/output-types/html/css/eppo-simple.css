@@ -28,6 +28,11 @@
 {
 	clear:both;
 }
+
+#decoration-bold
+{
+    font-weight:bold;    
+}
 				
 ul.toc li 
 {

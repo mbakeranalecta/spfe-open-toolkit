@@ -126,9 +126,9 @@
 				<xsl:if test="$draft">
 					<div id="draft-header">
 						<p class="status-{translate(@status,' ', '_')}">
-							<b class="cBold">Topic Name: </b>
+							<b class="decoration-bold">Topic Name: </b>
 							<xsl:value-of select="@name"/>
-							<b class="cBold"> Topic Status: </b>
+							<b class="decoration-bold"> Topic Status: </b>
 							<xsl:value-of select="@status"/>
 						</p>
 						<xsl:if test=".//review-note">
@@ -402,7 +402,7 @@
 			<xsl:if test="$draft">
 				<xsl:variable name="my-page" select="ancestor::page"/>
 				<span class="draft">
-					<b class="cBold">
+					<b class="decoration-bold">
 						<xsl:value-of select="count(preceding::p[ancestor::page is $my-page])+1"/>
 					</b>
 				</span>
@@ -460,21 +460,21 @@
 
 	<xsl:template match="note/p[1]">
 		<p class="note-body">
-			<b class="cBold">NOTE: </b>
+			<b class="decoration-bold">NOTE: </b>
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>
 
 	<xsl:template match="caution/p[1]">
 		<p class="caution-body">
-			<b class="cBold">CAUTION: </b>
+			<b class="decoration-bold">CAUTION: </b>
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>
 
 	<xsl:template match="warning/p[1]">
 		<p class="warning-body">
-			<b class="cBold">WARNING: </b>
+			<b class="decoration-bold">WARNING: </b>
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>
@@ -755,7 +755,7 @@
 	<!-- CHARACTERS -->
 
 	<xsl:template match="name|value|code|gui-label|bold">
-		<b class="cBold">
+		<b class="decoration-bold">
 			<xsl:apply-templates/>
 		</b>
 	</xsl:template>
