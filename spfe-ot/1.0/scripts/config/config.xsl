@@ -221,6 +221,15 @@
                     property="{$topic-set-id}.sources-to-extract-content-from-files"
                     refid="{$topic-set-id}.sources-to-extract-content-from"/>
             </xsl:for-each>
+            <xsl:for-each select="$config/output-format">
+                <xsl:variable name="format-name" select="name"/>
+                <files id="files.{$format-name}.support-files">
+                    <xsl:for-each
+                        select="$config/output-format[name=$format-name]/support-files/include">
+                        <include name="{.}"/>
+                    </xsl:for-each>
+                </files>                
+            </xsl:for-each>
 
             <target name="--build.toc">
                 <xsl:for-each select="$config/topic-set">

@@ -195,6 +195,7 @@
             <xs:sequence>
               <xs:element name="name" type="output-format-name"/>
               <xs:element name="scripts" type="scripts-type"/>
+              <xs:element name="support-files" type="fileset-type"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -526,6 +526,13 @@
 				<files refid="files.images.html"/>
 			</copy>
 			
+			<!-- copy the support files (css, scripts, etc.) to the output directory -->
+						
+			<copy todir="${spfe.build.output-directory}/@{topic-set-id}/style" flatten="true" failonerror="false"
+				preservelastmodified="true" verbose="true">
+				<files refid="files.html.support-files"/>
+			</copy>
+			
 		</sequential>
 	</macrodef>
 	
