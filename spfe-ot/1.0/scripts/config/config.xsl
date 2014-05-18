@@ -339,7 +339,8 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.format-html 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.format-html.xsl">
+                        style="{$doc-set-build}/{$topic-set-id}/spfe.format-html.xsl"
+                        output-directory="{if ($topic-set-id=$config/doc-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
                     </build.format-html>
                 </xsl:for-each>
             </target>

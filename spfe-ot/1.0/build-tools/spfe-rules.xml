@@ -489,8 +489,9 @@
 		unless="-current.format-html">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
+		<attribute name="output-directory"/>
 		<sequential>
-			<property name="temp" value="${spfe.build.build-directory}/@{topic-set-id}/temp"/>
+			<!--<property name="temp" value="${spfe.build.build-directory}/@{topic-set-id}/temp"/>-->
 <!--			<get.externals.graphics.html topic-set-id="@{topic-set-id}" output="@{output}"/>
 			<get.externals.style.html output="@{output}"/>
 -->						
@@ -520,15 +521,15 @@
 			<files id="files.images.html"
 				includesfile="${spfe.build.build-directory}/@{topic-set-id}/image-list.txt" excludes="*"/>
 			
-			<mkdir dir="${spfe.build.output-directory}/@{topic-set-id}/images"/>
-			<copy todir="${spfe.build.output-directory}/@{topic-set-id}/images" flatten="true" failonerror="false"
+			<mkdir dir="${spfe.build.output-directory}/@{output-directory}images"/>
+			<copy todir="${spfe.build.output-directory}/@{output-directory}images" flatten="true" failonerror="false"
 				preservelastmodified="true" verbose="true">
 				<files refid="files.images.html"/>
 			</copy>
 			
 			<!-- copy the support files (css, scripts, etc.) to the output directory -->
-						
-			<copy todir="${spfe.build.output-directory}/@{topic-set-id}/style" flatten="true" failonerror="false"
+			<mkdir dir="${spfe.build.output-directory}/@{output-directory}style"/>			
+			<copy todir="${spfe.build.output-directory}/@{output-directory}style" flatten="true" failonerror="false"
 				preservelastmodified="true" verbose="true">
 				<files refid="files.html.support-files"/>
 			</copy>

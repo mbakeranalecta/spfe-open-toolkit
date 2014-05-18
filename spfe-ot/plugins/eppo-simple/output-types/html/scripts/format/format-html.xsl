@@ -389,7 +389,7 @@
 	<!-- suppress fig and table titles because they are handled in  the parent -->
 	<xsl:template match="table/title"/>
 
-	<xsl:template match="fig/title"/>
+
 
 
 	<!-- PARAGRAPHS -->
@@ -778,7 +778,7 @@
 		<xsl:call-template name="sf:warning">
 			<xsl:with-param name="message">
 				<xsl:text>Unknown element found in presentation: </xsl:text>
-				<xsl:value-of select="name()"/>
+				<xsl:value-of select="concat('{', namespace-uri(), '}', name())"/>
 			</xsl:with-param>
 		</xsl:call-template>
 		<xsl:apply-templates/>
