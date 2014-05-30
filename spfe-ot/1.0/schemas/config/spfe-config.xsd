@@ -13,6 +13,7 @@
             <xs:sequence>
               <xs:element name="topic-set-id" type="xs:string"/>
               <xs:element name="topic-set-type" type="xs:string"/>
+              <xs:element minOccurs="0" name="topic-set-link-priority" type="xs:int"/>
               <xs:element name="topic-types">
                 <xs:complexType>
                   <xs:sequence>
@@ -43,7 +44,7 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="object-types">
+              <xs:element name="object-types" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="included-object-types">
@@ -177,6 +178,7 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="xmlns" type="xs:anyURI"/>
+              <xs:element minOccurs="0" name="topic-type-link-priority" type="xs:int"/>
               <xs:element name="aliases" type="topic-type-aliases-type" minOccurs="0"/>
               <xs:element name="scripts" type="scripts-type"/>
             </xs:sequence>

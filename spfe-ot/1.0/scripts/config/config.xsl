@@ -110,40 +110,6 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:function name="spfe:xml2properties">
-        <!-- Convert an XML structure into a set of property statements -->
-        <!-- FIXME: Should root be optional (as it is now) or required? -->
-        <xsl:param name="root"/>
-        <xsl:param name="base" as="xs:string"/>
-        <xsl:for-each select="$root">
-            <xsl:variable name="new-name">
-                <xsl:choose>
-                    <xsl:when test="name() eq 'other'">
-                        <xsl:value-of
-                            select="if($base) then concat($base, '.other.', @name) else concat('other.', @name)"
-                        />
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of
-                            select="if($base) then concat($base, '.', name($root)) else name($root)"
-                        />
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:variable>
-            <xsl:choose>
-                <xsl:when test="child::*">
-                    <xsl:for-each select="child::*">
-                        <xsl:sequence select="spfe:xml2properties(., $new-name)"/>
-                    </xsl:for-each>
-                </xsl:when>
-                <xsl:otherwise>
-                    <property
-                        name="{if($base) then concat($base, '.', name($root)) else name($root)}"
-                        value="{.}"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
-    </xsl:function>
 
     <xsl:function name="spfe:URL-to-local">
         <xsl:param name="URL"/>
@@ -277,7 +243,7 @@
 
             <!-- FIXME: Does this allow for more than one extract operation per topic set?
                  and if not, does that matter? What do we do if we want to create a topic 
-                 set that extracts content from more than one source to cobine into a single
+                 set that extracts content from more than one source to combine into a single
                  topic type? Can we predefine a config scenario for all the possible ineresting
                  cases, or would it be better to delegate it to the script (which could include
                  the use of 'other' config options. 
@@ -295,10 +261,6 @@
                 </xsl:for-each>
             </target>
 
-
-
-
-
             <target name="--build.link-catalog">
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
@@ -310,7 +272,7 @@
             </target>
 
             <target name="--build.list-pages">
-                <build.list-pages style="" topic-set-id="{$config/topic-set-id}"/>
+                <build.list-pages style=""/>
             </target>
 
             <target name="--build.presentation-web">
@@ -321,8 +283,7 @@
                         style="{$doc-set-build}/{$topic-set-id}/spfe.presentation-web.xsl">
                     </build.presentation-web>
                 </xsl:for-each>
-            </target>
-            
+            </target>       
           
             <target name="--build.presentation-book">
                 <xsl:for-each select="$config/topic-set">
@@ -346,149 +307,7 @@
             </target>
             <import file="{$spfeot-home}/1.0/build-tools/spfe-rules.xml"/>
         </project>
-
     </xsl:template>
-
-
-<!--    <xsl:template name="create-topic-set-build-file">
-        <project name="{$config/topic-set-id}" basedir="." default="draft">
-            <xsl:sequence select="spfe:xml2properties(($config/topic-set-id)[1], 'spfe')"/>
-            <xsl:sequence select="spfe:xml2properties(($config/topic-set-type)[1], 'spfe')"/>
-            <xsl:sequence select="spfe:xml2properties(($config/wip-site)[1], 'spfe')"/>
-            <xsl:sequence select="spfe:xml2properties(($config/messages)[1], 'spfe')"/>
-
-            <xsl:for-each select="$config/scripts/*">
-                <xsl:choose>
-                    <xsl:when test="name()='other'">
-                        <property name="spfe.scripts.other.{@name}"
-                            value="{$doc-set-build}/spfe.other.{@name}.xsl"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <property name="spfe.scripts.{name()}"
-                            value="{$doc-set-build}/spfe.{name()}.xsl"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-
-            </xsl:for-each>
-
-
-            <property name="spfe.build.output-directory" value="{$topicset-home}"/>
-            <property name="spfe.build.link-catalog-directory" value="{$link-catalog-directory}"/>
-            <property name="spfe.build.toc-directory" value="{$toc-directory}"/>
-
-
-            <xsl:sequence
-                select="spfe:xml2properties((spfe:URL-to-local(resolve-uri(($config/build/build-rules)[1], ($config/build/build-rules)[1]/@base-uri))), 'spfe.build')"/>
-            <property name="spfe.deployment"
-                value="{concat(($config/build/output-directory)[1], '/', ($config/topic-set-id)[1])}"/>
-
-            <files id="authored-content-for-merge">
-                <xsl:for-each select="$config/sources/authored-content-for-merge/include">
-                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                </xsl:for-each>
-            </files>
-
-            <files id="sources-to-extract-content-from">
-                <xsl:for-each select="$config/sources/sources-to-extract-content-from/include">
-                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                </xsl:for-each>
-            </files>
-
-            <files id="graphics">
-                <xsl:for-each select="$config/sources/graphics/include">
-                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                </xsl:for-each>
-            </files>
-
-            <files id="strings">
-                <xsl:for-each select="$config/sources/strings/include">
-                    <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                </xsl:for-each>
-            </files>
-
-            <files id="link-catalogs">
-                <include name="{concat($link-catalog-directory, '/*.xml')}"/>
-            </files>
-
-            <files id="tocs">
-                <include name="{concat($toc-directory, '/*.xml')}"/>
-            </files>
-
-            <xsl:for-each select="$config/sources/other">
-                <files id="other.{@name}">
-                    <xsl:for-each select="include">
-                        <include name="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                    </xsl:for-each>
-                </files>
-            </xsl:for-each>
-
-            <xsl:choose>
-                <xsl:when test="$config/build/build-rules[1]">
-                    <xsl:for-each select="$config/build/build-rules[1]">
-                        <import file="{spfe:URL-to-local(resolve-uri(.,@base-uri))}"/>
-                    </xsl:for-each>
-                </xsl:when>
-                <xsl:otherwise>
-                    <import file="{$config/SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml"/>
-                </xsl:otherwise>
-            </xsl:choose>
-
-            <resources id="spfe.style.html-style-directories">
-                <xsl:for-each select="$config/style/html-style-directories/include">
-                    <fileset dir="{spfe:URL-to-local(resolve-uri(. ,@base-uri))}"/>
-                </xsl:for-each>
-            </resources>
-
-            <xsl:for-each select="$config/other">
-                <property name="spfe.other.{@name}" value="{.}"/>
-            </xsl:for-each>
-
-        </project>
-
-    </xsl:template>
--->
-    <!--   <xsl:template name="create-build-file">
-        <xsl:choose>
-            <!-\- if the config file specifies a doc set, create a build file for doc set -\->
-            <xsl:when test="/spfe/doc-set">
-                <xsl:call-template name="create-docset-build-file"/>
-            </xsl:when>
-            
-            <!-\- otherwise, create build file for topic-set -\->
-            <xsl:otherwise>  
-                <xsl:call-template name="create-topic-set-build-file"/>
-            </xsl:otherwise>
-        </xsl:choose>
-        
-    </xsl:template>
--->
-    <!-- <xsl:template name="create-run-command">
-        <xsl:param name="build-command"/>
-        <xsl:param name="antfile"/>
-        <!-\- Using <exec> rather than <ant> to avoid a memory exhaustion error that occurs when running <ant>. -\->
-
-        <exec executable="cmd" failonerror="yes" osfamily="windows" xmlns="">
-            <arg value="/c"/>
-            <arg value="ant.bat"/>
-            <arg value="-f"/>
-            <arg value="{$antfile}"/>
-            <arg value="-lib"/>
-            <arg value='"%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar"'/>
-            <arg value="{$build-command}"/>
-            <arg value="-emacs"/>
-        </exec>
-
-        <exec executable="ant" failonerror="yes" osfamily="unix" xmlns="">
-            <arg value="-f"/>
-            <arg value="{$antfile}"/>
-            <arg value="-lib"/>
-            <arg value='"$SPFEOT_HOME/tools/xml-commons-resolver-1.2/resolver.jar"'/>
-            <arg value="{$build-command}"/>
-            <arg value="-emacs"/>
-        </exec>
-
-    </xsl:template>-->
-
 
     <xsl:template name="create-config-file">
         <xsl:if test="not($config//doc-set)">
@@ -542,15 +361,24 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </output-directory>
+                        <xsl:if test="not(topic-set-link-priority)">
+                            <topic-set-link-priority>1</topic-set-link-priority>
+                        </xsl:if>
                         <xsl:copy-of select="*"/>
                     </xsl:copy>
                 </xsl:for-each>
                 
                 <xsl:for-each-group select="$config/topic-type" group-by="xmlns">
-                    <xsl:copy-of select="current-group()[1]"></xsl:copy-of>
+                    <xsl:variable name="this-topic-type" select="current-group()[1]"/>
+                    <topic-type>
+                        <xsl:if test="not($this-topic-type/topic-type-link-priority)">
+                            <topic-type-link-priority>1</topic-type-link-priority>
+                        </xsl:if>
+                        <xsl:copy-of select="$this-topic-type/*"/>
+                    </topic-type>
+                    
                 </xsl:for-each-group>
                 <xsl:copy-of select="$config/output-format"/>
-                <!--<xsl:sequence select="$config/*"/>-->
             </spfe>
 
         </xsl:result-document>
@@ -577,8 +405,6 @@
             </xsl:for-each>
         </xsl:variable>
 
-        <!--<xsl:message select="'$script-sets', $script-sets/scripts/synthesis"/>-->
-
         <xsl:for-each-group select="$script-sets/scripts/*" group-by="name()">
             <xsl:variable name="script-type"
                 select="if (name()='other') then concat('other.',@name) else name()"/>
@@ -595,4 +421,31 @@
             </xsl:result-document>
         </xsl:for-each-group>
     </xsl:template>
+    
+    <!-- <xsl:template name="create-run-command">
+        <xsl:param name="build-command"/>
+        <xsl:param name="antfile"/>
+        <!-\- Using <exec> rather than <ant> to avoid a memory exhaustion error that occurs when running <ant>. -\->
+        
+        <exec executable="cmd" failonerror="yes" osfamily="windows" xmlns="">
+            <arg value="/c"/>
+            <arg value="ant.bat"/>
+            <arg value="-f"/>
+            <arg value="{$antfile}"/>
+            <arg value="-lib"/>
+            <arg value='"%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar"'/>
+            <arg value="{$build-command}"/>
+            <arg value="-emacs"/>
+        </exec>
+        
+        <exec executable="ant" failonerror="yes" osfamily="unix" xmlns="">
+            <arg value="-f"/>
+            <arg value="{$antfile}"/>
+            <arg value="-lib"/>
+            <arg value='"$SPFEOT_HOME/tools/xml-commons-resolver-1.2/resolver.jar"'/>
+            <arg value="{$build-command}"/>
+            <arg value="-emacs"/>
+        </exec>
+        
+    </xsl:template>-->
 </xsl:stylesheet>
