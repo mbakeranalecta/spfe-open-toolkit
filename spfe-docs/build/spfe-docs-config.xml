@@ -4,7 +4,7 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <doc-set>
-        <id>spfew-docs</id>
+        <doc-set-id>spfe-docs</doc-set-id>
         <title>SPFE Documentation</title>
         <topic-set-type-order>
             <topic-set-type>docset</topic-set-type>
@@ -15,25 +15,28 @@
         <home-topic-set>spfe-docs-docset</home-topic-set>
         <topic-sets>
             <topic-set>
-                <id>spfe-docs-docset</id>
+                <topic-set-id>spfe-docs-docset</topic-set-id>
                 <href>topic-sets/spfe-docs-docset.xml</href>
             </topic-set>
             
             <topic-set>
-                <id>spfe-development</id>
+                <topic-set-id>spfe-development</topic-set-id>
                 <href>topic-sets/spfe-development.xml</href>
             </topic-set>
 
             <topic-set>
-                <id>spfe-function-reference</id>
+                <topic-set-id>spfe-function-reference</topic-set-id>
                 <href>topic-sets/spfe-function-reference.xml</href>
             </topic-set>
             
             <topic-set>
-                <id>spfe-configuration-reference</id>
+                <topic-set-id>spfe-configuration-reference</topic-set-id>
                 <href>topic-sets/spfe-configuration-reference.xml</href>
             </topic-set>
         </topic-sets>
+        
+
+        
         <style>
             <html-style-directories>
                 <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css</include>

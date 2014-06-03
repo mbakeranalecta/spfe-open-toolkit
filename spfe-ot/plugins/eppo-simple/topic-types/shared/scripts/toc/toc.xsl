@@ -182,8 +182,6 @@
 	<!-- fallback entries for prefix and suffix entries -->
 	<xsl:template name="toc-prefix-entries"/>
 	<xsl:template name="toc-suffix-entries"/>
-
-	
 	
 	<!-- This template can be overridden in the importing stylesheet to 
 	add additional entries to a TOC after the normal entries. -->
@@ -199,7 +197,6 @@
 			<node id="{@local-name}" name="{@title}"/>
 		</xsl:for-each>
 	</xsl:template>
-	
 
 	<!-- don't create a TOC category for title-pages -->
 	<xsl:template match="topics-of-type[@virtual-type='spfe.title-page']"/>
