@@ -126,14 +126,14 @@ Main content processing templates
 			<xsl:variable name="xpath" select="normalize-space(xpath)"/>
 			<ss:index>
 				<ss:entry>
-					<ss:type>xpath</ss:type>
+					<ss:type>config-setting</ss:type>
 					<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</ss:namespace>
 					<ss:term><xsl:value-of select="$xpath"/></ss:term>
 				</ss:entry>
 				
 				<xsl:for-each select="//schema-attribute[starts-with(normalize-space(xpath), concat($xpath, '/@'))]">
 					<ss:entry>
-						<ss:type>xpath</ss:type>
+						<ss:type>config-setting</ss:type>
 						<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</ss:namespace>
 						<ss:term><xsl:value-of select="xpath"/></ss:term>
 						<ss:anchor><xsl:value-of select="name"></xsl:value-of></ss:anchor>

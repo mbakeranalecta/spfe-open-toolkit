@@ -117,9 +117,9 @@ Main content processing templates
 	<xsl:if test="($current-doctype = $doctype) or not($doctype)">		
 				
 		<ss:topic 
-			type="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference" 
-			full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/{translate(xpath, '/:', '__')}"
-			local-name="{translate(xpath, '/:', '__')}"
+			type="http://spfeopentoolkit.org/spfe-docs/topic-types/topic-subject-list-topic" 
+			full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/topic-subject-list-topic/{name}"
+			local-name="{name}"
 			topic-type-alias="{$topic-type-alias}"
 			title="{name}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words($source[ed:xpath=$xpath]/ed:description/ed:p[1], 30, ' ...'))}">
