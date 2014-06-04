@@ -14,7 +14,8 @@
 
 <xsl:function name="sf:title2anchor">
 	<xsl:param name="title"/>
-	<xsl:value-of select='translate( normalize-space($title), " :&apos;[]", "-----")'/>
+<!--	<xsl:value-of select='translate( normalize-space($title), " :&apos;[]/\", "-\-\-\-\-\-\-")'/>
+-->	<xsl:value-of select="translate(encode-for-uri( normalize-space($title)), '%', '')"/>
 </xsl:function>
 
 <xsl:function name="sf:get-sources">
@@ -360,11 +361,53 @@
 						<xsl:value-of select="$topic-type-xmlns"/>
 						<xsl:text>.</xsl:text>
 						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
-						<xsl:text>/spfe/topic-type/aliases/singular.</xsl:text>
+						<xsl:text>/spfe/topic-type/aliases/plural.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
 				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->
 				<xsl:value-of select="$topic-type-xmlns"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<xsl:function name="sf:get-subject-type-alias-singular">
+		<xsl:param name="subject-type-id"/>
+		<xsl:choose>
+			<xsl:when test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular">
+				<xsl:value-of select="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message">
+						<xsl:text>No singular subject type alias found for topic type </xsl:text>
+						<xsl:value-of select="$subject-type-id"/>
+						<xsl:text>.</xsl:text>
+						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:text>/spfe/subject-types/subject-type/aliases/singular.</xsl:text>
+					</xsl:with-param>
+				</xsl:call-template>
+				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->
+				<xsl:value-of select="$subject-type-id"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<xsl:function name="sf:get-subject-type-alias-plural">
+		<xsl:param name="subject-type-id"/>
+		<xsl:choose>
+			<xsl:when test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural">
+				<xsl:value-of select="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message">
+						<xsl:text>No plural subject type alias found for topic type </xsl:text>
+						<xsl:value-of select="$subject-type-id"/>
+						<xsl:text>.</xsl:text>
+						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:text>/spfe/subject-types/subject-type/aliases/plural.</xsl:text>
+					</xsl:with-param>
+				</xsl:call-template>
+				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->
+				<xsl:value-of select="$subject-type-id"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>

@@ -14,18 +14,16 @@
   meaning that the conditional logic will not be applied to it.
 	
 =======================================================-->
-<xsl:stylesheet version="2.0"  
- xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
- xmlns:xs="http://www.w3.org/2001/XMLSchema" 
- xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" 
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
- xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
- exclude-result-prefixes="#all"
->
-	
-<xsl:param name="condition-tokens"/>
-<xsl:param name="default-reference-scope"/>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
+	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	exclude-result-prefixes="#all">
+
+	<xsl:param name="condition-tokens"/>
+	<xsl:param name="default-reference-scope"/>
 
 	<xsl:param name="fragment-files"/>
 	<xsl:variable name="unresolved-fragments" select="sf:get-sources($fragment-files)"/>
@@ -37,34 +35,25 @@
 	<xsl:template match="/">
 		<xsl:if test="normalize-space($condition-tokens)">
 			<xsl:call-template name="sf:info">
-				<xsl:with-param name="message" select="'Applying condition tokens:', $condition-tokens"/>
+				<xsl:with-param name="message"
+					select="'Applying condition tokens:', $condition-tokens"/>
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:apply-templates/>
 	</xsl:template>
-	
 
-
-	<!-- conditional elements -->
-	<xsl:template match="*" mode="process-fragments">
-		<xsl:call-template name="apply-conditions"/>
-	</xsl:template>
-	
 	<xsl:template match="*">
-		<xsl:call-template name="apply-conditions"/>
-	</xsl:template>
-
-	<xsl:template name="apply-conditions">
 		<xsl:param name="output-namespace" tunnel="yes"/>
-		<xsl:variable name="conditions" select="@if"/>
+		<!-- FIXME: Need to decide if default-reference-scope is still valid and if so whether this is the right way to do it. -->
 		<xsl:choose>
-			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
-				<xsl:element name="{local-name()}" namespace="{$output-namespace}">
+			<xsl:when test="$output-namespace=''"> 
+				<xsl:copy>
 					<xsl:copy-of select="@*" copy-namespaces="no"/>
 					<xsl:if test="(parent::*:p and not(@scope)) or name()='code-block'">
 						<xsl:choose>
 							<xsl:when test="ancestor::ss:topic/@default-reference-scope">
-								<xsl:attribute name="scope" select="ancestor::ss:topic/@default-reference-scope"/>
+								<xsl:attribute name="scope"
+									select="ancestor::ss:topic/@default-reference-scope"/>
 							</xsl:when>
 							<xsl:when test="$default-reference-scope">
 								<xsl:attribute name="scope" select="$default-reference-scope"/>
@@ -74,35 +63,67 @@
 					
 					<xsl:apply-templates mode="#current"/>
 					
+				</xsl:copy>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<xsl:element name="{local-name()}" namespace="{$output-namespace}">
+					<xsl:copy-of select="@*" copy-namespaces="no"/>
+					<xsl:if test="(parent::*:p and not(@scope)) or name()='code-block'">
+						<xsl:choose>
+							<xsl:when test="ancestor::ss:topic/@default-reference-scope">
+								<xsl:attribute name="scope"
+									select="ancestor::ss:topic/@default-reference-scope"/>
+							</xsl:when>
+							<xsl:when test="$default-reference-scope">
+								<xsl:attribute name="scope" select="$default-reference-scope"/>
+							</xsl:when>
+						</xsl:choose>
+					</xsl:if>
+
+					<xsl:apply-templates mode="#current"/>
+
 				</xsl:element>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<!-- Apply if conditions -->
+	<xsl:template match="*[@if]" priority="1">
+		<xsl:variable name="conditions" select="@if"/>
+		<xsl:choose>
+			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
+				<xsl:next-match/>
 			</xsl:when>
 			<xsl:otherwise>
 				<!-- suppress the element -->
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	
+
 	<!-- changed code-block to code-block/text() to ensure conditions are applied to code-block -->
 	<xsl:template match="*:code-block/text() | *:terminal-session/*/text()">
 		<xsl:choose>
 			<xsl:when test="contains(., '&#09;')">
-			<xsl:call-template name="sf:error">
-				<xsl:with-param name="message">Tab character found in <xsl:value-of select="parent::*/name()"/> element. Tabs cannot be formatted reliably. Replace tabs with spaces.</xsl:with-param>
-			</xsl:call-template>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:copy copy-namespaces="no">
-				<xsl:copy-of select="@*"/>
-				<xsl:apply-templates>
-					<xsl:with-param name="output-namespace" tunnel="yes"/>
-				</xsl:apply-templates>
-			</xsl:copy>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
-	
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message">Tab character found in <xsl:value-of
+							select="parent::*/name()"/> element. Tabs cannot be formatted reliably.
+						Replace tabs with spaces.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:copy copy-namespaces="no">
+					<xsl:copy-of select="@*"/>
+					<xsl:apply-templates>
+						<xsl:with-param name="output-namespace" tunnel="yes"/>
+					</xsl:apply-templates>
+				</xsl:copy>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
 
-	
+
+
 	<xsl:template match="*:fragment-internal">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:if test="sf:conditions-met($conditions, $condition-tokens)">
@@ -110,7 +131,7 @@
 		</xsl:if>
 	</xsl:template>
 
-	
+
 	<xsl:template match="*:fragment-id">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:if test="sf:conditions-met($conditions, $condition-tokens)">
@@ -144,8 +165,7 @@
 			</xsl:choose>
 		</xsl:if>
 	</xsl:template>
-	
-										 
-	
-</xsl:stylesheet>
 
+
+
+</xsl:stylesheet>

@@ -407,8 +407,15 @@
                         </xsl:if>
                         <xsl:copy-of select="$this-topic-type/*"/>
                     </topic-type>
-                    
                 </xsl:for-each-group>
+                
+                <xsl:for-each-group select="$config//subject-type" group-by="id">
+                        <xsl:copy-of select="current-group()[1]" copy-namespaces="no"/>
+                </xsl:for-each-group>
+                
+ 
+                <!--<xsl:copy-of select="$config/subject-types"/>-->
+                
                 <xsl:copy-of select="$config/output-format"/>
             </spfe>
 

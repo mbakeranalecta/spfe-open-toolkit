@@ -41,6 +41,16 @@
                 <href>topic-sets/spfe-docs-lists.xml</href>
             </topic-set>
         </topic-sets>
+        
+        <subject-types>
+            <subject-type>
+                <id>config-setting</id>
+                <aliases>
+                    <singular>Configuration setting</singular>
+                    <plural>Configuration settings</plural>
+                </aliases>
+            </subject-type>
+        </subject-types>
 
         <style>
             <html-style-directories>

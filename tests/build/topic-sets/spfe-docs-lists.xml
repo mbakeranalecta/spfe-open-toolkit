@@ -11,12 +11,12 @@
         <topic-types>
             <included-topic-types>
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/topic-subject-list-topic</xmlns>
+                    <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</xmlns>
                     <href>../../../spfe-docs/topic-types/topic-subject-list-topic/config.xml</href>
                 </topic-type>
             </included-topic-types>
             <topic-type-order>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/topic-subject-list-topic</topic-type-xmlns>
+                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</topic-type-xmlns>
             </topic-type-order>
         </topic-types>
 <!--        <object-types>

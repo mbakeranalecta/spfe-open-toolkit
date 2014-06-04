@@ -3,12 +3,13 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet version="2.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
-	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" 
+	xmlns:stl="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list"
 	exclude-result-prefixes="#all">
 	
-	<xsl:output indent="yes" method="xml"/>
+
 
 	
 <!-- =============================================================
@@ -33,34 +34,34 @@
 	<xsl:template name="main" >
 		<!-- Create the root "extracted-content element" -->
 		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id,'/extracted/lists.xml')}" method="xml" indent="yes" omit-xml-declaration="no">
- 			<topic-subject-lists>
+			<stl:subject-topic-lists>
 			<xsl:for-each-group select="$sources//target[@type ne 'topic']" group-by="concat(@type, '+', original-key)">
 				<xsl:variable name="this-key" select="original-key"/>
 				<xsl:variable name="this-type" select="@type"/>
-				<topic-subject-list>
-					<subject><xsl:value-of select="$this-key"/></subject>
-					<subject-type><xsl:value-of select="$this-type"/></subject-type>
-					<topics-on-subject>
+				<stl:subject-topic-list>
+					<stl:subject><xsl:value-of select="$this-key"/></stl:subject>
+					<stl:subject-type><xsl:value-of select="$this-type"/></stl:subject-type>
+					<stl:topics-on-subject>
 
 					<xsl:for-each select="$sources//page[target/original-key=$this-key][target/@type=$this-type]">
-						<topic>
-							<title><xsl:value-of select="@title"/></title>
-							<full-name><xsl:value-of select="@full-name"/></full-name>
-							<topic-type><xsl:value-of select="@topic-type"/></topic-type>
-							<topic-type-alias><xsl:value-of select="@topic-type-alias"/></topic-type-alias>
-							<excerpt><xsl:value-of select="@excerpt"/></excerpt>
-						</topic>
+						<stl:topic>
+							<stl:title><xsl:value-of select="@title"/></stl:title>
+							<stl:full-name><xsl:value-of select="@full-name"/></stl:full-name>
+							<stl:topic-type><xsl:value-of select="@topic-type"/></stl:topic-type>
+							<stl:topic-type-alias><xsl:value-of select="@topic-type-alias"/></stl:topic-type-alias>
+							<stl:excerpt><xsl:value-of select="@excerpt"/></stl:excerpt>
+						</stl:topic>
 					</xsl:for-each>	
-					</topics-on-subject>
-				</topic-subject-list>
+					</stl:topics-on-subject>
+				</stl:subject-topic-list>
 			</xsl:for-each-group>
- 			</topic-subject-lists>
+ 			</stl:subject-topic-lists>
 		</xsl:result-document>
 	</xsl:template>
 	
-	<xsl:output method="xml" indent="yes"/>
+
 	
-	<xsl:key name="attribute-type" match="xs:attribute" use="@type"/>
+
 	
 	<xsl:template match="link-catalog">
 	
