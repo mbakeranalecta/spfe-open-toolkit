@@ -53,18 +53,23 @@ Main template
 	<xsl:call-template name="create-toc-page"/>
 </xsl:template>
 	
-<xsl:template match="ss:topic" priority="1">
+<xsl:template match="ss:topic" priority="100">
 	<!-- Individual topic types can also match ss:topic for further processing. -->
 	<xsl:call-template name="sf:info">
-		<xsl:with-param name="message" select="'Creating page ', @local-name"/>
+		<xsl:with-param name="message" select="'Creating page ', string(@local-name)"/>
 	</xsl:call-template>
 	<xsl:next-match/>
+</xsl:template>
+	
+<!-- This is to make sure processing continues if topic types do not provide their own version. -->	
+<xsl:template match="ss:topic" priority="-0.1">
+	<xsl:apply-templates/>
 </xsl:template>
 
 <xsl:template match="topic/name" mode="#all"/>	
 <xsl:template match="tracking" mode="#all"/>
 	
-	<xsl:template match="*" priority="-1">
+	<xsl:template match="*" >
 		<xsl:call-template name="sf:warning">
 			<xsl:with-param name="message">
 				<xsl:text>Unknown element found in synthesis: </xsl:text>

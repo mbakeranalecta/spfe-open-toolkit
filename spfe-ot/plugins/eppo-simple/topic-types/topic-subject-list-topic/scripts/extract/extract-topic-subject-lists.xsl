@@ -42,8 +42,8 @@
 					<stl:subject><xsl:value-of select="$this-key"/></stl:subject>
 					<stl:subject-type><xsl:value-of select="$this-type"/></stl:subject-type>
 					<stl:topics-on-subject>
-
-					<xsl:for-each select="$sources//page[target/original-key=$this-key][target/@type=$this-type]">
+						<!-- Select topic on this subject and type, excluding those in subject-topic-list pages. -->
+						<xsl:for-each select="$sources//page[target/original-key=$this-key][target/@type=$this-type][@topic-type ne 'http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list']">
 						<stl:topic>
 							<stl:title><xsl:value-of select="@title"/></stl:title>
 							<stl:full-name><xsl:value-of select="@full-name"/></stl:full-name>

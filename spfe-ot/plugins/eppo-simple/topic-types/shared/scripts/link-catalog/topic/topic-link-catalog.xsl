@@ -189,8 +189,8 @@ Main template
 	<!-- Suppress everything else, but process all templates to allow other link 
 		catalog scripts to include this script and process other elements to create 
 		other targets. -->
-	<xsl:template match="*" priority="-1">
+	<xsl:template match="*" >
 		<xsl:apply-templates/>
 	</xsl:template>
-	<xsl:template match="text()" priority="-1"/>
+	<xsl:template match="text()" priority="-0.1"/>
 </xsl:stylesheet>

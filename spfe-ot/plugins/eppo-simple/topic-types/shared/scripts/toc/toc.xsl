@@ -120,9 +120,6 @@
 							</xsl:call-template>
 						</xsl:if>
 						
-
-						
-						
 						<!-- make sure there is a topic type alias for every topic in the topic type order list -->
 						<!-- FIXME: This check could be moved to the config script -->
 						<xsl:if test="not(every $x in $topic-type-order-list satisfies $x = $topic-type-alias-list)">
@@ -203,7 +200,7 @@
 
 		
 	
-<!-- 	<xsl:template match="topic" mode="toc" priority="-1">
+	<!-- 	<xsl:template match="topic" mode="toc" priority="-0.1">
 		<node id="{name}" name="{title}"/>
 	</xsl:template>
  -->

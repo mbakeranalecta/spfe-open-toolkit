@@ -74,14 +74,14 @@
     </xsl:variable>
 
     <!-- copy the attribute nodes from the config files -->
-    <xsl:template match="@*" priority="-1" mode="load-config">
+    <xsl:template match="@*" priority="-0.1" mode="load-config">
         <xsl:copy-of select="."/>
     </xsl:template>
 
     <!-- copy the element nodes from the config files -->
     <!-- add a base-uri attribute to each so we can resolve relative URIs 
          correctly based on the config file in which they occurred -->
-    <xsl:template match="*" priority="-1" mode="load-config">
+    <xsl:template match="*"  mode="load-config">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()" mode="load-config"/>
         </xsl:copy>

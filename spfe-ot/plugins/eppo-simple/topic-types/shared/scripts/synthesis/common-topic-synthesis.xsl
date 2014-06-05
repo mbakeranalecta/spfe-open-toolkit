@@ -43,12 +43,13 @@ Main template
 	</xsl:template>
 	
 	<!-- catch any root node that does not have a specific processing attached to it -->
-	<xsl:template match="/*" priority="-1">
+	<!-- priority is -0.6 because wildcard default priority is -0.5-->
+	<xsl:template match="/*" priority="-0.6">
 		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">
 				<xsl:text>Unknown document root element </xsl:text><xsl:value-of select="local-name()"/> 
-				<xsl:text>encountered with a namespace of </xsl:text> <xsl:value-of select="namespace-uri()"/>. 
-				<xsl:text>You probably need to add a synthesis script for this topic type to the build configuration for the topic set.</xsl:text>
+				<xsl:text> encountered with a namespace of </xsl:text> <xsl:value-of select="namespace-uri()"/> 
+				<xsl:text>. You probably need to add a synthesis script for this topic type to the build configuration for the topic set.</xsl:text>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>

@@ -775,7 +775,7 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 
-	<xsl:template match="*" priority="-1">
+	<xsl:template match="*" >
 		<xsl:call-template name="sf:warning">
 			<xsl:with-param name="message">
 				<xsl:text>Unknown element found in presentation: </xsl:text>
