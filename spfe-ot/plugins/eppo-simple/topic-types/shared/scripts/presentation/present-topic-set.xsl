@@ -53,9 +53,12 @@ Main template
 	<xsl:call-template name="create-toc-page"/>
 </xsl:template>
 	
-<xsl:template match="ss:topic" >
-	<!-- This can be overridden by specific topic types processing that wants to do something specific here. -->
-	<xsl:apply-templates/>
+<xsl:template match="ss:topic" priority="1">
+	<!-- Individual topic types can also match ss:topic for further processing. -->
+	<xsl:call-template name="sf:info">
+		<xsl:with-param name="message" select="'Creating page ', @local-name"/>
+	</xsl:call-template>
+	<xsl:next-match/>
 </xsl:template>
 
 <xsl:template match="topic/name" mode="#all"/>	

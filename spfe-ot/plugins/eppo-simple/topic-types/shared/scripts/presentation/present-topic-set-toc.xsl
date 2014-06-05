@@ -8,9 +8,10 @@
     xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     exclude-result-prefixes="#all">
     
-    <!-- processing directives
-    <xsl:output method="xml" indent="yes"/> -->
+    <!-- processing directives -->
+    <xsl:output method="xml" indent="yes"/> 
     
+    <!-- FIXME: Why is this script reading all the TOC files? Only actually processing the file for this topic-set. -->
     <xsl:param name="toc-files"/>
     <xsl:variable name="unsorted-toc" >
         <xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file:')"/>
@@ -34,6 +35,7 @@
                 <!-- Make sure there is an entry on the topic set type order list for every topic set type. -->
                 <xsl:variable name="topic-set-types-found" select="distinct-values($unsorted-toc/toc/@topic-set-type)"/>
                 
+                <!-- FIXME: Why is topic-set-type order being tested here? -->
                 <!-- Make sure all the topic set types appear on the topic type order list -->
                 <xsl:call-template name="sf:info">
                     <xsl:with-param name="message">
@@ -85,6 +87,7 @@
     
     <!-- TOC templates -->
     <xsl:template name="create-toc-page">
+        
         <xsl:variable name="topic-set-title" select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 
         <page status="generated" name="{$topic-set-id}-toc">
@@ -96,11 +99,15 @@
     </xsl:template>
     
     <xsl:template match="toc[@topic-set-id=$topic-set-id]">
-         <xsl:apply-templates/> 
+        <ul>
+         <xsl:apply-templates/>
+        </ul> 
     </xsl:template>
     <xsl:template match="toc"/>
     
-    <xsl:template match="toc/node">
+    <xsl:template match="node[@topic-type]">
+        <!-- FIXME: title may not be the right markup here, or may need explicit handling at format stage -->
+        <title><xsl:value-of select="@name"/></title>
         <ul>
             <xsl:apply-templates/>
         </ul>

@@ -7,110 +7,11 @@
  xmlns:lf="local-functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
- xmlns:re="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference"
+ xmlns:stl="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list"
  exclude-result-prefixes="#all" 
- xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference">
+ xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list">
 
 	
-	<!--================================================
-	link-xpath-segments function
-
-	Called recursivly to link the segments of an xpath back 
-	to the element named in each segment.
-	===================================================-->
-<xsl:function name="lf:link-xpath-segments">
-	<xsl:param name="xpath"/>
-		<xsl:sequence select="lf:link-xpath-segments($xpath, '', 1)"/>
-</xsl:function>
-
-<xsl:function name="lf:link-doc-xpath">
-	<xsl:param name="doc-xpath"/>
-	<!--find the source-->
-	<xsl:variable name="xpath" select="$synthesis//schema-element[doc-xpath=$doc-xpath]/xpath, $synthesis//schema-element/attributes/attribute[doc-xpath=$doc-xpath]/xpath"/>
-	<xsl:variable name="consumed" select="substring-before($xpath,$doc-xpath)"/>
-	<xsl:sequence select="lf:link-xpath-segments($xpath, $consumed, 1)"/>
-</xsl:function>
-
-<xsl:function name="lf:link-xpath-segments">
-	<xsl:param name="xpath"/>
-	<xsl:param name="consumed"/>
-	<xsl:param name="depth"/>
-
-	<!--check depth to make sure it does not run for ever if something else breaks -->
-	<xsl:if test="not($xpath=$consumed) and not($depth>10)">
-
-	<!-- calculate this segment of the path -->
-	<xsl:variable name="segment">
-		<xsl:choose>
-			<xsl:when test="substring-before(substring($xpath, string-length($consumed)+2),'/')=''">
-				<xsl:value-of select="substring($xpath, string-length($consumed)+2)"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="substring-before(substring($xpath, string-length($consumed)+2),'/')"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-
-	<!-- output this segment with link -->
-	<xsl:text>/</xsl:text>
-	<!-- call the link template -->
-	<xsl:sequence select="lf:link-xpath(concat($consumed, '/', $segment),$segment)"/> 
-	<!-- recursive call -->
-	<xsl:sequence select="lf:link-xpath-segments($xpath, concat($consumed, '/', $segment), $depth+1)"/>
-	</xsl:if>
-</xsl:function>
-
-
-<!-- ==========================================================================
-	link-xpath function
-
-	link-xpath is called to create a link in the output. It checks that the 
-	link target exists. If it is not, it prints an error on the command line.
-=============================================================================-->
-
-<xsl:function name="lf:link-xpath">
-	<xsl:param name="target" as="xs:string"/>
-	<xsl:param name="link-text" as="xs:string"/>
-	<xsl:variable name="targets" select="$synthesis//schema-element, $synthesis//attribute"/>
-	<!--Determine whether or not the target exists. -->
-	<xsl:choose>
-		<xsl:when test="count($targets[xpath = $target]) > 1">
-			<xsl:call-template name="sf:warning">
-				<xsl:with-param name="message" select="'Ambiguous xpath ', $target"/>
-			</xsl:call-template>
-			<!-- output plain text -->
-			<xsl:value-of select="$link-text"/>
-		</xsl:when>			
-		<xsl:when test="not($targets[xpath = $target])">
-			<!-- if it does not exist, report the error but continue, outputting plain text -->
-			<xsl:call-template name="sf:warning">
-				<xsl:with-param name="message" select="'Unknown xpath', $target"/>
-			</xsl:call-template>
-			<!-- output plain text -->
-			<xsl:value-of select="$link-text"/>
-		</xsl:when>
-		
-		<xsl:otherwise>		
-			<!-- it does exist so output a link -->
-			<xsl:variable name="href">
-				<xsl:value-of select="if (contains($target, '/@')) 
-				then 		
-					translate(substring-before($target, '/@'), '/:', '__' )
-				else
-					translate($target, '/:', '__' )"/>
-				<xsl:text>.html</xsl:text>
-				<xsl:if test="contains($target, '/@')">
-					<xsl:text>#</xsl:text>
-					<xsl:value-of select="substring-after($target, '/@')"/>
-				</xsl:if>
-			</xsl:variable>
-									
-			<xref target="{$href}" title="Link to: {$target}">
- 				<xsl:value-of select="$link-text"/>
-			</xref>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:function>
 
 	<!-- 
 		=================
@@ -118,29 +19,27 @@
 		=================
 	-->
 	
-	
-	<!-- spfe-configuration-reference-entry -->
-	<xsl:template match="spfe-configuration-reference-entry">
-		<xsl:apply-templates/>
+	<xsl:template match="ss:topic[@type='http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list']" >
+		<page type="{@type}" name="{@local-name}">
+			<xsl:apply-templates/>
+		</page>
 	</xsl:template>
 	
+	
 	<!-- schema-element -->
-	<xsl:template match="schema-element">
+	<xsl:template match="subject-topic-list">
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
 		
 		<!-- info -->
-		<xsl:call-template name="sf:info">
-			<xsl:with-param name="message" select="'Creating page ', xpath/text()"/>
-		</xsl:call-template>
-		<page type="API" name="{translate(xpath, '/:', '__')}">
+
 			<xsl:call-template name="show-header"/>		
-			<title>Element: <xsl:value-of select="$name"/></title>
+			<title><xsl:value-of select="title"/></title>
 			
 			<labeled-item>
 				<label>XPath</label>
 				<item>
-					<p><xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/></p>
+					<p></p>
 				</item>
 			</labeled-item>	
 			
@@ -241,7 +140,7 @@
 						<xsl:variable name="child-xpath" select="."/>
 						<p>
 							<name hint="element-name">
-								<xsl:sequence select="lf:link-xpath($child-xpath,//schema-element[xpath eq $child-xpath]/name)"/> 
+								
 							</name>
 						</p>
 					</xsl:for-each>
@@ -276,13 +175,13 @@
 				<xsl:call-template name="format-attribute"/>
 			</xsl:for-each>
 			<xsl:call-template name="show-footer"/>		
-		</page>
+		
 	</xsl:template>
 	
 	<!-- FIXME: redundant ? -->
 	<xsl:template	 match="xpath">
 		<name hint="xpath">
-			<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
+			
 		</name>
 	</xsl:template>
 	
@@ -334,7 +233,7 @@
 		<labeled-item>
 			<label>XPath</label>
 			<item>
-				<p><xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/></p>
+				<p></p>
 			</item>
 		</labeled-item>	
 		

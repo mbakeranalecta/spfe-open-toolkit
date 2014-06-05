@@ -129,10 +129,10 @@
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
 		
-		<!-- info -->
+		<!-- info 
 		<xsl:call-template name="sf:info">
 			<xsl:with-param name="message" select="'Creating page ', xpath/text()"/>
-		</xsl:call-template>
+		</xsl:call-template>-->
 		<page type="API" name="{translate(xpath, '/:', '__')}">
 			<xsl:call-template name="show-header"/>		
 			<title>Element: <xsl:value-of select="$name"/></title>
