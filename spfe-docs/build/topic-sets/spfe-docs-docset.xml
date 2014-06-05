@@ -11,34 +11,19 @@
         <topic-types>
             <included-topic-types>
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>
-                    <href>../../topic-types/generic-topic/config.xml</href>
+                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic</xmlns>
+                    <href>../../topic-types/docset-home-topic/config.xml</href>
                 </topic-type>
             </included-topic-types>
             <topic-type-order>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</topic-type-xmlns>
+                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic</topic-type-xmlns>
             </topic-type-order>
         </topic-types>
 
         <sources>
-            <topics>
+            <authored-content>
                 <include>../../content/spfe-docs/*.xml</include>
-            </topics>
-            <text-objects>
-                <include>../../content/*.xml</include>
-            </text-objects>
-            <fragments>
-                <include>../../content/*.xml</include>
-            </fragments>
-            <graphics>
-                <include>../../content/*.xml</include>
-            </graphics>
-            <strings>
-                <include>../../content/*.xml</include>
-            </strings>
-            <synonyms>
-                <include>../../content/*.xml</include>
-            </synonyms>
+            </authored-content>
         </sources>
 
         <default-topic-scope>spfe</default-topic-scope>

@@ -11,19 +11,21 @@
             <topic-set-type>guide</topic-set-type>
             <topic-set-type>task</topic-set-type>
             <topic-set-type>reference</topic-set-type>
+            <topic-set-type>list</topic-set-type>
         </topic-set-type-order>
         <home-topic-set>spfe-docs-docset</home-topic-set>
         <topic-sets>
+            
+            <topic-set>
+                <topic-set-id>spfe-development</topic-set-id>
+                <href>topic-sets/spfe-development.xml</href>
+            </topic-set>    
+            
             <topic-set>
                 <topic-set-id>spfe-docs-docset</topic-set-id>
                 <href>topic-sets/spfe-docs-docset.xml</href>
             </topic-set>
             
-            <topic-set>
-                <topic-set-id>spfe-development</topic-set-id>
-                <href>topic-sets/spfe-development.xml</href>
-            </topic-set>
-
             <topic-set>
                 <topic-set-id>spfe-function-reference</topic-set-id>
                 <href>topic-sets/spfe-function-reference.xml</href>
@@ -33,16 +35,32 @@
                 <topic-set-id>spfe-configuration-reference</topic-set-id>
                 <href>topic-sets/spfe-configuration-reference.xml</href>
             </topic-set>
+            
+            <topic-set>
+                <topic-set-id>spfe-docs-lists</topic-set-id>
+                <href>topic-sets/spfe-docs-lists.xml</href>
+            </topic-set>
         </topic-sets>
         
+        <subject-types>
+            <subject-type>
+                <id>config-setting</id>
+                <aliases>
+                    <singular>Configuration setting</singular>
+                    <plural>Configuration settings</plural>
+                </aliases>
+            </subject-type>
+        </subject-types>
 
-        
         <style>
             <html-style-directories>
                 <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css</include>
             </html-style-directories>
         </style>
         <messages>warning info</messages>
+        
+
+        
         <output-formats>
             <output-format>
                 <name>html</name>

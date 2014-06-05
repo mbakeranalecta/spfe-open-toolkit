@@ -8,6 +8,7 @@
     <topic-set>
         <topic-set-id>spfe-configuration-reference</topic-set-id>
         <topic-set-type>reference</topic-set-type>
+
         <topic-types>
             <included-topic-types>
                 <topic-type>
@@ -21,27 +22,9 @@
         </topic-types>
 
         <sources>
-            <topics>
-                <include>../../content/config-ref/*.xml</include>
-            </topics>
-            <text-objects>
-                <include>../../content/*.xml</include>
-            </text-objects>
-            <fragments>
-                <include>../../content/*.xml</include>
-            </fragments>
-            <graphics>
-                <include>../../content/*.xml</include>
-            </graphics>
-            <strings>
-                <include>../../content/*.xml</include>
-            </strings>
-            <synonyms>
-                <include>../../content/*.xml</include>
-            </synonyms>
-            <authored-content-for-merge>
+            <authored-content>
                 <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
-            </authored-content-for-merge>
+            </authored-content>
             <sources-to-extract-content-from>
                 <include>${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</include>
             </sources-to-extract-content-from>

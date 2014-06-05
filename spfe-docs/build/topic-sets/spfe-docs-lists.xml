@@ -5,47 +5,40 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set>
-        <topic-set-id>spfe-development</topic-set-id>
-        <topic-set-type>guide</topic-set-type>
+        <topic-set-id>spfe-docs-lists</topic-set-id>
+        <topic-set-type>list</topic-set-type>
 
         <topic-types>
             <included-topic-types>
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>
-                    <href>../../topic-types/generic-topic/config.xml</href>
-                </topic-type>
-                <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</xmlns>
-                    <href>../../topic-types/generic-task-topic/config.xml</href>
+                    <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</xmlns>
+                    <href>../../../spfe-docs/topic-types/topic-subject-list-topic/config.xml</href>
                 </topic-type>
             </included-topic-types>
             <topic-type-order>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</topic-type-xmlns>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</topic-type-xmlns>
+                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</topic-type-xmlns>
             </topic-type-order>
-
         </topic-types>
-        <object-types>
+<!--        <object-types>
             <included-object-types>
                 <object-type>
                     <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record</xmlns>
-                    <href>../../object-types/graphics/config.xml</href>
+                    <href>../../../spfe-docs/object-types/graphics/config.xml</href>
                 </object-type>
             </included-object-types>
-        </object-types>
+        </object-types>-->
         
         <sources>
-            <authored-content>
-                
-                <include>../../content/development/*.xml</include>
-            </authored-content>
+            <sources-to-extract-content-from>
+                <include>${DOC_SET_BUILD_DIR}/link-catalogs/*.link-catalog.xml</include>
+            </sources-to-extract-content-from>
         </sources>
 
         <default-topic-scope>spfe</default-topic-scope>
         <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>     
         <strings>
-            <string id="eppo-simple-topic-set-title">SPFE Development</string>
+            <string id="eppo-simple-topic-set-title">SPFE Documentation Lists</string>
         </strings>
     </topic-set>
 </spfe>

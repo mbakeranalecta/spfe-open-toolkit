@@ -29,27 +29,10 @@
         </topic-types>
 
         <sources>
-            <topics>
+            <authored-content>
                 <include>../../content/xsl-function-ref/*.xml</include>
-            </topics>
-            <text-objects>
-                <include>../../content/*.xml</include>
-            </text-objects>
-            <fragments>
-                <include>../../content/*.xml</include>
-            </fragments>
-            <graphics>
-                <include>../../content/*.xml</include>
-            </graphics>
-            <strings>
-                <include>../../content/*.xml</include>
-            </strings>
-            <synonyms>
-                <include>../../content/*.xml</include>
-            </synonyms>
-            <authored-content-for-merge>
                 <include>${SPFEOT_HOME}/1.0/scripts/common/function-and-template-descriptions.xml</include>
-            </authored-content-for-merge>
+            </authored-content>
             <sources-to-extract-content-from>
                 <include>${SPFEOT_HOME}/1.0/scripts/**/*.xsl</include>
                 <include>${SPFEOT_HOME}/1.0/scripts/**/*.xslt</include>
@@ -62,7 +45,7 @@
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules>
         
         <strings>
-            <string id="eppo-simple-topic-set-title">SPFE Function Reference</string>
+            <string id="eppo-simple-topic-set-title">SPFE Functions and Templates</string>
         </strings>
     </topic-set>
 
