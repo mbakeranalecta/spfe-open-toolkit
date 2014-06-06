@@ -122,7 +122,6 @@ Main content processing templates
 			local-name="{translate(xpath, '/:', '__')}"
 			topic-type-alias="{$topic-type-alias}"
 			title="{name}"
-			link-priority="{sf:get-topic-link-priority(namespace-uri(),$topic-set-id)}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words($source[ed:xpath=$xpath]/ed:description/ed:p[1], 30, ' ...'))}">
 			<xsl:variable name="xpath" select="normalize-space(xpath)"/>
 			<ss:index>

@@ -74,7 +74,6 @@ Main template
 					local-name="{xfd:name}"
 					topic-type-alias="{$topic-type-alias}"
 					title="{xfd:name}"
-					link-priority="{sf:get-topic-link-priority(namespace-uri(),$topic-set-id)}"
 					excerpt="{sf:escape-for-xml(sf:first-n-words($function-description/fd:description/fd:p[1], 30, ' ...'))}">
 					
 					<ss:index>
@@ -167,7 +166,6 @@ Main template
 					topic-type-alias=
 					"{sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference')}"
 					title="{xfd:name}"
-					link-priority="{sf:get-topic-link-priority(namespace-uri(),$topic-set-id)}"
 					>
 					<ss:index>
 						<ss:entry>

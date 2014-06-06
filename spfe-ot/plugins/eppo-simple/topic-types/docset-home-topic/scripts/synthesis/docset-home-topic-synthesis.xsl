@@ -24,7 +24,6 @@ exclude-result-prefixes="#all">
 					full-name="{concat(namespace-uri(), '/', *:head/*:id)}"
 					local-name="{*:head/*:id}"
 					title="{*:body/*:title}"
-					link-priority="{sf:get-topic-link-priority(namespace-uri(),$topic-set-id)}"
 					excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::*:p[1], 30, ' ...'))}">
 					<xsl:if test="*:head/*:virtual-type">
 						<xsl:attribute name="virtual-type" select="*:head/*:virtual-type"/>
