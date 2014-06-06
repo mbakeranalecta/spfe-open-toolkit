@@ -175,31 +175,8 @@
 
 			</xsl:call-template>
 		</xsl:if>
-				
+		
 		<xsl:choose>
-			<!-- ancestor::index is a hack to get all cross reference links in folds, even if only one links exists. Need a cleaner implementation. -->
-			<xsl:when test="count($target-page) > 1 or (ancestor::index and count($target-page) eq 1)">
-				<xref-set id="{generate-id($target-page[1]/target[@type=$type][key=$target][1])}">
-					<content><xsl:sequence select="$content"/></content>
-					<xsl:variable name="current-node" select="current()"/>
-					<xsl:for-each select="$target-page">
-						<xsl:variable name="this-target-page" select="."/>
-						<!-- need to reestablish the current node as the context node 
-						     to allow make-xref to test the current node for 
-						     conditional link generation -->
-						<xsl:for-each select="$current-node">
-							<xsl:call-template name="make-xref">
-								<xsl:with-param name="target-page" select="$this-target-page"/>
-								<xsl:with-param name="target" select="$target"/>
-								<xsl:with-param name="type" select="$type"/>
-								<xsl:with-param name="class" select="$class"/>
-								<xsl:with-param name="content" select="''"/>
-								<xsl:with-param name="see-also" as="xs:boolean" select="$see-also"/>
-							</xsl:call-template>
-						</xsl:for-each>
-					</xsl:for-each>
-				</xref-set>
-			</xsl:when>
 			<!-- No target pages identified, so no link. This takes care of links back to the current page -->
 			<xsl:when test="count($target-page) eq 0">
 				<xsl:choose>
@@ -212,8 +189,22 @@
 				</xsl:choose>
 			</xsl:when>
 			<xsl:otherwise>
+				<!-- Choose the target page with the highest link priority -->
+				<!-- Arbitrarilly picks the fist in sequence if more than one page with same priority -->
+				<xsl:variable name="highest-priority-page" select="$target-page[number(@link-priority) eq min($target-page/@link-priority)][1]"/>	
+				<!-- FIXME: This test has never been tested. Need a test case for it. -->
+				<xsl:if test="count($target-page[number(@link-priority) eq min($target-page/@link-priority)]) > 1">
+					<xsl:call-template name="sf:warning">
+						<xsl:with-param name="message">
+							<xsl:text>More than one target page with the same link priority. </xsl:text>
+							<xsl:text>Target pages include:</xsl:text>
+							<xsl:value-of select="string-join($target-page[number(@link-priority) eq min($target-page/@link-priority)], ', ')"/>
+						</xsl:with-param>
+					</xsl:call-template>					
+				</xsl:if>
+
 				<xsl:call-template name="make-xref">
-					<xsl:with-param name="target-page" select="$target-page"/>
+					<xsl:with-param name="target-page" select="$highest-priority-page"/>
 					<xsl:with-param name="target" select="$target"/>
 					<xsl:with-param name="type" select="$type"/>
 					<xsl:with-param name="class" select="$class"/>
