@@ -190,7 +190,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<!-- Choose the target page with the highest link priority -->
-				<!-- Arbitrarilly picks the fist in sequence if more than one page with same priority -->
+				<!-- Arbitrarilly picks the first in sequence if more than one page with same priority -->
 				<xsl:variable name="highest-priority-page" select="$target-page[number(@link-priority) eq min($target-page/@link-priority)][1]"/>	
 				<!-- FIXME: This test has never been tested. Need a test case for it. -->
 				<xsl:if test="count($target-page[number(@link-priority) eq min($target-page/@link-priority)]) > 1">

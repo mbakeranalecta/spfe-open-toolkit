@@ -193,13 +193,15 @@
 	</xsl:function>
 	
 	<xsl:function name="sf:relative-from-absolute-path" as="xs:string">
-		<xsl:param name="path"/>
-		<xsl:param name="relative-to"/>
-		<xsl:param name="prefix"/>
+		<xsl:param name="path" as="xs:string"/>
+		<xsl:param name="relative-to" as="xs:string"/>
+		<xsl:param name="prefix" as="xs:string"/>
 		
-		<xsl:variable name="relative-to-uri" select="sf:path-after-protocol-part(resolve-uri($relative-to))"/>
-		<xsl:variable name="path-uri" select="sf:path-after-protocol-part(resolve-uri($path,$relative-to-uri))"/>
-		<xsl:value-of select="concat($prefix,substring-after($path-uri, $relative-to-uri))"/>
+		<xsl:variable name="normalized-path" 
+			select=" sf:path-after-protocol-part(translate(sf:pct-decode($path), '\', '/'))"></xsl:variable>
+		<xsl:variable  name="normalized-relative-to" 
+			select="sf:path-after-protocol-part(translate(sf:pct-decode($relative-to), '\', '/'))"></xsl:variable>
+		<xsl:value-of select="concat($prefix,substring-after($normalized-path, $normalized-relative-to))"/>
 	</xsl:function>
 	
 	<xsl:function name="sf:path-after-protocol-part" as="xs:string">
