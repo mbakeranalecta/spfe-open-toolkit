@@ -101,8 +101,7 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<!-- changed code-block to code-block/text() to ensure conditions are applied to code-block -->
-	<xsl:template match="*:code-block/text() | *:terminal-session/*/text()">
+	<xsl:template match="*:code-block | *:terminal-session/*">
 		<xsl:choose>
 			<xsl:when test="contains(., '&#09;')">
 				<xsl:call-template name="sf:error">

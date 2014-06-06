@@ -23,9 +23,9 @@ exclude-result-prefixes="#all" >
 	<xsl:for-each select="$element-source//ed:string[not(parent::ed:string-ref)], $config/config:string">
 		<!-- remove them from source namespace -->
 		<string>
-			<xsl:copy-of select="@*"/>
+<!--			<xsl:copy-of select="@*"/>
 			<xsl:copy-of select="./node()"/>
-		</string>
+-->		</string>
 	</xsl:for-each>
 </xsl:variable>
 
@@ -108,7 +108,7 @@ Main content processing templates
 	select=" if ($doctype) 
 					 then concat('/',$doctype,  substring-after($xpath, $doctype))
 					 else $xpath"/> 
-	
+
 	<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference')"/>
 						 
 	<!-- is it this doctype or a group, but not clear we need this check again -->			

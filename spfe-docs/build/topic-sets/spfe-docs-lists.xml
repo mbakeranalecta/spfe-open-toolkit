@@ -7,6 +7,7 @@
     <topic-set>
         <topic-set-id>spfe-docs-lists</topic-set-id>
         <topic-set-type>list</topic-set-type>
+        <topic-set-link-priority>0</topic-set-link-priority>
 
         <topic-types>
             <included-topic-types>
