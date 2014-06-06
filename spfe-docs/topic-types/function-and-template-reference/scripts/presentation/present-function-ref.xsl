@@ -94,6 +94,10 @@
 		</page>
 	</xsl:template>
 	
+	<xsl:template match="description">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
 	<!-- spfe-template-reference-entry -->
 	<xsl:template match="spfe-xslt-template-reference-entry">
 		<xsl:apply-templates/>

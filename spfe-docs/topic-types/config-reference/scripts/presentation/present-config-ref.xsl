@@ -279,6 +279,10 @@
 		</page>
 	</xsl:template>
 	
+	<xsl:template match="description">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
 	<!-- FIXME: redundant ? -->
 	<xsl:template	 match="xpath">
 		<name hint="xpath">
