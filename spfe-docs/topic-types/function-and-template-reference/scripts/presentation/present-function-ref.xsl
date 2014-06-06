@@ -24,10 +24,6 @@
 	<xsl:template match="xsl-function">
 		<xsl:variable name="display-name" select="name/text()"/>
 		
-		<!-- info
-		<xsl:call-template name="sf:info">
-			<xsl:with-param name="message" select="'Creating page ', $display-name"/>
-		</xsl:call-template> -->
 		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
 		<page type="API" name="{name}">
 			
@@ -107,10 +103,6 @@
 	<xsl:template match="xsl-template">
 		<xsl:variable name="display-name" select="name/text()"/>
 		
-		<!-- info 
-		<xsl:call-template name="sf:info">
-			<xsl:with-param name="message" select="'Creating page ', $display-name"/>
-		</xsl:call-template>-->
 		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
 		<!-- FIXME: Is the page type attribute used for anything? Should it be? -->
 		<page type="API" name="{name}">

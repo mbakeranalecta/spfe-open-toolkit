@@ -412,5 +412,13 @@
 		</xsl:choose>
 	</xsl:function>
 	
+	<xsl:function name="sf:get-topic-link-priority">
+		<xsl:param name="topic-namespace-uri"/>
+		<xsl:param name="topic-set-id"/>
+		<xsl:value-of select="$config/config:topic-type[config:xmlns eq $topic-namespace-uri]/config:topic-type-link-priority
+			+
+			$config/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"/>
+	</xsl:function>
+	
 	
 </xsl:stylesheet>

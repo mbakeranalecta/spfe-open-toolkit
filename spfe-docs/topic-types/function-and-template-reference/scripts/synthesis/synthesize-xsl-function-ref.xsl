@@ -74,6 +74,7 @@ Main template
 					local-name="{xfd:name}"
 					topic-type-alias="{$topic-type-alias}"
 					title="{xfd:name}"
+					link-priority="{sf:get-topic-link-priority(namespace-uri(),$topic-set-id)}"
 					excerpt="{sf:escape-for-xml(sf:first-n-words($function-description/fd:description/fd:p[1], 30, ' ...'))}">
 					
 					<ss:index>
@@ -158,14 +159,16 @@ Main template
 			<xsl:for-each-group select="xfd:template-definition" group-by="concat(xfd:namespace-uri, xfd:name)">
 				<xsl:variable name="name" select="string(xfd:name[1])"/>
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
-							
+				<!-- FIXME: This needs an excerpt attribute -->			
 				<ss:topic 
 					type="http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference" 
 					full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference/{concat(xfd:local-prefix, '_', xfd:name)}"
 					local-name="{xfd:name}"
 					topic-type-alias=
 					"{sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference')}"
-					title="{xfd:name}">
+					title="{xfd:name}"
+					link-priority="{sf:get-topic-link-priority(namespace-uri(),$topic-set-id)}"
+					>
 					<ss:index>
 						<ss:entry>
 							<ss:type>spfe-xslt-template-reference-entry</ss:type>

@@ -59,7 +59,7 @@ Main template
 	
 	<xsl:template name="main" >
 		<!-- Create the root "synthesis element" -->
-		<xsl:result-document href="file:///{concat($config/config:link-catalog-directory, '/', $topic-set-id, '.link-catalog.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+		<xsl:result-document href="file:///{concat($config/config:link-catalog-directory, '/', $topic-set-id, '.link-catalog.xml')}" method="xml" indent="yes" encoding="UTF-8" omit-xml-declaration="no">
 			<xsl:apply-templates select="$synthesis"/>
 		</xsl:result-document>
 	</xsl:template>

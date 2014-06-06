@@ -7,7 +7,7 @@
     <xsl:template match="*:config-setting">
         <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
-            <xsl:attribute name="type">xpath</xsl:attribute>
+            <xsl:attribute name="type">config-setting</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
             <xsl:attribute name="namespace">http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</xsl:attribute> 
             <xsl:apply-templates/>

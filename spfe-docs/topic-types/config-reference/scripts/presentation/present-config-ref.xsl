@@ -129,10 +129,6 @@
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
 		
-		<!-- info 
-		<xsl:call-template name="sf:info">
-			<xsl:with-param name="message" select="'Creating page ', xpath/text()"/>
-		</xsl:call-template>-->
 		<page type="API" name="{translate(xpath, '/:', '__')}">
 			<xsl:call-template name="show-header"/>		
 			<title>Element: <xsl:value-of select="$name"/></title>
@@ -284,7 +280,7 @@
 	</xsl:template>
 	
 	<!-- FIXME: redundant ? -->
-	<xsl:template	 match="xpath">
+	<xsl:template match="xpath">
 		<name hint="xpath">
 			<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
 		</name>
