@@ -146,6 +146,8 @@
 	</xsl:template>
 	
 	<xsl:template match="xsl:*">
+		<xsl:variable name="function-prefix" select="string(ancestor::ss:topic//local-prefix)"/>
+		<xsl:variable name="current-page-name" select="ancestor::ss:topic/@full-name"/>
 		<xsl:variable name="indent">
 			<xsl:for-each select="ancestor::xsl:*">
 				<xsl:text>&#xa0;&#xa0;</xsl:text>
@@ -158,7 +160,22 @@
 		<xsl:for-each select="@*">
 			<xsl:value-of select="name()"/>
 			<xsl:text>="</xsl:text>
-			<xsl:value-of select="."/>
+
+			<xsl:message select="'[',string(.),']', concat($function-prefix,':[a-zA-Z0-9._-]+')"></xsl:message>
+			<xsl:analyze-string select="string(.)" regex="{$function-prefix}:[a-zA-Z0-9._-]+">
+				<xsl:matching-substring>
+					<xsl:message select="'function-name:' ,regex-group(0)"/>
+					<xsl:call-template name="output-link">
+						<xsl:with-param name="target" select="substring-after(regex-group(0), concat($function-prefix,':'))"/>
+						<xsl:with-param name="type">xslt-function-name</xsl:with-param>
+						<xsl:with-param name="content" select="regex-group(0)"/>
+						<xsl:with-param name="current-page-name" select="$current-page-name"/>
+					</xsl:call-template>
+				</xsl:matching-substring>
+				<xsl:non-matching-substring>
+					<xsl:value-of select="."/>
+				</xsl:non-matching-substring>
+			</xsl:analyze-string>
 			<xsl:text>"</xsl:text>
 			<xsl:if test="position() ne last()">&#xa0;</xsl:if>
 		</xsl:for-each>

@@ -156,17 +156,18 @@
 		<xsl:param name="type"/>
 		<xsl:param name="class">default</xsl:param>
 		<xsl:param name="content"/>
+		<xsl:param name="current-page-name" as="xs:string"/>
 		<xsl:param name="see-also" as="xs:boolean" select="false()"/>
 		<xsl:param name="scope"/>
-		<!-- check that we are not linking to the current page -->
-		<xsl:variable name="current-page" select="if (ancestor::ss:topic/@full-name) then ancestor::ss:topic/@full-name else 'no-current-page'"/>
+		<!-- check that we are not linking to the current page
+		<xsl:variable name="current-page" select="if (. instance of node() and ancestor::ss:topic/@full-name) then ancestor::ss:topic/@full-name else 'no-current-page'"/> -->
 		
 		<xsl:variable name="target-page" as="node()*"> 		
 			<!-- single key lookup -->
-			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page][esf:in-scope(ancestor-or-self::page,$scope)][target/key=$target]"/>	
+			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page-name][esf:in-scope(ancestor-or-self::page,$scope)][target/key=$target]"/>	
 			
 			<!-- multi-key lookup -->
-			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page][esf:in-scope(ancestor-or-self::page,$scope)]/target[lf:try-key-set($target, key-set)]/.."/>	
+			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page-name][esf:in-scope(ancestor-or-self::page,$scope)]/target[lf:try-key-set($target, key-set)]/.."/>	
 		</xsl:variable>
 		
 		<xsl:if test="count($target-page[1]/target[@type=$type][key=$target]) gt 1">
@@ -207,6 +208,7 @@
 					<xsl:with-param name="target-page" select="$highest-priority-page"/>
 					<xsl:with-param name="target" select="$target"/>
 					<xsl:with-param name="type" select="$type"/>
+					<xsl:with-param name="current-page-name" select="$current-page-name"/>
 					<xsl:with-param name="class" select="$class"/>
 					<xsl:with-param name="see-also" as="xs:boolean" select="$see-also"/>
 					<xsl:with-param name="content">
@@ -229,6 +231,7 @@
 		<xsl:param name="target-page"/>
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
+		<xsl:param name="current-page-name" as="xs:string"/>
 		<xsl:param name="class">default</xsl:param>
 		<xsl:param name="content"/>
 		<xsl:param name="see-also" as="xs:boolean" select="false()"/>
@@ -255,7 +258,7 @@
 			<xsl:attribute name="target">
 				<xsl:choose>
 					<!-- this page -->
-					<xsl:when test="ancestor::topic/name=$target-page[1]/@full-name">
+					<xsl:when test="$current-page-name=$target-page[1]/@full-name">
 						<xsl:choose>
 							<xsl:when test="not($target-anchor='')">
 								 <xsl:value-of select="$target-anchor"/>
@@ -430,6 +433,7 @@
 					<xsl:with-param name="target" select="$target"/>
 					<xsl:with-param name="type">xpath</xsl:with-param>
 					<xsl:with-param name="scope" select="$scope"/>
+					<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 				</xsl:call-template>
 				
 			</xsl:otherwise>
@@ -450,6 +454,7 @@
 					<xsl:with-param name="class">gloss</xsl:with-param>
 					<xsl:with-param name="content" select="normalize-space(string-join(.,''))"/>
 						<xsl:with-param name="scope" select="$scope"/>
+					<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
@@ -485,7 +490,8 @@
 								<xsl:with-param name="content" as="xs:string">
 									<xsl:value-of select="$link-catalogs//target[@type='topic'][key=$topic][esf:in-scope(parent::page, $scope)]/parent::page/@title"/>
 								</xsl:with-param>
-							<xsl:with-param name="scope" select="$scope"/>
+								<xsl:with-param name="scope" select="$scope"/>
+								<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 							</xsl:call-template>
 						</italic>
 					</xsl:otherwise>
@@ -521,6 +527,7 @@
 							<xsl:with-param name="content">
 								<xsl:value-of select="$link-catalogs//target[@type='topic-set'][key=$topic-set]/parent::page/@title"/>
 							</xsl:with-param>
+							<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 							<!-- <xsl:with-param name="scope" select="$scope"/> -->
 						</xsl:call-template>
 					</xsl:otherwise>
@@ -558,6 +565,7 @@
 						<xsl:with-param name="type" select="@type"/>
 						<xsl:with-param name="content" select="$content"/>
 						<xsl:with-param name="scope" select="@scope"/>
+						<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
@@ -595,6 +603,7 @@
 						<xsl:with-param name="type" select="@type"/>
 						<xsl:with-param name="content" select="$content"/>
 						<xsl:with-param name="scope" select="@scope"/>
+						<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
@@ -696,7 +705,8 @@
 					<xsl:with-param name="target" select="$target"/>
 					<xsl:with-param name="type" select="$type"/>
 					<xsl:with-param name="content" select="$content"/>
-						<xsl:with-param name="scope" select="$scope"/>
+					<xsl:with-param name="scope" select="$scope"/>
+					<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>

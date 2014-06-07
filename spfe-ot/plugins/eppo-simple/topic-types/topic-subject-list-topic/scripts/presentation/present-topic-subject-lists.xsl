@@ -50,6 +50,7 @@
 						<xsl:with-param name="content">
 							<xsl:value-of select="topic-type-alias"/>: <xsl:value-of select="title"/>
 						</xsl:with-param>
+						<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 					</xsl:call-template>
 				</label>
 

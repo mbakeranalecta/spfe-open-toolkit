@@ -53,6 +53,7 @@
                                             <xsl:with-param name="target" select="key[1]"/>
                                             <xsl:with-param name="type" select="type"/>
                                             <xsl:with-param name="content" select="$key-text"/>
+                                            <xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
                                             <xsl:with-param name="scope" select="ancestor::topic/@default-reference-scope"/> 
                                         </xsl:call-template>
                                     </xsl:when>
@@ -77,6 +78,7 @@
                     <xsl:with-param name="target" select="key[1]"/>
                     <xsl:with-param name="type" select="type"/>
                     <xsl:with-param name="content" select="translate(key[1], '{}', '')"/>
+                    <xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
                     <xsl:with-param name="see-also" select="true()"/>
                     <xsl:with-param name="scope" select="ancestor::topic/@default-reference-scope"/> 
                 </xsl:call-template>

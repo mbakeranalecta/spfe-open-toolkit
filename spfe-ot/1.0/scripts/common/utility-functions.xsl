@@ -188,20 +188,20 @@
 
 	<xsl:function name="sf:relative-from-absolute-path" as="xs:string">
 		<xsl:param name="path"/>
-		<xsl:param name="relative-to"/>
-		<xsl:value-of select="sf:relative-from-absolute-path($path, $relative-to, '')"/>
+		<xsl:param name="base-path"/>
+		<xsl:value-of select="sf:relative-from-absolute-path($path, $base-path, '')"/>
 	</xsl:function>
 	
 	<xsl:function name="sf:relative-from-absolute-path" as="xs:string">
 		<xsl:param name="path" as="xs:string"/>
-		<xsl:param name="relative-to" as="xs:string"/>
+		<xsl:param name="base-path" as="xs:string"/>
 		<xsl:param name="prefix" as="xs:string"/>
 		
 		<xsl:variable name="normalized-path" 
 			select=" sf:path-after-protocol-part(translate(sf:pct-decode($path), '\', '/'))"></xsl:variable>
-		<xsl:variable  name="normalized-relative-to" 
-			select="sf:path-after-protocol-part(translate(sf:pct-decode($relative-to), '\', '/'))"></xsl:variable>
-		<xsl:value-of select="concat($prefix,substring-after($normalized-path, $normalized-relative-to))"/>
+		<xsl:variable  name="normalized-base-path" 
+			select="sf:path-after-protocol-part(translate(sf:pct-decode($base-path), '\', '/'))"></xsl:variable>
+		<xsl:value-of select="concat($prefix,substring-after($normalized-path, $normalized-base-path))"/>
 	</xsl:function>
 	
 	<xsl:function name="sf:path-after-protocol-part" as="xs:string">
