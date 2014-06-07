@@ -20,6 +20,44 @@
     </head>
     <body>
         <namespace-uri>http://spfeopentoolkit.org/spfe-ot/1.0/functions</namespace-uri>
+        <function-description>  
+            <name>relative-from-absolute-path</name>
+            <description>
+                <p>The <xslt-function-name>relative-from-absolute-path</xslt-function-name> function takes a full system path and returns the portion of that path relative to a base path. For example, given the path</p>
+                <codeblock>C:/Users/Joe/spfe-open-toolkit/spfe-ot/1.0/scripts/common/utility-functions.xsl</codeblock>
+                <p>and the base path</p>
+                <codeblock>C:/Users/Joe/spfe-open-toolkit/spfe-ot</codeblock>
+                <p>it returns the part of the path after the base path:</p>
+                <codeblock>/1.0/scripts/common/utility-functions.xsl</codeblock>
+                <p>Optionally, you can specify a prefix to be added to the returned path:</p>
+                <codeblock>&lt;xsl:value-of select=" sf:relative-from-absolute-path(source-file, $config/config:spfeot-home,'$SPFEOT_HOME')"/>
+                </codeblock>
+
+                <p>In this example, <code>source-file</code> is an element containing the full path of a source file, <code>$config/config:spfeot-home</code> pulls the local path of the spfe open toolkit on the users machine from the config file, and <code>'$SPFEOT_HOME'</code> is a prefix string. Assuming that the value of <code>source-file</code> is <code>file:/C:/Users/Joe/spfe-open-toolkit/spfe-ot/1.0/scripts/common/utility-functions.xsl</code>, the return value will be:</p>
+                <codeblock>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</codeblock>
+                <p>The function does its best to normalize both the <code>path</code> and <code>base-path</code> parameters before comparing them. Any protocol part is removed from both strings (<code>file:/</code> in the example above), directory separators are normalized to forward slashes, and URL decoding is applied (so that if spaces are represented by <code>%20</code>, they will be replaced by regular spaces. This allows you to compare paths in different formats and encodings wihtout having to normalize them first.</p>
+                <p>As the example shows, the principal motivation for this function is to assist in <task>generating documentation from source code</task>. If you write an extraction routine that captures the file name of the file it is extracting from, that name will contain the path of the local machine on which the extraction is run. You can use this function to remove the local portion of the file path and substitute a placeholder such as <code>$SPFEOT_HOME</code> in the example above.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The function returns the portion of the <code>path</code> parameter after the end of the <code>base-path</code> parameter, prefixed with the value of the <code>prefix</code> parameter.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>path</name>
+                    <description>
+                        <p>An absolute path from which the relative path is to be extracted.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>base-path</name>
+                    <description>
+                        <p>An absolute path which will be subtracted from the <code>path</code> parameter to form the relative path.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
         <function-description>
             <name>title2anchor</name>
             <description>
