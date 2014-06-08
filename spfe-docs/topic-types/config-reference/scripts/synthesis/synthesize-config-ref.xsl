@@ -64,9 +64,10 @@ Main template
 <xsl:template name="main">
 	<!-- Create the schema element topic set -->
 	<xsl:for-each-group select="$doctypes/doctype" group-by="@name">
-		<xsl:variable name="root" select=".[sf:longest-string(@xpath)]/@xpath"/>
+		<!-- FIXME: Need a test for the root selection method using schema with more than one doc element. -->
+		<xsl:variable name="root" select=".[sf:index-of-shortest-string(@xpath)]/@xpath"/>
 		<xsl:variable name="current-doctype" select="@name"/>
-			
+		
 		<xsl:result-document 
 			 method="xml" 
 			 indent="yes"

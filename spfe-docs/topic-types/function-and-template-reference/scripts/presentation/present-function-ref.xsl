@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2013 All Rights Reserved. -->
-<xsl:stylesheet version="2.0" 
- xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
- xmlns:xs="http://www.w3.org/2001/XMLSchema"
- xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
- xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
- xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
- exclude-result-prefixes="#all">
-  
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
+	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
+	exclude-result-prefixes="#all">
+
 	<!-- processing directives -->
 	<xsl:output method="xml" indent="yes" cdata-section-elements="codeblock"/>
 
-	
+
 	<!-- spfe-function-reference-entry -->
 	<xsl:template match="spfe-xslt-function-reference-entry">
 		<xsl:apply-templates/>
 	</xsl:template>
-	
+
 	<!-- XSL function -->
 	<xsl:template match="xsl-function">
 		<xsl:variable name="display-name" select="name/text()"/>
-		
+
 		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
 		<page type="API" name="{name}">
-			
+
 
 			<xsl:call-template name="show-header"/>
 			<title>Function: <xsl:value-of select="$display-name"/></title>
-			
+
 			<p>
 				<bold>
 					<xsl:value-of select="$display-name"/>
@@ -48,11 +47,13 @@
 			<labeled-item>
 				<label>Description</label>
 				<item>
-					<xsl:if test="not(description)"><p/></xsl:if>
+					<xsl:if test="not(description)">
+						<p/>
+					</xsl:if>
 					<xsl:apply-templates select="description"/>
 				</item>
-			</labeled-item>	
-			
+			</labeled-item>
+
 			<labeled-item>
 				<label>Return value</label>
 				<item>
@@ -60,81 +61,91 @@
 					<xsl:apply-templates select="return-value/description"/>
 				</item>
 			</labeled-item>
-			
+
 			<labeled-item>
 				<label>Source file</label>
 				<item>
-					<p><xsl:value-of select="source-file"/></p>
-				</item>
-			</labeled-item>
-			
-			<subhead>Parameters</subhead>
-			<xsl:for-each select="parameters/parameter">
-				<labeled-item>
-					<label><xsl:value-of select="name"/></label>
-					<item>
-						<p>Type: <xsl:value-of select="type"/></p>
-						<xsl:apply-templates select="description"/>
-					</item>
-				</labeled-item>
-			</xsl:for-each>
-			
-			<subhead>Definition</subhead>
-			<xsl:for-each select="definition">
-				<codeblock language="XSLT">
-    			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
-    			<xsl:apply-templates select="*"/>
-    		</codeblock>
-			</xsl:for-each>
-			<xsl:call-template name="show-footer"/>		
-		</page>
-	</xsl:template>
-	
-	<xsl:template match="description">
-		<xsl:apply-templates/>
-	</xsl:template>
-	
-	<!-- spfe-template-reference-entry -->
-	<xsl:template match="spfe-xslt-template-reference-entry">
-		<xsl:apply-templates/>
-	</xsl:template>
-	
-	<!-- XSL template -->
-	<xsl:template match="xsl-template">
-		<xsl:variable name="display-name" select="name/text()"/>
-		
-		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
-		<!-- FIXME: Is the page type attribute used for anything? Should it be? -->
-		<page type="API" name="{name}">
-			
-			<title>Template: <xsl:value-of select="$display-name"/></title>
-			
-			<labeled-item>
-				<label>Description</label>
-				<item>
-					<xsl:if test="not(description)"><p/></xsl:if>
-					<xsl:apply-templates select="description"/>
-				</item>
-			</labeled-item>	
-			
-			<labeled-item>
-				<label>Source file</label>
-				<item>
-					<p><xsl:value-of select="source-file"/></p>
+					<p>
+						<xsl:value-of select="source-file"/>
+					</p>
 				</item>
 			</labeled-item>
 
 			<subhead>Parameters</subhead>
 			<xsl:for-each select="parameters/parameter">
 				<labeled-item>
-					<label><xsl:value-of select="name"/></label>
+					<label>
+						<xsl:value-of select="name"/>
+					</label>
 					<item>
 						<p>Type: <xsl:value-of select="type"/></p>
 						<xsl:apply-templates select="description"/>
 					</item>
 				</labeled-item>
 			</xsl:for-each>
-			
+
+			<subhead>Definition</subhead>
+			<xsl:for-each select="definition">
+				<codeblock language="XSLT">
+    			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
+    			<xsl:apply-templates select="*"/>
+    		</codeblock>
+			</xsl:for-each>
+			<xsl:call-template name="show-footer"/>
+		</page>
+	</xsl:template>
+
+	<xsl:template match="description">
+		<xsl:apply-templates/>
+	</xsl:template>
+
+	<!-- spfe-template-reference-entry -->
+	<xsl:template match="spfe-xslt-template-reference-entry">
+		<xsl:apply-templates/>
+	</xsl:template>
+
+	<!-- XSL template -->
+	<xsl:template match="xsl-template">
+		<xsl:variable name="display-name" select="name/text()"/>
+
+		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
+		<!-- FIXME: Is the page type attribute used for anything? Should it be? -->
+		<page type="API" name="{name}">
+
+			<title>Template: <xsl:value-of select="$display-name"/></title>
+
+			<labeled-item>
+				<label>Description</label>
+				<item>
+					<xsl:if test="not(description)">
+						<p/>
+					</xsl:if>
+					<xsl:apply-templates select="description"/>
+				</item>
+			</labeled-item>
+
+			<labeled-item>
+				<label>Source file</label>
+				<item>
+					<p>
+						<xsl:value-of select="source-file"/>
+					</p>
+				</item>
+			</labeled-item>
+
+			<subhead>Parameters</subhead>
+			<xsl:for-each select="parameters/parameter">
+				<labeled-item>
+					<label>
+						<xsl:value-of select="name"/>
+					</label>
+					<item>
+						<p>Type: <xsl:value-of select="type"/></p>
+						<xsl:apply-templates select="description"/>
+					</item>
+				</labeled-item>
+			</xsl:for-each>
+
 			<subhead>Definition</subhead>
 			<xsl:for-each select="definition">
 				<codeblock language="XSLT">
@@ -144,7 +155,7 @@
 			</xsl:for-each>
 		</page>
 	</xsl:template>
-	
+
 	<xsl:template match="xsl:*">
 		<xsl:variable name="function-prefix" select="string(ancestor::ss:topic//local-prefix)"/>
 		<xsl:variable name="current-page-name" select="ancestor::ss:topic/@full-name"/>
@@ -161,12 +172,11 @@
 			<xsl:value-of select="name()"/>
 			<xsl:text>="</xsl:text>
 
-			<xsl:message select="'[',string(.),']', concat($function-prefix,':[a-zA-Z0-9._-]+')"></xsl:message>
 			<xsl:analyze-string select="string(.)" regex="{$function-prefix}:[a-zA-Z0-9._-]+">
 				<xsl:matching-substring>
-					<xsl:message select="'function-name:' ,regex-group(0)"/>
 					<xsl:call-template name="output-link">
-						<xsl:with-param name="target" select="substring-after(regex-group(0), concat($function-prefix,':'))"/>
+						<xsl:with-param name="target"
+							select="substring-after(regex-group(0), concat($function-prefix,':'))"/>
 						<xsl:with-param name="type">xslt-function-name</xsl:with-param>
 						<xsl:with-param name="content" select="regex-group(0)"/>
 						<xsl:with-param name="current-page-name" select="$current-page-name"/>
@@ -182,26 +192,26 @@
 
 		<xsl:choose>
 			<xsl:when test="normalize-space(text()[1])">
-				<xsl:text>&gt;</xsl:text>				
+				<xsl:text>&gt;</xsl:text>
 				<xsl:apply-templates/>
 				<xsl:text>&lt;/</xsl:text>
 				<xsl:value-of select="name()"/>
-				<xsl:text>&gt;&#xa;</xsl:text>					
+				<xsl:text>&gt;&#xa;</xsl:text>
 			</xsl:when>
 			<xsl:when test="child::*">
-				<xsl:text>&gt;&#xa;</xsl:text>				
+				<xsl:text>&gt;&#xa;</xsl:text>
 				<xsl:apply-templates/>
 				<xsl:value-of select="$indent"/>
 				<xsl:text>&lt;/</xsl:text>
 				<xsl:value-of select="name()"/>
-				<xsl:text>&gt;&#xa;</xsl:text>		
+				<xsl:text>&gt;&#xa;</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:text>/&gt;&#xa;</xsl:text>				
+				<xsl:text>/&gt;&#xa;</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	
+
 	<xsl:template match="xsl:*/text()">
 		<xsl:value-of select="normalize-space(.)"/>
 	</xsl:template>

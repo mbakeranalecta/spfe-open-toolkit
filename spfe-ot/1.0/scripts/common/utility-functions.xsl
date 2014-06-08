@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<xsl:stylesheet version="2.0" 
- xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
- xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
- exclude-result-prefixes="#all">
+	exclude-result-prefixes="#all">
 
-<xsl:param name="message-types">info debug warning</xsl:param>
-<xsl:param name="terminate-on-error">yes</xsl:param>
-<xsl:variable name="verbosity" select="tokenize($message-types, ' ')"/>
+	<xsl:param name="message-types">info debug warning</xsl:param>
+	<xsl:param name="terminate-on-error">yes</xsl:param>
+	<xsl:variable name="verbosity" select="tokenize($message-types, ' ')"/>
 
-<xsl:function name="sf:title2anchor">
-	<xsl:param name="title"/>
-<!--	<xsl:value-of select='translate( normalize-space($title), " :&apos;[]/\", "-\-\-\-\-\-\-")'/>
--->	<xsl:value-of select="translate(encode-for-uri( normalize-space($title)), '%', '')"/>
-</xsl:function>
+	<xsl:function name="sf:title2anchor">
+		<xsl:param name="title"/>
+		<!--	<xsl:value-of select='translate( normalize-space($title), " :&apos;[]/\", "-\-\-\-\-\-\-")'/>
+-->
+		<xsl:value-of select="translate(encode-for-uri( normalize-space($title)), '%', '')"/>
+	</xsl:function>
 
-<xsl:function name="sf:get-sources">
-	<xsl:param name="file-list"/>
-	<xsl:sequence select="sf:get-sources($file-list, '')"></xsl:sequence>
-</xsl:function>
-	
-<xsl:function name="sf:get-sources">
-	<xsl:param name="file-list"/>
-	<xsl:param name="load-message"/>
-<!--  FIXME: This test is firing in spfe-docs even though it is building correctly???
+	<xsl:function name="sf:get-sources">
+		<xsl:param name="file-list"/>
+		<xsl:sequence select="sf:get-sources($file-list, '')"/>
+	</xsl:function>
+
+	<xsl:function name="sf:get-sources">
+		<xsl:param name="file-list"/>
+		<xsl:param name="load-message"/>
+		<!--  FIXME: This test is firing in spfe-docs even though it is building correctly???
 		<xsl:if test="normalize-space($file-list)=''">
 		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">
@@ -34,32 +34,32 @@
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:if>
--->	
-	<xsl:for-each select="tokenize(translate($file-list, '\', '/'), ';')">
-		<xsl:variable name="one-file" select="concat('file:///', normalize-space(.))"/>
-		<xsl:if test="normalize-space($load-message)">
-			<xsl:call-template name="sf:info">
-				<xsl:with-param name="message" select="$load-message, $one-file "/>
-			</xsl:call-template>
-		</xsl:if>
-		<xsl:sequence select="document($one-file)"/>
-	</xsl:for-each>
-</xsl:function>	
-	
+-->
+		<xsl:for-each select="tokenize(translate($file-list, '\', '/'), ';')">
+			<xsl:variable name="one-file" select="concat('file:///', normalize-space(.))"/>
+			<xsl:if test="normalize-space($load-message)">
+				<xsl:call-template name="sf:info">
+					<xsl:with-param name="message" select="$load-message, $one-file "/>
+				</xsl:call-template>
+			</xsl:if>
+			<xsl:sequence select="document($one-file)"/>
+		</xsl:for-each>
+	</xsl:function>
+
 	<xsl:template name="sf:info">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='info'">
 			<xsl:message select="'Info: ', $message"/>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xsl:template name="sf:debug">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='debug'">
 			<xsl:message select="'Debug: ', $message"/>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xsl:template name="sf:warning">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='warning'">
@@ -79,7 +79,7 @@
 			</xsl:message>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xsl:template name="sf:error">
 		<xsl:param name="message"/>
 		<xsl:message>**********************************************************</xsl:message>
@@ -87,7 +87,7 @@
 		<xsl:message>**********************************************************</xsl:message>
 		<xsl:message terminate="{$terminate-on-error}"/>
 	</xsl:template>
-	
+
 
 	<xsl:function name="sf:path-depth" as="xs:integer">
 		<!-- Calculates the depth of an XPath by counting the number of 
@@ -107,103 +107,133 @@
 		<xsl:value-of select="subsequence($tokens, count($tokens))"/>
 	</xsl:function>
 
-	<xsl:function name="sf:string" >
+	<xsl:function name="sf:string">
 		<xsl:param name="strings" as="element()*"/>
 		<xsl:param name="id"/>
 		<xsl:if test="not($strings/*:string[@id=$id])">
 			<xsl:call-template name="sf:error">
-				<xsl:with-param name="message">String lookup failed for string ID <xsl:value-of select="$id"/>. No matching string found.</xsl:with-param>
+				<xsl:with-param name="message">String lookup failed for string ID <xsl:value-of
+						select="$id"/>. No matching string found.</xsl:with-param>
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:sequence select="$strings/*:string[@id=$id]/node()"/>
 	</xsl:function>
 
 	<!-- returns the index of the longest of a set of strings -->
-	<xsl:function name="sf:longest-string" as="xs:integer">
-		<xsl:param name="strings"/>
-		<xsl:value-of select="sf:longest-string($strings,1,1)"/>
+	<xsl:function name="sf:index-of-longest-string" as="xs:integer">
+		<xsl:param name="strings" as="xs:string*"/>
+		<xsl:value-of select="sf:index-of-longest-string($strings,2,string-length($strings[1]),1)"/>
 	</xsl:function>
 	
-	<xsl:function name="sf:longest-string" as="xs:integer">
-	<xsl:param name="strings"/>
-	<xsl:param name="current"/>
-	<xsl:param name="longest"/>
-	<xsl:choose>
-		<xsl:when test="$current lt count($strings)">
-			<xsl:variable name="new-longest">
-				<xsl:choose>
-					<xsl:when test="string-length($strings[$current]) gt string-length($strings[$longest])">
-						<xsl:value-of select="string-length($strings[$current])"/>
-					</xsl:when>
-				</xsl:choose>
-			</xsl:variable>
-			<xsl:value-of select="sf:longest-string($strings,$current + 1, $new-longest)"/>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:value-of select="$longest"/>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:function>
+	<xsl:function name="sf:index-of-longest-string" as="xs:integer">
+		<xsl:param name="strings" as="xs:string*"/>
+		<xsl:param name="current" as="xs:integer"/>
+		<xsl:param name="length-of-longest" as="xs:integer"/>
+		<xsl:param name="index-of-longest" as="xs:integer"/>
+		<xsl:message select="'sf:longest-string',$strings,'|', $current,'|', $length-of-longest, '|', $index-of-longest"/>
+		<xsl:choose>
+			<xsl:when test="$current le count($strings)">
+				<xsl:variable name="length-of-current" select="string-length($strings[$current])"/>
+				<xsl:value-of select="sf:index-of-longest-string(
+					$strings, 
+					$current + 1, 
+					max(($length-of-current,$length-of-longest)),
+					if ($length-of-current>$length-of-longest) then $current else $index-of-longest)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$index-of-longest"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
 	
-<xsl:function name="sf:conditions-met" as="xs:boolean">
-	<xsl:param name="conditions"/>
-	<xsl:param name="condition-tokens"/>
-	<xsl:variable name="tokens-list" select="tokenize($condition-tokens, '\s+')"/>
-	<xsl:variable name="conditions-list" select="tokenize($conditions, '\s+')"/>
-	<xsl:choose>
-		<xsl:when test="not($conditions)">
-			<xsl:value-of select="true()"/>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:value-of select="sf:satisfies-condition($conditions-list, $tokens-list)"/>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:function>
+	<!-- returns the index of the shortest of a set of strings -->
+	<xsl:function name="sf:index-of-shortest-string" as="xs:integer">
+		<xsl:param name="strings" as="xs:string*"/>
+		<xsl:value-of select="sf:index-of-shortest-string($strings,2,string-length($strings[1]),1)"/>
+	</xsl:function>
 	
-<xsl:function name="sf:satisfies-condition" as="xs:boolean">
-	<xsl:param name="conditions-list"/>
-	<xsl:param name="tokens-list"/>
-	<xsl:value-of select="sf:satisfies-condition($conditions-list, $tokens-list, 1)"/>
-</xsl:function>
+	<xsl:function name="sf:index-of-shortest-string" as="xs:integer">
+		<xsl:param name="strings" as="xs:string*"/>
+		<xsl:param name="current" as="xs:integer"/>
+		<xsl:param name="length-of-shortest" as="xs:integer"/>
+		<xsl:param name="index-of-shortest" as="xs:integer"/>
+		<xsl:message select="'sf:shortest-string',$strings,'|', $current,'|', $length-of-shortest, '|', $index-of-shortest"/>
+		<xsl:choose>
+			<xsl:when test="$current le count($strings)">
+				<xsl:variable name="length-of-current" select="string-length($strings[$current])"/>
+				<xsl:value-of select="sf:index-of-shortest-string(
+					$strings, 
+					$current + 1, 
+					min(($length-of-current,$length-of-shortest)),
+					if ($length-of-current lt $length-of-shortest) then $current else $index-of-shortest)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$index-of-shortest"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	<xsl:function name="sf:conditions-met" as="xs:boolean">
+		<xsl:param name="conditions"/>
+		<xsl:param name="condition-tokens"/>
+		<xsl:variable name="tokens-list" select="tokenize($condition-tokens, '\s+')"/>
+		<xsl:variable name="conditions-list" select="tokenize($conditions, '\s+')"/>
+		<xsl:choose>
+			<xsl:when test="not($conditions)">
+				<xsl:value-of select="true()"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="sf:satisfies-condition($conditions-list, $tokens-list)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
 
-<xsl:function name="sf:satisfies-condition" as="xs:boolean">
-	<xsl:param name="conditions-list"/>
-	<xsl:param name="tokens-list"/>
-	<xsl:param name="index"/>
-	
-	<xsl:variable name="and-tokens" select="tokenize($tokens-list[$index], '\+')"/>
-	
-	<xsl:choose>
-		<xsl:when test="every $item in $and-tokens satisfies $item=$conditions-list">
-			<xsl:value-of select="true()"/>
-		</xsl:when>
-		<xsl:when test="$index lt count($tokens-list)">
-			<xsl:value-of select="sf:satisfies-condition($conditions-list, $tokens-list, $index + 1)"/>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:value-of select="false()"/>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:function>
+	<xsl:function name="sf:satisfies-condition" as="xs:boolean">
+		<xsl:param name="conditions-list"/>
+		<xsl:param name="tokens-list"/>
+		<xsl:value-of select="sf:satisfies-condition($conditions-list, $tokens-list, 1)"/>
+	</xsl:function>
+
+	<xsl:function name="sf:satisfies-condition" as="xs:boolean">
+		<xsl:param name="conditions-list"/>
+		<xsl:param name="tokens-list"/>
+		<xsl:param name="index"/>
+
+		<xsl:variable name="and-tokens" select="tokenize($tokens-list[$index], '\+')"/>
+
+		<xsl:choose>
+			<xsl:when test="every $item in $and-tokens satisfies $item=$conditions-list">
+				<xsl:value-of select="true()"/>
+			</xsl:when>
+			<xsl:when test="$index lt count($tokens-list)">
+				<xsl:value-of
+					select="sf:satisfies-condition($conditions-list, $tokens-list, $index + 1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="false()"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
 
 	<xsl:function name="sf:relative-from-absolute-path" as="xs:string">
 		<xsl:param name="path"/>
 		<xsl:param name="base-path"/>
 		<xsl:value-of select="sf:relative-from-absolute-path($path, $base-path, '')"/>
 	</xsl:function>
-	
+
 	<xsl:function name="sf:relative-from-absolute-path" as="xs:string">
 		<xsl:param name="path" as="xs:string"/>
 		<xsl:param name="base-path" as="xs:string"/>
 		<xsl:param name="prefix" as="xs:string"/>
-		
-		<xsl:variable name="normalized-path" 
-			select=" sf:path-after-protocol-part(translate(sf:pct-decode($path), '\', '/'))"></xsl:variable>
-		<xsl:variable  name="normalized-base-path" 
-			select="sf:path-after-protocol-part(translate(sf:pct-decode($base-path), '\', '/'))"></xsl:variable>
-		<xsl:value-of select="concat($prefix,substring-after($normalized-path, $normalized-base-path))"/>
+
+		<xsl:variable name="normalized-path"
+			select=" sf:path-after-protocol-part(translate(sf:pct-decode($path), '\', '/'))"/>
+		<xsl:variable name="normalized-base-path"
+			select="sf:path-after-protocol-part(translate(sf:pct-decode($base-path), '\', '/'))"/>
+		<xsl:value-of
+			select="concat($prefix,substring-after($normalized-path, $normalized-base-path))"/>
 	</xsl:function>
-	
+
 	<xsl:function name="sf:path-after-protocol-part" as="xs:string">
 		<xsl:param name="path"/>
 		<xsl:analyze-string select="$path" regex="^([a-zA-Z]{{2,}}://?/?)?(.+)">
@@ -212,12 +242,12 @@
 			</xsl:matching-substring>
 		</xsl:analyze-string>
 	</xsl:function>
-	
+
 	<xsl:function name="sf:local-path-from-uri">
 		<xsl:param name="local-path"/>
 		<xsl:value-of select="sf:pct-decode(sf:path-after-protocol-part($local-path))"/>
 	</xsl:function>
-	
+
 	<!-- Adapted from code published by James A. Robinson at http://www.oxygenxml.com/archives/xsl-list/200911/msg00300.html -->
 	<!-- Function to decode percent-encoded characters  -->
 	<xsl:function name="sf:pct-decode" as="xs:string?">
@@ -227,7 +257,7 @@
 	<xsl:function name="sf:pct-decode" as="xs:string?">
 		<xsl:param name="in" as="xs:string"/>
 		<xsl:param name="seq" as="xs:string*"/>
-		
+
 		<xsl:choose>
 			<xsl:when test="not($in)">
 				<xsl:sequence select="string-join($seq, '')"/>
@@ -236,13 +266,17 @@
 				<xsl:choose>
 					<xsl:when test="matches(substring($in, 2, 2), '^[0-9A-Fa-f][0-9A-Fa-f]$')">
 						<xsl:variable name="s" as="xs:string" select="substring($in, 2, 2)"/>
-						<xsl:variable name="d" as="xs:integer" select="sf:hex-to-dec(upper-case($s))"/>
+						<xsl:variable name="d" as="xs:integer"
+							select="sf:hex-to-dec(upper-case($s))"/>
 						<xsl:variable name="c" as="xs:string" select="codepoints-to-string($d)"/>
 						<xsl:sequence select="sf:pct-decode(substring($in, 4), ($seq, $c))"/>
 					</xsl:when>
 					<xsl:when test="contains(substring($in, 2), '%')">
-						<xsl:variable name="s" as="xs:string" select="substring-before(substring($in, 2), '%')"/>
-						<xsl:sequence select="sf:pct-decode(substring($in, 2 + string-length($s)), ($seq, '%', $s))"/>
+						<xsl:variable name="s" as="xs:string"
+							select="substring-before(substring($in, 2), '%')"/>
+						<xsl:sequence
+							select="sf:pct-decode(substring($in, 2 + string-length($s)), ($seq, '%', $s))"
+						/>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:sequence select="string-join(($seq, $in), '')"/>
@@ -251,25 +285,27 @@
 			</xsl:when>
 			<xsl:when test="contains($in, '%')">
 				<xsl:variable name="s" as="xs:string" select="substring-before($in, '%')"/>
-				<xsl:sequence select="sf:pct-decode(substring($in, string-length($s)+1), ($seq, $s))"/>
+				<xsl:sequence
+					select="sf:pct-decode(substring($in, string-length($s)+1), ($seq, $s))"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:sequence select="string-join(($seq, $in), '')"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
-	
+
 	<!-- Function to convert a hexadecimal string into decimal -->
 	<xsl:function name="sf:hex-to-dec" as="xs:integer">
 		<xsl:param name="hex" as="xs:string"/>
-		
+
 		<xsl:variable name="len" as="xs:integer" select="string-length($hex)"/>
 		<xsl:choose>
 			<xsl:when test="$len eq 0">
 				<xsl:sequence select="0"/>
 			</xsl:when>
 			<xsl:when test="$len eq 1">
-				<xsl:sequence select="
+				<xsl:sequence
+					select="
 					if ($hex eq '0')       then 0
 					else if ($hex eq '1')       then 1
 					else if ($hex eq '2')       then 2
@@ -287,16 +323,19 @@
 					else if ($hex = ('E', 'e')) then 14
 					else if ($hex = ('F', 'f')) then 15
 					else error(xs:QName('sf:hex-to-dec'))
-					"/>
+					"
+				/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="
+				<xsl:sequence
+					select="
 					(16 * sf:hex-to-dec(substring($hex, 1, $len - 1)))
-					+ sf:hex-to-dec(substring($hex, $len))"/>
+					+ sf:hex-to-dec(substring($hex, $len))"
+				/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
-	
+
 	<!-- Display first n words -->
 	<xsl:function name="sf:first-n-words">
 		<xsl:param name="text"/>
@@ -312,7 +351,7 @@
 			</xsl:analyze-string>
 		</xsl:if>
 	</xsl:function>
-	
+
 	<!-- Escape string for XML -->
 	<xsl:function name="sf:escape-for-xml">
 		<xsl:param name="string"/>
@@ -328,12 +367,15 @@
 			</xsl:non-matching-substring>
 		</xsl:analyze-string>
 	</xsl:function>
-	
+
 	<xsl:function name="sf:get-topic-type-alias-singular">
 		<xsl:param name="topic-type-xmlns"/>
 		<xsl:choose>
-			<xsl:when test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular">
-				<xsl:value-of select="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular"/>
+			<xsl:when
+				test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular">
+				<xsl:value-of
+					select="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular"
+				/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
@@ -353,8 +395,11 @@
 	<xsl:function name="sf:get-topic-type-alias-plural">
 		<xsl:param name="topic-type-xmlns"/>
 		<xsl:choose>
-			<xsl:when test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural">
-				<xsl:value-of select="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural"/>
+			<xsl:when
+				test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural">
+				<xsl:value-of
+					select="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural"
+				/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
@@ -374,8 +419,11 @@
 	<xsl:function name="sf:get-subject-type-alias-singular">
 		<xsl:param name="subject-type-id"/>
 		<xsl:choose>
-			<xsl:when test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular">
-				<xsl:value-of select="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular"/>
+			<xsl:when
+				test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular">
+				<xsl:value-of
+					select="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular"
+				/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
@@ -395,8 +443,11 @@
 	<xsl:function name="sf:get-subject-type-alias-plural">
 		<xsl:param name="subject-type-id"/>
 		<xsl:choose>
-			<xsl:when test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural">
-				<xsl:value-of select="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural"/>
+			<xsl:when
+				test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural">
+				<xsl:value-of
+					select="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural"
+				/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
@@ -413,14 +464,16 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
-	
+
 	<xsl:function name="sf:get-topic-link-priority">
 		<xsl:param name="topic-namespace-uri"/>
 		<xsl:param name="topic-set-id"/>
-		<xsl:value-of select="$config/config:topic-type[config:xmlns eq $topic-namespace-uri]/config:topic-type-link-priority
+		<xsl:value-of
+			select="$config/config:topic-type[config:xmlns eq $topic-namespace-uri]/config:topic-type-link-priority
 			+
-			$config/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"/>
+			$config/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"
+		/>
 	</xsl:function>
-	
-	
+
+
 </xsl:stylesheet>
