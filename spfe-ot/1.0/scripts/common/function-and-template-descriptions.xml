@@ -8,7 +8,6 @@
     <head>
         <id>function-and-template-descriptions</id>
         <virtual-type/>
-        <author>mbaker</author>
         <history>
             <revision>
                 <date>2012-09-21</date>
@@ -149,10 +148,13 @@
                 </parameter>
             </parameters>
         </function-description>
+        
         <function-description>
-            <name>longest-string</name>
+            <!-- Keep this description in sync with index-of-shortest-string -->
+            <name>index-of-longest-string</name>
             <description>
-                <p>The <xslt-function-name>longest-string</xslt-function-name> function returns the index of the longest string in a sequence of strings.</p>
+                <p>The <xslt-function-name>index-of-longest-string</xslt-function-name> function returns the index of the longest string in a sequence of strings. To get the index of the shortest string, use <xslt-function-name>index-of-shortest-string</xslt-function-name>.</p>
+                <p>For XSLT geeks: <xslt-function-name>index-of-longest-string</xslt-function-name> is a recursive polymorphic function. There is a version with one parameter, <code>strings</code>, that is the one you call from your code, and a version with four parameters, that is called by the first version, and which calls itself recursively, to do the work. It is unlikely you will ever want to call the second version yourself.</p>
             </description>
             <return-value>
                 <description>
@@ -166,6 +168,65 @@
                         <p>A sequence of strings.</p>
                     </description>
                 </parameter>
+                <parameter>
+                    <name>current</name>
+                    <description>
+                        <p>The index of the string currently being measured. You should not generally use this parameter in your code. It is used internally by the recursive function calls.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>length-of-longest</name>
+                    <description>
+                        <p>The length of the longest string seen so far as the function is called recursively. You should not generally use this parameter in your code.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>index-of-longest</name>
+                    <description>
+                        <p>The index of the longest string seen so far as the function is called recursively. You should not generally use this parameter in your code.</p>
+                    </description>
+                </parameter>
+                
+            </parameters>
+        </function-description>
+        <function-description>
+            <!-- Keep this description in sync with index-of-longest-string -->
+            <name>index-of-shortest-string</name>
+            <description>
+                <p>The <xslt-function-name>index-of-shortest-string</xslt-function-name> function returns the index of the shortest string in a sequence of strings. To get the index of the longest string, use <xslt-function-name>index-of-longest-string</xslt-function-name>.</p>
+                <p>For XSLT geeks: <xslt-function-name>index-of-shortest-string</xslt-function-name> is a recursive polymorphic function. There is a version with one parameter, <code>strings</code>, that is the one you call from your code, and a version with four parameters, that is called by the first version, and which calls itself recursively, to do the work. It is unlikely you will ever want to call the second version yourself.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The index of the shortest string.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>strings</name>
+                    <description>
+                        <p>A sequence of strings.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>current</name>
+                    <description>
+                        <p>The index of the string currently being measured. You should not generally use this parameter in your code. It is used internally by the recursive function calls.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>length-of-longest</name>
+                    <description>
+                        <p>The length of the shortest string seen so far as the function is called recursively. You should not generally use this parameter in your code.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>index-of-longest</name>
+                    <description>
+                        <p>The index of the shortes string seen so far as the function is called recursively. You should not generally use this parameter in your code.</p>
+                    </description>
+                </parameter>
+                
             </parameters>
         </function-description>
         <function-description>
