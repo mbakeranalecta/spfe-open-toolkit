@@ -111,7 +111,7 @@
 		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
 		<!-- FIXME: Is the page type attribute used for anything? Should it be? -->
 		<page type="API" name="{name}">
-
+			<xsl:call-template name="show-header"/>
 			<title>Template: <xsl:value-of select="$display-name"/></title>
 
 			<labeled-item>
@@ -153,6 +153,7 @@
     			<xsl:apply-templates select="*"/>
     		</codeblock>
 			</xsl:for-each>
+			<xsl:call-template name="show-footer"/>
 		</page>
 	</xsl:template>
 

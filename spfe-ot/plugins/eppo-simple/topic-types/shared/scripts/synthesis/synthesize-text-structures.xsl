@@ -25,13 +25,6 @@
 	<xsl:param name="condition-tokens"/>
 	<xsl:param name="default-reference-scope"/>
 
-	<xsl:param name="fragment-files"/>
-	<xsl:variable name="unresolved-fragments" select="sf:get-sources($fragment-files)"/>
-	<xsl:variable name="fragments">
-		<xsl:apply-templates mode="process-fragments" select="$unresolved-fragments"/>
-	</xsl:variable>
-
-
 	<xsl:template match="/">
 		<xsl:if test="normalize-space($condition-tokens)">
 			<xsl:call-template name="sf:info">
@@ -123,7 +116,7 @@
 
 
 
-	<xsl:template match="*:fragment-internal">
+	<xsl:template match="*:fragment">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:if test="sf:conditions-met($conditions, $condition-tokens)">
 			<xsl:apply-templates/>
@@ -131,23 +124,26 @@
 	</xsl:template>
 
 
-	<xsl:template match="*:fragment-id">
+	<xsl:template match="*:fragment-ref">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:if test="sf:conditions-met($conditions, $condition-tokens)">
-			<xsl:variable name="id" select="@id-ref"/>
-			<xsl:variable name="matching-fragment">
-				<xsl:apply-templates select="$fragments//fragment[@id=$id]"/>
-			</xsl:variable>
-			<xsl:variable name="fragment-count" select="count($matching-fragment/fragment)"/>
+			<xsl:variable name="fragment-id" select="@id-ref"/>
+			<xsl:variable name="matching-fragment" select="$fragments[@id=$fragment-id]"/>
+			<xsl:variable name="fragment-count" select="count($matching-fragment)"/>
+			
 			<xsl:choose>
 				<xsl:when test="$fragment-count = 1">
-					<xsl:sequence select="$matching-fragment/fragment/*"/>
+					<xsl:message select="'f$in-scope-strings', *:local-strings/*:string"></xsl:message>
+					<xsl:apply-templates select="$matching-fragment/*">
+						
+						<xsl:with-param name="in-scope-strings" select="*:local-strings/*:string" tunnel="yes"/>
+					</xsl:apply-templates>
 				</xsl:when>
 				<xsl:when test="$fragment-count gt 1">
 					<xsl:call-template name="sf:error">
 						<xsl:with-param name="message">
-							<xsl:text>More than one fragment matching the fragment id </xsl:text>
-							<xsl:value-of select="$id"/>
+							<xsl:text>More than one fragment matching the fragment-id </xsl:text>
+							<xsl:value-of select="$fragment-id"/>
 							<xsl:text> was found. Check that fragment ids are unique and that conditions applied to the build do not result in multiple fragments with the same name being available.</xsl:text>
 						</xsl:with-param>
 					</xsl:call-template>
@@ -156,7 +152,7 @@
 					<xsl:call-template name="sf:error">
 						<xsl:with-param name="message">
 							<xsl:text>No fragment was found matching the fragment id </xsl:text>
-							<xsl:value-of select="$id"/>
+							<xsl:value-of select="$fragment-id"/>
 							<xsl:text>.</xsl:text>
 						</xsl:with-param>
 					</xsl:call-template>

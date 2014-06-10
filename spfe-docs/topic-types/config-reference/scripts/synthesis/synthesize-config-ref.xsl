@@ -18,8 +18,10 @@ exclude-result-prefixes="#all" >
 	
 <xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xsl:variable>	
 	
+<xsl:variable name="fragments" select="$element-source//*:fragment"/>
+	
 <!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
-<xsl:variable name="strings">
+<xsl:variable name="strings" as="element()*">
 	<xsl:for-each select="$element-source//ed:string[not(parent::ed:string-ref)], $config/config:string">
 		<!-- remove them from source namespace -->
 		<string>
@@ -87,6 +89,15 @@ Main template
 			</ss:synthesis>
 		</xsl:result-document>
 	</xsl:for-each-group>
+	<!-- Warn if there are any unmatched topics in the authored content. -->
+	<!-- FIXME: Should also search for unmatched attribute definitions. -->
+	<xsl:for-each select="$element-source//ed:element-description">
+		<xsl:if test="not(ed:xpath = $schema-defs/schema-definitions/schema-element/xpath)">
+			<xsl:call-template name="sf:warning">
+				<xsl:with-param name="message" select="'Authored element description found for an element not found in the schema:', string(ed:xpath)"/>
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:for-each>
 </xsl:template>
 
 <!-- 

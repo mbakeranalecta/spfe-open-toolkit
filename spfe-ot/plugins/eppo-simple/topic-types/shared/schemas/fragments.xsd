@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:complexType name="fragment-type">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="local-strings">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="string" type="string-type"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:group ref="text-general"/>
+        </xs:sequence>
+        <xs:attribute name="id"/>
+    </xs:complexType>
+
+    <xs:group name="fragments">
+        <xs:sequence>
+            <xs:element name="fragment" type="fragment-type"/>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="fragment-ref-type">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="local-strings">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="string" type="string-type"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id-ref"/>
+    </xs:complexType>
+
+    <xs:group name="fragment-ref">
+        <xs:sequence>
+            <xs:element name="fragment-ref" type="fragment-ref-type"/>
+        </xs:sequence>
+    </xs:group>
+
+</xs:schema>

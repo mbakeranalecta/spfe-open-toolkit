@@ -27,7 +27,9 @@
 <xsl:variable name="config" as="element(config:spfe)">
 	<xsl:sequence select="/config:spfe"/>
 </xsl:variable>
-
+	
+	<xsl:variable name="fragments" as="element()*"/>
+	<xsl:variable name="strings" as="element()*"/>
 
 <!-- 
 =============

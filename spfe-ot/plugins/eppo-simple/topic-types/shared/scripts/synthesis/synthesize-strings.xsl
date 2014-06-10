@@ -9,12 +9,16 @@
     exclude-result-prefixes="#all">
     
     <xsl:template match="*:string-ref">
-        <xsl:param name="local-strings" as="element()*" tunnel="yes"/>
-        <xsl:variable name="id" select="@id-ref"/>
-        <xsl:variable name="substitution" select="$strings/string[@id = $id], $local-strings[@id=$id]"/>
+        <xsl:param name="in-scope-strings" as="element()*" tunnel="yes"/>
+        <xsl:message select="'$in-scope-strings', $in-scope-strings"></xsl:message>
+        <xsl:variable name="local-strings" select="*:local-strings/*:string, $in-scope-strings, ancestor::*:fragment/*:local-strings/*:string, $strings" as="element()*"/>   
+        
+        <xsl:variable name="string-id" select="@id-ref"/>
+        <xsl:message select="$local-strings"/>
+        <xsl:variable name="substitution" select="$local-strings[@id=$string-id][1]"/>
 
         <xsl:choose>
-            <xsl:when test="$substitution[2]">
+<!--            <xsl:when test="$substitution[2]">
                 <xsl:call-template name="sf:error">
                     <xsl:with-param name="message">
                         <xsl:text>Multiple strings found with string id </xsl:text>
@@ -25,17 +29,17 @@
                         </xsl:for-each>
                     </xsl:with-param>
                 </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$substitution[1]">
+            </xsl:when>-->
+            <xsl:when test="$substitution">
                 <xsl:apply-templates select="$substitution/node()">
-                    <xsl:with-param name="local-strings" select="*:string" tunnel="yes"/>
+                    <xsl:with-param name="in-scope-strings" select="$local-strings" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="sf:error">
                     <xsl:with-param name="message">
                         <xsl:text>No string found with string id </xsl:text>
-                        <xsl:value-of select="$id"/>
+                        <xsl:value-of select="$string-id"/>
                         <xsl:text>.</xsl:text>
                     </xsl:with-param>
                 </xsl:call-template>

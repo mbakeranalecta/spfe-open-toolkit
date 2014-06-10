@@ -8,7 +8,6 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-element-descriptions  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/element-descriptions.xsd">
     <head>
         <id>element-descriptions</id>
-        <author>Mark Baker</author>
         <history>
             <revision>
                 <date>2012-04-04</date>
@@ -37,6 +36,19 @@
             <description>
                 <p>The <config-setting>spfe</config-setting> element is the root element of a SPFE configuration file.</p>
                 <p>You can spread your configuration over multiple configuration files. Each file must have a <config-setting>spfe</config-setting> root element. The <tool-name>spfe</tool-name> command requires a spfe configuration file as a parameter. This is the configuration file that defines the properties for an individual build. It may include more general property files that are shared by multiple builds. You include other spfe configuration files using the <config-setting>/spfe/include</config-setting> element.</p>
+                <fragment id="test-fragment">
+                    <local-strings>
+                        <string id="test-string-1"><bold>test string one</bold></string>
+                        <string id="test-string-2"><italic>test string two</italic></string>
+                    </local-strings>
+                    <p>This is a piece of text in a fragment. It includes references to local strings <string-ref id-ref="test-string-1"/> and <string-ref id-ref="test-string-2"/>.</p>
+                </fragment>
+                <p>The following is a reference to the fragment defined above:</p>
+                <fragment-ref id-ref="test-fragment">
+                    <local-strings>
+                        <string id="test-string-1"><code>this is test string number one</code></string>
+                    </local-strings>
+                </fragment-ref>
             </description>
             <build-property/>
             <include-behavior>
