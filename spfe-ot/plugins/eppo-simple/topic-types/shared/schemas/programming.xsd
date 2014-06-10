@@ -5,7 +5,16 @@
 
     <xs:group name="programming">
         <xs:choice>
-            <xs:element name="codeblock" type="xs:string"> </xs:element>
+            <xs:element name="codeblock">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="language"/>
+                            <xs:attribute name="namespace"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
         </xs:choice>
     </xs:group>
 </xs:schema>

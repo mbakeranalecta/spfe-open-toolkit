@@ -25,6 +25,7 @@
             <xs:element name="task"/>
             <xs:element name="term"/>
             <xs:element name="tool-name"/>
+            <xs:element name="link-external"/>
             <xs:element name="url"/>
         </xs:choice>
     </xs:group>

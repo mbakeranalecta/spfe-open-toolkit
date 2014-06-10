@@ -542,7 +542,7 @@
 		</xsl:choose>
 	</xsl:template>
 	
-	<xsl:template match="*:url-ref">
+	<xsl:template match="*:link-external">
 	<!-- FIXME: support other protocols -->
 		<xlink href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}">
 			<xsl:apply-templates/>
@@ -551,7 +551,7 @@
 
 	<xsl:template match="*:url">
 	<!-- FIXME: support other protocols -->
-		<xlink href="http://{if (starts-with(., 'http://')) then substring-after(., 'http://') else .}">
+		<xlink href="{if (starts-with(., 'http://')) then . else concat('http://',.)}">
 		 <xsl:apply-templates/>
 		</xlink>	
 	</xsl:template>
@@ -583,6 +583,11 @@
 		</bold>
 	</xsl:template>
 	
+	<xsl:template match="*:p/*:quote">
+		<xsl:text>“</xsl:text>
+			<xsl:apply-templates/>
+		<xsl:text>”</xsl:text>
+	</xsl:template>
 	
 
 	<xsl:template match="*:p/*:name">

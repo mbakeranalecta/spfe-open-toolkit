@@ -230,6 +230,337 @@
             </parameters>
         </function-description>
         <function-description>
+            <name>path-after-protocol-part</name>
+            <description>
+                <p>The <xslt-function-name>path-after-protocol-part</xslt-function-name> function takes a URL containing a protocol  (file, http, etc) and returns the part after the protocol. For example, if will turn a URL like this:</p>
+                <codeblock>file:/c:/Users/Joe/spfe-open-toolkit/spfe-ot/spfe.bat</codeblock>
+                <p>into</p>
+                <codeblock>c:/Users/Joe/spfe-open-toolkit/spfe-ot/spfe.bat</codeblock>
+                <p>This is mostly useful for taking local file URLs returned by some tools and turning them into the local paths accepted by other tools.</p>
+                <p>Note that this function does not do URL decoding. If the URL you are using may be URL encoded (that is, if it uses %20 for spaces, and similar % encodings for other special characters), use <xslt-function-name>local-path-from-uri</xslt-function-name>.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The path with the protocol part removed.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>path</name>
+                    <description>
+                        <p>The path to be processed.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>local-path-from-uri</name>
+            <description>
+                <p>The <xslt-function-name>local-path-from-uri</xslt-function-name> function takes a URL containing a protocol  (file, http, etc) and returns the part after the protocol, decoding the URL if required. For example, if will turn a URL like this:</p>
+                <codeblock>file:/c:/Users/Joe%20Blogs/spfe-open-toolkit/spfe-ot/spfe.bat</codeblock>
+                <p>into</p>
+                <codeblock>c:/Users/Joe Blogs/spfe-open-toolkit/spfe-ot/spfe.bat</codeblock>
+                <p>This is mostly useful for taking local file URIs returned by some tools and turning them into the local paths accepted by other tools.</p>
+                <p>This function is similar to <xslt-function-name>path-after-protocol-part</xslt-function-name>, except that <xslt-function-name>path-after-protocol-part</xslt-function-name> does not do URL decoding. This function calls <xslt-function-name>path-after-protocol-part</xslt-function-name> to do its work, after decoding the URI. Calling this function on a URI that is not URL encoded will work fine, so you can always call this function rather than <xslt-function-name>path-after-protocol-part</xslt-function-name>.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>A URL-decoded version of the input URI with the protocol part removed.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>uri</name>
+                    <description>
+                        <p>The input URI.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>hex-to-dec</name>
+            <description>
+                <p>The <xslt-function-name>hex-to-dec</xslt-function-name> function takes are string representing a hexadecimal number and converts it to a decimal number.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The interger value of the hexadecimal number.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>hex</name>
+                    <description>
+                        <p>A string representing the hexadecimal number to be converted.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>first-n-words</name>
+            <description>
+                <p>Returns that first number of words of a specified string, and optionally adds a specified suffix. For example, calling this function like this:</p>
+                <codeblock>&lt;xsl:value-of select="sf:first-n-words('The quick brown fox', 3, '...')/></codeblock>
+                
+                <p>Will return:</p>
+                
+                <codeblock>The quick brown ...</codeblock>
+                <p>This is useful for creating exerpts of a text to appear in a list or to lable a link.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The truncated string with the specified prefix. If there number of words in the string is less than or equal to the number specified in the <code>words</code> parameter, the whole string is returned. The function recognizes words by matching spaces between words. The returned string includes the final space after the late matched world, if one exists in the input string. The suffix is added after this space. If specified, the suffix is always added, even if the whole string is returned.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>test</name>
+                    <description>
+                        <p>The string to be truncated.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>words</name>
+                    <description>
+                        <p>The number of words to be returned.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>suffix</name>
+                    <description>
+                        <p>The suffix string to be added to the returned string.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>escape-for-xml</name>
+            <description>
+                <p>Takes and input string and escapes the <code>&lt;</code> and <code>&amp;</code> characters so that the string can be inserted into an XML document. For example, given the string:</p>
+                <codeblock>&lt;name>Five &amp; Dime&lt;/name></codeblock>
+                <p>It will return the string</p>
+                <codeblock>&amp;lt;name>Five &amp;amp; Dime&amp;lt;/name></codeblock>
+                <p>This is useful for inserting examples of XML into an XML document.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The input string with the <code>&lt;</code> and <code>&amp;</code> characters escaped.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>string</name>
+                    <description>
+                        <p>The string to be escaped for XML.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>get-topic-type-alias-singular</name>
+            <!-- keep this in sync with otehr get-alias functions -->
+            <description>
+                <p>Gets the singular version of a <feature>topic type alias</feature>. Topic types are formally named using their XML namespace URIs. However, if you want to display the name of a topic type publicly, for instance in a list of topics or in the visible metadata of a topic, you will need a human readable name for the topic type: the topic type alias. Topic type aliases are defined in the configuration of a topic type, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <codeblock language="XML">
+&lt;topic-type>
+    &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference&lt;/xmlns>
+    &lt;aliases>
+        &lt;singular>Configuration setting&lt;/singular>
+        &lt;plural>Configuration settings&lt;/plural>
+    &lt;/aliases>
+                </codeblock>
+                <p>The <xslt-function-name>get-topic-type-alias-singular</xslt-function-name> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <xslt-function-name>get-topic-type-alias-plural</xslt-function-name>.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The singular version of the topic type alias. An error occurs if a matching topic type alias is not found.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>topic-type-xmlns</name>
+                    <description>
+                        <p>The namespace URI of the topic type. This is the value declared in the <code>xmlns</code> attribute of the topic source file:</p>
+                        <codeblock language="XML">
+&lt;function-and-template-descriptions
+    xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions"                            
+                        </codeblock>
+                        
+                        <p>It is also the value declared in the <code>target-namespace</code> attribute of the <code>xsd:schema</code> element of the topic type schema:</p>
+                        <codeblock language="XSD">
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	targetNamespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions">                            
+                        </codeblock>
+                        <p>Note, however, that it is possible for the synthesis routine to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis routine is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>get-topic-type-alias-plural</name>
+            <!-- keep this in sync with otehr get-alias functions -->
+            <description>
+                <p>Gets the plural version of a <feature>topic type alias</feature>. Topic types are formally named using their XML namespace URIs. However, if you want to display the name of a topic type publicly, for instance in a list of topics or in the visible metadata of a topic, you will need a human readable name for the topic type: the topic type alias. Topic type aliases are defined in the configuration of a topic type, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <codeblock language="XML">
+&lt;topic-type>
+    &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference&lt;/xmlns>
+    &lt;aliases>
+        &lt;singular>Configuration setting&lt;/singular>
+        &lt;plural>Configuration settings&lt;/plural>
+    &lt;/aliases>
+                </codeblock>
+                <p>The <xslt-function-name>get-topic-type-alias-plural</xslt-function-name> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <xslt-function-name>get-topic-type-alias-singular</xslt-function-name>.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The plural version of the topic type alias. An error occurs if a matching topic type alias is not found.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>topic-type-xmlns</name>
+                    <description>
+                        <p>The namespace URI of the topic type. This is the value declared in the <code>xmlns</code> attribute of the topic source file:</p>
+                        <codeblock language="XML">
+&lt;function-and-template-descriptions
+    xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions"                            
+                        </codeblock>
+                        
+                        <p>It is also the value declared in the <code>target-namespace</code> attribute of the <code>xsd:schema</code> element of the topic type schema:</p>
+                        <codeblock language="XSD">
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	targetNamespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions">                            
+                        </codeblock>
+                        <p>Note, however, that it is possible for the synthesis routine to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis routine is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>get-subject-type-alias-singular</name>
+            <!-- keep this in sync with otehr get-alias functions -->
+            <description>
+                <p>Gets the singular version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quote>xslt-function-name</quote>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>doc set configuration</feature>, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <codeblock language="XML" namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+&lt;spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    &lt;doc-set>
+    ...
+        &lt;subject-types>
+            &lt;subject-type>
+                &lt;id>config-setting&lt;/id>
+                &lt;aliases>
+                    &lt;singular>Configuration setting&lt;/singular>
+                    &lt;plural>Configuration settings&lt;/plural>
+                &lt;/aliases>
+            &lt;/subject-type>
+        &lt;/subject-types>
+                </codeblock>
+                <p>The <xslt-function-name>get-subject-type-alias-singular</xslt-function-name> function looks up the singular version of the subject type alias in the configuration and returns it. To get the plural version of the alias, use the <xslt-function-name>get-subject-type-alias-plural</xslt-function-name>.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The singular version of the subject type alias. An error occurs if a matching subject type alias is not found.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>subject-type-id</name>
+                    <description>
+                        <p>The id of the subject type. This is the value that is used in defining the type of the entry in the topic type index.</p>
+                        <codeblock language="XML">
+&lt;index>
+    &lt;entry>
+        &lt;type>feature&lt;/type>
+        &lt;term>{configuration file}&lt;/term>
+    &lt;/entry>
+    &lt;entry>
+        &lt;type>config-setting&lt;/type>
+        &lt;term>/spfe&lt;/term>
+    &lt;/entry>
+&lt;/index>
+                           
+                        </codeblock>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>get-subject-type-alias-plural</name>
+            <!-- keep this in sync with otehr get-alias functions -->
+            <description>
+                <p>Gets the plural version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quote>xslt-function-name</quote>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>doc set configuration</feature>, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <codeblock language="XML" namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+&lt;spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    &lt;doc-set>
+    ...
+        &lt;subject-types>
+            &lt;subject-type>
+                &lt;id>config-setting&lt;/id>
+                &lt;aliases>
+                    &lt;singular>Configuration setting&lt;/singular>
+                    &lt;plural>Configuration settings&lt;/plural>
+                &lt;/aliases>
+            &lt;/subject-type>
+        &lt;/subject-types>
+                </codeblock>
+                <p>The <xslt-function-name>get-subject-type-alias-plural</xslt-function-name> function looks up the plural version of the subject type alias in the configuration and returns it. To get the singlusr version of the alias, use the <xslt-function-name>get-subject-type-alias-singular</xslt-function-name>.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The plural version of the subject type alias. An error occurs if a matching subject type alias is not found.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>subject-type-id</name>
+                    <description>
+                        <p>The id of the subject type. This is the value that is used in defining the type of the entry in the topic type index.</p>
+                        <codeblock language="XML">
+&lt;index>
+    &lt;entry>
+        &lt;type>feature&lt;/type>
+        &lt;term>{configuration file}&lt;/term>
+    &lt;/entry>
+    &lt;entry>
+        &lt;type>config-setting&lt;/type>
+        &lt;term>/spfe&lt;/term>
+    &lt;/entry>
+&lt;/index>
+                           
+                        </codeblock>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>pct-decode</name>
+            <description>
+                <p>Takes a string encoded using <link-external href="http://en.wikipedia.org/wiki/Percent-encoding">percent-encoding</link-external> (also know as URL encoding) and returns the decoded string. Adapted from code published by James A. Robinson at <url>http://www.oxygenxml.com/archives/xsl-list/200911/msg00300.html</url>. </p>
+                <p>This is a recursive polymorphic function. You call the version of the function that takes one parameter, <code>in</code>. The second version of the function is called recursively by the first version to complete the decoding of the input string. It takes a second parameter, <code>seq</code>. You should not call this version of the function from your code.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The decoded string.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>in</name>
+                    <description>
+                        <p>The string to be decoded.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>seq</name>
+                    <description>
+                        <p>Used internally by the function during recursion. Do not use this parameter in your code.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
             <name>path-depth</name>
             <description>
                 <p>The <xslt-function-name>path-depth</xslt-function-name> calculates the depth of an XPath by counting the number of elements in the path. It uses tokenize to count but throws away the empty string item that would be created by a leading or trailing slash. Thus <code>foo/bar</code>, <code>/foo/bar</code>, and <code>/foo/bar/</code>, are all counted as having a path depth of 2. Will count a concluding attribute on a path as part of the depth. Presumably works for file paths as well, as long as they are in UNIX form, but it won't distinguish path elements from drive letters or the protocol parts of a URI.</p>

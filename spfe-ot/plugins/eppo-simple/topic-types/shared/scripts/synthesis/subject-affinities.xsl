@@ -123,7 +123,7 @@
                        | *:product-name
                        | *:tool-name
                        | *:xml-namespace-uri
-                       | *:url">
+                       ">
         <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type" select="local-name()"/>

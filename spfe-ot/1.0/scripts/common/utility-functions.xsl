@@ -244,8 +244,8 @@
 	</xsl:function>
 
 	<xsl:function name="sf:local-path-from-uri">
-		<xsl:param name="local-path"/>
-		<xsl:value-of select="sf:pct-decode(sf:path-after-protocol-part($local-path))"/>
+		<xsl:param name="uri"/>
+		<xsl:value-of select="sf:pct-decode(sf:path-after-protocol-part($uri))"/>
 	</xsl:function>
 
 	<!-- Adapted from code published by James A. Robinson at http://www.oxygenxml.com/archives/xsl-list/200911/msg00300.html -->
