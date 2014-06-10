@@ -142,7 +142,7 @@ Main template
 										<xsl:variable name="authored" select="$function-description/fd:parameters/fd:parameter[fd:name = $parameter-name]/fd:description"/>
 										<xsl:if test="not($authored)">
 											<xsl:call-template name="sf:warning">
-												<xsl:with-param name="message" select="'Parameter description not found ', string($parameter-name)"/>
+												<xsl:with-param name="message" select="concat('Parameter description not found &quot;', string($parameter-name), '&quot; for function ', $name)"/>
 											</xsl:call-template>
 										</xsl:if>
 										
@@ -227,7 +227,7 @@ Main template
 										<xsl:variable name="authored" select="$template-description/fd:parameters/fd:parameter[fd:name = $parameter-name]/fd:description"/>
 										<xsl:if test="not($authored)">
 											<xsl:call-template name="sf:warning">
-												<xsl:with-param name="message" select="'Parameter description not found ', string($parameter-name)"/>
+												<xsl:with-param name="message" select="concat('Parameter description not found &quot;', string($parameter-name), '&quot; for template ', $name)"/>
 											</xsl:call-template>
 										</xsl:if>
 										

@@ -55,6 +55,12 @@
                         <p>An absolute path which will be subtracted from the <code>path</code> parameter to form the relative path.</p>
                     </description>
                 </parameter>
+                <parameter>
+                    <name>prefix</name>
+                    <description>
+                        <p>The prefix to be added to the start of the returned string.</p>
+                    </description>
+                </parameter>
             </parameters>
         </function-description>
         <function-description>
@@ -215,15 +221,15 @@
                     </description>
                 </parameter>
                 <parameter>
-                    <name>length-of-longest</name>
+                    <name>length-of-shortest</name>
                     <description>
                         <p>The length of the shortest string seen so far as the function is called recursively. You should not generally use this parameter in your code.</p>
                     </description>
                 </parameter>
                 <parameter>
-                    <name>index-of-longest</name>
+                    <name>index-of-shortest</name>
                     <description>
-                        <p>The index of the shortes string seen so far as the function is called recursively. You should not generally use this parameter in your code.</p>
+                        <p>The index of the shortest string seen so far as the function is called recursively. You should not generally use this parameter in your code.</p>
                     </description>
                 </parameter>
                 
@@ -314,7 +320,7 @@
             </return-value>
             <parameters>
                 <parameter>
-                    <name>test</name>
+                    <name>text</name>
                     <description>
                         <p>The string to be truncated.</p>
                     </description>
@@ -535,6 +541,41 @@
             </parameters>
         </function-description>
         <function-description>
+            <name>get-topic-link-priority</name>
+            <description>
+                <p>Gets the <feature>link priority</feature> of a topic. Link priority is used to determine which topic to link to when more than one topic is identified as a source for a subject. Lower numbers indicate a higher priority.</p>
+                <p>Link priority is calculated by adding the link priority of the <feature>topic type</feature>, defined in <config-setting>/spfe/topic-type/topic-type-link-priority</config-setting> to the link priority of the <feature>topic set</feature>, defined in <config-setting>/spfe/topic-set/topic-set-link-priority</config-setting>.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The link priority of the topic.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>topic-namespace-uri</name>
+                    <description>
+                        <p>The <feature>namespace URI of the topic type schema</feature>. By default, the <feature>synthesis</feature> process places the namespace URI of the topic in the <xml-attribute-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic/@type">type</xml-attribute-name> attribute of the <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic">ss:topic</xml-element-name> wrapper element.</p>
+                        <codeblock>
+&lt;ss:topic type="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic"
+    topic-type-alias="Task"
+    full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/adding-a-doc-set"
+    local-name="adding-a-doc-set" title="Adding a new documentation set"
+    excerpt="A documentation set (doc-set) is a collection of one or more related topic sets, each of which can use different     schemas. ...">
+
+                        </codeblock>
+                        <p>Since <task>linking</task> is done at the presentation stage, you can read the topic type namespace URI from this attribute for the topic you are processing.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>topic-set-id</name>
+                    <description>
+                        <p>The <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> of the topic. The <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> is passed as a parameter to every processing script.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
             <name>pct-decode</name>
             <description>
                 <p>Takes a string encoded using <link-external href="http://en.wikipedia.org/wiki/Percent-encoding">percent-encoding</link-external> (also know as URL encoding) and returns the decoded string. Adapted from code published by James A. Robinson at <url>http://www.oxygenxml.com/archives/xsl-list/200911/msg00300.html</url>. </p>
@@ -638,6 +679,7 @@
         <template-description>
             <name>error</name>
             <description>
+                <!-- FIXME: Determine if setting message types to display is working and document accordingly. -->
                 <p>Used to report an error in a script. The error template terminates the script unless the <code>terminate-on-error</code> parameter is set to false.</p>
             </description>
             <return-value>
@@ -650,6 +692,82 @@
                     <name>message</name>
                     <description>
                         <p>The error message to report. The template outputs this message prefixed with "ERROR: ".</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </template-description>
+        <template-description>
+            <name>info</name>
+            <description>
+                <p>Outputs a information message to the build console.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>None.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>message</name>
+                    <description>
+                        <p>The message to be output. The string "Info: " will be prefixed to the message.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </template-description>
+        <template-description>
+            <name>debug</name>
+            <description>
+                <p>Outputs a debug message to the build console.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>None.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>message</name>
+                    <description>
+                        <p>The message to be output. The string "Debug: " will be prefixed to the message.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </template-description>
+        <template-description>
+            <name>warning</name>
+            <description>
+                <p>Outputs a warning message to the build console.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>None.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>message</name>
+                    <description>
+                        <p>The message to be output. The string "Warning: " will be prefixed to the message.</p>
+                    </description>
+                </parameter>
+            </parameters>
+        </template-description>
+        <template-description>
+            <name>subject-not-resolved</name>
+            <description>
+                <p>Outputs a message to the build console stating that a particular <feature>subject affinity</feature> found in a topic could not be resolved to any subject in the index of any in-scope topic, meaning that no link will be created for that subject.</p>
+            </description>
+            <return-value>
+                <description>
+                    <p>None.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>message</name>
+                    <description>
+                        <p>The message to be output. The string "Subject not resolved: " will be prefixed to the message.</p>
                     </description>
                 </parameter>
             </parameters>

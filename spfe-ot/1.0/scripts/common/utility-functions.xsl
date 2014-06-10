@@ -70,11 +70,11 @@
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template name="sf:subject-affinity-not-resolved">
+	<xsl:template name="sf:subject-not-resolved">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='warning'">
 			<xsl:message>
-				<xsl:text>subject-affinity not resolved: </xsl:text>
+				<xsl:text>Subject not resolved: </xsl:text>
 				<xsl:sequence select="$message"/>
 			</xsl:message>
 		</xsl:if>
@@ -157,7 +157,6 @@
 		<xsl:param name="current" as="xs:integer"/>
 		<xsl:param name="length-of-shortest" as="xs:integer"/>
 		<xsl:param name="index-of-shortest" as="xs:integer"/>
-		<xsl:message select="'sf:shortest-string',$strings,'|', $current,'|', $length-of-shortest, '|', $index-of-shortest"/>
 		<xsl:choose>
 			<xsl:when test="$current le count($strings)">
 				<xsl:variable name="length-of-current" select="string-length($strings[$current])"/>

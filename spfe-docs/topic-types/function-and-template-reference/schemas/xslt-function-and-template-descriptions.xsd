@@ -17,10 +17,9 @@
 		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/text-decoration.xsd"/>
 	<xs:include
 		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/strings.xsd"/>
-	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/subject-affinities-xslt.xsd"/>
-	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/subject-affinities-general.xsd"/>
+	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/subject-affinities-xslt.xsd"/>
+	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/subject-affinities-general.xsd"/>
+	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/subject-affinities-xml.xsd"/>
 	<xs:include schemaLocation="../../shared/schemas/subject-affinities-spfe-build.xsd"/>
 
 	<xs:include

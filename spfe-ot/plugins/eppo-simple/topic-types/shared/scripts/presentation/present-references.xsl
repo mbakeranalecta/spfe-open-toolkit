@@ -458,7 +458,7 @@
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="sf:subject-affinity-not-resolved">
+				<xsl:call-template name="sf:subject-not-resolved">
 					<xsl:with-param name="message" select="'Term  &quot;', $term, '&quot; not resolved.'"/> 
 				</xsl:call-template>
 				<xsl:apply-templates/>
@@ -569,7 +569,7 @@
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:call-template name="sf:subject-affinity-not-resolved">
+					<xsl:call-template name="sf:subject-not-resolved">
 						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved.')"/>
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
@@ -612,7 +612,7 @@
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:call-template name="sf:subject-affinity-not-resolved">
+					<xsl:call-template name="sf:subject-not-resolved">
 						<xsl:with-param name="message" select="concat(@type, ' name &quot;', (if (@key) then @key else .), '&quot; not resolved.')"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
@@ -718,7 +718,7 @@
 				<xsl:variable name="not-resolved-message">
 					<xsl:value-of select="$type"/> string not found: <xsl:value-of select="$target"/>.
 				</xsl:variable>
-				<xsl:call-template name="sf:subject-affinity-not-resolved">
+				<xsl:call-template name="sf:subject-not-resolved">
 					<xsl:with-param name="message">
 						<xsl:value-of select="$type"/> string not found: &quot;<xsl:value-of select="$target"/>&quot;.
 					</xsl:with-param>
