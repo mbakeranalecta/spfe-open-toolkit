@@ -755,11 +755,12 @@
 
 	<!-- CHARACTERS -->
 
-	<xsl:template match="name|value|code|gui-label|bold">
+	<xsl:template match="name|value|gui-label|bold|code">
 		<b class="decoration-bold">
 			<xsl:apply-templates/>
 		</b>
 	</xsl:template>
+	
 
 	<xsl:template match="placeholder|italic">
 		<em>

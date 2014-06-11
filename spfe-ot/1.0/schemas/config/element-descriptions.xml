@@ -144,7 +144,7 @@
                 <p>The URI of a <feature>topic type</feature> in the <feature>topic type order list</feature>.</p>
             </description>
             <build-property></build-property>
-            <include-behavior></include-behavior>
+            <include-behavior/>
         </element-description>
         <element-description>
             <xpath>/spfe/sources</xpath>
@@ -686,9 +686,9 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts</xpath>
+            <xpath>/spfe/topic-type/scripts</xpath>
             <description>
-                <p>A container for the list of scripts to be used for each stage of the build process. Each build script for each stage should be written to use the standard SPFE interface for a script at that stage (which you can determine by examining the <file-name>spfe.rules</file-name> build rules file). Listing the full path of the script for each stage in this list will then cause that script to be called at the appropriate stage of the build process. If you need to change the interface to a script at a particular stage, you can override the build rule for that step by specifying a build rule with the same name as the one in <file-name>spfe.rules</file-name>. If you need to add additional steps, you can use the <config-setting>/spfe/scripts/other</config-setting>. If you do this, you must override the normal sequence in which the scripts are run in your local build rules file (the one specified by <config-setting>/spfe/build/build-rules</config-setting>).</p>
+                <p>A container for the list of scripts to be used for each stage of the build process. Each build script for each stage should be written to use the standard SPFE interface for a script at that stage (which you can determine by examining the <file-name>spfe.rules</file-name> build rules file). Listing the full path of the script for each stage in this list will then cause that script to be called at the appropriate stage of the build process. If you need to change the interface to a script at a particular stage, you can override the build rule for that step by specifying a build rule with the same name as the one in <file-name>spfe.rules</file-name>. If you need to add additional steps, you can use the <config-setting>/spfe/topic-type/scripts/other</config-setting>. If you do this, you must override the normal sequence in which the scripts are run in your local build rules file (the one specified by <config-setting>/spfe/build/build-rules</config-setting>).</p>
                 <p>You may specify more than one script for each stage. The build will create a temporary script file that includes each of the scripts listed for each stage. One, and only one, of the included scripts must have a template named "main", which the build rule will call as the initial template (unless you have overridden the build rule for this step in your custom build file.</p>
                 <p>This mechanism for building the final script by including a list of specified scripts allows you to customize the build for each topic set while maintaining a high degree of modularity and reuse in your script collections. A typical way to use this mechanism would be to include a separate script at the presentation stage for each of the topic types included in the build. This mechanism does not prevent you from including one script file in another in the normal way, it just gives you a more flexible way of managing modular script files and assembling the right set for each topic set.</p>
             </description>
@@ -699,7 +699,7 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/synthesis</xpath>
+            <xpath>/spfe/topic-type/scripts/synthesis</xpath>
             <description>
                 <p>Container element for a list of synthesis scripts. The synthesis scripts are responsible for assembling a set of topics in which all names are fully resolved and all conditions and inclusions have been applied.</p>
             </description>
@@ -708,16 +708,21 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/synthesis/script</xpath>
+            <xpath>/spfe/topic-type/scripts/synthesis/script</xpath>
             <description>
-                <p> <string id="script-description">The full path to <string-ref id-ref="script-type"/> script file.</string> <string-ref id-ref="script-description"> <string id="script-type">a synthesis</string> </string-ref></p>
+                <fragment id="script-description">
+                    <local-strings>
+                        <string id="script-type">a synthesis</string>
+                    </local-strings>
+                    <p>The full path to <string-ref id-ref="script-type"/> script file.</p>
+                </fragment>  
             </description>
             <build-property/>
             <include-behavior/>
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/link-catalog</xpath>
+            <xpath>/spfe/topic-type/scripts/link-catalog</xpath>
             <description>
                 <p>Container element for a list of link-catalog scripts. The link-catalog step is considered to be a sub step of the presentation process. In most cases, however, the link catalog build will be run separately from the full doc build. This is to allow you to build all the link catalogs for all the topic sets in the documentation set, so that topics can link to topics in other topic sets by reading the entire collection of link catalogs to resolve subject-affinities.</p>
             </description>
@@ -726,15 +731,19 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/link-catalog/script</xpath>
+            <xpath>/spfe/topic-type/scripts/link-catalog/script</xpath>
             <description>
-                <p><string-ref id-ref="script-description"> <string id="script-type">a link-catalog</string> </string-ref></p>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a link-catalog</string>
+                    </local-strings>
+                </fragment-ref>
             </description>
             <build-property/>
             <include-behavior/>
         </element-description>
         <element-description>
-            <xpath>/spfe/scripts/toc</xpath>
+            <xpath>/spfe/topic-type/scripts/toc</xpath>
             <description>
                 <p>A container for a list of scripts for creating a <feature>table of contents file</feature> for the topic set. </p>
             </description>
@@ -742,16 +751,20 @@
             <include-behavior/>
         </element-description>
         <element-description>
-            <xpath>/spfe/scripts/toc/script</xpath>
+            <xpath>/spfe/topic-type/scripts/toc/script</xpath>
             <description>
-                <p><string-ref id-ref="script-description"> <string id="script-type">a TOC file</string> </string-ref></p>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a TOC file</string>
+                    </local-strings>
+                </fragment-ref>
             </description>
             <build-property/>
             <include-behavior/>
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/image-list</xpath>
+            <xpath>/spfe/topic-type/scripts/image-list</xpath>
             <description>
                 <p>A container for a list of image-list scripts. Unless you have introduced custom
                     image handling into your system, the default image handling script should work
@@ -765,16 +778,20 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/image-list/script</xpath>
+            <xpath>/spfe/topic-type/scripts/image-list/script</xpath>
             <description>
-                <p><string-ref id-ref="script-description"> <string id="script-type">an image list</string> </string-ref></p>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an image list</string>
+                    </local-strings>
+                </fragment-ref>
             </description>
             <build-property/>
             <include-behavior/>
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/presentation-web</xpath>
+            <xpath>/spfe/topic-type/scripts/presentation-web</xpath>
             <description>
                 <p>A container for a list of presentation scripts for building a web presentation of the topic set. Usually there will be one script for the topic set as a whole and one script for each topic type in the script.</p>
             </description>
@@ -783,16 +800,20 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/presentation-web/script</xpath>
+            <xpath>/spfe/topic-type/scripts/presentation-web/script</xpath>
             <description>
-                <p><string-ref id-ref="script-description"> <string id="script-type">a web presentation</string> </string-ref></p>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a web presentation</string>
+                    </local-strings>
+                </fragment-ref>
             </description>
             <build-property/>
             <include-behavior/>
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/presentation-book</xpath>
+            <xpath>/spfe/topic-type/scripts/presentation-book</xpath>
             <description>
                 <p>A container for a list of presentation scripts for building a book presentation of the topic set. Usually there will be one script for the topic set as a whole and one script for each topic type in the script.</p>
             </description>
@@ -801,16 +822,20 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/presentation-book/script</xpath>
+            <xpath>/spfe/topic-type/scripts/presentation-book/script</xpath>
             <description>
-                <p><string-ref id-ref="script-description"> <string id="script-type">a book presentation</string> </string-ref></p>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a book presentation</string>
+                    </local-strings>
+                </fragment-ref>
             </description>
             <build-property/>
             <include-behavior/>
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/format-html</xpath>
+            <xpath>/spfe/topic-type/scripts/format-html</xpath>
             <description>
                 <p>A container for a list of scripts for formatting a topic set in HTML.</p>
             </description>
@@ -819,16 +844,20 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/format-html/script</xpath>
+            <xpath>/spfe/topic-type/scripts/format-html/script</xpath>
             <description>
-                <p><string-ref id-ref="script-description"> <string id="script-type">an html format</string> </string-ref>.</p>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an html format</string>
+                    </local-strings>
+                </fragment-ref>
             </description>
             <build-property/>
             <include-behavior/>
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/format-book</xpath>
+            <xpath>/spfe/topic-type/scripts/format-book</xpath>
             <description>
                 <p>A container for a list of formatting scripts for creating a book format of the topic set. Normally this script would produce an output in the input language of a rendering engine, such as XSL-FO or TeX. However, if you have written your own encoding script, then the formatting script should produce the input format expected by your encoding script.</p>
             </description>
@@ -837,16 +866,20 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/format-book/script</xpath>
+            <xpath>/spfe/topic-type/scripts/format-book/script</xpath>
             <description>
-                <p><string-ref id-ref="script-description"> <string id="script-type">a book formatting</string> </string-ref>.</p>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a book formatting</string>
+                    </local-strings>
+                </fragment-ref>
             </description>
             <build-property/>
             <include-behavior/>
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/other</xpath>
+            <xpath>/spfe/topic-type/scripts/other</xpath>
             <description>
                 <p>A container for a named list of scripts to perform an additional step that is not part of the normal SPFE build sequence. The most usual place to user other scripts is in the synthesis step for things like extracting content from source files (the way this reference is build by extracting information from the configuration schema and combining it with authored information).</p>
             </description>
@@ -863,7 +896,7 @@
         </element-description>
 
         <element-description>
-            <xpath>/spfe/scripts/other/script</xpath>
+            <xpath>/spfe/topic-type/scripts/other/script</xpath>
             <description>
                 <p>The full path of a script that is part of the extra step.</p>
             </description>

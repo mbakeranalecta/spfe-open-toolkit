@@ -39,5 +39,4 @@
             <xs:element name="fragment-ref" type="fragment-ref-type"/>
         </xs:sequence>
     </xs:group>
-
 </xs:schema>

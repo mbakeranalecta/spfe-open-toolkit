@@ -12,25 +12,29 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphics.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/fragments.xsd"/>
+
     <xs:group name="text-general">
-        <xs:choice>
-            <xs:group ref="paragraphs"/>
-            <xs:group ref="lists"/>
-            <xs:group ref="programming"/>
-            <xs:group ref="graphics"/>
-            <xs:group ref="fragments"/>
-            <xs:group ref="fragment-ref"/>
-        </xs:choice>
+        <xs:sequence>
+            <xs:sequence maxOccurs="1" minOccurs="0">
+                <xs:choice>
+                    <xs:group ref="paragraphs" maxOccurs="1" minOccurs="1"/>
+                    <xs:group ref="fragments" maxOccurs="1" minOccurs="1"/>
+                    <xs:group ref="fragment-ref"/>
+                </xs:choice>
+                <xs:choice maxOccurs="unbounded" minOccurs="0">
+                    <xs:group ref="paragraphs"/>
+                    <xs:group ref="lists"/>
+                    <xs:group ref="programming"/>
+                    <xs:group ref="graphics"/>
+                    <xs:group ref="fragments"/>
+                    <xs:group ref="fragment-ref"/>
+                </xs:choice>
+            </xs:sequence>
+        </xs:sequence>
     </xs:group>
 
     <xs:complexType name="text-general-type">
-        <xs:group ref="text-general" maxOccurs="unbounded"/>
+        <xs:group ref="text-general"/>
     </xs:complexType>
 
-    <xs:complexType name="paragraph-first-text-general-type">
-        <xs:sequence>
-            <xs:group ref="paragraphs" maxOccurs="1" minOccurs="1"/>
-            <xs:group ref="text-general" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
 </xs:schema>
