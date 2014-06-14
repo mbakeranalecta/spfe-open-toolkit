@@ -11,7 +11,7 @@
             </xs:element>
             <xs:group ref="text-general"/>
         </xs:sequence>
-        <xs:attribute name="id"/>
+        <xs:attribute name="id" use="required"/>
     </xs:complexType>
 
     <xs:group name="fragments">

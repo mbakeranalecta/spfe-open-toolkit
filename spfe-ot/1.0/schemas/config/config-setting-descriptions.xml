@@ -2,7 +2,10 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <?xml-stylesheet type="text/css" href="../../../../spfe-docs/style/authoring/config-setting-descriptions.css"?>
-<config-setting-descriptions xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions.xsd">
+<config-setting-descriptions
+    xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions.xsd">
     <head>
         <id>config-setting-descriptions</id>
         <history>
@@ -29,7 +32,13 @@
     <body>
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/format-html/script</xpath>
-            <description></description>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an html format</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -93,71 +102,6 @@
             <values/>
             <restrictions/>
             <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/build</xpath>
-            <description>
-                <p>A container element for settings related to the build environment.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-
-        </config-setting-description>
-        <config-setting-description>
-            <xpath>/spfe/build/build-directory</xpath>
-            <description>
-                <p>Specifies the <feature>build directory</feature> used to store temporary files
-                    (logs, fully resolved configuration files, scripts) generated during the build
-                    process. The default is the value of
-                    <config-setting>/spfe/topic-set-id</config-setting> appended to the value of
-                    <config-setting>/spfe/doc-set element</config-setting> appended to the value of
-                    the environment variable <code>SPFE_BUILD_DIR</code>.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property>spfe.directories.build</build-property>
-            <attributes/>
-        </config-setting-description>
-
-
-        <config-setting-description>
-            <xpath>/spfe/build/link-catalog-directory</xpath>
-            <description>
-                <p>Specifies the directory where the link catalogs will be created. The link
-                    catalogs that will be read when linking the topic set are specified by
-                    <config-setting>/spfe/sources/link-catalogs</config-setting>.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property>spfe.directories.link-catalogs</build-property>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/build/output-directory</xpath>
-            <description>
-                <p>Specifies the directory where the final build output will be created.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property>spfe.directories.output</build-property>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/build/toc-directory</xpath>
-            <description>
-                <p>Specifies the directory where the TOC files will be created by the topic set
-                    build. The TOCs that will be read when linking the topic set are specified by
-                    <config-setting>/spfe/sources/tocs</config-setting>.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property>spfe.directories.toc-directory</build-property>
             <attributes/>
         </config-setting-description>
 
@@ -323,12 +267,14 @@
                     <local-strings>
                         <string id="scope">the entire <feature>doc set</feature></string>
                         <string id="inverse-of-scope">a particular topic set</string>
-                        <string id="inverse-of-setting"><config-setting>/spfe/topic-set/strings</config-setting></string>
+                        <string id="inverse-of-setting"
+                            ><config-setting>/spfe/topic-set/strings</config-setting></string>
                     </local-strings>
                     <p>A container element for a list of <config-setting>string</config-setting>
                         elements that define <feature>strings</feature> used by the tools or in
                         content. This setting defines strings for <string-ref id-ref="scope"/>. To
-                        define strings for <string-ref id-ref="inverse-of-scope"/>, use <string-ref id-ref="inverse-of-setting"/>.</p>
+                        define strings for <string-ref id-ref="inverse-of-scope"/>, use <string-ref
+                            id-ref="inverse-of-setting"/>.</p>
                 </fragment>
             </description>
             <values/>
@@ -563,9 +509,9 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/wip-site/href</xpath>
+            <xpath>/spfe/doc-set/wip-site/url</xpath>
             <description>
-                <p>The href of the <feature>work in progress site</feature>.</p>
+                <p>The URL of the <feature>work in progress site</feature>.</p>
             </description>
             <values/>
             <restrictions/>
@@ -583,11 +529,13 @@
             <build-property>spfe.wip-site.path</build-property>
             <attributes/>
         </config-setting-description>
+
+
         <config-setting-description>
-            <xpath>/spfe/format</xpath>
+            <xpath>/spfe/object-type</xpath>
             <description>
-                <p>A container for formatting information to be passed to the formatting
-                    scripts.</p>
+                <p>A container element for the configuration of an <feature>object
+                    type</feature>.</p>
             </description>
             <values/>
             <restrictions/>
@@ -596,17 +544,14 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/object-type</xpath>
-            <description/>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
             <xpath>/spfe/object-type/scripts</xpath>
-            <description/>
+            <description>
+                <fragment id="scripts-description">
+                    <local-strings>
+                        <string id="object-to-be-processed">an object type</string>
+                    </local-strings>
+                </fragment>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -615,7 +560,11 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/extract</xpath>
-            <description/>
+            <description>
+                <p>Container element for a list of extraction scripts. The extract scripts are
+                    responsible for extracting data from external sources, which may then be
+                    used to generate objects for inclusion in your documentation set. For example, you might use a extract script to create a chart from a set of data in a database.</p>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -624,7 +573,13 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/extract/script</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an extract</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -633,7 +588,7 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/format-book</xpath>
-            <description/>
+            <description><fragment-ref id-ref="scripts-format-book-description"/></description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -642,7 +597,13 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/format-book/script</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a book formatting</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -651,7 +612,7 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/format-html</xpath>
-            <description/>
+            <description><fragment-ref id-ref="scripts-format-html-description"/></description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -660,7 +621,9 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/image-list</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="scripts-image-list-description"/>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -669,7 +632,13 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/image-list/script</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an image list</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -679,7 +648,12 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/link-catalog</xpath>
-            <description/>
+            <description>
+                
+                <fragment-ref id-ref="link-catalog-script-description"/>
+                
+                <p>Objects can also be indexed. The indexes can be use to resolve subject affinities to objects, rahter than having authors insert objects explicitly into topics.</p>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -688,7 +662,14 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/link-catalog/script</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a link catalog</string>
+                    </local-strings>
+                </fragment-ref>
+                
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -697,25 +678,31 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/other</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="scripts-other-description"/>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/object-type/scripts/other/@name</xpath>
-            <description/>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
+            <attributes>
+                <attribute>
+                    <name>name</name>
+                    <description>
+                        <fragment-ref id-ref="scripts-other-name-description"/>
+                    </description>
+                </attribute>
+            </attributes>
         </config-setting-description>
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/other/script</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an other processing</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -724,8 +711,12 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/presentation-book
+            
+            
             </xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="scripts-presentation-book-description"/>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -734,7 +725,13 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/presentation-book/script</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a book presentation</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -743,35 +740,55 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/presentation-web</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="scripts-presentation-description"/>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/presentation-web/script</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a web presentation</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/synthesis</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="synthesis-script-description">
+                    <local-strings>
+                        <string id="thing-to-be-processed">an <feature>object type</feature></string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/synthesis/script</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type"> a synthesis</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -780,7 +797,9 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/toc</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="toc-script-description"/>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -789,7 +808,13 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/toc/script</xpath>
-            <description/>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a table of contents</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -798,17 +823,12 @@
 
         <config-setting-description>
             <xpath>/spfe/object-type/xmlns</xpath>
-            <description/>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-        <config-setting-description>
-            <xpath>/spfe/sources</xpath>
             <description>
-                <p>A container element for settings that point to various source files used in the
-                    build.</p>
+                <fragment-ref id-ref="xmlns-definition-description">
+                    <local-strings>
+                        <string id="thing-defined">an <feature>object type</feature></string>
+                    </local-strings>
+                </fragment-ref>
             </description>
             <values/>
             <restrictions/>
@@ -933,7 +953,8 @@
             <description>
                 <fragment id="other-setting-description">
                     <local-strings>
-                        <string id="setting"><config-setting>/spfe/topic-set/other</config-setting></string>
+                        <string id="setting"
+                            ><config-setting>/spfe/topic-set/other</config-setting></string>
                     </local-strings>
                     <p>You can use the <string-ref id-ref="setting"/> element to add additional
                         configuration settings to be used by your scripts of build files.</p>
@@ -972,7 +993,8 @@
                     <local-strings>
                         <string id="source-type"><feature>authored content</feature> files</string>
                     </local-strings>
-                    <p>A container element for a list of file selectors that select the <string-ref id-ref="source-type"/> to include in the build. This becomes an ANT
+                    <p>A container element for a list of file selectors that select the <string-ref
+                            id-ref="source-type"/> to include in the build. This becomes an ANT
                         <ant-element>files</ant-element> expression in the build file.</p>
                 </fragment>
                 <p>Authored content includes all textual sources created by authors. It includes
@@ -998,7 +1020,8 @@
                         include in the build. You can use wild cards. This path expression is used
                         to create an <config-setting>include</config-setting> element in an
                             <tool-name>ANT</tool-name>
-                        <ant-element>files</ant-element> element that is used to copy <string-ref id-ref="source-type"/> to the <feature>build directory</feature> for
+                        <ant-element>files</ant-element> element that is used to copy <string-ref
+                            id-ref="source-type"/> to the <feature>build directory</feature> for
                         inclusion in the <feature>build</feature>.</p>
                 </fragment>
             </description>
@@ -1159,7 +1182,8 @@
             <description>
                 <fragment id="link-priority-description">
                     <local-strings>
-                        <string id="other-setting"><config-setting>/spfe/topic-type/topic-type-link-priority</config-setting></string>
+                        <string id="other-setting"
+                            ><config-setting>/spfe/topic-type/topic-type-link-priority</config-setting></string>
                     </local-strings>
                     <p>Used in determining the <feature>link priority</feature> of a topic when
                         there is more than one possible target for a link. The overall link priority
@@ -1226,7 +1250,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/topic-set/topic-types/object-type/href</xpath>
+            <xpath>/spfe/topic-set/object-types/object-type/href</xpath>
             <description>
                 <p>The location of the file that contains the configuration of a object type.</p>
             </description>
@@ -1242,7 +1266,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/topic-set/topic-types/object-type/xmlns</xpath>
+            <xpath>/spfe/topic-set/object-types/object-type/xmlns</xpath>
             <description>
                 <p>The XML namespace URI of the object type. This is used to unambiguously identify
                     the ovject type.</p>
@@ -1321,48 +1345,11 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type</xpath>
             <description>
-                <p>A container element for the configuration of a <feature>topic-type</feature>.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-        <config-setting-description>
-            <xpath>/spfe/topic-type-aliases/topic-type/alias</xpath>
-            <description>
-                <p>The alias for the topic type
-                    <config-setting xpath="/spfe/topic-type-aliases/topic-type/id">id</config-setting>,
-                    that is, a reader-friendly name for the topic type.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/topic-type-aliases/topic-type/id</xpath>
-            <description>
-                <p>The topic type id, that is, the namespace identifier of the topic type
-                    schema.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-        <config-setting-description>
-            <xpath>/spfe/topic-type-aliases/topic-type/plural</xpath>
-            <description>
-                <p>The plural version of the
-                    <config-setting xpath="/spfe/topic-type-aliases/topic-type/alias">alias</config-setting>
-                    for the topic type
-                    <config-setting xpath="/spfe/topic-type-aliases/topic-type/id">id</config-setting>.</p>
+                <p>A container element for the configuration of a <feature>topic type</feature>.</p>
             </description>
             <values/>
             <restrictions/>
@@ -1433,69 +1420,81 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts</xpath>
             <description>
-                <p>A container for the list of scripts to be used for each stage of the build
-                    process. Each build script for each stage should be written to use the standard
-                    SPFE interface for a script at that stage (which you can determine by examining
-                    the <file-name>spfe.rules</file-name> build rules file). Listing the full path
-                    of the script for each stage in this list will then cause that script to be
-                    called at the appropriate stage of the build process. If you need to change the
-                    interface to a script at a particular stage, you can override the build rule for
-                    that step by specifying a build rule with the same name as the one in
-                        <file-name>spfe.rules</file-name>. If you need to add additional steps, you
-                    can use the <config-setting>/spfe/topic-type/scripts/other</config-setting>. If
-                    you do this, you must override the normal sequence in which the scripts are run
-                    in your local build rules file (the one specified by
-                    <config-setting>/spfe/topic-set/build-rules</config-setting>).</p>
-                <p>You may specify more than one script for each stage. The build will create a
-                    temporary script file that includes each of the scripts listed for each stage.
-                    One, and only one, of the included scripts must have a template named "main",
-                    which the build rule will call as the initial template (unless you have
-                    overridden the build rule for this step in your custom build file.</p>
-                <p>This mechanism for building the final script by including a list of specified
-                    scripts allows you to customize the build for each topic set while maintaining a
-                    high degree of modularity and reuse in your script collections. A typical way to
-                    use this mechanism would be to include a separate script at the presentation
-                    stage for each of the topic types included in the build. This mechanism does not
-                    prevent you from including one script file in another in the normal way, it just
-                    gives you a more flexible way of managing modular script files and assembling
-                    the right set for each topic set.</p>
+                <fragment id="scripts-description">
+                    <local-strings>
+                        <string id="object-to-be-processed">a topic type</string>
+                    </local-strings>
+                    <p>A container for the list of scripts to be used to process <string-ref
+                            id-ref="object-to-be-processed"/> at each stage of the build process.
+                        Each build script for each stage should be written to use the standard SPFE
+                        interface for a script at that stage (which you can determine by examining
+                        the <file-name>spfe.rules</file-name> build rules file). Listing the full
+                        path of the script for each stage in this list will then cause that script
+                        to be called at the appropriate stage of the build process. If you need to
+                        change the interface to a script at a particular stage, you can override the
+                        build rule for that step by specifying a build rule with the same name as
+                        the one in <file-name>spfe.rules</file-name>. If you need to add additional
+                        steps, you can use the
+                        <config-setting>/spfe/topic-type/scripts/other</config-setting>. If you do
+                        this, you must override the normal sequence in which the scripts are run in
+                        your local build rules file (the one specified by
+                        <config-setting>/spfe/topic-set/build-rules</config-setting>).</p>
+                    <p>You may specify more than one script for each stage. The build will create a
+                        temporary script file that includes each of the scripts listed for each
+                        stage. One, and only one, of the included scripts must have a template named
+                        "main", which the build rule will call as the initial template (unless you
+                        have overridden the build rule for this step in your custom build file.</p>
+                    <p>This mechanism for building the final script by including a list of specified
+                        scripts allows you to customize the build for each topic set while
+                        maintaining a high degree of modularity and reuse in your script
+                        collections. A typical way to use this mechanism would be to include a
+                        separate script at the presentation stage for each of the topic types
+                        included in the build. This mechanism does not prevent you from including
+                        one script file in another in the normal way, it just gives you a more
+                        flexible way of managing modular script files and assembling the right set
+                        for each topic set.</p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/extract</xpath>
             <description>
-                <p>Container element for a list of extraction scripts. The extract scripts are responsible for extracting content from external sources, which may then be combined with authored content to form complete topics. </p>
+                <p>Container element for a list of extraction scripts. The extract scripts are
+                    responsible for extracting content from external sources, which may then be
+                    combined with authored content to form complete topics. </p>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/format-book</xpath>
             <description>
+                <fragment id="scripts-format-book-description">
                 <p>A container for a list of formatting scripts for creating a book format of the
                     topic set. Normally this script would produce an output in the input language of
                     a rendering engine, such as XSL-FO or TeX. However, if you have written your own
                     encoding script, then the formatting script should produce the input format
                     expected by your encoding script.</p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/format-book/script</xpath>
             <description>
@@ -1510,18 +1509,20 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/format-html</xpath>
             <description>
-                <p>A container for a list of scripts for formatting a topic set in HTML.</p>
+                <fragment id="scripts-format-html-description">
+                <p>A container for a list of script components for formatting a topic set in HTML.</p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/format-html/script</xpath>
             <description>
@@ -1536,23 +1537,25 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/image-list</xpath>
             <description>
+                <fragment id="scripts-image-list-description">
                 <p>A container for a list of image-list scripts. Unless you have introduced custom
                     image handling into your system, the default image handling script should work
                     for all topic types. The image-list script is part of the format step. It
                     generates a list of all the graphics included in the presentation so that the
                     build scripts can copy those graphics to the appropriate location in the
                     output.</p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/image-list/script</xpath>
             <description>
@@ -1567,24 +1570,20 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/link-catalog</xpath>
             <description>
-                <p>Container element for a list of link-catalog scripts. The link-catalog step is
-                    a sub step of the presentation process. In most cases, however,
-                    the link catalog build will be run separately from the full doc build. This is
-                    to allow you to build all the link catalogs for all the topic sets in the
-                    documentation set, so that topics can link to topics in other topic sets by
-                    reading the entire collection of link catalogs to resolve
-                    subject-affinities.</p>
+                <fragment id="link-catalog-script-description">
+                <p>Container element for a list of link-catalog scripts. The <feature>link catalog</feature> script is responsible for creating a catalog of all the link targets in a topic set. For topics types whose synthesis routines produce a <feature>standard synthesis header</feature> with index terms embedded, the standard EPPO-simple link-catalog script can be used. In most cases it will be preferable to create the index header at the synthesis stage rather than producing a non-standard synthesis and then writing your own link catalog script. However, that option is available and you can specify the use of your own link-catalog script using this setting.</p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/link-catalog/script</xpath>
             <description>
@@ -1599,15 +1598,14 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/other</xpath>
             <description>
+                <fragment id="scripts-other-description">
                 <p>A container for a named list of scripts to perform an additional step that is not
-                    part of the normal SPFE build sequence. The most usual place to user other
-                    scripts is in the synthesis step for things like extracting content from source
-                    files (the way this reference is build by extracting information from the
-                    configuration schema and combining it with authored information).</p>
+                    part of the normal SPFE build sequence.</p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
@@ -1616,12 +1614,14 @@
                 <attribute>
                     <name>name</name>
                     <description>
+                        <fragment id="scripts-other-name-description">
                         <p>The name of the extra step.</p>
+                        </fragment>
                     </description>
                 </attribute>
             </attributes>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/other/script</xpath>
             <description>
@@ -1632,20 +1632,22 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/presentation-book</xpath>
             <description>
-                <p>A container for a list of presentation scripts for building a book presentation
+                <fragment id="scripts-presentation-book-description">
+                <p>A container for a list of presentation script components for building a book presentation
                     of the topic set. Usually there will be one script for the topic set as a whole
                     and one script for each topic type in the script.</p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/presentation-book/script</xpath>
             <description>
@@ -1660,20 +1662,22 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/presentation-web</xpath>
             <description>
-                <p>A container for a list of presentation scripts for building a web presentation of
+                <fragment id="scripts-presentation-description">
+                <p>A container for a list of presentation script components for building a web presentation of
                     the topic set. Usually there will be one script for the topic set as a whole and
                     one script for each topic type in the script.</p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/presentation-web/script</xpath>
             <description>
@@ -1688,20 +1692,25 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/synthesis</xpath>
             <description>
-                <p>Container element for a list of synthesis scripts. The synthesis scripts are
-                    responsible for assembling a set of topics in which all names are fully resolved
-                    and all conditions and inclusions have been applied.</p>
+                <fragment id="synthesis-script-description">
+                    <local-strings>
+                        <string id="thing-to-be-processed">a <feature>topic type</feature></string>
+                    </local-strings>
+                    <p>Container element for a list of <feature>synthesis</feature> script components for <string-ref id-ref="thing-to-be-processed"></string-ref>. The synthesis scripts are
+                    responsible for assembling a set of <feature>topics</feature> in which all names are fully resolved
+                    and all conditions and inclusions have been applied. Script components contribute the handling of different elements to the synthesis script.</p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/extract/script</xpath>
             <description>
@@ -1717,10 +1726,10 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
 
-        
-        
+
+
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/synthesis/script</xpath>
             <description>
@@ -1735,19 +1744,21 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/toc</xpath>
             <description>
+                <fragment id="toc-script-description">
                 <p>A container for a list of scripts for creating a <feature>table of contents
                         file</feature> for the topic set. </p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/toc/script</xpath>
             <description>
@@ -1762,13 +1773,14 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/topic-type-link-priority</xpath>
             <description>
                 <fragment-ref id-ref="link-priority-description">
                     <local-strings>
-                        <string id="other-setting"><config-setting>/spfe/topic-set/topic-set-link-priority</config-setting></string>
+                        <string id="other-setting"
+                            ><config-setting>/spfe/topic-set/topic-set-link-priority</config-setting></string>
                     </local-strings>
                 </fragment-ref>
             </description>
@@ -1781,16 +1793,344 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-        
+
         <config-setting-description>
             <xpath>/spfe/topic-type/xmlns</xpath>
             <description>
-                <p>The XML schema namespace URI that identifies a <feature>topic type</feature>.</p>
+                <fragment id="xmlns-definition-description">
+                    <local-strings>
+                        <string id="thing-defined">a <feature>topic type</feature></string>
+                    </local-strings>
+                    <p>The XML schema namespace URI that identifies <string-ref
+                            id-ref="thing-defined"/>.</p>
+                </fragment>
             </description>
             <values/>
             <restrictions/>
             <build-property/>
             <attributes/>
         </config-setting-description>
+        
+        
+        
+        
+        
+        
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format</xpath>
+            <description>
+                <p>A container element for the configuration of an <feature>output
+                    type</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts</xpath>
+            <description>
+                <fragment id="scripts-description">
+                    <local-strings>
+                        <string id="object-to-be-processed">an output type</string>
+                    </local-strings>
+                </fragment>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/extract</xpath>
+            <description>
+                <p>Container element for a list of extraction scripts. It is unlikely that an output type will want to contribute a script to the extraction process, and may indicate a poor separation of concerns in your architecture. However, if you do want to extract content different for a particular output format, this setting allows you to specify the appropriate extract script component.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/extract/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an extract</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/format-book</xpath>
+            <description><fragment-ref id-ref="scripts-format-book-description"/></description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/format-book/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a book formatting</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/format-html</xpath>
+            <description><fragment-ref id-ref="scripts-format-html-description"/></description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/format-html/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an HTML formatting</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/image-list</xpath>
+            <description>
+                <fragment-ref id-ref="scripts-image-list-description"/>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/image-list/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an image list</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/link-catalog</xpath>
+            <description>
+                
+                <fragment-ref id-ref="link-catalog-script-description"/>
+                
+                <p>Output types cannot be indexed and it is unlikely that an output type would want to change the way content is indexed. However, this setting lets you contribute an output-type-specific link catalog script to the build.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/link-catalog/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a link catalog</string>
+                    </local-strings>
+                </fragment-ref>
+                
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/other</xpath>
+            <description>
+                <fragment-ref id-ref="scripts-other-description"/>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes>
+                <attribute>
+                    <name>name</name>
+                    <description>
+                        <fragment-ref id-ref="scripts-other-name-description"/>
+                    </description>
+                </attribute>
+            </attributes>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/other/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an other processing</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/presentation-book
+            
+            
+            </xpath>
+            <description>
+                <fragment-ref id-ref="scripts-presentation-book-description"/>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/presentation-book/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a book presentation</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/presentation-web</xpath>
+            <description>
+                <fragment-ref id-ref="scripts-presentation-description"/>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/presentation-web/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a web presentation</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/synthesis</xpath>
+            <description>
+                <fragment-ref id-ref="synthesis-script-description">
+                    <local-strings>
+                        <string id="thing-to-be-processed">an <feature>object type</feature></string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/synthesis/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type"> a synthesis</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/toc</xpath>
+            <description>
+                <fragment-ref id-ref="toc-script-description"/>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/toc/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a table of contents</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/name</xpath>
+            <description>
+                <p>The name of the output format.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
     </body>
 </config-setting-descriptions>
