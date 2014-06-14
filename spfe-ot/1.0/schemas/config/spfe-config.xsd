@@ -17,27 +17,11 @@
               <xs:element name="topic-types">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="included-topic-types">
+                    <xs:element maxOccurs="unbounded" name="topic-type">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element maxOccurs="unbounded" name="topic-type">
-                            <xs:complexType>
-                              <xs:sequence>
-                                <xs:element name="xmlns" type="xs:anyURI"/>
-                                <xs:element name="href" type="xs:anyURI"/>
-                                <xs:element name="aliases" type="topic-type-aliases-type"
-                                  minOccurs="0"/>
-                              </xs:sequence>
-                            </xs:complexType>
-                          </xs:element>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                    <xs:element name="topic-type-order" minOccurs="0">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="topic-type-xmlns" minOccurs="1" maxOccurs="unbounded"
-                            type="xs:anyURI"/>
+                          <xs:element name="xmlns" type="xs:anyURI"/>
+                          <xs:element name="href" type="xs:anyURI"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
@@ -47,17 +31,11 @@
               <xs:element name="object-types" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="included-object-types">
+                    <xs:element maxOccurs="unbounded" name="object-type">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element maxOccurs="unbounded" name="object-type">
-                            <xs:complexType>
-                              <xs:sequence>
-                                <xs:element name="xmlns" type="xs:anyURI"/>
-                                <xs:element name="href" type="xs:anyURI"/>
-                              </xs:sequence>
-                            </xs:complexType>
-                          </xs:element>
+                          <xs:element name="xmlns" type="xs:anyURI"/>
+                          <xs:element name="href" type="xs:anyURI"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>

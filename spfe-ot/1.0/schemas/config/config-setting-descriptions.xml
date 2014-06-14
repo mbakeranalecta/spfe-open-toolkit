@@ -1,0 +1,1796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/style/authoring/config-setting-descriptions.css"?>
+<config-setting-descriptions xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions.xsd">
+    <head>
+        <id>config-setting-descriptions</id>
+        <history>
+            <revision>
+                <date>2012-04-04</date>
+                <author>Mark Baker</author>
+                <comment>new</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2013-07-12</date>
+                <author>jkeffer</author>
+                <comment>Spelling and minor wording changes</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2013-07-24</date>
+                <author>jkeffer</author>
+                <comment>Match info in other topics and add subject affinities</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+    </head>
+    <body>
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/format-html/script</xpath>
+            <description></description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe</xpath>
+            <description>
+                <p>The <config-setting>spfe</config-setting> element is the root element of a SPFE
+                    configuration file.</p>
+                <p>The SPFE configuration file has five sections, which are usually separated into
+                    different files.</p>
+                <ol>
+                    <li>
+                        <p><config-setting xpath="/spfe/doc-set">doc-set</config-setting> describes
+                            the configuration of a whole documentation set. The build scripts take a
+                            doc-set configuration as input.</p>
+                    </li>
+                </ol>
+                <ol>
+                    <li>
+                        <p><config-setting xpath="/spfe/object-type">object-type</config-setting>
+                            describes the configuration of an object type, such as
+                                <feature>graphics</feature>, used in <feature>topic sets</feature>.
+                            To include an object type configuration in your topic set configuration,
+                            use the <config-setting>/spfe/topic-set/object-types</config-setting>
+                            setting.</p>
+                    </li>
+                </ol>
+                <ol>
+                    <li>
+                        <p><config-setting xpath="/spfe/output-format">output-format</config-setting>
+                            describes the configuration of an <feature>output format</feature>, such
+                            as HTML. To include an output format configuration in your topic set
+                            configuration, use the
+                            <config-setting>/spfe/doc-set/output-formats/output-format</config-setting>
+                            setting.</p>
+                    </li>
+                </ol>
+                <ol>
+                    <li>
+                        <p><config-setting xpath="/spfe/topic-set">topic-set</config-setting>
+                            describes the configuration of a topic set. To include a topic set in
+                            the doc set, use the
+                            <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting>
+                            setting.</p>
+                    </li>
+                </ol>
+                <ol>
+                    <li>
+                        <p><config-setting xpath="/spfe/object-type">topic-type</config-setting>
+                            describes the configuration of a <feature>topic type</feature>. To
+                            include an topic type configuration in your topic set configuration, use
+                            the
+                            <config-setting>/spfe/topic-set/topic-types/topic-type</config-setting>
+                            setting.</p>
+                    </li>
+                </ol>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/build</xpath>
+            <description>
+                <p>A container element for settings related to the build environment.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/build/build-directory</xpath>
+            <description>
+                <p>Specifies the <feature>build directory</feature> used to store temporary files
+                    (logs, fully resolved configuration files, scripts) generated during the build
+                    process. The default is the value of
+                    <config-setting>/spfe/topic-set-id</config-setting> appended to the value of
+                    <config-setting>/spfe/doc-set element</config-setting> appended to the value of
+                    the environment variable <code>SPFE_BUILD_DIR</code>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.directories.build</build-property>
+            <attributes/>
+        </config-setting-description>
+
+
+        <config-setting-description>
+            <xpath>/spfe/build/link-catalog-directory</xpath>
+            <description>
+                <p>Specifies the directory where the link catalogs will be created. The link
+                    catalogs that will be read when linking the topic set are specified by
+                    <config-setting>/spfe/sources/link-catalogs</config-setting>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.directories.link-catalogs</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/build/output-directory</xpath>
+            <description>
+                <p>Specifies the directory where the final build output will be created.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.directories.output</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/build/toc-directory</xpath>
+            <description>
+                <p>Specifies the directory where the TOC files will be created by the topic set
+                    build. The TOCs that will be read when linking the topic set are specified by
+                    <config-setting>/spfe/sources/tocs</config-setting>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.directories.toc-directory</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set</xpath>
+            <description>
+                <p>A container element for information on a documentation set. A documentation set
+                    is a collection of <feature>topic sets</feature>. To define a documentation set,
+                    you list the configuration files for each topic set in the documentation set
+                    using a <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting>
+                    element.</p>
+                <p>To build a full documentation set, you simply run the <tool-name>spfe</tool-name>
+                    build tool with a configuration file that contains a
+                    <config-setting xpath="/spfe/doc-set">doc-set</config-setting> element directly
+                    (not via inclusion). The build tool will then run whichever build command you
+                    have specified on all the topic sets in the documentation set, as well as
+                    creating the files that belong to the documentation set as a whole.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes>
+                <attribute>
+                    <name>id</name>
+                    <description>
+                        <p>An ID for the <feature>documentation set</feature>. This value is used as
+                            the name of a directory containing the documentation set build inside
+                            the <feature>build directory</feature>.</p>
+                    </description>
+                </attribute>
+            </attributes>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/condition-tokens</xpath>
+            <description>
+                <p>Specifies the <feature>condition tokens</feature> that will be applied to this
+                    documentation set by the <feature>synthesis</feature> process.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/doc-set/doc-set-id</xpath>
+            <description>
+                <p>An identifier for the docset.</p>
+            </description>
+            <values/>
+            <restrictions>
+                <restriction>
+                    <p>The <config-setting>doc-set-id</config-setting> is used to form paths in the
+                        output, so it must be a permitted directory name on all output media.</p>
+                </restriction>
+            </restrictions>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/home-topic-set</xpath>
+            <description>
+                <p>Designates one <feature>topic set</feature> as the <feature>home topic
+                        set</feature> for the documentation set. The <feature>home topic
+                        set</feature> becomes the home for the documentation set as a whole. In many
+                    cases, a home topic set will consist of a single topic, with the name
+                    <code>index</code>, which will become the home page of the documentation set.
+                    However, you can include as many topics as you like in the home topic set. If
+                    you only have one topic set in your documentation set, you should designate it
+                    as the home topic set.</p>
+            </description>
+            <values/>
+            <restrictions>
+                <restriction>
+                    <p>The value must match the topic set id of one topic set in the documentation
+                        set. Topic set IDs are defined in
+                        <config-setting>/spfe/topic-set/topic-set-id</config-setting>.</p>
+                </restriction>
+            </restrictions>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/doc-set/messages</xpath>
+            <description>
+                <p>Specifies the types of messages that will be generated by the build. Possible
+                    value are <code>info</code>, and <code>warning</code>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.message-types</build-property>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/doc-set/other</xpath>
+            <description>
+                <fragment-ref id-ref="other-setting-description">
+                    <local-strings>
+                        <string id="setting">/spfe/doc-set/other</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes>
+                <attribute>
+                    <name>name</name>
+                    <description>
+                        <p>The name of the other configuration setting.</p>
+                    </description>
+                </attribute>
+            </attributes>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/output-formats</xpath>
+            <description>
+                <p>A container element for a list of <feature>output formats</feature> supported by
+                    the <feature>documentation set</feature> build.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/doc-set/output-formats/output-format</xpath>
+            <description>
+                <p>An output format supported by the documentation set build.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/doc-set/output-formats/output-format/href</xpath>
+            <description>
+                <p>The location of a file that contains the configuration file for the output
+                    format.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/doc-set/output-formats/output-format/name</xpath>
+            <description>
+                <p>The name of an output format. </p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/doc-set/strings</xpath>
+            <description>
+                <fragment id="strings-description">
+                    <local-strings>
+                        <string id="scope">the entire <feature>doc set</feature></string>
+                        <string id="inverse-of-scope">a particular topic set</string>
+                        <string id="inverse-of-setting"><config-setting>/spfe/topic-set/strings</config-setting></string>
+                    </local-strings>
+                    <p>A container element for a list of <config-setting>string</config-setting>
+                        elements that define <feature>strings</feature> used by the tools or in
+                        content. This setting defines strings for <string-ref id-ref="scope"/>. To
+                        define strings for <string-ref id-ref="inverse-of-scope"/>, use <string-ref id-ref="inverse-of-setting"/>.</p>
+                </fragment>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/doc-set/strings/string</xpath>
+            <description>
+                <fragment id="strings-string-description">
+                    <p>Defines a <feature>string</feature> and gives it an ID. Strings may be used
+                        by both the build tools and in content. </p>
+                </fragment>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes>
+                <attribute>
+                    <name>id</name>
+                    <description>
+                        <fragment id="strings-string-id-description">
+                            <p>The ID of the string. The string id is used to insert the string into
+                                a script or a piece of content. The markup used to insert a string
+                                may vary from one document type to another. In
+                                    <tool-name>EPPO-Simple</tool-name>, the
+                                <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/generic-topic">string-ref</xml-element-name>
+                                element is used.</p>
+                        </fragment>
+                    </description>
+                </attribute>
+            </attributes>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/style</xpath>
+            <description>
+                <p>A container element for settings related to style information used by the build
+                    tools.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/style/html-style-directories</xpath>
+            <description>
+                <p>A container element for a list of directories containing style files for HTML
+                    output. The specified directories will be copied into a
+                        <directory-name>style</directory-name> directory in the output directory.
+                    All subdirectories and their files will be copied as well. In the build file, it
+                    becomes an ANT <ant-element>resources</ant-element> element with the
+                    <ant-element>id</ant-element> of
+                    <code>spfe.style.html-style-directories</code>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.style.html-style-directories</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/style/html-style-directories/include</xpath>
+            <description>
+                <p>A path expression indicating style directories to be copied to the output. This
+                    path expression is used to create an <config-setting>include</config-setting>
+                    element in an ANT <ant-element>resources</ant-element> element that is used to
+                    copy style files to the output directory.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/title</xpath>
+            <description>
+                <p>The title of the <feature>documentation set</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/topic-set-type-order</xpath>
+            <description>
+                <p>Defines the order in which topic set types will be listed in the <feature>doc
+                        set</feature>
+                    <feature>table of contents</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/topic-set-type-order/topic-set-type</xpath>
+            <description>
+                <p>The name of a topic set type in the topic set type order list.</p>
+            </description>
+            <values/>
+            <restrictions>
+                <restriction>
+                    <p>The value must match one of the values defined in
+                        <config-setting>/spfe/topic-set/topic-set-type</config-setting> for topic
+                        sets included in the doc set.</p>
+                </restriction>
+            </restrictions>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/topic-sets</xpath>
+            <description>
+                <p>A container element for the list of <feature>topic sets</feature> in a
+                        <feature>documentation set</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/topic-sets/topic-set</xpath>
+            <description>
+                <p>The path to a topic set configuration file for a <feature>topic set</feature> to
+                    be included in the <feature>documentation set</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/topic-sets/topic-set/href</xpath>
+            <description>
+                <p>The URL of the configuration file for the included <feature>topic
+                    set</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/topic-sets/topic-set/topic-set-id</xpath>
+            <description>
+                <p>The topic set id of the included <feature>topic set</feature>, it should normally
+                    match the <config-setting>/spfe/topic-set/topic-set-id</config-setting> element
+                    in the topic set's configuration file. </p>
+            </description>
+            <values/>
+            <restrictions>
+                <restriction>
+                    <p>The <config-setting>topic-set-id</config-setting> is used to form file names
+                        and should be a valid file name on all target operating systems.</p>
+                </restriction>
+            </restrictions>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/wip-site</xpath>
+            <description>
+                <p>A container element for configuration information on the <feature>work in
+                        progress site</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/wip-site/ftp</xpath>
+            <description>
+                <p>A container for login information for FTP access to the <feature>work in progress
+                        site</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/wip-site/ftp/password</xpath>
+            <description>
+                <p>The ftp password for the <feature>work in progress site</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.wip-site.ftp.password</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/wip-site/ftp/url</xpath>
+            <description>
+                <p>The URL of the ftp login to the <feature>work in progress site</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.wip-site.ftp.url</build-property>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/doc-set/wip-site/ftp/user</xpath>
+            <description>
+                <p>The user name for logging in to the <feature>work in progress site</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.wip-site.ftp.user</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/wip-site/href</xpath>
+            <description>
+                <p>The href of the <feature>work in progress site</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.wip-site.href</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/doc-set/wip-site/path</xpath>
+            <description>
+                <p>The file path to the root of the <feature>work in progress site</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.wip-site.path</build-property>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/format</xpath>
+            <description>
+                <p>A container for formatting information to be passed to the formatting
+                    scripts.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/extract</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/extract/script</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/format-book</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/format-book/script</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/format-html</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/image-list</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/image-list/script</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/link-catalog</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/link-catalog/script</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/other</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/other/@name</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/other/script</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/presentation-book
+            </xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/presentation-book/script</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/presentation-web</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/presentation-web/script</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/synthesis</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/synthesis/script</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/toc</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/toc/script</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/xmlns</xpath>
+            <description/>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/sources</xpath>
+            <description>
+                <p>A container element for settings that point to various source files used in the
+                    build.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/topic-set</xpath>
+            <description>
+                <p>A container element for the configuration of a <feature>topic set</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/build-rules</xpath>
+            <description>
+                <p>Specifies the ANT <file-name>build rules</file-name> file to use to build the
+                    topic set.</p>
+            </description>
+            <values>
+                <default>
+                    <p>If this setting is not specified, the default
+                            <file-name>spfe-rules.xml</file-name> build rules file is used.</p>
+                </default>
+            </values>
+            <restrictions/>
+            <build-property>spfe.build-rules</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/condition-tokens</xpath>
+            <description>
+                <p>Specifies the <feature>condition tokens</feature> that will be applied to this
+                    topic set by the <feature>synthesis</feature> process.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/default-subject-affinity-scope</xpath>
+            <description>
+                <p>Specifies the <feature>subject-affinity scope</feature> tokens to be applied to
+                    all subject-affinities in all topics in the build by default. Effectively,
+                    specifying this setting applies scope to subject-affinities that do not specify
+                    a scope. Subject affinities that declare their own scope are not affected by
+                    this setting.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/default-topic-scope</xpath>
+            <description>
+                <p>Specifies the <feature>topic scope</feature> tokens to be applied to all topics
+                    in the build by default. Effectively, specifying this setting applies scope to
+                    topics that do not specify a scope. Topics that declare their own scope are not
+                    affected by this setting.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/object-types</xpath>
+            <description>
+                <p>A container element for a list of <feature>object types</feature> included in a
+                    topic set.</p>
+                <p>The list of object types is used to locate the configuration file for each object
+                    type, which in turn lists the scripts used to process objects of this type. </p>
+            </description>
+            <values/>
+            <restrictions>
+                <restriction>
+                    <p>Every object type occurring in the topic set must be listed here. If an
+                        unlisted object type is included, an error will occur at the
+                            <feature>synthesis</feature> stage of the <feature>build</feature> when
+                        the synthesis scripts will be unable to find templates to process the object
+                        type.</p>
+                </restriction>
+            </restrictions>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/object-types/object-type</xpath>
+            <description>
+                <p>An item in the list of the <feature>object types</feature> included in a
+                        <feature>topic set</feature>. The topic type is identified by its XML
+                    namespace URI (<config-setting>xmlns</config-setting>) of the XML document that
+                    describes the individual object (for instance, a <feature>graphic record
+                        file</feature>, for a standard <feature>graphic</feature>), and the URL of
+                    its configuration file (<config-setting>href</config-setting>).</p>
+                <codeblock language="XML" namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+&lt;topic-type>
+    &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic&lt;/xmlns>
+    &lt;href>../../topic-types/generic-topic/config.xml&lt;/href>
+&lt;/topic-type>                
+                </codeblock>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/other</xpath>
+            <description>
+                <fragment id="other-setting-description">
+                    <local-strings>
+                        <string id="setting"><config-setting>/spfe/topic-set/other</config-setting></string>
+                    </local-strings>
+                    <p>You can use the <string-ref id-ref="setting"/> element to add additional
+                        configuration settings to be used by your scripts of build files.</p>
+                </fragment>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes>
+                <attribute>
+                    <name>name</name>
+                    <description>
+                        <p>The name of the other configuration setting.</p>
+                    </description>
+                </attribute>
+            </attributes>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/sources</xpath>
+            <description>
+                <p>A container element for the list of sources to be included in a topic set.
+                    Sources include authored content file, graphics, sources to extract content
+                    from, and other. </p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/sources/authored-content</xpath>
+            <description>
+                <fragment id="sources-type-description">
+                    <local-strings>
+                        <string id="source-type"><feature>authored content</feature> files</string>
+                    </local-strings>
+                    <p>A container element for a list of file selectors that select the <string-ref id-ref="source-type"/> to include in the build. This becomes an ANT
+                        <ant-element>files</ant-element> expression in the build file.</p>
+                </fragment>
+                <p>Authored content includes all textual sources created by authors. It includes
+                        <feature>topics</feature>, <feature>text objects</feature>,
+                        <feature>fragments</feature>, <feature>strings</feature> (other than those
+                    defined in the <feature>configuration</feature> files), and content to be merged
+                    with <feature>extracted content</feature>. </p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>topics</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/sources/authored-content/include</xpath>
+            <description>
+                <fragment id="sources-include-description">
+                    <local-strings>
+                        <string id="source-type"><feature>authored content</feature> files</string>
+                    </local-strings>
+                    <p>A path expression indicating which <string-ref id-ref="source-type"/> to
+                        include in the build. You can use wild cards. This path expression is used
+                        to create an <config-setting>include</config-setting> element in an
+                            <tool-name>ANT</tool-name>
+                        <ant-element>files</ant-element> element that is used to copy <string-ref id-ref="source-type"/> to the <feature>build directory</feature> for
+                        inclusion in the <feature>build</feature>.</p>
+                </fragment>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/sources/graphics</xpath>
+            <description>
+                <fragment-ref id-ref="sources-type-description">
+                    <local-strings>
+                        <string id="sources-type"><feature>graphics</feature> files</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>graphics</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/sources/graphics/include</xpath>
+            <description>
+                <fragment-ref id-ref="sources-include-description">
+                    <local-strings>
+                        <string id="source-type">graphics</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/sources/other</xpath>
+            <description>
+                <fragment-ref id-ref="sources-type-description">
+                    <local-strings>
+                        <string id="source-type">other files</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>other.{name}</build-property>
+            <attributes>
+                <attribute>
+                    <name>name</name>
+                    <description>
+                        <p>The name of the type of other source.</p>
+                    </description>
+                </attribute>
+            </attributes>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/sources/other/include</xpath>
+            <description>
+                <fragment-ref id-ref="sources-include-description">
+                    <local-strings>
+                        <string id="source-type">other files</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/sources/sources-to-extract-content-from</xpath>
+            <description>
+                <fragment-ref id-ref="sources-type-description">
+                    <local-strings>
+                        <string id="sources-type">files to extract content from</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>graphics</build-property>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/sources/sources-to-extract-content-from/include</xpath>
+            <description>
+                <fragment-ref id-ref="sources-include-description">
+                    <local-strings>
+                        <string id="sources-type">files to extract content from</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/strings</xpath>
+            <description>
+                <fragment-ref id-ref="strings-description">
+                    <local-strings>
+                        <string id="scope">the entire <feature>topic set</feature></string>
+                        <string id="inverse-of-scope">the doc set</string>
+                        <string id="inverse-of-setting">
+                            <config-setting>/spfe/doc-set/strings</config-setting>
+                        </string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/topic-set/strings/string</xpath>
+            <description>
+                <fragment-ref id-ref="strings-string-description"/>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes>
+                <attribute>
+                    <name>id</name>
+                    <description>
+                        <fragment-ref id-ref="strings-string-id-description"/>
+                    </description>
+                </attribute>
+            </attributes>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/topic-set/topic-set-id</xpath>
+            <description>
+                <p>The <config-setting>topic-set-id</config-setting> element specifies the
+                    identifier for the current <feature>topic set</feature>. This identifier can be
+                    used to create a reference to the topic set. It is also used to create file and
+                    directory names, so it should be a value that is a valid file name (minus the
+                    extension) on all target operating systems.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property>spfe.topic-set-id</build-property>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/topic-set/topic-set-link-priority</xpath>
+            <description>
+                <fragment id="link-priority-description">
+                    <local-strings>
+                        <string id="other-setting"><config-setting>/spfe/topic-type/topic-type-link-priority</config-setting></string>
+                    </local-strings>
+                    <p>Used in determining the <feature>link priority</feature> of a topic when
+                        there is more than one possible target for a link. The overall link priority
+                        of a topic is obtained by adding its topic set link priority to its topic
+                        type link priority, specified by <string-ref id-ref="other-setting"/>.</p>
+                </fragment>
+            </description>
+            <values>
+                <default>
+                    <p>1</p>
+                </default>
+            </values>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/topic-set-type</xpath>
+            <description>
+                <p>This setting enables you to assign a type string to a <feature>topic
+                        set</feature>. You can use this element to group topic sets in output, and
+                    determine the order in which topic sets type appear in the
+                        <feature>documentation set</feature> table of contents. The order is set
+                    using the <config-setting>/spfe/doc-set/topic-set-type-order</config-setting>
+                    element. There are no special limits or requirements on this value. You can use
+                    any topic set type names that make sense in your environment. The value must
+                    match one of the values in the element
+                    <config-setting>/spfe/doc-set/topic-set-type-order</config-setting>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/topic-types</xpath>
+            <description>
+                <p>A container element for a list of topic types included in a topic set.</p>
+                <p>The list of topic types is used to locate the configuration file for each topic
+                    type, which in turn lists the scripts used to process topics of this type. The
+                    list is also used to determine the <feature>topic type order</feature> for a
+                    topic set, which determines the order in which topic types are listed in a
+                    generated <feature>table of contents</feature>.</p>
+            </description>
+            <values/>
+            <restrictions>
+                <restriction>
+                    <p>Every topic type occurring in the topic set must be listed here. If an
+                        unlisted topic type is included, an error will occur at the
+                            <feature>synthesis</feature> stage of the <feature>build</feature> when
+                        the synthesis scripts will be unable to find templates to process the topic
+                        type.</p>
+                    <p>Note that it is possible to write a synthesis routine that attempts to
+                        process an unrecognized topic type. In this case, the error described above
+                        may not occur. This is unwise, however, since such a script cannot be
+                        guaranteed to correctly interpret all the structure of an unknown type,
+                        which may result in unanticipated effects in the output. </p>
+                </restriction>
+            </restrictions>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/topic-types/object-type/href</xpath>
+            <description>
+                <p>The location of the file that contains the configuration of a object type.</p>
+            </description>
+            <values/>
+            <restrictions>
+                <restriction>
+                    <p>The setting must contain the location of a valid object type configuration
+                        file.</p>
+                </restriction>
+            </restrictions>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-set/topic-types/object-type/xmlns</xpath>
+            <description>
+                <p>The XML namespace URI of the object type. This is used to unambiguously identify
+                    the ovject type.</p>
+            </description>
+            <values/>
+            <restrictions>
+                <restriction>
+                    <p>This value must match the value of the <code>targetNamespace</code> attribute
+                        of the schema that defines the object type.</p>
+                </restriction>
+                <restriction>
+                    <p>Must match the object type namespace URI declared in the object type
+                        configuration file pointed to by the <config-setting>href</config-setting>
+                        setting. In the object type configuration file, the object type namespace
+                        URI is specified in the
+                        <config-setting>/spfe/object-type/xmlns</config-setting> setting.</p>
+                </restriction>
+            </restrictions>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/topic-set/topic-types/topic-type</xpath>
+            <description>
+                <p>An item in the list of the topic types included in a <feature>topic
+                    set</feature>. The topic type is identified by its XML namespace URI
+                    (<config-setting>xmlns</config-setting>) and the URL of its configuration file
+                    (<config-setting>href</config-setting>).</p>
+                <codeblock language="XML" namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+&lt;topic-type>
+    &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic&lt;/xmlns>
+    &lt;href>../../topic-types/generic-topic/config.xml&lt;/href>
+&lt;/topic-type>                    
+                </codeblock>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/topic-set/topic-types/topic-type/href</xpath>
+            <description>
+                <p>The location of the file that contains the configuration of a topic type.</p>
+            </description>
+            <values/>
+            <restrictions>
+                <restriction>
+                    <p>The setting must contain the location of a valid topic type configuration
+                        file.</p>
+                </restriction>
+            </restrictions>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/topic-set/topic-types/topic-type/xmlns</xpath>
+            <description>
+                <p>The XML namespace URI of the topic type. This is used to unambiguously identify
+                    the topic type.</p>
+            </description>
+            <values/>
+            <restrictions>
+                <restriction>
+                    <p>This value must match the value of the <code>targetNamespace</code> attribute
+                        of the schema that defines the topic type.</p>
+                </restriction>
+                <restriction>
+                    <p>Must match the topic type namespace URI declared in the topic type
+                        configuration file pointed to by the <config-setting>href</config-setting>
+                        setting. In the topic type configuration file, the topic type namespace URI
+                        is specified in the <config-setting>/spfe/topic-type/xmlns</config-setting>
+                        setting.</p>
+                </restriction>
+            </restrictions>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type</xpath>
+            <description>
+                <p>A container element for the configuration of a <feature>topic-type</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/topic-type-aliases/topic-type/alias</xpath>
+            <description>
+                <p>The alias for the topic type
+                    <config-setting xpath="/spfe/topic-type-aliases/topic-type/id">id</config-setting>,
+                    that is, a reader-friendly name for the topic type.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-type-aliases/topic-type/id</xpath>
+            <description>
+                <p>The topic type id, that is, the namespace identifier of the topic type
+                    schema.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/topic-type-aliases/topic-type/plural</xpath>
+            <description>
+                <p>The plural version of the
+                    <config-setting xpath="/spfe/topic-type-aliases/topic-type/alias">alias</config-setting>
+                    for the topic type
+                    <config-setting xpath="/spfe/topic-type-aliases/topic-type/id">id</config-setting>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/spfe/topic-type/aliases</xpath>
+            <description>
+                <p>A container element for a pair or <feature>topic type aliases</feature>,
+                    <config-setting>singular</config-setting> and
+                    <config-setting>plural</config-setting>. <feature>Topic types</feature> in SPFE
+                    are formally identified by the namespace URI of the topic schema. In some cases,
+                    however, we need to display the topic type to the user. For this purpose we need
+                    a user-friendly alias for the topic type.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-type/aliases/plural</xpath>
+            <description>
+                <fragment-ref id-ref="aliases-description">
+                    <local-strings>
+                        <string id="singular-or-plural">plural</string>
+                        <string id="example-alias"><quote>Configuration settings</quote></string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+
+        <config-setting-description>
+            <xpath>/spfe/topic-type/aliases/singular</xpath>
+            <description>
+                <fragment id="aliases-description">
+                    <local-strings>
+                        <string id="singular-or-plural">singular</string>
+                        <string id="example-alias"><quote>Configuration setting</quote></string>
+                    </local-strings>
+                    <p>A <string-ref id-ref="singular-or-plural"/> version of the <feature>topic
+                            type alias</feature>. For instance, in the SPFE documentation, the
+                            <string-ref id-ref="singular-or-plural"/> alias for the topic type
+                        formally identified as
+                            <xml-namespace-uri>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions</xml-namespace-uri>
+                        is <string-ref id-ref="example-alias"/>. The namespace alias configuration
+                        for this looks like this:</p>
+                    <codeblock language="XML" namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+&lt;topic-type>
+    &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference&lt;/xmlns>
+    &lt;aliases>
+        &lt;singular>Configuration setting&lt;/singular>
+        &lt;plural>Configuration settings&lt;/plural>
+    &lt;/aliases>
+    ...
+&lt;/topic-type>     
+                </codeblock>
+                </fragment>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts</xpath>
+            <description>
+                <p>A container for the list of scripts to be used for each stage of the build
+                    process. Each build script for each stage should be written to use the standard
+                    SPFE interface for a script at that stage (which you can determine by examining
+                    the <file-name>spfe.rules</file-name> build rules file). Listing the full path
+                    of the script for each stage in this list will then cause that script to be
+                    called at the appropriate stage of the build process. If you need to change the
+                    interface to a script at a particular stage, you can override the build rule for
+                    that step by specifying a build rule with the same name as the one in
+                        <file-name>spfe.rules</file-name>. If you need to add additional steps, you
+                    can use the <config-setting>/spfe/topic-type/scripts/other</config-setting>. If
+                    you do this, you must override the normal sequence in which the scripts are run
+                    in your local build rules file (the one specified by
+                    <config-setting>/spfe/topic-set/build-rules</config-setting>).</p>
+                <p>You may specify more than one script for each stage. The build will create a
+                    temporary script file that includes each of the scripts listed for each stage.
+                    One, and only one, of the included scripts must have a template named "main",
+                    which the build rule will call as the initial template (unless you have
+                    overridden the build rule for this step in your custom build file.</p>
+                <p>This mechanism for building the final script by including a list of specified
+                    scripts allows you to customize the build for each topic set while maintaining a
+                    high degree of modularity and reuse in your script collections. A typical way to
+                    use this mechanism would be to include a separate script at the presentation
+                    stage for each of the topic types included in the build. This mechanism does not
+                    prevent you from including one script file in another in the normal way, it just
+                    gives you a more flexible way of managing modular script files and assembling
+                    the right set for each topic set.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/extract</xpath>
+            <description>
+                <p>Container element for a list of extraction scripts. The extract scripts are responsible for extracting content from external sources, which may then be combined with authored content to form complete topics. </p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/format-book</xpath>
+            <description>
+                <p>A container for a list of formatting scripts for creating a book format of the
+                    topic set. Normally this script would produce an output in the input language of
+                    a rendering engine, such as XSL-FO or TeX. However, if you have written your own
+                    encoding script, then the formatting script should produce the input format
+                    expected by your encoding script.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/format-book/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a book formatting</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/format-html</xpath>
+            <description>
+                <p>A container for a list of scripts for formatting a topic set in HTML.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/format-html/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an html format</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/image-list</xpath>
+            <description>
+                <p>A container for a list of image-list scripts. Unless you have introduced custom
+                    image handling into your system, the default image handling script should work
+                    for all topic types. The image-list script is part of the format step. It
+                    generates a list of all the graphics included in the presentation so that the
+                    build scripts can copy those graphics to the appropriate location in the
+                    output.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/image-list/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">an image list</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/link-catalog</xpath>
+            <description>
+                <p>Container element for a list of link-catalog scripts. The link-catalog step is
+                    a sub step of the presentation process. In most cases, however,
+                    the link catalog build will be run separately from the full doc build. This is
+                    to allow you to build all the link catalogs for all the topic sets in the
+                    documentation set, so that topics can link to topics in other topic sets by
+                    reading the entire collection of link catalogs to resolve
+                    subject-affinities.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/link-catalog/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a link-catalog</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/other</xpath>
+            <description>
+                <p>A container for a named list of scripts to perform an additional step that is not
+                    part of the normal SPFE build sequence. The most usual place to user other
+                    scripts is in the synthesis step for things like extracting content from source
+                    files (the way this reference is build by extracting information from the
+                    configuration schema and combining it with authored information).</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes>
+                <attribute>
+                    <name>name</name>
+                    <description>
+                        <p>The name of the extra step.</p>
+                    </description>
+                </attribute>
+            </attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/other/script</xpath>
+            <description>
+                <p>The full path of a script that is part of the extra step.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/presentation-book</xpath>
+            <description>
+                <p>A container for a list of presentation scripts for building a book presentation
+                    of the topic set. Usually there will be one script for the topic set as a whole
+                    and one script for each topic type in the script.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/presentation-book/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a book presentation</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/presentation-web</xpath>
+            <description>
+                <p>A container for a list of presentation scripts for building a web presentation of
+                    the topic set. Usually there will be one script for the topic set as a whole and
+                    one script for each topic type in the script.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/presentation-web/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a web presentation</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/synthesis</xpath>
+            <description>
+                <p>Container element for a list of synthesis scripts. The synthesis scripts are
+                    responsible for assembling a set of topics in which all names are fully resolved
+                    and all conditions and inclusions have been applied.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/extract/script</xpath>
+            <description>
+                <fragment id="script-description">
+                    <local-strings>
+                        <string id="script-type">an extract</string>
+                    </local-strings>
+                    <p>The full path to <string-ref id-ref="script-type"/> script file.</p>
+                </fragment>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/synthesis/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a synthesis</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/toc</xpath>
+            <description>
+                <p>A container for a list of scripts for creating a <feature>table of contents
+                        file</feature> for the topic set. </p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/toc/script</xpath>
+            <description>
+                <fragment-ref id-ref="script-description">
+                    <local-strings>
+                        <string id="script-type">a TOC file</string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/topic-type-link-priority</xpath>
+            <description>
+                <fragment-ref id-ref="link-priority-description">
+                    <local-strings>
+                        <string id="other-setting"><config-setting>/spfe/topic-set/topic-set-link-priority</config-setting></string>
+                    </local-strings>
+                </fragment-ref>
+            </description>
+            <values>
+                <default>
+                    <p>1</p>
+                </default>
+            </values>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/xmlns</xpath>
+            <description>
+                <p>The XML schema namespace URI that identifies a <feature>topic type</feature>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <build-property/>
+            <attributes/>
+        </config-setting-description>
+    </body>
+</config-setting-descriptions>

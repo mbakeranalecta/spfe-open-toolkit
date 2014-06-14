@@ -50,6 +50,14 @@
                     <plural>Configuration settings</plural>
                 </aliases>
             </subject-type>
+            <subject-type>
+                <id>spfe-build-property</id>
+                <aliases>
+                    <singular>Build property</singular>
+                    <plural>Build properties</plural>
+                </aliases>
+            </subject-type>
+            
         </subject-types>
 
         <style>

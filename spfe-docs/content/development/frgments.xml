@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+
+<generic-task-topic xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/generic-task-topic.xsd">
+
+
+<head>
+    <id></id>
+    <history>
+        <revision>
+            <date></date>
+            <author></author>
+            <comment></comment>
+            <status></status>
+        </revision>
+    </history>
+    <index>
+        <entry>
+            <type></type>
+            <term></term>
+        </entry>
+    </index>
+</head>
+    <body>
+        <title>Fragments</title>
+        <understanding>
+            <p></p>
+            <codeblock>&lt;fragment id="test-fragment">
+    &lt;local-strings>
+        &lt;string id="test-string-1">&lt;bold>test string one&lt;/bold>&lt;/string>
+        &lt;string id="test-string-2">&lt;italic>test string two&lt;/italic>&lt;/string>
+    &lt;/local-strings>
+    &lt;p>This is a piece of text in a fragment. It includes references to local strings &lt;string-ref id-ref="test-string-1"/> and &lt;string-ref id-ref="test-string-2"/>. And to a global string &lt;string-ref id-ref="eppo-simple-topic-set-product"/>&lt;/p>
+&lt;/fragment>
+&lt;p>The following is a reference to the fragment defined above:&lt;/p>
+&lt;fragment-ref id-ref="test-fragment">
+    &lt;local-strings>
+        &lt;string id="test-string-1">&lt;code>this is test string number one&lt;/code>&lt;/string>
+    &lt;/local-strings>
+&lt;/fragment-ref></codeblock>
+        </understanding>
+        <planning></planning>
+    </body>
+</generic-task-topic>

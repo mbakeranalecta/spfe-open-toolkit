@@ -8,7 +8,7 @@
         <topic-set-id>spfe-function-reference</topic-set-id>
         <topic-set-type>reference</topic-set-type>
         <topic-types>
-            <included-topic-types>
+
                 <topic-type>
                     <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions</xmlns>
                     <href>../../topic-types/function-and-template-reference/config.xml</href>
@@ -21,11 +21,8 @@
                     <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</xmlns>
                     <href>../../topic-types/function-and-template-reference/config.xml</href>
                 </topic-type>
-            </included-topic-types>
-            <topic-type-order>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</topic-type-xmlns>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</topic-type-xmlns>
-            </topic-type-order>
+            
+
         </topic-types>
 
         <sources>

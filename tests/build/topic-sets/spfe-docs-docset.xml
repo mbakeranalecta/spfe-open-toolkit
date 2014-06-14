@@ -9,15 +9,12 @@
         <topic-set-id>spfe-docs-docset</topic-set-id>
         <topic-set-type>docset</topic-set-type>
         <topic-types>
-            <included-topic-types>
+
                 <topic-type>
                     <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic</xmlns>
                     <href>../../../spfe-docs/topic-types/docset-home-topic/config.xml</href>
                 </topic-type>
-            </included-topic-types>
-            <topic-type-order>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic</topic-type-xmlns>
-            </topic-type-order>
+           
         </topic-types>
 
         <sources>

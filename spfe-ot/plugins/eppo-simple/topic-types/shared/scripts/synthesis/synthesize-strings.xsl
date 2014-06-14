@@ -9,27 +9,15 @@
     exclude-result-prefixes="#all">
     
     <xsl:template match="*:string-ref">
+        <!-- Selects the string definition in the inmost local scope.
+             If two string definitions in the same scope have the same ID it 
+             selects the first in document order. -->
         <xsl:param name="in-scope-strings" as="element()*" tunnel="yes"/>
-        <xsl:message select="'$in-scope-strings', $in-scope-strings"></xsl:message>
-        <xsl:variable name="local-strings" select="*:local-strings/*:string, $in-scope-strings, ancestor::*:fragment/*:local-strings/*:string, $strings" as="element()*"/>   
-        
+        <xsl:variable name="local-strings" select="*:local-strings/*:string, $in-scope-strings" as="element()*"/>   
         <xsl:variable name="string-id" select="@id-ref"/>
-        <xsl:message select="$local-strings"/>
         <xsl:variable name="substitution" select="$local-strings[@id=$string-id][1]"/>
 
         <xsl:choose>
-<!--            <xsl:when test="$substitution[2]">
-                <xsl:call-template name="sf:error">
-                    <xsl:with-param name="message">
-                        <xsl:text>Multiple strings found with string id </xsl:text>
-                        <xsl:value-of select="$id"/>
-                        <xsl:text>. Matching strings: </xsl:text>
-                        <xsl:for-each select="$substitution">
-                            <xsl:value-of select="."/>
-                        </xsl:for-each>
-                    </xsl:with-param>
-                </xsl:call-template>
-            </xsl:when>-->
             <xsl:when test="$substitution">
                 <xsl:apply-templates select="$substitution/node()">
                     <xsl:with-param name="in-scope-strings" select="$local-strings" tunnel="yes"/>

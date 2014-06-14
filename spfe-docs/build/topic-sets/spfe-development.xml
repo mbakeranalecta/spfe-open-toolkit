@@ -9,41 +9,33 @@
         <topic-set-type>guide</topic-set-type>
 
         <topic-types>
-            <included-topic-types>
-                <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>
-                    <href>../../topic-types/generic-topic/config.xml</href>
-                </topic-type>
-                <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</xmlns>
-                    <href>../../topic-types/generic-task-topic/config.xml</href>
-                </topic-type>
-            </included-topic-types>
-            <topic-type-order>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</topic-type-xmlns>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</topic-type-xmlns>
-            </topic-type-order>
+            <topic-type>
+                <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</xmlns>
+                <href>../../topic-types/generic-task-topic/config.xml</href>
+            </topic-type>
+            <topic-type>
+                <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>
+                <href>../../topic-types/generic-topic/config.xml</href>
+            </topic-type>
 
         </topic-types>
         <object-types>
-            <included-object-types>
-                <object-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record</xmlns>
-                    <href>../../object-types/graphics/config.xml</href>
-                </object-type>
-            </included-object-types>
+            <object-type>
+                <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record</xmlns>
+                <href>../../object-types/graphics/config.xml</href>
+            </object-type>
         </object-types>
-        
+
         <sources>
             <authored-content>
-                
+
                 <include>../../content/development/*.xml</include>
             </authored-content>
         </sources>
 
         <default-topic-scope>spfe</default-topic-scope>
         <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
-        <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>     
+        <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
         <strings>
             <string id="eppo-simple-topic-set-title">SPFE Development</string>
         </strings>

@@ -10,20 +10,15 @@
         <topic-set-type>reference</topic-set-type>
 
         <topic-types>
-            <included-topic-types>
                 <topic-type>
                     <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xmlns>
                     <href>../../topic-types/config-reference/config.xml</href>
                 </topic-type>
-            </included-topic-types>
-            <topic-type-order>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</topic-type-xmlns>
-        </topic-type-order>
         </topic-types>
 
         <sources>
             <authored-content>
-                <include>${SPFEOT_HOME}/1.0/schemas/config/element-descriptions.xml</include>
+                <include>${SPFEOT_HOME}/1.0/schemas/config/config-setting-descriptions.xml</include>
             </authored-content>
             <sources-to-extract-content-from>
                 <include>${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</include>

@@ -10,23 +10,21 @@
         <topic-set-link-priority>0</topic-set-link-priority>
 
         <topic-types>
-            <included-topic-types>
+
                 <topic-type>
                     <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</xmlns>
                     <href>../../../spfe-docs/topic-types/topic-subject-list-topic/config.xml</href>
                 </topic-type>
-            </included-topic-types>
-            <topic-type-order>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</topic-type-xmlns>
-            </topic-type-order>
+            
+
         </topic-types>
 <!--        <object-types>
-            <included-object-types>
+
                 <object-type>
                     <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record</xmlns>
                     <href>../../../spfe-docs/object-types/graphics/config.xml</href>
                 </object-type>
-            </included-object-types>
+
         </object-types>-->
         
         <sources>

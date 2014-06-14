@@ -92,22 +92,11 @@ planning>planning-question>planning-question-title
 planning>planning-question>planning-question-body:before
 {
     display:block;
-    content: "Explanation of planning question";
+    content: "Answer the planning question or tell reader how to find an answer for themselves";
     background-color:#FFDEAD;
     font-family:sans-serif;
     font-size:small;  
     margin-top: 1em;}
-
-
-planning>planning-question>how-to-answer-body:before
-{
-    display:block;
-    content: "How to answer the planning question";
-    background-color:#FFDEAD;
-    font-family:sans-serif;
-    font-size:small;  
-    margin-top: 1em;
-}
 
 doing:before
 {

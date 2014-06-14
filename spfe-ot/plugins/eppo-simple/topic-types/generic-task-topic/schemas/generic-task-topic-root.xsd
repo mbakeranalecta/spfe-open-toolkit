@@ -21,7 +21,7 @@
                             <xs:element name="understanding" maxOccurs="1" minOccurs="1">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:group ref="text-general" maxOccurs="unbounded" minOccurs="1"/>
+                                        <xs:group ref="text-general"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -30,7 +30,7 @@
                             <xs:element name="doing" maxOccurs="1" minOccurs="0">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:group ref="text-general" maxOccurs="unbounded" minOccurs="0"/>
+                                        <xs:group ref="text-general"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -48,7 +48,6 @@
                     <xs:sequence>
                         <xs:element name="planning-question-title" type="xs:string"/>
                         <xs:element name="planning-question-body" type="text-general-type"/>
-                        <xs:element name="how-to-answer-body" type="text-general-type"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>

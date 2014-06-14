@@ -12,7 +12,7 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphics.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/fragments.xsd"/>
-
+    <xs:include schemaLocation="strings.xsd"/>
     <xs:group name="text-general">
         <xs:sequence>
             <xs:sequence maxOccurs="1" minOccurs="0">

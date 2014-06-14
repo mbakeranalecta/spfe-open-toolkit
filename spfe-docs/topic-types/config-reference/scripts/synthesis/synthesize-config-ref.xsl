@@ -9,7 +9,7 @@ xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-xmlns:ed="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-element-descriptions"
+xmlns:ed="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions"
           
 exclude-result-prefixes="#all" >
 	
@@ -18,12 +18,12 @@ exclude-result-prefixes="#all" >
 	
 <xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xsl:variable>	
 	
-<xsl:variable name="fragments" select="$element-source//*:fragment"/>
+<xsl:variable name="fragments" select="$config-setting-source//*:fragment"/>
 	
 <!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
 <xsl:variable name="strings" as="element()*">
 	<xsl:for-each select="
-		$element-source//ed:string[not(parent::ed:local-strings)],
+		$config-setting-source//ed:string[not(parent::ed:local-strings)],
 		$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
 		$config/config:doc-set/config:strings/config:string
 		">
@@ -43,7 +43,7 @@ exclude-result-prefixes="#all" >
 <xsl:variable name="schema-defs" select="sf:get-sources($extracted-content-files)"/>
 
 <xsl:param name="authored-content-files"/>
-<xsl:variable name="element-source" select="sf:get-sources($authored-content-files)"/>
+<xsl:variable name="config-setting-source" select="sf:get-sources($authored-content-files)"/>
 
 <xsl:variable name="config" as="element(config:spfe)">
 	<xsl:sequence select="/config:spfe"/>
@@ -86,8 +86,9 @@ Main template
 				<!-- Use for-each-group to filter out duplicate xpaths -->
 				<xsl:for-each-group select="$schema-defs/schema-definitions/schema-element[starts-with(xpath, $root) or belongs-to-group]" group-by="xpath">
 					<xsl:apply-templates select=".">
-						<xsl:with-param name="source" select="$element-source//ed:element-description"/>
+						<xsl:with-param name="source" select="$config-setting-source//ed:config-setting-description"/>
 						<xsl:with-param name="current-doctype" select="$current-doctype"/>
+						<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>
 					</xsl:apply-templates>
 				</xsl:for-each-group>
 			</ss:synthesis>
@@ -95,7 +96,7 @@ Main template
 	</xsl:for-each-group>
 	<!-- Warn if there are any unmatched topics in the authored content. -->
 	<!-- FIXME: Should also search for unmatched attribute definitions. -->
-	<xsl:for-each select="$element-source//ed:element-description">
+	<xsl:for-each select="$config-setting-source//ed:config-setting-description">
 		<xsl:if test="not(ed:xpath = $schema-defs/schema-definitions/schema-element/xpath)">
 			<xsl:call-template name="sf:warning">
 				<xsl:with-param name="message" select="'Authored element description found for an element not found in the schema:', string(ed:xpath)"/>
@@ -138,7 +139,7 @@ Main content processing templates
 			local-name="{translate(xpath, '/:', '__')}"
 			topic-type-alias="{$topic-type-alias}"
 			title="{name}"
-			excerpt="{sf:escape-for-xml(sf:first-n-words($source[ed:xpath=$xpath]/ed:description/ed:p[1], 30, ' ...'))}">
+			excerpt="{if(normalize-space($source[ed:xpath=$xpath][1]/ed:description/ed:p[1])) then sf:escape-for-xml(sf:first-n-words($source[ed:xpath=$xpath][1]/ed:description/ed:p[1], 30, ' ...')) else ''}">
 			<xsl:variable name="xpath" select="normalize-space(xpath)"/>
 			<ss:index>
 				<ss:entry>
@@ -155,11 +156,11 @@ Main content processing templates
 						<ss:anchor><xsl:value-of select="name"></xsl:value-of></ss:anchor>
 					</ss:entry>
 				</xsl:for-each>
-				<xsl:if test="normalize-space($source[ed:xpath=$xpath]/ed:build-property)">
+				<xsl:if test="normalize-space($source[ed:xpath=$xpath][1]/ed:build-property)">
 					<ss:entry>
 						<ss:type>spfe-build-property</ss:type>
 						<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/build</ss:namespace>
-						<ss:term><xsl:value-of select="normalize-space($source[ed:xpath=$xpath]/ed:build-property)"/></ss:term>
+						<ss:term><xsl:value-of select="normalize-space($source[ed:xpath=$xpath][1]/ed:build-property)"/></ss:term>
 					</ss:entry>					
 				</xsl:if>
 			</ss:index>
@@ -220,15 +221,27 @@ Main content processing templates
 					
 					<!-- Select and copy the authored element info. -->
 					<xsl:choose>
+						<xsl:when test="$source[ed:xpath=$xpath][2]">
+							<xsl:call-template name="sf:error">
+								<xsl:with-param name="message" select="'Duplicate configuration setting description found for setting ', $xpath">
+									
+								</xsl:with-param>
+							</xsl:call-template>
+						</xsl:when>
 						<!-- Test that the information exists. -->
 						<xsl:when test="exists($source[ed:xpath=$xpath]/*)">
-							<xsl:apply-templates select="$source[ed:xpath=$xpath]/ed:description"/>
-							<xsl:apply-templates select="$source[ed:xpath=$xpath]/ed:build-property"/>
-							<xsl:apply-templates select="$source[ed:xpath=$xpath]/ed:include-behavior"/>
+							<xsl:apply-templates select="$source[ed:xpath=$xpath]/ed:description">
+								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>
+							</xsl:apply-templates>
+							<xsl:apply-templates select="$source[ed:xpath=$xpath]/ed:build-property">
+								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>	
+							</xsl:apply-templates>
+							<xsl:apply-templates select="$source[ed:xpath=$xpath]/ed:include-behavior">
+								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>									</xsl:apply-templates>
 						</xsl:when>
 						<xsl:otherwise><!-- If not found, report warning. -->
 							<xsl:call-template name="sf:warning">
-								<xsl:with-param name="message" select="'Element description not found ', string($xpath)"/>
+								<xsl:with-param name="message" select="'Configuration setting description not found ', string($xpath)"/>
 							</xsl:call-template>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -284,7 +297,9 @@ Main content processing templates
 										<xsl:with-param name="message" select="'Attribute description not found ', string(xpath)"/>
 									</xsl:call-template>
 								</xsl:if>
-								<xsl:apply-templates select="$authored"/>
+								<xsl:apply-templates select="$authored">
+									<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>
+								</xsl:apply-templates>
 							</xsl:element>
 						</xsl:for-each>
 					</xsl:element>
@@ -358,7 +373,7 @@ Content fix-up templates
 
 <!-- Fix up attribute name xpaths -->
 <!--<xsl:template match="ed:config-setting">
-	<xsl:variable name="context-element" select="ancestor::ed:element-description/ed:xpath"/>
+	<xsl:variable name="context-element" select="ancestor::ed:config-setting-description/ed:xpath"/>
 	<xsl:variable name="data-content" select="."/>
 	<xsl:variable name="xpath" select="@xpath"/>
 	<xsl:variable name="all-attributes" select="
@@ -387,7 +402,7 @@ Content fix-up templates
 					
 					<!-\- Is it the name of an attribute of the current element? -\->
 					<!-\- FIXME: This is using the ed source rather than the schema defs -\->
-<!-\-					<xsl:when test="ancestor::ed:element-description/ed:attributes/ed:attribute[ends-with(ed:name, $data-content)]">-\->
+<!-\-					<xsl:when test="ancestor::ed:config-setting-description/ed:attributes/ed:attribute[ends-with(ed:name, $data-content)]">-\->
 					<xsl:when test="concat($context-element, '/@', $data-content) = $all-attributes">
 							<xsl:attribute name="key" select="concat($context-element, '/@', $data-content)"/>
 						<xsl:apply-templates/>
@@ -420,7 +435,7 @@ Content fix-up templates
 
 <!-- Fix up element name xpaths -->
 	<xsl:template match="ed:config-setting">
-	<xsl:variable name="context-element" select="ancestor::ed:element-description/ed:xpath"/>
+		<xsl:variable name="context-element" select="ancestor::ed:config-setting-description/ed:xpath"/>
 	<xsl:variable name="data-content" select="."/>
 	<xsl:variable name="xpath" select="@xpath"/>
 	<xsl:variable name="all-elements" select="
@@ -460,12 +475,10 @@ Content fix-up templates
 						<xsl:attribute name="key" select="$data-content"/>
 						<xsl:call-template name="sf:warning">
 							<xsl:with-param name="message">
-								<xsl:text>Ambiguous SPFE config element name "</xsl:text>
+								<xsl:text>Unknown or ambiguous SPFE config element name "</xsl:text>
 								<xsl:value-of select="$data-content"/>
 								<xsl:text>". Context element is:</xsl:text>
 								<xsl:value-of select="$context-element"/>
-								<xsl:text> Elements are: </xsl:text>
-								<xsl:value-of select="$all-elements[ends-with(., $data-content)]"/>
 							</xsl:with-param>
 						</xsl:call-template>
 					</xsl:otherwise>

@@ -60,14 +60,12 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
                 <planning-question-body>
                     <p>You need to define a documentation set to group related topic sets into a
                         single documentation set.</p>
-                </planning-question-body>
-                <how-to-answer-body>
                     <p>It is not necessary to create a collection of topic sets; you use a single
                             <feature>topic set</feature> to include all your topics. However, if you
                         use a documentation set, you can present multiple topic sets in a specific
                         order in the table of contents in the output. A documentation set also
                         enables you to reuse topic sets in different documentation sets.</p>
-                </how-to-answer-body>
+                </planning-question-body>
             </planning-question>
        </planning>
         <doing>        

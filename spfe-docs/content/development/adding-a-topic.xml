@@ -48,15 +48,12 @@
            <planning-question>
                <planning-question-title>What do I need to add a new topic?</planning-question-title>
                 <planning-question-body>
-                   <p>Before you add a topic, you must decide what topic type schema to use.</p>
-                </planning-question-body>
-                <how-to-answer-body>
-                    <p>You can use an existing schema and a topic set that uses
+                   <p>Before you add a topic, you must decide what topic type schema to use.</p>                    <p>You can use an existing schema and a topic set that uses
                                 the schema can include your topic. If your topic uses a new schema or a schema that does
                                 not have an associated topic set, it will not appear in a
                                 documentation set until a topic set includes it.
                     </p>
-                </how-to-answer-body>
+                </planning-question-body>
             </planning-question>
        </planning>
 <doing>

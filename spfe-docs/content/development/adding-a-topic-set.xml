@@ -52,8 +52,6 @@
                <planning-question-title>Do I need to create a new topic set?</planning-question-title>
                 <planning-question-body>
                     <p>You could have a single topic set that contains all the topics; however, in a large <feature>documentation set</feature> it may be preferable to group topics into multiple topic sets related to particular roles or different aspects of a product.</p>
-                </planning-question-body>
-                <how-to-answer-body>
                     <p>If you want to do any of the following, you need a new topic set:</p>
                     <ul>
                         <li>
@@ -63,7 +61,9 @@
                             <p>Change the order of topic sets in the TOC—the order of the folders in the table of contents is based on the <config-setting>topic-set-order</config-setting> element in the configuration file</p>
                         </li>
                     </ul>
-            </how-to-answer-body>
+                    
+                </planning-question-body>
+
             </planning-question>
        </planning>
        <doing>        

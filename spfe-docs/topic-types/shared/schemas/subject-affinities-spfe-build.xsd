@@ -22,6 +22,9 @@
                 </xs:complexType>
             </xs:element>
             <xs:element name="spfe-build-property" type="xs:NCName"/>
+            <xs:element name="spfe-build-function"/>
+            <xs:element name="spfe-build-template"/>
+            <xs:element name="spfe-build-variable"/>
             <xs:element name="ant-element" type="xs:string"> </xs:element>
 
         </xs:choice>

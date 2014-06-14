@@ -428,12 +428,12 @@
 
         <xsl:variable name="script-sets">
             <xsl:for-each
-                select="$config/topic-set[topic-set-id=$topic-set-id]/topic-types/included-topic-types/topic-type">
+                select="$config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type">
                 <xsl:variable name="xmlns" select="xmlns"/>
                 <xsl:sequence select="$config/topic-type[xmlns=$xmlns]/scripts"/>
             </xsl:for-each>
             <xsl:for-each
-                select="$config/topic-set[topic-set-id=$topic-set-id]/object-types/included-object-types/object-type">
+                select="$config/topic-set[topic-set-id=$topic-set-id]/object-types/object-type">
                 <xsl:variable name="xmlns" select="xmlns"/>
                 <xsl:sequence select="$config/object-type[xmlns=$xmlns]/scripts"/>
             </xsl:for-each>

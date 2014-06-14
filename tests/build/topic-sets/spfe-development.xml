@@ -9,29 +9,21 @@
         <topic-set-type>guide</topic-set-type>
 
         <topic-types>
-            <included-topic-types>
-                <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>
-                    <href>../../../spfe-docs/topic-types/generic-topic/config.xml</href>
-                </topic-type>
                 <topic-type>
                     <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</xmlns>
                     <href>../../../spfe-docs/topic-types/generic-task-topic/config.xml</href>
                 </topic-type>
-            </included-topic-types>
-            <topic-type-order>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</topic-type-xmlns>
-                <topic-type-xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</topic-type-xmlns>
-            </topic-type-order>
+                <topic-type>
+                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>
+                    <href>../../../spfe-docs/topic-types/generic-topic/config.xml</href>
+                </topic-type>
 
-        </topic-types>
+            </topic-types>
         <object-types>
-            <included-object-types>
-                <object-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record</xmlns>
-                    <href>../../../spfe-docs/object-types/graphics/config.xml</href>
-                </object-type>
-            </included-object-types>
+            <object-type>
+                <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record</xmlns>
+                <href>../../../spfe-docs/object-types/graphics/config.xml</href>
+            </object-type>
         </object-types>
         
         <sources>

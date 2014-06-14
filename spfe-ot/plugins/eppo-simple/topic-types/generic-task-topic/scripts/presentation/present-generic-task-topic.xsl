@@ -77,16 +77,9 @@
 	</xsl:template>-->
 	
 	<xsl:template match="gt:planning-question-body">
-		<question>
 			<xsl:apply-templates/>
-		</question>
 	</xsl:template>
 	
-	<xsl:template match="gt:how-to-answer-body">
-		<answer>
-			<xsl:apply-templates/>
-		</answer>
-	</xsl:template>
 	
 	<xsl:template match="gt:doing">	
 		<title>Do</title>

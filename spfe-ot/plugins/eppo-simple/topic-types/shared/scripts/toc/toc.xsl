@@ -95,7 +95,7 @@
 					<!-- If not TOC file, create TOC based on topic types -->
 					<xsl:otherwise>	
 						<xsl:call-template name="sf:info">
-							<xsl:with-param name="message" select="'No toc file, use topic-type-order for ', $media"/>
+							<xsl:with-param name="message" select="'No toc file, using topic type order for ', $media"/>
 						</xsl:call-template>
 						<xsl:if test="$synthesis/ss:synthesis/ss:topic[matches(@local-name, '^[iI][nN][dD][eE][xX]$')]">
 							<xsl:attribute name="index">index</xsl:attribute>
@@ -111,12 +111,12 @@
 						<!-- FIXME: decide if still using virutal types. If not, remove code. -->
 						<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic[not(@virtual-type)]/@type union $synthesis/ss:synthesis/ss:topic[not(starts-with(@virtual-type, 'spfe.'))]/@virtual-type)"/>
 						
-						<xsl:variable name="topic-type-order-list" select="$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type-order/config:topic-type-xmlns/text()"/>
+						<xsl:variable name="topic-type-order-list" select="$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type/config:xmlns/text()"/>
 						<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type/config:xmlns/text()"/>
-						
+						<!-- FIXME: review this code -->
 						<xsl:if test="count($topic-types-found[not(.=$topic-type-alias-list)])">
 							<xsl:call-template name="sf:error">
-								<xsl:with-param name="message" select="'Topic type(s) missing from spfe.topic-type-order-list property: ', string-join($topic-types-found[not(.=$config/config:topic-type-order/config:topic-type)], ', ')"/>
+								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list: ', string-join($topic-types-found[not(.=$config/config:topic-type-order/config:topic-type)], ', ')"/>
 							</xsl:call-template>
 						</xsl:if>
 						
@@ -159,9 +159,6 @@
 								<xsl:otherwise>
 								<!-- if no topics, no heading -->
 									<xsl:if test="not($synthesis/ss:synthesis/ss:topic[matches(@local-name, '^[iI][nN][dD][eE][xX]$')][@type=$this-topic-type])">
-										<xsl:call-template name="sf:warning">
-											<xsl:with-param name="message" select="'No topics found for topic type ', $this-topic-type, ' in the topic type order list. This might be because all the topics of that type are grouped with other topics, or because there are no topics of that type. No type grouping will be created in the TOC.'"/>
-										</xsl:call-template>
 									</xsl:if>
 								</xsl:otherwise>
 							</xsl:choose>
