@@ -459,7 +459,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:subject-not-resolved">
-					<xsl:with-param name="message" select="'Term  &quot;', $term, '&quot; not resolved.'"/> 
+					<xsl:with-param name="message" select="'Term  &quot;', $term, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name"/> 
 				</xsl:call-template>
 				<xsl:apply-templates/>
 			</xsl:otherwise>
@@ -570,7 +570,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="sf:subject-not-resolved">
-						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved.')"/>
+						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/>
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
 				</xsl:otherwise>
@@ -613,7 +613,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="sf:subject-not-resolved">
-						<xsl:with-param name="message" select="concat(@type, ' name &quot;', (if (@key) then @key else .), '&quot; not resolved.')"/> 
+						<xsl:with-param name="message" select="concat(@type, ' name &quot;', (if (@key) then @key else .), '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
 				</xsl:otherwise>
@@ -720,7 +720,7 @@
 				</xsl:variable>
 				<xsl:call-template name="sf:subject-not-resolved">
 					<xsl:with-param name="message">
-						<xsl:value-of select="$type"/> string not found: &quot;<xsl:value-of select="$target"/>&quot;.
+						<xsl:value-of select="$type"/> string not found: &quot;<xsl:value-of select="$target"/>&quot; not resolved in topic <xsl:value-of select="ancestor::ss:topic/@full-name"/>.
 					</xsl:with-param>
 				</xsl:call-template>
 				<xsl:sequence select="$content"/>

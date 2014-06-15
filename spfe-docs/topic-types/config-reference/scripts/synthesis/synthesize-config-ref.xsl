@@ -168,10 +168,6 @@ Main content processing templates
 			<!-- FIXME: Need to generate an index element for the link catalog -->
 		
 			<xsl:element name="spfe-configuration-reference-entry" namespace="{$output-namespace}">
-				
-
-				<xsl:element name="schema-element" namespace="{$output-namespace}">
-
 					<xsl:element name="namespace" namespace="{$output-namespace}">
 						<xsl:value-of select="ancestor::schema-definitions/@namespace"/>
 					</xsl:element> 
@@ -230,15 +226,18 @@ Main content processing templates
 						</xsl:when>
 						<!-- Test that the information exists. -->
 						<xsl:when test="exists($source[normalize-space(ed:xpath)=$xpath]/ed:description/*)">
-							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]/ed:description">
+							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]">
 								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>
 							</xsl:apply-templates>
-							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]/ed:build-property">
+<!--							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]/ed:build-property">
 								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>	
 							</xsl:apply-templates>
-							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]/ed:include-behavior">
-								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>									
+							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]/ed:values">
+								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>				
 							</xsl:apply-templates>
+							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]/ed:restrictions">
+								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>				
+							</xsl:apply-templates>-->
 						</xsl:when>
 						<xsl:otherwise><!-- If not found, report warning. -->
 							<xsl:call-template name="sf:warning">
@@ -297,17 +296,21 @@ Main content processing templates
 										<xsl:with-param name="message" select="'Configuration setting description not found ', string(xpath)"/>
 									</xsl:call-template>
 								</xsl:if>
-								<xsl:apply-templates select="$authored/*">
+								<xsl:apply-templates select="$authored">
 									<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>
 								</xsl:apply-templates>
 							</xsl:element>
 						</xsl:for-each>
 					</xsl:element>
-				</xsl:element>
+				
 			</xsl:element>
 		</ss:topic>
 	</xsl:if>
 </xsl:template>
+	
+	<xsl:template match="ed:config-setting-description">
+		<xsl:apply-templates/>
+	</xsl:template>
 	
 	<xsl:template match="ed:description">
 		<xsl:element name="description" namespace="{$output-namespace}">
@@ -321,12 +324,13 @@ Main content processing templates
 		</xsl:element>
 	</xsl:template>
 	
-	<xsl:template match="ed:include-behavior">
-		<xsl:element name="include-behavior" namespace="{$output-namespace}">
+	<xsl:template match="ed:restrictions | ed:restriction | ed:values | ed:default | ed:value">
+		<xsl:element name="{local-name()}" namespace="{$output-namespace}">
 			<xsl:apply-templates/>
 		</xsl:element>
 	</xsl:template>
 	
+
 <xsl:template name="get-group-children">
 	<xsl:param name="xpath"/>
 	<xsl:for-each select="/schema-definitions/schema-group-ref[referenced-in-xpath eq $xpath]">

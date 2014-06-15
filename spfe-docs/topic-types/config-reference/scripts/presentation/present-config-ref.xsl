@@ -26,7 +26,7 @@
 <xsl:function name="lf:link-doc-xpath">
 	<xsl:param name="doc-xpath"/>
 	<!--find the source-->
-	<xsl:variable name="xpath" select="$synthesis//schema-element[doc-xpath=$doc-xpath]/xpath, $synthesis//schema-element/attributes/attribute[doc-xpath=$doc-xpath]/xpath"/>
+	<xsl:variable name="xpath" select="$synthesis//spfe-configuration-reference-entry[doc-xpath=$doc-xpath]/xpath, $synthesis//spfe-configuration-reference-entry/attributes/attribute[doc-xpath=$doc-xpath]/xpath"/>
 	<xsl:variable name="consumed" select="substring-before($xpath,$doc-xpath)"/>
 	<xsl:sequence select="lf:link-xpath-segments($xpath, $consumed, 1)"/>
 </xsl:function>
@@ -71,7 +71,7 @@
 <xsl:function name="lf:link-xpath">
 	<xsl:param name="target" as="xs:string"/>
 	<xsl:param name="link-text" as="xs:string"/>
-	<xsl:variable name="targets" select="$synthesis//schema-element, $synthesis//attribute"/>
+	<xsl:variable name="targets" select="$synthesis//spfe-configuration-reference-entry, $synthesis//attribute"/>
 	<!--Determine whether or not the target exists. -->
 	<xsl:choose>
 		<xsl:when test="count($targets[xpath = $target]) > 1">
@@ -121,11 +121,6 @@
 	
 	<!-- spfe-configuration-reference-entry -->
 	<xsl:template match="spfe-configuration-reference-entry">
-		<xsl:apply-templates/>
-	</xsl:template>
-	
-	<!-- schema-element -->
-	<xsl:template match="schema-element">
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
 		
@@ -188,11 +183,11 @@
 			<xsl:if test="values">
 					<!-- not specified -->
 		<labeled-item>
-			<label>Behavior if not specified</label>
+			<label>Default</label>
 			<item>
 				
 					<xsl:choose>
-						<xsl:when test="not(values/unspecified)"><p>N/A</p></xsl:when> 
+						<xsl:when test="not(values/unspecified)"><p>None</p></xsl:when> 
 						<xsl:otherwise>
 							<xsl:apply-templates select="values/unspecified"/>
 						</xsl:otherwise>
@@ -203,7 +198,7 @@
 		
 		<!-- Special -->
 		<labeled-item>
-			<label>Values with special meanings</label>
+			<label>Values</label>
 			<item>
 				<xsl:choose>
 					<xsl:when test="values/value"> 
@@ -220,7 +215,7 @@
 								<xsl:apply-templates select="following-sibling::description[1]/p[preceding-sibling::p]"/>
 						</xsl:for-each>
 					</xsl:when>
-					<xsl:otherwise><p>None</p></xsl:otherwise>
+					<xsl:otherwise><p>N/A</p></xsl:otherwise>
 				</xsl:choose>
 			</item>
 		</labeled-item>
@@ -237,7 +232,7 @@
 						<xsl:variable name="child-xpath" select="."/>
 						<p>
 							<name hint="element-name">
-								<xsl:sequence select="lf:link-xpath($child-xpath,//schema-element[xpath eq $child-xpath]/name)"/> 
+								<xsl:sequence select="lf:link-xpath($child-xpath,//spfe-configuration-reference-entry[xpath eq $child-xpath]/name)"/> 
 							</name>
 						</p>
 					</xsl:for-each>
@@ -291,8 +286,8 @@
 		<xsl:apply-templates/>	
 	</xsl:template>
 	
-	<xsl:template match="schema-element/type"/>
-	<xsl:template match="schema-element/name"/>
+	<xsl:template match="spfe-configuration-reference-entry/type"/>
+	<xsl:template match="spfe-configuration-reference-entry/name"/>
 	
 	<!-- 
 		============================
