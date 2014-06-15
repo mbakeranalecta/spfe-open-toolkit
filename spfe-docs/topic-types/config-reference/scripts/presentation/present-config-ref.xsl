@@ -187,9 +187,9 @@
 			<item>
 				
 					<xsl:choose>
-						<xsl:when test="not(values/unspecified)"><p>None</p></xsl:when> 
+						<xsl:when test="not(values/default)"><p>None</p></xsl:when> 
 						<xsl:otherwise>
-							<xsl:apply-templates select="values/unspecified"/>
+							<xsl:apply-templates select="values/default"/>
 						</xsl:otherwise>
 					</xsl:choose>
 				
@@ -282,7 +282,7 @@
 	</xsl:template>
 	
 	<!-- FIXME: Some redundant element names here -->
-	<xsl:template match="required-by|verified-by|location|unspecified|special|precis"> 
+	<xsl:template match="required-by|verified-by|location|default|special|precis"> 
 		<xsl:apply-templates/>	
 	</xsl:template>
 	
@@ -373,9 +373,9 @@
 			<item>
 				
 					<xsl:choose>
-						<xsl:when test="not(values/unspecified)"><p>N/A</p></xsl:when> 
+						<xsl:when test="not(values/default)"><p>N/A</p></xsl:when> 
 						<xsl:otherwise>
-							<xsl:apply-templates select="values/unspecified"/>
+							<xsl:apply-templates select="values/default"/>
 						</xsl:otherwise>
 					</xsl:choose>
 				
