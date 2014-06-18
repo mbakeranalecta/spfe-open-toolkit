@@ -20,6 +20,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xmlns:test="http://spfeopentoolkit.org/spfe-ot/1.0/test-failed"
 	exclude-result-prefixes="#all">
 
 	<xsl:param name="condition-tokens"/>

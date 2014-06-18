@@ -452,13 +452,62 @@
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
                     <!-- It is a mystery to me why we need to put *:script here. The default namespace here
                     should be config, but it does not works without *: prefix. -->
-                    <xsl:for-each select="distinct-values(current-group()/*:script/text())">
-                        <gen:include href="{concat('file:/', .)}"/>
-                    </xsl:for-each>
+                    <xsl:for-each-group select="current-group()/*:script" group-by="text()">
+                        <!-- Generate unique file names. -->
+                        <xsl:variable name="temp-file-name" select="generate-id(.)"/>
+                        <gen:include href="{$temp-file-name}.xsl" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"/>
+                        <xsl:apply-templates mode="rewrite-scripts" select="document(.)">
+                            <xsl:with-param name="topic-set-id" select="$topic-set-id" tunnel="yes"/>
+                            <xsl:with-param name="temp-file-name" select="$temp-file-name" tunnel="yes"/>
+                        </xsl:apply-templates>
+                    </xsl:for-each-group>
                 </gen:stylesheet>
             </xsl:result-document>
         </xsl:for-each-group>
     </xsl:template>
+    
+    <!-- Import this from utility funcitons instead. -->
+    <xsl:function name="sf:get-file-name-from-path" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions">
+        <xsl:param name="path"/>
+        <xsl:variable name="tokens" select="tokenize($path, '/')"/>
+        <xsl:value-of select="subsequence($tokens, count($tokens))"/>
+    </xsl:function>
+    
+    <xsl:template mode="rewrite-scripts" match="node()|@*">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"  mode="rewrite-scripts" />
+            <xsl:apply-templates  mode="rewrite-scripts" />
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template mode="rewrite-scripts" match="xsl:stylesheet"  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions">
+        <xsl:param name="topic-set-id" tunnel="yes"/>
+        <xsl:param name="temp-file-name" tunnel="yes"/>
+        <xsl:result-document
+            href="file:///{$doc-set-build}/{$topic-set-id}/{$temp-file-name}.xsl" method="xml"
+            indent="no" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
+            <xsl:for-each select="namespace::*">
+                <xsl:if test=".='http://spfeopentoolkit.org/spfe-ot/1.0/test-failed'">
+                    <xsl:message select="."/>
+                </xsl:if>
+            </xsl:for-each>
+            <xsl:copy>
+                <xsl:apply-templates select="@*" mode="rewrite-scripts" />
+                <xsl:apply-templates mode="rewrite-scripts" />
+            </xsl:copy>
+        </xsl:result-document>
+        
+    </xsl:template>
+    
+<!--    <xsl:template mode="rewrite-scripts" match="xsl:stylesheet">
+        <xsl:message select="."></xsl:message>
+        <xsl:attribute name="{name()}">
+            <xsl:choose>
+                <xsl:when test=".='http://spfeopentoolkit.org/spfe-ot/1.0/test-failed'">http://spfeopentoolkit.org/spfe-ot/1.0/test-passed</xsl:when>
+                <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:attribute>
+    </xsl:template>-->
     
     <!-- <xsl:template name="create-run-command">
         <xsl:param name="build-command"/>
