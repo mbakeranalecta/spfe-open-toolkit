@@ -129,7 +129,7 @@
 			<title>Element: <xsl:value-of select="$name"/></title>
 			
 			<labeled-item>
-				<label>XPath</label>
+				<label>Location</label>
 				<item>
 					<p><xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/></p>
 				</item>

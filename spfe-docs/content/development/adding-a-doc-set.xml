@@ -31,11 +31,17 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
                 <comment>Update content</comment>
                 <status>Ready for technical review</status>
             </revision>
+            <revision>
+                <date>2014-06-17</date>
+                <author>mbaker</author>
+                <comment>Bringing up to date with new config system.</comment>
+                <status>In progress</status>
+            </revision>
         </history>
         <index>
             <entry>
                 <type>feature</type>
-                <term>{documentation set}</term>
+                <term>documentation set</term>
             </entry>
             <entry>
                 <type>task</type>
@@ -50,16 +56,15 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
     <body>
         <title>Adding a new documentation set</title>
         <understanding>
-            <p>A documentation set (<config-setting>doc-set</config-setting>) is a collection of
-                one or more related topic sets, each of which can use
-                different schemas.</p>
+            <p>A documentation set is a collection of
+                one or more related <feature>topic sets</feature>. A documentation set generally contains all the documentation related to a single product or service.</p>
+            <p>In SPFE, a documentation set is simply a particular build configuration. Topic source files do not contain anything that ties them to a specific documentation set. Therefore, you can define as many documentation sets as you like, simply by writing new documentation set configuration files. This makes it easy to reuse topics in different documentation sets. It also makes it easy to set up different build configurations for use during the developtment process.</p>
        </understanding>
        <planning>
            <planning-question>
                 <planning-question-title>Do I need a documentation set?</planning-question-title>
                 <planning-question-body>
-                    <p>You need to define a documentation set to group related topic sets into a
-                        single documentation set.</p>
+                    <p>Yes. The SPFE build requires a Documentation Set as a build target.</p>
                     <p>It is not necessary to create a collection of topic sets; you use a single
                             <feature>topic set</feature> to include all your topics. However, if you
                         use a documentation set, you can present multiple topic sets in a specific
@@ -67,18 +72,18 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
                         enables you to reuse topic sets in different documentation sets.</p>
                 </planning-question-body>
             </planning-question>
+           <planning-question>
+               <planning-question-title>Do I always have to build the entire documentation set</planning-question-title>
+               <planning-question-body>
+                   <p>If your documentation set is large, it may take a long time to build. If you are working on a single topic set and you want to do frequent builds of that topic set, you may not want to have to build the entire documentation set each time. SPFE does not provide a way to build topic sets individually. However, because a documentation set is to inexpensive to set up, you can create a documentation set that contains just the topic set you are working on and build that.</p>
+               </planning-question-body>
+           </planning-question>
        </planning>
         <doing>        
-            <p>To add a documentation set, you define the
-                <config-setting>/spfe/doc-set</config-setting> element in the main SPFE
-                    <feature>configuration file</feature>; you cannot include a
-                <config-setting>doc-set</config-setting> definition in a separate file. You can
-                only define one <config-setting>doc-set</config-setting> element; the build
-                system ignores the subsequent definitions. A documentation set must have at least
-                one topic set. You need the following mandatory attributes and elements: </p>
+            <p>To add a documentation set, you documentation set configuration file. A documentation set configuration file is a configuration file that includes the <config-setting>/spfe/doc-set</config-setting> element. You need the following mandatory attributes and elements: </p>
             <ul>
                 <li>
-                    <p><config-setting>/spfe/doc-set/@id</config-setting>: The name of the
+                    <p><config-setting>/spfe/doc-set/doc-set-id</config-setting>: The ID of the
                         documentation set. The build system uses the value to create a directory
                         name and it must be a valid directory name in the operating system that runs
                         the build system. </p>
@@ -90,41 +95,105 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
                 <li>
                     <p><config-setting>/spfe/doc-set/topic-set-type-order</config-setting>: The
                         order in which you want to present the topic sets in the table of contents
-                        of the documentation set. Each topic set must define a
-                        <config-setting>/spfe/topic-set-type</config-setting> element that
-                        matches one of the values in this element.</p>
+                        of the documentation set. The type of a topic set is defined by the 
+                        <config-setting>/spfe/topic-set-type</config-setting> setting in the topic set configuration file.</p>
                 </li>
                 <li>
                     <p><config-setting>/spfe/doc-set/topic-sets</config-setting>: The list of
                         the topic sets to include in the documentation set. The value of the
-                        <config-setting>/spfe/doc-set/topic-sets/topic-set/id</config-setting>
-                        attribute should match the
-                        <config-setting>/spfe/topic-set-id</config-setting> for the topic set
-                        and the
+                        <config-setting>/spfe/doc-set/topic-sets/topic-set/topic-set-id</config-setting>
+                        setting should match the
+                        <config-setting>/spfe/topic-set/topic-set-id</config-setting> for the topic set.
+                        The
                         <config-setting>/spfe/doc-set/topic-sets/topic-set/href</config-setting>
                         attribute is the URL of the topic set configuration file.</p>
                 </li>    
             </ul>
-            <p>The following shows the doc-set definition for the SPFE documentation set:</p>
+            <p>The following shows the documentation set configuration for the SPFE documentation set:</p>
             <codeblock>
                 <![CDATA[
-                <doc-set id="spfe-docs">
-                <title>SPFE Documentation</title>
-                <topic-set-type-order>docset, guide, task, reference</topic-set-type-order>
-                <topic-sets>
-                    <topic-set>
-                        <id>spfe-docs-docset</id>
-                        <href>topic-sets/spfe-docs-docset.xml</href>
-                    </topic-set>
-                    <topic-set>
-                        <id>spfe-development</id>
-                        <href>topic-sets/spfe-development.xml</href>
-                    </topic-set>
-                    <topic-set>
-                        <id>spfe-development-tasks</id>
-                        <href>topic-sets/spfe-development-tasks.xml</href>
-                    </topic-set>
-                </doc-set>]]>
+ <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    <doc-set>
+        <doc-set-id>tests</doc-set-id>
+        <title>SPFE Documentation</title>
+        <topic-set-type-order>
+            <topic-set-type>docset</topic-set-type>
+            <topic-set-type>guide</topic-set-type>
+            <topic-set-type>task</topic-set-type>
+            <topic-set-type>reference</topic-set-type>
+            <topic-set-type>list</topic-set-type>
+        </topic-set-type-order>
+        <home-topic-set>spfe-docs-docset</home-topic-set>
+        <topic-sets>
+            
+            <topic-set>
+                <topic-set-id>spfe-development</topic-set-id>
+                <href>topic-sets/spfe-development.xml</href>
+            </topic-set>    
+            
+            <topic-set>
+                <topic-set-id>spfe-docs-docset</topic-set-id>
+                <href>topic-sets/spfe-docs-docset.xml</href>
+            </topic-set>
+            
+            <topic-set>
+                <topic-set-id>spfe-function-reference</topic-set-id>
+                <href>topic-sets/spfe-function-reference.xml</href>
+            </topic-set>
+            
+            <topic-set>
+                <topic-set-id>spfe-configuration-reference</topic-set-id>
+                <href>topic-sets/spfe-configuration-reference.xml</href>
+            </topic-set>
+            
+            <topic-set>
+                <topic-set-id>spfe-docs-lists</topic-set-id>
+                <href>topic-sets/spfe-docs-lists.xml</href>
+            </topic-set>
+        </topic-sets>
+        
+        <subject-types>
+            <subject-type>
+                <id>config-setting</id>
+                <aliases>
+                    <singular>Configuration setting</singular>
+                    <plural>Configuration settings</plural>
+                </aliases>
+            </subject-type>
+        </subject-types>
+
+        <style>
+            <html-style-directories>
+                <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css</include>
+            </html-style-directories>
+        </style>
+        <messages>warning info</messages>
+        
+        <output-formats>
+            <output-format>
+                <name>html</name>
+                <href>../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml</href>
+            </output-format>
+        </output-formats>
+        
+        <wip-site>
+            <url>wip-site.href</url>
+            <ftp>
+                <url>wip-site.ftp.url</url>
+                <user>wip-site.ftp.user</user>
+                <password>wip-site.ftp.password</password>
+            </ftp>
+            <path>wip-site.ftp</path>
+        </wip-site>
+
+        <strings>
+            <string id="eppo-simple-topic-set-product">SPFE Open Toolkit</string>
+            <string id="eppo-simple-topic-set-release">1.0 (alpha 1)</string>
+            <string id="eppo-simple-topic-set-copyright">Copyright © 2013 Analecta Communications Inc.</string>
+        </strings>
+     </doc-set>
+</spfe>]]>
             </codeblock>
             <p>This documentation set includes three topic sets, each with their own configuration
                 file, which is specified by the <config-setting>href</config-setting>

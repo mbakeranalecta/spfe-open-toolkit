@@ -28,6 +28,12 @@
                 <comment>Update content</comment>
                 <status>In progress</status>
             </revision>
+            <revision>
+                <date>2014-06-17</date>
+                <author>mbaker</author>
+                <comment>Updated for new build.</comment>
+                <status>In progress</status>
+            </revision>
         </history>
         <index>
             <entry>
@@ -36,7 +42,7 @@
             </entry>
             <entry>
                 <type>task</type>
-                <term>add a topic set</term>
+                <term>{adding} a {topic set}</term>
             </entry>
         </index>
     </head>
@@ -49,67 +55,38 @@
        </understanding>
        <planning>
            <planning-question>
-               <planning-question-title>Do I need to create a new topic set?</planning-question-title>
+               <planning-question-title>Do I need more than one topic set?</planning-question-title>
                 <planning-question-body>
-                    <p>You could have a single topic set that contains all the topics; however, in a large <feature>documentation set</feature> it may be preferable to group topics into multiple topic sets related to particular roles or different aspects of a product.</p>
-                    <p>If you want to do any of the following, you need a new topic set:</p>
-                    <ul>
+                    <p>You could have a single topic set that contains all your topics. This approach is consistent with the Every Page is Page One approach. However, you may want to divide your documentation set into multiple topic sets for two reasons:</p>
+                    <ol>
                         <li>
-                            <p>Create a new <feature>documentation set</feature>—every documentation set needs at least one topic set</p>
+                            <p>To provide top-down navigation for your readers. While the Every Page is Page One approach emphasizes a bottom-up approach to navigation, top down navigation still has significant value, particularly for smaller content sets where it can be used effectively. Dividing your content into topic sets provides a level of top-down structure to your content set that can be useful to your readers.</p>
                         </li>
                         <li>
-                            <p>Change the order of topic sets in the TOC—the order of the folders in the table of contents is based on the <config-setting>topic-set-order</config-setting> element in the configuration file</p>
+                            <p>To separate the processing of different types of content. In some cases, you will want to process different sets of topics in different ways. This is particularly true in cases where you are building topics from content extracted from external sources, especially when you are combining that material with authored content. Dividing your content into different topic sets allows you to define different processing for different sets of topics.</p>
                         </li>
-                    </ul>
-                    
+                    </ol>
+               
                 </planning-question-body>
 
             </planning-question>
+           <planning-question>
+               <planning-question-title>Can I include more than one topic type in a topic set?</planning-question-title>
+               <planning-question-body>
+                   <p>Yes, you can include more than one topic type in a topic set. Each topic type has its own namespace, so you can define different processing for each topic type within a single <feature>synthesis</feature> or <feature>presentation</feature> script. </p>
+               </planning-question-body>
+           </planning-question>
        </planning>
        <doing>        
-           <p>To add a topic set to the build, perform the following steps:</p>
+           <p>To add a topic set to the build:</p>
            <ol>
                <li>
-                   <p>Create a topic set configuration file</p>
+                   <p>Create a <feature>topic set configuration file</feature> that describes the topic set. The conposition of the topic set is determined entirely by the topic set configuration. Individual topics don't know what topic set (or topic sets) they belong to.</p>
                </li>
                <li>
-                   <p>Add a new <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting> to the <feature>SPFE configuration file</feature></p>
+                   <p>Add a new <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting> to the appropriate <feature>documentation set configuration file</feature>. You can add a topic set to more than one documentation set.</p>
                </li>
            </ol>
-           <p>In the topic set configuration file, include the following elements:</p>
-           <ul>
-               <li>
-                   <p><config-setting>spfe</config-setting>: The root element that specifies the schema of the configuration file. SPFE provides the spfe-config schema, or you can define your own. Each build configuration file in the document must follow the same schema.</p>
-               </li>
-               <li>
-                   <p>Define a unique TOPIC_SET_ID and a <config-setting>topic-set-id</config-setting> element, for example: <code><![CDATA[<define name="TOPIC_SET_ID" value="spfe-development-tasks"/>
-                        <topic-set-id>${TOPIC_SET_ID}</topic-set-id>]]></code></p>
-               </li>
-               <li>
-                   <p><config-setting>/spfe/topic-set-type</config-setting>: It determines where your topic set appears in the table of contents and it must match one of the entries in the <config-setting>topic-set-type-order</config-setting> element in the SPFE configuration file</p>
-               </li>
-               <li>
-                   <p><config-setting>/spfe/sources</config-setting>: The list of directories that contain the contents of the topics</p>
-               </li>
-               <li>
-                   <p><config-setting>/spfe/build</config-setting>: The parameters that specify where to store files generated during the build</p>
-               </li>
-               <li>
-                   <p><config-setting>/spfe/deployment</config-setting>: The path to the output folder</p>
-               </li>
-               <li>
-                   <p><config-setting>/spfe/scripts</config-setting>: the list of scripts to process the topic set; if you use an existing schema, you can reuse the existing scripts</p>
-               </li>
-           </ul>
-           <p>If you want content at the top level folder, you need an index topic.</p>
-           <p>
- 
-               Key elements:
-               <config-setting>/spfe/topic-set-id</config-setting>, 
-               <config-setting>string</config-setting> - name that appears in the TOC
-               <config-setting>default-topic-scope</config-setting>, <config-setting>default-subject-affinity-scope</config-setting>
-           </p>
-            <p>When you build your documents, if your topic set appears in the table of contents in the order you specified by using the topic-set-type, you have successfully added your topic set.</p>   
        </doing>
     </body>
 </generic-task-topic>

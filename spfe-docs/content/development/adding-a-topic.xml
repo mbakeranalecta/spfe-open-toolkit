@@ -27,6 +27,12 @@
                 <comment>Remove some incorrect content.</comment>
                 <status>Ready for technical review</status>
             </revision>
+            <revision>
+                <date>2014-06-17</date>
+                <author>mbaker</author>
+                <comment>Fixing config-setting references</comment>
+                <status>In progress</status>
+            </revision>
         </history>
         <index>
             <entry>
@@ -35,20 +41,21 @@
             </entry>
             <entry>
                 <type>task</type>
-                <term>add a topic</term>
+                <term>{add} a {topic}</term>
             </entry>
         </index>
     </head>
     <body>
         <title>Adding a new topic</title>
         <understanding>
-            <p>A topic appears in a documentation set if a <feature>topic set</feature> includes it. A topic appears under a topic set in the table of contents.</p>
+            <p>A <feature>topic</feature> is the basic unit of content that is presented to the user. If you are trying to create a reusable content building block that is not a full topic, you should be creating a <feature>fragment</feature>, a <feature>string</feature>, or a <feature>text object</feature>.</p>
        </understanding>
        <planning>
            <planning-question>
                <planning-question-title>What do I need to add a new topic?</planning-question-title>
                 <planning-question-body>
-                   <p>Before you add a topic, you must decide what topic type schema to use.</p>                    <p>You can use an existing schema and a topic set that uses
+                   <p>Before you add a topic, you must decide what topic type schema to use.</p>
+                    <p>You can use an existing schema and a topic set that uses
                                 the schema can include your topic. If your topic uses a new schema or a schema that does
                                 not have an associated topic set, it will not appear in a
                                 documentation set until a topic set includes it.
@@ -59,7 +66,7 @@
 <doing>
     <p>To add a new topic, create a file for your topic that includes the content that follows the
                 schema you selected. A topic set includes a topic file based on the attributes of
-                the <config-setting>/spfe/sources/topics</config-setting> element in the topic
+                the <config-setting>/spfe/topic-set/sources/authored-content</config-setting> element in the topic
                 configuration file.</p>
                     <p>If you store your topic source file in a directory that is already included
                         in the topic set configuration file, the build system automatically includes
@@ -67,7 +74,7 @@
                         of contents.</p>
 
                     <p>If you store your topic file in a new directory, the new directory path must be added to the
-                        <config-setting>/spfe/sources/topics</config-setting> element of the topic set
+                        <config-setting>/spfe/topic-set/sources/authored-content</config-setting> element of the topic set
                         configuration file.</p>
     
   
