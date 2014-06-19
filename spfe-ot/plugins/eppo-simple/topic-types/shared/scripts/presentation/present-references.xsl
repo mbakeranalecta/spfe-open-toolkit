@@ -172,7 +172,7 @@
 		
 		<xsl:if test="count($target-page[1]/target[@type=$type][key=$target]) gt 1">
 			<xsl:call-template name="sf:warning">
-				<xsl:with-param name="message" select="'Detected a target page that contains more than one target of the same name and type. The target is:', $target, '. The type is:', $type, '.'"/>
+				<xsl:with-param name="message" select="'Detected a target page that contains more than one target of the same name and type. The name is:', string($target), '. The type is:', string($type), '. The topic is', string(ancestor::ss:topic/@full-name), '.'"/>
 
 			</xsl:call-template>
 		</xsl:if>

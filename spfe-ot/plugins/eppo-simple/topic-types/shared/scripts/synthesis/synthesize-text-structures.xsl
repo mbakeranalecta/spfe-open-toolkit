@@ -163,6 +163,9 @@
 		</xsl:if>
 	</xsl:template>
 
+	<xsl:template match="*:local-strings">
+		<xsl:apply-templates/>
+	</xsl:template>
 
 
 </xsl:stylesheet>

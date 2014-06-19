@@ -152,7 +152,7 @@ Main content processing templates
 					<ss:entry>
 						<ss:type>config-setting</ss:type>
 						<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</ss:namespace>
-						<ss:term><xsl:value-of select="$xpath"/></ss:term>
+						<ss:term><xsl:value-of select="$xpath"/>/@<xsl:value-of select="name"/></ss:term>
 						<ss:anchor><xsl:value-of select="name"></xsl:value-of></ss:anchor>
 					</ss:entry>
 				</xsl:for-each>
