@@ -377,7 +377,7 @@ Content fix-up templates
 
 <!-- Fix up element name xpaths -->
 	<xsl:template match="ed:config-setting">
-		<xsl:variable name="context-element" select="ancestor::ed:config-setting-description/normalize-space(ed:xpath)"/>
+	<xsl:variable name="context-element" select="ancestor::ed:config-setting-description/normalize-space(ed:xpath)"/>
 	<xsl:variable name="data-content" select="."/>
 	<xsl:variable name="xpath" select="@xpath"/>
 	<xsl:variable name="all-elements" select="
@@ -387,6 +387,8 @@ Content fix-up templates
 		<xsl:choose>
 			<!-- check the cases where there is no 'xpath' attribute -->
 			<xsl:when test="not(@xpath)">
+				
+				<xsl:variable name="parent-of-context-element" select="string-join(tokenize($context-element,'/')[position()!=last()],'/')"/>
 				<xsl:choose>
 				
 					<!-- Is it a full element path? -->
@@ -410,7 +412,13 @@ Content fix-up templates
 					<xsl:when test="$all-elements=concat($context-element, '/', $data-content)">
 						<xsl:attribute name="key" select="concat($context-element, '/', $data-content)"/>
 					</xsl:when>
-
+					
+					<!-- Is it the name of a sibling of the current element?--> 
+					
+					<xsl:when test="$all-elements=concat($parent-of-context-element, '/', $data-content)">
+						<xsl:attribute name="key" select="concat($parent-of-context-element, '/', $data-content)"/>
+					</xsl:when>
+					
 					
 					<!-- If not, we have a problem -->
 					<xsl:otherwise>
