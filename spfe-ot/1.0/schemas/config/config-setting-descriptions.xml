@@ -1109,7 +1109,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>graphics</build-property>
+            <build-property/>
             <attributes/>
         </config-setting-description>
 

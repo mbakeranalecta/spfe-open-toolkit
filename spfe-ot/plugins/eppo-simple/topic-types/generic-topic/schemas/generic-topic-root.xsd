@@ -18,13 +18,12 @@
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="title"/>
-                            <xs:group ref="text-general" maxOccurs="unbounded" minOccurs="0"/>
+                            <xs:group ref="text-general"/>
                             <xs:element name="section" maxOccurs="unbounded" minOccurs="0">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="title"/>
-                                        <xs:group ref="text-general" maxOccurs="unbounded"
-                                            minOccurs="0"/>
+                                        <xs:group ref="text-general"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>

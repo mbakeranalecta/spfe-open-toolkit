@@ -427,10 +427,9 @@
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">
-						<xsl:text>No singular subject type alias found for topic type </xsl:text>
+						<xsl:text>No singular subject type alias found for subject type </xsl:text>
 						<xsl:value-of select="$subject-type-id"/>
-						<xsl:text>.</xsl:text>
-						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:text>. This setting should be defined in the configuration files at </xsl:text>
 						<xsl:text>/spfe/subject-types/subject-type/aliases/singular.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
