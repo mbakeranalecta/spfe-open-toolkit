@@ -30,6 +30,18 @@
                 <type>task</type>
                 <term>{install} {the SPFE Open Toolkit}</term>
             </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe.bat</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe.sh</term>
+            </entry>
+            <entry>
+                <type>tool-name</type>
+                <term>spfe</term>
+            </entry>
         </index>
     </head>
     <body>

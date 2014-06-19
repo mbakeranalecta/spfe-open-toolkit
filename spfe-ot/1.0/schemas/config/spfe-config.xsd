@@ -22,6 +22,7 @@
                         <xs:sequence>
                           <xs:element name="xmlns" type="xs:anyURI"/>
                           <xs:element name="href" type="xs:anyURI"/>
+                          <xs:element name="aliases" type="topic-type-aliases-type" minOccurs="0"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>

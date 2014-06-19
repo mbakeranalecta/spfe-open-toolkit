@@ -35,7 +35,7 @@ Main template
 =============
 -->
 <xsl:template name="main">
-	<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+	<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
 		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
 			<title>
 				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>

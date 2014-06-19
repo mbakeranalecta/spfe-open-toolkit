@@ -27,103 +27,99 @@
                 <comment>Removing reference to output directory. Now hard coded to topic-set-id.</comment>
                 <status>In progress</status>
             </revision>
+            <revision>
+                <date>2014-06-19</date>
+                <author>mbaker</author>
+                <comment>Updating for new config system</comment>
+                <status>In progress</status>
+            </revision>
         </history>
         <index>
             <entry>
                 <type>feature</type>
-                <term>{build directory}</term>
+                <term>build directory</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>spfebuild</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>synthesis</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>presentation</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>extracted</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfebuild.xml</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>config</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>output</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>topic-sets</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>link-catalogs</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>tocs</term>
             </entry>
         </index>
     </head>
     <body>
         <title>Build directory structure</title>
-        <p>If you want use the SPFE Toolkit build system in an automated build, it is helpful to
-            understand the directory elements to enable you to organize your directory structure,
-            and locate files for status reporting and troubleshooting. This topic explains the
-            environment variables, the <feature>configuration file</feature> elements, and their
-            relationships.</p>
+        <p>The build systems produces a directory structure inside the build directory. Understanding the build directory structure can help you debug problems with the build.</p>
+        
+        <p>By default, the build directory is named <directory-name>spfebuild</directory-name> and is created in the user's home directory. You can change the location of the build directory by setting the environment variable <code>SPFE_BUILD_DIR</code>.</p>
+        
+        <p>The build begins by running the configuration script, which creates an ANT build file named <file-name>spfebuild.xml</file-name> at the root of the build directory. This file is created dynamically each time the build is run. Don't try to edit it because it will be overwritten the next time the build is run.</p>
+        
+        <p>The configuration script also creates a directory for the documentation set being built, which is named using the documentation set id (configured in <config-setting>/spfe/doc-set/doc-set-id</config-setting>). Inside this directory it create a directory named <directory-name>config</directory-name> which contains the consolidated <feature>configuration file</feature>, with the name <file-name>spfe-config.xml</file-name>.</p>
+        
+        <p>The build script then runs ANT with the <file-name>spfebuild.xml</file-name> build file, to run the rest of the build. The build then creates two additional directories in the doc set directory, <directory-name>build</directory-name>, where all the temporary files used by the build are created, and <directory-name>output</directory-name>, where the output is created.</p>
+        
+        <p>Inside the <directory-name>build</directory-name> directory, there are three directories, <directory-name>link-catalogs</directory-name>, where the <feature>link catalogs</feature> are created, <directory-name>topic-sets</directory-name>, where the each stage of the topic set build is created, and <directory-name>tocs</directory-name>, where the temporary TOC files are created. The link catalogs and temporary TOCs are created separately from the topic-set files because they are used by all topic set builds.</p>
+        
+        <p>Inside the <directory-name>topic-sets</directory-name> directory, a directory is created for each topic set in the build, with its name matching the <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> of each topic set.</p>
+        
+        <p>Inside each of these topic set directories, the following files and directories are created:</p>
+        
         <ul>
             <li>
-                <p><code>SPFE_BUILD_DIR</code>: Environment variable set in the
-                        <tool-name>spfe</tool-name> build tool file (set to
-                    <code>HOME</code>/spfebuild). The <directory-name>temp</directory-name>
-                    subdirectory stores ANT property and file definitions generated by the script
-                        <file-name>config.xsl</file-name>. The variable is not configurable in the
-                    configuration file. To change it, in the <code>SPFEOT_HOME</code> directory,
-                    edit <file-name>spfe.sh</file-name> (Linux) or <file-name>spfe.bat</file-name>
-                    (Windows).</p>
+                <p>A generated script file for each stage of the build: extract, synthesis, presentation, etc.</p>
             </li>
             <li>
-                <p><config-setting>/spfe/build/build-directory</config-setting>: Stores scripts,
-                    the fully resolved configuration files (subdirectory
-                        <directory-name>config</directory-name>), and logs (subdirectory
-                        <directory-name>logs</directory-name>) generated by the script
-                        <file-name>config.xsl</file-name> for each <feature>topic set
-                    </feature>during the build. It also stores the configuration files created as
-                    output and provided as input to each stage of the build in the subdirectory
-                        <directory-name>temp</directory-name>. If you do not define this element,
-                    the default is composed of the values of
-                    <code>SPFE_BUILD_DIR</code>/<config-setting>doc-set@id</config-setting>/<config-setting>topic-set-id</config-setting>. </p>
+                <p>A build flag for each stage of the build. </p>
             </li>
             <li>
-                <p><config-setting>/spfe/build/link-catalog-directory</config-setting>: Stores
-                    the link catalogs generated by the link catalog script. The
-                    <config-setting>/spfe/sources/link-catalog</config-setting> element must
-                    include this directory path. There is no default value and the build fails if
-                    you do not define this element and you include the directory in the sources
-                    element. If you do not use a link catalog, the build system does not generate
-                    links.</p>
+                <p>A <directory-name>extracted</directory-name> directory containing the temp files for the <feature>extract</feature> stage (if there is an extraction stage for this topic set).</p>
             </li>
             <li>
-                <p><config-setting>/spfe/build/toc-directory</config-setting>: Stores the toc
-                    files generated by the presentation script. The
-                    <config-setting>/spfe/sources/tocs</config-setting> element must include
-                    this directory path. There is no default value and the build fails if you do not
-                    define this element and you include the directory in the sources element. If you
-                    do not define a tocs element, the output does not show a table of contents; the
-                    build system generates the toc files, but the presentation scripts do not
-                    include them.</p>
+                <p>A <directory-name>synthesis</directory-name> directory containing the temp files for the <feature>synthesis</feature> stage.</p>
             </li>
             <li>
-                <p><config-setting>/spfe/build/output-directory</config-setting>: Stores the
-                    final output of the documentation set (HTML, PDF, etc.) generated by the
-                    formatting or encoding script. There is no default value and the EPPO Simple
-                    scripts fail if this element is not defined.</p>
+                <p>A <directory-name>presentation</directory-name> directory containing the temp files for the <feature>presentation</feature> stage.</p>
             </li>
+            <li>
+                <p>The <file-name>image-list.txt</file-name> file, which is used to copy image files used in the topic set to the output directory.</p>
+            </li>
+            
         </ul>
-        <p>In the SPFE docs configuration files, there are two
-            <config-setting>define</config-setting> elements used in the element definitions to
-            separate files for the build from the final output of the documentation set.</p>
-        <codeblock><![CDATA[
-<define name="SPFE_BUILD" value="${HOME}/spfebuild/build"/>
-<define name="SPFE_DOCSET" value="${HOME}/spfebuild/spfe-docs"/>]]>
-        </codeblock>
-        <p>The following elements are defined in spfe-docs-config.xml:</p>
-        <codeblock><![CDATA[    
-<build>
-    <link-catalog-directory>${SPFE_BUILD}/link-catalogs</link-catalog-directory>
-    <output-directory>${SPFE_DOCSET}/output</output-directory>
-    <toc-directory>${SPFE_BUILD}/tocs</toc-directory>
-</build>]]>
-        </codeblock>
-        <p>If the user's HOME directory is C:\Users\username, the paths resolve to: </p>
-        <p><config-setting>/spfe/build/link-catalog-directory</config-setting>:
-            <code>C:\Users\username\spfebuild\build\link-catalogs</code></p>
-        <p><config-setting>/spfe/build/toc-directory</config-setting>:
-            <code>C:\Users\username\spfebuild\build\tocs</code></p>
-        <p><config-setting>/spfe/build/output-directory</config-setting>:
-            <code>C:\Users\username\spfebuild\spfe-docs</code></p>
-        <p>The following shows the topic set specific elements in the configuration file
-            spfe-development-tasks.xml:</p>
-        <codeblock><![CDATA[
-<define name="TOPIC_SET_ID" value="spfe-development-tasks"/>
-<build>
-    <build-directory>${SPFE_BUILD}/tasks</build-directory>
-</build>
- ]]></codeblock>
-        <p>If the user's HOME directory is C:\Users\username, the paths resolve to:</p>
-        <p><config-setting>/spfe/build/build-directory</config-setting>:
-            <code>C:\Users\username\spfebuild\build\tasks</code>.</p>
     </body>
     
 </generic-topic>

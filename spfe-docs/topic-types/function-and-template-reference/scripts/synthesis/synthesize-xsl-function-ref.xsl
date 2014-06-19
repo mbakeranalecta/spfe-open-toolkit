@@ -59,7 +59,7 @@ Main template
 		 method="xml" 
 		 indent="yes"
 		 omit-xml-declaration="no" 
-		 href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/synthesis/synthesis.xml')}">
+		 href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/synthesis.xml')}">
 		<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$topic-set-id}" title="{sf:string($config//config:strings, 'eppo-simple-topic-set-product')} {sf:string($config//config:strings, 'eppo-simple-topic-set-release')}"> 
 			
 			<xsl:for-each-group select="xfd:function-definition" group-by="concat(xfd:namespace-uri, xfd:name)">

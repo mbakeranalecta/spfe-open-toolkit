@@ -37,7 +37,7 @@ Main template
 
 	<xsl:template name="main" >
 		<!-- Create the root "synthesis element" -->
-		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/synthesis/synthesis.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/synthesis.xml')}" method="xml" indent="no" omit-xml-declaration="no">
 			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$topic-set-id}" title="{sf:string($config//config:strings, 'eppo-simple-topic-set-product')} {sf:string($config//config:strings, 'eppo-simple-topic-set-release')}"> 
 				<xsl:apply-templates select="$topics"/>
 			</ss:synthesis>

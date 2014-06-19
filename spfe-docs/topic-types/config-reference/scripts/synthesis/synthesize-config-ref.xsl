@@ -78,7 +78,7 @@ Main template
 			 method="xml" 
 			 indent="yes"
 			 omit-xml-declaration="no" 
-			 href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/synthesis/synthesis.xml')}">
+			 href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/synthesis.xml')}">
 			<ss:synthesis 
 				xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
 				topic-set-id="{$topic-set-id}" 

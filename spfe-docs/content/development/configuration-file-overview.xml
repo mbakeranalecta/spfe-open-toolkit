@@ -65,11 +65,11 @@
                 <p>The <feature>topic type</feature> configuration for each topic type in a topic set, contained in the setting <config-setting>/spfe/topic-type</config-setting>: This defines the scripts to use to process topics of a particular topic type, as well as other setting common to a topic type. A topic type configuration file is usually created as part of defining a topic type. A topic type configuration is included in the topic set configuration using the setting <config-setting>/spfe/topic-set/topic-types/topic-type</config-setting>.</p>
             </li>
             <li>
-                <p>The <feature>object type</feature> configuration for each <feature>object type</feature> in a topic set, contained in the setting <config-setting>/spfe/topic-type/object-types/object-type</config-setting>: This defines the scripts used to process objects of a particular type, as well as other setting related to objects.
+                <p>The <feature>object type</feature> configuration for each <feature>object type</feature> in a topic set, contained in the setting <config-setting>/spfe/topic-set/object-types/object-type</config-setting>: This defines the scripts used to process objects of a particular type, as well as other settings related to objects.
                 </p>
             </li>
             <li>
-                <p>The <feature>output type</feature> configuration for each output type required for the documentation set, contained in the setting <config-setting>/spfe/output-type</config-setting>: This defines the scripts used to create an output of a particular type. An output type configuration file is usually created as part of defining and output type. An output type configuration is included in the documentation set configuration using the setting <config-setting>/spfe/doc-set/output-types/output-type</config-setting>.</p>
+                <p>The <feature>output type</feature> configuration for each output type required for the documentation set, contained in the setting <config-setting>/spfe/output-format</config-setting>: This defines the scripts used to create an output of a particular type. An output type configuration file is usually created as part of defining and output type. An output type configuration is included in the documentation set configuration using the setting <config-setting>/spfe/doc-set/output-formats/output-format</config-setting>.</p>
             </li>
         </ul>
 

@@ -222,7 +222,7 @@
 			<saxon-xslt 
 				style="@{style}" 
 				in="${spfe.config-file}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/extracted.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/extracted.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="sources-to-extract-content-from"	expression="${sources-to-extract-content-from}"/>
@@ -253,7 +253,7 @@
 			
 			<local name="extracted-files"/>
 			<local name="extracted-files-list"/>
-			<fileset id="extracted-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+			<fileset id="extracted-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
 				<include name="extracted/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="extracted-files-list"
@@ -262,7 +262,7 @@
 			<saxon-xslt 
 				style="@{style}" 
 				in="${spfe.config-file}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="authored-content-files" expression="@{authored-content-files}"/>
@@ -282,7 +282,7 @@
 	<target name="-current.link-catalog">
 		<uptodate property="-current.link-catalog"
 			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog"
-			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"/>
+			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"/>
 	</target>-->
 
 	<!-- target for link-catalog -->
@@ -295,7 +295,7 @@
 		<sequential>
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
-			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
 				<include name="synthesis/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
@@ -305,7 +305,7 @@
 			<saxon-xslt 
 				in="${spfe.config-file}" 
 				style="@{style}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/link-catalog.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/link-catalog.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files-list}"/>
@@ -321,7 +321,7 @@
 <!--	<target name="-current.list-pages">
 		<uptodate property="-current.list-pages"
 			targetfile="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages"
-			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"/>
+			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"/>
 	</target>-->
 
 	<!-- target for list-pages -->
@@ -353,14 +353,14 @@
 		<sequential>
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
-			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
 				<include name="synthesis/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
-			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
 				<include name="synthesis/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
@@ -370,7 +370,7 @@
 			<saxon-xslt 
 				in="${spfe.config-file}" 
 				style="@{style}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/toc.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/toc.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files-list}"/>
@@ -386,7 +386,7 @@
 	<!-- check to see if the html-presentation is up to date -->
 	<target name="-current.presentation-web">
 		<uptodate property="-current.presentation-web"
-			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"
+			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"
 			targetfile="${temp}/presentation/presentation-web.flag"/>
 	</target>
 
@@ -406,7 +406,7 @@
 			<local name="toc-files-list"/>
 			<local name="link-catalog-files"/>
 			<local name="link-catalog-list"/>
-			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
 				<include name="synthesis/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
@@ -423,7 +423,7 @@
 			<saxon-xslt 
 				style="@{style}" 
 				in="${spfe.config-file}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/presentation-web.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/presentation-web.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files-list}"/>
@@ -439,7 +439,7 @@
 	<!-- check to see if the presentation-book is up to date -->
 	<target name="-current.presentation-book">
 		<uptodate property="-current.presentation-book"
-			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"
+			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"
 			targetfile="${temp}/presentation/presentation-book.flag"/>
 	</target>
 
@@ -453,7 +453,7 @@
 		<sequential>
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
-			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/@{topic-set-id}">
+			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
 				<include name="synthesis/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
@@ -464,7 +464,7 @@
 			<saxon-xslt 
 				in="${spfe.config-file}" 
 				style="@{style}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/presentation-book.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/presentation-book.flag">
 				<params>
 					<param name="topic-set-id" value="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files}"/>
@@ -493,7 +493,7 @@
 		<attribute name="topic-set-id"/>
 		<attribute name="output-directory"/>
 		<sequential>
-			<!--<property name="temp" value="${spfe.build.build-directory}/@{topic-set-id}/temp"/>-->
+			<!--<property name="temp" value="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/temp"/>-->
 <!--			<get.externals.graphics.html topic-set-id="@{topic-set-id}" output="@{output}"/>
 			<get.externals.style.html output="@{output}"/>
 -->						
@@ -501,7 +501,7 @@
 			<local name="presentation-files-list"/>
 			<local name="files.images.html"/>
 			<local name="echo-files"/>
-			<fileset dir="${spfe.build.build-directory}/@{topic-set-id}" id="presentation-file-list">
+			<fileset dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}" id="presentation-file-list">
 				<include name="presentation/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="presentation-files"
@@ -510,7 +510,7 @@
 			<saxon-xslt 
 				in="${spfe.config-file}" 
 				style="@{style}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/format-html.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/format-html.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
@@ -521,7 +521,7 @@
 			<!-- copy the image files to the image directory using list created by format script -->
 			<!-- Need the excludes="*" because otherwise an empty incluesfile means copy everything -->
 			<files id="files.images.html"
-				includesfile="${spfe.build.build-directory}/@{topic-set-id}/image-list.txt" excludes="*"/>
+				includesfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/image-list.txt" excludes="*"/>
 			
 			<mkdir dir="${spfe.build.output-directory}/@{output-directory}images"/>
 			<copy todir="${spfe.build.output-directory}/@{output-directory}images" flatten="true" failonerror="false"
@@ -555,7 +555,7 @@
 		<attribute name="topic-set-id"/>
 		<attribute name="output"/>
 		<sequential>
-			<property name="temp" value="${spfe.build.build-directory}/@{topic-set-id}/temp"/>
+			<property name="temp" value="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/temp"/>
 			<fileset id="presentation-file-list" dir="${temp}">
 				<include name="presentation/*.xml"/>
 			</fileset>
@@ -566,7 +566,7 @@
 			<!-- run the XSLT script to produce the output -->
 
 			<saxon-xslt in="${spfe.config-file}" style="@{style}"
-				out="${spfe.build.build-directory}/@{topic-set-id}/temp/fo-format.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/temp/fo-format.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
@@ -597,7 +597,7 @@
 		<attribute name="topic-set-id"/>
 		<attribute name="output"/>
 		<sequential>
-			<property name="temp" value="${spfe.build.build-directory}/@{topic-set-id}/temp"/>
+			<property name="temp" value="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/temp"/>
 			<mkdir dir="@{output}"/>
 			<fop format="application/pdf" fofile="${temp}/spfe.fo-format.fo"
 				outfile="@{output}/${spfe.pdf-name}" basedir="${temp}"
@@ -613,7 +613,7 @@
 	<!-- check to see if the html-presentation is up to date 
 	<target name="-current.report">
 		<uptodate property="-current.presentation-web" targetfile="${output}/${spfe.report-name}"
-			srcfile="${spfe.build.build-directory}/@{topic-set-id}/synthesis.flag"/>
+			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"/>
 	</target>-->
 
 	<!-- build the report 

@@ -281,7 +281,7 @@
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:result-document
-			href="file:///{$config/config:doc-set-build}/{$topic-set-id}/image-list.txt"
+			href="file:///{$config/config:doc-set-build}/topic-sets/{$topic-set-id}/image-list.txt"
 			method="text">
 			<xsl:for-each-group select="$graphic-file-list" group-by=".">
 				<xsl:value-of select="concat(sf:local-path-from-uri(current-grouping-key()), '&#xa;')"/>
