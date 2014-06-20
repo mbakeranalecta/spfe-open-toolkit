@@ -288,6 +288,7 @@
 	
 	<xsl:template match="spfe-configuration-reference-entry/type"/>
 	<xsl:template match="spfe-configuration-reference-entry/name"/>
+	<xsl:template match="spfe-configuration-reference-entry/build-property"/>
 	
 	<!-- 
 		============================
