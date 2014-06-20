@@ -5,10 +5,12 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:spfe="http://spfeopentoolkit.org/spfe-ot/1.0/xslt/fuctions"
+    xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:gen="dummy-namespace-for-the-generated-xslt"
     xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     exclude-result-prefixes="#all">
     <xsl:output method="xml" indent="yes"/>
+    <xsl:include href="../common/utility-functions.xsl"/>
 
 
     <xsl:param name="HOME"/>
@@ -17,7 +19,7 @@
     <xsl:param name="SPFE_BUILD_COMMAND"/>
     <xsl:param name="configfile"/>
     
-    <xsl:variable name="config-doc" select="document(concat('file:///', translate($configfile, '\', '/')))"/>
+    <xsl:variable name="config-doc" select="document(sf:local-to-url(translate($configfile, '\', '/')))"/>
 
     <!-- directories -->
     <xsl:variable name="home" select="translate($HOME, '\', '/')"/>
@@ -109,43 +111,12 @@
     <xsl:template match="href|include|script|build-rules" mode="load-config">
         <xsl:element name="{name()}">
             <xsl:value-of
-                select="spfe:URL-to-local(resolve-uri(spfe:resolve-defines(.),base-uri()))"/>
+                select="sf:url-to-local(resolve-uri(spfe:resolve-defines(.),base-uri()))"/>
         </xsl:element>
     </xsl:template>
 
 
-    <xsl:function name="spfe:URL-to-local">
-        <xsl:param name="URL"/>
-        <xsl:variable name="newURL">
-            <xsl:choose>
-                <!-- Windows style -->
-                <xsl:when test="matches($URL, '^file:/[a-zA-Z]:/')">
-                    <xsl:value-of select="substring-after($URL,'file:/')"/>
-                </xsl:when>
-                <!-- Windows system path -->
-                <xsl:when test="matches($URL, '^[a-zA-Z]:/')">
-                    <xsl:value-of select="$URL"/>
-                </xsl:when>
-                <!-- UNIX style -->
-                <xsl:when test="matches($URL, '^file:/')">
-                    <xsl:value-of select="substring-after($URL,'file:')"/>
-                </xsl:when>
-                <!-- unsupported protocol -->
-                <xsl:when test="matches($URL, '^[a-zA-Z]+:/')">
-                    <xsl:message terminate="yes">
-                        <xsl:text>ERROR: A URL with an unsupported protocol was specified in a config file. The URL is: </xsl:text>
-                        <xsl:value-of select="$URL"/>
-                    </xsl:message>
-                </xsl:when>
 
-                <!-- already local -->
-                <xsl:otherwise>
-                    <xsl:value-of select="$URL"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:value-of select="replace($newURL, '%20', ' ')"/>
-    </xsl:function>
 
     <xsl:template name="create-build-file">
 
@@ -456,22 +427,28 @@
                         <!-- Generate unique file names. -->
                         <xsl:variable name="temp-file-name" select="generate-id(.)"/>
                         <gen:include href="{$temp-file-name}.xsl" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"/>
-                        <xsl:apply-templates mode="rewrite-scripts" select="document(.)">
-                            <xsl:with-param name="topic-set-id" select="$topic-set-id" tunnel="yes"/>
-                            <xsl:with-param name="temp-file-name" select="$temp-file-name" tunnel="yes"/>
-                        </xsl:apply-templates>
+                        <xsl:result-document
+                            href="file:///{$doc-set-build}/{$topic-set-id}/{$temp-file-name}.xsl" method="text"
+                            indent="no" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
+<!--                            <xsl:message select="'script', string(.)"/>
+                            <xsl:message select="'base-uri', base-uri(.)"/>
+                            <xsl:message select="'resolve-uri', resolve-uri(.)" terminate="yes"/>-->
+                            <xsl:analyze-string select="unparsed-text(concat('file:///',.))" regex="xmlns:(.+)=[&quot;&apos;]http://spfeopentoolkit\.org/spfe-ot/1\.0/test-failed[&quot;&apos;]">
+                                 <xsl:matching-substring>
+                                     <xsl:text>xmlns:</xsl:text>
+                                     <xsl:value-of select="regex-group(1)"/>
+                                     <xsl:text>="http://spfeopentoolkit.org/spfe-ot/1.0/test-passed"</xsl:text>
+                                 </xsl:matching-substring>
+                                 <xsl:non-matching-substring>
+                                     <xsl:value-of select="."/>
+                                 </xsl:non-matching-substring>
+                             </xsl:analyze-string>
+                        </xsl:result-document>
                     </xsl:for-each-group>
                 </gen:stylesheet>
             </xsl:result-document>
         </xsl:for-each-group>
     </xsl:template>
-    
-    <!-- Import this from utility funcitons instead. -->
-    <xsl:function name="sf:get-file-name-from-path" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions">
-        <xsl:param name="path"/>
-        <xsl:variable name="tokens" select="tokenize($path, '/')"/>
-        <xsl:value-of select="subsequence($tokens, count($tokens))"/>
-    </xsl:function>
     
     <xsl:template mode="rewrite-scripts" match="node()|@*">
         <xsl:copy>

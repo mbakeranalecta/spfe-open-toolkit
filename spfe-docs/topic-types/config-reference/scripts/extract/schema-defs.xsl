@@ -83,8 +83,8 @@
 	
 	<xsl:template name="read-schema">
 		<xsl:param name="file-name"/>
-		<xsl:sequence select="document(concat('file:///',$file-name))"/>
-		<xsl:for-each select="document(concat('file:///',$file-name))/xs:schema/xs:include/@schemaLocation">
+		<xsl:sequence select="document(sf:local-to-url($file-name))"/>
+		<xsl:for-each select="document(sf:local-to-url($file-name))/xs:schema/xs:include/@schemaLocation">
 			<xsl:call-template name="read-schema">
 				<xsl:with-param name="file-name" select="."/>
 			</xsl:call-template>
