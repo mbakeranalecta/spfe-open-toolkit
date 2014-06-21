@@ -110,6 +110,7 @@
 
     <xsl:template match="href|include|script|build-rules" mode="load-config">
         <xsl:element name="{name()}">
+            <xsl:copy-of select="@*"/>
             <xsl:value-of
                 select="sf:url-to-local(resolve-uri(spfe:resolve-defines(.),base-uri()))"/>
         </xsl:element>
@@ -424,58 +425,41 @@
                     <!-- It is a mystery to me why we need to put *:script here. The default namespace here
                     should be config, but it does not works without *: prefix. -->
                     <xsl:for-each-group select="current-group()/*:script" group-by="text()">
-                        <!-- Generate unique file names. -->
-                        <xsl:variable name="temp-file-name" select="generate-id(.)"/>
-                        <gen:include href="{$temp-file-name}.xsl" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"/>
-                        <xsl:result-document
-                            href="file:///{$doc-set-build}/{$topic-set-id}/{$temp-file-name}.xsl" method="text"
-                            indent="no" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
-<!--                            <xsl:message select="'script', string(.)"/>
-                            <xsl:message select="'base-uri', base-uri(.)"/>
-                            <xsl:message select="'resolve-uri', resolve-uri(.)" terminate="yes"/>-->
-                            <xsl:analyze-string select="unparsed-text(concat('file:///',.))" regex="xmlns:(.+)=[&quot;&apos;]http://spfeopentoolkit\.org/spfe-ot/1\.0/test-failed[&quot;&apos;]">
-                                 <xsl:matching-substring>
-                                     <xsl:text>xmlns:</xsl:text>
-                                     <xsl:value-of select="regex-group(1)"/>
-                                     <xsl:text>="http://spfeopentoolkit.org/spfe-ot/1.0/test-passed"</xsl:text>
-                                 </xsl:matching-substring>
-                                 <xsl:non-matching-substring>
-                                     <xsl:value-of select="."/>
-                                 </xsl:non-matching-substring>
-                             </xsl:analyze-string>
-                        </xsl:result-document>
+                        <xsl:choose>                
+                            <!-- If namespace remapping is specified,create a temp file with remapped namespaces -->
+                            <xsl:when test="current-group()/@remap-namespace">
+                                <xsl:variable name="map-from-namespace" select="tokenize(normalize-space(@remap-namespace),' ')[1]"/>
+                                <xsl:variable name="map-to-namespace" select="tokenize(normalize-space(@remap-namespace),' ')[2]"/>                                <xsl:variable name="temp-file-name" select="generate-id(.)"/>
+                                <gen:include href="{$temp-file-name}.xsl"/>
+                                <xsl:result-document
+                                    href="file:///{$doc-set-build}/{$topic-set-id}/{$temp-file-name}.xsl" method="text"
+                                    indent="no" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
+                                    <xsl:analyze-string select="unparsed-text(concat('file:///',.))" regex="xmlns:(.+)=[&quot;&apos;]{$map-from-namespace}[&quot;&apos;]">
+                                         <xsl:matching-substring>
+                                             <xsl:text>xmlns:</xsl:text>
+                                             <xsl:value-of select="regex-group(1)"/>
+                                             <xsl:text>="</xsl:text>
+                                             <xsl:value-of select="$map-to-namespace"/>
+                                             <xsl:text>"</xsl:text>
+                                         </xsl:matching-substring>
+                                         <xsl:non-matching-substring>
+                                             <xsl:value-of select="."/>
+                                         </xsl:non-matching-substring>
+                                     </xsl:analyze-string>
+                                </xsl:result-document>                                
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <!-- Otherwise, just link to existing file. -->
+                                <gen:include href="{sf:local-to-url(.)}"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:for-each-group>
                 </gen:stylesheet>
             </xsl:result-document>
         </xsl:for-each-group>
     </xsl:template>
     
-    <xsl:template mode="rewrite-scripts" match="node()|@*">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"  mode="rewrite-scripts" />
-            <xsl:apply-templates  mode="rewrite-scripts" />
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template mode="rewrite-scripts" match="xsl:stylesheet"  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions">
-        <xsl:param name="topic-set-id" tunnel="yes"/>
-        <xsl:param name="temp-file-name" tunnel="yes"/>
-        <xsl:result-document
-            href="file:///{$doc-set-build}/{$topic-set-id}/{$temp-file-name}.xsl" method="xml"
-            indent="no" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
-            <xsl:for-each select="namespace::*">
-                <xsl:if test=".='http://spfeopentoolkit.org/spfe-ot/1.0/test-failed'">
-                    <xsl:message select="."/>
-                </xsl:if>
-            </xsl:for-each>
-            <xsl:copy>
-                <xsl:apply-templates select="@*" mode="rewrite-scripts" />
-                <xsl:apply-templates mode="rewrite-scripts" />
-            </xsl:copy>
-        </xsl:result-document>
-        
-    </xsl:template>
-    
+   
 <!--    <xsl:template mode="rewrite-scripts" match="xsl:stylesheet">
         <xsl:message select="."></xsl:message>
         <xsl:attribute name="{name()}">

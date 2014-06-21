@@ -288,7 +288,9 @@
       <xs:element name="script" maxOccurs="unbounded">
         <xs:complexType>
           <xs:simpleContent>
-            <xs:extension base="xs:anyURI"> </xs:extension>
+            <xs:extension base="xs:anyURI">
+              <xs:attribute name="remap-namespace"/>
+            </xs:extension>
           </xs:simpleContent>
         </xs:complexType>
       </xs:element>

@@ -11,7 +11,7 @@
 	<xsl:param name="terminate-on-error">yes</xsl:param>
 	<xsl:variable name="verbosity" select="tokenize($message-types, ' ')"/>
 
-	<xsl:function name="sf:title2anchor">
+	<xsl:function name="sf:title-to-anchor">
 		<xsl:param name="title"/>
 		<!--	<xsl:value-of select='translate( normalize-space($title), " :&apos;[]/\", "-\-\-\-\-\-\-")'/>
 -->

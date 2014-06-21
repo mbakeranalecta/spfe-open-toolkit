@@ -16,7 +16,7 @@
             <synthesis>
                 <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/common-topic-synthesis.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/synthesize-text-structures.xsl</script>
+                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/synthesize-text-structures.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/docset-home-topic/scripts/synthesis/docset-home-topic-synthesis.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
                 <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
@@ -34,7 +34,7 @@
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/docset-home-topic/scripts/presentation/present-docset-home-topic.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-doc-set-toc.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-references.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-text-structures.xsl</script>
+                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-text-structures.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-header-and-footer.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-topic-set.xsl</script>
                 <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>

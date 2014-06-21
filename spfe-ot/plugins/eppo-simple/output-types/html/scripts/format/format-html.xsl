@@ -312,7 +312,7 @@
 			<ul>
 				<xsl:for-each select="../section/title">
 					<li>
-						<a href="#{sf:title2anchor(normalize-space(.))}">
+						<a href="#{sf:title-to-anchor(normalize-space(.))}">
 							<xsl:value-of select="."/>
 						</a>
 					</li>

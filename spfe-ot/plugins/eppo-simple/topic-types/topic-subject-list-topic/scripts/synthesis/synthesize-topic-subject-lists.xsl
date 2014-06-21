@@ -73,8 +73,8 @@ Main content processing templates
 			
 		<ss:topic 
 			type="{$output-namespace}" 
-			full-name="{$output-namespace}/{sf:title2anchor($subject-topic-name)}"
-			local-name="{sf:title2anchor($subject-topic-name)}"
+			full-name="{$output-namespace}/{sf:title-to-anchor($subject-topic-name)}"
+			local-name="{sf:title-to-anchor($subject-topic-name)}"
 			topic-type-alias="{$topic-type-alias}"
 			title="{sf:get-subject-type-alias-singular(stl:subject-type)}: {stl:subject}"
 			excerpt="A list of topics related to the {sf:get-subject-type-alias-singular(stl:subject-type)} {stl:subject}.">
