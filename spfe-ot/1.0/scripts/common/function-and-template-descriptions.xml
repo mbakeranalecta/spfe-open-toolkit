@@ -561,7 +561,7 @@
     topic-type-alias="Task"
     full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/adding-a-doc-set"
     local-name="adding-a-doc-set" title="Adding a new documentation set"
-    excerpt="A documentation set (doc-set) is a collection of one or more related topic sets, each of which can use different     schemas. ...">
+    excerpt="A documentation set (doc-set) is a collection of one or more related topic sets, each of which can use different schemas. ...">
 
                         </codeblock>
                         <p>Since <task>linking</task> is done at the presentation stage, you can read the topic type namespace URI from this attribute for the topic you are processing.</p>
@@ -623,7 +623,7 @@
         <function-description>
             <name>satisfies-condition</name>
             <description>
-                <p>A recursive function that checks a series of conditions against a series of conditiont tokens and returns true if there is a match. It takes account of conditions joined by a plus sign, returning true only if both conditions are satisfied. This is a helper function for the <xslt-function-name>xs:conditions-met</xslt-function-name> function.</p>
+                <p>A recursive function that checks a series of conditions against a series of conditiont tokens and returns true if there is a match. It takes account of conditions joined by a plus sign, returning true only if both conditions are satisfied. This is a helper function for the <spfe-build-function>sf:conditions-met</spfe-build-function> function.</p>
             </description>
             <return-value>
                 <description>
