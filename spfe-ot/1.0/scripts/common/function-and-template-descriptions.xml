@@ -342,7 +342,7 @@
         <function-description>
             <name>escape-for-xml</name>
             <description>
-                <p>Takes and input string and escapes the <code>&lt;</code> and <code>&amp;</code> characters so that the string can be inserted into an XML document. For example, given the string:</p>
+                <p>Takes an input string and escapes the <code>&lt;</code> and <code>&amp;</code> characters so that the string can be inserted into an XML document. For example, given the string:</p>
                 <codeblock>&lt;name>Five &amp; Dime&lt;/name></codeblock>
                 <p>It will return the string</p>
                 <codeblock>&amp;lt;name>Five &amp;amp; Dime&amp;lt;/name></codeblock>

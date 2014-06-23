@@ -44,7 +44,7 @@
 	</xsl:template>
 	
 	<xsl:template match="gt:section">
-		<xsl:if test="$config/config:build-command='draft' or esf:section-has-content(gt:title/following-sibling::*) ">
+		<xsl:if test="$config/config:build-command='draft' or sf:has-content(gt:title/following-sibling::*) ">
 		<section>
 			<anchor name="{sf:title2anchor(gt:title)}"/>
 			<xsl:apply-templates/>

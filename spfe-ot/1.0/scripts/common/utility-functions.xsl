@@ -337,7 +337,7 @@
 
 	<!-- Display first n words -->
 	<xsl:function name="sf:first-n-words">
-		<xsl:param name="text" as="xs:string"/>
+		<xsl:param name="text"/>
 		<xsl:param name="words" as="xs:integer"/>
 		<xsl:param name="suffix" as="xs:string"/>
 		<xsl:variable name="text-string" select="normalize-space(string($text))"/>
@@ -473,5 +473,9 @@
 		/>
 	</xsl:function>
 
+	<xsl:function name="sf:has-content" as="xs:boolean">
+		<xsl:param name="content"/>
+		<xsl:value-of select="$content/text()[normalize-space(.)] | $content/*"/>
+	</xsl:function>
 
 </xsl:stylesheet>
