@@ -453,7 +453,7 @@
                     <!-- It is a mystery to me why we need to put *:script here. The default namespace here
                     should be config, but it does not works without *: prefix. -->
                     <xsl:for-each select="distinct-values(current-group()/*:script/text())">
-                        <gen:include href="{concat('file:/', .)}"/>
+                        <gen:include href="{concat(if(starts-with(.,'/')) then 'file://' else 'file:/', .)}"/>
                     </xsl:for-each>
                 </gen:stylesheet>
             </xsl:result-document>
