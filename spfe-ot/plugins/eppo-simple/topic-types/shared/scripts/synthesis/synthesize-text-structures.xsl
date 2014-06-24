@@ -35,7 +35,8 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 
-	<xsl:template match="*">
+	<!-- Priority is -0.9 to set it below the generic root element match that tests for unknown roots. -->
+	<xsl:template match="*" priority="-0.9">
 		<xsl:param name="output-namespace" tunnel="yes"/>
 		<!-- FIXME: Need to decide if default-reference-scope is still valid and if so whether this is the right way to do it. -->
 		<xsl:choose>

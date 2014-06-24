@@ -46,6 +46,7 @@ Main template
 	
 	<!-- catch any root node that does not have a specific processing attached to it -->
 	<!-- priority is -0.6 because wildcard default priority is -0.5-->
+	<!-- FIXME: the test should actually be for unknown types, not root elements. But how do we match on that? -->
 	<xsl:template match="/*" priority="-0.6">
 		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">

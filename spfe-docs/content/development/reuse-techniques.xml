@@ -35,6 +35,10 @@
                 <type>feature</type>
                 <term>URI remapping</term>
             </entry>
+            <entry>
+                <type>task</type>
+                <term>content reuse</term>
+            </entry>
         </index>
     </head>
     <body>
