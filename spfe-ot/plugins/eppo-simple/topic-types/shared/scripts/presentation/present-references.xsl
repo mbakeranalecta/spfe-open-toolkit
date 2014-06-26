@@ -117,7 +117,9 @@
 	 		<xsl:when test="$index gt count($list)">
 	 			<xsl:value-of select="false()"/>
 	 		</xsl:when>
-	 		<xsl:when test="contains($string, $list[$index])">
+	 		<xsl:when test="$string = tokenize($list[$index], ' ')">
+	 			<xsl:message select="$string"/>
+	 			<xsl:message select="$list[$index]"/>
 	 			<xsl:value-of select="true()"/>
 	 		</xsl:when>
 	 		<xsl:otherwise>
@@ -197,9 +199,12 @@
 				<xsl:if test="count($target-page[number(@link-priority) eq min($target-page/@link-priority)]) > 1">
 					<xsl:call-template name="sf:warning">
 						<xsl:with-param name="message">
-							<xsl:text>More than one target page with the same link priority. </xsl:text>
-							<xsl:text>Target pages include:</xsl:text>
-							<xsl:value-of select="string-join($target-page[number(@link-priority) eq min($target-page/@link-priority)], ', ')"/>
+							<xsl:text>More than one target page with the same link priority.&#x000A;</xsl:text>
+							<xsl:text>Target pages include:&#x000A;</xsl:text>
+							<xsl:value-of select="string-join($target-page[number(@link-priority) eq min($target-page/@link-priority)]/@full-name, ',&#x000A;')"/>
+							<xsl:value-of select="'&#x000A;The target is: ', $target"/>
+							<xsl:value-of select="'&#x000A;The type is: ', $type"/>
+							<xsl:value-of select="'&#x000A;The priority is: ', min($target-page/@link-priority)"/>
 						</xsl:with-param>
 					</xsl:call-template>					
 				</xsl:if>
