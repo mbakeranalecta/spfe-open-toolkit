@@ -473,9 +473,10 @@
 		/>
 	</xsl:function>
 
+	<!-- FIXME: Has to be a more elegant way to do this test! -->
 	<xsl:function name="sf:has-content" as="xs:boolean">
 		<xsl:param name="content"/>
-		<xsl:value-of select="$content/text()[normalize-space(.)] | $content/*"/>
+		<xsl:value-of select="string-join(($content/text()[normalize-space(.)] | $content/*),'') ne ''"/>
 	</xsl:function>
 
 </xsl:stylesheet>

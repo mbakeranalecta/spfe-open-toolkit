@@ -18,14 +18,32 @@
         <index>
             <entry>
                 <type>feature</type>
+                <term>fragment</term>
+            </entry>
+            <entry>
+                <type>feature</type>
                 <term>fragments</term>
             </entry>
-        </index>
+       </index>
     </head>
     <body>
         <title>Fragments</title>
         <p><feature>Fragments</feature> are a <task>content reuse</task> feature of the <feature>EPPO-simple</feature> <feature>plugin</feature>.</p>
         <p>A fragment is an arbitrary sequence of text structures (paragraphs, lists, etc.) that has been given an id so that it can be included by reference at other points in the content. </p>
+        <codeblock>&lt;fragment id="test-fragment">
+    &lt;local-strings>
+        &lt;string id="test-string-1">&lt;bold>test string one&lt;/bold>&lt;/string>
+        &lt;string id="test-string-2">&lt;italic>test string two&lt;/italic>&lt;/string>
+    &lt;/local-strings>
+    &lt;p>This is a piece of text in a fragment. It includes references to local strings &lt;string-ref id-ref="test-string-1"/> and &lt;string-ref id-ref="test-string-2"/>. And to a global string &lt;string-ref id-ref="eppo-simple-topic-set-product"/>&lt;/p>
+&lt;/fragment>
+&lt;p>The following is a reference to the fragment defined above:&lt;/p>
+&lt;fragment-ref id-ref="test-fragment">
+    &lt;local-strings>
+        &lt;string id="test-string-1">&lt;code>this is test string number one&lt;/code>&lt;/string>
+    &lt;/local-strings>
+&lt;/fragment-ref></codeblock>
+        
         <p>Fragments can be defined inline in a topic file, or they can be defined in separate fragment collections. If a fragment is defined inline, it is included where it occurs. Fragments in fragment files are not included anywhere unless they are pulled in by a fragment reference.</p>
         <p>A fragment reference inserts a fragment by ID at the place it occurs in the text.</p>
         <p>Fragments are recursive. That is, fragments can contain other fragments and fragment references.</p>
