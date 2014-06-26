@@ -126,7 +126,7 @@ Main content processing templates
 					 then concat('/',$doctype,  substring-after($xpath, $doctype))
 					 else $xpath"/> 
 
-	<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference')"/>
+	<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference', $config)"/>
 						 
 	<!-- is it this doctype or a group, but not clear we need this check again -->			
 	

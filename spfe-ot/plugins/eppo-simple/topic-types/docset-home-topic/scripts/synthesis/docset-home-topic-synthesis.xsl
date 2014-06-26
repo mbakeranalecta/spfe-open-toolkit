@@ -20,7 +20,7 @@ exclude-result-prefixes="#all">
 			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
 				<ss:topic 
 					type="{namespace-uri()}" 
-					topic-type-alias="{sf:get-topic-type-alias-singular($topic-type)}"
+					topic-type-alias="{sf:get-topic-type-alias-singular($topic-type, $config)}"
 					full-name="{concat(namespace-uri(), '/', *:head/*:id)}"
 					local-name="{*:head/*:id}"
 					title="{*:body/*:title}"

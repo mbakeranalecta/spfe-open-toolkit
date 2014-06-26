@@ -67,7 +67,7 @@ Main content processing templates
 	<xsl:template match="stl:subject-topic-list" >
 		<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</xsl:variable>	
 		
-	<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular($output-namespace)"/>
+		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular($output-namespace, $config)"/>
 		<xsl:variable name="subject-topic-name" select="concat(stl:subject-type, '_', stl:subject)"/>
 						 
 			
@@ -76,8 +76,8 @@ Main content processing templates
 			full-name="{$output-namespace}/{sf:title2anchor($subject-topic-name)}"
 			local-name="{sf:title2anchor($subject-topic-name)}"
 			topic-type-alias="{$topic-type-alias}"
-			title="{sf:get-subject-type-alias-singular(stl:subject-type)}: {stl:subject}"
-			excerpt="A list of topics related to the {sf:get-subject-type-alias-singular(stl:subject-type)} {stl:subject}.">
+			title="{sf:get-subject-type-alias-singular(stl:subject-type, $config)}: {stl:subject}"
+			excerpt="A list of topics related to the {sf:get-subject-type-alias-singular(stl:subject-type, $config)} {stl:subject}.">
 			
 			<!-- FIXME: Need to reproduce the entire index term markup here so it is passed through to the link catalog -->
 			<ss:index>
