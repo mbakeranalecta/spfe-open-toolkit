@@ -25,6 +25,7 @@
             <xs:element name="spfe-build-function"/>
             <xs:element name="spfe-build-template"/>
             <xs:element name="spfe-build-variable"/>
+            <xs:element name="spfe-build-script"/>
             <xs:element name="ant-element" type="xs:string"> </xs:element>
 
         </xs:choice>
