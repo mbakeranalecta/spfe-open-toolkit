@@ -59,14 +59,14 @@ Main template
 		 method="xml" 
 		 indent="yes"
 		 omit-xml-declaration="no" 
-		 href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/synthesis/synthesis.xml')}">
+		 href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/synthesis.xml')}">
 		<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$topic-set-id}" title="{sf:string($config//config:strings, 'eppo-simple-topic-set-product')} {sf:string($config//config:strings, 'eppo-simple-topic-set-release')}"> 
 			
 			<xsl:for-each-group select="xfd:function-definition" group-by="concat(xfd:namespace-uri, xfd:name)">
 				<xsl:variable name="name" select="string(xfd:name[1])"/>
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
 				
-				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference')"/>	
+				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference', $config)"/>	
 				<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
 				<ss:topic 
 					type="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference" 
@@ -164,7 +164,7 @@ Main template
 					full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference/{concat(xfd:local-prefix, '_', xfd:name)}"
 					local-name="{xfd:name}"
 					topic-type-alias=
-					"{sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference')}"
+					"{sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference', $config)}"
 					title="{xfd:name}"
 					>
 					<ss:index>

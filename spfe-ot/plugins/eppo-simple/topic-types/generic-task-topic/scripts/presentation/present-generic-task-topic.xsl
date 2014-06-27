@@ -45,7 +45,7 @@
 	
 	
 	<xsl:template match="gt:planning-question">
-		<xsl:if test="$config/config:build-command='draft' or esf:section-has-content(gt:planning-question-title/following-sibling::*) ">
+		<xsl:if test="$config/config:build-command='draft' or sf:has-content(gt:planning-question-title/following-sibling::*) ">
 			<qa>
 				<anchor name="{sf:title-to-anchor(gt:planning-question-title)}"/>
 				<xsl:apply-templates/>

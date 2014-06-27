@@ -96,7 +96,7 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
                     <p><config-setting>/spfe/doc-set/topic-set-type-order</config-setting>: The
                         order in which you want to present the topic sets in the table of contents
                         of the documentation set. The type of a topic set is defined by the 
-                        <config-setting>/spfe/topic-set-type</config-setting> setting in the topic set configuration file.</p>
+                        <config-setting>/spfe/topic-set/topic-set-type</config-setting> setting in the topic set configuration file.</p>
                 </li>
                 <li>
                     <p><config-setting>/spfe/doc-set/topic-sets</config-setting>: The list of
@@ -196,12 +196,11 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
 </spfe>]]>
             </codeblock>
             <p>This documentation set includes three topic sets, each with their own configuration
-                file, which is specified by the <config-setting>href</config-setting>
-                attribute of the
-                <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting> element. The
-                path is relative to the location of the configuration file that defines the doc-set
+                file, which is specified by the <config-setting>/spfe/doc-set/topic-sets/topic-set/href</config-setting>
+               setting. The
+                path is relative to the location of the configuration file that defines the <config-setting>/spfe/doc-set</config-setting>
                 element. Each topic set configuration file defines a
-                <config-setting>/spfe/topic-set-type</config-setting> element that matches one
+                <config-setting>/spfe/topic-set/topic-set-type</config-setting> element that matches one
                 of the values in the
                 <config-setting>/spfe/doc-set/topic-set-type-order</config-setting> element.</p>
             <p>To add an index page for the documentation set, you need to <task>add a topic
@@ -209,7 +208,7 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
                 of topic sets. For example, the topic set <bold>spfe-docs-docset</bold> contains the
                 index topic for the SPFE documentation set.</p>
             <p>Run the <tool-name>spfe</tool-name> build tool and specify the configuration file
-                that contains the <config-setting>doc-set </config-setting> element as the first
+                that contains the <config-setting>/spfe/doc-set</config-setting> element as the first
                 parameter. If you see the topic sets that your documentation set includes in the
                 table of contents you have successfully added a documentation set.</p>
         </doing>

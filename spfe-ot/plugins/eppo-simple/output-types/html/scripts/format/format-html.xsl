@@ -281,7 +281,7 @@
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:result-document
-			href="file:///{$config/config:doc-set-build}/{$topic-set-id}/image-list.txt"
+			href="file:///{$config/config:doc-set-build}/topic-sets/{$topic-set-id}/image-list.txt"
 			method="text">
 			<xsl:for-each-group select="$graphic-file-list" group-by=".">
 				<xsl:value-of select="concat(sf:local-path-from-uri(current-grouping-key()), '&#xa;')"/>
@@ -356,7 +356,7 @@
 		</h3>
 	</xsl:template>
 
-	<xsl:template match="fold/title">
+	<xsl:template match="li/title">
 		<h3>
 			<xsl:apply-templates/>
 		</h3>
@@ -775,12 +775,16 @@
 	<xsl:template match="step">
 		<xsl:apply-templates/>
 	</xsl:template>
+	
+	<xsl:template match="qa">
+		<xsl:apply-templates/>
+	</xsl:template>
 
 	<xsl:template match="*" >
 		<xsl:call-template name="sf:warning">
 			<xsl:with-param name="message">
 				<xsl:text>Unknown element found in presentation: </xsl:text>
-				<xsl:value-of select="concat('{', namespace-uri(), '}', name())"/>
+				<xsl:value-of select="concat('/', string-join(ancestor::*/name(), '/'),'/', '{', namespace-uri(), '}',name())"/>
 			</xsl:with-param>
 		</xsl:call-template>
 		<xsl:apply-templates/>

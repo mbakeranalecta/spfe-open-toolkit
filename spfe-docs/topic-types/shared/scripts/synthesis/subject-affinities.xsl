@@ -32,5 +32,33 @@
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
+
+    <xsl:template match="*:spfe-build-function">
+        <xsl:param name="output-namespace" tunnel="yes"/>
+        <xsl:element name="name" namespace="{$output-namespace}">
+            <xsl:attribute name="type">spfe-build-function</xsl:attribute>
+            <xsl:attribute name="key" select="normalize-space(.)"/>
+            <xsl:apply-templates/>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="*:spfe-build-variable">
+        <xsl:param name="output-namespace" tunnel="yes"/>
+        <xsl:element name="name" namespace="{$output-namespace}">
+            <xsl:attribute name="type">spfe-build-variable</xsl:attribute>
+            <xsl:attribute name="key" select="normalize-space(.)"/>
+            <xsl:apply-templates/>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="*:spfe-build-script">
+        <xsl:param name="output-namespace" tunnel="yes"/>
+        <xsl:element name="name" namespace="{$output-namespace}">
+            <xsl:attribute name="type">spfe-build-script</xsl:attribute>
+            <xsl:attribute name="key" select="normalize-space(.)"/>
+            <xsl:apply-templates/>
+        </xsl:element>
+    </xsl:template>
+    
     
  </xsl:stylesheet>

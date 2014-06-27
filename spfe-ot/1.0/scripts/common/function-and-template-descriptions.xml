@@ -342,7 +342,7 @@
         <function-description>
             <name>escape-for-xml</name>
             <description>
-                <p>Takes and input string and escapes the <code>&lt;</code> and <code>&amp;</code> characters so that the string can be inserted into an XML document. For example, given the string:</p>
+                <p>Takes an input string and escapes the <code>&lt;</code> and <code>&amp;</code> characters so that the string can be inserted into an XML document. For example, given the string:</p>
                 <codeblock>&lt;name>Five &amp; Dime&lt;/name></codeblock>
                 <p>It will return the string</p>
                 <codeblock>&amp;lt;name>Five &amp;amp; Dime&amp;lt;/name></codeblock>
@@ -375,7 +375,7 @@
         &lt;plural>Configuration settings&lt;/plural>
     &lt;/aliases>
                 </codeblock>
-                <p>The <xslt-function-name>get-topic-type-alias-singular</xslt-function-name> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <xslt-function-name>get-topic-type-alias-plural</xslt-function-name>.</p>
+                <p>The <xslt-function-name>get-topic-type-alias-singular</xslt-function-name> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <spfe-build-function>get-topic-type-alias-plural</spfe-build-function>.</p>
             </description>
             <return-value>
                 <description>
@@ -398,6 +398,14 @@
 	targetNamespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions">                            
                         </codeblock>
                         <p>Note, however, that it is possible for the synthesis routine to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis routine is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>config</name>
+                    <description>
+                        <fragment id="config-description">
+                            <p>A reference to the configuration file.</p>
+                        </fragment>
                     </description>
                 </parameter>
             </parameters>
@@ -438,6 +446,12 @@
 	targetNamespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions">                            
                         </codeblock>
                         <p>Note, however, that it is possible for the synthesis routine to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis routine is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>config</name>
+                    <description>
+                        <fragment-ref id-ref="config-description"/>
                     </description>
                 </parameter>
             </parameters>
@@ -489,6 +503,12 @@
                         </codeblock>
                     </description>
                 </parameter>
+                <parameter>
+                    <name>config</name>
+                    <description>
+                        <fragment-ref id-ref="config-description"/>
+                    </description>
+                </parameter>
             </parameters>
         </function-description>
         <function-description>
@@ -538,6 +558,12 @@
                         </codeblock>
                     </description>
                 </parameter>
+                <parameter>
+                    <name>config</name>
+                    <description>
+                        <fragment-ref id-ref="config-description"/>
+                    </description>
+                </parameter>
             </parameters>
         </function-description>
         <function-description>
@@ -561,7 +587,7 @@
     topic-type-alias="Task"
     full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/adding-a-doc-set"
     local-name="adding-a-doc-set" title="Adding a new documentation set"
-    excerpt="A documentation set (doc-set) is a collection of one or more related topic sets, each of which can use different     schemas. ...">
+    excerpt="A documentation set (doc-set) is a collection of one or more related topic sets, each of which can use different schemas. ...">
 
                         </codeblock>
                         <p>Since <task>linking</task> is done at the presentation stage, you can read the topic type namespace URI from this attribute for the topic you are processing.</p>
@@ -571,6 +597,12 @@
                     <name>topic-set-id</name>
                     <description>
                         <p>The <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> of the topic. The <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> is passed as a parameter to every processing script.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>config</name>
+                    <description>
+                        <fragment-ref id-ref="config-description"/>
                     </description>
                 </parameter>
             </parameters>
@@ -623,7 +655,7 @@
         <function-description>
             <name>satisfies-condition</name>
             <description>
-                <p>A recursive function that checks a series of conditions against a series of conditiont tokens and returns true if there is a match. It takes account of conditions joined by a plus sign, returning true only if both conditions are satisfied. This is a helper function for the <xslt-function-name>xs:conditions-met</xslt-function-name> function.</p>
+                <p>A recursive function that checks a series of conditions against a series of conditiont tokens and returns true if there is a match. It takes account of conditions joined by a plus sign, returning true only if both conditions are satisfied. This is a helper function for the <spfe-build-function>sf:conditions-met</spfe-build-function> function.</p>
             </description>
             <return-value>
                 <description>

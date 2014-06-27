@@ -107,10 +107,12 @@
     
     <xsl:template match="node[@topic-type]">
         <!-- FIXME: title may not be the right markup here, or may need explicit handling at format stage -->
-        <title><xsl:value-of select="@name"/></title>
-        <ul>
-            <xsl:apply-templates/>
-        </ul>
+        <li>
+          <title><xsl:value-of select="@name"/></title>
+          <ul>
+              <xsl:apply-templates/>
+          </ul>
+        </li>
     </xsl:template>
     
     <xsl:template match="node">

@@ -1109,7 +1109,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>graphics</build-property>
+            <build-property/>
             <attributes/>
         </config-setting-description>
 
@@ -2131,6 +2131,28 @@
             <build-property/>
             <attributes/>
         </config-setting-description>
-
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/support-files</xpath>
+            <description>
+                <p>A list of support files, such as JavaScript file or CSS files used by the output format. These are coppied to the output directory by the build.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/support-files/include</xpath>
+            <description>
+                <p>The path to a support file for the output format.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
     </body>
 </config-setting-descriptions>

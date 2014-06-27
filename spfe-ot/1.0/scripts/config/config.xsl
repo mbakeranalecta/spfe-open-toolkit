@@ -185,7 +185,7 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.extracted-content 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.extract.xsl"
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.extract.xsl"
                         sources-to-extract-content-from="${{{$topic-set-id}.sources-to-extract-content-from-files}}"
                     />                    
                 </xsl:for-each>
@@ -199,7 +199,7 @@
                     <xsl:if test="sources/sources-to-extract-content-from/include">
                         <build.extracted-content 
                             topic-set-id="{$topic-set-id}"
-                            style="{$doc-set-build}/{$topic-set-id}/spfe.extract.xsl">
+                            style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.extract.xsl">
                             <files-elements>
                                 <files id="{$topic-set-id}.sources-to-extract-content-from">
                                     <xsl:for-each
@@ -215,7 +215,7 @@
                     </xsl:if>
                     
                     <build.synthesis topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.synthesis.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.synthesis.xsl">
                         <xsl:if
                             test="sources/authored-content/include">
                             <xsl:attribute name="authored-content-files"
@@ -225,12 +225,12 @@
                     
                     <build.link-catalog 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.link-catalog.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.link-catalog.xsl">
                     </build.link-catalog>
                     
                     <build.toc 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.toc.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.toc.xsl">
                     </build.toc>
                     
                 </xsl:for-each>
@@ -241,7 +241,7 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.link-catalog 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.link-catalog.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.link-catalog.xsl">
                     </build.link-catalog>
                 </xsl:for-each>
 -->            </target>
@@ -251,7 +251,7 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.toc 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.toc.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.toc.xsl">
                     </build.toc>
                 </xsl:for-each>
 -->            </target>
@@ -261,7 +261,7 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.presentation-web 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.presentation-web.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.presentation-web.xsl">
                     </build.presentation-web>
                 </xsl:for-each>
             </target>       
@@ -271,7 +271,7 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.presentation-book 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.presentation-book.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.presentation-book.xsl">
                     </build.presentation-book>
                 </xsl:for-each>
             </target>
@@ -281,7 +281,7 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.format-html 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.format-html.xsl"
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.format-html.xsl"
                         output-directory="{if ($topic-set-id=$config/doc-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
                     </build.format-html>
                 </xsl:for-each>
@@ -292,7 +292,7 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.fo-format 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.fo-format.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.fo-format.xsl">
                     </build.fo-format>
                 </xsl:for-each>
             </target>
@@ -302,7 +302,7 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.pdf-encode 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/{$topic-set-id}/spfe.pdf-encode.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.pdf-encode.xsl">
                     </build.pdf-encode>
                 </xsl:for-each>
             </target>
@@ -419,7 +419,7 @@
             <xsl:variable name="script-type"
                 select="if (name()='other') then concat('other.',@name) else name()"/>
             <xsl:result-document
-                href="file:///{$doc-set-build}/{$topic-set-id}/spfe.{$script-type}.xsl" method="xml"
+                href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.{$script-type}.xsl" method="xml"
                 indent="yes" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
                     <!-- It is a mystery to me why we need to put *:script here. The default namespace here

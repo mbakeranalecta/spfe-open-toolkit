@@ -16,13 +16,6 @@ version="2.0"
 
 
 
-	<xsl:function name="esf:section-has-content" as="xs:boolean">
-		<xsl:param name="content"/>
-		<xsl:value-of select="(normalize-space
-				(string-join
-					(($content/text() | $content/*) except ($content/author-note | $content/review-note),''))
-				) ne ''"/>
-	</xsl:function>
 
 	<!-- FIXME: This needs to be an explicit list or else it overrides present-references.xsl in 
 		the import order. Might be fixed by converting individual reference types to subject-affinity or name 

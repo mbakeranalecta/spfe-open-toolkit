@@ -414,6 +414,7 @@
 
 	<xsl:function name="sf:get-topic-type-alias-singular">
 		<xsl:param name="topic-type-xmlns"/>
+		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
 				test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular">
@@ -438,6 +439,7 @@
 	</xsl:function>
 	<xsl:function name="sf:get-topic-type-alias-plural">
 		<xsl:param name="topic-type-xmlns"/>
+		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
 				test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural">
@@ -462,6 +464,7 @@
 	</xsl:function>
 	<xsl:function name="sf:get-subject-type-alias-singular">
 		<xsl:param name="subject-type-id"/>
+		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
 				test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular">
@@ -472,10 +475,9 @@
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">
-						<xsl:text>No singular subject type alias found for topic type </xsl:text>
+						<xsl:text>No singular subject type alias found for subject type </xsl:text>
 						<xsl:value-of select="$subject-type-id"/>
-						<xsl:text>.</xsl:text>
-						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:text>. This setting should be defined in the configuration files at </xsl:text>
 						<xsl:text>/spfe/subject-types/subject-type/aliases/singular.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
@@ -486,6 +488,7 @@
 	</xsl:function>
 	<xsl:function name="sf:get-subject-type-alias-plural">
 		<xsl:param name="subject-type-id"/>
+		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
 				test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural">
@@ -512,6 +515,7 @@
 	<xsl:function name="sf:get-topic-link-priority">
 		<xsl:param name="topic-namespace-uri"/>
 		<xsl:param name="topic-set-id"/>
+		<xsl:param name="config"/>
 		<xsl:value-of
 			select="$config/config:topic-type[config:xmlns eq $topic-namespace-uri]/config:topic-type-link-priority
 			+
@@ -519,5 +523,10 @@
 		/>
 	</xsl:function>
 
+	<!-- FIXME: Has to be a more elegant way to do this test! -->
+	<xsl:function name="sf:has-content" as="xs:boolean">
+		<xsl:param name="content"/>
+		<xsl:value-of select="string-join(($content/text()[normalize-space(.)] | $content/*),'') ne ''"/>
+	</xsl:function>
 
 </xsl:stylesheet>

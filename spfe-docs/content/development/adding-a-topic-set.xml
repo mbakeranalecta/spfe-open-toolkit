@@ -44,6 +44,10 @@
                 <type>task</type>
                 <term>{adding} a {topic set}</term>
             </entry>
+            <entry>
+                <type>task</type>
+                <term>add a topic set</term>
+            </entry>
         </index>
     </head>
     <body>
@@ -73,7 +77,10 @@
            <planning-question>
                <planning-question-title>Can I include more than one topic type in a topic set?</planning-question-title>
                <planning-question-body>
-                   <p>Yes, you can include more than one topic type in a topic set. Each topic type has its own namespace, so you can define different processing for each topic type within a single <feature>synthesis</feature> or <feature>presentation</feature> script. </p>
+                   <p>Yes, you can include more than one <feature>topic type</feature> in a topic
+                        set. Each topic type has its own namespace, so you can define different
+                        processing for each topic type within a single <feature>synthesis</feature>
+                        or <feature>presentation</feature> script. </p>
                </planning-question-body>
            </planning-question>
        </planning>

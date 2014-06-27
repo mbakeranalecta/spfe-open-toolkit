@@ -78,7 +78,7 @@ Main template
 			 method="xml" 
 			 indent="yes"
 			 omit-xml-declaration="no" 
-			 href="file:///{concat($config/config:doc-set-build, '/', $topic-set-id, '/synthesis/synthesis.xml')}">
+			 href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/synthesis.xml')}">
 			<ss:synthesis 
 				xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
 				topic-set-id="{$topic-set-id}" 
@@ -126,7 +126,7 @@ Main content processing templates
 					 then concat('/',$doctype,  substring-after($xpath, $doctype))
 					 else $xpath"/> 
 
-	<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference')"/>
+	<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference', $config)"/>
 						 
 	<!-- is it this doctype or a group, but not clear we need this check again -->			
 	
@@ -152,7 +152,7 @@ Main content processing templates
 					<ss:entry>
 						<ss:type>config-setting</ss:type>
 						<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</ss:namespace>
-						<ss:term><xsl:value-of select="$xpath"/></ss:term>
+						<ss:term><xsl:value-of select="$xpath"/>/@<xsl:value-of select="name"/></ss:term>
 						<ss:anchor><xsl:value-of select="name"></xsl:value-of></ss:anchor>
 					</ss:entry>
 				</xsl:for-each>
@@ -377,7 +377,7 @@ Content fix-up templates
 
 <!-- Fix up element name xpaths -->
 	<xsl:template match="ed:config-setting">
-		<xsl:variable name="context-element" select="ancestor::ed:config-setting-description/normalize-space(ed:xpath)"/>
+	<xsl:variable name="context-element" select="ancestor::ed:config-setting-description/normalize-space(ed:xpath)"/>
 	<xsl:variable name="data-content" select="."/>
 	<xsl:variable name="xpath" select="@xpath"/>
 	<xsl:variable name="all-elements" select="
@@ -387,6 +387,8 @@ Content fix-up templates
 		<xsl:choose>
 			<!-- check the cases where there is no 'xpath' attribute -->
 			<xsl:when test="not(@xpath)">
+				
+				<xsl:variable name="parent-of-context-element" select="string-join(tokenize($context-element,'/')[position()!=last()],'/')"/>
 				<xsl:choose>
 				
 					<!-- Is it a full element path? -->
@@ -410,7 +412,13 @@ Content fix-up templates
 					<xsl:when test="$all-elements=concat($context-element, '/', $data-content)">
 						<xsl:attribute name="key" select="concat($context-element, '/', $data-content)"/>
 					</xsl:when>
-
+					
+					<!-- Is it the name of a sibling of the current element?--> 
+					
+					<xsl:when test="$all-elements=concat($parent-of-context-element, '/', $data-content)">
+						<xsl:attribute name="key" select="concat($parent-of-context-element, '/', $data-content)"/>
+					</xsl:when>
+					
 					
 					<!-- If not, we have a problem -->
 					<xsl:otherwise>

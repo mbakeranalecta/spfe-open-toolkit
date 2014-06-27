@@ -57,7 +57,13 @@
                     <plural>Build properties</plural>
                 </aliases>
             </subject-type>
-            
+            <subject-type>
+                <id>feature</id>
+                <aliases>
+                    <singular>Feature</singular>
+                    <plural>Features</plural>
+                </aliases> 
+            </subject-type>
         </subject-types>
 
         <style>
