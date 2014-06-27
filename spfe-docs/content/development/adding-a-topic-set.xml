@@ -44,6 +44,10 @@
                 <type>task</type>
                 <term>{adding} a {topic set}</term>
             </entry>
+            <entry>
+                <type>task</type>
+                <term>add a topic set</term>
+            </entry>
         </index>
     </head>
     <body>
