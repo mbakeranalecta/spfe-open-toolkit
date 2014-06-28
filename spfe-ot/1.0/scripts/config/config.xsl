@@ -450,7 +450,7 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <!-- Otherwise, just link to existing file. -->
-                                <gen:include href="{sf:local-to-url(.)}"/>
+                                <gen:include href="{concat(if(starts-with(.,'/')) then 'file://' else 'file:/', .)}"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:for-each-group>
