@@ -432,7 +432,7 @@
                                 <xsl:variable name="map-to-namespace" select="tokenize(normalize-space(@remap-namespace),' ')[2]"/>                                <xsl:variable name="temp-file-name" select="generate-id(.)"/>
                                 <gen:include href="{$temp-file-name}.xsl"/>
                                 <xsl:result-document
-                                    href="file:///{$doc-set-build}/{$topic-set-id}/{$temp-file-name}.xsl" method="text"
+                                    href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/{$temp-file-name}.xsl" method="text"
                                     indent="no" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                                     <xsl:analyze-string select="unparsed-text(concat('file:///',.))" regex="xmlns:(.+)=[&quot;&apos;]{$map-from-namespace}[&quot;&apos;]">
                                          <xsl:matching-substring>
