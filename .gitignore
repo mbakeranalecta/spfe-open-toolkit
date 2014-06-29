@@ -1,6 +1,7 @@
 # Backup files
 *~
 *.bak
+*.log
 
 # Windows image file caches
 Thumbs.db 
