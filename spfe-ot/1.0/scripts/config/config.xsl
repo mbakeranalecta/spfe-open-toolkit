@@ -424,23 +424,21 @@
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
                     <!-- It is a mystery to me why we need to put *:script here. The default namespace here
                     should be config, but it does not works without *: prefix. -->
-                    <xsl:for-each-group select="current-group()/*:script" group-by="text()">
+                    <xsl:for-each-group select="current-group()/*:script" group-by="concat(text(), ' ', normalize-space(@remap-namespace))">
                         <xsl:choose>                
-                            <!-- If namespace remapping is specified,create a temp file with remapped namespaces -->
+                            <!-- If namespace remapping is specified, create a temp file with remapped namespaces -->
                             <xsl:when test="current-group()/@remap-namespace">
                                 <xsl:variable name="map-from-namespace" select="tokenize(normalize-space(@remap-namespace),' ')[1]"/>
-                                <xsl:variable name="map-to-namespace" select="tokenize(normalize-space(@remap-namespace),' ')[2]"/>                                <xsl:variable name="temp-file-name" select="generate-id(.)"/>
-                                <gen:include href="{$temp-file-name}.xsl"/>
+                                <xsl:variable name="map-to-namespace" select="tokenize(normalize-space(@remap-namespace),' ')[2]"/>                                
+                                <xsl:variable name="temp-file-name" select="concat(sf:get-file-name-from-path(.), generate-id(.), position(), '.xsl')"/>
+                                
+                                <gen:include href="{$temp-file-name}"/>
                                 <xsl:result-document
-                                    href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/{$temp-file-name}.xsl" method="text"
+                                    href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/{$temp-file-name}" method="text"
                                     indent="no" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
-                                    <xsl:analyze-string select="unparsed-text(concat('file:///',.))" regex="xmlns:(.+)=[&quot;&apos;]{$map-from-namespace}[&quot;&apos;]">
+                                    <xsl:analyze-string select="unparsed-text(concat('file:///',.))" regex="(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;]){sf:escape-for-regex($map-from-namespace)}([&quot;&apos;])">
                                          <xsl:matching-substring>
-                                             <xsl:text>xmlns:</xsl:text>
-                                             <xsl:value-of select="regex-group(1)"/>
-                                             <xsl:text>="</xsl:text>
-                                             <xsl:value-of select="$map-to-namespace"/>
-                                             <xsl:text>"</xsl:text>
+                                             <xsl:value-of select="concat(regex-group(1),$map-to-namespace,regex-group(2))"/>
                                          </xsl:matching-substring>
                                          <xsl:non-matching-substring>
                                              <xsl:value-of select="."/>

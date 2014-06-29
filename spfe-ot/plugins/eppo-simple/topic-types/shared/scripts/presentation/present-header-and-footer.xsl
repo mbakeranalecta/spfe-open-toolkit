@@ -48,13 +48,12 @@
                             <xsl:for-each select="index/reference">
                                 <xsl:variable name="key-text" select="translate(key[1], '{}', '')"/>
                                 <xsl:choose>
-                                    <xsl:when test="esf:target-exists-not-self(key[1], type, ancestor::topic/@default-reference-scope, ancestor::topic/name)">
+                                    <xsl:when test="esf:target-exists-not-self(key[1], type, ancestor::topic/name)">
                                         <xsl:call-template name="output-link">
                                             <xsl:with-param name="target" select="key[1]"/>
                                             <xsl:with-param name="type" select="type"/>
                                             <xsl:with-param name="content" select="$key-text"/>
                                             <xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
-                                            <xsl:with-param name="scope" select="ancestor::topic/@default-reference-scope"/> 
                                         </xsl:call-template>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -73,14 +72,13 @@
     
     <xsl:template name="show-footer">		
         <xsl:variable name="see-also-links">
-            <xsl:for-each select="index/reference[esf:target-exists(key[1], type, ancestor::topic/@default-reference-scope)]">
+            <xsl:for-each select="index/reference[esf:target-exists(key[1], type)]">
                 <xsl:call-template name="output-link">
                     <xsl:with-param name="target" select="key[1]"/>
                     <xsl:with-param name="type" select="type"/>
                     <xsl:with-param name="content" select="translate(key[1], '{}', '')"/>
                     <xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
                     <xsl:with-param name="see-also" select="true()"/>
-                    <xsl:with-param name="scope" select="ancestor::topic/@default-reference-scope"/> 
                 </xsl:call-template>
             </xsl:for-each>	
         </xsl:variable>

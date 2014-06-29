@@ -242,7 +242,8 @@ version="2.0"
 			<xsl:analyze-string select="." regex="([a-zA-z0-9]+)(\s*\()">
 				<xsl:matching-substring>
 					<xsl:choose>
-						<xsl:when test="esf:target-exists(regex-group(1), 'routine', $scope)">
+						<!-- FIXME: can we avoid enbedding "routine" here? -->
+						<xsl:when test="esf:target-exists(regex-group(1), 'routine')">
 							<xsl:variable name="routine">
 								<routine-name scope="{$scope}"><xsl:value-of select="regex-group(1)"/></routine-name>
 							</xsl:variable>

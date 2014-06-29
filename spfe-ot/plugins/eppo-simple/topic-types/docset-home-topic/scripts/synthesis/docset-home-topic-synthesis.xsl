@@ -16,9 +16,7 @@ exclude-result-prefixes="#all">
 	<xsl:template match="dht:docset-home-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
-		
-		<xsl:choose>
-			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
+
 				<ss:topic 
 					type="{namespace-uri()}" 
 					topic-type-alias="{sf:get-topic-type-alias-singular($topic-type, $config)}"
@@ -30,27 +28,14 @@ exclude-result-prefixes="#all">
 						<xsl:attribute name="virtual-type" select="dht:head/dht:virtual-type"/>
 					</xsl:if>
 					<xsl:element name="{local-name()}" namespace="{$output-namespace}">
-						<xsl:copy-of select="@*"/>
-						<xsl:call-template name="apply-topic-attributes"/>
+						<xsl:copy-of select="@*" copy-namespaces="no"/>
 						<xsl:apply-templates>
 						</xsl:apply-templates>
 					</xsl:element>
 				</ss:topic>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="sf:info">
-					<xsl:with-param name="message">
-						<xsl:text>Suppressing topic </xsl:text>
-						<xsl:value-of select="dht:name"/>
-						<xsl:text> because its conditions (</xsl:text>
-						<xsl:value-of select="$conditions"/>
-						<xsl:text>) do not match the conditions specified for the build ( </xsl:text>
-						<xsl:value-of select="$condition-tokens"/>
-						<xsl:text>).</xsl:text>
-					</xsl:with-param>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
+			
+
+		
 	</xsl:template>
 	
 	<!-- This was inserted to get rid of warning that head not matched in synthesis. Unsure why this was not needed for other topic types. -->

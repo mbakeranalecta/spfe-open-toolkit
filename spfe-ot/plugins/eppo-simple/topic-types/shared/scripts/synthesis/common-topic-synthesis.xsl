@@ -56,33 +56,6 @@ Main template
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
-	
-
-	<xsl:template name="apply-topic-attributes">
-			<!-- copy existing attributes -->
-		<xsl:copy-of select="@*" copy-namespaces="no"/>
-		
-		<xsl:attribute name="default-reference-scope" select="$default-reference-scope"/>
-		<!-- add scope attributes, if scope meets conditions -->
-		<xsl:choose>
-			<xsl:when test="scope">
-				<xsl:attribute name="scope">
-					<xsl:for-each select="scope">
-						<xsl:variable name="conditions" select="@if"/>
-						<xsl:if test="sf:conditions-met($conditions, $condition-tokens)">
-							<xsl:value-of select="."/>
-							<xsl:if test="position()!=last()">
-								<xsl:text> </xsl:text>
-							</xsl:if>
-						</xsl:if>
-					</xsl:for-each>
-				</xsl:attribute>
-			</xsl:when>
-			<xsl:when test="$default-topic-scope">
-				<xsl:attribute name="scope" select="$default-topic-scope"/>
-			</xsl:when>	
-		</xsl:choose>
-	</xsl:template>
 
 </xsl:stylesheet>
 

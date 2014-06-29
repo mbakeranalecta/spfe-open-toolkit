@@ -412,6 +412,21 @@
 		</xsl:analyze-string>
 	</xsl:function>
 
+	<!-- Escape string for regex -->
+	<!-- Escapes the reserved characters for inserting literal string into a regex expression -->
+	<xsl:function name="sf:escape-for-regex">
+		<xsl:param name="string"/>
+		<xsl:value-of select="replace($string, '([\\\|\.\?\*\+\(\)\{\}\[\]\$\^\-])', '\\$1')"/>
+<!--		<xsl:analyze-string select="string($string)" regex="\.|\\">
+			<xsl:matching-substring>
+				<xsl:value-of select="concat('\',.)"/>
+			</xsl:matching-substring>
+			<xsl:non-matching-substring>
+				<xsl:value-of select="."/>
+			</xsl:non-matching-substring>
+		</xsl:analyze-string>-->
+	</xsl:function>
+
 	<xsl:function name="sf:get-topic-type-alias-singular">
 		<xsl:param name="topic-type-xmlns"/>
 		<xsl:param name="config"/>

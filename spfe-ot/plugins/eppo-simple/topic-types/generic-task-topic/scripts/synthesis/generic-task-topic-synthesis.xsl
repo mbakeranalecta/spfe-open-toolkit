@@ -14,8 +14,7 @@ exclude-result-prefixes="#all">
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
 		<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-task-topic</xsl:variable>		
 		
-		<xsl:choose>
-			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
+
 				<ss:topic 
 					type="{namespace-uri()}" 
 					topic-type-alias="{sf:get-topic-type-alias-singular($topic-type, $config)}"
@@ -27,28 +26,13 @@ exclude-result-prefixes="#all">
 						<xsl:attribute name="virtual-type" select="*:head/*:virtual-type"/>
 					</xsl:if>
 					<xsl:element name="{local-name()}" namespace="{$output-namespace}">
-						<xsl:copy-of select="@*"/>
-						<xsl:call-template name="apply-topic-attributes"/>
+						<xsl:copy-of select="@*" copy-namespaces="no"/>
 						<xsl:apply-templates>
 							<xsl:with-param name="output-namespace" tunnel="yes" select="$output-namespace"/>
 						</xsl:apply-templates>
 					</xsl:element>
 				</ss:topic>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="sf:info">
-					<xsl:with-param name="message">
-						<xsl:text>Suppressing topic </xsl:text>
-						<xsl:value-of select="name"/>
-						<xsl:text> because its conditions (</xsl:text>
-						<xsl:value-of select="$conditions"/>
-						<xsl:text>) do not match the conditions specified for the build ( </xsl:text>
-						<xsl:value-of select="$condition-tokens"/>
-						<xsl:text>).</xsl:text>
-					</xsl:with-param>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
+			
 	</xsl:template>
 </xsl:stylesheet>
 
