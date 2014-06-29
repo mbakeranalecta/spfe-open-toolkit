@@ -76,6 +76,7 @@ Main template
 				<xsl:value-of select="concat('{', namespace-uri(), '}', name())"/>
 			</xsl:with-param>
 		</xsl:call-template>
+		<xsl:apply-templates/>
 	</xsl:template>
 
 </xsl:stylesheet>

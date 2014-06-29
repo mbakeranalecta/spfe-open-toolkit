@@ -71,7 +71,7 @@
         <p>The order of operations for the build is as follows:</p>
         <ol>
             <li>
-                <p>Run the <feature>synthesis process</feature> for each topic set in turn in the order they are listed in the <config-setting>/spfe/doc-set/topic-sets</config-setting> configuration setting. This involved running the extract, synthesis, toc, and link catalog scripts for each topic set in turn. Running the scripts in the order in which the topic sets are defined is important because it allows the scripts of later topic sets to access the synthesis, tocs, and link catalogs of the earlier topics. This is used, for instance, to generate <feature>subject list pages</feature> that draw from the entire documentation set.</p> 
+                <p>Run the <feature>synthesis process</feature> for each topic set in turn in the order they are listed in the <config-setting>/spfe/doc-set/topic-sets</config-setting> configuration setting. This involved running the extract, synthesis, toc, and link catalog scripts for each topic set in turn. Running the scripts in the order in which the topic sets are defined is important because it allows the scripts of later topic sets to access the synthesis, tocs, and link catalogs of the earlier topics. This is used, for instance, to generate <feature>subject list topics</feature> that draw from the entire documentation set.</p> 
             </li>
             <li>
                 <p>Run the <feature>presentation process</feature> for each <feature>topic set</feature> in the <feature>documentation set</feature> in turn. If there are different presentation processes for different output media, each will be run in turn.</p>

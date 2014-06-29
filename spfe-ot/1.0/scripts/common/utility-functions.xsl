@@ -369,6 +369,7 @@
 
 	<xsl:function name="sf:get-topic-type-alias-singular">
 		<xsl:param name="topic-type-xmlns"/>
+		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
 				test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular">
@@ -393,6 +394,7 @@
 	</xsl:function>
 	<xsl:function name="sf:get-topic-type-alias-plural">
 		<xsl:param name="topic-type-xmlns"/>
+		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
 				test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural">
@@ -417,6 +419,7 @@
 	</xsl:function>
 	<xsl:function name="sf:get-subject-type-alias-singular">
 		<xsl:param name="subject-type-id"/>
+		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
 				test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular">
@@ -440,6 +443,7 @@
 	</xsl:function>
 	<xsl:function name="sf:get-subject-type-alias-plural">
 		<xsl:param name="subject-type-id"/>
+		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
 				test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural">
@@ -466,6 +470,7 @@
 	<xsl:function name="sf:get-topic-link-priority">
 		<xsl:param name="topic-namespace-uri"/>
 		<xsl:param name="topic-set-id"/>
+		<xsl:param name="config"/>
 		<xsl:value-of
 			select="$config/config:topic-type[config:xmlns eq $topic-namespace-uri]/config:topic-type-link-priority
 			+
@@ -473,9 +478,10 @@
 		/>
 	</xsl:function>
 
+	<!-- FIXME: Has to be a more elegant way to do this test! -->
 	<xsl:function name="sf:has-content" as="xs:boolean">
 		<xsl:param name="content"/>
-		<xsl:value-of select="$content/text()[normalize-space(.)] | $content/*"/>
+		<xsl:value-of select="string-join(($content/text()[normalize-space(.)] | $content/*),'') ne ''"/>
 	</xsl:function>
 
 </xsl:stylesheet>
