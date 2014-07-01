@@ -32,7 +32,6 @@
 	<xsl:template match="subject-topic-list">
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
-		<xsl:message select="name(), namespace-uri()"/>
 
 		<!-- info -->
 
