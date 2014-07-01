@@ -109,7 +109,9 @@ Main template
 							<xsl:choose>
 								<!-- Test that the information exists. -->
 								<xsl:when test="exists($function-description/*)">
-									<xsl:apply-templates select="$function-description/fd:description"/>
+									<xsl:apply-templates select="$function-description/fd:description">
+										<xsl:with-param name="output-namespace" select="$output-namespace"/>
+									</xsl:apply-templates>
 								</xsl:when>
 								<xsl:otherwise><!-- If not found, report warning. -->
 									<xsl:call-template name="sf:warning">
@@ -122,7 +124,9 @@ Main template
 								<type>
 									<xsl:value-of select="xfd:return-type"/>
 								</type>
-								<xsl:apply-templates select="$function-description/fd:return-value/fd:description"/>
+								<xsl:apply-templates select="$function-description/fd:return-value/fd:description">
+									<xsl:with-param name="output-namespace" select="$output-namespace"/>
+								</xsl:apply-templates>
 							</return-value>
 							
 							
@@ -248,7 +252,9 @@ Main template
 
 <xsl:template match="fd:description">
 	<description>
-		<xsl:apply-templates/>
+		<xsl:apply-templates>
+			<xsl:with-param name="output-namespace" select="$output-namespace" tunnel="yes"/>
+		</xsl:apply-templates>
 	</description>
 </xsl:template>
 </xsl:stylesheet>

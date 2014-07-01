@@ -13,7 +13,7 @@
             <synthesis>
                 <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
                 <script>../../topic-types/function-and-template-reference/scripts/synthesis/synthesize-xsl-function-ref.xsl</script>
-                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/synthesize-text-structures.xsl</script>
+                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/synthesize-text-structures.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
                 <script>../../topic-types/shared/scripts/synthesis/subject-affinities.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/object-types/graphics/scripts/synthesis/synthesis-fig.xsl</script>
