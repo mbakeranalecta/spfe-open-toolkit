@@ -87,11 +87,11 @@ Main content processing templates
 					<ss:term><xsl:value-of select="stl:subject"/></ss:term>
 				</ss:entry>
 			</ss:index>
-			<xsl:copy>
+			<xsl:element name="subject-topic-list" namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list">
 				<xsl:apply-templates>
-					<!--<xsl:with-param name="output-namespace" tunnel="yes">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</xsl:with-param>-->
+					<xsl:with-param name="output-namespace" tunnel="yes">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</xsl:with-param>
 				</xsl:apply-templates>
-			</xsl:copy>
+			</xsl:element>
 			
 		</ss:topic>
 </xsl:template>

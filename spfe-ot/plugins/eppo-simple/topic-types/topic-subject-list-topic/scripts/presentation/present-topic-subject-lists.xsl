@@ -5,11 +5,8 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xmlns:lf="local-functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:stl="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list"
 	exclude-result-prefixes="#all"
 	xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list">
-
-
 
 	<!-- 
 		=================
@@ -35,6 +32,7 @@
 	<xsl:template match="subject-topic-list">
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
+		<xsl:message select="name(), namespace-uri()"/>
 
 		<!-- info -->
 
