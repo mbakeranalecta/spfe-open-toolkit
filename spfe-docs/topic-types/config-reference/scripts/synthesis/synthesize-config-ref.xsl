@@ -89,6 +89,7 @@ Main template
 						<xsl:with-param name="source" select="$config-setting-source//ed:config-setting-description"/>
 						<xsl:with-param name="current-doctype" select="$current-doctype"/>
 						<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>
+						<xsl:with-param name="output-namespace" select="$output-namespace" tunnel="yes"/>
 					</xsl:apply-templates>
 				</xsl:for-each-group>
 			</ss:synthesis>
@@ -216,8 +217,9 @@ Main content processing templates
 					</xsl:element>
 					
 					<!-- Select and copy the authored element info. -->
+				<xsl:variable name="authored-content" select="$source[normalize-space(ed:xpath)=$xpath]"/>
 					<xsl:choose>
-						<xsl:when test="$source[normalize-space(ed:xpath)=$xpath][2]">
+						<xsl:when test="$authored-content[2]">
 							<xsl:call-template name="sf:error">
 								<xsl:with-param name="message" select="'Duplicate configuration setting description found for setting ', $xpath">
 									
@@ -225,19 +227,12 @@ Main content processing templates
 							</xsl:call-template>
 						</xsl:when>
 						<!-- Test that the information exists. -->
-						<xsl:when test="exists($source[normalize-space(ed:xpath)=$xpath]/ed:description/*)">
-							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]">
+						
+						<xsl:when test="exists($authored-content/ed:description/*)">
+							<xsl:apply-templates select="$authored-content/ed:description, $authored-content/ed:values, $authored-content/ed:restrictions, $authored-content/ed:build-property">
 								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>
+								<xsl:with-param name="output-namespace" select="$output-namespace" tunnel="yes"/>
 							</xsl:apply-templates>
-<!--							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]/ed:build-property">
-								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>	
-							</xsl:apply-templates>
-							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]/ed:values">
-								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>				
-							</xsl:apply-templates>
-							<xsl:apply-templates select="$source[normalize-space(ed:xpath)=$xpath]/ed:restrictions">
-								<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>				
-							</xsl:apply-templates>-->
 						</xsl:when>
 						<xsl:otherwise><!-- If not found, report warning. -->
 							<xsl:call-template name="sf:warning">
@@ -267,6 +262,9 @@ Main content processing templates
 							<xsl:element name="attribute" namespace="{$output-namespace}">
 								
 								<!-- Copy the extracted element info. -->
+								<xsl:element name="name" namespace="{$output-namespace}">
+									<xsl:value-of select="name"/>
+								</xsl:element>
 								<xsl:element name="xpath" namespace="{$output-namespace}">
 									<xsl:value-of select="xpath"/>
 								</xsl:element>
@@ -296,8 +294,9 @@ Main content processing templates
 										<xsl:with-param name="message" select="'Configuration setting description not found ', string(xpath)"/>
 									</xsl:call-template>
 								</xsl:if>
-								<xsl:apply-templates select="$authored">
+								<xsl:apply-templates select="$authored/*">
 									<xsl:with-param name="in-scope-strings" select="$strings" as="element()*" tunnel="yes"/>
+									<xsl:with-param name="output-namespace" select="$output-namespace" tunnel="yes"/>
 								</xsl:apply-templates>
 							</xsl:element>
 						</xsl:for-each>
@@ -309,27 +308,37 @@ Main content processing templates
 </xsl:template>
 	
 	<xsl:template match="ed:config-setting-description">
-		<xsl:apply-templates/>
+		<xsl:apply-templates>
+			<xsl:with-param name="output-namespace" select="$output-namespace" tunnel="yes"/>
+		</xsl:apply-templates>
 	</xsl:template>
 	
 	<xsl:template match="ed:description">
 		<xsl:element name="description" namespace="{$output-namespace}">
-			<xsl:apply-templates/>
+			<xsl:apply-templates>
+				<xsl:with-param name="output-namespace" select="$output-namespace" tunnel="yes"/>
+			</xsl:apply-templates>
 		</xsl:element>
 	</xsl:template>
 	
 	<xsl:template match="ed:build-property">
 		<xsl:element name="build-property" namespace="{$output-namespace}">
-			<xsl:apply-templates/>
+			<xsl:apply-templates>
+				<xsl:with-param name="output-namespace" select="$output-namespace" tunnel="yes"/>
+			</xsl:apply-templates>
 		</xsl:element>
 	</xsl:template>
 	
-	<xsl:template match="ed:restrictions | ed:restriction | ed:values | ed:default | ed:value">
+	<xsl:template match="ed:restrictions | ed:restriction | ed:values | ed:default | ed:value | ed:name">
 		<xsl:element name="{local-name()}" namespace="{$output-namespace}">
-			<xsl:apply-templates/>
+			<xsl:apply-templates>
+				<xsl:with-param name="output-namespace" select="$output-namespace" tunnel="yes"/>
+			</xsl:apply-templates>
 		</xsl:element>
 	</xsl:template>
 	
+	<!-- Suppress xpath from authored content as it duplicates xpath from extracted content. -->
+	<xsl:template match="ed:xpath"/>
 
 <xsl:template name="get-group-children">
 	<xsl:param name="xpath"/>
@@ -365,7 +374,7 @@ Main content processing templates
 
 
 <!-- prevent getting two copies of name one from source, one from authored content -->
-<xsl:template match="ed:attribute/name"/>
+<xsl:template match="ed:attribute/ed:name"/>
 
 <!-- 
 =================================
@@ -439,7 +448,9 @@ Content fix-up templates
 				<xsl:attribute name="key" select="@xpath"/>
 			</xsl:otherwise>
 		</xsl:choose>
-		<xsl:apply-templates/>
+		<xsl:apply-templates>
+			<xsl:with-param name="output-namespace" select="$output-namespace" tunnel="yes"/>
+		</xsl:apply-templates>
 	</xsl:element>
 </xsl:template>
 

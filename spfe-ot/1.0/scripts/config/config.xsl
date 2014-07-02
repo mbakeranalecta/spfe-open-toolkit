@@ -458,15 +458,7 @@
     </xsl:template>
     
    
-<!--    <xsl:template mode="rewrite-scripts" match="xsl:stylesheet">
-        <xsl:message select="."></xsl:message>
-        <xsl:attribute name="{name()}">
-            <xsl:choose>
-                <xsl:when test=".='http://spfeopentoolkit.org/spfe-ot/1.0/test-failed'">http://spfeopentoolkit.org/spfe-ot/1.0/test-passed</xsl:when>
-                <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
-    </xsl:template>-->
+
     
     <!-- <xsl:template name="create-run-command">
         <xsl:param name="build-command"/>

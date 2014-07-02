@@ -102,8 +102,6 @@
 	 			<xsl:value-of select="false()"/>
 	 		</xsl:when>
 	 		<xsl:when test="$string = tokenize($list[$index], ' ')">
-	 			<xsl:message select="$string"/>
-	 			<xsl:message select="$list[$index]"/>
 	 			<xsl:value-of select="true()"/>
 	 		</xsl:when>
 	 		<xsl:otherwise>

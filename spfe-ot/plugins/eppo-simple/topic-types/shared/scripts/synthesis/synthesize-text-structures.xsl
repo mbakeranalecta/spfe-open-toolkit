@@ -30,7 +30,6 @@
 	<!-- Using a namespace prefix here to avoid matching everything in all namespaces -->
 	<xsl:template match="esgt:*" priority="-0.9" >
 		<xsl:param name="output-namespace" tunnel="yes"/>
-		<!--<xsl:message select="'General rule firing for', name(), ' in ', namespace-uri(), 'from', base-uri(document(''))"/>-->
 		<xsl:element name="{local-name()}" namespace="{$output-namespace}">
 			<xsl:copy-of select="@*" copy-namespaces="no"/>
 			<xsl:apply-templates mode="#current"/>

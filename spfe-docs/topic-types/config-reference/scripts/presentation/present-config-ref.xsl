@@ -84,7 +84,7 @@
 		<xsl:when test="not($targets[xpath = $target])">
 			<!-- if it does not exist, report the error but continue, outputting plain text -->
 			<xsl:call-template name="sf:warning">
-				<xsl:with-param name="message" select="'Unknown xpath', $target"/>
+				<xsl:with-param name="message" select="'#Unknown xpath', $target"/>
 			</xsl:call-template>
 			<!-- output plain text -->
 			<xsl:value-of select="$link-text"/>
@@ -324,6 +324,7 @@
 		=========================
 	-->
 	<xsl:template name="format-attribute">
+		<xsl:message>Calling format attribute for <xsl:value-of select="name"/></xsl:message>
 		<anchor name="{name}"/>
 		<subhead>Attribute: <xsl:value-of select="name"/></subhead>
 
