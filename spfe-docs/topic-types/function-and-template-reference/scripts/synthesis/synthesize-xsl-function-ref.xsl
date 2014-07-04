@@ -12,10 +12,11 @@ xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:fd="http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions"
 xmlns:xfd="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"
 xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
+xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
 exclude-result-prefixes="#all" >
 	
 	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xsl:variable>	
-	<xsl:variable name="fragments" select="$function-source//*:fragment"/>
+	<xsl:variable name="fragments" select="$function-source//fragment"/>
 <!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
 	<xsl:variable name="strings" as="element()*">
 	<xsl:for-each select="$function-source//fd:string[not(parent::fd:string-ref)], $config/config:string">

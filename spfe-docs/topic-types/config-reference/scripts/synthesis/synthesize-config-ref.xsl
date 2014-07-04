@@ -18,7 +18,7 @@ exclude-result-prefixes="#all" >
 	
 <xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xsl:variable>	
 	
-<xsl:variable name="fragments" select="$config-setting-source//*:fragment"/>
+<xsl:variable name="fragments" select="$config-setting-source//ed:fragment"/>
 	
 <!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
 <xsl:variable name="strings" as="element()*">
@@ -384,8 +384,8 @@ Content fix-up templates
 
 <!-- FIXME: Are these in the right namespace to match?" -->
 
-<!-- Fix up element name xpaths -->
-	<xsl:template match="ed:config-setting">
+<!-- Fix up element name xpaths. Raise priority to avoid collision with default config-setting template -->
+	<xsl:template match="ed:config-setting" priority="1">
 	<xsl:variable name="context-element" select="ancestor::ed:config-setting-description/normalize-space(ed:xpath)"/>
 	<xsl:variable name="data-content" select="."/>
 	<xsl:variable name="xpath" select="@xpath"/>

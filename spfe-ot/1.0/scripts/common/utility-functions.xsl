@@ -152,6 +152,7 @@
 		<xsl:value-of select="subsequence($tokens, count($tokens))"/>
 	</xsl:function>
 
+	<!-- FIXME: Strings should probably get coerced into their own namespace prior to lookup -->
 	<xsl:function name="sf:string">
 		<xsl:param name="strings" as="element()*"/>
 		<xsl:param name="id"/>

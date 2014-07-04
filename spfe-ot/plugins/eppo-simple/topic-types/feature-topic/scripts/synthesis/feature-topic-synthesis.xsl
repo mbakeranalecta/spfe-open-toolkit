@@ -8,11 +8,12 @@ xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/feature-topic"
 exclude-result-prefixes="#all">
 	
 
 	
-	<xsl:template match="*:feature-topic">
+	<xsl:template match="feature-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
 		<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/feature-topic</xsl:variable>
@@ -21,12 +22,12 @@ exclude-result-prefixes="#all">
 				<ss:topic 
 					type="{namespace-uri()}" 
 					topic-type-alias="{sf:get-topic-type-alias-singular($topic-type, $config)}"
-					full-name="{concat(namespace-uri(), '/', *:head/*:id)}"
-					local-name="{*:head/*:id}"
-					title="{*:body/*:title}"
-					excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::*:p[1], 30, ' ...'))}">
-					<xsl:if test="*:head/*:virtual-type">
-						<xsl:attribute name="virtual-type" select="*:head/*:virtual-type"/>
+					full-name="{concat(namespace-uri(), '/', head/id)}"
+					local-name="{head/id}"
+					title="{body/title}"
+					excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
+					<xsl:if test="head/virtual-type">
+						<xsl:attribute name="virtual-type" select="head/virtual-type"/>
 					</xsl:if>
 					<xsl:element name="{local-name()}" namespace="{$output-namespace}">
 						<xsl:copy-of select="@*" copy-namespaces="no"/>

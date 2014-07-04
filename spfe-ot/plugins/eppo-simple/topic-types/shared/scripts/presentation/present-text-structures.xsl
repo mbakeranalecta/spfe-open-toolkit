@@ -17,7 +17,7 @@ version="2.0"
 
 
 
-	<!-- FIXME: This needs to be an explicit list or else it overrides present-references.xsl in 
+	<!-- FIXME: This needs to be an explicit list or else it overrides subject-affinity-templates.xsl in 
 		the import order. Might be fixed by converting individual reference types to subject-affinity or name 
 		at the synthesis stage, or by changing the import order. -->
 	<xsl:template match="title

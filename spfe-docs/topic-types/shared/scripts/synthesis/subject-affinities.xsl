@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic"
     version="2.0">
 
-    <xsl:template match="*:config-setting">
+    <xsl:template match="config-setting">
         <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">config-setting</xsl:attribute>
@@ -14,7 +15,7 @@
         </xsl:element>
     </xsl:template>    
     
-    <xsl:template match="*:ant-element">
+    <xsl:template match="ant-element">
         <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">xpath</xsl:attribute>
@@ -24,7 +25,7 @@
         </xsl:element>
     </xsl:template> 
     
-    <xsl:template match="*:spfe-build-property">
+    <xsl:template match="spfe-build-property">
         <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">spfe-build-property</xsl:attribute>
@@ -33,7 +34,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="*:spfe-build-function">
+    <xsl:template match="spfe-build-function">
         <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">spfe-build-function</xsl:attribute>
@@ -42,7 +43,7 @@
         </xsl:element>
     </xsl:template>
     
-    <xsl:template match="*:spfe-build-variable">
+    <xsl:template match="spfe-build-variable">
         <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">spfe-build-variable</xsl:attribute>
@@ -51,7 +52,7 @@
         </xsl:element>
     </xsl:template>
     
-    <xsl:template match="*:spfe-build-script">
+    <xsl:template match="spfe-build-script">
         <xsl:param name="output-namespace" tunnel="yes"/>
         <xsl:element name="name" namespace="{$output-namespace}">
             <xsl:attribute name="type">spfe-build-script</xsl:attribute>

@@ -6,14 +6,15 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0" 
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+    xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
     exclude-result-prefixes="#all">
     
-    <xsl:template match="*:string-ref">
+    <xsl:template match="string-ref">
         <!-- Selects the string definition in the inmost local scope.
              If two string definitions in the same scope have the same ID it 
              selects the first in document order. -->
         <xsl:param name="in-scope-strings" as="element()*" tunnel="yes"/>
-        <xsl:variable name="local-strings" select="*:local-strings/*:string, $in-scope-strings" as="element()*"/>   
+        <xsl:variable name="local-strings" select="local-strings/string, $in-scope-strings" as="element()*"/>   
         <xsl:variable name="string-id" select="@id-ref"/>
         <xsl:variable name="substitution" select="$local-strings[@id=$string-id][1]"/>
 
@@ -35,5 +36,5 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="*:string"/>
+    <xsl:template match="string"/>
 </xsl:stylesheet>
