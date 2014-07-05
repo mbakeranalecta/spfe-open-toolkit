@@ -10,7 +10,7 @@
         <topic-types>
 
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions</xmlns>
+                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions</xmlns>
                     <href>../../../spfe-docs/topic-types/function-and-template-reference/config.xml</href>
                 </topic-type>
                 <topic-type>

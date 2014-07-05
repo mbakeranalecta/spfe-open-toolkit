@@ -9,8 +9,8 @@ xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-xmlns:ed="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions"
-          
+xmlns:ed="http://spfeopentoolkit.org/spfe-docs/topic-types/config-setting-descriptions"
+xmlns:cr="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference"          
 exclude-result-prefixes="#all" >
 	
 <xsl:param name="topic-set-id"/>
@@ -161,26 +161,24 @@ Main content processing templates
 					</ss:entry>					
 				</xsl:if>
 			</ss:index>
-			
-			<!-- FIXME: Need to generate an index element for the link catalog -->
 		
-			<spfe-configuration-reference-entry>
-					<namespace>
+			<cr:spfe-configuration-reference-entry>
+				<cr:namespace>
 						<xsl:value-of select="ancestor::schema-definitions/@namespace"/>
-					</namespace>
-					<doctype>
+					</cr:namespace>
+				<cr:doctype>
 						<xsl:value-of select="$doctype"/>
-					</doctype>
-					<doc-xpath>
+					</cr:doctype>
+				<cr:doc-xpath>
 						<xsl:value-of select="$doc-xpath"/>
-					</doc-xpath>
-					<xpath>
+					</cr:doc-xpath>
+				<cr:xpath>
 						<xsl:value-of select="$xpath"/>
-					</xpath>
-					<group>
+					</cr:xpath>
+				<cr:group>
 						<xsl:value-of select="$group"/>
-					</group>
-					<allowed-in>
+					</cr:group>
+				<cr:allowed-in>
 						<xsl:variable name="allowed-in-list"> 
 							<xsl:call-template name="create-allowed-in-list">
 								<xsl:with-param name="group" select="$group"/>
@@ -190,27 +188,27 @@ Main content processing templates
 						<xsl:for-each-group select="$allowed-in-list/xpath" group-by="text()">
 							<xsl:sequence select="current-group()[1]"/>
 						</xsl:for-each-group>
-					</allowed-in>
+					</cr:allowed-in>
 
 					<!-- Copy the extracted element info. -->
-					<name>
+				<cr:name>
 						<xsl:value-of select="name"/>
-					</name>
-					<type>
+					</cr:name>
+				<cr:type>
 						<xsl:value-of select="type"/>
-					</type>
-					<use>
+					</cr:type>
+				<cr:use>
 						<xsl:value-of select="use"/>
-					</use>
-					<default>
+					</cr:use>
+				<cr:default>
 						<xsl:value-of select="default"/>
-					</default>
-					<minOccurs>
+					</cr:default>
+				<cr:minOccurs>
 						<xsl:value-of select="minOccurs"/>
-					</minOccurs>
-					<maxOccurs>
+					</cr:minOccurs>
+				<cr:maxOccurs>
 						<xsl:value-of select="maxOccurs"/>
-					</maxOccurs>
+					</cr:maxOccurs>
 					
 					<!-- Select and copy the authored element info. -->
 				<xsl:variable name="authored-content" select="$source[normalize-space(ed:xpath)=$xpath]"/>
@@ -237,7 +235,7 @@ Main content processing templates
 					</xsl:choose>
 				
 					<!-- Calculate children -->
-					<children>
+				<cr:children>
 						<!-- children by xpath -->
 						<xsl:for-each-group select="/schema-definitions/schema-element  
 							[starts-with(xpath, concat($xpath, '/'))]
@@ -250,39 +248,39 @@ Main content processing templates
 						<xsl:call-template name="get-group-children">
 							<xsl:with-param name="xpath" select="$xpath"/>
 						</xsl:call-template>
-					</children>
+					</cr:children>
 					
-					<attributes>
+				<cr:attributes>
 						<xsl:for-each select="root()/schema-definitions/schema-attribute[starts-with(xpath, concat($xpath, '/@'))]"> 
 							<attribute>
 								
 								<!-- Copy the extracted element info. -->
-								<name>
+								<cr:name>
 									<xsl:value-of select="name"/>
-								</name>
-								<xpath>
+								</cr:name>
+								<cr:xpath>
 									<xsl:value-of select="xpath"/>
-								</xpath>
-								<type>
+								</cr:xpath>
+								<cr:type>
 									<xsl:value-of select="type"/>
-								</type>
-								<use>
+								</cr:type>
+								<cr:use>
 									<xsl:value-of select="use"/>
-								</use>
-								<default>
+								</cr:use>
+								<cr:default>
 									<xsl:value-of select="default"/>
-								</default>
-								<minOccurs>
+								</cr:default>
+								<cr:minOccurs>
 									<xsl:value-of select="minOccurs"/>
-								</minOccurs>
-								<maxOccurs>
+								</cr:minOccurs>
+								<cr:maxOccurs>
 									<xsl:value-of select="maxOccurs"/>
-								</maxOccurs>
+								</cr:maxOccurs>
 								
 								<xsl:variable name="attribute-name" select="name"/>
-								<doc-xpath>
+								<cr:doc-xpath>
 									<xsl:value-of select="concat($doc-xpath, '/@', $attribute-name)"/>
-								</doc-xpath>
+								</cr:doc-xpath>
 								<xsl:variable name="authored" select="$source[normalize-space(ed:xpath)=$xpath]/ed:attributes/ed:attribute[ed:name=$attribute-name]"/>
 								<xsl:if test="not($authored/ed:description/*)">
 									<xsl:call-template name="sf:warning">
@@ -294,9 +292,9 @@ Main content processing templates
 								</xsl:apply-templates>
 							</attribute>
 						</xsl:for-each>
-					</attributes>
+					</cr:attributes>
 				
-			</spfe-configuration-reference-entry>
+			</cr:spfe-configuration-reference-entry>
 		</ss:topic>
 	</xsl:if>
 </xsl:template>
@@ -306,15 +304,15 @@ Main content processing templates
 	</xsl:template>
 	
 	<xsl:template match="ed:description">
-		<description>
+		<cr:description>
 			<xsl:apply-templates/>
-		</description>
+		</cr:description>
 	</xsl:template>
 	
 	<xsl:template match="ed:build-property">
-		<build-property>
+		<cr:build-property>
 			<xsl:apply-templates/>
-		</build-property>
+		</cr:build-property>
 	</xsl:template>
 	
 	<xsl:template match="ed:restrictions | ed:restriction | ed:values | ed:default | ed:value | ed:name">
@@ -332,9 +330,9 @@ Main content processing templates
 		<xsl:variable name="referenced-group" select="referenced-group"/>
 <!-- each element that is in the group and has only one step in its path (so not the children of the element at the group level -->
 		<xsl:for-each-group select="/schema-definitions/schema-element[belongs-to-group eq $referenced-group][not(contains(xpath, '/'))]" group-by="xpath">
-			<child>
+			<cr:child>
 				<xsl:value-of select="xpath"/>
-			</child>
+			</cr:child>
 		</xsl:for-each-group>
 		<xsl:call-template name="get-nested-groups">
 			<xsl:with-param name="referenced-group" select="$referenced-group"/>
@@ -348,9 +346,9 @@ Main content processing templates
 		<xsl:variable name="referenced-group" select="referenced-group"/>
 		<!-- each element that is in the group and has only one step in its path (so not the children of the element at the group level -->
 		<xsl:for-each-group select="/schema-definitions/schema-element[belongs-to-group eq $referenced-group][not(contains(xpath, '/'))]" group-by="xpath">
-			<child>
+			<cr:child>
 				<xsl:value-of select="xpath"/>
-			</child>
+			</cr:child>
 		</xsl:for-each-group>
 		<xsl:call-template name="get-nested-groups">
 			<xsl:with-param name="referenced-group" select="$referenced-group"/>
@@ -377,7 +375,7 @@ Content fix-up templates
 	<xsl:variable name="xpath" select="@xpath"/>
 	<xsl:variable name="all-elements" select="
 	$schema-defs/schema-definitions/schema-element/xpath"/>
-	<name>
+		<ed:name>
 		<xsl:attribute name="type">config-setting</xsl:attribute>		
 		<xsl:choose>
 			<!-- check the cases where there is no 'xpath' attribute -->
@@ -435,7 +433,7 @@ Content fix-up templates
 			</xsl:otherwise>
 		</xsl:choose>
 		<xsl:apply-templates/>
-	</name>
+	</ed:name>
 </xsl:template>
 
 <xsl:template name="create-allowed-in-list">
@@ -464,9 +462,9 @@ Content fix-up templates
 		<xsl:choose>
 		
 			<xsl:when test="referenced-in-xpath">
-				<xpath>
+				<cr:xpath>
 					<xsl:value-of select="referenced-in-xpath"/>
-				</xpath>
+				</cr:xpath>
 			</xsl:when>
 			
 			<xsl:when test="//schema-group-ref[referenced-group=$group]">

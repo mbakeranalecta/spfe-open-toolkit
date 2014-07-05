@@ -3,9 +3,9 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <?xml-stylesheet type="text/css" href="../../../../spfe-docs/style/authoring/config-setting-descriptions.css"?>
 <config-setting-descriptions
-    xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions"
+    xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/config-setting-descriptions"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/config-setting-descriptions  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions.xsd">
     <head>
         <id>config-setting-descriptions</id>
         <history>
@@ -1400,7 +1400,7 @@
                             type alias</feature>. For instance, in the SPFE documentation, the
                             <string-ref id-ref="singular-or-plural"/> alias for the topic type
                         formally identified as
-                            <xml-namespace-uri>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions</xml-namespace-uri>
+                            <xml-namespace-uri>http://spfeopentoolkit.org/spfe-docs/topic-types/config-setting-descriptions</xml-namespace-uri>
                         is <string-ref id-ref="example-alias"/>. The namespace alias configuration
                         for this looks like this:</p>
                     <codeblock language="XML" namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
