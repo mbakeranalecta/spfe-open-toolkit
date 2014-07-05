@@ -9,9 +9,8 @@ xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:dht="http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic"
+xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic"
 exclude-result-prefixes="#all">
-	
-	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/docset-home-topic</xsl:variable>
 	
 	<xsl:template match="dht:docset-home-topic">
 		<xsl:variable name="conditions" select="@if"/>
@@ -27,7 +26,7 @@ exclude-result-prefixes="#all">
 					<xsl:if test="dht:head/dht:virtual-type">
 						<xsl:attribute name="virtual-type" select="dht:head/dht:virtual-type"/>
 					</xsl:if>
-					<xsl:element name="{local-name()}" namespace="{$output-namespace}">
+					<xsl:element name="{local-name()}">
 						<xsl:copy-of select="@*" copy-namespaces="no"/>
 						<xsl:apply-templates>
 						</xsl:apply-templates>
@@ -40,7 +39,7 @@ exclude-result-prefixes="#all">
 	
 	<!-- This was inserted to get rid of warning that head not matched in synthesis. Unsure why this was not needed for other topic types. -->
 	<xsl:template match="dht:*">
-		<xsl:element name="{local-name()}" namespace="{$output-namespace}">
+		<xsl:element name="{local-name()}">
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
 		</xsl:element>

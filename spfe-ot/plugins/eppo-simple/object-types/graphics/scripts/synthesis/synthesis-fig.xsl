@@ -8,7 +8,6 @@
 
     <!-- Make sure that the fig href is an absolute URI so that we know where to copy it from -->
     <xsl:template match="*:fig">
-        <xsl:param name="output-namespace" tunnel="yes"/>
         <!-- FIXME: is this regex smart enough? -->
         <!-- FIXME: Stop this from reloading the source file -->
  
@@ -29,7 +28,7 @@
             <xsl:when test="doc-available($graphic-record-file-uri)">
                 <xsl:variable name="graphic-record"
                     select="document($graphic-record-file-uri)"/>
-                <xsl:element name="fig" namespace="{$output-namespace}">
+                <fig>
                     <xsl:if test="@id">
                         <xsl:attribute name="id" select="@id"/>
                     </xsl:if>
@@ -37,7 +36,7 @@
                         <xsl:with-param name="graphic-record-file-uri" select="$graphic-record-file-uri" tunnel="yes"/>
                     </xsl:apply-templates>
                     <xsl:apply-templates/>
-                </xsl:element>
+                </fig>
             </xsl:when>
             
             <!-- The graphic is specified in an href -->
@@ -58,7 +57,7 @@
                         <xsl:text>.</xsl:text>
                     </xsl:with-param>
                 </xsl:call-template>
-                <xsl:element name="fig" namespace="{$output-namespace}">
+                <fig>
                     <xsl:for-each select="@*[not(name()='href')]">
                         <xsl:copy/>
                     </xsl:for-each>
@@ -75,7 +74,7 @@
                         </gr:formats>
                     </gr:graphic-record>
                     <xsl:apply-templates/>
-                </xsl:element>               
+                </fig>             
                 
                 
             </xsl:when>            
@@ -85,8 +84,7 @@
     </xsl:template>
     
     <xsl:template match="*:fig/*:caption | *:fig/*:title">
-        <xsl:param name="output-namespace" tunnel="yes"/>
-        <xsl:element name="{local-name()}" namespace="{$output-namespace}">
+        <xsl:element name="{local-name()}">
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>

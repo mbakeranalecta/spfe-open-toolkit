@@ -15,8 +15,7 @@ xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
 xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
 exclude-result-prefixes="#all" >
 	
-	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xsl:variable>	
-	<xsl:variable name="fragments" select="$function-source//fragment"/>
+<xsl:variable name="fragments" select="$function-source//fd:fragment"/>
 <!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
 	<xsl:variable name="strings" as="element()*">
 	<xsl:for-each select="$function-source//fd:string[not(parent::fd:string-ref)], $config/config:string">
@@ -110,9 +109,7 @@ Main template
 							<xsl:choose>
 								<!-- Test that the information exists. -->
 								<xsl:when test="exists($function-description/*)">
-									<xsl:apply-templates select="$function-description/fd:description">
-										<xsl:with-param name="output-namespace" select="$output-namespace"/>
-									</xsl:apply-templates>
+									<xsl:apply-templates select="$function-description/fd:description"/>
 								</xsl:when>
 								<xsl:otherwise><!-- If not found, report warning. -->
 									<xsl:call-template name="sf:warning">
@@ -125,9 +122,7 @@ Main template
 								<type>
 									<xsl:value-of select="xfd:return-type"/>
 								</type>
-								<xsl:apply-templates select="$function-description/fd:return-value/fd:description">
-									<xsl:with-param name="output-namespace" select="$output-namespace"/>
-								</xsl:apply-templates>
+								<xsl:apply-templates select="$function-description/fd:return-value/fd:description"/>
 							</return-value>
 							
 							
@@ -253,9 +248,7 @@ Main template
 
 <xsl:template match="fd:description">
 	<description>
-		<xsl:apply-templates>
-			<xsl:with-param name="output-namespace" select="$output-namespace" tunnel="yes"/>
-		</xsl:apply-templates>
+		<xsl:apply-templates/>
 	</description>
 </xsl:template>
 </xsl:stylesheet>

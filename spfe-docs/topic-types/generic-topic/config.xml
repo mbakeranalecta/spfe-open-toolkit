@@ -30,7 +30,7 @@
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/get-image-list.xsl</script>
             </image-list>
             <presentation-web>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-generic-topic.xsl</script>
+                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-generic-topic.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-topic-set-toc.xsl</script>
                 <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-subject-affinity-functions.xsl</script>
                 <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/shared/scripts/presentation/present-subject-affinity-templates.xsl</script>

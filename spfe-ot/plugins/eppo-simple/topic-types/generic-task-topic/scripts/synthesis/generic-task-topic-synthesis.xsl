@@ -13,8 +13,6 @@ exclude-result-prefixes="#all">
 	<xsl:template match="generic-task-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
-		<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-task-topic</xsl:variable>		
-		
 
 				<ss:topic 
 					type="{namespace-uri()}" 
@@ -26,12 +24,10 @@ exclude-result-prefixes="#all">
 					<xsl:if test="head/virtual-type">
 						<xsl:attribute name="virtual-type" select="head/virtual-type"/>
 					</xsl:if>
-					<xsl:element name="{local-name()}" namespace="{$output-namespace}">
+					<xsl:copy>
 						<xsl:copy-of select="@*" copy-namespaces="no"/>
-						<xsl:apply-templates>
-							<xsl:with-param name="output-namespace" tunnel="yes" select="$output-namespace"/>
-						</xsl:apply-templates>
-					</xsl:element>
+						<xsl:apply-templates/>
+					</xsl:copy>
 				</ss:topic>
 			
 	</xsl:template>

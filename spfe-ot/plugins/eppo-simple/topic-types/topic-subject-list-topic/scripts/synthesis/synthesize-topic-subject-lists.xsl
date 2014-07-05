@@ -65,15 +65,14 @@ Main content processing templates
 
 <!-- Topic subject list template -->
 	<xsl:template match="stl:subject-topic-list" >
-		<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</xsl:variable>	
 		
-		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular($output-namespace, $config)"/>
+		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list', $config)"/>
 		<xsl:variable name="subject-topic-name" select="concat(stl:subject-type, '_', stl:subject)"/>
 						 
 			
 		<ss:topic 
-			type="{$output-namespace}" 
-			full-name="{$output-namespace}/{sf:title-to-anchor($subject-topic-name)}"
+			type="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list" 
+			full-name="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list/{sf:title-to-anchor($subject-topic-name)}"
 			local-name="{sf:title-to-anchor($subject-topic-name)}"
 			topic-type-alias="{$topic-type-alias}"
 			title="{sf:get-subject-type-alias-singular(stl:subject-type, $config)}: {stl:subject}"
@@ -88,9 +87,7 @@ Main content processing templates
 				</ss:entry>
 			</ss:index>
 			<xsl:element name="subject-topic-list" namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list">
-				<xsl:apply-templates>
-					<xsl:with-param name="output-namespace" tunnel="yes">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</xsl:with-param>
-				</xsl:apply-templates>
+				<xsl:apply-templates/>
 			</xsl:element>
 			
 		</ss:topic>

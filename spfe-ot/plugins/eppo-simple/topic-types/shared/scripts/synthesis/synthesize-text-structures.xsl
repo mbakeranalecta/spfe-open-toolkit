@@ -29,11 +29,10 @@
 	<!-- Priority is -0.9 to set it below the generic root element match that tests for unknown roots. -->
 	<!-- Using a namespace prefix here to avoid matching everything in all namespaces -->
 	<xsl:template match="esgt:*" priority="-0.9" >
-		<xsl:param name="output-namespace" tunnel="yes"/>
-		<xsl:element name="{local-name()}" namespace="{$output-namespace}">
+		<xsl:copy>
 			<xsl:copy-of select="@*" copy-namespaces="no"/>
 			<xsl:apply-templates mode="#current"/>
-		</xsl:element>
+		</xsl:copy>
 	</xsl:template>
 
 	<!-- Apply if conditions -->
@@ -61,9 +60,7 @@
 			<xsl:otherwise>
 				<xsl:copy copy-namespaces="no">
 					<xsl:copy-of select="@*"/>
-					<xsl:apply-templates>
-						<xsl:with-param name="output-namespace" tunnel="yes"/>
-					</xsl:apply-templates>
+					<xsl:apply-templates/>
 				</xsl:copy>
 			</xsl:otherwise>
 		</xsl:choose>
