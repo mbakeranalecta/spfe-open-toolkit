@@ -259,10 +259,5 @@
 			</xsl:with-param>
 		</xsl:call-template> 
 	</xsl:template>
-	
-	
-	
-				
-	<!-- Targets to absorb fields from the synthesis wrapper.  -->
-	<xsl:template match="ss:*"/>
+
 </xsl:stylesheet>

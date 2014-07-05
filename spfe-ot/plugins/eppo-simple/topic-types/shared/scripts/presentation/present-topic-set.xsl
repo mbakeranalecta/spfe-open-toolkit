@@ -78,5 +78,6 @@ Main template
 		</xsl:call-template>
 		<xsl:apply-templates/>
 	</xsl:template>
-
+	<!-- Targets to absorb fields from the synthesis wrapper.  -->
+	<xsl:template match="ss:*"/>
 </xsl:stylesheet>
