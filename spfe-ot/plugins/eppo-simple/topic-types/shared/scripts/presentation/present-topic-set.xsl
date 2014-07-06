@@ -18,7 +18,7 @@
 	
 	<!-- FIXME: This should be in config. -->
 	<xsl:param name="output-image-directory">graphics</xsl:param>
-<xsl:param name="presentation-schema">eppo-simple-web-presentation.xsd</xsl:param>
+
 <xsl:param name="draft">no</xsl:param>
 	
 <xsl:param name="topic-set-id"/>

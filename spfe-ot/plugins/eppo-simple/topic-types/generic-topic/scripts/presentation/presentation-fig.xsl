@@ -3,11 +3,12 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record"
+    xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
     exclude-result-prefixes="#all"
     version="2.0">
 
     
-    <xsl:template match="*:fig">
+    <xsl:template match="fig">
         <xsl:if test="@id">
             <anchor name="fig:{@id}"/>
         </xsl:if>
@@ -15,12 +16,12 @@
             <xsl:if test="@id">
                 <xs:attribute name="fig" select="fig:{@id}"/>
             </xsl:if>
-            <xsl:if test="not(*:title) and gr:graphic-record/gr:default-title">
+            <xsl:if test="not(title) and gr:graphic-record/gr:default-title">
                 <title>
                     <xsl:value-of select="gr:graphic-record/gr:default-title"/>
                 </title>
             </xsl:if>   
-            <xsl:if test="not(*:caption) and gr:graphic-record/gr:default-caption">
+            <xsl:if test="not(caption) and gr:graphic-record/gr:default-caption">
                 <caption>
                     <xsl:apply-templates select="gr:graphic-record/gr:default-caption"/>
                 </caption>
@@ -40,13 +41,13 @@
         </gr:graphic-record>
     </xsl:template>
     
-    <xsl:template match="*:fig/*:caption">
+    <xsl:template match="fig/caption">
         <caption>
             <xsl:apply-templates/>
         </caption>
     </xsl:template>
     
-    <xsl:template match="*:fig/*:title">
+    <xsl:template match="fig/title">
         <title>
             <xsl:apply-templates/>
         </title>

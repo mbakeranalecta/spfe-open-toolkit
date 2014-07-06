@@ -4,10 +4,12 @@
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record"
     xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
+    xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
     exclude-result-prefixes="#all" version="2.0">
 
     <!-- Make sure that the fig href is an absolute URI so that we know where to copy it from -->
-    <xsl:template match="*:fig">
+    <xsl:template match="fig">
         <!-- FIXME: is this regex smart enough? -->
         <!-- FIXME: Stop this from reloading the source file -->
  
@@ -53,7 +55,7 @@
                             </xsl:otherwise>
                         </xsl:choose>
                         <xsl:text>. In topic </xsl:text>
-                        <xsl:value-of select="ancestor::*/*:head/*:id"/>
+                        <xsl:value-of select="ancestor::*/head/id"/>
                         <xsl:text>.</xsl:text>
                     </xsl:with-param>
                 </xsl:call-template>
@@ -83,7 +85,7 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="*:fig/*:caption | *:fig/*:title">
+    <xsl:template match="fig/caption | fig/title">
         <xsl:element name="{local-name()}">
             <xsl:apply-templates/>
         </xsl:element>
