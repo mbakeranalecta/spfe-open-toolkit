@@ -7,6 +7,7 @@
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" 
 	xmlns:stl="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list"
+	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
 	exclude-result-prefixes="#all">
 	
 
@@ -35,15 +36,15 @@
 		<!-- Create the root "extracted-content element" -->
 		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id,'/extracted/lists.xml')}" method="xml" indent="yes" omit-xml-declaration="no">
 			<stl:subject-topic-lists>
-			<xsl:for-each-group select="$sources//target[@type ne 'topic']" group-by="concat(@type, '+', original-key)">
-				<xsl:variable name="this-key" select="original-key"/>
+				<xsl:for-each-group select="$sources//lc:target[@type ne 'topic']" group-by="concat(@type, '+', lc:original-key)">
+					<xsl:variable name="this-key" select="lc:original-key"/>
 				<xsl:variable name="this-type" select="@type"/>
 				<stl:subject-topic-list>
 					<stl:subject><xsl:value-of select="$this-key"/></stl:subject>
 					<stl:subject-type><xsl:value-of select="$this-type"/></stl:subject-type>
 					<stl:topics-on-subject>
 						<!-- Select topic on this subject and type, excluding those in subject-topic-list pages. -->
-						<xsl:for-each select="$sources//page[target/original-key=$this-key][target/@type=$this-type][@topic-type ne 'http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list']">
+						<xsl:for-each select="$sources//lc:page[lc:target/lc:original-key=$this-key][lc:target/@type=$this-type][@topic-type ne 'http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list']">
 						<stl:topic>
 							<stl:title><xsl:value-of select="@title"/></stl:title>
 							<stl:full-name><xsl:value-of select="@full-name"/></stl:full-name>
@@ -63,7 +64,7 @@
 	
 
 	
-	<xsl:template match="link-catalog">
+	<xsl:template match="lc:link-catalog">
 	
 	</xsl:template>
 	

@@ -5,9 +5,7 @@
     xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record"
     exclude-result-prefixes="#all"
     version="2.0">
-    
-    <!-- FIXME: This should be in config. -->
-    <xsl:param name="output-image-directory">graphics</xsl:param>
+
     
     <xsl:template match="*:fig">
         <xsl:if test="@id">

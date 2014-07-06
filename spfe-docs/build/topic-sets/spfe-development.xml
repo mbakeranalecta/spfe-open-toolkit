@@ -22,12 +22,7 @@
                 <href>../../topic-types/feature-topic/config.xml</href>
             </topic-type>    
         </topic-types>
-        <object-types>
-            <object-type>
-                <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record</xmlns>
-                <href>../../object-types/graphics/config.xml</href>
-            </object-type>
-        </object-types>
+
 
         <sources>
             <authored-content>
