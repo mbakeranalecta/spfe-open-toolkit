@@ -240,9 +240,9 @@ Main content processing templates
 						<xsl:for-each-group select="/schema-definitions/schema-element  
 							[starts-with(xpath, concat($xpath, '/'))]
 							[not(contains(substring(xpath,string-length($xpath)+2),'/'))]" group-by="xpath">
-							<child>
+							<cr:child>
 								<xsl:value-of select="xpath"/>
-							</child>
+							</cr:child>
 						</xsl:for-each-group>
 						<!-- children by group -->
 						<xsl:call-template name="get-group-children">
