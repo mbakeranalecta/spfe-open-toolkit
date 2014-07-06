@@ -35,7 +35,11 @@
     </head>
     <body>
         <title>How the build system works</title>
-        <p>The SPFE build system is highly configurable and flexible.</p>
+        <p>The SPFE build system has a modular architecture with four major layers, <feature>synthesis</feature>, <feature>presentation</feature>, <feature>formatting</feature>, and <feature>encoding</feature>.</p>
+        <fig href="../graphics/SPFE-flow.png">
+            <title>The SPFE build system</title>
+            <caption><p>An overview of the SPFE build system.</p></caption>
+        </fig>
         <p>The build tool for a SPFE build is a shell script (UNIX) or batch file (Windows) called
                 <tool-name>spfe</tool-name>. This script takes two parameters, a
                 <feature>configuration file</feature> and a <feature>build command</feature>. It

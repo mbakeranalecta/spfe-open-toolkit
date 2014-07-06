@@ -32,7 +32,7 @@
         <sources>
             <authored-content>
 
-                <include>../../content/development/*.xml</include>
+                <include>../../content/text/development/*.xml</include>
             </authored-content>
         </sources>
 

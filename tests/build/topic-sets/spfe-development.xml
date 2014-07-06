@@ -28,8 +28,8 @@
         
         <sources>
             <authored-content>
-                <include>../../../spfe-docs/content/development/*.xml</include>
-                <include>../../content/development/*.xml</include>
+                <include>../../../spfe-docs/content/text/development/*.xml</include>
+                <include>../../content/text/development/*.xml</include>
             </authored-content>
         </sources>
 

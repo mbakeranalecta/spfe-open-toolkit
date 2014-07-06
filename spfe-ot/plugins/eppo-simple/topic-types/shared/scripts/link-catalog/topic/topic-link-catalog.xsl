@@ -7,6 +7,8 @@
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog" 
+	xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
 	exclude-result-prefixes="#all">
 
 	<xsl:variable name="config" as="element(config:spfe)">

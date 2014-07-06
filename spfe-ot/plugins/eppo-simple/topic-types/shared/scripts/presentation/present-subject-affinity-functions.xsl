@@ -8,6 +8,7 @@
 	xmlns:lf="local-functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
+	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config" 
 	xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
 	exclude-result-prefixes="#all">
@@ -15,11 +16,11 @@
 	<xsl:param name="link-catalog-files"/>
 	<xsl:variable name="link-catalogs" >
 		<xsl:variable name="temp-link-catalogs" select="sf:get-sources($link-catalog-files, 'Loading link catalog file:')"/>
-		<xsl:if test="count(distinct-values($temp-link-catalogs/link-catalog/@topic-set-id)) lt count($temp-link-catalogs/link-catalog)">
+		<xsl:if test="count(distinct-values($temp-link-catalogs/lc:link-catalog/@topic-set-id)) lt count($temp-link-catalogs/lc:link-catalog)">
 			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message">
 					<xsl:text>Duplicate link catalogs detected.&#x000A; There appears to be more than one link catalog in scope for the same topics set. Topic set IDs encountered include:&#x000A;</xsl:text>
-					<xsl:for-each select="$temp-link-catalogs/link-catalog">
+					<xsl:for-each select="$temp-link-catalogs/lc:link-catalog">
 						<xsl:value-of select="@topic-set-id,'&#x000A;'"/>
 					</xsl:for-each>
 				</xsl:with-param>
@@ -31,7 +32,7 @@
 	<xsl:function name="esf:target-exists" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
-		<xsl:value-of select="if ($link-catalogs//target[@type=$type][key=$target] or esf:multi-key-match($target, $type)) then true() else false()"/>
+		<xsl:value-of select="if ($link-catalogs//lc:target[@type=$type][lc:key=$target] or esf:multi-key-match($target, $type)) then true() else false()"/>
 	</xsl:function>
 	
 	
@@ -39,7 +40,7 @@
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
 		<xsl:param name="self"/>
-		<xsl:value-of select="if ($link-catalogs//target[parent::page/@full-name ne $self][@type=$type][key=$target] or esf:multi-key-match($target, $type)) then true() else false()"/>
+		<xsl:value-of select="if ($link-catalogs//lc:target[parent::lc:page/@full-name ne $self][@type=$type][lc:key=$target] or esf:multi-key-match($target, $type)) then true() else false()"/>
 	</xsl:function>
 	
 	<xsl:function name="esf:multi-key-match" as="xs:boolean">
@@ -47,15 +48,15 @@
 		<xsl:param name="type"/>
 
 		<xsl:variable name="in-scope-key-sets-of-this-type">
-			<xsl:for-each select="$link-catalogs//target[@type=$type][key-set]">
+			<xsl:for-each select="$link-catalogs//lc:target[@type=$type][lc:key-set]">
 				<target>
-					<xsl:copy-of select="key-set"/>
+					<xsl:copy-of select="lc:key-set"/>
 				</target>
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:variable name="matching-keysets" as="xs:boolean*">
-			<xsl:for-each select="$in-scope-key-sets-of-this-type/target">	
-				<xsl:value-of select="lf:try-key-set($target, key-set)"/>
+			<xsl:for-each select="$in-scope-key-sets-of-this-type/lc:target">	
+				<xsl:value-of select="lf:try-key-set($target, lc:key-set)"/>
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:value-of select="$matching-keysets=true()"/>
@@ -78,7 +79,7 @@
 			<xsl:when test="$index gt count($key-sets)">
 				<xsl:value-of select="true()"/>
 			</xsl:when>
-			<xsl:when test="not(lf:contains-any($target, $key-sets[$index]/key))">
+			<xsl:when test="not(lf:contains-any($target, $key-sets[$index]/lc:key))">
 				<xsl:value-of select="false()"/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -125,13 +126,13 @@
 		
 		<xsl:variable name="target-page" as="node()*"> 		
 			<!-- single key lookup -->
-			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page-name][target/key=$target]"/>	
+			<xsl:sequence select="$link-catalogs/lc:link-catalog/lc:page[lc:target/@type=$type][@full-name ne $current-page-name][lc:target/lc:key=$target]"/>	
 			
 			<!-- multi-key lookup -->
-			<xsl:sequence select="$link-catalogs/link-catalog/page[target/@type=$type][@full-name ne $current-page-name]/target[lf:try-key-set($target, key-set)]/.."/>	
+			<xsl:sequence select="$link-catalogs/lc:link-catalog/lc:page[lc:target/@type=$type][@full-name ne $current-page-name]/lc:target[lf:try-key-set($target, lc:key-set)]/.."/>	
 		</xsl:variable>
 		
-		<xsl:if test="count($target-page[1]/target[@type=$type][key=$target]) gt 1">
+		<xsl:if test="count($target-page[1]/lc:target[@type=$type][lc:key=$target]) gt 1">
 			<xsl:call-template name="sf:warning">
 				<xsl:with-param name="message" select="'Detected a target page that contains more than one target of the same name and type. The name is:', string($target), '. The type is:', string($type), '. The topic is', string(ancestor::ss:topic/@full-name), '.'"/>
 
@@ -200,9 +201,9 @@
 		<xsl:param name="content"/>
 		<xsl:param name="see-also" as="xs:boolean" select="false()"/>
 		
-		<xsl:variable name="target-topic-set" select="$target-page/parent::link-catalog/@topic-set-id"/>
+		<xsl:variable name="target-topic-set" select="$target-page/parent::lc:link-catalog/@topic-set-id"/>
 
-		<xsl:variable name="target-directory" select="$target-page/parent::link-catalog/@output-directory"/>
+		<xsl:variable name="target-directory" select="$target-page/parent::lc:link-catalog/@output-directory"/>
 		
 		<xsl:variable name="target-directory-path" >
 			<xsl:for-each select="tokenize($target-directory, '/')">
@@ -215,7 +216,7 @@
 		
 		<xsl:variable name="target-file"  select="string($target-page/@file)"/>		
 		
-		<xsl:variable name="target-anchor" select="if ($target-page[1]/target[key=$target][@type=$type][1]/@anchor) then concat('#', $target-page[1]/target[key=$target][@type=$type][1]/@anchor) else ''"/>
+		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][@type=$type][1]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][@type=$type][1]/@anchor) else ''"/>
 
 		
 		<xref hint="{$type}">
@@ -233,6 +234,7 @@
 										<xsl:text>A page is linking to itself. This is a tool problem, not a content problem. The tools should not generate links to the current page. Report this as bug. Include the following information in the bug report: &#x000A;</xsl:text>
 										<xsl:value-of select="'Reference-type=', $type, '&#x000A;'"/>
 										<xsl:value-of select="'Target=', $target, '&#x000A;'"/>
+										<!-- FIXME: What is this supposed to match, and in what namespace? -->
 										<xsl:value-of select="'Topic id=', ancestor::topic/name, '&#x000A;'"/>
 									</xsl:with-param>
 								</xsl:call-template>
@@ -255,7 +257,7 @@
 			</xsl:attribute>
 			
 			<xsl:variable name="title">
-				<xsl:variable name="target-content" select="normalize-space(string($target-page/target[key=$target][@type=$type]/label))"/>
+				<xsl:variable name="target-content" select="normalize-space(string($target-page/lc:target[lc:key=$target][@type=$type]/lc:label))"/>
 				
 				<xsl:choose>
 					<xsl:when test="$target-content">
@@ -290,10 +292,10 @@
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
 				
-		<xsl:variable name="target-page" select="$link-catalogs/link-catalog/page[target/@type=$type][target/key=$target]"/>
+		<xsl:variable name="target-page" select="$link-catalogs/lc:link-catalog/lc:page[lc:target/@type=$type][lc:target/lc:key=$target]"/>
 				
 		<xsl:choose>
-			<xsl:when test="(count($target-page/page/@file) > 1) or (count($link-catalogs/link-catalog/page[@full-name=$target-page/@full-name]) > 1)">
+			<xsl:when test="(count($target-page/lc:page/@file) > 1) or (count($link-catalogs/lc:link-catalog/lc:page[@full-name=$target-page/@full-name]) > 1)">
 				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">More than one destination found for the cross reference <xsl:value-of select="$target"/>. Unable to proceed.</xsl:with-param>
 				</xsl:call-template>
@@ -315,10 +317,10 @@
 		<xsl:param name="type"/>
 
 		<xsl:variable name="target-topic-set">
-			<xsl:value-of select="$link-catalogs/link-catalog[page/@full-name=$target-page/@full-name]/@topic-set-id"/>
+			<xsl:value-of select="$link-catalogs/lc:link-catalog[lc:page/@full-name=$target-page/@full-name]/@topic-set-id"/>
 		</xsl:variable>
 		
-		<xsl:variable name="target-directory" select="$link-catalogs/link-catalog/page[@full-name=$target-page/@full-name]/parent::link-catalog/@output-directory"/>
+		<xsl:variable name="target-directory" select="$link-catalogs/lc:link-catalog/lc:page[@full-name=$target-page/@full-name]/parent::lc:link-catalog/@output-directory"/>
 
 		
 		<xsl:variable name="target-directory-path" >
@@ -332,7 +334,7 @@
 	
 		<xsl:variable name="target-file"  select="string($target-page/@file)"/>		
 		
-		<xsl:variable name="target-anchor" select="if ($target-page[1]/target[key=$target][@type=$type]/@anchor) then concat('#', $target-page[1]/target[key=$target][@type=$type]/@anchor) else ''"/>
+		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][@type=$type]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][@type=$type]/@anchor) else ''"/>
 
 		<xsl:choose>
 			<!-- this book -->
@@ -349,7 +351,7 @@
 				</bold>
 				<xsl:text> in </xsl:text>
 				<italic>
-					<xsl:value-of select="$link-catalogs/link-catalog[@topic-set-id=$target-topic-set]/@title"/>
+					<xsl:value-of select="$link-catalogs/lc:link-catalog[@topic-set-id=$target-topic-set]/@title"/>
 				</italic> 
 			</xsl:otherwise>
 		</xsl:choose>
