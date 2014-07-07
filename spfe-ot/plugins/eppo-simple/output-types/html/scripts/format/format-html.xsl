@@ -292,6 +292,10 @@
 	
 
 	<xsl:template match="gr:*"/>
+	
+	<xsl:template match="caption">
+		<xsl:apply-templates/>
+	</xsl:template>
 
 	<xsl:template match="caption/p">
 		<p class="fig-caption">
