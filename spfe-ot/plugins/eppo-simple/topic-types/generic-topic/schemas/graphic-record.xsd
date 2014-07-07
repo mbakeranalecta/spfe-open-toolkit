@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record">
+    targetNamespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record">
     <xs:element name="graphic-record">
         <xs:complexType>
             <xs:sequence>

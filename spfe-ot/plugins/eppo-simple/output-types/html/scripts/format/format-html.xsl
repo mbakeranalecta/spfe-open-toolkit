@@ -8,7 +8,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:lf="local-functions"
 	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
-	xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record"
+	xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record"
 	exclude-result-prefixes="#all">
 	<xsl:output method="xml" indent="yes"/>
 
@@ -259,8 +259,10 @@
 				<xsl:sequence select="$fig//gr:format[gr:type/text() eq $format]"/>
 			</xsl:for-each>
 		</xsl:variable>
+		<xsl:message select="'preferred-formats', $preferred-formats"/>
+		<xsl:message select="'$available-preferred-formats', $available-preferred-formats"/>
 		<!-- FIXME: should test for no match, and decide what to do if unexpected format provided -->
-		<xsl:variable name="graphic-file-name" select="sf:get-file-name-from-path($available-preferred-formats[1]//gr:href)"/>
+		<xsl:variable name="graphic-file-name" select="sf:get-file-name-from-path($available-preferred-formats/gr:format[1]/gr:href)"/>
 		<!-- FIXME: image directory location should probably be configurable -->
 		<img src="images/{$graphic-file-name}" alt="{gr:graphic-record/gr:alt}" title="{gr:graphic-record/gr:name}"/>
 		<xsl:apply-templates/>
@@ -277,7 +279,7 @@
 					</xsl:for-each>
 				</xsl:variable>
 				<!-- FIXME: should test for no match, and decide what to do if unexpected format provided -->
-				<xsl:value-of select="$available-preferred-formats[1]//gr:href"/>
+				<xsl:value-of select="$available-preferred-formats/gr:format[1]/gr:href"/>
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:result-document

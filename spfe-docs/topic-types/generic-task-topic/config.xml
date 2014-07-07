@@ -19,7 +19,8 @@
                 <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</script>
                 <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</script>
                 <script remap-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic">../../topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-fig.xsl</script>
+                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-graphic-record.xsl</script>
+                
                 <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-fig.xsl</script>
             </synthesis>
             <link-catalog>

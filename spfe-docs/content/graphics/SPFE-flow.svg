@@ -216,21 +216,7 @@
        inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
        inkscape:export-xdpi="92.191521"
        inkscape:export-ydpi="92.191521" />
-    <flowRoot
-       transform="matrix(2.7293338,0,0,2.7293338,-317.42644,-568.17518)"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       id="flowRoot3787"
-       xml:space="preserve"
-       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
-       inkscape:export-xdpi="92.191521"
-       inkscape:export-ydpi="92.191521"><flowRegion
-         id="flowRegion3789"><rect
-           y="308.79074"
-           x="174.28572"
-           height="86.428574"
-           width="80"
-           id="rect3791" /></flowRegion><flowPara
-         id="flowPara3793">S</flowPara></flowRoot>    <path
+    <path
        d="m 262.14286,341.29074 c 0,28.60046 -23.18525,51.78571 -51.78571,51.78571 -28.60046,0 -51.78572,-23.18525 -51.78572,-51.78571 0,-28.60046 23.18526,-51.78571 51.78572,-51.78571 28.60046,0 51.78571,23.18525 51.78571,51.78571 z"
        sodipodi:ry="51.785713"
        sodipodi:rx="51.785713"
@@ -243,21 +229,7 @@
        inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
        inkscape:export-xdpi="92.191521"
        inkscape:export-ydpi="92.191521" />
-    <flowRoot
-       transform="matrix(2.7200253,0,0,2.7200253,-190.60214,-565.12301)"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       id="flowRoot3787-0"
-       xml:space="preserve"
-       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
-       inkscape:export-xdpi="92.191521"
-       inkscape:export-ydpi="92.191521"><flowRegion
-         id="flowRegion3789-9"><rect
-           y="308.79074"
-           x="174.28572"
-           height="86.428574"
-           width="80"
-           id="rect3791-4" /></flowRegion><flowPara
-         id="flowPara3793-8">P</flowPara></flowRoot>    <path
+    <path
        d="m 262.14286,341.29074 c 0,28.60046 -23.18525,51.78571 -51.78571,51.78571 -28.60046,0 -51.78572,-23.18525 -51.78572,-51.78571 0,-28.60046 23.18526,-51.78571 51.78572,-51.78571 28.60046,0 51.78571,23.18525 51.78571,51.78571 z"
        sodipodi:ry="51.785713"
        sodipodi:rx="51.785713"
@@ -270,21 +242,7 @@
        inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
        inkscape:export-xdpi="92.191521"
        inkscape:export-ydpi="92.191521" />
-    <flowRoot
-       transform="matrix(2.7407863,0,0,2.7407863,-75.269126,-571.63309)"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       id="flowRoot3787-2"
-       xml:space="preserve"
-       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
-       inkscape:export-xdpi="92.191521"
-       inkscape:export-ydpi="92.191521"><flowRegion
-         id="flowRegion3789-4"><rect
-           y="308.79074"
-           x="174.28572"
-           height="86.428574"
-           width="80"
-           id="rect3791-5" /></flowRegion><flowPara
-         id="flowPara3793-5">F</flowPara></flowRoot>    <path
+    <path
        d="m 262.14286,341.29074 c 0,28.60046 -23.18525,51.78571 -51.78571,51.78571 -28.60046,0 -51.78572,-23.18525 -51.78572,-51.78571 0,-28.60046 23.18526,-51.78571 51.78572,-51.78571 28.60046,0 51.78571,23.18525 51.78571,51.78571 z"
        sodipodi:ry="51.785713"
        sodipodi:rx="51.785713"
@@ -297,19 +255,61 @@
        inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
        inkscape:export-xdpi="92.191521"
        inkscape:export-ydpi="92.191521" />
-    <flowRoot
-       transform="matrix(2.7186063,0,0,2.7186063,49.314545,-564.67808)"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       id="flowRoot3787-7"
+    <text
        xml:space="preserve"
-       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
-       inkscape:export-xdpi="92.191521"
-       inkscape:export-ydpi="92.191521"><flowRegion
-         id="flowRegion3789-1"><rect
-           y="308.79074"
-           x="174.28572"
-           height="86.428574"
-           width="80"
-           id="rect3791-1" /></flowRegion><flowPara
-         id="flowPara3793-52">E</flowPara></flowRoot>  </g>
+       style="font-size:109.1733551px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="158.24527"
+       y="365.8143"
+       id="text6171"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="158.24527"
+         y="365.8143"
+         id="tspan6173"><tspan
+           x="158.24527"
+           y="365.8143"
+           id="tspan6175">S</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:108.80101013px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="283.44727"
+       y="365.68106"
+       id="text6165"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="283.44727"
+         y="365.68106"
+         id="tspan6167"><tspan
+           x="283.44727"
+           y="365.68106"
+           id="tspan6169">P</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:109.63145447px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="402.39853"
+       y="366.27548"
+       id="text6183"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="402.39853"
+         y="366.27548"
+         id="tspan6185"><tspan
+           x="402.39853"
+           y="366.27548"
+           id="tspan6187">F</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:108.74425507px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="523.11664"
+       y="365.64038"
+       id="text6177"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="523.11664"
+         y="365.64038"
+         id="tspan6179"><tspan
+           x="523.11664"
+           y="365.64038"
+           id="tspan6181">E</tspan></tspan></text>
+  </g>
 </svg>
