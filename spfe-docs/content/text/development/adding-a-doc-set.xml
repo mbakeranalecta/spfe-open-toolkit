@@ -56,9 +56,9 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
     <body>
         <title>Adding a new documentation set</title>
         <understanding>
-            <p>A documentation set is a collection of
+            <p>A <feature>documentation set</feature> is a collection of
                 one or more related <feature>topic sets</feature>. A documentation set generally contains all the documentation related to a single product or service.</p>
-            <p>In SPFE, a documentation set is simply a particular build configuration. Topic source files do not contain anything that ties them to a specific documentation set. Therefore, you can define as many documentation sets as you like, simply by writing new documentation set configuration files. This makes it easy to reuse topics in different documentation sets. It also makes it easy to set up different build configurations for use during the developtment process.</p>
+            <p>In SPFE, a documentation set is simply a particular build configuration. Topic source files do not contain anything that ties them to a specific documentation set. Therefore, you can define as many documentation sets as you like, simply by writing new documentation set configuration files. This makes it easy to reuse topics in different documentation sets. It also makes it easy to set up different build configurations for use during the development process.</p>
        </understanding>
        <planning>
            <planning-question>
