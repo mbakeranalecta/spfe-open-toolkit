@@ -10,7 +10,7 @@
     
     <xsl:param name="toc-files"/>
     <xsl:variable name="unsorted-toc" >
-        <xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file:')"/>
+        <xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file: ')"/>
         <xsl:if test="count(distinct-values($temp-tocs/toc/@topic-set-id)) lt count($temp-tocs/toc)">
             <xsl:call-template name="sf:error">
                 <xsl:with-param name="message">

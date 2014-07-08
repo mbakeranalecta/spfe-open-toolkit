@@ -102,13 +102,13 @@
     <xsl:template match="spfe" mode="load-config">
         <xsl:variable name="this" select="."/>
         <xsl:apply-templates mode="load-config"/>
-        <xsl:for-each select="//href">
+        <xsl:for-each select="//topic-type/href, //object-type/href, //output-format/href, //topic-set/href">
             <xsl:apply-templates select="document(resolve-uri(.,base-uri($this)))"
                 mode="load-config"/>
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template match="href|include|script|build-rules" mode="load-config">
+    <xsl:template match="href|include|script[not(href)]|build-rules" mode="load-config">
         <xsl:element name="{name()}">
             <xsl:copy-of select="@*"/>
             <xsl:value-of
@@ -424,31 +424,31 @@
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
                     <!-- It is a mystery to me why we need to put *:script here. The default namespace here
                     should be config, but it does not works without *: prefix. -->
-                    <xsl:for-each-group select="current-group()/*:script" group-by="concat(text(), ' ', normalize-space(@remap-namespace))">
+                    <xsl:for-each-group select="current-group()/*:script" group-by="concat(*:href/text(), ' ', normalize-space(*:remap-namespace/*:from), normalize-space(*:remap-namespace/*:to))">
                         <xsl:choose>                
                             <!-- If namespace remapping is specified, create a temp file with remapped namespaces -->
-                            <xsl:when test="current-group()/@remap-namespace">
-                                <xsl:variable name="map-from-namespace" select="tokenize(normalize-space(@remap-namespace),' ')[1]"/>
-                                <xsl:variable name="map-to-namespace" select="tokenize(normalize-space(@remap-namespace),' ')[2]"/>                                
-                                <xsl:variable name="temp-file-name" select="concat(sf:get-file-name-from-path(.), generate-id(.), position(), '.xsl')"/>
+                            <xsl:when test="current-group()/*:remap-namespace">
+                                <xsl:variable name="map-from-namespace" select="normalize-space(*:remap-namespace/*:from)"/>
+                                <xsl:variable name="map-to-namespace" select="normalize-space(*:remap-namespace/*:to)"/>                                
+                                <xsl:variable name="temp-file-name" select="concat(generate-id(*:remap-namespace/*:from), position(), sf:get-file-name-from-path(*:href))"/>
                                 
                                 <gen:include href="{$temp-file-name}"/>
                                 <xsl:result-document
                                     href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/{$temp-file-name}" method="text"
                                     indent="no" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
-                                    <xsl:analyze-string select="unparsed-text(concat('file:///',.))" regex="(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;]){sf:escape-for-regex($map-from-namespace)}([&quot;&apos;])">
-                                         <xsl:matching-substring>
-                                             <xsl:value-of select="concat(regex-group(1),$map-to-namespace,regex-group(2))"/>
-                                         </xsl:matching-substring>
-                                         <xsl:non-matching-substring>
-                                             <xsl:value-of select="."/>
-                                         </xsl:non-matching-substring>
-                                     </xsl:analyze-string>
+                                    <xsl:analyze-string select="unparsed-text(concat('file:///',*:href))" regex="(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;]){sf:escape-for-regex($map-from-namespace)}([&quot;&apos;])">
+                                        <xsl:matching-substring>
+                                            <xsl:value-of select="concat(regex-group(1),$map-to-namespace,regex-group(2))"/>
+                                        </xsl:matching-substring>
+                                        <xsl:non-matching-substring>
+                                            <xsl:value-of select="."/>
+                                        </xsl:non-matching-substring>
+                                    </xsl:analyze-string>
                                 </xsl:result-document>                                
                             </xsl:when>
                             <xsl:otherwise>
                                 <!-- Otherwise, just link to existing file. -->
-                                <gen:include href="{concat(if(starts-with(.,'/')) then 'file://' else 'file:/', .)}"/>
+                                <gen:include href="{concat(if(starts-with(*:href,'/')) then 'file://' else 'file:/', *:href)}"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:for-each-group>

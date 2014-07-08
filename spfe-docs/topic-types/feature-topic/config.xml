@@ -4,7 +4,7 @@
 <spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-
+    
     <topic-type>
         <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</xmlns>
         <aliases>
@@ -13,38 +13,120 @@
         </aliases>
         <scripts>
             <synthesis>
-                <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/common-topic-synthesis.xsl</script>
-                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</script>
-                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/feature-topic http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/feature-topic/scripts/synthesis/feature-topic-synthesis.xsl</script>
-                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</script>
-                <script remap-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic">../../topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-graphic-record.xsl</script>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/common-topic-synthesis.xsl</href>
+                </script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</href>
+                </script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/feature-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/feature-topic/scripts/synthesis/feature-topic-synthesis.xsl</href>
+                </script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</href>
+                </script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</to>
+                    </remap-namespace>
+                    <href>../../topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-graphic-record.xsl</href>
+                </script>
                 
-                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-fig.xsl</script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-fig.xsl</href>
+                </script>
             </synthesis>
             <link-catalog>
-                <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/link-catalog/topic/topic-link-catalog.xsl</script>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/link-catalog/topic/topic-link-catalog.xsl</href>
+                </script>
             </link-catalog>
             <image-list>
-                <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/get-image-list.xsl</script>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/get-image-list.xsl</href>
+                </script>
             </image-list>
             <presentation-web>
-                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/feature-topic http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/feature-topic/scripts/presentation/present-feature-topic.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-topic-set-toc.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-functions.xsl</script>
-                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-templates.xsl</script>
-                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-text-structures.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-header-and-footer.xsl</script>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-topic-set.xsl</script>
-                <script remap-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic">${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/presentation-fig.xsl</script>
-                <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/feature-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/feature-topic/scripts/presentation/present-feature-topic.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-topic-set-toc.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-functions.xsl</href>
+                </script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-templates.xsl</href>
+                </script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-text-structures.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-header-and-footer.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-topic-set.xsl</href>
+                </script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/presentation-fig.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
             </presentation-web>
             <toc>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/toc/toc.xsl</script>
-                <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/toc/toc.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
             </toc>
         </scripts>
     </topic-type>

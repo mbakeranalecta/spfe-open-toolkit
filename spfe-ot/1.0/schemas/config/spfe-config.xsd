@@ -287,11 +287,17 @@
       <!-- <xs:element name="script" type="xs:anyURI" maxOccurs="unbounded" minOccurs="1"/>-->
       <xs:element name="script" maxOccurs="unbounded">
         <xs:complexType>
-          <xs:simpleContent>
-            <xs:extension base="xs:anyURI">
-              <xs:attribute name="remap-namespace"/>
-            </xs:extension>
-          </xs:simpleContent>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="remap-namespace">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="from" type="xs:anyURI"/>
+                  <xs:element name="to" type="xs:anyURI"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="href" type="xs:anyURI"/>
+          </xs:sequence>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
