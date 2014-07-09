@@ -9,14 +9,14 @@
     <output-format>
         <name>html</name>
         <scripts>
-            <format-html>
+            <format>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-html.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
-            </format-html>
+            </format>
         </scripts>
         <support-files>
             <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css/eppo-simple.css</include>

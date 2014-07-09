@@ -23,13 +23,15 @@
 	<xsl:variable name="media">online</xsl:variable>
 
 	<xsl:param name="toc-file"/>
+	
+	<xsl:param name="output-directory" select="$config/config:toc-directory"/>
 
 	<xsl:variable name="title-string" select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 	
 
 	<xsl:template name="main">
 
-		<xsl:result-document href="file:///{$config/config:toc-directory}/{$topic-set-id}.toc.xml" method="xml" indent="yes" omit-xml-declaration="no">
+		<xsl:result-document href="file:///{$output-directory}/{$topic-set-id}.toc.xml" method="xml" indent="yes" omit-xml-declaration="no">
 			<toc 
 				topic-set-id="{$topic-set-id}" 
 				topic-set-type="{$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-set-type}" 
@@ -37,7 +39,7 @@
 				title="{$title-string}">
 				<xsl:choose>
 					<!-- If there is a TOC file for this media, use it to create TOC -->
-					<!-- Fixme: still need to add toc spport to config and make this work with it. -->
+					<!-- FIXME: still need to add toc spport to config and make this work with it. -->
 					<xsl:when test="$media = tokenize(document($toc-file)/toc/@media, '\s+')">
 						
 						<xsl:call-template name="sf:info">

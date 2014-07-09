@@ -90,7 +90,7 @@
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </image-list>
-            <presentation-web>
+            <presentation>
                 <script>
                     <href>../../topic-types/config-reference/scripts/presentation/present-config-ref.xsl</href>
                 </script>
@@ -130,7 +130,7 @@
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
-            </presentation-web>
+            </presentation>
         </scripts>
     </topic-type>
 </spfe>

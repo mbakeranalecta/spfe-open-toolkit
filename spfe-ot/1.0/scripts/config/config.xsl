@@ -151,17 +151,8 @@
                 <pathconvert dirsep="/" pathsep=";"
                     property="{$topic-set-id}.authored-content-files"
                     refid="{$topic-set-id}.authored-content"/>
-
-<!--                <files id="{$topic-set-id}.sources-to-extract-content-from">
-                    <xsl:for-each
-                        select="$config/topic-set[topic-set-id=$topic-set-id]/sources/sources-to-extract-content-from/include">
-                        <include name="{.}"/>
-                    </xsl:for-each>
-                </files>
-                <pathconvert dirsep="/" pathsep=";"
-                    property="{$topic-set-id}.sources-to-extract-content-from-files"
-                    refid="{$topic-set-id}.sources-to-extract-content-from"/>-->
             </xsl:for-each>
+            
             <xsl:for-each select="$config/output-format">
                 <xsl:variable name="format-name" select="name"/>
                 <files id="files.{$format-name}.support-files">
@@ -172,25 +163,6 @@
                 </files>                
             </xsl:for-each>
 
-            <!-- FIXME: Does this allow for more than one extract operation per topic set?
-                 and if not, does that matter? What do we do if we want to create a topic 
-                 set that extracts content from more than one source to combine into a single
-                 topic type? Can we predefine a config scenario for all the possible ineresting
-                 cases, or would it be better to delegate it to the script (which could include
-                 the use of 'other' config options. 
-            -->
-            <target name="--build.extracted-content">
-                <!-- only define this stage for topic sets that define sources to extract from -->
-<!--                <xsl:for-each select="$config/topic-set[sources/sources-to-extract-content-from/include]">
-                    <xsl:variable name="topic-set-id" select="topic-set-id"/>
-                    <build.extracted-content 
-                        topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.extract.xsl"
-                        sources-to-extract-content-from="${{{$topic-set-id}.sources-to-extract-content-from-files}}"
-                    />                    
-                </xsl:for-each>
--->            </target>
-
             <target name="--build.synthesis">
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
@@ -199,7 +171,7 @@
                     <xsl:if test="sources/sources-to-extract-content-from/include">
                         <build.extracted-content 
                             topic-set-id="{$topic-set-id}"
-                            style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.extract.xsl">
+                            style="{$doc-set-build}/topic-sets/{$topic-set-id}/extract/spfe.extract.xsl">
                             <files-elements>
                                 <files id="{$topic-set-id}.sources-to-extract-content-from">
                                     <xsl:for-each
@@ -215,7 +187,7 @@
                     </xsl:if>
                     
                     <build.synthesis topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.synthesis.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/synthesis/spfe.synthesis.xsl">
                         <xsl:if
                             test="sources/authored-content/include">
                             <xsl:attribute name="authored-content-files"
@@ -225,84 +197,47 @@
                     
                     <build.link-catalog 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.link-catalog.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/link-catalog/spfe.link-catalog.xsl">
                     </build.link-catalog>
                     
                     <build.toc 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.toc.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/toc/spfe.toc.xsl">
                     </build.toc>
                     
                 </xsl:for-each>
             </target>
 
-            <target name="--build.link-catalog">
-<!--                <xsl:for-each select="$config/topic-set">
-                    <xsl:variable name="topic-set-id" select="topic-set-id"/>
-                    <build.link-catalog 
-                        topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.link-catalog.xsl">
-                    </build.link-catalog>
-                </xsl:for-each>
--->            </target>
             
-            <target name="--build.toc">
-<!--                <xsl:for-each select="$config/topic-set">
-                    <xsl:variable name="topic-set-id" select="topic-set-id"/>
-                    <build.toc 
-                        topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.toc.xsl">
-                    </build.toc>
-                </xsl:for-each>
--->            </target>
-            
-            <target name="--build.presentation-web">
+            <target name="--build.presentation">
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
-                    <build.presentation-web 
+                    <build.presentation 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.presentation-web.xsl">
-                    </build.presentation-web>
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/presentation/spfe.presentation.xsl">
+                    </build.presentation>
                 </xsl:for-each>
             </target>       
           
-            <target name="--build.presentation-book">
-                <xsl:for-each select="$config/topic-set">
-                    <xsl:variable name="topic-set-id" select="topic-set-id"/>
-                    <build.presentation-book 
-                        topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.presentation-book.xsl">
-                    </build.presentation-book>
-                </xsl:for-each>
-            </target>
 
-            <target name="--build.format-html">
+            <target name="--build.format">
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
-                    <build.format-html 
+                    <build.format 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.format-html.xsl"
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/format/spfe.format.xsl"
                         output-directory="{if ($topic-set-id=$config/doc-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
-                    </build.format-html>
+                    </build.format>
                 </xsl:for-each>
             </target>
             
-            <target name="--build.fo-format">
-                <xsl:for-each select="$config/topic-set">
-                    <xsl:variable name="topic-set-id" select="topic-set-id"/>
-                    <build.fo-format 
-                        topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.fo-format.xsl">
-                    </build.fo-format>
-                </xsl:for-each>
-            </target>
 
-            <target name="--build.pdf-encode">
+            <target name="--build.encode">
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.pdf-encode 
                         topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.pdf-encode.xsl">
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/encode/spfe.encode.xsl">
                     </build.pdf-encode>
                 </xsl:for-each>
             </target>
@@ -385,9 +320,6 @@
                         <xsl:copy-of select="current-group()[1]" copy-namespaces="no"/>
                 </xsl:for-each-group>
                 
- 
-                <!--<xsl:copy-of select="$config/subject-types"/>-->
-                
                 <xsl:copy-of select="$config/output-format"/>
             </spfe>
 
@@ -419,7 +351,7 @@
             <xsl:variable name="script-type"
                 select="if (name()='other') then concat('other.',@name) else name()"/>
             <xsl:result-document
-                href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/spfe.{$script-type}.xsl" method="xml"
+                href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/{$script-type}/spfe.{$script-type}.xsl" method="xml"
                 indent="yes" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
                     <!-- It is a mystery to me why we need to put *:script here. The default namespace here
@@ -434,7 +366,7 @@
                                 
                                 <gen:include href="{$temp-file-name}"/>
                                 <xsl:result-document
-                                    href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/{$temp-file-name}" method="text"
+                                    href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/{$script-type}/{$temp-file-name}" method="text"
                                     indent="no" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                                     <xsl:analyze-string select="unparsed-text(concat('file:///',*:href))" regex="(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;]){sf:escape-for-regex($map-from-namespace)}([&quot;&apos;])">
                                         <xsl:matching-substring>

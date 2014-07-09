@@ -34,7 +34,7 @@ exclude-result-prefixes="#all" >
 
 <xsl:output method="xml" indent="yes" />
 
-<xsl:param name="synthesis-directory"/>
+	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/out')"></xsl:param>
 
 <xsl:param name="extracted-content-files"/>
 <xsl:variable name="schema-defs" select="sf:get-sources($extracted-content-files)"/>
@@ -75,7 +75,7 @@ Main template
 			 method="xml" 
 			 indent="yes"
 			 omit-xml-declaration="no" 
-			 href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/synthesis.xml')}">
+			 href="file:///{$output-directory}/synthesis.xml">
 			<ss:synthesis 
 				xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
 				topic-set-id="{$topic-set-id}" 

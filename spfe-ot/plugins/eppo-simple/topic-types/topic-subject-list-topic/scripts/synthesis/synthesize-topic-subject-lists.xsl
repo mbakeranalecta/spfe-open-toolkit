@@ -14,6 +14,7 @@
 	exclude-result-prefixes="#all" >
 	
 <xsl:param name="topic-set-id"/>
+	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/out')"/>
 	
 <xsl:output method="xml" indent="yes" />
 
@@ -44,7 +45,7 @@ Main template
 			 method="xml" 
 			 indent="yes"
 			 omit-xml-declaration="no" 
-			 href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/synthesis.xml')}">
+			 href="file:///{$output-directory}/synthesis.xml">
 			<ss:synthesis 
 				xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
 				topic-set-id="{$topic-set-id}" 

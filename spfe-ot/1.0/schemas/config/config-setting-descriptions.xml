@@ -31,7 +31,7 @@
     </head>
     <body>
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/format-html/script</xpath>
+            <xpath>/spfe/object-type/scripts/format/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -611,8 +611,8 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/format-html</xpath>
-            <description><fragment-ref id-ref="scripts-format-html-description"/></description>
+            <xpath>/spfe/object-type/scripts/format</xpath>
+            <description><fragment-ref id-ref="scripts-format-description"/></description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -739,7 +739,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation-web</xpath>
+            <xpath>/spfe/object-type/scripts/presentation</xpath>
             <description>
                 <fragment-ref id-ref="scripts-presentation-description"/>
             </description>
@@ -750,7 +750,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation-web/script</xpath>
+            <xpath>/spfe/object-type/scripts/presentation/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1511,9 +1511,9 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/format-html</xpath>
+            <xpath>/spfe/topic-type/scripts/format</xpath>
             <description>
-                <fragment id="scripts-format-html-description">
+                <fragment id="scripts-format-description">
                 <p>A container for a list of script components for formatting a topic set in HTML.</p>
                 </fragment>
             </description>
@@ -1524,7 +1524,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/format-html/script</xpath>
+            <xpath>/spfe/topic-type/scripts/format/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1664,7 +1664,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation-web</xpath>
+            <xpath>/spfe/topic-type/scripts/presentation</xpath>
             <description>
                 <fragment id="scripts-presentation-description">
                 <p>A container for a list of presentation script components for building a web presentation of
@@ -1679,7 +1679,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation-web/script</xpath>
+            <xpath>/spfe/topic-type/scripts/presentation/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1896,8 +1896,8 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/format-html</xpath>
-            <description><fragment-ref id-ref="scripts-format-html-description"/></description>
+            <xpath>/spfe/output-format/scripts/format</xpath>
+            <description><fragment-ref id-ref="scripts-format-description"/></description>
             <values/>
             <restrictions/>
             <build-property/>
@@ -1905,7 +1905,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/format-html/script</xpath>
+            <xpath>/spfe/output-format/scripts/format/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -2039,7 +2039,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation-web</xpath>
+            <xpath>/spfe/output-format/scripts/presentation</xpath>
             <description>
                 <fragment-ref id-ref="scripts-presentation-description"/>
             </description>
@@ -2050,7 +2050,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation-web/script</xpath>
+            <xpath>/spfe/output-format/scripts/presentation/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>

@@ -211,7 +211,7 @@
 	</target> -->
 
 	<!-- EXTRACT TARGET -->
-	<target name="-build.extracted-content" depends="--build.extracted-content"/>
+	<!--<target name="-build.extracted-content" depends="-\-build.extracted-content"/>-->
 	<macrodef name="build.extracted-content" description="extract content from source files">
 		<attribute name="topic-set-id"/>
 		<attribute name="style"/>
@@ -241,7 +241,7 @@
 
 
 	<!-- SYNTHESIS STEP -->
-	<target name="-build.synthesis" depends="-build.extracted-content, --build.synthesis"/>
+	<target name="-build.synthesis" depends="--build.synthesis"/>
 	<!-- macro to build synthesis -->
 	<macrodef name="build.synthesis" description="synthesis">
 		<attribute name="style"/>
@@ -286,7 +286,7 @@
 	</target>-->
 
 	<!-- target for link-catalog -->
-	<target name="-build.link-catalog" depends="-build.synthesis, --build.link-catalog"/>
+	<!--<target name="-build.link-catalog" depends="-build.synthesis, -\-build.link-catalog"/>-->
 	<macrodef name="build.link-catalog" description="Link catalog step.">
 		<!-- FIXME		depends="-current.link-catalog"
 		unless="-current.link-catalog">-->
@@ -296,7 +296,7 @@
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
-				<include name="synthesis/*.xml"/>
+				<include name="synthesis/out/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
@@ -314,54 +314,19 @@
 		</sequential>
 	</macrodef>
 
-	<!-- LIST PAGES STEP -->
 
-	<!-- check if list page file is up to date -->
+	<!-- macro for toc -->
 
-<!--	<target name="-current.list-pages">
-		<uptodate property="-current.list-pages"
-			targetfile="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages"
-			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"/>
-	</target>-->
-
-	<!-- target for list-pages -->
-	<!-- note that this target is called once at the doc set level -->
-
-<!--	<target name="-build.list-pages" depends="-\-build.list-pages"/>
-	<macrodef name="build.list-pages" description="List page step.">
-		<!-\-unless="-current.list-pages">-\->
-		<sequential>
-			
-			<!-\- run the XSLT script to produce the output -\->
-			<saxon-xslt in="${spfe.config-file}" 
-				style="${spfe.scripts.list-pages}"
-				out="${spfe.build.list-pages-directory}/${spfe.topic-set-id}.list-pages.xml">
-				<params>
-					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="synthesis-files" expression="${synthesis-files-list}"/>
-				</params>
-			</saxon-xslt>
-		</sequential>
-	</macrodef>-->
-
-	<!-- target for toc -->
-	<target name="-build.toc" depends=" -build.synthesis, --build.toc"/>
 	<macrodef name="build.toc" description="TOC step.">
 		<!-- FIXME		depends="  -current.link-catalog" unless="-current.link-catalog">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<sequential>
+			
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
-				<include name="synthesis/*.xml"/>
-			</fileset>
-			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
-				refid="synthesis-files"/>
-			<local name="synthesis-files"/>
-			<local name="synthesis-files-list"/>
-			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
-				<include name="synthesis/*.xml"/>
+				<include name="synthesis/out/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
@@ -384,19 +349,18 @@
 
 
 	<!-- check to see if the html-presentation is up to date -->
-	<target name="-current.presentation-web">
-		<uptodate property="-current.presentation-web"
+	<target name="-current.presentation">
+		<uptodate property="-current.presentation"
 			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"
-			targetfile="${temp}/presentation/presentation-web.flag"/>
+			targetfile="${temp}/presentation/presentation.flag"/>
 	</target>
 
 	<!-- build the presentation -->
-	<target name="-build.presentation-web"
-		depends="-build.synthesis, -build.link-catalog,
-				 -build.toc, --build.presentation-web"/>
-	<macrodef name="build.presentation-web" description="presentation step.">
-		<!--		depends="-current.presentation-web"
-		unless="-current.presentation-web">-->
+	<target name="-build.presentation"
+		depends="-build.synthesis, --build.presentation"/>
+	<macrodef name="build.presentation" description="presentation step.">
+		<!--		depends="-current.presentation"
+		unless="-current.presentation">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<sequential>
@@ -407,7 +371,7 @@
 			<local name="link-catalog-files"/>
 			<local name="link-catalog-list"/>
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
-				<include name="synthesis/*.xml"/>
+				<include name="synthesis/out/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
@@ -423,7 +387,7 @@
 			<saxon-xslt 
 				style="@{style}" 
 				in="${spfe.config-file}"
-				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/presentation-web.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/presentation.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files-list}"/>
@@ -436,59 +400,22 @@
 
 	<!-- PRESENTATION BOOK STEP -->
 
-	<!-- check to see if the presentation-book is up to date -->
-	<target name="-current.presentation-book">
-		<uptodate property="-current.presentation-book"
-			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"
-			targetfile="${temp}/presentation/presentation-book.flag"/>
-	</target>
 
-	<!-- build the book presentation -->
-	<target name="-build.presentation-book" depends="-build.synthesis,--build.presentation-book"/>
-	<macrodef name="--build.presentation-book" description="book presentation step.">
-		<!--		depends="  -current.presentation-book" unless="-current.presentation-book">-->
 
-		<attribute name="style"/>
-		<attribute name="topic-set-id"/>
-		<sequential>
-			<local name="synthesis-files"/>
-			<local name="synthesis-files-list"/>
-			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
-				<include name="synthesis/*.xml"/>
-			</fileset>
-			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
-				refid="synthesis-files"/>
-			<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
-			<pathconvert property="link-catalog-files" dirsep="/" pathsep=";" refid="link-catalogs"/>
-			<!-- run the XSLT script to produce the output -->
-			<saxon-xslt 
-				in="${spfe.config-file}" 
-				style="@{style}"
-				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/presentation-book.flag">
-				<params>
-					<param name="topic-set-id" value="@{topic-set-id}"/>
-					<param name="synthesis-files" expression="${synthesis-files}"/>
-					<param name="link-catalog-files" expression="${link-catalog-files}"/>
-					<param name="toc-files" expression="${toc-files}"/>
-				</params>
-			</saxon-xslt>
-		</sequential>
-	</macrodef>
-
-	<!-- FORMAT HTML STEP -->
+	<!-- FORMAT STEP -->
 
 	<!-- check to see if the format is up to date -->
-	<target name="-current.format-html">
-		<uptodate property="-current.format-html" targetfile="${temp}/format-html.flag"
-			srcfile="${temp}/presentation-web.flag"/>
+	<target name="-current.format">
+		<uptodate property="-current.format" targetfile="${temp}/format.flag"
+			srcfile="${temp}/presentation.flag"/>
 	</target>
 
-	<target name="-build.format-html" depends="-build.presentation-web, --build.format-html"/>
-	<macrodef name="build.format-html">
+	<target name="-build.format" depends="-build.presentation, --build.format"/>
+	<macrodef name="build.format">
 		<!--		depends="
 	        	 -get.externals.style.html,
-  				 -current.format-html"
-		unless="-current.format-html">-->
+  				 -current.format"
+		unless="-current.format">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<attribute name="output-directory"/>
@@ -502,7 +429,7 @@
 			<local name="files.images.html"/>
 			<local name="echo-files"/>
 			<fileset dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}" id="presentation-file-list">
-				<include name="presentation/*.xml"/>
+				<include name="presentation/out/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="presentation-files"
 				refid="presentation-file-list"/>
@@ -510,7 +437,7 @@
 			<saxon-xslt 
 				in="${spfe.config-file}" 
 				style="@{style}"
-				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/format-html.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/format.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
@@ -542,40 +469,6 @@
 	<!-- FORMAT FO STEP -->
 	<!-- FIXME: Need to make sure this is non-intersecting with the web presentation files -->
 
-	<!-- check to see if the format is up to date -->
-	<target name="-current.fo-format">
-		<uptodate property="-current.fo-format" targetfile="${temp}/fo-format.flag"
-			srcfile="${temp}/presentation-book.flag"/>
-	</target>
-
-	<target name="-build.fo-format" depends="-build.presentation-book, --build.fo-format"/>
-	<macrodef name="build.fo-format" description="FO formatting">
-		<!--depends=" -current.fo-format" unless="-current.fo-format"-->
-		<attribute name="style"/>
-		<attribute name="topic-set-id"/>
-		<attribute name="output"/>
-		<sequential>
-			<property name="temp" value="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/temp"/>
-			<fileset id="presentation-file-list" dir="${temp}">
-				<include name="presentation/*.xml"/>
-			</fileset>
-			<pathconvert dirsep="/" pathsep=";" property="presentation-files"
-				refid="presentation-file-list"/>
-
-			<pathconvert property="toc-files" dirsep="/" pathsep=";" refid="tocs"/>
-			<!-- run the XSLT script to produce the output -->
-
-			<saxon-xslt in="${spfe.config-file}" style="@{style}"
-				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/temp/fo-format.flag">
-				<params>
-					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-					<param name="presentation-files" expression="${presentation-files}"/>
-					<param name="toc-files" expression="${toc-files}"/>
-				</params>
-			</saxon-xslt>
-		</sequential>
-	</macrodef>
 
 
 	<!-- ENCODE PDF STEP -->
@@ -586,8 +479,8 @@
 			srcfile="{temp}/fo-format.flag"/>
 	</target>
 
-	<target name="-build.pdf-encode" depends=" -build.fo-format, --build.pdf-encode"/>
-	<macrodef name="build.pdf-encode" description="PDF encoding">
+	<target name="-build.encode" depends=" -build.format, --build.encode"/>
+	<macrodef name="build.encode" description="Encoding">
 		<!--		depends=" -get.externals.graphics.print, 
 		-get.externals.style.print, 
 		-current.pdf-encode"
@@ -599,6 +492,7 @@
 		<sequential>
 			<property name="temp" value="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/temp"/>
 			<mkdir dir="@{output}"/>
+			<!--FIXME: generalize out the call of the encoder -->
 			<fop format="application/pdf" fofile="${temp}/spfe.fo-format.fo"
 				outfile="@{output}/${spfe.pdf-name}" basedir="${temp}"
 				userconfig="${temp}/fop.xconf"/>
@@ -607,46 +501,22 @@
 	</macrodef>
 
 
-	<!-- REPORT STEP -->
-
-
-	<!-- check to see if the html-presentation is up to date 
-	<target name="-current.report">
-		<uptodate property="-current.presentation-web" targetfile="${output}/${spfe.report-name}"
-			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"/>
-	</target>-->
-
-	<!-- build the report 
-	<target name="-build.report" description="report generation"
-		depends="-build.synthesis, -current.report" unless="-current.report">
-
-		<saxon-xslt in="${spfe.config-file}" style="${scripts.report}"
-			out="${output}/${spfe.report-name}">
-			<params>
-			
-				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-				<param name="draft" expression="${draft}" if="draft"/>
-			</params>
-		</saxon-xslt>
-	</target>-->
-
-
 	<!-- IMAGE LIST STEP -->
 
 	<!-- check to see if the image-list is up to date -->
 	<target name="-current.image-list-html">
 		<uptodate property="-current.image-list-html" targetfile="${temp}/image-list-html"
-			srcfile="${temp}/presentation-web.flag"/>
+			srcfile="${temp}/presentation.flag"/>
 	</target>
 
 	<!-- check to see if the format is up to date -->
 	<target name="-current.image-list.print">
 		<uptodate property="-current.image-list.print" targetfile="${temp}/image-list-print"
-			srcfile="{temp}/presentation-book.flag"/>
+			srcfile="{temp}/presentation.flag"/>
 	</target>
 
 	<target name="-build.image-list.print"
-		depends="-build.presentation-book, -current.image-list.print"
+		depends="-build.presentation, -current.image-list.print"
 		unless="-current.image-list.print">
 		<saxon-xslt 
 			in="${spfe.config-file}" 
@@ -704,7 +574,7 @@
 
 	<!-- FINAL -->
 	<target name="final" depends="-init, -final"/>
-	<target name="-final" depends="-build.format-html" description="Build the final online output."/>
+	<target name="-final" depends="-build.format" description="Build the final online output."/>
 
 	<target name="-is-draft">
 		<available property="is-draft" file="${temp}/draft.flag"/>
@@ -729,30 +599,6 @@
 		</copy>
 	</target>-->
 
-	<!-- CAT -->
-	<!-- Is all this antcall stuff needed, or will a simple dependency do? -->
-	<target name="cat" depends="-init">
-		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
-		<antcall target="-cat"/>
-		<delete file="${temp}/incomplete.flag"/>
-	</target>
-
-	<target name="-cat" description="Build all the link catalogs">
-		<antcall target="-build.link-catalog"/>
-	</target>
-
-
-	<!-- TOC -->
-	<target name="toc" depends="-init">
-		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
-		<antcall target="-toc"/>
-		<delete file="${temp}/incomplete.flag"/>
-	</target>
-
-	<target name="-toc" description="Build all tocs">
-		<antcall target="-build.toc"/>
-	</target>
-
 	<!-- REPORT -->
 	<target name="report" depends="-init">
 		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
@@ -762,16 +608,6 @@
 
 	<target name="-report" description="Build all the report">
 		<antcall target="-build.report"/>
-	</target>
-
-	<!-- PDF -->
-	<target name="pdf" depends="-init, -pdf-skipped-message" description="Build the PDF output."
-		if="spfe.pdf">
-		<antcall target="-build.pdf-encode"/>
-	</target>
-
-	<target name="-pdf-skipped-message" unless="spfe.pdf">
-		<echo message="PDF generation skipped because property spfe.pdf is not set."/>
 	</target>
 
 	<target name="test-mail">

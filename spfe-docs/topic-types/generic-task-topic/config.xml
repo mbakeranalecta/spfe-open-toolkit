@@ -75,7 +75,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/get-image-list.xsl</href>
                 </script>
             </image-list>
-            <presentation-web>
+            <presentation>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-functions.xsl</href>
                 </script>
@@ -119,7 +119,7 @@
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-topic-set-toc.xsl</href>
                 </script>
-            </presentation-web>
+            </presentation>
         </scripts>
     </topic-type>
 </spfe>

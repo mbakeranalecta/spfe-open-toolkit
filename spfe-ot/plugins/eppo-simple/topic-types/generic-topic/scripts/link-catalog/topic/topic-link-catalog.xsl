@@ -31,6 +31,8 @@
 			<xsl:value-of select="unparsed-text(.)"/>
 		</xsl:for-each>
 	</xsl:variable>
+	
+	<xsl:param name="output-directory" select="$config/config:link-catalog-directory"/>
 
 	<xsl:variable name="synonyms">
 		<synonyms>
@@ -61,7 +63,7 @@ Main template
 	
 	<xsl:template name="main" >
 		<!-- Create the root "synthesis element" -->
-		<xsl:result-document href="file:///{concat($config/config:link-catalog-directory, '/', $topic-set-id, '.link-catalog.xml')}" method="xml" indent="yes" encoding="UTF-8" omit-xml-declaration="no">
+		<xsl:result-document href="file:///{concat($output-directory, '/', $topic-set-id, '.link-catalog.xml')}" method="xml" indent="yes" encoding="UTF-8" omit-xml-declaration="no">
 			<xsl:apply-templates select="$synthesis"/>
 		</xsl:result-document>
 	</xsl:template>

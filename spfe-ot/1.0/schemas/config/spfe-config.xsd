@@ -261,9 +261,17 @@
       <xs:element name="link-catalog" type="script-list-type" minOccurs="0"/>
       <xs:element name="toc" type="script-list-type" minOccurs="0"/>
       <xs:element name="image-list" type="script-list-type" minOccurs="0"/>
-      <xs:element name="presentation-web" type="script-list-type" minOccurs="0"/>
+      <xs:element name="presentation" minOccurs="0">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="script-list-type">
+              <xs:attribute name="newAttribute"/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="presentation-book" type="script-list-type" minOccurs="0"/>
-      <xs:element name="format-html" type="script-list-type" minOccurs="0"/>
+      <xs:element name="format" type="script-list-type" minOccurs="0"/>
       <xs:element name="format-book" type="script-list-type" minOccurs="0"/>
       <!--      <xs:element name="encode-pdf" type="script-list-type"  minOccurs="0"/>-->
       <!-- Need a different mechanism for specifying the pdf encoding script since

@@ -18,6 +18,7 @@
 	
 	<!-- FIXME: This should be in config. -->
 	<xsl:param name="output-image-directory">graphics</xsl:param>
+	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/presentation/out')"></xsl:param>
 
 <xsl:param name="draft">no</xsl:param>
 	
@@ -37,7 +38,7 @@ Main template
 =============
 -->
 <xsl:template name="main">
-	<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/presentation/presentation.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+	<xsl:result-document href="file:///{$output-directory}/presentation.xml" method="xml" indent="no" omit-xml-declaration="no">
 		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
 			<title>
 				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
