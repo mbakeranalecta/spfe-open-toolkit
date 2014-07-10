@@ -239,7 +239,7 @@
                         <xsl:variable name="presentation-type" select="$config/output-format[name=$name][1]/presentation-type"/>
                         <build.format 
                             topic-set-id="{$topic-set-id}"
-                            style="{$doc-set-build}/topic-sets/{$topic-set-id}/format/spfe.format.xsl"
+                            style="{$doc-set-build}/topic-sets/{$topic-set-id}/format-{name}/spfe.format-{name}.xsl"
                             input-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out"
                             output-directory="{if ($topic-set-id=$config/doc-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
                         </build.format>

@@ -10,7 +10,7 @@
         <name>html</name>
         <presentation-type>eppo</presentation-type>
         <scripts>
-            <format>
+            <format type="html">
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-html.xsl</href>
                 </script>
