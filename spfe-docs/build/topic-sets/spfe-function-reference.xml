@@ -24,7 +24,16 @@
             
 
         </topic-types>
-
+        <presentation-types>
+            <presentation-type>
+                <name>eppo</name>
+            </presentation-type>
+        </presentation-types>
+        <output-formats>
+            <output-format>
+                <name>html</name>
+            </output-format>
+        </output-formats>
         <sources>
             <authored-content>
                 <include>../../content/text/xsl-function-ref/*.xml</include>
@@ -35,17 +44,7 @@
                 <include>${SPFEOT_HOME}/1.0/scripts/**/*.xslt</include>
             </sources-to-extract-content-from>
         </sources>
-        <output-formats>
-            <output-format>
-                <name>html</name>
-            </output-format>
-        </output-formats>
         
-        <presentation-types>
-            <presentation-type>
-                <name>eppo</name>
-            </presentation-type>
-        </presentation-types>
         <default-topic-scope>spfe</default-topic-scope>
         <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
 

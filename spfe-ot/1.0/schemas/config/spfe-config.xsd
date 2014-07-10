@@ -42,6 +42,32 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="presentation-types">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="presentation-type">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="output-formats">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="output-format">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="sources" type="sources-type"/>
               <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
               <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
@@ -97,6 +123,27 @@
                         <xs:sequence>
                           <xs:element name="topic-set-id" type="xs:NCName"/>
                           <xs:element name="href" type="xs:anyURI"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="subject-types">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="subject-type">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="id" type="xs:NMTOKEN"/>
+                          <xs:element name="aliases">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="singular" type="xs:string"/>
+                                <xs:element name="plural" type="xs:string"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
@@ -265,14 +312,20 @@
         <xs:complexType>
           <xs:complexContent>
             <xs:extension base="script-list-type">
-              <xs:attribute name="newAttribute"/>
+              <xs:attribute name="type" type="xs:NMTOKEN"/>
             </xs:extension>
           </xs:complexContent>
         </xs:complexType>
       </xs:element>
-      <xs:element name="presentation-book" type="script-list-type" minOccurs="0"/>
-      <xs:element name="format" type="script-list-type" minOccurs="0"/>
-      <xs:element name="format-book" type="script-list-type" minOccurs="0"/>
+      <xs:element name="format" minOccurs="0">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="script-list-type">
+              <xs:attribute name="type" type="xs:NMTOKEN"/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
       <!--      <xs:element name="encode-pdf" type="script-list-type"  minOccurs="0"/>-->
       <!-- Need a different mechanism for specifying the pdf encoding script since
       it is not a standard SPFE XSLT script, but a third party one with its own rules. 

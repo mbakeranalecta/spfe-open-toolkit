@@ -18,24 +18,25 @@
             
 
         </topic-types>
-
-        
-        <sources>
-            <sources-to-extract-content-from>
-                <include>${DOC_SET_BUILD_DIR}/link-catalogs/*.link-catalog.xml</include>
-            </sources-to-extract-content-from>
-        </sources>
+        <presentation-types>
+            <presentation-type>
+                <name>eppo</name>
+            </presentation-type>
+        </presentation-types>
         <output-formats>
             <output-format>
                 <name>html</name>
             </output-format>
         </output-formats>
         
-        <presentation-types>
-            <presentation-type>
-                <name>eppo</name>
-            </presentation-type>
-        </presentation-types>
+        <sources>
+            <sources-to-extract-content-from>
+                <include>${DOC_SET_BUILD_DIR}/link-catalogs/*.link-catalog.xml</include>
+            </sources-to-extract-content-from>
+        </sources>
+
+        
+
         <default-topic-scope>spfe</default-topic-scope>
         <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>     

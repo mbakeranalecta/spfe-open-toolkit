@@ -15,17 +15,18 @@
                     <href>../../topic-types/config-reference/config.xml</href>
                 </topic-type>
         </topic-types>
-        <output-formats>
-            <output-format>
-                <name>html</name>
-            </output-format>
-        </output-formats>
+
         
         <presentation-types>
             <presentation-type>
                 <name>eppo</name>
             </presentation-type>
         </presentation-types>
+        <output-formats>
+            <output-format>
+                <name>html</name>
+            </output-format>
+        </output-formats>        
         <sources>
             <authored-content>
                 <include>${SPFEOT_HOME}/1.0/schemas/config/config-setting-descriptions.xml</include>

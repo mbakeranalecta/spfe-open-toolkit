@@ -22,18 +22,18 @@
                 <href>../../topic-types/feature-topic/config.xml</href>
             </topic-type>    
         </topic-types>
-        
+         
+        <presentation-types>
+            <presentation-type>
+                <name>eppo</name>
+            </presentation-type>
+        </presentation-types>       
         <output-formats>
             <output-format>
                 <name>html</name>
             </output-format>
         </output-formats>
-        
-        <presentation-types>
-            <presentation-type>
-                <name>eppo</name>
-            </presentation-type>
-        </presentation-types>
+
 
 
         <sources>
