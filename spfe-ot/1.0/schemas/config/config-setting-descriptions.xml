@@ -58,8 +58,7 @@
                             the configuration of a whole documentation set. The build scripts take a
                             doc-set configuration as input.</p>
                     </li>
-                </ol>
-                <ol>
+
                     <li>
                         <p><config-setting xpath="/spfe/object-type">object-type</config-setting>
                             describes the configuration of an object type, such as
@@ -68,8 +67,7 @@
                             use the <config-setting>/spfe/topic-set/object-types</config-setting>
                             setting.</p>
                     </li>
-                </ol>
-                <ol>
+
                     <li>
                         <p><config-setting xpath="/spfe/output-format">output-format</config-setting>
                             describes the configuration of an <feature>output format</feature>, such
@@ -78,8 +76,7 @@
                             <config-setting>/spfe/doc-set/output-formats/output-format</config-setting>
                             setting.</p>
                     </li>
-                </ol>
-                <ol>
+
                     <li>
                         <p><config-setting xpath="/spfe/topic-set">topic-set</config-setting>
                             describes the configuration of a topic set. To include a topic set in
@@ -87,8 +84,7 @@
                             <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting>
                             setting.</p>
                     </li>
-                </ol>
-                <ol>
+
                     <li>
                         <p><config-setting xpath="/spfe/object-type">topic-type</config-setting>
                             describes the configuration of a <feature>topic type</feature>. To
