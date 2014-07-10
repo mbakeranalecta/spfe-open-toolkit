@@ -6,8 +6,9 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
     
-    <output-format>
+    <output-format type="html">
         <name>html</name>
+        <presentation-type>eppo</presentation-type>
         <scripts>
             <format>
                 <script>

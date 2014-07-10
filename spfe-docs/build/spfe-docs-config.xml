@@ -72,16 +72,7 @@
             </html-style-directories>
         </style>
         <messages>warning info</messages>
-        
-
-        
-        <output-formats>
-            <output-format>
-                <name>html</name>
-                <href>../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml</href>
-            </output-format>
-        </output-formats>
-        
+               
         <wip-site>
             <url>wip-site.href</url>
             <ftp>

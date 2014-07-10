@@ -30,7 +30,6 @@
     <xsl:variable name="doc-set-build" select="concat($doc-set-build-root-directory, '/build')"/>
     <xsl:variable name="doc-set-config" select="concat($doc-set-build-root-directory, '/config')"/>
     <xsl:variable name="doc-set-output" select="concat($doc-set-build-root-directory, '/output')"/>
-    <!--<xsl:variable name="topic-set-build" select="concat($doc-set-build, '/', $config/topic-set-id)"/>-->
     <xsl:variable name="doc-set-home"
         select="concat($build-directory, '/', $config/doc-set/doc-set-id,'/output')"/>
     <xsl:variable name="topicset-home">
@@ -65,7 +64,13 @@
         </xsl:variable>
         <xsl:value-of select="string-join($result,'')"/>
     </xsl:function>
-
+    
+    <!-- 
+    =============================================================================
+         Read the configuration 
+    =============================================================================
+    -->
+    
     <xsl:variable name="config" as="element(spfe)*">
         <xsl:message select="'Loading config file ', $configfile"/>
         <spfe>
@@ -116,9 +121,12 @@
         </xsl:element>
     </xsl:template>
 
-
-
-
+    <!-- 
+    =============================================================================
+         Create the build file
+    =============================================================================
+    -->
+    
     <xsl:template name="create-build-file">
 
         <!-- TO DO: check that all the topic sets have unique IDs -->
@@ -212,10 +220,13 @@
             <target name="--build.presentation">
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
-                    <build.presentation 
-                        topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/presentation/spfe.presentation.xsl">
-                    </build.presentation>
+                    <xsl:for-each select="presentation-types/presentation-type">
+                        <build.presentation 
+                            topic-set-id="{$topic-set-id}"
+                            style="{$doc-set-build}/topic-sets/{$topic-set-id}/presentation-{name}/spfe.presentation-{name}.xsl"
+                            output-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/presentation-{name}/out">
+                        </build.presentation>
+                    </xsl:for-each>
                 </xsl:for-each>
             </target>       
           
@@ -223,11 +234,16 @@
             <target name="--build.format">
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
-                    <build.format 
-                        topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/format/spfe.format.xsl"
-                        output-directory="{if ($topic-set-id=$config/doc-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
-                    </build.format>
+                    <xsl:for-each select="output-formats/output-format">
+                        <xsl:variable name="name" select="name"/>
+                        <xsl:variable name="presentation-type" select="$config/output-format[name=$name][1]/presentation-type"/>
+                        <build.format 
+                            topic-set-id="{$topic-set-id}"
+                            style="{$doc-set-build}/topic-sets/{$topic-set-id}/format/spfe.format.xsl"
+                            input-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out"
+                            output-directory="{if ($topic-set-id=$config/doc-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
+                        </build.format>
+                    </xsl:for-each>
                 </xsl:for-each>
             </target>
             
@@ -246,7 +262,13 @@
             <import file="{$spfeot-home}/1.0/build-tools/spfe-rules.xml"/>
         </project>
     </xsl:template>
-
+    
+    <!-- 
+    =============================================================================
+         Create the config file
+    =============================================================================
+    -->
+    
     <xsl:template name="create-config-file">
         <xsl:if test="not($config//doc-set)">
             <xsl:message terminate="yes">
@@ -325,6 +347,12 @@
 
         </xsl:result-document>
     </xsl:template>
+    
+    <!-- 
+    =============================================================================
+         Create the script files 
+    =============================================================================
+    -->
 
     <xsl:namespace-alias stylesheet-prefix="gen" result-prefix="xsl"/>
     <xsl:template name="create-script-files">
@@ -347,11 +375,13 @@
             </xsl:for-each>
         </xsl:variable>
 
-        <xsl:for-each-group select="$script-sets/scripts/*" group-by="name()">
+        <xsl:for-each-group select="$script-sets/scripts/*" group-by="concat(name(), '.', @type)">
             <xsl:variable name="script-type"
                 select="if (name()='other') then concat('other.',@name) else name()"/>
+            <xsl:variable name="script-name-with-type" select="concat($script-type, if (@type) then concat('-', @type) else '')"/>
+            <xsl:variable name="script-output-directory" select="concat($doc-set-build, '/topic-sets/', $topic-set-id, '/', $script-name-with-type)"></xsl:variable>
             <xsl:result-document
-                href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/{$script-type}/spfe.{$script-type}.xsl" method="xml"
+                href="file:///{$script-output-directory}/spfe.{$script-name-with-type}.xsl" method="xml"
                 indent="yes" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
                     <!-- It is a mystery to me why we need to put *:script here. The default namespace here
@@ -366,7 +396,7 @@
                                 
                                 <gen:include href="{$temp-file-name}"/>
                                 <xsl:result-document
-                                    href="file:///{$doc-set-build}/topic-sets/{$topic-set-id}/{$script-type}/{$temp-file-name}" method="text"
+                                    href="file:///{$script-output-directory}/{$temp-file-name}" method="text"
                                     indent="no" xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                                     <xsl:analyze-string select="unparsed-text(concat('file:///',*:href))" regex="(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;]){sf:escape-for-regex($map-from-namespace)}([&quot;&apos;])">
                                         <xsl:matching-substring>

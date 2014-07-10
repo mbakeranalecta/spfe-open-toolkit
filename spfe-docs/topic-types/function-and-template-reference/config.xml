@@ -79,7 +79,7 @@
             <plural>SPFE functions</plural>
         </aliases>
         <scripts>
-            <presentation>
+            <presentation type="eppo">
                 <script>
                     <href>../../topic-types/function-and-template-reference/scripts/presentation/present-function-ref.xsl</href>
                 </script>
@@ -137,7 +137,7 @@
             <plural>SPFE templates</plural>
         </aliases>
         <scripts>
-            <presentation>
+            <presentation type="eppo">
                 <script>
                     <href>../../topic-types/function-and-template-reference/scripts/presentation/present-function-ref.xsl</href>
                 </script>

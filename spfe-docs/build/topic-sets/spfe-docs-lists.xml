@@ -18,21 +18,25 @@
             
 
         </topic-types>
-<!--        <object-types>
 
-                <object-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record</xmlns>
-                    <href>../../../spfe-docs/object-types/graphics/config.xml</href>
-                </object-type>
-
-        </object-types>-->
         
         <sources>
             <sources-to-extract-content-from>
                 <include>${DOC_SET_BUILD_DIR}/link-catalogs/*.link-catalog.xml</include>
             </sources-to-extract-content-from>
         </sources>
-
+        <output-formats>
+            <output-format>
+                <name>html</name>
+                <href>../../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml</href>
+            </output-format>
+        </output-formats>
+        
+        <presentation-types>
+            <presentation-type>
+                <name>eppo</name>
+            </presentation-type>
+        </presentation-types>
         <default-topic-scope>spfe</default-topic-scope>
         <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>     
