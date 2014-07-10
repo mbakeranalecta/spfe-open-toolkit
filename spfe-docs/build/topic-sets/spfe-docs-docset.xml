@@ -16,10 +16,10 @@
                 </topic-type>
             
         </topic-types>
+        
         <output-formats>
             <output-format>
                 <name>html</name>
-                <href>../../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml</href>
             </output-format>
         </output-formats>
         

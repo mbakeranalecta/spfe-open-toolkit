@@ -42,6 +42,13 @@
             </topic-set>
         </topic-sets>
         
+        <output-formats>
+            <output-format>
+                <name>html</name>
+                <href>../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml</href>
+            </output-format>
+        </output-formats>
+        
         <subject-types>
             <subject-type>
                 <id>config-setting</id>
