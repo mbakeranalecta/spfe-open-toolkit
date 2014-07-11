@@ -16,7 +16,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subject-affinities-general.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subject-affinities-xml.xsd"/>
-    <xs:include schemaLocation="../../shared/schemas/subject-affinities-spfe-build.xsd"/>
+    <xs:include schemaLocation="../../generic-topic/schemas/subject-affinities-spfe-build.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/conditions.xsd"/>
     <xs:include

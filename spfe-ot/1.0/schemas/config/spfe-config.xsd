@@ -221,9 +221,11 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="name" type="output-format-name"/>
+              <xs:element name="presentation-type" type="xs:NMTOKEN"/>
               <xs:element name="scripts" type="scripts-type"/>
               <xs:element name="support-files" type="fileset-type"/>
             </xs:sequence>
+            <xs:attribute name="type"/>
           </xs:complexType>
         </xs:element>
       </xs:choice>

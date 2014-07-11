@@ -542,11 +542,11 @@
         <config-setting-description>
             <xpath>/spfe/object-type/scripts</xpath>
             <description>
-                <fragment id="scripts-description">
+                <fragment-ref id-ref="scripts-description">
                     <local-strings>
                         <string id="object-to-be-processed">an object type</string>
                     </local-strings>
-                </fragment>
+                </fragment-ref>
             </description>
             <values/>
             <restrictions/>
@@ -582,29 +582,6 @@
             <attributes/>
         </config-setting-description>
 
-        <config-setting-description>
-            <xpath>/spfe/object-type/scripts/format-book</xpath>
-            <description><fragment-ref id-ref="scripts-format-book-description"/></description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/object-type/scripts/format-book/script</xpath>
-            <description>
-                <fragment-ref id-ref="script-description">
-                    <local-strings>
-                        <string id="script-type">a book formatting</string>
-                    </local-strings>
-                </fragment-ref>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/format</xpath>
@@ -705,35 +682,7 @@
             <attributes/>
         </config-setting-description>
 
-        <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation-book
-            
-            
-            </xpath>
-            <description>
-                <fragment-ref id-ref="scripts-presentation-book-description"/>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation-book/script</xpath>
-            <description>
-                <fragment-ref id-ref="script-description">
-                    <local-strings>
-                        <string id="script-type">a book presentation</string>
-                    </local-strings>
-                </fragment-ref>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
+ 
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/presentation</xpath>
             <description>
@@ -1474,37 +1423,6 @@
             <attributes/>
         </config-setting-description>
 
-        <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/format-book</xpath>
-            <description>
-                <fragment id="scripts-format-book-description">
-                <p>A container for a list of formatting scripts for creating a book format of the
-                    topic set. Normally this script would produce an output in the input language of
-                    a rendering engine, such as XSL-FO or TeX. However, if you have written your own
-                    encoding script, then the formatting script should produce the input format
-                    expected by your encoding script.</p>
-                </fragment>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/format-book/script</xpath>
-            <description>
-                <fragment-ref id-ref="script-description">
-                    <local-strings>
-                        <string id="script-type">a book formatting</string>
-                    </local-strings>
-                </fragment-ref>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
 
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/format</xpath>
@@ -1622,36 +1540,6 @@
             <xpath>/spfe/topic-type/scripts/other/script</xpath>
             <description>
                 <p>The full path of a script that is part of the extra step.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation-book</xpath>
-            <description>
-                <fragment id="scripts-presentation-book-description">
-                <p>A container for a list of presentation script components for building a book presentation
-                    of the topic set. Usually there will be one script for the topic set as a whole
-                    and one script for each topic type in the script.</p>
-                </fragment>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation-book/script</xpath>
-            <description>
-                <fragment-ref id-ref="script-description">
-                    <local-strings>
-                        <string id="script-type">a book presentation</string>
-                    </local-strings>
-                </fragment-ref>
             </description>
             <values/>
             <restrictions/>
@@ -1829,11 +1717,11 @@
         <config-setting-description>
             <xpath>/spfe/output-format/scripts</xpath>
             <description>
-                <fragment id="scripts-description">
+                <fragment-ref id-ref="scripts-description">
                     <local-strings>
                         <string id="object-to-be-processed">an output type</string>
                     </local-strings>
-                </fragment>
+                </fragment-ref>
             </description>
             <values/>
             <restrictions/>
@@ -1867,29 +1755,6 @@
             <attributes/>
         </config-setting-description>
 
-        <config-setting-description>
-            <xpath>/spfe/output-format/scripts/format-book</xpath>
-            <description><fragment-ref id-ref="scripts-format-book-description"/></description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/output-format/scripts/format-book/script</xpath>
-            <description>
-                <fragment-ref id-ref="script-description">
-                    <local-strings>
-                        <string id="script-type">a book formatting</string>
-                    </local-strings>
-                </fragment-ref>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
 
         <config-setting-description>
             <xpath>/spfe/output-format/scripts/format</xpath>
@@ -1996,35 +1861,6 @@
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">an other processing</string>
-                    </local-strings>
-                </fragment-ref>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation-book
-            
-            
-            </xpath>
-            <description>
-                <fragment-ref id-ref="scripts-presentation-book-description"/>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation-book/script</xpath>
-            <description>
-                <fragment-ref id-ref="script-description">
-                    <local-strings>
-                        <string id="script-type">a book presentation</string>
                     </local-strings>
                 </fragment-ref>
             </description>
@@ -2150,5 +1986,216 @@
             <attributes></attributes>
         </config-setting-description>
         
+       
+        <config-setting-description>
+            <xpath>/spfe/topic-set/presentation-types</xpath>
+            <description>
+                <p>A container element for a list of <feature>presentation types</feature> to be generated for a topic set. A presentation type is a way of presenting content for use in a particular class of media (online vs. paper, top-down vs. bottom-up, etc.). A presentation type is expressed as a <feature>presentation schema</feature>. Each <feature>output format</feature> is written to format a particular presentation type. Therefore, you must ensure that there is an appropriate presentation type specified for each of the output formats you specify for a topic type. The output format configuration specifies the presentation format that it uses in the setting <config-setting>/spfe/output-format/presentation-type</config-setting>. In order to build a <feature>presentation</feature> of the specified type, there must be a set of <feature>presentation scripts</feature> for this presentation type for each <feature>topic type</feature> included in the <feature>topic set</feature>. The scripts for a presentation type are contained in a <config-setting>/spfe/topic-type/scripts/presentation</config-setting> element with a <config-setting xpath="/spfe/topic-type/scripts/presentation/@type">type</config-setting> attribute that matches the name of the presentation type, as specified in <config-setting>/spfe/topic-set/presentation-types/presentation-type/name</config-setting>.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-set/presentation-types/presentation-type</xpath>
+            <description>
+                <p>A container element for the <config-setting xpath="/spfe/topic-set/presentation-types/presentation-type/name">name</config-setting> of <feature>presentation type</feature>.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-set/presentation-types/presentation-type/name</xpath>
+            <description>
+                <p>The name of a <feature>presentation type</feature>.</p>
+            </description>
+            <values></values>
+            <restrictions>
+                <restriction>
+                    <p>An error will result if there is no <feature>presentation type</feature> specified for any <feature>output format</feature> used for the topic type. The presentation type used by an output format is specified in the setting <config-setting>/spfe/output-format/presentation-type</config-setting>.</p>
+                </restriction>
+            </restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/presentation-type</xpath>
+            <description>
+                <p>Specifies the <feature>presentation type</feature> used by an <feature>output format</feature>. This is used to enable the <feature>SPFE build system</feature> to select the right set of <feature>presentation files</feature> to feed to the <feature>format scripts</feature> for this output format. </p>
+            </description>
+            <values></values>
+            <restrictions>
+                <restriction>
+                <p>This value must match the value of a presentation type that is part of the build for each topic set. The presentation types available in the topic set build are specified by the setting <config-setting>/spfe/topic-set/presentation-types/presentation-type/name</config-setting>. </p>
+                </restriction>
+            </restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-set/output-formats</xpath>
+            <description>
+                <p>A container for a list of <feature>output formats</feature> to be created for the <feature>topic set</feature>. You should specify an output format for each of the output formats you want the <feature>SPFE build</feature> to create for a topic set. The scripts for an output format are contained in a <config-setting>/spfe/topic-type/scripts/format</config-setting> element with a <config-setting xpath="/spfe/topic-type/scripts/format/@type">type</config-setting> attribute that matches the name of the format type, as specified in <config-setting>/spfe/topic-set/output-formats/output-format/name</config-setting>.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-set/output-formats/output-format</xpath>
+            <description>
+                <p>A container for the <config-setting xpath="/spfe/topic-set/output-formats/output-format/name">name</config-setting> of a <feature>output format</feature>.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-set/output-formats/output-format/name</xpath>
+            <description>
+                <p>The name of an <feature>output format</feature>. The name forms part of the path to the output-format build directory, to separate it from other output format builds. It is also used to select the <feature>format scrips</feature> used to create the output format..</p>
+            </description>
+            <values></values>
+            <restrictions>
+                <restriction>
+                    <p>This value must match the value of a <config-setting>/spfe/topic-type/scripts/format/@type</config-setting> setting that specifies the scripts to use to build this <feature>output format</feature>.</p>
+                </restriction>
+            </restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/doc-set/subject-types</xpath>
+            <description>
+                <p>A container for a list of <feature>subject types</feature> used in the <feature>documentation set</feature>. Subject types are the classification of subjects referred to by <feature>subject affinity markup</feature> and used to <task>index topics</task>. The subject type listing is used to provide aliases for the subject types when the name of the subject types is displayed in the output. For example, in the SPFE documentation, SPFE configuration settings are marked up using the <xml-element-name>config-setting</xml-element-name> element. <quote>config-setting</quote> is thus a subject type in this documentation set. However, when the output explicitly refers to a configuration setting (for instance, in a <feature>list page</feature>) the string <quote>Configuration setting</quote> is used in the singular and <quote>Configuration settings</quote> is used in the plural. These string are generated based on the value of the <config-setting>/spfe/doc-set/subject-types/subject-type/aliases/singular</config-setting> and <config-setting>/spfe/doc-set/subject-types/subject-type/aliases/plural</config-setting> settings for the <quote>config-setting</quote> subject type, as defined in the <feature>configuration file</feature> for this <feature>documentation set</feature>.</p>
+                <codeblock>
+&lt;subject-types>
+    &lt;subject-type>
+        &lt;id>config-setting&lt;/id>
+        &lt;aliases>
+            &lt;singular>Configuration setting&lt;/singular>
+            &lt;plural>Configuration settings&lt;/plural>
+        &lt;/aliases>
+    &lt;/subject-type>
+...
+&lt;/subject-types>
+                </codeblock>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/doc-set/subject-types/subject-type</xpath>
+            <description>
+                <p>A container for a subject type listing.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/doc-set/subject-types/subject-type/id</xpath>
+            <description>
+                <p>The id of a subject type. This is identical to an item in the list of subject affinity values used in the <feature>topic index</feature>.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/doc-set/subject-types/subject-type/aliases</xpath>
+            <description>
+                <p>A container for a pair of <feature>subject type aliases</feature>.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/doc-set/subject-types/subject-type/aliases/singular</xpath>
+            <description>
+                <p>The singular version of a <feature>subject type alias</feature>.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/doc-set/subject-types/subject-type/aliases/plural</xpath>
+            <description>
+                <p>The plural version of a <feature>subject type alias</feature>.</p>         
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>script/remap-namespace</xpath>
+            <description>
+                <p>Instructs the SPFE build to <task>remap the namespace declarations</task> in an included script file. Instances of an xmlns namespace declaration or a <xml-attribute-name namespace-uri="http://www.w3.org/1999/XSL/Transform" xpath="/stylesheet/@xpath-default-namespace">xpath-default-namespace</xml-attribute-name> declaration with the namespace URI specified by <config-setting>from</config-setting> are changed to the namespace URI specified by <config-setting>to</config-setting>. A separate copy of the imported stylesheet will be included for each namespace remapping found for all <feature>topic types</feature> in a <feature>topic set</feature>. This allows you to borrow the same topic structures and scripts in several topic types and have them all processed using their correct namespaces.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>script/remap-namespace/from</xpath>
+            <description>
+                <p>The namespace URI to be matched in the included stylesheet. It will be replaced by the namespace URI specified by <config-setting>to</config-setting>.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>script/remap-namespace/to</xpath>
+            <description>
+                <p>The namespace URI to be used to replace the namespace URI specified by <config-setting>from</config-setting> in an included stylesheet.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>script/href</xpath>
+            <description>
+                <p>Specifies the location of the stylesheet file to be included. You may specify either a relative or absolute local path, or a URL. If a URL is used, the SPFE build will use any XML catalogs available to it to resolve the location of the script. For the sake of portability, you should use a URL whenever possible. If it is not possible to use a URL, use a relative path wherever possible.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
     </body>
 </config-setting-descriptions>

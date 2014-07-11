@@ -9,12 +9,12 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/programming.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphics.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/graphics.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/fragments.xsd"/>
     <xs:include schemaLocation="strings.xsd"/>
     <xs:group name="text-general">
-        <xs:sequence >
+        <xs:sequence>
             <xs:choice maxOccurs="1" minOccurs="1">
                 <xs:group ref="paragraphs" maxOccurs="1" minOccurs="1"/>
                 <xs:group ref="fragments" maxOccurs="1" minOccurs="1"/>
