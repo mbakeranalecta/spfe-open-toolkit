@@ -2155,9 +2155,11 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>script/remap-namespace</xpath>
+            <xpath>/spfe/topic-type/scripts/extract/script/remap-namespace</xpath>
             <description>
+                <fragment id="remap-namespace-description">
                 <p>Instructs the SPFE build to <task>remap the namespace declarations</task> in an included script file. Instances of an xmlns namespace declaration or a <xml-attribute-name namespace-uri="http://www.w3.org/1999/XSL/Transform" xpath="/stylesheet/@xpath-default-namespace">xpath-default-namespace</xml-attribute-name> declaration with the namespace URI specified by <config-setting>from</config-setting> are changed to the namespace URI specified by <config-setting>to</config-setting>. A separate copy of the imported stylesheet will be included for each namespace remapping found for all <feature>topic types</feature> in a <feature>topic set</feature>. This allows you to borrow the same topic structures and scripts in several topic types and have them all processed using their correct namespaces.</p>
+                </fragment>
             </description>
             <values></values>
             <restrictions></restrictions>
@@ -2166,9 +2168,11 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>script/remap-namespace/from</xpath>
+            <xpath>/spfe/topic-type/scripts/extract/script/remap-namespace/from</xpath>
             <description>
-                <p>The namespace URI to be matched in the included stylesheet. It will be replaced by the namespace URI specified by <config-setting>to</config-setting>.</p>
+                <fragment id="remap-namespace-from-description">
+                    <p>The namespace URI to be matched in the included stylesheet. It will be replaced by the namespace URI specified by <config-setting>to</config-setting>.</p>
+                </fragment>
             </description>
             <values></values>
             <restrictions></restrictions>
@@ -2177,9 +2181,11 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>script/remap-namespace/to</xpath>
+            <xpath>/spfe/topic-type/scripts/extract/script/remap-namespace/to</xpath>
             <description>
-                <p>The namespace URI to be used to replace the namespace URI specified by <config-setting>from</config-setting> in an included stylesheet.</p>
+                <fragment id="remap-namespace-to-description">
+                    <p>The namespace URI to be used to replace the namespace URI specified by <config-setting>from</config-setting> in an included stylesheet.</p>
+                </fragment>
             </description>
             <values></values>
             <restrictions></restrictions>
@@ -2188,14 +2194,886 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>script/href</xpath>
+            <xpath>/spfe/topic-type/scripts/extract/script/href</xpath>
             <description>
-                <p>Specifies the location of the stylesheet file to be included. You may specify either a relative or absolute local path, or a URL. If a URL is used, the SPFE build will use any XML catalogs available to it to resolve the location of the script. For the sake of portability, you should use a URL whenever possible. If it is not possible to use a URL, use a relative path wherever possible.</p>
+                <fragment id="script-href-description">
+                    <p>Specifies the location of the stylesheet file to be included. You may specify either a relative or absolute local path, or a URL. If a URL is used, the SPFE build will use any XML catalogs available to it to resolve the location of the script. For the sake of portability, you should use a URL whenever possible. If it is not possible to use a URL, use a relative path wherever possible.</p>
+                </fragment>
             </description>
             <values></values>
             <restrictions></restrictions>
             <build-property></build-property>
             <attributes></attributes>
         </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/synthesis/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/synthesis/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/synthesis/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/synthesis/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/link-catalog/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/link-catalog/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/link-catalog/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/link-catalog/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+
+
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/toc/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/toc/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/toc/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/toc/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/image-list/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/image-list/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/image-list/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/image-list/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/presentation/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/presentation/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/presentation/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/presentation/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+
+
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/format/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/format/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/format/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/format/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/other/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/other/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/other/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/topic-type/scripts/other/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+
+
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/synthesis/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/synthesis/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/synthesis/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/synthesis/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/link-catalog/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/link-catalog/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/link-catalog/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/link-catalog/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/toc/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/toc/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/toc/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/toc/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/image-list/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/image-list/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/image-list/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/image-list/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/presentation/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/presentation/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/presentation/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/presentation/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/format/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/format/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/format/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/format/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/other/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/other/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/other/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/other/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/synthesis/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/synthesis/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/synthesis/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/synthesis/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/link-catalog/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/link-catalog/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/link-catalog/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/link-catalog/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/toc/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/toc/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/toc/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/toc/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/image-list/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/image-list/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/image-list/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/image-list/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/presentation/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/presentation/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/presentation/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/presentation/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/format/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/format/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/format/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/format/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/other/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/other/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/other/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/other/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/extract/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/extract/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/extract/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/object-type/scripts/extract/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/extract/script/remap-namespace</xpath>
+            <description><fragment-ref id-ref="remap-namespace-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/extract/script/remap-namespace/from</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/extract/script/remap-namespace/to</xpath>
+            <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
+            <xpath>/spfe/output-format/scripts/extract/script/href</xpath>
+            <description><fragment-ref id-ref="script-href-description"/></description>
+            <values></values>
+            <restrictions></restrictions>
+            <build-property></build-property>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        
+        
+        
     </body>
 </config-setting-descriptions>
