@@ -530,7 +530,11 @@
 	</target>
 
 	<!-- FINAL -->
-	<target name="final" depends="-init, -final"/>
+	<target name="final" depends="-init">
+		<touch file="${temp}/incomplete.flag" mkdirs="true"/>
+		<antcall target="-final"/>
+		<delete file="${temp}/incomplete.flag"/>
+	</target>
 	<target name="-final" depends="-build.format" description="Build the final online output."/>
 
 	<target name="-is-draft">
