@@ -83,6 +83,11 @@
     </head>
     <body>
         <title>Build directory structure</title>
+        <fragment-ref id-ref="my-fragment">
+            <local-strings>
+                <string id="my-local-string"><bold>the local string from the topic file</bold></string>
+            </local-strings>
+        </fragment-ref>
         <p>The build systems produces a directory structure inside the build directory. Understanding the build directory structure can help you debug problems with the build.</p>
         
         <p>By default, the build directory is named <directory-name>spfebuild</directory-name> and is created in the user's home directory. You can change the location of the build directory by setting the environment variable <code>SPFE_BUILD_DIR</code>.</p>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fragments xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic file:/C:/Users/Mark/spfe-open-toolkit/spfe-docs/topic-types/fragments-file/schemas/fragments-file.xsd">
+    <head>
+        <id>fragments-test</id>
+        <history>
+            <revision>
+                <date>2014-07-21</date>
+                <author>mbaker</author>
+                <comment>test file</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+    </head>
+    <body>
+        <fragment id="my-fragment">
+            <local-strings>
+                <string id="my-local-string">the local string from the fragments file</string>
+            </local-strings>
+            <p>This is a fragment that contains <string-ref id-ref="my-local-string"/>.</p>
+        </fragment>
+    </body>
+</fragments>

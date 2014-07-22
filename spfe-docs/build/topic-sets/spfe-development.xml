@@ -39,6 +39,7 @@
         <sources>
             <authored-content>
                 <include>../../content/text/development/*.xml</include>
+                <include>../../content/text/fragments/*.xml</include>
             </authored-content>
         </sources>
 
