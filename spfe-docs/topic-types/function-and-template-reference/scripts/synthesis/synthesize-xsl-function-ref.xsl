@@ -17,7 +17,7 @@ exclude-result-prefixes="#all" >
 	
 <xsl:variable name="fragments" select="$function-source//fd:fragment"/>
 <!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
-	<xsl:variable name="strings" as="element()*">
+<xsl:variable name="strings" as="element()*">
 	<xsl:for-each select="$function-source//fd:string[not(parent::fd:string-ref)], $config/config:string">
 		<!-- remove them from source namespace -->
 		<string>

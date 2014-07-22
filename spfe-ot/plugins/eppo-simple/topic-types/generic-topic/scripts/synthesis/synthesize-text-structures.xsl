@@ -84,7 +84,7 @@
 		<xsl:choose>
 			<xsl:when test="$fragment-count = 1">
 				<xsl:apply-templates select="$matching-fragment/*">
-					<xsl:with-param name="in-scope-strings" select="local-strings/string, $matching-fragment/local-strings/string, $in-scope-strings" tunnel="yes"/>
+					<xsl:with-param name="in-scope-strings" select="local-strings/string, $matching-fragment/*:local-strings/*:string, $in-scope-strings" tunnel="yes"/>
 				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:when test="$fragment-count gt 1">

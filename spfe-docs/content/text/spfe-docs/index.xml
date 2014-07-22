@@ -24,5 +24,15 @@
     <body>
         <title>SPFE Documentation</title>
         <p>The SPFE Documentation includes information on the <feature>SPFE Open Toolkit</feature> and the <feature>EPPO Simple schema set</feature>.</p>
+        <fragment-ref id-ref="my-fragment">
+            
+        </fragment-ref>
+        
+        <fragment-ref id-ref="my-fragment">
+            <local-strings>
+                <string id="my-local-string"><bold>the local string from the topic file</bold></string>
+            </local-strings>
+        </fragment-ref>
+        
     </body>
 </docset-home-topic>

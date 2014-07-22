@@ -9,6 +9,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
     exclude-result-prefixes="#all">
-    
+    <!-- This is simply to suppress the error that would be raised if nothing matched the 
+         root element of the fragments file. All fragments across the synthesis files are
+         read by one script to create a fragments database.
+    -->
     <xsl:template match="fragments"/>
+
 </xsl:stylesheet>

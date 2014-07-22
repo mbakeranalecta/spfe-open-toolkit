@@ -35,6 +35,7 @@
     </head>
     <body>
         <title>How the build system works</title>
+        
         <p>The SPFE build system has a modular architecture with four major layers, <feature>synthesis</feature>, <feature>presentation</feature>, <feature>formatting</feature>, and <feature>encoding</feature>.</p>
         <fig href="../../graphics/SPFE-flow.png">
             <title>The SPFE build system</title>

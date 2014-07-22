@@ -25,7 +25,7 @@
 	<xsl:variable name="topics" select="sf:get-sources($authored-content-files)"/>
 	
 	<!-- FIXME: Need to settle the story on fragments and namespaces.  -->
-	<xsl:variable name="fragments" select="$topics//*:fragment"/>
+	<xsl:variable name="fragments" select="$topics/*:fragments/*:body/*:fragment"/>
 	
 	<xsl:param name="default-topic-scope"/>
 	<xsl:param name="topic-set-id"/>
