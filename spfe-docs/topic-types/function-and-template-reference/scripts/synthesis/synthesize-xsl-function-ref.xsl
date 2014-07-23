@@ -15,17 +15,13 @@ xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
 xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
 exclude-result-prefixes="#all" >
 	
-<xsl:variable name="fragments" select="$function-source//fd:fragment"/>
-<!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
-<xsl:variable name="strings" as="element()*">
-	<xsl:for-each select="$function-source//fd:string[not(parent::fd:string-ref)], $config/config:string">
-		<!-- remove them from source namespace -->
-		<string>
-			<xsl:copy-of select="@*"/>
-			<xsl:copy-of select="./node()"/>
-		</string>
-	</xsl:for-each>
-</xsl:variable>
+
+	<xsl:variable 
+		name="strings" 
+		select="
+		$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
+		$config/config:doc-set/config:strings/config:string"
+		as="element()*"/>
 
 <xsl:output method="xml" indent="yes" />
 	

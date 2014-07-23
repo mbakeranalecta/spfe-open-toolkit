@@ -18,7 +18,7 @@
             <local-strings>
                 <string id="my-local-string">the local string from the fragments file</string>
             </local-strings>
-            <p>This is a fragment that contains <string-ref id-ref="my-local-string"/>.</p>
+            <p>This is a fragment that contains <string-ref id-ref="my-local-string"/>. It also references a global string, <string-ref id-ref="eppo-simple-topic-set-product"/></p>
         </fragment>
     </body>
 </fragments>

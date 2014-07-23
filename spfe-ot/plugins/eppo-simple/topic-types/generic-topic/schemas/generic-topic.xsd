@@ -32,6 +32,7 @@
             <xs:group ref="text-decoration"/>
             <xs:group ref="subject-affinities-general"/>
             <xs:group ref="resources"/>
+            <xs:group ref="strings"/>
         </xs:choice>
     </xs:group>
 

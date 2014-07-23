@@ -24,8 +24,18 @@
 	<xsl:param name="authored-content-files"/>
 	<xsl:variable name="topics" select="sf:get-sources($authored-content-files)"/>
 	
-	<!-- FIXME: Need to settle the story on fragments and namespaces.  -->
+	
 	<xsl:variable name="fragments" select="$topics/*:fragments/*:body/*:fragment"/>
+	
+	
+	<xsl:variable 
+		name="strings" 
+		select="
+			$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
+			$config/config:doc-set/config:strings/config:string"
+		as="element()*"/>
+		
+	
 	
 	<xsl:param name="default-topic-scope"/>
 	<xsl:param name="topic-set-id"/>
@@ -41,7 +51,10 @@ Main template
 		<!-- Create the root "synthesis element" -->
 		<xsl:result-document href="file:///{$output-directory}/synthesis.xml" method="xml" indent="no" omit-xml-declaration="no">
 			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$topic-set-id}" title="{sf:string($config//config:strings, 'eppo-simple-topic-set-product')} {sf:string($config//config:strings, 'eppo-simple-topic-set-release')}"> 
-				<xsl:apply-templates select="$topics"/>
+				<xsl:apply-templates select="$topics">
+					<xsl:with-param name="in-scope-strings" select="$strings" tunnel="yes"/>
+					<xsl:with-param name="in-scope-fragments" select="$fragments" tunnel="yes"/>
+				</xsl:apply-templates>
 			</ss:synthesis>
 		</xsl:result-document>
 	</xsl:template>

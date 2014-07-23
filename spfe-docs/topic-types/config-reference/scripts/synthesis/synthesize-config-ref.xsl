@@ -15,23 +15,12 @@
 
 	<xsl:param name="topic-set-id"/>
 
-	<xsl:variable name="fragments" select="$config-setting-source//ed:fragment"/>
-
-	<!-- synthesize-strings does not make any presumptions about where to look for strings, so we define $strings here -->
-	<xsl:variable name="strings" as="element()*">
-		<xsl:for-each
-			select="
-		$config-setting-source//ed:string[not(parent::ed:local-strings)],
+	<xsl:variable 
+		name="strings" 
+		select="
 		$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
-		$config/config:doc-set/config:strings/config:string
-		">
-			<!-- remove them from source namespace -->
-			<string>
-				<xsl:copy-of select="@*"/>
-				<xsl:copy-of select="./node()"/>
-			</string>
-		</xsl:for-each>
-	</xsl:variable>
+		$config/config:doc-set/config:strings/config:string"
+		as="element()*"/>
 
 	<xsl:output method="xml" indent="yes"/>
 

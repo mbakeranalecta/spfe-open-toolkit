@@ -77,9 +77,11 @@
 
 
 	<xsl:template match="fragment-ref">
+		<xsl:param name="in-scope-fragments" as="element()*" tunnel="yes"/>
 		<xsl:param name="in-scope-strings" as="element()*" tunnel="yes" />
 		<xsl:variable name="fragment-id" select="@id-ref"/>
-		<xsl:variable name="matching-fragment" select="$fragments[@id=$fragment-id]"/>
+		<xsl:variable name="local-fragments" select="/*//fragment, $in-scope-fragments"/>
+		<xsl:variable name="matching-fragment" select="$local-fragments[@id=$fragment-id]"/>
 		<xsl:variable name="fragment-count" select="count($matching-fragment)"/>	
 		<xsl:choose>
 			<xsl:when test="$fragment-count = 1">

@@ -36,6 +36,7 @@
             <xs:group ref="subject-affinities-spfe-build"/>
             <xs:group ref="subject-affinities-xml"/>
             <xs:group ref="resources"/>
+            <xs:group ref="strings"/>
         </xs:choice>
     </xs:group>
 
