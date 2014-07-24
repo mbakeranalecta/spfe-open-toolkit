@@ -33,16 +33,6 @@
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</href>
                 </script>
-                <!-- We include the synthsize-text-structures file twice with different remappings, because the fragments 
-                     file contains strings in the generic topic namespace
-                -->
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</href>
-                </script>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/docset-home-topic/scripts/synthesis/docset-home-topic-synthesis.xsl</href>
                 </script>
@@ -84,13 +74,15 @@
                         <!-- We remap to generic-topic here because that is what the fragments file is witten in. -->
                         <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</to>
                         
-                    </remap-namespace>                   <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/synthesis/synthesis-fragments.xsl</href>
+                    </remap-namespace>                   
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/synthesis/synthesis-fragments.xsl</href>
                 </script>                
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
                         <to>http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic</to>
-                    </remap-namespace>                   <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-strings.xsl</href>
+                    </remap-namespace>                   
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-strings.xsl</href>
                 </script>
                 <!-- We include the synthesis-strings file twice with different remappings, because the fragments 
                      file contains strings in the generic topic namespace
@@ -99,7 +91,18 @@
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
                         <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</to>
-                    </remap-namespace>                   <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-strings.xsl</href>
+                    </remap-namespace>                   
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-strings.xsl</href>
+                </script>
+                <!-- We include the synthsize-text-structures file twice with different remappings, because the fragments 
+                     file contains strings in the generic topic namespace
+                -->
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</href>
                 </script>
                 
             </synthesis>
