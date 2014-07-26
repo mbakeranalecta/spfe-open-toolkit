@@ -105,7 +105,7 @@ Content fix-up templates
 	<!-- Fix up element name xpaths. Raise priority to avoid collision with default config-setting template -->
 	<xsl:template match="config-setting" priority="1">
 		<xsl:variable name="context-element"
-			select="ancestor::config-setting-description/normalize-space(xpath)"/>
+			select="ancestor::spfe-configuration-reference-entry/normalize-space(xpath)"/>
 		<xsl:variable name="data-content" select="."/>
 		<xsl:variable name="xpath" select="@xpath"/>
 		<xsl:variable name="all-elements"
