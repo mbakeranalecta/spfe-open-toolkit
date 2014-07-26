@@ -86,7 +86,7 @@ Main template
 			  file="{@local-name}.html"
 			  topic-type="{if (@virtual-type) then @virtual-type else @type}" 
 			  topic-type-alias="{@topic-type-alias}"
-			  link-priority="{sf:get-topic-link-priority(@type,parent::ss:synthesis/@topic-set-id, $config)}"
+			  link-priority="{sf:get-topic-link-priority(@type, parent::ss:synthesis/@topic-set-id, $config)}"
 			  excerpt="{@excerpt}">
 			<xsl:choose>
 				<xsl:when test="@scope">

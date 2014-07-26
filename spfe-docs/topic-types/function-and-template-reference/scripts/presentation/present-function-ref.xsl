@@ -157,6 +157,7 @@
 		</page>
 	</xsl:template>
 
+	<!-- Add links to code samples -->
 	<xsl:template match="xsl:*">
 		<xsl:variable name="function-prefix" select="string(ancestor::ss:topic//local-prefix)"/>
 		<xsl:variable name="current-page-name" select="ancestor::ss:topic/@full-name"/>

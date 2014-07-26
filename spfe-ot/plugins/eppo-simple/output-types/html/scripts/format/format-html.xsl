@@ -261,8 +261,7 @@
 				<xsl:sequence select="$fig//gr:format[gr:type/text() eq $format]"/>
 			</xsl:for-each>
 		</xsl:variable>
-		<xsl:message select="'preferred-formats', $preferred-formats"/>
-		<xsl:message select="'$available-preferred-formats', $available-preferred-formats"/>
+
 		<!-- FIXME: should test for no match, and decide what to do if unexpected format provided -->
 		<xsl:variable name="graphic-file-name" select="sf:get-file-name-from-path($available-preferred-formats/gr:format[1]/gr:href)"/>
 		<!-- FIXME: image directory location should probably be configurable -->

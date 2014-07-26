@@ -18,10 +18,7 @@
 	
 <xsl:output method="xml" indent="yes" />
 
-<xsl:param name="extracted-content-files"/>
-<xsl:variable name="list-of-topic-subjects" select="sf:get-sources($extracted-content-files)"/>
 
-<!-- There is currently no authored content for the subject list topic set -->
 <xsl:param name="authored-content-files"/>
 <xsl:variable name="authored-content" select="sf:get-sources($authored-content-files)"/>
 
@@ -37,7 +34,7 @@ Main template
 -->
 	
 <xsl:template name="main">
-
+	
 	<!-- Create the topic set -->
 		<xsl:result-document 
 			 method="xml" 
@@ -49,7 +46,7 @@ Main template
 				topic-set-id="{$topic-set-id}" 
 				title="{sf:string($config//config:strings, 'eppo-simple-topic-set-product')} {sf:string($config//config:strings, 'eppo-simple-topic-set-release')}"> 
 				<!-- Only build list pages for subjects with more than one topic -->
-				<xsl:apply-templates select="$list-of-topic-subjects//stl:subject-topic-list[stl:topics-on-subject/stl:topic[2]]"/>
+				<xsl:apply-templates select="$authored-content//stl:subject-topic-list[stl:topics-on-subject/stl:topic[2]]"/>
 			</ss:synthesis>
 		</xsl:result-document>
 </xsl:template>

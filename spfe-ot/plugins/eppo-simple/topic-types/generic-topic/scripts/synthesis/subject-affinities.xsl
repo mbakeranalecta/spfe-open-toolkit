@@ -6,7 +6,7 @@
     xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
     version="2.0">
     
-    <xsl:template match="body//task">
+    <xsl:template match="task">
         <subject-affinity>
             <xsl:attribute name="type">task</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -14,7 +14,7 @@
         </subject-affinity>
     </xsl:template>
     
-    <xsl:template match="body//term">
+    <xsl:template match="term">
         <subject-affinity>
             <xsl:attribute name="type">term</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -22,7 +22,7 @@
         </subject-affinity>
     </xsl:template>
     
-    <xsl:template match="body//feature">
+    <xsl:template match="feature">
         <subject-affinity>
             <xsl:attribute name="type">feature</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>

@@ -87,6 +87,13 @@ Main content processing templates
              <xsl:apply-templates select="@* | node()" />
          </xsl:copy>
  </xsl:template>
+	
+	<!-- Avoid xpath being matched by subject affinity markup rules. -->
+	<xsl:template match="spfe-configuration-reference-entry/xpath">
+		<xsl:copy>
+			<xsl:apply-templates select="@* | node()" />
+		</xsl:copy>
+	</xsl:template>
 	<!-- 
 =================================
 Content fix-up templates
