@@ -6,7 +6,7 @@
     xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic"
     version="2.0">
 
-    <xsl:template match="config-setting">
+    <xsl:template match="p/config-setting | string/config-setting">
         <name>
             <xsl:attribute name="type">config-setting</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
@@ -15,7 +15,7 @@
         </name>
     </xsl:template>    
     
-    <xsl:template match="ant-element">
+    <xsl:template match="p/ant-element | string/ant-element">
         <name>
             <xsl:attribute name="type">xpath</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
@@ -24,7 +24,7 @@
         </name>
     </xsl:template> 
     
-    <xsl:template match="spfe-build-property">
+    <xsl:template match="p/spfe-build-property | string/spfe-build-property">
         <name>
             <xsl:attribute name="type">spfe-build-property</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -32,7 +32,7 @@
         </name>
     </xsl:template>
 
-    <xsl:template match="spfe-build-function">
+    <xsl:template match="p/spfe-build-function | string/spfe-build-function">
         <name>
             <xsl:attribute name="type">spfe-build-function</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -40,7 +40,7 @@
         </name>
     </xsl:template>
     
-    <xsl:template match="spfe-build-variable">
+    <xsl:template match="p/spfe-build-variable | string/spfe-build-variable">
         <name>
             <xsl:attribute name="type">spfe-build-variable</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -48,7 +48,7 @@
         </name>
     </xsl:template>
     
-    <xsl:template match="spfe-build-script">
+    <xsl:template match="p/spfe-build-script | string/spfe-build-script">
         <name>
             <xsl:attribute name="type">spfe-build-script</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>

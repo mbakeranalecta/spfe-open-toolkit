@@ -6,7 +6,7 @@
     xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
     version="2.0">
     
-    <xsl:template match="task">
+    <xsl:template match="p/task | string/task">
         <subject-affinity>
             <xsl:attribute name="type">task</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -14,7 +14,7 @@
         </subject-affinity>
     </xsl:template>
     
-    <xsl:template match="term">
+    <xsl:template match="p/term | string/term">
         <subject-affinity>
             <xsl:attribute name="type">term</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -22,7 +22,7 @@
         </subject-affinity>
     </xsl:template>
     
-    <xsl:template match="feature">
+    <xsl:template match="p/feature | string/feature">
         <subject-affinity>
             <xsl:attribute name="type">feature</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -30,7 +30,7 @@
         </subject-affinity>
     </xsl:template>
 
-    <xsl:template match="xml-element-name">
+    <xsl:template match="p/xml-element-name | string/xml-element-name">
         <name>
             <xsl:attribute name="type">xpath</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
@@ -41,7 +41,7 @@
         </name>
     </xsl:template>    
     
-    <xsl:template match="xml-attribute-name">
+    <xsl:template match="p/xml-attribute-name | string/xml-attribute-name">
         <name>
             <xsl:attribute name="type">xpath</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
@@ -52,7 +52,7 @@
         </name>
     </xsl:template>   
     
-    <xsl:template match="xpath">
+    <xsl:template match="p/xpath | string/xpath">
         <name>
             <xsl:attribute name="type">xpath</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -64,7 +64,7 @@
     </xsl:template>
 
 
-    <xsl:template match="xslt-function-name">
+    <xsl:template match="p/xslt-function-name | string/xslt-function-name">
         <name>
             <xsl:attribute name="type">xslt-function-name</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -75,7 +75,7 @@
         </name>
     </xsl:template>   
     
-    <xsl:template match="xslt-template-name">
+    <xsl:template match="p/xslt-template-name | string/xslt-template-name">
         <name>
             <xsl:attribute name="type">xslt-template-name</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -87,7 +87,7 @@
     </xsl:template>   
     
 
-    <xsl:template match="xslt-function-parameter-name">
+    <xsl:template match="p/xslt-function-parameter-name | string/xslt-function-parameter-name">
         <name>
             <xsl:attribute name="type">xpath</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
@@ -98,7 +98,7 @@
         </name>
     </xsl:template>   
     
-    <xsl:template match="xslt-template-parameter-name">
+    <xsl:template match="p/xslt-template-parameter-name | string/xslt-template-parameter-name">
         <name>
             <xsl:attribute name="type">xslt-template-parameter-name</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
@@ -109,12 +109,13 @@
         </name>
     </xsl:template>   
     
-    <xsl:template match="directory-name
-                       | document-name
-                       | file-name
-                       | product-name
-                       | tool-name
-                       | xml-namespace-uri
+    <xsl:template match="
+        p/directory-name  | string/directory-name
+        | p/document-name  | string/document-name
+        | p/file-name  | string/file-name
+        | p/product-name  | string/product-name
+        | p/tool-name  | string/tool-name
+        | p/xml-namespace-uri  | string/xml-namespace-uri
                        ">
         <name>
             <xsl:attribute name="type" select="local-name()"/>
