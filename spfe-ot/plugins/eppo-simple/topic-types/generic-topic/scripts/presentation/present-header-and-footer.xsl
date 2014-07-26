@@ -29,9 +29,7 @@
             <p>
                 <xref target="{$doc-set-index-file}" >Home</xref>   
                 | 
-                <xref target="{$doc-set-toc-file}">
-                    <xsl:value-of select="$doc-set-title"/>   
-                </xref>
+                <xref target="{$doc-set-toc-file}">TOC</xref>
                 
                 <xsl:if test="not($is-home-topic-set)">
                     >      

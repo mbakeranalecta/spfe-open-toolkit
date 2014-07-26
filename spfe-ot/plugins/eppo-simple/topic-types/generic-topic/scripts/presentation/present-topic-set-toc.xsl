@@ -92,7 +92,7 @@
 
         <page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
-            <title>List of topics in <xsl:value-of select="$topic-set-title"></xsl:value-of></title>        
+            <title><xsl:value-of select="$topic-set-title"></xsl:value-of></title>        
             <xsl:apply-templates select="$toc"/>
             <xsl:call-template name="show-footer"/>		
         </page>

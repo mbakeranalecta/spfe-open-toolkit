@@ -9,8 +9,8 @@
         <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</xmlns>
         <topic-type-link-priority>0</topic-type-link-priority>
         <aliases>
-            <singular>List of topics on a subject</singular>
-            <plural>Lists of topics on a subject</plural>
+            <singular>A list of topics on a subject</singular>
+            <plural>Lists of topics on particular subjects</plural>
         </aliases>
         <scripts>
             <extract>
