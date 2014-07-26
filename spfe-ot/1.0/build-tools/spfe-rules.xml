@@ -169,6 +169,7 @@
 	<macrodef name="build.extracted-content" description="extract content from source files">
 		<attribute name="topic-set-id"/>
 		<attribute name="style"/>
+		<attribute name="output-directory"/>
 		<element name="files-elements"/>
 		<sequential>
 			<local name="sources-to-extract-content-from"/>
@@ -179,6 +180,7 @@
 				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/extracted.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<param name="output-directory" expression="@{output-directory}"/>
 					<param name="sources-to-extract-content-from"	expression="${sources-to-extract-content-from}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 					<param name="draft" expression="${draft}" if="draft"/>
@@ -194,40 +196,62 @@
 	</macrodef>
 
 
-	<!-- SYNTHESIS STEP -->
-	<target name="-build.synthesis" depends="--build.synthesis"/>
-	<!-- macro to build synthesis -->
-	<macrodef name="build.synthesis" description="synthesis">
+	<!-- MERGE STEP -->
+	<target name="-build.merge" />
+	<!-- macro to merge extracted contet with authored content -->
+	<macrodef name="build.merge" description="merge">
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
-		<attribute name="authored-content-files" default=""/>
+		<attribute name="output-directory"/>
+		<element name="files-elements"/>
 		<sequential>
-			<echo>Building synthesis for @{topic-set-id}.</echo>
-			<!-- run the XSLT script to produce the output -->
-			
-			<local name="extracted-files"/>
-			<local name="extracted-files-list"/>
-			<fileset id="extracted-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
-				<include name="extracted/*.xml"/>
-			</fileset>
-			<pathconvert dirsep="/" pathsep=";" property="extracted-files-list"
-				refid="extracted-files"/>
-			
+			<local name="extracts-to-merge-content-with"/>
+			<local name="authored-content-files"/>
+			<files-elements/>
+			<echo>Building merge for @{topic-set-id}.</echo>
 			<saxon-xslt 
 				style="@{style}" 
 				in="${spfe.config-file}"
-				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/merge.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="authored-content-files" expression="@{authored-content-files}"/>
-					<param name="extracted-content-files" expression="${extracted-files-list}"/>
+					<param name="output-directory" expression="@{output-directory}"/>
+					<param name="authored-content-files" expression="${authored-content-files}"/>
+					<param name="extracted-content-files" expression="${extracts-to-merge-content-with}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 					<param name="draft" expression="${draft}" if="draft"/>
 				</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
-
+	
+	<!-- SYNTHESIS STEP -->
+	<target name="-build.synthesis" depends="--build.synthesis"/>
+	<!-- macro to build synthesis -->
+	<macrodef name="build.synthesis" description="synthesis">
+		<attribute name="style"/>
+		<attribute name="topic-set-id"/>
+		<attribute name="output-directory"/>
+		<element name="files-elements"/>
+		<sequential>
+			<echo>Building synthesis for @{topic-set-id}.</echo>
+			<!-- run the XSLT script to produce the output -->
+			<local name="authored-content-files"/>
+			<files-elements/>
+			<saxon-xslt 
+				style="@{style}" 
+				in="${spfe.config-file}"
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag">
+				<params>
+					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<param name="authored-content-files" expression="${authored-content-files}"/>
+					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
+					<param name="draft" expression="${draft}" if="draft"/>
+				</params>
+			</saxon-xslt>
+		</sequential>
+	</macrodef>
+	
 
 	<!-- LINK CATALOG STEP -->
 
@@ -246,6 +270,7 @@
 		unless="-current.link-catalog">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
+		<attribute name="output-directory"/>
 		<sequential>
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
@@ -275,6 +300,7 @@
 		<!-- FIXME		depends="  -current.link-catalog" unless="-current.link-catalog">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
+		<attribute name="output-directory"/>
 		<sequential>
 			
 			<local name="synthesis-files"/>
@@ -299,7 +325,7 @@
 	</macrodef>
 
 
-	<!-- PRESENTATION WEB STEP -->
+	<!-- PRESENTATION STEP -->
 
 
 	<!-- check to see if the html-presentation is up to date -->
@@ -353,10 +379,6 @@
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
-
-	<!-- PRESENTATION BOOK STEP -->
-
-
 
 	<!-- FORMAT STEP -->
 
@@ -423,10 +445,6 @@
 		</sequential>
 	</macrodef>
 	
-	<!-- FORMAT FO STEP -->
-	<!-- FIXME: Need to make sure this is non-intersecting with the web presentation files -->
-
-
 
 	<!-- ENCODE PDF STEP -->
 
@@ -499,20 +517,6 @@
 	<!-- USER COMMANDS -->
 	<!--===============-->
 
-	<!-- ZIP -->
-	<target name="zip" depends="-init">
-		<antcall target="-zip"/>
-	</target>
-
-	<!--	<target name="-zip" depends="-final, pdf">
-		<mkdir dir="${spfe.directories.output.zip}"/>
-		<basename property="zip-prefix" file=""/>
-		<echo message="Zipping ${output}"/>
-		<zip destfile="${spfe.directories.output.zip}/${spfe.zip-file-name}">
-			<zipfileset dir="${output}" prefix="${zip-prefix}"/>
-		</zip>
-	</target>
--->
 
 	<!-- DRAFT -->
 	<target name="draft" depends="-init">
@@ -541,15 +545,6 @@
 		<available property="is-draft" file="${temp}/draft.flag"/>
 	</target>
 
-	<!-- CLEAN -->
-	<target name="clean" depends="-init, -clean"/>
-
-	<target name="-clean" description="Clean build directory.">
-		<retry retrycount="32" retrydelay="100">
-			<delete dir="${spfe.docset-build-root-directory}/build" deleteonexit="true"
-				performGCOnFailedDelete="true"/>
-		</retry>
-	</target>
 
 	<!--	<!-\- WIP -\->
 	<target name="wip" depends="-init, draft, pdf, -wip"/>

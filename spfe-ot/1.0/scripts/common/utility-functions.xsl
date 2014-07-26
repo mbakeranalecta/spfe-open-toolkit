@@ -532,10 +532,20 @@
 		<xsl:param name="topic-namespace-uri"/>
 		<xsl:param name="topic-set-id"/>
 		<xsl:param name="config"/>
-		<xsl:value-of
-			select="$config/config:topic-type[config:xmlns eq $topic-namespace-uri]/config:topic-type-link-priority
-			+
-			$config/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"
+		<xsl:variable name="topic-type-link-priority" select="$config/config:topic-type[config:xmlns eq $topic-namespace-uri]/config:topic-type-link-priority"/>
+		<xsl:variable name="topic-set-link-priority" select="$config/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"/>
+		<xsl:if test="normalize-space($topic-type-link-priority) eq ''">
+			<xsl:call-template name="sf:error">
+				<xsl:with-param name="message" select="'Topic type link priority not set for namespace ', $topic-namespace-uri"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:if test="normalize-space($topic-set-link-priority) eq ''">
+			<xsl:call-template name="sf:error">
+				<xsl:with-param name="message" select="'Topic set link priority not set for topic set ID ', $topic-set-id"/>
+			</xsl:call-template>
+		</xsl:if>
+		
+		<xsl:value-of select="$topic-type-link-priority + $topic-set-link-priority"
 		/>
 	</xsl:function>
 

@@ -306,6 +306,7 @@
   <xs:complexType name="scripts-type">
     <xs:choice maxOccurs="unbounded">
       <xs:element minOccurs="0" name="extract" type="script-list-type"/>
+      <xs:element minOccurs="0" name="merge" type="script-list-type"/>
       <xs:element name="synthesis" type="script-list-type" minOccurs="0"/>
       <xs:element name="link-catalog" type="script-list-type" minOccurs="0"/>
       <xs:element name="toc" type="script-list-type" minOccurs="0"/>

@@ -73,7 +73,7 @@
 	
 	<xsl:template name="main" >
 		<!-- Create the root "extracted-content element" -->
-		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/extracted/schema-defs.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/extract/out/schema-defs.xml')}" method="xml" indent="no" omit-xml-declaration="no">
  
 			<xsl:apply-templates select="$schema"/>
 

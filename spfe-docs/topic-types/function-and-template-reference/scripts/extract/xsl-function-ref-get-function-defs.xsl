@@ -24,7 +24,7 @@
     
     <xsl:template name="main" >
         <!-- Create the root "extracted-content element" -->
-        <xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/extracted/function-and-template-definitions.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+        <xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/extract/out/function-and-template-definitions.xml')}" method="xml" indent="no" omit-xml-declaration="no">
             <function-and-template-definitions>
                 <xsl:apply-templates select="$xslt-file-set"/>
             </function-and-template-definitions>

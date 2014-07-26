@@ -21,9 +21,7 @@ exclude-result-prefixes="#all">
 					local-name="{head/id}"
 					title="{body/title}"
 					excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">		
-					<xsl:if test="head/virtual-type">
-						<xsl:attribute name="virtual-type" select="head/virtual-type"/>
-					</xsl:if>
+
 					<xsl:copy>
 						<xsl:copy-of select="@*" copy-namespaces="no"/>
 						<xsl:apply-templates/>
