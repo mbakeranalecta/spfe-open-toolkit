@@ -6,4 +6,5 @@
     <rewriteURI uriStartString="http://spfeopentoolkit.org/spfe-ot/plugins/" rewritePrefix="./"/>
     <rewriteSystem
         systemIdStartString="http://spfeopentoolkit.org/spfe-ot/plugins/" rewritePrefix="./" />
+<!--    <uri name="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/authoring/css/eppo-simple.css" uri="./eppo-simple/topic-types/generic-topic/authoring/css/eppo-simple.css"/>-->
 </catalog>

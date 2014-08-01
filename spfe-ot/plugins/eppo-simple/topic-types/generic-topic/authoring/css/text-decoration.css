@@ -1,14 +1,14 @@
-p>bold
+p>bold, string>bold
 {
     font-weight:bold;
 }
 
-p>italic
+p>italic, string>italic
 {
     font-style:italic;
 }
 
-p>code
+p>code, string>code
 {
     font-family:monospace;
     font-weight:bold;

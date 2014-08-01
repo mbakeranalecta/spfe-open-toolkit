@@ -1,9 +1,11 @@
 @import url("head.css");
 @import url("../../../generic-topic/authoring/css/generic-topic.css");
-@import url("../../../generic-task-topic/authoring/css/generic-task-topic.css");
+@import url("../../../think-plan-do-topic/authoring/css/think-plan-do-topic.css");
 @import url("text-general.css");
 @import url("subject-affinities-general.css");
 @import url("subject-affinities-xml.css");
 @import url("conditions.css");
 @import url("text-decoration.css");
 @import url("strings.css");
+@import url("fragments.css");
+@import url("subhead.css");

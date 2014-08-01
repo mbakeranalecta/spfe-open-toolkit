@@ -23,21 +23,8 @@
     </head>
     <body>
         <title>SPFE Documentation</title>
-        <p>The SPFE Documentation includes information on the <string-ref id-ref="eppo-simple-topic-set-product"/> and the <feature>EPPO Simple schema set</feature>.  </p>
-<subhead>This is a test of the string feature</subhead>
-
-        <p> What follows is a string defined inline with <code>&lt;string id="a-string">This is a string&lt;/string></code>: <string id="a-string">This is a string</string></p>
-        <p>This is a reference to that inline string with <code>&lt;string-ref id-ref="a-string"/></code>
-            <string-ref id-ref="a-string"/></p>
-        <subhead>This is a test of the fragment feature</subhead>
-        <p> There are two fragment references to an externally define fragment. The first pulls in the fragment without redefining any strings. The second pulls it in but redefines the string "my-local-string".</p>
-        
-        <fragment-ref id-ref="my-fragment"/>
-        
-      <fragment-ref id-ref="my-fragment">
-          <local-strings>
-              <string id="my-local-string"><italic>a local string from the topic file</italic></string>
-          </local-strings>
-      </fragment-ref>
+        <p>The SPFE Documentation includes information on the <string-ref
+                id-ref="eppo-simple-topic-set-product"/> and the <feature>EPPO Simple schema
+                set</feature>. </p>
     </body>
 </docset-home-topic>

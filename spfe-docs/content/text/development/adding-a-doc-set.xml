@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<generic-task-topic xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic
-http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/generic-task-topic.xsd">
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic
+http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
 
     <head>
         <id>adding-a-doc-set</id>
@@ -213,4 +213,4 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/schemas/gene
                 table of contents you have successfully added a documentation set.</p>
         </doing>
     </body>
-</generic-task-topic>
+</think-plan-do-topic>

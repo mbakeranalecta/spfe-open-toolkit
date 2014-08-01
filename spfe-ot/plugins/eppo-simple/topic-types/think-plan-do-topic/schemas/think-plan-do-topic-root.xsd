@@ -2,7 +2,7 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:element name="generic-task-topic">
+    <xs:element name="think-plan-do-topic">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="head">

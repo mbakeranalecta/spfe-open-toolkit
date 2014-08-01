@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
     <topic-type>
-        <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</xmlns>
+        <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</xmlns>
         <aliases>
             <singular>Task</singular>
             <plural>Tasks</plural>
@@ -21,29 +21,29 @@
                 </script>
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-task-topic</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</to>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/think-plan-do-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</to>
                     </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-task-topic/scripts/synthesis/generic-task-topic-synthesis.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/think-plan-do-topic/scripts/synthesis/think-plan-do-topic-synthesis.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</to>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</to>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</to>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</to>
                     </remap-namespace>
                     <href>../../topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</href>
                 </script>
@@ -54,7 +54,7 @@
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</to>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-fig.xsl</href>
                 </script>
@@ -118,14 +118,14 @@
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</to>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-templates.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</to>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-text-structures.xsl</href>
                 </script>
@@ -140,15 +140,15 @@
                 </script>
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-task-topic</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</to>
+                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/think-plan-do-topic</from>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</to>
                     </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-task-topic/scripts/presentation/present-generic-task-topic.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/think-plan-do-topic/scripts/presentation/present-think-plan-do-topic.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</to>
+                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/presentation-fig.xsl</href>
                 </script>

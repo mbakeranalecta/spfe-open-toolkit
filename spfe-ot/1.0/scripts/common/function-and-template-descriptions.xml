@@ -583,9 +583,9 @@
                     <description>
                         <p>The <feature>namespace URI of the topic type schema</feature>. By default, the <feature>synthesis</feature> process places the namespace URI of the topic in the <xml-attribute-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic/@type">type</xml-attribute-name> attribute of the <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic">ss:topic</xml-element-name> wrapper element.</p>
                         <codeblock>
-&lt;ss:topic type="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic"
+&lt;ss:topic type="http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic"
     topic-type-alias="Task"
-    full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic/adding-a-doc-set"
+    full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/adding-a-doc-set"
     local-name="adding-a-doc-set" title="Adding a new documentation set"
     excerpt="A documentation set (doc-set) is a collection of one or more related topic sets, each of which can use different schemas. ...">
 

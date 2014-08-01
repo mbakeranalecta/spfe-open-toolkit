@@ -3,7 +3,7 @@ head
 {
  display:block;
  padding: 1em;
- background-color:silver;
+ background-color:#F0F5F5;
  font-family:sans-serif;
 }
 
@@ -16,7 +16,7 @@ head>uri
 head>uri:before
 {
     content: "URI:";
-    background-color:silver;
+    background-color:#F0F5F5;
     padding: 2px;
     display:block;
     font-size:small;
@@ -32,7 +32,7 @@ head>author
 head>author:before
 {
     content: "Author:";
-    background-color:silver;
+    background-color:#F0F5F5;
     padding: 2px;
     font-size:small;
     display:block;
@@ -47,7 +47,7 @@ head>status
 head>status:before
 {
     content: "Status:";
-    background-color:silver;
+    background-color:#F0F5F5;
     padding: 2px;
     font-size:small;
     display:block;
@@ -63,7 +63,7 @@ head>history
 head>history:before
 {
     content: "History:";
-    background-color:silver;
+    background-color:#F0F5F5;
     padding: 2px;
     font-size:small;
     display: block;
@@ -81,14 +81,14 @@ head>history>revision:first-child>date:before
     text-align:center;
     font-weight:bold;
     font-size:small;
-    background-color:silver;
+    background-color:#F0F5F5;
 }
 
 head>history>revision>date
 {
     display:table-column;
-    border-bottom: 1px solid silver;
-    border-left: 1px solid silver;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
     -oxy-show-placeholder: always;
     -oxy-placeholder-content: "YYYY-MM-DD";
 }
@@ -109,14 +109,14 @@ head>history>revision:first-child>author:before
     text-align:center;
     font-weight:bold;
     font-size:small;
-    background-color:silver;
+    background-color:#F0F5F5;
 }
 
 head>history>revision>author
 {
     display:table-column;
-    border-bottom: 1px solid silver;
-    border-left: 1px solid silver;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
     -oxy-show-placeholder: always;
 }
 
@@ -127,15 +127,15 @@ head>history>revision:first-child>comment:before
     text-align:center;
     font-weight:bold;
     font-size:small;
-    background-color:silver;
+    background-color:#F0F5F5;
 
 }
 
 head>history>revision>comment
 {
     display:table-column;
-    border-bottom: 1px solid silver;
-    border-left: 1px solid silver;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
     -oxy-show-placeholder: always;
 }
 
@@ -147,14 +147,14 @@ head>history>revision:first-child>status:before
     text-align:center;
     font-weight:bold;
     font-size:small;
-    background-color:silver;
+    background-color:#F0F5F5;
 }
 
 head>history>revision>status
 {
     display:table-column;
-    border-bottom: 1px solid silver;
-    border-left: 1px solid silver;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
     -oxy-show-placeholder: always;
 }
 
@@ -179,7 +179,7 @@ head>index::before
 {
     display: block;
     content: "Index:";
-    background-color:silver;
+    background-color:#F0F5F5;
     padding: 2px;
     font-size:small;
 }
@@ -196,14 +196,14 @@ head>index>entry:first-child>type:before
     text-align:center;
     font-weight:bold;
     font-size:small;
-    background-color:silver;
+    background-color:#F0F5F5;
 }
 
 head>index>entry>type
 {
     display:table-column;
-    border-bottom: 1px solid silver;
-    border-left: 1px solid silver;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
 }
 head>index>entry>type
 {
@@ -221,11 +221,11 @@ head>index>entry:first-child>term:before
     text-align:center;
     font-weight:bold;
     font-size:small;
-    background-color:silver;
+    background-color:#F0F5F5;
 }
 head>index>entry>term
 {
     display:table-column;
-    border-bottom: 1px solid silver;
-    border-left: 1px solid silver;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
 }

@@ -5,7 +5,7 @@
     <rewriteURI uriStartString="http://spfeopentoolkit.org/spfe-ot/1.0/" rewritePrefix="../"/>
     <rewriteSystem
         systemIdStartString="http://spfeopentoolkit.org/spfe-ot/1.0/" rewritePrefix="../" />
-
+    
   <!-- OASIS XML Catalogs 1.0 -->
   <public publicId="-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN" uri="catalog1.0.dtd"/>
   <system systemId="http://www.oasis-open.org/committees/release/1.0/catalog.dtd" uri="catalog1.0.dtd"/>

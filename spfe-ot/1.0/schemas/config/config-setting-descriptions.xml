@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<?xml-stylesheet type="text/css" href="../../../../spfe-docs/style/authoring/config-setting-descriptions.css"?>
 <config-setting-descriptions
     xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/config-setting-descriptions"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

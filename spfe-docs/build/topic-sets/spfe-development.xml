@@ -10,8 +10,8 @@
 
         <topic-types>
             <topic-type>
-                <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</xmlns>
-                <href>../../topic-types/generic-task-topic/config.xml</href>
+                <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</xmlns>
+                <href>../../topic-types/think-plan-do-topic/config.xml</href>
             </topic-type>
             <topic-type>
                 <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>

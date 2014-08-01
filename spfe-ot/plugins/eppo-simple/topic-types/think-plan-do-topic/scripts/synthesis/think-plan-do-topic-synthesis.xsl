@@ -7,10 +7,10 @@ xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-task-topic"
+xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/think-plan-do-topic"
 exclude-result-prefixes="#all">
 	
-	<xsl:template match="generic-task-topic">
+	<xsl:template match="think-plan-do-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
 

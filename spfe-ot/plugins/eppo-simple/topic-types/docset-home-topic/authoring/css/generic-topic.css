@@ -1,7 +1,6 @@
 generic-topic>body
 {
     display:block;
-    background-color:#FFDEAD;
     padding: 1em;
 }
 
@@ -9,7 +8,7 @@ generic-topic>head:before
 {
     font-weight:bold;
     font-size:larger;
-    content: "Generic task topic";
+    content: "Generic topic";
     font-family:sans-serif;
 }
 

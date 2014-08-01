@@ -1,7 +1,6 @@
 feature-topic>body
 {
     display:block;
-    background-color:#FFDEAD;
     padding: 1em;
 }
 
@@ -9,7 +8,7 @@ feature-topic>head:before
 {
     font-weight:bold;
     font-size:larger;
-    content: "Generic task topic";
+    content: "Feature topic";
     font-family:sans-serif;
 }
 

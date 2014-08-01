@@ -1,0 +1,26 @@
+fragment
+{
+
+   border: 1px solid #FFDEAD;
+   display:block;
+}
+
+fragment-ref
+{
+    display:block;
+}
+
+fragment:before
+{
+    content:"fragment: " attr(id);
+    background-color: #FFDEAD;
+    font-size: small;
+}
+
+fragment-ref:before
+{
+    content:"fragment-ref: " attr(id-ref);
+    background-color: #FFDEAD;
+    font-size: small;
+}
+
