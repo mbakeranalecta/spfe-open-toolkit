@@ -13,7 +13,7 @@
             <topic-set-type>reference</topic-set-type>
             <topic-set-type>list</topic-set-type>
         </topic-set-type-order>
-        <home-topic-set>spfe-docs-docset</home-topic-set>
+        <home-topic-set>spfe-docs-home</home-topic-set>
         <topic-sets>
             
             <topic-set>
@@ -22,8 +22,8 @@
             </topic-set>    
             
             <topic-set>
-                <topic-set-id>spfe-docs-docset</topic-set-id>
-                <href>topic-sets/spfe-docs-docset.xml</href>
+                <topic-set-id>spfe-docs-home</topic-set-id>
+                <href>topic-sets/spfe-docs-home.xml</href>
             </topic-set>
             
             <topic-set>

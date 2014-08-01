@@ -1,11 +1,13 @@
 
 
-feature-topic>head:before
+docset-home-topic>head:before
 {
     font-weight:bold;
     font-size:larger;
-    content: "Feature topic";
+    content: "Documentation Set Home Topic:";
     font-family:sans-serif;
 }
+
+
 
 

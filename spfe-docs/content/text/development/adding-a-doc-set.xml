@@ -124,7 +124,7 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
             <topic-set-type>reference</topic-set-type>
             <topic-set-type>list</topic-set-type>
         </topic-set-type-order>
-        <home-topic-set>spfe-docs-docset</home-topic-set>
+        <home-topic-set>home</home-topic-set>
         <topic-sets>
             
             <topic-set>
@@ -133,8 +133,8 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
             </topic-set>    
             
             <topic-set>
-                <topic-set-id>spfe-docs-docset</topic-set-id>
-                <href>topic-sets/spfe-docs-docset.xml</href>
+                <topic-set-id>spfe-docs-home</topic-set-id>
+                <href>topic-sets/spfe-docs-home.xml</href>
             </topic-set>
             
             <topic-set>
@@ -205,7 +205,7 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
                 <config-setting>/spfe/doc-set/topic-set-type-order</config-setting> element.</p>
             <p>To add an index page for the documentation set, you need to <task>add a topic
                     set</task> that includes an index topic and includes the topic set in the list
-                of topic sets. For example, the topic set <bold>spfe-docs-docset</bold> contains the
+                of topic sets. For example, the topic set <bold>spfe-docs-home</bold> contains the
                 index topic for the SPFE documentation set.</p>
             <p>Run the <tool-name>spfe</tool-name> build tool and specify the configuration file
                 that contains the <config-setting>/spfe/doc-set</config-setting> element as the first
