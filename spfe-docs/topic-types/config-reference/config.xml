@@ -23,7 +23,7 @@
             </merge>
             <synthesis>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/common-topic-synthesis.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/synthesis/common-topic-synthesis.xsl</href>
                 </script>
                 <script>
                     <href>../../topic-types/config-reference/scripts/synthesis/synthesize-config-ref.xsl</href>
@@ -138,7 +138,7 @@
                     <href>../../topic-types/config-reference/scripts/presentation/present-config-ref.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-topic-set-toc.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-topic-set-toc.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-functions.xsl</href>
@@ -161,7 +161,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-header-and-footer.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-topic-set.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-topic-set.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
