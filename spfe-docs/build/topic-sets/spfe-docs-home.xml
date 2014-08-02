@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
 
     <topic-set>
-        <topic-set-id>spfe-docs-docset</topic-set-id>
+        <topic-set-id>spfe-docs-home</topic-set-id>
         <topic-set-type>docset</topic-set-type>
         <topic-types>
 
@@ -30,7 +30,7 @@
 
         <sources>
             <authored-content>
-                <include>../../content/text/spfe-docs/*.xml</include>
+                <include>../../content/text/home/*.xml</include>
                 <include>../../content/text/fragments/*.xml</include>
             </authored-content>
         </sources>

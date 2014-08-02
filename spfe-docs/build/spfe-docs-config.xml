@@ -94,6 +94,13 @@
                     <plural>File names</plural>
                 </aliases>
             </subject-type>
+            <subject-type>
+                <id>document-name</id>
+                <aliases>
+                    <singular>Document name</singular>
+                    <plural>Document names</plural>
+                </aliases>
+            </subject-type>
         </subject-types>
 
         <style>
