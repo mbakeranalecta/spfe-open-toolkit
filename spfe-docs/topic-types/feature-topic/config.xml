@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
     <topic-type>
-        <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</xmlns>
+        <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic}feature-topic</name>
         <aliases>
             <singular>Feature</singular>
             <plural>Features</plural>

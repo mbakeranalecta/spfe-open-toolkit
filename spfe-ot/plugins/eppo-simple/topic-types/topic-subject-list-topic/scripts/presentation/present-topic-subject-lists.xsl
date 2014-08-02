@@ -15,7 +15,7 @@
 	-->
 
 	<xsl:template
-		match="ss:topic[@type='http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list']">
+		match="ss:topic[@type='{http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list}subject-topic-list']">
 		<page type="{@type}" name="{@local-name}">
 			<xsl:call-template name="show-header"/>
 			<title>

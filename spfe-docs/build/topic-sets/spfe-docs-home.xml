@@ -11,7 +11,7 @@
         <topic-types>
 
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic</xmlns>
+                    <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic}docset-home-topic</name>
                     <href>../../topic-types/docset-home-topic/config.xml</href>
                 </topic-type>
             

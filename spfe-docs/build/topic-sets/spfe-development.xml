@@ -10,15 +10,15 @@
 
         <topic-types>
             <topic-type>
-                <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic</xmlns>
+                <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic}think-plan-do-topic</name>
                 <href>../../topic-types/think-plan-do-topic/config.xml</href>
             </topic-type>
             <topic-type>
-                <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</xmlns>
+                <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic}generic-topic</name>
                 <href>../../topic-types/generic-topic/config.xml</href>
             </topic-type>
             <topic-type>
-                <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic</xmlns>
+                <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic}feature-topic</name>
                 <href>../../topic-types/feature-topic/config.xml</href>
             </topic-type>    
         </topic-types>

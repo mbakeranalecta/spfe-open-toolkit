@@ -429,52 +429,50 @@
 	</xsl:function>
 
 	<xsl:function name="sf:get-topic-type-alias-singular">
-		<xsl:param name="topic-type-xmlns"/>
+		<xsl:param name="topic-type-name"/>
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular">
+				test="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular">
 				<xsl:value-of
-					select="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular"
+					select="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">
 						<xsl:text>No singular topic type alias found for topic type </xsl:text>
-						<xsl:value-of select="$topic-type-xmlns"/>
-						<xsl:text>.</xsl:text>
-						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:value-of select="$topic-type-name"/>
+						<xsl:text>. This setting should be defined in the configuration files at </xsl:text>
 						<xsl:text>/spfe/topic-type/aliases/singular.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
 				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->
-				<xsl:value-of select="$topic-type-xmlns"/>
+				<xsl:value-of select="$topic-type-name"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
 	<xsl:function name="sf:get-topic-type-alias-plural">
-		<xsl:param name="topic-type-xmlns"/>
+		<xsl:param name="topic-type-name"/>
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural">
+				test="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural">
 				<xsl:value-of
-					select="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural"
+					select="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">
 						<xsl:text>No plural topic type alias found for topic type </xsl:text>
-						<xsl:value-of select="$topic-type-xmlns"/>
-						<xsl:text>.</xsl:text>
-						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:value-of select="$topic-type-name"/>
+						<xsl:text>. This setting should be defined in the configuration files at </xsl:text>
 						<xsl:text>/spfe/topic-type/aliases/plural.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
 				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->
-				<xsl:value-of select="$topic-type-xmlns"/>
+				<xsl:value-of select="$topic-type-name"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -517,8 +515,7 @@
 					<xsl:with-param name="message">
 						<xsl:text>No plural subject type alias found for topic type </xsl:text>
 						<xsl:value-of select="$subject-type-id"/>
-						<xsl:text>.</xsl:text>
-						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:text>. This setting should be defined in the configuration files at </xsl:text>
 						<xsl:text>/spfe/subject-types/subject-type/aliases/plural.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
@@ -529,14 +526,14 @@
 	</xsl:function>
 
 	<xsl:function name="sf:get-topic-link-priority">
-		<xsl:param name="topic-namespace-uri"/>
+		<xsl:param name="topic-type-name"/>
 		<xsl:param name="topic-set-id"/>
 		<xsl:param name="config"/>
-		<xsl:variable name="topic-type-link-priority" select="$config/config:topic-type[config:xmlns eq $topic-namespace-uri]/config:topic-type-link-priority"/>
+		<xsl:variable name="topic-type-link-priority" select="$config/config:topic-type[config:name eq $topic-type-name]/config:topic-type-link-priority"/>
 		<xsl:variable name="topic-set-link-priority" select="$config/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"/>
 		<xsl:if test="normalize-space($topic-type-link-priority) eq ''">
 			<xsl:call-template name="sf:error">
-				<xsl:with-param name="message" select="'Topic type link priority not set for namespace ', $topic-namespace-uri"/>
+				<xsl:with-param name="message" select="'Topic type link priority not set for namespace ', $topic-type-name"/>
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:if test="normalize-space($topic-set-link-priority) eq ''">
@@ -553,6 +550,11 @@
 	<xsl:function name="sf:has-content" as="xs:boolean">
 		<xsl:param name="content"/>
 		<xsl:value-of select="string-join(($content/text()[normalize-space(.)] | $content/*),'') ne ''"/>
+	</xsl:function>
+	
+	<xsl:function name="sf:name-in-clark-notation">
+		<xsl:param name="element"/>
+		<xsl:value-of select="concat('{', namespace-uri($element), '}', local-name($element))"/>
 	</xsl:function>
 
 </xsl:stylesheet>

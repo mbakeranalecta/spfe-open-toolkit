@@ -16,11 +16,11 @@ exclude-result-prefixes="#all">
 	
 	<xsl:template match="feature-topic">
 		<xsl:variable name="conditions" select="@if"/>
-		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
+		<xsl:variable name="topic-type" select="sf:name-in-clark-notation(.)"/>
 		
 
 				<ss:topic 
-					type="{namespace-uri()}" 
+					type="{sf:name-in-clark-notation(.)}" 
 					topic-type-alias="{sf:get-topic-type-alias-singular($topic-type, $config)}"
 					full-name="{concat(namespace-uri(), '/', head/id)}"
 					local-name="{head/id}"

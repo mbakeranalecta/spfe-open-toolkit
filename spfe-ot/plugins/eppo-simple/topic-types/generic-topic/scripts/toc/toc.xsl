@@ -113,8 +113,8 @@
 						<!-- FIXME: decide if still using virutal types. If not, remove code. -->
 						<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic[not(@virtual-type)]/@type union $synthesis/ss:synthesis/ss:topic[not(starts-with(@virtual-type, 'spfe.'))]/@virtual-type)"/>
 						
-						<xsl:variable name="topic-type-order-list" select="$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type/config:xmlns/text()"/>
-						<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type/config:xmlns/text()"/>
+						<xsl:variable name="topic-type-order-list" select="$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type/config:name/text()"/>
+						<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type/config:name/text()"/>
 						<!-- FIXME: review this code -->
 						<xsl:if test="count($topic-types-found[not(.=$topic-type-alias-list)])">
 							<xsl:call-template name="sf:error">
@@ -126,7 +126,7 @@
 						<!-- FIXME: This check could be moved to the config script -->
 						<xsl:if test="not(every $x in $topic-type-order-list satisfies $x = $topic-type-alias-list)">
 							<xsl:call-template name="sf:error">
-								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list:', string-join($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type-order/config:topic-type-xmlns[not(.=$config/config:topic-type/config:xmlns)], ', ')"/>
+								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list:', string-join($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type-order/config:topic-type-name[not(.=$config/config:topic-type/config:name)], ', ')"/>
 							</xsl:call-template>
 						</xsl:if>
 	
@@ -153,7 +153,7 @@
 								</xsl:when>
 								<!-- if more than one topic, create group -->
 								<xsl:when test="$included-topics">
-									<node topic-type="{$this-topic-type}"  name="{$config/config:topic-type[config:xmlns=$this-topic-type]/config:aliases/config:plural}">
+									<node topic-type="{$this-topic-type}"  name="{$config/config:topic-type[config:name=$this-topic-type]/config:aliases/config:plural}">
 										<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
 									</node>
 

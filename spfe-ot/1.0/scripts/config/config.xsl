@@ -358,7 +358,7 @@
                     </xsl:copy>
                 </xsl:for-each>
 
-                <xsl:for-each-group select="$config/topic-type" group-by="xmlns">
+                <xsl:for-each-group select="$config/topic-type" group-by="name">
                     <xsl:variable name="this-topic-type" select="current-group()[1]"/>
                     <topic-type>
                         <xsl:if test="not($this-topic-type/topic-type-link-priority)">
@@ -391,13 +391,13 @@
         <xsl:variable name="script-sets">
             <xsl:for-each
                 select="$config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type">
-                <xsl:variable name="xmlns" select="xmlns"/>
-                <xsl:sequence select="$config/topic-type[xmlns=$xmlns]/scripts"/>
+                <xsl:variable name="name" select="name"/>
+                <xsl:sequence select="$config/topic-type[name=$name]/scripts"/>
             </xsl:for-each>
             <xsl:for-each
                 select="$config/topic-set[topic-set-id=$topic-set-id]/object-types/object-type">
-                <xsl:variable name="xmlns" select="xmlns"/>
-                <xsl:sequence select="$config/object-type[xmlns=$xmlns]/scripts"/>
+                <xsl:variable name="name" select="name"/>
+                <xsl:sequence select="$config/object-type[name=$name]/scripts"/>
             </xsl:for-each>
             <xsl:for-each select="$config/output-format">
                 <xsl:sequence select="scripts"/>

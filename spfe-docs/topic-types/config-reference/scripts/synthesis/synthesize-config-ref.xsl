@@ -24,10 +24,10 @@ Main content processing templates
 	<!-- Schema element template -->
 	<xsl:template match="spfe-configuration-reference-entry">
 
-			<ss:topic type="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference"
+		<ss:topic type="{{http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference}}config-reference"
 				full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/{translate(xpath, '/:', '__')}"
 				local-name="{translate(xpath, '/:', '__')}" 
-				topic-type-alias="{sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference', $config)}"
+				topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference}config-reference', $config)}"
 				title="{name}"
 				excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 				<xsl:variable name="xpath" select="normalize-space(xpath)"/>

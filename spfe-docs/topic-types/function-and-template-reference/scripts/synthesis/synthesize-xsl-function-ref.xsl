@@ -25,10 +25,10 @@ exclude-result-prefixes="#all" >
 		<xsl:variable name="name" select="xsl-function/name"/>
 		
 		<ss:topic 
-			type="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference" 
+			type="{{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}}function-reference" 
 			full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference/{concat(local-prefix, '_', $name)}"
 			local-name="{$name}"
-			topic-type-alias="{sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference', $config)}"
+			topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}function-reference', $config)}"
 			title="{$name}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 			
@@ -59,10 +59,10 @@ exclude-result-prefixes="#all" >
 		<xsl:variable name="name" select="xsl-template/name"/>
 		
 		<ss:topic 
-			type="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference" 
+			type="{{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}}function-reference" 
 			full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference/{concat(local-prefix, '_', $name)}"
 			local-name="{$name}"
-			topic-type-alias="{sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference', $config)}"
+			topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}function-reference', $config)}"
 			title="{$name}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 			

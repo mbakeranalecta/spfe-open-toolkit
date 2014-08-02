@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
     <topic-type>
-        <xmlns>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</xmlns>
+        <name>{http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list}subject-topic-list</name>
         <topic-type-link-priority>0</topic-type-link-priority>
         <aliases>
             <singular>A list of topics on a subject</singular>

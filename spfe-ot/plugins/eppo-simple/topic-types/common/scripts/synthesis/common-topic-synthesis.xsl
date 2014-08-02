@@ -39,7 +39,7 @@
 	
 	<xsl:param name="default-topic-scope"/>
 	<xsl:param name="topic-set-id"/>
-	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/out')"></xsl:param>
+	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/out')"/>
 	
 <!-- 
 =============

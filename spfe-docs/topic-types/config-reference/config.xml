@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-type>
-        <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xmlns>
+        <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference}config-reference</name>
         <aliases>
             <singular>Configuration setting</singular>
             <plural>Configuration settings</plural>

@@ -62,12 +62,12 @@ Main content processing templates
 <!-- Topic subject list template -->
 	<xsl:template match="stl:subject-topic-list" >
 		
-		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list', $config)"/>
+		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list}subject-topic-list', $config)"/>
 		<xsl:variable name="subject-topic-name" select="concat(stl:subject-type, '_', stl:subject)"/>
 						 
 			
 		<ss:topic 
-			type="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list" 
+			type="{sf:name-in-clark-notation(.)}" 
 			full-name="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list/{sf:title-to-anchor($subject-topic-name)}"
 			local-name="{sf:title-to-anchor($subject-topic-name)}"
 			topic-type-alias="{$topic-type-alias}"

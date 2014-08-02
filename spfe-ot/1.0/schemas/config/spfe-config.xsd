@@ -20,7 +20,7 @@
                     <xs:element maxOccurs="unbounded" name="topic-type">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="xmlns" type="xs:anyURI"/>
+                          <xs:element name="name" type="xs:string"/>
                           <xs:element name="href" type="xs:anyURI"/>
                         </xs:sequence>
                       </xs:complexType>
@@ -34,7 +34,7 @@
                     <xs:element maxOccurs="unbounded" name="object-type">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="xmlns" type="xs:anyURI"/>
+                          <xs:element name="name" type="xs:string"/>
                           <xs:element name="href" type="xs:anyURI"/>
                         </xs:sequence>
                       </xs:complexType>
@@ -202,7 +202,7 @@
         <xs:element name="topic-type">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="xmlns" type="xs:anyURI"/>
+              <xs:element name="name" type="xs:string"/>
               <xs:element minOccurs="0" name="topic-type-link-priority" type="xs:int"/>
               <xs:element name="aliases" type="topic-type-aliases-type" minOccurs="0"/>
               <xs:element name="scripts" type="scripts-type"/>
@@ -212,7 +212,7 @@
         <xs:element name="object-type">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="xmlns" type="xs:anyURI"/>
+              <xs:element name="name" type="xs:string"/>
               <xs:element name="scripts" type="scripts-type"/>
             </xs:sequence>
           </xs:complexType>

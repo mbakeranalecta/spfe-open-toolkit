@@ -62,7 +62,7 @@ Main template
 				<xsl:variable name="name" select="string(xfd:name[1])"/>
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
 				
-				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference', $config)"/>	
+				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}function-reference', $config)"/>	
 				<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
 					
 					<spfe-xslt-function-reference-entry>

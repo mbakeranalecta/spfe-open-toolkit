@@ -384,7 +384,7 @@
             </return-value>
             <parameters>
                 <parameter>
-                    <name>topic-type-xmlns</name>
+                    <name>topic-type-name</name>
                     <description>
                         <p>The namespace URI of the topic type. This is the value declared in the <code>xmlns</code> attribute of the topic source file:</p>
                         <codeblock language="XML">
@@ -432,7 +432,7 @@
             </return-value>
             <parameters>
                 <parameter>
-                    <name>topic-type-xmlns</name>
+                    <name>topic-type-name</name>
                     <description>
                         <p>The namespace URI of the topic type. This is the value declared in the <code>xmlns</code> attribute of the topic source file:</p>
                         <codeblock language="XML">

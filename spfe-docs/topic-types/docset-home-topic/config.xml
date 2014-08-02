@@ -7,7 +7,7 @@
     
     
     <topic-type>
-        <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic</xmlns>
+        <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic}docset-home-topic</name>
         <aliases>
             <singular>Home</singular>
             <plural>Home pages</plural>

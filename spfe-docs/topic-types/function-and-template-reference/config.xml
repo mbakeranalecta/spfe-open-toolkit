@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-type>
-        <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions</xmlns>
+        <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}spfe-function-and-template-descriptions</name>
         
         <scripts>
             <extract>
@@ -111,7 +111,7 @@
         </scripts>
     </topic-type>
     <topic-type>
-        <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xmlns>
+        <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}function-reference</name>
         <aliases>
             <singular>SPFE function</singular>
             <plural>SPFE functions</plural>
@@ -169,7 +169,7 @@
         </scripts>
     </topic-type>
     <topic-type>
-        <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</xmlns>
+        <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}template-reference</name>
         <aliases>
             <singular>SPFE template</singular>
             <plural>SPFE templates</plural>
