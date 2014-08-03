@@ -26,7 +26,7 @@ body>title
 
 body>section
 {
-    border-left: 2em solid #FFDEAD;;
+
 }
 
 body>section:before
@@ -35,7 +35,7 @@ body>section:before
     font-family:sans-serif;
     content: "Section:";
     font-size:small;
-    margin-top: 2em;
+    background-color:#FFDEAD;
 }
 
 body>section>title

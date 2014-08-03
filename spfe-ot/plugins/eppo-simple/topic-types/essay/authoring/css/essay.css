@@ -1,0 +1,48 @@
+
+
+essay>head:before
+{
+    font-weight:bold;
+    font-size:larger;
+    content: "Essay: ";
+    font-family:sans-serif;
+}
+
+essay>body>byline
+{
+    display:block;
+    font-style:italic;
+    
+}
+
+essay>body>byline:before
+{
+    content: "By: Give the author's full name as it should appear in the output.";
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    font-size:small;  
+    display:block;
+}
+
+essay>body>precis
+{
+    display:block;
+}
+
+essay>body>precis:before
+{
+    display:block;
+    content: "Precis: Give a quick summary of the essay.";
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    font-size:small;  
+}
+
+essay>body>precis:after
+{
+    display:block;
+    content: "Write the body of the essay here.";
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    font-size:small;  
+}

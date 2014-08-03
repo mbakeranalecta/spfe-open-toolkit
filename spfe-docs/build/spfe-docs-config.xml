@@ -11,6 +11,7 @@
             <topic-set-type>guide</topic-set-type>
             <topic-set-type>task</topic-set-type>
             <topic-set-type>reference</topic-set-type>
+            <topic-set-type>essay</topic-set-type>
             <topic-set-type>list</topic-set-type>
         </topic-set-type-order>
         <home-topic-set>spfe-docs-home</home-topic-set>
@@ -36,6 +37,11 @@
                 <href>topic-sets/spfe-function-reference.xml</href>
             </topic-set>
             
+            <topic-set>
+                <topic-set-id>spfe-docs-essays</topic-set-id>
+                <href>topic-sets/spfe-docs-essays.xml</href>
+            </topic-set>
+
             <topic-set>
                 <topic-set-id>spfe-docs-lists</topic-set-id>
                 <href>topic-sets/spfe-docs-lists.xml</href>
