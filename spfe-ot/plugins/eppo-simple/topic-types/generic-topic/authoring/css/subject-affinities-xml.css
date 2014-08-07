@@ -27,8 +27,8 @@ p>link-external, string>link-external
    border: 1px solid #FFDEAD;
 }
 
-p>link-external:before, string>link-external:before
+p>link-external:after, string>link-external:after
 {
     background-color:#FFDEAD;
-    content:attr(href) " ";
+    content:" (" attr(href) ") ";
 }

@@ -108,7 +108,7 @@
                 project within that organization that created the vocabulary that the namespace is
                 assigned to. Thus the namespace identifier,
                     <xml-namespace-uri>http://www.w3.org/2001/XMLSchema</xml-namespace-uri> states
-                that it belong to the W3C and to the XMLSchema project within the W3C. The SPFE
+                that it belong to the W3C and to the XML Schema project within the W3C. The SPFE
                 configuration namespace,
                     <xml-namespace-uri>http://spfeopentoolkit/ns/spfe-ot/config</xml-namespace-uri>
                 states that it belongs to the SPFE Open Toolkit, and to the configuration project
