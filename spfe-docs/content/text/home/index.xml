@@ -23,7 +23,7 @@
     </head>
     <body>
         <title>SPFE Open Toolkit Documentation</title>
-        <p>The <string-ref id-ref="eppo-simple-topic-set-product"/> is a toolkit for building
+        <p>The <string-ref id-ref="product"/> is a toolkit for building
             content creation systems using the <feature>SPFE architecture</feature>. </p>
         <p>The SPFE architecture is designed to facilitate the creation of structured writing
             systems that use a <feature>bottom-up architecture</feature>. A bottom up architecture
@@ -50,7 +50,7 @@
         <p>Bottom-up architectures are common on the Web. Both wikis and blogging platforms, as well
             as many Web CMS work on the bottom-up pattern. However, there are no bottom-up systems
             based on markup-based structured writing principles (some database-based structured
-            bottom-up systems exist). The <string-ref id-ref="eppo-simple-topic-set-product"/> is
+            bottom-up systems exist). The <string-ref id-ref="product"/> is
             designed to fill this gap.</p>
         <p>The SPFE-OT is also capable of creating top-down and hybrid top-down/bottom-up
             architectures.</p>
@@ -61,7 +61,7 @@
                 markup</feature> in which the document markup does not contain any publishing or
             content management directives. </p>
         <p>To enable users to get up to speed quickly, and to provide a baseline of functionality
-            for building SPFE-compatible schemas, <string-ref id-ref="eppo-simple-topic-set-product"
+            for building SPFE-compatible schemas, <string-ref id-ref="product"
             /> includes the <feature>EPPO Simple schema set</feature>. EPPO Simple is a highly
             modularized set of schemas and associated processing that you can use directly or as the
             basis for <task>creating your own schemas</task>.</p>

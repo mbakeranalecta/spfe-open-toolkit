@@ -13,3 +13,15 @@ p>code, string>code
     font-family:monospace;
     font-weight:bold;
 }
+
+p>quote:before, string>quote:before
+{
+    background-color:#FFDEAD;
+    content:'“';
+}
+
+p>quote:after, string>quote:after
+{
+    background-color:#FFDEAD;
+    content:'”';
+}

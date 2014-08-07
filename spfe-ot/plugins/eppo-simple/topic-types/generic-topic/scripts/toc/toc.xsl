@@ -7,7 +7,7 @@
  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
- xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+ xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
  exclude-result-prefixes="#all">
 	
 	<xsl:variable name="config" as="element(config:spfe)">

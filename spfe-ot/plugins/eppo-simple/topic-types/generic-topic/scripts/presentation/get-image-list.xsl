@@ -3,7 +3,7 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  
 version="2.0"
-xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:xs="http://www.w3.org/2001/XMLSchema"
 xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphic-record"

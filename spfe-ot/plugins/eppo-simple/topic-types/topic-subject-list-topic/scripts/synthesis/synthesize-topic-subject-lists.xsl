@@ -8,7 +8,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"   
 	xmlns:stl="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list"
 	exclude-result-prefixes="#all" >
@@ -44,7 +44,7 @@ Main template
 			<ss:synthesis 
 				xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
 				topic-set-id="{$topic-set-id}" 
-				title="{sf:string($config//config:strings, 'eppo-simple-topic-set-product')} {sf:string($config//config:strings, 'eppo-simple-topic-set-release')}"> 
+				title="{sf:string($config//config:strings, 'product')} {sf:string($config//config:strings, 'product-release')}"> 
 				<!-- Only build list pages for subjects with more than one topic -->
 				<xsl:apply-templates select="$authored-content//stl:subject-topic-list[stl:topics-on-subject/stl:topic[2]]"/>
 			</ss:synthesis>

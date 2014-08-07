@@ -5,7 +5,7 @@
 <xsl:stylesheet version="2.0" 
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
-xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic"

@@ -3,11 +3,11 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:spfe="http://spfeopentoolkit.org/spfe-ot/1.0/xslt/fuctions"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:gen="dummy-namespace-for-the-generated-xslt"
-    xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xpath-default-namespace="http://spfeopentoolkit/ns/spfe-ot/config"
     exclude-result-prefixes="#all">
     <xsl:output method="xml" indent="yes"/>
     <xsl:include href="../common/utility-functions.xsl"/>
@@ -108,6 +108,11 @@
         <xsl:apply-templates mode="load-config"/>
         <xsl:for-each
             select="//topic-type/href, //object-type/href, //output-format/href, //topic-set/href">
+            <xsl:if test="not(doc-available(resolve-uri(.,base-uri($this))))">
+                <xsl:call-template name="sf:error">
+                    <xsl:with-param name="message">Configuration file <xsl:value-of select="."/> not found.</xsl:with-param>
+                </xsl:call-template>
+            </xsl:if>
             <xsl:apply-templates select="document(resolve-uri(.,base-uri($this)))"
                 mode="load-config"/>
         </xsl:for-each>
@@ -311,8 +316,8 @@
             select="concat('Generating config file: ', 'file:///', $doc-set-build, '/config/spfe-config.xml')"/>
         <xsl:result-document href="file:///{$doc-set-config}/spfe-config.xml" method="xml"
             indent="yes"
-            xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
-            xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+            xpath-default-namespace="http://spfeopentoolkit/ns/spfe-ot/config"
+            xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
             exclude-result-prefixes="#all">
             <spfe>
                 <build-directory>

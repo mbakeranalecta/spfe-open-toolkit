@@ -7,7 +7,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:lf="local-functions"
-	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record"
 	exclude-result-prefixes="#all">
 	<xsl:output method="xml" indent="yes"/>

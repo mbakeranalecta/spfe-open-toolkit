@@ -83,7 +83,7 @@
     </head>
     <body>
         <title>Build directory structure</title>
-        <p>The SPFE Documentation includes information on the <feature> Open Toolkit</feature> and the <feature>EPPO Simple schema set</feature>. <string-ref id-ref="eppo-simple-topic-set-product"/> <string id="a-string">This is a string</string>: <string-ref id-ref="a-string"/>!</p>
+        <p>The SPFE Documentation includes information on the <feature> Open Toolkit</feature> and the <feature>EPPO Simple schema set</feature>. <string-ref id-ref="product"/> <string id="a-string">This is a string</string>: <string-ref id-ref="a-string"/>!</p>
         <fragment-ref id-ref="my-fragment">
             <local-strings>
                 <string id="my-local-string"><italic>a local string from the topic file</italic></string>

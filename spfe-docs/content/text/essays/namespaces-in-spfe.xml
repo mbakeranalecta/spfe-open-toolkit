@@ -24,26 +24,25 @@
         </index>
     </head>
     <body>
-        <title>
-        </title>
+        <title> Namespaces in SPFE</title>
         <byline> Mark Baker</byline>
         <precis>
-<p><string-ref id-ref="eppo-simple-product-name"/> uses namespaces extensively.  </p>
+<p><string-ref id-ref="product"/> uses namespaces extensively. </p>
         </precis>
-<p><string-ref id-ref="eppo-simple-product-name"/> makes extensive use of XML namespaces. It does
-            not force your to use namespaces for your own content, but I do recommend that you do.
-            You have some choices in how you use namespaces. The way they are used in EPPO-simple
-            and the SPFE documentation is one choice, but there are others. The purpose of this
-            essay is to explain the choices and why EPPO-simple and the SPFE documentation use
-            namespaces the way they do.</p>
+<p><string-ref id-ref="product"/> makes extensive use of XML namespaces. It does not force your to
+            use namespaces for your own content, but I do recommend that you do. You have some
+            choices in how you use namespaces. The way they are used in EPPO-simple and the SPFE
+            documentation is one choice, but there are others. The purpose of this essay is to
+            explain the choices and why EPPO-simple and the SPFE documentation use namespaces the
+            way they do.</p>
         <section>
             <title>Understanding namespaces</title>
             <p>XML Namespaces are a source of considerable confusion. This is not because they are
                 complex, but because they are simpler than we expect them to be, and because, as a
-                late eddition to the XML family, they are not treated entirely consistenly across
+                late edition to the XML family, they are not treated entirely consistently across
                 other XML technologies. They do less than we expect them to, and they do it in
-                inconsistent ways. Nonetheless, they perform an important funciton.</p>
-            <p>The function of XML namespaces is to provide an expaded name for an XML element that
+                inconsistent ways. Nonetheless, they perform an important function.</p>
+            <p>The function of XML namespaces is to provide an expanded name for an XML element that
                 can distinguish it from the same local name used in other XML vocabularies. Thus,
                 for instance, the name <xml-element-name>element</xml-element-name> is used in both
                 XML schema and in XSLT. In XML Schema is it used to define an element name in a
@@ -59,7 +58,7 @@
                 <xml-element-name>section</xml-element-name>,
                 <xml-element-name>xref</xml-element-name>, or
                 <xml-element-name>table</xml-element-name>. By giving each of those vocabularies a
-                different namespace, you can tell which  <xml-element-name>title</xml-element-name>,
+                different namespace, you can tell which <xml-element-name>title</xml-element-name>,
                 <xml-element-name>name</xml-element-name>,
                 <xml-element-name>section</xml-element-name>,
                 <xml-element-name>xref</xml-element-name>, or
@@ -70,45 +69,80 @@
                 don't, and this is one possible source of confusion. Namespace names themselves are
                 supposed to be globally unique. This is why they are usually based on domain names,
                 since domain names are guaranteed to be globally unique thanks to the global domain
-                name registation system. (Note that there is no global registry for XML namespaces
+                name registration system. (Note that there is no global registry for XML namespaces
                 themselves.) But adding a globally unique namespace name to an XML element name does
                 not make that element name globally unique, because XML element names are not unique
                 within their own namespace. </p>
             <p>In fact, there same element name can occur several times in an XML vocabulary, and
-                can mean different things in each case. A commone example is to have an element
-                named <xml-element-name>name</xml-element-name> which is used to capture the name of
+                can mean different things in each case. A common example is to have an element named
+                <xml-element-name>name</xml-element-name> which is used to capture the name of
                 several different things described by the vocabulary. In the SPFE configuration
-                vocabulary </p>
+                vocabulary, for example, there are several elements named
+                <xml-element-name>name</xml-element-name>, and every one of them is part of the SPFE
+                configuration namespace,
+                    <xml-namespace-uri>http://spfeopentoolkit/ns/spfe-ot/config</xml-namespace-uri>.
+                What distinguishes them is there position relative to other elements in a
+                configuration document. They include: </p>
+            <ul>
+                <li>
+                    <p><config-setting>/spfe/topic-type/name</config-setting></p>
+                </li>
+                <li>
+                    <p><config-setting>/spfe/doc-set/output-formats/output-format/name</config-setting></p>
+                </li>
+                <li>
+                    <p><config-setting>/spfe/topic-set/topic-types/topic-type/name</config-setting></p>
+                </li>
+                <li>
+                    <p><config-setting>/spfe/topic-set/presentation-types/presentation-type/name</config-setting></p>
+                </li>
+            </ul>
+            <p>So, having a element name and namespace does not tell you what that element means, or
+                even which element it is. For that, you have to know both the namespace and the
+                context in which the element occurs.</p>
+            <p>Namespaces, therefore, are not about uniquely identify an element. Namespaces are
+                actually about ownership. A namespace name tells you who the element name belongs
+                to. Whether or not the name is unique within the namespace is entirely up to the
+                person who owns the namespace. </p>
+            <p>Typically, ownership of a namespace is expressed in terms of the organization and the
+                project within that organization that created the vocabulary that the namespace is
+                assigned to. Thus the namespace identifier,
+                    <xml-namespace-uri>http://www.w3.org/2001/XMLSchema</xml-namespace-uri> states
+                that it belong to the W3C and to the XMLSchema project within the W3C. The SPFE
+                configuration namespace,
+                    <xml-namespace-uri>http://spfeopentoolkit/ns/spfe-ot/config</xml-namespace-uri>
+                states that it belongs to the SPFE Open Toolkit, and to the configuration project
+                within the SPFE Open Toolkit.</p>
         </section>
         <section>
             <title>Document types and namespaces</title>
             <p>You may have noticed that to this point I have not used the phrase
                 <quote>document type</quote>. I have used <quote>vocabulary</quote> to describe a
-                set of XML elements designed to be used together. We may think of scemas and DTDs as
-                defining document types, and that is what we generally use them to do. But actually,
-                neither schemas not DTDs define document types. Rather, documents declare what type
-                of document they are, esentailly by choosing what root element to use. Schemas and
+                set of XML elements designed to be used together. We may think of schemas and DTDs
+                as defining document types, and that is what we generally use them to do. But
+                actually, neither schemas not DTDs define document types. Rather, documents declare
+                what type of document they are, by choosing what root element to use. Schemas and
                 DTDs simply give them elements to choose from to form their root element, and in
                 many cases, they give them several choices. </p>
-            <p>With DTD, any element defined in the DTD can be used by a document as a root element.
-                Despite its name, a DTD is really defining a nested set of elements and a document
-                is free to choose any element anywhere in that nest as its root element. XML Schemas
-                are a bit more restritive. You can only choose your root element from among those
-                elements declared at the root of the schema. Elements declared inside type
-                definitions cannot be used. This lets you write a schema with only one root element,
-                which effectively confines it to be a document typed definition. But one schema
-                document can define multiple root elements. In fact, a schema or a DTD can define
-                multiple root elements that share no child elements at all -- effiectively defining
-                multiple separate document types. </p>
-            <p>In short, schemas, like namespaces, are all about elements. A document, and a
-                document type, is something that we construct out of the raw material of nested
-                elements that schemas and namespaces present to us. A document types is, therefore,
-                not something with a strict definition in XML that we have to adhere to. It is
-                something we can construct for ourselves in ways that meet our own needs. XML just
-                says: here are elements, and here are the rules for elements and their names; make
-                what you want out of them.</p>
+            <p>With DTDs, any element defined in the DTD can be used by a document as a root
+                element. Despite its name, a DTD is really defining a nested set of elements and a
+                document is free to choose any element anywhere in that nest as its root element.
+                XML Schemas are a bit more restrictive. You can only choose your root element from
+                among those elements declared at the root of the schema. Elements declared inside
+                type definitions cannot be used. This lets you write a schema with only one root
+                element, which effectively confines it to defining a single document type. But one
+                schema document can define multiple root elements. In fact, a schema or a DTD can
+                define multiple root elements that share no child elements at all -- effectively
+                defining multiple separate document types. </p>
+            <p>In short, schemas, and namespaces, are all about elements. A document, and a document
+                type, is something that we construct out of the raw material of nested elements that
+                schemas and namespaces present to us. A document types is, therefore, not something
+                with a strict definition in XML that we have to adhere to. It is something we can
+                construct for ourselves in ways that meet our own needs. XML just says: here are
+                elements, and here are the rules for elements and their names; make what you want
+                out of them.</p>
             <p>This ability to define for ourselves what document types are is powerful, but
-                potentially confusing. It aslo forces us to make decisions about what document types
+                potentially confusing. It also forces us to make decisions about what document types
                 mean to us and what rules we are going to apply to them.</p>
             <p>One of those decisions is about the relationship between namespaces and document
                 types. It is very tempting to think that a document types has a unique namespace and
@@ -120,11 +154,14 @@
             <p>But if you are setting up a structured writing system, particularly a topic-based
                 structured writing system, you are going to have multiple topic types. But each f
                 those topic types is going to have a great many things in common. You are not going
-                to have a whole different way of doing tables or lists or procedures across a
-                familiy of closely related topic types. In fact, those topic types are probably
-                going to share a whole bunch of elements that mean exactly the same thing in all of
-                them. Why then should the be in different namespaces?</p>
-            <p>There are three ways to handle this.</p>
+                to have a whole different way of doing tables or lists or procedures across a family
+                of closely related topic types. In fact, those topic types are probably going to
+                share a whole bunch of elements that mean exactly the same thing in all of them. Why
+                then should the be in different namespaces?</p>
+            <p>There are three ways to handle this, which <link-external
+                    href="http://www.xfront.com/ZeroOneOrManyNamespaces.html">this
+                    essay</link-external> has named the Homogeneous, Heterogeneous, and Chameleon
+                designs.</p>
         </section>
     </body>
 </essay>

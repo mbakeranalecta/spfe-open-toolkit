@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
     <topic-type>
         <name>{http://spfeopentoolkit.org/ns/spfe-docs}essay</name>
         <aliases>
-            <singular>Feature</singular>
-            <plural>Features</plural>
+            <singular>Essay</singular>
+            <plural>Essays</plural>
         </aliases>
         <scripts>
             <synthesis>
@@ -96,7 +96,7 @@
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/essay/scripts/presentation/present-essay.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/essay/scripts/presentation/present-essay-topic.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-topic-set-toc.xsl</href>

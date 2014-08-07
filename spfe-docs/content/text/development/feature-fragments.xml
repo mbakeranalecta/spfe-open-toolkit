@@ -35,7 +35,7 @@
         &lt;string id="test-string-1">&lt;bold>test string one&lt;/bold>&lt;/string>
         &lt;string id="test-string-2">&lt;italic>test string two&lt;/italic>&lt;/string>
     &lt;/local-strings>
-    &lt;p>This is a piece of text in a fragment. It includes references to local strings &lt;string-ref id-ref="test-string-1"/> and &lt;string-ref id-ref="test-string-2"/>. And to a global string &lt;string-ref id-ref="eppo-simple-topic-set-product"/>&lt;/p>
+    &lt;p>This is a piece of text in a fragment. It includes references to local strings &lt;string-ref id-ref="test-string-1"/> and &lt;string-ref id-ref="test-string-2"/>. And to a global string &lt;string-ref id-ref="product"/>&lt;/p>
 &lt;/fragment>
 &lt;p>The following is a reference to the fragment defined above:&lt;/p>
 &lt;fragment-ref id-ref="test-fragment">

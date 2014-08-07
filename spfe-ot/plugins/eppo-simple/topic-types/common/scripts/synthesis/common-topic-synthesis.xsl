@@ -11,7 +11,7 @@
 	=======================================================-->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
-	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	exclude-result-prefixes="#all">
 
@@ -50,7 +50,7 @@ Main template
 	<xsl:template name="main" >
 		<!-- Create the root "synthesis element" -->
 		<xsl:result-document href="file:///{$output-directory}/synthesis.xml" method="xml" indent="no" omit-xml-declaration="no">
-			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$topic-set-id}" title="{sf:string($config//config:strings, 'eppo-simple-topic-set-product')} {sf:string($config//config:strings, 'eppo-simple-topic-set-release')}"> 
+			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="{$topic-set-id}" title="{sf:string($config//config:strings, 'product')} {sf:string($config//config:strings, 'product-release')}"> 
 				<xsl:apply-templates select="$topics">
 					<xsl:with-param name="in-scope-strings" select="$strings" tunnel="yes"/>
 					<xsl:with-param name="in-scope-fragments" select="$fragments" tunnel="yes"/>

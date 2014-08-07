@@ -7,7 +7,7 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference"
 	xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference"
@@ -34,7 +34,7 @@ Main content processing templates
 				<ss:index>
 					<ss:entry>
 						<ss:type>config-setting</ss:type>
-						<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</ss:namespace>
+						<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
 						<ss:term>
 							<xsl:value-of select="$xpath"/>
 						</ss:term>
@@ -44,7 +44,7 @@ Main content processing templates
 						select="//schema-attribute[starts-with(normalize-space(xpath), concat($xpath, '/@'))]">
 						<ss:entry>
 							<ss:type>config-setting</ss:type>
-							<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config</ss:namespace>
+							<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
 							<ss:term><xsl:value-of select="$xpath"/>/@<xsl:value-of select="name"/></ss:term>
 							<ss:anchor>
 								<xsl:value-of select="name"/>

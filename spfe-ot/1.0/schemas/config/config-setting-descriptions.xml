@@ -879,7 +879,7 @@
                     describes the individual object (for instance, a <feature>graphic record
                         file</feature>, for a standard <feature>graphic</feature>), and the URL of
                     its configuration file (<config-setting>href</config-setting>).</p>
-                <codeblock language="XML" namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+                <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
 &lt;topic-type>
     &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic&lt;/xmlns>
     &lt;href>../../topic-types/generic-topic/config.xml&lt;/href>
@@ -1239,7 +1239,7 @@
                     set</feature>. The topic type is identified by its XML namespace URI
                     (<config-setting>xmlns</config-setting>) and the URL of its configuration file
                     (<config-setting>href</config-setting>).</p>
-                <codeblock language="XML" namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+                <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
 &lt;topic-type>
     &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic&lt;/xmlns>
     &lt;href>../../topic-types/generic-topic/config.xml&lt;/href>
@@ -1347,7 +1347,7 @@
                         <xml-namespace-uri>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xml-namespace-uri>
                         is <string-ref id-ref="example-alias"/>. The namespace alias configuration
                         for this looks like this:</p>
-                    <codeblock language="XML" namespace="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config">
+                    <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
 &lt;topic-type>
     &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference&lt;/xmlns>
     &lt;aliases>
