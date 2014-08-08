@@ -7,7 +7,7 @@
     xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
+    xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     exclude-result-prefixes="#all">
     <!-- This is simply to suppress the error that would be raised if nothing matched the 
          root element of the fragments file. All fragments across the synthesis files are

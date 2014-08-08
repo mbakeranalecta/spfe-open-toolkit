@@ -4,8 +4,8 @@
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record"
     xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
-    xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
-    xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
+    xmlns="http://spfeopentoolkit.org/ns/eppo-simple"
+    xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     exclude-result-prefixes="#all" version="2.0">
 
     <!-- Make sure that the fig href is an absolute URI so that we know where to copy it from -->

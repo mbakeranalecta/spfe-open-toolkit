@@ -6,7 +6,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0" 
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
-    xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
+    xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     exclude-result-prefixes="#all">
     
     <xsl:template match="string-ref">

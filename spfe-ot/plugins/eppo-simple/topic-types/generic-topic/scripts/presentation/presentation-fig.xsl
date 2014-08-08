@@ -3,7 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record"
-    xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
+    xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     exclude-result-prefixes="#all"
     version="2.0">
 

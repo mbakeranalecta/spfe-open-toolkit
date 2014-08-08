@@ -2,8 +2,8 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
-    xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic"
+    xmlns="http://spfeopentoolkit.org/ns/eppo-simple"
+    xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     version="2.0">
     
     <xsl:template match="p/task | string/task">
