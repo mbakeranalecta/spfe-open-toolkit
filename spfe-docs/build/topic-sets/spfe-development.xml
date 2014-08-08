@@ -10,7 +10,7 @@
 
         <topic-types>
             <topic-type>
-                <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic}think-plan-do-topic</name>
+                <name>{http://spfeopentoolkit.org/ns/eppo-simple}think-plan-do-topic</name>
                 <href>../../topic-types/think-plan-do-topic/config.xml</href>
             </topic-type>
             <topic-type>
