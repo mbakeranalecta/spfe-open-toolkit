@@ -6,27 +6,32 @@
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
     <topic-type>
-        <name>{http://spfeopentoolkit.org/ns/eppo-simple}think-plan-do-topic</name>
+        <name>{http://spfeopentoolkit.org/ns/eppo-simple}subject-topic-list</name>
+        <topic-type-link-priority>0</topic-type-link-priority>
         <aliases>
-            <singular>Task</singular>
-            <plural>Tasks</plural>
+            <singular>A list of topics on a subject</singular>
+            <plural>Lists of topics on particular subjects</plural>
         </aliases>
         <scripts>
+            <extract>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/topic-subject-list-topic/scripts/extract/extract-topic-subject-lists.xsl</href>
+                </script>
+            </extract>            
             <synthesis>
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/synthesis/common-topic-synthesis.xsl</href>
-                </script>
-                <script>
-
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/think-plan-do-topic/scripts/synthesis/think-plan-do-topic-synthesis.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/topic-subject-list-topic/scripts/synthesis/synthesize-topic-subject-lists.xsl</href>
                 </script>
                 <script>
 
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</href>
-                </script>
+                </script>    
                 <script>
 
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</href>
@@ -36,23 +41,18 @@
                     <href>../../topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-graphic-record.xsl</href>
-                </script>
-                
-                <script>
-
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-fig.xsl</href>
                 </script>
                 <script>
-                
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-graphic-record.xsl</href>
+                </script>
+                <script>
+                 
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/synthesis/synthesis-fragments.xsl</href>
                 </script>                
                 <script>
                  
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-strings.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</href>
                 </script>
             </synthesis>
             <link-catalog>
@@ -73,10 +73,16 @@
             </image-list>
             <presentation type="eppo">
                 <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/topic-subject-list-topic/scripts/presentation/present-topic-subject-lists.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-topic-set-toc.xsl</href>
+                </script>
+                <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-functions.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-templates.xsl</href>
+                   <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-templates.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-text-structures.xsl</href>
@@ -90,18 +96,15 @@
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
-                <script>
-
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/think-plan-do-topic/scripts/presentation/present-think-plan-do-topic.xsl</href>
-                </script>
-                <script>
-
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/presentation-fig.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-topic-set-toc.xsl</href>
-                </script>
             </presentation>
+            <toc>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/toc/toc.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+            </toc>
         </scripts>
     </topic-type>
 </spfe>

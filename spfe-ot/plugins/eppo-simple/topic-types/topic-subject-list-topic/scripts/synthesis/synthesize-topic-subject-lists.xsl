@@ -10,7 +10,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"   
-	xmlns:stl="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list"
+	xmlns:stl="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all" >
 	
 <xsl:param name="topic-set-id"/>
@@ -62,13 +62,13 @@ Main content processing templates
 <!-- Topic subject list template -->
 	<xsl:template match="stl:subject-topic-list" >
 		
-		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list}subject-topic-list', $config)"/>
+		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/eppo-simple}subject-topic-list', $config)"/>
 		<xsl:variable name="subject-topic-name" select="concat(stl:subject-type, '_', stl:subject)"/>
 						 
 			
 		<ss:topic 
 			type="{sf:name-in-clark-notation(.)}" 
-			full-name="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list/{sf:title-to-anchor($subject-topic-name)}"
+			full-name="http://spfeopentoolkit.org/ns/eppo-simple/{sf:title-to-anchor($subject-topic-name)}"
 			local-name="{sf:title-to-anchor($subject-topic-name)}"
 			topic-type-alias="{$topic-type-alias}"
 			title="{sf:get-subject-type-alias-singular(stl:subject-type, $config)}: {stl:subject}"
@@ -78,11 +78,11 @@ Main content processing templates
 			<ss:index>
 				<ss:entry>
 					<ss:type><xsl:value-of select="stl:subject-type"/></ss:type>
-					<ss:namespace>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list</ss:namespace>
+					<ss:namespace>http://spfeopentoolkit.org/ns/eppo-simple</ss:namespace>
 					<ss:term><xsl:value-of select="stl:subject"/></ss:term>
 				</ss:entry>
 			</ss:index>
-			<xsl:element name="subject-topic-list" namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list">
+			<xsl:element name="subject-topic-list" namespace="http://spfeopentoolkit.org/ns/eppo-simple">
 				<xsl:apply-templates/>
 			</xsl:element>
 			

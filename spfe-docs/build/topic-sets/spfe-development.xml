@@ -10,7 +10,7 @@
 
         <topic-types>
             <topic-type>
-                <name>{http://spfeopentoolkit.org/ns/eppo-simple}think-plan-do-topic</name>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic</name>
                 <href>../../topic-types/think-plan-do-topic/config.xml</href>
             </topic-type>
             <topic-type>
@@ -18,7 +18,7 @@
                 <href>../../topic-types/generic-topic/config.xml</href>
             </topic-type>
             <topic-type>
-                <name>{http://spfeopentoolkit.org/ns/eppo-simple}feature-topic</name>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic</name>
                 <href>../../topic-types/feature-topic/config.xml</href>
             </topic-type>    
         </topic-types>

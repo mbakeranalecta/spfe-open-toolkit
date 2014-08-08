@@ -6,7 +6,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	exclude-result-prefixes="#all"
-	xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list">
+	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple">
 
 	<!-- 
 		=================
@@ -15,7 +15,7 @@
 	-->
 
 	<xsl:template
-		match="ss:topic[@type='{http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list}subject-topic-list']">
+		match="ss:topic[@type='{http://spfeopentoolkit.org/ns/eppo-simple}subject-topic-list']">
 		<page type="{@type}" name="{@local-name}">
 			<xsl:call-template name="show-header"/>
 			<title>

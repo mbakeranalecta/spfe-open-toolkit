@@ -6,7 +6,7 @@
 
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" 
-	xmlns:stl="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list"
+	xmlns:stl="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
 	exclude-result-prefixes="#all">
 	
@@ -44,7 +44,7 @@
 					<stl:subject-type><xsl:value-of select="$this-type"/></stl:subject-type>
 					<stl:topics-on-subject>
 						<!-- Select topic on this subject and type, excluding those in subject-topic-list pages. -->
-						<xsl:for-each select="$sources//lc:page[lc:target/lc:original-key=$this-key][lc:target/@type=$this-type][@topic-type ne 'http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list']">
+						<xsl:for-each select="$sources//lc:page[lc:target/lc:original-key=$this-key][lc:target/@type=$this-type][@topic-type ne '{http://spfeopentoolkit.org/ns/eppo-simple}subject-topic-list']">
 						<stl:topic>
 							<stl:title><xsl:value-of select="@title"/></stl:title>
 							<stl:full-name><xsl:value-of select="@full-name"/></stl:full-name>
