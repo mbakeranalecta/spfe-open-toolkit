@@ -67,7 +67,7 @@
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic</to>
+                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
                     </remap-namespace>                   
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-strings.xsl</href>
                 </script>
