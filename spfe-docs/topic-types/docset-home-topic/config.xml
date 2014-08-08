@@ -7,7 +7,7 @@
     
     
     <topic-type>
-        <name>{http://spfeopentoolkit.org/ns/eppo-simple}docset-home-topic</name>
+        <name>{http://spfeopentoolkit.org/ns/spfe-docs}docset-home-topic</name>
         <aliases>
             <singular>Home</singular>
             <plural>Home pages</plural>
@@ -18,7 +18,10 @@
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/docset-home-topic/scripts/synthesis/docset-home-topic-synthesis.xsl</href>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
+                    </remap-namespace> <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/docset-home-topic/scripts/synthesis/docset-home-topic-synthesis.xsl</href>
                 </script>                
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
@@ -28,8 +31,8 @@
                 </script>
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</href>
                 </script>
@@ -39,22 +42,22 @@
                 
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</from>
-                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</from>
-                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>../../topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</href>
                 </script>                
@@ -63,47 +66,27 @@
                 </script>
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesis-fig.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <!-- We remap to generic-topic here because that is what the fragments file is witten in. -->
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                         
                     </remap-namespace>                   
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/synthesis/synthesis-fragments.xsl</href>
                 </script>                
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>                   
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-strings.xsl</href>
                 </script>
-                <!-- We include the synthesis-strings file twice with different remappings, because the fragments 
-                     file contains strings in the generic topic namespace
-                -->
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</to>
-                    </remap-namespace>                   
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-strings.xsl</href>
-                </script>
-                <!-- We include the synthsize-text-structures file twice with different remappings, because the fragments 
-                     file contains strings in the generic topic namespace
-                -->
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/synthesize-text-structures.xsl</href>
-                </script>
+                
                 
             </synthesis>
             <link-catalog>
@@ -125,8 +108,8 @@
             <presentation type="eppo">
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/docset-home-topic</from>
-                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/docset-home-topic/scripts/presentation/present-docset-home-topic.xsl</href>
                 </script>
@@ -138,15 +121,15 @@
                 </script>
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-templates.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-text-structures.xsl</href>
                 </script>
@@ -155,8 +138,8 @@
                 -->
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <to>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-text-structures.xsl</href>
                 </script>
@@ -168,8 +151,8 @@
                 </script>
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/spfe-docs</from>
-                        <to>http://spfeopentoolkit.org/ns/eppo-simple</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/presentation-fig.xsl</href>
                 </script>

@@ -408,6 +408,8 @@
                 <xsl:sequence select="scripts"/>
             </xsl:for-each>
         </xsl:variable>
+        
+        <!-- FIXME: Should test that each of the required script sets is present and raise error if not. -->
 
         <xsl:for-each-group select="$script-sets/scripts/*" group-by="concat(name(), '.', @type)">
             <xsl:variable name="script-type"
@@ -456,6 +458,7 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <!-- Otherwise, just link to existing file. -->
+                                <!-- FIXME: need function for fixup is current one does not work -->
                                 <gen:include
                                     href="{concat(if(starts-with(*:href,'/')) then 'file://' else 'file:/', *:href)}"
                                 />

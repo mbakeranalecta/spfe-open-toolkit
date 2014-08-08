@@ -14,7 +14,7 @@
                 <href>../../topic-types/think-plan-do-topic/config.xml</href>
             </topic-type>
             <topic-type>
-                <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic}generic-topic</name>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic</name>
                 <href>../../topic-types/generic-topic/config.xml</href>
             </topic-type>
             <topic-type>

@@ -8,7 +8,7 @@ xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic"
+xmlns="http://spfeopentoolkit.org/ns/eppo-simple"
 xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 exclude-result-prefixes="#all">
 	
