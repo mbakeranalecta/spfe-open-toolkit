@@ -152,12 +152,12 @@
                 established semantics. And they don't share much with other public standards. Having
                 unique namespaces for each of them makes sense because of the way they are used. </p>
             <p>But if you are setting up a structured writing system, particularly a topic-based
-                structured writing system, you are going to have multiple topic types. But each f
+                structured writing system, you are going to have multiple topic types. But each of
                 those topic types is going to have a great many things in common. You are not going
                 to have a whole different way of doing tables or lists or procedures across a family
                 of closely related topic types. In fact, those topic types are probably going to
                 share a whole bunch of elements that mean exactly the same thing in all of them. Why
-                then should the be in different namespaces?</p>
+                then should they be in different namespaces?</p>
             <p>There are three ways to handle this, which <link-external
                     href="http://www.xfront.com/ZeroOneOrManyNamespaces.html">this
                     essay</link-external> has named the Homogeneous, Heterogeneous, and Chameleon
