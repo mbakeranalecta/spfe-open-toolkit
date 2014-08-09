@@ -9,7 +9,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:ed="http://spfeopentoolkit.org/spfe-docs/topic-types/config-setting-descriptions"
+	xmlns:ed="http://spfeopentoolkit.org/ns/spfe-docs"
 	xmlns:cr="http://spfeopentoolkit.org/ns/spfe-docs"
 	exclude-result-prefixes="#all">
 

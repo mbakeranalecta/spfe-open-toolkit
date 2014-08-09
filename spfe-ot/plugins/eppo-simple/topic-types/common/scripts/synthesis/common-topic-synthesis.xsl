@@ -72,6 +72,16 @@ Main template
 		</xsl:call-template>
 	</xsl:template>
 
+	<xsl:template match="*" priority="-1">
+		<xsl:call-template name="sf:error">
+			<xsl:with-param name="message">
+				<xsl:text>Unknown element </xsl:text><xsl:value-of select="local-name()"/> 
+				<xsl:text> encountered with a namespace of </xsl:text> <xsl:value-of select="namespace-uri()"/> 
+				<xsl:text>. You probably need to add a synthesis script for this element type to the build configuration for the topic set.</xsl:text>
+			</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+	
 </xsl:stylesheet>
 
 

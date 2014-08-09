@@ -6,6 +6,7 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog" 
 	xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
@@ -78,7 +79,7 @@ Main template
 	</xsl:template>
 	
 	<!-- FIXME: should this match be qualified by a type parameter? -->
-	<xsl:template match="ss:topic">
+	<xsl:template match="ss:topic" priority="+1">
 		<xsl:variable name="name" select="@local-name"/>
 		<page local-name="{@local-name}" 
 			  full-name="{@full-name}"
@@ -86,8 +87,9 @@ Main template
 			  file="{@local-name}.html"
 			  topic-type="{if (@virtual-type) then @virtual-type else @type}" 
 			  topic-type-alias="{@topic-type-alias}"
-			  link-priority="{sf:get-topic-link-priority(@type, parent::ss:synthesis/@topic-set-id, $config)}"
-			  excerpt="{@excerpt}">
+			  link-priority="{sf:get-topic-link-priority(@type, parent::ss:synthesis/@topic-set-id, $config)}">
+			
+			<xsl:call-template name="get-excerpt"/>
 			<xsl:choose>
 				<xsl:when test="@scope">
 					<xsl:attribute name="scope" select="@scope"/>
@@ -148,6 +150,12 @@ Main template
 			</xsl:for-each>
 			<xsl:apply-templates/>
 		</page>
+	</xsl:template>
+	
+	<xsl:template name="get-excerpt">
+		<xsl:attribute name="excerpt">
+			<xsl:value-of select="sf:escape-for-xml(sf:first-n-words(descendant::es:p[1], 30, ' ...'))"/>
+		</xsl:attribute>
 	</xsl:template>
 
 	<xsl:template name="construct-index-key">

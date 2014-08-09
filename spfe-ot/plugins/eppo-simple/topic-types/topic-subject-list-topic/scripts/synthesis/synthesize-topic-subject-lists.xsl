@@ -89,11 +89,6 @@ Main content processing templates
 			
 		</ss:topic>
 </xsl:template>
-	
-
-	
-
-	
 
 </xsl:stylesheet>
 

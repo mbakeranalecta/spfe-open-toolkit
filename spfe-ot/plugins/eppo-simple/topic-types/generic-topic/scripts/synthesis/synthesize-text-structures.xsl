@@ -20,15 +20,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
-	xmlns:esgt="http://spfeopentoolkit.org/ns/eppo-simple"
+	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns="http://spfeopentoolkit.org/ns/eppo-simple"
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all" >
 
 
+<!-- FiXME: these should be made explicit to avoid passing one elements that should be specifically handled or rejected. -->
+
 	<!-- Priority is -0.9 to set it below the generic root element match that tests for unknown roots. -->
 	<!-- Using a namespace prefix here to avoid matching everything in all namespaces -->
-	<xsl:template match="esgt:*" priority="-0.9" >
+	<xsl:template match="es:*" priority="-0.9" >
 		<xsl:copy>
 			<xsl:copy-of select="@*" copy-namespaces="no"/>
 			<xsl:apply-templates mode="#current"/>
@@ -36,7 +38,7 @@
 	</xsl:template>
 
 	<!-- Apply if conditions -->
-	<xsl:template match="esgt:*[@if]" priority="1">
+	<xsl:template match="es:*[@if]" priority="1">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:choose>
 			<xsl:when test="sf:conditions-met($conditions, $config/config:topic-set[config:topic-set-id=$topic-set-id]/config:condition-tokens)">

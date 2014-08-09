@@ -788,7 +788,7 @@
 	</xsl:template>
 
 	<xsl:template match="*" >
-		<xsl:call-template name="sf:warning">
+		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">
 				<xsl:text>Unknown element found in presentation: </xsl:text>
 				<xsl:value-of select="concat('/', string-join(ancestor::*/name(), '/'),'/', '{', namespace-uri(), '}',name())"/>

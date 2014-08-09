@@ -37,7 +37,9 @@ exclude-result-prefixes="#all">
 		
 	</xsl:template>
 	
-	
-
+	<xsl:template match="docset-home-topic/head"/>
+	<xsl:template match="docset-home-topic/body">
+		<xsl:apply-templates/>
+	</xsl:template>
 </xsl:stylesheet>
 

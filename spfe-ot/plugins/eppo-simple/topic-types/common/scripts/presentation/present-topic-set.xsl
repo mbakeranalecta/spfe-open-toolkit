@@ -73,7 +73,7 @@ Main template
 <xsl:template match="tracking" mode="#all"/>
 	
 	<xsl:template match="*" >
-		<xsl:call-template name="sf:warning">
+		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">
 				<xsl:text>Unknown element found in synthesis: </xsl:text>
 				<xsl:value-of select="concat('{', namespace-uri(), '}', name())"/>
