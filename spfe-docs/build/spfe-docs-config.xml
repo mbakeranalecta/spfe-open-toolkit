@@ -73,7 +73,7 @@
                 </aliases> 
             </subject-type>
             <subject-type>
-                <id>spfe-xslt-function-reference-entry</id>
+                <id>xslt-function-reference-entry</id>
                 <aliases>
                     <singular>SPFE function</singular>
                     <plural>SPFE functions</plural>

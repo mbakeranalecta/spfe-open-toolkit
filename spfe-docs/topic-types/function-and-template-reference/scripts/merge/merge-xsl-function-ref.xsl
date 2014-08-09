@@ -9,7 +9,7 @@ xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-xmlns:fd="http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions"
+xmlns:fd="http://spfeopentoolkit.org/ns/spfe-docs"
 xmlns:xfd="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"
 xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
 xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs"
@@ -57,7 +57,7 @@ Main template
 		 indent="yes"
 		 omit-xml-declaration="no" 
 		 href="file:///{$output-directory}/merge.xml">
-		<spfe-xslt-function-reference-entries>
+		<xslt-function-reference-entries>
 			<xsl:for-each-group select="xfd:function-definition" group-by="concat(xfd:namespace-uri, xfd:name)">
 				<xsl:variable name="name" select="string(xfd:name[1])"/>
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
@@ -65,7 +65,7 @@ Main template
 				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}function-reference', $config)"/>	
 				<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
 					
-					<spfe-xslt-function-reference-entry>
+					<xslt-function-reference-entry>
 						<xsl-function>
 							<name><xsl:value-of select="xfd:name[1]"/></name>
 							<local-prefix><xsl:value-of select="xfd:local-prefix[1]"/></local-prefix>
@@ -128,14 +128,14 @@ Main template
 								</xsl:for-each-group>
 							</parameters>
 						</xsl-function>
-					</spfe-xslt-function-reference-entry>
+					</xslt-function-reference-entry>
 			</xsl:for-each-group>
 			<xsl:for-each-group select="xfd:template-definition" group-by="concat(xfd:namespace-uri, xfd:name)">
 				<xsl:variable name="name" select="string(xfd:name[1])"/>
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
 				<!-- FIXME: This needs an excerpt attribute -->			
 					
-					<spfe-xslt-template-reference-entry>
+					<xslt-template-reference-entry>
 						<xsl-template>
 							<name><xsl:value-of select="xfd:name[1]"/></name>
 							<local-prefix><xsl:value-of select="xfd:local-prefix[1]"/></local-prefix>
@@ -192,9 +192,9 @@ Main template
 								</xsl:for-each-group>
 							</parameters>
 						</xsl-template>
-					</spfe-xslt-template-reference-entry>
+					</xslt-template-reference-entry>
 			</xsl:for-each-group>
-		</spfe-xslt-function-reference-entries>
+		</xslt-function-reference-entries>
 	</xsl:result-document>
 </xsl:template>
 

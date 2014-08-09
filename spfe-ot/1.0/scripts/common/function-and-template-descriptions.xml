@@ -2,9 +2,9 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <function-and-template-descriptions
-    xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions"
+    xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/xslt-function-and-template-descriptions.xsd">
     <head>
         <id>function-and-template-descriptions</id>
         <virtual-type/>
@@ -389,13 +389,13 @@
                         <p>The namespace URI of the topic type. This is the value declared in the <code>xmlns</code> attribute of the topic source file:</p>
                         <codeblock language="XML">
 &lt;function-and-template-descriptions
-    xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions"                            
+    xmlns="http://spfeopentoolkit.org/ns/spfe-docs"                            
                         </codeblock>
                         
                         <p>It is also the value declared in the <code>target-namespace</code> attribute of the <code>xsd:schema</code> element of the topic type schema:</p>
                         <codeblock language="XSD">
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-	targetNamespace="http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions">                            
+	targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs">                            
                         </codeblock>
                         <p>Note, however, that it is possible for the synthesis routine to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis routine is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
                     </description>
@@ -437,13 +437,13 @@
                         <p>The namespace URI of the topic type. This is the value declared in the <code>xmlns</code> attribute of the topic source file:</p>
                         <codeblock language="XML">
 &lt;function-and-template-descriptions
-    xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions"                            
+    xmlns="http://spfeopentoolkit.org/ns/spfe-docs"                            
                         </codeblock>
                         
                         <p>It is also the value declared in the <code>target-namespace</code> attribute of the <code>xsd:schema</code> element of the topic type schema:</p>
                         <codeblock language="XSD">
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-	targetNamespace="http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions">                            
+	targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs">                            
                         </codeblock>
                         <p>Note, however, that it is possible for the synthesis routine to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis routine is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
                     </description>

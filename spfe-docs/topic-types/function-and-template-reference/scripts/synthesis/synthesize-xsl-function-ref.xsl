@@ -14,27 +14,26 @@ xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs"
 exclude-result-prefixes="#all" >
 	
 	
-	<xsl:template match="spfe-xslt-function-reference-entries">
-		
-		<xsl:apply-templates/>
-		
+	<xsl:template match="xslt-function-reference-entries">
+		<xsl:apply-templates/>	
 	</xsl:template>
 
-	<xsl:template match="spfe-xslt-function-reference-entry">
+	<xsl:template match="xslt-function-reference-entry">
 		
 		<xsl:variable name="name" select="xsl-function/name"/>
+		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
 		
 		<ss:topic 
-			type="{{http://spfeopentoolkit.org/ns/spfe-docs}}function-reference" 
-			full-name="http://spfeopentoolkit.org/ns/spfe-docs/{concat(local-prefix, '_', $name)}"
+			type="{$type}" 
+			full-name="{$type}#{$name}"
 			local-name="{$name}"
-			topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}function-reference', $config)}"
+			topic-type-alias="{sf:get-topic-type-alias-singular($type, $config)}"
 			title="{$name}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 			
 			<ss:index>
 				<ss:entry>
-					<ss:type>spfe-xslt-function-reference-entry</ss:type>
+					<ss:type>xslt-function-reference-entry</ss:type>
 					<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/functions</ss:namespace>
 					<ss:term><xsl:value-of select="$name"/></ss:term>
 				</ss:entry>
@@ -54,21 +53,21 @@ exclude-result-prefixes="#all" >
 		
 	</xsl:template>	
 	
-	<xsl:template match="spfe-xslt-template-reference-entry">
+	<xsl:template match="xslt-template-reference-entry">
 		
 		<xsl:variable name="name" select="xsl-template/name"/>
-		
+		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
 		<ss:topic 
-			type="{{http://spfeopentoolkit.org/ns/spfe-docs}}template-reference" 
-			full-name="http://spfeopentoolkit.org/ns/spfe-docs/{concat(local-prefix, '_', $name)}"
+			type="{$type}" 
+			full-name="{$type}#{$name}"
 			local-name="{$name}"
-			topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}function-reference', $config)}"
+			topic-type-alias="{sf:get-topic-type-alias-singular($type, $config)}"
 			title="{$name}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 			
 			<ss:index>
 				<ss:entry>
-					<ss:type>spfe-xslt-function-reference-entry</ss:type>
+					<ss:type>xslt-function-reference-entry</ss:type>
 					<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/functions</ss:namespace>
 					<ss:term><xsl:value-of select="$name"/></ss:term>
 				</ss:entry>
