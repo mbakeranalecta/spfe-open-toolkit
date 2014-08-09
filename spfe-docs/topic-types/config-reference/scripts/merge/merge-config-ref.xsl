@@ -10,7 +10,7 @@
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:ed="http://spfeopentoolkit.org/spfe-docs/topic-types/config-setting-descriptions"
-	xmlns:cr="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference"
+	xmlns:cr="http://spfeopentoolkit.org/ns/spfe-docs"
 	exclude-result-prefixes="#all">
 
 	<xsl:param name="topic-set-id"/>
@@ -122,7 +122,7 @@ Main content processing templates
 					 else $xpath"/>
 
 		<xsl:variable name="topic-type-alias"
-			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference}config-reference', $config)"/>
+			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}config-reference', $config)"/>
 
 		<!-- is it this doctype or a group, but not clear we need this check again -->
 
@@ -273,7 +273,7 @@ Main content processing templates
 
 	<xsl:template
 		match="ed:*">
-		<xsl:element name="cr:{local-name()}" namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference">
+		<xsl:element name="cr:{local-name()}" namespace="http://spfeopentoolkit.org/ns/spfe-docs">
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
 		</xsl:element>

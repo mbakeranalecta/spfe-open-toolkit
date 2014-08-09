@@ -14,19 +14,6 @@
 		=================
 	-->
 
-	<xsl:template
-		match="ss:topic[@type='{http://spfeopentoolkit.org/ns/eppo-simple}subject-topic-list']">
-		<page type="{@type}" name="{@local-name}">
-			<xsl:call-template name="show-header"/>
-			<title>
-				<xsl:value-of select="@title"/>
-			</title>
-			<xsl:apply-templates/>
-			<xsl:call-template name="show-footer"/>
-		</page>
-
-	</xsl:template>
-
 
 	<!-- subject-topic-list -->
 	<xsl:template match="subject-topic-list">
@@ -34,6 +21,12 @@
 		<xsl:variable name="name" select="name"/>
 
 		<!-- info -->
+		<page type="list" name="{ancestor::ss:topic/@local-name}">
+			<xsl:call-template name="show-header"/>
+			<title>
+				<xsl:value-of select="parent::ss:topic/@title"/>
+			</title>
+
 
 		<p>
 			<xsl:value-of select="parent::ss:topic/@excerpt"/>
@@ -56,5 +49,7 @@
 				</item>
 			</labeled-item>
 		</xsl:for-each>
+			<xsl:call-template name="show-footer"/>
+		</page>
 	</xsl:template>
 </xsl:stylesheet>

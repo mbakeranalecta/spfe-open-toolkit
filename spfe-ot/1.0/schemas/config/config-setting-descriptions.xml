@@ -1344,12 +1344,12 @@
                             type alias</feature>. For instance, in the SPFE documentation, the
                             <string-ref id-ref="singular-or-plural"/> alias for the topic type
                         formally identified as
-                        <xml-namespace-uri>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xml-namespace-uri>
+                        <xml-namespace-uri>http://spfeopentoolkit.org/ns/spfe-docs</xml-namespace-uri>
                         is <string-ref id-ref="example-alias"/>. The namespace alias configuration
                         for this looks like this:</p>
                     <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
 &lt;topic-type>
-    &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference&lt;/xmlns>
+    &lt;xmlns>http://spfeopentoolkit.org/ns/spfe-docs&lt;/xmlns>
     &lt;aliases>
         &lt;singular>Configuration setting&lt;/singular>
         &lt;plural>Configuration settings&lt;/plural>

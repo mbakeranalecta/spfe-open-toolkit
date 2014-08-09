@@ -369,7 +369,7 @@
                 <p>Gets the singular version of a <feature>topic type alias</feature>. Topic types are formally named using their XML namespace URIs. However, if you want to display the name of a topic type publicly, for instance in a list of topics or in the visible metadata of a topic, you will need a human readable name for the topic type: the topic type alias. Topic type aliases are defined in the configuration of a topic type, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
                 <codeblock language="XML">
 &lt;topic-type>
-    &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference&lt;/xmlns>
+    &lt;xmlns>http://spfeopentoolkit.org/ns/spfe-docs&lt;/xmlns>
     &lt;aliases>
         &lt;singular>Configuration setting&lt;/singular>
         &lt;plural>Configuration settings&lt;/plural>
@@ -417,7 +417,7 @@
                 <p>Gets the plural version of a <feature>topic type alias</feature>. Topic types are formally named using their XML namespace URIs. However, if you want to display the name of a topic type publicly, for instance in a list of topics or in the visible metadata of a topic, you will need a human readable name for the topic type: the topic type alias. Topic type aliases are defined in the configuration of a topic type, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
                 <codeblock language="XML">
 &lt;topic-type>
-    &lt;xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference&lt;/xmlns>
+    &lt;xmlns>http://spfeopentoolkit.org/ns/spfe-docs&lt;/xmlns>
     &lt;aliases>
         &lt;singular>Configuration setting&lt;/singular>
         &lt;plural>Configuration settings&lt;/plural>

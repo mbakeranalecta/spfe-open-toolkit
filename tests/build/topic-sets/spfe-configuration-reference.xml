@@ -12,7 +12,7 @@
         <topic-types>
 
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xmlns>
+                    <name>http://spfeopentoolkit.org/ns/spfe-docs{configuration-reference}</name>
                     <href>../../../spfe-docs/topic-types/config-reference/config.xml</href>
                 </topic-type>
             

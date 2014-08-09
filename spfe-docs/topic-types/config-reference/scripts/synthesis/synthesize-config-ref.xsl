@@ -9,8 +9,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference"
-	xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference"
+	xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs"
 	exclude-result-prefixes="#all">
 
 
@@ -24,10 +24,10 @@ Main content processing templates
 	<!-- Schema element template -->
 	<xsl:template match="spfe-configuration-reference-entry">
 
-		<ss:topic type="{{http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference}}config-reference"
-				full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/{translate(xpath, '/:', '__')}"
+		<ss:topic type="{{http://spfeopentoolkit.org/ns/spfe-docs}}config-reference"
+			full-name="http://spfeopentoolkit.org/ns/spfe-docs/{translate(xpath, '/:', '__')}"
 				local-name="{translate(xpath, '/:', '__')}" 
-				topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference}config-reference', $config)}"
+				topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}config-reference', $config)}"
 				title="{name}"
 				excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 				<xsl:variable name="xpath" select="normalize-space(xpath)"/>

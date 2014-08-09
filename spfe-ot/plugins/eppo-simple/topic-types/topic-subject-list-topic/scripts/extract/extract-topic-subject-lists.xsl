@@ -6,7 +6,7 @@
 
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" 
-	xmlns:stl="http://spfeopentoolkit.org/ns/eppo-simple"
+	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
 	exclude-result-prefixes="#all">
 	
@@ -35,28 +35,28 @@
 	<xsl:template name="main" >
 		<!-- Create the root "extracted-content element" -->
 		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id,'/extract/out/lists.xml')}" method="xml" indent="yes" omit-xml-declaration="no">
-			<stl:subject-topic-lists>
+			<es:subject-topic-lists>
 				<xsl:for-each-group select="$sources//lc:target[@type ne 'topic']" group-by="concat(@type, '+', lc:original-key)">
 					<xsl:variable name="this-key" select="lc:original-key"/>
 				<xsl:variable name="this-type" select="@type"/>
-				<stl:subject-topic-list>
-					<stl:subject><xsl:value-of select="$this-key"/></stl:subject>
-					<stl:subject-type><xsl:value-of select="$this-type"/></stl:subject-type>
-					<stl:topics-on-subject>
+				<es:subject-topic-list>
+					<es:subject><xsl:value-of select="$this-key"/></es:subject>
+					<es:subject-type><xsl:value-of select="$this-type"/></es:subject-type>
+					<es:topics-on-subject>
 						<!-- Select topic on this subject and type, excluding those in subject-topic-list pages. -->
-						<xsl:for-each select="$sources//lc:page[lc:target/lc:original-key=$this-key][lc:target/@type=$this-type][@topic-type ne '{http://spfeopentoolkit.org/ns/eppo-simple}subject-topic-list']">
-						<stl:topic>
-							<stl:title><xsl:value-of select="@title"/></stl:title>
-							<stl:full-name><xsl:value-of select="@full-name"/></stl:full-name>
-							<stl:topic-type><xsl:value-of select="@topic-type"/></stl:topic-type>
-							<stl:topic-type-alias><xsl:value-of select="@topic-type-alias"/></stl:topic-type-alias>
-							<stl:excerpt><xsl:value-of select="@excerpt"/></stl:excerpt>
-						</stl:topic>
+						<xsl:for-each select="$sources//lc:page[lc:target/lc:original-key=$this-key][lc:target/@type=$this-type][not( ends-with(@topic-type, '}subject-topic-list'))]">
+						<es:topic>
+							<es:title><xsl:value-of select="@title"/></es:title>
+							<es:full-name><xsl:value-of select="@full-name"/></es:full-name>
+							<es:topic-type><xsl:value-of select="@topic-type"/></es:topic-type>
+							<es:topic-type-alias><xsl:value-of select="@topic-type-alias"/></es:topic-type-alias>
+							<es:excerpt><xsl:value-of select="@excerpt"/></es:excerpt>
+						</es:topic>
 					</xsl:for-each>	
-					</stl:topics-on-subject>
-				</stl:subject-topic-list>
+					</es:topics-on-subject>
+				</es:subject-topic-list>
 			</xsl:for-each-group>
- 			</stl:subject-topic-lists>
+ 			</es:subject-topic-lists>
 		</xsl:result-document>
 	</xsl:template>
 	

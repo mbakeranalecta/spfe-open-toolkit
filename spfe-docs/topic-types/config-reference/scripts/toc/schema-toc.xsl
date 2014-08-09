@@ -2,9 +2,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
-    xmlns:re="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference">
+    xmlns:re="http://spfeopentoolkit.org/ns/spfe-docs">
     
-    <xsl:template match="topics-of-type[@type='http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference']" mode="toc">
+    <xsl:template match="topics-of-type[@type='{http://spfeopentoolkit.org/ns/spfe-docs}config-reference']" mode="toc">
         
         <xsl:for-each-group select="//re:spfe-configuration-reference-entry" group-by="re:doctype">
             <xsl:sort select="current-grouping-key()"/>

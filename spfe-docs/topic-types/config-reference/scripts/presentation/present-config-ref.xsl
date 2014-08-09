@@ -7,9 +7,9 @@
  xmlns:lf="local-functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
- xmlns:re="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference"
+ xmlns:re="http://spfeopentoolkit.org/ns/spfe-docs"
  exclude-result-prefixes="#all" 
- xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference">
+ xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs">
 
 	
 	<!--================================================

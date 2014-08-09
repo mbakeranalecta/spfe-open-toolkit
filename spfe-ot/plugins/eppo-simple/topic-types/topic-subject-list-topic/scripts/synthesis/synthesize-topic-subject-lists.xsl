@@ -10,7 +10,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"   
-	xmlns:stl="http://spfeopentoolkit.org/ns/eppo-simple"
+	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all" >
 	
 <xsl:param name="topic-set-id"/>
@@ -46,7 +46,7 @@ Main template
 				topic-set-id="{$topic-set-id}" 
 				title="{sf:string($config//config:strings, 'product')} {sf:string($config//config:strings, 'product-release')}"> 
 				<!-- Only build list pages for subjects with more than one topic -->
-				<xsl:apply-templates select="$authored-content//stl:subject-topic-list[stl:topics-on-subject/stl:topic[2]]"/>
+				<xsl:apply-templates select="$authored-content//es:subject-topic-list[es:topics-on-subject/es:topic[2]]"/>
 			</ss:synthesis>
 		</xsl:result-document>
 </xsl:template>
@@ -60,10 +60,10 @@ Main content processing templates
 -->
 
 <!-- Topic subject list template -->
-	<xsl:template match="stl:subject-topic-list" >
+	<xsl:template match="es:subject-topic-list" >
 		
-		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/eppo-simple}subject-topic-list', $config)"/>
-		<xsl:variable name="subject-topic-name" select="concat(stl:subject-type, '_', stl:subject)"/>
+		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular(sf:name-in-clark-notation(.), $config)"/>
+		<xsl:variable name="subject-topic-name" select="concat(es:subject-type, '_', es:subject)"/>
 						 
 			
 		<ss:topic 
@@ -71,20 +71,21 @@ Main content processing templates
 			full-name="http://spfeopentoolkit.org/ns/eppo-simple/{sf:title-to-anchor($subject-topic-name)}"
 			local-name="{sf:title-to-anchor($subject-topic-name)}"
 			topic-type-alias="{$topic-type-alias}"
-			title="{sf:get-subject-type-alias-singular(stl:subject-type, $config)}: {stl:subject}"
-			excerpt="A list of topics related to the {sf:get-subject-type-alias-singular(stl:subject-type, $config)} {stl:subject}.">
+			title="{sf:get-subject-type-alias-singular(es:subject-type, $config)}: {es:subject}"
+			excerpt="A list of topics related to the {sf:get-subject-type-alias-singular(es:subject-type, $config)} {es:subject}.">
 			
 			<!-- FIXME: Need to reproduce the entire index term markup here so it is passed through to the link catalog -->
 			<ss:index>
 				<ss:entry>
-					<ss:type><xsl:value-of select="stl:subject-type"/></ss:type>
+					<ss:type><xsl:value-of select="es:subject-type"/></ss:type>
 					<ss:namespace>http://spfeopentoolkit.org/ns/eppo-simple</ss:namespace>
-					<ss:term><xsl:value-of select="stl:subject"/></ss:term>
+					<ss:term><xsl:value-of select="es:subject"/></ss:term>
 				</ss:entry>
 			</ss:index>
-			<xsl:element name="subject-topic-list" namespace="http://spfeopentoolkit.org/ns/eppo-simple">
+			<xsl:copy>
 				<xsl:apply-templates/>
-			</xsl:element>
+			</xsl:copy>
+			
 			
 		</ss:topic>
 </xsl:template>
