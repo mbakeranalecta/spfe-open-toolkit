@@ -108,12 +108,12 @@
         <xsl:apply-templates mode="load-config"/>
         <xsl:for-each
             select="//topic-type/href, //object-type/href, //output-format/href, //topic-set/href">
-            <xsl:if test="not(doc-available(resolve-uri(.,base-uri($this))))">
+            <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
                 <xsl:call-template name="sf:error">
                     <xsl:with-param name="message">Configuration file <xsl:value-of select="."/> not found.</xsl:with-param>
                 </xsl:call-template>
             </xsl:if>
-            <xsl:apply-templates select="document(resolve-uri(.,base-uri($this)))"
+            <xsl:apply-templates select="document(resolve-uri(spfe:resolve-defines(.),base-uri($this)))"
                 mode="load-config"/>
         </xsl:for-each>
     </xsl:template>
