@@ -23,13 +23,16 @@ Main content processing templates
 
 	<!-- Schema element template -->
 	<xsl:template match="spfe-configuration-reference-entry">
-
-		<ss:topic type="{{http://spfeopentoolkit.org/ns/spfe-docs}}config-reference"
-			full-name="http://spfeopentoolkit.org/ns/spfe-docs/{translate(xpath, '/:', '__')}"
-				local-name="{translate(xpath, '/:', '__')}" 
-				topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}config-reference', $config)}"
-				title="{name}"
-				excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
+		<xsl:variable name="name" select="translate(xpath, '/:', '__')"/>
+		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
+		
+		<ss:topic 
+			type="{$type}" 
+			full-name="{$type}#{$name}"
+			local-name="{$name}"
+			topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}config-reference', $config)}"
+			title="{name}"
+			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 				<xsl:variable name="xpath" select="normalize-space(xpath)"/>
 				<ss:index>
 					<ss:entry>

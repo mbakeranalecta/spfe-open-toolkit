@@ -11,22 +11,22 @@ xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 exclude-result-prefixes="#all">
 	
 	<xsl:template match="think-plan-do-topic">
-		<xsl:variable name="conditions" select="@if"/>
-		<xsl:variable name="topic-type" select="sf:name-in-clark-notation(.)"/>
+		<xsl:variable name="name" select="head/id"/>
+		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
+		
+		<ss:topic 
+			type="{$type}" 
+			full-name="{$type}#{$name}"
+			local-name="{$name}"				
+			topic-type-alias="{sf:get-topic-type-alias-singular($topic-type, $config)}"
+			title="{body/title}"
+			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">		
 
-				<ss:topic 
-					type="{sf:name-in-clark-notation(.)}" 
-					topic-type-alias="{sf:get-topic-type-alias-singular($topic-type, $config)}"
-					full-name="{concat(namespace-uri(), '/', head/id)}"
-					local-name="{head/id}"
-					title="{body/title}"
-					excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">		
-
-					<xsl:copy>
-						<xsl:copy-of select="@*" copy-namespaces="no"/>
-						<xsl:apply-templates/>
-					</xsl:copy>
-				</ss:topic>
+			<xsl:copy>
+				<xsl:copy-of select="@*" copy-namespaces="no"/>
+				<xsl:apply-templates/>
+			</xsl:copy>
+		</ss:topic>
 			
 	</xsl:template>
 	

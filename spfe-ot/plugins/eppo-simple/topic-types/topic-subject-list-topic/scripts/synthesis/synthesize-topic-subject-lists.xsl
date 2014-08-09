@@ -62,15 +62,17 @@ Main content processing templates
 <!-- Topic subject list template -->
 	<xsl:template match="es:subject-topic-list" >
 		
-		<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular(sf:name-in-clark-notation(.), $config)"/>
+		
 		<xsl:variable name="subject-topic-name" select="concat(es:subject-type, '_', es:subject)"/>
 						 
-			
+		<xsl:variable name="name" select="sf:title-to-anchor($subject-topic-name)"/>
+		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
+
 		<ss:topic 
-			type="{sf:name-in-clark-notation(.)}" 
-			full-name="http://spfeopentoolkit.org/ns/eppo-simple/{sf:title-to-anchor($subject-topic-name)}"
-			local-name="{sf:title-to-anchor($subject-topic-name)}"
-			topic-type-alias="{$topic-type-alias}"
+			type="{$type}" 
+			full-name="{$type}#{$name}"
+			local-name="{$name}"			
+			topic-type-alias="{sf:get-topic-type-alias-singular($type, $config)}"
 			title="{sf:get-subject-type-alias-singular(es:subject-type, $config)}: {es:subject}"
 			excerpt="A list of topics related to the {sf:get-subject-type-alias-singular(es:subject-type, $config)} {es:subject}.">
 			
