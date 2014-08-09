@@ -80,7 +80,10 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
            </planning-question>
        </planning>
         <doing>        
-            <p>To add a documentation set, you documentation set configuration file. A documentation set configuration file is a configuration file that includes the <config-setting>/spfe/doc-set</config-setting> element. You need the following mandatory attributes and elements: </p>
+            <p>To add a documentation set, you create a documentation set configuration file. A
+                documentation set configuration file is a configuration file that includes the
+                <config-setting>/spfe/doc-set</config-setting> element. You need the following
+                mandatory attributes and elements: </p>
             <ul>
                 <li>
                     <p><config-setting>/spfe/doc-set/doc-set-id</config-setting>: The ID of the

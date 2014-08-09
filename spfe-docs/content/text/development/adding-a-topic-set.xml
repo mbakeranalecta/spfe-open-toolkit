@@ -88,7 +88,10 @@
            <p>To add a topic set to the build:</p>
            <ol>
                <li>
-                   <p>Create a <feature>topic set configuration file</feature> that describes the topic set. The conposition of the topic set is determined entirely by the topic set configuration. Individual topics don't know what topic set (or topic sets) they belong to.</p>
+                   <p>Create a <feature>topic set configuration file</feature> that describes the
+                        topic set. The composition of the topic set is determined entirely by the
+                        topic set configuration. Individual topics don't know what topic set (or
+                        topic sets) they belong to.</p>
                </li>
                <li>
                    <p>Add a new <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting> to the appropriate <feature>documentation set configuration file</feature>. You can add a topic set to more than one documentation set.</p>

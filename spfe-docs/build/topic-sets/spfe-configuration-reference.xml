@@ -11,7 +11,7 @@
 
         <topic-types>
                 <topic-type>
-                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}config-reference</name>
+                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}spfe-configuration-reference-entry</name>
                     <href>../../topic-types/config-reference/config.xml</href>
                 </topic-type>
         </topic-types>

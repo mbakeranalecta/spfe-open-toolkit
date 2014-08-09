@@ -30,7 +30,7 @@ Main content processing templates
 			type="{$type}" 
 			full-name="{$type}#{$name}"
 			local-name="{$name}"
-			topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}config-reference', $config)}"
+			topic-type-alias="{sf:get-topic-type-alias-singular($type, $config)}"
 			title="{name}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 				<xsl:variable name="xpath" select="normalize-space(xpath)"/>

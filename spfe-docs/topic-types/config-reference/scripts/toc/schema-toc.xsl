@@ -4,7 +4,7 @@
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:re="http://spfeopentoolkit.org/ns/spfe-docs">
     
-    <xsl:template match="topics-of-type[@type='{http://spfeopentoolkit.org/ns/spfe-docs}config-reference']" mode="toc">
+    <xsl:template match="topics-of-type[@type='{http://spfeopentoolkit.org/ns/spfe-docs}spfe-configuration-reference-entry']" mode="toc">
         
         <xsl:for-each-group select="//re:spfe-configuration-reference-entry" group-by="re:doctype">
             <xsl:sort select="current-grouping-key()"/>
