@@ -9,8 +9,8 @@ xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
-xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
+xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs"
 exclude-result-prefixes="#all" >
 	
 	
@@ -25,10 +25,10 @@ exclude-result-prefixes="#all" >
 		<xsl:variable name="name" select="xsl-function/name"/>
 		
 		<ss:topic 
-			type="{{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}}function-reference" 
-			full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference/{concat(local-prefix, '_', $name)}"
+			type="{{http://spfeopentoolkit.org/ns/spfe-docs}}function-reference" 
+			full-name="http://spfeopentoolkit.org/ns/spfe-docs/{concat(local-prefix, '_', $name)}"
 			local-name="{$name}"
-			topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}function-reference', $config)}"
+			topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}function-reference', $config)}"
 			title="{$name}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 			
@@ -59,10 +59,10 @@ exclude-result-prefixes="#all" >
 		<xsl:variable name="name" select="xsl-template/name"/>
 		
 		<ss:topic 
-			type="{{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}}function-reference" 
-			full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference/{concat(local-prefix, '_', $name)}"
+			type="{{http://spfeopentoolkit.org/ns/spfe-docs}}template-reference" 
+			full-name="http://spfeopentoolkit.org/ns/spfe-docs/{concat(local-prefix, '_', $name)}"
 			local-name="{$name}"
-			topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}function-reference', $config)}"
+			topic-type-alias="{sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}function-reference', $config)}"
 			title="{$name}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 			

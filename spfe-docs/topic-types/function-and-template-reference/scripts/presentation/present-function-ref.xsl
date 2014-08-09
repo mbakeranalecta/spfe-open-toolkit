@@ -7,7 +7,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
-	xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
+	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs"
 	exclude-result-prefixes="#all">
 
 	<!-- processing directives -->

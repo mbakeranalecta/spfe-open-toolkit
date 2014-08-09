@@ -10,15 +10,15 @@
         <topic-types>
 
                 <topic-type>
-                    <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}spfe-function-and-template-descriptions</name>
+                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}spfe-function-and-template-descriptions</name>
                     <href>../../topic-types/function-and-template-reference/config.xml</href>
                 </topic-type>
                 <topic-type>
-                    <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}function-reference</name>
+                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}function-reference</name>
                     <href>../../topic-types/function-and-template-reference/config.xml</href>
                 </topic-type>
                 <topic-type>
-                    <name>{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}template-reference</name>
+                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}template-reference</name>
                     <href>../../topic-types/function-and-template-reference/config.xml</href>
                 </topic-type>
             

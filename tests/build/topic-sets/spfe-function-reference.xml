@@ -14,7 +14,7 @@
                     <href>../../../spfe-docs/topic-types/function-and-template-reference/config.xml</href>
                 </topic-type>
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xmlns>
+                    <xmlns>http://spfeopentoolkit.org/ns/spfe-docs</xmlns>
                     <href>../../../spfe-docs/topic-types/function-and-template-reference/config.xml</href>
                 </topic-type>
                 <topic-type>

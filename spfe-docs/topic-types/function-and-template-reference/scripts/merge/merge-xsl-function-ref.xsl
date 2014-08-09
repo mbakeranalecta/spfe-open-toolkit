@@ -11,8 +11,8 @@ xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:fd="http://spfeopentoolkit.org/spfe-docs/topic-types/spfe-function-and-template-descriptions"
 xmlns:xfd="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"
-xmlns="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
-xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
+xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs"
 exclude-result-prefixes="#all" >
 	
 
@@ -62,7 +62,7 @@ Main template
 				<xsl:variable name="name" select="string(xfd:name[1])"/>
 				<xsl:variable name="namespace-uri" select="string(xfd:namespace-uri[1])"/>
 				
-				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference}function-reference', $config)"/>	
+				<xsl:variable name="topic-type-alias" select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}function-reference', $config)"/>	
 				<xsl:variable name="function-description" select="$function-source/fd:function-and-template-descriptions/fd:body[fd:namespace-uri eq $namespace-uri]/fd:function-description[fd:name eq $name]"/>
 					
 					<spfe-xslt-function-reference-entry>
@@ -202,7 +202,7 @@ Main template
 	
 	<xsl:template
 		match="fd:*">
-		<xsl:element name="{local-name()}" namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference">
+		<xsl:element name="{local-name()}" namespace="http://spfeopentoolkit.org/ns/spfe-docs">
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
 		</xsl:element>
