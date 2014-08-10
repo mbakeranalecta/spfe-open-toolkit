@@ -7,23 +7,23 @@
  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
- xmlns:eppo="http://spfeopentoolkit.org/ns/eppo-simple"
+ xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
  xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
  exclude-result-prefixes="#all">
 	
 	<!-- topic -->
-	<xsl:template match="eppo:essay">
+	<xsl:template match="es:essay">
 		<xsl:choose>
 			<xsl:when test="$media='online'"> 
-				<page status="{eppo:head/eppo:history/eppo:revision[last()]/eppo:status}" name="{ancestor::ss:topic/@local-name}">
+				<page status="{es:head/es:history/es:revision[last()]/es:status}" name="{ancestor::ss:topic/@local-name}">
 					<xsl:call-template name="show-header"/>
 					<xsl:apply-templates /> 
 					<xsl:call-template name="show-footer"/>		
 				</page>
 			</xsl:when>
 			<xsl:when test="$media='paper'">
-				<chapter status="{eppo:head/eppo:tracking/eppo:status}" name="{eppo:name}">
+				<chapter status="{es:head/es:tracking/es:status}" name="{es:name}">
 					<xsl:apply-templates/>
 				</chapter>
 			</xsl:when>
@@ -35,33 +35,47 @@
 		</xsl:choose>
 	</xsl:template>
 	
-	<xsl:template match="eppo:head"/>
+	<xsl:template match="es:essay/es:head"/>
 
-	<xsl:template match="eppo:essay/eppo:title">
+	<xsl:template match="es:essay/es:body/es:title">
 		<title>
 			<xsl:apply-templates/>
 		</title>
+		<!-- page toc -->
+		<xsl:if test="count(../es:section/es:title) gt 1">
+			<ul>
+				<xsl:for-each select="../es:section/es:title">
+					<li>
+						<xref target="#{sf:title-to-anchor(normalize-space(.))}">
+							<xsl:value-of select="."/>
+						</xref>
+					</li>
+				</xsl:for-each>
+			</ul>
+		</xsl:if>	
 	</xsl:template>
 	
-	<xsl:template match="eppo:byline">
-		<p hint="byline"><xsl:apply-templates/></p>
+	<xsl:template match="es:essay/es:body/es:byline">
+		<p hint="byline">By <xsl:apply-templates/></p>
 	</xsl:template>
 	
-	<xsl:template match="eppo:precis">
-		<title>Summary</title>
-		<xsl:apply-templates/>
+	<xsl:template match="es:essay/es:body/es:precis">
+		<precis>
+			<title>Summary</title>
+			<xsl:apply-templates/>
+		</precis>
 	</xsl:template>
 	
-	<xsl:template match="eppo:section">
-		<xsl:if test="$config/config:build-command='draft' or sf:has-content(eppo:title/following-sibling::*) ">
+	<xsl:template match="es:essay/es:body/es:section">
+		<xsl:if test="$config/config:build-command='draft' or sf:has-content(es:title/following-sibling::*) ">
 		<section>
-			<anchor name="{sf:title-to-anchor(eppo:title)}"/>
+			<anchor name="{sf:title-to-anchor(es:title)}"/>
 			<xsl:apply-templates/>
 		</section>
 		</xsl:if>	
 	</xsl:template>
 	
-	<xsl:template match="eppo:section/eppo:title">	
+	<xsl:template match="es:essay/es:body/es:section/es:title">	
 			<title>
 				<xsl:apply-templates/>
 			</title>

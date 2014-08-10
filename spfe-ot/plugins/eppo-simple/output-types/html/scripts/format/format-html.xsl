@@ -314,18 +314,6 @@
 		<h1>
 			<xsl:apply-templates/>
 		</h1>
-		<!-- page toc -->
-		<xsl:if test="count(../section/title) gt 1">
-			<ul>
-				<xsl:for-each select="../section/title">
-					<li>
-						<a href="#{sf:title-to-anchor(normalize-space(.))}">
-							<xsl:value-of select="."/>
-						</a>
-					</li>
-				</xsl:for-each>
-			</ul>
-		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="section/title">
@@ -334,7 +322,17 @@
 		</h2>
 	</xsl:template>
 
+	<xsl:template match="precis">
+		<div class="precis">
+			<xsl:apply-templates/>
+		</div>
+	</xsl:template>
 
+	<xsl:template match="precis/title">
+		<h3>
+			<xsl:apply-templates/>
+		</h3>
+	</xsl:template>
 
 	<xsl:template match="qa/title">
 		<h2>
