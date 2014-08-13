@@ -4,7 +4,7 @@
 <xsl:stylesheet 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+    xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"
     exclude-result-prefixes="#all"
@@ -24,7 +24,7 @@
     
     <xsl:template name="main" >
         <!-- Create the root "extracted-content element" -->
-        <xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/extracted/function-and-template-definitions.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+        <xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/extract/out/function-and-template-definitions.xml')}" method="xml" indent="no" omit-xml-declaration="no">
             <function-and-template-definitions>
                 <xsl:apply-templates select="$xslt-file-set"/>
             </function-and-template-definitions>

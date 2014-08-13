@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
 
     <topic-set>
         <topic-set-id>spfe-configuration-reference</topic-set-id>
@@ -12,7 +12,7 @@
         <topic-types>
 
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference</xmlns>
+                    <name>http://spfeopentoolkit.org/ns/spfe-docs{configuration-reference}</name>
                     <href>../../../spfe-docs/topic-types/config-reference/config.xml</href>
                 </topic-type>
             
@@ -29,7 +29,7 @@
 
         <default-topic-scope>spfe</default-topic-scope>
         <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
-        <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules>
+        <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
         
 
         <strings>

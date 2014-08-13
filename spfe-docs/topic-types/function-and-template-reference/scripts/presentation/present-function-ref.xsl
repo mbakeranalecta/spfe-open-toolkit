@@ -6,8 +6,8 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
-	xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference"
+	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs"
 	exclude-result-prefixes="#all">
 
 	<!-- processing directives -->
@@ -15,7 +15,7 @@
 
 
 	<!-- spfe-function-reference-entry -->
-	<xsl:template match="spfe-xslt-function-reference-entry">
+	<xsl:template match="xslt-function-reference-entry">
 		<xsl:apply-templates/>
 	</xsl:template>
 
@@ -100,7 +100,7 @@
 	</xsl:template>
 
 	<!-- spfe-template-reference-entry -->
-	<xsl:template match="spfe-xslt-template-reference-entry">
+	<xsl:template match="xslt-template-reference-entry">
 		<xsl:apply-templates/>
 	</xsl:template>
 
@@ -157,6 +157,7 @@
 		</page>
 	</xsl:template>
 
+	<!-- Add links to code samples -->
 	<xsl:template match="xsl:*">
 		<xsl:variable name="function-prefix" select="string(ancestor::ss:topic//local-prefix)"/>
 		<xsl:variable name="current-page-name" select="ancestor::ss:topic/@full-name"/>

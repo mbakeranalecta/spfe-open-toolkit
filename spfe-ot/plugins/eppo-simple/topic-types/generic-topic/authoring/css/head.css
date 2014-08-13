@@ -1,0 +1,231 @@
+
+head
+{
+ display:block;
+ padding: 1em;
+ background-color:#F0F5F5;
+ font-family:sans-serif;
+}
+
+head>uri 
+{
+    display:block;
+    background-color:white;
+}
+
+head>uri:before
+{
+    content: "URI:";
+    background-color:#F0F5F5;
+    padding: 2px;
+    display:block;
+    font-size:small;
+    
+}
+
+head>author 
+{
+    display:block;
+    background-color:white;
+}
+
+head>author:before
+{
+    content: "Author:";
+    background-color:#F0F5F5;
+    padding: 2px;
+    font-size:small;
+    display:block;
+}
+
+head>status 
+{
+    display:block;
+    background-color:white;
+}
+
+head>status:before
+{
+    content: "Status:";
+    background-color:#F0F5F5;
+    padding: 2px;
+    font-size:small;
+    display:block;
+}
+
+head>history 
+{
+    display:table;
+    background-color:white;
+    width:100%;
+}
+
+head>history:before
+{
+    content: "History:";
+    background-color:#F0F5F5;
+    padding: 2px;
+    font-size:small;
+    display: block;
+}
+
+head>history>revision
+{
+    display:table-row;
+}
+
+head>history>revision:first-child>date:before
+{
+    content:"Date";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:#F0F5F5;
+}
+
+head>history>revision>date
+{
+    display:table-column;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
+    -oxy-show-placeholder: always;
+    -oxy-placeholder-content: "YYYY-MM-DD";
+}
+
+head>history>revision>date {
+    content:
+        oxy_datePicker(
+            columns, 16, 
+            edit, "#text",
+            format, "yyyy-MM-dd");
+    visibility: -oxy-collapse-text;
+}
+
+head>history>revision:first-child>author:before
+{
+    content:"Author";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:#F0F5F5;
+}
+
+head>history>revision>author
+{
+    display:table-column;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
+    -oxy-show-placeholder: always;
+}
+
+head>history>revision:first-child>comment:before
+{
+    content:"Comment";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:#F0F5F5;
+
+}
+
+head>history>revision>comment
+{
+    display:table-column;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
+    -oxy-show-placeholder: always;
+}
+
+
+head>history>revision:first-child>status:before
+{
+    content:"Status";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:#F0F5F5;
+}
+
+head>history>revision>status
+{
+    display:table-column;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
+    -oxy-show-placeholder: always;
+}
+
+head>history>revision>status
+{
+     visibility:-oxy-collapse-text;
+     content: 
+        oxy_editor(
+            type, combo, 
+            edit, "#text", 
+            editable, false);
+}
+
+head>index 
+{
+    display:table;
+    background-color:white;
+    width:100%;
+}
+
+head>index::before
+{
+    display: block;
+    content: "Index:";
+    background-color:#F0F5F5;
+    padding: 2px;
+    font-size:small;
+}
+
+head>index>entry
+{
+    display:table-row;
+}
+
+head>index>entry:first-child>type:before
+{
+    content:"Subject-affinity type";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:#F0F5F5;
+}
+
+head>index>entry>type
+{
+    display:table-column;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
+}
+head>index>entry>type
+{
+     visibility:-oxy-collapse-text;
+     content: 
+        oxy_editor(
+            type, combo, 
+            edit, "#text", 
+            editable, false);
+}
+head>index>entry:first-child>term:before
+{
+    content:"Subject-affinity text. If a phrase, use {...} to surround important words";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:#F0F5F5;
+}
+head>index>entry>term
+{
+    display:table-column;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
+}

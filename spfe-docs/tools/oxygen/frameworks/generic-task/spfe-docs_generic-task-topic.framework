@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="15.2" xml:space="preserve">
-	<map>
+<serialized version="16.0" xml:space="preserve">
+	<serializableOrderedMap>
 		<entry>
 			<String>document.types</String>
 			<documentTypeDescriptor-array>
 				<documentTypeDescriptor>
+					<field name="extensionPatch">
+						<null/>
+					</field>
 					<field name="name">
-						<String>SPFE-docs generic-task-topic</String>
+						<String>SPFE-docs</String>
 					</field>
 					<field name="schemaDescriptor">
 						<null/>
@@ -23,10 +26,10 @@
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
-											<String>http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-task-topic/authoring/css/generic-task-topic.css</String>
+											<String>http://spfeopentoolkit.org/spfe-docs/topic-types/common/authoring/css/spfe-docs.css</String>
 										</field>
 										<field name="title">
-											<String>SPFE Docs Generic Task Topic</String>
+											<String>SPFE Docs Common CSS</String>
 										</field>
 										<field name="alternate">
 											<Boolean>false</Boolean>
@@ -126,7 +129,7 @@
 					</field>
 					<field name="xmlCatalogs">
 						<String-array>
-							<String>${framework}/../schemas/authoring/generic-task-topic.xsd</String>
+							<String>http://spfeopentoolkit.org/spfe-docs/catalog.xml</String>
 						</String-array>
 					</field>
 					<field name="description">
@@ -136,7 +139,33 @@
 						<documentTypeRule-array>
 							<documentTypeRule>
 								<field name="namespace">
-									<String>http://spfeopentoolkit.org/spfe-docs/topic-types/generic-task-topic</String>
+									<String>http://spfeopentoolkit.org/spfe-docs/topic-types/*</String>
+								</field>
+								<field name="rootElem">
+									<String>*</String>
+								</field>
+								<field name="fileName">
+									<String>*</String>
+								</field>
+								<field name="publicID">
+									<String>*</String>
+								</field>
+								<field name="javaRuleClass">
+									<String></String>
+								</field>
+								<field name="attributeLocalName">
+									<String>*</String>
+								</field>
+								<field name="attributeNamespace">
+									<String>*</String>
+								</field>
+								<field name="attributeValue">
+									<String>*</String>
+								</field>
+							</documentTypeRule>
+							<documentTypeRule>
+								<field name="namespace">
+									<String>http://spfeopentoolkit.org/ns/spfe-docs</String>
 								</field>
 								<field name="rootElem">
 									<String>*</String>
@@ -219,5 +248,5 @@
 				</documentTypeDescriptor>
 			</documentTypeDescriptor-array>
 		</entry>
-	</map>
+	</serializableOrderedMap>
 </serialized>

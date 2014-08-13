@@ -7,23 +7,23 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:dh="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/docset-home-topic"
+	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	exclude-result-prefixes="#all">
 	
 	<!-- topic -->
-	<xsl:template match="dh:docset-home-topic">
+	<xsl:template match="es:docset-home-topic">
 		<xsl:choose>
 			<xsl:when test="$media='online'"> 
-				<page status="{dh:head/dh:history/dh:revision[last()]/dh:status}" name="{ancestor::ss:topic/@local-name}">
+				<page status="{es:head/es:history/es:revision[last()]/es:status}" name="{ancestor::ss:topic/@local-name}">
 					<xsl:call-template name="show-header"/>
 					<xsl:apply-templates /> 
 					<xsl:call-template name="show-footer"/>		
 				</page>
 			</xsl:when>
 			<xsl:when test="$media='paper'">
-				<chapter status="{dh:head/dh:tracking/dh:status}" name="{dh:name}">
+				<chapter status="{es:head/es:tracking/es:status}" name="{es:name}">
 					<xsl:apply-templates/>
 				</chapter>
 			</xsl:when>
@@ -35,11 +35,23 @@
 		</xsl:choose>
 	</xsl:template>
 	
-	<xsl:template match="dh:head"/>
+	<xsl:template match="es:docset-home-topic/es:head"/>
 	
-	<xsl:template match="dh:docset-home-topic/dh:title">
+	<xsl:template match="es:docset-home-topic/es:title">
 		<title>
 			<xsl:apply-templates/>
 		</title>
+		<!-- page toc -->
+		<xsl:if test="count(../es:section/es:title) gt 1">
+			<ul>
+				<xsl:for-each select="../es:section/es:title">
+					<li>
+						<xref target="#{sf:title-to-anchor(normalize-space(.))}">
+							<xsl:value-of select="."/>
+						</xref>
+					</li>
+				</xsl:for-each>
+			</ul>
+		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>

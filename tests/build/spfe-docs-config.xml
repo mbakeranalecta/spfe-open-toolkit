@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <doc-set>
         <doc-set-id>tests</doc-set-id>
         <title>SPFE Documentation</title>
@@ -13,7 +13,7 @@
             <topic-set-type>reference</topic-set-type>
             <topic-set-type>list</topic-set-type>
         </topic-set-type-order>
-        <home-topic-set>spfe-docs-docset</home-topic-set>
+        <home-topic-set>spfe-docs-home</home-topic-set>
         <topic-sets>
             
             <topic-set>
@@ -22,8 +22,8 @@
             </topic-set>    
             
             <topic-set>
-                <topic-set-id>spfe-docs-docset</topic-set-id>
-                <href>topic-sets/spfe-docs-docset.xml</href>
+                <topic-set-id>spfe-docs-home</topic-set-id>
+                <href>topic-sets/spfe-docs-home.xml</href>
             </topic-set>
             
             <topic-set>
@@ -87,9 +87,9 @@
         </wip-site>
 
         <strings>
-            <string id="eppo-simple-topic-set-product">SPFE Open Toolkit</string>
-            <string id="eppo-simple-topic-set-release">1.0 (alpha 1)</string>
-            <string id="eppo-simple-topic-set-copyright">Copyright © 2013 Analecta Communications Inc.</string>
+            <string id="product">SPFE Open Toolkit</string>
+            <string id="product-release">1.0 (alpha 1)</string>
+            <string id="copyright">Copyright © 2013 Analecta Communications Inc.</string>
         </strings>
      </doc-set>
     

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    elementFormDefault="qualified"  
+    targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns="http://spfeopentoolkit.org/ns/spfe-docs">
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/identity.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/index.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/tracking.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/text-general.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/conditions.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/text-decoration.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subject-affinities-general.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subject-affinities-xml.xsd"/>    
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/subject-affinities-spfe-build.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/resources.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/think-plan-do-topic/schemas/think-plan-do-topic-root.xsd"/>
+
+    <xs:group name="p-content">
+        <xs:choice>
+            <xs:group ref="text-decoration"/>
+            <xs:group ref="subject-affinities-general"/>
+            <xs:group ref="subject-affinities-spfe-build"/>
+            <xs:group ref="subject-affinities-xml"></xs:group>
+            <xs:group ref="resources"/>
+        </xs:choice>
+    </xs:group>
+    
+    <xs:simpleType name="subject-affinities-type">
+        <xs:union memberTypes="subject-affinities-general subject-affinities-spfe-build subject-affinities-xml"/>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record">
+    <xs:element name="graphic-record">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name"/>
+                <xs:element name="alt"/>
+                <xs:element minOccurs="0" name="uri" type="xs:anyURI"/>
+                <xs:element name="formats" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence maxOccurs="unbounded">
+                            <xs:element name="format">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="type"/>
+                                        <xs:element name="href" type="xs:anyURI"/>
+                                        <xs:element name="height" minOccurs="0"/>
+                                        <xs:element name="width" minOccurs="0"/>
+                                        <xs:element name="dpi" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element minOccurs="0" name="source">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="uri" type="xs:anyURI"/>
+                            <xs:element name="credit"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="default-title" type="xs:string" minOccurs="0"/>
+                <xs:element name="default-caption" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="p" minOccurs="0" maxOccurs="unbounded"
+                                type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

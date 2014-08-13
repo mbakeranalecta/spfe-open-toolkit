@@ -2,28 +2,28 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-	targetNamespace="http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions">
+	targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs">
 	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/text-general.xsd"/>
+		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/text-general.xsd"/>
 	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/tracking.xsd"/>
+		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/tracking.xsd"/>
 	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/identity.xsd"/>
+		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/identity.xsd"/>
 	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/tracking.xsd"/>
+		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/tracking.xsd"/>
 	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/conditions.xsd"/>
+		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/conditions.xsd"/>
 	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/text-decoration.xsd"/>
+		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/text-decoration.xsd"/>
 	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/strings.xsd"/>
-	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/subject-affinities-xslt.xsd"/>
-	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/subject-affinities-general.xsd"/>
-	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/subject-affinities-xml.xsd"/>
-	<xs:include schemaLocation="../../shared/schemas/subject-affinities-spfe-build.xsd"/>
+		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/strings.xsd"/>
+	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subject-affinities-xslt.xsd"/>
+	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subject-affinities-general.xsd"/>
+	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subject-affinities-xml.xsd"/>
+	<xs:include schemaLocation="../../generic-topic/schemas/subject-affinities-spfe-build.xsd"/>
 
 	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/shared/schemas/resources.xsd"/>
+		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/resources.xsd"/>
 
 	<xs:include schemaLocation="xslt-function-and-template-descriptions-root.xsd"/>
 

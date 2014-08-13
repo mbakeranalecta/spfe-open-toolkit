@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-
-
-    <output-format>
+    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    
+    
+    <output-format type="html">
         <name>html</name>
+        <presentation-type>eppo</presentation-type>
         <scripts>
-            <format-html>
-                <script>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-html.xsl</script>
-                <script>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</script>
-            </format-html>
+            <format type="html">
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-html.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+            </format>
         </scripts>
         <support-files>
             <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css/eppo-simple.css</include>

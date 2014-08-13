@@ -4,14 +4,14 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	exclude-result-prefixes="#all">
 
 	<xsl:param name="message-types">info debug warning</xsl:param>
 	<xsl:param name="terminate-on-error">yes</xsl:param>
 	<xsl:variable name="verbosity" select="tokenize($message-types, ' ')"/>
 
-	<xsl:function name="sf:title2anchor">
+	<xsl:function name="sf:title-to-anchor">
 		<xsl:param name="title"/>
 		<!--	<xsl:value-of select='translate( normalize-space($title), " :&apos;[]/\", "-\-\-\-\-\-\-")'/>
 -->
@@ -30,13 +30,13 @@
 		<xsl:if test="normalize-space($file-list)=''">
 		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">
-				<xsl:text>Empty file list passed to sf:get-sources function. This may be because a configuration file is point to a file that does not exist on the system. Check your configuration.</xsl:text>
+				<xsl:text>Empty file list passed to sf:get-sources function. This may be because a configuration file is pointing to a file that does not exist on the system. Check your configuration.</xsl:text>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:if>
 -->
 		<xsl:for-each select="tokenize(translate($file-list, '\', '/'), ';')">
-			<xsl:variable name="one-file" select="concat('file:///', normalize-space(.))"/>
+			<xsl:variable name="one-file" select="sf:local-to-url(.)"/>
 			<xsl:if test="normalize-space($load-message)">
 				<xsl:call-template name="sf:info">
 					<xsl:with-param name="message" select="$load-message, $one-file "/>
@@ -44,6 +44,51 @@
 			</xsl:if>
 			<xsl:sequence select="document($one-file)"/>
 		</xsl:for-each>
+	</xsl:function>
+	
+	<xsl:function name="sf:local-to-url">
+		<xsl:param name="local-path"/>
+		<xsl:choose>
+			<xsl:when test="starts-with($local-path,'file:/')">
+				<xsl:value-of select="$local-path"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="concat('file:///', normalize-space($local-path))"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	<xsl:function name="sf:url-to-local">
+		<xsl:param name="url"/>
+		<xsl:variable name="new-url">
+			<xsl:choose>
+				<!-- Windows style -->
+				<xsl:when test="matches($url, '^file:/[a-zA-Z]:/')">
+					<xsl:value-of select="substring-after($url,'file:/')"/>
+				</xsl:when>
+				<!-- Windows system path -->
+				<xsl:when test="matches($url, '^[a-zA-Z]:/')">
+					<xsl:value-of select="$url"/>
+				</xsl:when>
+				<!-- UNIX style -->
+				<xsl:when test="matches($url, '^file:/')">
+					<xsl:value-of select="substring-after($url,'file:')"/>
+				</xsl:when>
+				<!-- unsupported protocol -->
+				<xsl:when test="matches($url, '^[a-zA-Z]+:/')">
+					<xsl:message terminate="yes">
+						<xsl:text>ERROR: A URL with an unsupported protocol was specified. The URL is: </xsl:text>
+						<xsl:value-of select="$url"/>
+					</xsl:message>
+				</xsl:when>
+				
+				<!-- already local -->
+				<xsl:otherwise>
+					<xsl:value-of select="$url"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:value-of select="replace($new-url, '%20', ' ')"/>
 	</xsl:function>
 
 	<xsl:template name="sf:info">
@@ -107,6 +152,7 @@
 		<xsl:value-of select="subsequence($tokens, count($tokens))"/>
 	</xsl:function>
 
+	<!-- FIXME: Strings should probably get coerced into their own namespace prior to lookup -->
 	<xsl:function name="sf:string">
 		<xsl:param name="strings" as="element()*"/>
 		<xsl:param name="id"/>
@@ -367,53 +413,66 @@
 		</xsl:analyze-string>
 	</xsl:function>
 
+	<!-- Escape string for regex -->
+	<!-- Escapes the reserved characters for inserting literal string into a regex expression -->
+	<xsl:function name="sf:escape-for-regex">
+		<xsl:param name="string"/>
+		<xsl:value-of select="replace($string, '([\\\|\.\?\*\+\(\)\{\}\[\]\$\^\-])', '\\$1')"/>
+<!--		<xsl:analyze-string select="string($string)" regex="\.|\\">
+			<xsl:matching-substring>
+				<xsl:value-of select="concat('\',.)"/>
+			</xsl:matching-substring>
+			<xsl:non-matching-substring>
+				<xsl:value-of select="."/>
+			</xsl:non-matching-substring>
+		</xsl:analyze-string>-->
+	</xsl:function>
+
 	<xsl:function name="sf:get-topic-type-alias-singular">
-		<xsl:param name="topic-type-xmlns"/>
+		<xsl:param name="topic-type-name"/>
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular">
+				test="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular">
 				<xsl:value-of
-					select="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:singular"
+					select="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">
 						<xsl:text>No singular topic type alias found for topic type </xsl:text>
-						<xsl:value-of select="$topic-type-xmlns"/>
-						<xsl:text>.</xsl:text>
-						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:value-of select="$topic-type-name"/>
+						<xsl:text>. This setting should be defined in the configuration files at </xsl:text>
 						<xsl:text>/spfe/topic-type/aliases/singular.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
 				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->
-				<xsl:value-of select="$topic-type-xmlns"/>
+				<xsl:value-of select="$topic-type-name"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
 	<xsl:function name="sf:get-topic-type-alias-plural">
-		<xsl:param name="topic-type-xmlns"/>
+		<xsl:param name="topic-type-name"/>
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural">
+				test="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural">
 				<xsl:value-of
-					select="$config/config:topic-type[config:xmlns=$topic-type-xmlns]/config:aliases/config:plural"
+					select="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message">
 						<xsl:text>No plural topic type alias found for topic type </xsl:text>
-						<xsl:value-of select="$topic-type-xmlns"/>
-						<xsl:text>.</xsl:text>
-						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:value-of select="$topic-type-name"/>
+						<xsl:text>. This setting should be defined in the configuration files at </xsl:text>
 						<xsl:text>/spfe/topic-type/aliases/plural.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
 				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->
-				<xsl:value-of select="$topic-type-xmlns"/>
+				<xsl:value-of select="$topic-type-name"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -456,8 +515,7 @@
 					<xsl:with-param name="message">
 						<xsl:text>No plural subject type alias found for topic type </xsl:text>
 						<xsl:value-of select="$subject-type-id"/>
-						<xsl:text>.</xsl:text>
-						<xsl:text>This setting should be defined in the configuration files at </xsl:text>
+						<xsl:text>. This setting should be defined in the configuration files at </xsl:text>
 						<xsl:text>/spfe/subject-types/subject-type/aliases/plural.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
@@ -468,13 +526,23 @@
 	</xsl:function>
 
 	<xsl:function name="sf:get-topic-link-priority">
-		<xsl:param name="topic-namespace-uri"/>
+		<xsl:param name="topic-type-name"/>
 		<xsl:param name="topic-set-id"/>
 		<xsl:param name="config"/>
-		<xsl:value-of
-			select="$config/config:topic-type[config:xmlns eq $topic-namespace-uri]/config:topic-type-link-priority
-			+
-			$config/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"
+		<xsl:variable name="topic-type-link-priority" select="$config/config:topic-type[config:name eq $topic-type-name]/config:topic-type-link-priority"/>
+		<xsl:variable name="topic-set-link-priority" select="$config/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"/>
+		<xsl:if test="normalize-space($topic-type-link-priority) eq ''">
+			<xsl:call-template name="sf:error">
+				<xsl:with-param name="message" select="'Topic type link priority not set for namespace ', $topic-type-name"/>
+			</xsl:call-template>
+		</xsl:if>
+		<xsl:if test="normalize-space($topic-set-link-priority) eq ''">
+			<xsl:call-template name="sf:error">
+				<xsl:with-param name="message" select="'Topic set link priority not set for topic set ID ', $topic-set-id"/>
+			</xsl:call-template>
+		</xsl:if>
+		
+		<xsl:value-of select="$topic-type-link-priority + $topic-set-link-priority"
 		/>
 	</xsl:function>
 
@@ -482,6 +550,11 @@
 	<xsl:function name="sf:has-content" as="xs:boolean">
 		<xsl:param name="content"/>
 		<xsl:value-of select="string-join(($content/text()[normalize-space(.)] | $content/*),'') ne ''"/>
+	</xsl:function>
+	
+	<xsl:function name="sf:name-in-clark-notation">
+		<xsl:param name="element"/>
+		<xsl:value-of select="concat('{', namespace-uri($element), '}', local-name($element))"/>
 	</xsl:function>
 
 </xsl:stylesheet>

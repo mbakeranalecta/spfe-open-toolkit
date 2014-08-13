@@ -4,7 +4,7 @@
 <xsl:stylesheet version="2.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-	xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	exclude-result-prefixes="#all">
 
@@ -73,7 +73,7 @@
 	
 	<xsl:template name="main" >
 		<!-- Create the root "extracted-content element" -->
-		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/extracted/schema-defs.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/extract/out/schema-defs.xml')}" method="xml" indent="no" omit-xml-declaration="no">
  
 			<xsl:apply-templates select="$schema"/>
 
@@ -83,8 +83,8 @@
 	
 	<xsl:template name="read-schema">
 		<xsl:param name="file-name"/>
-		<xsl:sequence select="document(concat('file:///',$file-name))"/>
-		<xsl:for-each select="document(concat('file:///',$file-name))/xs:schema/xs:include/@schemaLocation">
+		<xsl:sequence select="document(sf:local-to-url($file-name))"/>
+		<xsl:for-each select="document(sf:local-to-url($file-name))/xs:schema/xs:include/@schemaLocation">
 			<xsl:call-template name="read-schema">
 				<xsl:with-param name="file-name" select="."/>
 			</xsl:call-template>

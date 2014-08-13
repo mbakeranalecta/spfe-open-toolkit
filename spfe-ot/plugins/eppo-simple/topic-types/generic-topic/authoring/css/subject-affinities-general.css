@@ -1,0 +1,47 @@
+p>directory-name, string>directory-name
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>document-name, string>document-name
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>feature, string>feature
+{
+   font-weight:normal;
+   border: 1px solid #FFDEAD;
+}
+
+p>file-name, string>file-name
+{ 
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>product-name, string>product-name
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>task, string>task
+{
+   font-weight:normal;
+   border: 1px solid #FFDEAD;
+}
+
+p>term, string>term
+{
+   font-weight:normal;
+   border: 1px solid #FFDEAD;
+}
+
+p>tool-name, string>tool-name
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}

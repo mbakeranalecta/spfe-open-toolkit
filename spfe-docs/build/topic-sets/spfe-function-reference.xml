@@ -1,33 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<spfe xmlns="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set>
         <topic-set-id>spfe-function-reference</topic-set-id>
         <topic-set-type>reference</topic-set-type>
         <topic-types>
 
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions</xmlns>
+                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}xslt-function-and-template-descriptions</name>
                     <href>../../topic-types/function-and-template-reference/config.xml</href>
                 </topic-type>
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/function-reference</xmlns>
+                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}xslt-function-reference-entry</name>
                     <href>../../topic-types/function-and-template-reference/config.xml</href>
                 </topic-type>
                 <topic-type>
-                    <xmlns>http://spfeopentoolkit.org/spfe-docs/topic-types/template-reference</xmlns>
+                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}xslt-template-reference-entry</name>
                     <href>../../topic-types/function-and-template-reference/config.xml</href>
                 </topic-type>
             
 
         </topic-types>
-
+        <presentation-types>
+            <presentation-type>
+                <name>eppo</name>
+            </presentation-type>
+        </presentation-types>
+        <output-formats>
+            <output-format>
+                <name>html</name>
+            </output-format>
+        </output-formats>
         <sources>
             <authored-content>
-                <include>../../content/xsl-function-ref/*.xml</include>
+                <include>../../content/text/xsl-function-ref/*.xml</include>
                 <include>${SPFEOT_HOME}/1.0/scripts/common/function-and-template-descriptions.xml</include>
             </authored-content>
             <sources-to-extract-content-from>
@@ -35,11 +44,11 @@
                 <include>${SPFEOT_HOME}/1.0/scripts/**/*.xslt</include>
             </sources-to-extract-content-from>
         </sources>
-
+        
         <default-topic-scope>spfe</default-topic-scope>
         <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
 
-        <build-rules>${SPFEOT_HOME}/1.0/build-tools/XML-extract-merge-rules.xml</build-rules>
+        <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
         
         <strings>
             <string id="eppo-simple-topic-set-title">SPFE Functions and Templates</string>

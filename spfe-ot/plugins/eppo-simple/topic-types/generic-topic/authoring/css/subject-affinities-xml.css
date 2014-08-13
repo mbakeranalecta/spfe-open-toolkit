@@ -1,0 +1,34 @@
+p>xml-element-name, string>xml-element-name
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>xml-attribute-name, string>xml-attribute-name
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>xml-namespace-uri, string>xml-namespace-uri
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>xpath, string>xpath
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>link-external, string>link-external
+{
+   border: 1px solid #FFDEAD;
+}
+
+p>link-external:after, string>link-external:after
+{
+    background-color:#FFDEAD;
+    content:" (" attr(href) ") ";
+}

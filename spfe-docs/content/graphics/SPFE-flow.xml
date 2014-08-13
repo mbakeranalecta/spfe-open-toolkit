@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphic-record xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/graphic-record.xsd">
+    
+    
+    <name>SPFE Build Systems Flow</name>
+    <alt>SPFE Build System flow diagram.</alt>
+    <uri>http://spfeopentoolkit.org/spfe-docs/content/graphics/SPFE-flow</uri>
+    
+    <formats>
+        <format>
+            <type>png</type>
+            <href>SPFE-flow.png</href>
+        </format>
+        <format>
+            <type>svg</type>
+            <href>SPFE-flow.svg</href>
+        </format>
+        
+    </formats>
+    <default-title>The basic flow of the SPFE build system: synthesis, presentation, formatting, and encoding.</default-title>
+    <default-caption>
+
+        <p>The basic flow of the SPFE build system: synthesis, presentation, formatting, and encoding.</p>
+    </default-caption>
+</graphic-record>

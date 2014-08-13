@@ -5,30 +5,14 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xmlns:lf="local-functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:stl="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list"
 	exclude-result-prefixes="#all"
-	xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list">
-
-
+	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple">
 
 	<!-- 
 		=================
 		Element templates
 		=================
 	-->
-
-	<xsl:template
-		match="ss:topic[@type='http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/subject-topic-list']">
-		<page type="{@type}" name="{@local-name}">
-			<xsl:call-template name="show-header"/>
-			<title>
-				<xsl:value-of select="@title"/>
-			</title>
-			<xsl:apply-templates/>
-			<xsl:call-template name="show-footer"/>
-		</page>
-
-	</xsl:template>
 
 
 	<!-- subject-topic-list -->
@@ -37,6 +21,12 @@
 		<xsl:variable name="name" select="name"/>
 
 		<!-- info -->
+		<page type="list" name="{ancestor::ss:topic/@local-name}">
+			<xsl:call-template name="show-header"/>
+			<title>
+				<xsl:value-of select="parent::ss:topic/@title"/>
+			</title>
+
 
 		<p>
 			<xsl:value-of select="parent::ss:topic/@excerpt"/>
@@ -59,5 +49,7 @@
 				</item>
 			</labeled-item>
 		</xsl:for-each>
+			<xsl:call-template name="show-footer"/>
+		</page>
 	</xsl:template>
 </xsl:stylesheet>

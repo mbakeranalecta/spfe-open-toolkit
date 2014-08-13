@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="704.60712"
+   height="116.21875"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="SPFE-flow.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="329.7339"
+     inkscape:cy="48.605743"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="716"
+     inkscape:window-x="-8"
+     inkscape:window-y="22"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     fit-margin-top="1"
+     fit-margin-bottom="1"
+     fit-margin-right="1"
+     fit-margin-left="1" />
+  <defs
+     id="defs4">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Send">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path3938"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="TriangleOutM"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="TriangleOutM">
+      <path
+         transform="scale(0.4,0.4)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         id="path4069"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path3932"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3944"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1SendT"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1SendT">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill:#ff0000;fill-rule:evenodd;stroke:#ff0000;stroke-width:1pt;marker-start:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         id="path6049"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1"
+     transform="translate(-24.9375,-269.42857)">
+    <g
+       transform="translate(0,11.428568)"
+       id="g3780"
+       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
+       inkscape:export-xdpi="92.191521"
+       inkscape:export-ydpi="92.191521">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3753"
+         width="79.285713"
+         height="95"
+         x="26.428572"
+         y="259.50504" />
+      <rect
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3753-1"
+         width="79.285713"
+         height="95"
+         x="34.642849"
+         y="268.43362" />
+      <rect
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3753-7"
+         width="79.285713"
+         height="95"
+         x="44.642857"
+         y="277.71933" />
+    </g>
+    <flowRoot
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       id="flowRoot3795"
+       xml:space="preserve"><flowRegion
+         id="flowRegion3797"><rect
+           y="349.50504"
+           x="199.28572"
+           height="74.285713"
+           width="40.714287"
+           id="rect3799" /></flowRegion><flowPara
+         id="flowPara3801" /></flowRoot>    <g
+       id="g3780-7"
+       transform="translate(604.10714,11.428568)"
+       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
+       inkscape:export-xdpi="92.191521"
+       inkscape:export-ydpi="92.191521">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3753-6"
+         width="79.285713"
+         height="95"
+         x="26.428572"
+         y="259.50504" />
+      <rect
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3753-1-1"
+         width="79.285713"
+         height="95"
+         x="34.642849"
+         y="268.43362" />
+      <rect
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect3753-7-4"
+         width="79.285713"
+         height="95"
+         x="44.642857"
+         y="277.71933" />
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path3918"
+       d="m 80.714286,331.36218 606.428574,-5 0,0"
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:16;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1SendT)"
+       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
+       inkscape:export-xdpi="92.191521"
+       inkscape:export-ydpi="92.191521" />
+    <path
+       d="m 262.14286,341.29074 c 0,28.60046 -23.18525,51.78571 -51.78571,51.78571 -28.60046,0 -51.78572,-23.18525 -51.78572,-51.78571 0,-28.60046 23.18526,-51.78571 51.78572,-51.78571 28.60046,0 51.78571,23.18525 51.78571,51.78571 z"
+       sodipodi:ry="51.785713"
+       sodipodi:rx="51.785713"
+       sodipodi:cy="341.29074"
+       sodipodi:cx="210.35715"
+       id="path3785"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       sodipodi:type="arc"
+       transform="translate(-14.357147,-13.74999)"
+       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
+       inkscape:export-xdpi="92.191521"
+       inkscape:export-ydpi="92.191521" />
+    <path
+       d="m 262.14286,341.29074 c 0,28.60046 -23.18525,51.78571 -51.78571,51.78571 -28.60046,0 -51.78572,-23.18525 -51.78572,-51.78571 0,-28.60046 23.18526,-51.78571 51.78572,-51.78571 28.60046,0 51.78571,23.18525 51.78571,51.78571 z"
+       sodipodi:ry="51.785713"
+       sodipodi:rx="51.785713"
+       sodipodi:cy="341.29074"
+       sodipodi:cx="210.35715"
+       id="path3785-4"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       sodipodi:type="arc"
+       transform="translate(106.46429,-13.74999)"
+       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
+       inkscape:export-xdpi="92.191521"
+       inkscape:export-ydpi="92.191521" />
+    <path
+       d="m 262.14286,341.29074 c 0,28.60046 -23.18525,51.78571 -51.78571,51.78571 -28.60046,0 -51.78572,-23.18525 -51.78572,-51.78571 0,-28.60046 23.18526,-51.78571 51.78572,-51.78571 28.60046,0 51.78571,23.18525 51.78571,51.78571 z"
+       sodipodi:ry="51.785713"
+       sodipodi:rx="51.785713"
+       sodipodi:cy="341.29074"
+       sodipodi:cx="210.35715"
+       id="path3785-8"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       sodipodi:type="arc"
+       transform="translate(227.2857,-13.74999)"
+       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
+       inkscape:export-xdpi="92.191521"
+       inkscape:export-ydpi="92.191521" />
+    <path
+       d="m 262.14286,341.29074 c 0,28.60046 -23.18525,51.78571 -51.78571,51.78571 -28.60046,0 -51.78572,-23.18525 -51.78572,-51.78571 0,-28.60046 23.18526,-51.78571 51.78572,-51.78571 28.60046,0 51.78571,23.18525 51.78571,51.78571 z"
+       sodipodi:ry="51.785713"
+       sodipodi:rx="51.785713"
+       sodipodi:cy="341.29074"
+       sodipodi:cx="210.35715"
+       id="path3785-1"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       sodipodi:type="arc"
+       transform="translate(348.10715,-13.74999)"
+       inkscape:export-filename="C:\Users\Mark B\spfe-open-toolkit\spfe-docs\content\graphics\SPFE-flow.png"
+       inkscape:export-xdpi="92.191521"
+       inkscape:export-ydpi="92.191521" />
+    <text
+       xml:space="preserve"
+       style="font-size:109.1733551px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="158.24527"
+       y="365.8143"
+       id="text6171"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="158.24527"
+         y="365.8143"
+         id="tspan6173"><tspan
+           x="158.24527"
+           y="365.8143"
+           id="tspan6175">S</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:108.80101013px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="283.44727"
+       y="365.68106"
+       id="text6165"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="283.44727"
+         y="365.68106"
+         id="tspan6167"><tspan
+           x="283.44727"
+           y="365.68106"
+           id="tspan6169">P</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:109.63145447px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="402.39853"
+       y="366.27548"
+       id="text6183"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="402.39853"
+         y="366.27548"
+         id="tspan6185"><tspan
+           x="402.39853"
+           y="366.27548"
+           id="tspan6187">F</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:108.74425507px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="523.11664"
+       y="365.64038"
+       id="text6177"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="523.11664"
+         y="365.64038"
+         id="tspan6179"><tspan
+           x="523.11664"
+           y="365.64038"
+           id="tspan6181">E</tspan></tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    <head>
+        <id>writing-schemas</id>
+        <history>
+            <revision>
+                <date>2011-12-17</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>{writing} {schemas}</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Writing Schemas</title>
+        <p>Before you can create content, you must create a schema for that content. You may choose to use one of the schemas from the <feature>EPPO-simple</feature> schema set, which is supplied as a plugin to the SPFE Open Toolkit, or create your own schema by reusing schema elements from <feature>EPPO-simple</feature>. You can also create your own schemas from scratch, as long as you follow the <feature>schema constraints</feature>, though if you decide to do so, you will need to create all the synthesis and presentation code to processes them. In most cases, it makes sense to create your own schema, even if you are not making major modifications to the schemas from the toolkit or plugins. Creating a basic schema for your project, however, is pretty simple.</p>
+        
+        <p>If you decide to write your own schemas, you may also choose to write them using the same conventions used in <feature>EPPO-simple</feature>. Doing so will allow you to take advantage of those features of the toolkit that assume schemas are written in this way. This may reduce the amount of code you have to write by allowing you to reuse more code from the toolkit or plugins.</p>
+        <section>
+            <title>Creating an authoring schema</title>
+            <p>The simplest schema you can create is a generic topic schema that uses only components from <feature>EPPO-simple</feature>. The easiest way to do this is to make a copy of the appropriate topic type schema from <feature>EPPO-simple</feature>. Topic type schemas in <feature>EPPO-simple</feature> consist entirely of include statements that pull in various schema modules to make up a complete topic type schema. This topic, for instance, is written in the generic topic schema of the SPFE docs schema set, which is entirely composed of modules from EPPO-simple, pulled together and assigned to a SPFE Docs namespace by the following schema file:</p>
+            <codeblock><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns="http://spfeopentoolkit.org/ns/spfe-docs">
+    
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/modules/identity.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/modules/index.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/modules/tracking.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/modules/text-general.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/modules/subject-affinities/subject-affinities-general.xsd"/>    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/modules/subject-affinities/subject-affinities-xml.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/modules/conditions.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/modules/text-decoration.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/modules/resources.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/generic-topic.xsd"/>
+    
+    
+</xs:schema>
+]]>
+            </codeblock>
+        </section>
+    </body>
+</generic-topic>

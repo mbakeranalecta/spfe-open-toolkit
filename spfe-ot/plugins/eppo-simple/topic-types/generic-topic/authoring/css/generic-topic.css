@@ -1,46 +1,44 @@
-generic-topic>body
+body
 {
     display:block;
-    background-color:#FFDEAD;
     padding: 1em;
 }
 
-generic-topic>head:before
+head:before
 {
     font-weight:bold;
     font-size:larger;
-    content: "Generic task topic";
+    content: "Generic topic";
     font-family:sans-serif;
 }
 
-generic-topic>body>*
+body>*
 {
     background-color:white;
 }
 
-generic-topic>body>title
+body>title
 {
     display:block;
     font-family:sans-serif;
     font-size:large;
 }
 
-generic-topic>body>section
+body>section
 {
-    border-left: 2em solid #FFDEAD;;
+
 }
 
-generic-topic>body>section:before
+body>section:before
 {
     display:block;
     font-family:sans-serif;
-    background-color:#FFDEAD;
     content: "Section:";
     font-size:small;
-    margin-top: 2em;
+    background-color:#FFDEAD;
 }
 
-generic-topic>body>section>title
+body>section>title
 {
     display:block;
     font-family:sans-serif;

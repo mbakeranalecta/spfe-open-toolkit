@@ -5,60 +5,35 @@
 <xsl:stylesheet version="2.0" 
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
-xmlns:config="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/spfe-config"
+xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns:dht="http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic"
+xmlns="http://spfeopentoolkit.org/ns/eppo-simple"
+xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 exclude-result-prefixes="#all">
 	
-	<xsl:variable name="output-namespace">http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/docset-home-topic</xsl:variable>
-	
-	<xsl:template match="dht:docset-home-topic">
+	<xsl:template match="docset-home-topic">
 		<xsl:variable name="conditions" select="@if"/>
-		<xsl:variable name="topic-type" select="tokenize(normalize-space(@xsi:schemaLocation), '\s')[1]"/>
+		<xsl:variable name="name" select="head/id"/>
+		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
 		
-		<xsl:choose>
-			<xsl:when test="sf:conditions-met($conditions, $condition-tokens)">
-				<ss:topic 
-					type="{namespace-uri()}" 
-					topic-type-alias="{sf:get-topic-type-alias-singular($topic-type, $config)}"
-					full-name="{concat(namespace-uri(), '/', dht:head/dht:id)}"
-					local-name="{dht:head/dht:id}"
-					title="{dht:body/dht:title}"
-					excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::dht:p[1], 30, ' ...'))}">
-					<xsl:if test="dht:head/dht:virtual-type">
-						<xsl:attribute name="virtual-type" select="dht:head/dht:virtual-type"/>
-					</xsl:if>
-					<xsl:element name="{local-name()}" namespace="{$output-namespace}">
-						<xsl:copy-of select="@*"/>
-						<xsl:call-template name="apply-topic-attributes"/>
-						<xsl:apply-templates>
-						</xsl:apply-templates>
-					</xsl:element>
-				</ss:topic>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="sf:info">
-					<xsl:with-param name="message">
-						<xsl:text>Suppressing topic </xsl:text>
-						<xsl:value-of select="dht:name"/>
-						<xsl:text> because its conditions (</xsl:text>
-						<xsl:value-of select="$conditions"/>
-						<xsl:text>) do not match the conditions specified for the build ( </xsl:text>
-						<xsl:value-of select="$condition-tokens"/>
-						<xsl:text>).</xsl:text>
-					</xsl:with-param>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-	
-	<!-- This was inserted to get rid of warning that head not matched in synthesis. Unsure why this was not needed for other topic types. -->
-	<xsl:template match="dht:*">
-		<xsl:element name="{local-name()}" namespace="{$output-namespace}">
-			<xsl:copy-of select="@*"/>
-			<xsl:apply-templates/>
-		</xsl:element>
+		<ss:topic 
+			type="{$type}" 
+			full-name="{$type}#{$name}"
+			local-name="{$name}"
+			topic-type-alias="{sf:get-topic-type-alias-singular($type, $config)}"
+
+			title="{body/title}"
+			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
+			<xsl:if test="head/virtual-type">
+				<xsl:attribute name="virtual-type" select="head/virtual-type"/>
+			</xsl:if>
+			<xsl:element name="{local-name()}">
+				<xsl:copy-of select="@*" copy-namespaces="no"/>
+				<xsl:apply-templates>
+				</xsl:apply-templates>
+			</xsl:element>
+		</ss:topic>		
 	</xsl:template>
 </xsl:stylesheet>
 
