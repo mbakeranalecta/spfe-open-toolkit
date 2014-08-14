@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/graphic-record" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/presentation/graphic-record">
+  <xs:import schemaLocation="presentation-eppo.xsd"/>
+  <xs:element name="graphic-record">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="gr:name"/>
+        <xs:element ref="gr:alt"/>
+        <xs:element ref="gr:uri"/>
+        <xs:element ref="gr:formats"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="alt" type="xs:string"/>
+  <xs:element name="uri" type="xs:anyURI"/>
+  <xs:element name="formats">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="gr:format"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="format">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="gr:type"/>
+        <xs:element ref="gr:href"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="type" type="xs:NCName"/>
+  <xs:element name="href" type="xs:anyURI"/>
+</xs:schema>
