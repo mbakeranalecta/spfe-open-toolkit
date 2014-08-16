@@ -137,7 +137,6 @@
   </xs:complexType>
   <xs:complexType name="li_type">
     <xs:sequence>
-      <xs:element name="xref" minOccurs="0" type="xref_type"/>
       <xs:element name="subhead" minOccurs="0" type="xs:string"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="p" type="p_type"/>

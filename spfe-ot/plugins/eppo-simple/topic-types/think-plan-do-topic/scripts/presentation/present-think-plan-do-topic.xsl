@@ -25,14 +25,15 @@
 	<xsl:template match="es:think-plan-do-topic/es:head"/>
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:title">
+		<xsl:variable name="title" select="."></xsl:variable>
 		<pe:title>
 			<xsl:apply-templates/>
 		</pe:title>
 		<!-- page toc -->
 		<pe:ul>
-			<pe:li><pe:xref target="#Think">Think</pe:xref></pe:li>
-			<pe:li><pe:xref target="#Plan">Plan</pe:xref></pe:li>
-			<pe:li><pe:xref target="#Do">Do</pe:xref></pe:li>
+			<pe:li><pe:p><pe:xref target="#Think">Understanding <xsl:value-of select="$title"/></pe:xref></pe:p></pe:li>
+			<pe:li><pe:p><pe:xref target="#Plan">Planning <xsl:value-of select="$title"/></pe:xref></pe:p></pe:li>
+			<pe:li><pe:p><pe:xref target="#Do">Doing <xsl:value-of select="$title"/></pe:xref></pe:p></pe:li>
 		</pe:ul>
 		
 	</xsl:template>
@@ -57,7 +58,7 @@
 	<xsl:template match="es:think-plan-do-topic/es:body/es:understanding">	
 		<pe:section>
 			<pe:anchor name="Think"/>
-			<pe:title>Think</pe:title>
+			<pe:title>Understanding <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
 			<xsl:apply-templates/>
 		</pe:section>
 	</xsl:template>
@@ -65,7 +66,7 @@
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning">
 		<pe:section>
 			<pe:anchor name="Plan"/>
-			<pe:title>Plan</pe:title>
+			<pe:title>Planning <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
 			<xsl:apply-templates/>
 		</pe:section>
 	</xsl:template>
@@ -82,7 +83,7 @@
 	<xsl:template match="es:think-plan-do-topic/es:body/es:doing">	
 		<pe:section>
 			<pe:anchor name="Do"/>
-			<pe:title>Do</pe:title>
+			<pe:title>Doing <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
 			<xsl:apply-templates/>
 		</pe:section>
 	</xsl:template>	

@@ -33,9 +33,11 @@
 			<pe:ul>
 				<xsl:for-each select="../es:section/es:title">
 					<pe:li>
-						<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
-							<xsl:value-of select="."/>
-						</pe:xref>
+						<pe:p>
+							<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
+								<xsl:value-of select="."/>
+							</pe:xref>
+						</pe:p>
 					</pe:li>
 				</xsl:for-each>
 			</pe:ul>

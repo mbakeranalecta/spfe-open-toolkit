@@ -38,7 +38,8 @@ version="2.0"
 		| code
 		| bold
 		| italic">
-		<xsl:element name="{local-name()}" namespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo">
+		
+		<xsl:element name="pe:{local-name()}" namespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo">
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
 		</xsl:element>
