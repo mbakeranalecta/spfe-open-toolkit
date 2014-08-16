@@ -8,7 +8,9 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:lf="local-functions"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
-	xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record"
+	xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
+	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
 	exclude-result-prefixes="#all">
 	<xsl:output method="xml" indent="yes"/>
 
@@ -532,20 +534,33 @@
 
 	<!-- LISTS -->
 
-	<xsl:template match="ul|ol|li">
-		<!-- Note that we can't use xsl:copy here as that creates a
-	     copy in the same namespace as the source. Here we need 
-			 to create an element of the same name but in the XHTML 
-			 namespace. xsl:element creates elements in the default
-			 namespace declared in xsl:stylesheet. -->
-		<xsl:element name="{name()}">
+	<xsl:template match="ul">
+		<ul>
 			<xsl:if test="@hint">
 				<xsl:attribute name="class" select="@hint"/>
 			</xsl:if>
 			<xsl:apply-templates/>
-		</xsl:element>
+		</ul>
 	</xsl:template>
-
+	
+	<xsl:template match="ol">
+		<ol>
+			<xsl:if test="@hint">
+				<xsl:attribute name="class" select="@hint"/>
+			</xsl:if>
+			<xsl:apply-templates/>
+		</ol>
+	</xsl:template>
+	
+	<xsl:template match="li">
+		<li>
+			<xsl:if test="@hint">
+				<xsl:attribute name="class" select="@hint"/>
+			</xsl:if>
+			<xsl:apply-templates/>
+		</li>
+	</xsl:template>
+	
 
 	<xsl:template match="author-note ">
 		<xsl:variable name="my-page" select="ancestor::page"/>
@@ -681,11 +696,9 @@
 
 	<xsl:template match="tool-tip">
 		<xsl:variable name="class" select="if (@class) then @class else 'default'"/>
-		<xsl:element name="a">
-			<xsl:attribute name="class" select="$class"/>
-			<xsl:attribute name="title" select="@title"/>
+		<a class="{$class}" title="{@title}">
 			<xsl:apply-templates/>
-		</xsl:element>
+		</a>
 	</xsl:template>
 
 	<xsl:template match="cross-ref">

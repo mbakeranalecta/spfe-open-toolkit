@@ -5,6 +5,7 @@
     xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
+    xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
     xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
     exclude-result-prefixes="#all">
     
@@ -82,20 +83,20 @@
     
     <!-- TOC templates -->
     <xsl:template name="create-toc-page">
-        <page status="generated" name="{$topic-set-id}-toc">
+        <pe:page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
-            <title><xsl:value-of select="$config/config:doc-set/config:title"/> Contents</title>       
-            <ul>
+            <pe:title><xsl:value-of select="$config/config:doc-set/config:title"/> Contents</pe:title>       
+            <pe:ul>
                 <xsl:apply-templates select="$toc"/>
-            </ul>
+            </pe:ul>
             <xsl:call-template name="show-footer"/>		
-        </page>
+        </pe:page>
     </xsl:template>
     
     <xsl:template match="toc[@topic-set-id ne $config/config:doc-set/config:home-topic-set]">
-        <li>
-            <p><xref target="{normalize-space(@deployment-relative-path)}{normalize-space(@topic-set-id)}-toc.html"><xsl:value-of select="@title"/></xref></p>
-        </li>
+        <pe:li>
+            <pe:p><pe:xref target="{normalize-space(@deployment-relative-path)}{normalize-space(@topic-set-id)}-toc.html"><xsl:value-of select="@title"/></pe:xref></pe:p>
+        </pe:li>
     </xsl:template>
     <xsl:template match="toc"/>
 

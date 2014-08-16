@@ -2,7 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
-    xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record"
+    xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
+    xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
     xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     exclude-result-prefixes="#all"
     version="2.0">
@@ -10,24 +11,24 @@
     
     <xsl:template match="fig">
         <xsl:if test="@id">
-            <anchor name="fig:{@id}"/>
+            <pe:anchor name="fig:{@id}"/>
         </xsl:if>
-        <fig>
+        <pe:fig>
             <xsl:if test="@id">
                 <xs:attribute name="fig" select="fig:{@id}"/>
             </xsl:if>
             <xsl:if test="not(title) and gr:graphic-record/gr:default-title">
-                <title>
+                <pe:title>
                     <xsl:value-of select="gr:graphic-record/gr:default-title"/>
-                </title>
+                </pe:title>
             </xsl:if>   
             <xsl:if test="not(caption) and gr:graphic-record/gr:default-caption">
-                <caption>
+                <pe:caption>
                     <xsl:apply-templates select="gr:graphic-record/gr:default-caption"/>
-                </caption>
+                </pe:caption>
             </xsl:if>   
             <xsl:apply-templates/> 
-        </fig>
+        </pe:fig>
     </xsl:template>
     
     <xsl:template match="gr:graphic-record">
@@ -42,15 +43,15 @@
     </xsl:template>
     
     <xsl:template match="fig/caption">
-        <caption>
+        <pe:caption>
             <xsl:apply-templates/>
-        </caption>
+        </pe:caption>
     </xsl:template>
     
     <xsl:template match="fig/title">
-        <title>
+        <pe:title>
             <xsl:apply-templates/>
-        </title>
+        </pe:title>
     </xsl:template>
     
   

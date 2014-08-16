@@ -5,6 +5,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
+ 	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
  	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
  	exclude-result-prefixes="#all">
 	
@@ -38,17 +39,23 @@ Main template
 =============
 -->
 <xsl:template name="main">
-	<xsl:result-document href="file:///{$output-directory}/presentation.xml" method="xml" indent="no" omit-xml-declaration="no">
-		<xsl:element name="{if ($media='paper') then 'book' else 'web'}" >
-			<title>
+	<xsl:result-document href="file:///{$output-directory}/presentation.xml" method="xml" indent="no" omit-xml-declaration="no" >
+		
+		
+		
+		
+		
+		<pe:web xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/schemas/presentation-eppo.xsd">
+			<pe:title>
 				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
-			</title>
+			</pe:title>
 				
 			<!-- process the topics --> 
 			<xsl:apply-templates select="$synthesis/ss:synthesis/*"/>
 			<xsl:call-template name="create-generated-topics"/>
 
-		</xsl:element>
+		</pe:web>
 	</xsl:result-document>
 </xsl:template>
 
@@ -69,8 +76,8 @@ Main template
 	<xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="topic/name" mode="#all"/>	
-<xsl:template match="tracking" mode="#all"/>
+	<xsl:template match="pe:topic/pe:name" mode="#all"/>	
+	<xsl:template match="pe:tracking" mode="#all"/>
 	
 	<xsl:template match="*" >
 		<xsl:call-template name="sf:error">

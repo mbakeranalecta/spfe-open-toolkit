@@ -9,65 +9,52 @@
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
+ xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
  xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
  exclude-result-prefixes="#all">
 	
 	<!-- topic -->
 	<xsl:template match="es:feature-topic">
-		<xsl:choose>
-			<xsl:when test="$media='online'"> 
-				<page status="{es:head/es:history/es:revision[last()]/es:status}" name="{ancestor::ss:topic/@local-name}">
-					<xsl:call-template name="show-header"/>
-					<xsl:apply-templates /> 
-					<xsl:call-template name="show-footer"/>		
-				</page>
-			</xsl:when>
-			<xsl:when test="$media='paper'">
-				<chapter status="{es:head/es:tracking/es:status}" name="{es:name}">
-					<xsl:apply-templates/>
-				</chapter>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="sf:error">
-					<xsl:with-param name="message" select="'Unknown media specified: ', $media"/>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
+		<pe:page status="{es:head/es:history/es:revision[last()]/es:status}" name="{ancestor::ss:topic/@local-name}">
+			<xsl:call-template name="show-header"/>
+			<xsl:apply-templates /> 
+			<xsl:call-template name="show-footer"/>		
+		</pe:page>
 	</xsl:template>
 	
 	<xsl:template match="es:feature-topic/es:head"/>
 
 	<xsl:template match="es:feature-topic/es:body/es:title">
-		<title>
+		<pe:title>
 			<xsl:apply-templates/>
-		</title>
+		</pe:title>
 		<!-- page toc -->
 		<xsl:if test="count(../es:section/es:title) gt 1">
-			<ul>
+			<pe:ul>
 				<xsl:for-each select="../es:section/es:title">
-					<li>
-						<xref target="#{sf:title-to-anchor(normalize-space(.))}">
+					<pe:li>
+						<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
 							<xsl:value-of select="."/>
-						</xref>
-					</li>
+						</pe:xref>
+					</pe:li>
 				</xsl:for-each>
-			</ul>
+			</pe:ul>
 		</xsl:if>	
 	</xsl:template>
 	
 	<xsl:template match="es:feature-topic/es:body/es:section">
 		<xsl:if test="$config/config:build-command='draft' or sf:has-content(es:title/following-sibling::*) ">
-		<section>
-			<anchor name="{sf:title-to-anchor(es:title)}"/>
+			<pe:section>
+				<pe:anchor name="{sf:title-to-anchor(es:title)}"/>
 			<xsl:apply-templates/>
-		</section>
+		</pe:section>
 		</xsl:if>	
 	</xsl:template>
 	
 	<xsl:template match="es:feature-topic/es:body/es:section/es:title">	
-			<title>
-				<xsl:apply-templates/>
-			</title>
+		<pe:title>
+			<xsl:apply-templates/>
+		</pe:title>
 	</xsl:template>
 	
 </xsl:stylesheet>

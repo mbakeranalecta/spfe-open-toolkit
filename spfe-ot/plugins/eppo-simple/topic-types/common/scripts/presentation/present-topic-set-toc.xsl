@@ -5,6 +5,7 @@
     xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
+    xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
     xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
     exclude-result-prefixes="#all">
     
@@ -90,40 +91,40 @@
         
         <xsl:variable name="topic-set-title" select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 
-        <page status="generated" name="{$topic-set-id}-toc">
+        <pe:page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
-            <title><xsl:value-of select="$topic-set-title"></xsl:value-of></title>        
+            <pe:title><xsl:value-of select="$topic-set-title"></xsl:value-of></pe:title>        
             <xsl:apply-templates select="$toc"/>
             <xsl:call-template name="show-footer"/>		
-        </page>
+        </pe:page>
     </xsl:template>
     
     <xsl:template match="toc[@topic-set-id=$topic-set-id]">
-        <ul>
+        <pe:ul>
          <xsl:apply-templates/>
-        </ul> 
+        </pe:ul> 
     </xsl:template>
     <xsl:template match="toc"/>
     
     <xsl:template match="node[@topic-type]">
-        <!-- FIXME: title may not be the right markup here, or may need explicit handling at format stage -->
-        <li>
-          <title><xsl:value-of select="@name"/></title>
-          <ul>
+        <!-- FIXME: subhead may not be the right markup here, or may need explicit handling at format stage -->
+        <pe:li>
+            <pe:subhead><xsl:value-of select="@name"/></pe:subhead>
+            <pe:ul>
               <xsl:apply-templates/>
-          </ul>
-        </li>
+          </pe:ul>
+        </pe:li>
     </xsl:template>
     
     <xsl:template match="node">
-        <li>
-            <p><xref target="{normalize-space(@id)}.html"><xsl:value-of select="@name"/></xref></p>
+        <pe:li>
+            <pe:p><pe:xref target="{normalize-space(@id)}.html"><xsl:value-of select="@name"/></pe:xref></pe:p>
             <xsl:if test="node">
-                <ul>
+                <pe:ul>
                     <xsl:apply-templates/>
-                </ul>
+                </pe:ul>
             </xsl:if>
-        </li>
+        </pe:li>
     </xsl:template>
     
 </xsl:stylesheet>

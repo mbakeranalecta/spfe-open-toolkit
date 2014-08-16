@@ -4,6 +4,7 @@
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
     xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
+    xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
     xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
     exclude-result-prefixes="#all"
     version="2.0">
@@ -25,24 +26,24 @@
                                   else concat('../', $config/config:doc-set/config:home-topic-set,'-toc.html')"/>
         </xsl:variable>
         
-        <header>
-            <p>
-                <xref target="{$doc-set-index-file}" >Home</xref>   
+        <pe:header>
+            <pe:p>
+                <pe:xref target="{$doc-set-index-file}" >Home</pe:xref>   
                 | 
-                <xref target="{$doc-set-toc-file}">TOC</xref>
+                <pe:xref target="{$doc-set-toc-file}">TOC</pe:xref>
                 
                 <xsl:if test="not($is-home-topic-set)">
                     >      
-                    <xref target="{normalize-space($topic-set-id)}-toc.html">
+                    <pe:xref target="{normalize-space($topic-set-id)}-toc.html">
                         <xsl:value-of select="$topic-set-title"/>
-                    </xref>
+                    </pe:xref>
                 </xsl:if>
-            </p>
-            <table>
+            </pe:p>
+            <pe:table>
                 <xsl:if test="index/reference/key[normalize-space(.) ne '']">
-                    <tr>
-                        <td><bold>Tags</bold></td>
-                        <td>
+                    <pe:tr>
+                        <pe:td><pe:bold>Tags</pe:bold></pe:td>
+                        <pe:td>
                             <xsl:for-each select="index/reference">
                                 <xsl:variable name="key-text" select="translate(key[1], '{}', '')"/>
                                 <xsl:choose>
@@ -60,12 +61,12 @@
                                 </xsl:choose>
                                 <xsl:if test="position() != last()">, </xsl:if>
                             </xsl:for-each>
-                        </td>
-                    </tr>
+                        </pe:td>
+                    </pe:tr>
                     
                 </xsl:if>
-            </table>
-        </header>
+            </pe:table>
+        </pe:header>
     </xsl:template>
     
     <xsl:template name="show-footer">		
@@ -82,18 +83,18 @@
         </xsl:variable>
         
         <xsl:if test="$see-also-links/xref | $see-also-links/xref-set">
-            <table hint="context">
-                <tr>
-                    <td><bold>See also</bold></td>
-                    <td>
-                        <ul>
+            <pe:table hint="context">
+                <pe:tr>
+                    <pe:td><pe:bold>See also</pe:bold></pe:td>
+                    <pe:td>
+                        <pe:ul>
                             <xsl:for-each-group select="$see-also-links/xref | $see-also-links/xref-set/xref" group-by="@target">
-                                <li><xsl:sequence select="."/></li>
+                                <pe:li><xsl:sequence select="."/></pe:li>
                             </xsl:for-each-group>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
+                        </pe:ul>
+                    </pe:td>
+                </pe:tr>
+            </pe:table>
         </xsl:if>
         
     </xsl:template>

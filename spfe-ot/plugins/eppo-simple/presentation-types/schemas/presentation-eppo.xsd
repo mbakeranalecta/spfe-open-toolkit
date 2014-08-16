@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-  xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/presentation/graphic-record"
+  xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
   targetNamespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
   xmlns="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo">
-  <xs:import namespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/graphic-record"
-    schemaLocation="gr.xsd"/>
+  <xs:import namespace="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphic-record.xsd"/>
   <xs:element name="web">
     <xs:complexType>
       <xs:sequence>
@@ -17,19 +17,8 @@
     <xs:sequence>
       <xs:element name="header" type="header_type"/>
       <xs:element name="title" type="xs:string"/>
-      <xs:choice maxOccurs="unbounded">
-        <xs:element name="fig" type="fig_type"/>
-        <xs:element name="labeled-item" type="labeled-item_type"/>
-        <xs:element name="precis" type="precis_type"/>
-        <xs:element name="qa" type="qa_type"/>
-        <xs:element name="subhead" type="xs:string"/>
-        <xs:element name="p" type="p_type"/>
-        <xs:element name="anchor" type="anchor_type"/>
-        <xs:element name="ol" type="ol_type"/>
-        <xs:element name="codeblock" type="codeblock_type"/>
-        <xs:element name="ul" type="ul_type"/>
-      </xs:choice>
-      <xs:element name="section" type="section_type" minOccurs="0"/>
+      <xs:group maxOccurs="unbounded" ref="text-structure-group"/>
+      <xs:element name="section" type="section_type" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="name" use="required" type="xs:NCName"/>
     <xs:attribute name="status"/>
@@ -59,19 +48,14 @@
       <xs:element name="label">
         <xs:complexType mixed="true">
           <xs:sequence>
-            <xs:element name="xref" type="xref_type"/>
+            <xs:element name="xref" type="xref_type" minOccurs="0"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="item">
         <xs:complexType>
           <xs:sequence>
-            <xs:choice minOccurs="0" maxOccurs="unbounded">
-              <xs:element name="p" type="p_type"/>
-              <xs:element name="codeblock" type="codeblock_type"/>
-            </xs:choice>
-            <xs:element name="ol" type="ol_type"/>
-            <xs:element name="ul" type="ul_type"/>
+            <xs:group maxOccurs="unbounded" ref="nested-text-structure-group"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -87,25 +71,27 @@
     <xs:sequence>
       <xs:element name="anchor" type="anchor_type"/>
       <xs:element name="title" type="xs:string"/>
-      <xs:element name="p" type="p_type"/>
-      <xs:element name="ol" type="ol_type"/>
+      <xs:group maxOccurs="unbounded" ref="nested-text-structure-group"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="section_type">
     <xs:sequence>
       <xs:element name="anchor" type="anchor_type"/>
       <xs:element name="title" type="xs:string"/>
-      <xs:choice maxOccurs="unbounded">
-        <xs:element name="p" type="p_type"/>
-        <xs:element name="ol" type="ol_type"/>
-        <xs:element name="codeblock" type="codeblock_type"/>
-        <xs:element name="ul" type="ul_type"/>
-      </xs:choice>
+      <xs:group maxOccurs="unbounded" ref="text-structure-group"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType mixed="true" name="p_type">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="xlink" type="xref_type"/>
+      <xs:element name="xlink">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="href" type="xs:anyURI"/>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="bold" type="xs:string"/>
       <xs:element name="code" type="xs:string"/>
       <xs:element name="italic" type="xs:string"/>
@@ -116,7 +102,7 @@
   </xs:complexType>
   <xs:complexType mixed="true" name="name_type">
     <xs:sequence>
-      <xs:element name="xref" type="xref_type"/>
+      <xs:element name="xref" type="xref_type" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="hint" type="xs:NCName"/>
     <xs:attribute name="type" type="xs:NCName"/>
@@ -131,7 +117,7 @@
   </xs:complexType>
   <xs:complexType mixed="true" name="codeblock_type">
     <xs:sequence>
-      <xs:element name="xref" type="xref_type"/>
+      <xs:element name="xref" type="xref_type" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="language" type="xs:NCName"/>
     <xs:attribute name="namespace" type="xs:anyURI"/>
@@ -152,7 +138,7 @@
   <xs:complexType name="li_type">
     <xs:sequence>
       <xs:element name="xref" minOccurs="0" type="xref_type"/>
-      <xs:element name="title" minOccurs="0" type="title_type"/>
+      <xs:element name="subhead" minOccurs="0" type="xs:string"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="p" type="p_type"/>
         <xs:element name="ul" type="ul_type"/>
@@ -164,4 +150,31 @@
     <xs:attribute name="href" use="required" type="xs:anyURI"/>
     <xs:attribute name="title"/>
   </xs:complexType>
+  <xs:group name="text-structure-group">
+    <xs:choice>
+      <xs:element name="fig" type="fig_type"/>
+      <xs:element name="labeled-item" type="labeled-item_type"/>
+      <xs:element name="precis" type="precis_type"/>
+      <xs:element name="qa" type="qa_type"/>
+      <xs:element name="subhead" type="xs:string"/>
+      <xs:element name="p" type="p_type"/>
+      <xs:element name="anchor" type="anchor_type"/>
+      <xs:element name="ol" type="ol_type"/>
+      <xs:element name="codeblock" type="codeblock_type"/>
+      <xs:element name="ul" type="ul_type"/>
+    </xs:choice>
+
+  </xs:group>
+  <xs:group name="nested-text-structure-group">
+    <xs:choice>
+      <xs:element name="fig" type="fig_type"/>
+      <xs:element name="subhead" type="xs:string"/>
+      <xs:element name="p" type="p_type"/>
+      <xs:element name="anchor" type="anchor_type"/>
+      <xs:element name="ol" type="ol_type"/>
+      <xs:element name="codeblock" type="codeblock_type"/>
+      <xs:element name="ul" type="ul_type"/>
+    </xs:choice>
+
+  </xs:group>
 </xs:schema>

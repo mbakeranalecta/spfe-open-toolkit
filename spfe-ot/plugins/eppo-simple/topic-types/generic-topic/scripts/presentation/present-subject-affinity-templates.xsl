@@ -9,6 +9,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"	
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config" 
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all">
@@ -44,16 +45,7 @@
 		<xsl:choose>
 			<!-- make sure that the target exists -->
 			<xsl:when test="esf:target-exists($topic, 'topic')">
-				<!-- paper or online -->
-				<xsl:choose>
-					<xsl:when test="$media='paper'">
-						<xsl:call-template name="output-cross-reference">
-							<xsl:with-param name="target" select="$topic"/>
-							<xsl:with-param name="type">topic</xsl:with-param>
-						</xsl:call-template>
-					</xsl:when>
-					<xsl:otherwise>
-						<italic>
+						<pe:italic>
 							<xsl:call-template name="output-link">
 								<xsl:with-param name="target" select="$topic"/>
 								<xsl:with-param name="type">topic</xsl:with-param>
@@ -62,9 +54,7 @@
 								</xsl:with-param>
 								<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 							</xsl:call-template>
-						</italic>
-					</xsl:otherwise>
-				</xsl:choose>
+						</pe:italic>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
@@ -80,24 +70,14 @@
 		<xsl:choose>
 			<!-- make sure that the target exists -->
 			<xsl:when test="esf:target-exists($topic-set, 'topic-set')">
-				<!-- paper or online -->
-				<xsl:choose>
-					<xsl:when test="$media='paper'">
-						<italic  hint="document-name">
-							<xsl:value-of select="$link-catalogs//lc:target[@type='topic-set'][lc:key=$topic-set]/parent::lc:page/@title"/>
-						</italic>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:call-template name="output-link">
-							<xsl:with-param name="target" select="$topic-set"/>
-							<xsl:with-param name="type">topic-set</xsl:with-param>
-							<xsl:with-param name="content">
-								<xsl:value-of select="$link-catalogs//lc:target[@type='topic-set'][lc:key=$topic-set]/parent::lc:page/@title"/>
-							</xsl:with-param>
-							<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
-						</xsl:call-template>
-					</xsl:otherwise>
-				</xsl:choose>
+				<xsl:call-template name="output-link">
+					<xsl:with-param name="target" select="$topic-set"/>
+					<xsl:with-param name="type">topic-set</xsl:with-param>
+					<xsl:with-param name="content">
+						<xsl:value-of select="$link-catalogs//lc:target[@type='topic-set'][lc:key=$topic-set]/parent::lc:page/@title"/>
+					</xsl:with-param>
+					<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
@@ -110,16 +90,16 @@
 	
 	<xsl:template match="link-external">
 	<!-- FIXME: support other protocols -->
-		<xlink href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}">
+		<pe:xlink href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}">
 			<xsl:apply-templates/>
-		</xlink>	
+		</pe:xlink>	
 	</xsl:template>
 
 	<xsl:template match="url">
 	<!-- FIXME: support other protocols -->
-		<xlink href="{if (starts-with(., 'http://')) then . else concat('http://',.)}">
+		<pe:xlink href="{if (starts-with(., 'http://')) then . else concat('http://',.)}">
 		 <xsl:apply-templates/>
-		</xlink>	
+		</pe:xlink>	
 	</xsl:template>
 
 	<xsl:template match="subject-affinity">
@@ -143,9 +123,9 @@
 	</xsl:template>
 	
 	<xsl:template match="p/bold">
-		<bold>
+		<pe:bold>
 			<xsl:apply-templates/>
-		</bold>
+		</pe:bold>
 	</xsl:template>
 	
 	<xsl:template match="p/quote">
@@ -155,7 +135,7 @@
 	</xsl:template>
 	
 
-	<xsl:template match="p/name">
+	<xsl:template match="p/name ">
 		<!-- FIXME: handle namespace of the name? -->
 		<xsl:if test="not(@key)">
 			<xsl:call-template name="sf:warning">
@@ -165,7 +145,7 @@
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:variable name="content" select="normalize-space(.)"/>
-		<name type="{@type}">
+		<pe:name type="{@type}">
 			<xsl:choose>
 				<xsl:when test="esf:target-exists(@key, @type)">
 					<xsl:call-template name="output-link">
@@ -182,15 +162,18 @@
 					<xsl:value-of select="$content"/>								
 				</xsl:otherwise>
 			</xsl:choose>
-		</name>	
+		</pe:name>	
 	</xsl:template>
 	
+	<!-- FIXME: Need to do something more definite here. Need to give a clear contract to the format layer. -->
 	<xsl:template match="decoration">
 		<xsl:copy-of select="."/>
 	</xsl:template>
 
 	<xsl:template match="selection-sequence">
-		<gui-label hint="{name()}"><xsl:apply-templates/></gui-label>
+		<pe:gui-label hint="{name()}">
+			<xsl:apply-templates/>
+		</pe:gui-label>
 	</xsl:template>
 
 	<!-- TEXT STRUCTURE GROUP -->
@@ -203,7 +186,7 @@
 				<xsl:with-param name="message" select="'No table/title element found for referenced table:', $table-id, '. A title is required for all referenced tables.'"/>
 			</xsl:call-template>
 		</xsl:if>
-				<cross-ref target="{@id-ref}" type="table"/>
+		<pe:cross-ref target="{@id-ref}" type="table"/>
 	</xsl:template>
 	
 	<xsl:template match="fig-id">
@@ -216,33 +199,33 @@
 		</xsl:if>
 		<xsl:choose>
 			<xsl:when test="$uri">
-				<cross-ref target="{generate-id(ancestor::topic//fig[@uri=$uri]/@uri)}" type="fig"/>
+				<pe:cross-ref target="{generate-id(ancestor::topic//fig[@uri=$uri]/@uri)}" type="fig"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<cross-ref target="{@id-ref}" type="fig"/>
+				<pe:cross-ref target="{@id-ref}" type="fig"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="code-sample-id">
-		<cross-ref target="{@id-ref}" type="code-sample"/>
+		<pe:cross-ref target="{@id-ref}" type="code-sample"/>
 	</xsl:template>
 
 	<xsl:template match="procedure-id">
-		<cross-ref target="{@id-ref}" type="procedure"/>
+		<pe:cross-ref target="{@id-ref}" type="procedure"/>
 	</xsl:template>
 
 	<xsl:template match="step-id">
-		<cross-ref target="{@id-ref}" type="step"/>
+		<pe:cross-ref target="{@id-ref}" type="step"/>
 	</xsl:template>
 	
 	<xsl:template match="text-object-ref">
 		<xsl:variable name="id" select="@id-ref"/>
 		<xsl:choose>
-			<xsl:when test="//text-object[id=$id] and not($media='paper')">
-				<fold-toggle id="{generate-id()}" initial-state="folded">
+			<xsl:when test="//text-object[id=$id]">
+				<pe:fold-toggle id="{generate-id()}" initial-state="folded">
 					<xsl:apply-templates/>
-				</fold-toggle>
+				</pe:fold-toggle>
 			</xsl:when>
 			<xsl:otherwise>
 				<!-- no warning here because present-text-structures generates it -->

@@ -9,6 +9,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config" 
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all">
@@ -219,7 +220,7 @@
 		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][@type=$type][1]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][@type=$type][1]/@anchor) else ''"/>
 
 		
-		<xref hint="{$type}">
+		<pe:xref hint="{$type}">
 			<xsl:attribute name="target">
 				<xsl:choose>
 					<!-- this page -->
@@ -284,7 +285,7 @@
 					<xsl:sequence select="$content"/>
 				</xsl:otherwise>
 			</xsl:choose>
-			</xref>
+			</pe:xref>
 	</xsl:template>
 	
 
@@ -339,20 +340,20 @@
 		<xsl:choose>
 			<!-- this book -->
 			<xsl:when test="$topic-set-id eq $target-topic-set">
-				<cross-ref 
+				<pe:cross-ref 
 					type="{$type}"
 					target="{$target}"/>
 			</xsl:when>
 			
 			<!-- outside this book -->
 			<xsl:otherwise>
-				<bold>
+				<pe:bold>
 					<xsl:value-of select="$target-page/@title"/>
-				</bold>
+				</pe:bold>
 				<xsl:text> in </xsl:text>
-				<italic>
+				<pe:italic>
 					<xsl:value-of select="$link-catalogs/lc:link-catalog[@topic-set-id=$target-topic-set]/@title"/>
-				</italic> 
+				</pe:italic> 
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -411,13 +412,13 @@
 					<xsl:when test="regex-group(1)='{'">
 						<xsl:choose>
 							<xsl:when test="$literal-name ne ''">
-								<xsl:element name="{$literal-name}"><xsl:value-of select="regex-group(1)"/></xsl:element>
+								<xsl:element name="pe:{$literal-name}"><xsl:value-of select="regex-group(1)"/></xsl:element>
 							</xsl:when>
 							<xsl:otherwise><xsl:value-of select="regex-group(1)"/></xsl:otherwise>
 						</xsl:choose>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:element name="{$placeholder-name}"><xsl:value-of select="regex-group(1)"/></xsl:element>
+						<xsl:element name="pe:{$placeholder-name}"><xsl:value-of select="regex-group(1)"/></xsl:element>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:matching-substring>
@@ -425,7 +426,7 @@
 				<xsl:if test="not(normalize-space(.)='')">
 						<xsl:choose>
 							<xsl:when test="$literal-name ne''">
-								<xsl:element name="{$literal-name}"><xsl:value-of select="."/></xsl:element>
+								<xsl:element name="pe:{$literal-name}"><xsl:value-of select="."/></xsl:element>
 							</xsl:when>
 							<xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
 						</xsl:choose>
