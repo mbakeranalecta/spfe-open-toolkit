@@ -26,47 +26,46 @@
                                   else concat('../', $config/config:doc-set/config:home-topic-set,'-toc.html')"/>
         </xsl:variable>
         
-        <pe:header>
-            <pe:p>
+        <pe:context-nav>
+            <pe:home>
                 <pe:xref target="{$doc-set-index-file}" >Home</pe:xref>   
-                | 
-                <pe:xref target="{$doc-set-toc-file}">TOC</pe:xref>
-                
+            </pe:home>
+            <pe:breadcrumbs>
+                <pe:breadcrumb><pe:xref target="{$doc-set-toc-file}">TOC</pe:xref></pe:breadcrumb>
                 <xsl:if test="not($is-home-topic-set)">
-                    >      
-                    <pe:xref target="{normalize-space($topic-set-id)}-toc.html">
-                        <xsl:value-of select="$topic-set-title"/>
-                    </pe:xref>
+                    <pe:breadcrumb>
+                       <pe:xref target="{normalize-space($topic-set-id)}-toc.html">
+                           <xsl:value-of select="$topic-set-title"/>
+                       </pe:xref>
+                    </pe:breadcrumb>
                 </xsl:if>
-            </pe:p>
-            <pe:table>
-                <xsl:if test="index/reference/key[normalize-space(.) ne '']">
-                    <pe:tr>
-                        <pe:td><pe:bold>Tags</pe:bold></pe:td>
-                        <pe:td>
-                            <xsl:for-each select="index/reference">
-                                <xsl:variable name="key-text" select="translate(key[1], '{}', '')"/>
-                                <xsl:choose>
-                                    <xsl:when test="esf:target-exists-not-self(key[1], type, ancestor::topic/name)">
-                                        <xsl:call-template name="output-link">
-                                            <xsl:with-param name="target" select="key[1]"/>
-                                            <xsl:with-param name="type" select="type"/>
-                                            <xsl:with-param name="content" select="$key-text"/>
-                                            <xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
-                                        </xsl:call-template>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="$key-text"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                                <xsl:if test="position() != last()">, </xsl:if>
-                            </xsl:for-each>
-                        </pe:td>
-                    </pe:tr>
-                    
+            </pe:breadcrumbs>
+        
+            <pe:keywords>
+                <xsl:if test="index/entry/term[normalize-space(.) ne '']">
+                    <pe:title>Tags</pe:title>
+                    <pe:keyword>
+                        <xsl:for-each select="index/entry">
+                            <xsl:variable name="key-text" select="translate(term[1], '{}', '')"/>
+                            <xsl:choose>
+                                <xsl:when test="esf:target-exists-not-self(term[1], type, ancestor::ss:topic/@name)">
+                                    <xsl:call-template name="output-link">
+                                        <xsl:with-param name="target" select="key[1]"/>
+                                        <xsl:with-param name="type" select="type"/>
+                                        <xsl:with-param name="content" select="$key-text"/>
+                                        <xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+                                    </xsl:call-template>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$key-text"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:if test="position() != last()">, </xsl:if>
+                        </xsl:for-each>
+                    </pe:keyword>   
                 </xsl:if>
-            </pe:table>
-        </pe:header>
+            </pe:keywords>
+        </pe:context-nav>
     </xsl:template>
     
     <xsl:template name="show-footer">		
