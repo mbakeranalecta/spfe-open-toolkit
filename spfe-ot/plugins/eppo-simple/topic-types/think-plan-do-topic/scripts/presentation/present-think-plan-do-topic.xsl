@@ -30,11 +30,11 @@
 			<xsl:apply-templates/>
 		</pe:title>
 		<!-- page toc -->
-		<pe:ul>
-			<pe:li><pe:p><pe:xref target="#Think">Understanding <xsl:value-of select="$title"/></pe:xref></pe:p></pe:li>
-			<pe:li><pe:p><pe:xref target="#Plan">Planning <xsl:value-of select="$title"/></pe:xref></pe:p></pe:li>
-			<pe:li><pe:p><pe:xref target="#Do">Doing <xsl:value-of select="$title"/></pe:xref></pe:p></pe:li>
-		</pe:ul>
+		<pe:toc>
+			<pe:toc-entry><pe:xref target="#Think">Understanding <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
+			<pe:toc-entry><pe:xref target="#Plan">Planning <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
+			<pe:toc-entry><pe:xref target="#Do">Doing <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
+		</pe:toc>
 		
 	</xsl:template>
 	

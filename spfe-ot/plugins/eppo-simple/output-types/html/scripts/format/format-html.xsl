@@ -719,6 +719,18 @@
 	<xsl:template match="context-nav/breadcrumbs/breadcrumb">
 		<xsl:apply-templates/>
 	</xsl:template>
+	
+	<xsl:template match="page/toc">
+		<ul class="page-toc">
+			<xsl:apply-templates/>
+		</ul>
+	</xsl:template>
+	
+	<xsl:template match="page/toc/toc-entry">
+		<li>
+			<xsl:apply-templates/>
+		</li>
+	</xsl:template>
 
 	<xsl:template match="cross-ref">
 		<xsl:variable name="target" select="@target"/>

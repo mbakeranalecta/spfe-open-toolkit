@@ -102,10 +102,11 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="title" type="xs:string"/>
       <xs:element minOccurs="0" name="toc">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="toc-item">
+            <xs:element maxOccurs="unbounded" name="toc-entry">
               <xs:complexType>
                 <xs:sequence>
                   <xs:element name="xref" type="xref_type"/>
@@ -115,8 +116,7 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="title" type="xs:string"/>
-      <xs:group maxOccurs="unbounded" ref="text-structure-group"/>
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="text-structure-group"/>
       <xs:element name="section" type="section_type" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="name" use="required" type="xs:NCName"/>

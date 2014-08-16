@@ -28,17 +28,15 @@
 		</pe:title>
 		<!-- page toc -->
 		<xsl:if test="count(../es:section/es:title) gt 1">
-			<pe:ul>
+			<pe:toc>
 				<xsl:for-each select="../es:section/es:title">
-					<pe:li>
-						<pe:p>
-							<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
-								<xsl:value-of select="."/>
-							</pe:xref>
-						</pe:p>
-					</pe:li>
+					<pe:toc-entry>
+						<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
+							<xsl:value-of select="."/>
+						</pe:xref>
+					</pe:toc-entry>
 				</xsl:for-each>
-			</pe:ul>
+			</pe:toc>
 		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>
