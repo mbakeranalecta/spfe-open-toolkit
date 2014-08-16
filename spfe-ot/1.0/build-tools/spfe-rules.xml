@@ -186,12 +186,6 @@
 					<param name="draft" expression="${draft}" if="draft"/>
 				</params>
 			</saxon-xslt>
-
-			<!--<!-\- validate the output file -\->
-			<xmlvalidate lenient="yes" file="${temp}/${files.extracted-content}">
-				<!-\- make the validation include namespaces -\->
-				<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
-			</xmlvalidate>-->
 		</sequential>
 	</macrodef>
 
@@ -377,6 +371,16 @@
 					<param name="toc-files" expression="${toc-files-list}"/>
 				</params>
 			</saxon-xslt>
+			
+			<!-- validate the output file -->
+			<echo>Validating presentation files for @{topic-set-id}.</echo>
+			<xmlvalidate lenient="no">
+				<fileset dir="@{output-directory}" includes="**/*.xml"/>
+				<xmlcatalog refid="spfe-catalogs"/>
+				<!-- make the validation include namespaces -->
+				<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+				<attribute name="http://apache.org/xml/features/validation/schema" value="true"/>
+			</xmlvalidate>
 		</sequential>
 	</macrodef>
 
