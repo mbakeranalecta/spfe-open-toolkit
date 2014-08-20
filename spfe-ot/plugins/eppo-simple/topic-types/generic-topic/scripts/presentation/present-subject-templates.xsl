@@ -102,7 +102,7 @@
 		</pe:xlink>	
 	</xsl:template>
 
-	<xsl:template match="subject-affinity">
+	<xsl:template match="subject">
 		<xsl:variable name="content" select="normalize-space(.)"/>
 			<xsl:choose>
 				<xsl:when test="esf:target-exists(@key, @type)">
@@ -140,7 +140,7 @@
 		<xsl:if test="not(@key)">
 			<xsl:call-template name="sf:warning">
 				<xsl:with-param name="message" 
-					select="'&quot;name&quot; subject-affinity element found with no &quot;key&quot; attribute:', . "/>
+					select="'&quot;name&quot; subject element found with no &quot;key&quot; attribute:', . "/>
 				
 			</xsl:call-template>
 		</xsl:if>

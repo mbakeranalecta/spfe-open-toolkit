@@ -46,7 +46,7 @@
         </sources>
         
         <default-topic-scope>spfe</default-topic-scope>
-        <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
+        <default-subject-scope>spfe</default-subject-scope>
 
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
         

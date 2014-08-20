@@ -71,7 +71,7 @@
               <xs:element name="sources" type="sources-type"/>
               <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
               <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
-              <xs:element name="default-subject-affinity-scope" minOccurs="0" maxOccurs="1"
+              <xs:element name="default-subject-scope" minOccurs="0" maxOccurs="1"
                 type="xs:string"/>
               <xs:element name="build-rules" type="xs:anyURI" minOccurs="0"/>
               <xs:element name="strings" minOccurs="0">

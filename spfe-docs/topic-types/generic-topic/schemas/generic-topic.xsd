@@ -14,10 +14,10 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/text-general.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subject-affinities-general.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subjects-general.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subject-affinities-xml.xsd"/>
-    <xs:include schemaLocation="../../generic-topic/schemas/subject-affinities-spfe-build.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subjects-xml.xsd"/>
+    <xs:include schemaLocation="../../generic-topic/schemas/subjects-spfe-build.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/conditions.xsd"/>
     <xs:include
@@ -32,17 +32,17 @@
     <xs:group name="p-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>
-            <xs:group ref="subject-affinities-general"/>
-            <xs:group ref="subject-affinities-spfe-build"/>
-            <xs:group ref="subject-affinities-xml"/>
+            <xs:group ref="subjects-general"/>
+            <xs:group ref="subjects-spfe-build"/>
+            <xs:group ref="subjects-xml"/>
             <xs:group ref="resources"/>
             <xs:group ref="strings"/>
         </xs:choice>
     </xs:group>
 
-    <xs:simpleType name="subject-affinities-type">
+    <xs:simpleType name="subjects-type">
         <xs:union
-            memberTypes="subject-affinities-general subject-affinities-spfe-build subject-affinities-xml"
+            memberTypes="subjects-general subjects-spfe-build subjects-xml"
         />
     </xs:simpleType>
 </xs:schema>

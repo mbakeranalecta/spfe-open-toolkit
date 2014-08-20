@@ -36,7 +36,7 @@
         </sources>
 
         <default-topic-scope>spfe</default-topic-scope>
-        <default-subject-affinity-scope>spfe</default-subject-affinity-scope>
+        <default-subject-scope>spfe</default-subject-scope>
 
         <strings>
             <string id="eppo-simple-topic-set-title">SPFE Documentation</string>

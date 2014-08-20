@@ -820,11 +820,11 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/topic-set/default-subject-affinity-scope</xpath>
+            <xpath>/spfe/topic-set/default-subject-scope</xpath>
             <description>
-                <p>Specifies the <feature>subject-affinity scope</feature> tokens to be applied to
-                    all subject-affinities in all topics in the build by default. Effectively,
-                    specifying this setting applies scope to subject-affinities that do not specify
+                <p>Specifies the <feature>subject scope</feature> tokens to be applied to
+                    all subjects in all topics in the build by default. Effectively,
+                    specifying this setting applies scope to subjects that do not specify
                     a scope. Subject affinities that declare their own scope are not affected by
                     this setting.</p>
             </description>
