@@ -14,8 +14,8 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/text-general.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subjects-general.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subjects-xml.xsd"/>    <xs:include schemaLocation="../../generic-topic/schemas/subjects-spfe-build.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/annotations-general.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/annotations-xml.xsd"/>    <xs:include schemaLocation="../../generic-topic/schemas/annotations-spfe-build.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/conditions.xsd"/>
     <xs:include
@@ -28,15 +28,15 @@
     <xs:group name="p-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>
-            <xs:group ref="subjects-general"/>
-            <xs:group ref="subjects-spfe-build"/>
-            <xs:group ref="subjects-xml"/>
+            <xs:group ref="annotations-general"/>
+            <xs:group ref="annotations-spfe-build"/>
+            <xs:group ref="annotations-xml"/>
             <xs:group ref="resources"/>
             <xs:group ref="strings"/>
         </xs:choice>
     </xs:group>
 
     <xs:simpleType name="subjects-type">
-        <xs:union memberTypes="subjects-general subjects-spfe-build subjects-xml"/>
+        <xs:union memberTypes="annotations-general annotations-spfe-build annotations-xml"/>
     </xs:simpleType>
 </xs:schema>

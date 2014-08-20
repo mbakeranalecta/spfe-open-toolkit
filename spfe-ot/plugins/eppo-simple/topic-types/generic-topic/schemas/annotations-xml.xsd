@@ -2,7 +2,7 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:simpleType name="subjects-xml">
+    <xs:simpleType name="annotations-xml">
         <xs:restriction base="xs:string">
             <xs:enumeration value="xml-element-name"/>
             <xs:enumeration value="xml-attribute-name"/>
@@ -11,7 +11,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:group name="subjects-xml">
+    <xs:group name="annotations-xml">
         <xs:choice>
             <xs:element name="xml-element-name">
                 <xs:complexType>

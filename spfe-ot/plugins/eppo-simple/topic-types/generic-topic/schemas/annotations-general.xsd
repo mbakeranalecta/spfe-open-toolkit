@@ -2,7 +2,7 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:simpleType name="subjects-general">
+    <xs:simpleType name="annotations-general">
         <xs:restriction base="xs:string">
             <xs:enumeration value="directory-name"/>
             <xs:enumeration value="document-name"/>
@@ -16,7 +16,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:group name="subjects-general">
+    <xs:group name="annotations-general">
         <xs:choice>
             <xs:element name="directory-name"/>
             <xs:element name="document-name"/>
@@ -34,7 +34,7 @@
                             <xs:attribute name="href" type="xs:anyURI"/>
                         </xs:extension>
                     </xs:simpleContent>
-                    
+
                 </xs:complexType>
             </xs:element>
             <xs:element name="url"/>

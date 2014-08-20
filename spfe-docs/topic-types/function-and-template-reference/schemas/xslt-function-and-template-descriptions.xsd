@@ -17,10 +17,10 @@
 		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/text-decoration.xsd"/>
 	<xs:include
 		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/strings.xsd"/>
-	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subjects-xslt.xsd"/>
-	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subjects-general.xsd"/>
-	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/subjects-xml.xsd"/>
-	<xs:include schemaLocation="../../generic-topic/schemas/subjects-spfe-build.xsd"/>
+	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/annotations-xslt.xsd"/>
+	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/annotations-general.xsd"/>
+	<xs:include	schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/annotations-xml.xsd"/>
+	<xs:include schemaLocation="../../generic-topic/schemas/annotations-spfe-build.xsd"/>
 
 	<xs:include
 		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/resources.xsd"/>
