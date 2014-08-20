@@ -25,7 +25,7 @@
     </head>
     <body>
         <title> Namespaces in SPFE</title>
-        <byline><author>Mark Baker</author></byline>
+        <byline><author-name>Mark Baker</author-name></byline>
         <precis>
 <p><string-ref id-ref="product"/> uses namespaces extensively. </p>
         </precis>

@@ -21,7 +21,7 @@
                             <xs:element name="byline">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element maxOccurs="unbounded" name="author"/>
+                                        <xs:element maxOccurs="unbounded" name="author-name"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>

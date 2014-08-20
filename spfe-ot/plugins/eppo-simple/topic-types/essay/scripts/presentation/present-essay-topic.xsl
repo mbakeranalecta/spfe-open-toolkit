@@ -45,9 +45,26 @@
 			<pe:by-label>By </pe:by-label>
 			<pe:authors>
 				<!-- FIXME: This should be checking the link catalogs to see if there are links for authors. -->
-				<xsl:for-each select="es:author">
+				<xsl:for-each select="es:name">
 					<pe:name hint="author">
-						<xsl:apply-templates/>
+						<xsl:choose>
+							<!-- make sure that the target exists -->
+							<xsl:when test="esf:target-exists(., 'author')">
+								<xsl:call-template name="output-link">
+									<xsl:with-param name="target" select="@key"/>
+									<xsl:with-param name="type" select="@type"/>
+									<xsl:with-param name="class">author</xsl:with-param>
+									<xsl:with-param name="content" select="normalize-space(string-join(.,''))"/>
+									<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+								</xsl:call-template>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:call-template name="sf:subject-not-resolved">
+									<xsl:with-param name="message" select="'Author name  &quot;', ., '&quot; not resolved in topic ', ancestor::ss:topic/@full-name"/> 
+								</xsl:call-template>
+								<xsl:apply-templates/>
+							</xsl:otherwise>
+						</xsl:choose>
 					</pe:name>
 					<xsl:if test="not(position() eq last())">, </xsl:if>
 				</xsl:for-each>
@@ -55,7 +72,7 @@
 		</pe:byline>
 	</xsl:template>
 	
-	<xsl:template match="es:essay/es:body/es:byline/es:author">
+	<xsl:template match="es:essay/es:body/es:byline/es:name">
 
 	</xsl:template>
 	
