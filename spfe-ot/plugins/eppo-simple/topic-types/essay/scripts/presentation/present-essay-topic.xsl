@@ -41,9 +41,23 @@
 	</xsl:template>
 
 	<xsl:template match="es:essay/es:body/es:byline">
-		<pe:p hint="byline">By <xsl:apply-templates/></pe:p>
+		<pe:byline>
+			<pe:by-label>By </pe:by-label>
+			<pe:authors>
+				<xsl:for-each select="es:author">
+					<pe:name hint="author">
+						<xsl:apply-templates/>
+					</pe:name>
+					<xsl:if test="not(position() eq last())">, </xsl:if>
+				</xsl:for-each>
+			</pe:authors>
+		</pe:byline>
 	</xsl:template>
+	
+	<xsl:template match="es:essay/es:body/es:byline/es:author">
 
+	</xsl:template>
+	
 	<xsl:template match="es:essay/es:body/es:precis">
 		<pe:precis>
 			<pe:title>Summary</pe:title>

@@ -18,7 +18,13 @@
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="title"/>
-                            <xs:element name="byline"/>
+                            <xs:element name="byline">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="author"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
                             <xs:element name="precis" type="text-general-type"/>
                             <xs:group ref="text-general"/>
                             <xs:element name="section" maxOccurs="unbounded" minOccurs="0">

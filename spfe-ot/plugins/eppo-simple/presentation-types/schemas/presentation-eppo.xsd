@@ -5,7 +5,7 @@
   xmlns="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo">
   <xs:import namespace="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphic-record.xsd"/>
-  <xs:element name="web">
+  <xs:element name="pages">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="title" type="xs:string"/>
@@ -116,6 +116,21 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element minOccurs="0" name="byline">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="by-label"/>
+            <xs:element name="authors">
+              <xs:complexType mixed="true">
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="name" type="name_type"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="precis" type="precis_type" minOccurs="0"/>
       <xs:group minOccurs="0" maxOccurs="unbounded" ref="text-structure-group"/>
       <xs:element name="section" type="section_type" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
@@ -263,7 +278,6 @@
     <xs:choice>
       <xs:element name="fig" type="fig_type"/>
       <xs:element name="labeled-item" type="labeled-item_type"/>
-      <xs:element name="precis" type="precis_type"/>
       <xs:element name="qa" type="qa_type"/>
       <xs:element name="subhead" type="xs:string"/>
       <xs:element name="p" type="p_type"/>

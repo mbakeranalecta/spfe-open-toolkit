@@ -118,7 +118,7 @@
 				</xsl:choose>
 			</xsl:with-param>
 		</xsl:call-template>
-		<xsl:apply-templates select="$presentation/web/page"/>
+		<xsl:apply-templates select="$presentation/pages/page"/>
 		<xsl:call-template name="generate-graphics-list"/>
 	</xsl:template>
 
@@ -273,7 +273,7 @@
 	
 	<xsl:template name="generate-graphics-list">
 		<xsl:variable name="graphic-file-list" as="xs:string*">
-			<xsl:for-each select="$presentation/web/page//gr:graphic-record">	                                 
+			<xsl:for-each select="$presentation/pages/page//gr:graphic-record">	                                 
 				<xsl:variable name="available-preferred-formats">
 					<xsl:variable name="gr" select="."/>
 					<xsl:for-each select="$preferred-formats">
@@ -294,6 +294,19 @@
 
 		</xsl:result-document>
 	</xsl:template>
+	
+	<xsl:template match="byline">
+		<p>
+			<i><xsl:value-of select="by-label"/></i>
+			<xsl:apply-templates/>
+		</p>
+	</xsl:template>
+	
+	<xsl:template match="byline/authors">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template match="by-label"/>
 	
 
 	<xsl:template match="gr:*"/>

@@ -45,7 +45,7 @@ Main template
 		
 		
 		
-		<pe:web xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		<pe:pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/schemas/presentation-eppo.xsd">
 			<pe:title>
 				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
@@ -55,7 +55,7 @@ Main template
 			<xsl:apply-templates select="$synthesis/ss:synthesis/*"/>
 			<xsl:call-template name="create-generated-topics"/>
 
-		</pe:web>
+		</pe:pages>
 	</xsl:result-document>
 </xsl:template>
 
