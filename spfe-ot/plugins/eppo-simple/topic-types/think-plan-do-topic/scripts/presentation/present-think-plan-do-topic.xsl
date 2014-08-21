@@ -41,18 +41,18 @@
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning/es:planning-question">
 		<xsl:if test="$config/config:build-command='draft' or sf:has-content(es:planning-question-title/following-sibling::*) ">
-			<pe:qa>
+			<pe:labeled-item>
 				<pe:anchor name="{sf:title-to-anchor(es:planning-question-title)}"/>
 				<xsl:apply-templates/>
-			</pe:qa>
+			</pe:labeled-item>
 		</xsl:if>	
 	</xsl:template>
 	
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning/es:planning-question/es:planning-question-title">	
-		<pe:title>
+		<pe:label>
 			<xsl:apply-templates/>
-		</pe:title>
+		</pe:label>
 	</xsl:template>
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:understanding">	
@@ -76,7 +76,9 @@
 	</xsl:template>-->
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning/es:planning-question/es:planning-question-body">
+		<pe:item>
 			<xsl:apply-templates/>
+		</pe:item>
 	</xsl:template>
 	
 	

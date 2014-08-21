@@ -349,20 +349,6 @@
 		</h3>
 	</xsl:template>
 
-	<xsl:template match="qa/title">
-		<h2>
-			<xsl:apply-templates/>
-		</h2>
-	</xsl:template>
-
-	<xsl:template match="qa/question">
-		<xsl:apply-templates/>
-	</xsl:template>
-
-	<xsl:template match="qa/answer">
-		<xsl:apply-templates/>
-	</xsl:template>
-
 	<xsl:template match="procedure/title">
 		<h3>
 			<xsl:apply-templates/>
@@ -835,10 +821,6 @@
 	</xsl:template>
 
 	<xsl:template match="step">
-		<xsl:apply-templates/>
-	</xsl:template>
-	
-	<xsl:template match="qa">
 		<xsl:apply-templates/>
 	</xsl:template>
 
