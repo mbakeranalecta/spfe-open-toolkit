@@ -179,7 +179,7 @@
   <xs:complexType name="precis_type">
     <xs:sequence>
       <xs:element name="title" type="xs:string"/>
-      <xs:group ref="basic-text-structure-group"/>
+      <xs:group maxOccurs="unbounded" ref="basic-text-structure-group"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="qa_type">
