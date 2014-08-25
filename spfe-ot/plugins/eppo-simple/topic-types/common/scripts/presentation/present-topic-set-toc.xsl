@@ -100,31 +100,25 @@
     </xsl:template>
     
     <xsl:template match="toc[@topic-set-id=$topic-set-id]">
-        <pe:ul>
+        <pe:tree class="toc">
          <xsl:apply-templates/>
-        </pe:ul> 
+        </pe:tree> 
     </xsl:template>
     <xsl:template match="toc"/>
     
     <xsl:template match="node[@topic-type]">
         <!-- FIXME: subhead may not be the right markup here, or may need explicit handling at format stage -->
-        <pe:li>
-            <pe:subhead><xsl:value-of select="@name"/></pe:subhead>
-            <pe:ul>
+        <pe:branch state="open">
+            <pe:content><xsl:value-of select="@name"/></pe:content>
               <xsl:apply-templates/>
-          </pe:ul>
-        </pe:li>
+        </pe:branch>
     </xsl:template>
     
     <xsl:template match="node">
-        <pe:li>
-            <pe:p><pe:xref target="{normalize-space(@id)}.html"><xsl:value-of select="@name"/></pe:xref></pe:p>
-            <xsl:if test="node">
-                <pe:ul>
-                    <xsl:apply-templates/>
-                </pe:ul>
-            </xsl:if>
-        </pe:li>
+        <pe:branch state="open">
+            <pe:content><pe:xref target="{normalize-space(@id)}.html"><xsl:value-of select="@name"/></pe:xref></pe:content>
+               <xsl:apply-templates/>
+        </pe:branch>
     </xsl:template>
     
 </xsl:stylesheet>

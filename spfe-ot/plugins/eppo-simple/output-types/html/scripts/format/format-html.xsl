@@ -44,14 +44,9 @@
 				<meta http-equiv="Pragma" content="no-cache"/>
 				<meta http-equiv="expires" content="FRI, 13 APR 1999 01:00:00 GMT"/>
 			</xsl:if>
-			<xsl:for-each select="$config/config:format/config:html/config:css">
-				<link rel="STYLESHEET" href="{.}" type="text/css" media="all"/>
-			</xsl:for-each>
-			<xsl:for-each select="$config/config:format/config:html/config:java-script">
-				<script type="text/javascript" src="{.}">&#160;</script>
-			</xsl:for-each>
 
 			<link rel="stylesheet" type="text/css" href="style/eppo-simple.css"/>
+			<link rel="stylesheet" type="text/css" href="style/css-tree.css"/>
 		</head>
 	</xsl:function>
 
@@ -823,7 +818,43 @@
 	<xsl:template match="step">
 		<xsl:apply-templates/>
 	</xsl:template>
-
+	
+	<!-- TREES -->
+	
+	<xsl:template match="tree[@class='toc']">
+		<ol class="tree">
+			<xsl:apply-templates/>
+		</ol>
+	</xsl:template>
+	
+	<xsl:template match="tree//branch">
+		<li>
+			<xsl:choose>
+				<xsl:when test="branch">
+					<label for="{generate-id()}"><xsl:apply-templates select="content"/></label> 
+					<input type="checkbox" id="{generate-id()}" >
+						<!-- FIXME: How should we handle class="fixed"?-->
+						<xsl:if test="@state='open'">
+							<xsl:attribute name="checked"/>
+						</xsl:if>
+					</input> 				
+					<ol>			
+						<xsl:apply-templates select="branch"/>
+					</ol>				
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="class">file</xsl:attribute>
+					<xsl:apply-templates select="content"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</li>
+	</xsl:template>
+	
+	<xsl:template match="tree//branch/content">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	
 	<xsl:template match="*" >
 		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">

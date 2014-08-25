@@ -319,36 +319,6 @@
 
 
 
-        <config-setting-description>
-            <xpath>/spfe/doc-set/style/html-style-directories</xpath>
-            <description>
-                <p>A container element for a list of directories containing style files for HTML
-                    output. The specified directories will be copied into a
-                        <directory-name>style</directory-name> directory in the output directory.
-                    All subdirectories and their files will be copied as well. In the build file, it
-                    becomes an ANT <ant-element>resources</ant-element> element with the
-                    <ant-element>id</ant-element> of
-                    <code>spfe.style.html-style-directories</code>.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property>spfe.style.html-style-directories</build-property>
-            <attributes/>
-        </config-setting-description>
-
-        <config-setting-description>
-            <xpath>/spfe/doc-set/style/html-style-directories/include</xpath>
-            <description>
-                <p>A path expression indicating style directories to be copied to the output. This
-                    path expression is used to create an <config-setting>include</config-setting>
-                    element in an ANT <ant-element>resources</ant-element> element that is used to
-                    copy style files to the output directory.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            <build-property/>
-            <attributes/>
-        </config-setting-description>
 
         <config-setting-description>
             <xpath>/spfe/doc-set/title</xpath>

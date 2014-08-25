@@ -182,13 +182,7 @@
       <xs:group maxOccurs="unbounded" ref="basic-text-structure-group"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="qa_type">
-    <xs:sequence>
-      <xs:element name="anchor" type="anchor_type"/>
-      <xs:element name="title" type="xs:string"/>
-      <xs:group maxOccurs="unbounded" ref="nested-text-structure-group"/>
-    </xs:sequence>
-  </xs:complexType>
+
   <xs:complexType name="section_type">
     <xs:sequence>
       <xs:element name="anchor" type="anchor_type"/>
@@ -237,13 +231,17 @@
     <xs:attribute name="language" type="xs:NCName"/>
     <xs:attribute name="namespace" type="xs:anyURI"/>
   </xs:complexType>
-  <xs:complexType mixed="true" name="xref_type">
-    <xs:attribute name="class" type="xs:NCName"/>
-    <xs:attribute name="hint" type="xs:NCName"/>
-    <xs:attribute name="target" use="required"/>
-    <xs:attribute name="title"/>
-    <xs:attribute name="topic-title"/>
-    <xs:attribute name="topic-type"/>
+  <xs:complexType name="xref_type">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="class" type="xs:NCName"/>
+        <xs:attribute name="hint" type="xs:NCName"/>
+        <xs:attribute name="target" use="required"/>
+        <xs:attribute name="title"/>
+        <xs:attribute name="topic-title"/>
+        <xs:attribute name="topic-type"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="ul_type">
     <xs:sequence>
@@ -266,14 +264,37 @@
   </xs:complexType>
   <xs:complexType name="tree_type">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="branch" type="branch_type"/>
+      <xs:element maxOccurs="unbounded" name="branch"> </xs:element>
     </xs:sequence>
+    <xs:attribute name="class">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="toc"/>
+          <xs:enumeration value="general"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name="branch_type">
     <xs:sequence>
-      <xs:element name="content"/>
-      <xs:element name="branch" type="branch_type"/>
+      <xs:element name="content">
+        <xs:complexType mixed="true">
+          <xs:sequence>
+            <xs:element name="xref" type="xref_type" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="branch" type="branch_type" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
+    <xs:attribute name="state">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="open"/>
+          <xs:enumeration value="closed"/>
+          <xs:enumeration value="fixed"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:complexType>
   <xs:group name="text-structure-group">
     <xs:choice>

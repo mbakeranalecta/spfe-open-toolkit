@@ -151,7 +151,6 @@
                 </xs:complexType>
               </xs:element>
               <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
-              <xs:element name="style" type="style-type" minOccurs="0"/>
               <xs:element name="messages" minOccurs="0">
                 <xs:simpleType>
                   <xs:list itemType="messages-type"/>
@@ -364,12 +363,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="style-type">
-    <xs:sequence>
-      <xs:element name="html-style-directories" type="fileset-type"/>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

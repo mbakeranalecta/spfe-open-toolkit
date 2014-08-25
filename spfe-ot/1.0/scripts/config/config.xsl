@@ -152,15 +152,6 @@
             <property name="spfe.build.toc-directory" value="{$toc-directory}"/>
             <property name="spfe.doc-set-id" value="{$config/doc-set/doc-set-id}"/>
 
-            <xsl:for-each select="$config/output-format">
-                <xsl:variable name="format-name" select="name"/>
-                <files id="files.{$format-name}.support-files">
-                    <xsl:for-each
-                        select="$config/output-format[name=$format-name]/support-files/include">
-                        <include name="{.}"/>
-                    </xsl:for-each>
-                </files>
-            </xsl:for-each>
 
             <target name="--build.synthesis">
                 <xsl:for-each select="$config/topic-set">
@@ -278,7 +269,16 @@
                             style="{$doc-set-build}/topic-sets/{$topic-set-id}/format-{name}/spfe.format-{name}.xsl"
                             input-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out"
                             output-directory="{if ($topic-set-id=$config/doc-set/home-topic-set) then '' else concat($topic-set-id, '/')}"
-                        > </build.format>
+                        > 
+                            <files-elements>
+                                    <files id="files.{$name}.support-files">
+                                        <xsl:for-each
+                                            select="$config/output-format[name=$name]/support-files/include">
+                                            <include name="{.}"/>
+                                        </xsl:for-each>
+                                    </files>
+                            </files-elements>
+                        </build.format>
                     </xsl:for-each>
                 </xsl:for-each>
             </target>
