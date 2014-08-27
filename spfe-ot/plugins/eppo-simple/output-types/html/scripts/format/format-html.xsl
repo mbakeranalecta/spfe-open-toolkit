@@ -831,6 +831,7 @@
 		<li>
 			<xsl:choose>
 				<xsl:when test="branch">
+					<xsl:attribute name="class">folder</xsl:attribute>
 					<label for="{generate-id()}"><xsl:apply-templates select="content"/></label> 
 					<input type="checkbox" id="{generate-id()}" >
 						<!-- FIXME: How should we handle class="fixed"?-->
