@@ -6,6 +6,12 @@ ol.tree
 	padding: 0 0 0 30px;
 	width: 300px;
 }
+
+    ol.tree a
+    {
+        text-decoration:none;
+    }
+    
 	li 
 	{ 
 		position: relative; 
@@ -48,10 +54,15 @@ ol.tree
 		li input + ol > li { display: none; margin-left: -14px !important; padding-left: 1px; }
 	li label
 	{
-		background: url(folder-horizontal.png) 15px 1px no-repeat;
+		background: url(document.png) 15px 1px no-repeat;
 		cursor: pointer;
 		display: block;
 		padding-left: 37px;
+	}
+	
+	li label.folder
+	{
+	    background: url(folder-horizontal.png) 15px 1px no-repeat;
 	}
 
 	li input:checked + ol

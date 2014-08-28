@@ -831,7 +831,12 @@
 		<li>
 			<xsl:choose>
 				<xsl:when test="branch">
-					<label for="{generate-id()}"><xsl:apply-templates select="content"/></label> 
+					<label for="{generate-id()}">
+						<xsl:if test="not(content/xref)">
+							<xsl:attribute name="class">folder</xsl:attribute>
+						</xsl:if>
+						<xsl:apply-templates select="content"/>
+					</label> 
 					<input type="checkbox" id="{generate-id()}" >
 						<!-- FIXME: How should we handle class="fixed"?-->
 						<xsl:if test="@state='open'">
