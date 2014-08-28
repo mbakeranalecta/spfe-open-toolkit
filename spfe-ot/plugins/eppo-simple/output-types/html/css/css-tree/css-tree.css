@@ -6,16 +6,12 @@ ol.tree
 	padding: 0 0 0 30px;
 	width: 300px;
 }
-	li.folder 
+	li 
 	{ 
 		position: relative; 
 		margin-left: -15px;
 		list-style: none;
 	}
-		li.folder a
-		{
-			text-decoration: none;
-		}
 	li.file
 	{
 		margin-left: -1px !important;
