@@ -264,7 +264,7 @@
   </xs:complexType>
   <xs:complexType name="tree_type">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="branch"> </xs:element>
+      <xs:element maxOccurs="unbounded" name="branch" type="branch_type"> </xs:element>
     </xs:sequence>
     <xs:attribute name="class">
       <xs:simpleType>
