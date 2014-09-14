@@ -2,7 +2,7 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2014 All Rights Reserved. -->
 <!-- ===================================================
-	merge-config-ref.xsl
+	merge-doctype-ref.xsl
 =======================================================-->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
@@ -30,7 +30,7 @@
 	<xsl:variable name="schema-defs" select="sf:get-sources($extracted-content-files)"/>
 
 	<xsl:param name="authored-content-files"/>
-	<xsl:variable name="config-setting-source" select="sf:get-sources($authored-content-files)"/>
+	<xsl:variable name="doctype-source" select="sf:get-sources($authored-content-files)"/>
 
 	<xsl:variable name="config" as="element(config:spfe)">
 		<xsl:sequence select="/config:spfe"/>
@@ -55,11 +55,7 @@ Main template
 -->
 
 	<xsl:template name="main">
-		
-		<xsl:message select="'$output-directory', $output-directory"/>
-		<xsl:message select="'$authored-content-files', $authored-content-files"/>
-		<xsl:message select="'$extracted-content-files', $extracted-content-files"/>
-		
+				
 		<!-- Create the schema element topic set -->
 		<xsl:for-each-group select="$doctypes/doctype" group-by="@name">
 			<!-- FIXME: Need a test for the root selection method using schema with more than one doc element. -->
@@ -68,7 +64,7 @@ Main template
 
 			<xsl:result-document method="xml" indent="yes" omit-xml-declaration="no"
 				href="file:///{$output-directory}/merge.xml">
-				<cr:spfe-configuration-reference-entries>
+				<cr:doctype-reference-entries>
 
 					<!-- Use for-each-group to filter out duplicate xpaths -->
 					<xsl:for-each-group
@@ -76,18 +72,18 @@ Main template
 						group-by="xpath">
 						<xsl:apply-templates select=".">
 							<xsl:with-param name="source"
-								select="$config-setting-source//ed:config-setting-description"/>
+								select="doctype-source//ed:doctype-description"/>
 							<xsl:with-param name="current-doctype" select="$current-doctype"/>
 							<xsl:with-param name="in-scope-strings" select="$strings"
 								as="element()*" tunnel="yes"/>
 						</xsl:apply-templates>
 					</xsl:for-each-group>
-				</cr:spfe-configuration-reference-entries>
+				</cr:doctype-reference-entries>
 			</xsl:result-document>
 		</xsl:for-each-group>
 		<!-- Warn if there are any unmatched topics in the authored content. -->
 		<!-- FIXME: Should also search for unmatched attribute definitions. -->
-		<xsl:for-each select="$config-setting-source//ed:config-setting-description">
+		<xsl:for-each select="$doctype-source//ed:doctype-description">
 			<xsl:if
 				test="not(normalize-space(ed:xpath) = $schema-defs/schema-definitions/schema-element/normalize-space(xpath))">
 				<xsl:call-template name="sf:warning">
@@ -122,14 +118,14 @@ Main content processing templates
 					 else $xpath"/>
 
 		<xsl:variable name="topic-type-alias"
-			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}spfe-configuration-reference-entry', $config)"/>
+			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry', $config)"/>
 
 		<!-- is it this doctype or a group, but not clear we need this check again -->
 
 		<!-- FIXME: Should this be separated into a config specific script? -->
 		<xsl:if test="($current-doctype = $doctype) or not($doctype)">
 
-				<cr:spfe-configuration-reference-entry>
+				<cr:doctype-reference-entry>
 						<cr:namespace>
 						<xsl:value-of select="ancestor::schema-definitions/@namespace"/>
 					</cr:namespace>
@@ -173,7 +169,7 @@ Main content processing templates
 						<xsl:when test="$authored-content[2]">
 							<xsl:call-template name="sf:error">
 								<xsl:with-param name="message"
-									select="'Duplicate configuration setting description found for setting ', $xpath"
+									select="'Duplicate doctype element description found for setting ', $xpath"
 								> </xsl:with-param>
 							</xsl:call-template>
 						</xsl:when>
@@ -191,7 +187,7 @@ Main content processing templates
 							<!-- If not found, report warning. -->
 							<xsl:call-template name="sf:warning">
 								<xsl:with-param name="message"
-									select="'Configuration setting description not found ', string($xpath)"/>
+									select="'Doctype element description not found ', string($xpath)"/>
 							</xsl:call-template>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -252,7 +248,7 @@ Main content processing templates
 								<xsl:if test="not($authored/ed:description/*)">
 									<xsl:call-template name="sf:warning">
 										<xsl:with-param name="message"
-											select="'Configuration setting description not found ', string(xpath)"
+											select="'Doctype element description not found ', string(xpath)"
 										/>
 									</xsl:call-template>
 								</xsl:if>
@@ -263,11 +259,11 @@ Main content processing templates
 							</attribute>
 						</xsl:for-each>
 					</cr:attributes>
-				</cr:spfe-configuration-reference-entry>
+				</cr:doctype-reference-entry>
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="ed:config-setting-description">
+	<xsl:template match="ed:doctype-description">
 			<xsl:apply-templates/>
 </xsl:template>
 

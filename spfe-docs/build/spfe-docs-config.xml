@@ -32,6 +32,11 @@
                 <topic-set-id>spfe-configuration-reference</topic-set-id>
                 <href>topic-sets/spfe-configuration-reference.xml</href>
             </topic-set>  
+			
+			 <topic-set>
+                <topic-set-id>eppo-presentation-reference</topic-set-id>
+                <href>topic-sets/eppo-presentation-reference.xml</href>
+            </topic-set>  
             
             <topic-set>
                 <topic-set-id>spfe-function-reference</topic-set-id>

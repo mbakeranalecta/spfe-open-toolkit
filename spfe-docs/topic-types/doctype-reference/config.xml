@@ -11,14 +11,14 @@
         <scripts>
             <extract>
                 <script>
-                    <href>../../topic-types/doctype-reference/scripts/extract/schema-defs.xsl</href>
+                    <href>scripts/extract/schema-defs.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </extract>
             <merge>
-                <script><href>../../topic-types/config-reference/scripts/merge/merge-config-ref.xsl</href></script>
+                <script><href>scripts/merge/merge-doctype-ref.xsl</href></script>
                 <script><href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href></script>
             </merge>
             <synthesis>
@@ -26,7 +26,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/synthesis/common-topic-synthesis.xsl</href>
                 </script>
                 <script>
-                    <href>../../topic-types/config-reference/scripts/synthesis/synthesize-config-ref.xsl</href>
+                    <href>scripts/synthesis/synthesize-doctype-ref.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
@@ -91,7 +91,8 @@
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>                      <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/link-catalog/topic/topic-link-catalog.xsl</href>
+                    </remap-namespace>                      
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/link-catalog/topic/topic-link-catalog.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
@@ -105,7 +106,7 @@
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
                 <script>
-                    <href>../../topic-types/config-reference/scripts/toc/schema-toc.xsl</href>
+                    <href>../../topic-types/doctype-reference/scripts/toc/doctype-toc.xsl</href>
                 </script>
             </toc>
             <image-list>
@@ -118,7 +119,7 @@
             </image-list>
             <presentation type="eppo">
                 <script>
-                    <href>../../topic-types/config-reference/scripts/presentation/present-config-ref.xsl</href>
+                    <href>scripts/presentation/present-doctype-ref.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-topic-set-toc.xsl</href>

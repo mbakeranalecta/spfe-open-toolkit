@@ -24,7 +24,7 @@
 		<xsl:param name="doc-xpath"/>
 		<!--find the source-->
 		<xsl:variable name="xpath"
-			select="$synthesis//spfe-configuration-reference-entry[doc-xpath=$doc-xpath]/xpath, $synthesis//spfe-configuration-reference-entry/attributes/attribute[doc-xpath=$doc-xpath]/xpath"/>
+			select="$synthesis//doctype-reference-entry[doc-xpath=$doc-xpath]/xpath, $synthesis//doctype-reference-entry/attributes/attribute[doc-xpath=$doc-xpath]/xpath"/>
 		<xsl:variable name="consumed" select="substring-before($xpath,$doc-xpath)"/>
 		<xsl:sequence select="lf:link-xpath-segments($xpath, $consumed, 1)"/>
 	</xsl:function>
@@ -33,11 +33,16 @@
 		<xsl:param name="xpath"/>
 		<xsl:param name="consumed"/>
 		<xsl:param name="depth"/>
-
+		
+		<xsl:variable name="root-xpath" select="starts-with($xpath, '/')"></xsl:variable>
+	
+		<xsl:variable name="xpath-segments" select="tokenize(if ($root-xpath) then substring($xpath,2) else $xpath, '/')"/>
+		<xsl:variable name="consumed-segments" select="tokenize(if (starts-with($consumed, '/')) then substring($consumed,2) else $consumed, '/')"/>
+		
 		<!--check depth to make sure it does not run for ever if something else breaks -->
-		<xsl:if test="not($xpath=$consumed) and not($depth>10)">
+		<xsl:if test="count($xpath-segments) gt count($consumed-segments) and not($depth>10)">
 
-			<!-- calculate this segment of the path -->
+			<!-- calculate this segment of the path 
 			<xsl:variable name="segment">
 				<xsl:choose>
 					<xsl:when
@@ -50,12 +55,17 @@
 						/>
 					</xsl:otherwise>
 				</xsl:choose>
-			</xsl:variable>
-
+			</xsl:variable>-->
+			<xsl:variable name="segment" select="$xpath-segments[count($consumed-segments)+1]"/>
 			<!-- output this segment with link -->
 			<xsl:text>/</xsl:text>
 			<!-- call the link template -->
-			<xsl:sequence select="lf:link-xpath(concat($consumed, '/', $segment),$segment)"/>
+			<xsl:sequence select="lf:link-xpath(
+				concat(
+					if($root-xpath) then '/' else '',
+					string-join($xpath-segments[position() le count($consumed-segments)+1], '/')
+				),
+				$segment)"/>
 			<!-- recursive call -->
 			<xsl:sequence
 				select="lf:link-xpath-segments($xpath, concat($consumed, '/', $segment), $depth+1)"
@@ -75,7 +85,7 @@
 		<xsl:param name="target" as="xs:string"/>
 		<xsl:param name="link-text" as="xs:string"/>
 		<xsl:variable name="targets"
-			select="$synthesis//spfe-configuration-reference-entry, $synthesis//attribute"/>
+			select="$synthesis//doctype-reference-entry, $synthesis//attribute"/>
 		<!--Determine whether or not the target exists. -->
 		<xsl:choose>
 			<xsl:when test="count($targets[xpath = $target]) > 1">
@@ -124,8 +134,8 @@
 	-->
 
 
-	<!-- spfe-configuration-reference-entry -->
-	<xsl:template match="spfe-configuration-reference-entry">
+	<!-- doctype-reference-entry -->
+	<xsl:template match="doctype-reference-entry">
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
 
@@ -238,7 +248,7 @@
 						<pe:p>
 							<pe:name hint="element-name">
 								<xsl:sequence
-									select="lf:link-xpath($child-xpath,//spfe-configuration-reference-entry[xpath eq $child-xpath]/name)"
+									select="lf:link-xpath($child-xpath,//doctype-reference-entry[xpath eq $child-xpath]/name)"
 								/>
 							</pe:name>
 						</pe:p>
@@ -293,9 +303,9 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 
-	<xsl:template match="spfe-configuration-reference-entry/type"/>
-	<xsl:template match="spfe-configuration-reference-entry/name"/>
-	<xsl:template match="spfe-configuration-reference-entry/build-property"/>
+	<xsl:template match="doctype-reference-entry/type"/>
+	<xsl:template match="doctype-reference-entry/name"/>
+	<xsl:template match="doctype-reference-entry/build-property"/>
 
 	<!-- 
 		============================

@@ -22,7 +22,7 @@ Main content processing templates
 -->
 
 	<!-- Schema element template -->
-	<xsl:template match="spfe-configuration-reference-entry">
+	<xsl:template match="doctype-reference-entry">
 		<xsl:variable name="name" select="translate(xpath, '/:', '__')"/>
 		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
 		
@@ -46,7 +46,7 @@ Main content processing templates
 					<xsl:for-each
 						select="//schema-attribute[starts-with(normalize-space(xpath), concat($xpath, '/@'))]">
 						<ss:entry>
-							<ss:type>config-setting</ss:type>
+							<ss:type>doctype-element</ss:type>
 							<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
 							<ss:term><xsl:value-of select="$xpath"/>/@<xsl:value-of select="name"/></ss:term>
 							<ss:anchor>
@@ -78,7 +78,7 @@ Main content processing templates
 	</xsl:template>
 
 
-	<xsl:template match="spfe-configuration-reference-entries">
+	<xsl:template match="doctype-reference-entries">
 
 			<xsl:apply-templates/>
 
@@ -92,7 +92,7 @@ Main content processing templates
  </xsl:template>
 	
 	<!-- Avoid xpath being matched by subject affinity markup rules. -->
-	<xsl:template match="spfe-configuration-reference-entry/xpath">
+	<xsl:template match="doctype-reference-entry/xpath">
 		<xsl:copy>
 			<xsl:apply-templates select="@* | node()" />
 		</xsl:copy>
@@ -106,15 +106,15 @@ Content fix-up templates
 	<!-- FIXME: Are these in the right namespace to match?" -->
 
 	<!-- Fix up element name xpaths. Raise priority to avoid collision with default config-setting template -->
-	<xsl:template match="config-setting" priority="1">
+	<xsl:template match="doctype-element" priority="1">
 		<xsl:variable name="context-element"
-			select="ancestor::spfe-configuration-reference-entry/normalize-space(xpath)"/>
+			select="ancestor::doctype-reference-entry/normalize-space(xpath)"/>
 		<xsl:variable name="data-content" select="."/>
 		<xsl:variable name="xpath" select="@xpath"/>
 		<xsl:variable name="all-elements"
-			select="//spfe-configuration-reference-entry/xpath"/>
+			select="//doctype-reference-entry/xpath"/>
 		<name>
-			<xsl:attribute name="type">config-setting</xsl:attribute>
+			<xsl:attribute name="type">doctype-element</xsl:attribute>
 			<xsl:choose>
 				<!-- check the cases where there is no 'xpath' attribute -->
 				<xsl:when test="not(@xpath)">
@@ -161,7 +161,7 @@ Content fix-up templates
 							<xsl:attribute name="key" select="$data-content"/>
 							<xsl:call-template name="sf:warning">
 								<xsl:with-param name="message">
-									<xsl:text>Unknown or ambiguous SPFE config element name "</xsl:text>
+									<xsl:text>Unknown or ambiguous element name "</xsl:text>
 									<xsl:value-of select="$data-content"/>
 									<xsl:text>". Context element is:</xsl:text>
 									<xsl:value-of select="$context-element"/>
