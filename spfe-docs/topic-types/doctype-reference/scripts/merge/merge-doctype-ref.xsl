@@ -72,7 +72,7 @@ Main template
 						group-by="xpath">
 						<xsl:apply-templates select=".">
 							<xsl:with-param name="source"
-								select="doctype-source//ed:doctype-description"/>
+								select="$doctype-source//ed:doctype-description"/>
 							<xsl:with-param name="current-doctype" select="$current-doctype"/>
 							<xsl:with-param name="in-scope-strings" select="$strings"
 								as="element()*" tunnel="yes"/>

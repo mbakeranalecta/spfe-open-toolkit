@@ -178,20 +178,6 @@
 			</pe:labeled-item>
 
 			<pe:labeled-item>
-				<pe:label>Name in build file</pe:label>
-				<pe:item>
-					<pe:p>
-						<xsl:choose>
-							<xsl:when test="normalize-space(build-property) ne ''">
-								<xsl:value-of select="build-property"/>
-							</xsl:when>
-							<xsl:otherwise>Not used in the build file.</xsl:otherwise>
-						</xsl:choose>
-					</pe:p>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:labeled-item>
 				<pe:label>Default</pe:label>
 				<pe:item>
 
@@ -275,9 +261,6 @@
 				</pe:item>
 			</pe:labeled-item>
 
-			<!-- restrictions -->
-			<xsl:call-template name="format-restrictions"/>
-
 			<!-- Add the attributes -->
 			<xsl:for-each select="attributes/attribute">
 				<xsl:sort select="name"/>
@@ -305,36 +288,8 @@
 
 	<xsl:template match="doctype-reference-entry/type"/>
 	<xsl:template match="doctype-reference-entry/name"/>
-	<xsl:template match="doctype-reference-entry/build-property"/>
 
-	<!-- 
-		============================
-		format-restrictions template
-		============================
-	-->
-	<xsl:template name="format-restrictions">
-		<pe:labeled-item>
-			<pe:label>Restrictions</pe:label>
-			<pe:item>
-				<xsl:choose>
-					<!-- don't get fooled by an empty restriction element left over from the template -->
-					<xsl:when
-						test="not(normalize-space(string-join(restrictions/restriction/*,'')))">
-						<pe:p>None</pe:p>
-					</xsl:when>
-					<xsl:otherwise>
-						<pe:ul>
-							<xsl:for-each select="restrictions/restriction">
-								<pe:li>
-									<xsl:apply-templates/>
-								</pe:li>
-							</xsl:for-each>
-						</pe:ul>
-					</xsl:otherwise>
-				</xsl:choose>
-			</pe:item>
-		</pe:labeled-item>
-	</xsl:template>
+
 
 	<!-- 
 		=========================
@@ -437,7 +392,6 @@
 			</pe:item>
 		</pe:labeled-item>
 		<!-- restrictions -->
-		<xsl:call-template name="format-restrictions"/>
 	</xsl:template>
 
 
