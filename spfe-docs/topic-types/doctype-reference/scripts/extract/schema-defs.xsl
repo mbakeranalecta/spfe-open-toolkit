@@ -21,7 +21,7 @@
 	 This stylesheet creates a full xpath to every possible combination of elements and 
 	attributes. That is, it unfolds all types and references. An element or attribute that is 
 	defined once and used many times will appear as a separate element or attribute here,
-	distinguised from other instances by the full xpath of the place it is used. In other words,
+	distinguished from other instances by the full xpath of the place it is used. In other words,
 	the output of this stylesheet lists every context in which each element and attribute can
 	possibly occur. For simpleTypes, it just dumps the definitions.
 	 
@@ -41,6 +41,7 @@
 	<xsl:variable name="xsd-prefix" select="substring-before(name(xs:schema), local-name(xs:schema))"/> -->
 	
 	<xsl:param name="topic-set-id"/>
+	<xsl:output indent="yes"/>
 
 	<xsl:variable name="config" as="element(config:spfe)">
 		<xsl:sequence select="/config:spfe"/>
@@ -351,9 +352,41 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-	<!-- just pass on the path-so-far -->
+
 	<xsl:template match="xs:sequence">
 		<xsl:param name="path-so-far"/>
+		<schema-sequence>
+			<parent><xsl:value-of select="$path-so-far"/></parent>
+			<xsl:for-each select="child::*">
+				<child type="{name()}"><xsl:value-of select="if (@name) then @name else @ref"/></child>
+			</xsl:for-each>
+		</schema-sequence>
+		<xsl:apply-templates>
+			<xsl:with-param name="path-so-far" select="$path-so-far"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+	<xsl:template match="xs:choice">
+		<xsl:param name="path-so-far"/>
+		<schema-choice>
+			<parent><xsl:value-of select="$path-so-far"/></parent>
+			<xsl:for-each select="child::*">
+				<child type="{name()}"><xsl:value-of select="if (@name) then @name else @ref"/></child>
+			</xsl:for-each>
+		</schema-choice>
+		<xsl:apply-templates>
+			<xsl:with-param name="path-so-far" select="$path-so-far"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+	<xsl:template match="xs:all">
+		<xsl:param name="path-so-far"/>
+		<schema-all>
+			<parent><xsl:value-of select="$path-so-far"/></parent>
+			<xsl:for-each select="child::*">
+				<child type="{name()}"><xsl:value-of select="if (@name) then @name else @ref"/></child>
+			</xsl:for-each>
+		</schema-all>
 		<xsl:apply-templates>
 			<xsl:with-param name="path-so-far" select="$path-so-far"/>
 		</xsl:apply-templates>
