@@ -63,7 +63,7 @@ Main template
 			<xsl:variable name="current-doctype" select="@name"/>
 
 			<xsl:result-document method="xml" indent="yes" omit-xml-declaration="no"
-				href="file:///{$output-directory}/merge.xml">
+				href="file:///{$output-directory}/merge.{@name}.xml">
 				<cr:doctype-reference-entries>
 
 					<!-- Use for-each-group to filter out duplicate xpaths -->
@@ -209,6 +209,10 @@ Main content processing templates
 							<xsl:with-param name="xpath" select="$xpath"/>
 						</xsl:call-template>
 					</cr:children>
+					
+					<cr:model>
+						<xsl:sequence select="//schema-sequence[parent eq $xpath], //schema-choice[parent eq $xpath], //schema-all[parent eq $xpath]"/>
+					</cr:model>
 
 					<cr:attributes>
 						<xsl:for-each
