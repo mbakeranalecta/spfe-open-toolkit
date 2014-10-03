@@ -177,7 +177,7 @@
 			href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/extract/out/schema-defs.xml')}"
 			method="xml" indent="yes" omit-xml-declaration="no">
 
-			<schema-definitions namespace="{@targetNamespace}">
+			<schema-definitions>
 				<xsl:sequence select="$all-paths"/>
 			</schema-definitions>
 
@@ -305,6 +305,9 @@
 					<name>
 						<xsl:value-of select="@ref"/>
 					</name>
+					<namespace>
+						<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+					</namespace>
 				</schema-element>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -349,6 +352,9 @@
 			<referenced-group>
 				<xsl:value-of select="@ref"/>
 			</referenced-group>
+			<namespace>
+				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+			</namespace>
 			<xsl:choose>
 
 				<xsl:when test="starts-with($path-so-far, 'group#') and contains($path-so-far, '/')">
@@ -400,6 +406,9 @@
 			<name>
 				<xsl:value-of select="@name"/>
 			</name>
+			<namespace>
+				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+			</namespace>
 		</schema-group>
 		<xsl:apply-templates>
 			<xsl:with-param name="path-so-far" select="concat('group#',@name)"/>
@@ -477,6 +486,9 @@
 			<parent>
 				<xsl:value-of select="$path-to-record"/>
 			</parent>
+			<namespace>
+				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+			</namespace>
 			<xsl:for-each select="child::*">
 				<child type="{name()}">
 					<xsl:value-of select="if (@name) then @name else @ref"/>
@@ -496,6 +508,9 @@
 			<parent>
 				<xsl:value-of select="$path-to-record"/>
 			</parent>
+			<namespace>
+				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+			</namespace>
 			<xsl:for-each select="child::*">
 				<child type="{name()}">
 					<xsl:value-of select="if (@name) then @name else @ref"/>
@@ -515,6 +530,9 @@
 			<parent>
 				<xsl:value-of select="$path-so-far"/>
 			</parent>
+			<namespace>
+				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+			</namespace>
 			<xsl:for-each select="child::*">
 				<child type="{name()}">
 					<xsl:value-of select="if (@name) then @name else @ref"/>
@@ -551,6 +569,9 @@
 		</xsl:variable>
 		<xsl:text>&#xA;</xsl:text>
 		<schema-attribute>
+			<namespace>
+				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+			</namespace>
 			<xsl:choose>
 				<xsl:when test="starts-with($xpath, 'group#')">
 					<xpath>
