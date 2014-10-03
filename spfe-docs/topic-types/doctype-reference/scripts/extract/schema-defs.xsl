@@ -35,8 +35,6 @@
 	 recursion of XSLT takes care of the rest. Path is written out for each element and
 	attribute encountered.
 ===============================================================-->
-	<!-- get the namespace prefix used in the source  
-	<xsl:variable name="xsd-prefix" select="substring-before(name(xs:schema), local-name(xs:schema))"/> -->
 
 	<xsl:param name="topic-set-id"/>
 	<xsl:output method="xml" indent="yes"/>
@@ -133,7 +131,6 @@
 
 		<!-- get the definitions of all the types that are defined -->
 		<xsl:call-template name="get-type-definitions"/>
-		<xsl:text>&#xA;&#xA;</xsl:text>
 
 		<!-- get the names of all the base types that are used -->
 		<xsl:call-template name="get-base-type-references"/>
@@ -141,33 +138,27 @@
 	</xsl:variable>
 
 	<xsl:variable name="consolidated-paths">
-		<xsl:for-each select="$all-paths/schema-element">
-			<xsl:variable name="location" select="tokenize(xpath, '/')"/>
-			<xsl:choose>
-				<xsl:when test="not(true() = (for $x in $location return contains($x, '#')))">
-					<xsl:copy-of select="."/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:for-each select="$location[contains(., '#')]">
-						<xsl:variable name="type" select="tokenize(., '#')[1]"/>
-						<xsl:variable name="name" select="tokenize(., '#')[2]"/>
-						<xsl:choose>
-							<xsl:when test="$type = 'complexType'">
-								<xsl:choose>
-									<xsl:when
-										test="count($all-paths//schema-element[type=$name]) gt 1">
-										<!-- There are multiple instances of this type, so skip this extension. -->
-										<!-- But how to make sure it is included once? -->
-									</xsl:when>
-								</xsl:choose>
-							</xsl:when>
-							<xsl:otherwise> </xsl:otherwise>
-						</xsl:choose>
-					</xsl:for-each>
-				</xsl:otherwise>
-
-			</xsl:choose>
-		</xsl:for-each>
+		<xsl:for-each-group select="$all-paths/schema-element" group-by="concat(xpath,'+', namespace)">
+			<xsl:sequence select="."/>
+		</xsl:for-each-group>
+		<xsl:for-each-group select="$all-paths/schema-group-ref" group-by="concat(referenced-group, '+', namespace)">
+			<xsl:sequence select="."/>
+		</xsl:for-each-group>
+		<xsl:for-each-group select="$all-paths/schema-group" group-by="concat(xpath, '+', namespace)">
+			<xsl:sequence select="."/>
+		</xsl:for-each-group>
+		<xsl:for-each-group select="$all-paths/schema-sequence" group-by="concat(parent, '+', namespace)">
+			<xsl:sequence select="."/>
+		</xsl:for-each-group>
+		<xsl:for-each-group select="$all-paths/schema-choice" group-by="concat(parent, '+', namespace)">
+			<xsl:sequence select="."/>
+		</xsl:for-each-group>
+		<xsl:for-each-group select="$all-paths/schema-all" group-by="concat(parent, '+', namespace)">
+			<xsl:sequence select="."/>
+		</xsl:for-each-group>
+		<xsl:for-each-group select="$all-paths/schema-attribute" group-by="concat(xpath, '+', namespace)">
+			<xsl:sequence select="."/>
+		</xsl:for-each-group>
 	</xsl:variable>
 
 	<xsl:template name="main">
@@ -178,7 +169,7 @@
 			method="xml" indent="yes" omit-xml-declaration="no">
 
 			<schema-definitions>
-				<xsl:sequence select="$all-paths"/>
+				<xsl:sequence select="$consolidated-paths"/>
 			</schema-definitions>
 
 		</xsl:result-document>
@@ -209,7 +200,6 @@
 		<xsl:variable name="namespace" select="ancestor::xs:schema[1]/@targetNamespace"/>
 		<xsl:variable name="is-complexType" select="if ($combined-schemas//xs:complexType[@name eq $type]) then true() else false()" as="xs:boolean"/>
 		<xsl:variable name="times-used" select="count($combined-schemas//xs:element[(@type = $type) and (@name = $name)])"/>
-		<xsl:message select="string($name), ' ' , string($type), ' ' , $is-complexType, ' ' , $times-used"/>
 		<xsl:variable name="psf" select="concat($path-so-far, '/', $name)"/>
 		<xsl:variable name="path-to-record">
 			<xsl:choose>
@@ -425,11 +415,9 @@
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<xsl:variable name="name" select="@name"/>
-		<xsl:message select="$path-so-far"/>
 		<xsl:variable name="times-used" select="count($combined-schemas//xs:element[@type = $name])"/>
 		<!-- guard against recusion -->
 		<xsl:if test="not(tokenize($path-so-far, '/') = concat('complexType#',@name))">
-			<xsl:message select="@name"/>
 			<xsl:choose>
 				<!-- If the type is only used once, ignore and treat element as if defined inline. -->
 				<xsl:when test="$times-used gt 1">

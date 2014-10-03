@@ -72,16 +72,12 @@ Main content processing templates
 					<xsl:copy-of select="@*" copy-namespaces="no"/>
 					<xsl:apply-templates/>
 				</xsl:copy>
-					
-
 			</ss:topic>
 	</xsl:template>
 
 
 	<xsl:template match="doctype-reference-entries">
-
 			<xsl:apply-templates/>
-
 	</xsl:template>
 	
 	<!-- IdentityTransform -->

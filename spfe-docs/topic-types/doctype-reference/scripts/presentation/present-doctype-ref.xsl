@@ -34,7 +34,7 @@
 		<xsl:param name="consumed"/>
 		<xsl:param name="depth"/>
 		
-		<xsl:variable name="root-xpath" select="starts-with($xpath, '/')"></xsl:variable>
+		<xsl:variable name="root-xpath" select="starts-with($xpath, '/')"/>
 	
 		<xsl:variable name="xpath-segments" select="tokenize(if ($root-xpath) then substring($xpath,2) else $xpath, '/')"/>
 		<xsl:variable name="consumed-segments" select="tokenize(if (starts-with($consumed, '/')) then substring($consumed,2) else $consumed, '/')"/>
@@ -42,20 +42,6 @@
 		<!--check depth to make sure it does not run for ever if something else breaks -->
 		<xsl:if test="count($xpath-segments) gt count($consumed-segments) and not($depth>10)">
 
-			<!-- calculate this segment of the path 
-			<xsl:variable name="segment">
-				<xsl:choose>
-					<xsl:when
-						test="substring-before(substring($xpath, string-length($consumed)+2),'/')=''">
-						<xsl:value-of select="substring($xpath, string-length($consumed)+2)"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of
-							select="substring-before(substring($xpath, string-length($consumed)+2),'/')"
-						/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>-->
 			<xsl:variable name="segment" select="$xpath-segments[count($consumed-segments)+1]"/>
 			<!-- output this segment with link -->
 			<xsl:text>/</xsl:text>

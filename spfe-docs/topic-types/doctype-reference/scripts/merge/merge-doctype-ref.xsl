@@ -10,13 +10,11 @@
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:ed="http://spfeopentoolkit.org/ns/spfe-docs"
-	xmlns:cr="http://spfeopentoolkit.org/ns/spfe-docs"
-	exclude-result-prefixes="#all">
+	xmlns:cr="http://spfeopentoolkit.org/ns/spfe-docs" exclude-result-prefixes="#all">
 
 	<xsl:param name="topic-set-id"/>
 
-	<xsl:variable 
-		name="strings" 
+	<xsl:variable name="strings"
 		select="
 		$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
 		$config/config:doc-set/config:strings/config:string"
@@ -55,32 +53,23 @@ Main template
 -->
 
 	<xsl:template name="main">
-				
-		<!-- Create the schema element topic set -->
-		<xsl:for-each-group select="$doctypes/doctype" group-by="@name">
-			<!-- FIXME: Need a test for the root selection method using schema with more than one doc element. -->
-			<xsl:variable name="root" select=".[sf:index-of-shortest-string(@xpath)]/@xpath"/>
-			<xsl:variable name="current-doctype" select="@name"/>
 
-			<xsl:result-document method="xml" indent="yes" omit-xml-declaration="no"
-				href="file:///{$output-directory}/merge.{@name}.xml">
-				<cr:doctype-reference-entries>
+		<xsl:result-document method="xml" indent="yes" omit-xml-declaration="no"
+			href="file:///{$output-directory}/merge.xml">
+			<cr:doctype-reference-entries>
 
-					<!-- Use for-each-group to filter out duplicate xpaths -->
-					<xsl:for-each-group
-						select="$schema-defs/schema-definitions/schema-element[starts-with(xpath, $root) or belongs-to-group]"
-						group-by="xpath">
-						<xsl:apply-templates select=".">
-							<xsl:with-param name="source"
-								select="$doctype-source//ed:doctype-description"/>
-							<xsl:with-param name="current-doctype" select="$current-doctype"/>
-							<xsl:with-param name="in-scope-strings" select="$strings"
-								as="element()*" tunnel="yes"/>
-						</xsl:apply-templates>
-					</xsl:for-each-group>
-				</cr:doctype-reference-entries>
-			</xsl:result-document>
-		</xsl:for-each-group>
+				<!-- Use for-each-group to filter out duplicate xpaths -->
+				<xsl:for-each-group select="$schema-defs/schema-definitions/schema-element"
+					group-by="xpath">
+					<xsl:apply-templates select=".">
+						<xsl:with-param name="source"
+							select="$doctype-source//ed:doctype-description"/>
+						<xsl:with-param name="in-scope-strings" select="$strings" as="element()*"
+							tunnel="yes"/>
+					</xsl:apply-templates>
+				</xsl:for-each-group>
+			</cr:doctype-reference-entries>
+		</xsl:result-document>
 		<!-- Warn if there are any unmatched topics in the authored content. -->
 		<!-- FIXME: Should also search for unmatched attribute definitions. -->
 		<xsl:for-each select="$doctype-source//ed:doctype-description">
@@ -104,175 +93,184 @@ Main content processing templates
 	<!-- Schema element template -->
 	<xsl:template match="schema-element">
 		<xsl:param name="source"/>
-		<xsl:param name="current-doctype"/>
-
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="group" select="belongs-to-group"/>
+		<xsl:variable name="name" select="name"/>
 		<!-- determine the doctype by comparing the xpath of this element to the 
 			 xpath of each of the document root elements -->
 		<xsl:variable name="doctype"
 			select="$doctypes/doctype[starts-with($xpath, @xpath)][1]/@name"/>
-		<xsl:variable name="doc-xpath"
+		<!--		<xsl:variable name="doc-xpath"
 			select=" if ($doctype) 
 					 then concat('/',$doctype,  substring-after($xpath, $doctype))
-					 else $xpath"/>
+					 else $xpath"/>-->
 
 		<xsl:variable name="topic-type-alias"
 			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry', $config)"/>
 
-		<!-- is it this doctype or a group, but not clear we need this check again -->
+		<cr:doctype-reference-entry>
+			<cr:namespace>
+				<xsl:value-of select="ancestor::schema-definitions/@namespace"/>
+			</cr:namespace>
+			<cr:doctype>
+				<xsl:value-of select="$doctype"/>
+			</cr:doctype>
+			<xsl:choose>
+				<xsl:when test="xpath eq name">
+					<cr:parents>
+						<xsl:for-each
+							select="$schema-defs//schema-sequence[child=$name], $schema-defs//schema-choice[child=$name], $schema-defs//schema-all[child=$name]">
+							<cr:parent>
+								<xsl:value-of select="parent"/>
+							</cr:parent>
+						</xsl:for-each>
+					</cr:parents>
+				</xsl:when>
+				<xsl:otherwise>
+					<cr:parents>
+						<cr:parent>
+							<xsl:value-of select="string-join(tokenize($xpath, '/')[position() ne last()],'/')"></xsl:value-of>
+						</cr:parent>
+					</cr:parents>
+				</xsl:otherwise>
+			</xsl:choose>
+			<cr:xpath>
+				<xsl:value-of select="$xpath"/>
+			</cr:xpath>
+			<cr:group>
+				<xsl:value-of select="$group"/>
+			</cr:group>
 
-		<!-- FIXME: Should this be separated into a config specific script? -->
-		<xsl:if test="($current-doctype = $doctype) or not($doctype)">
+			<!-- Copy the extracted element info. -->
+			<cr:name>
+				<xsl:value-of select="name"/>
+			</cr:name>
+			<cr:type>
+				<xsl:value-of select="type"/>
+			</cr:type>
+			<cr:use>
+				<xsl:value-of select="use"/>
+			</cr:use>
+			<cr:default>
+				<xsl:value-of select="default"/>
+			</cr:default>
+			<cr:minOccurs>
+				<xsl:value-of select="minOccurs"/>
+			</cr:minOccurs>
+			<cr:maxOccurs>
+				<xsl:value-of select="maxOccurs"/>
+			</cr:maxOccurs>
 
-				<cr:doctype-reference-entry>
-						<cr:namespace>
-						<xsl:value-of select="ancestor::schema-definitions/@namespace"/>
-					</cr:namespace>
-					<cr:doctype>
-						<xsl:value-of select="$doctype"/>
-					</cr:doctype>
-					<cr:doc-xpath>
-						<xsl:value-of select="$doc-xpath"/>
-					</cr:doc-xpath>
-					<cr:xpath>
-						<xsl:value-of select="$xpath"/>
-					</cr:xpath>
-					<cr:group>
-						<xsl:value-of select="$group"/>
-					</cr:group>
+			<!-- Select and copy the authored element info. -->
+			<xsl:variable name="authored-content" select="$source[normalize-space(ed:xpath)=$xpath]"/>
+			<xsl:choose>
+				<xsl:when test="$authored-content[2]">
+					<xsl:call-template name="sf:error">
+						<xsl:with-param name="message"
+							select="'Duplicate doctype element description found for setting ', $xpath"
+						> </xsl:with-param>
+					</xsl:call-template>
+				</xsl:when>
+				<!-- Test that the information exists. -->
 
-					<!-- Copy the extracted element info. -->
-					<cr:name>
-						<xsl:value-of select="name"/>
-					</cr:name>
-					<cr:type>
-						<xsl:value-of select="type"/>
-					</cr:type>
-					<cr:use>
-						<xsl:value-of select="use"/>
-					</cr:use>
-					<cr:default>
-						<xsl:value-of select="default"/>
-					</cr:default>
-					<cr:minOccurs>
-						<xsl:value-of select="minOccurs"/>
-					</cr:minOccurs>
-					<cr:maxOccurs>
-						<xsl:value-of select="maxOccurs"/>
-					</cr:maxOccurs>
+				<xsl:when test="exists($authored-content/ed:description/*)">
+					<xsl:apply-templates
+						select="$authored-content/ed:description, $authored-content/ed:values, $authored-content/ed:restrictions, $authored-content/ed:build-property">
+						<xsl:with-param name="in-scope-strings" select="$strings" as="element()*"
+							tunnel="yes"/>
+					</xsl:apply-templates>
+				</xsl:when>
 
-					<!-- Select and copy the authored element info. -->
-					<xsl:variable name="authored-content"
-						select="$source[normalize-space(ed:xpath)=$xpath]"/>
-					<xsl:choose>
-						<xsl:when test="$authored-content[2]">
-							<xsl:call-template name="sf:error">
-								<xsl:with-param name="message"
-									select="'Duplicate doctype element description found for setting ', $xpath"
-								> </xsl:with-param>
-							</xsl:call-template>
-						</xsl:when>
-						<!-- Test that the information exists. -->
+				<xsl:otherwise>
+					<!-- If not found, report warning. -->
+					<xsl:call-template name="sf:warning">
+						<xsl:with-param name="message"
+							select="'Doctype element description not found ', string($xpath)"/>
+					</xsl:call-template>
+				</xsl:otherwise>
+			</xsl:choose>
 
-						<xsl:when test="exists($authored-content/ed:description/*)">
-							<xsl:apply-templates
-								select="$authored-content/ed:description, $authored-content/ed:values, $authored-content/ed:restrictions, $authored-content/ed:build-property">
-								<xsl:with-param name="in-scope-strings" select="$strings"
-									as="element()*" tunnel="yes"/>
-							</xsl:apply-templates>
-						</xsl:when>
-
-						<xsl:otherwise>
-							<!-- If not found, report warning. -->
-							<xsl:call-template name="sf:warning">
-								<xsl:with-param name="message"
-									select="'Doctype element description not found ', string($xpath)"/>
-							</xsl:call-template>
-						</xsl:otherwise>
-					</xsl:choose>
-
-					<!-- Calculate children -->
-					<cr:children>
-						<!-- children by xpath -->
-						<xsl:for-each-group
-							select="/schema-definitions/schema-element  
+			<!-- Calculate children -->
+			<cr:children>
+				<!-- children by xpath -->
+				<xsl:for-each-group
+					select="/schema-definitions/schema-element  
 							[starts-with(xpath, concat($xpath, '/'))]
 							[not(contains(substring(xpath,string-length($xpath)+2),'/'))]"
-							group-by="xpath">
-							<cr:child>
-								<xsl:value-of select="xpath"/>
-							</cr:child>
-						</xsl:for-each-group>
-						<!-- children by group -->
-						<xsl:call-template name="get-group-children">
-							<xsl:with-param name="xpath" select="$xpath"/>
-						</xsl:call-template>
-					</cr:children>
-					
-					<cr:model>
-						<xsl:sequence select="//schema-sequence[parent eq $xpath], //schema-choice[parent eq $xpath], //schema-all[parent eq $xpath]"/>
-					</cr:model>
+					group-by="xpath">
+					<cr:child>
+						<xsl:value-of select="xpath"/>
+					</cr:child>
+				</xsl:for-each-group>
+				<!-- children by group -->
+				<xsl:call-template name="get-group-children">
+					<xsl:with-param name="xpath" select="$xpath"/>
+				</xsl:call-template>
+			</cr:children>
 
-					<cr:attributes>
-						<xsl:for-each
-							select="root()/schema-definitions/schema-attribute[starts-with(xpath, concat($xpath, '/@'))]">
-							<attribute>
+			<cr:model>
+				<xsl:sequence
+					select="//schema-sequence[parent eq $xpath], //schema-choice[parent eq $xpath], //schema-all[parent eq $xpath]"
+				/>
+			</cr:model>
 
-								<!-- Copy the extracted element info. -->
-								<cr:name>
-									<xsl:value-of select="name"/>
-								</cr:name>
-								<cr:xpath>
-									<xsl:value-of select="xpath"/>
-								</cr:xpath>
-								<cr:type>
-									<xsl:value-of select="type"/>
-								</cr:type>
-								<cr:use>
-									<xsl:value-of select="use"/>
-								</cr:use>
-								<cr:default>
-									<xsl:value-of select="default"/>
-								</cr:default>
-								<cr:minOccurs>
-									<xsl:value-of select="minOccurs"/>
-								</cr:minOccurs>
-								<cr:maxOccurs>
-									<xsl:value-of select="maxOccurs"/>
-								</cr:maxOccurs>
+			<cr:attributes>
+				<xsl:for-each
+					select="root()/schema-definitions/schema-attribute[starts-with(xpath, concat($xpath, '/@'))]">
+					<attribute>
 
-								<xsl:variable name="attribute-name" select="name"/>
-								<cr:doc-xpath>
+						<!-- Copy the extracted element info. -->
+						<cr:name>
+							<xsl:value-of select="name"/>
+						</cr:name>
+						<cr:xpath>
+							<xsl:value-of select="xpath"/>
+						</cr:xpath>
+						<cr:type>
+							<xsl:value-of select="type"/>
+						</cr:type>
+						<cr:use>
+							<xsl:value-of select="use"/>
+						</cr:use>
+						<cr:default>
+							<xsl:value-of select="default"/>
+						</cr:default>
+						<cr:minOccurs>
+							<xsl:value-of select="minOccurs"/>
+						</cr:minOccurs>
+						<cr:maxOccurs>
+							<xsl:value-of select="maxOccurs"/>
+						</cr:maxOccurs>
+
+						<xsl:variable name="attribute-name" select="name"/>
+						<!--								<cr:doc-xpath>
 									<xsl:value-of select="concat($doc-xpath, '/@', $attribute-name)"
 									/>
-								</cr:doc-xpath>
-								<xsl:variable name="authored"
-									select="$source[normalize-space(ed:xpath)=$xpath]/ed:attributes/ed:attribute[ed:name=$attribute-name]"/>
-								<xsl:if test="not($authored/ed:description/*)">
-									<xsl:call-template name="sf:warning">
-										<xsl:with-param name="message"
-											select="'Doctype element description not found ', string(xpath)"
-										/>
-									</xsl:call-template>
-								</xsl:if>
-								<xsl:apply-templates select="$authored/*">
-									<xsl:with-param name="in-scope-strings" select="$strings"
-										as="element()*" tunnel="yes"/>
-								</xsl:apply-templates>
-							</attribute>
-						</xsl:for-each>
-					</cr:attributes>
-				</cr:doctype-reference-entry>
-		</xsl:if>
+								</cr:doc-xpath>-->
+						<xsl:variable name="authored"
+							select="$source[normalize-space(ed:xpath)=$xpath]/ed:attributes/ed:attribute[ed:name=$attribute-name]"/>
+						<xsl:if test="not($authored/ed:description/*)">
+							<xsl:call-template name="sf:warning">
+								<xsl:with-param name="message"
+									select="'Doctype element description not found ', string(xpath)"
+								/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:apply-templates select="$authored/*">
+							<xsl:with-param name="in-scope-strings" select="$strings"
+								as="element()*" tunnel="yes"/>
+						</xsl:apply-templates>
+					</attribute>
+				</xsl:for-each>
+			</cr:attributes>
+		</cr:doctype-reference-entry>
 	</xsl:template>
 
 	<xsl:template match="ed:doctype-description">
-			<xsl:apply-templates/>
-</xsl:template>
+		<xsl:apply-templates/>
+	</xsl:template>
 
-	<xsl:template
-		match="ed:*">
+	<xsl:template match="ed:*">
 		<xsl:element name="cr:{local-name()}" namespace="http://spfeopentoolkit.org/ns/spfe-docs">
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
