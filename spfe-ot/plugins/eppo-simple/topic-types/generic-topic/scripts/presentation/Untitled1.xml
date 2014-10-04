@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tree>
+    <branch>
+        <p>This is the root of the tree</p>
+        <branch>
+            <p>This is a main branch</p>
+        </branch>
+        <branch>
+            <p>This is a main branch</p>
+        </branch>
+        
+    </branch>
+</tree>
+
+<ul>
+    <li>
+        <p>This is the root of the tree</p>
+        <ul>
+            <li>
+                <content>This is a main branch</content>
+            </li>
+            <li>
+                <content>This is a main branch</content>
+            </li>            
+        </ul>
+     
+    </li>
+</ul>

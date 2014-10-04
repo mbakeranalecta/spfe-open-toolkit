@@ -38,7 +38,7 @@
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/subject-affinities.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/synthesis/annotations.xsl</href>
                 </script>
 
                 <script>
@@ -94,14 +94,14 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-topic-set-toc.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-functions.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-functions.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-affinity-templates.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-templates.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>

@@ -8,7 +8,9 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:lf="local-functions"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
-	xmlns:gr="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/graphic-record"
+	xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
+	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
 	exclude-result-prefixes="#all">
 	<xsl:output method="xml" indent="yes"/>
 
@@ -42,14 +44,9 @@
 				<meta http-equiv="Pragma" content="no-cache"/>
 				<meta http-equiv="expires" content="FRI, 13 APR 1999 01:00:00 GMT"/>
 			</xsl:if>
-			<xsl:for-each select="$config/config:format/config:html/config:css">
-				<link rel="STYLESHEET" href="{.}" type="text/css" media="all"/>
-			</xsl:for-each>
-			<xsl:for-each select="$config/config:format/config:html/config:java-script">
-				<script type="text/javascript" src="{.}">&#160;</script>
-			</xsl:for-each>
 
 			<link rel="stylesheet" type="text/css" href="style/eppo-simple.css"/>
+			<link rel="stylesheet" type="text/css" href="style/css-tree.css"/>
 		</head>
 	</xsl:function>
 
@@ -116,7 +113,7 @@
 				</xsl:choose>
 			</xsl:with-param>
 		</xsl:call-template>
-		<xsl:apply-templates select="$presentation/web/page"/>
+		<xsl:apply-templates select="$presentation/pages/page"/>
 		<xsl:call-template name="generate-graphics-list"/>
 	</xsl:template>
 
@@ -271,7 +268,7 @@
 	
 	<xsl:template name="generate-graphics-list">
 		<xsl:variable name="graphic-file-list" as="xs:string*">
-			<xsl:for-each select="$presentation/web/page//gr:graphic-record">	                                 
+			<xsl:for-each select="$presentation/pages/page//gr:graphic-record">	                                 
 				<xsl:variable name="available-preferred-formats">
 					<xsl:variable name="gr" select="."/>
 					<xsl:for-each select="$preferred-formats">
@@ -292,6 +289,19 @@
 
 		</xsl:result-document>
 	</xsl:template>
+	
+	<xsl:template match="byline">
+		<p>
+			<i><xsl:value-of select="by-label"/></i>
+			<xsl:apply-templates/>
+		</p>
+	</xsl:template>
+	
+	<xsl:template match="byline/authors">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template match="by-label"/>
 	
 
 	<xsl:template match="gr:*"/>
@@ -332,20 +342,6 @@
 		<h3>
 			<xsl:apply-templates/>
 		</h3>
-	</xsl:template>
-
-	<xsl:template match="qa/title">
-		<h2>
-			<xsl:apply-templates/>
-		</h2>
-	</xsl:template>
-
-	<xsl:template match="qa/question">
-		<xsl:apply-templates/>
-	</xsl:template>
-
-	<xsl:template match="qa/answer">
-		<xsl:apply-templates/>
 	</xsl:template>
 
 	<xsl:template match="procedure/title">
@@ -532,20 +528,33 @@
 
 	<!-- LISTS -->
 
-	<xsl:template match="ul|ol|li">
-		<!-- Note that we can't use xsl:copy here as that creates a
-	     copy in the same namespace as the source. Here we need 
-			 to create an element of the same name but in the XHTML 
-			 namespace. xsl:element creates elements in the default
-			 namespace declared in xsl:stylesheet. -->
-		<xsl:element name="{name()}">
+	<xsl:template match="ul">
+		<ul>
 			<xsl:if test="@hint">
 				<xsl:attribute name="class" select="@hint"/>
 			</xsl:if>
 			<xsl:apply-templates/>
-		</xsl:element>
+		</ul>
 	</xsl:template>
-
+	
+	<xsl:template match="ol">
+		<ol>
+			<xsl:if test="@hint">
+				<xsl:attribute name="class" select="@hint"/>
+			</xsl:if>
+			<xsl:apply-templates/>
+		</ol>
+	</xsl:template>
+	
+	<xsl:template match="li">
+		<li>
+			<xsl:if test="@hint">
+				<xsl:attribute name="class" select="@hint"/>
+			</xsl:if>
+			<xsl:apply-templates/>
+		</li>
+	</xsl:template>
+	
 
 	<xsl:template match="author-note ">
 		<xsl:variable name="my-page" select="ancestor::page"/>
@@ -681,11 +690,40 @@
 
 	<xsl:template match="tool-tip">
 		<xsl:variable name="class" select="if (@class) then @class else 'default'"/>
-		<xsl:element name="a">
-			<xsl:attribute name="class" select="$class"/>
-			<xsl:attribute name="title" select="@title"/>
+		<a class="{$class}" title="{@title}">
 			<xsl:apply-templates/>
-		</xsl:element>
+		</a>
+	</xsl:template>
+	
+	<xsl:template match="context-nav">
+		<p>
+			<xsl:apply-templates select="home"/>   
+			| 
+			<xsl:for-each select="breadcrumbs/breadcrumb">
+				<xsl:apply-templates select="."/>
+				<xsl:if test="position() ne last()"> > </xsl:if>
+			</xsl:for-each>
+		</p>
+	</xsl:template>
+	
+	<xsl:template match="context-nav/home">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template match="context-nav/breadcrumbs/breadcrumb">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template match="page/toc">
+		<ul class="page-toc">
+			<xsl:apply-templates/>
+		</ul>
+	</xsl:template>
+	
+	<xsl:template match="page/toc/toc-entry">
+		<li>
+			<xsl:apply-templates/>
+		</li>
 	</xsl:template>
 
 	<xsl:template match="cross-ref">
@@ -781,10 +819,47 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<xsl:template match="qa">
+	<!-- TREES -->
+	
+	<xsl:template match="tree[@class='toc']">
+		<ol class="tree">
+			<xsl:apply-templates/>
+		</ol>
+	</xsl:template>
+	
+	<xsl:template match="tree//branch">
+		<li>
+			<xsl:choose>
+				<xsl:when test="branch">
+					<label for="{generate-id()}">
+						<xsl:if test="not(content/xref)">
+							<xsl:attribute name="class">folder</xsl:attribute>
+						</xsl:if>
+						<xsl:apply-templates select="content"/>
+					</label> 
+					<input type="checkbox" id="{generate-id()}" >
+						<!-- FIXME: How should we handle class="fixed"?-->
+						<xsl:if test="@state='open'">
+							<xsl:attribute name="checked"/>
+						</xsl:if>
+					</input> 				
+					<ol>			
+						<xsl:apply-templates select="branch"/>
+					</ol>				
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:attribute name="class">file</xsl:attribute>
+					<xsl:apply-templates select="content"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</li>
+	</xsl:template>
+	
+	<xsl:template match="tree//branch/content">
 		<xsl:apply-templates/>
 	</xsl:template>
-
+	
+	
 	<xsl:template match="*" >
 		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">

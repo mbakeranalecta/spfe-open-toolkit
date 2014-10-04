@@ -62,20 +62,20 @@
     <xs:group name="p-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>
-            <xs:group ref="subject-affinities"/>
+            <xs:group ref="subjects"/>
             <xs:group ref="resources"/>
             <xs:group ref="substitutions"/>
         </xs:choice>
     </xs:group>
 
 
-    <xs:group name="subject-affinities">
+    <xs:group name="subjects">
         <xs:choice>
-            <!-- <xs:group ref="subject-affinities-xml"/>-->
-            <xs:group ref="subject-affinities-xslt"/>
-            <xs:group ref="subject-affinities-general"/>
-            <xs:group ref="subject-affinities-spfe-build"/>
-            <xs:group ref="subject-affinities-xml"/>
+            <!-- <xs:group ref="annotations-xml"/>-->
+            <xs:group ref="annotations-xslt"/>
+            <xs:group ref="annotations-general"/>
+            <xs:group ref="annotations-spfe-build"/>
+            <xs:group ref="annotations-xml"/>
         </xs:choice>
     </xs:group>
 

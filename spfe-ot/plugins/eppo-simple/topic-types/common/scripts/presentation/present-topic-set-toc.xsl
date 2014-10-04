@@ -5,6 +5,7 @@
     xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
+    xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
     xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
     exclude-result-prefixes="#all">
     
@@ -61,7 +62,7 @@
             <xsl:when test="$config/config:doc-set/config:topic-sets">
                 <xsl:call-template name="sf:warning">
                     <xsl:with-param name="message">
-                        <!-- FIXME: Should test for the two conditions subject-affinityed below. -->
+                        <!-- FIXME: Should test for the two conditions subjected below. -->
                         <xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/doc-set configuration setting. External TOC files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
                     </xsl:with-param>
                 </xsl:call-template>
@@ -90,40 +91,34 @@
         
         <xsl:variable name="topic-set-title" select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 
-        <page status="generated" name="{$topic-set-id}-toc">
+        <pe:page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
-            <title><xsl:value-of select="$topic-set-title"></xsl:value-of></title>        
+            <pe:title><xsl:value-of select="$topic-set-title"></xsl:value-of></pe:title>        
             <xsl:apply-templates select="$toc"/>
             <xsl:call-template name="show-footer"/>		
-        </page>
+        </pe:page>
     </xsl:template>
     
     <xsl:template match="toc[@topic-set-id=$topic-set-id]">
-        <ul>
+        <pe:tree class="toc">
          <xsl:apply-templates/>
-        </ul> 
+        </pe:tree> 
     </xsl:template>
     <xsl:template match="toc"/>
     
     <xsl:template match="node[@topic-type]">
-        <!-- FIXME: title may not be the right markup here, or may need explicit handling at format stage -->
-        <li>
-          <title><xsl:value-of select="@name"/></title>
-          <ul>
+        <!-- FIXME: subhead may not be the right markup here, or may need explicit handling at format stage -->
+        <pe:branch state="open">
+            <pe:content><xsl:value-of select="@name"/></pe:content>
               <xsl:apply-templates/>
-          </ul>
-        </li>
+        </pe:branch>
     </xsl:template>
     
     <xsl:template match="node">
-        <li>
-            <p><xref target="{normalize-space(@id)}.html"><xsl:value-of select="@name"/></xref></p>
-            <xsl:if test="node">
-                <ul>
-                    <xsl:apply-templates/>
-                </ul>
-            </xsl:if>
-        </li>
+        <pe:branch state="open">
+            <pe:content><pe:xref target="{normalize-space(@id)}.html"><xsl:value-of select="@name"/></pe:xref></pe:content>
+               <xsl:apply-templates/>
+        </pe:branch>
     </xsl:template>
     
 </xsl:stylesheet>

@@ -6,6 +6,7 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs"
 	exclude-result-prefixes="#all">
@@ -24,14 +25,14 @@
 		<xsl:variable name="display-name" select="name/text()"/>
 
 		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
-		<page type="API" name="{name}">
+		<pe:page type="API" name="{name}">
 
 
 			<xsl:call-template name="show-header"/>
-			<title>Function: <xsl:value-of select="$display-name"/></title>
+			<pe:title>Function: <xsl:value-of select="$display-name"/></pe:title>
 
-			<p>
-				<bold>
+			<pe:p>
+				<pe:bold>
 					<xsl:value-of select="$display-name"/>
 					<xsl:text>(</xsl:text>
 					<xsl:for-each select="parameters/parameter">
@@ -42,57 +43,57 @@
 					</xsl:for-each>
 					<xsl:text>) as </xsl:text>
 					<xsl:value-of select="return-value/type"/>
-				</bold>
-			</p>
-			<labeled-item>
-				<label>Description</label>
-				<item>
+				</pe:bold>
+			</pe:p>
+			<pe:labeled-item>
+				<pe:label>Description</pe:label>
+				<pe:item>
 					<xsl:if test="not(description)">
-						<p/>
+						<pe:p/>
 					</xsl:if>
 					<xsl:apply-templates select="description"/>
-				</item>
-			</labeled-item>
+				</pe:item>
+			</pe:labeled-item>
 
-			<labeled-item>
-				<label>Return value</label>
-				<item>
-					<p>Return type: <xsl:value-of select="return-value/type"/></p>
+			<pe:labeled-item>
+				<pe:label>Return value</pe:label>
+				<pe:item>
+					<pe:p>Return type: <xsl:value-of select="return-value/type"/></pe:p>
 					<xsl:apply-templates select="return-value/description"/>
-				</item>
-			</labeled-item>
+				</pe:item>
+			</pe:labeled-item>
 
-			<labeled-item>
-				<label>Source file</label>
-				<item>
-					<p>
+			<pe:labeled-item>
+				<pe:label>Source file</pe:label>
+				<pe:item>
+					<pe:p>
 						<xsl:value-of select="source-file"/>
-					</p>
-				</item>
-			</labeled-item>
+					</pe:p>
+				</pe:item>
+			</pe:labeled-item>
 
-			<subhead>Parameters</subhead>
+			<pe:subhead>Parameters</pe:subhead>
 			<xsl:for-each select="parameters/parameter">
-				<labeled-item>
-					<label>
+				<pe:labeled-item>
+					<pe:label>
 						<xsl:value-of select="name"/>
-					</label>
-					<item>
-						<p>Type: <xsl:value-of select="type"/></p>
+					</pe:label>
+					<pe:item>
+						<pe:p>Type: <xsl:value-of select="type"/></pe:p>
 						<xsl:apply-templates select="description"/>
-					</item>
-				</labeled-item>
+					</pe:item>
+				</pe:labeled-item>
 			</xsl:for-each>
 
-			<subhead>Definition</subhead>
+			<pe:subhead>Definition</pe:subhead>
 			<xsl:for-each select="definition">
-				<codeblock language="XSLT">
+				<pe:codeblock language="XSLT">
     			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
     			<xsl:apply-templates select="*"/>
-    		</codeblock>
+    		</pe:codeblock>
 			</xsl:for-each>
 			<xsl:call-template name="show-footer"/>
-		</page>
+		</pe:page>
 	</xsl:template>
 
 	<xsl:template match="description">
@@ -110,51 +111,51 @@
 
 		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
 		<!-- FIXME: Is the page type attribute used for anything? Should it be? -->
-		<page type="API" name="{name}">
+		<pe:page type="API" name="{name}">
 			<xsl:call-template name="show-header"/>
-			<title>Template: <xsl:value-of select="$display-name"/></title>
+			<pe:title>Template: <xsl:value-of select="$display-name"/></pe:title>
 
-			<labeled-item>
-				<label>Description</label>
-				<item>
+			<pe:labeled-item>
+				<pe:label>Description</pe:label>
+					<pe:item>
 					<xsl:if test="not(description)">
-						<p/>
+						<pe:p/>
 					</xsl:if>
 					<xsl:apply-templates select="description"/>
-				</item>
-			</labeled-item>
+				</pe:item>
+			</pe:labeled-item>
 
-			<labeled-item>
-				<label>Source file</label>
-				<item>
-					<p>
+			<pe:labeled-item>
+				<pe:label>Source file</pe:label>
+				<pe:item>
+					<pe:p>
 						<xsl:value-of select="source-file"/>
-					</p>
-				</item>
-			</labeled-item>
+					</pe:p>
+				</pe:item>
+			</pe:labeled-item>
 
-			<subhead>Parameters</subhead>
+			<pe:subhead>Parameters</pe:subhead>
 			<xsl:for-each select="parameters/parameter">
-				<labeled-item>
-					<label>
+				<pe:labeled-item>
+					<pe:label>
 						<xsl:value-of select="name"/>
-					</label>
-					<item>
-						<p>Type: <xsl:value-of select="type"/></p>
+					</pe:label>
+					<pe:item>
+						<pe:p>Type: <xsl:value-of select="type"/></pe:p>
 						<xsl:apply-templates select="description"/>
-					</item>
-				</labeled-item>
+					</pe:item>
+				</pe:labeled-item>
 			</xsl:for-each>
 
-			<subhead>Definition</subhead>
+			<pe:subhead>Definition</pe:subhead>
 			<xsl:for-each select="definition">
-				<codeblock language="XSLT">
+				<pe:codeblock language="XSLT">
     			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
     			<xsl:apply-templates select="*"/>
-    		</codeblock>
+    		</pe:codeblock>
 			</xsl:for-each>
 			<xsl:call-template name="show-footer"/>
-		</page>
+		</pe:page>
 	</xsl:template>
 
 	<!-- Add links to code samples -->

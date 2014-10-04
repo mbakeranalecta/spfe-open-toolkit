@@ -5,6 +5,7 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xmlns:lf="local-functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
 	exclude-result-prefixes="#all"
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple">
 
@@ -21,35 +22,35 @@
 		<xsl:variable name="name" select="name"/>
 
 		<!-- info -->
-		<page type="list" name="{ancestor::ss:topic/@local-name}">
+		<pe:page type="list" name="{ancestor::ss:topic/@local-name}">
 			<xsl:call-template name="show-header"/>
-			<title>
+			<pe:title>
 				<xsl:value-of select="parent::ss:topic/@title"/>
-			</title>
+			</pe:title>
 
 
-		<p>
-			<xsl:value-of select="parent::ss:topic/@excerpt"/>
-		</p>
-		<xsl:for-each select="topics-on-subject/topic">
-			<labeled-item>
-				<label>
-					<xsl:call-template name="output-link">
-						<xsl:with-param name="target" select="full-name"/>
-						<xsl:with-param name="type">topic</xsl:with-param>
-						<xsl:with-param name="content">
-							<xsl:value-of select="topic-type-alias"/>: <xsl:value-of select="title"/>
-						</xsl:with-param>
-						<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
-					</xsl:call-template>
-				</label>
-
-				<item>
-					<p><xsl:value-of select="excerpt"></xsl:value-of></p>
-				</item>
-			</labeled-item>
-		</xsl:for-each>
+			<pe:p>
+				<xsl:value-of select="parent::ss:topic/@excerpt"/>
+			</pe:p>
+			<xsl:for-each select="topics-on-subject/topic">
+				<pe:labeled-item>
+					<pe:label>
+						<xsl:call-template name="output-link">
+							<xsl:with-param name="target" select="full-name"/>
+							<xsl:with-param name="type">topic</xsl:with-param>
+							<xsl:with-param name="content">
+								<xsl:value-of select="topic-type-alias"/>: <xsl:value-of select="title"/>
+							</xsl:with-param>
+							<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+						</xsl:call-template>
+					</pe:label>
+	
+					<pe:item>
+						<pe:p><xsl:value-of select="excerpt"></xsl:value-of></pe:p>
+					</pe:item>
+				</pe:labeled-item>
+			</xsl:for-each>
 			<xsl:call-template name="show-footer"/>
-		</page>
+		</pe:page>
 	</xsl:template>
 </xsl:stylesheet>

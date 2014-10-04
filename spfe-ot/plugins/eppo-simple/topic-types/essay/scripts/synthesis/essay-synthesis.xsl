@@ -37,6 +37,17 @@ exclude-result-prefixes="#all">
 
 	</xsl:template>
 	
+	<xsl:template match="byline/author-name">
+		<name>
+			<xsl:attribute name="type">author</xsl:attribute>
+			<xsl:attribute name="key" select="normalize-space(.)"/>
+			<xsl:if test="@namespace">
+				<xsl:attribute name="namespace" select="@namespace"/> 
+			</xsl:if>
+			<xsl:apply-templates/>
+		</name>
+	</xsl:template>
+	
 
 </xsl:stylesheet>
 

@@ -104,17 +104,6 @@
 
 
 
-	<macrodef name="get.externals.style.html">
-		<attribute name="output"/>
-		<sequential>
-			<mkdir dir="@{output}/style"/>
-			<copy todir="@{output}/style" preservelastmodified="true" flatten="false"
-				failonerror="true">
-				<resources refid="spfe.style.html-style-directories"/>
-			</copy>
-		</sequential>
-	</macrodef>
-
 	
 	<!-- PDF -->
 
@@ -186,12 +175,6 @@
 					<param name="draft" expression="${draft}" if="draft"/>
 				</params>
 			</saxon-xslt>
-
-			<!--<!-\- validate the output file -\->
-			<xmlvalidate lenient="yes" file="${temp}/${files.extracted-content}">
-				<!-\- make the validation include namespaces -\->
-				<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
-			</xmlvalidate>-->
 		</sequential>
 	</macrodef>
 
@@ -377,6 +360,16 @@
 					<param name="toc-files" expression="${toc-files-list}"/>
 				</params>
 			</saxon-xslt>
+			
+			<!-- validate the output file -->
+			<echo>Validating presentation files for @{topic-set-id}.</echo>
+			<xmlvalidate lenient="no">
+				<fileset dir="@{output-directory}" includes="**/*.xml"/>
+				<xmlcatalog refid="spfe-catalogs"/>
+				<!-- make the validation include namespaces -->
+				<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
+				<attribute name="http://apache.org/xml/features/validation/schema" value="true"/>
+			</xmlvalidate>
 		</sequential>
 	</macrodef>
 
@@ -390,23 +383,21 @@
 
 	<target name="-build.format" depends="-build.presentation, --build.format"/>
 	<macrodef name="build.format">
-		<!--		depends="
-	        	 -get.externals.style.html,
-  				 -current.format"
-		unless="-current.format">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<attribute name="input-directory"/>
 		<attribute name="output-directory"/>
+		<element name="files-elements"/>
 		<sequential>
-			<!--<property name="temp" value="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/temp"/>-->
-<!--			<get.externals.graphics.html topic-set-id="@{topic-set-id}" output="@{output}"/>
-			<get.externals.style.html output="@{output}"/>
--->						
 			<local name="presentation-files"/>
 			<local name="presentation-files-list"/>
 			<local name="files.images.html"/>
+			<local name="files.html.support-files"/>
+			<local name="support-files"/>
 			<local name="echo-files"/>
+			<files-elements/>
+			<pathconvert dirsep="/" pathsep=";" property="support-files"
+				refid="files.html.support-files"/>
 			<fileset dir="@{input-directory}" id="presentation-file-list">
 				<include name="*.xml"/>
 			</fileset>
@@ -428,7 +419,7 @@
 			<!-- Need the excludes="*" because otherwise an empty incluesfile means copy everything -->
 			<files id="files.images.html"
 				includesfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/image-list.txt" excludes="*"/>
-			
+	
 			<mkdir dir="${spfe.build.output-directory}/@{output-directory}images"/>
 			<copy todir="${spfe.build.output-directory}/@{output-directory}images" flatten="true" failonerror="false"
 				preservelastmodified="true" verbose="true">
@@ -436,8 +427,10 @@
 			</copy>
 			
 			<!-- copy the support files (css, scripts, etc.) to the output directory -->
-			<mkdir dir="${spfe.build.output-directory}/@{output-directory}style"/>			
-			<copy todir="${spfe.build.output-directory}/@{output-directory}style" flatten="true" failonerror="false"
+			<mkdir dir="${spfe.build.output-directory}/@{output-directory}style"/>		
+			<!-- FIXME: the copy has to use flatten, because the files element contains absolute paths which do not copy as desired.
+			            Should maybe switch to filesets, but that has issues at config level. -->
+			<copy todir="${spfe.build.output-directory}/@{output-directory}style"  flatten="true" failonerror="false"
 				preservelastmodified="true" verbose="true">
 				<files refid="files.html.support-files"/>
 			</copy>

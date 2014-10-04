@@ -7,27 +7,27 @@
     version="2.0">
     
     <xsl:template match="p/task | string/task">
-        <subject-affinity>
+        <subject>
             <xsl:attribute name="type">task</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
             <xsl:apply-templates/>
-        </subject-affinity>
+        </subject>
     </xsl:template>
     
     <xsl:template match="p/term | string/term">
-        <subject-affinity>
+        <subject>
             <xsl:attribute name="type">term</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
             <xsl:apply-templates/>
-        </subject-affinity>
+        </subject>
     </xsl:template>
     
     <xsl:template match="p/feature | string/feature">
-        <subject-affinity>
+        <subject>
             <xsl:attribute name="type">feature</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
             <xsl:apply-templates/>
-        </subject-affinity>
+        </subject>
     </xsl:template>
 
     <xsl:template match="p/xml-element-name | string/xml-element-name">

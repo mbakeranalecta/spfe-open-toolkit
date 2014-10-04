@@ -6,7 +6,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:re="http://spfeopentoolkit.org/ns/spfe-docs" exclude-result-prefixes="#all"
-	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs">
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs">
 
 
 	<!--================================================
@@ -110,9 +110,9 @@
 					</xsl:if>
 				</xsl:variable>
 
-				<xref target="{$href}" title="Link to: {$target}">
+				<pe:xref target="{$href}" title="Link to: {$target}">
 					<xsl:value-of select="$link-text"/>
-				</xref>
+				</pe:xref>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -129,141 +129,141 @@
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
 
-		<page type="API" name="{translate(xpath, '/:', '__')}">
+		<pe:page type="API" name="{translate(xpath, '/:', '__')}">
 			<xsl:call-template name="show-header"/>
-			<title>Element: <xsl:value-of select="$name"/></title>
+			<pe:title>Element: <xsl:value-of select="$name"/></pe:title>
 
-			<labeled-item>
-				<label>Location</label>
-				<item>
-					<p>
+			<pe:labeled-item>
+				<pe:label>Location</pe:label>
+				<pe:item>
+					<pe:p>
 						<xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/>
-					</p>
-				</item>
-			</labeled-item>
+					</pe:p>
+				</pe:item>
+			</pe:labeled-item>
 
-			<labeled-item>
-				<label>Description</label>
-				<item>
+			<pe:labeled-item>
+				<pe:label>Description</pe:label>
+				<pe:item>
 					<xsl:if test="not(description)">
-						<p/>
+						<pe:p/>
 					</xsl:if>
 					<xsl:apply-templates select="description"/>
-				</item>
-			</labeled-item>
+				</pe:item>
+			</pe:labeled-item>
 
-			<labeled-item>
-				<label>Use</label>
+			<pe:labeled-item>
+				<pe:label>Use</pe:label>
 				<!-- FIXME: need a more sophisticated reading of schema groups 
 				     to define usage more accurately-->
-				<item>
-					<p>
+				<pe:item>
+					<pe:p>
 						<xsl:choose>
 							<xsl:when test="minOccurs='0' or group='choice'">Optional</xsl:when>
 							<xsl:otherwise>Required</xsl:otherwise>
 						</xsl:choose>
 						<xsl:if test="maxOccurs='unbounded'">, unbounded</xsl:if>
-					</p>
-				</item>
-			</labeled-item>
+					</pe:p>
+				</pe:item>
+			</pe:labeled-item>
 
-			<labeled-item>
-				<label>Name in build file</label>
-				<item>
-					<p>
+			<pe:labeled-item>
+				<pe:label>Name in build file</pe:label>
+				<pe:item>
+					<pe:p>
 						<xsl:choose>
 							<xsl:when test="normalize-space(build-property) ne ''">
 								<xsl:value-of select="build-property"/>
 							</xsl:when>
 							<xsl:otherwise>Not used in the build file.</xsl:otherwise>
 						</xsl:choose>
-					</p>
-				</item>
-			</labeled-item>
+					</pe:p>
+				</pe:item>
+			</pe:labeled-item>
 
-			<labeled-item>
-				<label>Default</label>
-				<item>
+			<pe:labeled-item>
+				<pe:label>Default</pe:label>
+				<pe:item>
 
 					<xsl:choose>
 						<xsl:when test="not(values/default)">
-							<p>None</p>
+							<pe:p>None</pe:p>
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:apply-templates select="values/default"/>
 						</xsl:otherwise>
 					</xsl:choose>
 
-				</item>
-			</labeled-item>
+				</pe:item>
+			</pe:labeled-item>
 
 			<!-- Special -->
-			<labeled-item>
-				<label>Values</label>
-				<item>
+			<pe:labeled-item>
+				<pe:label>Values</pe:label>
+				<pe:item>
 					<xsl:choose>
 						<xsl:when test="values/value">
 							<xsl:for-each select="values/value">
 								<xsl:sort select="."/>
 								<!-- FIXME: this is a hork that will not handle all text-group cases. Need to change to subheads for main headings to use labelled-item here. -->
-								<p>
-									<value hint="attribute-value">
+								<pe:p>
+									<pe:value hint="attribute-value">
 										<xsl:value-of select="."/>
-									</value>
+									</pe:value>
 									<xsl:text>: </xsl:text>
 									<xsl:apply-templates
 										select="following-sibling::description[1]/p[1]/node()"/>
-								</p>
+								</pe:p>
 								<xsl:apply-templates
 									select="following-sibling::description[1]/p[preceding-sibling::p]"
 								/>
 							</xsl:for-each>
 						</xsl:when>
 						<xsl:otherwise>
-							<p>N/A</p>
+							<pe:p>N/A</pe:p>
 						</xsl:otherwise>
 					</xsl:choose>
-				</item>
-			</labeled-item>
+				</pe:item>
+			</pe:labeled-item>
 
-			<labeled-item>
-				<label>Children</label>
-				<item>
+			<pe:labeled-item>
+				<pe:label>Children</pe:label>
+				<pe:item>
 					<xsl:if test="not(children/*)">
-						<p>None</p>
+						<pe:p>None</pe:p>
 					</xsl:if>
 					<xsl:for-each select="children/child">
 						<xsl:sort select="."/>
 						<xsl:variable name="child-xpath" select="."/>
-						<p>
-							<name hint="element-name">
+						<pe:p>
+							<pe:name hint="element-name">
 								<xsl:sequence
 									select="lf:link-xpath($child-xpath,//spfe-configuration-reference-entry[xpath eq $child-xpath]/name)"
 								/>
-							</name>
-						</p>
+							</pe:name>
+						</pe:p>
 					</xsl:for-each>
-				</item>
-			</labeled-item>
+				</pe:item>
+			</pe:labeled-item>
 
-			<labeled-item>
-				<label>Attributes</label>
-				<item>
+			<pe:labeled-item>
+				<pe:label>Attributes</pe:label>
+				<pe:item>
 					<xsl:if test="not(attributes/attribute)">
-						<p>None</p>
+						<pe:p>None</pe:p>
 					</xsl:if>
 					<xsl:for-each select="attributes/attribute">
 						<xsl:sort select="name"/>
-						<p>
-							<name hint="attribute-name">
-								<xref target="#{name}">
+						<pe:p>
+							<pe:name hint="attribute-name">
+								<pe:xref target="#{name}">
 									<xsl:value-of select="name"/>
-								</xref>
-							</name>
-						</p>
+								</pe:xref>
+							</pe:name>
+						</pe:p>
 					</xsl:for-each>
-				</item>
-			</labeled-item>
+				</pe:item>
+			</pe:labeled-item>
 
 			<!-- restrictions -->
 			<xsl:call-template name="format-restrictions"/>
@@ -274,7 +274,7 @@
 				<xsl:call-template name="format-attribute"/>
 			</xsl:for-each>
 			<xsl:call-template name="show-footer"/>
-		</page>
+		</pe:page>
 	</xsl:template>
 
 	<xsl:template match="description">
@@ -283,9 +283,9 @@
 
 	<!-- FIXME: redundant ? -->
 	<xsl:template match="xpath">
-		<name hint="xpath">
+		<pe:name hint="xpath">
 			<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
-		</name>
+		</pe:name>
 	</xsl:template>
 
 	<!-- FIXME: Some redundant element names here -->
@@ -303,27 +303,27 @@
 		============================
 	-->
 	<xsl:template name="format-restrictions">
-		<labeled-item>
-			<label>Restrictions</label>
-			<item>
+		<pe:labeled-item>
+			<pe:label>Restrictions</pe:label>
+			<pe:item>
 				<xsl:choose>
 					<!-- don't get fooled by an empty restriction element left over from the template -->
 					<xsl:when
 						test="not(normalize-space(string-join(restrictions/restriction/*,'')))">
-						<p>None</p>
+						<pe:p>None</pe:p>
 					</xsl:when>
 					<xsl:otherwise>
-						<ul>
+						<pe:ul>
 							<xsl:for-each select="restrictions/restriction">
-								<li>
+								<pe:li>
 									<xsl:apply-templates/>
-								</li>
+								</pe:li>
 							</xsl:for-each>
-						</ul>
+						</pe:ul>
 					</xsl:otherwise>
 				</xsl:choose>
-			</item>
-		</labeled-item>
+			</pe:item>
+		</pe:labeled-item>
 	</xsl:template>
 
 	<!-- 
@@ -333,99 +333,99 @@
 	-->
 	<xsl:template name="format-attribute">
 		<xsl:message>Calling format attribute for <xsl:value-of select="name"/></xsl:message>
-		<anchor name="{name}"/>
-		<subhead>Attribute: <xsl:value-of select="name"/></subhead>
+		<pe:anchor name="{name}"/>
+		<pe:subhead>Attribute: <xsl:value-of select="name"/></pe:subhead>
 
-		<labeled-item>
-			<label>XPath</label>
-			<item>
-				<p>
+		<pe:labeled-item>
+			<pe:label>XPath</pe:label>
+			<pe:item>
+				<pe:p>
 					<xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/>
-				</p>
-			</item>
-		</labeled-item>
+				</pe:p>
+			</pe:item>
+		</pe:labeled-item>
 
 
 		<!-- description -->
-		<labeled-item>
-			<label>Description</label>
-			<item>
+		<pe:labeled-item>
+			<pe:label>Description</pe:label>
+			<pe:item>
 				<!-- no <p> because description contains <p>, but add p if no description -->
 				<xsl:if test="not(description)">
-					<p/>
+					<pe:p/>
 				</xsl:if>
 				<xsl:apply-templates select="description"/>
-			</item>
-		</labeled-item>
+			</pe:item>
+		</pe:labeled-item>
 
 		<!-- Use -->
-		<labeled-item>
-			<label>Use</label>
-			<item>
-				<p>
+		<pe:labeled-item>
+			<pe:label>Use</pe:label>
+			<pe:item>
+				<pe:p>
 					<xsl:choose>
 						<xsl:when test="use = 'required'">Required</xsl:when>
 						<xsl:otherwise>Optional</xsl:otherwise>
 					</xsl:choose>
-				</p>
-			</item>
-		</labeled-item>
+				</pe:p>
+			</pe:item>
+		</pe:labeled-item>
 
 		<!-- XML data type -->
 		<xsl:variable name="type" select="type"/>
-		<labeled-item>
-			<label>XML data type</label>
-			<item>
-				<p>
+		<pe:labeled-item>
+			<pe:label>XML data type</pe:label>
+			<pe:item>
+				<pe:p>
 					<xsl:value-of select="$type"/>
-				</p>
-			</item>
-		</labeled-item>
+				</pe:p>
+			</pe:item>
+		</pe:labeled-item>
 
 		<!-- not specified -->
-		<labeled-item>
-			<label>Behavior if not specified</label>
-			<item>
+		<pe:labeled-item>
+			<pe:label>Behavior if not specified</pe:label>
+			<pe:item>
 
 				<xsl:choose>
 					<xsl:when test="not(values/default)">
-						<p>N/A</p>
+						<pe:p>N/A</pe:p>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:apply-templates select="values/default"/>
 					</xsl:otherwise>
 				</xsl:choose>
 
-			</item>
-		</labeled-item>
+			</pe:item>
+		</pe:labeled-item>
 
 		<!-- Special -->
-		<labeled-item>
-			<label>Values with special meanings</label>
-			<item>
+		<pe:labeled-item>
+			<pe:label>Values with special meanings</pe:label>
+			<pe:item>
 				<xsl:choose>
 					<xsl:when test="values/value">
 						<xsl:for-each select="values/value">
 							<xsl:sort select="."/>
 							<!-- FIXME: this is a hork that will not handle all text-group cases. Need to change to subheads for main headings to use labelled-item here. -->
-							<p>
-								<value hint="attribute-value">
+							<pe:p>
+								<pe:value hint="attribute-value">
 									<xsl:value-of select="."/>
-								</value>
+								</pe:value>
 								<xsl:text>: </xsl:text>
 								<xsl:apply-templates
 									select="following-sibling::description[1]/p[1]/node()"/>
-							</p>
+							</pe:p>
 							<xsl:apply-templates
 								select="following-sibling::description[1]/p[preceding-sibling::p]"/>
 						</xsl:for-each>
 					</xsl:when>
 					<xsl:otherwise>
-						<p>None</p>
+						<pe:p>None</pe:p>
 					</xsl:otherwise>
 				</xsl:choose>
-			</item>
-		</labeled-item>
+			</pe:item>
+		</pe:labeled-item>
 		<!-- restrictions -->
 		<xsl:call-template name="format-restrictions"/>
 	</xsl:template>

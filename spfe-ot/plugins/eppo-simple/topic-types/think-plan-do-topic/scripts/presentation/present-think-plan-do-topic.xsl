@@ -9,76 +9,66 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	exclude-result-prefixes="#all">
 	
 	<!-- topic -->
 	<xsl:template match="es:think-plan-do-topic">
-		<xsl:choose>
-			<xsl:when test="$media='online'"> 
-				<page status="{es:head/es:history/es:revision[last()]/es:status}" name="{ancestor::ss:topic/@local-name}">
-					<xsl:call-template name="show-header"/>
-					<xsl:apply-templates /> 
-					<xsl:call-template name="show-footer"/>		
-				</page>
-			</xsl:when>
-			<xsl:when test="$media='paper'">
-				<chapter status="{es:head/es:tracking/es:status}" name="{es:name}">
-					<xsl:apply-templates/>
-				</chapter>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="sf:error">
-					<xsl:with-param name="message" select="'Unknown media specified: ', $media"/>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
+		<pe:page status="{es:head/es:history/es:revision[last()]/es:status}" name="{ancestor::ss:topic/@local-name}">
+			<xsl:call-template name="show-header"/>
+			<xsl:apply-templates /> 
+			<xsl:call-template name="show-footer"/>		
+		</pe:page>
 	</xsl:template>
 	
 	<xsl:template match="es:think-plan-do-topic/es:head"/>
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:title">
-		<title>
+		<xsl:variable name="title" select="."></xsl:variable>
+		<pe:title>
 			<xsl:apply-templates/>
-		</title>
+		</pe:title>
 		<!-- page toc -->
-		<ul>
-			<li><xref target="#Think">Think</xref></li>
-			<li><xref target="#Plan">Plan</xref></li>
-			<li><xref target="#Do">Do</xref></li>
-		</ul>
+		<pe:toc>
+			<pe:toc-entry><pe:xref target="#Think">Understanding <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
+			<pe:toc-entry><pe:xref target="#Plan">Planning <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
+			<pe:toc-entry><pe:xref target="#Do">Doing <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
+		</pe:toc>
 		
 	</xsl:template>
 	
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning/es:planning-question">
 		<xsl:if test="$config/config:build-command='draft' or sf:has-content(es:planning-question-title/following-sibling::*) ">
-			<qa>
-				<anchor name="{sf:title-to-anchor(es:planning-question-title)}"/>
+			<pe:labeled-item>
+				<pe:anchor name="{sf:title-to-anchor(es:planning-question-title)}"/>
 				<xsl:apply-templates/>
-			</qa>
+			</pe:labeled-item>
 		</xsl:if>	
 	</xsl:template>
 	
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning/es:planning-question/es:planning-question-title">	
-		<title>
+		<pe:label>
 			<xsl:apply-templates/>
-		</title>
+		</pe:label>
 	</xsl:template>
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:understanding">	
-		<anchor name="Think"/>
-		<title>Think</title>
+		<pe:section>
+			<pe:anchor name="Think"/>
+			<pe:title>Understanding <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
 			<xsl:apply-templates/>
-		
+		</pe:section>
 	</xsl:template>
 	
-	<xsl:template match="es:think-plan-do-topic/es:body/es:planning">	
-		<anchor name="Plan"/>
-		<title>Plan</title>
+	<xsl:template match="es:think-plan-do-topic/es:body/es:planning">
+		<pe:section>
+			<pe:anchor name="Plan"/>
+			<pe:title>Planning <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
 			<xsl:apply-templates/>
-		
+		</pe:section>
 	</xsl:template>
 	
 <!--	<xsl:template match="es:planning-question">
@@ -86,14 +76,17 @@
 	</xsl:template>-->
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning/es:planning-question/es:planning-question-body">
+		<pe:item>
 			<xsl:apply-templates/>
+		</pe:item>
 	</xsl:template>
 	
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:doing">	
-		<anchor name="Do"/>
-		<title>Do</title>
+		<pe:section>
+			<pe:anchor name="Do"/>
+			<pe:title>Doing <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
 			<xsl:apply-templates/>
-		
+		</pe:section>
 	</xsl:template>	
 </xsl:stylesheet>
