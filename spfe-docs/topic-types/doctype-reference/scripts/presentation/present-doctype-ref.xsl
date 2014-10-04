@@ -133,10 +133,24 @@
 				<pe:label>Location</pe:label>
 				<pe:item>
 					<pe:p>
-						<xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/>
+						<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
 					</pe:p>
 				</pe:item>
 			</pe:labeled-item>
+			
+			<xsl:if test="parents/parent">
+				<pe:labeled-item>
+					<pe:label><xsl:value-of select="if (parents/parent[2]) then 'Parents' else 'Parent'"/></pe:label>
+					<pe:item>
+						<xsl:for-each select="parents/parent">
+							<pe:p>
+								<xsl:sequence select="lf:link-xpath-segments(.)"/>
+							</pe:p>
+						</xsl:for-each>
+					</pe:item>
+				</pe:labeled-item>
+			</xsl:if>
+			
 
 			<pe:labeled-item>
 				<pe:label>Description</pe:label>

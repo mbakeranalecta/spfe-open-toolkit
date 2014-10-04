@@ -77,15 +77,15 @@ Main content processing templates
 
 
 	<xsl:template match="doctype-reference-entries">
-			<xsl:apply-templates/>
+		<xsl:apply-templates/>
 	</xsl:template>
 	
 	<!-- IdentityTransform -->
- <xsl:template match="@* | node()">
+ 	<xsl:template match="@* | node()">
       <xsl:copy>
              <xsl:apply-templates select="@* | node()" />
          </xsl:copy>
- </xsl:template>
+ 	</xsl:template>
 	
 	<!-- Avoid xpath being matched by subject affinity markup rules. -->
 	<xsl:template match="doctype-reference-entry/xpath">

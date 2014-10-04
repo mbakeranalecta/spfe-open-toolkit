@@ -115,6 +115,9 @@ Main content processing templates
 			<cr:doctype>
 				<xsl:value-of select="$doctype"/>
 			</cr:doctype>
+			<cr:location>
+				<xsl:value-of select="xpath"></xsl:value-of>
+			</cr:location>
 			<xsl:choose>
 				<xsl:when test="xpath eq name">
 					<cr:parents>
