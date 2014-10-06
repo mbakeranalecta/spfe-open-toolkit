@@ -247,6 +247,11 @@ Main content processing templates
 									<xsl:value-of select="$child"/>
 								</cr:child>
 							</xsl:when>
+							<xsl:when test="@child-namespace ne parent::*/namespace">
+								<cr:child required="{$required}" count="{$count}" child-namespace="{@child-namespace}">
+									<xsl:value-of select="$child"/>
+								</cr:child>								
+							</xsl:when>
 							<xsl:otherwise>
 								<xsl:call-template name="sf:error">
 									<xsl:with-param name="message">

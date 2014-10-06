@@ -215,7 +215,7 @@
 		<xsl:param name="path-to-record"/>
 		<xsl:variable name="type" select="@type"/>
 		<xsl:variable name="name" select="@name"/>
-		<xsl:variable name="namespace" select="ancestor::xs:schema[1]/@targetNamespace"/>
+		<xsl:variable name="namespace" select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 		<xsl:variable name="times-used" select="count($combined-schemas//xs:element[(@type = $type) and (@name = $name)])"/>
 		<xsl:variable name="psf" select="concat($path-so-far, '/', $name)"/>
 		<xsl:variable name="parent-group" select="substring-after(tokenize($path-so-far, '/')[last()], 'group#')"/>
@@ -303,25 +303,29 @@
 				<xsl:with-param name="path-to-record" select="$path-to-record"/>
 			</xsl:apply-templates>
 		</xsl:variable>
-		<xsl:choose>
-			<xsl:when test="$referenced-element > ''">
-				<xsl:copy-of select="$referenced-element"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:variable name="element-name" select="concat($path-to-record, '/', @ref)"/>
-				<schema-element doc-element="false">
-					<xpath>
-						<xsl:value-of select="$element-name"/>
-					</xpath>
-					<name>
-						<xsl:value-of select="@ref"/>
-					</name>
-					<namespace>
-						<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
-					</namespace>
-				</schema-element>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:variable name="namespace" select="namespace-uri-for-prefix(substring-before(@ref, ':'), .)"/>
+		<xsl:variable name="namespace-of-root" select="namespace-uri-for-prefix(substring-before(/*, ':'), .)"/>
+		<xsl:if test="$namespace-of-root eq $namespace">
+			<xsl:choose>
+				<xsl:when test="$referenced-element > ''">
+					<xsl:copy-of select="$referenced-element"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:variable name="element-name" select="concat($path-to-record, '/', @ref)"/>
+					<schema-element doc-element="false">
+						<xpath>
+							<xsl:value-of select="$element-name"/>
+						</xpath>
+						<name>
+							<xsl:value-of select="@ref"/>
+						</name>
+						<namespace>
+							<xsl:value-of select="$namespace"/>
+						</namespace>
+					</schema-element>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 
 	<!-- attribute definitions that have references -->
@@ -364,7 +368,7 @@
 				<xsl:value-of select="@ref"/>
 			</referenced-group>
 			<namespace>
-				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</namespace>
 			<xsl:choose>
 
@@ -418,7 +422,7 @@
 				<xsl:value-of select="@name"/>
 			</name>
 			<namespace>
-				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</namespace>
 		</schema-group>
 		<xsl:apply-templates>
@@ -497,10 +501,10 @@
 				<xsl:value-of select="$path-to-record"/>
 			</parent>
 			<namespace>
-				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</namespace>
 			<xsl:for-each select="child::*">
-				<child child-type="{name()}" >
+				<child child-type="{name()}" child-namespace="{namespace-uri-for-prefix(substring-before(if (@name) then @name else @ref, ':'), .)}">
 					<xsl:copy-of select="@*"/>
 <!--					<xsl:if test="@type">
 						<xsl:attribute name="type" select="@type"/>
@@ -524,7 +528,7 @@
 				<xsl:value-of select="$path-to-record"/>
 			</parent>
 			<namespace>
-				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</namespace>
 			<xsl:for-each select="child::*">
 				<child child-type="{name()}">
@@ -551,7 +555,7 @@
 				<xsl:value-of select="$path-so-far"/>
 			</parent>
 			<namespace>
-				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</namespace>
 			<xsl:for-each select="child::*">
 				<child child-type="{name()}">
@@ -594,7 +598,7 @@
 		<xsl:text>&#xA;</xsl:text>
 		<schema-attribute>
 			<namespace>
-				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
+				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</namespace>
 			<xsl:choose>
 				<xsl:when test="starts-with($xpath, 'group#')">
@@ -639,7 +643,6 @@
 		<xsl:param name="namespace"/>
 
 		<schema-element doc-element="{if (parent::xs:schema) then 'true' else 'false'}">
-			<xsl:message select="'$path-so-far', $path-so-far"></xsl:message>
 			<xsl:choose>
 
 				<xsl:when test="starts-with($path-so-far, 'group#')">
@@ -666,7 +669,7 @@
 				<xsl:value-of select="@name"/>
 			</name>
 			<namespace>
-				<xsl:value-of select="$namespace"></xsl:value-of>
+				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</namespace>
 			<type>
 				<xsl:value-of select="substring-after(@type, $target-prefix)"/>

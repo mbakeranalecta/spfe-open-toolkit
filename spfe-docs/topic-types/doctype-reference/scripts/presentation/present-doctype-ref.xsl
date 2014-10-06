@@ -5,8 +5,11 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xmlns:lf="local-functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:re="http://spfeopentoolkit.org/ns/spfe-docs" exclude-result-prefixes="#all"
-	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs">
+	xmlns:re="http://spfeopentoolkit.org/ns/spfe-docs"
+	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple" exclude-result-prefixes="#all"
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"	
+	xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
+	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs">
 
 <xsl:output indent="yes" method="xml"/>
 
@@ -201,9 +204,30 @@
 						<xsl:variable name="child-xpath" select="."/>
 						<pe:p>
 							<pe:name hint="element-name">
-								<xsl:sequence
-									select="lf:link-xpath($child-xpath,//doctype-reference-entry[xpath eq $child-xpath]/name)"
-								/>
+								<xsl:choose>
+									<xsl:when test="@child-namespace">
+										<xsl:choose>
+											<xsl:when test="esf:target-exists($child-xpath, 'element-name')">
+												<xsl:call-template name="output-link">
+													<xsl:with-param name="target" select="$child-xpath"/>
+													<xsl:with-param name="type" select="'element-name'"/>
+													<xsl:with-param name="content" select="$child-xpath"/>
+													<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+												</xsl:call-template>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:call-template name="sf:subject-not-resolved">
+													<xsl:with-param name="message" select="concat('element-name &quot;', $child-xpath, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/> 
+												</xsl:call-template>
+												<xsl:value-of select="$child-xpath"/>								
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:sequence
+											select="lf:link-xpath($child-xpath,//doctype-reference-entry[xpath eq $child-xpath]/name)"/>
+									</xsl:otherwise>
+								</xsl:choose>
 							</pe:name>
 							<xsl:text> (</xsl:text>
 							<xsl:value-of select="if (@required='yes') then 'required' else 'optional'"/>
