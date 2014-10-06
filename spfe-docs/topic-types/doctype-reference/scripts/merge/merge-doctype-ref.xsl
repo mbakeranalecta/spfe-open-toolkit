@@ -110,14 +110,11 @@ Main content processing templates
 
 		<cr:doctype-reference-entry>
 			<cr:namespace>
-				<xsl:value-of select="ancestor::schema-definitions/@namespace"/>
+				<xsl:value-of select="namespace"/>
 			</cr:namespace>
 			<cr:doctype>
 				<xsl:value-of select="$doctype"/>
 			</cr:doctype>
-			<cr:location>
-				<xsl:value-of select="xpath"></xsl:value-of>
-			</cr:location>
 			<xsl:choose>
 				<xsl:when test="xpath eq name">
 					<cr:parents>
@@ -157,12 +154,6 @@ Main content processing templates
 			<cr:default>
 				<xsl:value-of select="default"/>
 			</cr:default>
-			<cr:minOccurs>
-				<xsl:value-of select="minOccurs"/>
-			</cr:minOccurs>
-			<cr:maxOccurs>
-				<xsl:value-of select="maxOccurs"/>
-			</cr:maxOccurs>
 
 			<!-- Select and copy the authored element info. -->
 			<xsl:variable name="authored-content" select="$source[normalize-space(ed:xpath)=$xpath]"/>
@@ -194,8 +185,8 @@ Main content processing templates
 			</xsl:choose>
 
 			<!-- Calculate children -->
-			<cr:children>
-				<!-- children by xpath -->
+<!--			<cr:children>
+				<!-\- children by xpath -\->
 				<xsl:for-each-group
 					select="/schema-definitions/schema-element  
 							[starts-with(xpath, concat($xpath, '/'))]
@@ -205,22 +196,75 @@ Main content processing templates
 						<xsl:value-of select="xpath"/>
 					</cr:child>
 				</xsl:for-each-group>
-				<!-- children by group -->
+				<!-\- children by group -\->
 				<xsl:call-template name="get-group-children">
 					<xsl:with-param name="xpath" select="$xpath"/>
 				</xsl:call-template>
-			</cr:children>
+			</cr:children>-->
 
 			<cr:model>
 				<xsl:sequence
-					select="//schema-sequence[parent eq $xpath], //schema-choice[parent eq $xpath], //schema-all[parent eq $xpath]"
+					select="$schema-defs//schema-sequence[parent eq $xpath], //schema-choice[parent eq $xpath], //schema-all[parent eq $xpath]"
 				/>
 			</cr:model>
+			
+			<cr:children>
+				<xsl:for-each 
+					select="$schema-defs//schema-sequence[parent eq $xpath], //schema-choice[parent eq $xpath], //schema-all[parent eq $xpath]">
+					<xsl:for-each select="child[@child-type='xs:element']">
+						<xsl:variable name="child" select="."/>
+						<xsl:variable name="child-xpath" select="concat($xpath, '/', $child)"/>
+						<xsl:variable name="required">
+							<xsl:choose>
+								<xsl:when test="parent::schema-choice">no</xsl:when>
+								<xsl:when test="@minOccurs='0'">no</xsl:when>
+								<xsl:otherwise>yes</xsl:otherwise>
+							</xsl:choose>
+						</xsl:variable>
+						<xsl:variable name="count">
+							<!-- FIXME: cosider cases of schema-sequence and combinations of parent and child maxOccurs value -->
+							<xsl:choose>
+								<xsl:when test="parent::schema-choice/@maxOccurs">
+									<xsl:value-of select="parent::schema-choice/@maxOccurs"/>
+								</xsl:when>
+								<xsl:when test="parent::schema-all/@maxOccurs">
+									<xsl:value-of select="parent::schema-all/@maxOccurs"/>
+								</xsl:when>
+								<xsl:when test="@maxOccurs">
+									<xsl:value-of select="@maxOccurs"/>
+								</xsl:when>
+								<xsl:otherwise>1</xsl:otherwise>
+							</xsl:choose>
+						</xsl:variable>
+						<xsl:choose>
+							<xsl:when test="$schema-defs//schema-element[xpath eq $child-xpath]">
+								<cr:child required="{$required}" count="{$count}">
+									<xsl:value-of select="concat($xpath, '/', .)"/>
+								</cr:child>
+							</xsl:when>
+							<xsl:when test="$schema-defs//schema-element[xpath eq $child]">
+								<cr:child required="{$required}" count="{$count}">
+									<xsl:value-of select="$child"/>
+								</cr:child>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:call-template name="sf:error">
+									<xsl:with-param name="message">
+										<xsl:text>Unable to locate element definition for element child </xsl:text>
+										<xsl:value-of select="$child"/>
+										<xsl:text>.</xsl:text>
+									</xsl:with-param>
+								</xsl:call-template>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:for-each>
+				</xsl:for-each>
+			</cr:children>
 
 			<cr:attributes>
 				<xsl:for-each
-					select="root()/schema-definitions/schema-attribute[starts-with(xpath, concat($xpath, '/@'))]">
-					<attribute>
+					select="$schema-defs//schema-attribute[starts-with(xpath, concat($xpath, '/@'))]">
+					<cr:attribute>
 
 						<!-- Copy the extracted element info. -->
 						<cr:name>
@@ -263,7 +307,7 @@ Main content processing templates
 							<xsl:with-param name="in-scope-strings" select="$strings"
 								as="element()*" tunnel="yes"/>
 						</xsl:apply-templates>
-					</attribute>
+					</cr:attribute>
 				</xsl:for-each>
 			</cr:attributes>
 		</cr:doctype-reference-entry>
@@ -285,11 +329,11 @@ Main content processing templates
 
 	<xsl:template name="get-group-children">
 		<xsl:param name="xpath"/>
-		<xsl:for-each select="/schema-definitions/schema-group-ref[referenced-in-xpath eq $xpath]">
+		<xsl:for-each select="/schema-definitions/schema-group-ref[referenced-in-xpath = $xpath]">
 			<xsl:variable name="referenced-group" select="referenced-group"/>
 			<!-- each element that is in the group and has only one step in its path (so not the children of the element at the group level -->
 			<xsl:for-each-group
-				select="/schema-definitions/schema-element[belongs-to-group eq $referenced-group][not(contains(xpath, '/'))]"
+				select="/schema-definitions/schema-element[belongs-to-group = $referenced-group][not(contains(xpath, '/'))]"
 				group-by="xpath">
 				<cr:child>
 					<xsl:value-of select="xpath"/>

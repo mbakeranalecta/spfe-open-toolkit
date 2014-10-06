@@ -8,6 +8,7 @@
 	xmlns:re="http://spfeopentoolkit.org/ns/spfe-docs" exclude-result-prefixes="#all"
 	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs">
 
+<xsl:output indent="yes" method="xml"/>
 
 	<!--================================================
 	link-xpath-segments function
@@ -16,47 +17,33 @@
 	to the element named in each segment.
 	===================================================-->
 	<xsl:function name="lf:link-xpath-segments">
-		<xsl:param name="xpath"/>
-		<xsl:sequence select="lf:link-xpath-segments($xpath, '', 1)"/>
-	</xsl:function>
-
-	<xsl:function name="lf:link-doc-xpath">
-		<xsl:param name="doc-xpath"/>
-		<!--find the source-->
-		<xsl:variable name="xpath"
-			select="$synthesis//doctype-reference-entry[doc-xpath=$doc-xpath]/xpath, $synthesis//doctype-reference-entry/attributes/attribute[doc-xpath=$doc-xpath]/xpath"/>
-		<xsl:variable name="consumed" select="substring-before($xpath,$doc-xpath)"/>
-		<xsl:sequence select="lf:link-xpath-segments($xpath, $consumed, 1)"/>
+		<xsl:param name="xpath" as="xs:string"/>
+		<xsl:sequence select="lf:link-xpath-segments($xpath, '')"/>
 	</xsl:function>
 
 	<xsl:function name="lf:link-xpath-segments">
 		<xsl:param name="xpath"/>
 		<xsl:param name="consumed"/>
-		<xsl:param name="depth"/>
-		
-		<xsl:variable name="root-xpath" select="starts-with($xpath, '/')"/>
+		<xsl:if test="$consumed ne $xpath">
+		<xsl:variable name="is-root-xpath" select="starts-with($xpath, '/')"/>
 	
-		<xsl:variable name="xpath-segments" select="tokenize(if ($root-xpath) then substring($xpath,2) else $xpath, '/')"/>
+		<xsl:variable name="xpath-segments" select="tokenize(if ($is-root-xpath) then substring($xpath,2) else $xpath, '/')"/>
 		<xsl:variable name="consumed-segments" select="tokenize(if (starts-with($consumed, '/')) then substring($consumed,2) else $consumed, '/')"/>
+		<xsl:variable name="segment" select="$xpath-segments[count($consumed-segments)+1]"/>
 		
-		<!--check depth to make sure it does not run for ever if something else breaks -->
-		<xsl:if test="count($xpath-segments) gt count($consumed-segments) and not($depth>10)">
-
-			<xsl:variable name="segment" select="$xpath-segments[count($consumed-segments)+1]"/>
-			<!-- output this segment with link -->
-			<xsl:text>/</xsl:text>
+		<!-- output this segment with link -->
+			<xsl:if test="not($consumed='' and not($is-root-xpath))">/</xsl:if>
 			<!-- call the link template -->
 			<xsl:sequence select="lf:link-xpath(
 				concat(
-					if($root-xpath) then '/' else '',
+					if($is-root-xpath) then '/' else '',
 					string-join($xpath-segments[position() le count($consumed-segments)+1], '/')
 				),
 				$segment)"/>
 			<!-- recursive call -->
-			<xsl:sequence
-				select="lf:link-xpath-segments($xpath, concat($consumed, '/', $segment), $depth+1)"
-			/>
-		</xsl:if>
+			
+				<xsl:sequence select="lf:link-xpath-segments($xpath, concat($consumed, if($consumed='' and not($is-root-xpath)) then '' else '/', $segment))"/>
+			</xsl:if>
 	</xsl:function>
 
 
@@ -130,26 +117,11 @@
 			<pe:title>Element: <xsl:value-of select="$name"/></pe:title>
 
 			<pe:labeled-item>
-				<pe:label>Location</pe:label>
+				<pe:label>Namespace</pe:label>
 				<pe:item>
-					<pe:p>
-						<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
-					</pe:p>
+					<pe:p><xsl:value-of select="namespace"/></pe:p>
 				</pe:item>
 			</pe:labeled-item>
-			
-			<xsl:if test="parents/parent">
-				<pe:labeled-item>
-					<pe:label><xsl:value-of select="if (parents/parent[2]) then 'Parents' else 'Parent'"/></pe:label>
-					<pe:item>
-						<xsl:for-each select="parents/parent">
-							<pe:p>
-								<xsl:sequence select="lf:link-xpath-segments(.)"/>
-							</pe:p>
-						</xsl:for-each>
-					</pe:item>
-				</pe:labeled-item>
-			</xsl:if>
 			
 
 			<pe:labeled-item>
@@ -159,21 +131,6 @@
 						<pe:p/>
 					</xsl:if>
 					<xsl:apply-templates select="description"/>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:labeled-item>
-				<pe:label>Use</pe:label>
-				<!-- FIXME: need a more sophisticated reading of schema groups 
-				     to define usage more accurately-->
-				<pe:item>
-					<pe:p>
-						<xsl:choose>
-							<xsl:when test="minOccurs='0' or group='choice'">Optional</xsl:when>
-							<xsl:otherwise>Required</xsl:otherwise>
-						</xsl:choose>
-						<xsl:if test="maxOccurs='unbounded'">, unbounded</xsl:if>
-					</pe:p>
 				</pe:item>
 			</pe:labeled-item>
 
@@ -221,7 +178,18 @@
 					</xsl:choose>
 				</pe:item>
 			</pe:labeled-item>
-
+			<xsl:if test="parents/parent[1]/text() ne ''">
+				<pe:labeled-item>
+					<pe:label><xsl:value-of select="if (parents/parent[2]) then 'Parents' else 'Parent'"/></pe:label>
+					<pe:item>
+						<xsl:for-each select="parents/parent">
+							<pe:p>
+								<xsl:sequence select="lf:link-xpath-segments(.)"/>
+							</pe:p>
+						</xsl:for-each>
+					</pe:item>
+				</pe:labeled-item>
+			</xsl:if>
 			<pe:labeled-item>
 				<pe:label>Children</pe:label>
 				<pe:item>
@@ -237,6 +205,11 @@
 									select="lf:link-xpath($child-xpath,//doctype-reference-entry[xpath eq $child-xpath]/name)"
 								/>
 							</pe:name>
+							<xsl:text> (</xsl:text>
+							<xsl:value-of select="if (@required='yes') then 'required' else 'optional'"/>
+							<xsl:text> x </xsl:text>
+							<xsl:value-of select="@count"/>
+							<xsl:text>)</xsl:text>
 						</pe:p>
 					</xsl:for-each>
 				</pe:item>
@@ -282,7 +255,7 @@
 	</xsl:template>
 
 	<!-- FIXME: Some redundant element names here -->
-	<xsl:template match="required-by|verified-by|location|default|special|precis">
+	<xsl:template match="required-by|verified-by|default|special|precis">
 		<xsl:apply-templates/>
 	</xsl:template>
 
@@ -297,7 +270,6 @@
 		=========================
 	-->
 	<xsl:template name="format-attribute">
-		<xsl:message>Calling format attribute for <xsl:value-of select="name"/></xsl:message>
 		<pe:anchor name="{name}"/>
 		<pe:subhead>Attribute: <xsl:value-of select="name"/></pe:subhead>
 
@@ -305,7 +277,7 @@
 			<pe:label>XPath</pe:label>
 			<pe:item>
 				<pe:p>
-					<xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/>
+					<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
 				</pe:p>
 			</pe:item>
 		</pe:labeled-item>

@@ -39,7 +39,7 @@ Main template
 =============
 -->
 <xsl:template name="main">
-	<xsl:result-document href="file:///{$output-directory}/presentation.xml" method="xml" indent="no" omit-xml-declaration="no" >
+	<xsl:result-document href="file:///{$output-directory}/presentation.xml" method="xml" indent="yes" omit-xml-declaration="no" >
 		
 		
 		

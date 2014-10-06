@@ -24,7 +24,6 @@
     <xsl:template name="make-doctype-toc">
         <xsl:param name="level"/>
         <xsl:param name="items"/>
-        <xsl:message select="$level, ' ' , count($items)"></xsl:message>
         
         <xsl:for-each-group select="$items[sf:path-depth(re:xpath)=$level]" group-by="re:xpath">
             <xsl:variable name="xpath" select="re:xpath"/>

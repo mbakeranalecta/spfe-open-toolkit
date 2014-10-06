@@ -77,9 +77,9 @@
 	<xsl:template match="xs:include" mode="combine-schemas">
 		<xsl:apply-templates select="document(@schemaLocation)" mode="combine-schemas"/>
 	</xsl:template>
-	<xsl:template match="xs:import" mode="combine-schemas">
+<!--	<xsl:template match="xs:import" mode="combine-schemas">
 		<xsl:apply-templates select="document(@schemaLocation)" mode="combine-schemas"/>
-	</xsl:template>
+	</xsl:template>-->
 
 	<xsl:template match="xs:*" mode="combine-schemas" priority="-1">
 		<xsl:copy>
@@ -139,10 +139,27 @@
 
 	<xsl:variable name="consolidated-paths">
 		<xsl:for-each-group select="$all-paths/schema-element" group-by="concat(xpath,'+', namespace)">
-			<xsl:sequence select="."/>
+			<xsl:copy>
+				<xsl:copy-of select="name"/>
+				<xsl:copy-of select="xpath"/>
+				<xsl:for-each-group select="current-group()" group-by="belongs-to-group">
+					<xsl:copy-of select="belongs-to-group"/>
+				</xsl:for-each-group>
+				<xsl:copy-of select="namespace"/>
+				<xsl:copy-of select="type"/>
+				<xsl:copy-of select="minOccurs"/>
+				<xsl:copy-of select="maxOccurs"/>
+				<xsl:copy-of select="schema-documentation"/>
+			</xsl:copy>
 		</xsl:for-each-group>
 		<xsl:for-each-group select="$all-paths/schema-group-ref" group-by="concat(referenced-group, '+', namespace)">
-			<xsl:sequence select="."/>
+			<xsl:copy>
+				<xsl:copy-of select="referenced-group"/>
+				<xsl:copy-of select="namespace"/>
+				<xsl:for-each-group select="current-group()" group-by="referenced-in-xpath">
+					<xsl:copy-of select="referenced-in-xpath"/>
+				</xsl:for-each-group>
+			</xsl:copy>
 		</xsl:for-each-group>
 		<xsl:for-each-group select="$all-paths/schema-group" group-by="concat(xpath, '+', namespace)">
 			<xsl:sequence select="."/>
@@ -192,18 +209,20 @@
 	</xsl:template>-->
 
 	<!-- element definitions that have types -->
+	<!-- FIXME: This will not detect that no type is the same as xs:string -->
 	<xsl:template match="xs:element">
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<xsl:variable name="type" select="@type"/>
 		<xsl:variable name="name" select="@name"/>
 		<xsl:variable name="namespace" select="ancestor::xs:schema[1]/@targetNamespace"/>
-		<xsl:variable name="is-complexType" select="if ($combined-schemas//xs:complexType[@name eq $type]) then true() else false()" as="xs:boolean"/>
 		<xsl:variable name="times-used" select="count($combined-schemas//xs:element[(@type = $type) and (@name = $name)])"/>
 		<xsl:variable name="psf" select="concat($path-so-far, '/', $name)"/>
+		<xsl:variable name="parent-group" select="substring-after(tokenize($path-so-far, '/')[last()], 'group#')"/>
+		<xsl:variable name="group-times-used" select="count($combined-schemas//xs:group[(@ref = $parent-group)])"></xsl:variable>
 		<xsl:variable name="path-to-record">
 			<xsl:choose>
-				<xsl:when test="$is-complexType and $times-used gt 1">
+				<xsl:when test="($type and $times-used gt 1) or ($group-times-used gt 1)">
 					<xsl:value-of select="$name"/>
 				</xsl:when>
 				<xsl:otherwise>
@@ -213,15 +232,17 @@
 		</xsl:variable> 
 		<xsl:call-template name="element-info">
 			<xsl:with-param name="path-to-record" select="$path-to-record"/>
+			<xsl:with-param name="path-so-far" select="$path-so-far"/>
 			<xsl:with-param name="namespace" select="$namespace"/>
 		</xsl:call-template>
-		<xsl:if test="contains(tokenize($path-so-far, '/')[last()], '#')">
-			<!-- if child of type or group, also put out standalone version -->
+		<!--<xsl:if test="contains(tokenize($path-so-far, '/')[last()], '#')">
+			<!-\- if child of type or group, also put out standalone version -\->
 			<xsl:call-template name="element-info">
-				<xsl:with-param name="path-to-record" select="$path-to-record"/>
+				<xsl:with-param name="path-to-record" select="$name"/>
+				<xsl:with-param name="path-so-far" select="$name"/>
 				<xsl:with-param name="namespace" select="$namespace"/>
 			</xsl:call-template>
-		</xsl:if>
+		</xsl:if>-->
 		<xsl:variable name="type" select="substring-after(@type, $target-prefix)"/>
 		<xsl:choose>
 			<xsl:when test="not(@type)">
@@ -471,6 +492,7 @@
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<schema-sequence>
+			<xsl:copy-of select="@*"/>
 			<parent>
 				<xsl:value-of select="$path-to-record"/>
 			</parent>
@@ -478,7 +500,11 @@
 				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
 			</namespace>
 			<xsl:for-each select="child::*">
-				<child type="{name()}">
+				<child child-type="{name()}" >
+					<xsl:copy-of select="@*"/>
+<!--					<xsl:if test="@type">
+						<xsl:attribute name="type" select="@type"/>
+					</xsl:if>-->
 					<xsl:value-of select="if (@name) then @name else @ref"/>
 				</child>
 			</xsl:for-each>
@@ -493,6 +519,7 @@
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<schema-choice>
+			<xsl:copy-of select="@*"/>
 			<parent>
 				<xsl:value-of select="$path-to-record"/>
 			</parent>
@@ -500,7 +527,11 @@
 				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
 			</namespace>
 			<xsl:for-each select="child::*">
-				<child type="{name()}">
+				<child child-type="{name()}">
+					<xsl:copy-of select="@*"/>
+					<!--<xsl:if test="@type">
+						<xsl:attribute name="type" select="@type"/>
+					</xsl:if>-->
 					<xsl:value-of select="if (@name) then @name else @ref"/>
 				</child>
 			</xsl:for-each>
@@ -515,6 +546,7 @@
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<schema-all>
+			<xsl:copy-of select="@*"/>
 			<parent>
 				<xsl:value-of select="$path-so-far"/>
 			</parent>
@@ -522,7 +554,11 @@
 				<xsl:value-of select="ancestor::xs:schema[1]/@targetNamespace"/>
 			</namespace>
 			<xsl:for-each select="child::*">
-				<child type="{name()}">
+				<child child-type="{name()}">
+					<xsl:copy-of select="@*"/>
+					<!--<xsl:if test="@type">
+						<xsl:attribute name="type" select="@type"/>
+					</xsl:if>-->
 					<xsl:value-of select="if (@name) then @name else @ref"/>
 				</child>
 			</xsl:for-each>
@@ -598,18 +634,23 @@
 
 	<!-- display element information -->
 	<xsl:template name="element-info">
+		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<xsl:param name="namespace"/>
 
 		<schema-element doc-element="{if (parent::xs:schema) then 'true' else 'false'}">
+			<xsl:message select="'$path-so-far', $path-so-far"></xsl:message>
 			<xsl:choose>
 
-				<xsl:when test="starts-with($path-to-record, 'group#')">
+				<xsl:when test="starts-with($path-so-far, 'group#')">
 					<xsl:variable name="group"
-						select="substring-before(substring-after($path-to-record, 'group#'), '/')"/>
-					<belongs-to-group>
-						<xsl:value-of select="$group"/>
-					</belongs-to-group>
+						select="substring-before(substring-after($path-so-far, 'group#'), '/')"/>
+					<xsl:if test="$group">
+						<belongs-to-group>
+							<xsl:value-of select="$group"/>
+						</belongs-to-group>	
+					</xsl:if>
+					
 					<xpath>
 						<xsl:value-of select="$path-to-record"/>
 					</xpath>
@@ -630,22 +671,6 @@
 			<type>
 				<xsl:value-of select="substring-after(@type, $target-prefix)"/>
 			</type>
-			<xsl:if test="@minOccurs">
-				<minOccurs>
-					<xsl:value-of select="@minOccurs"/>
-				</minOccurs>
-			</xsl:if>
-			<xsl:if test="@maxOccurs">
-				<maxOccurs>
-					<xsl:value-of select="@maxOccurs"/>
-				</maxOccurs>
-			</xsl:if>
-			<!-- the following is to improve required/optional detection
-			     full extraction of group information is still TBD 
-					 FIXME: not working though-->
-			<xsl:if test="parent::choice">
-				<group>choice</group>
-			</xsl:if>
 			<xsl:if test="xs:annotation/xs:documentation">
 				<schema-documentation>
 					<xsl:value-of select="xs:annotation/xs:documentation"/>
