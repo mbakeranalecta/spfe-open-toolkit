@@ -413,7 +413,6 @@
 	</xsl:template>
 
 
-	<!-- just pass on the path-so-far -->
 	<xsl:template match="xs:group">
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
@@ -426,7 +425,7 @@
 			</namespace>
 		</schema-group>
 		<xsl:apply-templates>
-			<xsl:with-param name="path-so-far" select="concat('group#',@name)"/>
+			<xsl:with-param name="path-so-far" select="concat($path-so-far, '/group#',@name)"/>
 			<xsl:with-param name="path-to-record" select="$path-to-record"/>
 		</xsl:apply-templates>
 	</xsl:template>
@@ -480,15 +479,39 @@
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<xsl:variable name="base" select="@base"/>
-		<xsl:apply-templates select="$combined-schemas//xs:schema/xs:complexType[@name=$base]">
+		<xsl:message select="$path-so-far, '|', $path-to-record, '|', string($base)"/>
+		
+		<xsl:choose>
+			<!-- deal with recursively defined elements -->	
+			<xsl:when test="not(tokenize($path-so-far, '/') = @base)">
+				<xsl:apply-templates select="$combined-schemas//xs:complexType[@name=$base]">
+					<xsl:with-param name="path-so-far" select="$path-so-far"/>
+					<xsl:with-param name="path-to-record" select="$path-to-record"/>
+				</xsl:apply-templates>
+				<!-- get the extension -->
+				<xsl:apply-templates>
+					<xsl:with-param name="path-so-far" select="$path-so-far"/>
+					<xsl:with-param name="path-to-record" select="$path-to-record"/>
+				</xsl:apply-templates>
+			</xsl:when>
+			
+			<xsl:otherwise>
+				<!-- this is a recursive definition, so grab the attributes but don't keep recursing. -->
+				<xsl:apply-templates
+					select="$combined-schemas//xs:complexType[@name=$base]/xs:attribute">
+					<xsl:with-param name="path-so-far" select="$path-so-far"/>
+					<xsl:with-param name="path-to-record" select="$path-to-record"/>
+				</xsl:apply-templates>
+			</xsl:otherwise>
+		</xsl:choose>
+		
+		
+		
+<!--		<xsl:apply-templates select="$combined-schemas//xs:schema/xs:complexType[@name=$base]">
 			<xsl:with-param name="path-so-far" select="$path-so-far"/>
 			<xsl:with-param name="path-to-record" select="$path-to-record"/>
-		</xsl:apply-templates>
-		<!-- get the extension -->
-		<xsl:apply-templates>
-			<xsl:with-param name="path-so-far" select="$path-so-far"/>
-			<xsl:with-param name="path-to-record" select="$path-to-record"/>
-		</xsl:apply-templates>
+		</xsl:apply-templates>-->
+
 	</xsl:template>
 
 
