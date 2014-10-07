@@ -201,23 +201,36 @@
 					</xsl:if>
 					<xsl:for-each select="children/child">
 						<xsl:sort select="."/>
-						<xsl:variable name="child-xpath" select="."/>
+						<xsl:variable name="child-xpath" select="./text()"/>
 						<pe:p>
 							<pe:name hint="element-name">
 								<xsl:choose>
 									<xsl:when test="@child-namespace">
+										<!-- We don't know if the child element is a root or not in the foreign namespace, so try both. -->
+										<xsl:variable name="child-name" select="local-name-from-QName(QName (@child-namespace, $child-xpath))"/>
+										<xsl:variable name="child-name-as-root" select="concat('/',$child-name)"/>
 										<xsl:choose>
-											<xsl:when test="esf:target-exists($child-xpath, 'element-name')">
+											<!-- FIXME: This does not take accout of namespace of the link. -->
+											
+											<xsl:when test="esf:target-exists($child-name-as-root, 'xml-element-name')">
 												<xsl:call-template name="output-link">
-													<xsl:with-param name="target" select="$child-xpath"/>
-													<xsl:with-param name="type" select="'element-name'"/>
+													<xsl:with-param name="target" select="$child-name-as-root"/>
+													<xsl:with-param name="type" select="'xml-element-name'"/>
+													<xsl:with-param name="content" select="$child-xpath"/>
+													<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+												</xsl:call-template>
+											</xsl:when>
+											<xsl:when test="esf:target-exists($child-name, 'xml-element-name')">
+												<xsl:call-template name="output-link">
+													<xsl:with-param name="target" select="$child-name"/>
+													<xsl:with-param name="type" select="'xml-element-name'"/>
 													<xsl:with-param name="content" select="$child-xpath"/>
 													<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 												</xsl:call-template>
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:call-template name="sf:subject-not-resolved">
-													<xsl:with-param name="message" select="concat('element-name &quot;', $child-xpath, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/> 
+													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-xpath, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/> 
 												</xsl:call-template>
 												<xsl:value-of select="$child-xpath"/>								
 											</xsl:otherwise>

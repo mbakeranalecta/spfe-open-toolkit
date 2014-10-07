@@ -2,7 +2,7 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <!-- ===================================================
-	synthesize-config-ref.xsl
+	synthesize-doctype-ref.xsl
 =======================================================-->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
@@ -36,7 +36,7 @@ Main content processing templates
 				<xsl:variable name="xpath" select="normalize-space(xpath)"/>
 				<ss:index>
 					<ss:entry>
-						<ss:type>config-setting</ss:type>
+						<ss:type>xml-element-name</ss:type>
 						<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
 						<ss:term>
 							<xsl:value-of select="$xpath"/>
@@ -46,7 +46,7 @@ Main content processing templates
 					<xsl:for-each
 						select="//schema-attribute[starts-with(normalize-space(xpath), concat($xpath, '/@'))]">
 						<ss:entry>
-							<ss:type>doctype-element</ss:type>
+							<ss:type>xml-attribute-name</ss:type>
 							<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
 							<ss:term><xsl:value-of select="$xpath"/>/@<xsl:value-of select="name"/></ss:term>
 							<ss:anchor>
@@ -54,18 +54,6 @@ Main content processing templates
 							</ss:anchor>
 						</ss:entry>
 					</xsl:for-each>
-					<xsl:if
-						test="normalize-space(build-property)">
-						<ss:entry>
-							<ss:type>spfe-build-property</ss:type>
-							<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/build</ss:namespace>
-							<ss:term>
-								<xsl:value-of
-									select="normalize-space(build-property)"
-								/>
-							</ss:term>
-						</ss:entry>
-					</xsl:if>
 				</ss:index>
 
 				<xsl:copy>

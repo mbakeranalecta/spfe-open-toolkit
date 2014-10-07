@@ -38,6 +38,11 @@
                 <href>topic-sets/eppo-presentation-reference.xml</href>
             </topic-set>  
             
+			 <topic-set>
+			     <topic-set-id>eppo-graphic-record-doctype-reference</topic-set-id>
+			     <href>topic-sets/eppo-graphic-record-reference.xml</href>
+            </topic-set>  
+            
             <topic-set>
                 <topic-set-id>spfe-function-reference</topic-set-id>
                 <href>topic-sets/spfe-function-reference.xml</href>
