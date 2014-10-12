@@ -207,6 +207,15 @@
 			<xsl:call-template name="get-included-group-defs"/>
 		</xsl:for-each>
 	</xsl:template>-->
+	
+	<xsl:function name="sf:get-parents" as="xs:string*">
+		<xsl:param name="segments" as="xs:string*"/>
+		<xsl:param name="parent-prefix" as="xs:string"/>
+		<xsl:if test="starts-with($segments[last()], $parent-prefix)">
+			<xsl:value-of select="substring-after($segments[last()], $parent-prefix)"/> 
+			<xsl:value-of select="sf:get-parents($segments[position() ne last()], $parent-prefix)"/>
+		</xsl:if>
+	</xsl:function>
 
 	<!-- element definitions that have types -->
 	<!-- FIXME: This will not detect that no type is the same as xs:string -->
@@ -216,13 +225,24 @@
 		<xsl:variable name="type" select="@type"/>
 		<xsl:variable name="name" select="@name"/>
 		<xsl:variable name="namespace" select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
-		<xsl:variable name="times-used" select="count($combined-schemas//xs:element[(@type = $type) and (@name = $name)])"/>
+		<xsl:variable name="times-type-used" select="count($combined-schemas//xs:element[(@type = $type) and (@name = $name)])"/>
 		<xsl:variable name="psf" select="concat($path-so-far, '/', $name)"/>
 		<xsl:variable name="parent-group" select="substring-after(tokenize($path-so-far, '/')[last()], 'group#')"/>
-		<xsl:variable name="group-times-used" select="count($combined-schemas//xs:group[(@ref = $parent-group)])"></xsl:variable>
+		<xsl:variable name="group-times-used" select="count($combined-schemas//xs:group[@ref = $parent-group])"/>
+		<xsl:variable name="group-set" select="sf:get-parents(tokenize($path-so-far, '/'), 'group#')"/>
+		<xsl:variable name="group-set-times-used" select="for $i in $group-set return count($combined-schemas//xs:group[@ref = normalize-space($i)])"/>
+		<xsl:message select="'*** ', $psf, ' |', string-join($group-set, '\'), '|', $group-set-times-used"/>
+		
+		<!-- Need to detect the parent type, and see how often it is used, including as an extension base. -->
+		<!-- It an element is the child of the same parent type, we treat it as the same element, even if it has a different parent -->
+			
+		<!-- OR is this much simpler and we just treat every element with the same name as the same element? But in that case,
+		what happens to the parent calculation? Is it just immediate parents, which you then have to trace back if you 
+		want the structure? -->	
+			
 		<xsl:variable name="path-to-record">
 			<xsl:choose>
-				<xsl:when test="($type and $times-used gt 1) or ($group-times-used gt 1)">
+				<xsl:when test="($type and $times-type-used gt 1) or ($group-times-used gt 1)">
 					<xsl:value-of select="$name"/>
 				</xsl:when>
 				<xsl:otherwise>
@@ -235,14 +255,6 @@
 			<xsl:with-param name="path-so-far" select="$path-so-far"/>
 			<xsl:with-param name="namespace" select="$namespace"/>
 		</xsl:call-template>
-		<!--<xsl:if test="contains(tokenize($path-so-far, '/')[last()], '#')">
-			<!-\- if child of type or group, also put out standalone version -\->
-			<xsl:call-template name="element-info">
-				<xsl:with-param name="path-to-record" select="$name"/>
-				<xsl:with-param name="path-so-far" select="$name"/>
-				<xsl:with-param name="namespace" select="$namespace"/>
-			</xsl:call-template>
-		</xsl:if>-->
 		<xsl:variable name="type" select="substring-after(@type, $target-prefix)"/>
 		<xsl:choose>
 			<xsl:when test="not(@type)">
@@ -439,7 +451,13 @@
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<xsl:variable name="name" select="@name"/>
-		<xsl:variable name="times-used" select="count($combined-schemas//xs:element[@type = $name])"/>
+		<xsl:variable name="times-used" select="count($combined-schemas//xs:element[@type = $name]) 
+			+ count($combined-schemas//xs:extension[@base = $name])"/>
+		<xsl:variable name="extending" select="substring-after(tokenize($path-so-far, '/')[last()], 'extending#')"/>
+		<xsl:if test="$extending">
+			<xsl:message select="'@@@', $path-so-far, '|', $path-to-record, '|', $extending ,'|', $times-used"/>	
+		</xsl:if>
+	
 		<!-- guard against recusion -->
 		<xsl:if test="not(tokenize($path-so-far, '/') = concat('complexType#',@name))">
 			<xsl:choose>
@@ -479,13 +497,13 @@
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<xsl:variable name="base" select="@base"/>
-		<xsl:message select="$path-so-far, '|', $path-to-record, '|', string($base)"/>
+		<!--<xsl:message select="$path-so-far, '|', $path-to-record, '|', string($base)"/>-->
 		
 		<xsl:choose>
 			<!-- deal with recursively defined elements -->	
 			<xsl:when test="not(tokenize($path-so-far, '/') = @base)">
 				<xsl:apply-templates select="$combined-schemas//xs:complexType[@name=$base]">
-					<xsl:with-param name="path-so-far" select="$path-so-far"/>
+					<xsl:with-param name="path-so-far" select="concat($path-so-far, '/extending#', @base)"/>
 					<xsl:with-param name="path-to-record" select="$path-to-record"/>
 				</xsl:apply-templates>
 				<!-- get the extension -->

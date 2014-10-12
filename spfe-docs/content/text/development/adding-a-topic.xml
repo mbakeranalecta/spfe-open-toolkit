@@ -52,34 +52,30 @@
        </understanding>
        <planning>
            <planning-question>
-               <planning-question-title>What do I need to add a new topic?</planning-question-title>
+               <planning-question-title>Which topic type should I use?</planning-question-title>
                 <planning-question-body>
-                   <p>Before you add a topic, you must decide what topic type schema to use.</p>
-                    <p>You can use an existing schema and a topic set that uses
-                                the schema can include your topic. If your topic uses a new schema or a schema that does
-                                not have an associated topic set, it will not appear in a
-                                documentation set until a topic set includes it.
-                    </p>
+                   <p>Before you add a topic, you must decide what <feature>topic type</feature> to
+                        create. You should choose the topic type that is most specific to the
+                        subject matter you are writing about. You should also be aware that each
+                        topic set only allows a specific set to topic types to be included. While
+                        you don't create topics for topic sets, but as independent entities, you
+                        don't want to be surprised by this requirement down the line.  Each
+                            <feature>topic set configuration file</feature> lists the topic types
+                        that are allowed in that topic set.  That list should reflect the type of
+                        content the topic set is supposed to contain, so if the best topic type for
+                        your subject matter is not one that a topic set that wants to include it
+                        supports, the chances are that the problem lies with how the topic set is
+                        defined rather than with the topic type chosen for the topic.</p>
                 </planning-question-body>
             </planning-question>
        </planning>
 <doing>
-    <p>To add a new topic, create a file for your topic that includes the content that follows the
-                schema you selected. A topic set includes a topic file based on the attributes of
-                the <config-setting>/spfe/topic-set/sources/authored-content</config-setting> element in the topic
-                configuration file.</p>
-                    <p>If you store your topic source file in a directory that is already included
-                        in the topic set configuration file, the build system automatically includes
-                        the topic in the topic set and it appears under the topic set in the table
-                        of contents.</p>
-
-                    <p>If you store your topic file in a new directory, the new directory path must be added to the
-                        <config-setting>/spfe/topic-set/sources/authored-content</config-setting> element of the topic set
-                        configuration file.</p>
-    
-  
-    <p>When you run the <tool-name>spfe</tool-name> build tool, if your topic appears in the documentation set under the correct topic
-                set in the table of contents and contains the correct content, you have successfully added a topic to the documentation set.</p>
+    <p>To add a new topic, create a file based on the schema for the topic type you have chosen.</p>
+            <p>Where you store your file will depend on the rules of the repository that you are
+                using. In the simplest case, you will store you file in a directory on the local
+                file system. One or more topic sets may be set up to pull files from that directory,
+                in which case you topic will then be included in those topic sets. In other cases,
+                the file may be included or excluded based on metadata it contains.</p>
         </doing>
     </body>
 </think-plan-do-topic>
