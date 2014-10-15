@@ -237,12 +237,12 @@ Main content processing templates
 							</xsl:choose>
 						</xsl:variable>
 						<xsl:choose>
-							<xsl:when test="$schema-defs//schema-element[xpath eq $child-xpath]">
+							<xsl:when test="$schema-defs//schema-element[name eq $child-xpath]">
 								<cr:child required="{$required}" count="{$count}">
 									<xsl:value-of select="concat($xpath, '/', .)"/>
 								</cr:child>
 							</xsl:when>
-							<xsl:when test="$schema-defs//schema-element[xpath eq $child]">
+							<xsl:when test="$schema-defs//schema-element[name eq $child]">
 								<cr:child required="{$required}" count="{$count}">
 									<xsl:value-of select="$child"/>
 								</cr:child>

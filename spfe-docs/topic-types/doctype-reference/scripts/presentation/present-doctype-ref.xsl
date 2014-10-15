@@ -237,8 +237,9 @@
 										</xsl:choose>
 									</xsl:when>
 									<xsl:otherwise>
+										<xsl:message select="$child-xpath, '|', //doctype-reference-entry[name eq $child-xpath]"></xsl:message>
 										<xsl:sequence
-											select="lf:link-xpath($child-xpath,//doctype-reference-entry[xpath eq $child-xpath]/name)"/>
+											select="lf:link-xpath($child-xpath,//doctype-reference-entry[name eq $child-xpath]/name)"/>
 									</xsl:otherwise>
 								</xsl:choose>
 							</pe:name>

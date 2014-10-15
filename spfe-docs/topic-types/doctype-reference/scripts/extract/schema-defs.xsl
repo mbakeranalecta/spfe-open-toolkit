@@ -138,7 +138,7 @@
 	</xsl:variable>
 
 	<xsl:variable name="consolidated-paths">
-		<xsl:for-each-group select="$all-paths/schema-element" group-by="concat(xpath,'+', namespace)">
+		<xsl:for-each-group select="$all-paths/schema-element" group-by="concat(name,'+', namespace)">
 			<xsl:copy>
 				<xsl:copy-of select="name"/>
 				<xsl:copy-of select="xpath"/>
