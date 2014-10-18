@@ -141,9 +141,14 @@
 		<xsl:for-each-group select="$all-paths/schema-element" group-by="concat(name,'+', namespace)">
 			<xsl:copy>
 				<xsl:copy-of select="name"/>
-				<xsl:copy-of select="xpath"/>
-				<xsl:for-each-group select="current-group()" group-by="belongs-to-group">
-					<xsl:copy-of select="belongs-to-group"/>
+				<xsl:for-each-group select="current-group()" group-by="parent">
+					<xsl:copy-of select="parent"/>
+				</xsl:for-each-group>
+				<xsl:for-each-group select="current-group()" group-by="xpath">
+					<xsl:copy-of select="xpath"/>
+				</xsl:for-each-group>
+				<xsl:for-each-group select="belongs-to-group" group-by="text()">
+					<xsl:copy-of select="."/>
 				</xsl:for-each-group>
 				<xsl:copy-of select="namespace"/>
 				<xsl:copy-of select="type"/>
@@ -156,12 +161,16 @@
 			<xsl:copy>
 				<xsl:copy-of select="referenced-group"/>
 				<xsl:copy-of select="namespace"/>
+				<xsl:copy-of select="path-so-far"></xsl:copy-of>
 				<xsl:for-each-group select="current-group()" group-by="referenced-in-xpath">
 					<xsl:copy-of select="referenced-in-xpath"/>
 				</xsl:for-each-group>
+				<xsl:for-each-group select="current-group()" group-by="referenced-in-group">
+					<xsl:copy-of select="referenced-in-group"/>
+				</xsl:for-each-group>
 			</xsl:copy>
 		</xsl:for-each-group>
-		<xsl:for-each-group select="$all-paths/schema-group" group-by="concat(xpath, '+', namespace)">
+		<xsl:for-each-group select="$all-paths/schema-group" group-by="concat(name, '+', namespace)">
 			<xsl:sequence select="."/>
 		</xsl:for-each-group>
 		<xsl:for-each-group select="$all-paths/schema-sequence" group-by="concat(parent, '+', namespace)">
@@ -231,7 +240,8 @@
 		<xsl:variable name="group-times-used" select="count($combined-schemas//xs:group[@ref = $parent-group])"/>
 		<xsl:variable name="group-set" select="sf:get-parents(tokenize($path-so-far, '/'), 'group#')"/>
 		<xsl:variable name="group-set-times-used" select="for $i in $group-set return count($combined-schemas//xs:group[@ref = normalize-space($i)])"/>
-		<xsl:message select="'*** ', $psf, ' |', string-join($group-set, '\'), '|', $group-set-times-used"/>
+<!--		<xsl:message select="'*** ', $psf, ' |', string-join($group-set, '\'), '|', $group-set-times-used"/>
+-->		<xsl:message select="'*** ', $path-so-far"/>
 		
 		<!-- Need to detect the parent type, and see how often it is used, including as an extension base. -->
 		<!-- It an element is the child of the same parent type, we treat it as the same element, even if it has a different parent -->
@@ -241,14 +251,14 @@
 		want the structure? -->	
 			
 		<xsl:variable name="path-to-record">
-			<xsl:choose>
-				<xsl:when test="($type and $times-type-used gt 1) or ($group-times-used gt 1)">
+<!--			<xsl:choose>-->
+<!--				<xsl:when test="($type and $times-type-used gt 1) or ($group-times-used gt 1)">
 					<xsl:value-of select="$name"/>
-				</xsl:when>
-				<xsl:otherwise>
+				</xsl:when>-->
+<!--				<xsl:otherwise>-->
 					<xsl:value-of select="concat($path-to-record, '/', $name)"/>
-				</xsl:otherwise>
-			</xsl:choose>
+				<!--</xsl:otherwise>-->
+			<!--</xsl:choose>-->
 		</xsl:variable> 
 		<xsl:call-template name="element-info">
 			<xsl:with-param name="path-to-record" select="$path-to-record"/>
@@ -375,21 +385,25 @@
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<xsl:variable name="ref" select="substring-after(@ref,$target-prefix)"/>
-		<schema-group-ref>
+		<xsl:variable name="path-segments" select="tokenize($path-so-far, '/')"/>
+		<schema-group-ref>!
 			<referenced-group>
 				<xsl:value-of select="@ref"/>
 			</referenced-group>
 			<namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</namespace>
+			<path-so-far><xsl:value-of select="$path-so-far"/></path-so-far>
 			<xsl:choose>
 
-				<xsl:when test="starts-with($path-so-far, 'group#') and contains($path-so-far, '/')">
+<!--				<xsl:when test="starts-with($path-so-far, 'group#') and contains($path-so-far, '/')">
 
 					<referenced-in-xpath>
 						<xsl:value-of select="substring-after($path-so-far, '/')"/>
 					</referenced-in-xpath>
-				</xsl:when>
+				</xsl:when>-->
+				
+				
 
 				<xsl:when
 					test="starts-with($path-so-far, 'group#') and not(contains($path-so-far, '/'))">
@@ -398,16 +412,16 @@
 					</referenced-in-group>
 				</xsl:when>
 
-				<xsl:when test="starts-with($path-so-far, 'group#')">
-					<!-- avoid infinite loops -->
+				<xsl:when test="starts-with($path-segments[last()], 'group#')">
+<!--					<!-\- avoid infinite loops -\->
 					<xsl:if
-						test="substring-before(substring-after($path-so-far, 'group#'),'/') ne @ref">
+						test="substring-before(substring-after($path-so-far[last()], 'group#'),'/') ne @ref">-->
 						<referenced-in-group>
 							<xsl:value-of
-								select="substring-before(substring-after($path-so-far, 'group#'), '/')"
+								select="substring-after($path-segments[last()], 'group#')"
 							/>
 						</referenced-in-group>
-					</xsl:if>
+<!--					</xsl:if>-->
 				</xsl:when>
 
 				<xsl:otherwise>
@@ -454,9 +468,9 @@
 		<xsl:variable name="times-used" select="count($combined-schemas//xs:element[@type = $name]) 
 			+ count($combined-schemas//xs:extension[@base = $name])"/>
 		<xsl:variable name="extending" select="substring-after(tokenize($path-so-far, '/')[last()], 'extending#')"/>
-		<xsl:if test="$extending">
+<!--		<xsl:if test="$extending">
 			<xsl:message select="'@@@', $path-so-far, '|', $path-to-record, '|', $extending ,'|', $times-used"/>	
-		</xsl:if>
+		</xsl:if>-->
 	
 		<!-- guard against recusion -->
 		<xsl:if test="not(tokenize($path-so-far, '/') = concat('complexType#',@name))">
@@ -539,7 +553,7 @@
 		<schema-sequence>
 			<xsl:copy-of select="@*"/>
 			<parent>
-				<xsl:value-of select="$path-to-record"/>
+				<xsl:value-of select="$path-so-far"/>
 			</parent>
 			<namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
@@ -566,7 +580,7 @@
 		<schema-choice>
 			<xsl:copy-of select="@*"/>
 			<parent>
-				<xsl:value-of select="$path-to-record"/>
+				<xsl:value-of select="$path-so-far"/>
 			</parent>
 			<namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
@@ -641,6 +655,9 @@
 			<namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</namespace>
+			<parent>
+				<xsl:value-of select="$path-to-record"/>
+			</parent>
 			<xsl:choose>
 				<xsl:when test="starts-with($xpath, 'group#')">
 					<xpath>
@@ -682,30 +699,31 @@
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<xsl:param name="namespace"/>
+		<xsl:variable name="path-segments" select="tokenize($path-so-far, '/')"/>
 
 		<schema-element doc-element="{if (parent::xs:schema) then 'true' else 'false'}">
-			<xsl:choose>
+			
+			<xsl:if test="starts-with($path-segments[last()], 'group#')">
+				<belongs-to-group>
+					<xsl:value-of select="substring-after(., 'group#')"/>
+				</belongs-to-group>	
+			</xsl:if>
 
-				<xsl:when test="starts-with($path-so-far, 'group#')">
-					<xsl:variable name="group"
-						select="substring-before(substring-after($path-so-far, 'group#'), '/')"/>
-					<xsl:if test="$group">
-						<belongs-to-group>
-							<xsl:value-of select="$group"/>
-						</belongs-to-group>	
-					</xsl:if>
-					
-					<xpath>
-						<xsl:value-of select="$path-to-record"/>
-					</xpath>
-				</xsl:when>
-
-				<xsl:otherwise>
-					<xpath>
-						<xsl:value-of select="$path-to-record"/>
-					</xpath>
-				</xsl:otherwise>
-			</xsl:choose>
+			<xsl:if test="starts-with($path-segments[last()], 'group#')">
+				<xsl:variable name="group"
+					select="substring-after($path-segments[last()], 'group#')"/>
+				<belongs-to-group>
+					<xsl:value-of select="$group"/>
+				</belongs-to-group>	
+			</xsl:if>
+			
+			<parent>
+				<xsl:value-of select="string-join(tokenize($path-to-record, '/')[position() ne last()],'/')"/>
+			</parent>
+			
+			<xpath>
+				<xsl:value-of select="$path-to-record"/>
+			</xpath>
 			<name>
 				<xsl:value-of select="@name"/>
 			</name>

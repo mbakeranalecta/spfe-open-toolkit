@@ -23,32 +23,33 @@ Main content processing templates
 
 	<!-- Schema element template -->
 	<xsl:template match="doctype-reference-entry">
-		<xsl:variable name="name" select="translate(xpath, '/:', '__')"/>
+		<xsl:variable name="topic-name" select="sf:title-to-anchor(name)"/>
 		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
+		<xsl:variable name="element-name" select="name"/>
 		
 		<ss:topic 
 			type="{$type}" 
-			full-name="{$type}#{$name}"
-			local-name="{$name}"
+			full-name="{$type}#{$topic-name}"
+			local-name="{$topic-name}"
 			topic-type-alias="{sf:get-topic-type-alias-singular($type, $config)}"
-			title="{name}"
+			title="{$element-name}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
-				<xsl:variable name="xpath" select="normalize-space(xpath)"/>
+				
 				<ss:index>
 					<ss:entry>
 						<ss:type>xml-element-name</ss:type>
 						<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
 						<ss:term>
-							<xsl:value-of select="$xpath"/>
+							<xsl:value-of select="$element-name"/>
 						</ss:term>
 					</ss:entry>
 
 					<xsl:for-each
-						select="//schema-attribute[starts-with(normalize-space(xpath), concat($xpath, '/@'))]">
+						select="//schema-attribute[starts-with(normalize-space(xpath), concat($element-name, '/@'))]">
 						<ss:entry>
 							<ss:type>xml-attribute-name</ss:type>
 							<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
-							<ss:term><xsl:value-of select="$xpath"/>/@<xsl:value-of select="name"/></ss:term>
+							<ss:term><xsl:value-of select="name"/>/@<xsl:value-of select="name"/></ss:term>
 							<ss:anchor>
 								<xsl:value-of select="name"/>
 							</ss:anchor>

@@ -115,7 +115,7 @@
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
 
-		<pe:page type="API" name="{translate(xpath, '/:', '__')}">
+		<pe:page type="API" name="{translate(name, '/:', '__')}">
 			<xsl:call-template name="show-header"/>
 			<pe:title>Element: <xsl:value-of select="$name"/></pe:title>
 
@@ -137,62 +137,42 @@
 				</pe:item>
 			</pe:labeled-item>
 
-			<pe:labeled-item>
-				<pe:label>Default</pe:label>
-				<pe:item>
-
-					<xsl:choose>
-						<xsl:when test="not(values/default)">
-							<pe:p>None</pe:p>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:apply-templates select="values/default"/>
-						</xsl:otherwise>
-					</xsl:choose>
-
-				</pe:item>
-			</pe:labeled-item>
-
-			<!-- Special -->
-			<pe:labeled-item>
-				<pe:label>Values</pe:label>
-				<pe:item>
-					<xsl:choose>
-						<xsl:when test="values/value">
-							<xsl:for-each select="values/value">
-								<xsl:sort select="."/>
-								<!-- FIXME: this is a hork that will not handle all text-group cases. Need to change to subheads for main headings to use labelled-item here. -->
-								<pe:p>
-									<pe:value hint="attribute-value">
-										<xsl:value-of select="."/>
-									</pe:value>
-									<xsl:text>: </xsl:text>
-									<xsl:apply-templates
-										select="following-sibling::description[1]/p[1]/node()"/>
-								</pe:p>
-								<xsl:apply-templates
-									select="following-sibling::description[1]/p[preceding-sibling::p]"
-								/>
-							</xsl:for-each>
-						</xsl:when>
-						<xsl:otherwise>
-							<pe:p>N/A</pe:p>
-						</xsl:otherwise>
-					</xsl:choose>
-				</pe:item>
-			</pe:labeled-item>
 			<xsl:if test="parents/parent[1]/text() ne ''">
 				<pe:labeled-item>
 					<pe:label><xsl:value-of select="if (parents/parent[2]) then 'Parents' else 'Parent'"/></pe:label>
 					<pe:item>
 						<xsl:for-each select="parents/parent">
 							<pe:p>
-								<xsl:sequence select="lf:link-xpath-segments(.)"/>
+								<xsl:variable name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+								<xsl:for-each select="tokenize(.,'/')[. ne '']">
+									<xsl:variable name="element-name" select="."/>
+									<xsl:text>/</xsl:text>
+									<xsl:choose>
+										<!-- FIXME: This does not take accout of namespace of the link. -->
+										
+										<xsl:when test="esf:target-exists($element-name, 'xml-element-name')">
+											<xsl:call-template name="output-link">
+												<xsl:with-param name="target" select="$element-name"/>
+												<xsl:with-param name="type" select="'xml-element-name'"/>
+												<xsl:with-param name="content" select="$element-name"/>
+												<xsl:with-param name="current-page-name" select="$current-page-name"/>
+											</xsl:call-template>
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:message>not resolved</xsl:message>
+											<xsl:call-template name="sf:subject-not-resolved">
+												<xsl:with-param name="message" select="concat('xml-element-name &quot;', $element-name, '&quot; not resolved in topic ', $current-page-name)"/> 
+											</xsl:call-template>
+											<xsl:value-of select="$element-name"/>								
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:for-each>
 							</pe:p>
 						</xsl:for-each>
 					</pe:item>
 				</pe:labeled-item>
 			</xsl:if>
+			
 			<pe:labeled-item>
 				<pe:label>Children</pe:label>
 				<pe:item>
@@ -229,6 +209,7 @@
 												</xsl:call-template>
 											</xsl:when>
 											<xsl:otherwise>
+												<xsl:message>not resolved</xsl:message>
 												<xsl:call-template name="sf:subject-not-resolved">
 													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-xpath, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/> 
 												</xsl:call-template>
@@ -237,17 +218,12 @@
 										</xsl:choose>
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:message select="$child-xpath, '|', //doctype-reference-entry[name eq $child-xpath]"></xsl:message>
+<!--										<xsl:message select="$child-xpath, '|', //doctype-reference-entry[name eq $child-xpath]"/>-->
 										<xsl:sequence
 											select="lf:link-xpath($child-xpath,//doctype-reference-entry[name eq $child-xpath]/name)"/>
 									</xsl:otherwise>
 								</xsl:choose>
 							</pe:name>
-							<xsl:text> (</xsl:text>
-							<xsl:value-of select="if (@required='yes') then 'required' else 'optional'"/>
-							<xsl:text> x </xsl:text>
-							<xsl:value-of select="@count"/>
-							<xsl:text>)</xsl:text>
 						</pe:p>
 					</xsl:for-each>
 				</pe:item>
@@ -285,12 +261,12 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 
-	<!-- FIXME: redundant ? -->
+	<!-- FIXME: redundant ?
 	<xsl:template match="xpath">
 		<pe:name hint="xpath">
 			<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
 		</pe:name>
-	</xsl:template>
+	</xsl:template> -->
 
 	<!-- FIXME: Some redundant element names here -->
 	<xsl:template match="required-by|verified-by|default|special|precis">
@@ -310,16 +286,6 @@
 	<xsl:template name="format-attribute">
 		<pe:anchor name="{name}"/>
 		<pe:subhead>Attribute: <xsl:value-of select="name"/></pe:subhead>
-
-		<pe:labeled-item>
-			<pe:label>XPath</pe:label>
-			<pe:item>
-				<pe:p>
-					<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
-				</pe:p>
-			</pe:item>
-		</pe:labeled-item>
-
 
 		<!-- description -->
 		<pe:labeled-item>

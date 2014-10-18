@@ -58,9 +58,9 @@ Main template
 			href="file:///{$output-directory}/merge.xml">
 			<cr:doctype-reference-entries>
 
-				<!-- Use for-each-group to filter out duplicate xpaths -->
+				<!-- Use for-each-group to filter out duplicate xpaths FIXME: there may not be duplictes if we use names-->
 				<xsl:for-each-group select="$schema-defs/schema-definitions/schema-element"
-					group-by="xpath">
+					group-by="name">
 					<xsl:apply-templates select=".">
 						<xsl:with-param name="source"
 							select="$doctype-source//ed:doctype-description"/>
@@ -99,7 +99,7 @@ Main content processing templates
 		<!-- determine the doctype by comparing the xpath of this element to the 
 			 xpath of each of the document root elements -->
 		<xsl:variable name="doctype"
-			select="$doctypes/doctype[starts-with($xpath, @xpath)][1]/@name"/>
+			select="$doctypes/doctype[starts-with($xpath[1], @xpath)][1]/@name"/>
 		<!--		<xsl:variable name="doc-xpath"
 			select=" if ($doctype) 
 					 then concat('/',$doctype,  substring-after($xpath, $doctype))
@@ -109,6 +109,12 @@ Main content processing templates
 			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry', $config)"/>
 
 		<cr:doctype-reference-entry>
+			<cr:name>
+				<xsl:value-of select="name"/>
+			</cr:name>
+			<cr:type>
+				<xsl:value-of select="type"/>
+			</cr:type>
 			<cr:namespace>
 				<xsl:value-of select="namespace"/>
 			</cr:namespace>
@@ -116,7 +122,7 @@ Main content processing templates
 				<xsl:value-of select="$doctype"/>
 			</cr:doctype>
 			<xsl:choose>
-				<xsl:when test="xpath eq name">
+				<xsl:when test="xpath = name">
 					<cr:parents>
 						<xsl:for-each
 							select="$schema-defs//schema-sequence[child=$name], $schema-defs//schema-choice[child=$name], $schema-defs//schema-all[child=$name]">
@@ -128,26 +134,21 @@ Main content processing templates
 				</xsl:when>
 				<xsl:otherwise>
 					<cr:parents>
+						<xsl:for-each select="$xpath">
 						<cr:parent>
-							<xsl:value-of select="string-join(tokenize($xpath, '/')[position() ne last()],'/')"></xsl:value-of>
+							<xsl:value-of select="string-join(tokenize(., '/')[position() ne last()],'/')"/>
 						</cr:parent>
+						</xsl:for-each>
 					</cr:parents>
 				</xsl:otherwise>
 			</xsl:choose>
-			<cr:xpath>
+<!--			<cr:xpath>
 				<xsl:value-of select="$xpath"/>
-			</cr:xpath>
+			</cr:xpath>-->
 			<cr:group>
 				<xsl:value-of select="$group"/>
 			</cr:group>
 
-			<!-- Copy the extracted element info. -->
-			<cr:name>
-				<xsl:value-of select="name"/>
-			</cr:name>
-			<cr:type>
-				<xsl:value-of select="type"/>
-			</cr:type>
 			<cr:use>
 				<xsl:value-of select="use"/>
 			</cr:use>
@@ -179,7 +180,7 @@ Main content processing templates
 					<!-- If not found, report warning. -->
 					<xsl:call-template name="sf:warning">
 						<xsl:with-param name="message"
-							select="'Doctype element description not found ', string($xpath)"/>
+							select="'Doctype element description not found ', string($name)"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -204,17 +205,36 @@ Main content processing templates
 
 			<cr:model>
 				<xsl:sequence
-					select="$schema-defs//schema-sequence[parent eq $xpath], //schema-choice[parent eq $xpath], //schema-all[parent eq $xpath]"
+					select="$schema-defs//schema-sequence[parent = $xpath], //schema-choice[parent = $xpath], //schema-all[parent = $xpath]"
 				/>
 			</cr:model>
 			
 			<cr:children>
-				<xsl:for-each 
-					select="$schema-defs//schema-sequence[parent eq $xpath], //schema-choice[parent eq $xpath], //schema-all[parent eq $xpath]">
+				<xsl:for-each select="$schema-defs//schema-element[parent = $xpath]">
+					<cr:child child-namespace="{namespace}"><xsl:value-of select="name"/></cr:child>
+				</xsl:for-each>
+			</cr:children>
+		
+<!-- This is unfinished, but attempts to determine if the child is required and how many times it may occur. -->		
+<!--			<cr:children>
+				<xsl:for-each-group 
+					select="$schema-defs//schema-sequence[parent = $xpath], //schema-choice[parent = $xpath], //schema-all[parent = $xpath]"
+					group-by="child">
+					<xsl:for-each select="child[@child-type='xs:group']">
+						<xsl:variable name="group-name" select="."/>
+						<xsl:for-each-group select="$schema-defs//schema-element[belongs-to-group = $group-name]" group-by="name">
+							<cr:child><xsl:value-of select="name"/></cr:child>
+						</xsl:for-each-group>
+						<xsl:call-template name="get-nested-groups">
+							<xsl:with-param name="referenced-group" select="$group-name"/>
+						</xsl:call-template>					
+					</xsl:for-each>
+
 					<xsl:for-each select="child[@child-type='xs:element']">
 						<xsl:variable name="child" select="."/>
-						<xsl:variable name="child-xpath" select="concat($xpath, '/', $child)"/>
-						<xsl:variable name="required">
+						<xsl:variable name="child-xpath" select="$child"/>
+<!-\-						<xsl:variable name="child-xpath" select="concat($xpath, '/', $child)"/>
+-\->						<xsl:variable name="required">
 							<xsl:choose>
 								<xsl:when test="parent::schema-choice">no</xsl:when>
 								<xsl:when test="@minOccurs='0'">no</xsl:when>
@@ -222,7 +242,7 @@ Main content processing templates
 							</xsl:choose>
 						</xsl:variable>
 						<xsl:variable name="count">
-							<!-- FIXME: cosider cases of schema-sequence and combinations of parent and child maxOccurs value -->
+							<!-\- FIXME: cosider cases of schema-sequence and combinations of parent and child maxOccurs value -\->
 							<xsl:choose>
 								<xsl:when test="parent::schema-choice/@maxOccurs">
 									<xsl:value-of select="parent::schema-choice/@maxOccurs"/>
@@ -237,12 +257,13 @@ Main content processing templates
 							</xsl:choose>
 						</xsl:variable>
 						<xsl:choose>
-							<xsl:when test="$schema-defs//schema-element[name eq $child-xpath]">
+							<xsl:when test="$schema-defs//schema-element[xpath = $child-xpath]">
 								<cr:child required="{$required}" count="{$count}">
-									<xsl:value-of select="concat($xpath, '/', .)"/>
+									<xsl:value-of select="$child"/>
+									<!-\-<xsl:value-of select="concat($xpath[1], '/', .)"/>-\->
 								</cr:child>
 							</xsl:when>
-							<xsl:when test="$schema-defs//schema-element[name eq $child]">
+							<xsl:when test="$schema-defs//schema-element[xpath = $child]">
 								<cr:child required="{$required}" count="{$count}">
 									<xsl:value-of select="$child"/>
 								</cr:child>
@@ -253,7 +274,8 @@ Main content processing templates
 								</cr:child>								
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:call-template name="sf:error">
+<!-\-								<xsl:call-template name="sf:error">-\->
+									<xsl:call-template name="sf:warning">
 									<xsl:with-param name="message">
 										<xsl:text>Unable to locate element definition for element child </xsl:text>
 										<xsl:value-of select="$child"/>
@@ -263,12 +285,12 @@ Main content processing templates
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:for-each>
-				</xsl:for-each>
+				</xsl:for-each-group>
 			</cr:children>
 
-			<cr:attributes>
+-->			<cr:attributes>
 				<xsl:for-each
-					select="$schema-defs//schema-attribute[starts-with(xpath, concat($xpath, '/@'))]">
+					select="$schema-defs//schema-attribute[starts-with(xpath, concat($xpath[1], '/@'))]">
 					<cr:attribute>
 
 						<!-- Copy the extracted element info. -->
@@ -357,10 +379,10 @@ Main content processing templates
 			<xsl:variable name="referenced-group" select="referenced-group"/>
 			<!-- each element that is in the group and has only one step in its path (so not the children of the element at the group level -->
 			<xsl:for-each-group
-				select="/schema-definitions/schema-element[belongs-to-group eq $referenced-group][not(contains(xpath, '/'))]"
-				group-by="xpath">
+				select="/schema-definitions/schema-element[belongs-to-group eq $referenced-group]"
+				group-by="name">
 				<cr:child>
-					<xsl:value-of select="xpath"/>
+					<xsl:value-of select="name"/>
 				</cr:child>
 			</xsl:for-each-group>
 			<xsl:call-template name="get-nested-groups">
