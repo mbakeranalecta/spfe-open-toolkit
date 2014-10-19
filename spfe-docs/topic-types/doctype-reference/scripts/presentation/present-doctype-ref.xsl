@@ -162,7 +162,6 @@
 											</xsl:call-template>
 										</xsl:when>
 										<xsl:otherwise>
-											<xsl:message select="$subject-namespace">!!!not resolved</xsl:message>
 											<xsl:call-template name="sf:subject-not-resolved">
 												<xsl:with-param name="message" select="concat('xml-element-name &quot;', $element-name, '&quot; not resolved in topic ', $current-page-name)"/> 
 											</xsl:call-template>
@@ -216,7 +215,6 @@
 												</xsl:call-template>
 											</xsl:when>
 											<xsl:otherwise>
-												<xsl:message>not resolved</xsl:message>
 												<xsl:call-template name="sf:subject-not-resolved">
 													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-xpath, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/> 
 												</xsl:call-template>
@@ -225,7 +223,6 @@
 										</xsl:choose>
 									</xsl:when>
 									<xsl:otherwise>
-<!--										<xsl:message select="$child-xpath, '|', //doctype-reference-entry[name eq $child-xpath]"/>-->
 										<xsl:sequence
 											select="lf:link-xpath($child-xpath,//doctype-reference-entry[name eq $child-xpath]/name)"/>
 									</xsl:otherwise>
