@@ -3,13 +3,6 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
-    <xs:complexType name="restrictionsType">
-        <xs:sequence>
-            <xs:element name="restriction" minOccurs="0" maxOccurs="unbounded"
-                type="text-general-type"/>
-        </xs:sequence>
-    </xs:complexType>
-
     <xs:complexType name="attributesType">
         <xs:sequence>
             <xs:element name="attribute" maxOccurs="unbounded" minOccurs="0">

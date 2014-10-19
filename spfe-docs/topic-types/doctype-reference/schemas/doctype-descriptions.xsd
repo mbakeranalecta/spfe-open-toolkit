@@ -3,7 +3,7 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
 	targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs"
-	xmlns:csd="http://spfeopentoolkit.org/ns/spfe-docs">
+	xmlns:dd="http://spfeopentoolkit.org/ns/spfe-docs">
 
 
 
@@ -29,43 +29,28 @@
 		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/resources.xsd"/>
 
 	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions-root.xsd"/>
+		schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/doctype-reference/schemas/doctype-descriptions-root.xsd"/>
 
-	<xs:element name="config-setting-descriptions">
+	<xs:element name="doctype-descriptions">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="head">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:group ref="csd:identity"/>
-							<xs:group ref="csd:tracking"/>
+							<xs:group ref="dd:identity"/>
+							<xs:group ref="dd:tracking"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="body">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="config-setting-description" maxOccurs="unbounded">
+							<xs:element name="doctype-description" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="xpath" type="xs:string"/>
-										<xs:element name="description" type="csd:text-general-type"/>
-										<xs:element name="values">
-											<xs:complexType>
-												<xs:sequence>
-												<xs:element name="default" minOccurs="0"
-												maxOccurs="1" type="csd:text-general-type"/>
-												<xs:sequence maxOccurs="unbounded" minOccurs="0">
-												<xs:element name="value" type="xs:string"/>
-												<xs:element name="description"
-												type="csd:text-general-type"/>
-												</xs:sequence>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="restrictions" type="csd:restrictionsType"/>
-										<xs:element name="build-property" type="xs:string"/>
-										<xs:element name="attributes" type="csd:attributesType"/>
+										<xs:element name="description" type="dd:text-general-type"/>
+										<xs:element name="attributes" type="dd:attributesType"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
@@ -75,8 +60,8 @@
 			</xs:sequence>
 		</xs:complexType>
 		<xs:unique name="ConfigurationSettingDescription">
-			<xs:selector xpath="csd:body/csd:config-setting-description"/>
-			<xs:field xpath="csd:xpath"/>
+			<xs:selector xpath="dd:body/dd:doctype-description"/>
+			<xs:field xpath="dd:xpath"/>
 		</xs:unique>
 	</xs:element>
 
