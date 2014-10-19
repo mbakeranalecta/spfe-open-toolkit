@@ -30,7 +30,7 @@
         
         <sources>
             <authored-content>
-                <include>${SPFEOT_HOME}/1.0/schemas/config/config-setting-descriptions.xml</include>
+                <include>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/schemas/presentation-eppo.doc.xml</include>
             </authored-content>
             <sources-to-extract-content-from>
                 <include>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/schemas/presentation-eppo.xsd</include>

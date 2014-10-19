@@ -63,4 +63,10 @@
             <xs:group ref="strings"/>
         </xs:choice>
     </xs:group>
+    <xs:complexType name="restrictionsType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="restriction"
+                type="text-general-type"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctype-element-descriptions xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/doctype-reference/schemas/doctype-element-descriptions.xsd">
+    <head>
+        <id>id0</id>
+        <history>
+            <revision>
+                <date>2006-05-04</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+    </head>
+    <body>
+        <doctype-element-description>
+            <xpath>pages</xpath>
+            <description>
+                <p>The root element of the <feature>EPPO</feature> <feature>presentation</feature> schema.</p>
+            </description>
+            <attributes>
+            </attributes>
+        </doctype-element-description>
+        <doctype-element-description>
+            <xpath>page</xpath>
+            <description>
+                <p>The container element for a page in <feature>EPPO</feature> output.</p>
+            </description>
+            <attributes>
+            </attributes>
+        </doctype-element-description>
+    </body>
+</doctype-element-descriptions>

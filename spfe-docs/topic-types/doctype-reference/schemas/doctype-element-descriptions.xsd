@@ -29,9 +29,9 @@
 		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/resources.xsd"/>
 
 	<xs:include
-		schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/doctype-reference/schemas/doctype-descriptions-root.xsd"/>
+		schemaLocation="http://spfeopentoolkit.org/spfe-docs/topic-types/doctype-reference/schemas/doctype-element-descriptions-root.xsd"/>
 
-	<xs:element name="doctype-descriptions">
+	<xs:element name="doctype-element-descriptions">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="head">
@@ -45,7 +45,7 @@
 				<xs:element name="body">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="doctype-description" maxOccurs="unbounded">
+							<xs:element name="doctype-element-description" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="xpath" type="xs:string"/>
@@ -60,7 +60,7 @@
 			</xs:sequence>
 		</xs:complexType>
 		<xs:unique name="ConfigurationSettingDescription">
-			<xs:selector xpath="dd:body/dd:doctype-description"/>
+			<xs:selector xpath="dd:body/dd:doctype-element-description"/>
 			<xs:field xpath="dd:xpath"/>
 		</xs:unique>
 	</xs:element>
