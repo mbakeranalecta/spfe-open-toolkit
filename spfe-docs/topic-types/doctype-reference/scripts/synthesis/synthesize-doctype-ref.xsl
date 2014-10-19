@@ -38,7 +38,7 @@ Main content processing templates
 				<ss:index>
 					<ss:entry>
 						<ss:type>xml-element-name</ss:type>
-						<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
+						<ss:namespace><xsl:value-of select="subject-namespace"/></ss:namespace>
 						<ss:term>
 							<xsl:value-of select="$element-name"/>
 						</ss:term>
@@ -48,7 +48,7 @@ Main content processing templates
 						select="//schema-attribute[starts-with(normalize-space(xpath), concat($element-name, '/@'))]">
 						<ss:entry>
 							<ss:type>xml-attribute-name</ss:type>
-							<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
+							<ss:namespace><xsl:value-of select="subject-namespace"/></ss:namespace>
 							<ss:term><xsl:value-of select="name"/>/@<xsl:value-of select="name"/></ss:term>
 							<ss:anchor>
 								<xsl:value-of select="name"/>

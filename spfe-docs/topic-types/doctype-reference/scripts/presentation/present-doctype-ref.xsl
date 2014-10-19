@@ -114,15 +114,16 @@
 	<xsl:template match="doctype-reference-entry">
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
+		<xsl:variable name="subject-namespace" select="subject-namespace"/>
 
 		<pe:page type="API" name="{translate(name, '/:', '__')}">
 			<xsl:call-template name="show-header"/>
 			<pe:title>Element: <xsl:value-of select="$name"/></pe:title>
 
 			<pe:labeled-item>
-				<pe:label>Namespace</pe:label>
+				<pe:label>XML Namespace</pe:label>
 				<pe:item>
-					<pe:p><xsl:value-of select="namespace"/></pe:p>
+					<pe:p><xsl:value-of select="xml-namespace"/></pe:p>
 				</pe:item>
 			</pe:labeled-item>
 			
@@ -150,16 +151,18 @@
 									<xsl:choose>
 										<!-- FIXME: This does not take accout of namespace of the link. -->
 										
-										<xsl:when test="esf:target-exists($element-name, 'xml-element-name')">
+										<xsl:when test="esf:target-exists($element-name, 'xml-element-name', $subject-namespace)">
 											<xsl:call-template name="output-link">
 												<xsl:with-param name="target" select="$element-name"/>
 												<xsl:with-param name="type" select="'xml-element-name'"/>
+												<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
+												<xsl:with-param name="namespace" select="$subject-namespace"/>
 												<xsl:with-param name="content" select="$element-name"/>
 												<xsl:with-param name="current-page-name" select="$current-page-name"/>
 											</xsl:call-template>
 										</xsl:when>
 										<xsl:otherwise>
-											<xsl:message>not resolved</xsl:message>
+											<xsl:message select="$subject-namespace">!!!not resolved</xsl:message>
 											<xsl:call-template name="sf:subject-not-resolved">
 												<xsl:with-param name="message" select="concat('xml-element-name &quot;', $element-name, '&quot; not resolved in topic ', $current-page-name)"/> 
 											</xsl:call-template>
@@ -196,6 +199,8 @@
 												<xsl:call-template name="output-link">
 													<xsl:with-param name="target" select="$child-name-as-root"/>
 													<xsl:with-param name="type" select="'xml-element-name'"/>
+													<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
+													<xsl:with-param name="namespace" select="$subject-namespace"/>
 													<xsl:with-param name="content" select="$child-xpath"/>
 													<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 												</xsl:call-template>
@@ -204,6 +209,8 @@
 												<xsl:call-template name="output-link">
 													<xsl:with-param name="target" select="$child-name"/>
 													<xsl:with-param name="type" select="'xml-element-name'"/>
+													<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
+													<xsl:with-param name="namespace" select="$subject-namespace"/>
 													<xsl:with-param name="content" select="$child-xpath"/>
 													<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 												</xsl:call-template>

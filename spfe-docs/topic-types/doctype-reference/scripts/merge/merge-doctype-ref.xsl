@@ -109,15 +109,18 @@ Main content processing templates
 			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry', $config)"/>
 
 		<cr:doctype-reference-entry>
+			<cr:subject-namespace>
+				<xsl:value-of select="concat(xml-namespace, '#', if (normalize-space(parent[1])) then tokenize(parent[1],'/')[. ne ''][1] else $name)"/>
+			</cr:subject-namespace>
 			<cr:name>
 				<xsl:value-of select="name"/>
 			</cr:name>
 			<cr:type>
 				<xsl:value-of select="type"/>
 			</cr:type>
-			<cr:namespace>
-				<xsl:value-of select="namespace"/>
-			</cr:namespace>
+			<cr:xml-namespace>
+				<xsl:value-of select="xml-namespace"/>
+			</cr:xml-namespace>
 			<cr:doctype>
 				<xsl:value-of select="$doctype"/>
 			</cr:doctype>
@@ -211,7 +214,7 @@ Main content processing templates
 			
 			<cr:children>
 				<xsl:for-each select="$schema-defs//schema-element[parent = $xpath]">
-					<cr:child child-namespace="{namespace}"><xsl:value-of select="name"/></cr:child>
+					<cr:child child-namespace="{xml-namespace}"><xsl:value-of select="name"/></cr:child>
 				</xsl:for-each>
 			</cr:children>
 		

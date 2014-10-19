@@ -138,7 +138,7 @@
 	</xsl:variable>
 
 	<xsl:variable name="consolidated-paths">
-		<xsl:for-each-group select="$all-paths/schema-element" group-by="concat(name,'+', namespace)">
+		<xsl:for-each-group select="$all-paths/schema-element" group-by="concat(name,'+', xml-namespace)">
 			<xsl:copy>
 				<xsl:copy-of select="name"/>
 				<xsl:for-each-group select="current-group()" group-by="parent">
@@ -150,17 +150,17 @@
 				<xsl:for-each-group select="belongs-to-group" group-by="text()">
 					<xsl:copy-of select="."/>
 				</xsl:for-each-group>
-				<xsl:copy-of select="namespace"/>
+				<xsl:copy-of select="xml-namespace"/>
 				<xsl:copy-of select="type"/>
 				<xsl:copy-of select="minOccurs"/>
 				<xsl:copy-of select="maxOccurs"/>
 				<xsl:copy-of select="schema-documentation"/>
 			</xsl:copy>
 		</xsl:for-each-group>
-		<xsl:for-each-group select="$all-paths/schema-group-ref" group-by="concat(referenced-group, '+', namespace)">
+		<xsl:for-each-group select="$all-paths/schema-group-ref" group-by="concat(referenced-group, '+', xml-namespace)">
 			<xsl:copy>
 				<xsl:copy-of select="referenced-group"/>
-				<xsl:copy-of select="namespace"/>
+				<xsl:copy-of select="xml-namespace"/>
 				<xsl:copy-of select="path-so-far"></xsl:copy-of>
 				<xsl:for-each-group select="current-group()" group-by="referenced-in-xpath">
 					<xsl:copy-of select="referenced-in-xpath"/>
@@ -170,19 +170,19 @@
 				</xsl:for-each-group>
 			</xsl:copy>
 		</xsl:for-each-group>
-		<xsl:for-each-group select="$all-paths/schema-group" group-by="concat(name, '+', namespace)">
+		<xsl:for-each-group select="$all-paths/schema-group" group-by="concat(name, '+', xml-namespace)">
 			<xsl:sequence select="."/>
 		</xsl:for-each-group>
-		<xsl:for-each-group select="$all-paths/schema-sequence" group-by="concat(parent, '+', namespace)">
+		<xsl:for-each-group select="$all-paths/schema-sequence" group-by="concat(parent, '+', xml-namespace)">
 			<xsl:sequence select="."/>
 		</xsl:for-each-group>
-		<xsl:for-each-group select="$all-paths/schema-choice" group-by="concat(parent, '+', namespace)">
+		<xsl:for-each-group select="$all-paths/schema-choice" group-by="concat(parent, '+', xml-namespace)">
 			<xsl:sequence select="."/>
 		</xsl:for-each-group>
-		<xsl:for-each-group select="$all-paths/schema-all" group-by="concat(parent, '+', namespace)">
+		<xsl:for-each-group select="$all-paths/schema-all" group-by="concat(parent, '+', xml-namespace)">
 			<xsl:sequence select="."/>
 		</xsl:for-each-group>
-		<xsl:for-each-group select="$all-paths/schema-attribute" group-by="concat(xpath, '+', namespace)">
+		<xsl:for-each-group select="$all-paths/schema-attribute" group-by="concat(xpath, '+', xml-namespace)">
 			<xsl:sequence select="."/>
 		</xsl:for-each-group>
 	</xsl:variable>
@@ -241,7 +241,7 @@
 		<xsl:variable name="group-set" select="sf:get-parents(tokenize($path-so-far, '/'), 'group#')"/>
 		<xsl:variable name="group-set-times-used" select="for $i in $group-set return count($combined-schemas//xs:group[@ref = normalize-space($i)])"/>
 <!--		<xsl:message select="'*** ', $psf, ' |', string-join($group-set, '\'), '|', $group-set-times-used"/>
--->		<xsl:message select="'*** ', $path-so-far"/>
+-->		<!--<xsl:message select="'*** ', $path-so-far"/>-->
 		
 		<!-- Need to detect the parent type, and see how often it is used, including as an extension base. -->
 		<!-- It an element is the child of the same parent type, we treat it as the same element, even if it has a different parent -->
@@ -341,9 +341,9 @@
 						<name>
 							<xsl:value-of select="@ref"/>
 						</name>
-						<namespace>
+						<xml-namespace>
 							<xsl:value-of select="$namespace"/>
-						</namespace>
+						</xml-namespace>
 					</schema-element>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -390,9 +390,9 @@
 			<referenced-group>
 				<xsl:value-of select="@ref"/>
 			</referenced-group>
-			<namespace>
+			<xml-namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
-			</namespace>
+			</xml-namespace>
 			<path-so-far><xsl:value-of select="$path-so-far"/></path-so-far>
 			<xsl:choose>
 
@@ -446,9 +446,9 @@
 			<name>
 				<xsl:value-of select="@name"/>
 			</name>
-			<namespace>
+			<xml-namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
-			</namespace>
+			</xml-namespace>
 		</schema-group>
 		<xsl:apply-templates>
 			<xsl:with-param name="path-so-far" select="concat($path-so-far, '/group#',@name)"/>
@@ -555,9 +555,9 @@
 			<parent>
 				<xsl:value-of select="$path-so-far"/>
 			</parent>
-			<namespace>
+			<xml-namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
-			</namespace>
+			</xml-namespace>
 			<xsl:for-each select="child::*">
 				<child child-type="{name()}" child-namespace="{namespace-uri-for-prefix(substring-before(if (@name) then @name else @ref, ':'), .)}">
 					<xsl:copy-of select="@*"/>
@@ -582,9 +582,9 @@
 			<parent>
 				<xsl:value-of select="$path-so-far"/>
 			</parent>
-			<namespace>
+			<xml-namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
-			</namespace>
+			</xml-namespace>
 			<xsl:for-each select="child::*">
 				<child child-type="{name()}">
 					<xsl:copy-of select="@*"/>
@@ -609,9 +609,9 @@
 			<parent>
 				<xsl:value-of select="$path-so-far"/>
 			</parent>
-			<namespace>
+			<xml-namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
-			</namespace>
+			</xml-namespace>
 			<xsl:for-each select="child::*">
 				<child child-type="{name()}">
 					<xsl:copy-of select="@*"/>
@@ -652,9 +652,9 @@
 		</xsl:variable>
 		<xsl:text>&#xA;</xsl:text>
 		<schema-attribute>
-			<namespace>
+			<xml-namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
-			</namespace>
+			</xml-namespace>
 			<parent>
 				<xsl:value-of select="$path-to-record"/>
 			</parent>
@@ -727,9 +727,9 @@
 			<name>
 				<xsl:value-of select="@name"/>
 			</name>
-			<namespace>
+			<xml-namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
-			</namespace>
+			</xml-namespace>
 			<type>
 				<xsl:value-of select="substring-after(@type, $target-prefix)"/>
 			</type>
