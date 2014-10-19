@@ -240,8 +240,6 @@
 		<xsl:variable name="group-times-used" select="count($combined-schemas//xs:group[@ref = $parent-group])"/>
 		<xsl:variable name="group-set" select="sf:get-parents(tokenize($path-so-far, '/'), 'group#')"/>
 		<xsl:variable name="group-set-times-used" select="for $i in $group-set return count($combined-schemas//xs:group[@ref = normalize-space($i)])"/>
-<!--		<xsl:message select="'*** ', $psf, ' |', string-join($group-set, '\'), '|', $group-set-times-used"/>
--->		<!--<xsl:message select="'*** ', $path-so-far"/>-->
 		
 		<!-- Need to detect the parent type, and see how often it is used, including as an extension base. -->
 		<!-- It an element is the child of the same parent type, we treat it as the same element, even if it has a different parent -->
@@ -250,16 +248,7 @@
 		what happens to the parent calculation? Is it just immediate parents, which you then have to trace back if you 
 		want the structure? -->	
 			
-		<xsl:variable name="path-to-record">
-<!--			<xsl:choose>-->
-<!--				<xsl:when test="($type and $times-type-used gt 1) or ($group-times-used gt 1)">
-					<xsl:value-of select="$name"/>
-				</xsl:when>-->
-<!--				<xsl:otherwise>-->
-					<xsl:value-of select="concat($path-to-record, '/', $name)"/>
-				<!--</xsl:otherwise>-->
-			<!--</xsl:choose>-->
-		</xsl:variable> 
+		<xsl:variable name="path-to-record" select="concat($path-to-record, '/', $name)"/>
 		<xsl:call-template name="element-info">
 			<xsl:with-param name="path-to-record" select="$path-to-record"/>
 			<xsl:with-param name="path-so-far" select="$path-so-far"/>
@@ -293,26 +282,6 @@
 		</xsl:choose>
 	</xsl:template>
 	
-	<!-- plain vanilla element definition -->
-	<!--<xsl:template match="xs:element">
-		<xsl:param name="path-so-far"/>
-		<xsl:param name="path-to-record"/>
-		<xsl:variable name="psf" select="concat($path-so-far, '/', @name)"/>
-		
-		<xsl:call-template name="element-info">
-			<xsl:with-param name="path-to-record" select="concat($path-to-record, '/', @name)"/>
-		</xsl:call-template>
-		<xsl:if test="contains(tokenize($path-so-far, '/')[last()], '#')">
-			<!-\- if child of type or group, also put out standalone version -\->
-			<xsl:call-template name="element-info">
-				<xsl:with-param name="path-to-record" select="concat($path-to-record, '/', @name)"/>
-			</xsl:call-template>
-		</xsl:if>
-		<xsl:apply-templates>
-			<xsl:with-param name="path-so-far" select="$psf"/>
-			<xsl:with-param name="path-to-record" select="concat($path-to-record, '/', @name)"/>
-		</xsl:apply-templates>
-	</xsl:template>-->
 	
 	<!-- element definitions that have references -->
 	<xsl:template match="xs:element[@ref]">
@@ -396,15 +365,6 @@
 			<path-so-far><xsl:value-of select="$path-so-far"/></path-so-far>
 			<xsl:choose>
 
-<!--				<xsl:when test="starts-with($path-so-far, 'group#') and contains($path-so-far, '/')">
-
-					<referenced-in-xpath>
-						<xsl:value-of select="substring-after($path-so-far, '/')"/>
-					</referenced-in-xpath>
-				</xsl:when>-->
-				
-				
-
 				<xsl:when
 					test="starts-with($path-so-far, 'group#') and not(contains($path-so-far, '/'))">
 					<referenced-in-group>
@@ -413,15 +373,11 @@
 				</xsl:when>
 
 				<xsl:when test="starts-with($path-segments[last()], 'group#')">
-<!--					<!-\- avoid infinite loops -\->
-					<xsl:if
-						test="substring-before(substring-after($path-so-far[last()], 'group#'),'/') ne @ref">-->
 						<referenced-in-group>
 							<xsl:value-of
 								select="substring-after($path-segments[last()], 'group#')"
 							/>
 						</referenced-in-group>
-<!--					</xsl:if>-->
 				</xsl:when>
 
 				<xsl:otherwise>
@@ -468,9 +424,6 @@
 		<xsl:variable name="times-used" select="count($combined-schemas//xs:element[@type = $name]) 
 			+ count($combined-schemas//xs:extension[@base = $name])"/>
 		<xsl:variable name="extending" select="substring-after(tokenize($path-so-far, '/')[last()], 'extending#')"/>
-<!--		<xsl:if test="$extending">
-			<xsl:message select="'@@@', $path-so-far, '|', $path-to-record, '|', $extending ,'|', $times-used"/>	
-		</xsl:if>-->
 	
 		<!-- guard against recusion -->
 		<xsl:if test="not(tokenize($path-so-far, '/') = concat('complexType#',@name))">
@@ -511,7 +464,6 @@
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<xsl:variable name="base" select="@base"/>
-		<!--<xsl:message select="$path-so-far, '|', $path-to-record, '|', string($base)"/>-->
 		
 		<xsl:choose>
 			<!-- deal with recursively defined elements -->	
@@ -536,14 +488,6 @@
 				</xsl:apply-templates>
 			</xsl:otherwise>
 		</xsl:choose>
-		
-		
-		
-<!--		<xsl:apply-templates select="$combined-schemas//xs:schema/xs:complexType[@name=$base]">
-			<xsl:with-param name="path-so-far" select="$path-so-far"/>
-			<xsl:with-param name="path-to-record" select="$path-to-record"/>
-		</xsl:apply-templates>-->
-
 	</xsl:template>
 
 
@@ -561,9 +505,6 @@
 			<xsl:for-each select="child::*">
 				<child child-type="{name()}" child-namespace="{namespace-uri-for-prefix(substring-before(if (@name) then @name else @ref, ':'), .)}">
 					<xsl:copy-of select="@*"/>
-<!--					<xsl:if test="@type">
-						<xsl:attribute name="type" select="@type"/>
-					</xsl:if>-->
 					<xsl:value-of select="if (@name) then @name else @ref"/>
 				</child>
 			</xsl:for-each>
@@ -588,9 +529,6 @@
 			<xsl:for-each select="child::*">
 				<child child-type="{name()}">
 					<xsl:copy-of select="@*"/>
-					<!--<xsl:if test="@type">
-						<xsl:attribute name="type" select="@type"/>
-					</xsl:if>-->
 					<xsl:value-of select="if (@name) then @name else @ref"/>
 				</child>
 			</xsl:for-each>
@@ -615,9 +553,6 @@
 			<xsl:for-each select="child::*">
 				<child child-type="{name()}">
 					<xsl:copy-of select="@*"/>
-					<!--<xsl:if test="@type">
-						<xsl:attribute name="type" select="@type"/>
-					</xsl:if>-->
 					<xsl:value-of select="if (@name) then @name else @ref"/>
 				</child>
 			</xsl:for-each>
@@ -857,20 +792,7 @@
 			<xsl:text>&#xA;</xsl:text>
 			<xsl:text>&#xA;</xsl:text>
 		</xsl:for-each>
-		<!--<xsl:call-template name="get-included-type-definitions"/>-->
 	</xsl:template>
-	<!--	
-	<xsl:template name="get-included-type-definitions">
-		<!-\- dump types from included schemas -\->
-		<xsl:for-each select="/xs:schema/xs:include">
-			<xsl:for-each select="document(@schemaLocation)/xs:schema/xs:simpleType[@name]">
-				<xsl:call-template name="type-info"/>
-			</xsl:for-each>
-			<xsl:for-each select="document(@schemaLocation)/xs:schema/xs:include"> 
-				<xsl:call-template name="get-included-type-definitions"/> 
-			</xsl:for-each>
-		</xsl:for-each>
-	</xsl:template>-->
 
 	<xsl:template name="get-base-type-references">
 		<!-- pick up built-in types used to define attributes -->
@@ -894,26 +816,4 @@
 		<!--<xsl:call-template name="get-included-base-type-references"/> -->
 	</xsl:template>
 
-	<!--	<xsl:template name="get-included-base-type-references">
-			<!-\- Now read them from all the included files -\->
-			<xsl:for-each select="/xs:schema/xs:include">
-				<xsl:for-each select="document(@schemaLocation)//xs:attribute[substring-before(@type, ':') eq $xsd-prefix]">
-					<!-\- this is a test to pick up only the first instance of any particular declared name -\->
-					<xsl:if test="generate-id(key('attribute-type',@type)[1])=generate-id()">
-						<schema-type>
-							<name>
-								<!-\- Normalize the XSD prefix to 'xs:'. -\->
-								<xsl:value-of select="concat('xs:',substring-after(@type, $xsd-prefix))"/>
-							</name>
-						</schema-type>
-						<xsl:text>&#xA;</xsl:text>
-						<xsl:text>&#xA;</xsl:text>
-					</xsl:if>
-				</xsl:for-each>		
-				<xsl:for-each select="document(@schemaLocation)/xs:schema/xs:include"> 
-					<xsl:call-template name="get-included-base-type-references"/> 
-				</xsl:for-each>
-			</xsl:for-each>
-	</xsl:template>
--->
 </xsl:stylesheet>

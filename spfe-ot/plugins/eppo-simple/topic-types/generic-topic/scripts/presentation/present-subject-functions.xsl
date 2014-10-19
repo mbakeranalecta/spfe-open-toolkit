@@ -36,6 +36,14 @@
 		<xsl:value-of select="if ($link-catalogs//lc:target[@type=$type][lc:key=$target] or esf:multi-key-match($target, $type)) then true() else false()"/>
 	</xsl:function>
 	
+	<xsl:function name="esf:target-exists" as="xs:boolean">
+		<xsl:param name="target"/>
+		<xsl:param name="type"/>
+		<xsl:param name="namespace"/>
+		<xsl:value-of select="if ($link-catalogs//lc:target[@type=$type]
+														   [lc:namespace=$namespace]
+			                                               [lc:key=$target] or esf:multi-key-match($target, $type, $namespace)) then true() else false()"/>
+	</xsl:function>
 	
 	<xsl:function name="esf:target-exists-not-self" as="xs:boolean">
 		<xsl:param name="target"/>
@@ -50,6 +58,26 @@
 
 		<xsl:variable name="in-scope-key-sets-of-this-type">
 			<xsl:for-each select="$link-catalogs//lc:target[@type=$type][lc:key-set]">
+				<target>
+					<xsl:copy-of select="lc:key-set"/>
+				</target>
+			</xsl:for-each>
+		</xsl:variable>
+		<xsl:variable name="matching-keysets" as="xs:boolean*">
+			<xsl:for-each select="$in-scope-key-sets-of-this-type/lc:target">	
+				<xsl:value-of select="lf:try-key-set($target, lc:key-set)"/>
+			</xsl:for-each>
+		</xsl:variable>
+		<xsl:value-of select="$matching-keysets=true()"/>
+	</xsl:function>
+
+	<xsl:function name="esf:multi-key-match" as="xs:boolean">
+		<xsl:param name="target"/>
+		<xsl:param name="type"/>
+		<xsl:param name="namespace"/>
+		
+		<xsl:variable name="in-scope-key-sets-of-this-type">
+			<xsl:for-each select="$link-catalogs//lc:target[@type=$type][lc:namespace=$namespace][lc:key-set]">
 				<target>
 					<xsl:copy-of select="lc:key-set"/>
 				</target>
@@ -117,22 +145,30 @@
 	<xsl:template name="output-link">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
+		<xsl:param name="namespace"/>
 		<xsl:param name="class">default</xsl:param>
 		<xsl:param name="content"/>
 		<xsl:param name="current-page-name" as="xs:string"/>
 		<xsl:param name="see-also" as="xs:boolean" select="false()"/>
+		
 
 		<!-- check that we are not linking to the current page
 		<xsl:variable name="current-page" select="if (. instance of node() and ancestor::ss:topic/@full-name) then ancestor::ss:topic/@full-name else 'no-current-page'"/> -->
 		
 		<xsl:variable name="target-page" as="node()*"> 		
 			<!-- single key lookup -->
-			<xsl:sequence select="$link-catalogs/lc:link-catalog/lc:page[lc:target/@type=$type][@full-name ne $current-page-name][lc:target/lc:key=$target]"/>	
+			<xsl:sequence select="$link-catalogs/lc:link-catalog/lc:page[lc:target/@type=$type]
+				                                                        [if($namespace) then lc:target/lc:namespace=$namespace else true()]
+				                                                        [@full-name ne $current-page-name]
+				                                                        [lc:target/lc:key=$target]"/>	
 			
 			<!-- multi-key lookup -->
-			<xsl:sequence select="$link-catalogs/lc:link-catalog/lc:page[lc:target/@type=$type][@full-name ne $current-page-name]/lc:target[lf:try-key-set($target, lc:key-set)]/.."/>	
+			<xsl:sequence select="$link-catalogs/lc:link-catalog/lc:page[lc:target/@type=$type]
+				                                                        [if($namespace) then lc:target/lc:namespace=$namespace else true()]
+				                                                        [@full-name ne $current-page-name]/lc:target[lf:try-key-set($target, lc:key-set)]/.."/>	
 		</xsl:variable>
 		
+		<!-- FIXME: Update this for namespaces? -->
 		<xsl:if test="count($target-page[1]/lc:target[@type=$type][lc:key=$target]) gt 1">
 			<xsl:call-template name="sf:warning">
 				<xsl:with-param name="message" select="'Detected a target page that contains more than one target of the same name and type. The name is:', string($target), '. The type is:', string($type), '. The topic is', string(ancestor::ss:topic/@full-name), '.'"/>
@@ -174,6 +210,7 @@
 					<xsl:with-param name="target-page" select="$highest-priority-page"/>
 					<xsl:with-param name="target" select="$target"/>
 					<xsl:with-param name="type" select="$type"/>
+					<xsl:with-param name="namespace" select="$namespace"/>
 					<xsl:with-param name="current-page-name" select="$current-page-name"/>
 					<xsl:with-param name="class" select="$class"/>
 					<xsl:with-param name="see-also" as="xs:boolean" select="$see-also"/>
@@ -197,6 +234,7 @@
 		<xsl:param name="target-page"/>
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
+		<xsl:param name="namespace"/>
 		<xsl:param name="current-page-name" as="xs:string"/>
 		<xsl:param name="class">default</xsl:param>
 		<xsl:param name="content"/>
@@ -217,7 +255,7 @@
 		
 		<xsl:variable name="target-file"  select="string($target-page/@file)"/>		
 		
-		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][@type=$type][1]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][@type=$type][1]/@anchor) else ''"/>
+		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][lc:namespace=$namespace][@type=$type][1]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][@type=$type][1]/@anchor) else ''"/>
 
 		
 		<pe:xref hint="{$type}">
@@ -312,6 +350,7 @@
 	</xsl:template>
 
 		<!--make-cross-ref template-->
+	<!-- FIXME: needs to be updated for namespaces, if it gets used at all -->
 	<xsl:template name="make-cross-ref">
 		<xsl:param name="target-page"/>
 		<xsl:param name="target"/>
@@ -358,24 +397,25 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<!-- link-xpath template -->
+	<!-- FIXME: Verify this is no longer needed.
+		<!-\- link-xpath template -\->
 	<xsl:template name="link-xpath">
 		<xsl:param name="target" as="xs:string"/>
 		<xsl:param name="link-text" as="xs:string"/>
 		
-		<!--Determine whether or not the target exists. -->
+		<!-\-Determine whether or not the target exists. -\->
 		<xsl:choose>
 			<xsl:when test="not(esf:target-exists($target, 'xpath'))">
-				<!-- if it does not exist, output warning and continue, outputting plain text -->
+				<!-\- if it does not exist, output warning and continue, outputting plain text -\->
 				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message" select="'Unknown xpath ', $target"/>
 				</xsl:call-template>
-				<!-- output plain text -->
+				<!-\- output plain text -\->
 				<xsl:value-of select="$link-text"/>
 			</xsl:when>
 			
 			<xsl:otherwise>		
-				<!-- it does exist so output a link -->
+				<!-\- it does exist so output a link -\->
 				<xsl:call-template name="output-link">
 					<xsl:with-param name="target" select="$target"/>
 					<xsl:with-param name="type">xpath</xsl:with-param>
@@ -384,7 +424,7 @@
 				
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:template>
+	</xsl:template>-->
 	
 	<xsl:function name="esf:process-placeholders" as="node()*">
 	<!-- Processes a string to determine if it contains placeholder markup in 

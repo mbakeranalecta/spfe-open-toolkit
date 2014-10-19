@@ -44,7 +44,6 @@
 		<pe:byline>
 			<pe:by-label>By </pe:by-label>
 			<pe:authors>
-				<!-- FIXME: This should be checking the link catalogs to see if there are links for authors. -->
 				<xsl:for-each select="es:name">
 					<pe:name hint="author">
 						<xsl:choose>
