@@ -46,7 +46,7 @@ Main template
 		
 		
 		<pe:pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/schemas/eppo/presentation-eppo.xsd">
+		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/eppo/schemas/presentation-eppo.xsd">
 			<pe:title>
 				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 			</pe:title>

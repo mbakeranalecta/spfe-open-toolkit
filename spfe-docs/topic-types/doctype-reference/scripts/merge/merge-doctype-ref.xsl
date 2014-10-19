@@ -63,7 +63,7 @@ Main template
 					group-by="name">
 					<xsl:apply-templates select=".">
 						<xsl:with-param name="source"
-							select="$doctype-source//ed:doctype-description"/>
+							select="$doctype-source//ed:doctype-element-description"/>
 						<xsl:with-param name="in-scope-strings" select="$strings" as="element()*"
 							tunnel="yes"/>
 					</xsl:apply-templates>
@@ -72,9 +72,9 @@ Main template
 		</xsl:result-document>
 		<!-- Warn if there are any unmatched topics in the authored content. -->
 		<!-- FIXME: Should also search for unmatched attribute definitions. -->
-		<xsl:for-each select="$doctype-source//ed:doctype-description">
+		<xsl:for-each select="$doctype-source//ed:doctype-element-description">
 			<xsl:if
-				test="not(normalize-space(ed:xpath) = $schema-defs/schema-definitions/schema-element/normalize-space(xpath))">
+				test="not(normalize-space(ed:xpath) = $schema-defs/schema-definitions/schema-element/normalize-space(name))">
 				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message"
 						select="'Authored element description found for an element not found in the schema:', normalize-space(ed:xpath)"
@@ -158,15 +158,14 @@ Main content processing templates
 			<cr:default>
 				<xsl:value-of select="default"/>
 			</cr:default>
-
 			<!-- Select and copy the authored element info. -->
-			<xsl:variable name="authored-content" select="$source[normalize-space(ed:xpath)=$xpath]"/>
+			<xsl:variable name="authored-content" select="$source[normalize-space(ed:xpath)=$name]"/>
 			<xsl:choose>
 				<xsl:when test="$authored-content[2]">
 					<xsl:call-template name="sf:error">
 						<xsl:with-param name="message"
-							select="'Duplicate doctype element description found for setting ', $xpath"
-						> </xsl:with-param>
+							select="'Duplicate doctype element description found for setting ', $name"
+						/> 
 					</xsl:call-template>
 				</xsl:when>
 				<!-- Test that the information exists. -->
@@ -188,23 +187,6 @@ Main content processing templates
 				</xsl:otherwise>
 			</xsl:choose>
 
-			<!-- Calculate children -->
-<!--			<cr:children>
-				<!-\- children by xpath -\->
-				<xsl:for-each-group
-					select="/schema-definitions/schema-element  
-							[starts-with(xpath, concat($xpath, '/'))]
-							[not(contains(substring(xpath,string-length($xpath)+2),'/'))]"
-					group-by="xpath">
-					<cr:child>
-						<xsl:value-of select="xpath"/>
-					</cr:child>
-				</xsl:for-each-group>
-				<!-\- children by group -\->
-				<xsl:call-template name="get-group-children">
-					<xsl:with-param name="xpath" select="$xpath"/>
-				</xsl:call-template>
-			</cr:children>-->
 
 			<cr:model>
 				<xsl:sequence
