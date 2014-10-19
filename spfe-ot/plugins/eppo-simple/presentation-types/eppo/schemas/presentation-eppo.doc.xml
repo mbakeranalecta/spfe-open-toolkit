@@ -28,6 +28,12 @@
                 <p>The container element for a page in <feature>EPPO</feature> output.</p>
             </description>
             <attributes>
+                <attribute>
+                    <name>name</name>
+                    <description>
+                        <p>The name of the page.</p>
+                    </description>
+                </attribute>
             </attributes>
         </doctype-element-description>
     </body>

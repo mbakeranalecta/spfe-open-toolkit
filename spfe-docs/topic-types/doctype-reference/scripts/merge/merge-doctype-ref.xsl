@@ -160,6 +160,7 @@ Main content processing templates
 			</cr:default>
 			<!-- Select and copy the authored element info. -->
 			<xsl:variable name="authored-content" select="$source[normalize-space(ed:xpath)=$name]"/>
+			<xsl:message select="'1', $authored-content"></xsl:message>
 			<xsl:choose>
 				<xsl:when test="$authored-content[2]">
 					<xsl:call-template name="sf:error">
@@ -302,16 +303,15 @@ Main content processing templates
 						</cr:maxOccurs>
 
 						<xsl:variable name="attribute-name" select="name"/>
-						<!--								<cr:doc-xpath>
-									<xsl:value-of select="concat($doc-xpath, '/@', $attribute-name)"
-									/>
-								</cr:doc-xpath>-->
+						<xsl:message select="'2', $authored-content"></xsl:message>
+						<xsl:message select="$source[normalize-space(ed:xpath)=$name]"/>
+						            
 						<xsl:variable name="authored"
-							select="$source[normalize-space(ed:xpath)=$xpath]/ed:attributes/ed:attribute[ed:name=$attribute-name]"/>
+							select="$source[normalize-space(ed:xpath)=$name]/ed:attributes/ed:attribute[ed:name=$attribute-name]"/>
 						<xsl:if test="not($authored/ed:description/*)">
 							<xsl:call-template name="sf:warning">
 								<xsl:with-param name="message"
-									select="'Doctype element description not found ', string(xpath)"
+									select="'Attribute description not found ', string(xpath)"
 								/>
 							</xsl:call-template>
 						</xsl:if>
