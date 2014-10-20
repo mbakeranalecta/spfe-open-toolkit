@@ -160,7 +160,6 @@ Main content processing templates
 			</cr:default>
 			<!-- Select and copy the authored element info. -->
 			<xsl:variable name="authored-content" select="$source[normalize-space(ed:xpath)=$name]"/>
-			<xsl:message select="'1', $authored-content"></xsl:message>
 			<xsl:choose>
 				<xsl:when test="$authored-content[2]">
 					<xsl:call-template name="sf:error">
@@ -303,8 +302,6 @@ Main content processing templates
 						</cr:maxOccurs>
 
 						<xsl:variable name="attribute-name" select="name"/>
-						<xsl:message select="'2', $authored-content"></xsl:message>
-						<xsl:message select="$source[normalize-space(ed:xpath)=$name]"/>
 						            
 						<xsl:variable name="authored"
 							select="$source[normalize-space(ed:xpath)=$name]/ed:attributes/ed:attribute[ed:name=$attribute-name]"/>
