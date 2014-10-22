@@ -34,7 +34,6 @@
 		<xsl:sequence select="/config:spfe"/>
 	</xsl:variable>
 
-
 	<!-- Build a list of doctype xpaths 
      Note: This supposes that the doctype names are unique across all 
 		 schemas in the set (which they *should* be).-->
@@ -45,7 +44,6 @@
 		</xsl:for-each>
 	</xsl:variable>
 
-
 	<!-- 
 =============
 Main template
@@ -53,7 +51,6 @@ Main template
 -->
 
 	<xsl:template name="main">
-
 		<xsl:result-document method="xml" indent="yes" omit-xml-declaration="no"
 			href="file:///{$output-directory}/merge.xml">
 			<cr:doctype-reference-entries>
@@ -107,6 +104,36 @@ Main content processing templates
 
 		<xsl:variable name="topic-type-alias"
 			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry', $config)"/>
+		
+		<xsl:message>[</xsl:message>
+		<xsl:message select="'Element name:', $name"/>
+		<xsl:choose>
+			<!-- content file contains entry matching by name alone -->
+			<xsl:when test="$source[normalize-space(ed:xpath)=$name]">
+				<xsl:message select="'%', $name"/>
+			</xsl:when>
+			<!-- content file contains entries matching by full or partial xpath -->
+			<xsl:when test="$source[tokenize(normalize-space(ed:xpath), '/')[last()]=$name]">
+				<xsl:for-each select="$source[tokenize(normalize-space(ed:xpath), '/')[last()]=$name]/ed:xpath">
+					<xsl:variable name="edxp" select="tokenize(., '/')[. ne '']"/>
+					<xsl:message select="'tested $edxp', $edxp"/>
+					<xsl:for-each select="$xpath">
+						<xsl:variable name="xp" select="tokenize(.,'/')[. ne '']"/>
+						<xsl:message select="'tested $xp', $xp"/>
+						<xsl:message select="'comparing $edxp', string-join($edxp,'/'), '=', 
+							string-join($xp[position() gt (count($xp)-count($edxp))],'/')"/>
+						<xsl:if test="string-join($edxp,'/') = string-join($xp[position() gt (count($xp)-count($edxp))],'/')">
+							<xsl:message select="'matching $edxp', string-join($edxp,'/'), '=', 
+								string-join($xp[position() gt (count($xp)-count($edxp))],'/')"/>
+						</xsl:if>
+					</xsl:for-each>
+				</xsl:for-each>
+			</xsl:when>
+		</xsl:choose>
+		<xsl:message>]</xsl:message>
+		
+		
+		
 
 		<cr:doctype-reference-entry>
 			<cr:subject-namespace>
@@ -145,13 +172,9 @@ Main content processing templates
 					</cr:parents>
 				</xsl:otherwise>
 			</xsl:choose>
-<!--			<cr:xpath>
-				<xsl:value-of select="$xpath"/>
-			</cr:xpath>-->
 			<cr:group>
 				<xsl:value-of select="$group"/>
 			</cr:group>
-
 			<cr:use>
 				<xsl:value-of select="use"/>
 			</cr:use>
@@ -172,7 +195,10 @@ Main content processing templates
 
 				<xsl:when test="exists($authored-content/ed:description/*)">
 					<xsl:apply-templates
-						select="$authored-content/ed:description, $authored-content/ed:values, $authored-content/ed:restrictions, $authored-content/ed:build-property">
+						select="$authored-content/ed:description, 
+						$authored-content/ed:values, 
+						$authored-content/ed:restrictions, 
+						$authored-content/ed:build-property">
 						<xsl:with-param name="in-scope-strings" select="$strings" as="element()*"
 							tunnel="yes"/>
 					</xsl:apply-templates>
@@ -187,11 +213,11 @@ Main content processing templates
 				</xsl:otherwise>
 			</xsl:choose>
 
-
 			<cr:model>
 				<xsl:sequence
-					select="$schema-defs//schema-sequence[parent = $xpath], //schema-choice[parent = $xpath], //schema-all[parent = $xpath]"
-				/>
+					select="$schema-defs//schema-sequence[parent = $xpath], 
+					//schema-choice[parent = $xpath], 
+					//schema-all[parent = $xpath]"/>
 			</cr:model>
 			
 			<cr:children>

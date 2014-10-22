@@ -17,7 +17,7 @@
         <doctype-element-description>
             <xpath>pages</xpath>
             <description>
-                <p>The root element of the <feature>EPPO</feature> <feature>presentation</feature> schema.</p>
+                <p>The root element of the <feature>EPPO</feature> <feature>presentation</feature> schema. In an Every Page is Page One information design, we do not create a book, but simply a collection of pages. </p>
             </description>
             <attributes>
             </attributes>
@@ -31,10 +31,24 @@
                 <attribute>
                     <name>name</name>
                     <description>
-                        <p>The name of the page.</p>
+                        <p>The name of the page. This is usually the <feature>id of the topic</feature> on which the page is based, though in some cases it may be generated, such as when the topics have been generated from material extracted from an external source.</p>
                     </description>
                 </attribute>
             </attributes>
+        </doctype-element-description>
+        <doctype-element-description>
+            <xpath>p/name</xpath>
+            <description>
+                <p>A annotation element denoting the name of a subject.</p>
+            </description>
+            <attributes></attributes>
+        </doctype-element-description>
+        <doctype-element-description>
+            <xpath>authors/name</xpath>
+            <description>
+                <p>The name of an author of the current topic.</p>
+            </description>
+            <attributes></attributes>
         </doctype-element-description>
     </body>
 </doctype-element-descriptions>

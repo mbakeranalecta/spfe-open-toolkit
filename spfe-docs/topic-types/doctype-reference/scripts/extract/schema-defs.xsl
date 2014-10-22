@@ -11,12 +11,9 @@
 	schema-defs.xsl
 	
 	Reads a schema and pulls out the elements, attributes, and simple types 
-	 This stylesheet starts from the element named in the "start-from" variable. 
-	 This variable can be set from the command line to build a report for one of
-	 the sub-schemas. Elements and attributes defined in included schemas are 
-	 read.
+	Elements and attributes defined in included schemas are read.
 	 
-	 This stylesheet creates a full xpath to every possible combination of elements and 
+	This stylesheet creates a full xpath to every possible combination of elements and 
 	attributes. That is, it unfolds all types and references. An element or attribute that is 
 	defined once and used many times will appear as a separate element or attribute here,
 	distinguished from other instances by the full xpath of the place it is used. In other words,
@@ -60,11 +57,6 @@
 			<xsl:text>:</xsl:text>
 		</xsl:if>
 	</xsl:variable>
-
-	<!-- default to starting from the first element defined -->
-	<xsl:param name="start-from">
-		<xsl:value-of select="xs:schema/xs:element[1]/@name"/>
-	</xsl:param>
 
 	<xsl:param name="sources-to-extract-content-from"/>
 	<xsl:variable name="schema" select="sf:get-sources($sources-to-extract-content-from)"/>
@@ -113,32 +105,15 @@
 			</xsl:if>
 		</xsl:for-each>
 
-		<!--<xsl:apply-templates select="$combined-schemas//xs:schema/xs:group"/>-->
-		<!--<xsl:call-template name="get-included-group-defs"/>-->
-
-		<!-- get the definitions of all groups that are defined
-			<xsl:apply-templates select="/xs:schema/xs:group"/> -->
-
-		<!-- get the definitions from included files and their included files 
-			<xsl:for-each select="/xs:schema/xs:include/document(@schemaLocation)">
-				<xsl:apply-templates select="/xs:schema/xs:group"/>
-				<xsl:for-each select="/xs:schema/xs:include/document(@schemaLocation)">
-					<xsl:apply-templates select="/xs:schema/xs:group"/>
-				</xsl:for-each>
-			</xsl:for-each>-->
-
-
-
 		<!-- get the definitions of all the types that are defined -->
 		<xsl:call-template name="get-type-definitions"/>
 
 		<!-- get the names of all the base types that are used -->
 		<xsl:call-template name="get-base-type-references"/>
-
 	</xsl:variable>
 
 	<xsl:variable name="consolidated-paths">
-		<xsl:for-each-group select="$all-paths/schema-element" group-by="concat(name,'+', xml-namespace)">
+		<xsl:for-each-group select="$all-paths/schema-element" group-by="concat(name,'+', xml-namespace, '+', type)">
 			<xsl:copy>
 				<xsl:copy-of select="name"/>
 				<xsl:for-each-group select="current-group()" group-by="parent">
@@ -201,22 +176,10 @@
 		</xsl:result-document>
 	</xsl:template>
 
-
-
-	<xsl:key name="attribute-type" match="xs:attribute" use="@type"/>
-
 	<xsl:template match="xs:schema">
 		<xsl:apply-templates/>
 	</xsl:template>
 
-	<!--	<!-\- recursively search all included schemas -\->
-	<xsl:template name="get-included-group-defs">
-		<xsl:apply-templates select="/xs:schema/xs:group"/>
-		<xsl:for-each select="/xs:schema/xs:include/document(@schemaLocation)">
-			<xsl:call-template name="get-included-group-defs"/>
-		</xsl:for-each>
-	</xsl:template>-->
-	
 	<xsl:function name="sf:get-parents" as="xs:string*">
 		<xsl:param name="segments" as="xs:string*"/>
 		<xsl:param name="parent-prefix" as="xs:string"/>
@@ -281,7 +244,6 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	
 	
 	<!-- element definitions that have references -->
 	<xsl:template match="xs:element[@ref]">
@@ -348,14 +310,13 @@
 		</xsl:choose>
 	</xsl:template>
 
-
 	<!-- group definitions that have references -->
 	<xsl:template match="xs:group[@ref]">
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
 		<xsl:variable name="ref" select="substring-after(@ref,$target-prefix)"/>
 		<xsl:variable name="path-segments" select="tokenize($path-so-far, '/')"/>
-		<schema-group-ref>!
+		<schema-group-ref>
 			<referenced-group>
 				<xsl:value-of select="@ref"/>
 			</referenced-group>
@@ -375,8 +336,7 @@
 				<xsl:when test="starts-with($path-segments[last()], 'group#')">
 						<referenced-in-group>
 							<xsl:value-of
-								select="substring-after($path-segments[last()], 'group#')"
-							/>
+								select="substring-after($path-segments[last()], 'group#')"/>
 						</referenced-in-group>
 				</xsl:when>
 
@@ -391,9 +351,7 @@
 			<xsl:with-param name="path-so-far" select="$path-so-far"/>
 			<xsl:with-param name="path-to-record" select="$path-to-record"/>
 		</xsl:apply-templates>
-
 	</xsl:template>
-
 
 	<xsl:template match="xs:group">
 		<xsl:param name="path-so-far"/>
@@ -411,10 +369,6 @@
 			<xsl:with-param name="path-to-record" select="$path-to-record"/>
 		</xsl:apply-templates>
 	</xsl:template>
-
-
-
-
 
 	<!-- complexType definition -->
 	<xsl:template match="xs:complexType[@name]">
@@ -444,10 +398,8 @@
 					</xsl:apply-templates>
 				</xsl:otherwise>
 			</xsl:choose>
-
 		</xsl:if>
 	</xsl:template>
-
 
 	<!-- complexType definition - just call apply-templates to pick up definitions -->
 	<xsl:template match="xs:complexType">
@@ -490,7 +442,6 @@
 		</xsl:choose>
 	</xsl:template>
 
-
 	<xsl:template match="xs:sequence">
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
@@ -503,7 +454,8 @@
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</xml-namespace>
 			<xsl:for-each select="child::*">
-				<child child-type="{name()}" child-namespace="{namespace-uri-for-prefix(substring-before(if (@name) then @name else @ref, ':'), .)}">
+				<child child-type="{name()}" 
+					child-namespace="{namespace-uri-for-prefix(substring-before(if (@name) then @name else @ref, ':'), .)}">
 					<xsl:copy-of select="@*"/>
 					<xsl:value-of select="if (@name) then @name else @ref"/>
 				</child>
@@ -697,8 +649,6 @@
 	<xsl:template match="xs:*">
 		<xsl:param name="path-so-far"/>
 		<xsl:param name="path-to-record"/>
-
-
 		<xsl:apply-templates>
 			<xsl:with-param name="path-so-far" select="$path-so-far"/>
 			<xsl:with-param name="path-to-record" select="$path-to-record"/>
@@ -707,7 +657,6 @@
 
 	<!-- ignore annotations - prevents extraneous text in output -->
 	<xsl:template match="xs:annotation"/>
-
 
 	<!-- "type" mode templates -->
 	<xsl:template mode="type" match="xs:annotation/xs:documentation">
@@ -813,7 +762,6 @@
 			<xsl:text>&#xA;</xsl:text>
 			<xsl:text>&#xA;</xsl:text>
 		</xsl:for-each>
-		<!--<xsl:call-template name="get-included-base-type-references"/> -->
 	</xsl:template>
 
 </xsl:stylesheet>
