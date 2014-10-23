@@ -5,8 +5,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set>
-        <topic-set-id>spfe-user-concepts</topic-set-id>
-        <topic-set-type>guide</topic-set-type>
+        <topic-set-id>spfe-user-essay</topic-set-id>
+        <topic-set-type>essays</topic-set-type>
 
         <topic-types>
             <topic-type>
@@ -30,7 +30,7 @@
 
         <sources>
             <authored-content>
-                <include>../../content/text/concepts/*.xml</include>
+                <include>../../content/text/essays/*.xml</include>
             </authored-content>
         </sources>
 

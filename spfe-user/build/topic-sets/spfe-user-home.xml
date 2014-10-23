@@ -7,7 +7,7 @@
 
     <topic-set>
         <topic-set-id>spfe-user-home</topic-set-id>
-        <topic-set-type>docset</topic-set-type>
+        <topic-set-type>home</topic-set-type>
         <topic-types>
 
                 <topic-type>

@@ -8,10 +8,10 @@
         <doc-set-id>spfe-user</doc-set-id>
         <title>Using the SPFE Open Toolkit</title>
         <topic-set-type-order>
-            <topic-set-type>docset</topic-set-type>
-            <topic-set-type>essay</topic-set-type>
-            <topic-set-type>guide</topic-set-type>
-            <topic-set-type>task</topic-set-type>
+            <topic-set-type>home</topic-set-type>
+            <topic-set-type>concepts</topic-set-type>
+            <topic-set-type>tasks</topic-set-type>
+            <topic-set-type>essays</topic-set-type>
             <topic-set-type>reference</topic-set-type>
             <topic-set-type>list</topic-set-type>
         </topic-set-type-order>
@@ -30,8 +30,18 @@
             </topic-set>
 
             <topic-set>
-                <topic-set-id>spfe-user-guides</topic-set-id>
-                <href>topic-sets/spfe-user-guides.xml</href>
+                <topic-set-id>spfe-user-tasks</topic-set-id>
+                <href>topic-sets/spfe-user-tasks.xml</href>
+            </topic-set>
+
+            <topic-set>
+                <topic-set-id>spfe-user-essays</topic-set-id>
+                <href>topic-sets/spfe-user-essays.xml</href>
+            </topic-set>
+
+            <topic-set>
+                <topic-set-id>spfe-user-reference</topic-set-id>
+                <href>topic-sets/spfe-user-reference.xml</href>
             </topic-set>
 
         </topic-sets>

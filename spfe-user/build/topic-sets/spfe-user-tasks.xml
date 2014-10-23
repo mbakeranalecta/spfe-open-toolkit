@@ -5,14 +5,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set>
-        <topic-set-id>spfe-user-guides</topic-set-id>
-        <topic-set-type>guide</topic-set-type>
+        <topic-set-id>spfe-user-tasks</topic-set-id>
+        <topic-set-type>tasks</topic-set-type>
 
         <topic-types>
-            <topic-type>
-                <name>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic</name>
-                <href>../../../spfe-docs/topic-types/generic-topic/config.xml</href>
-            </topic-type>    
             <topic-type>
                 <name>{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic</name>
                 <href>../../../spfe-docs/topic-types/think-plan-do-topic/config.xml</href>
@@ -32,7 +28,7 @@
 
         <sources>
             <authored-content>
-                <include>../../content/text/guides/*.xml</include>
+                <include>../../content/text/tasks/*.xml</include>
             </authored-content>
         </sources>
 
