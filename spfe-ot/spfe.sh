@@ -5,9 +5,7 @@
 
 if [ -e "$1" ]; then
 
-    if [ $SPFE_BUILD_DIR == ""]; then 
-        SPFE_BUILD_DIR=$HOME/spfebuild 
-    fi
+    SPFE_BUILD_DIR=${SPFE_BUILD_DIR:=$HOME/spfebuild}
 
     echo "Building in directory: $SPFE_BUILD_DIR"
     mkdir $SPFE_BUILD_DIR
