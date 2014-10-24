@@ -102,7 +102,7 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="title"  type="title_type"/>
+      <xs:element name="title" type="other_title_type"/>
       <xs:element minOccurs="0" name="toc">
         <xs:complexType>
           <xs:sequence>
@@ -178,7 +178,7 @@
   </xs:complexType>
   <xs:complexType name="precis_type">
     <xs:sequence>
-      <xs:element name="title"  type="title_type"/>
+      <xs:element name="title" type="title_type"/>
       <xs:group maxOccurs="unbounded" ref="basic-text-structure-group"/>
     </xs:sequence>
   </xs:complexType>
@@ -186,7 +186,7 @@
   <xs:complexType name="section_type">
     <xs:sequence>
       <xs:element name="anchor" type="anchor_type"/>
-      <xs:element name="title"  type="title_type"/>
+      <xs:element name="title" type="title_type"/>
       <xs:group maxOccurs="unbounded" ref="text-structure-group"/>
     </xs:sequence>
   </xs:complexType>
@@ -331,4 +331,7 @@
     </xs:choice>
 
   </xs:group>
+  <xs:simpleType name="other_title_type">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
 </xs:schema>

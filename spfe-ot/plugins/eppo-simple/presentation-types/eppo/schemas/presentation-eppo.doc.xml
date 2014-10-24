@@ -15,7 +15,7 @@
     </head>
     <body>
         <doctype-element-description>
-            <xpath>pages</xpath>
+            <name>pages</name>
             <description>
                 <p>The root element of the <feature>EPPO</feature> <feature>presentation</feature> schema. In an Every Page is Page One information design, we do not create a book, but simply a collection of pages. </p>
             </description>
@@ -23,7 +23,7 @@
             </attributes>
         </doctype-element-description>
         <doctype-element-description>
-            <xpath>page</xpath>
+            <name>page</name>
             <description>
                 <p>The container element for a page in <feature>EPPO</feature> output.</p>
             </description>
@@ -37,14 +37,16 @@
             </attributes>
         </doctype-element-description>
         <doctype-element-description>
-            <xpath>p/name</xpath>
+            <name>name</name>
+            <parent>/p</parent>
             <description>
                 <p>A annotation element denoting the name of a subject.</p>
             </description>
             <attributes></attributes>
         </doctype-element-description>
         <doctype-element-description>
-            <xpath>authors/name</xpath>
+            <name>name</name>
+            <parent>/authors</parent>
             <description>
                 <p>The name of an author of the current topic.</p>
             </description>

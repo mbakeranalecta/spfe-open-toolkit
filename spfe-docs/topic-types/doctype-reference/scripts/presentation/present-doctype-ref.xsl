@@ -84,11 +84,10 @@
 				<!-- it does exist so output a link -->
 				<xsl:variable name="href">
 					<xsl:value-of
-						select="if (contains($target, '/@')) 
-				then 		
-					translate(substring-before($target, '/@'), '/:', '__' )
-				else
-					translate($target, '/:', '__' )"/>
+						select="
+				if (contains($target, '/@')) 
+				then translate(substring-before($target, '/@'), '/:', '__' )
+				else translate($target, '/:', '__' )"/>
 					<xsl:text>.html</xsl:text>
 					<xsl:if test="contains($target, '/@')">
 						<xsl:text>#</xsl:text>
@@ -115,11 +114,36 @@
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
 		<xsl:variable name="subject-namespace" select="subject-namespace"/>
+		<xsl:variable name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+		<xsl:variable name="this" select="."/>
 
-		<pe:page type="API" name="{translate(name, '/:', '__')}">
+		<pe:page type="API" name="{ancestor::ss:topic/@local-name}">
 			<xsl:call-template name="show-header"/>
 			<pe:title>Element: <xsl:value-of select="$name"/></pe:title>
-
+			
+			<xsl:if test="../../*/doctype-reference-entry[name=$name][not(. is $this)]">
+				<pe:labeled-item>
+					<pe:label>See also</pe:label>
+					<pe:item>
+						<pe:ul>
+							<xsl:for-each select="../../*/doctype-reference-entry[name=$name][not(. is $this)]">
+							<pe:li>
+								<pe:p>
+									<xsl:call-template name="output-link">
+										<xsl:with-param name="target" select="parent::ss:topic/@full-name"/>
+										<xsl:with-param name="type" select="'topic'"/>
+										<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
+										<xsl:with-param name="namespace" select="$subject-namespace"/>
+										<xsl:with-param name="content" select="name/text()"/>
+										<xsl:with-param name="current-page-name" select="$current-page-name"/>
+									</xsl:call-template>
+								</pe:p>
+							</pe:li>
+						</xsl:for-each>
+						</pe:ul>
+					</pe:item>
+				</pe:labeled-item>
+			</xsl:if>
 			<pe:labeled-item>
 				<pe:label>XML Namespace</pe:label>
 				<pe:item>

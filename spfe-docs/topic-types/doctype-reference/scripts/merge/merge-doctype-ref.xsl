@@ -55,16 +55,13 @@ Main template
 			href="file:///{$output-directory}/merge.xml">
 			<cr:doctype-reference-entries>
 
-				<!-- Use for-each-group to filter out duplicate xpaths FIXME: there may not be duplictes if we use names-->
-				<xsl:for-each-group select="$schema-defs/schema-definitions/schema-element"
-					group-by="name">
-					<xsl:apply-templates select=".">
+
+					<xsl:apply-templates select="$schema-defs/schema-definitions/schema-element">
 						<xsl:with-param name="source"
 							select="$doctype-source//ed:doctype-element-description"/>
 						<xsl:with-param name="in-scope-strings" select="$strings" as="element()*"
 							tunnel="yes"/>
 					</xsl:apply-templates>
-				</xsl:for-each-group>
 			</cr:doctype-reference-entries>
 		</xsl:result-document>
 		<!-- Warn if there are any unmatched topics in the authored content. -->
@@ -90,6 +87,7 @@ Main content processing templates
 	<!-- Schema element template -->
 	<xsl:template match="schema-element">
 		<xsl:param name="source"/>
+		<xsl:variable name="this-element" select="."/>
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="group" select="belongs-to-group"/>
 		<xsl:variable name="name" select="name"/>
@@ -109,26 +107,25 @@ Main content processing templates
 		<xsl:message select="'Element name:', $name"/>
 		<xsl:choose>
 			<!-- content file contains entry matching by name alone -->
-			<xsl:when test="$source[normalize-space(ed:xpath)=$name]">
-				<xsl:message select="'%', $name"/>
+			<xsl:when test="count($source[normalize-space(ed:name)=$name]) eq 1">
+				<xsl:message select="'Found single: ', $name"/>
 			</xsl:when>
 			<!-- content file contains entries matching by full or partial xpath -->
-			<xsl:when test="$source[tokenize(normalize-space(ed:xpath), '/')[last()]=$name]">
-				<xsl:for-each select="$source[tokenize(normalize-space(ed:xpath), '/')[last()]=$name]/ed:xpath">
-					<xsl:variable name="edxp" select="tokenize(., '/')[. ne '']"/>
-					<xsl:message select="'tested $edxp', $edxp"/>
-					<xsl:for-each select="$xpath">
-						<xsl:variable name="xp" select="tokenize(.,'/')[. ne '']"/>
-						<xsl:message select="'tested $xp', $xp"/>
-						<xsl:message select="'comparing $edxp', string-join($edxp,'/'), '=', 
-							string-join($xp[position() gt (count($xp)-count($edxp))],'/')"/>
-						<xsl:if test="string-join($edxp,'/') = string-join($xp[position() gt (count($xp)-count($edxp))],'/')">
-							<xsl:message select="'matching $edxp', string-join($edxp,'/'), '=', 
-								string-join($xp[position() gt (count($xp)-count($edxp))],'/')"/>
-						</xsl:if>
-					</xsl:for-each>
+			<xsl:when test="count($source[normalize-space(ed:name)=$name]) gt 1">
+				<xsl:message select="'Found multiple: '"/>
+				<xsl:for-each select="$source[normalize-space(ed:name)=$name]/ed:parent">
+					<xsl:variable name="p" select="normalize-space(.)"/>
+					<xsl:message select="'Trying:', $p"/>
+					<xsl:if test="$this-element/parent[ends-with(.,$p)]">
+						<xsl:message select="'Found:', $this-element/parent[ends-with(.,$p)]"/>
+					</xsl:if>
+					<!-- Need to check for not matched parents -->
+					<!-- Need to check for parents matched more than once -->
 				</xsl:for-each>
 			</xsl:when>
+			<xsl:otherwise>
+				<xsl:message>Not found.</xsl:message>
+			</xsl:otherwise>
 		</xsl:choose>
 		<xsl:message>]</xsl:message>
 		

@@ -23,7 +23,7 @@ Main content processing templates
 
 	<!-- Schema element template -->
 	<xsl:template match="doctype-reference-entry">
-		<xsl:variable name="topic-name" select="sf:title-to-anchor(name)"/>
+		<xsl:variable name="topic-name" select="sf:title-to-anchor(concat(name,'_',type))"/>
 		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
 		<xsl:variable name="element-name" select="name"/>
 		
