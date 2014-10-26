@@ -10,11 +10,11 @@
         systemIdStartString="http://spfeopentoolkit.org/spfe-user/" 
         rewritePrefix="./" />
     <rewriteURI 
-        uriStartString="http://spfeopentoolkit.org/spfe-docs/" 
-        rewritePrefix="../spfe-docs"/>
+        uriStartString="http://spfeopentoolkit.org" 
+        rewritePrefix="../" />
     <rewriteSystem
-        systemIdStartString="http://spfeopentoolkit.org/spfe-docs/" 
-        rewritePrefix="../spfe-docs" />
+        systemIdStartString="http://spfeopentoolkit.org/" 
+        rewritePrefix="../" />
     <nextCatalog 
         catalog="../spfe-ot/plugins/catalog.xml"/>
 </catalog>

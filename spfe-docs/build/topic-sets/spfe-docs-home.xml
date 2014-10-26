@@ -11,8 +11,8 @@
         <topic-types>
 
                 <topic-type>
-                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}docset-home-topic</name>
-                    <href>../../topic-types/docset-home-topic/config.xml</href>
+                    <name>{http://spfeopentoolkit.org/ns/eppo-simple}docset-home-topic</name>
+                    <href>../../../spfe-ot/plugins/topic-types/docset-home-topic/config.xml</href>
                 </topic-type>
             
         </topic-types>

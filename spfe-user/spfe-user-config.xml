@@ -9,11 +9,11 @@
         <title>Using the SPFE Open Toolkit</title>
         <topic-set-type-order>
             <topic-set-type>home</topic-set-type>
-            <topic-set-type>concepts</topic-set-type>
-            <topic-set-type>tasks</topic-set-type>
-            <topic-set-type>essays</topic-set-type>
+            <topic-set-type>understand</topic-set-type>
+            <topic-set-type>operate</topic-set-type>
+            <topic-set-type>author</topic-set-type>
             <topic-set-type>reference</topic-set-type>
-            <topic-set-type>list</topic-set-type>
+            <topic-set-type>index</topic-set-type>
         </topic-set-type-order>
        
         <home-topic-set>spfe-user-home</home-topic-set>
@@ -23,79 +23,39 @@
                 <topic-set-id>spfe-user-home</topic-set-id>
                 <href>topic-sets/spfe-user-home.xml</href>
             </topic-set>
-
+  
             <topic-set>
-                <topic-set-id>spfe-user-concepts</topic-set-id>
-                <href>topic-sets/spfe-user-concepts.xml</href>
+                <topic-set-id>spfe-user-understand</topic-set-id>
+                <href>topic-sets/spfe-user-understand.xml</href>
             </topic-set>
 
             <topic-set>
-                <topic-set-id>spfe-user-tasks</topic-set-id>
-                <href>topic-sets/spfe-user-tasks.xml</href>
+                <topic-set-id>spfe-user-operate</topic-set-id>
+                <href>topic-sets/spfe-user-operate.xml</href>
             </topic-set>
 
             <topic-set>
-                <topic-set-id>spfe-user-essays</topic-set-id>
-                <href>topic-sets/spfe-user-essays.xml</href>
-            </topic-set>
+                <topic-set-id>spfe-user-author</topic-set-id>
+                <href>topic-sets/spfe-user-author.xml</href>
+            </topic-set>          
 
             <topic-set>
-                <topic-set-id>spfe-user-reference</topic-set-id>
-                <href>topic-sets/spfe-user-reference.xml</href>
+                <topic-set-id>spfe-user-index</topic-set-id>
+                <href>topic-sets/spfe-user-index.xml</href>
             </topic-set>
 
         </topic-sets>
-        
+
         <subject-types>
+            
             <subject-type>
-                <id>config-setting</id>
+                <id>directory-name</id>
                 <aliases>
-                    <singular>Configuration setting</singular>
-                    <plural>Configuration settings</plural>
+                    <singular>Directory</singular>
+                    <plural>Directories</plural>
                 </aliases>
             </subject-type>
-            <subject-type>
-                <id>spfe-build-property</id>
-                <aliases>
-                    <singular>Build property</singular>
-                    <plural>Build properties</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>feature</id>
-                <aliases>
-                    <singular>Feature</singular>
-                    <plural>Features</plural>
-                </aliases> 
-            </subject-type>
-            <subject-type>
-                <id>xslt-function-reference-entry</id>
-                <aliases>
-                    <singular>SPFE function</singular>
-                    <plural>SPFE functions</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>xslt-function-name</id>
-                <aliases>
-                    <singular>XSLT function</singular>
-                    <plural>XSLT functions</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>task</id>
-                <aliases>
-                    <singular>Task</singular>
-                    <plural>Tasks</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>file-name</id>
-                <aliases>
-                    <singular>File name</singular>
-                    <plural>File names</plural>
-                </aliases>
-            </subject-type>
+            
             <subject-type>
                 <id>document-name</id>
                 <aliases>
@@ -103,13 +63,87 @@
                     <plural>Document names</plural>
                 </aliases>
             </subject-type>
+            
+            <subject-type>
+                <id>feature</id>
+                <aliases>
+                    <singular>Feature</singular>
+                    <plural>Features</plural>
+                </aliases> 
+            </subject-type>
+            
+            <subject-type>
+                <id>file-name</id>
+                <aliases>
+                    <singular>File name</singular>
+                    <plural>File names</plural>
+                </aliases>
+            </subject-type>
+            
+            <subject-type>
+                <id>product-name</id>
+                <aliases>
+                    <singular>Product</singular>
+                    <plural>Products</plural>
+                </aliases>
+            </subject-type>
+
+            <subject-type>
+                <id>task</id>
+                <aliases>
+                    <singular>Task</singular>
+                    <plural>Tasks</plural>
+                </aliases>
+            </subject-type>
+
+            <subject-type>
+                <id>term</id>
+                <aliases>
+                    <singular>Term</singular>
+                    <plural>Terms</plural>
+                </aliases>
+            </subject-type>
+            
+            <subject-type>
+                <id>tool-name</id>
+                <aliases>
+                    <singular>Tool</singular>
+                    <plural>Tools</plural>
+                </aliases>
+            </subject-type>
+            
+            <subject-type>
+                <id>config-setting</id>
+                <aliases>
+                    <singular>Configuration setting</singular>
+                    <plural>Configuration settings</plural>
+                </aliases>
+            </subject-type>
+ 
             <subject-type>
                 <id>xml-element-name</id>
                 <aliases>
-                    <singular>XML element name</singular>
-                    <plural>XML element names</plural>
+                    <singular>XML element</singular>
+                    <plural>XML elements</plural>
                 </aliases>
             </subject-type>
+            
+            <subject-type>
+                <id>xml-attribute-name</id>
+                <aliases>
+                    <singular>XML attribute</singular>
+                    <plural>XML attributes</plural>
+                </aliases>
+            </subject-type>
+        
+            <subject-type>
+                <id>xml-namespace-uri</id>
+                <aliases>
+                    <singular>XML namespace</singular>
+                    <plural>XML namespaces</plural>
+                </aliases>
+            </subject-type>
+        
         </subject-types>
 
         <messages>warning info</messages>
