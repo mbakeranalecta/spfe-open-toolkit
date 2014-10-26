@@ -183,6 +183,7 @@
 					<xsl:when test="$content">
 						<xsl:sequence select="$content"/>
 					</xsl:when>
+					<!-- Is this ever the right thing to do. Can cause side effects depending on where called from. -->
 					<xsl:otherwise>
 						<xsl:apply-templates/>
 					</xsl:otherwise>

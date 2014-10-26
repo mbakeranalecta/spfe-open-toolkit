@@ -54,14 +54,12 @@ Main template
 		<xsl:result-document method="xml" indent="yes" omit-xml-declaration="no"
 			href="file:///{$output-directory}/merge.xml">
 			<cr:doctype-reference-entries>
-
-
-					<xsl:apply-templates select="$schema-defs/schema-definitions/schema-element">
-						<xsl:with-param name="source"
-							select="$doctype-source//ed:doctype-element-description"/>
-						<xsl:with-param name="in-scope-strings" select="$strings" as="element()*"
-							tunnel="yes"/>
-					</xsl:apply-templates>
+				<xsl:apply-templates select="$schema-defs/schema-definitions/schema-element">
+					<xsl:with-param name="source"
+						select="$doctype-source//ed:doctype-element-description"/>
+					<xsl:with-param name="in-scope-strings" select="$strings" as="element()*"
+						tunnel="yes"/>
+				</xsl:apply-templates>
 			</cr:doctype-reference-entries>
 		</xsl:result-document>
 		<!-- Warn if there are any unmatched topics in the authored content. -->
@@ -103,83 +101,94 @@ Main content processing templates
 		<xsl:variable name="topic-type-alias"
 			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry', $config)"/>
 		
-		<xsl:message>[</xsl:message>
-		<xsl:message select="'Element name:', $name"/>
+
 		<xsl:choose>
 			<!-- content file contains entry matching by name alone -->
-			<xsl:when test="count($source[normalize-space(ed:name)=$name]) eq 1">
-				<xsl:message select="'Found single: ', $name"/>
+			<xsl:when test="count($source[normalize-space(ed:name)=$name]) le 1">
+				<xsl:call-template name="doctype-reference-entry">
+					<xsl:with-param name="this-element" select="$this-element"/>
+					<xsl:with-param name="source" select="$source"/>
+				</xsl:call-template>
 			</xsl:when>
 			<!-- content file contains entries matching by full or partial xpath -->
-			<xsl:when test="count($source[normalize-space(ed:name)=$name]) gt 1">
-				<xsl:message select="'Found multiple: '"/>
+			<xsl:otherwise>
 				<xsl:for-each select="$source[normalize-space(ed:name)=$name]/ed:parent">
 					<xsl:variable name="p" select="normalize-space(.)"/>
-					<xsl:message select="'Trying:', $p"/>
 					<xsl:if test="$this-element/parent[ends-with(.,$p)]">
-						<xsl:message select="'Found:', $this-element/parent[ends-with(.,$p)]"/>
+						<xsl:call-template name="doctype-reference-entry">
+							<xsl:with-param name="parent" select="$p"/>
+							<xsl:with-param name="this-element" select="$this-element"/>
+							<xsl:with-param name="source" select="$source"/>
+						</xsl:call-template>
 					</xsl:if>
 					<!-- Need to check for not matched parents -->
 					<!-- Need to check for parents matched more than once -->
 				</xsl:for-each>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:message>Not found.</xsl:message>
 			</xsl:otherwise>
 		</xsl:choose>
-		<xsl:message>]</xsl:message>
+	</xsl:template>
+	
+	<xsl:template name="doctype-reference-entry">
+		<xsl:param name="parent"/>
+		<xsl:param name="source"/>
+		<xsl:param name="this-element"/>
+		<xsl:variable name="xpath" select="$this-element/xpath"/>
+		<xsl:variable name="group" select="$this-element/belongs-to-group"/>
+		<xsl:variable name="name" select="$this-element/name"/>
 		
+		<!-- determine the doctype by comparing the xpath of this element to the 
+			 xpath of each of the document root elements -->
+		<xsl:variable name="doctype"
+			select="$doctypes/doctype[starts-with($xpath[1], @xpath)][1]/@name"/>		
 		
-		
-
 		<cr:doctype-reference-entry>
 			<cr:subject-namespace>
-				<xsl:value-of select="concat(xml-namespace, '#', if (normalize-space(parent[1])) then tokenize(parent[1],'/')[. ne ''][1] else $name)"/>
+				<xsl:value-of select="concat($this-element/xml-namespace, '#', if (normalize-space($this-element/parent[1])) then tokenize($this-element/parent[1],'/')[. ne ''][1] else $name)"/>
 			</cr:subject-namespace>
 			<cr:name>
-				<xsl:value-of select="name"/>
+				<xsl:value-of select="$this-element/name"/>
 			</cr:name>
 			<cr:type>
-				<xsl:value-of select="type"/>
+				<xsl:value-of select="$this-element/type"/>
 			</cr:type>
 			<cr:xml-namespace>
-				<xsl:value-of select="xml-namespace"/>
+				<xsl:value-of select="$this-element/xml-namespace"/>
 			</cr:xml-namespace>
 			<cr:doctype>
 				<xsl:value-of select="$doctype"/>
 			</cr:doctype>
-			<xsl:choose>
-				<xsl:when test="xpath = name">
-					<cr:parents>
-						<xsl:for-each
-							select="$schema-defs//schema-sequence[child=$name], $schema-defs//schema-choice[child=$name], $schema-defs//schema-all[child=$name]">
-							<cr:parent>
-								<xsl:value-of select="parent"/>
-							</cr:parent>
-						</xsl:for-each>
-					</cr:parents>
-				</xsl:when>
-				<xsl:otherwise>
-					<cr:parents>
-						<xsl:for-each select="$xpath">
-						<cr:parent>
-							<xsl:value-of select="string-join(tokenize(., '/')[position() ne last()],'/')"/>
-						</cr:parent>
-						</xsl:for-each>
-					</cr:parents>
-				</xsl:otherwise>
-			</xsl:choose>
+			
+			<cr:parents>
+				<xsl:for-each
+					select="if (normalize-space($parent)) then $this-element/parent[ends-with(.,$parent)] else $this-element/parent">
+					<cr:parent>
+						<xsl:value-of select="."/>
+					</cr:parent>
+				</xsl:for-each>
+			</cr:parents>
 			<cr:group>
 				<xsl:value-of select="$group"/>
 			</cr:group>
 			<cr:use>
-				<xsl:value-of select="use"/>
+				<xsl:value-of select="$this-element/use"/>
 			</cr:use>
 			<cr:default>
-				<xsl:value-of select="default"/>
+				<xsl:value-of select="$this-element/default"/>
 			</cr:default>
 			<!-- Select and copy the authored element info. -->
-			<xsl:variable name="authored-content" select="$source[normalize-space(ed:xpath)=$name]"/>
+			<xsl:value-of select="'$parent', $parent, 'parent'"/>
+			
+			<xsl:variable name="authored-content">
+				<xsl:choose>
+					<xsl:when test="normalize-space($parent)">
+						<xsl:sequence select="$source[normalize-space(ed:name)=$name][ed:parent=$parent]"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:sequence select="$source[normalize-space(ed:name)=$name]"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+			<xsl:copy-of select=" $authored-content"/>
 			<xsl:choose>
 				<xsl:when test="$authored-content[2]">
 					<xsl:call-template name="sf:error">
@@ -189,18 +198,13 @@ Main content processing templates
 					</xsl:call-template>
 				</xsl:when>
 				<!-- Test that the information exists. -->
-
-				<xsl:when test="exists($authored-content/ed:description/*)">
-					<xsl:apply-templates
-						select="$authored-content/ed:description, 
-						$authored-content/ed:values, 
-						$authored-content/ed:restrictions, 
-						$authored-content/ed:build-property">
+				<xsl:when test="exists($authored-content/ed:doctype-element-description/ed:description/*)">
+					<xsl:apply-templates select="$authored-content/ed:doctype-element-description/ed:description">
 						<xsl:with-param name="in-scope-strings" select="$strings" as="element()*"
 							tunnel="yes"/>
 					</xsl:apply-templates>
 				</xsl:when>
-
+				
 				<xsl:otherwise>
 					<!-- If not found, report warning. -->
 					<xsl:call-template name="sf:warning">
@@ -209,22 +213,23 @@ Main content processing templates
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
-
+			
 			<cr:model>
 				<xsl:sequence
 					select="$schema-defs//schema-sequence[parent = $xpath], 
-					//schema-choice[parent = $xpath], 
-					//schema-all[parent = $xpath]"/>
+					$schema-defs//schema-choice[parent = $xpath], 
+					$schema-defs//schema-all[parent = $xpath]"/>
 			</cr:model>
 			
 			<cr:children>
-				<xsl:for-each select="$schema-defs//schema-element[parent = $xpath]">
-					<cr:child child-namespace="{xml-namespace}"><xsl:value-of select="name"/></cr:child>
+				<xsl:for-each select="$schema-defs/*/schema-element[parent = $xpath]">
+					<cr:child child-namespace="{xml-namespace}">
+						<xsl:value-of select="name"/></cr:child>
 				</xsl:for-each>
 			</cr:children>
-		
-<!-- This is unfinished, but attempts to determine if the child is required and how many times it may occur. -->		
-<!--			<cr:children>
+			
+			<!-- This is unfinished, but attempts to determine if the child is required and how many times it may occur. -->		
+			<!--			<cr:children>
 				<xsl:for-each-group 
 					select="$schema-defs//schema-sequence[parent = $xpath], //schema-choice[parent = $xpath], //schema-all[parent = $xpath]"
 					group-by="child">
@@ -237,7 +242,7 @@ Main content processing templates
 							<xsl:with-param name="referenced-group" select="$group-name"/>
 						</xsl:call-template>					
 					</xsl:for-each>
-
+					
 					<xsl:for-each select="child[@child-type='xs:element']">
 						<xsl:variable name="child" select="."/>
 						<xsl:variable name="child-xpath" select="$child"/>
@@ -295,12 +300,12 @@ Main content processing templates
 					</xsl:for-each>
 				</xsl:for-each-group>
 			</cr:children>
-
+			
 -->			<cr:attributes>
 				<xsl:for-each
 					select="$schema-defs//schema-attribute[starts-with(xpath, concat($xpath[1], '/@'))]">
 					<cr:attribute>
-
+						
 						<!-- Copy the extracted element info. -->
 						<cr:name>
 							<xsl:value-of select="name"/>
@@ -323,11 +328,11 @@ Main content processing templates
 						<cr:maxOccurs>
 							<xsl:value-of select="maxOccurs"/>
 						</cr:maxOccurs>
-
+						
 						<xsl:variable name="attribute-name" select="name"/>
-						            
+						
 						<xsl:variable name="authored"
-							select="$source[normalize-space(ed:xpath)=$name]/ed:attributes/ed:attribute[ed:name=$attribute-name]"/>
+			       	select="$source[normalize-space(ed:name)=$name]/ed:attributes/ed:attribute[ed:name=$attribute-name]"/>
 						<xsl:if test="not($authored/ed:description/*)">
 							<xsl:call-template name="sf:warning">
 								<xsl:with-param name="message"
@@ -343,6 +348,7 @@ Main content processing templates
 				</xsl:for-each>
 			</cr:attributes>
 		</cr:doctype-reference-entry>
+		
 	</xsl:template>
 
 	<xsl:template match="ed:doctype-description">

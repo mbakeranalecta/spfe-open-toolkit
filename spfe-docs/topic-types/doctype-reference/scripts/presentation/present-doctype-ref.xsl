@@ -134,7 +134,7 @@
 										<xsl:with-param name="type" select="'topic'"/>
 										<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
 										<xsl:with-param name="namespace" select="$subject-namespace"/>
-										<xsl:with-param name="content" select="name/text()"/>
+										<xsl:with-param name="content" select="string(name)"/>
 										<xsl:with-param name="current-page-name" select="$current-page-name"/>
 									</xsl:call-template>
 								</pe:p>
@@ -303,8 +303,11 @@
 
 	<xsl:template match="doctype-reference-entry/type"/>
 	<xsl:template match="doctype-reference-entry/name"/>
-
-
+	<!--<xsl:template match="subject-namespace"/>
+	<xsl:template match="xml-namespace"/>
+	<xsl:template match="doctype"/>
+	<xsl:template match="parents"/>
+	<xsl:template match="group"/>-->
 
 	<!-- 
 		=========================

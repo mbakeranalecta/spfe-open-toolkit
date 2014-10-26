@@ -23,9 +23,20 @@ Main content processing templates
 
 	<!-- Schema element template -->
 	<xsl:template match="doctype-reference-entry">
-		<xsl:variable name="topic-name" select="sf:title-to-anchor(concat(name,'_',type))"/>
-		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
 		<xsl:variable name="element-name" select="name"/>
+		<xsl:variable name="topic-name">
+			<xsl:choose>
+				<xsl:when test="following-sibling::doctype-reference-entry[name=$element-name] 
+					or preceding-sibling::doctype-reference-entry[name=$element-name]">
+					<xsl:value-of select="sf:title-to-anchor(concat(name,'_',type, generate-id()))"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="sf:title-to-anchor(concat(name,'_',type))"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable> 
+		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
+		
 		
 		<ss:topic 
 			type="{$type}" 

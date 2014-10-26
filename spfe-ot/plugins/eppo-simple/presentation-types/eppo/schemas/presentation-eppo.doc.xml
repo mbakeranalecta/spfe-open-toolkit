@@ -52,5 +52,17 @@
             </description>
             <attributes></attributes>
         </doctype-element-description>
+        <doctype-element-description>
+            <name>xref</name>
+            <description><p>An annotation describing a link to another piece of content.</p></description>
+            <attributes>
+                <attribute>
+                    <name>target</name>
+                    <description>
+                        <p>The url of the content to link to.</p>
+                    </description>
+                </attribute>
+            </attributes>
+        </doctype-element-description>
     </body>
 </doctype-element-descriptions>
