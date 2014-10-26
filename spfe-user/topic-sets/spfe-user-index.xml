@@ -13,7 +13,7 @@
 
                 <topic-type>
                     <name>{http://spfeopentoolkit.org/ns/spfe-docs}subject-topic-list</name>
-                    <href>../../../spfe-docs/topic-types/topic-subject-list-topic/config.xml</href>
+                    <href>../../spfe-docs/topic-types/topic-subject-list-topic/config.xml</href>
                 </topic-type>
             
 

@@ -11,7 +11,7 @@
         <topic-types>
             <topic-type>
                 <name>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic</name>
-                <href>../../../spfe-docs/topic-types/feature-topic/config.xml</href>
+                <href>../../spfe-docs/topic-types/feature-topic/config.xml</href>
             </topic-type>    
         </topic-types>
          
@@ -28,7 +28,7 @@
 
         <sources>
             <authored-content>
-                <include>../../content/text/reference/*.xml</include>
+                <include>../content/text/reference/*.xml</include>
             </authored-content>
         </sources>
 
