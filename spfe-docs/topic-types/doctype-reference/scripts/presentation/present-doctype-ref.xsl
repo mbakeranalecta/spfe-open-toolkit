@@ -74,7 +74,7 @@
 			<xsl:when test="not($targets[xpath = $target])">
 				<!-- if it does not exist, report the error but continue, outputting plain text -->
 				<xsl:call-template name="sf:warning">
-					<xsl:with-param name="message" select="'#Unknown xpath', $target"/>
+					<xsl:with-param name="message" select="'Unknown xpath', $target"/>
 				</xsl:call-template>
 				<!-- output plain text -->
 				<xsl:value-of select="$link-text"/>
@@ -111,12 +111,13 @@
 
 	<!-- doctype-reference-entry -->
 	<xsl:template match="doctype-reference-entry">
-		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
-		<xsl:variable name="subject-namespace" select="subject-namespace"/>
+		<xsl:variable name="namespace" select="xml-namespace"/>
 		<xsl:variable name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 		<xsl:variable name="this" select="."/>
-
+		<xsl:variable name="one-possible-xpath" select="concat(parents/parent[1], '/', name)"/>
+		<xsl:if test="$namespace = ''">
+		</xsl:if>
 		<pe:page type="API" name="{ancestor::ss:topic/@local-name}">
 			<xsl:call-template name="show-header"/>
 			<pe:title>Element: <xsl:value-of select="$name"/></pe:title>
@@ -132,8 +133,7 @@
 									<xsl:call-template name="output-link">
 										<xsl:with-param name="target" select="parent::ss:topic/@full-name"/>
 										<xsl:with-param name="type" select="'topic'"/>
-										<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
-										<xsl:with-param name="namespace" select="$subject-namespace"/>
+										<xsl:with-param name="namespace" select="$namespace"/>
 										<xsl:with-param name="content" select="string(name)"/>
 										<xsl:with-param name="current-page-name" select="$current-page-name"/>
 									</xsl:call-template>
@@ -147,7 +147,7 @@
 			<pe:labeled-item>
 				<pe:label>XML Namespace</pe:label>
 				<pe:item>
-					<pe:p><xsl:value-of select="xml-namespace"/></pe:p>
+					<pe:p><xsl:value-of select="$namespace"/></pe:p>
 				</pe:item>
 			</pe:labeled-item>
 			
@@ -175,12 +175,12 @@
 									<xsl:choose>
 										<!-- FIXME: This does not take accout of namespace of the link. -->
 										
-										<xsl:when test="esf:target-exists($element-name, 'xml-element-name', $subject-namespace)">
+										<xsl:when test="esf:target-exists($element-name, 'xml-element-name', $namespace)">
 											<xsl:call-template name="output-link">
 												<xsl:with-param name="target" select="$element-name"/>
 												<xsl:with-param name="type" select="'xml-element-name'"/>
 												<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
-												<xsl:with-param name="namespace" select="$subject-namespace"/>
+												<xsl:with-param name="namespace" select="$namespace"/>
 												<xsl:with-param name="content" select="$element-name"/>
 												<xsl:with-param name="current-page-name" select="$current-page-name"/>
 											</xsl:call-template>
@@ -207,48 +207,67 @@
 					</xsl:if>
 					<xsl:for-each select="children/child">
 						<xsl:sort select="."/>
-						<xsl:variable name="child-xpath" select="./text()"/>
+						<xsl:variable name="child-name" select="./text()"/>
 						<pe:p>
 							<pe:name hint="element-name">
 								<xsl:choose>
-									<xsl:when test="@child-namespace">
+									<xsl:when test="@child-namespace ne $namespace">
 										<!-- We don't know if the child element is a root or not in the foreign namespace, so try both. -->
-										<xsl:variable name="child-name" select="local-name-from-QName(QName (@child-namespace, $child-xpath))"/>
-										<xsl:variable name="child-name-as-root" select="concat('/',$child-name)"/>
+										<xsl:variable name="unprefixed-child-name" 
+											select="local-name-from-QName(QName (@child-namespace, $child-name))"/>
+										<xsl:variable name="unprefixed-child-name-as-root" 
+											select="concat('/',$child-name)"/>
 										<xsl:choose>
-											<!-- FIXME: This does not take accout of namespace of the link. -->
-											
-											<xsl:when test="esf:target-exists($child-name-as-root, 'xml-element-name')">
+																					
+											<xsl:when test="esf:target-exists($unprefixed-child-name-as-root, 'xml-element-name')">
 												<xsl:call-template name="output-link">
-													<xsl:with-param name="target" select="$child-name-as-root"/>
+													<xsl:with-param name="target" select="$unprefixed-child-name-as-root"/>
 													<xsl:with-param name="type" select="'xml-element-name'"/>
-													<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
-													<xsl:with-param name="namespace" select="$subject-namespace"/>
-													<xsl:with-param name="content" select="$child-xpath"/>
+													<xsl:with-param name="namespace" select="@child-namespace"/>
+													<xsl:with-param name="content" select="$child-name"/>
 													<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 												</xsl:call-template>
 											</xsl:when>
-											<xsl:when test="esf:target-exists($child-name, 'xml-element-name')">
+											<xsl:when test="esf:target-exists($unprefixed-child-name, 'xml-element-name')">
 												<xsl:call-template name="output-link">
-													<xsl:with-param name="target" select="$child-name"/>
+													<xsl:with-param name="target" select="$unprefixed-child-name"/>
 													<xsl:with-param name="type" select="'xml-element-name'"/>
-													<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
-													<xsl:with-param name="namespace" select="$subject-namespace"/>
-													<xsl:with-param name="content" select="$child-xpath"/>
+													<xsl:with-param name="namespace" select="@child-namespace"/>
+													<xsl:with-param name="content" select="$child-name"/>
 													<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 												</xsl:call-template>
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:call-template name="sf:subject-not-resolved">
-													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-xpath, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/> 
+													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-name, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/> 
 												</xsl:call-template>
-												<xsl:value-of select="$child-xpath"/>								
+												<xsl:value-of select="$child-name"/>								
 											</xsl:otherwise>
 										</xsl:choose>
 									</xsl:when>
 									<xsl:otherwise>
-										<xsl:sequence
-											select="lf:link-xpath($child-xpath,//doctype-reference-entry[name eq $child-xpath]/name)"/>
+										<xsl:variable name="child-xpath" select="concat($one-possible-xpath,'/',$child-name)"></xsl:variable>
+										<!-- FIXME: This is silly. could just be $child-xpath, $child-xpath. but is it doing the right thing? -->
+										<!--<xsl:sequence
+											select="lf:link-xpath(concat($one-possible-xpath,'/',$child-name),$child-name)"/>-->
+										<xsl:choose>
+											<xsl:when test="esf:target-exists($child-xpath, 'xml-element-name', @child-namespace)">
+												<xsl:call-template name="output-link">
+													<xsl:with-param name="target" select="$child-xpath"/>
+													<xsl:with-param name="type" select="'xml-element-name'"/>
+													<xsl:with-param name="namespace" select="@child-namespace"/>
+													<xsl:with-param name="content" select="$child-name"/>
+													<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+												</xsl:call-template>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:call-template name="sf:subject-not-resolved">
+													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-name, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/> 
+												</xsl:call-template>
+												<xsl:value-of select="$child-name"/>								
+											</xsl:otherwise>
+										</xsl:choose>
+										
 									</xsl:otherwise>
 								</xsl:choose>
 							</pe:name>
@@ -289,13 +308,6 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 
-	<!-- FIXME: redundant ?
-	<xsl:template match="xpath">
-		<pe:name hint="xpath">
-			<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
-		</pe:name>
-	</xsl:template> -->
-
 	<!-- FIXME: Some redundant element names here -->
 	<xsl:template match="required-by|verified-by|default|special|precis">
 		<xsl:apply-templates/>
@@ -303,12 +315,6 @@
 
 	<xsl:template match="doctype-reference-entry/type"/>
 	<xsl:template match="doctype-reference-entry/name"/>
-	<!--<xsl:template match="subject-namespace"/>
-	<xsl:template match="xml-namespace"/>
-	<xsl:template match="doctype"/>
-	<xsl:template match="parents"/>
-	<xsl:template match="group"/>-->
-
 	<!-- 
 		=========================
 		Format Attribute template

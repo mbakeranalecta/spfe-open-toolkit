@@ -196,7 +196,9 @@
 		<xsl:param name="path-to-record"/>
 		<xsl:variable name="type" select="@type"/>
 		<xsl:variable name="name" select="@name"/>
-		<xsl:variable name="namespace" select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
+<!--		<xsl:variable name="namespace" select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
+-->		<xsl:variable name="namespace" select="/xs:schema/@target-namespace"/>
+		
 		<xsl:variable name="times-type-used" select="count($combined-schemas//xs:element[(@type = $type) and (@name = $name)])"/>
 		<xsl:variable name="psf" select="concat($path-so-far, '/', $name)"/>
 		<xsl:variable name="parent-group" select="substring-after(tokenize($path-so-far, '/')[last()], 'group#')"/>
@@ -448,7 +450,7 @@
 		<schema-sequence>
 			<xsl:copy-of select="@*"/>
 			<parent>
-				<xsl:value-of select="$path-so-far"/>
+				<xsl:value-of select="$path-to-record"/>
 			</parent>
 			<xml-namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
@@ -473,13 +475,13 @@
 		<schema-choice>
 			<xsl:copy-of select="@*"/>
 			<parent>
-				<xsl:value-of select="$path-so-far"/>
+				<xsl:value-of select="$path-to-record"/>
 			</parent>
 			<xml-namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</xml-namespace>
 			<xsl:for-each select="child::*">
-				<child child-type="{name()}">
+				<child child-type="{name()}" child-namespace="{namespace-uri-for-prefix(substring-before(if (@name) then @name else @ref, ':'), .)}">
 					<xsl:copy-of select="@*"/>
 					<xsl:value-of select="if (@name) then @name else @ref"/>
 				</child>
@@ -497,13 +499,13 @@
 		<schema-all>
 			<xsl:copy-of select="@*"/>
 			<parent>
-				<xsl:value-of select="$path-so-far"/>
+				<xsl:value-of select="$path-to-record"/>
 			</parent>
 			<xml-namespace>
 				<xsl:value-of select="namespace-uri-for-prefix(substring-before(@name, ':'), .)"/>
 			</xml-namespace>
 			<xsl:for-each select="child::*">
-				<child child-type="{name()}">
+				<child child-type="{name()}" child-namespace="{namespace-uri-for-prefix(substring-before(if (@name) then @name else @ref, ':'), .)}">
 					<xsl:copy-of select="@*"/>
 					<xsl:value-of select="if (@name) then @name else @ref"/>
 				</child>

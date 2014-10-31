@@ -49,17 +49,20 @@ Main content processing templates
 				<ss:index>
 					<ss:entry>
 						<ss:type>xml-element-name</ss:type>
-						<ss:namespace><xsl:value-of select="subject-namespace"/></ss:namespace>
+						<ss:namespace><xsl:value-of select="xml-namespace"/></ss:namespace>
 						<ss:term>
 							<xsl:value-of select="$element-name"/>
 						</ss:term>
+						<xsl:for-each select="parents/parent">
+							<ss:key><xsl:value-of select="concat(.,'/',$element-name)"/></ss:key>
+						</xsl:for-each>
 					</ss:entry>
 
 					<xsl:for-each
 						select="//schema-attribute[starts-with(normalize-space(xpath), concat($element-name, '/@'))]">
 						<ss:entry>
 							<ss:type>xml-attribute-name</ss:type>
-							<ss:namespace><xsl:value-of select="subject-namespace"/></ss:namespace>
+							<ss:namespace><xsl:value-of select="xml-namespace"/></ss:namespace>
 							<ss:term><xsl:value-of select="name"/>/@<xsl:value-of select="name"/></ss:term>
 							<ss:anchor>
 								<xsl:value-of select="name"/>
