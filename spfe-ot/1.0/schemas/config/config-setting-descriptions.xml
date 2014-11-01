@@ -679,7 +679,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/synthesis</xpath>
+            <xpath>/spfe/object-type/scripts/resolve</xpath>
             <description>
                 <fragment-ref id-ref="synthesis-script-description">
                     <local-strings>
@@ -695,7 +695,7 @@
 
 
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/synthesis/script</xpath>
+            <xpath>/spfe/object-type/scripts/resolve/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1547,7 +1547,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/synthesis</xpath>
+            <xpath>/spfe/topic-type/scripts/resolve</xpath>
             <description>
                 <fragment id="synthesis-script-description">
                     <local-strings>
@@ -1584,7 +1584,7 @@
 
 
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/synthesis/script</xpath>
+            <xpath>/spfe/topic-type/scripts/resolve/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1866,7 +1866,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/synthesis</xpath>
+            <xpath>/spfe/output-format/scripts/resolve</xpath>
             <description>
                 <fragment-ref id-ref="synthesis-script-description">
                     <local-strings>
@@ -1882,7 +1882,7 @@
 
 
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/synthesis/script</xpath>
+            <xpath>/spfe/output-format/scripts/resolve/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -2176,7 +2176,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/synthesis/script/remap-namespace</xpath>
+            <xpath>/spfe/topic-type/scripts/resolve/script/remap-namespace</xpath>
             <description><fragment-ref id-ref="remap-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2185,7 +2185,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/synthesis/script/remap-namespace/from</xpath>
+            <xpath>/spfe/topic-type/scripts/resolve/script/remap-namespace/from</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2194,7 +2194,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/synthesis/script/remap-namespace/to</xpath>
+            <xpath>/spfe/topic-type/scripts/resolve/script/remap-namespace/to</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2203,7 +2203,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/synthesis/script/href</xpath>
+            <xpath>/spfe/topic-type/scripts/resolve/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2442,7 +2442,7 @@
 
 
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/synthesis/script/remap-namespace</xpath>
+            <xpath>/spfe/object-type/scripts/resolve/script/remap-namespace</xpath>
             <description><fragment-ref id-ref="remap-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2451,7 +2451,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/synthesis/script/remap-namespace/from</xpath>
+            <xpath>/spfe/object-type/scripts/resolve/script/remap-namespace/from</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2460,7 +2460,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/synthesis/script/remap-namespace/to</xpath>
+            <xpath>/spfe/object-type/scripts/resolve/script/remap-namespace/to</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2469,7 +2469,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/synthesis/script/href</xpath>
+            <xpath>/spfe/object-type/scripts/resolve/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2707,7 +2707,7 @@
         
 
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/synthesis/script/remap-namespace</xpath>
+            <xpath>/spfe/output-format/scripts/resolve/script/remap-namespace</xpath>
             <description><fragment-ref id-ref="remap-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2716,7 +2716,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/synthesis/script/remap-namespace/from</xpath>
+            <xpath>/spfe/output-format/scripts/resolve/script/remap-namespace/from</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2725,7 +2725,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/synthesis/script/remap-namespace/to</xpath>
+            <xpath>/spfe/output-format/scripts/resolve/script/remap-namespace/to</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2734,7 +2734,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/synthesis/script/href</xpath>
+            <xpath>/spfe/output-format/scripts/resolve/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>

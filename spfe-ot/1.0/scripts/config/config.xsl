@@ -211,9 +211,9 @@
                         </xsl:if>
                     </xsl:if>
 
-                    <build.synthesis topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/synthesis/spfe.synthesis.xsl"
-                        output-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/synthesis/out">
+                    <build.resolve topic-set-id="{$topic-set-id}"
+                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/resolve/spfe.resolve.xsl"
+                        output-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/resolve/out">
                         <files-elements>
                             <files id="{$topic-set-id}.authored-content">
                                <xsl:choose>
@@ -233,7 +233,7 @@
                             </files>
                             <pathconvert dirsep="/" pathsep=";" property="authored-content-files" refid="{$topic-set-id}.authored-content"/>
                         </files-elements>
-                    </build.synthesis>
+                    </build.resolve>
 
                     <build.link-catalog topic-set-id="{$topic-set-id}"
                         style="{$doc-set-build}/topic-sets/{$topic-set-id}/link-catalog/spfe.link-catalog.xsl"

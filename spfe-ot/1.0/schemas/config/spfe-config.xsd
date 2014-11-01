@@ -71,8 +71,7 @@
               <xs:element name="sources" type="sources-type"/>
               <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
               <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
-              <xs:element name="default-subject-scope" minOccurs="0" maxOccurs="1"
-                type="xs:string"/>
+              <xs:element name="default-subject-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
               <xs:element name="build-rules" type="xs:anyURI" minOccurs="0"/>
               <xs:element name="strings" minOccurs="0">
                 <xs:complexType>
@@ -264,10 +263,6 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="topic-type-type">
-    <xs:sequence> </xs:sequence>
-  </xs:complexType>
-
   <xs:simpleType name="messages-type">
     <xs:restriction base="xs:string">
       <xs:enumeration value="warning"/>
@@ -306,7 +301,7 @@
     <xs:choice maxOccurs="unbounded">
       <xs:element minOccurs="0" name="extract" type="script-list-type"/>
       <xs:element minOccurs="0" name="merge" type="script-list-type"/>
-      <xs:element name="synthesis" type="script-list-type" minOccurs="0"/>
+      <xs:element name="resolve" type="script-list-type" minOccurs="0"/>
       <xs:element name="link-catalog" type="script-list-type" minOccurs="0"/>
       <xs:element name="toc" type="script-list-type" minOccurs="0"/>
       <xs:element name="image-list" type="script-list-type" minOccurs="0"/>

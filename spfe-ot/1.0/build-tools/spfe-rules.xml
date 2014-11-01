@@ -211,20 +211,20 @@
 	<!-- SYNTHESIS STEP -->
 	<target name="-build.synthesis" depends="--build.synthesis"/>
 	<!-- macro to build synthesis -->
-	<macrodef name="build.synthesis" description="synthesis">
+	<macrodef name="build.resolve" description="resolve">
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<attribute name="output-directory"/>
 		<element name="files-elements"/>
 		<sequential>
-			<echo>Building synthesis for @{topic-set-id}.</echo>
+			<echo>Building resolve for @{topic-set-id}.</echo>
 			<!-- run the XSLT script to produce the output -->
 			<local name="authored-content-files"/>
 			<files-elements/>
 			<saxon-xslt 
 				style="@{style}" 
 				in="${spfe.config-file}"
-				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/resolve.flag">
 				<params>
 					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="authored-content-files" expression="${authored-content-files}"/>
@@ -243,11 +243,11 @@
 	<target name="-current.link-catalog">
 		<uptodate property="-current.link-catalog"
 			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog"
-			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"/>
+			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/resolve.flag"/>
 	</target>-->
 
 	<!-- target for link-catalog -->
-	<!--<target name="-build.link-catalog" depends="-build.synthesis, -\-build.link-catalog"/>-->
+	<!--<target name="-build.link-catalog" depends="-build.resolve, -\-build.link-catalog"/>-->
 	<macrodef name="build.link-catalog" description="Link catalog step.">
 		<!-- FIXME		depends="-current.link-catalog"
 		unless="-current.link-catalog">-->
@@ -258,7 +258,7 @@
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
-				<include name="synthesis/out/*.xml"/>
+				<include name="resolve/out/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
@@ -289,7 +289,7 @@
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
-				<include name="synthesis/out/*.xml"/>
+				<include name="resolve/out/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
@@ -335,7 +335,7 @@
 			<local name="link-catalog-files"/>
 			<local name="link-catalog-list"/>
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
-				<include name="synthesis/out/*.xml"/>
+				<include name="resolve/out/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
