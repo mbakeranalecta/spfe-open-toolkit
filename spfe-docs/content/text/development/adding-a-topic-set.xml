@@ -55,13 +55,13 @@
         <understanding>
             <p>A topic set is a collection of related topics.</p>
                 
-             <p>A <feature>documentation set</feature> must have at least one topic set. </p>
+            <p>A <feature>content set</feature> must have at least one topic set. </p>
        </understanding>
        <planning>
            <planning-question>
                <planning-question-title>Do I need more than one topic set?</planning-question-title>
                 <planning-question-body>
-                    <p>You could have a single topic set that contains all your topics. This approach is consistent with the Every Page is Page One approach. However, you may want to divide your documentation set into multiple topic sets for two reasons:</p>
+                    <p>You could have a single topic set that contains all your topics. This approach is consistent with the Every Page is Page One approach. However, you may want to divide your content set into multiple topic sets for two reasons:</p>
                     <ol>
                         <li>
                             <p>To provide top-down navigation for your readers. While the Every Page is Page One approach emphasizes a bottom-up approach to navigation, top down navigation still has significant value, particularly for smaller content sets where it can be used effectively. Dividing your content into topic sets provides a level of top-down structure to your content set that can be useful to your readers.</p>
@@ -92,7 +92,7 @@
                         topic sets) they belong to.</p>
                </li>
                <li>
-                   <p>Add a new <config-setting>/spfe/content-set/topic-sets/topic-set</config-setting> to the appropriate <feature>documentation set configuration file</feature>. You can add a topic set to more than one documentation set.</p>
+                   <p>Add a new <config-setting>/spfe/content-set/topic-sets/topic-set</config-setting> to the appropriate <feature>content set configuration file</feature>. You can add a topic set to more than one content set.</p>
                </li>
            </ol>
        </doing>

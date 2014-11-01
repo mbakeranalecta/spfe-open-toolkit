@@ -4,7 +4,7 @@
 <function-and-template-descriptions
     xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/xslt-function-and-template-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions.xsd">
     <head>
         <id>function-and-template-descriptions</id>
         <virtual-type/>
@@ -586,8 +586,8 @@
 &lt;ss:topic type="http://spfeopentoolkit.org/ns/eppo-simple"
     topic-type-alias="Task"
     full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/adding-a-content-set"
-    local-name="adding-a-content-set" title="Adding a new documentation set"
-    excerpt="A documentation set (content-set) is a collection of one or more related topic sets, each of which can use different schemas. ...">
+    local-name="adding-a-content-set" title="Adding a new content set"
+    excerpt="A content set (content-set) is a collection of one or more related topic sets, each of which can use different schemas. ...">
 
                         </codeblock>
                         <p>Since <task>linking</task> is done at the presentation stage, you can read the topic type namespace URI from this attribute for the topic you are processing.</p>

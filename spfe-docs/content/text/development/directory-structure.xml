@@ -104,8 +104,8 @@
         
         <p>The build begins by running the configuration script, which creates an ANT build file named <file-name>spfebuild.xml</file-name> at the root of the build directory. This file is created dynamically each time the build is run. Don't try to edit it because it will be overwritten the next time the build is run.</p>
         
-        <p>The configuration script also creates a directory for the documentation set being built,
-            which is named using the documentation set id (configured in
+        <p>The configuration script also creates a directory for the content set being built,
+            which is named using the content set id (configured in
             <config-setting>/spfe/content-set/content-set-id</config-setting>). Inside this directory it
             creates a directory named <directory-name>config</directory-name> which contains the
             consolidated <feature>configuration file</feature>, with the name
@@ -138,7 +138,7 @@
                 <p>A directory named after each step in the build process (extract, merge, resolve,
                     presentation, etc.). Each directory contains the generated scripts for that step
                     and an out directory that hold the result of the step (except for the steps that
-                    produce the final output, where the output goes to the documentation set output
+                    produce the final output, where the output goes to the content set output
                     directory.  </p>
             </li>
             <li>

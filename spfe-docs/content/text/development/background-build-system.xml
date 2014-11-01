@@ -72,7 +72,7 @@
             </li>
         </ol>
         <p>Next, the <tool-name>spfe</tool-name> build tool runs <tool-name>ANT</tool-name> on the generated ANT build
-            file, building the <feature>documentation set</feature>. </p>
+            file, building the <feature>content set</feature>. </p>
         <p>The order of operations for the build is as follows:</p>
         <ol>
             <li>
@@ -85,13 +85,13 @@
                     the order in which the topic sets are defined is important because it allows the
                     scripts of later topic sets to access the synthesis, tocs, and link catalogs of
                     the earlier topics. This is used, for instance, to generate <feature>subject
-                        list topics</feature> that draw from the entire documentation set.</p> 
+                        list topics</feature> that draw from the entire content set.</p> 
             </li>
             <li>
-                <p>Run the <feature>presentation process</feature> for each <feature>topic set</feature> in the <feature>documentation set</feature> in turn. If there are different presentation processes for different output media, each will be run in turn.</p>
+                <p>Run the <feature>presentation process</feature> for each <feature>topic set</feature> in the <feature>content set</feature> in turn. If there are different presentation processes for different output media, each will be run in turn.</p>
             </li>
             <li>
-                <p>Run the <feature>format process</feature> for each <feature>topic set</feature> in the <feature>documentation set</feature> in turn. If there are multiple output formats being built, each will be run in turn.</p>
+                <p>Run the <feature>format process</feature> for each <feature>topic set</feature> in the <feature>content set</feature> in turn. If there are multiple output formats being built, each will be run in turn.</p>
             </li>
         </ol>
         <p>The following build command are available:</p>
