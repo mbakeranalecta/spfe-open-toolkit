@@ -2,7 +2,7 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <!-- ===================================================
-	common-topic-synthesis.xsl
+	resolve-topic.xsl
 	
 	Reads the collection of topic files and text object files
 	for the topic set, creates the synthesis element, and hands 
@@ -39,7 +39,8 @@
 	
 	<xsl:param name="default-topic-scope"/>
 	<xsl:param name="topic-set-id"/>
-	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/synthesis/out')"/>
+	<!-- FIXME: This should not be defaulted. -->
+	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/resolve/out')"/>
 	
 <!-- 
 =============

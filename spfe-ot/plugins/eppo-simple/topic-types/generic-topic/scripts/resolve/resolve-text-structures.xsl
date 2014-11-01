@@ -2,7 +2,7 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <!-- ===================================================
-	text-structures.xsl
+	resolve-text-structures.xsl
 
 	This stylesheet is designed to be included in other stylesheets to
 	process common text structures used in all SPFE schemas.
