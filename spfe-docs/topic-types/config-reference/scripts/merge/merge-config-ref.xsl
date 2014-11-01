@@ -56,9 +56,6 @@ Main template
 
 	<xsl:template name="main">
 		
-		<xsl:message select="'$output-directory', $output-directory"/>
-		<xsl:message select="'$authored-content-files', $authored-content-files"/>
-		<xsl:message select="'$extracted-content-files', $extracted-content-files"/>
 		
 		<!-- Create the schema element topic set -->
 		<xsl:for-each-group select="$doctypes/doctype" group-by="@name">
