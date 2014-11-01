@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0"
@@ -27,7 +29,7 @@
     
     <xsl:variable name="toc">
         <xsl:choose>
-            <xsl:when test="$config/config:doc-set/config:topic-set-type-order/config:topic-set-type">
+            <xsl:when test="$config/config:content-set/config:topic-set-type-order/config:topic-set-type">
                                
                 <!-- Make sure there is an entry on the topic set type order list for every topic set type. -->
                 <xsl:variable name="topic-set-types-found" select="distinct-values($unsorted-toc/toc/@topic-set-type)"/>
@@ -36,17 +38,17 @@
                 <xsl:call-template name="sf:info">
                     <xsl:with-param name="message">
                         <xsl:text>Ordering the TOC according to the topic set type list:</xsl:text>
-                        <xsl:value-of select="string-join($config/config:doc-set/config:topic-set-type-order/config:topic-set-type, ', ')"/>
+                        <xsl:value-of select="string-join($config/config:content-set/config:topic-set-type-order/config:topic-set-type, ', ')"/>
                     </xsl:with-param>
                 </xsl:call-template>				
                 
-                <xsl:if test="count($topic-set-types-found[not(.=$config/config:doc-set/config:topic-set-type-order/config:topic-set-type)])">
+                <xsl:if test="count($topic-set-types-found[not(.=$config/config:content-set/config:topic-set-type-order/config:topic-set-type)])">
                     <xsl:call-template name="sf:error">
-                        <xsl:with-param name="message" select="'Topic type(s) missing from topic type order list: ', string-join($topic-set-types-found[not(.=$config/config:doc-set/config:topic-set-type-order/config:topic-set-type)], ', ')"/>
+                        <xsl:with-param name="message" select="'Topic type(s) missing from topic type order list: ', string-join($topic-set-types-found[not(.=$config/config:content-set/config:topic-set-type-order/config:topic-set-type)], ', ')"/>
                     </xsl:call-template>
                 </xsl:if>
                 
-                <xsl:for-each select="$config/config:doc-set/config:topic-set-type-order/config:topic-set-type">
+                <xsl:for-each select="$config/config:content-set/config:topic-set-type-order/config:topic-set-type">
                     <xsl:variable name="this-topic-set-type" select="."/>
                     <xsl:for-each select="$unsorted-toc/toc[@topic-set-type eq $this-topic-set-type]">
                         <xsl:sequence select="."/>
@@ -54,14 +56,14 @@
                 </xsl:for-each>
                 
             </xsl:when>
-            <xsl:when test="$config/config:doc-set/config:topic-sets">
+            <xsl:when test="$config/config:content-set/config:topic-sets">
                 <xsl:call-template name="sf:warning">
                     <xsl:with-param name="message">
                         <!-- FIXME: Should test for the two conditions subjects below. -->
-                        <xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/doc-set configuration setting. External TOC files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
+                        <xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/content-set configuration setting. External TOC files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
                     </xsl:with-param>
                 </xsl:call-template>
-                <xsl:for-each select="$config/config:doc-set/config:topic-sets/config:topic-set">
+                <xsl:for-each select="$config/config:content-set/config:topic-sets/config:topic-set">
                     <xsl:variable name="id" select="config:id"/>
                     <xsl:sequence select="$unsorted-toc/toc[@topic-set-id eq $id]"/>
                 </xsl:for-each>
@@ -85,7 +87,7 @@
     <xsl:template name="create-toc-page">
         <pe:page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
-            <pe:title><xsl:value-of select="$config/config:doc-set/config:title"/> Contents</pe:title>       
+            <pe:title><xsl:value-of select="$config/config:content-set/config:title"/> Contents</pe:title>       
             <pe:ul>
                 <xsl:apply-templates select="$toc"/>
             </pe:ul>
@@ -93,7 +95,7 @@
         </pe:page>
     </xsl:template>
     
-    <xsl:template match="toc[@topic-set-id ne $config/config:doc-set/config:home-topic-set]">
+    <xsl:template match="toc[@topic-set-id ne $config/config:content-set/config:home-topic-set]">
         <pe:li>
             <pe:p><pe:xref target="{normalize-space(@deployment-relative-path)}{normalize-space(@topic-set-id)}-toc.html"><xsl:value-of select="@title"/></pe:xref></pe:p>
         </pe:li>

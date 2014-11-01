@@ -464,7 +464,7 @@
                 <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
 &lt;spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    &lt;doc-set>
+    &lt;content-set>
     ...
         &lt;subject-types>
             &lt;subject-type>
@@ -519,7 +519,7 @@
                 <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
 &lt;spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    &lt;doc-set>
+    &lt;content-set>
     ...
         &lt;subject-types>
             &lt;subject-type>
@@ -585,9 +585,9 @@
                         <codeblock>
 &lt;ss:topic type="http://spfeopentoolkit.org/ns/eppo-simple"
     topic-type-alias="Task"
-    full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/adding-a-doc-set"
-    local-name="adding-a-doc-set" title="Adding a new documentation set"
-    excerpt="A documentation set (doc-set) is a collection of one or more related topic sets, each of which can use different schemas. ...">
+    full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/adding-a-content-set"
+    local-name="adding-a-content-set" title="Adding a new documentation set"
+    excerpt="A documentation set (content-set) is a collection of one or more related topic sets, each of which can use different schemas. ...">
 
                         </codeblock>
                         <p>Since <task>linking</task> is done at the presentation stage, you can read the topic type namespace URI from this attribute for the topic you are processing.</p>

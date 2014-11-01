@@ -17,7 +17,7 @@
 	<xsl:variable name="strings"
 		select="
 		$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
-		$config/config:doc-set/config:strings/config:string"
+		$config/config:content-set/config:strings/config:string"
 		as="element()*"/>
 
 	<xsl:output method="xml" indent="yes"/>

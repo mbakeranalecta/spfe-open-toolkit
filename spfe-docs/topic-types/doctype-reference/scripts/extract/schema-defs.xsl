@@ -166,7 +166,7 @@
 
 		<!-- Create the root "extracted-content element" -->
 		<xsl:result-document
-			href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/extract/out/schema-defs.xml')}"
+			href="file:///{concat($config/config:content-set-build, '/topic-sets/', $topic-set-id, '/extract/out/schema-defs.xml')}"
 			method="xml" indent="yes" omit-xml-declaration="no">
 
 			<schema-definitions>

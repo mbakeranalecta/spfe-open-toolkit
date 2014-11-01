@@ -100,10 +100,10 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="doc-set">
+        <xs:element name="content-set">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="doc-set-id" type="xs:NMTOKEN"/>
+              <xs:element name="content-set-id" type="xs:NMTOKEN"/>
               <xs:element name="title" type="xs:string"/>
               <xs:element name="topic-set-type-order">
                 <xs:complexType>

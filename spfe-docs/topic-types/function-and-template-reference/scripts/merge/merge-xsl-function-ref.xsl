@@ -20,14 +20,14 @@ exclude-result-prefixes="#all" >
 		name="strings" 
 		select="
 		$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
-		$config/config:doc-set/config:strings/config:string"
+		$config/config:content-set/config:strings/config:string"
 		as="element()*"/>
 
 <xsl:output method="xml" indent="yes" />
 	
 <xsl:param name="topic-set-id"/>
 
-	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/merge/out')"></xsl:param>
+	<xsl:param name="output-directory" select="concat($config/config:content-set-build, '/topic-sets/', $topic-set-id, '/merge/out')"></xsl:param>
 
 	<xsl:param name="extracted-content-files"/>
 	<xsl:variable name="function-defs" select="sf:get-sources($extracted-content-files)"/>

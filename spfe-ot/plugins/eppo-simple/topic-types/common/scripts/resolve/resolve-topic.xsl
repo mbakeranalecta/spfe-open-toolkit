@@ -32,7 +32,7 @@
 		name="strings" 
 		select="
 			$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
-			$config/config:doc-set/config:strings/config:string"
+			$config/config:content-set/config:strings/config:string"
 		as="element()*"/>
 		
 	
@@ -40,7 +40,7 @@
 	<xsl:param name="default-topic-scope"/>
 	<xsl:param name="topic-set-id"/>
 	<!-- FIXME: This should not be defaulted. -->
-	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/resolve/out')"/>
+	<xsl:param name="output-directory" select="concat($config/config:content-set-build, '/topic-sets/', $topic-set-id, '/resolve/out')"/>
 	
 <!-- 
 =============

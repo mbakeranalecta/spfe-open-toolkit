@@ -15,7 +15,7 @@
 	
 <xsl:param name="topic-set-id"/>
 	<!-- FIXME: This should not be defaulted. -->
-	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/resolve/out')"/>
+	<xsl:param name="output-directory" select="concat($config/config:content-set-build, '/topic-sets/', $topic-set-id, '/resolve/out')"/>
 	
 <xsl:output method="xml" indent="yes" />
 

@@ -88,7 +88,7 @@
                     <p><config-setting>/spfe/topic-type/name</config-setting></p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/doc-set/output-formats/output-format/name</config-setting></p>
+                    <p><config-setting>/spfe/content-set/output-formats/output-format/name</config-setting></p>
                 </li>
                 <li>
                     <p><config-setting>/spfe/topic-set/topic-types/topic-type/name</config-setting></p>

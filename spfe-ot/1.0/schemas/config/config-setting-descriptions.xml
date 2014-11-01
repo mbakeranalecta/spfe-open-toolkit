@@ -53,9 +53,9 @@
                     different files.</p>
                 <ol>
                     <li>
-                        <p><config-setting xpath="/spfe/doc-set">doc-set</config-setting> describes
+                        <p><config-setting xpath="/spfe/content-set">content-set</config-setting> describes
                             the configuration of a whole documentation set. The build scripts take a
-                            doc-set configuration as input.</p>
+                            content-set configuration as input.</p>
                     </li>
 
                     <li>
@@ -72,7 +72,7 @@
                             describes the configuration of an <feature>output format</feature>, such
                             as HTML. To include an output format configuration in your topic set
                             configuration, use the
-                            <config-setting>/spfe/doc-set/output-formats/output-format</config-setting>
+                            <config-setting>/spfe/content-set/output-formats/output-format</config-setting>
                             setting.</p>
                     </li>
 
@@ -80,7 +80,7 @@
                         <p><config-setting xpath="/spfe/topic-set">topic-set</config-setting>
                             describes the configuration of a topic set. To include a topic set in
                             the doc set, use the
-                            <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting>
+                            <config-setting>/spfe/content-set/topic-sets/topic-set</config-setting>
                             setting.</p>
                     </li>
 
@@ -101,16 +101,16 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set</xpath>
+            <xpath>/spfe/content-set</xpath>
             <description>
                 <p>A container element for information on a documentation set. A documentation set
                     is a collection of <feature>topic sets</feature>. To define a documentation set,
                     you list the configuration files for each topic set in the documentation set
-                    using a <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting>
+                    using a <config-setting>/spfe/content-set/topic-sets/topic-set</config-setting>
                     element.</p>
                 <p>To build a full documentation set, you simply run the <tool-name>spfe</tool-name>
                     build tool with a configuration file that contains a
-                    <config-setting xpath="/spfe/doc-set">doc-set</config-setting> element directly
+                    <config-setting xpath="/spfe/content-set">content-set</config-setting> element directly
                     (not via inclusion). The build tool will then run whichever build command you
                     have specified on all the topic sets in the documentation set, as well as
                     creating the files that belong to the documentation set as a whole.</p>
@@ -131,7 +131,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/condition-tokens</xpath>
+            <xpath>/spfe/content-set/condition-tokens</xpath>
             <description>
                 <p>Specifies the <feature>condition tokens</feature> that will be applied to this
                     documentation set by the <feature>resolve step</feature>.</p>
@@ -142,14 +142,14 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/spfe/doc-set/doc-set-id</xpath>
+            <xpath>/spfe/content-set/content-set-id</xpath>
             <description>
                 <p>An identifier for the docset.</p>
             </description>
             <values/>
             <restrictions>
                 <restriction>
-                    <p>The <config-setting>doc-set-id</config-setting> is used to form paths in the
+                    <p>The <config-setting>content-set-id</config-setting> is used to form paths in the
                         output, so it must be a permitted directory name on all output media.</p>
                 </restriction>
             </restrictions>
@@ -158,7 +158,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/home-topic-set</xpath>
+            <xpath>/spfe/content-set/home-topic-set</xpath>
             <description>
                 <p>Designates one <feature>topic set</feature> as the <feature>home topic
                         set</feature> for the documentation set. The <feature>home topic
@@ -181,7 +181,7 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/spfe/doc-set/messages</xpath>
+            <xpath>/spfe/content-set/messages</xpath>
             <description>
                 <p>Specifies the types of messages that will be generated by the build. Possible
                     value are <code>info</code>, and <code>warning</code>.</p>
@@ -192,11 +192,11 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/spfe/doc-set/other</xpath>
+            <xpath>/spfe/content-set/other</xpath>
             <description>
                 <fragment-ref id-ref="other-setting-description">
                     <local-strings>
-                        <string id="setting">/spfe/doc-set/other</string>
+                        <string id="setting">/spfe/content-set/other</string>
                     </local-strings>
                 </fragment-ref>
             </description>
@@ -214,7 +214,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/output-formats</xpath>
+            <xpath>/spfe/content-set/output-formats</xpath>
             <description>
                 <p>A container element for a list of <feature>output formats</feature> supported by
                     the <feature>documentation set</feature> build.</p>
@@ -225,7 +225,7 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/spfe/doc-set/output-formats/output-format</xpath>
+            <xpath>/spfe/content-set/output-formats/output-format</xpath>
             <description>
                 <p>An output format supported by the documentation set build.</p>
             </description>
@@ -235,7 +235,7 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/spfe/doc-set/output-formats/output-format/href</xpath>
+            <xpath>/spfe/content-set/output-formats/output-format/href</xpath>
             <description>
                 <p>The location of a file that contains the configuration file for the output
                     format.</p>
@@ -246,7 +246,7 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/spfe/doc-set/output-formats/output-format/name</xpath>
+            <xpath>/spfe/content-set/output-formats/output-format/name</xpath>
             <description>
                 <p>The name of an output format. </p>
             </description>
@@ -256,7 +256,7 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/spfe/doc-set/strings</xpath>
+            <xpath>/spfe/content-set/strings</xpath>
             <description>
                 <fragment id="strings-description">
                     <local-strings>
@@ -278,7 +278,7 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/spfe/doc-set/strings/string</xpath>
+            <xpath>/spfe/content-set/strings/string</xpath>
             <description>
                 <fragment id="strings-string-description">
                     <p>Defines a <feature>string</feature> and gives it an ID. Strings may be used
@@ -306,7 +306,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/style</xpath>
+            <xpath>/spfe/content-set/style</xpath>
             <description>
                 <p>A container element for settings related to style information used by the build
                     tools.</p>
@@ -321,7 +321,7 @@
 
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/title</xpath>
+            <xpath>/spfe/content-set/title</xpath>
             <description>
                 <p>The title of the <feature>documentation set</feature>.</p>
             </description>
@@ -332,7 +332,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/topic-set-type-order</xpath>
+            <xpath>/spfe/content-set/topic-set-type-order</xpath>
             <description>
                 <p>Defines the order in which topic set types will be listed in the <feature>doc
                         set</feature>
@@ -345,7 +345,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/topic-set-type-order/topic-set-type</xpath>
+            <xpath>/spfe/content-set/topic-set-type-order/topic-set-type</xpath>
             <description>
                 <p>The name of a topic set type in the topic set type order list.</p>
             </description>
@@ -362,7 +362,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/topic-sets</xpath>
+            <xpath>/spfe/content-set/topic-sets</xpath>
             <description>
                 <p>A container element for the list of <feature>topic sets</feature> in a
                         <feature>documentation set</feature>.</p>
@@ -374,7 +374,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/topic-sets/topic-set</xpath>
+            <xpath>/spfe/content-set/topic-sets/topic-set</xpath>
             <description>
                 <p>The path to a topic set configuration file for a <feature>topic set</feature> to
                     be included in the <feature>documentation set</feature>.</p>
@@ -386,7 +386,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/topic-sets/topic-set/href</xpath>
+            <xpath>/spfe/content-set/topic-sets/topic-set/href</xpath>
             <description>
                 <p>The URL of the configuration file for the included <feature>topic
                     set</feature>.</p>
@@ -398,7 +398,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/topic-sets/topic-set/topic-set-id</xpath>
+            <xpath>/spfe/content-set/topic-sets/topic-set/topic-set-id</xpath>
             <description>
                 <p>The topic set id of the included <feature>topic set</feature>, it should normally
                     match the <config-setting>/spfe/topic-set/topic-set-id</config-setting> element
@@ -416,7 +416,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/wip-site</xpath>
+            <xpath>/spfe/content-set/wip-site</xpath>
             <description>
                 <p>A container element for configuration information on the <feature>work in
                         progress site</feature>.</p>
@@ -430,7 +430,7 @@
 
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/wip-site/ftp</xpath>
+            <xpath>/spfe/content-set/wip-site/ftp</xpath>
             <description>
                 <p>A container for login information for FTP access to the <feature>work in progress
                         site</feature>.</p>
@@ -442,7 +442,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/wip-site/ftp/password</xpath>
+            <xpath>/spfe/content-set/wip-site/ftp/password</xpath>
             <description>
                 <p>The ftp password for the <feature>work in progress site</feature>.</p>
             </description>
@@ -453,7 +453,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/wip-site/ftp/url</xpath>
+            <xpath>/spfe/content-set/wip-site/ftp/url</xpath>
             <description>
                 <p>The URL of the ftp login to the <feature>work in progress site</feature>.</p>
             </description>
@@ -463,7 +463,7 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/spfe/doc-set/wip-site/ftp/user</xpath>
+            <xpath>/spfe/content-set/wip-site/ftp/user</xpath>
             <description>
                 <p>The user name for logging in to the <feature>work in progress site</feature>.</p>
             </description>
@@ -474,7 +474,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/wip-site/url</xpath>
+            <xpath>/spfe/content-set/wip-site/url</xpath>
             <description>
                 <p>The URL of the <feature>work in progress site</feature>.</p>
             </description>
@@ -485,7 +485,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/doc-set/wip-site/path</xpath>
+            <xpath>/spfe/content-set/wip-site/path</xpath>
             <description>
                 <p>The file path to the root of the <feature>work in progress site</feature>.</p>
             </description>
@@ -1050,7 +1050,7 @@
                         <string id="scope">the entire <feature>topic set</feature></string>
                         <string id="inverse-of-scope">the doc set</string>
                         <string id="inverse-of-setting">
-                            <config-setting>/spfe/doc-set/strings</config-setting>
+                            <config-setting>/spfe/content-set/strings</config-setting>
                         </string>
                     </local-strings>
                 </fragment-ref>
@@ -1122,11 +1122,11 @@
                         set</feature>. You can use this element to group topic sets in output, and
                     determine the order in which topic sets type appear in the
                         <feature>documentation set</feature> table of contents. The order is set
-                    using the <config-setting>/spfe/doc-set/topic-set-type-order</config-setting>
+                    using the <config-setting>/spfe/content-set/topic-set-type-order</config-setting>
                     element. There are no special limits or requirements on this value. You can use
                     any topic set type names that make sense in your environment. The value must
                     match one of the values in the element
-                    <config-setting>/spfe/doc-set/topic-set-type-order</config-setting>.</p>
+                    <config-setting>/spfe/content-set/topic-set-type-order</config-setting>.</p>
             </description>
             <values/>
             <restrictions/>
@@ -2046,9 +2046,9 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/doc-set/subject-types</xpath>
+            <xpath>/spfe/content-set/subject-types</xpath>
             <description>
-                <p>A container for a list of <feature>subject types</feature> used in the <feature>documentation set</feature>. Subject types are the classification of subjects referred to by <feature>subject affinity markup</feature> and used to <task>index topics</task>. The subject type listing is used to provide aliases for the subject types when the name of the subject types is displayed in the output. For example, in the SPFE documentation, SPFE configuration settings are marked up using the <xml-element-name>config-setting</xml-element-name> element. <quote>config-setting</quote> is thus a subject type in this documentation set. However, when the output explicitly refers to a configuration setting (for instance, in a <feature>list page</feature>) the string <quote>Configuration setting</quote> is used in the singular and <quote>Configuration settings</quote> is used in the plural. These string are generated based on the value of the <config-setting>/spfe/doc-set/subject-types/subject-type/aliases/singular</config-setting> and <config-setting>/spfe/doc-set/subject-types/subject-type/aliases/plural</config-setting> settings for the <quote>config-setting</quote> subject type, as defined in the <feature>configuration file</feature> for this <feature>documentation set</feature>.</p>
+                <p>A container for a list of <feature>subject types</feature> used in the <feature>documentation set</feature>. Subject types are the classification of subjects referred to by <feature>subject affinity markup</feature> and used to <task>index topics</task>. The subject type listing is used to provide aliases for the subject types when the name of the subject types is displayed in the output. For example, in the SPFE documentation, SPFE configuration settings are marked up using the <xml-element-name>config-setting</xml-element-name> element. <quote>config-setting</quote> is thus a subject type in this documentation set. However, when the output explicitly refers to a configuration setting (for instance, in a <feature>list page</feature>) the string <quote>Configuration setting</quote> is used in the singular and <quote>Configuration settings</quote> is used in the plural. These string are generated based on the value of the <config-setting>/spfe/content-set/subject-types/subject-type/aliases/singular</config-setting> and <config-setting>/spfe/content-set/subject-types/subject-type/aliases/plural</config-setting> settings for the <quote>config-setting</quote> subject type, as defined in the <feature>configuration file</feature> for this <feature>documentation set</feature>.</p>
                 <codeblock>
 &lt;subject-types>
     &lt;subject-type>
@@ -2069,7 +2069,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/doc-set/subject-types/subject-type</xpath>
+            <xpath>/spfe/content-set/subject-types/subject-type</xpath>
             <description>
                 <p>A container for a subject type listing.</p>
             </description>
@@ -2080,7 +2080,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/doc-set/subject-types/subject-type/id</xpath>
+            <xpath>/spfe/content-set/subject-types/subject-type/id</xpath>
             <description>
                 <p>The id of a subject type. This is identical to an item in the list of subject affinity values used in the <feature>topic index</feature>.</p>
             </description>
@@ -2091,7 +2091,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/doc-set/subject-types/subject-type/aliases</xpath>
+            <xpath>/spfe/content-set/subject-types/subject-type/aliases</xpath>
             <description>
                 <p>A container for a pair of <feature>subject type aliases</feature>.</p>
             </description>
@@ -2102,7 +2102,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/doc-set/subject-types/subject-type/aliases/singular</xpath>
+            <xpath>/spfe/content-set/subject-types/subject-type/aliases/singular</xpath>
             <description>
                 <p>The singular version of a <feature>subject type alias</feature>.</p>
             </description>
@@ -2113,7 +2113,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/doc-set/subject-types/subject-type/aliases/plural</xpath>
+            <xpath>/spfe/content-set/subject-types/subject-type/aliases/plural</xpath>
             <description>
                 <p>The plural version of a <feature>subject type alias</feature>.</p>         
             </description>

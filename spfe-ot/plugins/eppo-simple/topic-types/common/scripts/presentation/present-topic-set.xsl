@@ -19,7 +19,7 @@
 	
 	<!-- FIXME: This should be in config. -->
 	<xsl:param name="output-image-directory">graphics</xsl:param>
-	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/presentation/out')"/>
+	<xsl:param name="output-directory" select="concat($config/config:content-set-build, '/topic-sets/', $topic-set-id, '/presentation/out')"/>
 
 <xsl:param name="draft">no</xsl:param>
 	

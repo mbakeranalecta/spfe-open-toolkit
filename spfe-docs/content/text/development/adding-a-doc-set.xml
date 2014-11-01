@@ -5,7 +5,7 @@
 http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
 
     <head>
-        <id>adding-a-doc-set</id>
+        <id>adding-a-content-set</id>
         <history>
             <revision>
                 <date>2013-06-14</date>
@@ -87,21 +87,21 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
         <doing>        
             <p>To add a documentation set, you create a <feature>documentation set configuration
                     file</feature>. A documentation set configuration file is a configuration file
-                that includes the <config-setting>/spfe/doc-set</config-setting> element. You need
+                that includes the <config-setting>/spfe/content-set</config-setting> element. You need
                 the following mandatory attributes and elements: </p>
             <ul>
                 <li>
-                    <p><config-setting>/spfe/doc-set/doc-set-id</config-setting>: The ID of the
+                    <p><config-setting>/spfe/content-set/content-set-id</config-setting>: The ID of the
                         documentation set. The build system uses the value to create a directory
                         name and it must be a valid directory name in the operating system that runs
                         the build system. </p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/doc-set/title</config-setting>: The title of the
+                    <p><config-setting>/spfe/content-set/title</config-setting>: The title of the
                         documentation set to display in the output.</p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/doc-set/topic-set-type-order</config-setting>: You can
+                    <p><config-setting>/spfe/content-set/topic-set-type-order</config-setting>: You can
                         declare topic sets to be of different types, such as <quote>guide</quote>,
                         or <quote>reference</quote>. (You do this in the <feature>topic set
                             configuration file</feature> in
@@ -110,13 +110,13 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
                         types appear the documentation set table of contents. </p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/doc-set/topic-sets</config-setting>: The list of
+                    <p><config-setting>/spfe/content-set/topic-sets</config-setting>: The list of
                         the topic sets to include in the documentation set. The value of the
-                        <config-setting>/spfe/doc-set/topic-sets/topic-set/topic-set-id</config-setting>
+                        <config-setting>/spfe/content-set/topic-sets/topic-set/topic-set-id</config-setting>
                         setting should match the
                         <config-setting>/spfe/topic-set/topic-set-id</config-setting> for the topic set.
                         The
-                        <config-setting>/spfe/doc-set/topic-sets/topic-set/href</config-setting>
+                        <config-setting>/spfe/content-set/topic-sets/topic-set/href</config-setting>
                         attribute is the URL of the topic set configuration file.</p>
                 </li>    
             </ul>
@@ -125,8 +125,8 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
             <codeblock>                <![CDATA[
  <spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <doc-set>
-        <doc-set-id>tests</doc-set-id>
+    <content-set>
+        <content-set-id>tests</content-set-id>
         <title>SPFE Documentation</title>
         <topic-set-type-order>
             <topic-set-type>docset</topic-set-type>
@@ -198,23 +198,23 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
             <string id="product-release">1.0 (alpha 1)</string>
             <string id="copyright">Copyright © 2013 Analecta Communications Inc.</string>
         </strings>
-     </doc-set>
+     </content-set>
 </spfe>]]>
             </codeblock>
             <p>This documentation set includes three topic sets, each with their own configuration
-                file, which is specified by the <config-setting>/spfe/doc-set/topic-sets/topic-set/href</config-setting>
+                file, which is specified by the <config-setting>/spfe/content-set/topic-sets/topic-set/href</config-setting>
                setting. The
-                path is relative to the location of the configuration file that defines the <config-setting>/spfe/doc-set</config-setting>
+                path is relative to the location of the configuration file that defines the <config-setting>/spfe/content-set</config-setting>
                 element. Each topic set configuration file defines a
                 <config-setting>/spfe/topic-set/topic-set-type</config-setting> element that matches one
                 of the values in the
-                <config-setting>/spfe/doc-set/topic-set-type-order</config-setting> element.</p>
+                <config-setting>/spfe/content-set/topic-set-type-order</config-setting> element.</p>
             <p>To add an index page for the documentation set, you need to <task>add a topic
                     set</task> that includes an index topic and includes the topic set in the list
                 of topic sets. For example, the topic set <bold>spfe-docs-home</bold> contains the
                 index topic for the SPFE documentation set.</p>
             <p>Run the <tool-name>spfe</tool-name> build tool and specify the configuration file
-                that contains the <config-setting>/spfe/doc-set</config-setting> element as the first
+                that contains the <config-setting>/spfe/content-set</config-setting> element as the first
                 parameter. If you see the topic sets that your documentation set includes in the
                 table of contents you have successfully added a documentation set.</p>
         </doing>

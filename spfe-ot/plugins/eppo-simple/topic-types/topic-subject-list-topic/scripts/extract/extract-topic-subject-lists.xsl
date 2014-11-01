@@ -34,7 +34,7 @@
 	
 	<xsl:template name="main" >
 		<!-- Create the root "extracted-content element" -->
-		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id,'/extract/out/lists.xml')}" method="xml" indent="yes" omit-xml-declaration="no">
+		<xsl:result-document href="file:///{concat($config/config:content-set-build, '/topic-sets/', $topic-set-id,'/extract/out/lists.xml')}" method="xml" indent="yes" omit-xml-declaration="no">
 			<es:subject-topic-lists>
 				<xsl:for-each-group select="$sources//lc:target[@type ne 'topic']" group-by="concat(@type, '+', lc:original-key)">
 					<xsl:variable name="this-key" select="lc:original-key"/>

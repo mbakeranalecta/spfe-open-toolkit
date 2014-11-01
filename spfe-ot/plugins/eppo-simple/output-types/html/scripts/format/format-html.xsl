@@ -24,7 +24,7 @@
 	<xsl:variable name="draft" as="xs:boolean" select="$config/config:build-command='draft'"/>
 	
 	<xsl:param name="topic-set-id"/>
-	<xsl:param name="output-directory" select="$config/config:doc-set-output"/>
+	<xsl:param name="output-directory" select="$config/config:content-set-output"/>
 	
 	<xsl:param name="presentation-files"/>
 	<xsl:variable name="presentation" select="sf:get-sources($presentation-files)"/>
@@ -281,7 +281,7 @@
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:result-document
-			href="file:///{$config/config:doc-set-build}/topic-sets/{$topic-set-id}/image-list.txt"
+			href="file:///{$config/config:content-set-build}/topic-sets/{$topic-set-id}/image-list.txt"
 			method="text">
 			<xsl:for-each-group select="$graphic-file-list" group-by=".">
 				<xsl:value-of select="concat(sf:local-path-from-uri(current-grouping-key()), '&#xa;')"/>

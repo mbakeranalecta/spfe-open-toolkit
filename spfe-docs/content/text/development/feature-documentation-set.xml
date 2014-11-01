@@ -29,6 +29,6 @@
     </head>
     <body>
         <title>Documentation Set</title>
-        <p>A <feature>documentation set</feature> is the full set of content built by a SPFE build. A documentation set  may contain one or more <feature>topic sets</feature>. A documentation set is defined by a <feature>documentation set configuration file</feature>, using the <feature>configuration setting</feature> <config-setting>/spfe/doc-set</config-setting>.</p>
+        <p>A <feature>documentation set</feature> is the full set of content built by a SPFE build. A documentation set  may contain one or more <feature>topic sets</feature>. A documentation set is defined by a <feature>documentation set configuration file</feature>, using the <feature>configuration setting</feature> <config-setting>/spfe/content-set</config-setting>.</p>
     </body>
 </feature-topic>

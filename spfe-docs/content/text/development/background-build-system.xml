@@ -78,7 +78,7 @@
             <li>
                 <p>Run the <feature>synthesis stage</feature> for each topic set in turn in the
                     order they are listed in the
-                    <config-setting>/spfe/doc-set/topic-sets</config-setting> configuration setting.
+                    <config-setting>/spfe/content-set/topic-sets</config-setting> configuration setting.
                     This involved running the <feature>extract</feature>, <feature>merge</feature>,
                         <feature>resolve</feature>, <feature>toc</feature>, and <feature>link
                         catalog</feature> scripts for each topic set in turn. Running the scripts in

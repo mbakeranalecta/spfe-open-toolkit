@@ -117,7 +117,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/docset-home-topic/scripts/presentation/present-docset-home-topic.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-doc-set-toc.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-content-set-toc.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-functions.xsl</href>

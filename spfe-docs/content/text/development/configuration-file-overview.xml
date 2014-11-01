@@ -62,12 +62,12 @@
         <ul>
             <li>
                 <p>The <feature>documentation set</feature> configuration, contained in the setting,
-                    <config-setting>/spfe/doc-set</config-setting>: This defines the set of topic
+                    <config-setting>/spfe/content-set</config-setting>: This defines the set of topic
                     sets to be included in the topic set as well as other settings that are common
                     to the entire documentation set.</p>
             </li>
             <li>
-                <p>The <feature>topic set</feature> configuration for each topic set, contained in the setting <config-setting>/spfe/topic-set</config-setting>: This defines the topics to include in each topic set and other setting that are common to a topic set. A topic set configuration is included in the documentation set configuration using the setting <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting>.</p>
+                <p>The <feature>topic set</feature> configuration for each topic set, contained in the setting <config-setting>/spfe/topic-set</config-setting>: This defines the topics to include in each topic set and other setting that are common to a topic set. A topic set configuration is included in the documentation set configuration using the setting <config-setting>/spfe/content-set/topic-sets/topic-set</config-setting>.</p>
             </li>
             <li>
                 <p>The <feature>topic type</feature> configuration for each topic type in a topic set, contained in the setting <config-setting>/spfe/topic-type</config-setting>: This defines the scripts to use to process topics of a particular topic type, as well as other setting common to a topic type. A topic type configuration file is usually created as part of defining a topic type. A topic type configuration is included in the topic set configuration using the setting <config-setting>/spfe/topic-set/topic-types/topic-type</config-setting>.</p>
@@ -84,7 +84,7 @@
                     is usually created as part of defining an output type. An output type
                     configuration is included in the documentation set configuration using the
                     setting
-                    <config-setting>/spfe/doc-set/output-formats/output-format</config-setting>.</p>
+                    <config-setting>/spfe/content-set/output-formats/output-format</config-setting>.</p>
             </li>
         </ul>
 

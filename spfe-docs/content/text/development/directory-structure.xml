@@ -106,7 +106,7 @@
         
         <p>The configuration script also creates a directory for the documentation set being built,
             which is named using the documentation set id (configured in
-            <config-setting>/spfe/doc-set/doc-set-id</config-setting>). Inside this directory it
+            <config-setting>/spfe/content-set/content-set-id</config-setting>). Inside this directory it
             creates a directory named <directory-name>config</directory-name> which contains the
             consolidated <feature>configuration file</feature>, with the name
                 <file-name>spfe-config.xml</file-name>.</p>

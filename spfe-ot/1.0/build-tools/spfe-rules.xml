@@ -61,7 +61,7 @@
 		<echo/>
 		<echo/>
 		<echo>=====================================================</echo>
-		<echo>Beginning ${ant.project.invoked-targets} build of ${spfe.doc-set-id}</echo>
+		<echo>Beginning ${ant.project.invoked-targets} build of ${spfe.content-set-id}</echo>
 		<echo>====================================================</echo>
 		<echo/>
 		<echo/>
