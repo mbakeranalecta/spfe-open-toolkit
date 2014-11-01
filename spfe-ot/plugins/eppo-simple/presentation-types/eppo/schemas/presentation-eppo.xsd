@@ -8,7 +8,7 @@
   <xs:element name="pages">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="title" type="xs:string"/>
+        <xs:element name="title" type="title_type"/>
         <xs:element name="page" type="page_type" maxOccurs="unbounded"/>
       </xs:sequence>
     </xs:complexType>
@@ -41,7 +41,7 @@
             <xs:element minOccurs="0" name="keywords">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="title"/>
+                  <xs:element name="title" type="title_type"/>
                   <xs:element maxOccurs="unbounded" name="keyword">
                     <xs:complexType>
                       <xs:sequence>
@@ -55,7 +55,7 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" name="disambiguation">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="title"/>
+                  <xs:element name="title" type="title_type"/>
                   <xs:element name="p" type="p_type"/>
                 </xs:sequence>
               </xs:complexType>
@@ -102,7 +102,7 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="title" type="xs:string"/>
+      <xs:element name="title" type="other_title_type"/>
       <xs:element minOccurs="0" name="toc">
         <xs:complexType>
           <xs:sequence>
@@ -148,7 +148,7 @@
   <xs:complexType name="fig_type">
     <xs:sequence>
       <xs:element ref="gr:graphic-record"/>
-      <xs:element name="title" type="xs:string"/>
+      <xs:element name="title" type="title_type"/>
       <xs:element name="caption" type="caption_type"/>
     </xs:sequence>
   </xs:complexType>
@@ -178,7 +178,7 @@
   </xs:complexType>
   <xs:complexType name="precis_type">
     <xs:sequence>
-      <xs:element name="title" type="xs:string"/>
+      <xs:element name="title" type="title_type"/>
       <xs:group maxOccurs="unbounded" ref="basic-text-structure-group"/>
     </xs:sequence>
   </xs:complexType>
@@ -186,7 +186,7 @@
   <xs:complexType name="section_type">
     <xs:sequence>
       <xs:element name="anchor" type="anchor_type"/>
-      <xs:element name="title" type="xs:string"/>
+      <xs:element name="title" type="title_type"/>
       <xs:group maxOccurs="unbounded" ref="text-structure-group"/>
     </xs:sequence>
   </xs:complexType>
@@ -257,7 +257,6 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="title_type"/>
   <xs:complexType mixed="true" name="xlink_type">
     <xs:attribute name="href" use="required" type="xs:anyURI"/>
     <xs:attribute name="title"/>
@@ -310,6 +309,9 @@
     </xs:choice>
 
   </xs:group>
+  <xs:simpleType name="title_type">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
   <xs:group name="basic-text-structure-group">
     <xs:choice>
       <xs:element name="p" type="p_type"/>
@@ -329,4 +331,7 @@
     </xs:choice>
 
   </xs:group>
+  <xs:simpleType name="other_title_type">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
 </xs:schema>

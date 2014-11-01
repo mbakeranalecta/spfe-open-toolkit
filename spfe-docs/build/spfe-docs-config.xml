@@ -32,6 +32,21 @@
                 <topic-set-id>spfe-configuration-reference</topic-set-id>
                 <href>topic-sets/spfe-configuration-reference.xml</href>
             </topic-set>  
+			
+			 <topic-set>
+                <topic-set-id>eppo-presentation-reference</topic-set-id>
+                <href>topic-sets/eppo-presentation-reference.xml</href>
+            </topic-set>  
+            
+			 <topic-set>
+			     <topic-set-id>eppo-graphic-record-doctype-reference</topic-set-id>
+			     <href>topic-sets/eppo-graphic-record-reference.xml</href>
+            </topic-set>  
+            
+			 <topic-set>
+			     <topic-set-id>eppo-generic-topic-reference</topic-set-id>
+			     <href>topic-sets/eppo-generic-topic-reference.xml</href>
+            </topic-set>  
             
             <topic-set>
                 <topic-set-id>spfe-function-reference</topic-set-id>
@@ -106,6 +121,13 @@
                 <aliases>
                     <singular>Document name</singular>
                     <plural>Document names</plural>
+                </aliases>
+            </subject-type>
+            <subject-type>
+                <id>xml-element-name</id>
+                <aliases>
+                    <singular>XML element name</singular>
+                    <plural>XML element names</plural>
                 </aliases>
             </subject-type>
         </subject-types>

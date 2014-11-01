@@ -88,11 +88,6 @@
         <p>The following build command are available:</p>
         <ul>
             <li>
-                <p><code>cat</code>: Generates the <feature>link catalogs</feature> for the topic
-                    set. The link catalogs must be built first to enable the build to create the
-                    links.</p>
-            </li>
-            <li>
                 <p><code>draft</code>: Generates a draft build. Output includes work-in-progress
                     information and an indication of draft status.</p>
             </li>
@@ -106,8 +101,9 @@
         </ul>
         <p>If you make changes to scripts or configuration files, you should always run clean before
             building a new draft, since the dependency checking in the build does not cover the
-            scripts and configuration file. In the Alpha version of the toolkit, it is not a given
-            that it covers all the things it should cover, so when in doubt, run clean before you
-            build a draft. The tools run clean before a final build, just to be certain.</p>
+            scripts and configuration file. If you don't see the changes you expect as the result of
+            any change you have made, try running <code>-clean</code> and run the build again. If
+            you see a patterns of changes not being recognized without running <code>-clean</code>
+            <task>please report this issue</task>.</p>
      </body>
 </feature-topic>

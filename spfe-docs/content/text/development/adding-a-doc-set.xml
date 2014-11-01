@@ -58,18 +58,23 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
         <understanding>
             <p>A <feature>documentation set</feature> is a collection of
                 one or more related <feature>topic sets</feature>. A documentation set generally contains all the documentation related to a single product or service.</p>
-            <p>In SPFE, a documentation set is simply a particular build configuration. Topic source files do not contain anything that ties them to a specific documentation set. Therefore, you can define as many documentation sets as you like, simply by writing new documentation set configuration files. This makes it easy to reuse topics in different documentation sets. It also makes it easy to set up different build configurations for use during the development process.</p>
+            <p>In SPFE, a documentation set is simply a particular <feature>build
+                    configuration</feature>. Topic source files do not contain anything that ties
+                them to a specific documentation set. Therefore, you can define as many
+                documentation sets as you like, simply by writing new documentation set
+                    <feature>configuration files</feature>. This makes it easy to <task>reuse</task>
+                topics in different documentation sets. It also makes it easy to set up different
+                build configurations for use during the development process.</p>
        </understanding>
        <planning>
            <planning-question>
                 <planning-question-title>Do I need a documentation set?</planning-question-title>
                 <planning-question-body>
                     <p>Yes. The SPFE build requires a Documentation Set as a build target.</p>
-                    <p>It is not necessary to create a collection of topic sets; you use a single
+                    <p>It is not necessary to create multiple topic sets; you use a single
                             <feature>topic set</feature> to include all your topics. However, if you
-                        use a documentation set, you can present multiple topic sets in a specific
-                        order in the table of contents in the output. A documentation set also
-                        enables you to reuse topic sets in different documentation sets.</p>
+                        use a multiple topic sets, you can present multiple topic sets in a specific
+                        order in the <feature>table of contents</feature> in the output. </p>
                 </planning-question-body>
             </planning-question>
            <planning-question>
@@ -80,10 +85,10 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
            </planning-question>
        </planning>
         <doing>        
-            <p>To add a documentation set, you create a documentation set configuration file. A
-                documentation set configuration file is a configuration file that includes the
-                <config-setting>/spfe/doc-set</config-setting> element. You need the following
-                mandatory attributes and elements: </p>
+            <p>To add a documentation set, you create a <feature>documentation set configuration
+                    file</feature>. A documentation set configuration file is a configuration file
+                that includes the <config-setting>/spfe/doc-set</config-setting> element. You need
+                the following mandatory attributes and elements: </p>
             <ul>
                 <li>
                     <p><config-setting>/spfe/doc-set/doc-set-id</config-setting>: The ID of the
@@ -96,10 +101,13 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
                         documentation set to display in the output.</p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/doc-set/topic-set-type-order</config-setting>: The
-                        order in which you want to present the topic sets in the table of contents
-                        of the documentation set. The type of a topic set is defined by the 
-                        <config-setting>/spfe/topic-set/topic-set-type</config-setting> setting in the topic set configuration file.</p>
+                    <p><config-setting>/spfe/doc-set/topic-set-type-order</config-setting>: You can
+                        declare topic sets to be of different types, such as <quote>guide</quote>,
+                        or <quote>reference</quote>. (You do this in the <feature>topic set
+                            configuration file</feature> in
+                        <config-setting>/spfe/topic-set/topic-set-type</config-setting>.) You can
+                        then use this setting to determine the order in which different topic set
+                        types appear the documentation set table of contents. </p>
                 </li>
                 <li>
                     <p><config-setting>/spfe/doc-set/topic-sets</config-setting>: The list of
@@ -112,9 +120,9 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
                         attribute is the URL of the topic set configuration file.</p>
                 </li>    
             </ul>
-            <p>The following shows the documentation set configuration for the SPFE documentation set:</p>
-            <codeblock>
-                <![CDATA[
+            <p>The following is an abbreviated version of  the documentation set configuration for
+                the SPFE documentation set:</p>
+            <codeblock>                <![CDATA[
  <spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <doc-set>

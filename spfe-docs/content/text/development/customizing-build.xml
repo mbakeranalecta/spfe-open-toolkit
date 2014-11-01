@@ -37,8 +37,22 @@
            <planning-question>
                 <planning-question-title>Do I need to change the build order?</planning-question-title>
                 <planning-question-body>
-                    <p>The default build order invokes a single build file for the synthesis, presentation, format, and encode stages. If you want to break any of these stages up into multiple steps, you will need to change the build order.</p>
-                    <p>The most common reason for changing the build order is to do custom processing of source files to create topics, or to combine externally sourced material with authored material to produce topics. You would then run a regular or custom synthesis step on the resulting topic files.</p>
+                    <p>The default build order invokes a single build file for the synthesis,
+                        presentation, format, and encode stages. Each of those stage may also be
+                        broken up into multiple steps. If you want to add an additional step to any
+                        of these stages, you will need to change the build order.</p>
+                    <p>The most common reason for changing the build order is to do custom
+                        processing of source files to create topics, or to combine externally
+                        sourced material with authored material to produce topics. You would then
+                        run a regular or custom synthesis step on the resulting topic files. Note,
+                        however, that the standard build process already includes two steps called
+                            <feature>extract</feature> and <feature>merge</feature>. These steps are
+                        intended for extracting content from external sources and for merging
+                        content from different sources together. In most cases, writing scripts for
+                        these steps should enable you to handle any custom pre-processing you may
+                        need to do. These steps are invoked automatically when a topic set
+                        configuration contains an entry for the
+                        <config-setting>source-to-extract-content-from</config-setting> setting.  </p>
 
                 </planning-question-body>
 
@@ -47,7 +61,13 @@
         
 
 <doing>        
-    <p>To change the build order, you write an ant rules file describing the steps of your build. You don't have to describe the complete build order in your build file. You can import <file-name>spfe-rules.xml</file-name> into your build file and then override the rules you want to change. To make this easier, <file-name>spfe.rules</file-name> defines an intermediate taget for each build step that has a dependency on the main build rules for that step. Rather than overriding the main build rule, you can just override the intermediate rule and add your custom rules to its dependency list.</p>
+    <p>To change the build order, write an ant rules file describing the steps of your build. You
+                don't have to describe the complete build order in your build file. You can import
+                    <file-name>spfe-rules.xml</file-name> into your build file and then override the
+                rules you want to change. To make this easier, <file-name>spfe.rules</file-name>
+                defines an intermediate target for each build step that has a dependency on the main
+                build rules for that step. Rather than overriding the main build rule, you can just
+                override the intermediate rule and add your custom rules to its dependency list.</p>
         <p>The main build targets have names starting with two hyphens. For instance, the main synthesis rules is called <code>--build.synthesis</code>. The intermediate build rules have the same name starting with one hyphen, for instance, <code>-build.synthesis</code>. The <code>-build.synthesis</code> rule contains just a dependency on the main build rule, so in <file-name>spfe.rules</file-name> the <code>-build.synthesis</code> rule looks like this:</p>
         <codeblock>
 <![CDATA[<target name="-build.synthesis" depends="--build.synthesis"/>]]>
@@ -69,6 +89,7 @@
 </project>
         ]]>
         </codeblock>
+            <!--Need to deal with standard directory locations for input and outputs. To override, you need the next step to know where to look. Not sure if this is implemented yet.-->
         
         <p>This build rule causes your custom synthesis rule to be called first, and then the standard synthesis rule. Obviously, if you do this you must create XML output in the place the default synthesis rule expects to find it. Alternatively, you can omit the default synthesis rule entirely, in which case your custom synthesis rule must create a syntheis XML document or documents in the place the presentation rule expects to find it.</p>
         <p>The list of build rules designed to be overridable in this way is:</p>

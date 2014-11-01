@@ -146,6 +146,9 @@ Main template
 						<xsl:sequence select="."/>
 					</xsl:for-each-group>
 					<xsl:sequence select="$references/key-set"/>
+					<xsl:for-each select="*:key">
+						<key><xsl:value-of select="."/></key>
+					</xsl:for-each>
 				</target>
 			</xsl:for-each>
 			<xsl:apply-templates/>

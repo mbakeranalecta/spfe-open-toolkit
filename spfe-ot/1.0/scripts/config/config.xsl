@@ -94,6 +94,8 @@
     </xsl:template>
 
     <xsl:template name="main">
+        <!-- Check the soundness of the config file -->
+        <!-- FIXME: Check that each topic set file is unique. To do this, need to normalize the locations, not just check the paths as strings. -->
         <xsl:call-template name="create-config-file"/>
         <xsl:call-template name="create-build-file"/>
         <xsl:for-each select="$config/topic-set">
@@ -410,7 +412,6 @@
         </xsl:variable>
         
         <!-- FIXME: Should test that each of the required script sets is present and raise error if not. -->
-
         <xsl:for-each-group select="$script-sets/scripts/*" group-by="concat(name(), '.', @type)">
             <xsl:variable name="script-type"
                 select="if (name()='other') then concat('other.',@name) else name()"/>
