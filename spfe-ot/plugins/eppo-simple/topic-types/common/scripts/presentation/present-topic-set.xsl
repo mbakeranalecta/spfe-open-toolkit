@@ -19,7 +19,7 @@
 	
 	<!-- FIXME: This should be in config. -->
 	<xsl:param name="output-image-directory">graphics</xsl:param>
-	<xsl:param name="output-directory" select="concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id, '/presentation/out')"/>
+	<xsl:param name="output-directory" select="concat($config/config:content-set-build, '/topic-sets/', $topic-set-id, '/presentation/out')"/>
 
 <xsl:param name="draft">no</xsl:param>
 	
@@ -39,14 +39,14 @@ Main template
 =============
 -->
 <xsl:template name="main">
-	<xsl:result-document href="file:///{$output-directory}/presentation.xml" method="xml" indent="no" omit-xml-declaration="no" >
+	<xsl:result-document href="file:///{$output-directory}/presentation.xml" method="xml" indent="yes" omit-xml-declaration="no" >
 		
 		
 		
 		
 		
 		<pe:pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/schemas/eppo/presentation-eppo.xsd">
+		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/eppo/schemas/presentation-eppo.xsd">
 			<pe:title>
 				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 			</pe:title>

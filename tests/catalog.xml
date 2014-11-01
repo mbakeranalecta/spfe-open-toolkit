@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
-<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<!DOCTYPE catalog PUBLIC "-//OASIS//DTD XML Catalogs V1.0//EN" "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-    <rewriteURI uriStartString="http://spfeopentoolkit.org/tests/" rewritePrefix="./"/>
-    <rewriteSystem
-        systemIdStartString="http://spfeopentoolkit.org/tests/" rewritePrefix="./" />
-</catalog>

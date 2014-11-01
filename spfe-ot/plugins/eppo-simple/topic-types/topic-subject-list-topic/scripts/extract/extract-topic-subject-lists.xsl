@@ -34,28 +34,32 @@
 	
 	<xsl:template name="main" >
 		<!-- Create the root "extracted-content element" -->
-		<xsl:result-document href="file:///{concat($config/config:doc-set-build, '/topic-sets/', $topic-set-id,'/extract/out/lists.xml')}" method="xml" indent="yes" omit-xml-declaration="no">
+		<xsl:result-document href="file:///{concat($config/config:content-set-build, '/topic-sets/', $topic-set-id,'/extract/out/lists.xml')}" method="xml" indent="yes" omit-xml-declaration="no">
 			<es:subject-topic-lists>
 				<xsl:for-each-group select="$sources//lc:target[@type ne 'topic']" group-by="concat(@type, '+', lc:original-key)">
 					<xsl:variable name="this-key" select="lc:original-key"/>
-				<xsl:variable name="this-type" select="@type"/>
-				<es:subject-topic-list>
-					<es:subject><xsl:value-of select="$this-key"/></es:subject>
-					<es:subject-type><xsl:value-of select="$this-type"/></es:subject-type>
-					<es:topics-on-subject>
-						<!-- Select topic on this subject and type, excluding those in subject-topic-list pages. -->
-						<xsl:for-each select="$sources//lc:page[lc:target/lc:original-key=$this-key][lc:target/@type=$this-type][not( ends-with(@topic-type, '}subject-topic-list'))]">
-						<es:topic>
-							<es:title><xsl:value-of select="@title"/></es:title>
-							<es:full-name><xsl:value-of select="@full-name"/></es:full-name>
-							<es:topic-type><xsl:value-of select="@topic-type"/></es:topic-type>
-							<es:topic-type-alias><xsl:value-of select="@topic-type-alias"/></es:topic-type-alias>
-							<es:excerpt><xsl:value-of select="@excerpt"/></es:excerpt>
-						</es:topic>
-					</xsl:for-each>	
-					</es:topics-on-subject>
-				</es:subject-topic-list>
-			</xsl:for-each-group>
+					<xsl:variable name="this-type" select="@type"/>
+					<xsl:variable name="this-namespace" select="lc:namespace"/>
+					<es:subject-topic-list>
+						<es:subject><xsl:value-of select="$this-key"/></es:subject>
+						<es:subject-type><xsl:value-of select="$this-type"/></es:subject-type>
+						<es:topics-on-subject>
+							<!-- Select topic on this subject and type, excluding those in subject-topic-list pages. -->
+							<xsl:for-each select="$sources//lc:page[lc:target/lc:original-key=$this-key]
+								                                   [if($this-namespace) then lc:target/lc:namespace=$this-namespace else true()]
+								                                   [lc:target/@type=$this-type]
+								                                   [not( ends-with(@topic-type, '}subject-topic-list'))]">
+								<es:topic>
+									<es:title><xsl:value-of select="@title"/></es:title>
+									<es:full-name><xsl:value-of select="@full-name"/></es:full-name>
+									<es:topic-type><xsl:value-of select="@topic-type"/></es:topic-type>
+									<es:topic-type-alias><xsl:value-of select="@topic-type-alias"/></es:topic-type-alias>
+									<es:excerpt><xsl:value-of select="@excerpt"/></es:excerpt>
+								</es:topic>
+							</xsl:for-each>	
+						</es:topics-on-subject>
+					</es:subject-topic-list>
+				</xsl:for-each-group>
  			</es:subject-topic-lists>
 		</xsl:result-document>
 	</xsl:template>

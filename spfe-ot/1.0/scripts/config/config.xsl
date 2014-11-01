@@ -26,32 +26,32 @@
     <xsl:variable name="home" select="translate($HOME, '\', '/')"/>
     <xsl:variable name="spfeot-home" select="translate($SPFEOT_HOME, '\', '/')"/>
     <xsl:variable name="build-directory" select="translate($SPFE_BUILD_DIR, '\', '/')"/>
-    <xsl:variable name="doc-set-build-root-directory"
-        select="concat($build-directory,  '/', $config-doc/spfe/doc-set/doc-set-id)"/>
-    <xsl:variable name="doc-set-build" select="concat($doc-set-build-root-directory, '/build')"/>
-    <xsl:variable name="doc-set-config" select="concat($doc-set-build-root-directory, '/config')"/>
-    <xsl:variable name="doc-set-output" select="concat($doc-set-build-root-directory, '/output')"/>
-    <xsl:variable name="doc-set-home"
-        select="concat($build-directory, '/', $config/doc-set/doc-set-id,'/output')"/>
+    <xsl:variable name="content-set-build-root-directory"
+        select="concat($build-directory,  '/', $config-doc/spfe/content-set/content-set-id)"/>
+    <xsl:variable name="content-set-build" select="concat($content-set-build-root-directory, '/build')"/>
+    <xsl:variable name="content-set-config" select="concat($content-set-build-root-directory, '/config')"/>
+    <xsl:variable name="content-set-output" select="concat($content-set-build-root-directory, '/output')"/>
+    <xsl:variable name="content-set-home"
+        select="concat($build-directory, '/', $config/content-set/content-set-id,'/output')"/>
     <xsl:variable name="topicset-home">
         <xsl:choose>
-            <xsl:when test="$config/topic-set-id eq $config/doc-set/home-topic-set">
-                <xsl:value-of select="$doc-set-home"/>
+            <xsl:when test="$config/topic-set-id eq $config/content-set/home-topic-set">
+                <xsl:value-of select="$content-set-home"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="concat($doc-set-home, '/', $config/topic-set-id)"/>
+                <xsl:value-of select="concat($content-set-home, '/', $config/topic-set-id)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="link-catalog-directory" select="concat($doc-set-build, '/link-catalogs')"/>
-    <xsl:variable name="toc-directory" select="concat($doc-set-build, '/tocs')"/>
+    <xsl:variable name="link-catalog-directory" select="concat($content-set-build, '/link-catalogs')"/>
+    <xsl:variable name="toc-directory" select="concat($content-set-build, '/tocs')"/>
 
     <xsl:function name="spfe:resolve-defines" as="xs:string">
         <xsl:param name="value"/>
         <xsl:variable name="defines" as="element(define)*">
             <define name="HOME" value="{$home}"/>
             <define name="SPFEOT_HOME" value="{$spfeot-home}"/>
-            <define name="DOC_SET_BUILD_DIR" value="{$doc-set-build}"/>
+            <define name="DOC_SET_BUILD_DIR" value="{$content-set-build}"/>
         </xsl:variable>
         <xsl:variable name="result">
             <xsl:analyze-string select="$value" regex="\$\{{([^}}]*)\}}">
@@ -94,6 +94,8 @@
     </xsl:template>
 
     <xsl:template name="main">
+        <!-- Check the soundness of the config file -->
+        <!-- FIXME: Check that each topic set file is unique. To do this, need to normalize the locations, not just check the paths as strings. -->
         <xsl:call-template name="create-config-file"/>
         <xsl:call-template name="create-build-file"/>
         <xsl:for-each select="$config/topic-set">
@@ -137,20 +139,20 @@
         <!-- TO DO: check that all the topic sets have unique IDs -->
         <!-- TO DO: check that all the topic sets have unique build directories -->
 
-        <project name="{$config/doc-set/doc-set-id}" default="{$SPFE_BUILD_COMMAND}" xmlns="">
+        <project name="{$config/content-set/content-set-id}" default="{$SPFE_BUILD_COMMAND}" xmlns="">
 
             <property file="{$home}/.spfe/spfe.properties"/>
             <property name="HOME" value="{$home}"/>
             <property name="SPFEOT_HOME" value="{$spfeot-home}"/>
-            <property name="spfe.config-file" value="{$doc-set-config}/spfe-config.xml"/>
+            <property name="spfe.config-file" value="{$content-set-config}/spfe-config.xml"/>
             <property name="SPFE_BUILD_COMMAND" value="{$SPFE_BUILD_COMMAND}"/>
             <property name="spfe.docset-build-root-directory"
-                value="{$doc-set-build-root-directory}"/>
-            <property name="spfe.build.build-directory" value="{$doc-set-build}"/>
-            <property name="spfe.build.output-directory" value="{$doc-set-home}"/>
+                value="{$content-set-build-root-directory}"/>
+            <property name="spfe.build.build-directory" value="{$content-set-build}"/>
+            <property name="spfe.build.output-directory" value="{$content-set-home}"/>
             <property name="spfe.build.link-catalog-directory" value="{$link-catalog-directory}"/>
             <property name="spfe.build.toc-directory" value="{$toc-directory}"/>
-            <property name="spfe.doc-set-id" value="{$config/doc-set/doc-set-id}"/>
+            <property name="spfe.content-set-id" value="{$config/content-set/content-set-id}"/>
 
 
             <target name="--build.synthesis">
@@ -165,8 +167,8 @@
                         <!-- EXTRACT -->
 
                         <build.extracted-content topic-set-id="{$topic-set-id}"
-                            style="{$doc-set-build}/topic-sets/{$topic-set-id}/extract/spfe.extract.xsl"
-                            output-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/extract/out">
+                            style="{$content-set-build}/topic-sets/{$topic-set-id}/extract/spfe.extract.xsl"
+                            output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/extract/out">
                             <files-elements>
                                 <files id="{$topic-set-id}.sources-to-extract-content-from">
                                     <xsl:for-each
@@ -185,12 +187,12 @@
                             <!-- MERGE -->
                             <build.merge 
                                 topic-set-id="{$topic-set-id}"
-                                style="{$doc-set-build}/topic-sets/{$topic-set-id}/merge/spfe.merge.xsl"
-                                output-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/merge/out">
+                                style="{$content-set-build}/topic-sets/{$topic-set-id}/merge/spfe.merge.xsl"
+                                output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/merge/out">
                                 <files-elements>
                                     <files id="{$topic-set-id}.extracts-to-merge-content-with">
                                         <include
-                                            name="{$doc-set-build}/topic-sets/{$topic-set-id}/extract/out/*.xml"
+                                            name="{$content-set-build}/topic-sets/{$topic-set-id}/extract/out/*.xml"
                                         />
                                     </files>
                                     <pathconvert dirsep="/" pathsep=";"
@@ -209,17 +211,17 @@
                         </xsl:if>
                     </xsl:if>
 
-                    <build.synthesis topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/synthesis/spfe.synthesis.xsl"
-                        output-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/synthesis/out">
+                    <build.resolve topic-set-id="{$topic-set-id}"
+                        style="{$content-set-build}/topic-sets/{$topic-set-id}/resolve/spfe.resolve.xsl"
+                        output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/resolve/out">
                         <files-elements>
                             <files id="{$topic-set-id}.authored-content">
                                <xsl:choose>
                                    <xsl:when test="sources/sources-to-extract-content-from/include and sources/authored-content/include">
-                                       <include name="{$doc-set-build}/topic-sets/{$topic-set-id}/merge/out/*.xml"/>
+                                       <include name="{$content-set-build}/topic-sets/{$topic-set-id}/merge/out/*.xml"/>
                                    </xsl:when>
                                    <xsl:when test="sources/sources-to-extract-content-from/include">
-                                       <include name="{$doc-set-build}/topic-sets/{$topic-set-id}/extract/out/*.xml"/>
+                                       <include name="{$content-set-build}/topic-sets/{$topic-set-id}/extract/out/*.xml"/>
                                    </xsl:when>
                                    <xsl:otherwise>
                                        <xsl:for-each
@@ -231,15 +233,15 @@
                             </files>
                             <pathconvert dirsep="/" pathsep=";" property="authored-content-files" refid="{$topic-set-id}.authored-content"/>
                         </files-elements>
-                    </build.synthesis>
+                    </build.resolve>
 
                     <build.link-catalog topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/link-catalog/spfe.link-catalog.xsl"
-                        output-directory="{$doc-set-build}/link-catalogs"> </build.link-catalog>
+                        style="{$content-set-build}/topic-sets/{$topic-set-id}/link-catalog/spfe.link-catalog.xsl"
+                        output-directory="{$content-set-build}/link-catalogs"> </build.link-catalog>
 
                     <build.toc topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/toc/spfe.toc.xsl"
-                        output-directory="{$doc-set-build}/tocs"> </build.toc>
+                        style="{$content-set-build}/topic-sets/{$topic-set-id}/toc/spfe.toc.xsl"
+                        output-directory="{$content-set-build}/tocs"> </build.toc>
 
                 </xsl:for-each>
             </target>
@@ -250,8 +252,8 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <xsl:for-each select="presentation-types/presentation-type">
                         <build.presentation topic-set-id="{$topic-set-id}"
-                            style="{$doc-set-build}/topic-sets/{$topic-set-id}/presentation-{name}/spfe.presentation-{name}.xsl"
-                            output-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/presentation-{name}/out"
+                            style="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{name}/spfe.presentation-{name}.xsl"
+                            output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{name}/out"
                         > </build.presentation>
                     </xsl:for-each>
                 </xsl:for-each>
@@ -266,9 +268,9 @@
                         <xsl:variable name="presentation-type"
                             select="$config/output-format[name=$name][1]/presentation-type"/>
                         <build.format topic-set-id="{$topic-set-id}"
-                            style="{$doc-set-build}/topic-sets/{$topic-set-id}/format-{name}/spfe.format-{name}.xsl"
-                            input-directory="{$doc-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out"
-                            output-directory="{if ($topic-set-id=$config/doc-set/home-topic-set) then '' else concat($topic-set-id, '/')}"
+                            style="{$content-set-build}/topic-sets/{$topic-set-id}/format-{name}/spfe.format-{name}.xsl"
+                            input-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out"
+                            output-directory="{if ($topic-set-id=$config/content-set/home-topic-set) then '' else concat($topic-set-id, '/')}"
                         > 
                             <files-elements>
                                     <files id="files.{$name}.support-files">
@@ -288,7 +290,7 @@
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.pdf-encode topic-set-id="{$topic-set-id}"
-                        style="{$doc-set-build}/topic-sets/{$topic-set-id}/encode/spfe.encode.xsl"
+                        style="{$content-set-build}/topic-sets/{$topic-set-id}/encode/spfe.encode.xsl"
                     > </build.pdf-encode>
                 </xsl:for-each>
             </target>
@@ -305,16 +307,16 @@
     -->
 
     <xsl:template name="create-config-file">
-        <xsl:if test="not($config//doc-set)">
+        <xsl:if test="not($config//content-set)">
             <xsl:message terminate="yes">
-                <xsl:text>ERROR: /spfe/doc-set not found in </xsl:text>
+                <xsl:text>ERROR: /spfe/content-set not found in </xsl:text>
                 <xsl:value-of select="$configfile"/>
                 <xsl:text>. The configuration file provided to the build system must define a doc set.</xsl:text>
             </xsl:message>
         </xsl:if>
         <xsl:message
-            select="concat('Generating config file: ', 'file:///', $doc-set-build, '/config/spfe-config.xml')"/>
-        <xsl:result-document href="file:///{$doc-set-config}/spfe-config.xml" method="xml"
+            select="concat('Generating config file: ', 'file:///', $content-set-build, '/config/spfe-config.xml')"/>
+        <xsl:result-document href="file:///{$content-set-config}/spfe-config.xml" method="xml"
             indent="yes"
             xpath-default-namespace="http://spfeopentoolkit/ns/spfe-ot/config"
             xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
@@ -323,12 +325,12 @@
                 <build-directory>
                     <xsl:value-of select="$build-directory"/>
                 </build-directory>
-                <doc-set-build>
-                    <xsl:value-of select="$doc-set-build"/>
-                </doc-set-build>
-                <doc-set-output>
-                    <xsl:value-of select="$doc-set-output"/>
-                </doc-set-output>
+                <content-set-build>
+                    <xsl:value-of select="$content-set-build"/>
+                </content-set-build>
+                <content-set-output>
+                    <xsl:value-of select="$content-set-output"/>
+                </content-set-output>
                 <spfeot-home>
                     <xsl:value-of select="$SPFEOT_HOME"/>
                 </spfeot-home>
@@ -342,13 +344,13 @@
                     <xsl:value-of select="$toc-directory"/>
                 </toc-directory>
                 <!-- FIXME: don't need to copy the topic set list as it is redundant -->
-                <xsl:copy-of select="$config/doc-set"/>
+                <xsl:copy-of select="$config/content-set"/>
                 <xsl:for-each select="$config/topic-set">
                     <xsl:copy>
                         <output-directory>
                             <!-- FIXME: This dir ends with spearator. Others don't. Make consistent (by changing others) -->
                             <xsl:choose>
-                                <xsl:when test="topic-set-id=$config/doc-set/home-topic-set">
+                                <xsl:when test="topic-set-id=$config/content-set/home-topic-set">
                                     <xsl:text/>
                                 </xsl:when>
                                 <xsl:otherwise>
@@ -410,14 +412,13 @@
         </xsl:variable>
         
         <!-- FIXME: Should test that each of the required script sets is present and raise error if not. -->
-
         <xsl:for-each-group select="$script-sets/scripts/*" group-by="concat(name(), '.', @type)">
             <xsl:variable name="script-type"
                 select="if (name()='other') then concat('other.',@name) else name()"/>
             <xsl:variable name="script-name-with-type"
                 select="concat($script-type, if (@type) then concat('-', @type) else '')"/>
             <xsl:variable name="script-output-directory"
-                select="concat($doc-set-build, '/topic-sets/', $topic-set-id, '/', $script-name-with-type)"/>
+                select="concat($content-set-build, '/topic-sets/', $topic-set-id, '/', $script-name-with-type)"/>
             <xsl:result-document
                 href="file:///{$script-output-directory}/spfe.{$script-name-with-type}.xsl"
                 method="xml" indent="yes"
