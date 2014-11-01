@@ -51,7 +51,7 @@
             </entry>
             <entry>
                 <type>directory-name</type>
-                <term>synthesis</term>
+                <term>resolve</term>
             </entry>
             <entry>
                 <type>directory-name</type>
@@ -135,7 +135,7 @@
                     dependency checking purposes. </p>
             </li>
             <li>
-                <p>A directory named after each step in the build process (extract, synthesis,
+                <p>A directory named after each step in the build process (extract, merge, resolve,
                     presentation, etc.). Each directory contains the generated scripts for that step
                     and an out directory that hold the result of the step (except for the steps that
                     produce the final output, where the output goes to the documentation set output

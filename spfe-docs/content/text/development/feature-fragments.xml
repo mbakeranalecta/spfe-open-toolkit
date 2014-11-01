@@ -88,9 +88,9 @@
                 SPFE fragments and DITA conrefs. </p>
             <p>Note that fragments are actually not a feature of SPFE proper. They are a feature of
                 the EPPO-simple schema set. The resolution of fragments is performed as part of the
-                schema synthesis script for the EPPO-simple namespace. You could develop a schema
+                schema <feature>resolve</feature> script for the EPPO-simple namespace. You could develop a schema
                 set that implements conrefs if you wanted to, and resolve the conrefs in the
-                synthesis script of that schema set. </p>
+                resolve script of that schema set. </p>
             <p>First, a fragment is defined by an elements that contains the content of the
                 fragment. Only defined fragments can be included by a fragment ref. The source of a
                 conref is not defined in any special way. Any element with an ID can be the source

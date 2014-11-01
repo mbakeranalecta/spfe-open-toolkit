@@ -36,7 +36,7 @@
     <body>
         <title>How the build system works</title>
         
-        <p>The SPFE build system has a modular architecture with four major layers, <feature>synthesis</feature>, <feature>presentation</feature>, <feature>formatting</feature>, and <feature>encoding</feature>.</p>
+        <p>The SPFE build system has a modular architecture with four major stages, <feature>synthesis</feature>, <feature>presentation</feature>, <feature>formatting</feature>, and <feature>encoding</feature>.</p>
         <fig href="../../graphics/SPFE-flow.png">
             <title>The SPFE build system</title>
             <caption><p>An overview of the SPFE build system.</p></caption>
@@ -76,7 +76,16 @@
         <p>The order of operations for the build is as follows:</p>
         <ol>
             <li>
-                <p>Run the <feature>synthesis process</feature> for each topic set in turn in the order they are listed in the <config-setting>/spfe/doc-set/topic-sets</config-setting> configuration setting. This involved running the extract, synthesis, toc, and link catalog scripts for each topic set in turn. Running the scripts in the order in which the topic sets are defined is important because it allows the scripts of later topic sets to access the synthesis, tocs, and link catalogs of the earlier topics. This is used, for instance, to generate <feature>subject list topics</feature> that draw from the entire documentation set.</p> 
+                <p>Run the <feature>synthesis stage</feature> for each topic set in turn in the
+                    order they are listed in the
+                    <config-setting>/spfe/doc-set/topic-sets</config-setting> configuration setting.
+                    This involved running the <feature>extract</feature>, <feature>merge</feature>,
+                        <feature>resolve</feature>, <feature>toc</feature>, and <feature>link
+                        catalog</feature> scripts for each topic set in turn. Running the scripts in
+                    the order in which the topic sets are defined is important because it allows the
+                    scripts of later topic sets to access the synthesis, tocs, and link catalogs of
+                    the earlier topics. This is used, for instance, to generate <feature>subject
+                        list topics</feature> that draw from the entire documentation set.</p> 
             </li>
             <li>
                 <p>Run the <feature>presentation process</feature> for each <feature>topic set</feature> in the <feature>documentation set</feature> in turn. If there are different presentation processes for different output media, each will be run in turn.</p>

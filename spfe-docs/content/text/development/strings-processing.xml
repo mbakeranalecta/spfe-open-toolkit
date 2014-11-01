@@ -27,7 +27,7 @@
     <body>
         <title>Processing strings</title>
         <understanding>
-            <p><feature>Strings</feature> are a means of inserting variable text into a topic. If you <task>design a topic type</task>, or <task>write your own synthesis code</task> for a topic type, you may need to write code to process strings. In this case, you will need to understand how string processing works.</p>
+            <p><feature>Strings</feature> are a means of inserting variable text into a topic. If you <task>design a topic type</task>, or <task>write your own <feature>resolve</feature> code</task> for a topic type, you may need to write code to process strings. In this case, you will need to understand how string processing works.</p>
             <p>Strings are a core feature of SPFE, but different plugins may extend the strings feature in different ways. This topic explains how strings are implemented in core SPFE and the EPPO-simple plugin.</p>
             <p>Core SPFE allows you to define strings in the configuration file. Strings can be specified at the <feature>doc set</feature> level in <config-setting>/spfe/doc-set/strings</config-setting> and at the <feature>topic set</feature> level in <config-setting>/spfe/topic-set/strings</config-setting>.</p>
             <p>In your scripts, you can retrieve strings directly from the <feature>$config variable</feature> or you can retrieve individual strings using the <spfe-build-function>sf:string()</spfe-build-function> function.</p>
@@ -42,7 +42,8 @@
     went up the hill.&lt;/p>
 &lt;/fragment>                     </codeblock>
         
-        <p>This will be resolved by the default EPPO-simple synthesis routines into:</p>
+        <p>This will be resolved by the default EPPO-simple <feature>resolve scripts</feature>
+                into:</p>
         <codeblock>&lt;p>Jack and Jill went up the hill.&lt;/p></codeblock>
         <p>But if this fragment is then inserted in a different place using &lt;fragment-ref>, the
             string values can be redefined locally for that use.</p>

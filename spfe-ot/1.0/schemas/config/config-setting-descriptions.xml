@@ -134,7 +134,7 @@
             <xpath>/spfe/doc-set/condition-tokens</xpath>
             <description>
                 <p>Specifies the <feature>condition tokens</feature> that will be applied to this
-                    documentation set by the <feature>synthesis</feature> process.</p>
+                    documentation set by the <feature>resolve step</feature>.</p>
             </description>
             <values/>
             <restrictions/>
@@ -681,7 +681,7 @@
         <config-setting-description>
             <xpath>/spfe/object-type/scripts/resolve</xpath>
             <description>
-                <fragment-ref id-ref="synthesis-script-description">
+                <fragment-ref id-ref="resolve-script-description">
                     <local-strings>
                         <string id="thing-to-be-processed">an <feature>object type</feature></string>
                     </local-strings>
@@ -699,7 +699,7 @@
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
-                        <string id="script-type"> a synthesis</string>
+                        <string id="script-type"> a resolve</string>
                     </local-strings>
                 </fragment-ref>
             </description>
@@ -781,7 +781,7 @@
             <xpath>/spfe/topic-set/condition-tokens</xpath>
             <description>
                 <p>Specifies the <feature>condition tokens</feature> that will be applied to this
-                    topic set by the <feature>synthesis</feature> process.</p>
+                    topic set by the <feature>resolve process</feature>.</p>
             </description>
             <values/>
             <restrictions/>
@@ -831,7 +831,7 @@
                 <restriction>
                     <p>Every object type occurring in the topic set must be listed here. If an
                         unlisted object type is included, an error will occur at the
-                            <feature>synthesis</feature> stage of the <feature>build</feature> when
+                            <feature>synthesis stage</feature> of the <feature>build</feature> when
                         the synthesis scripts will be unable to find templates to process the object
                         type.</p>
                 </restriction>
@@ -1149,10 +1149,10 @@
                 <restriction>
                     <p>Every topic type occurring in the topic set must be listed here. If an
                         unlisted topic type is included, an error will occur at the
-                            <feature>synthesis</feature> stage of the <feature>build</feature> when
+                            <feature>synthesis stage</feature> of the <feature>build</feature> when
                         the synthesis scripts will be unable to find templates to process the topic
                         type.</p>
-                    <p>Note that it is possible to write a synthesis routine that attempts to
+                    <p>Note that it is possible to write a <feature>resolve script</feature> that attempts to
                         process an unrecognized topic type. In this case, the error described above
                         may not occur. This is unwise, however, since such a script cannot be
                         guaranteed to correctly interpret all the structure of an unknown type,
@@ -1458,7 +1458,7 @@
             <xpath>/spfe/topic-type/scripts/link-catalog</xpath>
             <description>
                 <fragment id="link-catalog-script-description">
-                <p>Container element for a list of link-catalog scripts. The <feature>link catalog</feature> script is responsible for creating a catalog of all the link targets in a topic set. For topics types whose synthesis routines produce a <feature>standard synthesis header</feature> with index terms embedded, the standard EPPO-simple link-catalog script can be used. In most cases it will be preferable to create the index header at the synthesis stage rather than producing a non-standard synthesis and then writing your own link catalog script. However, that option is available and you can specify the use of your own link-catalog script using this setting.</p>
+                <p>Container element for a list of link-catalog scripts. The <feature>link catalog</feature> script is responsible for creating a catalog of all the link targets in a topic set. For topics types whose resolve scripts produce a <feature>standard synthesis header</feature> with index terms embedded, the standard EPPO-simple link-catalog script can be used. In most cases it will be preferable to create the index header at the resolve stage rather than to produce a non-standard synthesis and then write your own link catalog script. However, that option is available and you can specify the use of your own link-catalog script using this setting.</p>
                 </fragment>
             </description>
             <values/>
@@ -1549,13 +1549,13 @@
         <config-setting-description>
             <xpath>/spfe/topic-type/scripts/resolve</xpath>
             <description>
-                <fragment id="synthesis-script-description">
+                <fragment id="resolve-script-description">
                     <local-strings>
                         <string id="thing-to-be-processed">a <feature>topic type</feature></string>
                     </local-strings>
-                    <p>Container element for a list of <feature>synthesis</feature> script components for <string-ref id-ref="thing-to-be-processed"></string-ref>. The synthesis scripts are
+                    <p>Container element for a list of <feature>resolve script</feature> components for <string-ref id-ref="thing-to-be-processed"></string-ref>. The resolve scripts are
                     responsible for assembling a set of <feature>topics</feature> in which all names are fully resolved
-                    and all conditions and inclusions have been applied. Script components contribute the handling of different elements to the synthesis script.</p>
+                    and all conditions and inclusions have been applied. Script components contribute the handling of different elements to the resolve script.</p>
                 </fragment>
             </description>
             <values/>
@@ -1588,7 +1588,7 @@
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
-                        <string id="script-type">a synthesis</string>
+                        <string id="script-type">a resolve</string>
                     </local-strings>
                 </fragment-ref>
             </description>
@@ -1868,7 +1868,7 @@
         <config-setting-description>
             <xpath>/spfe/output-format/scripts/resolve</xpath>
             <description>
-                <fragment-ref id-ref="synthesis-script-description">
+                <fragment-ref id-ref="resolve-script-description">
                     <local-strings>
                         <string id="thing-to-be-processed">an <feature>object type</feature></string>
                     </local-strings>
@@ -1886,7 +1886,7 @@
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
-                        <string id="script-type"> a synthesis</string>
+                        <string id="script-type"> a resolve</string>
                     </local-strings>
                 </fragment-ref>
             </description>

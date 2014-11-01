@@ -35,7 +35,7 @@
                 <spfe-build-script>topic-link-catalog.xsl</spfe-build-script> script creates the
             link catalog. For topic types that do not use the standard index, you will need to write
             a script to generate the link catalogs for that topic type. Alternatively, you can
-            generate index entries in the standard form in your main synthesis script. These can
+            generate index entries in the standard form in your main <feature>resolve script</feature>. These can
             then be processed by the standard
                 <spfe-build-script>topic-link-catalog.xsl</spfe-build-script>
             script.<!--The latter may be the only recommended way to do it. That way we do not need multiple link catalog scripts, which allows us to use python for that script.--></p>

@@ -31,13 +31,13 @@
     <body>
         <title>Customizing the build</title>
         <understanding>
-            <p>The default SPFE build file (<file-name>spfe-rules.xml</file-name>) implements a standard order of build steps which will work for most <feature>topic sets</feature>. However, sometimes you will want to insert additional steps into the build, particularly at the <feature>synthesis</feature> stage. If you have a complex process at any stage of the build, it is better to break it up into multiple steps, each of which does one thing, and which produces an XML file to be read by the next stage of the build.</p>
+            <p>The default SPFE build file (<file-name>spfe-rules.xml</file-name>) implements a standard order of build steps for each stage which will work for most <feature>topic sets</feature>. However, sometimes you will want to insert additional steps into the build, particularly at the <feature>synthesis</feature> stage. If you have a complex process at any stage of the build, it is better to break it up into multiple steps, each of which does one thing, and which produces an XML file to be read by the next stage of the build.</p>
        </understanding>
        <planning>
            <planning-question>
                 <planning-question-title>Do I need to change the build order?</planning-question-title>
                 <planning-question-body>
-                    <p>The default build order invokes a single build file for the synthesis,
+                    <p>The default build order invokes a single build file covering the synthesis,
                         presentation, format, and encode stages. Each of those stage may also be
                         broken up into multiple steps. If you want to add an additional step to any
                         of these stages, you will need to change the build order.</p>
@@ -92,6 +92,7 @@
             <!--Need to deal with standard directory locations for input and outputs. To override, you need the next step to know where to look. Not sure if this is implemented yet.-->
         
         <p>This build rule causes your custom synthesis rule to be called first, and then the standard synthesis rule. Obviously, if you do this you must create XML output in the place the default synthesis rule expects to find it. Alternatively, you can omit the default synthesis rule entirely, in which case your custom synthesis rule must create a syntheis XML document or documents in the place the presentation rule expects to find it.</p>
+    <!-- FIXME: Out of date. Fix. -->
         <p>The list of build rules designed to be overridable in this way is:</p>
         <ul>
             <li>

@@ -48,15 +48,15 @@
         <section>
             <title>How SPFE finds topics to link to</title>
             <p>SPFE looks for topics to link to in a link catalog. The link catalog is built as part
-                of the synthesis process. It is the responsibility of the synthesis step to generate
-                link catalog entries for the topics it creates. The default case is that the
-                synthesis process builds the link catalogs from the index entries that authors
+                of the <feature>synthesis stage</feature>. It is the responsibility of the <feature>link catalog step</feature> to generate
+                <feature>link catalog</feature> entries for the topics it creates. The default case is that the
+                link catalog builds the link catalogs from the index entries that authors
                 create in the header or each topic they write. However, depending on the sources it
-                is working with, a synthesis process can use any information available to it to
+                is working with, a synthesis stage can use any information available to it to
                 build a link catalog.</p>
-            <p>The SPFE build process is organized so that the synthesis step is run for all topic
+            <p>The SPFE build process is organized so that the synthesis stage is run for all topic
                 sets before any of the presentation steps are run. Generating links is part of the
-                presentation process, so once the synthesis process is complete, link catalogs are
+                presentation process, so once the synthesis stage is complete, link catalogs are
                 available for all topic sets in the build. Thus linking can take place across the
                 entire documentation set. </p>
             <p>In addition, SPFE is not limited to using link catalogs from the current build. You
@@ -115,7 +115,7 @@
                 if you want to, but it is usually easier for authors if you define a specific set of
                 annotation types that they can easily choose from when writing. </p>
             <p>Converting your local annotation elements into normalized annotations is part of the
-                job of the synthesis processing stage. </p>
+                job of the <feature>resolve processing step</feature>. </p>
         </section>
         <section>
             <title>Dealing with multiple link targets</title>
@@ -162,12 +162,12 @@
                         the list topic will be the one chosen.</p>
                 </li>
                 <li>
-                    <p>Create a synthesis script that reads the link catalogs of all the other topic
+                    <p>Create an <feature>extract script</feature> that reads the link catalogs of all the other topic
                         sets and find all the cases where there is more than one topic on a
                         particular subject. Have the script generate a topic for each of those
                         subject which lists the topics on that subject and provides links. You can
                         use a generic topic type for this. You don't need a specific topic type.
-                        Since the SPFE-docs project already includes a synthesis function that does
+                        Since the <feature>SPFE-docs project</feature> already includes an extract script that does
                         this, you may be able to just use it, or else use it as a template for
                         developing your own.  </p>
                 </li>
