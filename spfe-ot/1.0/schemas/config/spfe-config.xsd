@@ -49,6 +49,7 @@
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="name"/>
+                          <xs:element name="href" type="xs:anyURI"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
