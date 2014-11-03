@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+ 
+    <head>
+        <id>install-spfe-toolkit</id>
+        <history>
+            <revision>
+                <date>2014-10-28</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>install</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>getting started</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>{install} {SPFE Open Toolkit}</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe.bat</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe.sh</term>
+            </entry>
+            <entry>
+                <type>tool-name</type>
+                <term>spfe</term>
+            </entry>
+            <entry>
+                <type>tool-name</type>
+                <term>Ant</term>
+            </entry>
+            <entry>
+                <type>tool-name</type>
+                <term>Java</term>
+            </entry>
+            <entry>
+                <type>tool-name</type>
+                <term>JDK</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Install SPFE Open Toolkit</title>
+
+        <p> You may use the SPFE Open Toolkit in a Microsoft Windows or a Unix-like environment,
+            including OS X or Linux. Use these guidelines to install and test the SPFE Open Toolkit and
+            the third-party tools it will need.</p>
+
+        <p> Installation involves the following tasks:</p>
+
+        <ul>
+            <li><p>installing the Java Development Kit</p></li>
+            <li><p>installing Apache Ant</p></li>
+            <li><p>installing the SPFE Open Toolkit</p></li>
+            <li><p>configuring your environment</p></li>
+            <li><p>testing the installation</p></li>
+        </ul>
+
+        <section>
+            <title>Installing the Java Development Kit</title>
+            
+            <p> The SPFE Open Toolkit uses Java to run its build scripts. You may have the 
+                Java Runtime Engine (JRE) installed, but that's not sufficient. You will need the 
+                Java Development Kit (JDK), Standard Edition, installed. To install the JDK, go to 
+                <link-external href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">
+                    oracle.com/technetwork/java/javase/downloads
+                </link-external> and follow the instructions for your operating system.</p>
+            
+            <ul>
+                <li><p>
+                    <link-external href="http://docs.oracle.com/javase/8/docs/technotes/guides/install/windows_jdk_install.html">
+                    JDK installation instructions for Microsoft Windows
+                    </link-external>
+                </p></li>
+                <li><p>
+                    <link-external href="http://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_jdk.html">
+                        JDK installation instructions for (Mac) OS X
+                    </link-external>
+                </p></li>
+                <li><p>
+                    <link-external href="http://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jdk.html">
+                        JDK installation instructions for Linux
+                    </link-external>
+                </p></li>
+            </ul>
+
+        </section>
+
+
+        <section>
+            <title>Installing Apache Ant</title>
+            
+            <p>While Java is the engine that runs the SPFE Open Toolkit build system, Apache Ant orchestrates it. Ant is a
+            Java library and command-line tool that will manage the sequence of operations needed to transform a content
+            set to finished output. Ant is open-source software that's freely available at 
+            <link-external href="http://ant.apache.org">ant.apache.org</link-external>. Refer to the installation
+            instructions at 
+                <link-external href="http://ant.apache.org/manual/install.html">
+                    ant.apache.org/manual/install.html
+                </link-external>. To simplify the installation process for Microsoft Windows, you may use the WinAnt installer available at
+                <link-external href="https://code.google.com/p/winant/">code.google.com/p/winant</link-external>.</p>       
+        </section>
+
+    </body>
+</generic-topic>

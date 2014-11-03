@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
+
+<essay xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/essay/schemas/essay.xsd">
+ 
+    <head>
+        <id>structured-content</id>
+        <history>
+            <revision>
+                <date>2014-10-25</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>term</type>
+                <term>structured content</term>
+            </entry>
+            <entry>
+                <type>term</type>
+                <term>metadata</term>
+            </entry>
+            <entry>
+                <type>term</type>
+                <term>markup</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>What is structured content?</title>
+        <byline>
+            <author-name>John Farrell MacDonald</author-name>
+        </byline>
+        <precis>
+
+            <p>Information is structured when its functional components are tagged with metadata
+                such that computer programs may retain content structure and purpose when processing
+                it.</p>
+
+        </precis>
+
+        <p> If you've written a letter, you've written <term>structured content</term>. If it was a
+            formal letter, you likely wrote your name, return address, and date at the top, aligned
+            on either the left or right side of the page, followed by the name and address of the
+            person or institution for whom the letter was intended. After the salutation and body of
+            the letter, you would have closed the letter with the appropriate farewell, your
+            signature, name, and possibly your title. The letter followed a recognizable
+            <italic>structure.</italic>   </p>
+
+        <p> Correctly recognizing and interpreting such a letter requires a human reader familiar
+            with the form and conventions of letters.  Increasingly in today's world, the content we
+            create must first be interpreted, transmitted, transformed, and reformatted by computer
+            software before a human sees it. For a human, a properly formatted letter is structured
+            content, whether it is typed or handwritten. But for a computer, it is unstructured.
+            Scan or fax the letter, and software sees only bits to encode, transmit, and decode. The
+            software won't recognize it as a letter; it can only reproduce the image that was
+            scanned.</p>
+
+        <p> Here, we consider content to be structured if computer programs can recognize and retain
+            its structure and purpose when processing it.</p> 
+
+        <section>
+            <title>Structured content is tagged with metadata</title>
+
+        <p> For software to retain content structure while reformatting or otherwise processing it,
+            the content must be tagged with <term>metadata</term>. Metadata is additional
+            information that identifies the structural role that content components play.
+            Information that identifies your letter's return address <italic>as</italic> a return
+            address would be such metadata.  </p>
+
+        <p> Many methods can and are used to tag content with metadata. The following are widely
+            used.</p>
+
+        <ul>
+            <li><p><term>XML</term></p></li>
+            <li><p><link-external href="http://www.w3.org/standards/webdesign/htmlcss">HTML</link-external></p></li>
+            <li><p><link-external href="https://meta.wikimedia.org/wiki/Wiki_syntax">MediaWiki Wikitext</link-external></p></li>
+            <li><p><link-external href="http://daringfireball.net/projects/markdown/">Markdown</link-external></p></li>
+            <li><p><link-external href="http://tug.org/">TeX</link-external> and its derivative 
+                   <link-external href="http://latex-project.org/">LaTeX</link-external></p></li>
+        </ul>
+
+        <p> But tagging information alone does not make it structured content. Content must
+            <italic>function</italic> after it's processed by a computer program for it to serve its
+            purpose.  Simply tagging your letter's destination address as right-aligned and bold
+            will not guarentee it will reach it's destination.  A program must recognize the address
+            as a destination address.</p>
+
+        </section>
+        
+        <section>
+            <title>Structured content functions as a whole to serve a purpose</title>
+
+        <p> Information takes on meaning when it serves a purpose. An address found on a torn slip
+            of paper could mean many things.  It could have been a letter's return or destination
+            address. It could have been given to someone who needed directions.  It could have been
+            torn from a tax return. You can assign the address's purpose and meaning only when you
+            can place it in context.  To find context, you need additional information.  </p>
+
+        <p> For a body of content to serve a purpose, it must contain sufficient information to
+            identify that purpose. For structured content to function as a stand-alone unit of
+            information, it must be not only be complete, but also have its intent captured in its
+            metadata.  </p>
+
+        <p> But metadata that does not serve the content's purpose is superfluous. It isn't
+            necessary to know <italic>why</italic> a letter was written to deliver it. Structured
+            content serves a specific and <italic>limited</italic> purpose.  </p>
+
+        </section>
+        
+        <section>
+            <title>Structured content conforms to a specific type</title>
+
+        <p> To serve a specific purpose, structured content must conform to a specific
+            <term>type</term>. That is, its <italic>structure</italic> must conform to a type.
+            Whatever the content of a letter, it will function as a letter if it has the structure
+            of a letter.  We can identify the letter with the type &quot;document,&quot; but that
+            isn't sufficient to identify its purpose. We and our computer programs need more
+            <term>metadata</term> than that.</p>
+
+        <p> Content types can form a hierarchy. A letter is not only a letter but is also a
+            document. For some purposes, such as where to store it on my personal computer, I may
+            need only identify it as type &quot;document.&quot; But likely I'll store it in a folder
+            that depends on the type of letter. I'll keep letters to loved ones and letters to the
+            IRS in different folders. To identify that purpose, a structured letter would need to
+            have metadata that identifies it not only as type &quot;letter,&quot; but also
+            identifies the type of letter.</p>
+
+        <p> As we can see in the case of a letter, an item of structured content may need to
+            function in different ways. Thus its metadata needs to serve all its purposes. Yet we
+            must identify one specific item of content with one specific type. Rather than encumber
+            content typing with all the ways that an item of content may be used, we identify the
+            content type with those essential features common for all its purposes. Whether we send
+            it or file it away, a letter is a letter.</p>
+
+        <p> So, some essential metadata identifies the content type, and optional metadata can
+            further help the content fulfill its purpose.</p>
+
+        </section>
+        
+        <section>
+            <title>This essay is an example of structured content</title>
+
+        <p> An essay, according to <italic>The American Heritage Dictionary of the English
+                Language,</italic> is &quot;a short literary composition on a single subject,
+            usually presenting the personal view of the author.&quot; This document you are now
+            reading conforms to that type.  The metadata essential to its function as an essay
+            identifies the following information.</p>
+
+        <ul>
+            <li><p>a title</p></li>
+            <li><p>a byline identifying the author</p></li>
+            <li><p>a summary</p></li>
+            <li><p>a body of content</p></li>
+        </ul>
+
+        <p> Additional metadata is present in a <term>header</term> that helps process it in context of a larger
+            body of content. The header metadata is intended for computer processing rather than for
+            a human reader.</p>
+
+        <ul>
+            <li><p>a unique identifier</p></li>
+            <li><p>a revision history</p></li>
+            <li><p>a list of terms to help in finding the essay</p></li>
+        </ul>
+
+        <p> This essay has optional metadata that help it serve its purpose.</p>
+
+        <ul>
+            <li><p>tags that identify sections</p></li>
+            <li><p>tags that identify external links</p></li>
+            <li><p>tags that identify terms that link to other topics in the content set</p></li>
+            <li><p>tags that annotate content for special formatting, such as italics</p></li>
+        </ul>
+
+        <p> As with a letter, a little metadata goes a long way in helping this content serve its
+            purpose when it's processed by a computer. Or rather, <italic>preserve</italic> its
+            purpose. It may or may not be a good letter or a good essay, but that's not the intent
+            of structure metadata.  The purpose of structure metadata is simply to preserve
+            content's purpose when it's processed by computer programs.</p>              
+
+        </section>
+        
+        <section>
+            <title>Structured content serves both writers and readers</title>
+
+        <p> Granted, we all know how to structure a letter. But a letter has many subtypes and
+            purposes. You wouldn't write a love letter the same way you'd write a business letter.
+            As evidenced by the number of how-to-write-a-letter books that have been published
+            (<link-external href="http://www.amazon.com">amazon.com</link-external> lists more than
+            a thousand), determining the form a specific letter should take is not a trivial task.
+            As with creating most any kind of content, half the battle is in determining the
+            structure that best serves its purpose.</p>
+
+        <p> Information serves many purposes and many of those purposes, as those of a letter, are
+            served with widely recognized structures.  Developing information types and defining
+            content structures is both art and science. Writers who begin with a clearly defined
+            purpose and develop or use structures that serves those purposes will have a better shot
+            at achieving their purpose.  A reader may well have a different purpose. Yet, by
+            preserving intent when it's distributed, structured content helps content users as well
+            as authors. It helps users find what they need.  </p>
+
+        </section>
+        
+    </body>
+</essay>

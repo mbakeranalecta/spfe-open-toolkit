@@ -5,13 +5,21 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set>
-        <topic-set-id>spfe-user-understand</topic-set-id>
-        <topic-set-type>understand</topic-set-type>
+        <topic-set-id>spfe-user-concepts</topic-set-id>
+        <topic-set-type>concepts</topic-set-type>
 
         <topic-types>
             <topic-type>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic</name>
+                <href>../../spfe-docs/topic-types/generic-topic/config.xml</href>
+            </topic-type>    
+            <topic-type>
                 <name>{http://spfeopentoolkit.org/ns/spfe-docs}essay</name>
                 <href>../../spfe-docs/topic-types/essay/config.xml</href>
+            </topic-type>    
+            <topic-type>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic</name>
+                <href>../../spfe-docs/topic-types/feature-topic/config.xml</href>
             </topic-type>    
         </topic-types>
          
@@ -30,7 +38,7 @@
 
         <sources>
             <authored-content>
-                <include>../content/text/understand/*.xml</include>
+                <include>../content/text/concepts/*.xml</include>
             </authored-content>
         </sources>
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
+<fragments xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/fragments-file/schemas/fragments-file.xsd">
+    <head>
+        <id>graphics-fragments</id>
+        <history>
+            <revision>
+                <date>2014-11-01</date>
+                <author>jfmacdonald</author>
+                <comment>graphic elements for documentation</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+    </head>
+    <body>
+        <fragment id="structure-graphic-legend">
+            <p></p>
+            <fig href="../../graphics/legend.png">
+                <title>Legend</title>
+                <caption><p></p></caption>
+            </fig>
+        </fragment>
+    </body>
+</fragments>
+

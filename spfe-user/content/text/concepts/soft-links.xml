@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    
+    <head>
+        <id>soft-links</id>
+        <history>
+            <revision>
+                <date>2014-11-02</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>subject affinity</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>soft linking</term>
+            </entry>
+            <entry>
+                <type>term</type>
+                <term>soft link</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>What are soft links?</title>
+        <p>PLACE HOLDER</p>
+    </body>
+</feature-topic>

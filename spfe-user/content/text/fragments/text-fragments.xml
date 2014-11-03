@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fragments xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    
+    <head>
+        <id>text-fragments</id>
+        <history>
+            <revision>
+                <date>2014-11-01</date>
+                <author>jfmacdonald</author>
+                <comment>text elements for documentation</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+    </head>
+    
+    <body>
+        
+        <fragment id="nursery-lessons-in-words-of-one-syllable">
+            <p>A topic:</p>
+
+                <subhead>Nursery lessons in words of one syllable</subhead>
+                
+                <p> See! Here is a fine nag. And that is a good boy who rides on it too; 
+                    for he reads his book so well, and is so neat and clean, that his
+                    kind aunt gave him this nice horse; and I am sure James takes good
+                    care of her gift.</p>
+                
+                <fig href="../../graphics/horse.png">
+                    <title>James on his horse</title>
+                    <caption>
+                        <p>See James ride.</p>
+                    </caption>
+                </fig>    
+            
+        </fragment>
+
+    </body> 
+    
+</fragments>            

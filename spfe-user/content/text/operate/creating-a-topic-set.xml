@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    
+    <head>
+        <id>creating-a-topic-set</id>
+        <history>
+            <revision>
+                <date>2014-11-01</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>topic set</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>document set</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Creating a new topic set</title>
+        
+        <p>PLACE HOLDER</p>
+        
+        <section>
+            <title>Why do I need a topic set?</title>
+            <p>PLACE HOLDER</p>
+        </section> 
+        
+        <section>
+            <title>What is a topic set?</title>
+            <p>PLACE HOLDER</p>
+        </section> 
+        
+        <section>
+            <title>What decisions do I need to make when planning a topic set?</title>        
+            <p>PLACE HOLDER</p>
+        </section> 
+        
+        <section>
+            <title>How do I make a topic set?</title>
+            <p>PLACE HOLDER</p>
+        </section> 
+        
+    </body> 
+</generic-topic>
+

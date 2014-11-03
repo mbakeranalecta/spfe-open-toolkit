@@ -10,7 +10,7 @@
         <title>Using the SPFE Open Toolkit</title>
         <topic-set-type-order>
             <topic-set-type>home</topic-set-type>
-            <topic-set-type>understand</topic-set-type>
+            <topic-set-type>concepts</topic-set-type>
             <topic-set-type>operate</topic-set-type>
             <topic-set-type>author</topic-set-type>
             <topic-set-type>reference</topic-set-type>
@@ -26,8 +26,8 @@
             </topic-set>
   
             <topic-set>
-                <topic-set-id>spfe-user-understand</topic-set-id>
-                <href>topic-sets/spfe-user-understand.xml</href>
+                <topic-set-id>spfe-user-concepts</topic-set-id>
+                <href>topic-sets/spfe-user-concepts.xml</href>
             </topic-set>
 
             <topic-set>
@@ -39,6 +39,11 @@
                 <topic-set-id>spfe-user-author</topic-set-id>
                 <href>topic-sets/spfe-user-author.xml</href>
             </topic-set>          
+
+            <topic-set>
+                <topic-set-id>spfe-user-reference</topic-set-id>
+                <href>topic-sets/spfe-user-reference.xml</href>
+            </topic-set>
 
             <topic-set>
                 <topic-set-id>spfe-user-index</topic-set-id>
@@ -60,64 +65,64 @@
             <subject-type>
                 <id>document-name</id>
                 <aliases>
-                    <singular>Document name</singular>
-                    <plural>Document names</plural>
+                    <singular>document name</singular>
+                    <plural>document names</plural>
                 </aliases>
             </subject-type>
             
             <subject-type>
                 <id>feature</id>
                 <aliases>
-                    <singular>Feature</singular>
-                    <plural>Features</plural>
+                    <singular>feature</singular>
+                    <plural>features</plural>
                 </aliases> 
             </subject-type>
             
             <subject-type>
                 <id>file-name</id>
                 <aliases>
-                    <singular>File name</singular>
-                    <plural>File names</plural>
+                    <singular>file name</singular>
+                    <plural>file names</plural>
                 </aliases>
             </subject-type>
             
             <subject-type>
                 <id>product-name</id>
                 <aliases>
-                    <singular>Product</singular>
-                    <plural>Products</plural>
+                    <singular>product</singular>
+                    <plural>products</plural>
                 </aliases>
             </subject-type>
 
             <subject-type>
                 <id>task</id>
                 <aliases>
-                    <singular>Task</singular>
-                    <plural>Tasks</plural>
+                    <singular>task</singular>
+                    <plural>tasks</plural>
                 </aliases>
             </subject-type>
 
             <subject-type>
                 <id>term</id>
                 <aliases>
-                    <singular>Term</singular>
-                    <plural>Terms</plural>
+                    <singular>term</singular>
+                    <plural>terms</plural>
                 </aliases>
             </subject-type>
             
             <subject-type>
                 <id>tool-name</id>
                 <aliases>
-                    <singular>Tool</singular>
-                    <plural>Tools</plural>
+                    <singular>tool</singular>
+                    <plural>tools</plural>
                 </aliases>
             </subject-type>
             
             <subject-type>
                 <id>config-setting</id>
                 <aliases>
-                    <singular>Configuration setting</singular>
-                    <plural>Configuration settings</plural>
+                    <singular>configuration setting</singular>
+                    <plural>configuration settings</plural>
                 </aliases>
             </subject-type>
  

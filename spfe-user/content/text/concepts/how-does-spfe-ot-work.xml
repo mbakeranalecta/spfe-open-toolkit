@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<essay xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/essay/schemas/essay.xsd">
+    
+    <head>
+        <id>how-does-spfe-ot-work</id>
+        <history>
+            <revision>
+                <date>2014-11-02</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>term</type>
+                <term>XML</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>How does the SPFE Open Toolkit work?</title>
+        <byline>
+            <author-name>John Farrell MacDonald</author-name>
+        </byline>
+        <precis><p>Summary</p></precis>
+        <p>PLACE HOLDER</p>
+    </body>
+</essay>
+    

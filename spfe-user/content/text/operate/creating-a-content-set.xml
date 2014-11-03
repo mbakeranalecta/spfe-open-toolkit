@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+ 
+    <head>
+        <id>creating-a-content-set</id>
+        <history>
+            <revision>
+                <date>2014-10-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>content set</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>document set</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Creating a new content set</title>
+
+        <p> The SPFE Open Toolkit (SPFE-OT) builds a collection of web pages or other output format
+            from a collection of topics that you specify in a content set.</p>
+        
+        <section>
+            <title>Why do I need a content set?</title>
+            <p>A content set is the master plan that the SPFE Open Toolkit will use to generate
+            output content. You must have a content-set configuration file to to run the SPFE
+            build system to create output.</p>
+        </section> 
+        
+        <section>
+            <title>What is a content set?</title>
+
+            <p> A content set is the collection of <feature>topics</feature> that you specify in a
+                content-set configuration file. The SPFE-OT build system uses the the content-set
+                configuration file to collect the source content and process it as a whole to
+                generate HTML or other output format. The configuration file doesn't list the topics
+                directly but specifies one or more <feature>topic-sets</feature>. Each topic set has
+                its own configuration file that <italic>does</italic> specify the topics it
+                includes.</p>
+
+            <p> Thus, to generate output using the SPFE-OT, you'll need a content-set configuration
+                file that specifies one or more topic sets.</p>
+        
+        </section> 
+
+        <section>
+            <title>What decisions do I need to make when planning a content set?</title>
+
+            <p> Before diving in, take a moment to consider how you organize topics and file
+                locations will affect how you work and what you create. </p>
+
+            <ul>
+                <li><p>
+                    <bold>Topics:</bold> Though each topic should be a complete, functional unit, topics 
+                    do have affinites by addressing similar subjects. Users will appreciate when closely
+                    related topics are easy to find. One way to associate topics is to place them in the
+                    same topic set.
+                </p></li>
+
+                <li><p>
+                    <bold>File locations:</bold> While you can include topic files in a topic set wherever
+                    they may be in the file system, you'll find it much simpler to organize files that
+                    belong to a topic set in a single folder.
+                </p></li>
+            </ul>
+        
+        </section> 
+        
+        <section>
+            <title>How do I create a content-set configuration file?</title>
+            <p>Create an XML file in the <feature>content set configuration</feature> structure and locate
+            it in the same directory you will execute <task>builds</task>.</p>
+        </section>
+
+    </body> 
+</generic-topic>

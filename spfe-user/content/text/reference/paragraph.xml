@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    
+    <head>
+        <id>paragraph</id>
+        <history>
+            <revision>
+                <date>2014-11-01</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>paragraph</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>paragraphs</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>EPPO-simple paragraph</title>
+        <p> A paragraph comprises text, annotations, links, or other <term>inline</term> components to form a 
+            textual building <term>block</term> of a composition. Except in <feature>titles</feature>
+            or in other elements that accept only simple text, a paragraph element is needed 
+            whereever text is needed, including the following.</p>
+        <ul>
+            <li><p>in <feature>body content</feature></p></li>
+            <li><p>in a figure <feature>caption</feature></p></li>
+            <li><p>in a <feature>list</feature> element</p></li>
+        </ul>    
+        <p>Use the legend below to interpret the structure diagrams.</p>
+        <fragment-ref id-ref="structure-graphic-legend"></fragment-ref>          
+        <section>
+            <title>Structure</title>
+            <p> Whereas most elements accept only other elements or only text, a paragraph element, <code>&lt;p&gt;</code>,
+                may contain a mixture of text and <term>inline</term> elements. We group inline elements in the following
+                categories, according to the role they play.</p>
+            <ul>
+                <li>
+                    <p> Decorated-text elements affect how text is displayed.</p>
+                </li>
+                <li>
+                    <p> Subject-annotation elements identify terms that the SPFE build system will soft-link 
+                        to related topics.</p>
+                </li>
+                <li>
+                    <p> Link elements connect to specific resources through a 
+                        <link-external href="http://en.wikipedia.org/wiki/Uniform_resource_identifier">URI</link-external>
+                        or web address.</p>
+                </li>
+                <li>
+                    <p> Resource elements reference other elements through an identifier.</p>
+                </li>
+                <li>
+                    <p> String elements allow strings to be identified so they can be reused.</p>
+                </li>
+            </ul>
+            <fig href="../../graphics/paragraph.png">
+                <title>EPPO-simple paragraph structure</title>
+                <caption>
+                    <p> Each component is optional and may appear any number of times, as indicated by 
+                        the <quote>0+</quote> annotations.
+                    </p>
+                </caption>
+            </fig>
+        </section>
+        <section>
+            <title>Decorated text</title>
+            <p>Text decorators affect how text is displayed.</p>
+            <fig href="../../graphics/decorated-text.png">
+                <title>EPPO-simple text decorators</title>
+                <caption>
+                    <p></p>
+                </caption>
+            </fig> 
+            <subhead>Example</subhead>
+            <p> The following XML-marked block of text uses text decorators.</p>
+            <codeblock language="XML">
+            <![CDATA[
+<p> Text may need to be displayed in <bold>bold face</bold> or <italic>italics</italic> in 
+    many situations. Just remember that these are <italic>display</italic> properties only; 
+    they carry no meaning other than to the human eye. Though the <code>code</code> element 
+    may appear similar to the <bold>bold</bold> element, it's best to reserve it for text 
+    that <italic>is</italic> code, such as the XML <code>&lt;bold&gt;</code> and 
+    <code>&lt;quote&gt;</code> tags. Use the quote element to set off spoken language and 
+    titles of short works. Some people say, <quote>Well, OK,</quote> after reading 
+    <quote>EPPO-simple paragraph.</quote>
+</p>  
+            ]]>
+            </codeblock>
+            <p> The above XML markup produces the paragraph below. </p>
+            <p> Text may need to be displayed in <bold>bold face</bold> or <italic>italics</italic> in 
+                many situations. Just remember that these are <italic>display</italic> properties only; 
+                they carry no meaning other than to the human eye. Though the <code>code</code> element 
+                may appear similar to the <bold>bold</bold> element, it's best to reserve it for text 
+                that <italic>is</italic> code, such as the XML <code>&lt;bold&gt;</code> and 
+                <code>&lt;quote&gt;</code> tags. Use the quote element to set off spoken language and 
+                titles of short works. Some people say, <quote>Well, OK,</quote> after reading 
+                <quote>EPPO-simple paragraph.</quote> </p>
+        </section>
+        
+        <section>
+            <title>Subject annotation</title>
+            <p> The SPFE build system will link subject-annotated terms to topics that list those terms 
+                in their <feature>index</feature>, which is a component in each topic's <feature>header</feature>. 
+                The build system creates an index with a list of topics for each subject-annotation term. 
+                The lists are organized by subject type identified by the subject-annotation tag. </p>
+            <p> Figure 4 lists the subject-annotation tags that EPPO-simple provide.</p>
+            <fig href="../../graphics/subject-annotation.png">
+                <title>EPPO-simple subject annotation elements</title>
+                <caption> <p></p> </caption>
+            </fig>
+
+        </section>
+        
+        <section>
+            <title>Links</title>
+            <p> Links to external resources or websites are created with either the <feature>link-external</feature>
+            or <feature>url</feature> element. The former works like the HTML &lt;a&gt; element; it wraps an
+            a text string with a tag with an href attribute, which specifies a URI. The &lt;url&gt;
+            tag, on the other hand, simply wraps a web address.</p>
+            <fig href="../../graphics/link.png">
+                <title>EPPO-simple link elements</title>
+                <caption> <p></p> </caption>
+            </fig>
+            
+        </section>
+    </body>
+</feature-topic>

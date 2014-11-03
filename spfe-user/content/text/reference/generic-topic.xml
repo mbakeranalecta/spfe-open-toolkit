@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
+
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    
+    <head>
+        <id>generic-topic</id>
+        <history>
+            <revision>
+                <date>2014-11-01</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>generic-topic</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>{generic topic}</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>{body content}</term>
+            </entry>
+            <entry>
+                <type>term</type>
+                <term>content</term>
+            </entry>
+            <entry>
+                <type>term</type>
+                <term>topic</term>
+            </entry>
+            <entry>
+                <type>term</type>
+                <term>header</term>
+            </entry>
+            <entry>
+                <type>term</type>
+                <term>head</term>
+            </entry>
+            <entry>
+                <type>term</type>
+                <term>body</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>EPPO-simple generic topic</title>
+        <p> The EPPO-simple <code>&lt;generic-topic&gt;</code> element has a structure that serves many purposes
+            and forms the base for several, more specialized topics. Like all topic elements, it forms the top-level 
+            container for a generic-topic document.</p>
+        <p>Use the legend below to interpret the structure diagram.</p>
+        <fragment-ref id-ref="structure-graphic-legend"></fragment-ref>
+        
+        <section>
+            <title>Structure</title>
+            <p>Figure 1 shows the structure of a generic-topic XML document.</p>
+            <fig href="../../graphics/generic-topic.png">
+                <title>EPPO-simple generic-topic structure</title>
+                <caption>
+                    <p> The tag <code>&lt;generic-topic&gt;</code> labels the <term>root element</term> 
+                        of a generic-topic document.</p>
+                </caption>
+            </fig>
+            <p> The <italic>head</italic> element holds the document <term>header</term>, which comprises the 
+                <feature>identity</feature> group, the revision <feature>history</feature> group, and the
+                <feature>index</feature> group. The latter contains the set of terms discussed in the topic.
+                </p>
+            <p> The <italic>body</italic> element holds the topic contents. A <feature>body-content</feature> 
+                group follows the main <italic>title</italic> element and every section title.</p>
+            
+        </section>
+        
+        <section>
+            <title>Example</title>
+            <p>The XML code below shows the markup for a simple generic-topic document.</p> 
+            <codeblock>
+                <![CDATA[
+                
+<?xml version="1.0" encoding="UTF-8"?>
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    
+    <head>
+        <id>nursery-lessons-in-words-of-one-syllable</id>
+            <history>
+                <revision>
+                    <date>1838-06-06</date>
+                    <author>Unknown</author>
+                    <comment>Publisher Darton and Harvey, London</comment>
+                    <status>In progress</status>
+                </revision>
+                <revision>
+                    <date>2014-11-01</date>
+                    <author>jfmacdonald</author>
+                    <comment>digital revision</comment>
+                    <status>Ready for release review</status>
+                </revision>
+            </history>
+            <index>
+                <entry>
+                    <type>term</type>
+                    <term>nag</term>
+                </entry>
+                <entry>
+                    <type>task</type>
+                    <term>reading</term>
+                </entry>
+            </index>
+    </head>
+    
+    <body>
+        <title>Nursery Lessons in Words of One Syllable</title>
+        
+        <p> See! Here is a find nag. And that is a good boy who rides on it too; 
+            for he reads his book so well, and is so neat and clean, that his
+            kind aunt gave him this nice horse; and I am sure James takes good
+            care of her gift.</p>
+        <fig href="../../graphics/horse.png">
+            <title>James on his horse</title>
+            <caption>
+                <p>See James ride.</p>
+            </caption>
+        </fig>
+        
+    </body> 
+    
+</generic-topic>            
+                ]]>
+         </codeblock>
+         <p>The code above displays as shown below.</p>
+         <fragment-ref id-ref="nursery-lessons-in-words-of-one-syllable"></fragment-ref>
+        </section>
+        
+    </body>
+</feature-topic>
+

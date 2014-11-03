@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+
+    <head>
+        <id>configuration-file-overview</id>
+        <history>
+            <revision>
+                <date>2012-03-22</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <status>Not started</status>
+            </revision>
+            <revision>
+                <date>2013-07-05</date>
+                <author>jkeffer</author>
+                <comment>Initial content</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2013-07-12</date>
+                <author>jkeffer</author>
+                <comment>Updates to content and structure</comment>
+                <status>Ready for technical review</status>
+            </revision>
+            <revision>
+                <date>2104-06-18</date>
+                <author>mbaker</author>
+                <comment>Update for new config system</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>configuration file</term>
+            </entry>
+            <entry>
+                <type>config-setting</type>
+                <term>/spfe</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Configuration file overview</title>
+        <p>The SPFE Documentation includes information on the <feature> Open Toolkit</feature> and
+            the <feature>EPPO Simple schema set</feature>. <string-ref
+                id-ref="product"/>
+            <string id="a-string">This is a different string</string>: <string-ref id-ref="a-string"
+            /></p>
+        <p>The SPFE <feature>build system</feature> is configured by the SPFE configuration file. Configuration file determine the behavior of the SPFE. The first stage of the build process is to run the configuration script, which reads the configuration files and writes out the files that run the rest of the build. A version of the configuration file produced by the configuration script is also passed as the main input to all processing scripts, making the configuration information available at all stages of the build. </p>
+        
+        <p>While you can define the entire configuration of a build in one file, it is usually better to divide the configuration into multiple files. Many of these partial configuration files can be reused for multiple documentation sets or topic sets. For instance, the configuration file for a topic type can be used in every topic set configuration that uses that topic type.</p>
+
+        <p>There are several sections to the complete configuration of a documentation set, each of which is commonly stored in one or more separate files: </p>
+        <ul>
+            <li>
+                <p>The <feature>documentation set</feature> configuration, contained in the setting, <config-setting>/spfe/doc-set</config-setting>: This defines the set of topic sets to be included in the topic set as well as other settings that are common to the entire documentaion set.</p>
+            </li>
+            <li>
+                <p>The <feature>topic set</feature> configuration for each topic set, contained in the setting <config-setting>/spfe/topic-set</config-setting>: This defines the topics to include in each topic set and other setting that are common to a topic set. A topic set configuration is included in the documentation set configuration using the setting <config-setting>/spfe/doc-set/topic-sets/topic-set</config-setting>.</p>
+            </li>
+            <li>
+                <p>The <feature>topic type</feature> configuration for each topic type in a topic set, contained in the setting <config-setting>/spfe/topic-type</config-setting>: This defines the scripts to use to process topics of a particular topic type, as well as other setting common to a topic type. A topic type configuration file is usually created as part of defining a topic type. A topic type configuration is included in the topic set configuration using the setting <config-setting>/spfe/topic-set/topic-types/topic-type</config-setting>.</p>
+            </li>
+            <li>
+                <p>The <feature>object type</feature> configuration for each <feature>object type</feature> in a topic set, contained in the setting <config-setting>/spfe/topic-set/object-types/object-type</config-setting>: This defines the scripts used to process objects of a particular type, as well as other settings related to objects.
+                </p>
+            </li>
+            <li>
+                <p>The <feature>output type</feature> configuration for each output type required for the documentation set, contained in the setting <config-setting>/spfe/output-format</config-setting>: This defines the scripts used to create an output of a particular type. An output type configuration file is usually created as part of defining and output type. An output type configuration is included in the documentation set configuration using the setting <config-setting>/spfe/doc-set/output-formats/output-format</config-setting>.</p>
+            </li>
+        </ul>
+
+    </body>
+</generic-topic>

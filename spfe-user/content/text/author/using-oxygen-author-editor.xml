@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    
+    <head>
+        <id>using-oxygen-author-editor</id>
+        <history>
+            <revision>
+                <date>2014-10-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>{using Oxygen XML}</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>Oxygen XML</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Using Oxygen XML Author Editor to create content</title>
+        <p>PLACE HOLDER</p>
+    </body>
+</generic-topic>
+
