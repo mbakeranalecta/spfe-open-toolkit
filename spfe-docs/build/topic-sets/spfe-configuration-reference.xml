@@ -18,9 +18,8 @@
 
         
         <presentation-types>
-            <presentation-type>
-                <name>eppo</name>
-            </presentation-type>
+            <presentation-type>eppo</presentation-type>
+            <presentation-type>dita</presentation-type>
         </presentation-types>
         <output-formats>
             <output-format>

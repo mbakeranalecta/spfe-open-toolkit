@@ -109,7 +109,7 @@
         <xsl:variable name="this" select="."/>
         <xsl:apply-templates mode="load-config"/>
         <xsl:for-each
-            select="//topic-type/href, //object-type/href, //output-format/href, //presentation-format/href, //topic-set/href">
+            select="//topic-type/href, //object-type/href, //output-format/href, //presentation-type/href, //topic-set/href">
             <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
                 <xsl:call-template name="sf:error">
                     <xsl:with-param name="message">Configuration file <xsl:value-of select="."/> not found.</xsl:with-param>
@@ -252,9 +252,8 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <xsl:for-each select="presentation-types/presentation-type">
                         <build.presentation topic-set-id="{$topic-set-id}"
-                            style="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{name}/spfe.presentation-{name}.xsl"
-                            output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{name}/out"
-                        > </build.presentation>
+                            style="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{.}/spfe.presentation-{.}.xsl"
+                            output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{.}/out"/> 
                     </xsl:for-each>
                 </xsl:for-each>
             </target>
