@@ -50,7 +50,7 @@
                         <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/common/scripts/present-topic-set-toc.xsl</href>
                     </script>
                     <script>
-                        <href>scripts/present-config-ref.xsl</href>
+                        <href>config-reference/scripts/present-config-ref.xsl</href>
                     </script>
                 </scripts>
             </topic-type>
@@ -61,7 +61,7 @@
                         <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/common/scripts/present-topic-set-toc.xsl</href>
                     </script>
                     <script>
-                        <href>scripts/present-doctype-ref.xsl</href>
+                        <href>doctype-reference/scripts/present-doctype-ref.xsl</href>
                     </script>
                 </scripts>
             </topic-type>
@@ -72,7 +72,7 @@
                         <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/common/scripts/present-topic-set-toc.xsl</href>
                     </script>
                     <script>
-                        <href>scripts/present-function-ref.xsl</href>
+                        <href>function-and-template-reference/scripts/present-function-ref.xsl</href>
                     </script>
                 </scripts>
             </topic-type>
@@ -94,6 +94,9 @@
             <topic-type>
                 <name>{http://spfeopentoolkit.org/ns/spfe-docs}docset-home-topic</name>
                 <scripts>
+                    <script>
+                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/common/scripts/present-content-set-toc.xsl</href>
+                    </script>
                     <script>
                         <remap-namespace>
                             <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
