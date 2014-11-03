@@ -208,6 +208,28 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="presentation-type">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element name="scripts" minOccurs="0" type="script-list-type"/>
+              <xs:element name="topic-types" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="topic-type" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="xs:string"/>
+                          <xs:element name="scripts" type="script-list-type"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="object-type">
           <xs:complexType>
             <xs:sequence>
