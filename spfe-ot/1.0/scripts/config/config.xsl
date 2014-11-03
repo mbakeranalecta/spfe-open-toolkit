@@ -109,7 +109,7 @@
         <xsl:variable name="this" select="."/>
         <xsl:apply-templates mode="load-config"/>
         <xsl:for-each
-            select="//topic-type/href, //object-type/href, //output-format/href, //topic-set/href">
+            select="//topic-type/href, //object-type/href, //output-format/href, //presentation-format/href, //topic-set/href">
             <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
                 <xsl:call-template name="sf:error">
                     <xsl:with-param name="message">Configuration file <xsl:value-of select="."/> not found.</xsl:with-param>
@@ -405,6 +405,21 @@
                 select="$config/topic-set[topic-set-id=$topic-set-id]/object-types/object-type">
                 <xsl:variable name="name" select="name"/>
                 <xsl:sequence select="$config/object-type[name=$name]/scripts"/>
+            </xsl:for-each>
+            <xsl:for-each select="$config/presentation-type">
+                <scripts>
+                    <presentation type="{name}">
+                            <xsl:sequence select="scripts/script"/>
+                        </presentation>
+                </scripts>
+            </xsl:for-each>         
+            
+            <xsl:for-each select="$config/presentation-type/topic-types/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name]">
+                <scripts>
+                    <presentation type="{../../name}">
+                        <xsl:sequence select="scripts/script"/>
+                    </presentation>
+                </scripts>
             </xsl:for-each>
             <xsl:for-each select="$config/output-format">
                 <xsl:sequence select="scripts"/>

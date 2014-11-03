@@ -9,25 +9,25 @@
         <name>eppo</name>
         <scripts>
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/common/scripts/present-topic-set-toc.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/common/scripts/present-topic-set-toc.xsl</href>
             </script>
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/generic-topic/scripts/present-subject-functions.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/present-subject-functions.xsl</href>
             </script>
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/generic-topic/scripts/present-subject-templates.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/present-subject-templates.xsl</href>
             </script>
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/generic-topic/scripts/present-text-structures.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/present-text-structures.xsl</href>
             </script>
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/generic-topic/scripts/present-header-and-footer.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/present-header-and-footer.xsl</href>
             </script>
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/common/scripts/present-topic-set.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/common/scripts/present-topic-set.xsl</href>
             </script>
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/generic-topic/scripts/presentation-fig.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/presentation-fig.xsl</href>
             </script>
             <script>
                 <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
@@ -38,7 +38,7 @@
                 <name>{http://spfeopentoolkit.org/ns/eppo-simple}generic-topic</name>
                 <scripts>
                     <script>
-                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/generic-topic/scripts/present-generic-topic.xsl</href>
+                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/present-generic-topic.xsl</href>
                     </script>
                 </scripts>
             </topic-type>
@@ -46,7 +46,7 @@
                 <name>{http://spfeopentoolkit.org/ns/eppo-simple}docset-home-topic</name>
                 <scripts>
                     <script>
-                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/docset-home-topic/scripts/present-docset-home-topic.xsl</href>
+                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/docset-home-topic/scripts/present-docset-home-topic.xsl</href>
                     </script>
                 </scripts>
             </topic-type>
@@ -54,7 +54,7 @@
                 <name>{http://spfeopentoolkit.org/ns/spfe-docs}essay</name>
                 <scripts>
                     <script>
-                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/essay/scripts/present-essay-topic.xsl</href>
+                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/essay/scripts/present-essay-topic.xsl</href>
                     </script>
                 </scripts>
             </topic-type>
@@ -62,7 +62,7 @@
                 <name>{http://spfeopentoolkit.org/ns/eppo-simple}feature-topic</name>
                 <scripts>
                     <script>                            
-                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/feature-topic/scripts/present-feature-topic.xsl</href>
+                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/feature-topic/scripts/present-feature-topic.xsl</href>
                     </script>
                 </scripts>
             </topic-type>
@@ -70,7 +70,7 @@
                 <name>{http://spfeopentoolkit.org/ns/eppo-simple}think-plan-do-topic</name>
                 <scripts>
                     <script>
-                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/generic-topic/scripts/present-subject-functions.xsl</href>
+                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/think-plan-do-topic/scripts/present-think-plan-do-topic.xsl</href>
                     </script>
                 </scripts>
             </topic-type>
@@ -78,7 +78,7 @@
                 <name>{http://spfeopentoolkit.org/ns/eppo-simple}subject-topic-list</name>
                 <scripts>
                     <script>
-                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/topic-subject-list-topic/scripts/present-topic-subject-lists.xsl</href>
+                        <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/topic-subject-list-topic/scripts/present-topic-subject-lists.xsl</href>
                     </script>
                 </scripts>
             </topic-type>

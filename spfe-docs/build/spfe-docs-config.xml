@@ -133,6 +133,11 @@
         </subject-types>
 
         <messages>warning info</messages>
+        <presentation-formats>
+            <presentation-format>
+                <href>../presentation-types/eppo/config.xml</href>
+            </presentation-format>
+        </presentation-formats>
         <output-formats>
             <output-format>
                 <name>html</name>

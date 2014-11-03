@@ -156,6 +156,20 @@
                   <xs:list itemType="messages-type"/>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="presentation-formats" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="presentation-format">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="xs:string"/>
+                          <xs:element name="href" type="xs:anyURI"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="output-formats" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
