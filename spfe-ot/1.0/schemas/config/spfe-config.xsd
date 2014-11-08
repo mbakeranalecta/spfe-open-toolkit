@@ -158,6 +158,7 @@
                         <xs:sequence>
                           <xs:element name="name" type="xs:NMTOKEN"/>
                           <xs:element name="href" type="xs:anyURI"/>
+                          <xs:element minOccurs="0" name="copy-to" type="xs:anyURI"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>

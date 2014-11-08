@@ -15,60 +15,81 @@
 	
 	<!-- topic -->
 	<xsl:template match="es:think-plan-do-topic">
-		<pe:page status="{es:head/es:history/es:revision[last()]/es:status}" name="{ancestor::ss:topic/@local-name}">
-			<xsl:call-template name="show-header"/>
-			<xsl:apply-templates /> 
-			<xsl:call-template name="show-footer"/>		
-		</pe:page>
+		<xsl:result-document href="file:///{$output-directory}/{$topic-set-id}/{ancestor::ss:topic/@local-name}.dita" 
+			method="xml" 
+			indent="yes" 
+			omit-xml-declaration="no" 
+			doctype-public="-//OASIS//DTD DITA Topic//EN" 
+			doctype-system="topic.dtd">
+			<topic id="{ancestor::ss:topic/@local-name}">
+				<xsl:apply-templates/>
+			</topic>
+		</xsl:result-document>
 	</xsl:template>
 	
 	<xsl:template match="es:think-plan-do-topic/es:head"/>
 	
-	<xsl:template match="es:think-plan-do-topic/es:body/es:title">
-		<xsl:variable name="title" select="."></xsl:variable>
-		<pe:title>
-			<xsl:apply-templates/>
-		</pe:title>
-		<!-- page toc -->
-		<pe:toc>
-			<pe:toc-entry><pe:xref target="#Think">Understanding <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
-			<pe:toc-entry><pe:xref target="#Plan">Planning <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
-			<pe:toc-entry><pe:xref target="#Do">Doing <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
-		</pe:toc>
+	<xsl:template match="es:think-plan-do-topic/es:body/es:title" mode="topic-title">
+		<xsl:apply-templates/>
+	</xsl:template>
+	<xsl:template match="es:think-plan-do-topic/es:body/es:title"/>
+
+	<xsl:template match="es:think-plan-do-topic/es:body">
+		<!-- Move title outside body because DITA is wierd like that. -->
+		<xsl:if test="es:title">
+			<title>
+				<xsl:apply-templates select="es:title" mode="topic-title"/>
+			</title>	
+		</xsl:if>
 		
+		<body>
+			<!-- page toc -->
+			<!--<xsl:if test="count(../es:section/es:title) gt 1">
+							<pe:toc>
+				<xsl:for-each select="../es:section/es:title">
+					<pe:toc-entry>
+						<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
+							<xsl:value-of select="."/>
+						</pe:xref>
+					</pe:toc-entry>
+				</xsl:for-each>
+			</pe:toc>
+		</xsl:if>-->
+			<xsl:apply-templates/>
+		</body>		
 	</xsl:template>
 	
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning/es:planning-question">
 		<xsl:if test="$config/config:build-command='draft' or sf:has-content(es:planning-question-title/following-sibling::*) ">
-			<pe:labeled-item>
-				<pe:anchor name="{sf:title-to-anchor(es:planning-question-title)}"/>
+			<dlentry id="{sf:title-to-anchor(es:planning-question-title)}">
 				<xsl:apply-templates/>
-			</pe:labeled-item>
+			</dlentry>
 		</xsl:if>	
 	</xsl:template>
 	
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning/es:planning-question/es:planning-question-title">	
-		<pe:label>
+		<dt>
 			<xsl:apply-templates/>
-		</pe:label>
+		</dt>
 	</xsl:template>
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:understanding">	
-		<pe:section>
-			<pe:anchor name="Think"/>
-			<pe:title>Understanding <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
+		<section id="Think">
+			<title>Understanding <xsl:value-of select="ancestor::es:body/es:title"/></title>
 			<xsl:apply-templates/>
-		</pe:section>
+		</section>
 	</xsl:template>
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning">
-		<pe:section>
-			<pe:anchor name="Plan"/>
-			<pe:title>Planning <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
-			<xsl:apply-templates/>
-		</pe:section>
+		<section id="Plan">
+			<title>Planning <xsl:value-of select="ancestor::es:body/es:title"/></title>
+			<dl>
+				<xsl:apply-templates/>
+			</dl>
+			
+		</section>
 	</xsl:template>
 	
 <!--	<xsl:template match="es:planning-question">
@@ -76,17 +97,16 @@
 	</xsl:template>-->
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning/es:planning-question/es:planning-question-body">
-		<pe:item>
+		<dd>
 			<xsl:apply-templates/>
-		</pe:item>
+		</dd>
 	</xsl:template>
 	
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:doing">	
-		<pe:section>
-			<pe:anchor name="Do"/>
-			<pe:title>Doing <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
+		<section id="Do">
+			<title>Doing <xsl:value-of select="ancestor::es:body/es:title"/></title>
 			<xsl:apply-templates/>
-		</pe:section>
+		</section>
 	</xsl:template>	
 </xsl:stylesheet>

@@ -39,34 +39,18 @@ Main template
 =============
 -->
 <xsl:template name="main">
-	<xsl:result-document href="file:///{$output-directory}/presentation.xml" method="xml" indent="yes" omit-xml-declaration="no" >
-		
-		
-		
-		
-		
-		<pe:pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/eppo/schemas/presentation-eppo.xsd">
-			<pe:title>
-				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
-			</pe:title>
-				
-			<!-- process the topics --> 
 			<xsl:apply-templates select="$synthesis/ss:synthesis/*"/>
 			<xsl:call-template name="create-generated-topics"/>
-
-		</pe:pages>
-	</xsl:result-document>
 </xsl:template>
 
 <xsl:template name="create-generated-topics">
-	<xsl:call-template name="create-toc-page"/>
+	<xsl:call-template name="create-map"/>
 </xsl:template>
 	
 <xsl:template match="ss:topic" priority="1">
 	<!-- Individual topic types can also match ss:topic for further processing. -->
 	<xsl:call-template name="sf:info">
-		<xsl:with-param name="message" select="'Creating page ', string(@local-name)"/>
+		<xsl:with-param name="message" select="'Creating map ', string(@local-name)"/>
 	</xsl:call-template>
 	<xsl:next-match/>
 </xsl:template>

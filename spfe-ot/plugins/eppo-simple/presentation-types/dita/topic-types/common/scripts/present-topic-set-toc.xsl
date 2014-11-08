@@ -94,27 +94,31 @@
     </xsl:variable>
 
     <!-- TOC templates -->
-    <xsl:template name="create-toc-page">
+    <xsl:template name="create-map">
 
         <xsl:variable name="topic-set-title"
             select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
-
-        <pe:page status="generated" name="{$topic-set-id}-toc">
-            <xsl:call-template name="show-header"/>
-            <pe:title>
+        <xsl:result-document href="file:///{$output-directory}/{$topic-set-id}/{$topic-set-id}.ditamap" 
+            method="xml" 
+            indent="yes" 
+            omit-xml-declaration="no" 
+            doctype-public="-//OASIS//DTD DITA Map//EN" 
+            doctype-system="map.dtd">
+        <map id="{$topic-set-id}">
+            <title>
                 <xsl:value-of select="$topic-set-title"/>
-            </pe:title>
-            <xsl:apply-templates select="$toc"/>
-            <xsl:call-template name="show-footer"/>
-        </pe:page>
+            </title>
+            <topichead navtitle="{$topic-set-title}">
+                 <xsl:apply-templates select="$toc"/>
+            </topichead>
+        </map>
+        </xsl:result-document>
     </xsl:template>
 
     <xsl:template match="toc[@topic-set-id=$topic-set-id]">
         <xsl:choose>
             <xsl:when test="node">
-                <pe:tree class="toc">
                     <xsl:apply-templates/>
-                </pe:tree>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="sf:warning">
@@ -127,24 +131,15 @@
     <xsl:template match="toc"/>
 
     <xsl:template match="node[@topic-type]">
-        <!-- FIXME: subhead may not be the right markup here, or may need explicit handling at format stage -->
-        <pe:branch state="open">
-            <pe:content>
-                <xsl:value-of select="@name"/>
-            </pe:content>
+        <topichead navtitle="{@name}">
             <xsl:apply-templates/>
-        </pe:branch>
+        </topichead>
     </xsl:template>
 
     <xsl:template match="node">
-        <pe:branch state="open">
-            <pe:content>
-                <pe:xref target="{normalize-space(@id)}.html">
-                    <xsl:value-of select="@name"/>
-                </pe:xref>
-            </pe:content>
+        <topicref keys="{$topic-set-id}.{@id}" href="{@id}.dita">
             <xsl:apply-templates/>
-        </pe:branch>
+        </topicref>
     </xsl:template>
 
 </xsl:stylesheet>

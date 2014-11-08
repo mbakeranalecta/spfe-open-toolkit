@@ -51,7 +51,9 @@
         <xsl:variable name="defines" as="element(define)*">
             <define name="HOME" value="{$home}"/>
             <define name="SPFEOT_HOME" value="{$spfeot-home}"/>
-            <define name="DOC_SET_BUILD_DIR" value="{$content-set-build}"/>
+            <define name="CONTENT_SET_BUILD_DIR" value="{$content-set-build}"/>
+            <define name="CONTENT_SET_OUTPUT_DIR" value="{$content-set-output}"/>
+            <define name="CONTENT_SET_BUILD_ROOT_DIR" value="{$content-set-build-root-directory}"/>
         </xsl:variable>
         <xsl:variable name="result">
             <xsl:analyze-string select="$value" regex="\$\{{([^}}]*)\}}">
@@ -251,9 +253,14 @@
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <xsl:for-each select="presentation-types/presentation-type">
+                        <xsl:variable name="presentation-type" select="."/>
                         <build.presentation topic-set-id="{$topic-set-id}"
-                            style="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{.}/spfe.presentation-{.}.xsl"
-                            output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{.}/out"/> 
+                            style="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/spfe.presentation-{$presentation-type}.xsl"
+                            output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out">
+                            <xsl:if test="$config/content-set/presentation-types/presentation-type[name eq $presentation-type]/copy-to">
+                                <xsl:attribute name="copy-to" select="spfe:resolve-defines($config/content-set/presentation-types/presentation-type[name eq $presentation-type]/copy-to)"/>
+                            </xsl:if>
+                        </build.presentation> 
                     </xsl:for-each>
                 </xsl:for-each>
             </target>

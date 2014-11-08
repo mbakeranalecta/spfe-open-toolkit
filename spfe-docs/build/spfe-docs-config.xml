@@ -141,6 +141,7 @@
                 <presentation-type>
                     <name>dita</name>
                     <href>../presentation-types/dita/config.xml</href>
+                    <copy-to>${CONTENT_SET_BUILD_ROOT_DIR}/ditaout</copy-to>
                 </presentation-type>
         </presentation-types>
         <output-formats>

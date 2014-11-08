@@ -8,9 +8,8 @@ version="2.0"
  xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
  xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
  xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
- xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
  exclude-result-prefixes="#all" 
- xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
+ xpath-default-namespace=""
 >
 <!--<xsl:output indent="no"/>-->
 <xsl:strip-space elements="terminal-session"/>
@@ -21,48 +20,75 @@ version="2.0"
 	<!-- FIXME: This needs to be an explicit list or else it overrides subject-templates.xsl in 
 		the import order. Might be fixed by converting individual reference types to subject or name 
 		at the synthesis stage, or by changing the import order. -->
-	<xsl:template match="title
-		| subhead
-		| labeled-item
-		| label
-		| item
-		| tr
-		| td
-		| th
-		| ol
-		| ul
-		| li
-		| note
-		| warning
-		| caution
-		| code
-		| bold
-		| italic">
+	<xsl:template match="es:title
+		| es:tr
+		| es:td
+		| es:th
+		| es:ol
+		| es:ul
+		| es:li
+		| es:note
+		| es:warning
+		| es:caution
+">
 		
-		<xsl:element name="pe:{local-name()}" namespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo">
-			<xsl:copy-of select="@*"/>
+		<xsl:element name="{local-name()}" namespace="">
+			<!--<xsl:copy-of select="@*"/> Can't blindly copy attributes since DITA atrributes don't match.-->
 			<xsl:apply-templates/>
 		</xsl:element>
 	</xsl:template>
 	
-	<xsl:template match="body">
+	<xsl:template match="es:body">
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<xsl:template match="p">
-		<pe:p>
+	<xsl:template match="es:code">
+		<codeph><xsl:apply-templates/></codeph>
+	</xsl:template>
+
+	<xsl:template match="es:italic">
+		<i><xsl:apply-templates/></i>
+	</xsl:template>
+	
+	<xsl:template match="es:subhead">
+		<p><b><xsl:apply-templates/></b></p>
+	</xsl:template>
+	
+	<xsl:template match="es:bold">
+		<b><xsl:apply-templates/></b>
+	</xsl:template>
+	
+	<xsl:template match="es:labeled-item">
+		<dl>
+			<dlentry>
+				<xsl:apply-templates/>
+			</dlentry>
+		</dl>
+	</xsl:template>
+	
+	<xsl:template match="es:item">
+		<dd><xsl:apply-templates/></dd>
+	</xsl:template>
+
+	<xsl:template match="es:label">
+		<dt><xsl:apply-templates/></dt>
+	</xsl:template>
+
+	<xsl:template match="es:p">
+		<p>
 			<!-- FIXME: will this copy attributes with old namespaces? Make it all explicit.-->
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
-		</pe:p>
-		<xsl:for-each select="text-object-ref">
+		</p>
+		
+<!--		<xsl:for-each select="text-object-ref">
 			<xsl:variable name="id" select="@id-ref"/>
 			<xsl:variable name="content" select="normalize-space(.)"/>
 			<xsl:choose>
 				<xsl:when test="//text-object[id=$id]">
-					<pe:fold id="{generate-id()}" type="text-object" initial-state="closed" reference-text="{$content}">
+					<fold id="{generate-id()}" type="text-object" initial-state="closed" reference-text="{$content}">
 						<xsl:apply-templates select="//text-object[id=$id]"/>
-					</pe:fold>		
+					</fold>		
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="sf:warning">
@@ -70,36 +96,36 @@ version="2.0"
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
-		</xsl:for-each>
+		</xsl:for-each>-->
 	</xsl:template>
 
-	<xsl:template match="text-object">
+<!--	<xsl:template match="text-object">
 		<xsl:apply-templates/>
 	</xsl:template>
 	
 	<xsl:template match="text-object/tracking"/>
 	<xsl:template match="text-object/id"/>
 	<xsl:template match="text-object/title">
-		<pe:title><xsl:apply-templates/></pe:title>
-	</xsl:template>
+		<title><xsl:apply-templates/></pe:title>
+	</xsl:template>-->
 
 
 	
-	<xsl:template match="codeblock">
-		<pe:codeblock>
-		<xsl:copy-of select="@*"/>
+	<xsl:template match="es:codeblock">
+		<codeblock>
 			<xsl:apply-templates/>
-		</pe:codeblock>
+		</codeblock>
 	</xsl:template>
 
-	<xsl:template match="terminal-session">
+	<xsl:template match="es:terminal-session">
 	<!-- do it all here so we can control the whitespace in output -->
-		<pe:codeblock>
+		<!-- FIXME: Use dita terminal markup -->
+		<codeblock>
 			<xsl:text/><xsl:apply-templates/><xsl:text/>
-		</pe:codeblock>
+		</codeblock>
 	</xsl:template>
 	
-	<xsl:template match="terminal-session/prompt">
+	<xsl:template match="es:terminal-session/es:prompt">
 	<!-- account for the possibility that there is no response between entries -->
 	<xsl:if test="preceding-sibling::entry">
 			<xsl:text>&#xA;</xsl:text>
@@ -110,13 +136,13 @@ version="2.0"
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template match="terminal-session/entry">
+	<xsl:template match="es:terminal-session/es:entry">
 		<xsl:if test="normalize-space(.)">
 			<xsl:sequence select="esf:process-placeholders(., 'code', 'placeholder')"/>
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template match="terminal-session/response">
+	<xsl:template match="es:terminal-session/es:response">
 		<xsl:if test="normalize-space(.)">
 			<xsl:text>&#xA;</xsl:text>
 			<xsl:text/><xsl:apply-templates/><xsl:text/>
@@ -124,43 +150,37 @@ version="2.0"
 	</xsl:template>
 
 	
-	<xsl:template match="string-literal">
-		<pe:bold><xsl:apply-templates/></pe:bold>
-	</xsl:template>
-	
-	<xsl:template match="table">
-		<xsl:if test="@id">
-			<pe:anchor name="table:{@id}"/>
-		</xsl:if>
-		<pe:table>
+
+	<xsl:template match="es:table">
+		<table id="{if (@id) then @id else generate-id()}">
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
-		</pe:table>
+		</table>
 	</xsl:template>
 	
-	<xsl:template match="code-sample">
-		<pe:code-sample id="{@id}">
+	<xsl:template match="es:code-sample">
+		<code-sample id="{@id}">
 			<xsl:if test="@id">
 				<anchor name="code-sample:{@id}"/>
 			</xsl:if>
-			<xsl:apply-templates select="title"/>
-			<xsl:if test="file-ref">
-				<pe:p>
+			<xsl:apply-templates select="es:title"/>
+			<xsl:if test="es:file-ref">
+				<p>
 					<xsl:text>Source file: </xsl:text>
-					<xsl:apply-templates select="file-ref"/>
-				</pe:p>
+					<xsl:apply-templates select="es:file-ref"/>
+				</p>
 			</xsl:if>
-			<xsl:apply-templates select="codeblock"/>
-		</pe:code-sample>
+			<xsl:apply-templates select="es:codeblock"/>
+		</code-sample>
 	</xsl:template>
 
-	<xsl:template match="code-sample/title">
-		<pe:title>
+	<xsl:template match="es:code-sample/es:title">
+		<title>
 			<xsl:apply-templates/>
-		</pe:title>
+		</title>
 	</xsl:template>
 
-	<xsl:template match="author-note">
+	<xsl:template match="es:author-note">
 		<xsl:if test="$config/config:build-command='draft'">
 			<xsl:element name="{local-name()}">
 				<xsl:copy-of select="@*"/>
@@ -169,7 +189,7 @@ version="2.0"
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="review-note">
+	<xsl:template match="es:review-note">
 		<xsl:if test="$config/config:build-command='draft'">
 			<xsl:element name="{local-name()}">
 				<xsl:copy-of select="@*"/>
@@ -178,62 +198,55 @@ version="2.0"
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template match="procedure">
-		<pe:procedure id="{@id}">
-			<xsl:if test="@id">
-				<anchor name="procedure:{@id}"/>
-			</xsl:if>
+	<xsl:template match="es:procedure">
+		<procedure id="{if (@id) then @id else generate-id()}">
 			<xsl:apply-templates/>
-		</pe:procedure>
+		</procedure>
 	</xsl:template>
 	
-	<xsl:template match="procedure/title">
-		<pe:title>
+	<xsl:template match="es:procedure/es:title">
+		<title>
 			<xsl:apply-templates/>
-		</pe:title>
+		</title>
 	</xsl:template>
 	
-	<xsl:template match="procedure/intro">
+	<xsl:template match="es:procedure/es:intro">
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<xsl:template match="step">
-		<pe:step>
-			<xsl:if test="@id">
-				<xsl:copy-of select="@id"/>
-				<pe:anchor name="step:{@id}"/>
-			</xsl:if>
+	<xsl:template match="es:step">
+		<step id="{if (@id) then @id else generate-id()}">
 			<xsl:apply-templates/>
-		</pe:step>
+		</step>
 	</xsl:template>
 	
-	<xsl:template match="step/title">
-		<pe:title>
+	<xsl:template match="es:step/es:title">
+		<title>
 			<xsl:apply-templates/>
-		</pe:title>
+		</title>
 	</xsl:template>
 
-	<xsl:template match="qa">
-		<pe:labeled-item>
+	<xsl:template match="es:qa">
+		<labeled-item>
 			<xsl:apply-templates/>
-		</pe:labeled-item>
+		</labeled-item>
 	</xsl:template>
 	
-	<xsl:template match="qa/q">
-		<pe:label>
+	<xsl:template match="es:qa/es:q">
+		<label>
 			<xsl:apply-templates/>
-		</pe:label>
+		</label>
 	</xsl:template>
 	
-	<xsl:template match="qa/a">
-		<pe:item>
+	<xsl:template match="es:qa/es:a">
+		<item>
 			<xsl:apply-templates/>
-		</pe:item>
+		</item>
 	</xsl:template>
 	
-	<xsl:template match="codeblock[@language='C']">
+	<xsl:template match="es:codeblock[@language='C']">
 		<xsl:variable name="scope" select="@scope"/>
-		<pe:codeblock>
+		<codeblock>
 			<xsl:analyze-string select="." regex="([a-zA-z0-9]+)(\s*\()">
 				<xsl:matching-substring>
 					<xsl:choose>
@@ -254,7 +267,7 @@ version="2.0"
 					<xsl:value-of select="."/>
 				</xsl:non-matching-substring>
 			</xsl:analyze-string>
-		</pe:codeblock>
+		</codeblock>
 	</xsl:template>
 
 </xsl:stylesheet>

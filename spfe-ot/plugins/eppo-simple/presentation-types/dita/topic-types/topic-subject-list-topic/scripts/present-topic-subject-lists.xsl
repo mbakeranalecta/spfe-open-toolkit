@@ -21,36 +21,44 @@
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
 
-		<!-- info -->
-		<pe:page type="list" name="{ancestor::ss:topic/@local-name}">
-			<xsl:call-template name="show-header"/>
-			<pe:title>
-				<xsl:value-of select="parent::ss:topic/@title"/>
-			</pe:title>
 
-
-			<pe:p>
-				<xsl:value-of select="parent::ss:topic/@excerpt"/>
-			</pe:p>
-			<xsl:for-each select="topics-on-subject/topic">
-				<pe:labeled-item>
-					<pe:label>
-						<xsl:call-template name="output-link">
-							<xsl:with-param name="target" select="full-name"/>
-							<xsl:with-param name="type">topic</xsl:with-param>
-							<xsl:with-param name="content">
-								<xsl:value-of select="topic-type-alias"/>: <xsl:value-of select="title"/>
-							</xsl:with-param>
-							<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
-						</xsl:call-template>
-					</pe:label>
-	
-					<pe:item>
-						<pe:p><xsl:value-of select="excerpt"></xsl:value-of></pe:p>
-					</pe:item>
-				</pe:labeled-item>
-			</xsl:for-each>
-			<xsl:call-template name="show-footer"/>
-		</pe:page>
+		<xsl:result-document href="file:///{$output-directory}/{$topic-set-id}/{ancestor::ss:topic/@local-name}.dita" 
+			method="xml" 
+			indent="yes" 
+			omit-xml-declaration="no" 
+			doctype-public="-//OASIS//DTD DITA Topic//EN" 
+			doctype-system="topic.dtd">
+			<topic id="{ancestor::ss:topic/@local-name}">
+				<title>
+					<xsl:value-of select="parent::ss:topic/@title"/>
+				</title>	
+				<body>				
+					<p>
+						<xsl:value-of select="parent::ss:topic/@excerpt"/>
+					</p>
+					<dl>
+						<xsl:for-each select="topics-on-subject/topic">
+							<dlentry>
+								<dt>
+									<xsl:call-template name="output-link">
+										<xsl:with-param name="target" select="full-name"/>
+										<xsl:with-param name="type">topic</xsl:with-param>
+										<xsl:with-param name="content">
+											<xsl:value-of select="topic-type-alias"/>: <xsl:value-of select="title"/>
+										</xsl:with-param>
+										<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+									</xsl:call-template>
+								</dt>
+								
+								<dd>
+									<p><xsl:value-of select="excerpt"></xsl:value-of></p>
+								</dd>
+							</dlentry>
+						</xsl:for-each>
+						
+					</dl>
+				</body>
+			</topic>
+		</xsl:result-document>
 	</xsl:template>
 </xsl:stylesheet>

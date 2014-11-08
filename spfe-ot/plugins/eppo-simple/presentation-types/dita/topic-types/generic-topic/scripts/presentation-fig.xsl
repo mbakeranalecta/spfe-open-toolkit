@@ -10,48 +10,48 @@
 
     
     <xsl:template match="fig">
-        <xsl:if test="@id">
-            <pe:anchor name="fig:{@id}"/>
-        </xsl:if>
-        <pe:fig>
+        <fig>
             <xsl:if test="@id">
                 <xs:attribute name="fig" select="fig:{@id}"/>
             </xsl:if>
-            <xsl:if test="not(title) and gr:graphic-record/gr:default-title">
-                <pe:title>
-                    <xsl:value-of select="gr:graphic-record/gr:default-title"/>
-                </pe:title>
-            </xsl:if>   
+            <xsl:choose>
+                <xsl:when test="not(title) and gr:graphic-record/gr:default-title">
+                    <title>
+                        <xsl:value-of select="gr:graphic-record/gr:default-title"/>
+                    </title>
+                </xsl:when>  
+                <xsl:when test="title">
+                    <xsl:apply-templates select="title" mode="fig-title"/>
+                </xsl:when>
+            </xsl:choose>
             <xsl:if test="not(caption) and gr:graphic-record/gr:default-caption">
-                <pe:caption>
-                    <xsl:apply-templates select="gr:graphic-record/gr:default-caption"/>
-                </pe:caption>
+                    <xsl:apply-templates select="gr:graphic-record/gr:default-caption"/>              
             </xsl:if>   
             <xsl:apply-templates/> 
-        </pe:fig>
+        </fig>
     </xsl:template>
     
     <xsl:template match="gr:graphic-record">
-        <gr:graphic-record>
-            <!-- copy everything except the default caption -->
+        <image href="{gr:formats/gr:format[1]/gr:href}"/>
+<!--        <gr:graphic-record>
+            <!-\- copy everything except the default caption -\->
             <xsl:copy-of  select="gr:name" copy-namespaces="no"/>
             <xsl:copy-of  select="gr:alt" copy-namespaces="no"/>
             <xsl:copy-of  select="gr:uri" copy-namespaces="no"/>
             <xsl:copy-of select="gr:formats" copy-namespaces="no"/>
             <xsl:copy-of select="gr:source" copy-namespaces="no"/>
         </gr:graphic-record>
-    </xsl:template>
+-->    </xsl:template>
     
     <xsl:template match="fig/caption">
-        <pe:caption>
             <xsl:apply-templates/>
-        </pe:caption>
     </xsl:template>
     
-    <xsl:template match="fig/title">
-        <pe:title>
+    <xsl:template match="fig/title"/> 
+    <xsl:template match="fig/title" mode="fig-title">
+        <title>
             <xsl:apply-templates/>
-        </pe:title>
+        </title>
     </xsl:template>
     
   

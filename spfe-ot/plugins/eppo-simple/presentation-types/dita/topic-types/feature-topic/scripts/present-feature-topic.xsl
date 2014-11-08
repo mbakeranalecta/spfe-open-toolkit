@@ -15,46 +15,63 @@
 	
 	<!-- topic -->
 	<xsl:template match="es:feature-topic">
-		<pe:page status="{es:head/es:history/es:revision[last()]/es:status}" name="{ancestor::ss:topic/@local-name}">
-			<xsl:call-template name="show-header"/>
-			<xsl:apply-templates /> 
-			<xsl:call-template name="show-footer"/>		
-		</pe:page>
+		<xsl:result-document href="file:///{$output-directory}/{$topic-set-id}/{ancestor::ss:topic/@local-name}.dita" 
+			method="xml" 
+			indent="yes" 
+			omit-xml-declaration="no" 
+			doctype-public="-//OASIS//DTD DITA Topic//EN" 
+			doctype-system="topic.dtd">
+			<topic id="{ancestor::ss:topic/@local-name}">
+				<xsl:apply-templates/>
+			</topic>
+		</xsl:result-document>
 	</xsl:template>
 	
 	<xsl:template match="es:feature-topic/es:head"/>
-
-	<xsl:template match="es:feature-topic/es:body/es:title">
-		<pe:title>
-			<xsl:apply-templates/>
-		</pe:title>
-		<!-- page toc -->
-		<xsl:if test="count(../es:section/es:title) gt 1">
-			<pe:toc>
-				<xsl:for-each select="../es:section/es:title">
-					<pe:toc-entry>
-							<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
-								<xsl:value-of select="."/>
-							</pe:xref>
-					</pe:toc-entry>
-				</xsl:for-each>
-			</pe:toc>
-		</xsl:if>	
+	
+	<xsl:template match="es:feature-topic/es:body/es:title" mode="topic-title">
+		<xsl:apply-templates/>
 	</xsl:template>
+	<xsl:template match="es:feature-topic/es:body/es:title"/>
 	
 	<xsl:template match="es:feature-topic/es:body/es:section">
 		<xsl:if test="$config/config:build-command='draft' or sf:has-content(es:title/following-sibling::*) ">
-			<pe:section>
-				<pe:anchor name="{sf:title-to-anchor(es:title)}"/>
-			<xsl:apply-templates/>
-		</pe:section>
+			<section id="{sf:title-to-anchor(es:title)}">
+				<xsl:apply-templates/>
+			</section>
 		</xsl:if>	
 	</xsl:template>
 	
-	<xsl:template match="es:feature-topic/es:body/es:section/es:title">	
-		<pe:title>
+	<xsl:template match="es:feature-topic/es:body">
+		<!-- Move title outside body because DITA is wierd like that. -->
+		<xsl:if test="es:title">
+			<title>
+				<xsl:apply-templates select="es:title" mode="topic-title"/>
+			</title>	
+		</xsl:if>
+		
+		<body>
+			<!-- page toc -->
+			<!--<xsl:if test="count(../es:section/es:title) gt 1">
+							<pe:toc>
+				<xsl:for-each select="../es:section/es:title">
+					<pe:toc-entry>
+						<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
+							<xsl:value-of select="."/>
+						</pe:xref>
+					</pe:toc-entry>
+				</xsl:for-each>
+			</pe:toc>
+		</xsl:if>-->
 			<xsl:apply-templates/>
-		</pe:title>
+		</body>		
+	</xsl:template>
+	
+	
+	<xsl:template match="es:feature-topic/es:body/es:section/es:title">	
+		<title>
+			<xsl:apply-templates/>
+		</title>
 	</xsl:template>
 	
 </xsl:stylesheet>

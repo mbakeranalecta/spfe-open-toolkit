@@ -23,16 +23,18 @@
 	<!-- XSL function -->
 	<xsl:template match="xsl-function">
 		<xsl:variable name="display-name" select="name/text()"/>
-
+		<xsl:result-document href="file:///{$output-directory}/{$topic-set-id}/{ancestor::ss:topic/@local-name}.dita" 
+			method="xml" 
+			indent="yes" 
+			omit-xml-declaration="no" 
+			doctype-public="-//OASIS//DTD DITA Topic//EN" 
+			doctype-system="topic.dtd">
 		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
-		<pe:page type="API" name="{name}">
-
-
-			<xsl:call-template name="show-header"/>
-			<pe:title>Function: <xsl:value-of select="$display-name"/></pe:title>
-
-			<pe:p>
-				<pe:bold>
+		<topic id="{name}">
+			<title>Function: <xsl:value-of select="$display-name"/></title>
+<body>
+			<p>
+				<b>
 					<xsl:value-of select="$display-name"/>
 					<xsl:text>(</xsl:text>
 					<xsl:for-each select="parameters/parameter">
@@ -43,57 +45,61 @@
 					</xsl:for-each>
 					<xsl:text>) as </xsl:text>
 					<xsl:value-of select="return-value/type"/>
-				</pe:bold>
-			</pe:p>
-			<pe:labeled-item>
-				<pe:label>Description</pe:label>
-				<pe:item>
+				</b>
+			</p>
+	<dl>
+			<dlentry>
+				<dt>Description</dt>
+				<dd>
 					<xsl:if test="not(description)">
-						<pe:p/>
+						<p/>
 					</xsl:if>
 					<xsl:apply-templates select="description"/>
-				</pe:item>
-			</pe:labeled-item>
+				</dd>
+			</dlentry>
 
-			<pe:labeled-item>
-				<pe:label>Return value</pe:label>
-				<pe:item>
-					<pe:p>Return type: <xsl:value-of select="return-value/type"/></pe:p>
+			<dlentry>
+				<dt>Return value</dt>
+				<dd>
+					<p>Return type: <xsl:value-of select="return-value/type"/></p>
 					<xsl:apply-templates select="return-value/description"/>
-				</pe:item>
-			</pe:labeled-item>
+				</dd>
+			</dlentry>
 
-			<pe:labeled-item>
-				<pe:label>Source file</pe:label>
-				<pe:item>
-					<pe:p>
+			<dlentry>
+				<dt>Source file</dt>
+				<dd>
+					<p>
 						<xsl:value-of select="source-file"/>
-					</pe:p>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:subhead>Parameters</pe:subhead>
+					</p>
+				</dd>
+			</dlentry>
+</dl>
+			<section><title>Parameters</title>
 			<xsl:for-each select="parameters/parameter">
-				<pe:labeled-item>
-					<pe:label>
+				<dl>
+				<dlentry>
+					<dt>
 						<xsl:value-of select="name"/>
-					</pe:label>
-					<pe:item>
-						<pe:p>Type: <xsl:value-of select="type"/></pe:p>
+					</dt>
+					<dd>
+						<p>Type: <xsl:value-of select="type"/></p>
 						<xsl:apply-templates select="description"/>
-					</pe:item>
-				</pe:labeled-item>
+					</dd>
+				</dlentry></dl>
 			</xsl:for-each>
-
-			<pe:subhead>Definition</pe:subhead>
+</section>
+			<section><title>Definition</title>
 			<xsl:for-each select="definition">
-				<pe:codeblock language="XSLT">
+				<codeblock> <!-- FIXME: No obvious way to specify the language in DITA, so omitting that. -->
     			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
     			<xsl:apply-templates select="*"/>
-    		</pe:codeblock>
+    		</codeblock>
 			</xsl:for-each>
-			<xsl:call-template name="show-footer"/>
-		</pe:page>
+	</section>
+</body>
+		</topic>
+		</xsl:result-document>
 	</xsl:template>
 
 	<xsl:template match="description">
@@ -111,51 +117,61 @@
 
 		<!-- FIXME: the page should be created from the ss:topic element by shared code to keep in sync with tocs -->
 		<!-- FIXME: Is the page type attribute used for anything? Should it be? -->
-		<pe:page type="API" name="{name}">
-			<xsl:call-template name="show-header"/>
-			<pe:title>Template: <xsl:value-of select="$display-name"/></pe:title>
-
-			<pe:labeled-item>
-				<pe:label>Description</pe:label>
-					<pe:item>
+		<xsl:result-document href="file:///{$output-directory}/{$topic-set-id}/{ancestor::ss:topic/@local-name}.dita" 
+			method="xml" 
+			indent="yes" 
+			omit-xml-declaration="no" 
+			doctype-public="-//OASIS//DTD DITA Topic//EN" 
+			doctype-system="topic.dtd">
+			<topic id="{name}">
+			<title>Template: <xsl:value-of select="$display-name"/></title>
+	<body>
+		<dl>
+			<dlentry>
+				<dt>Description</dt>
+					<dd>
 					<xsl:if test="not(description)">
-						<pe:p/>
+						<p/>
 					</xsl:if>
 					<xsl:apply-templates select="description"/>
-				</pe:item>
-			</pe:labeled-item>
+				</dd>
+			</dlentry>
 
-			<pe:labeled-item>
-				<pe:label>Source file</pe:label>
-				<pe:item>
-					<pe:p>
+			<dlentry>
+				<dt>Source file</dt>
+				<dd>
+					<p>
 						<xsl:value-of select="source-file"/>
-					</pe:p>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:subhead>Parameters</pe:subhead>
+					</p>
+				</dd>
+			</dlentry>
+		</dl>
+			<section><title>Parameters</title><dl>
 			<xsl:for-each select="parameters/parameter">
-				<pe:labeled-item>
-					<pe:label>
+				
+				<dlentry>
+					<dt>
 						<xsl:value-of select="name"/>
-					</pe:label>
-					<pe:item>
-						<pe:p>Type: <xsl:value-of select="type"/></pe:p>
+					</dt>
+					<dd>
+						<p>Type: <xsl:value-of select="type"/></p>
 						<xsl:apply-templates select="description"/>
-					</pe:item>
-				</pe:labeled-item>
+					</dd>
+				</dlentry>
 			</xsl:for-each>
+			</dl></section>
 
-			<pe:subhead>Definition</pe:subhead>
+			<section><title>Definition</title>
 			<xsl:for-each select="definition">
-				<pe:codeblock language="XSLT">
+				<codeblock> <!-- FIXME: No obvious way to specify the language in DITA, so omitting that. -->
     			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
     			<xsl:apply-templates select="*"/>
-    		</pe:codeblock>
+    		</codeblock>
 			</xsl:for-each>
-			<xsl:call-template name="show-footer"/>
-		</pe:page>
+		</section>
+	</body>
+			</topic>
+		</xsl:result-document>
 	</xsl:template>
 
 	<!-- Add links to code samples -->

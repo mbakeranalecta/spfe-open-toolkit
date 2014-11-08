@@ -103,16 +103,16 @@
 					translate(substring-before($target, '/@'), '/:', '__' )
 				else
 					translate($target, '/:', '__' )"/>
-					<xsl:text>.html</xsl:text>
+					<xsl:text>.dita</xsl:text>
 					<xsl:if test="contains($target, '/@')">
 						<xsl:text>#</xsl:text>
 						<xsl:value-of select="substring-after($target, '/@')"/>
 					</xsl:if>
 				</xsl:variable>
-
-				<pe:xref target="{$href}" title="Link to: {$target}">
+				<!-- FIXME: This should go through the link catalog instead. -->
+				<xref href="{$href}">
 					<xsl:value-of select="$link-text"/>
-				</pe:xref>
+				</xref>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -128,153 +128,162 @@
 	<xsl:template match="spfe-configuration-reference-entry">
 		<xsl:variable name="xpath" select="xpath"/>
 		<xsl:variable name="name" select="name"/>
+		<xsl:variable name="topic-id" select="ancestor::ss:topic/@local-name"></xsl:variable>
 
-		<pe:page type="API" name="{translate(xpath, '/:', '__')}">
-			<xsl:call-template name="show-header"/>
-			<pe:title>Element: <xsl:value-of select="$name"/></pe:title>
-
-			<pe:labeled-item>
-				<pe:label>Location</pe:label>
-				<pe:item>
-					<pe:p>
-						<xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/>
-					</pe:p>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:labeled-item>
-				<pe:label>Description</pe:label>
-				<pe:item>
-					<xsl:if test="not(description)">
-						<pe:p/>
-					</xsl:if>
-					<xsl:apply-templates select="description"/>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:labeled-item>
-				<pe:label>Use</pe:label>
-				<!-- FIXME: need a more sophisticated reading of schema groups 
-				     to define usage more accurately-->
-				<pe:item>
-					<pe:p>
+		<xsl:result-document href="file:///{$output-directory}/{$topic-set-id}/{$topic-id}.dita" 
+			method="xml" 
+			indent="yes" 
+			omit-xml-declaration="no" 
+			doctype-public="-//OASIS//DTD DITA Topic//EN" 
+			doctype-system="topic.dtd">
+			
+		<topic id="{translate(xpath, '/:', '__')}">
+			<title>Element: <xsl:value-of select="$name"/></title>
+			<body>
+				<dl>
+				<dlentry>
+					<dt>Location</dt>
+					<dd>
+						<p>
+							<xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/>
+						</p>
+					</dd>
+				</dlentry>
+	
+				<dlentry>
+					<dt>Description</dt>
+					<dd>
+						<xsl:if test="not(description)">
+							<p/>
+						</xsl:if>
+						<xsl:apply-templates select="description"/>
+					</dd>
+				</dlentry>
+	
+				<dlentry>
+					<dt>Use</dt>
+					<!-- FIXME: need a more sophisticated reading of schema groups 
+					     to define usage more accurately-->
+					<dd>
+						<p>
+							<xsl:choose>
+								<xsl:when test="minOccurs='0' or group='choice'">Optional</xsl:when>
+								<xsl:otherwise>Required</xsl:otherwise>
+							</xsl:choose>
+							<xsl:if test="maxOccurs='unbounded'">, unbounded</xsl:if>
+						</p>
+					</dd>
+				</dlentry>
+	
+				<dlentry>
+					<dt>Name in build file</dt>
+					<dd>
+						<p>
+							<xsl:choose>
+								<xsl:when test="normalize-space(build-property) ne ''">
+									<xsl:value-of select="build-property"/>
+								</xsl:when>
+								<xsl:otherwise>Not used in the build file.</xsl:otherwise>
+							</xsl:choose>
+						</p>
+					</dd>
+				</dlentry>
+	
+				<dlentry>
+					<dt>Default</dt>
+					<dd>
+	
 						<xsl:choose>
-							<xsl:when test="minOccurs='0' or group='choice'">Optional</xsl:when>
-							<xsl:otherwise>Required</xsl:otherwise>
-						</xsl:choose>
-						<xsl:if test="maxOccurs='unbounded'">, unbounded</xsl:if>
-					</pe:p>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:labeled-item>
-				<pe:label>Name in build file</pe:label>
-				<pe:item>
-					<pe:p>
-						<xsl:choose>
-							<xsl:when test="normalize-space(build-property) ne ''">
-								<xsl:value-of select="build-property"/>
+							<xsl:when test="not(values/default)">
+								<p>None</p>
 							</xsl:when>
-							<xsl:otherwise>Not used in the build file.</xsl:otherwise>
+							<xsl:otherwise>
+								<xsl:apply-templates select="values/default"/>
+							</xsl:otherwise>
 						</xsl:choose>
-					</pe:p>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:labeled-item>
-				<pe:label>Default</pe:label>
-				<pe:item>
-
-					<xsl:choose>
-						<xsl:when test="not(values/default)">
-							<pe:p>None</pe:p>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:apply-templates select="values/default"/>
-						</xsl:otherwise>
-					</xsl:choose>
-
-				</pe:item>
-			</pe:labeled-item>
-
-			<!-- Special -->
-			<pe:labeled-item>
-				<pe:label>Values</pe:label>
-				<pe:item>
-					<xsl:choose>
-						<xsl:when test="values/value">
-							<xsl:for-each select="values/value">
-								<xsl:sort select="."/>
-								<!-- FIXME: this is a hork that will not handle all text-group cases. Need to change to subheads for main headings to use labelled-item here. -->
-								<pe:p>
-									<pe:value hint="attribute-value">
-										<xsl:value-of select="."/>
-									</pe:value>
-									<xsl:text>: </xsl:text>
+	
+					</dd>
+				</dlentry>
+	
+				<!-- Special -->
+				<dlentry>
+					<dt>Values</dt>
+					<dd>
+						<xsl:choose>
+							<xsl:when test="values/value">
+								<xsl:for-each select="values/value">
+									<xsl:sort select="."/>
+									<!-- FIXME: this is a hork that will not handle all text-group cases. Need to change to subheads for main headings to use labelled-item here. -->
+									<p>
+										<keyword>
+											<xsl:value-of select="."/>
+										</keyword>
+										<xsl:text>: </xsl:text>
+										<xsl:apply-templates
+											select="following-sibling::description[1]/p[1]/node()"/>
+									</p>
 									<xsl:apply-templates
-										select="following-sibling::description[1]/p[1]/node()"/>
-								</pe:p>
-								<xsl:apply-templates
-									select="following-sibling::description[1]/p[preceding-sibling::p]"
-								/>
-							</xsl:for-each>
-						</xsl:when>
-						<xsl:otherwise>
-							<pe:p>N/A</pe:p>
-						</xsl:otherwise>
-					</xsl:choose>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:labeled-item>
-				<pe:label>Children</pe:label>
-				<pe:item>
-					<xsl:if test="not(children/*)">
-						<pe:p>None</pe:p>
-					</xsl:if>
-					<xsl:for-each select="children/child">
-						<xsl:sort select="."/>
-						<xsl:variable name="child-xpath" select="."/>
-						<pe:p>
-							<pe:name hint="element-name">
-								<xsl:sequence
-									select="lf:link-xpath($child-xpath,//spfe-configuration-reference-entry[xpath eq $child-xpath]/name)"
-								/>
-							</pe:name>
-						</pe:p>
-					</xsl:for-each>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:labeled-item>
-				<pe:label>Attributes</pe:label>
-				<pe:item>
-					<xsl:if test="not(attributes/attribute)">
-						<pe:p>None</pe:p>
-					</xsl:if>
-					<xsl:for-each select="attributes/attribute">
-						<xsl:sort select="name"/>
-						<pe:p>
-							<pe:name hint="attribute-name">
-								<pe:xref target="#{name}">
-									<xsl:value-of select="name"/>
-								</pe:xref>
-							</pe:name>
-						</pe:p>
-					</xsl:for-each>
-				</pe:item>
-			</pe:labeled-item>
-
-			<!-- restrictions -->
-			<xsl:call-template name="format-restrictions"/>
-
-			<!-- Add the attributes -->
-			<xsl:for-each select="attributes/attribute">
-				<xsl:sort select="name"/>
-				<xsl:call-template name="format-attribute"/>
-			</xsl:for-each>
-			<xsl:call-template name="show-footer"/>
-		</pe:page>
+										select="following-sibling::description[1]/p[preceding-sibling::p]"
+									/>
+								</xsl:for-each>
+							</xsl:when>
+							<xsl:otherwise>
+								<p>N/A</p>
+							</xsl:otherwise>
+						</xsl:choose>
+					</dd>
+				</dlentry>
+	
+				<dlentry>
+					<dt>Children</dt>
+					<dd>
+						<xsl:if test="not(children/*)">
+							<p>None</p>
+						</xsl:if>
+						<xsl:for-each select="children/child">
+							<xsl:sort select="."/>
+							<xsl:variable name="child-xpath" select="."/>
+							<p>
+								<b><!-- FIX?ME: changed keyword to bold here because can't nest xref in keyword in DITA. Needs to be other way round.  -->
+									<xsl:sequence
+										select="lf:link-xpath($child-xpath,//spfe-configuration-reference-entry[xpath eq $child-xpath]/name)"
+									/>
+								</b>
+							</p>
+						</xsl:for-each>
+					</dd>
+				</dlentry>
+	
+				<dlentry>
+					<dt>Attributes</dt>
+					<dd>
+						<xsl:if test="not(attributes/attribute)">
+							<p>None</p>
+						</xsl:if>
+						<xsl:for-each select="attributes/attribute">
+							<xsl:sort select="name"/>
+							<p>
+								<keyword>
+									<xref href="#{$topic-id}/{name}">
+										<xsl:value-of select="name"/>
+									</xref>
+								</keyword>
+							</p>
+						</xsl:for-each>
+					</dd>
+				</dlentry>
+				
+				<!-- restrictions -->
+				<xsl:call-template name="format-restrictions"/>
+				</dl>
+				<!-- Add the attributes -->
+				<xsl:for-each select="attributes/attribute">
+					<xsl:sort select="name"/>
+					<xsl:call-template name="format-attribute"/>
+				</xsl:for-each>
+			</body>
+		</topic>
+		</xsl:result-document>
 	</xsl:template>
 
 	<xsl:template match="description">
@@ -283,9 +292,9 @@
 
 	<!-- FIXME: redundant ? -->
 	<xsl:template match="xpath">
-		<pe:name hint="xpath">
+		<codeph hint="xpath">
 			<xsl:sequence select="lf:link-xpath-segments(xpath)"/>
-		</pe:name>
+		</codeph>
 	</xsl:template>
 
 	<!-- FIXME: Some redundant element names here -->
@@ -303,27 +312,27 @@
 		============================
 	-->
 	<xsl:template name="format-restrictions">
-		<pe:labeled-item>
-			<pe:label>Restrictions</pe:label>
-			<pe:item>
+		<dlentry>
+			<dt>Restrictions</dt>
+			<dd>
 				<xsl:choose>
 					<!-- don't get fooled by an empty restriction element left over from the template -->
 					<xsl:when
 						test="not(normalize-space(string-join(restrictions/restriction/*,'')))">
-						<pe:p>None</pe:p>
+						<p>None</p>
 					</xsl:when>
 					<xsl:otherwise>
-						<pe:ul>
+						<ul>
 							<xsl:for-each select="restrictions/restriction">
-								<pe:li>
+								<li>
 									<xsl:apply-templates/>
-								</pe:li>
+								</li>
 							</xsl:for-each>
-						</pe:ul>
+						</ul>
 					</xsl:otherwise>
 				</xsl:choose>
-			</pe:item>
-		</pe:labeled-item>
+			</dd>
+		</dlentry>
 	</xsl:template>
 
 	<!-- 
@@ -332,101 +341,105 @@
 		=========================
 	-->
 	<xsl:template name="format-attribute">
-		<pe:anchor name="{name}"/>
-		<pe:subhead>Attribute: <xsl:value-of select="name"/></pe:subhead>
-
-		<pe:labeled-item>
-			<pe:label>XPath</pe:label>
-			<pe:item>
-				<pe:p>
+		<section id="{name}">
+			<title>Attribute: <xsl:value-of select="name"/></title>
+		<dl>
+		<dlentry>
+			<dt>XPath</dt>
+			<dd>
+				<p>
 					<xsl:sequence select="lf:link-doc-xpath(doc-xpath)"/>
-				</pe:p>
-			</pe:item>
-		</pe:labeled-item>
+				</p>
+			</dd>
+		</dlentry>
 
 
 		<!-- description -->
-		<pe:labeled-item>
-			<pe:label>Description</pe:label>
-			<pe:item>
+		<dlentry>
+			<dt>Description</dt>
+			<dd>
 				<!-- no <p> because description contains <p>, but add p if no description -->
 				<xsl:if test="not(description)">
-					<pe:p/>
+					<p/>
 				</xsl:if>
 				<xsl:apply-templates select="description"/>
-			</pe:item>
-		</pe:labeled-item>
+			</dd>
+		</dlentry>
 
 		<!-- Use -->
-		<pe:labeled-item>
-			<pe:label>Use</pe:label>
-			<pe:item>
-				<pe:p>
+		<dlentry>
+			<dt>Use</dt>
+			<dd>
+				<p>
 					<xsl:choose>
 						<xsl:when test="use = 'required'">Required</xsl:when>
 						<xsl:otherwise>Optional</xsl:otherwise>
 					</xsl:choose>
-				</pe:p>
-			</pe:item>
-		</pe:labeled-item>
+				</p>
+			</dd>
+		</dlentry>
 
 		<!-- XML data type -->
 		<xsl:variable name="type" select="type"/>
-		<pe:labeled-item>
-			<pe:label>XML data type</pe:label>
-			<pe:item>
-				<pe:p>
+		<dlentry>
+			<dt>XML data type</dt>
+			<dd>
+				<p>
 					<xsl:value-of select="$type"/>
-				</pe:p>
-			</pe:item>
-		</pe:labeled-item>
+				</p>
+			</dd>
+		</dlentry>
 
 		<!-- not specified -->
-		<pe:labeled-item>
-			<pe:label>Behavior if not specified</pe:label>
-			<pe:item>
+		<dlentry>
+			<dt>Behavior if not specified</dt>
+			<dd>
 
 				<xsl:choose>
 					<xsl:when test="not(values/default)">
-						<pe:p>N/A</pe:p>
+						<p>N/A</p>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:apply-templates select="values/default"/>
 					</xsl:otherwise>
 				</xsl:choose>
 
-			</pe:item>
-		</pe:labeled-item>
+			</dd>
+		</dlentry>
 
 		<!-- Special -->
-		<pe:labeled-item>
-			<pe:label>Values with special meanings</pe:label>
-			<pe:item>
+		<dlentry>
+			<dt>Values with special meanings</dt>
+			<dd>
 				<xsl:choose>
 					<xsl:when test="values/value">
 						<xsl:for-each select="values/value">
 							<xsl:sort select="."/>
 							<!-- FIXME: this is a hork that will not handle all text-group cases. Need to change to subheads for main headings to use labelled-item here. -->
-							<pe:p>
-								<pe:value hint="attribute-value">
+							<p>
+								<keyword>
 									<xsl:value-of select="."/>
-								</pe:value>
+								</keyword>
 								<xsl:text>: </xsl:text>
 								<xsl:apply-templates
 									select="following-sibling::description[1]/p[1]/node()"/>
-							</pe:p>
+							</p>
 							<xsl:apply-templates
 								select="following-sibling::description[1]/p[preceding-sibling::p]"/>
 						</xsl:for-each>
 					</xsl:when>
 					<xsl:otherwise>
-						<pe:p>None</pe:p>
+						<p>None</p>
 					</xsl:otherwise>
 				</xsl:choose>
-			</pe:item>
-		</pe:labeled-item>
-		<!-- restrictions -->
-		<xsl:call-template name="format-restrictions"/>
+			</dd>
+			
+			</dlentry>
+			<!-- restrictions -->
+			<xsl:call-template name="format-restrictions"/>	
+		</dl>
+		</section>
+
 	</xsl:template>
 
 

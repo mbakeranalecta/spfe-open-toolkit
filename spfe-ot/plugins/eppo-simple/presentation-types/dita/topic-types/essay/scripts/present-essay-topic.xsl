@@ -12,23 +12,34 @@
 
 	<!-- topic -->
 	<xsl:template match="es:essay">
-		<pe:page status="{es:head/es:history/es:revision[last()]/es:status}"
-			name="{ancestor::ss:topic/@local-name}">
-			<xsl:call-template name="show-header"/>
-			<xsl:apply-templates/>
-			<xsl:call-template name="show-footer"/>
-		</pe:page>
+		<xsl:result-document href="file:///{$output-directory}/{$topic-set-id}/{ancestor::ss:topic/@local-name}.dita" 
+			method="xml" 
+			indent="yes" 
+			omit-xml-declaration="no" 
+			doctype-public="-//OASIS//DTD DITA Topic//EN" 
+			doctype-system="topic.dtd">
+			<topic id="{ancestor::ss:topic/@local-name}">
+				<xsl:apply-templates/>
+			</topic>
+		</xsl:result-document>
 	</xsl:template>
 
 	<xsl:template match="es:essay/es:head"/>
-
-	<xsl:template match="es:essay/es:body/es:title">
-		<pe:title>
-			<xsl:apply-templates/>
-		</pe:title>
-		<!-- page toc -->
-		<xsl:if test="count(../es:section/es:title) gt 1">
-			<pe:toc>
+	
+	<xsl:template match="es:essay/es:body">
+		<!-- Move title outside body because DITA is wierd like that. -->
+		<xsl:if test="es:title">
+			<title>
+				<xsl:apply-templates select="es:title" mode="topic-title"/>
+			</title>	
+		</xsl:if>
+		<shortdesc>
+			<xsl:apply-templates select="es:precis" mode="precis"/>
+		</shortdesc>
+		<body>
+			<!-- page toc -->
+			<!--<xsl:if test="count(../es:section/es:title) gt 1">
+							<pe:toc>
 				<xsl:for-each select="../es:section/es:title">
 					<pe:toc-entry>
 						<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
@@ -37,15 +48,21 @@
 					</pe:toc-entry>
 				</xsl:for-each>
 			</pe:toc>
-		</xsl:if>
+		</xsl:if>-->
+			<xsl:apply-templates/>
+		</body>		
 	</xsl:template>
 
+
+	<xsl:template match="es:essay/es:body/es:title" mode="topic-title">
+		<xsl:apply-templates/>
+	</xsl:template>
+	<xsl:template match="es:essay/es:body/es:title"/>
+
 	<xsl:template match="es:essay/es:body/es:byline">
-		<pe:byline>
-			<pe:by-label>By </pe:by-label>
-			<pe:authors>
+		<p>By 
 				<xsl:for-each select="es:name">
-					<pe:name hint="author">
+					<i>
 						<xsl:choose>
 							<!-- make sure that the target exists -->
 							<xsl:when test="esf:target-exists(., 'author')">
@@ -64,38 +81,38 @@
 								<xsl:apply-templates/>
 							</xsl:otherwise>
 						</xsl:choose>
-					</pe:name>
+					</i>
 					<xsl:if test="not(position() eq last())">, </xsl:if>
 				</xsl:for-each>
-			</pe:authors>
-		</pe:byline>
+			
+		</p>
 	</xsl:template>
 	
 	<xsl:template match="es:essay/es:body/es:byline/es:name">
 
 	</xsl:template>
 	
-	<xsl:template match="es:essay/es:body/es:precis">
-		<pe:precis>
-			<pe:title>Summary</pe:title>
+	<xsl:template match="es:essay/es:body/es:precis"/>
+	<xsl:template match="es:essay/es:body/es:precis" mode="precis">
 			<xsl:apply-templates/>
-		</pe:precis>
 	</xsl:template>
-
+	<xsl:template match="es:essay/es:body/es:precis/es:p">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
 	<xsl:template match="es:essay/es:body/es:section">
 		<xsl:if
 			test="$config/config:build-command='draft' or sf:has-content(es:title/following-sibling::*) ">
-			<pe:section>
-				<pe:anchor name="{sf:title-to-anchor(es:title)}"/>
+			<section id="{sf:title-to-anchor(es:title)}">
 				<xsl:apply-templates/>
-			</pe:section>
+			</section>
 		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="es:essay/es:body/es:section/es:title">
-		<pe:title>
+		<title>
 			<xsl:apply-templates/>
-		</pe:title>
+		</title>
 	</xsl:template>
 
 </xsl:stylesheet>

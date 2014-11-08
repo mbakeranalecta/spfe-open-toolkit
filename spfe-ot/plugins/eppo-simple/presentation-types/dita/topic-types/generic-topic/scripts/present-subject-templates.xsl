@@ -45,7 +45,7 @@
 		<xsl:choose>
 			<!-- make sure that the target exists -->
 			<xsl:when test="esf:target-exists($topic, 'topic')">
-						<pe:italic>
+						<i>
 							<xsl:call-template name="output-link">
 								<xsl:with-param name="target" select="$topic"/>
 								<xsl:with-param name="type">topic</xsl:with-param>
@@ -54,7 +54,7 @@
 								</xsl:with-param>
 								<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 							</xsl:call-template>
-						</pe:italic>
+						</i>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
@@ -90,16 +90,18 @@
 	
 	<xsl:template match="link-external">
 	<!-- FIXME: support other protocols -->
-		<pe:xlink href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}">
+		<!-- FIXME: should detect format="pdf" where appropriate -->
+		<xref scope="external" href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}" format="html">
 			<xsl:apply-templates/>
-		</pe:xlink>	
+		</xref>	
 	</xsl:template>
 
 	<xsl:template match="url">
 	<!-- FIXME: support other protocols -->
-		<pe:xlink href="{if (starts-with(., 'http://')) then . else concat('http://',.)}">
+		<!-- FIXME: should detect format="pdf" where appropriate -->
+		<xref scope="external" href="{if (starts-with(., 'http://')) then . else concat('http://',.)}" format="html">
 		 <xsl:apply-templates/>
-		</pe:xlink>	
+		</xref>	
 	</xsl:template>
 
 	<xsl:template match="subject">
@@ -123,9 +125,9 @@
 	</xsl:template>
 	
 	<xsl:template match="p/bold">
-		<pe:bold>
+		<b>
 			<xsl:apply-templates/>
-		</pe:bold>
+		</b>
 	</xsl:template>
 	
 	<xsl:template match="p/quote">
@@ -145,7 +147,8 @@
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:variable name="content" select="normalize-space(.)"/>
-		<pe:name type="{@type}">
+		<!-- FIXME: see is we can be more precise in the selection of elements based on type of name -->
+		<b>
 			<xsl:choose>
 				<xsl:when test="esf:target-exists(@key, @type)">
 					<xsl:call-template name="output-link">
@@ -162,7 +165,7 @@
 					<xsl:value-of select="$content"/>								
 				</xsl:otherwise>
 			</xsl:choose>
-		</pe:name>	
+		</b>	
 	</xsl:template>
 	
 	<!-- FIXME: Need to do something more definite here. Need to give a clear contract to the format layer. -->
@@ -171,9 +174,9 @@
 	</xsl:template>
 
 	<xsl:template match="selection-sequence">
-		<pe:gui-label hint="{name()}">
+		<uicontrol hint="{name()}">
 			<xsl:apply-templates/>
-		</pe:gui-label>
+		</uicontrol>
 	</xsl:template>
 
 	<!-- TEXT STRUCTURE GROUP -->
@@ -186,7 +189,7 @@
 				<xsl:with-param name="message" select="'No table/title element found for referenced table:', $table-id, '. A title is required for all referenced tables.'"/>
 			</xsl:call-template>
 		</xsl:if>
-		<pe:cross-ref target="{@id-ref}" type="table"/>
+		<xref target="{@id-ref}" type="table"/>
 	</xsl:template>
 	
 	<xsl:template match="fig-id">
@@ -199,27 +202,27 @@
 		</xsl:if>
 		<xsl:choose>
 			<xsl:when test="$uri">
-				<pe:cross-ref target="{generate-id(ancestor::topic//fig[@uri=$uri]/@uri)}" type="fig"/>
+				<xref target="{generate-id(ancestor::topic//fig[@uri=$uri]/@uri)}" type="fig"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<pe:cross-ref target="{@id-ref}" type="fig"/>
+				<xref target="{@id-ref}" type="fig"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="code-sample-id">
-		<pe:cross-ref target="{@id-ref}" type="code-sample"/>
+		<xref target="{@id-ref}" type="code-sample"/>
 	</xsl:template>
 
 	<xsl:template match="procedure-id">
-		<pe:cross-ref target="{@id-ref}" type="procedure"/>
+		<xref target="{@id-ref}" type="procedure"/>
 	</xsl:template>
 
 	<xsl:template match="step-id">
-		<pe:cross-ref target="{@id-ref}" type="step"/>
+		<xref target="{@id-ref}" type="step"/>
 	</xsl:template>
 	
-	<xsl:template match="text-object-ref">
+<!--	<xsl:template match="text-object-ref">
 		<xsl:variable name="id" select="@id-ref"/>
 		<xsl:choose>
 			<xsl:when test="//text-object[id=$id]">
@@ -228,12 +231,12 @@
 				</pe:fold-toggle>
 			</xsl:when>
 			<xsl:otherwise>
-				<!-- no warning here because present-text-structures generates it -->
+				<!-\- no warning here because present-text-structures generates it -\->
 				<xsl:apply-templates/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	
+-->	
 		
 	<xsl:template match="index-entry">
 		<xsl:call-template name="create-reference-link">

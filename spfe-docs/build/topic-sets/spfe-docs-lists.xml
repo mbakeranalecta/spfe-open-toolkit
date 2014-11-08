@@ -30,7 +30,7 @@
         
         <sources>
             <sources-to-extract-content-from>
-                <include>${DOC_SET_BUILD_DIR}/link-catalogs/*.link-catalog.xml</include>
+                <include>${CONTENT_SET_BUILD_DIR}/link-catalogs/*.link-catalog.xml</include>
             </sources-to-extract-content-from>
         </sources>
 

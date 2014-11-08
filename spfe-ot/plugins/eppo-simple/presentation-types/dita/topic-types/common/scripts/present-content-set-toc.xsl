@@ -12,6 +12,7 @@
     exclude-result-prefixes="#all">
     
     <xsl:param name="toc-files"/>
+    <xsl:variable name="content-set-id" select="$config/config:content-set/config:content-set-id"/>
     <xsl:variable name="unsorted-toc" >
         <xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file: ')"/>
         <xsl:if test="count(distinct-values($temp-tocs/toc/@topic-set-id)) lt count($temp-tocs/toc)">
@@ -84,21 +85,22 @@
     </xsl:variable>
     
     <!-- TOC templates -->
-    <xsl:template name="create-toc-page">
-        <pe:page status="generated" name="{$topic-set-id}-toc">
-            <xsl:call-template name="show-header"/>
-            <pe:title><xsl:value-of select="$config/config:content-set/config:title"/> Contents</pe:title>       
-            <pe:ul>
-                <xsl:apply-templates select="$toc"/>
-            </pe:ul>
-            <xsl:call-template name="show-footer"/>		
-        </pe:page>
+    <xsl:template name="create-map">
+        <xsl:result-document href="file:///{$output-directory}/{$content-set-id}.ditamap" 
+            method="xml" 
+            indent="yes" 
+            omit-xml-declaration="no" 
+            doctype-public="-//OASIS//DTD DITA Map//EN" 
+            doctype-system="map.dtd">
+            <map id="{$content-set-id}">
+               <title><xsl:value-of select="$config/config:content-set/config:title"/></title>       
+               <xsl:apply-templates select="$toc"/>
+            </map>
+        </xsl:result-document>
     </xsl:template>
     
     <xsl:template match="toc[@topic-set-id ne $config/config:content-set/config:home-topic-set]">
-        <pe:li>
-            <pe:p><pe:xref target="{normalize-space(@deployment-relative-path)}{normalize-space(@topic-set-id)}-toc.html"><xsl:value-of select="@title"/></pe:xref></pe:p>
-        </pe:li>
+        <mapref href="{normalize-space(@deployment-relative-path)}{normalize-space(@topic-set-id)}.ditamap"/>
     </xsl:template>
     <xsl:template match="toc"/>
 
