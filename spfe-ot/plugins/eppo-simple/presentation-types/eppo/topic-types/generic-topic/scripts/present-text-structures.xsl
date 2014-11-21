@@ -29,9 +29,6 @@ version="2.0"
 		| tr
 		| td
 		| th
-		| ol
-		| ul
-		| li
 		| note
 		| warning
 		| caution

@@ -1,3 +1,4 @@
+@namespace oxy url('http://www.oxygenxml.com/extensions/author');
 
 head
 {
@@ -5,12 +6,14 @@ head
  padding: 1em;
  background-color:#F0F5F5;
  font-family:sans-serif;
+ -oxy-display-tags:none;
 }
 
 head>uri 
 {
     display:block;
     background-color:white;
+    -oxy-display-tags:none;
 }
 
 head>uri:before
@@ -20,13 +23,20 @@ head>uri:before
     padding: 2px;
     display:block;
     font-size:small;
+    -oxy-display-tags:none;
     
+}
+
+head id
+{
+    -oxy-display-tags:none;
 }
 
 head>author 
 {
     display:block;
     background-color:white;
+    -oxy-display-tags:none;
 }
 
 head>author:before
@@ -36,12 +46,14 @@ head>author:before
     padding: 2px;
     font-size:small;
     display:block;
+    -oxy-display-tags:none;
 }
 
 head>status 
 {
     display:block;
     background-color:white;
+    -oxy-display-tags:none;
 }
 
 head>status:before
@@ -51,6 +63,7 @@ head>status:before
     padding: 2px;
     font-size:small;
     display:block;
+    -oxy-display-tags:none;
 }
 
 head>history 
@@ -58,6 +71,7 @@ head>history
     display:table;
     background-color:white;
     width:100%;
+    -oxy-display-tags:none;
 }
 
 head>history:before
@@ -67,11 +81,13 @@ head>history:before
     padding: 2px;
     font-size:small;
     display: block;
+    -oxy-display-tags:none;
 }
 
 head>history>revision
 {
     display:table-row;
+    -oxy-display-tags:none;
 }
 
 head>history>revision:first-child>date:before
@@ -82,6 +98,7 @@ head>history>revision:first-child>date:before
     font-weight:bold;
     font-size:small;
     background-color:#F0F5F5;
+    -oxy-display-tags:none;
 }
 
 head>history>revision>date
@@ -91,6 +108,7 @@ head>history>revision>date
     border-left: 1px solid #F0F5F5;
     -oxy-show-placeholder: always;
     -oxy-placeholder-content: "YYYY-MM-DD";
+    -oxy-display-tags:none;
 }
 
 head>history>revision>date {
@@ -100,6 +118,7 @@ head>history>revision>date {
             edit, "#text",
             format, "yyyy-MM-dd");
     visibility: -oxy-collapse-text;
+    -oxy-display-tags:none;
 }
 
 head>history>revision:first-child>author:before
@@ -110,6 +129,7 @@ head>history>revision:first-child>author:before
     font-weight:bold;
     font-size:small;
     background-color:#F0F5F5;
+    -oxy-display-tags:none;
 }
 
 head>history>revision>author
@@ -118,6 +138,7 @@ head>history>revision>author
     border-bottom: 1px solid #F0F5F5;
     border-left: 1px solid #F0F5F5;
     -oxy-show-placeholder: always;
+    -oxy-display-tags:none;
 }
 
 head>history>revision:first-child>comment:before
@@ -128,6 +149,7 @@ head>history>revision:first-child>comment:before
     font-weight:bold;
     font-size:small;
     background-color:#F0F5F5;
+    -oxy-display-tags:none;
 
 }
 
@@ -137,6 +159,7 @@ head>history>revision>comment
     border-bottom: 1px solid #F0F5F5;
     border-left: 1px solid #F0F5F5;
     -oxy-show-placeholder: always;
+    -oxy-display-tags:none;
 }
 
 
@@ -148,6 +171,7 @@ head>history>revision:first-child>status:before
     font-weight:bold;
     font-size:small;
     background-color:#F0F5F5;
+    -oxy-display-tags:none;
 }
 
 head>history>revision>status
@@ -156,6 +180,7 @@ head>history>revision>status
     border-bottom: 1px solid #F0F5F5;
     border-left: 1px solid #F0F5F5;
     -oxy-show-placeholder: always;
+    -oxy-display-tags:none;
 }
 
 head>history>revision>status
@@ -166,6 +191,7 @@ head>history>revision>status
             type, combo, 
             edit, "#text", 
             editable, false);
+     -oxy-display-tags:none;
 }
 
 head>index 
@@ -173,6 +199,7 @@ head>index
     display:table;
     background-color:white;
     width:100%;
+    -oxy-display-tags:none;
 }
 
 head>index::before
@@ -182,11 +209,13 @@ head>index::before
     background-color:#F0F5F5;
     padding: 2px;
     font-size:small;
+    -oxy-display-tags:none;
 }
 
 head>index>entry
 {
     display:table-row;
+    -oxy-display-tags:none;
 }
 
 head>index>entry:first-child>type:before
@@ -197,6 +226,7 @@ head>index>entry:first-child>type:before
     font-weight:bold;
     font-size:small;
     background-color:#F0F5F5;
+    -oxy-display-tags:none;
 }
 
 head>index>entry>type
@@ -204,6 +234,7 @@ head>index>entry>type
     display:table-column;
     border-bottom: 1px solid #F0F5F5;
     border-left: 1px solid #F0F5F5;
+    -oxy-display-tags:none;
 }
 head>index>entry>type
 {
@@ -213,6 +244,7 @@ head>index>entry>type
             type, combo, 
             edit, "#text", 
             editable, false);
+     -oxy-display-tags:none;
 }
 head>index>entry:first-child>term:before
 {
@@ -222,10 +254,17 @@ head>index>entry:first-child>term:before
     font-weight:bold;
     font-size:small;
     background-color:#F0F5F5;
+    -oxy-display-tags:none;
 }
 head>index>entry>term
 {
     display:table-column;
     border-bottom: 1px solid #F0F5F5;
     border-left: 1px solid #F0F5F5;
+    -oxy-display-tags:none;
+}
+
+oxy|comment
+{
+    -oxy-display-tags:none;
 }

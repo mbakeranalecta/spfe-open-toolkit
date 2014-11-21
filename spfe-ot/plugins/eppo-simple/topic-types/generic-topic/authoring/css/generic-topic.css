@@ -4,7 +4,7 @@ body
     padding: 1em;
 }
 
-head:before
+generic-topic head:before
 {
     font-weight:bold;
     font-size:larger;
@@ -12,7 +12,7 @@ head:before
     font-family:sans-serif;
 }
 
-body>*
+body
 {
     background-color:white;
 }

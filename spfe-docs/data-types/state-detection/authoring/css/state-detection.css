@@ -1,0 +1,293 @@
+state-detection
+{
+    display:block;
+    color:#555555;
+    -oxy-display-tags:none;
+    background-color:#BBBBBB;
+    padding-left:2em;
+}
+
+state-detection:before
+{
+    content:'State detection table';
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#BBBBBB;
+    font-size:larger;
+}
+
+state-detection>title
+{
+    display:block;
+    background-color:white;
+    color:black;
+    font-size:larger;
+    -oxy-display-tags:none;
+    margin:2px;
+}
+
+state-detection>title:before
+{
+    display:inline;
+    content:'Title: ';
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#BBBBBB;
+}
+
+state-detection>caption
+{
+    display:block;
+    background-color:white;
+    color:black;
+    -oxy-display-tags:none;
+    margin:2px;
+}
+
+state-detection>caption:before
+{
+    display:inline;
+    content:'Caption: ';
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#BBBBBB;
+}
+
+state-detection>signs
+{
+    display:block;
+    margin-left:2em;
+    -oxy-display-tags:none;
+}
+
+state-detection>signs:before
+{
+    display:block;
+    content: "Signs are the places you can look for state information, such as indicator lights or log. Each sign has a name and a label.";
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+}
+
+state-detection>signs>sign 
+{
+    display:block;
+    margin-left:2em;
+    -oxy-display-tags:none;
+    border:1px solid black;
+    margin-bottom:1em;
+}
+
+state-detection>signs>sign>name:before
+{
+    display:inline;
+    content: "Sign: ";
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#BBBBBB;
+}
+
+state-detection>signs>sign>signals:before
+{
+    display: block;
+    content: "Signals are the way a sign communicates. An indicator flashes or shows a color. A log contains a specific message."; 
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+}
+
+
+state-detection>signs>sign>signals
+{
+    display: block;
+    margin-left:2em;
+    -oxy-display-tags:none;
+}
+
+state-detection>signs>sign>name
+{
+    display:block;
+    background-color:white;
+    -oxy-display-tags:none;
+    color:black;
+    margin:2px;
+    -oxy-editable:true;
+}
+
+state-detection>signs>sign>caption
+{
+    display:block;
+    margin-left:2em;
+    background-color:white;
+    -oxy-display-tags:none;
+    color:black;
+    margin:2px;
+}
+
+state-detection>signs>sign>caption:before
+{
+    display:inline;
+    font-weight: bold;
+    content: "Caption: ";
+    background-color:#BBBBBB;
+    -oxy-display-tags:none;
+    color:#555555;
+}
+
+
+state-detection>signs>sign>signals>signal
+{
+    display: block;
+    margin-left:2em;
+    background-color:white;
+    -oxy-display-tags:none;
+    color:black;
+    margin:2px;
+    -oxy-editable:true;
+}
+
+state-detection>signs>sign>signals>signal:before
+{
+    font-weight:bold;
+    display: inline;
+    content: "Signal: ";
+    -oxy-display-tags:none;
+    background-color:#BBBBBB;
+    color:#555555;
+}
+
+state-detection>states
+{
+    display:block;
+    -oxy-display-tags:none;
+    margin-left:2em;
+}
+state-detection>states:before
+{
+    display: block;
+    font-weight: bold;
+    content: "States are the condition a subject may be in. A state is indicated by a set of signs and signals.";
+    -oxy-display-tags:none;
+    color:#555555;
+}
+
+state-detection>states>state
+{
+    -oxy-display-tags:none;
+    display:block;
+    border:1px solid black;
+    margin-bottom:1em;
+}
+
+state-detection>states>state>name
+{
+    -oxy-display-tags:none;
+    display: block;
+    background-color: white;
+    color:black;
+    margin:2px;
+    -oxy-editable:true;
+}
+
+state-detection>states>state>name:before
+{
+    display:inline;
+    font-weight: bold;
+    content: "State: ";
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#BBBBBB;
+    margin-left:2em;
+}
+
+state-detection>states>state>action:before
+{
+    -oxy-display-tags:none;
+    display:inline;
+    background-color:#BBBBBB;
+    color:#555555;
+    content: "Action: ";
+    font-weight:bold;  
+    
+}
+
+state-detection>states>state>action
+{
+    -oxy-display-tags:none;
+    display: block;
+    background-color: white;
+    color:black;
+    margin-left:2em;
+    margin:2px;
+    -oxy-editable:true;
+}
+
+state-detection>states>state>action
+{
+    -oxy-display-tags:none;
+    display:inline;
+    background-color:white;
+    color:black;
+    margin-left:2em;
+    -oxy-editable:true;
+}
+state-detection>states>state>signs
+{
+    -oxy-display-tags:none;
+    display: block;
+    margin-left:2em;
+}
+
+state-detection>states>state>signs>sign
+{
+    -oxy-display-tags:none;
+    display: block;
+    margin-left:2em;
+}
+
+state-detection>states>state>signs>sign>name
+{
+    -oxy-display-tags:none;
+    display:block;
+    background-color:white;
+    color:black;
+    margin-left:2em;
+    margin:2px;
+    -oxy-editable:true;
+}
+
+state-detection>states>state>signs>sign>name:before
+{
+    -oxy-display-tags:none;
+    display:inline;
+    background-color:#BBBBBB;
+    color:#555555;
+    content: "Name: ";
+    font-weight:bold;
+}
+
+state-detection>states>state>signs>sign>signal
+{
+    -oxy-display-tags:none;
+    display:block;
+    background-color:white;
+    color:black;
+    margin-left:2em;
+    margin:2px;
+    -oxy-editable:true;
+}
+
+state-detection>states>state>signs>sign>signal:before
+{
+    -oxy-display-tags:none;
+    display:inline;
+    color:#555555;
+    background-color:#BBBBBB;
+    content: "Signal: ";
+    font-weight:bold;
+}
+

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<state-detection xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/data-types/state-detection/schemas/state-detection-topic.xsd">              <title>Troubleshoot your printer</title>
+        <caption>Determining the status of your printer.</caption>
+            <signs>
+                <sign>
+                    <name>printer</name>
+                    <caption>the printer</caption>
+                    <signals>
+                        <signal>chirps</signal>
+                        <signal>beeps twice</signal>
+                    </signals>
+                </sign>
+                <sign>
+                    <name>indicator</name>
+                    <caption>the indicator</caption>
+                    <signals>
+                        <signal>red</signal>
+                        <signal>yellow</signal>
+                        <signal>green</signal>
+                    </signals>
+                </sign>
+            </signs>
+            <states>
+                <state>
+                    <name>success</name>
+                    <action>retrieve print job</action>
+                    <signs>
+                        <sign>
+                            <name>printer</name>
+                            <signal>chirps</signal>
+                        </sign>
+                        <sign>
+                            <name>indicator</name>
+                            <signal>green</signal>
+                        </sign>
+                    </signs>
+                </state>
+                <state>
+                    <name>jammed</name>
+                    <action>clear the printer jam</action>
+                    <signs>
+                        <sign>
+                            <name>printer</name>
+                            <signal>beeps twice</signal>
+                        </sign>
+                        <sign>
+                            <name>indicator</name>
+                            <signal>yellow</signal>
+                        </sign>
+                    </signs>
+                </state>
+                <state>
+                    <name>broken</name>
+                    <action>call the service desk</action>
+                    <signs>
+                        <sign>
+                            <name>printer</name>
+                            <signal>beeps twice</signal>
+                        </sign>
+                        <sign>
+                            <name>indicator</name>
+                            <signal>red</signal>
+                        </sign>
+                    </signs>
+                </state>
+            </states>      
+</state-detection>
