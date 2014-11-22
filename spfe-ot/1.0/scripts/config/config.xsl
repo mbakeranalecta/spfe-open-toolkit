@@ -111,10 +111,10 @@
         <xsl:variable name="this" select="."/>
         <xsl:apply-templates mode="load-config"/>
         <xsl:for-each
-            select="//topic-type/href, //object-type/href, //output-format/href, //presentation-type/href, //topic-set/href">
+            select="//topic-type/href, //object-type/href, //output-format/href, //presentation-type/href, //topic-set/href, //structure/href">
             <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
                 <xsl:call-template name="sf:error">
-                    <xsl:with-param name="message">Configuration file <xsl:value-of select="."/> not found.</xsl:with-param>
+                    <xsl:with-param name="message">Configuration file <xsl:value-of select="resolve-uri(spfe:resolve-defines(.),base-uri($this))"/> not found.</xsl:with-param>
                 </xsl:call-template>
             </xsl:if>
             <xsl:apply-templates select="document(resolve-uri(spfe:resolve-defines(.),base-uri($this)))"
@@ -412,6 +412,33 @@
                 <xsl:variable name="name" select="name"/>
                 <xsl:sequence select="$config/object-type[name=$name]/scripts"/>
             </xsl:for-each>
+            <xsl:for-each
+                select="$config/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name]/structures/structure">
+                <xsl:variable name="name" select="name"/>
+                <xsl:choose>
+                    <xsl:when test="remap-namespace">
+                        <xsl:variable name="remap" select="remap-namespace"/>
+                        <xsl:for-each select="$config/structure[name=$name]/scripts">
+                            <xsl:copy>
+                                <xsl:for-each select="child::*">
+                                    <xsl:copy>
+                                        <xsl:copy-of select="@*"/>
+                                        <xsl:for-each select="script">
+                                            <xsl:copy>
+                                                <xsl:copy-of select="*"/>
+                                                <xsl:sequence select="$remap"/>
+                                            </xsl:copy>
+                                        </xsl:for-each>
+                                    </xsl:copy>
+                                </xsl:for-each>
+                            </xsl:copy>
+                        </xsl:for-each>                       
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:sequence select="$config/structure[name=$name]/scripts"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>            
             <xsl:for-each select="$config/presentation-type">
                 <scripts>
                     <presentation type="{name}">

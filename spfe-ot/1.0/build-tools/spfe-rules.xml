@@ -410,7 +410,7 @@
 					<equals arg1="${copy-to}" arg2=""/>
 				</not>
 			</condition>
-			<echo>################# copy-to = @{copy-to}</echo>
+
 			<copy todir="@{copy-to}" flatten="false" verbose="true">
 				<fileset dir="@{output-directory}">
 					<exclude name="*.*" unless="copy-to-specified"/>

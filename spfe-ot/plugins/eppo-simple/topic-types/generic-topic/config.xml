@@ -11,6 +11,12 @@
             <singular>Topic</singular>
             <plural>Topics</plural>
         </aliases>
+        <structures>
+            <structure>
+                <name>lists</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/config.xmlx</href>
+            </structure>
+        </structures>
         <scripts>
             <resolve>
                 <script>

@@ -12,6 +12,12 @@
             <singular>A list of topics on a subject</singular>
             <plural>Lists of topics on particular subjects</plural>
         </aliases>
+        <structures>
+            <structure>
+                <name>lists</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/config.xml</href>
+            </structure>
+        </structures>
         <scripts>
             <extract>
                 <script>
