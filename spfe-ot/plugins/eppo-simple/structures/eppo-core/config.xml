@@ -5,6 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <structures>
+        <name>eppo-core</name>
         <structure>
             <name>lists</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/config.xml</href>

@@ -11,10 +11,20 @@
             <singular>Essay</singular>
             <plural>Essays</plural>
         </aliases>
-        <structures>
+<!--        <structures>
             <structure>
                 <name>lists</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/config.xml</href>
+                <remap-namespace>
+                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                    <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
+                </remap-namespace>  
+            </structure>
+        </structures>-->
+        <structures>
+            <structure>
+                <name>eppo-core</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
                 <remap-namespace>
                     <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                     <to>http://spfeopentoolkit.org/ns/spfe-docs</to>

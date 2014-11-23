@@ -2,8 +2,7 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:spfe="http://spfeopentoolkit.org/spfe-ot/1.0/xslt/fuctions"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:gen="dummy-namespace-for-the-generated-xslt"
@@ -28,9 +27,12 @@
     <xsl:variable name="build-directory" select="translate($SPFE_BUILD_DIR, '\', '/')"/>
     <xsl:variable name="content-set-build-root-directory"
         select="concat($build-directory,  '/', $config-doc/spfe/content-set/content-set-id)"/>
-    <xsl:variable name="content-set-build" select="concat($content-set-build-root-directory, '/build')"/>
-    <xsl:variable name="content-set-config" select="concat($content-set-build-root-directory, '/config')"/>
-    <xsl:variable name="content-set-output" select="concat($content-set-build-root-directory, '/output')"/>
+    <xsl:variable name="content-set-build"
+        select="concat($content-set-build-root-directory, '/build')"/>
+    <xsl:variable name="content-set-config"
+        select="concat($content-set-build-root-directory, '/config')"/>
+    <xsl:variable name="content-set-output"
+        select="concat($content-set-build-root-directory, '/output')"/>
     <xsl:variable name="content-set-home"
         select="concat($build-directory, '/', $config/content-set/content-set-id,'/output')"/>
     <xsl:variable name="topicset-home">
@@ -43,7 +45,8 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="link-catalog-directory" select="concat($content-set-build, '/link-catalogs')"/>
+    <xsl:variable name="link-catalog-directory"
+        select="concat($content-set-build, '/link-catalogs')"/>
     <xsl:variable name="toc-directory" select="concat($content-set-build, '/tocs')"/>
 
     <xsl:function name="spfe:resolve-defines" as="xs:string">
@@ -114,10 +117,13 @@
             select="//topic-type/href, //object-type/href, //output-format/href, //presentation-type/href, //topic-set/href, //structure/href">
             <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
                 <xsl:call-template name="sf:error">
-                    <xsl:with-param name="message">Configuration file <xsl:value-of select="resolve-uri(spfe:resolve-defines(.),base-uri($this))"/> not found.</xsl:with-param>
+                    <xsl:with-param name="message">Configuration file <xsl:value-of
+                            select="resolve-uri(spfe:resolve-defines(.),base-uri($this))"/> not
+                        found.</xsl:with-param>
                 </xsl:call-template>
             </xsl:if>
-            <xsl:apply-templates select="document(resolve-uri(spfe:resolve-defines(.),base-uri($this)))"
+            <xsl:apply-templates
+                select="document(resolve-uri(spfe:resolve-defines(.),base-uri($this)))"
                 mode="load-config"/>
         </xsl:for-each>
     </xsl:template>
@@ -141,7 +147,8 @@
         <!-- TO DO: check that all the topic sets have unique IDs -->
         <!-- TO DO: check that all the topic sets have unique build directories -->
 
-        <project name="{$config/content-set/content-set-id}" default="{$SPFE_BUILD_COMMAND}" xmlns="">
+        <project name="{$config/content-set/content-set-id}" default="{$SPFE_BUILD_COMMAND}"
+            xmlns="">
 
             <property file="{$home}/.spfe/spfe.properties"/>
             <property name="HOME" value="{$home}"/>
@@ -187,8 +194,7 @@
                         <!-- FIXME: need to distinguish merge content from regular topic content. -->
                         <xsl:if test="sources/authored-content/include">
                             <!-- MERGE -->
-                            <build.merge 
-                                topic-set-id="{$topic-set-id}"
+                            <build.merge topic-set-id="{$topic-set-id}"
                                 style="{$content-set-build}/topic-sets/{$topic-set-id}/merge/spfe.merge.xsl"
                                 output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/merge/out">
                                 <files-elements>
@@ -206,8 +212,10 @@
                                             <include name="{.}"/>
                                         </xsl:for-each>
                                     </files>
-                                    <pathconvert dirsep="/" pathsep=";" property="authored-content-files" refid="{$topic-set-id}.authored-content"/>
-                                    
+                                    <pathconvert dirsep="/" pathsep=";"
+                                        property="authored-content-files"
+                                        refid="{$topic-set-id}.authored-content"/>
+
                                 </files-elements>
                             </build.merge>
                         </xsl:if>
@@ -218,22 +226,28 @@
                         output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/resolve/out">
                         <files-elements>
                             <files id="{$topic-set-id}.authored-content">
-                               <xsl:choose>
-                                   <xsl:when test="sources/sources-to-extract-content-from/include and sources/authored-content/include">
-                                       <include name="{$content-set-build}/topic-sets/{$topic-set-id}/merge/out/*.xml"/>
-                                   </xsl:when>
-                                   <xsl:when test="sources/sources-to-extract-content-from/include">
-                                       <include name="{$content-set-build}/topic-sets/{$topic-set-id}/extract/out/*.xml"/>
-                                   </xsl:when>
-                                   <xsl:otherwise>
-                                       <xsl:for-each
-                                           select="$config/topic-set[topic-set-id=$topic-set-id]/sources/authored-content/include">
-                                           <include name="{.}"/>
-                                       </xsl:for-each>
-                                   </xsl:otherwise>
-                               </xsl:choose>
+                                <xsl:choose>
+                                    <xsl:when
+                                        test="sources/sources-to-extract-content-from/include and sources/authored-content/include">
+                                        <include
+                                            name="{$content-set-build}/topic-sets/{$topic-set-id}/merge/out/*.xml"
+                                        />
+                                    </xsl:when>
+                                    <xsl:when test="sources/sources-to-extract-content-from/include">
+                                        <include
+                                            name="{$content-set-build}/topic-sets/{$topic-set-id}/extract/out/*.xml"
+                                        />
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:for-each
+                                            select="$config/topic-set[topic-set-id=$topic-set-id]/sources/authored-content/include">
+                                            <include name="{.}"/>
+                                        </xsl:for-each>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </files>
-                            <pathconvert dirsep="/" pathsep=";" property="authored-content-files" refid="{$topic-set-id}.authored-content"/>
+                            <pathconvert dirsep="/" pathsep=";" property="authored-content-files"
+                                refid="{$topic-set-id}.authored-content"/>
                         </files-elements>
                     </build.resolve>
 
@@ -257,10 +271,13 @@
                         <build.presentation topic-set-id="{$topic-set-id}"
                             style="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/spfe.presentation-{$presentation-type}.xsl"
                             output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out">
-                            <xsl:if test="$config/content-set/presentation-types/presentation-type[name eq $presentation-type]/copy-to">
-                                <xsl:attribute name="copy-to" select="spfe:resolve-defines($config/content-set/presentation-types/presentation-type[name eq $presentation-type]/copy-to)"/>
+                            <xsl:if
+                                test="$config/content-set/presentation-types/presentation-type[name eq $presentation-type]/copy-to">
+                                <xsl:attribute name="copy-to"
+                                    select="spfe:resolve-defines($config/content-set/presentation-types/presentation-type[name eq $presentation-type]/copy-to)"
+                                />
                             </xsl:if>
-                        </build.presentation> 
+                        </build.presentation>
                     </xsl:for-each>
                 </xsl:for-each>
             </target>
@@ -276,15 +293,14 @@
                         <build.format topic-set-id="{$topic-set-id}"
                             style="{$content-set-build}/topic-sets/{$topic-set-id}/format-{name}/spfe.format-{name}.xsl"
                             input-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out"
-                            output-directory="{if ($topic-set-id=$config/content-set/home-topic-set) then '' else concat($topic-set-id, '/')}"
-                        > 
+                            output-directory="{if ($topic-set-id=$config/content-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
                             <files-elements>
-                                    <files id="files.{$name}.support-files">
-                                        <xsl:for-each
-                                            select="$config/output-format[name=$name]/support-files/include">
-                                            <include name="{.}"/>
-                                        </xsl:for-each>
-                                    </files>
+                                <files id="files.{$name}.support-files">
+                                    <xsl:for-each
+                                        select="$config/output-format[name=$name]/support-files/include">
+                                        <include name="{.}"/>
+                                    </xsl:for-each>
+                                </files>
                             </files-elements>
                         </build.format>
                     </xsl:for-each>
@@ -323,10 +339,8 @@
         <xsl:message
             select="concat('Generating config file: ', 'file:///', $content-set-build, '/config/spfe-config.xml')"/>
         <xsl:result-document href="file:///{$content-set-config}/spfe-config.xml" method="xml"
-            indent="yes"
-            xpath-default-namespace="http://spfeopentoolkit/ns/spfe-ot/config"
-            xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
-            exclude-result-prefixes="#all">
+            indent="yes" xpath-default-namespace="http://spfeopentoolkit/ns/spfe-ot/config"
+            xmlns="http://spfeopentoolkit/ns/spfe-ot/config" exclude-result-prefixes="#all">
             <spfe>
                 <build-directory>
                     <xsl:value-of select="$build-directory"/>
@@ -418,36 +432,71 @@
                 <xsl:choose>
                     <xsl:when test="remap-namespace">
                         <xsl:variable name="remap" select="remap-namespace"/>
-                        <xsl:for-each select="$config/structure[name=$name]/scripts">
-                            <xsl:copy>
-                                <xsl:for-each select="child::*">
+                        <xsl:choose>
+                            <xsl:when test="$config/structures[name=$name]">
+                                <xsl:for-each select="$config/structures[name=$name]/structure">
+                                    <xsl:variable name="name" select="name"/>
+                                    <xsl:for-each select="$config/structure[name=$name]/scripts">
+                                        <xsl:copy>
+                                            <xsl:for-each select="child::*">
+                                                <xsl:copy>
+                                                  <xsl:copy-of select="@*"/>
+                                                  <xsl:for-each select="script">
+                                                  <xsl:copy>
+                                                  <xsl:copy-of select="*"/>
+                                                  <xsl:sequence select="$remap"/>
+                                                  </xsl:copy>
+                                                  </xsl:for-each>
+                                                </xsl:copy>
+                                            </xsl:for-each>
+                                        </xsl:copy>
+                                    </xsl:for-each>
+                                </xsl:for-each>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:for-each select="$config/structure[name=$name]/scripts">
                                     <xsl:copy>
-                                        <xsl:copy-of select="@*"/>
-                                        <xsl:for-each select="script">
+                                        <xsl:for-each select="child::*">
                                             <xsl:copy>
-                                                <xsl:copy-of select="*"/>
-                                                <xsl:sequence select="$remap"/>
+                                                <xsl:copy-of select="@*"/>
+                                                <xsl:for-each select="script">
+                                                  <xsl:copy>
+                                                  <xsl:copy-of select="*"/>
+                                                  <xsl:sequence select="$remap"/>
+                                                  </xsl:copy>
+                                                </xsl:for-each>
                                             </xsl:copy>
                                         </xsl:for-each>
                                     </xsl:copy>
                                 </xsl:for-each>
-                            </xsl:copy>
-                        </xsl:for-each>                       
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:sequence select="$config/structure[name=$name]/scripts"/>
+                        <xsl:choose>
+                            <xsl:when test="$config/structures[name=$name]">
+                                <xsl:for-each select="$config/structures[name=$name]/structure">
+                                    <xsl:variable name="name" select="name"/>
+                                    <xsl:sequence select="$config/structure[name=$name]/scripts"/>
+                                </xsl:for-each>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:sequence select="$config/structure[name=$name]/scripts"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:for-each>            
+            </xsl:for-each>
             <xsl:for-each select="$config/presentation-type">
                 <scripts>
                     <presentation type="{name}">
-                            <xsl:sequence select="scripts/script"/>
-                        </presentation>
+                        <xsl:sequence select="scripts/script"/>
+                    </presentation>
                 </scripts>
-            </xsl:for-each>         
-            
-            <xsl:for-each select="$config/presentation-type/topic-types/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name]">
+            </xsl:for-each>
+
+            <xsl:for-each
+                select="$config/presentation-type/topic-types/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name]">
                 <scripts>
                     <presentation type="{../../name}">
                         <xsl:sequence select="scripts/script"/>
@@ -458,7 +507,7 @@
                 <xsl:sequence select="scripts"/>
             </xsl:for-each>
         </xsl:variable>
-        
+
         <!-- FIXME: Should test that each of the required script sets is present and raise error if not. -->
         <xsl:for-each-group select="$script-sets/scripts/*" group-by="concat(name(), '.', @type)">
             <xsl:variable name="script-type"

@@ -285,6 +285,7 @@
         <xs:element name="structures">
           <xs:complexType>
             <xs:sequence>
+              <xs:element name="name" type="xs:string"/>
               <xs:element maxOccurs="unbounded" name="structure">
                 <xs:complexType>
                   <xs:sequence>
