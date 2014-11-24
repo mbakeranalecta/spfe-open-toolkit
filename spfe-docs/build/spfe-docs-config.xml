@@ -4,8 +4,8 @@
 <spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <doc-set>
-        <doc-set-id>spfe-docs</doc-set-id>
+    <content-set>
+        <content-set-id>spfe-docs</content-set-id>
         <title>SPFE Documentation</title>
         <topic-set-type-order>
             <topic-set-type>docset</topic-set-type>
@@ -31,6 +31,21 @@
             <topic-set>
                 <topic-set-id>spfe-configuration-reference</topic-set-id>
                 <href>topic-sets/spfe-configuration-reference.xml</href>
+            </topic-set>  
+			
+			 <topic-set>
+                <topic-set-id>eppo-presentation-reference</topic-set-id>
+                <href>topic-sets/eppo-presentation-reference.xml</href>
+            </topic-set>  
+            
+			 <topic-set>
+			     <topic-set-id>eppo-graphic-record-doctype-reference</topic-set-id>
+			     <href>topic-sets/eppo-graphic-record-reference.xml</href>
+            </topic-set>  
+            
+			 <topic-set>
+			     <topic-set-id>eppo-generic-topic-reference</topic-set-id>
+			     <href>topic-sets/eppo-generic-topic-reference.xml</href>
             </topic-set>  
             
             <topic-set>
@@ -108,6 +123,13 @@
                     <plural>Document names</plural>
                 </aliases>
             </subject-type>
+            <subject-type>
+                <id>xml-element-name</id>
+                <aliases>
+                    <singular>XML element name</singular>
+                    <plural>XML element names</plural>
+                </aliases>
+            </subject-type>
         </subject-types>
 
         <messages>warning info</messages>
@@ -130,9 +152,9 @@
         <strings>
             <string id="product">SPFE Open Toolkit</string>
             <string id="product-release">1.0 (alpha 1)</string>
-            <string id="copyright">Copyright © 2013 Analecta Communications Inc.</string>
+            <string id="copyright">Copyright © 2014 Analecta Communications Inc.</string>
         </strings>
-     </doc-set>
+     </content-set>
     
 
 

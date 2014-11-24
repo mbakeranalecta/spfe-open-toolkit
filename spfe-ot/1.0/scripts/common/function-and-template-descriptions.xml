@@ -4,7 +4,7 @@
 <function-and-template-descriptions
     xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/xslt-function-and-template-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions.xsd">
     <head>
         <id>function-and-template-descriptions</id>
         <virtual-type/>
@@ -397,7 +397,7 @@
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
 	targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs">                            
                         </codeblock>
-                        <p>Note, however, that it is possible for the synthesis routine to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis routine is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
+                        <p>Note, however, that it is possible for a <feature>synthesis stage</feature> script to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis stage is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
                     </description>
                 </parameter>
                 <parameter>
@@ -445,7 +445,7 @@
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
 	targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs">                            
                         </codeblock>
-                        <p>Note, however, that it is possible for the synthesis routine to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis routine is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
+                        <p>Note, however, that it is possible for the synthesis stage to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis stage is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
                     </description>
                 </parameter>
                 <parameter>
@@ -464,7 +464,7 @@
                 <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
 &lt;spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    &lt;doc-set>
+    &lt;content-set>
     ...
         &lt;subject-types>
             &lt;subject-type>
@@ -519,7 +519,7 @@
                 <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
 &lt;spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    &lt;doc-set>
+    &lt;content-set>
     ...
         &lt;subject-types>
             &lt;subject-type>
@@ -581,13 +581,13 @@
                 <parameter>
                     <name>topic-namespace-uri</name>
                     <description>
-                        <p>The <feature>namespace URI of the topic type schema</feature>. By default, the <feature>synthesis</feature> process places the namespace URI of the topic in the <xml-attribute-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic/@type">type</xml-attribute-name> attribute of the <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic">ss:topic</xml-element-name> wrapper element.</p>
+                        <p>The <feature>namespace URI of the topic type schema</feature>. By default, the <feature>resolve step</feature>  places the namespace URI of the topic in the <xml-attribute-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic/@type">type</xml-attribute-name> attribute of the <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic">ss:topic</xml-element-name> wrapper element.</p>
                         <codeblock>
 &lt;ss:topic type="http://spfeopentoolkit.org/ns/eppo-simple"
     topic-type-alias="Task"
-    full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/adding-a-doc-set"
-    local-name="adding-a-doc-set" title="Adding a new documentation set"
-    excerpt="A documentation set (doc-set) is a collection of one or more related topic sets, each of which can use different schemas. ...">
+    full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/adding-a-content-set"
+    local-name="adding-a-content-set" title="Adding a new content set"
+    excerpt="A content set (content-set) is a collection of one or more related topic sets, each of which can use different schemas. ...">
 
                         </codeblock>
                         <p>Since <task>linking</task> is done at the presentation stage, you can read the topic type namespace URI from this attribute for the topic you are processing.</p>

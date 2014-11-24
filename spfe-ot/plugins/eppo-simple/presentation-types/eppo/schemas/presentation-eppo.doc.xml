@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctype-element-descriptions xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/doctype-reference/schemas/doctype-element-descriptions.xsd">
+    <head>
+        <id>id0</id>
+        <history>
+            <revision>
+                <date>2006-05-04</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+    </head>
+    <body>
+        <doctype-element-description>
+            <name>pages</name>
+            <description>
+                <p>The root element of the <feature>EPPO</feature> <feature>presentation</feature> schema. In an Every Page is Page One information design, we do not create a book, but simply a collection of pages. </p>
+            </description>
+            <attributes>
+            </attributes>
+        </doctype-element-description>
+        <doctype-element-description>
+            <name>page</name>
+            <description>
+                <p>The container element for a page in <feature>EPPO</feature> output.</p>
+            </description>
+            <attributes>
+                <attribute>
+                    <name>name</name>
+                    <description>
+                        <p>The name of the page. This is usually the <feature>id of the topic</feature> on which the page is based, though in some cases it may be generated, such as when the topics have been generated from material extracted from an external source.</p>
+                    </description>
+                </attribute>
+            </attributes>
+        </doctype-element-description>
+        <doctype-element-description>
+            <name>name</name>
+            <parent>/p</parent>
+            <description>
+                <p>A annotation element denoting the name of a subject.</p>
+            </description>
+            <attributes></attributes>
+        </doctype-element-description>
+        <doctype-element-description>
+            <name>name</name>
+            <parent>/authors</parent>
+            <description>
+                <p>The name of an author of the current topic.</p>
+            </description>
+            <attributes></attributes>
+        </doctype-element-description>
+        <doctype-element-description>
+            <name>xref</name>
+            <description><p>An annotation describing a link to another piece of content.</p></description>
+            <attributes>
+                <attribute>
+                    <name>target</name>
+                    <description>
+                        <p>The url of the content to link to.</p>
+                    </description>
+                </attribute>
+            </attributes>
+        </doctype-element-description>
+    </body>
+</doctype-element-descriptions>

@@ -19,7 +19,7 @@
 		name="strings" 
 		select="
 		$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
-		$config/config:doc-set/config:strings/config:string"
+		$config/config:content-set/config:strings/config:string"
 		as="element()*"/>
 
 	<xsl:output method="xml" indent="yes"/>
@@ -56,9 +56,6 @@ Main template
 
 	<xsl:template name="main">
 		
-		<xsl:message select="'$output-directory', $output-directory"/>
-		<xsl:message select="'$authored-content-files', $authored-content-files"/>
-		<xsl:message select="'$extracted-content-files', $extracted-content-files"/>
 		
 		<!-- Create the schema element topic set -->
 		<xsl:for-each-group select="$doctypes/doctype" group-by="@name">

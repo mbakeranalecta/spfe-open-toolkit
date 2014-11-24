@@ -14,29 +14,29 @@
         <xsl:variable name="topic-set-title"
             select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 
-        <xsl:variable name="doc-set-title" select="$config/config:doc-set/config:title"/>
+        <xsl:variable name="content-set-title" select="$config/config:content-set/config:title"/>
 
         <xsl:variable name="is-home-topic-set"
-            select="normalize-space($config/config:doc-set/config:home-topic-set) eq normalize-space($topic-set-id)"/>
+            select="normalize-space($config/config:content-set/config:home-topic-set) eq normalize-space($topic-set-id)"/>
 
-        <xsl:variable name="doc-set-index-file">
+        <xsl:variable name="content-set-index-file">
             <xsl:value-of select="if ($is-home-topic-set) then 'index.html' else '../index.html'"/>
         </xsl:variable>
-        <xsl:variable name="doc-set-toc-file">
+        <xsl:variable name="content-set-toc-file">
             <xsl:value-of
                 select="if ($is-home-topic-set) 
-                                  then concat($config/config:doc-set/config:home-topic-set, '-toc.html') 
-                                  else concat('../', $config/config:doc-set/config:home-topic-set,'-toc.html')"
+                                  then concat($config/config:content-set/config:home-topic-set, '-toc.html') 
+                                  else concat('../', $config/config:content-set/config:home-topic-set,'-toc.html')"
             />
         </xsl:variable>
 
         <pe:context-nav>
             <pe:home>
-                <pe:xref target="{$doc-set-index-file}">Home</pe:xref>
+                <pe:xref target="{$content-set-index-file}">Home</pe:xref>
             </pe:home>
             <pe:breadcrumbs>
                 <pe:breadcrumb>
-                    <pe:xref target="{$doc-set-toc-file}">TOC</pe:xref>
+                    <pe:xref target="{$content-set-toc-file}">TOC</pe:xref>
                 </pe:breadcrumb>
                 <xsl:if test="not($is-home-topic-set)">
                     <pe:breadcrumb>

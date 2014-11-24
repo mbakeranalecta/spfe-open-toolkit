@@ -36,7 +36,7 @@
     <body>
         <title>How the build system works</title>
         
-        <p>The SPFE build system has a modular architecture with four major layers, <feature>synthesis</feature>, <feature>presentation</feature>, <feature>formatting</feature>, and <feature>encoding</feature>.</p>
+        <p>The SPFE build system has a modular architecture with four major stages, <feature>synthesis</feature>, <feature>presentation</feature>, <feature>formatting</feature>, and <feature>encoding</feature>.</p>
         <fig href="../../graphics/SPFE-flow.png">
             <title>The SPFE build system</title>
             <caption><p>An overview of the SPFE build system.</p></caption>
@@ -72,26 +72,30 @@
             </li>
         </ol>
         <p>Next, the <tool-name>spfe</tool-name> build tool runs <tool-name>ANT</tool-name> on the generated ANT build
-            file, building the <feature>documentation set</feature>. </p>
+            file, building the <feature>content set</feature>. </p>
         <p>The order of operations for the build is as follows:</p>
         <ol>
             <li>
-                <p>Run the <feature>synthesis process</feature> for each topic set in turn in the order they are listed in the <config-setting>/spfe/doc-set/topic-sets</config-setting> configuration setting. This involved running the extract, synthesis, toc, and link catalog scripts for each topic set in turn. Running the scripts in the order in which the topic sets are defined is important because it allows the scripts of later topic sets to access the synthesis, tocs, and link catalogs of the earlier topics. This is used, for instance, to generate <feature>subject list topics</feature> that draw from the entire documentation set.</p> 
+                <p>Run the <feature>synthesis stage</feature> for each topic set in turn in the
+                    order they are listed in the
+                    <config-setting>/spfe/content-set/topic-sets</config-setting> configuration setting.
+                    This involved running the <feature>extract</feature>, <feature>merge</feature>,
+                        <feature>resolve</feature>, <feature>toc</feature>, and <feature>link
+                        catalog</feature> scripts for each topic set in turn. Running the scripts in
+                    the order in which the topic sets are defined is important because it allows the
+                    scripts of later topic sets to access the synthesis, tocs, and link catalogs of
+                    the earlier topics. This is used, for instance, to generate <feature>subject
+                        list topics</feature> that draw from the entire content set.</p> 
             </li>
             <li>
-                <p>Run the <feature>presentation process</feature> for each <feature>topic set</feature> in the <feature>documentation set</feature> in turn. If there are different presentation processes for different output media, each will be run in turn.</p>
+                <p>Run the <feature>presentation process</feature> for each <feature>topic set</feature> in the <feature>content set</feature> in turn. If there are different presentation processes for different output media, each will be run in turn.</p>
             </li>
             <li>
-                <p>Run the <feature>format process</feature> for each <feature>topic set</feature> in the <feature>documentation set</feature> in turn. If there are multiple output formats being built, each will be run in turn.</p>
+                <p>Run the <feature>format process</feature> for each <feature>topic set</feature> in the <feature>content set</feature> in turn. If there are multiple output formats being built, each will be run in turn.</p>
             </li>
         </ol>
         <p>The following build command are available:</p>
         <ul>
-            <li>
-                <p><code>cat</code>: Generates the <feature>link catalogs</feature> for the topic
-                    set. The link catalogs must be built first to enable the build to create the
-                    links.</p>
-            </li>
             <li>
                 <p><code>draft</code>: Generates a draft build. Output includes work-in-progress
                     information and an indication of draft status.</p>
@@ -106,8 +110,9 @@
         </ul>
         <p>If you make changes to scripts or configuration files, you should always run clean before
             building a new draft, since the dependency checking in the build does not cover the
-            scripts and configuration file. In the Alpha version of the toolkit, it is not a given
-            that it covers all the things it should cover, so when in doubt, run clean before you
-            build a draft. The tools run clean before a final build, just to be certain.</p>
+            scripts and configuration file. If you don't see the changes you expect as the result of
+            any change you have made, try running <code>-clean</code> and run the build again. If
+            you see a patterns of changes not being recognized without running <code>-clean</code>
+            <task>please report this issue</task>.</p>
      </body>
 </feature-topic>
