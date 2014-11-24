@@ -13,14 +13,15 @@
         </aliases>
         <structures>
             <structure>
-                <name>lists</name>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/config.xml</href>
+                <name>eppo-core</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
                 <remap-namespace>
                     <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                     <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                 </remap-namespace>  
             </structure>
         </structures>
+        
         <scripts>
             <resolve>
                 <script>
@@ -52,30 +53,12 @@
                 </script>
 
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-graphic-record.xsl</href>
-                </script>
-                
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-fig.xsl</href>
-                </script>
-                <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>                   
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
                 </script>                
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>                   
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-strings.xsl</href>
-                </script>
             </resolve>
             <link-catalog>
                 <script>

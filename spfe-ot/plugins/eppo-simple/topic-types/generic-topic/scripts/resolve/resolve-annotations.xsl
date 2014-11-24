@@ -6,29 +6,6 @@
     xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     version="2.0">
     
-    <xsl:template match="p/task | string/task">
-        <subject>
-            <xsl:attribute name="type">task</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
-            <xsl:apply-templates/>
-        </subject>
-    </xsl:template>
-    
-    <xsl:template match="p/term | string/term">
-        <subject>
-            <xsl:attribute name="type">term</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
-            <xsl:apply-templates/>
-        </subject>
-    </xsl:template>
-    
-    <xsl:template match="p/feature | string/feature">
-        <subject>
-            <xsl:attribute name="type">feature</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
-            <xsl:apply-templates/>
-        </subject>
-    </xsl:template>
 
     <xsl:template match="p/xml-element-name | string/xml-element-name">
         <name>
@@ -109,19 +86,4 @@
         </name>
     </xsl:template>   
     
-    <xsl:template match="
-        p/directory-name  | string/directory-name
-        | p/document-name  | string/document-name
-        | p/file-name  | string/file-name
-        | p/product-name  | string/product-name
-        | p/tool-name  | string/tool-name
-        | p/xml-namespace-uri  | string/xml-namespace-uri
-                       ">
-        <name>
-            <xsl:attribute name="type" select="local-name()"/>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
-            <xsl:apply-templates/>
-        </name>
-    </xsl:template>
-
 </xsl:stylesheet>

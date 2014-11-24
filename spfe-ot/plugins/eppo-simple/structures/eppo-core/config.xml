@@ -10,5 +10,26 @@
             <name>lists</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/config.xml</href>
         </structure>
+        <structure>
+            <name>paragraphs</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/paragraphs/config.xml</href>
+        </structure>
+        <structure>
+            <name>graphics</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphics/config.xml</href>
+        </structure>
+        <structure>
+            <name>strings</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/strings/config.xml</href>
+        </structure>
+        <structure>
+            <name>fragments</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/fragments/config.xml</href>
+        </structure>
+        <structure>
+            <name>annotations-general</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations-general/config.xml</href>
+        </structure>
+        
     </structures>
 </spfe>

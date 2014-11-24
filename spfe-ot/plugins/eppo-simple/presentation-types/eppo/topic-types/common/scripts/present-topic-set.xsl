@@ -82,7 +82,7 @@ Main template
 	<xsl:template match="*" >
 		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">
-				<xsl:text>Unknown element found in synthesis: </xsl:text>
+				<xsl:text>Unknown element found in synthesis while creating EPPO-simple presentation: </xsl:text>
 				<xsl:value-of select="concat('{', namespace-uri(), '}', name())"/>
 			</xsl:with-param>
 		</xsl:call-template>

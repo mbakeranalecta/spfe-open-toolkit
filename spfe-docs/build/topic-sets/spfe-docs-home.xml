@@ -18,7 +18,7 @@
         </topic-types>
         <presentation-types>
             <presentation-type>eppo</presentation-type>
-            <presentation-type>dita</presentation-type>
+            <!--<presentation-type>dita</presentation-type>-->
         </presentation-types>        
         <output-formats>
             <output-format>

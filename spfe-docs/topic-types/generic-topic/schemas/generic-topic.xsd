@@ -28,7 +28,7 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/generic-topic-root.xsd"/>
 
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/fragments.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fragments/schemas/fragments.xsd"/>
     <xs:group name="p-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>

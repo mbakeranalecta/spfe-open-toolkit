@@ -46,36 +46,13 @@ version="2.0"
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<xsl:template match="p">
-		<pe:p>
-			<!-- FIXME: will this copy attributes with old namespaces? Make it all explicit.-->
-			<xsl:copy-of select="@*"/>
-			<xsl:apply-templates/>
-		</pe:p>
-		<xsl:for-each select="text-object-ref">
-			<xsl:variable name="id" select="@id-ref"/>
-			<xsl:variable name="content" select="normalize-space(.)"/>
-			<xsl:choose>
-				<xsl:when test="//text-object[id=$id]">
-					<pe:fold id="{generate-id()}" type="text-object" initial-state="closed" reference-text="{$content}">
-						<xsl:apply-templates select="//text-object[id=$id]"/>
-					</pe:fold>		
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:call-template name="sf:warning">
-						<xsl:with-param name="message">Text object <xsl:value-of select="$id"/> not found.</xsl:with-param>
-					</xsl:call-template>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:for-each>
-	</xsl:template>
-
 	<xsl:template match="text-object">
 		<xsl:apply-templates/>
 	</xsl:template>
 	
 	<xsl:template match="text-object/tracking"/>
 	<xsl:template match="text-object/id"/>
+	
 	<xsl:template match="text-object/title">
 		<pe:title><xsl:apply-templates/></pe:title>
 	</xsl:template>
@@ -237,7 +214,7 @@ version="2.0"
 						<!-- FIXME: can we avoid enbedding "routine" here? -->
 						<xsl:when test="esf:target-exists(regex-group(1), 'routine')">
 							<xsl:variable name="routine">
-								<routine-name scope="{$scope}"><xsl:value-of select="regex-group(1)"/></routine-name>
+								<function-name scope="{$scope}"><xsl:value-of select="regex-group(1)"/></function-name>
 							</xsl:variable>
 							<xsl:apply-templates select="$routine"/>
 							<xsl:value-of select="regex-group(2)"/>

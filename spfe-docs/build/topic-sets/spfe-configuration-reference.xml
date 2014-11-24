@@ -19,8 +19,8 @@
         
         <presentation-types>
             <presentation-type>eppo</presentation-type>
-            <presentation-type>dita</presentation-type>
-        </presentation-types>
+<!--            <presentation-type>dita</presentation-type>
+-->        </presentation-types>
         <output-formats>
             <output-format>
                 <name>html</name>

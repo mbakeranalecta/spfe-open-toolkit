@@ -100,7 +100,7 @@
             <p>So, having a element name and namespace does not tell you what that element means, or
                 even which element it is. For that, you have to know both the namespace and the
                 context in which the element occurs.</p>
-            <p>Namespaces, therefore, are not about uniquely identify an element. Namespaces are
+            <p>Namespaces, therefore, are not about uniquely identifying an element. Namespaces are
                 actually about ownership. A namespace name tells you who the element name belongs
                 to. Whether or not the name is unique within the namespace is entirely up to the
                 person who owns the namespace. </p>
