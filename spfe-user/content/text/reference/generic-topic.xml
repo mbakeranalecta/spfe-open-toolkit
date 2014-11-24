@@ -52,15 +52,17 @@
     </head>
     <body>
         <title>EPPO-simple generic topic</title>
-        <p> The EPPO-simple <code>&lt;generic-topic&gt;</code> element has a structure that serves many purposes
-            and forms the base for several, more specialized topics. Like all topic elements, it forms the top-level 
-            container for a generic-topic document.</p>
-        <p>Use the legend below to interpret the structure diagram.</p>
+        <p> The EPPO-simple generic topic serves many purposes and forms the
+            base for several more-specialized topics.
+            The <code>generic-topic</code> element is the top-level container for a generic-topic
+            <term>XML</term> document.</p>
+        <p> We show the proper structure using diagrams. Tagged boxes represent <term>XML</term>
+            elements and blocks represent groups of elements, as shown in figure 1.</p>
         <fragment-ref id-ref="structure-graphic-legend"></fragment-ref>
         
         <section>
             <title>Structure</title>
-            <p>Figure 1 shows the structure of a generic-topic XML document.</p>
+            <p>Figure 2 shows the structure of a generic-topic XML document.</p>
             <fig href="../../graphics/generic-topic.png">
                 <title>EPPO-simple generic-topic structure</title>
                 <caption>

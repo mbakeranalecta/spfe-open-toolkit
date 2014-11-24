@@ -31,7 +31,7 @@
         <p> A paragraph comprises text, annotations, links, or other <term>inline</term> components to form a 
             textual building <term>block</term> of a composition. Except in <feature>titles</feature>
             or in other elements that accept only simple text, a paragraph element is needed 
-            whereever text is needed, including the following.</p>
+            wherever text is needed, including the following.</p>
         <ul>
             <li><p>in <feature>body content</feature></p></li>
             <li><p>in a figure <feature>caption</feature></p></li>

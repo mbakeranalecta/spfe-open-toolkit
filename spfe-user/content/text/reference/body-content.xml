@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
 <feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
@@ -36,19 +36,23 @@
 </head>
 <body>
     <title>EPPO-simple body content</title>
-    <p>General text, figures, and other body content follow a main <feature>body</feature> or <feature>section</feature> <feature>title</feature>
-    to form the core of a topic.</p>
+    <p> The body content of an EPPO-simple topic follows a <feature>body</feature> or
+    <feature>section</feature> <code>title</code> element, as shown in the following figure.</p>
     <fig href="../../graphics/body-content-context.png">
         <title>Body content in context</title>
         <caption>
             <p></p>
         </caption>
     </fig>
-    <p>Use the legend below to interpret the structure diagrams.</p>
-    <fragment-ref id-ref="structure-graphic-legend"></fragment-ref>
-    
     <section>
         <title>Structure</title>
+
+        <p> Body content consists of text elements such as paragraphs and lists, figures, and other
+            block elements. The diagrams that follow illustrate their proper <term>XML</term>
+            structure. Tagged boxes represent <term>XML</term> elements and blocks represent groups
+            of elements, as shown in the following figure.</p>
+        <fragment-ref id-ref="structure-graphic-legend"></fragment-ref>
+    
         <p> A body of content consists of a sequence of elements such as paragraphs, lists, figures, 
             or other elements that would generally be presented as <term>block</term> components in 
             a document. An <feature>EPPO-simple</feature> body-content group will have the structure 
