@@ -53,16 +53,13 @@
     <body>
         <title>EPPO-simple generic topic</title>
         <p> The EPPO-simple generic topic serves many purposes and forms the
-            base for several more-specialized topics.
-            The <code>generic-topic</code> element is the top-level container for a generic-topic
-            <term>XML</term> document.</p>
-        <p> We show the proper structure using diagrams. Tagged boxes represent <term>XML</term>
-            elements and blocks represent groups of elements, as shown in figure 1.</p>
-        <fragment-ref id-ref="structure-graphic-legend"></fragment-ref>
-        
+            base for several more-specialized topics.</p>
+
         <section>
             <title>Structure</title>
-            <p>Figure 2 shows the structure of a generic-topic XML document.</p>
+            <p>The <code>generic-topic</code> element is the top-level container for a generic-topic
+            <term>XML</term> document. A valid generic-topic document has the structure shown in the
+            following diagram.</p>
             <fig href="../../graphics/generic-topic.png">
                 <title>EPPO-simple generic-topic structure</title>
                 <caption>
@@ -140,6 +137,11 @@
          </codeblock>
          <p>The code above displays as shown below.</p>
          <fragment-ref id-ref="nursery-lessons-in-words-of-one-syllable"></fragment-ref>
+        </section>
+        
+        <section>
+            <title>How to read a structure diagram</title> 
+            <fragment-ref id-ref="structure-graphic-legend"></fragment-ref>
         </section>
         
     </body>

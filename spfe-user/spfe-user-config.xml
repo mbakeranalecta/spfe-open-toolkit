@@ -5,8 +5,8 @@
 <spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <doc-set>
-        <doc-set-id>spfe-user</doc-set-id>
+    <content-set>
+        <content-set-id>spfe-user</content-set-id>
         <title>Using the SPFE Open Toolkit</title>
         <topic-set-type-order>
             <topic-set-type>home</topic-set-type>
@@ -174,6 +174,6 @@
             <string id="product-release">1.0 (alpha 1)</string>
             <string id="copyright">Copyright © 2013 Analecta Communications Inc.</string>
         </strings>
-     </doc-set>
+     </content-set>
     
 </spfe>

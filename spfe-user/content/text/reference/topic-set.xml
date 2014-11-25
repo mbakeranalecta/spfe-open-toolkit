@@ -6,7 +6,7 @@
     http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
     
     <head>
-        <id>topic-set</id>
+        <id>spfe-topic-set</id>
         <history>
             <revision>
                 <date>2014-11-01</date>
@@ -28,7 +28,7 @@
         </index>
     </head>
     <body>
-        <title>Topic-set configuration file</title>
+        <title>SPFE topic-set configuration file</title>
         <p>PLACE HOLDER</p>
     </body>
 </feature-topic>

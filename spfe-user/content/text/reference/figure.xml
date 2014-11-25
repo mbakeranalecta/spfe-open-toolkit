@@ -9,7 +9,7 @@
         <id>figure</id>
         <history>
             <revision>
-                <date>2014-11-01</date>
+                <date>2014-11-24</date>
                 <author>jfmacdonald</author>
                 <comment>New topic</comment>
                 <status>In progress</status>
@@ -22,13 +22,33 @@
             </entry>
             <entry>
                 <type>feature</type>
-                <term>graphic</term>
+                <term>programming</term>
             </entry>
-            
         </index>
     </head>
     <body>
         <title>EPPO-simple figure</title>
-        <p>PLACE HOLDER</p>
+        <p> A figure element may follow an initial <term>paragraph</term> or
+            <term>fragment reference</term> in the <term>body content</term> of a topic.</p>
+
+            <fig href="../../graphics/figure-context.png">
+                <title>EPPO-simple figure context</title>
+                <caption>
+                    <p></p>
+                </caption>
+            </fig>
+        <section>
+            <title>Structure</title>
+            
+        </section>
+        <section>
+            <title>Example</title>
+        </section>
+        <section>
+            <title>How to read a structure diagram</title>
+            <fragment-ref id-ref="structure-graphic-legend"></fragment-ref>
+        </section>
+        
     </body>
 </feature-topic>
+
