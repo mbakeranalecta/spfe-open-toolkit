@@ -181,7 +181,7 @@
 	
 	<xsl:template match="table-id">
 		<xsl:variable name="table-id" select="@id-ref"/>
-		<xsl:if test="not(ancestor::topic//table[@id=$table-id]/title)">
+		<xsl:if test="not(ancestor::ss:topic//table[@id=$table-id]/title)">
 			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message" select="'No table/title element found for referenced table:', $table-id, '. A title is required for all referenced tables.'"/>
 			</xsl:call-template>
@@ -192,14 +192,14 @@
 	<xsl:template match="fig-id">
 		<xsl:variable name="fig-id" select="@id-ref"/>
 		<xsl:variable name="uri" select="@uri"/>
-		<xsl:if test="not(ancestor::topic//fig[@id=$fig-id or @uri=$uri]/title)">
+		<xsl:if test="not(ancestor::ss:topic//fig[@id=$fig-id or @uri=$uri]/title)">
 			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message" select="'No fig/title element found for referenced fig:', if($uri) then $uri else $fig-id, '. A title is required for all referenced figs.'"/>
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:choose>
 			<xsl:when test="$uri">
-				<pe:cross-ref target="{generate-id(ancestor::topic//fig[@uri=$uri]/@uri)}" type="fig"/>
+				<pe:cross-ref target="{generate-id(ancestor::ss:topic//fig[@uri=$uri]/@uri)}" type="fig"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<pe:cross-ref target="{@id-ref}" type="fig"/>
