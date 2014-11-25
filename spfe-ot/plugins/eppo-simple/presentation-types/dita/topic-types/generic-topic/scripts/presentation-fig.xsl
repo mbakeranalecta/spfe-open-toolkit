@@ -12,7 +12,7 @@
     <xsl:template match="fig">
         <fig>
             <xsl:if test="@id">
-                <xs:attribute name="fig" select="fig:{@id}"/>
+                <xsl:attribute name="fig" select="concat('fig:', @id)"/>
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="not(title) and gr:graphic-record/gr:default-title">

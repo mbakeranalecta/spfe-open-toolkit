@@ -27,14 +27,7 @@
 
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-text-structures.xsl</href>
                 </script>
-                <script>
 
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-annotations.xsl</href>
-                </script>
-                <script>
-
-                    <href>../../topic-types/generic-topic/scripts/resolve/resolve-annotations.xsl</href>
-                </script>
 
                 <script>
                 

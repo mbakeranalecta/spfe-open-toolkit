@@ -31,10 +31,7 @@ version="2.0"
 		| th
 		| note
 		| warning
-		| caution
-		| code
-		| bold
-		| italic">
+		| caution">
 		
 		<xsl:element name="pe:{local-name()}" namespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo">
 			<xsl:copy-of select="@*"/>

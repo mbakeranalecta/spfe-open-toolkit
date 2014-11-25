@@ -7,39 +7,6 @@
     version="2.0">
     
 
-    <xsl:template match="p/xml-element-name | string/xml-element-name">
-        <name>
-            <xsl:attribute name="type">xpath</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
-            <xsl:if test="@namespace">
-                <xsl:attribute name="namespace" select="@namespace"/> 
-            </xsl:if>
-            <xsl:apply-templates/>
-        </name>
-    </xsl:template>    
-    
-    <xsl:template match="p/xml-attribute-name | string/xml-attribute-name">
-        <name>
-            <xsl:attribute name="type">xpath</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
-            <xsl:if test="@namespace">
-                <xsl:attribute name="namespace" select="@namespace"/> 
-            </xsl:if>
-            <xsl:apply-templates/>
-        </name>
-    </xsl:template>   
-    
-    <xsl:template match="p/xpath | string/xpath">
-        <name>
-            <xsl:attribute name="type">xpath</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
-            <xsl:if test="@namespace">
-                <xsl:attribute name="namespace" select="@namespace"/> 
-            </xsl:if>
-            <xsl:apply-templates/>
-        </name>
-    </xsl:template>
-
 
     <xsl:template match="p/xslt-function-name | string/xslt-function-name">
         <name>

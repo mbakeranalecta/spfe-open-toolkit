@@ -37,7 +37,7 @@
         <title>How the build system works</title>
         
         <p>The SPFE build system has a modular architecture with four major stages, <feature>synthesis</feature>, <feature>presentation</feature>, <feature>formatting</feature>, and <feature>encoding</feature>.</p>
-        <fig href="../../graphics/SPFE-flow.png">
+        <fig href="../../graphics/SPFE-flow.png" id="spfe-flow">
             <title>The SPFE build system</title>
             <caption><p>An overview of the SPFE build system.</p></caption>
         </fig>
@@ -73,6 +73,7 @@
         </ol>
         <p>Next, the <tool-name>spfe</tool-name> build tool runs <tool-name>ANT</tool-name> on the generated ANT build
             file, building the <feature>content set</feature>. </p>
+        <fig-id id-ref="spfe-flow"/>
         <p>The order of operations for the build is as follows:</p>
         <ol>
             <li>
