@@ -15,7 +15,7 @@
         </xsl:if>
         <pe:fig>
             <xsl:if test="@id">
-                <xs:attribute name="fig" select="fig:{@id}"/>
+                <xsl:attribute name="fig" select="concat('fig:', @id)"/>
             </xsl:if>
             <xsl:if test="not(title) and gr:graphic-record/gr:default-title">
                 <pe:title>
