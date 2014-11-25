@@ -22,7 +22,6 @@ version="2.0"
 		the import order. Might be fixed by converting individual reference types to subject or name 
 		at the synthesis stage, or by changing the import order. -->
 	<xsl:template match="title
-		| subhead
 		| labeled-item
 		| label
 		| item

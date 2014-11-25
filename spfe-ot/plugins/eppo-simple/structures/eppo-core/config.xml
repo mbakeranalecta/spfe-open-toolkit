@@ -42,5 +42,13 @@
             <name>text-decoration</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/text-decoration/config.xml</href>
         </structure> 
+        <structure>
+            <name>programming</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/programming/config.xml</href>
+        </structure> 
+        <structure>
+            <name>subhead</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/subhead/config.xml</href>
+        </structure> 
     </structures>
 </spfe>

@@ -278,7 +278,7 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element name="name" type="xs:string"/>
-              <xs:element name="dependencies">
+              <xs:element name="dependencies" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="dependency">
