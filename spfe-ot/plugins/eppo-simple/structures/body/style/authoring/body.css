@@ -1,0 +1,20 @@
+body
+{
+    display:block;
+    padding: 1em;
+}
+
+body
+{
+    background-color:white;
+}
+
+body>title
+{
+    display:block;
+    font-family:sans-serif;
+    font-size:large;
+}
+
+
+

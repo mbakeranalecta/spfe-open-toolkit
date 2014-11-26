@@ -1,9 +1,3 @@
-body
-{
-    display:block;
-    padding: 1em;
-}
-
 generic-topic head:before
 {
     font-weight:bold;
@@ -11,40 +5,3 @@ generic-topic head:before
     content: "Generic topic";
     font-family:sans-serif;
 }
-
-body
-{
-    background-color:white;
-}
-
-body>title
-{
-    display:block;
-    font-family:sans-serif;
-    font-size:large;
-}
-
-body>section
-{
-
-}
-
-body>section:before
-{
-    display:block;
-    font-family:sans-serif;
-    content: "Section:";
-    font-size:small;
-    background-color:#FFDEAD;
-}
-
-body>section>title
-{
-    display:block;
-    font-family:sans-serif;
-    font-size:larger;
-    margin-top:1em;
-}
-
-
-
