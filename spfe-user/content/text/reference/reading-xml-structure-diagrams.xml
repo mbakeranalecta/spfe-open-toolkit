@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    
+    <head>
+        <id>reading-xml-structure-diagrams</id>
+        <history>
+            <revision>
+                <date>2014-11-25</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>term</type>
+                <term>XML</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>structure diagram</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Reading XML structure diagrams</title>
+        <p> A box with a label, as shown in the first diagram in the figure <quote>How to read a
+            structure diagram</quote>, represents an <term>XML</term> element. The description
+            inside the box, if any, indicates what the element may contain. A group of elements that
+            work together is represented by a three-dimensional block, as shown in the second
+            diagram in the figure. Follow links a diagram's description to find a detailed
+            description of a group.</p>
+        
+        <p> A number range indicates the number of occurances an element or a group may appear.
+            If no number range is shown, the number of occurances (the <italic>multiplicity</italic>)
+            is one.</p>
+            
+        <fig uri="legend" href="../../graphics/legend.png">
+            <title>How to read a structure diagram</title>
+            <caption><p></p></caption>
+        </fig>
+        
+        <section>
+            <title>Example</title>
+            <p> In the figure "Diagram showing structure of a topic head element," the identify,
+                history, and index group of elements should appear once in the order shown inside
+                a <term>head</term> element. The figures "Identity group," "History group," and
+                "Index group" then provide the detailed structure for each group.</p>
+            
+            <fig href="../../graphics/structure-diagram-example.png">
+                <title>Diagram showing structure of a topic head element</title>
+                <caption><p></p></caption>
+            </fig>
+            <fig href="../../graphics/identity.png">
+                <title>Identity group</title>
+                <caption><p></p></caption>
+            </fig>
+            <fig href="../../graphics/history.png">
+                <title>History group</title>
+                <caption><p></p></caption>
+            </fig>
+            <fig href="../../graphics/index.png">
+                <title>Index group</title>
+                <caption><p></p></caption>
+            </fig>
+            
+            <subhead>XML corresponding to the diagrams</subhead>
+            <p>
+                The following <term>XML</term> document conforms to the example structure diagrams.
+            </p>
+            
+            <codeblock>
+            <![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    
+    <head>
+        <id>example-generic-topic</id>
+        <history>
+            <revision>
+                <date>2014-11-25</date>
+                <author>JFM</author>
+                <comment>Illustrating structure diagrams.</comment>
+                <status>Ready for release review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>term</type>
+                <term>XML</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <!-- content goes here -->
+    </body>
+</generic-topic>
+]]>
+            </codeblock>
+        </section>
+        
+    </body>
+</generic-topic>
