@@ -7,6 +7,10 @@
     <structures>
         <name>eppo-core</name>
         <structure>
+            <name>common</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/common/config.xml</href>
+        </structure> 
+        <structure>
             <name>lists</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/config.xml</href>
         </structure>
@@ -49,6 +53,22 @@
         <structure>
             <name>subhead</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/subhead/config.xml</href>
+        </structure> 
+        <structure>
+            <name>conditions</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/conditions/config.xml</href>
+        </structure> 
+        <structure>
+            <name>identity</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/identity/config.xml</href>
+        </structure> 
+        <structure>
+            <name>index</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/index/config.xml</href>
+        </structure> 
+        <structure>
+            <name>tracking</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tracking/config.xml</href>
         </structure> 
     </structures>
 </spfe>

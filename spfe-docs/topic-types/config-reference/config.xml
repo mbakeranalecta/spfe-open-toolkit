@@ -33,18 +33,13 @@
             </merge>
             <resolve>
                 <script>
+                    
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/resolve/resolve-topic.xsl</href>
                 </script>
                 <script>
                     <href>../../topic-types/config-reference/scripts/resolve/resolve-config-ref.xsl</href>
                 </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-text-structures.xsl</href>
-                </script>
+
 
                 <script>
                     <remap-namespace>

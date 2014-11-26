@@ -15,7 +15,7 @@
 	xmlns="http://spfeopentoolkit.org/ns/eppo-simple"
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all" >
-
+	
 	<xsl:template match="fragment">
 		<xsl:param name="in-scope-strings" as="element()*" tunnel="yes" />
 		<xsl:apply-templates>

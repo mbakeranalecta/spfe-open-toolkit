@@ -38,10 +38,7 @@
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/topic-subject-list-topic/scripts/resolve/resolve-topic-subject-lists.xsl</href>
                 </script>
-                <script>
-
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-text-structures.xsl</href>
-                </script>    
+ 
 
 
                 <script>

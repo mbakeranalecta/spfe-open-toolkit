@@ -23,19 +23,14 @@
 
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/think-plan-do-topic/scripts/resolve/resolve-think-plan-do-topic.xsl</href>
                 </script>
-                <script>
 
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-text-structures.xsl</href>
-                </script>
 
 
                 <script>
                 
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
                 </script>                
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-text-structures.xsl</href>
-                </script>
+
             </resolve>
             <link-catalog>
                 <script>
