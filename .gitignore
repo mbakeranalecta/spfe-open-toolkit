@@ -1,9 +1,13 @@
 # Backup files
 *~
 *.bak
+*.log
 
 # Windows image file caches
 Thumbs.db 
+
+# Mac OS filesystem
+.DS_Store
 
 # Folder config file
 Desktop.ini
@@ -15,6 +19,5 @@ $RECYCLE.BIN/
 *.xpr
 
 #Personal
-
 copyright-notice.txt
 spfe-docs/build/log.txt

@@ -3,14 +3,18 @@
 # This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.
 # (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved.
 
+function abs_path() {
+    (cd $(dirname $1); echo $PWD/$(basename $1))
+}
+
 if [ -e "$1" ]; then
 
-    if [ $SPFE_BUILD_DIR == ""]; then 
-        SPFE_BUILD_DIR=$HOME/spfebuild 
-    fi
+    export SPFE_BUILD_DIR=${SPFE_BUILD_DIR:-$HOME/spfebuild}
 
     echo "Building in directory: $SPFE_BUILD_DIR"
     mkdir $SPFE_BUILD_DIR
+
+    SPFE_CONFIG=$(abs_path $1)
 
     SPFE_TEMP_BUILD_FILE=$SPFE_BUILD_DIR/spfebuild.xml
     export ANT_OPTS="$ANT_OPTS -XX:PermSize=512m"
@@ -18,7 +22,7 @@ if [ -e "$1" ]; then
     java -classpath $SPFEOT_HOME/tools/saxon9he/saxon9he.jar net.sf.saxon.Transform \
     -xsl:$SPFEOT_HOME/1.0/scripts/config/config.xsl \
     -it:main \
-    configfile=$PWD/$1 \
+    configfile=$SPFE_CONFIG \
     HOME=$HOME \
     SPFEOT_HOME=$SPFEOT_HOME \
     SPFE_BUILD_DIR=$SPFE_BUILD_DIR \
