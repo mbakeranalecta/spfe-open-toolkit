@@ -2,7 +2,7 @@
 <graphic-record xmlns="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphic-record.xsd">
       
-    <name>generic-topic group</name>
+    <name>generic-topic-group</name>
     <alt>generic-topic structure diagram</alt>
     <uri>http://spfeopentoolkit.org/spfe-user/content/graphics/generic-topic</uri>
     

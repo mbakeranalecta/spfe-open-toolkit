@@ -10,6 +10,10 @@
 
         <topic-types>
             <topic-type>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic</name>
+                <href>../../spfe-docs/topic-types/generic-topic/config.xml</href>
+            </topic-type>    
+            <topic-type>
                 <name>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic</name>
                 <href>../../spfe-docs/topic-types/feature-topic/config.xml</href>
             </topic-type>    

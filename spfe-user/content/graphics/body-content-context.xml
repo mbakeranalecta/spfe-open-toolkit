@@ -2,8 +2,8 @@
 <graphic-record xmlns="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphic-record.xsd">
       
-    <name>body-content context</name>
-    <alt>bocontextt</alt>
+    <name>body-content-context</name>
+    <alt>body content context</alt>
     <uri>http://spfeopentoolkit.org/spfe-user/content/graphics/body-content-context</uri>
     
     <formats>

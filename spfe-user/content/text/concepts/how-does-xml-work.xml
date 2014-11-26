@@ -205,7 +205,7 @@
         
         <section>
             <title>What XML document types does the SPFE Open Toolkit use?</title>
-            <p> The toolkits works with two kinds of XML documents.</p>
+            <p> The toolkit works with two kinds of XML documents.</p>
             <ul>
                 <li><p>content documents</p></li>
                 <li><p>configuration documents</p></li>

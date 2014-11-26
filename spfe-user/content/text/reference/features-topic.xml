@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
     
     <head>
-        <id>features-topic</id>
+        <id>features</id>
         <history>
             <revision>
                 <date>2014-11-24</date>
@@ -18,7 +18,7 @@
         <index>
             <entry>
                 <type>feature</type>
-                <term>features-topic</term>
+                <term>features</term>
             </entry>
             <entry>
                 <type>feature</type>
@@ -31,22 +31,6 @@
             <entry>
                 <type>term</type>
                 <term>content</term>
-            </entry>
-            <entry>
-                <type>term</type>
-                <term>topic</term>
-            </entry>
-            <entry>
-                <type>term</type>
-                <term>header</term>
-            </entry>
-            <entry>
-                <type>term</type>
-                <term>head</term>
-            </entry>
-            <entry>
-                <type>term</type>
-                <term>body</term>
             </entry>
         </index>
     </head>
