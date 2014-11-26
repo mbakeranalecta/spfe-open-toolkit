@@ -3,7 +3,59 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/schemas/lists.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/schemas/authoring/lists.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/paragraphs/schemas/paragraphs.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/paragraphs/schemas/authoring/paragraphs.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/identity/schemas/authoring/identity.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/index/schemas/authoring/index.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/tracking/schemas/authoring/tracking.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/conditions/schemas/authoring/conditions.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/text-decoration/schemas/authoring/text-decoration.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations-general/schemas/authoring/annotations-general.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/eppo-core/schemas/authoring/resources.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/strings/schemas/authoring/strings.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fragments/schemas/authoring/fragments.xsd"/> 
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/schemas/authoring/lists.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/paragraphs/schemas/authoring/paragraphs.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/programming/schemas/authoring/programming.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/subhead/schemas/authoring/subhead.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/graphics/schemas/authoring/graphics.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/strings/schemas/authoring/strings.xsd"/>
+    
+    <xs:group name="text-general">
+        <xs:sequence>
+            <xs:choice maxOccurs="1" minOccurs="1">
+                <xs:group ref="paragraphs" maxOccurs="1" minOccurs="1"/>
+                <xs:group ref="fragments" maxOccurs="1" minOccurs="1"/>
+                <xs:group ref="fragment-ref" maxOccurs="1" minOccurs="1"/>
+            </xs:choice>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:group ref="paragraphs"/>
+                <xs:group ref="subhead"/>
+                <xs:group ref="lists"/>
+                <xs:group ref="programming"/>
+                <xs:group ref="graphics"/>
+                <xs:group ref="fragments"/>
+                <xs:group ref="fragment-ref"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+    
+    <xs:complexType name="text-general-type">
+        <xs:group ref="text-general"/>
+    </xs:complexType>
 </xs:schema>

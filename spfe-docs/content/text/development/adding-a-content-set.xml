@@ -2,7 +2,7 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
-http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
+http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
 
     <head>
         <id>adding-a-content-set</id>
@@ -130,7 +130,7 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/thi
                 the SPFE content set:</p>
             <codeblock>                <![CDATA[
  <spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/authoring/config/spfe-config.xsd">
     <content-set>
         <content-set-id>tests</content-set-id>
         <title>SPFE Documentation</title>

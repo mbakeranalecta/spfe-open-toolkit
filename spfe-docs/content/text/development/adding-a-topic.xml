@@ -4,7 +4,7 @@
 <think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
-    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
 
     <head>
         <id>adding-a-topic</id>

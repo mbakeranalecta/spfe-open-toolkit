@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs"
+	xmlns:dd="http://spfeopentoolkit.org/ns/spfe-docs">
+
+	<xs:include
+		schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/spfe-docs-core/schemas/authoring/spfe-docs-core.xsd"/>
+
+	<xs:element name="doctype-element-descriptions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="head">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:group ref="dd:identity"/>
+							<xs:group ref="dd:tracking"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="body">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="doctype-element-description" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="name" type="xs:string"/>
+										<xs:element maxOccurs="unbounded" minOccurs="0"
+											name="parent" type="xs:string"/>
+										<xs:element name="description" type="dd:text-general-type"/>
+										<xs:element name="attributes" type="dd:attributesType"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="ConfigurationSettingDescription">
+			<xs:selector xpath="dd:body/dd:doctype-element-description"/>
+			<xs:field xpath="dd:xpath"/>
+		</xs:unique>
+	</xs:element>
+	<xs:complexType name="attributesType">
+		<xs:sequence>
+			<xs:element name="attribute" maxOccurs="unbounded" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name" type="xs:string"/>
+						<xs:element name="description" type="dd:text-general-type"/>
+						<xs:element name="target" minOccurs="0">
+							<xs:complexType>
+								<xs:all>
+									<xs:element name="location" minOccurs="0" type="dd:paragraph-type"/>
+									<xs:element name="type" type="xs:string"/>
+								</xs:all>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="values" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="unspecified" type="dd:text-general-type"
+										minOccurs="0" maxOccurs="1"/>
+									<xs:sequence maxOccurs="unbounded" minOccurs="0">
+										<xs:element name="value" type="xs:string"/>
+										<xs:element name="description" type="dd:text-general-type"/>
+									</xs:sequence>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element minOccurs="0" name="restrictions" type="dd:restrictionsType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="restrictionsType">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="restriction"
+				type="dd:text-general-type"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

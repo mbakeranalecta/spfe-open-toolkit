@@ -4,7 +4,7 @@
 <config-setting-descriptions
     xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/authoring/config-setting-descriptions.xsd">
     <head>
         <id>config-setting-descriptions</id>
         <history>

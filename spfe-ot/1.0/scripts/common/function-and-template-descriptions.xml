@@ -4,7 +4,7 @@
 <function-and-template-descriptions
     xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/authoring/xslt-function-and-template-descriptions.xsd">
     <head>
         <id>function-and-template-descriptions</id>
         <virtual-type/>

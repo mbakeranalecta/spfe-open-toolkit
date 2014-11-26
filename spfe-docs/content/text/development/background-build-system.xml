@@ -4,7 +4,7 @@
 
 <feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
     <head>
         <id>background-build-system</id>
         <history>
@@ -72,8 +72,8 @@
             </li>
         </ol>
         <p>Next, the <tool-name>spfe</tool-name> build tool runs <tool-name>ANT</tool-name> on the generated ANT build
-            file, building the <feature>content set</feature>. </p>
-        <fig-id id-ref="spfe-flow"/>
+            file, building the <feature>content set</feature>.</p>
+        
         <p>The order of operations for the build is as follows:</p>
         <ol>
             <li>

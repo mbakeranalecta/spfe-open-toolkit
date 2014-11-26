@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs"
+	xmlns:sd="http://spfeopentoolkit.org/ns/spfe-docs">
+	<xs:include
+		schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/spfe-docs-core/schemas/authoring/spfe-docs-core.xsd"/>
+
+	<xs:element name="function-and-template-descriptions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="head">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:group ref="sd:identity"/>
+							<xs:group ref="sd:tracking"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="body">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="namespace-uri" type="xs:string"/>
+							<xs:choice maxOccurs="unbounded">
+								<xs:element name="function-description"
+									type="sd:function-or-template-description-type"/>
+								<xs:element name="template-description"
+									type="sd:function-or-template-description-type"/>
+							</xs:choice>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="function-or-template-description-type">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="description" type="sd:text-general-type"/>
+			<xs:element name="return-value">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="description" type="sd:text-general-type"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="parameters">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="parameter" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="name" type="xs:string"/>
+									<xs:element name="description"
+										type="sd:text-general-type"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <essay xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/essay/schemas/essay.xsd">
+ xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/essay/schemas/authoring/essay.xsd">
     <head>
         <id>essay-namespaces</id>
         <history>
