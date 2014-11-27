@@ -1,4 +1,5 @@
-@import url("../../../config-reference/authoring/css/element-descriptions.css");
-@import url("http://spfeopentoolkit.org/spfe-docs/data-types/state-detection/authoring/css/state-detection.css");
-@import url("annotations-spfe-build.css");
-@import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/common/authoring/css/eppo-simple.css");
+@import url("http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/style/authoring/configuration-setting-descriptions.css");
+
+@import url("http://spfeopentoolkit.org/spfe-docs/data-types/state-detection/style/authoring/state-detection.css");
+@import url("http://spfeopentoolkit.org/spfe-docs/structures/annotations-spfe-build/style/authoring/annotations-spfe-build.css");
+@import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/common/style/authoring/eppo-simple.css");
