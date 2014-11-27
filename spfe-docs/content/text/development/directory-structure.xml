@@ -124,6 +124,46 @@
                 <directory-name>tocs</directory-name>, where the temporary TOC files are created.
             The link catalogs and temporary TOCs are located outside of the topic set directories
             because they are used by all topic set builds.</p>
+        <table>
+            <caption>A table</caption>
+            <thead>
+                <tr>
+                    <td>
+                        <p>Col 1</p>
+                    </td>
+                    <td>
+                        <p>Col 2</p>
+                    </td>
+                    <td>
+                        <p>Col 3</p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <p>This is a cell</p>
+                    </td>
+                    <td>
+                        <p>This is another cell</p>
+                    </td>
+                    <td>
+                        <p>This is a third cell</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>This is a new row</p>
+                    </td>
+                    <td>
+                        <p>This is a second <feature>cell</feature> in the new row</p>
+                    </td>
+                    <td>
+                        <p>This is a third cell in the new row</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         
         <p>Inside the <directory-name>topic-sets</directory-name> directory, a directory is created for each topic set in the build, with its name matching the <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> of each topic set.</p>
         

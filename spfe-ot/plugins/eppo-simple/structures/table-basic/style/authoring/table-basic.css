@@ -1,0 +1,54 @@
+table
+{
+    display:table;
+    border:1pt solid black;
+}
+
+table>caption
+{
+    display:table-caption;
+    font-weight:bold;
+}
+
+table>caption:before
+{
+    display:table-caption;
+    font-weight:bold;
+    content:"Table :"
+}
+
+table>thead
+{
+    display:table-row-group;
+}
+
+table>tbody
+{
+    display:table-row-group;
+}
+
+table>thead>tr
+{
+    display:table-row;
+}
+
+table>thead>tr>td
+{
+    display:table-cell;
+    border:1pt solid black;
+    font-weight:bold;
+    padding:2px;
+}
+
+table>tbody>tr
+{
+    display:table-row;
+}
+
+table>tbody>tr>td
+{
+    display:table-cell;
+    border:1pt solid black;
+    padding:2px;
+}
+

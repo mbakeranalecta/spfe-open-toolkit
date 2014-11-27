@@ -35,6 +35,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/graphics/schemas/authoring/graphics.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/strings/schemas/authoring/strings.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/table-basic/schemas/authoring/table-basic.xsd"/>
     
     <xs:group name="text-general">
         <xs:sequence>
@@ -51,6 +52,7 @@
                 <xs:group ref="graphics"/>
                 <xs:group ref="fragments"/>
                 <xs:group ref="fragment-ref"/>
+                <xs:group ref="table-basic"/>
             </xs:choice>
         </xs:sequence>
     </xs:group>

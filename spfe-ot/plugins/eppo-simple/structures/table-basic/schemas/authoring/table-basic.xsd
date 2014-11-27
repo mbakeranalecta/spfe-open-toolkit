@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:group name="table-basic">
+        <xs:sequence>
+            <xs:element name="table">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="table-basic">
+                            <xs:attribute name="id"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="table-basic">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="caption"/>
+            <xs:element minOccurs="0" name="thead">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="tr">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element maxOccurs="unbounded" name="td" type="td-type"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="tbody">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="tr">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element maxOccurs="unbounded" name="td" type="td-type"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="td-type">
+        <xs:sequence>
+            <xs:group ref="table-cell-content"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:group name="table-cell-content">
+        <xs:sequence>
+            <xs:group ref="paragraphs"/>
+        </xs:sequence>
+    </xs:group>
+</xs:schema>
