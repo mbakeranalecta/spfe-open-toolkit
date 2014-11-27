@@ -205,7 +205,19 @@
 			<xsl:apply-templates/>
 		</tr>
 	</xsl:template>
-
+	
+	<xsl:template match="thead">
+		<thead>
+			<xsl:apply-templates/>
+		</thead>
+	</xsl:template>
+	
+	<xsl:template match="tbody">
+		<tbody>
+			<xsl:apply-templates/>
+		</tbody>
+	</xsl:template>
+	
 	<xsl:template match="th">
 		<th align="left">
 			<xsl:call-template name="get-column-width"/>

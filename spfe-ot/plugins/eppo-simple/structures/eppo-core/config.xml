@@ -70,5 +70,10 @@
             <name>tracking</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tracking/config.xml</href>
         </structure> 
+        <structure>
+            <name>table-basic</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/config.xml</href>
+        </structure> 
+        
     </structures>
 </spfe>
