@@ -1,0 +1,17 @@
+fig
+{
+    display:block;
+    content: attr(href, url);
+    margin-left:2em;
+}
+
+fig>title
+{
+    display:block;
+    font-weight:bold;
+}
+
+fig>caption
+{
+    display:block;
+}
