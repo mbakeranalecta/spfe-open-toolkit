@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<essay xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
     http://spfeopentoolkit.org/spfe-docs/topic-types/essay/schemas/essay.xsd">
@@ -54,18 +54,6 @@
     </head>
     <body>
         <title>How does XML work?</title>
-        <byline>
-            <author-name>John Farrell MacDonald</author-name>
-        </byline>
-        
-        <precis> 
-            <p> Standardized by the World Wide Web Consortium (W3C), the
-                Extensible Markup Language (XML) has a rich body of technologies
-                and tools that support it. Though the SPFE architecture could be
-                implemented in other ways, XML was selected because of its
-                robust set of tools and the fact that it is an open
-                standard.</p> 
-        </precis>
         
         <p> The Extensible Markup Language (<term>XML</term>) is, as stated by
             its standardizing body, the <link-external
@@ -256,5 +244,5 @@
         </section>
         
     </body>
-</essay>
+</generic-topic>
 

@@ -7,8 +7,13 @@
 export SPFEOT_HOME=/Users/John/workspace/spfe-open-toolkit/spfe-ot
 export SPFE_BUILD_DIR=/Users/John/spfe-user-build
 
-rm -rf ${SPFE_BUILD_DIR}
+date |tee build.log
 
-exec $SPFEOT_HOME/spfe.sh spfe-user-config.xml "$@" 2>&1 |tee build.log
+if [ -e ${SPFE_BUILD_DIR} ]; then
+    echo "NOT Removing ${SPFE_BUILD_DIR}" |tee -a build.log
+    # rm -rf ${SPFE_BUILD_DIR}
+fi
+
+exec $SPFEOT_HOME/spfe.sh spfe-user-config.xml "$@" 2>&1 |tee -a build.log
 
 

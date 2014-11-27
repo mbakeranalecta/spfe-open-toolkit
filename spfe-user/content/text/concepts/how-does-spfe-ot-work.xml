@@ -29,31 +29,40 @@
                 <term>XSLT</term>
             </entry>
             <entry>
-                <type>product</type>
+                <type>product-name</type>
                 <term>SPFE Open Toolkit</term>
             </entry>
         </index>
     </head>
     <body>
         <title>How does the SPFE Open Toolkit work?</title>
-        <p>
-            The <product>SPFE Open Toolkit</product> is a system for transforming
-            <term>structured content</term> XML to produce output in a desired format.
-            It works by applying <term>XSLT</term> scripts to process source XML through
-            a series of steps to produce the output.
-        </p>
+        <p> The <product-name>SPFE Open Toolkit</product-name> is a system for transforming
+            <term>structured content</term> XML to produce output in a desired format.  It works by
+            processing source XML through a series of stages to produce the output.  </p>
+
         <ol>
-            <li><p>The <term>synthesis</term> stage collects source <term>topic sets</term>,
-            pulling content together to prepare it for further processing.
-            </p></li>
-            <li><p>The <term>presentation</term> stage organizes and links topics,
-            structuring content as needed for a particular output format.</p></li>
-            <li><p>The <term>formatting</term> stage produces an XML representation
-            of the format. If the output format <italic>is</italic> an XML format,
-            such as XHTML, this will be the final stage.</p></li>
-            <li><p>The <term>encoding</term> stage tranforms the XML representation to
-            the output format when that format, such as PDF, is not XML.</p></li>
+            <li> 
+                <p> The <term>synthesis</term> stage collects source <term>topic sets</term>,
+                    pulling content together to prepare it for further processing.</p> 
+            </li>
+            <li> 
+                <p> The <term>presentation</term> stage organizes and links topics,
+                    structuring content as needed for a particular output format.</p>
+            </li>
+            <li>
+                <p> The <term>formatting</term> stage produces an XML representation
+                    of the format. If the output format <italic>is</italic> an XML format,
+                    such as XHTML, this will be the final stage.</p>
+            </li>
+            <li>
+                <p> The <term>encoding</term> stage tranforms the XML representation to
+                    the output format when that format, such as PDF, is not XML.</p>
+            </li>
         </ol>
+
+        <p> Understanding the SPFE build process will help you use the toolkit and resolve problems
+            when they occur.</p>
+
     </body>
-</essay>
+</generic-topic>
     
