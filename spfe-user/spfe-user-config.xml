@@ -10,10 +10,9 @@
         <title>Using the SPFE Open Toolkit</title>
         <topic-set-type-order>
             <topic-set-type>home</topic-set-type>
-            <topic-set-type>concepts</topic-set-type>
-            <topic-set-type>operate</topic-set-type>
-            <topic-set-type>author</topic-set-type>
-            <topic-set-type>reference</topic-set-type>
+            <topic-set-type>guide</topic-set-type>
+            <topic-set-type>eppo-simple</topic-set-type>
+            <topic-set-type>configuration</topic-set-type>
             <topic-set-type>index</topic-set-type>
         </topic-set-type-order>
        
@@ -26,23 +25,18 @@
             </topic-set>
   
             <topic-set>
-                <topic-set-id>spfe-user-concepts</topic-set-id>
-                <href>topic-sets/spfe-user-concepts.xml</href>
+                <topic-set-id>spfe-user-guide</topic-set-id>
+                <href>topic-sets/spfe-user-guide.xml</href>
             </topic-set>
 
             <topic-set>
-                <topic-set-id>spfe-user-operate</topic-set-id>
-                <href>topic-sets/spfe-user-operate.xml</href>
+                <topic-set-id>spfe-user-eppo-simple</topic-set-id>
+                <href>topic-sets/spfe-user-eppo-simple.xml</href>
             </topic-set>
 
             <topic-set>
-                <topic-set-id>spfe-user-author</topic-set-id>
-                <href>topic-sets/spfe-user-author.xml</href>
-            </topic-set>          
-
-            <topic-set>
-                <topic-set-id>spfe-user-reference</topic-set-id>
-                <href>topic-sets/spfe-user-reference.xml</href>
+                <topic-set-id>spfe-configuration-reference</topic-set-id>
+                <href>topic-sets/spfe-configuration-reference.xml</href>
             </topic-set>
 
             <topic-set>

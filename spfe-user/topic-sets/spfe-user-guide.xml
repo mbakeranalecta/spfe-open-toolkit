@@ -5,12 +5,25 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set>
-        <topic-set-id>spfe-user-operate</topic-set-id>
-        <topic-set-type>operate</topic-set-type>
+        <topic-set-id>spfe-user-guide</topic-set-id>
+        <topic-set-type>guide</topic-set-type>
+
         <topic-types>
             <topic-type>
                 <name>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic</name>
                 <href>../../spfe-docs/topic-types/generic-topic/config.xml</href>
+            </topic-type>    
+            <topic-type>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic</name>
+                <href>../../spfe-docs/topic-types/think-plan-do-topic/config.xml</href>
+            </topic-type>    
+            <topic-type>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic</name>
+                <href>../../spfe-docs/topic-types/feature-topic/config.xml</href>
+            </topic-type>    
+            <topic-type>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}essay</name>
+                <href>../../spfe-docs/topic-types/essay/config.xml</href>
             </topic-type>    
         </topic-types>
          
@@ -25,9 +38,11 @@
             </output-format>
         </output-formats>
 
+
+
         <sources>
             <authored-content>
-                <include>../content/text/operate/*.xml</include>
+                <include>../content/text/using-spfe-ot/*.xml</include>
             </authored-content>
         </sources>
 
@@ -35,7 +50,7 @@
         <default-subject-scope>spfe</default-subject-scope>
         <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
         <strings>
-            <string id="eppo-simple-topic-set-title">Installing, configuring, and building output with SPFE Open Toolkit</string>
+            <string id="eppo-simple-topic-set-title">Using the SPFE Open Toolkit</string>
         </strings>
     </topic-set>
 </spfe>

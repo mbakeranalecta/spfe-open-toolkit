@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
     
     <head>
-        <id>using-oxygen-author-editor</id>
+        <id>creating-a-topic</id>
         <history>
             <revision>
                 <date>2014-10-30</date>
@@ -25,8 +25,17 @@
         </index>
     </head>
     <body>
-        <title>Using Oxygen XML Author Editor to create content</title>
-        <p>PLACE HOLDER</p>
+        <title>Creating a topic</title>
+        <understanding>
+            <p></p>
+            
+        </understanding>
+        <planning>
+            <p></p>
+        </planning>
+        <doing>
+            <p></p>
+            
+        </doing>
     </body>
-</generic-topic>
-
+</think-plan-do-topic>

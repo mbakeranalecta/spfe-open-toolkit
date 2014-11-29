@@ -9,9 +9,9 @@ export SPFE_BUILD_DIR=/Users/John/spfe-user-build
 
 date |tee build.log
 
-if [ -e ${SPFE_BUILD_DIR} ]; then
-    echo "NOT Removing ${SPFE_BUILD_DIR}" |tee -a build.log
-    # rm -rf ${SPFE_BUILD_DIR}
+if [ -e ${SPFE_BUILD_DIR}/spfe-user/build/incomplete.flag ]; then
+    echo "Previous run left a mess. Removing ${SPFE_BUILD_DIR}/spfe-user" |tee -a build.log
+    rm -rf ${SPFE_BUILD_DIR}/spfe-user
 fi
 
 exec $SPFEOT_HOME/spfe.sh spfe-user-config.xml "$@" 2>&1 |tee -a build.log

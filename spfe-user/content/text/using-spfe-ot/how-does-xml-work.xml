@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+<essay xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
     http://spfeopentoolkit.org/spfe-docs/topic-types/essay/schemas/essay.xsd">
@@ -54,7 +54,17 @@
     </head>
     <body>
         <title>How does XML work?</title>
-        
+         <byline>
+            <author-name>John Farrell MacDonald</author-name>
+        </byline>
+        <precis>
+
+            <p>Information is structured when its functional components are tagged with metadata
+                such that computer programs may retain content structure and purpose when processing
+                it.</p>
+
+        </precis>
+       
         <p> The Extensible Markup Language (<term>XML</term>) is, as stated by
             its standardizing body, the <link-external
                 href="http://www.w3.org/standards/xml/">World Wide Web

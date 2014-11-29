@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
     
     <head>
         <id>creating-subject-affinity-annotationsc</id>
@@ -26,6 +26,16 @@
     </head>
     <body>
         <title>Creating subject-affinity annotations</title>
-        <p>PLACE HOLDER</p>
-    </body>
-</generic-topic>
+            <understanding>
+            <p></p>
+            
+        </understanding>
+        <planning>
+            <p></p>
+        </planning>
+        <doing>
+            <p></p>
+            
+        </doing>
+</body>
+</think-plan-do-topic>
