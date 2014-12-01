@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
-<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<!-- (c) Copyright Analecta Communications Inc. 2014. All Rights Reserved. -->
 <generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
@@ -61,7 +61,12 @@
             <p>A <feature>text object</feature> is a piece of text smaller than a topic, but which is nevertheless a complete and strongly typed piece of content. A text object may be included in a topic in the same way as a graphic object like a picture or a video. It has a structure of its own, and does not depend on or become part of the structure of the topic in which it appears. For display purposes, the text object may be presented as a sidebar or a pop-up, or may simply be included inline at the point it is referenced. Like a topic, a text object should be indexed, and may be pulled in as a result of soft linking. Like a graphic object, it may also be called in explicitly by its URI, though generally the reliance on soft linking is recommended over explicit inclusion by URI.</p>
             <p>A fragment is a piece of miscellaneous text that can be inserted into a topic by its URI. Unlike a text object, it is not strongly typed, is not indexed, and cannot be included by soft linking. In other words, a fragment works very much like a FrameMaker text insert. A fragment becomes part of the structure of the topic into which it is included. The topic type schema must explicitly support fragments in order for a fragment to be used. To preserve the SPFE principle that every content object must be valid in itself, fragments cannot be used in any way that makes the resolution of the fragment essential to the validation of the structure of the topic into which it is inserted. In practice, this means that fragments can only be inserted at the text structured level of a schema (that is, as siblings to paragraphs, lists, etc. It also means that fragments can only contain text structure level elements (including other fragment references).</p>
             
-            <p>One consequence of this restriction is that if you wanted, for instance, to include the same section in multiple topics, you could not include the entire <xml-element-name>section</xml-element-name> element in the fragment. You would have to create the <xml-attribute-name>section</xml-attribute-name> element and its <xml-attribute-name>title</xml-attribute-name> element  in both topics, and then pull in the fragment containing the body of the section.</p>
+            <p>One consequence of this restriction is that if you wanted, for instance, to include
+                the same section in multiple topics, you could not include the entire
+                <xml-element-name>section</xml-element-name> element in the fragment. You would have
+                to create the <xml-attribute-name>section</xml-attribute-name> element and its
+                <xml-element-name>title</xml-element-name> element in both topics, and then pull in
+                the fragment containing the body of the section.</p>
             
             <p>Despite these restrictions, a fragment is not a completely generic object. Each schema may declare its own set of text-structure level elements, and its own set of sub-paragraph <feature>semantic annotation elements</feature>. Thus a fragment needs to use the same text-structure and semantic annotation elements as the content into which it is being inserted. This restriction can be enforced ether at the schema level or at the processing level, but the inclusion of an incompatible fragment must be detected at the synthesis stage at the latest to avoid an error at a later processing stage or in the output.</p> 
             

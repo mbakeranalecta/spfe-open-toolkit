@@ -18,3 +18,10 @@
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/programming/style/authoring/programming.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/table-basic/style/authoring/table-basic.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/graphics/style/authoring/graphics.css");
+
+title
+{
+    display:block;
+    font-weight:bold;
+    font-size:larger;
+}
