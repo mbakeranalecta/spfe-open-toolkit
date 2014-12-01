@@ -108,13 +108,16 @@
                 <xsl:with-param name="topic-set-id" select="topic-set-id"/>
             </xsl:call-template>
         </xsl:for-each>
+        <xsl:call-template name="create-script-files">
+            <xsl:with-param name="topic-set-id" select="'spfe.text-objects'"/>
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template match="spfe" mode="load-config">
         <xsl:variable name="this" select="."/>
         <xsl:apply-templates mode="load-config"/>
         <xsl:for-each
-            select="//topic-type/href, //object-type/href, //output-format/href, //presentation-type/href, //topic-set/href, //structure/href">
+            select="//topic-type/href, //object-type/href, //output-format/href, //presentation-type/href, //topic-set/href, //structure/href, //text-object-type/href">
             <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
                 <xsl:call-template name="sf:error">
                     <xsl:with-param name="message">Configuration file <xsl:value-of
@@ -165,8 +168,8 @@
 
 
             <target name="--build.synthesis">
-                <xsl:for-each select="$config/topic-set">
-                    <xsl:variable name="topic-set-id" select="topic-set-id"/>
+                <xsl:for-each select="$config/topic-set, $config/content-set/text-objects">
+                    <xsl:variable name="topic-set-id" select="if (topic-set-id) then topic-set-id else 'spfe.text-objects'"/>
                     <xsl:comment select="$topic-set-id"/>
                     <xsl:text>&#xa;</xsl:text>
 
@@ -215,7 +218,6 @@
                                     <pathconvert dirsep="/" pathsep=";"
                                         property="authored-content-files"
                                         refid="{$topic-set-id}.authored-content"/>
-
                                 </files-elements>
                             </build.merge>
                         </xsl:if>
@@ -238,6 +240,11 @@
                                             name="{$content-set-build}/topic-sets/{$topic-set-id}/extract/out/*.xml"
                                         />
                                     </xsl:when>
+                                    <xsl:when test="$topic-set-id eq 'spfe.text-objects'">
+                                        <xsl:for-each select="$config/content-set/text-objects/sources/authored-content/include">
+                                            <include name="{.}"/>
+                                        </xsl:for-each>
+                                    </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:for-each
                                             select="$config/topic-set[topic-set-id=$topic-set-id]/sources/authored-content/include">
@@ -255,9 +262,11 @@
                         style="{$content-set-build}/topic-sets/{$topic-set-id}/link-catalog/spfe.link-catalog.xsl"
                         output-directory="{$content-set-build}/link-catalogs"> </build.link-catalog>
 
-                    <build.toc topic-set-id="{$topic-set-id}"
+                   <xsl:if test="$topic-set-id ne 'spfe.text-objects'"> 
+                       <build.toc topic-set-id="{$topic-set-id}"
                         style="{$content-set-build}/topic-sets/{$topic-set-id}/toc/spfe.toc.xsl"
                         output-directory="{$content-set-build}/tocs"> </build.toc>
+                   </xsl:if>
 
                 </xsl:for-each>
             </target>
@@ -333,7 +342,7 @@
             <xsl:message terminate="yes">
                 <xsl:text>ERROR: /spfe/content-set not found in </xsl:text>
                 <xsl:value-of select="$configfile"/>
-                <xsl:text>. The configuration file provided to the build system must define a doc set.</xsl:text>
+                <xsl:text>. The configuration file provided to the build system must define a content set.</xsl:text>
             </xsl:message>
         </xsl:if>
         <xsl:message
@@ -416,6 +425,11 @@
         <xsl:param name="topic-set-id"/>
 
         <xsl:variable name="script-sets">
+            <xsl:if test="$topic-set-id eq 'spfe.text-objects'">
+                <xsl:for-each select="$config/text-object-type">
+                    <xsl:sequence select="scripts"/>
+                </xsl:for-each>
+            </xsl:if>
             <xsl:for-each
                 select="$config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type">
                 <xsl:variable name="name" select="name"/>
@@ -426,9 +440,12 @@
                 <xsl:variable name="name" select="name"/>
                 <xsl:sequence select="$config/object-type[name=$name]/scripts"/>
             </xsl:for-each>
+
             <xsl:for-each
-                select="$config/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name]/structures/structure">
+                select="if ($topic-set-id eq 'spfe.text-objects') then $config/text-object-type/structures/structure else $config/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name]/structures/structure">
                 <xsl:variable name="name" select="name"/>
+                
+      
                 <xsl:choose>
                     <xsl:when test="remap-namespace">
                         <xsl:variable name="remap" select="remap-namespace"/>

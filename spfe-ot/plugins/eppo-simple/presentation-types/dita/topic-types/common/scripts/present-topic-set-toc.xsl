@@ -53,6 +53,7 @@
                         <xsl:with-param name="message"
                             select="'Topic type(s) missing from topic type order list: ', string-join($topic-set-types-found[not(.=$config/config:content-set/config:topic-set-type-order/config:topic-set-type)], ', ')"
                         />
+                        <xsl:with-param name="in" select="base-uri(document(''))"/>
                     </xsl:call-template>
                 </xsl:if>
 

@@ -123,7 +123,28 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="subject-types">
+              <xs:element minOccurs="0" name="text-objects">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="sources" type="sources-type"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="text-object-types" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="text-object-type">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="xs:string"/>
+                          <xs:element name="href" type="xs:anyURI"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="subject-types" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element maxOccurs="unbounded" name="subject-type">
@@ -313,10 +334,63 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="text-object-type">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element minOccurs="0" name="structures">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="structure">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="xs:string"/>
+                          <xs:element name="href" type="xs:anyURI"/>
+                          <xs:element minOccurs="0" name="remap-namespace"
+                            type="remap-namespaces-type"> </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="scripts" type="scripts-type"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="text-object" type="text-object-type"/>
+        <xs:element name="text-objects">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="text-object">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="text-object-id"/>
+                    <xs:element name="href"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
 
+  <xs:complexType name="text-object-type">
+    <xs:sequence>
+      <xs:element name="text-object-id"/>
+      <xs:element name="sources" type="sources-type"/>
+      <xs:element name="text-object-type">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="href" type="xs:anyURI"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="sources-type">
     <xs:choice maxOccurs="unbounded">
       <xs:element name="authored-content" type="fileset-type"/>

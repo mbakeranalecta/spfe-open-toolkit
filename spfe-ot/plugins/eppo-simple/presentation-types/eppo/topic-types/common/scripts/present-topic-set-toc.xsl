@@ -53,6 +53,7 @@
                         <xsl:with-param name="message"
                             select="'Topic type(s) missing from topic type order list: ', string-join($topic-set-types-found[not(.=$config/config:content-set/config:topic-set-type-order/config:topic-set-type)], ', ')"
                         />
+                        <xsl:with-param name="in" select="base-uri(document(''))"/>
                     </xsl:call-template>
                 </xsl:if>
 
@@ -96,8 +97,17 @@
     <!-- TOC templates -->
     <xsl:template name="create-toc-page">
 
-        <xsl:variable name="topic-set-title"
-            select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+        <xsl:variable name="topic-set-title">
+            <xsl:choose>
+                <xsl:when test="$topic-set-id eq 'spfe.text-objects'">
+                    <xsl:text>Text Objects</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+            
 
         <pe:page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>

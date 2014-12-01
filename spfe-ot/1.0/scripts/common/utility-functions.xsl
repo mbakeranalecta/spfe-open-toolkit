@@ -127,8 +127,10 @@
 
 	<xsl:template name="sf:error">
 		<xsl:param name="message"/>
+		<xsl:param name="in">Not specified.</xsl:param>
 		<xsl:message>**********************************************************</xsl:message>
 		<xsl:message select="'ERROR: ', string-join($message,'')"/>
+		<xsl:message select="'In: ', $in"/>
 		<xsl:message>**********************************************************</xsl:message>
 		<xsl:message terminate="{$terminate-on-error}"/>
 	</xsl:template>

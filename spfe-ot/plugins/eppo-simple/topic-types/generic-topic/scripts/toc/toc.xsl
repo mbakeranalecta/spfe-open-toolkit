@@ -26,7 +26,14 @@
 	
 	<xsl:param name="output-directory" select="$config/config:toc-directory"/>
 
-	<xsl:variable name="title-string" select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+	<xsl:variable name="title-string">
+		<xsl:choose>
+			<xsl:when test="$topic-set-id eq 'spfe.text-objects'">Text Objects</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable> 
 	
 
 	<xsl:template name="main">

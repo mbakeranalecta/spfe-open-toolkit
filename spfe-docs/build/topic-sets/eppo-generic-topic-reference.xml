@@ -32,7 +32,7 @@
                 <include>${SPFEOT_HOME}/1.0/schemas/config/config-setting-descriptions.xml</include>
             </authored-content>
             <sources-to-extract-content-from>
-                <include>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/schemas/generic-topic.xsd</include>
+                <include>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/schemas/authoring/generic-topic.xsd</include>
                 
             </sources-to-extract-content-from>
         </sources>

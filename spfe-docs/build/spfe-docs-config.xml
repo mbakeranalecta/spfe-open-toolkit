@@ -64,7 +64,20 @@
             </topic-set>
         </topic-sets>
         
-
+        <text-objects>
+            <sources>
+                <authored-content>
+                    <include>../content/text-objects/*.xml</include>
+                </authored-content>
+            </sources>        
+        </text-objects>
+        
+        <text-object-types>
+            <text-object-type>
+                <name>table-basic</name>
+                <href>../text-object-types/table-basic/config.xml</href>
+            </text-object-type>
+        </text-object-types>
         
         <subject-types>
             <subject-type>

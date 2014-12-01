@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table-basic-object xmlns="http://spfeopentoolkit.org/ns/spfe-docs/text-objects"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs/text-objects http://spfeopentoolkit.org/spfe-docs/text-object-types/table-basic/schemas/authoring/table-basic-object.xsd">
+    <head>
+        <id>test-table-basic-text-object-1</id>
+        <history>
+            <revision>
+                <date>2014-11-28</date>
+                <author>mbaker</author>
+                <comment>Test object to implement text objects.</comment>
+                <status>Not started</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>text object</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>text objects</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <table>
+            <caption>This is a test table.</caption>
+            <thead>
+                <tr>
+                    <td>
+                        <p>Column one</p>
+                    </td>
+                    <td>
+                        <p>Column 2</p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <p>Some</p>
+                    </td>
+                    <td>
+                        <p>table</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>content </p>
+                    </td>
+                    <td>
+                        <p>here.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</table-basic-object>

@@ -54,13 +54,6 @@ version="2.0"
 	</xsl:template>
 
 
-	
-	<xsl:template match="codeblock">
-		<pe:codeblock>
-		<xsl:copy-of select="@*"/>
-			<xsl:apply-templates/>
-		</pe:codeblock>
-	</xsl:template>
 
 	<xsl:template match="terminal-session">
 	<!-- do it all here so we can control the whitespace in output -->
@@ -98,37 +91,6 @@ version="2.0"
 		<pe:bold><xsl:apply-templates/></pe:bold>
 	</xsl:template>
 	
-	<xsl:template match="table">
-		<xsl:if test="@id">
-			<pe:anchor name="table:{@id}"/>
-		</xsl:if>
-		<pe:table>
-			<xsl:copy-of select="@*"/>
-			<xsl:apply-templates/>
-		</pe:table>
-	</xsl:template>
-	
-	<xsl:template match="code-sample">
-		<pe:code-sample id="{@id}">
-			<xsl:if test="@id">
-				<anchor name="code-sample:{@id}"/>
-			</xsl:if>
-			<xsl:apply-templates select="title"/>
-			<xsl:if test="file-ref">
-				<pe:p>
-					<xsl:text>Source file: </xsl:text>
-					<xsl:apply-templates select="file-ref"/>
-				</pe:p>
-			</xsl:if>
-			<xsl:apply-templates select="codeblock"/>
-		</pe:code-sample>
-	</xsl:template>
-
-	<xsl:template match="code-sample/title">
-		<pe:title>
-			<xsl:apply-templates/>
-		</pe:title>
-	</xsl:template>
 
 	<xsl:template match="author-note">
 		<xsl:if test="$config/config:build-command='draft'">
@@ -201,30 +163,5 @@ version="2.0"
 		</pe:item>
 	</xsl:template>
 	
-	<xsl:template match="codeblock[@language='C']">
-		<xsl:variable name="scope" select="@scope"/>
-		<pe:codeblock>
-			<xsl:analyze-string select="." regex="([a-zA-z0-9]+)(\s*\()">
-				<xsl:matching-substring>
-					<xsl:choose>
-						<!-- FIXME: can we avoid enbedding "routine" here? -->
-						<xsl:when test="esf:target-exists(regex-group(1), 'routine')">
-							<xsl:variable name="routine">
-								<function-name scope="{$scope}"><xsl:value-of select="regex-group(1)"/></function-name>
-							</xsl:variable>
-							<xsl:apply-templates select="$routine"/>
-							<xsl:value-of select="regex-group(2)"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="."/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:matching-substring>
-				<xsl:non-matching-substring>
-					<xsl:value-of select="."/>
-				</xsl:non-matching-substring>
-			</xsl:analyze-string>
-		</pe:codeblock>
-	</xsl:template>
 
 </xsl:stylesheet>

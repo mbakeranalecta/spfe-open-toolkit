@@ -41,7 +41,59 @@
 								<Boolean>false</Boolean>
 							</field>
 							<field name="actionDescriptors">
-								<action-array/>
+								<action-array>
+									<action>
+										<field name="id">
+											<String>add-an-indication</String>
+										</field>
+										<field name="name">
+											<String>Add an indication</String>
+										</field>
+										<field name="description">
+											<String></String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;sign xmlns="http://spfeopentoolkit.org/ns/spfe-docs">&lt;name>&lt;/name>&lt;signal>&lt;/signal>&lt;/sign></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>child::signs[last()]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as last child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+								</action-array>
 							</field>
 							<field name="menubarDescriptor">
 								<menu>
@@ -166,6 +218,32 @@
 							<documentTypeRule>
 								<field name="namespace">
 									<String>http://spfeopentoolkit.org/ns/spfe-docs</String>
+								</field>
+								<field name="rootElem">
+									<String>*</String>
+								</field>
+								<field name="fileName">
+									<String>*</String>
+								</field>
+								<field name="publicID">
+									<String>*</String>
+								</field>
+								<field name="javaRuleClass">
+									<String></String>
+								</field>
+								<field name="attributeLocalName">
+									<String>*</String>
+								</field>
+								<field name="attributeNamespace">
+									<String>*</String>
+								</field>
+								<field name="attributeValue">
+									<String>*</String>
+								</field>
+							</documentTypeRule>
+							<documentTypeRule>
+								<field name="namespace">
+									<String>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</String>
 								</field>
 								<field name="rootElem">
 									<String>*</String>

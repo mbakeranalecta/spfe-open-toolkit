@@ -122,17 +122,6 @@
 			</xsl:choose>		
 	</xsl:template>
 	
-	<xsl:template match="p/bold">
-		<pe:bold>
-			<xsl:apply-templates/>
-		</pe:bold>
-	</xsl:template>
-	
-	<xsl:template match="p/quote">
-		<xsl:text>“</xsl:text>
-			<xsl:apply-templates/>
-		<xsl:text>”</xsl:text>
-	</xsl:template>
 	
 
 	<xsl:template match="p/name ">
