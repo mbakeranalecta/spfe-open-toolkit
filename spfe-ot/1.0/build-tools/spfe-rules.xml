@@ -362,15 +362,15 @@
 			</saxon-xslt>
 			
 			<!-- validate the output file -->
-			<echo>Validating presentation files for @{topic-set-id}.</echo>
+<!--			<echo>Validating presentation files for @{topic-set-id}.</echo>
 			<xmlvalidate lenient="no">
 				<fileset dir="@{output-directory}" includes="**/*.xml"/>
 				<xmlcatalog refid="spfe-catalogs"/>
-				<!-- make the validation include namespaces -->
+				<!-\- make the validation include namespaces -\->
 				<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
 				<attribute name="http://apache.org/xml/features/validation/schema" value="true"/>
 			</xmlvalidate>
-		</sequential>
+-->		</sequential>
 	</macrodef>
 
 	<!-- FORMAT STEP -->
