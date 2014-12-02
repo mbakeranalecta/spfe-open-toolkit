@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
+
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    
+    <head>
+        <id>content-set-config</id>
+        <history>
+            <revision>
+                <date>2014-11-29</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>content set</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>configure</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>content-set</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term></term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>SPFE content set configuration</title>
+
+        <p> The <feature>SPFE Open Toolkit</feature> build system generates output for
+            content specified in <feature>content set</feature> and <feature>topic set</feature>
+            configuration files. A valid content set configuration file is an XML file with the
+            structure described here. </p>
+
+        <section>
+            <title>Structure</title>
+            
+            <p> A <config-setting>/spfe/content-set</config-setting> configuration has the structure
+                shown in the following <feature>structure diagram</feature>.</p>
+            
+        <fig href="../../../graphics/content-set.png">
+                <title>SPFE content set structure</title>
+                <caption> <p></p> </caption>
+            </fig>
+            
+        </section>
+        
+        <section>
+            <title>Example</title>
+            <fragment-ref id-ref="content-set-example"></fragment-ref>
+        </section>
+        
+    </body>
+</feature-topic>
+

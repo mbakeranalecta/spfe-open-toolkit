@@ -15,6 +15,12 @@
                 <comment>Draft</comment>
                 <status>In progress</status>
             </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>Draft</comment>
+                <status>Ready for technical review</status>
+            </revision>
         </history>
         <index>
             <entry>
@@ -24,7 +30,7 @@
         </index>
     </head>
     <body>
-        <title>Using the SPFE Open Toolkit to Create Structured Content</title>
+        <title>Using the SPFE Open Toolkit to create structured content</title>
         
         <p> The SPFE Open Toolkit is system of XML tools for creating strongly-typed content for
             publication to the Web, to a screen, or in print. The toolkit implements the
@@ -34,7 +40,7 @@
             particularly well suited for creating content for the Web, where <link-external
             href="http://everypageispageone.com/">Every Page is Page One</link-external>. </p>
             
-        <p>Find documentation here to help you to . . .</p>
+        <p>Find documentation here to help you to accomplish the following:</p>
         <ul>
             <li>
                 <p>understand the concepts behind the SPFE Open Toolkit</p>
@@ -44,8 +50,7 @@
                     formats</p>
             </li>
             <li>
-                <p>author structured content using SPFE Open Toolkit in <link-external
-                        href="http://www.oxygenxml.com/">Oxygen XML</link-external></p>
+                <p>author structured content using the SPFE Open Toolkit. </p>
             </li>
         </ul>
         <p> Click the table-of-contents (TOC) link to begin exploring.</p>

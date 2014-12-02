@@ -2,9 +2,9 @@
 <generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
-    
+
     <head>
-        <id>reading-xml-structure-diagrams</id>
+        <id>what-are-xml-structure-diagrams</id>
         <history>
             <revision>
                 <date>2014-11-25</date>
@@ -12,10 +12,16 @@
                 <comment>New topic</comment>
                 <status>In progress</status>
             </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
         </history>
         <index>
             <entry>
-                <type>term</type>
+                <type>feature</type>
                 <term>XML</term>
             </entry>
             <entry>
@@ -25,52 +31,71 @@
         </index>
     </head>
     <body>
-        <title>Reading XML structure diagrams</title>
+        <title>What are XML structure diagrams?</title>
+
+        <p> <feature>XML</feature> markup is an effective means to create <feature> structured
+            content </feature>. An XML document that conforms to an <feature>XML Schema</feature>
+            is <italic>valid</italic> and programs that work with its defined structure know what
+            to do with the document. To create a valid XML document, you must understand its
+            defining schema.</p>
+
+        <p> But rather than dive into the technical details of schema specifications, we present
+            here diagrams to describe an XML document's valid structure.</p>
+
+        <section>
+            <title>Structure diagrams</title>
+
         <p> A box with a label, as shown in the first diagram in the figure <quote>How to read a
-            structure diagram</quote>, represents an <term>XML</term> element. The description
-            inside the box, if any, indicates what the element may contain. A group of elements that
-            work together is represented by a three-dimensional block, as shown in the second
-            diagram in the figure. Follow links a diagram's description to find a detailed
-            description of a group.</p>
-        
-        <p> A number range indicates the number of occurances an element or a group may appear.
-            If no number range is shown, the number of occurances (the <italic>multiplicity</italic>)
-            is one.</p>
-            
-        <fig uri="legend" href="../../graphics/legend.png">
+                structure diagram</quote>, represents an <feature>XML</feature> element. The
+            description inside the box, if any, indicates what the element may contain. A group of
+            elements that work together is represented by a three-dimensional block, as shown in the
+            second diagram in the figure. Find a group's detailed description in a separate
+            diagram.</p>
+
+        <p> A number range indicates the number of occurances an element or a group may appear (its
+            <italic> multiplicity </italic>).  If no number range is shown, the required number of
+            occurances is one.</p>
+
+        <fig uri="legend" href="../../../graphics/legend.png">
             <title>How to read a structure diagram</title>
             <caption><p></p></caption>
         </fig>
-        
+
+        </section>
+
         <section>
-            <title>Example</title>
+
+            <title>Example structure diagram</title>
+
             <p> In the figure "Diagram showing structure of a topic head element," the identify,
-                history, and index group of elements should appear once in the order shown inside
-                a <term>head</term> element. The figures "Identity group," "History group," and
-                "Index group" then provide the detailed structure for each group.</p>
-            
-            <fig href="../../graphics/structure-diagram-example.png">
+                history, and index group of elements should appear once in the order shown inside a
+                <xml-element-name>head</xml-element-name> element. The figures "Identity group,"
+                "History group," and "Index group" then provide the detailed structure for each
+                group.</p>
+
+            <fig href="../../../graphics/structure-diagram-example.png">
                 <title>Diagram showing structure of a topic head element</title>
                 <caption><p></p></caption>
             </fig>
-            <fig href="../../graphics/identity.png">
+            <fig href="../../../graphics/identity.png">
                 <title>Identity group</title>
                 <caption><p></p></caption>
             </fig>
-            <fig href="../../graphics/history.png">
+            <fig href="../../../graphics/history.png">
                 <title>History group</title>
                 <caption><p></p></caption>
             </fig>
-            <fig href="../../graphics/index.png">
+            <fig href="../../../graphics/index.png">
                 <title>Index group</title>
                 <caption><p></p></caption>
             </fig>
-            
-            <subhead>XML corresponding to the diagrams</subhead>
+        </section>
+        <section>
+            <title>The XML for the example diagram</title>
             <p>
-                The following <term>XML</term> document conforms to the example structure diagrams.
+                The following <feature>XML</feature> document conforms to the example structure diagrams.
             </p>
-            
+
             <codeblock>
             <![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
@@ -78,7 +103,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
     http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
-    
+
     <head>
         <id>example-generic-topic</id>
         <history>
@@ -92,7 +117,7 @@
         <index>
             <entry>
                 <type>term</type>
-                <term>XML</term>
+                <feature>XML</feature>
             </entry>
         </index>
     </head>
@@ -103,6 +128,6 @@
 ]]>
             </codeblock>
         </section>
-        
+
     </body>
 </generic-topic>

@@ -20,23 +20,18 @@
         <topic-sets>
 
             <topic-set>
-                <topic-set-id>spfe-user-home</topic-set-id>
-                <href>topic-sets/spfe-user-home.xml</href>
+                <topic-set-id>spfe-configuration-reference</topic-set-id>
+                <href>topic-sets/spfe-configuration-reference.xml</href>
             </topic-set>
-  
+
             <topic-set>
                 <topic-set-id>spfe-user-guide</topic-set-id>
                 <href>topic-sets/spfe-user-guide.xml</href>
             </topic-set>
 
             <topic-set>
-                <topic-set-id>spfe-user-eppo-simple</topic-set-id>
-                <href>topic-sets/spfe-user-eppo-simple.xml</href>
-            </topic-set>
-
-            <topic-set>
-                <topic-set-id>spfe-configuration-reference</topic-set-id>
-                <href>topic-sets/spfe-configuration-reference.xml</href>
+                <topic-set-id>spfe-user-home</topic-set-id>
+                <href>topic-sets/spfe-user-home.xml</href>
             </topic-set>
 
             <topic-set>
@@ -47,103 +42,69 @@
         </topic-sets>
 
         <subject-types>
-            
-            <subject-type>
-                <id>directory-name</id>
-                <aliases>
-                    <singular>Directory</singular>
-                    <plural>Directories</plural>
-                </aliases>
-            </subject-type>
-            
-            <subject-type>
-                <id>document-name</id>
-                <aliases>
-                    <singular>document name</singular>
-                    <plural>document names</plural>
-                </aliases>
-            </subject-type>
-            
-            <subject-type>
-                <id>feature</id>
-                <aliases>
-                    <singular>feature</singular>
-                    <plural>features</plural>
-                </aliases> 
-            </subject-type>
-            
-            <subject-type>
-                <id>file-name</id>
-                <aliases>
-                    <singular>file name</singular>
-                    <plural>file names</plural>
-                </aliases>
-            </subject-type>
-            
-            <subject-type>
-                <id>product-name</id>
-                <aliases>
-                    <singular>product</singular>
-                    <plural>products</plural>
-                </aliases>
-            </subject-type>
-
-            <subject-type>
-                <id>task</id>
-                <aliases>
-                    <singular>task</singular>
-                    <plural>tasks</plural>
-                </aliases>
-            </subject-type>
-
-            <subject-type>
-                <id>term</id>
-                <aliases>
-                    <singular>term</singular>
-                    <plural>terms</plural>
-                </aliases>
-            </subject-type>
-            
-            <subject-type>
-                <id>tool-name</id>
-                <aliases>
-                    <singular>tool</singular>
-                    <plural>tools</plural>
-                </aliases>
-            </subject-type>
-            
             <subject-type>
                 <id>config-setting</id>
                 <aliases>
-                    <singular>configuration setting</singular>
-                    <plural>configuration settings</plural>
+                    <singular>Configuration setting</singular>
+                    <plural>Configuration settings</plural>
                 </aliases>
             </subject-type>
- 
+            <subject-type>
+                <id>spfe-build-property</id>
+                <aliases>
+                    <singular>Build property</singular>
+                    <plural>Build properties</plural>
+                </aliases>
+            </subject-type>
+            <subject-type>
+                <id>feature</id>
+                <aliases>
+                    <singular>Feature</singular>
+                    <plural>Features</plural>
+                </aliases> 
+            </subject-type>
+            <subject-type>
+                <id>xslt-function-reference-entry</id>
+                <aliases>
+                    <singular>SPFE function</singular>
+                    <plural>SPFE functions</plural>
+                </aliases>
+            </subject-type>
+            <subject-type>
+                <id>xslt-function-name</id>
+                <aliases>
+                    <singular>XSLT function</singular>
+                    <plural>XSLT functions</plural>
+                </aliases>
+            </subject-type>
+            <subject-type>
+                <id>task</id>
+                <aliases>
+                    <singular>Task</singular>
+                    <plural>Tasks</plural>
+                </aliases>
+            </subject-type>
+            <subject-type>
+                <id>file-name</id>
+                <aliases>
+                    <singular>File name</singular>
+                    <plural>File names</plural>
+                </aliases>
+            </subject-type>
+            <subject-type>
+                <id>document-name</id>
+                <aliases>
+                    <singular>Document name</singular>
+                    <plural>Document names</plural>
+                </aliases>
+            </subject-type>
             <subject-type>
                 <id>xml-element-name</id>
                 <aliases>
-                    <singular>XML element</singular>
-                    <plural>XML elements</plural>
+                    <singular>XML element name</singular>
+                    <plural>XML element names</plural>
                 </aliases>
             </subject-type>
-            
-            <subject-type>
-                <id>xml-attribute-name</id>
-                <aliases>
-                    <singular>XML attribute</singular>
-                    <plural>XML attributes</plural>
-                </aliases>
-            </subject-type>
-        
-            <subject-type>
-                <id>xml-namespace-uri</id>
-                <aliases>
-                    <singular>XML namespace</singular>
-                    <plural>XML namespaces</plural>
-                </aliases>
-            </subject-type>
-        
         </subject-types>
 
         <messages>warning info</messages>

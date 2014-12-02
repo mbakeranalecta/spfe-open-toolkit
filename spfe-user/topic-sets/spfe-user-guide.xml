@@ -38,11 +38,10 @@
             </output-format>
         </output-formats>
 
-
-
         <sources>
             <authored-content>
-                <include>../content/text/using-spfe-ot/*.xml</include>
+                <include>../content/text/spfe-user-guide/*/*.xml</include>
+                <include>../content/text/reference/*.xml</include>
             </authored-content>
         </sources>
 
