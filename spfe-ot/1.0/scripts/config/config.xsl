@@ -45,9 +45,9 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="link-catalog-directory"
-        select="concat($content-set-build, '/link-catalogs')"/>
+    <xsl:variable name="link-catalog-directory" select="concat($content-set-build, '/link-catalogs')"/>
     <xsl:variable name="toc-directory" select="concat($content-set-build, '/tocs')"/>
+    <xsl:variable name="text-objects-directory" select="concat($content-set-build, '/text-objects')"/>
 
     <xsl:function name="spfe:resolve-defines" as="xs:string">
         <xsl:param name="value"/>
@@ -225,7 +225,9 @@
 
                     <build.resolve topic-set-id="{$topic-set-id}"
                         style="{$content-set-build}/topic-sets/{$topic-set-id}/resolve/spfe.resolve.xsl"
-                        output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/resolve/out">
+                        output-directory="{if ($topic-set-id eq 'spfe.text-objects')
+                                           then $text-objects-directory
+                                           else concat($content-set-build,'/topic-sets/',$topic-set-id,'/resolve/out')}">
                         <files-elements>
                             <files id="{$topic-set-id}.authored-content">
                                 <xsl:choose>

@@ -41,7 +41,7 @@
 	<xsl:param name="default-topic-scope"/>
 
 	<!-- FIXME: This should not be defaulted. -->
-	<xsl:param name="output-directory" select="concat($config/config:content-set-build, '/topic-sets/spfe.text-objects/resolve/out')"/>
+	<xsl:param name="output-directory"/>
 	
 <!-- 
 =============
@@ -50,6 +50,7 @@ Main template
 -->
 
 	<xsl:template name="main" >
+		<xsl:message select="'Outputting synthesis to:', $output-directory"></xsl:message>
 		<!-- Create the root "synthesis element" -->
 		<xsl:result-document href="file:///{$output-directory}/synthesis.xml" method="xml" indent="no" omit-xml-declaration="no">
 			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="spfe.text-objects" title="{sf:string($config//config:strings, 'product')} {sf:string($config//config:strings, 'product-release')}"> 

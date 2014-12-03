@@ -239,7 +239,7 @@
 		<attribute name="output-directory"/>
 		<element name="files-elements"/>
 		<sequential>
-			<echo>Building resolve for @{topic-set-id}.</echo>
+			<echo>Building synthesis for @{topic-set-id} in @{output-directory}.</echo>
 			<!-- run the XSLT script to produce the output -->
 			<local name="authored-content-files"/>
 			<files-elements/>
@@ -250,6 +250,7 @@
 				<params>
 					<arg value="topic-set-id=@{topic-set-id}"/>
 					<arg value="authored-content-files=${authored-content-files}"/>
+					<arg value="output-directory=@{output-directory}"/>
 					<arg value="draft=${draft}"/>
 <!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="authored-content-files" expression="${authored-content-files}"/>
