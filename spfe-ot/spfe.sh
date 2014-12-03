@@ -3,11 +3,17 @@
 # This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.
 # (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved.
 
-if [ -e "$1" ]; then
+if [ $SPFE_BUILD_DIR == ""]; then 
+SPFE_BUILD_DIR=$HOME/spfebuild 
+fi
 
-    if [ $SPFE_BUILD_DIR == ""]; then 
-        SPFE_BUILD_DIR=$HOME/spfebuild 
-    fi
+if [[ "$1" == "-clean" ]]; then
+    echo "Remove $SPFE_BUILD_DIR?"
+    rm -Ir $SPFE_BUILD_DIR
+    exit 0
+fi
+
+if [ -e "$1" ]; then
 
     echo "Building in directory: $SPFE_BUILD_DIR"
     mkdir $SPFE_BUILD_DIR
