@@ -8,7 +8,7 @@ SPFE_BUILD_DIR=$HOME/spfebuild
 fi
 
 if [[ "$1" == "-clean" ]]; then
-    echo "Remove $SPFE_BUILD_DIR?"
+    echo "This will remove $SPFE_BUILD_DIR"
     rm -Ir $SPFE_BUILD_DIR
     exit 0
 fi
