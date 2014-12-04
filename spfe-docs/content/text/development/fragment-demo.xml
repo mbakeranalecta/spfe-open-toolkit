@@ -60,5 +60,7 @@
         </fragment-ref>
         <subhead>This is a test of text objects</subhead>
         <text-object-ref id-ref="test-table-basic-text-object-1"/>
+        <subhead>This is another test of text objects</subhead>
+        <text-object-ref id-ref="test-table-basic-text-object-2"/>
     </body>
 </generic-topic>

@@ -89,13 +89,14 @@
 	</xsl:template>
 	
 	<xsl:template match="text-object-ref">
+		<xsl:variable name="id-ref" select="@id-ref"/>
 		<xsl:choose>
-			<xsl:when test="$text-objects/ss:synthesis/ss:text-object/@local-name eq @id-ref">
-				<xsl:apply-templates select="$text-objects/ss:synthesis/ss:text-object/*"/>
+			<xsl:when test="$text-objects/ss:synthesis/ss:text-object[@local-name eq $id-ref]">
+				<xsl:apply-templates select="$text-objects/ss:synthesis/ss:text-object[@local-name eq $id-ref]/*"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
-					<xsl:with-param name="message" select="'No text object found for text object reference: ', @id-ref"/>
+					<xsl:with-param name="message" select="'No text object found for text object reference: ', $id-ref"/>
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>

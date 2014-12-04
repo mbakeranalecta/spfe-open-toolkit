@@ -13,17 +13,22 @@
     <xsl:template match="table-basic-object">
         <xsl:variable name="name" select="head/id"/>
         <xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
+        <xsl:result-document href="file:///{$output-directory}/{$name}.xml" method="xml" indent="no" omit-xml-declaration="no">
+            <ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="spfe.text-objects" title="{sf:string($config//config:strings, 'product')} {sf:string($config//config:strings, 'product-release')}"> 
+                <ss:text-object 
+                    type="{$type}" 
+                    full-name="{$type}#{$name}"
+                    local-name="{$name}"
+                    title="{body/title}"
+                    excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
+                    <xsl:copy>
+                        <xsl:copy-of select="@*" copy-namespaces="no"/>
+                        <xsl:apply-templates/>
+                    </xsl:copy>
+                </ss:text-object>
+            </ss:synthesis>
+        </xsl:result-document>
         
-        <ss:text-object 
-            type="{$type}" 
-            full-name="{$type}#{$name}"
-            local-name="{$name}"
-            title="{body/title}"
-            excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
-            <xsl:copy>
-                <xsl:copy-of select="@*" copy-namespaces="no"/>
-                <xsl:apply-templates/>
-            </xsl:copy>
-        </ss:text-object>
+
     </xsl:template>
 </xsl:stylesheet>
