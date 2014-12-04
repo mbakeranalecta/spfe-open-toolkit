@@ -53,7 +53,7 @@
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
-            </toc>
+            </toc>            
         </scripts>
     </text-object-type>
 </spfe>

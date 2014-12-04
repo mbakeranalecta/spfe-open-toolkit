@@ -85,6 +85,7 @@ Main template
 				<xsl:text>Unknown element found in synthesis while creating EPPO-simple presentation: </xsl:text>
 				<xsl:value-of select="concat('{', namespace-uri(), '}', name())"/>
 			</xsl:with-param>
+			<xsl:with-param name="in" select="base-uri(document(''))"></xsl:with-param>
 		</xsl:call-template>
 		<xsl:apply-templates/>
 	</xsl:template>

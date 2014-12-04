@@ -52,7 +52,7 @@ Main template
 	<xsl:template name="main" >
 		<xsl:message select="'Outputting synthesis to:', $output-directory"></xsl:message>
 		<!-- Create the root "synthesis element" -->
-		<xsl:result-document href="file:///{$output-directory}/synthesis.xml" method="xml" indent="no" omit-xml-declaration="no">
+		<xsl:result-document href="file:///{$output-directory}/text-objects.xml" method="xml" indent="no" omit-xml-declaration="no">
 			<ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="spfe.text-objects" title="{sf:string($config//config:strings, 'product')} {sf:string($config//config:strings, 'product-release')}"> 
 				<xsl:apply-templates select="$topics">
 					<xsl:with-param name="in-scope-strings" select="$strings" tunnel="yes"/>

@@ -163,6 +163,7 @@
             <property name="spfe.build.build-directory" value="{$content-set-build}"/>
             <property name="spfe.build.output-directory" value="{$content-set-home}"/>
             <property name="spfe.build.link-catalog-directory" value="{$link-catalog-directory}"/>
+            <property name="spfe.build.text-objects-directory" value="{$text-objects-directory}"/>
             <property name="spfe.build.toc-directory" value="{$toc-directory}"/>
             <property name="spfe.content-set-id" value="{$config/content-set/content-set-id}"/>
 

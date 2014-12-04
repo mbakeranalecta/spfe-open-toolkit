@@ -58,5 +58,7 @@
                 <string id="holiday">Easter</string>
             </local-strings>
         </fragment-ref>
+        <subhead>This is a test of text objects</subhead>
+        <text-object-ref id-ref="test-table-basic-text-object-1"/>
     </body>
 </generic-topic>

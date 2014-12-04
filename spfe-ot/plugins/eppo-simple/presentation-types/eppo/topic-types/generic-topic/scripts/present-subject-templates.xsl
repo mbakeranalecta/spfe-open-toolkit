@@ -88,6 +88,19 @@
 		</xsl:choose>
 	</xsl:template>
 	
+	<xsl:template match="text-object-ref">
+		<xsl:choose>
+			<xsl:when test="$text-objects/ss:synthesis/ss:text-object/@local-name eq @id-ref">
+				<xsl:apply-templates select="$text-objects/ss:synthesis/ss:text-object/*"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message" select="'No text object found for text object reference: ', @id-ref"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
 	<xsl:template match="link-external">
 	<!-- FIXME: support other protocols -->
 		<pe:xlink href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}">
@@ -208,22 +221,6 @@
 		<pe:cross-ref target="{@id-ref}" type="step"/>
 	</xsl:template>
 	
-	<xsl:template match="text-object-ref">
-		<xsl:variable name="id" select="@id-ref"/>
-		<xsl:choose>
-			<xsl:when test="//text-object[id=$id]">
-				<pe:fold-toggle id="{generate-id()}" initial-state="folded">
-					<xsl:apply-templates/>
-				</pe:fold-toggle>
-			</xsl:when>
-			<xsl:otherwise>
-				<!-- no warning here because present-text-structures generates it -->
-				<xsl:apply-templates/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-	
-		
 	<xsl:template match="index-entry">
 		<xsl:call-template name="create-reference-link">
 			<xsl:with-param name="type" select="@type"/>

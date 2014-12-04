@@ -365,19 +365,30 @@
 			<local name="toc-files-list"/>
 			<local name="link-catalog-files"/>
 			<local name="link-catalog-list"/>
+			<local name="text-objects-files"/>
+			<local name="text-objects-list"/>
+			
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
 				<include name="resolve/out/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
+			
 			<fileset id="toc-files" dir="${spfe.build.toc-directory}">
 				<include name="*.xml"/>
 			</fileset>
 			<pathconvert property="toc-files-list" dirsep="/" pathsep=";" refid="toc-files"/>
+			
 			<fileset id="link-catalog-files" dir="${spfe.build.link-catalog-directory}">
 				<include name="*.xml"/>
 			</fileset>			
 			<pathconvert property="link-catalog-files-list" dirsep="/" pathsep=";" refid="link-catalog-files"/>
+			
+			<fileset id="text-objects-files" dir="${spfe.build.text-objects-directory}">
+				<include name="*.xml"/>
+			</fileset>			
+			<pathconvert property="text-objects-files-list" dirsep="/" pathsep=";" refid="text-objects-files"/>
+			
 			<!-- run the XSLT script to produce the output -->
 			<saxon-xslt 
 				style="@{style}" 
@@ -387,6 +398,7 @@
 					<arg value="topic-set-id=@{topic-set-id}"/>
 					<arg value="synthesis-files=${synthesis-files-list}"/>
 					<arg value="link-catalog-files=${link-catalog-files-list}"/>
+					<arg value="text-objects-files=${text-objects-files-list}"/>
 					<arg value="output-directory=@{output-directory}"/>
 					<arg value="toc-files=${toc-files-list}"/>
 <!--					<param name="topic-set-id" expression="@{topic-set-id}"/>

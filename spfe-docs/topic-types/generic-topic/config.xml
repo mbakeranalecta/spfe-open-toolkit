@@ -20,7 +20,16 @@
                     <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                 </remap-namespace>  
             </structure>
+            <structure>
+                <name>eppo-core</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
+                <remap-namespace>
+                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                    <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
+                </remap-namespace>  
+            </structure>
         </structures>
+     <!-- FIXME: text-object-types here?????????-->
         <scripts>
             <resolve>
                 <script>
@@ -66,6 +75,24 @@
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </toc>
+            <!-- FIXME: probably not the right place for this -->
+            <presentation type="eppo">
+                <script>
+                    <remap-namespace>                          
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple/text-objects</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
+                    </remap-namespace>                  
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/presentation/eppo/present-eppo-table-basic-object.xsl</href>
+                </script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
+                    </remap-namespace>                  
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/presentation/eppo/present-table-basic.xsl</href>
+                </script>
+            </presentation>
+             
         </scripts>
     </topic-type>
 </spfe>
