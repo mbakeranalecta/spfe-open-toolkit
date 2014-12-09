@@ -29,6 +29,11 @@
                     <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
                 </remap-namespace>  
             </structure>
+            <structure>
+                <name>graphic-record</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
+            </structure>
+            
         </structures>
      <!-- FIXME: text-object-types here?????????-->
         <scripts>

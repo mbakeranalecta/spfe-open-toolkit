@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table-basic-object xmlns="http://spfeopentoolkit.org/ns/eppo-simple/text-objects"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/text-objects file:/C:/Users/Mark/spfe-open-toolkit/spfe-ot/plugins/eppo-simple/text-object-types/if-then-table/schemas/authoring/if-then-table-object.xsd">
+    <head>
+        <id>id0</id>
+        <history>
+            <revision>
+                <date>2006-05-04</date>
+                <author>mbaker</author>
+                <comment>comment0</comment>
+                <status>Not started</status>
+            </revision>
+            <revision>
+                <date>2006-05-04</date>
+                <author>author1</author>
+                <comment>comment1</comment>
+                <status>Not started</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>directory-name</type>
+                <term>term0</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>term1</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <if-then-table>
+            <if-then-table-head>
+                <td>When the printer ...</td>
+                <td>And the indicator is ...</td>
+                <td>Then ...</td>
+            </if-then-table-head>
+            <if-then-table-body>
+                <if-then-row>
+                    <if>
+                        <p>Chirps once</p>
+                    </if>
+                    <then>
+                        <if-then-row>
+                            <if>
+                                <p>green</p>
+                            </if>
+                            <then>
+                                <do>
+                                    <p>retrieve print job</p>
+                                </do>
+                            </then>
+                        </if-then-row>
+                    </then>
+                </if-then-row>
+                <if-then-row>
+                    <if>
+                        <p>Beeps twice</p>
+                    </if>
+                    <then>
+                        <if-then-row>
+                            <if>
+                                <p>yellow</p>
+                            </if>
+                            <then>
+                                <do>
+                                    <p>clear paper jam</p>
+                                </do>
+                            </then>
+                        </if-then-row>
+                        <if-then-row>
+                            <if>
+                                <p>red</p>
+                            </if>
+                            <then>
+                                <do>
+                                    <p>call technician</p>
+                                </do>
+                            </then>
+                        </if-then-row>
+                        
+                    </then>
+                </if-then-row>
+            </if-then-table-body>
+        </if-then-table>
+    </body>
+</table-basic-object>

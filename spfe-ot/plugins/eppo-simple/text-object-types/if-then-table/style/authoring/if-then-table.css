@@ -1,0 +1,74 @@
+if-then-table
+{
+    display:table;
+    border:1pt solid black;
+}
+
+if-then-table>caption
+{
+    display:table-caption;
+    font-weight:bold;
+}
+
+if-then-table>caption:before
+{
+    display:table-caption;
+    font-weight:bold;
+    content:"Table :"
+}
+
+if-then-table-head
+{
+    display:table-row;
+}
+
+if-then-table-body
+{
+    display:table-row-group;
+}
+
+
+
+if-then-table-head>td
+{
+    display:table-cell;
+    border:1pt solid black;
+    font-weight:bold;
+    padding:2px;
+}
+
+if-then-table-body>if-then-row
+{
+    display:table-row;
+}
+
+if-then-table-body>if-then-row>if
+{
+    display:table-cell;
+    border:1pt solid black;
+    padding:2px;
+}
+
+then!>if-then-row
+{
+    display:table;
+}
+
+then>if-then-row
+{
+    display:table-row;
+}
+
+then>if-then-row>if
+{
+    display:table-cell;
+    border:1pt solid black;
+    padding:2px;
+}
+then>if-then-row>then!>do
+{
+    display:table-cell;
+    border:1pt solid black;
+    padding:2px;
+}
+

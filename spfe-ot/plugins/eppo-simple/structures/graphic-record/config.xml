@@ -5,18 +5,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <structure>
-        <name>graphics</name>
+        <name>graphic-record</name>
         <scripts>
             <resolve>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphics/scripts/resolve/resolve-fig.xsl</href>
-                </script>            
-            </resolve>
-            <presentation type="eppo">
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphics/scripts/presentation/eppo/present-eppo-graphics.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/scripts/resolve/resolve-graphic-record.xsl</href>
                 </script>
-            </presentation>
+            </resolve>
         </scripts>
     </structure>
 </spfe>

@@ -21,6 +21,11 @@
                     <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                 </remap-namespace>  
             </structure>
+            <structure>
+                <name>graphic-record</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
+            </structure>
+            
         </structures>
         <scripts>
             <extract>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/table-basic/schemas/authoring/table-basic.xsd"/>
+
+    <xs:element name="table-basic-object">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="head">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:group ref="identity"/>
+                            <xs:group ref="tracking"/>
+                            <xs:group ref="index"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="body">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="if-then-table">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="if-then-table-head">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element maxOccurs="unbounded" name="td"
+                                                  type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="if-then-table-body">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element maxOccurs="unbounded"
+                                                  name="if-then-row" type="if-then-row-type"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="if-then-row-type">
+        <xs:sequence>
+            <xs:element name="if">
+                <xs:complexType>
+                    <xs:group ref="table-cell-content"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="then" type="then-type"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="then-type">
+        <xs:choice>
+            <xs:element maxOccurs="unbounded" name="if-then-row" type="if-then-row-type"/>
+            <xs:element name="do">
+                <xs:complexType>
+                    <xs:group ref="table-cell-content"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+</xs:schema>

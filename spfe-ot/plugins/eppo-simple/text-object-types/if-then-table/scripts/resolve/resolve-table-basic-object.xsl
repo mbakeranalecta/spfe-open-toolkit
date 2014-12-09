@@ -13,6 +13,7 @@
     <xsl:template match="table-basic-object">
         <xsl:variable name="name" select="head/id"/>
         <xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
+        <!-- FIXME: This assumes that IDs are unique, which is not guaranteed. Should detect duplicate IDs or randomize names. -->
         <xsl:result-document href="file:///{$output-directory}/{$name}.xml" method="xml" indent="no" omit-xml-declaration="no">
             <ss:synthesis xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" topic-set-id="spfe.text-objects" title="{sf:string($config//config:strings, 'product')} {sf:string($config//config:strings, 'product-release')}"> 
                 <ss:text-object 

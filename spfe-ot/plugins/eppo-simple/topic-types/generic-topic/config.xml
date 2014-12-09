@@ -16,6 +16,10 @@
                 <name>eppo-core</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
             </structure>
+            <structure>
+                <name>graphic-record</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
+            </structure>
         </structures>        
         <scripts>
             <resolve>
