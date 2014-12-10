@@ -69,6 +69,10 @@
                 <text-object-set-id>spfe-docs-misc-tables</text-object-set-id>
                 <href>text-object-sets/spfe-docs-misc-tables.xml</href>                 
             </text-object-set>
+            <text-object-set>
+                <text-object-set-id>spfe-docs-if-then-tables</text-object-set-id>
+                <href>text-object-sets/spfe-docs-if-then-tables.xml</href>                 
+            </text-object-set>
         </text-object-sets>
         
 

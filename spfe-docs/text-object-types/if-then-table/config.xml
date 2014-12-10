@@ -25,7 +25,10 @@
         <scripts>
             <extract>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/if-then-table/scripts/extract/extract-if-then-table-object.xsl</href>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+                <script>
+                    <href>../../text-object-types/if-then-table/scripts/extract/extract-if-then-table-object.xsl</href>
                 </script>
             </extract>
             <resolve>
@@ -43,7 +46,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/if-then-table/scripts/resolve/resolve-if-then-table-object.xsl</href>
                 </script>
             </resolve>
-            <presentation type="eppo">
+<!--            <presentation type="eppo">
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
@@ -51,7 +54,7 @@
                     </remap-namespace>  
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/presentation/eppo/present-eppo-if-then-table-object.xsl</href>
                 </script>
-            </presentation>
+            </presentation>-->
         </scripts>
     </text-object-type>
 </spfe>

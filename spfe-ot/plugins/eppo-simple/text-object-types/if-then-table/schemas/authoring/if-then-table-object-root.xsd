@@ -4,7 +4,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/table-basic/schemas/authoring/table-basic.xsd"/>
 
-    <xs:element name="table-basic-object">
+    <xs:element name="if-then-table-object">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="head">
@@ -22,6 +22,12 @@
                             <xs:element name="if-then-table">
                                 <xs:complexType>
                                     <xs:sequence>
+                                        <xs:element minOccurs="0" name="title"/>
+                                        <xs:element minOccurs="0" name="caption">
+                                            <xs:complexType>
+                                                <xs:group ref="paragraphs"/>
+                                            </xs:complexType>
+                                        </xs:element>
                                         <xs:element name="if-then-table-head">
                                             <xs:complexType>
                                                 <xs:sequence>

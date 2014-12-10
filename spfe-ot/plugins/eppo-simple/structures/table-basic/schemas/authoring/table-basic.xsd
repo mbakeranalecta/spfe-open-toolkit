@@ -16,7 +16,12 @@
     </xs:group>
     <xs:complexType name="table-basic">
         <xs:sequence>
-            <xs:element minOccurs="0" name="caption"/>
+            <xs:element name="title" minOccurs="0"/>
+            <xs:element minOccurs="0" name="caption">
+                <xs:complexType>
+                    <xs:group ref="pragraphs"/>
+                </xs:complexType>
+            </xs:element>
             <xs:element minOccurs="0" name="thead">
                 <xs:complexType>
                     <xs:sequence>

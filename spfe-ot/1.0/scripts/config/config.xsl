@@ -174,10 +174,11 @@
 
 
             <target name="--build.synthesis">
-                <xsl:for-each select="$config/topic-set, $config/content-set/text-object-sets/text-object-set">
+                <xsl:for-each select="$config/topic-set, $config/text-object-set">
+                    <xsl:variable name="set-id" select="if (topic-set-id) then topic-set-id else text-object-set-id"/>
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <xsl:variable name="text-object-set-id" select="text-object-set-id"/>
-                    <xsl:comment select="$topic-set-id"/>
+                    <xsl:comment select="$set-id"/>
                     <xsl:text>&#xa;</xsl:text>
 
 
@@ -185,19 +186,23 @@
 
                         <!-- EXTRACT -->
                         <!-- FIXME: Currently, spfe-rules expects a topic-set-id. Should either generalize ID or make separate rule. -->
-                        <build.extracted-content topic-set-id="{if ($text-object-set-id) then $text-object-set-id else $topic-set-id}"
-                            style="{$content-set-build}/topic-sets/{$topic-set-id}/extract/spfe.extract.xsl"
-                            output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/extract/out">
+                        <build.extracted-content topic-set-id="{$set-id}"
+                            style="{$content-set-build}/{if($topic-set-id) then 'topic-sets' else 'text-object-sets'}/{$set-id}/extract/spfe.extract.xsl"
+                            output-directory="{$content-set-build}/{if($topic-set-id) then 'topic-sets' else 'text-object-sets'}/{$set-id}/extract/out">
                             <files-elements>
-                                <files id="{$topic-set-id}.sources-to-extract-content-from">
+                                <files id="{$set-id}.sources-to-extract-content-from">
                                     <xsl:for-each
                                         select="$config/topic-set[topic-set-id=$topic-set-id]/sources/sources-to-extract-content-from/include">
+                                        <include name="{.}"/>
+                                    </xsl:for-each>
+                                    <xsl:for-each
+                                        select="$config/text-object-set[text-object-set-id=$set-id]/sources/sources-to-extract-content-from/include">
                                         <include name="{.}"/>
                                     </xsl:for-each>
                                 </files>
                                 <pathconvert dirsep="/" pathsep=";"
                                     property="sources-to-extract-content-from"
-                                    refid="{$topic-set-id}.sources-to-extract-content-from"/>
+                                    refid="{$set-id}.sources-to-extract-content-from"/>
                             </files-elements>
                         </build.extracted-content>
 
