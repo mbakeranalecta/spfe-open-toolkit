@@ -97,6 +97,7 @@
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">
 					<xsl:with-param name="message" select="'No text object found for text object reference: ', $id-ref"/>
+					<xsl:with-param name="in" select="base-uri(document(''))"/>
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>

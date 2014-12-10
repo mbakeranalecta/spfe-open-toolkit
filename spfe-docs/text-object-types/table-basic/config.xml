@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     
     <text-object-type>
-        <name>{http://spfeopentoolkit.org/ns/spfe-docs/text-objects}if-then-table-object</name>
+        <name>{http://spfeopentoolkit.org/ns/eppo-simple/text-objects}table-basic-object</name>
         <structures>
             <structure>
                 <name>eppo-core</name>
@@ -20,6 +20,7 @@
                 <name>graphic-record</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
             </structure>
+            
         </structures>
         <scripts>
             <resolve>
@@ -29,35 +30,24 @@
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/common/scripts/resolve/resolve-text-object.xsl</href>
                 </script>
-
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple/text-objects</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/resolve/resolve-if-then-table-object.xsl</href>
+                    </remap-namespace>  
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/resolve/resolve-table-basic-object.xsl</href>
                 </script>
+                
             </resolve>
-            <link-catalog>
+            <presentation type="eppo">
                 <script>
                     <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple/text-objects</from>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
-                    </remap-namespace>                      
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/link-catalog/topic/topic-link-catalog.xsl</href>
+                    </remap-namespace>  
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/presentation/eppo/present-eppo-table-basic-object.xsl</href>
                 </script>
-                <script>
-                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
-                </script>
-            </link-catalog>
-            <toc>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/toc/toc.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
-                </script>
-            </toc>            
+            </presentation>
         </scripts>
     </text-object-type>
 </spfe>

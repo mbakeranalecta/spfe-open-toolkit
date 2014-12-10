@@ -64,20 +64,14 @@
             </topic-set>
         </topic-sets>
         
-        <text-objects>
-            <sources>
-                <authored-content>
-                    <include>../content/text-objects/*.xml</include>
-                </authored-content>
-            </sources>        
-        </text-objects>
+        <text-object-sets>
+            <text-object-set>
+                <text-object-set-id>spfe-docs-misc-tables</text-object-set-id>
+                <href>text-object-sets/spfe-docs-misc-tables.xml</href>                 
+            </text-object-set>
+        </text-object-sets>
         
-        <text-object-types>
-            <text-object-type>
-                <name>table-basic</name>
-                <href>../text-object-types/table-basic/config.xml</href>
-            </text-object-type>
-        </text-object-types>
+
         
         <subject-types>
             <subject-type>

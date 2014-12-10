@@ -80,9 +80,11 @@ Main template
 		<xsl:call-template name="sf:error">
 			<xsl:with-param name="message">
 				<xsl:text>Unknown element "</xsl:text><xsl:value-of select="local-name()"/> 
-				<xsl:text>" encountered in a text-object of type </xsl:text> <xsl:value-of select="sf:name-in-clark-notation(/*[1])"/> 
+				<xsl:text>" encountered in a text-object of type </xsl:text> 
+				<xsl:value-of select="sf:name-in-clark-notation(/*[1])"/> 
 				<xsl:text>. You probably need to add a synthesis script for this element type to the build configuration for the content set.</xsl:text>
 			</xsl:with-param>
+			<xsl:with-param name="in" select="base-uri(document(''))"/>
 		</xsl:call-template>
 	</xsl:template>
 	

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    <text-object-set>
+        <text-object-set-id>spfe-docs-misc-tables</text-object-set-id>
+        
+        <text-object-types>
+            <text-object-type>
+                <name>{http://spfeopentoolkit.org/ns/eppo-simple/text-objects}table-basic-object</name>
+                <href>../../text-object-types/table-basic/config.xml</href>
+            </text-object-type>
+        </text-object-types>
+        
+        <sources>
+            <authored-content>
+                <include>../../content/text-objects/misc-tables/*.xml</include>
+            </authored-content>
+        </sources>                  
+    </text-object-set>
+    
+</spfe>

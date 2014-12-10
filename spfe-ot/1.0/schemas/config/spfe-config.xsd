@@ -95,6 +95,28 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="text-object-set">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="text-object-set-id" type="xs:NMTOKEN"/>
+              <xs:element name="text-object-types">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="text-object-type">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="xs:string"/>
+                          <xs:element name="href" type="xs:anyURI"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="sources" type="sources-type"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="content-set">
           <xs:complexType>
             <xs:sequence>
@@ -123,10 +145,17 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element minOccurs="0" name="text-objects">
+              <xs:element minOccurs="0" name="text-object-sets">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="sources" type="sources-type"/>
+                    <xs:element name="text-object-set">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="text-object-set-id"/>
+                          <xs:element name="href"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -355,21 +384,6 @@
                 </xs:complexType>
               </xs:element>
               <xs:element name="scripts" type="scripts-type"/>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="text-object" type="text-object-type"/>
-        <xs:element name="text-objects">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="text-object">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="text-object-id"/>
-                    <xs:element name="href"/>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

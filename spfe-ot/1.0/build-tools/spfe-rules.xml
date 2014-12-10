@@ -385,7 +385,7 @@
 			<pathconvert property="link-catalog-files-list" dirsep="/" pathsep=";" refid="link-catalog-files"/>
 			
 			<fileset id="text-objects-files" dir="${spfe.build.text-objects-directory}">
-				<include name="*.xml"/>
+				<include name="**/*.xml"/>
 			</fileset>			
 			<pathconvert property="text-objects-files-list" dirsep="/" pathsep=";" refid="text-objects-files"/>
 			

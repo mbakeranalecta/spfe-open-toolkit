@@ -11,10 +11,6 @@
             <structure>
                 <name>eppo-core</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
-                <remap-namespace>
-                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                    <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                </remap-namespace>  
             </structure>
             <structure>
                 <name>graphic-record</name>
@@ -28,6 +24,9 @@
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/common/scripts/resolve/resolve-text-object.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/resolve/resolve-table-basic-object.xsl</href>
                 </script>
             </resolve>
             <presentation type="eppo">
