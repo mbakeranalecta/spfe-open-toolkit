@@ -23,65 +23,72 @@
     <xsl:variable name="state-detection" select="sf:get-sources($sources-to-extract-content-from)"/>
 
     <xsl:template name="main">
-        <!-- Create the root "extracted-content element" -->
-        <xsl:result-document
-            href="file:///{concat($output-directory, '/if-then-table-objects.xml')}"
-            method="xml" indent="yes" omit-xml-declaration="no">
-
-            <xsl:apply-templates select="$state-detection"/>
-
-        </xsl:result-document>
+        <!-- FIXME: Should check for duplicate IDs. -->
+        <xsl:apply-templates select="$state-detection"/>
     </xsl:template>
 
     <xsl:template match="state-detection">
-        <sdto:if-then-table-object>
-            <sdto:head>
-                <sdto:id>
-                    <xsl:value-of select="id"/>
-                </sdto:id>
-            </sdto:head>
-            <sdto:body>
-                <sdto:if-then-table>
-                    <xsl:if test="title">
-                        <sdto:title>
-                            <xsl:apply-templates select="title"/>
-                        </sdto:title>
-                    </xsl:if>
-                    <xsl:if test="caption">
-                        <sdto:title>
-                            <xsl:apply-templates select="caption"/>
-                        </sdto:title>
-                    </xsl:if>
-                    <sdto:if-then-table-head>
-                        <xsl:for-each select="signs/sign">
-                            <sdto:td>
-                                <xsl:choose>
-                                    <xsl:when test="position()=1">
-                                        <xsl:text>When </xsl:text>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:text>And </xsl:text>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                                <xsl:value-of select="caption"/>
-                                <xsl:text> is ...</xsl:text>
-                            </sdto:td>
-                        </xsl:for-each>
-                        <sdto:td>Then ...</sdto:td>
-                    </sdto:if-then-table-head>
-                    <sdto:if-then-table-body>
-                        <xsl:call-template name="process-signs">
-                            <xsl:with-param name="signs" select="signs/sign"/>
-                            <xsl:with-param name="sign-number" select="1"/>
-                            <xsl:with-param name="states" select="states/state"/>
-                        </xsl:call-template>
-                    </sdto:if-then-table-body>
-                </sdto:if-then-table>
-            </sdto:body>
-        </sdto:if-then-table-object>
+        <xsl:result-document
+            href="file:///{$output-directory}/{id}.xml"
+            method="xml" indent="yes" omit-xml-declaration="no">
+           <sdto:if-then-table-object>
+               <sdto:head>
+                   <sdto:id>
+                       <xsl:value-of select="id"/>
+                   </sdto:id>
+               </sdto:head>
+               <sdto:body>
+                   <sdto:if-then-table>
+                       <xsl:if test="title">
+                           <sdto:title>
+                               <xsl:apply-templates select="title"/>
+                           </sdto:title>
+                       </xsl:if>
+                       <xsl:if test="caption">
+                           <sdto:caption>
+                               <xsl:apply-templates select="caption"/>
+                           </sdto:caption>
+                       </xsl:if>
+                       <sdto:if-then-table-head>
+                           <xsl:for-each select="signs/sign">
+                               <sdto:td>
+                                   <xsl:choose>
+                                       <xsl:when test="position()=1">
+                                           <xsl:text>When </xsl:text>
+                                       </xsl:when>
+                                       <xsl:otherwise>
+                                           <xsl:text>And </xsl:text>
+                                       </xsl:otherwise>
+                                   </xsl:choose>
+                                   <xsl:value-of select="caption"/>
+                                   <xsl:text> ...</xsl:text>
+                               </sdto:td>
+                           </xsl:for-each>
+                           <sdto:td>Then ...</sdto:td>
+                       </sdto:if-then-table-head>
+                       <sdto:if-then-table-body>
+                           <xsl:call-template name="process-signs">
+                               <xsl:with-param name="signs" select="signs/sign"/>
+                               <xsl:with-param name="sign-number" select="1"/>
+                               <xsl:with-param name="states" select="states/state"/>
+                           </xsl:call-template>
+                       </sdto:if-then-table-body>
+                   </sdto:if-then-table>
+               </sdto:body>
+           </sdto:if-then-table-object>
+        </xsl:result-document>
     </xsl:template>
 
     <xsl:template match="state-detection/*"/> 
+    
+    <xsl:template match="state-detection/title">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="state-detection/caption">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
 
     <xsl:template name="process-signs">
         <xsl:param name="signs"/>

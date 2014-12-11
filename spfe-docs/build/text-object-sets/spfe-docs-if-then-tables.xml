@@ -14,7 +14,7 @@
         
         <sources>
             <sources-to-extract-content-from>
-                <include>../../content/data/state-detection/state-detection-demo1.xml</include>
+                <include>../../content/data/state-detection/*.xml</include>
             </sources-to-extract-content-from>
         </sources>                  
     </text-object-set>
