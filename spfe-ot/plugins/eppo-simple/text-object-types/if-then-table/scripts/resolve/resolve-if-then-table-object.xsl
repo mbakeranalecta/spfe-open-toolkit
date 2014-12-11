@@ -85,7 +85,7 @@
     </xsl:template>
     
     <xsl:template match="if-then-table-body//if">
-        <xsl:variable name="num-alts" select="count(following-sibling::then/if-then-row)"/>
+        <xsl:variable name="num-alts" select="count(../descendant::do)"/>
            <td>
                <xsl:if test="$num-alts gt 1">
                    <xsl:attribute name="rowspan" select="$num-alts"/>
