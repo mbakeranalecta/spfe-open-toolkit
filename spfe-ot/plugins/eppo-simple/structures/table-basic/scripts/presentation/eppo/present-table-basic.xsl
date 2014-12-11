@@ -61,6 +61,8 @@ version="2.0"
 	
 	<xsl:template match="table/tbody/tr/td">
 		<pe:td>
+			<!-- FIXME: Hack to get the if-then-tables working. -->
+			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
 		</pe:td>
 	</xsl:template>

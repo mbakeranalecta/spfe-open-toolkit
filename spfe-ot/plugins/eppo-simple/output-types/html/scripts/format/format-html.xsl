@@ -227,6 +227,8 @@
 
 	<xsl:template match="td">
 		<td align="left" valign="top">
+			<!-- FIXME: Hack to get if-the-tables working. -->
+			<xsl:copy-of select="@*"/>
 			<xsl:call-template name="get-column-width"/>
 			<xsl:apply-templates/>
 		</td>

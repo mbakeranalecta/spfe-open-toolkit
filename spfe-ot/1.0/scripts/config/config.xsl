@@ -178,6 +178,7 @@
                     <xsl:variable name="set-id" select="if (topic-set-id) then topic-set-id else text-object-set-id"/>
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <xsl:variable name="text-object-set-id" select="text-object-set-id"/>
+                    <xsl:variable name="dir-path" select="if($topic-set-id) then 'topic-sets' else 'text-object-sets'"/>
                     <xsl:comment select="$set-id"/>
                     <xsl:text>&#xa;</xsl:text>
 
@@ -187,8 +188,8 @@
                         <!-- EXTRACT -->
                         <!-- FIXME: Currently, spfe-rules expects a topic-set-id. Should either generalize ID or make separate rule. -->
                         <build.extracted-content topic-set-id="{$set-id}"
-                            style="{$content-set-build}/{if($topic-set-id) then 'topic-sets' else 'text-object-sets'}/{$set-id}/extract/spfe.extract.xsl"
-                            output-directory="{$content-set-build}/{if($topic-set-id) then 'topic-sets' else 'text-object-sets'}/{$set-id}/extract/out">
+                            style="{$content-set-build}/{$dir-path}/{$set-id}/extract/spfe.extract.xsl"
+                            output-directory="{$content-set-build}/{$dir-path}/{$set-id}/extract/out">
                             <files-elements>
                                 <files id="{$set-id}.sources-to-extract-content-from">
                                     <xsl:for-each
@@ -209,19 +210,19 @@
                         <!-- FIXME: need to distinguish merge content from regular topic content. -->
                         <xsl:if test="sources/authored-content/include">
                             <!-- MERGE -->
-                            <build.merge topic-set-id="{$topic-set-id}"
-                                style="{$content-set-build}/topic-sets/{$topic-set-id}/merge/spfe.merge.xsl"
-                                output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/merge/out">
+                            <build.merge topic-set-id="{$set-id}"
+                                style="{$content-set-build}/{$dir-path}/{$set-id}/merge/spfe.merge.xsl"
+                                output-directory="{$content-set-build}/{$dir-path}/{$set-id}/merge/out">
                                 <files-elements>
-                                    <files id="{$topic-set-id}.extracts-to-merge-content-with">
+                                    <files id="{$set-id}.extracts-to-merge-content-with">
                                         <include
-                                            name="{$content-set-build}/topic-sets/{$topic-set-id}/extract/out/*.xml"
+                                            name="{$content-set-build}/{$dir-path}/{$set-id}/extract/out/*.xml"
                                         />
                                     </files>
                                     <pathconvert dirsep="/" pathsep=";"
                                         property="extracts-to-merge-content-with"
-                                        refid="{$topic-set-id}.extracts-to-merge-content-with"/>
-                                    <files id="{$topic-set-id}.authored-content">
+                                        refid="{$set-id}.extracts-to-merge-content-with"/>
+                                    <files id="{$set-id}.authored-content">
                                         <xsl:for-each
                                             select="$config/topic-set[topic-set-id=$topic-set-id]/sources/authored-content/include">
                                             <include name="{.}"/>
@@ -229,31 +230,29 @@
                                     </files>
                                     <pathconvert dirsep="/" pathsep=";"
                                         property="authored-content-files"
-                                        refid="{$topic-set-id}.authored-content"/>
+                                        refid="{$set-id}.authored-content"/>
                                 </files-elements>
                             </build.merge>
                         </xsl:if>
                     </xsl:if>
 
-                    <build.resolve topic-set-id="{$topic-set-id}"
-                        style="{if ($text-object-set-id)
-                        then concat($content-set-build, '/text-object-sets/', $text-object-set-id, '/resolve/spfe.resolve.xsl')
-                        else concat($content-set-build, '/topic-sets/', $topic-set-id, '/resolve/spfe.resolve.xsl')}"
+                    <build.resolve topic-set-id="{$set-id}"
+                        style="{$content-set-build}/{$dir-path}/{$set-id}/resolve/spfe.resolve.xsl"
                         output-directory="{if ($text-object-set-id)
                                            then concat($text-objects-directory, '/', $text-object-set-id)
                                            else concat($content-set-build,'/topic-sets/',$topic-set-id,'/resolve/out')}">
                         <files-elements>
-                            <files id="{$topic-set-id}.authored-content">
+                            <files id="{$set-id}.authored-content">
                                 <xsl:choose>
                                     <xsl:when
                                         test="sources/sources-to-extract-content-from/include and sources/authored-content/include">
                                         <include
-                                            name="{$content-set-build}/topic-sets/{$topic-set-id}/merge/out/*.xml"
+                                            name="{$content-set-build}/{$dir-path}/{$set-id}/merge/out/*.xml"
                                         />
                                     </xsl:when>
                                     <xsl:when test="sources/sources-to-extract-content-from/include">
                                         <include
-                                            name="{$content-set-build}/topic-sets/{$topic-set-id}/extract/out/*.xml"
+                                            name="{$content-set-build}/{$dir-path}/{$set-id}/extract/out/*.xml"
                                         />
                                     </xsl:when>
                                     <xsl:when test="$text-object-set-id">
@@ -270,7 +269,7 @@
                                 </xsl:choose>
                             </files>
                             <pathconvert dirsep="/" pathsep=";" property="authored-content-files"
-                                refid="{$topic-set-id}.authored-content"/>
+                                refid="{$set-id}.authored-content"/>
                         </files-elements>
                     </build.resolve>
 

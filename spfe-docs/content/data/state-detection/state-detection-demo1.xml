@@ -14,6 +14,7 @@
             <signals>
                 <signal>chirps</signal>
                 <signal>beeps twice</signal>
+                <signal>honks</signal>
             </signals>
         </sign>
         <sign>
@@ -23,6 +24,17 @@
                 <signal>red</signal>
                 <signal>yellow</signal>
                 <signal>green</signal>
+            </signals>
+        </sign>
+        <sign>
+            <name>screen</name>
+            <caption>screen reads</caption>
+            <signals>
+                <signal>paper jam</signal>
+                <signal>out of toner</signal>
+                <signal>call technician</signal>
+                <signal>print job complete</signal>
+                <signal>out of paper</signal>
             </signals>
         </sign>
     </signs>
@@ -39,6 +51,10 @@
                     <name>indicator</name>
                     <signal>green</signal>
                 </sign>
+                <sign>
+                    <name>screen</name>
+                    <signal>print job complete</signal>
+                </sign>
             </signs>
         </state>
         <state>
@@ -53,6 +69,10 @@
                     <name>indicator</name>
                     <signal>yellow</signal>
                 </sign>
+                <sign>
+                    <name>screen</name>
+                    <signal>paper jam</signal>
+                </sign>
             </signs>
         </state>
         <state>
@@ -66,6 +86,54 @@
                 <sign>
                     <name>indicator</name>
                     <signal>red</signal>
+                </sign>
+                <sign>
+                    <name>screen</name>
+                    <signal>call technician</signal>
+                </sign>
+            </signs>
+        </state>
+        <state>
+            <name>toner-low</name>
+            <action>install new toner cartridge</action>
+            <signs>
+                <sign>
+                    <name/>
+                    <signal/>
+                </sign>
+                <sign>
+                    <name>printer</name>
+                    <signal>honks</signal>
+                </sign>
+                <sign>
+                    <name>indicator</name>
+                    <signal>red</signal>
+                </sign>
+                <sign>
+                    <name>screen</name>
+                    <signal>out of toner</signal>
+                </sign>
+            </signs>
+        </state>
+        <state>
+            <name>out-of-paper</name>
+            <action>add paper to paper tray</action>
+            <signs>
+                <sign>
+                    <name/>
+                    <signal/>
+                </sign>
+                <sign>
+                    <name>printer</name>
+                    <signal>beeps twice</signal>
+                </sign>
+                <sign>
+                    <name>indicator</name>
+                    <signal>yellow</signal>
+                </sign>
+                <sign>
+                    <name>screen</name>
+                    <signal>out of paper</signal>
                 </sign>
             </signs>
         </state>

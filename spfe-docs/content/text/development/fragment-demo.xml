@@ -62,5 +62,7 @@
         <text-object-ref id-ref="test-table-basic-text-object-1"/>
         <subhead>This is another test of text objects</subhead>
         <text-object-ref id-ref="test-table-basic-text-object-2"/>
+        <subhead>This is another test of if-then-table text objects</subhead>
+        <text-object-ref id-ref="troubleshoot-printer"/>  
     </body>
 </generic-topic>
