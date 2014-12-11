@@ -3,7 +3,7 @@ state-detection
     display:block;
     color:#555555;
     -oxy-display-tags:none;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
     padding-left:2em;
 }
 
@@ -13,7 +13,7 @@ state-detection:before
     font-weight: bold;
     -oxy-display-tags:none;
     color:#555555;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
     font-size:larger;
 }
 
@@ -34,7 +34,7 @@ state-detection>id:before
     font-weight: bold;
     -oxy-display-tags:none;
     color:#555555;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
 }
 
 state-detection>title
@@ -54,7 +54,7 @@ state-detection>title:before
     font-weight: bold;
     -oxy-display-tags:none;
     color:#555555;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
 }
 
 state-detection>caption
@@ -73,7 +73,7 @@ state-detection>caption:before
     font-weight: bold;
     -oxy-display-tags:none;
     color:#555555;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
 }
 
 state-detection>signs
@@ -92,6 +92,14 @@ state-detection>signs:before
     color:#555555;
 }
 
+state-detection>signs:after
+{
+    content: 
+        oxy_editor(
+            type, button,
+            actionID, "add-a-sign");  
+}
+
 state-detection>signs>sign 
 {
     display:block;
@@ -101,6 +109,13 @@ state-detection>signs>sign
     margin-bottom:1em;
 }
 
+state-detection>signs>sign>signals:after
+{
+    content: 
+        oxy_editor(
+            type, button,
+            actionID, "add-a-signal");  
+}
 state-detection>signs>sign>name:before
 {
     display:inline;
@@ -108,7 +123,7 @@ state-detection>signs>sign>name:before
     font-weight: bold;
     -oxy-display-tags:none;
     color:#555555;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
 }
 
 state-detection>signs>sign>signals:before
@@ -153,7 +168,7 @@ state-detection>signs>sign>caption:before
     display:inline;
     font-weight: bold;
     content: "Caption: ";
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
     -oxy-display-tags:none;
     color:#555555;
 }
@@ -176,7 +191,7 @@ state-detection>signs>sign>signals>signal:before
     display: inline;
     content: "Signal: ";
     -oxy-display-tags:none;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
     color:#555555;
 }
 
@@ -193,6 +208,15 @@ state-detection>states:before
     content: "States are the condition a subject may be in. A state is indicated by a set of signs and signals.";
     -oxy-display-tags:none;
     color:#555555;
+}
+
+state-detection>states:after
+{
+        content: 
+        oxy_editor(
+            type, button,
+            actionID, "add-a-state");
+
 }
 
 state-detection>states>state
@@ -220,7 +244,7 @@ state-detection>states>state>name:before
     content: "State: ";
     -oxy-display-tags:none;
     color:#555555;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
     margin-left:2em;
 }
 
@@ -228,7 +252,7 @@ state-detection>states>state>action:before
 {
     -oxy-display-tags:none;
     display:inline;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
     color:#555555;
     content: "Action: ";
     font-weight:bold;  
@@ -267,14 +291,14 @@ state-detection>states>state>action:after
     -oxy-display-tags:none;
     display:table-caption;
     content: "Indications. (The combination of signs and signals that indicate this state.)";
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
     color:#555555;
     font-weight:bold;  
 }
 
 state-detection states state:after 
 {
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
     color:#555555;
     content: 
         oxy_editor(
@@ -300,14 +324,14 @@ state-detection>states>state>signs>sign>name
     margin:2px;
     -oxy-editable:true;
     padding:2px;
-    border:1pt solid #BBBBBB;
+    border:1pt solid #CCCCCC;
 }
 
 state-detection>states>state>signs>sign:first-child>name:before
 {
     -oxy-display-tags:none;
     display:table-cell;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
     color:#555555;
     content: "Sign: ";
     font-weight:bold;
@@ -323,7 +347,7 @@ state-detection>states>state>signs>sign>signal
     margin:2px;
     -oxy-editable:true;
     padding:2px;
-    border:1pt solid #BBBBBB;
+    border:1pt solid #CCCCCC;
 }
 
 state-detection>states>state>signs>sign:first-child>signal:before
@@ -331,7 +355,7 @@ state-detection>states>state>signs>sign:first-child>signal:before
     -oxy-display-tags:none;
     display:table-cell;
     color:#555555;
-    background-color:#BBBBBB;
+    background-color:#CCCCCC;
     content: "Signal: ";
     font-weight:bold;
 }
