@@ -316,6 +316,33 @@ state-detection>states>state>signs>sign
 
 state-detection>states>state>signs>sign>name
 {
+    content: 
+        oxy_combobox(           
+            edit, "#text",
+            editable, true,
+            values, oxy_xpath(
+                "string-join(/state-detection/signs/sign/name/text(),',')",
+                processChageMarkers,
+                true));
+    visibility:-oxy-collapse-text;
+}
+
+state-detection>states>state>signs>sign>signal
+{
+    content: 
+        oxy_combobox(           
+            edit, "#text",
+            editable, true,
+            values, oxy_xpath(
+                oxy_concat(
+                    "string-join(/state-detection/signs/sign[name = '", oxy_xpath("preceding-sibling::name/text()"), "']/signals/signal/text(),',')")
+                    )
+         );
+    visibility:-oxy-collapse-text;
+}
+
+state-detection>states>state>signs>sign>name
+{
     -oxy-display-tags:none;
     display:table-cell;
     background-color:white;

@@ -57,15 +57,6 @@
             <local-strings>
                 <string id="holiday">Easter</string>
             </local-strings>
-        </fragment-ref>
-        <subhead>This is a test of text objects</subhead>
-        <text-object-ref id-ref="test-table-basic-text-object-1"/>
-        <subhead>This is another test of text objects</subhead>
-        <text-object-ref id-ref="test-table-basic-text-object-2"/>
-        <subhead>This a test of if-then-table text objects</subhead>
-        <text-object-ref id-ref="troubleshoot-simple-printer"/>  
-        <subhead>This is another test of if-then-table text objects</subhead>
-        <text-object-ref id-ref="troubleshoot-printer"/>  
-        
+        </fragment-ref>        
     </body>
 </generic-topic>

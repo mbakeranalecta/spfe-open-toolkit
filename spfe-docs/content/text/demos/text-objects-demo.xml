@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
+    <head>
+        <id>text-objects-demo</id>
+        <history>
+            <revision>
+                <date>2014-07-31</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>text object</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>text objects</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Text Objects Demo</title>
+
+        <subhead>This is a test of text objects</subhead>
+        <text-object-ref id-ref="test-table-basic-text-object-1"/>
+        <subhead>This is another test of text objects</subhead>
+        <text-object-ref id-ref="test-table-basic-text-object-2"/>
+       
+    </body>
+</generic-topic>

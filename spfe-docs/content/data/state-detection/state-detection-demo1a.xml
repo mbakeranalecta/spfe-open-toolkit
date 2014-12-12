@@ -4,9 +4,9 @@
 <state-detection xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/data-types/state-detection/schemas/state-detection-topic.xsd">
-    <id>troubleshoot-advanced-printer</id>
-    <title>Troubleshoot your advanced printer</title>
-    <caption>Determining the status of your advanced printer.</caption>
+    <id>troubleshoot-simple-printer-toner</id>
+    <title>Troubleshoot your simple printer</title>
+    <caption>Determining the status of your simple printer.</caption>
     <signs>
         <sign>
             <name>printer</name>
@@ -26,17 +26,6 @@
                 <signal>green</signal>
             </signals>
         </sign>
-        <sign>
-            <name>screen</name>
-            <caption>the screen reads</caption>
-            <signals>
-                <signal>paper jam</signal>
-                <signal>out of toner</signal>
-                <signal>call technician</signal>
-                <signal>print job complete</signal>
-                <signal>out of paper</signal>
-            </signals>
-        </sign>
     </signs>
     <states>
         <state>
@@ -50,10 +39,6 @@
                 <sign>
                     <name>indicator</name>
                     <signal>green</signal>
-                </sign>
-                <sign>
-                    <name>screen</name>
-                    <signal>print job complete</signal>
                 </sign>
             </signs>
         </state>
@@ -69,10 +54,6 @@
                     <name>indicator</name>
                     <signal>yellow</signal>
                 </sign>
-                <sign>
-                    <name>screen</name>
-                    <signal>paper jam</signal>
-                </sign>
             </signs>
         </state>
         <state>
@@ -87,15 +68,11 @@
                     <name>indicator</name>
                     <signal>red</signal>
                 </sign>
-                <sign>
-                    <name>screen</name>
-                    <signal>call technician</signal>
-                </sign>
             </signs>
         </state>
         <state>
-            <name>toner-low</name>
-            <action>install new toner cartridge</action>
+            <name>out of toner</name>
+            <action>change the toner cartridge</action>
             <signs>
                 <sign>
                     <name>printer</name>
@@ -105,27 +82,19 @@
                     <name>indicator</name>
                     <signal>yellow</signal>
                 </sign>
-                <sign>
-                    <name>screen</name>
-                    <signal>out of toner</signal>
-                </sign>
             </signs>
         </state>
         <state>
-            <name>out-of-paper</name>
-            <action>add paper to paper tray</action>
+            <name>on fire</name>
+            <action>leave the building and call the fire deparetment</action>
             <signs>
                 <sign>
                     <name>printer</name>
-                    <signal>beeps twice</signal>
+                    <signal>beeps three times</signal>
                 </sign>
                 <sign>
                     <name>indicator</name>
-                    <signal>yellow</signal>
-                </sign>
-                <sign>
-                    <name>screen</name>
-                    <signal>out of paper</signal>
+                    <signal>red</signal>
                 </sign>
             </signs>
         </state>

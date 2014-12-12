@@ -57,7 +57,12 @@
                 <topic-set-id>spfe-docs-essays</topic-set-id>
                 <href>topic-sets/spfe-docs-essays.xml</href>
             </topic-set>
-
+            
+            <topic-set>
+                <topic-set-id>spfe-demos</topic-set-id>
+                <href>topic-sets/spfe-demos.xml</href>
+            </topic-set>
+            
             <topic-set>
                 <topic-set-id>spfe-docs-lists</topic-set-id>
                 <href>topic-sets/spfe-docs-lists.xml</href>

@@ -70,15 +70,5 @@
                 </sign>
             </signs>
         </state>
-        <state>
-            <name/>
-            <action/>
-            <signs>
-                <sign>
-                    <name/>
-                    <signal/>
-                </sign>
-            </signs>
-        </state>
     </states>
 </state-detection>
