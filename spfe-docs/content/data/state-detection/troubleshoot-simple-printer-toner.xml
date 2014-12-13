@@ -71,7 +71,7 @@
             </signs>
         </state>
         <state>
-            <name>out of toner</name>
+            <name>out-of-toner</name>
             <action>change the toner cartridge</action>
             <signs>
                 <sign>
@@ -85,7 +85,7 @@
             </signs>
         </state>
         <state>
-            <name>on fire</name>
+            <name>on-fire</name>
             <action>leave the building and call the fire deparetment</action>
             <signs>
                 <sign>

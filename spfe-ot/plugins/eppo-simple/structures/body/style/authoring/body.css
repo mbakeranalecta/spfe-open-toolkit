@@ -16,5 +16,11 @@ body>title
     font-size:large;
 }
 
+body>section>title
+{
+    display:block;
+    font-family:sans-serif;
+    font-size:larger;
+}
 
 
