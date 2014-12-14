@@ -29,7 +29,7 @@
 
         <sources>
             <authored-content>
-                <include>../../content/text/essays/*.xml</include>
+                <include>../../content/topics/essays/*.xml</include>
             </authored-content>
         </sources>
 

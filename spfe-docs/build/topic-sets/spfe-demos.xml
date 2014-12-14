@@ -29,8 +29,8 @@
 
         <sources>
             <authored-content>
-                <include>../../content/text/demos/*.xml</include>
-                <include>../../content/text/fragments/*.xml</include>
+                <include>../../content/topics/demos/*.xml</include>
+                <include>../../content/topics/fragments/*.xml</include>
             </authored-content>
         </sources>
 

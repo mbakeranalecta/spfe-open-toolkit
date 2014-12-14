@@ -35,7 +35,7 @@
         </output-formats>
         <sources>
             <authored-content>
-                <include>../../content/text/xsl-function-ref/*.xml</include>
+                <include>../../content/topics/xsl-function-ref/*.xml</include>
                 <include>${SPFEOT_HOME}/1.0/scripts/common/function-and-template-descriptions.xml</include>
             </authored-content>
             <sources-to-extract-content-from>
