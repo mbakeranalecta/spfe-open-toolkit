@@ -79,7 +79,7 @@
         </xsl:result-document>
     </xsl:template>
 
-    <xsl:template match="state-detection/*"/> 
+    <xsl:template match="state-detection/*" priority="-1"/> 
     
     <xsl:template match="state-detection/title">
         <xsl:apply-templates/>
