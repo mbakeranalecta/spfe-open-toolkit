@@ -105,10 +105,14 @@
 			<xsl:with-param name="message">
 				<xsl:choose>
 					<xsl:when test="$config/config:build-command eq 'draft'">
-						<xsl:text>Creating a draft format because build command was "draft".</xsl:text>
+						<xsl:text>Creating a draft HTML format of </xsl:text>
+						<xsl:value-of select="$topic-set-id"/>
+						<xsl:text> because build command was "draft".</xsl:text>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:text>Creating a final format.</xsl:text>
+						<xsl:text>Creating a final HTML format of </xsl:text>
+						<xsl:value-of select="$topic-set-id"/>
+						<xsl:text> because build command was "final".</xsl:text>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:with-param>
