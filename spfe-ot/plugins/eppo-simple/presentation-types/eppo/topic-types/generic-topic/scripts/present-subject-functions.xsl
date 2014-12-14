@@ -196,7 +196,6 @@
 				<!-- Choose the target page with the highest link priority -->
 				<!-- Arbitrarilly picks the first in sequence if more than one page with same priority -->
 				<xsl:variable name="highest-priority-page" select="$target-page[number(@link-priority) eq min($target-page/@link-priority)][1]"/>	
-				<!-- FIXME: This test has never been tested. Need a test case for it. -->
 				<xsl:if test="count($target-page[number(@link-priority) eq min($target-page/@link-priority)]) > 1">
 					<xsl:call-template name="sf:warning">
 						<xsl:with-param name="message">
@@ -206,6 +205,7 @@
 							<xsl:value-of select="'&#x000A;The target is: ', $target"/>
 							<xsl:value-of select="'&#x000A;The type is: ', $type"/>
 							<xsl:value-of select="'&#x000A;The priority is: ', min($target-page/@link-priority)"/>
+							<xsl:text>&#x000A;Arbitrarily picking a page to link to.</xsl:text>
 						</xsl:with-param>
 					</xsl:call-template>					
 				</xsl:if>
