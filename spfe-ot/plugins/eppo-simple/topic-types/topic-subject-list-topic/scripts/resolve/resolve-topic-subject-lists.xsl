@@ -81,7 +81,7 @@ Main content processing templates
 			<ss:index>
 				<ss:entry>
 					<ss:type><xsl:value-of select="es:subject-type"/></ss:type>
-					<ss:namespace>http://spfeopentoolkit.org/ns/eppo-simple</ss:namespace>
+					<ss:namespace><xsl:value-of select="es:subject-namespace"/></ss:namespace>
 					<ss:term><xsl:value-of select="es:subject"/></ss:term>
 				</ss:entry>
 			</ss:index>
