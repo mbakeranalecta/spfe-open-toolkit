@@ -30,18 +30,7 @@
             <xsl:apply-templates/> 
         </pe:fig>
     </xsl:template>
-    
-    <xsl:template match="gr:graphic-record">
-        <gr:graphic-record>
-            <!-- copy everything except the default caption -->
-            <xsl:copy-of  select="gr:name" copy-namespaces="no"/>
-            <xsl:copy-of  select="gr:alt" copy-namespaces="no"/>
-            <xsl:copy-of  select="gr:uri" copy-namespaces="no"/>
-            <xsl:copy-of select="gr:formats" copy-namespaces="no"/>
-            <xsl:copy-of select="gr:source" copy-namespaces="no"/>
-        </gr:graphic-record>
-    </xsl:template>
-    
+      
     <xsl:template match="fig/caption">
         <pe:caption>
             <xsl:apply-templates/>
@@ -52,10 +41,5 @@
         <pe:title>
             <xsl:apply-templates/>
         </pe:title>
-    </xsl:template>
-    
-  
-    <xsl:template match="gr:*" />
-    <!-- mop up any left over text fields -->
-    
+    </xsl:template>    
 </xsl:stylesheet>

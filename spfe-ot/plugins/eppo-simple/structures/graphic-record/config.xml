@@ -12,6 +12,11 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/scripts/resolve/resolve-graphic-record.xsl</href>
                 </script>
             </resolve>
+            <presentation type="eppo">
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/scripts/presentation/eppo/present-graphic-record.xsl</href>
+                </script>
+            </presentation>
         </scripts>
     </structure>
 </spfe>
