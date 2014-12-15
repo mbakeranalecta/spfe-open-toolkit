@@ -119,7 +119,7 @@
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='warning'">
 			<xsl:message>
-				<xsl:text>Subject not resolved: </xsl:text>
+				<xsl:text>No content to link to on subject: </xsl:text>
 				<xsl:sequence select="$message"/>
 			</xsl:message>
 		</xsl:if>

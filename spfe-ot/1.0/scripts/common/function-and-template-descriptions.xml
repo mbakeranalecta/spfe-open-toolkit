@@ -799,7 +799,7 @@
                 <parameter>
                     <name>message</name>
                     <description>
-                        <p>The message to be output. The string "Subject not resolved: " will be prefixed to the message.</p>
+                        <p>The message to be output. The string "No content to link to on subject: " will be prefixed to the message.</p>
                     </description>
                 </parameter>
             </parameters>
