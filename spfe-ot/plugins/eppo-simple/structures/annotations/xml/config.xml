@@ -5,7 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <structure>
-        <name>annotations-xslt</name>
+        <name>annotations-xml</name>
         <dependencies>
             <dependency>
                 <name>paragraphs</name>
@@ -15,7 +15,7 @@
         <scripts>
             <resolve>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations-xslt/scripts/resolve/resolve-annotations-xslt.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/xml/scripts/resolve/resolve-annotations-xml.xsl</href>
                 </script>
             </resolve>
         </scripts>

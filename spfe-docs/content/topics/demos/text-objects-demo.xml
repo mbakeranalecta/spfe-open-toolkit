@@ -28,7 +28,7 @@
     <body>
         <title>Text Objects Demo</title>
 
-        <subhead>This is a test of text objects</subhead>
+        <p>This is a test of text objects</p>
         <text-object-ref id-ref="test-table-basic-text-object-1"/>
         <subhead>This is another test of text objects</subhead>
         <text-object-ref id-ref="test-table-basic-text-object-2"/>

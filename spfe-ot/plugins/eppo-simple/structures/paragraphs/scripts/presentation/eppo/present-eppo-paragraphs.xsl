@@ -14,25 +14,8 @@ version="2.0"
 	
 	<xsl:template match="p">
 		<pe:p>
-			<!-- FIXME: will this copy attributes with old namespaces? Make it all explicit.-->
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
 		</pe:p>
-		<xsl:for-each select="text-object-ref">
-			<xsl:variable name="id" select="@id-ref"/>
-			<xsl:variable name="content" select="normalize-space(.)"/>
-			<xsl:choose>
-				<xsl:when test="//text-object[id=$id]">
-					<pe:fold id="{generate-id()}" type="text-object" initial-state="closed" reference-text="{$content}">
-						<xsl:apply-templates select="//text-object[id=$id]"/>
-					</pe:fold>		
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:call-template name="sf:warning">
-						<xsl:with-param name="message">Text object <xsl:value-of select="$id"/> not found.</xsl:with-param>
-					</xsl:call-template>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:for-each>
 	</xsl:template>
 </xsl:stylesheet>

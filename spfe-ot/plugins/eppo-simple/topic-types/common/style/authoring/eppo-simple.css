@@ -3,8 +3,8 @@
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/think-plan-do-topic/style/authoring/think-plan-do-topic.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/docset-home-topic/style/authoring/docset-home-topic.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/feature-topic/style/authoring/feature-topic.css");
-@import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations-general/style/authoring/annotations-general.css");
-@import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations-xml/style/authoring/annotations-xml.css");
+@import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/general/style/authoring/annotations-general.css");
+@import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/xml/style/authoring/annotations-xml.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/conditions/style/authoring/conditions.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/text-decoration/style/authoring/text-decoration.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/strings/style/authoring/strings.css");

@@ -125,7 +125,7 @@
             The link catalogs and temporary TOCs are located outside of the topic set directories
             because they are used by all topic set builds.</p>
         <table>
-            <caption>A table</caption>
+            <caption><p>A table</p></caption>
             <thead>
                 <tr>
                     <td>

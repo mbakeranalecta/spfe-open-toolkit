@@ -224,22 +224,6 @@
 	<xsl:template match="step-id">
 		<xref target="{@id-ref}" type="step"/>
 	</xsl:template>
-	
-<!--	<xsl:template match="text-object-ref">
-		<xsl:variable name="id" select="@id-ref"/>
-		<xsl:choose>
-			<xsl:when test="//text-object[id=$id]">
-				<pe:fold-toggle id="{generate-id()}" initial-state="folded">
-					<xsl:apply-templates/>
-				</pe:fold-toggle>
-			</xsl:when>
-			<xsl:otherwise>
-				<!-\- no warning here because present-text-structures generates it -\->
-				<xsl:apply-templates/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
--->	
 		
 	<xsl:template match="index-entry">
 		<xsl:call-template name="create-reference-link">

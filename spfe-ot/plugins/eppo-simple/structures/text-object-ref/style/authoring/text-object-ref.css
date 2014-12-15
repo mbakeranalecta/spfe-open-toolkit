@@ -1,0 +1,13 @@
+
+text-object-ref
+{
+    display:block;
+}
+
+text-object-ref:before
+{
+    content:"fragment-ref: " attr(id-ref);
+    background-color: #FFDEAD;
+    font-size: small;
+}
+

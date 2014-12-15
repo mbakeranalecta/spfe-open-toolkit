@@ -81,36 +81,9 @@ version="2.0"
 			<xsl:apply-templates/>
 		</p>
 		
-<!--		<xsl:for-each select="text-object-ref">
-			<xsl:variable name="id" select="@id-ref"/>
-			<xsl:variable name="content" select="normalize-space(.)"/>
-			<xsl:choose>
-				<xsl:when test="//text-object[id=$id]">
-					<fold id="{generate-id()}" type="text-object" initial-state="closed" reference-text="{$content}">
-						<xsl:apply-templates select="//text-object[id=$id]"/>
-					</fold>		
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:call-template name="sf:warning">
-						<xsl:with-param name="message">Text object <xsl:value-of select="$id"/> not found.</xsl:with-param>
-					</xsl:call-template>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:for-each>-->
 	</xsl:template>
 
-<!--	<xsl:template match="text-object">
-		<xsl:apply-templates/>
-	</xsl:template>
-	
-	<xsl:template match="text-object/tracking"/>
-	<xsl:template match="text-object/id"/>
-	<xsl:template match="text-object/title">
-		<title><xsl:apply-templates/></pe:title>
-	</xsl:template>-->
 
-
-	
 	<xsl:template match="es:codeblock">
 		<codeblock>
 			<xsl:apply-templates/>

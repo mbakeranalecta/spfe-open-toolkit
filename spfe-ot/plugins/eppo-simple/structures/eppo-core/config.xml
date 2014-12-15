@@ -31,16 +31,20 @@
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/fragments/config.xml</href>
         </structure>
         <structure>
+            <name>text-object-ref</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/text-object-ref/config.xml</href>
+        </structure>
+        <structure>
             <name>annotations-general</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations-general/config.xml</href>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/general/config.xml</href>
         </structure>
         <structure>
             <name>annotations-xml</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations-xml/config.xml</href>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/xml/config.xml</href>
         </structure>
         <structure>
             <name>annotations-xslt</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations-xslt/config.xml</href>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/xslt/config.xml</href>
         </structure> 
         <structure>
             <name>text-decoration</name>

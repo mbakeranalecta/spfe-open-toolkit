@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/eppo-core/schemas/authoring/eppo-core.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations-xml/schemas/authoring/annotations-xml.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/annotations-spfe-build/schemas/authoring/annotations-spfe-build.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/xml/schemas/authoring/annotations-xml.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/annotations/spfe-build/schemas/authoring/annotations-spfe-build.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/spfe-docs-core/schemas/authoring/spfe-docs-p-content.xsd"/> 
 </xs:schema>

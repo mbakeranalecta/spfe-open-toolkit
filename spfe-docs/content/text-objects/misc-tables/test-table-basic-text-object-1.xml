@@ -25,7 +25,7 @@
     </head>
     <body>
         <table>
-            <caption>This is a test table.</caption>
+            <caption><p>This is a test table.</p></caption>
             <thead>
                 <tr>
                     <td>
