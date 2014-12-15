@@ -76,7 +76,8 @@
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:call-template name="sf:subject-not-resolved">
-									<xsl:with-param name="message" select="'Author name  &quot;', ., '&quot; in topic ', ancestor::ss:topic/@full-name"/> 
+									<xsl:with-param name="message" select="'Author name  &quot;', ., '&quot;'"/> 
+									<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 								</xsl:call-template>
 								<xsl:apply-templates/>
 							</xsl:otherwise>

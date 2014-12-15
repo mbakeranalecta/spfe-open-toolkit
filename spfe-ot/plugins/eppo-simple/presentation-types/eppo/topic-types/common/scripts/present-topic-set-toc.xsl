@@ -128,8 +128,10 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="sf:warning">
-                    <xsl:with-param name="message">No toc nodes found. The topic set may be
-                        empty.</xsl:with-param>
+                    <xsl:with-param name="message">
+                        <xsl:text>No toc nodes found. The topic set may be empty.</xsl:text>
+                    </xsl:with-param>
+                    <xsl:with-param name="in" select="$topic-set-id"/>
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>

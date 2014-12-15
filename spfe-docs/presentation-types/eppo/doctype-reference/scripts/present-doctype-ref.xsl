@@ -55,7 +55,8 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="sf:subject-not-resolved">
-						<xsl:with-param name="message" select="concat('xml-element-name &quot;', $xpath, '&quot; in topic ', $current-page-name)"/> 
+						<xsl:with-param name="message" select="concat('xml-element-name &quot;', $xpath, '&quot;')"/> 
+						<xsl:with-param name="in" select="$current-page-name"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$xpath"/>								
 				</xsl:otherwise>
@@ -204,35 +205,7 @@
 									<xsl:with-param name="namespace" select="$namespace"/>
 								</xsl:call-template>
 							</pe:p>
-<!--							<pe:p>
-								<xsl:variable name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
-								
-								<xsl:for-each select="tokenize(.,'/')[. ne '']">
-									<xsl:variable name="element-name" select="."/>
-									<xsl:text>/</xsl:text>
-									<xsl:choose>
-										<!-\- FIXME: This does not take accout of namespace of the link. -\->
-										
-										<xsl:when test="esf:target-exists($element-name, 'xml-element-name', $namespace)">
-											<xsl:call-template name="output-link">
-												<xsl:with-param name="target" select="$element-name"/>
-												<xsl:with-param name="type" select="'xml-element-name'"/>
-												<!-\- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -\->
-												<xsl:with-param name="namespace" select="$namespace"/>
-												<xsl:with-param name="content" select="$element-name"/>
-												<xsl:with-param name="current-page-name" select="$current-page-name"/>
-											</xsl:call-template>
-										</xsl:when>
-										<xsl:otherwise>
-											<xsl:call-template name="sf:subject-not-resolved">
-												<xsl:with-param name="message" select="concat('xml-element-name &quot;', $element-name, '&quot; in topic ', $current-page-name)"/> 
-											</xsl:call-template>
-											<xsl:value-of select="$element-name"/>								
-										</xsl:otherwise>
-									</xsl:choose>
-								</xsl:for-each>
-							</pe:p>
--->						</xsl:for-each>
+						</xsl:for-each>
 					</pe:item>
 				</pe:labeled-item>
 			</xsl:if>
@@ -277,7 +250,8 @@
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:call-template name="sf:subject-not-resolved">
-													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-name, '&quot; in topic ', ancestor::ss:topic/@full-name)"/> 
+													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-name, '&quot;')"/> 
+													<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 												</xsl:call-template>
 												<xsl:value-of select="$child-name"/>								
 											</xsl:otherwise>
@@ -300,7 +274,8 @@
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:call-template name="sf:subject-not-resolved">
-													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-name, '&quot; in topic ', ancestor::ss:topic/@full-name)"/> 
+													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-name, '&quot;')"/> 
+													<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 												</xsl:call-template>
 												<xsl:value-of select="$child-name"/>								
 											</xsl:otherwise>

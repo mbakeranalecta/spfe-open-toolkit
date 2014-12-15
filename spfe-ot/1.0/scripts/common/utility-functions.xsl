@@ -91,37 +91,52 @@
 		<xsl:value-of select="replace($new-url, '%20', ' ')"/>
 	</xsl:function>
 
+	<!-- In the following functions, we us string-join to concatenate the messages and convert to strings. 
+	     This allows the messages to be specified in a number of ways and to potentially include multiple sequences.-->
+
 	<xsl:template name="sf:info">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='info'">
-			<xsl:message select="'Info: ', $message"/>
+			<xsl:message select="'Info: ', string-join($message, '')"/>
 		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="sf:debug">
 		<xsl:param name="message"/>
+		<xsl:param name="in">Not specified.</xsl:param>
 		<xsl:if test="$verbosity='debug'">
-			<xsl:message select="'Debug: ', $message"/>
+			<xsl:message>#######################################################</xsl:message>
+			<xsl:message select="'DEBUG: ', string-join($message, '')"/>
+			<xsl:message select="'In: ', string-join($in, '')"/>
+			<xsl:message>#######################################################</xsl:message>
 		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="sf:warning">
 		<xsl:param name="message"/>
+		<xsl:param name="in">Not specified.</xsl:param>
 		<xsl:if test="$verbosity='warning'">
+			<xsl:message>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</xsl:message>
 			<xsl:message>
 				<xsl:text>Warning: </xsl:text>
-				<xsl:sequence select="$message"/>
+				<xsl:sequence select="string-join($message, '')"/>
 			</xsl:message>
+			<xsl:message select="'In: ', string-join($in, '')"/>
+			<xsl:message>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</xsl:message>
 		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="sf:subject-not-resolved">
 		<xsl:param name="message"/>
+		<xsl:param name="in">Not specified.</xsl:param>
 		<xsl:if test="$verbosity='warning'">
+			<xsl:message>------------------------------------------------------</xsl:message>
 			<xsl:message>
 				<xsl:text>No content to link to on subject: </xsl:text>
-				<xsl:sequence select="$message"/>
+				<xsl:sequence select="string-join($message, '')"/>
 			</xsl:message>
+			<xsl:message select="'In: ', string-join($in, '')"/>
+			<xsl:message>------------------------------------------------------</xsl:message>
 		</xsl:if>
 	</xsl:template>
 
@@ -130,7 +145,7 @@
 		<xsl:param name="in">Not specified.</xsl:param>
 		<xsl:message>**********************************************************</xsl:message>
 		<xsl:message select="'ERROR: ', string-join($message,'')"/>
-		<xsl:message select="'In: ', $in"/>
+		<xsl:message select="'In: ', string-join($in, '')"/>
 		<xsl:message>**********************************************************</xsl:message>
 		<xsl:message terminate="{$terminate-on-error}"/>
 	</xsl:template>

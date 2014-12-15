@@ -434,8 +434,9 @@
 				</xsl:variable>
 				<xsl:call-template name="sf:subject-not-resolved">
 					<xsl:with-param name="message">
-						<xsl:value-of select="$type"/> string not found: &quot;<xsl:value-of select="$target"/>&quot; in topic <xsl:value-of select="ancestor::ss:topic/@full-name"/>.
+						<xsl:value-of select="$type"/> string not found: &quot;<xsl:value-of select="$target"/>&quot; 
 					</xsl:with-param>
+					<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 				</xsl:call-template>
 				<xsl:sequence select="$content"/>
 			</xsl:otherwise>

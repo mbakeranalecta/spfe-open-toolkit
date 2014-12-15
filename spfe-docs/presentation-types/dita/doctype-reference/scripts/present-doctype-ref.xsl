@@ -196,7 +196,8 @@
 										</xsl:when>
 										<xsl:otherwise>
 											<xsl:call-template name="sf:subject-not-resolved">
-												<xsl:with-param name="message" select="concat('xml-element-name &quot;', $element-name, '&quot; in topic ', $current-page-name)"/> 
+												<xsl:with-param name="message" select="concat('xml-element-name &quot;', $element-name, '&quot;')"/>
+												<xsl:with-param name="in" select="$current-page-name"/> 
 											</xsl:call-template>
 											<xsl:value-of select="$element-name"/>								
 										</xsl:otherwise>
@@ -248,7 +249,8 @@
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:call-template name="sf:subject-not-resolved">
-													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-name, '&quot; in topic ', ancestor::ss:topic/@full-name)"/> 
+													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-name, '&quot;')"/> 
+													<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 												</xsl:call-template>
 												<xsl:value-of select="$child-name"/>								
 											</xsl:otherwise>
@@ -271,7 +273,8 @@
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:call-template name="sf:subject-not-resolved">
-													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-name, '&quot; in topic ', ancestor::ss:topic/@full-name)"/> 
+													<xsl:with-param name="message" select="concat('xml-element-name &quot;', $child-name, '&quot;')"/> 
+													<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 												</xsl:call-template>
 												<xsl:value-of select="$child-name"/>								
 											</xsl:otherwise>
