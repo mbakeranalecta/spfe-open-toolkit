@@ -160,6 +160,11 @@ Main content processing templates
 					</cr:parent>
 				</xsl:for-each>
 			</cr:parents>
+<!--			<cr:xpaths>
+				<xsl:for-each select="$this-element/xpath">
+					<cr:xpath><xsl:apply-templates/></cr:xpath>
+				</xsl:for-each>
+			</cr:xpaths>-->
 			<cr:group>
 				<xsl:value-of select="$group"/>
 			</cr:group>

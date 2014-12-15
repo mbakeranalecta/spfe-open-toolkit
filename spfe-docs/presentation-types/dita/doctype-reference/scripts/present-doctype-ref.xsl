@@ -12,6 +12,8 @@
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs">
 
 <xsl:output indent="yes" method="xml"/>
+	
+	<!-- FIXME: See revised link-xpath-segments in the eppo version of this script -->
 
 	<!--================================================
 	link-xpath-segments function

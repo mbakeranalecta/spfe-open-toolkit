@@ -5,7 +5,7 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xmlns:lf="local-functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:re="http://spfeopentoolkit.org/ns/spfe-docs"
+	xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple" exclude-result-prefixes="#all"
 	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"	
 	xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
@@ -19,35 +19,65 @@
 	Called recursivly to link the segments of an xpath back 
 	to the element named in each segment.
 	===================================================-->
-	<xsl:function name="lf:link-xpath-segments">
+	<xsl:template name="lf:link-xpath-segments">
 		<xsl:param name="xpath" as="xs:string"/>
-		<xsl:sequence select="lf:link-xpath-segments($xpath, '')"/>
-	</xsl:function>
+		<xsl:param name="namespace"/>
+		<xsl:call-template name="lf:link-next-xpath-segment">
+			<xsl:with-param name="xpath" select="$xpath"/>
+			<xsl:with-param name="namespace" select="$namespace"/>
+			<xsl:with-param name="consumed"/>
+		</xsl:call-template>
+	</xsl:template>
 
-	<xsl:function name="lf:link-xpath-segments">
+	<xsl:template name="lf:link-next-xpath-segment">
 		<xsl:param name="xpath"/>
+		<xsl:param name="namespace"/>
 		<xsl:param name="consumed"/>
 		<xsl:if test="$consumed ne $xpath">
 		<xsl:variable name="is-root-xpath" select="starts-with($xpath, '/')"/>
-	
+		<xsl:variable name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 		<xsl:variable name="xpath-segments" select="tokenize(if ($is-root-xpath) then substring($xpath,2) else $xpath, '/')"/>
 		<xsl:variable name="consumed-segments" select="tokenize(if (starts-with($consumed, '/')) then substring($consumed,2) else $consumed, '/')"/>
 		<xsl:variable name="segment" select="$xpath-segments[count($consumed-segments)+1]"/>
 		
 		<!-- output this segment with link -->
 			<xsl:if test="not($consumed='' and not($is-root-xpath))">/</xsl:if>
-			<!-- call the link template -->
+			<xsl:choose>
+				<xsl:when test="esf:target-exists($xpath, 'xml-element-name', $namespace)">
+					<xsl:call-template name="output-link">
+						<xsl:with-param name="target" select="$xpath"/>
+						<xsl:with-param name="type" select="'xml-element-name'"/>
+						<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
+						<xsl:with-param name="namespace" select="$namespace"/>
+						<xsl:with-param name="content" select="$segment"/>
+						<xsl:with-param name="current-page-name" select="$current-page-name"/>
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="sf:subject-not-resolved">
+						<xsl:with-param name="message" select="concat('xml-element-name &quot;', $xpath, '&quot; not resolved in topic ', $current-page-name)"/> 
+					</xsl:call-template>
+					<xsl:value-of select="$xpath"/>								
+				</xsl:otherwise>
+			</xsl:choose>
+			
+			<!-- call the link template 
 			<xsl:sequence select="lf:link-xpath(
 				concat(
 					if($is-root-xpath) then '/' else '',
 					string-join($xpath-segments[position() le count($consumed-segments)+1], '/')
 				),
-				$segment)"/>
+				$segment)"/>-->
 			<!-- recursive call -->
+			<xsl:call-template name="lf:link-next-xpath-segment">
+				<xsl:with-param name="xpath" select="$xpath"/>
+				<xsl:with-param name="namespace" select="$namespace"/>
+				<xsl:with-param name="consumed" select="concat($consumed, if($consumed='' and not($is-root-xpath)) then '' else '/', $segment)"/>
+			</xsl:call-template>
 			
-				<xsl:sequence select="lf:link-xpath-segments($xpath, concat($consumed, if($consumed='' and not($is-root-xpath)) then '' else '/', $segment))"/>
+				<!--<xsl:call-template select="lf:link-xpath-segments($xpath, $namespace, concat($consumed, if($consumed='' and not($is-root-xpath)) then '' else '/', $segment))"/>-->
 			</xsl:if>
-	</xsl:function>
+	</xsl:template>
 
 
 	<!-- ==========================================================================
@@ -64,14 +94,14 @@
 			select="$synthesis//doctype-reference-entry, $synthesis//attribute"/>
 		<!--Determine whether or not the target exists. -->
 		<xsl:choose>
-			<xsl:when test="count($targets[xpath = $target]) > 1">
+			<xsl:when test="count($targets[xpaths/xpath = $target]) > 1">
 				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message" select="'Ambiguous xpath ', $target"/>
 				</xsl:call-template>
 				<!-- output plain text -->
 				<xsl:value-of select="$link-text"/>
 			</xsl:when>
-			<xsl:when test="not($targets[xpath = $target])">
+			<xsl:when test="not($targets[xpaths/xpath = $target])">
 				<!-- if it does not exist, report the error but continue, outputting plain text -->
 				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message" select="'Unknown xpath', $target"/>
@@ -86,8 +116,8 @@
 					<xsl:value-of
 						select="
 				if (contains($target, '/@')) 
-				then translate(substring-before($target, '/@'), '/:', '__' )
-				else translate($target, '/:', '__' )"/>
+				then translate(substring-before($targets[xpaths/xpath = $target]/parent::ss:topic/@local-name, '/@'), '/:', '__' )
+				else translate($targets[xpaths/xpath = $target]/parent::ss:topic/@local-name, '/:', '__' )"/>
 					<xsl:text>.html</xsl:text>
 					<xsl:if test="contains($target, '/@')">
 						<xsl:text>#</xsl:text>
@@ -168,18 +198,26 @@
 					<pe:item>
 						<xsl:for-each select="parents/parent">
 							<pe:p>
+								<xsl:call-template
+									name="lf:link-xpath-segments">
+									<xsl:with-param name="xpath" select="."/>
+									<xsl:with-param name="namespace" select="$namespace"/>
+								</xsl:call-template>
+							</pe:p>
+<!--							<pe:p>
 								<xsl:variable name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
+								
 								<xsl:for-each select="tokenize(.,'/')[. ne '']">
 									<xsl:variable name="element-name" select="."/>
 									<xsl:text>/</xsl:text>
 									<xsl:choose>
-										<!-- FIXME: This does not take accout of namespace of the link. -->
+										<!-\- FIXME: This does not take accout of namespace of the link. -\->
 										
 										<xsl:when test="esf:target-exists($element-name, 'xml-element-name', $namespace)">
 											<xsl:call-template name="output-link">
 												<xsl:with-param name="target" select="$element-name"/>
 												<xsl:with-param name="type" select="'xml-element-name'"/>
-												<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
+												<!-\- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -\->
 												<xsl:with-param name="namespace" select="$namespace"/>
 												<xsl:with-param name="content" select="$element-name"/>
 												<xsl:with-param name="current-page-name" select="$current-page-name"/>
@@ -194,7 +232,7 @@
 									</xsl:choose>
 								</xsl:for-each>
 							</pe:p>
-						</xsl:for-each>
+-->						</xsl:for-each>
 					</pe:item>
 				</pe:labeled-item>
 			</xsl:if>
