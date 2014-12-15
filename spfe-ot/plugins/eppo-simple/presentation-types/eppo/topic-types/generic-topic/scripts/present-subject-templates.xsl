@@ -32,7 +32,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:subject-not-resolved">
-					<xsl:with-param name="message" select="'Term  &quot;', $term, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name"/> 
+					<xsl:with-param name="message" select="'Term  &quot;', $term, '&quot; in topic ', ancestor::ss:topic/@full-name"/> 
 				</xsl:call-template>
 				<xsl:apply-templates/>
 			</xsl:otherwise>
@@ -130,7 +130,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="sf:subject-not-resolved">
-						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/>
+						<xsl:with-param name="message" select="concat(@type, ' name &quot;', @key, '&quot; in topic ', ancestor::ss:topic/@full-name)"/>
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
 				</xsl:otherwise>
@@ -161,7 +161,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="sf:subject-not-resolved">
-						<xsl:with-param name="message" select="concat(@type, ' name &quot;', (if (@key) then @key else .), '&quot; not resolved in topic ', ancestor::ss:topic/@full-name)"/> 
+						<xsl:with-param name="message" select="concat(@type, ' name &quot;', (if (@key) then @key else .), '&quot; in topic ', ancestor::ss:topic/@full-name)"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
 				</xsl:otherwise>
