@@ -41,6 +41,13 @@
                 <p>All <feature>strings</feature> and <feature>fragments</feature> have been resolved.</p>
             </li>
             <li>
+                <p>All syntactic sugar elements have been transformed to their general equivalents.
+                    For instance the <xml-element-name>note</xml-element-name>,
+                    <xml-element-name>caution</xml-element-name>, and
+                    <xml-element-name>warning</xml-element-name> admonitions have been transformed
+                    into admonition elements with the appropriate signal word.</p>
+            </li>
+            <li>
                 <p>All <feature>subject affinities</feature> have been fully resolved.</p>
             </li>
         </ul>

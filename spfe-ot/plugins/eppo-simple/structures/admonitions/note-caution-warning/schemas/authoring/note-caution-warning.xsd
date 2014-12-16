@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:complexType name="admonition">
+        <xs:sequence>
+            <xs:element name="title"/>
+            <xs:group ref="nested-text-structures"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:group name="note-caution-warning">
+
+        <xs:choice>
+            <xs:element name="warning" type="admonition"/>
+            <xs:element name="caution" type="admonition"/>
+            <xs:element name="note" type="admonition"/>
+        </xs:choice>
+    </xs:group>
+</xs:schema>

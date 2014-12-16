@@ -55,10 +55,24 @@
             file produced by the configuration script is also passed as the main input to all
             processing scripts, making the configuration information available at all stages of the
             build. </p>
+        <caution><title>Be cautious about this</title>
+            <p>This is something to be cautious about.</p></caution>
         
         <p>While you can define the entire configuration of a build in one file, it is usually better to divide the configuration into multiple files. Many of these partial configuration files can be reused for multiple content sets or topic sets. For instance, the configuration file for a topic type can be used in every topic set configuration that uses that topic type.</p>
+        <warning>
+            <title>Watch out!</title>
+            <p>This could hurt real bad.</p>
+        </warning>
+        <note>
+            <title>This is something to take note of</title>
+            <p>Take note of this.</p>
+        </note>
 
         <p>There are several sections to the complete configuration of a content set, each of which is commonly stored in one or more separate files: </p>
+        <warning>
+            <title>This stuff is dangerous</title>
+            <p>Be very careful with this.</p>
+        </warning>
         <ul>
             <li>
                 <p>The <feature>content set</feature> configuration, contained in the setting,

@@ -295,6 +295,26 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:complexType>
+  <xs:complexType name="general-admonition">
+    <xs:sequence>
+      <xs:element name="signal-word"/>
+      <xs:element name="title"/>
+      <xs:element name="body">
+        <xs:complexType>
+          <xs:group ref="nested-text-structure-group"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:group name="admonitions-general">
+    <xs:sequence>
+      <xs:element name="admonition" type="general-admonition"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="admonition-general">
+    <xs:group ref="admonitions-general"/>
+  </xs:complexType>
   <xs:group name="text-structure-group">
     <xs:choice>
       <xs:element name="fig" type="fig_type"/>
@@ -306,6 +326,7 @@
       <xs:element name="codeblock" type="codeblock_type"/>
       <xs:element name="ul" type="ul_type"/>
       <xs:element name="tree" type="tree_type"/>
+      <xs:element name="admonition" type="admonition-general"></xs:element>
     </xs:choice>
 
   </xs:group>

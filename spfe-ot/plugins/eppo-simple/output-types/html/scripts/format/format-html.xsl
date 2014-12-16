@@ -877,6 +877,17 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 	
+	<xsl:template match="admonition">
+		<div class="admonition-{@class}">
+			<xsl:apply-templates/>
+		</div>
+	</xsl:template>
+	
+	<xsl:template match="admonition/title">
+		<p class="admonition-title">
+			<xsl:apply-templates/>
+		</p>
+	</xsl:template>
 	
 	<xsl:template match="*" >
 		<xsl:call-template name="sf:error">

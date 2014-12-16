@@ -36,7 +36,8 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/text-decoration/schemas/authoring/text-decoration.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/tracking/schemas/authoring/tracking.xsd"/>
-
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/admonitions/note-caution-warning/schemas/authoring/note-caution-warning.xsd"/>
     <xs:group name="text-general">
         <xs:sequence>
             <xs:choice maxOccurs="1" minOccurs="1">
@@ -54,11 +55,30 @@
                 <xs:group ref="fragment-ref"/>
                 <xs:group ref="table-basic"/>
                 <xs:group ref="text-object-ref"/>
+                <xs:group ref="note-caution-warning"/>
             </xs:choice>
         </xs:sequence>
     </xs:group>
 
     <xs:complexType name="text-general-type">
         <xs:group ref="text-general"/>
+    </xs:complexType>
+    
+    <xs:group name="nested-text-structures">
+        <xs:sequence>
+            <xs:choice maxOccurs="1" minOccurs="1">
+                <xs:group ref="paragraphs"/>
+            </xs:choice>
+            <xs:choice>
+                <xs:group ref="paragraphs"/>
+                <xs:group ref="subhead"/>
+                <xs:group ref="lists"/>
+                <xs:group ref="programming"/>
+                <xs:group ref="graphics"/>
+            </xs:choice>
+        </xs:sequence>    </xs:group>
+    
+    <xs:complexType name="nested-text-structures">
+        <xs:group ref="nested-text-structures"/>
     </xs:complexType>
 </xs:schema>

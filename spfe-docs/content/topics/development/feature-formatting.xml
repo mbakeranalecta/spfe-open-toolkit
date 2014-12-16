@@ -30,6 +30,9 @@
         <title>Formatting</title>
         <p>The <feature>formatting</feature> step is the third phase of the <feature>SPFE build</feature> process. It is responsible for creating the final appearance of a topic set in a particular media.</p>
         <p>The formatting step takes the output of a <feature>presentation</feature> process appropriate to the particular media. You might have more than one <feature>formatting</feature> process for a particular presentation. For example, you might have a different formatting process for an online PDF (color, links) and for a prepress PDF (black and white, cross references).</p>
+        <p>The formatting stage should never add anything to the content. Formatting scripts should
+            not have to change for translation, excepting cases where a different layout is required
+            for the target language.</p>
         
     </body>
 </feature-topic>

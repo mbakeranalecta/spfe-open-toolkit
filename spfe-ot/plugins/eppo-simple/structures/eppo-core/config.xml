@@ -78,6 +78,10 @@
             <name>table-basic</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/config.xml</href>
         </structure> 
+        <structure>
+            <name>admonitions.note-caution-warning</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/admonitions/note-caution-warning/config.xml</href>
+        </structure>
         
     </structures>
 </spfe>

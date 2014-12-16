@@ -1,0 +1,63 @@
+note
+{
+    display:block;
+    border:2pt solid green;
+    margin:5pt;
+    padding:5pt;
+}
+
+note>title:before
+{
+    content:"Note: ";
+}
+
+note>title
+{
+    display:block;
+    font-weight:bold;
+    font-size:larger;
+    padding-bottom:5pt;
+}
+
+caution
+{
+    display:block;
+    border:2pt solid orange;
+    margin:5pt;
+    padding:5pt;
+}
+
+caution>title:before
+{
+    content:"Caution: ";
+}
+
+caution>title
+{
+    display:block;
+    font-weight:bold;
+    font-size:larger;
+    padding-bottom:5pt;
+}
+
+
+warning
+{
+    display:block;
+    border:2pt solid red;
+    margin:5pt;
+    padding:5pt;
+}
+
+warning>title:before
+{
+    content:"Warning: ";
+}
+
+warning>title
+{
+    display:block;
+    font-weight:bold;
+    font-size:larger;
+    padding-bottom:5pt;
+}
