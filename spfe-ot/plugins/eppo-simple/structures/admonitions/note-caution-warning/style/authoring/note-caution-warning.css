@@ -1,23 +1,4 @@
-note
-{
-    display:block;
-    border:2pt solid green;
-    margin:5pt;
-    padding:5pt;
-}
-
-note>title:before
-{
-    content:"Note: ";
-}
-
-note>title
-{
-    display:block;
-    font-weight:bold;
-    font-size:larger;
-    padding-bottom:5pt;
-}
+@import url('http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/admonitions/note/style/authoring/note-admonition.css');
 
 caution
 {

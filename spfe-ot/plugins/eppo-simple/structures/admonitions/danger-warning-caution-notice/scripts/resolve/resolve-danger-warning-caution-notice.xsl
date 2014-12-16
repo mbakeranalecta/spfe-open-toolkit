@@ -11,9 +11,9 @@
     exclude-result-prefixes="#all">
     
     
-    <xsl:template match="caution">
+    <xsl:template match="danger">
         <admonition>
-            <signal-word>Caution</signal-word>
+            <signal-word>DANGER</signal-word>
             <xsl:apply-templates/>
         </admonition>
     </xsl:template>
@@ -25,7 +25,22 @@
         </admonition>
     </xsl:template>
     
-    <xsl:template match="caution/title | warning/title">
+    <xsl:template match="caution">
+        <admonition>
+            <signal-word>Caution</signal-word>
+            <xsl:apply-templates/>
+        </admonition>
+    </xsl:template>
+    
+    <xsl:template match="notice">
+        <admonition>
+            <signal-word>Notice</signal-word>
+            <xsl:apply-templates/>
+        </admonition>
+    </xsl:template>
+    
+    
+    <xsl:template match="danger/title | warning/title | caution/title | notice/title">
         <xsl:copy>
             <xsl:apply-templates/>
         </xsl:copy>

@@ -9,9 +9,6 @@
         <scripts>
             <resolve>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/admonitions/note-caution-warning/scripts/resolve/resolve-note-caution-warning.xsl</href>
-                </script>
-                <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/admonitions/note/scripts/resolve/resolve-note-admonition.xsl</href>
                 </script>
             </resolve>

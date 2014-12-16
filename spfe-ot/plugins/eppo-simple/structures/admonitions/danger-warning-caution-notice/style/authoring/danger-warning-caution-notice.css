@@ -1,0 +1,84 @@
+danger
+{
+    display:block;
+    border:2pt solid red;
+    margin:5pt;
+    padding:5pt;
+}
+
+danger>title:before
+{
+    content:"DANGER: ";
+}
+
+danger>title
+{
+    display:block;
+    font-weight:bold;
+    font-size:larger;
+    padding-bottom:5pt;
+}
+
+
+warning
+{
+    display:block;
+    border:2pt solid orange;
+    margin:5pt;
+    padding:5pt;
+}
+
+warning>title:before
+{
+    content:"Warning: ";
+}
+
+warning>title
+{
+    display:block;
+    font-weight:bold;
+    font-size:larger;
+    padding-bottom:5pt;
+}
+caution
+{
+    display:block;
+    border:2pt solid yellow;
+    margin:5pt;
+    padding:5pt;
+}
+
+caution>title:before
+{
+    content:"Caution: ";
+}
+
+caution>title
+{
+    display:block;
+    font-weight:bold;
+    font-size:larger;
+    padding-bottom:5pt;
+}
+
+
+notice
+{
+    display:block;
+    border:2pt solid blue;
+    margin:5pt;
+    padding:5pt;
+}
+
+notice>title:before
+{
+    content:"Notice: ";
+}
+
+notice>title
+{
+    display:block;
+    font-weight:bold;
+    font-size:larger;
+    padding-bottom:5pt;
+}

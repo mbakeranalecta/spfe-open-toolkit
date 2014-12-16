@@ -10,22 +10,15 @@
     xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     exclude-result-prefixes="#all">
     
-    
-    <xsl:template match="caution">
+    <xsl:template match="note">
         <admonition>
-            <signal-word>Caution</signal-word>
+            <signal-word>Note</signal-word>
             <xsl:apply-templates/>
         </admonition>
     </xsl:template>
     
-    <xsl:template match="warning">
-        <admonition>
-            <signal-word>Warning</signal-word>
-            <xsl:apply-templates/>
-        </admonition>
-    </xsl:template>
-    
-    <xsl:template match="caution/title | warning/title">
+ 
+    <xsl:template match="note/title">
         <xsl:copy>
             <xsl:apply-templates/>
         </xsl:copy>
