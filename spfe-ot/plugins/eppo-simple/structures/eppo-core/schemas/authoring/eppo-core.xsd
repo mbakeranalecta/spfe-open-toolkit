@@ -3,8 +3,11 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/general/schemas/authoring/annotations-general.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-names/schemas/authoring/annotations-common-names.xsd"/>
     <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-subjects/schemas/authoring/annotations-common-subjects.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-addresses/schemas/authoring/annotations-common-addresses.xsd"/>    <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/conditions/schemas/authoring/conditions.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/eppo-core/schemas/authoring/resources.xsd"/>

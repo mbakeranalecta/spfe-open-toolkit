@@ -474,6 +474,13 @@
                         else $config/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name]/structures/structure">
                 <xsl:variable name="name" select="name"/>
                 
+                <xsl:if test="not($config/structures[name=$name]) and not($config/structure[name=$name])">
+                    <xsl:call-template name="sf:error">
+                        <xsl:with-param name="message" select="'No structure config found for structure name: ', $name"/>
+                        <xsl:with-param name="in" select="base-uri(.)"/>
+                    </xsl:call-template>
+                </xsl:if>
+                
       
                 <xsl:choose>
                     <xsl:when test="remap-namespace">
@@ -482,6 +489,12 @@
                             <xsl:when test="$config/structures[name=$name]">
                                 <xsl:for-each select="$config/structures[name=$name]/structure">
                                     <xsl:variable name="name" select="name"/>
+                                    <xsl:if test="not($config/structures[name=$name]) and not($config/structure[name=$name])">
+                                        <xsl:call-template name="sf:error">
+                                            <xsl:with-param name="message" select="'No structure config found for structure name: ', $name"/>
+                                            <xsl:with-param name="in" select="base-uri(.)"/>
+                                        </xsl:call-template>
+                                    </xsl:if>
                                     <xsl:for-each select="$config/structure[name=$name]/scripts">
                                         <xsl:copy>
                                             <xsl:for-each select="child::*">
@@ -523,6 +536,12 @@
                             <xsl:when test="$config/structures[name=$name]">
                                 <xsl:for-each select="$config/structures[name=$name]/structure">
                                     <xsl:variable name="name" select="name"/>
+                                    <xsl:if test="not($config/structures[name=$name]) and not($config/structure[name=$name])">
+                                        <xsl:call-template name="sf:error">
+                                            <xsl:with-param name="message" select="'No structure config found for structure name: ', $name"/>
+                                            <xsl:with-param name="in" select="base-uri(.)"/>
+                                        </xsl:call-template>
+                                    </xsl:if>
                                     <xsl:sequence select="$config/structure[name=$name]/scripts"/>
                                 </xsl:for-each>
                             </xsl:when>

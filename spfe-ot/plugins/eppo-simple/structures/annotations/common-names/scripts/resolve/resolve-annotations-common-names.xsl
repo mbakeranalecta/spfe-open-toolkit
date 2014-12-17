@@ -6,30 +6,6 @@
     xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     version="2.0">
     
-    <xsl:template match="p/task | string/task">
-        <subject>
-            <xsl:attribute name="type">task</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
-            <xsl:apply-templates/>
-        </subject>
-    </xsl:template>
-    
-    <xsl:template match="p/term | string/term">
-        <subject>
-            <xsl:attribute name="type">term</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
-            <xsl:apply-templates/>
-        </subject>
-    </xsl:template>
-    
-    <xsl:template match="p/feature | string/feature">
-        <subject>
-            <xsl:attribute name="type">feature</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
-            <xsl:apply-templates/>
-        </subject>
-    </xsl:template>
-    
     <xsl:template match="
         p/directory-name  | string/directory-name
         | p/document-name  | string/document-name

@@ -2,42 +2,25 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:simpleType name="annotations-general">
+    <xs:simpleType name="annotations-common-names">
         <xs:restriction base="xs:string">
             <xs:enumeration value="directory-name"/>
             <xs:enumeration value="document-name"/>
-            <xs:enumeration value="feature"/>
             <xs:enumeration value="file-name"/>
             <xs:enumeration value="product-name"/>
-            <xs:enumeration value="task"/>
-            <xs:enumeration value="term"/>
             <xs:enumeration value="tool-name"/>
             <xs:enumeration value="author-name"/>
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:group name="annotations-general">
+    <xs:group name="annotations-common-names">
         <xs:choice>
+            <xs:element name="file-name"/>
             <xs:element name="directory-name"/>
             <xs:element name="document-name"/>
-            <xs:element name="feature"/>
-            <xs:element name="file-name"/>
             <xs:element name="product-name"/>
-            <xs:element name="task"/>
-            <xs:element name="term"/>
             <xs:element name="tool-name"/>
             <xs:element name="author-name"/>
-            <xs:element name="link-external">
-                <xs:complexType>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attribute name="href" type="xs:anyURI"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="url"/>
         </xs:choice>
     </xs:group>
 </xs:schema>

@@ -35,9 +35,18 @@
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/text-object-ref/config.xml</href>
         </structure>
         <structure>
-            <name>annotations-general</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/general/config.xml</href>
+            <name>annotations.common-names</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common-subjects/config.xml</href>
         </structure>
+        <structure>
+            <name>annotations.common-subjects</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common-names/config.xml</href>
+        </structure>
+        <structure>
+            <name>annotations.common-addresses</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common-addresses/config.xml</href>
+        </structure>
+        <!-- FIXME: XML and XSLT are not core structures. Move. -->
         <structure>
             <name>annotations-xml</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/xml/config.xml</href>

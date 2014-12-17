@@ -5,17 +5,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <structure>
-        <name>fragments</name>
+        <name>annotations.common-subjects</name>
         <dependencies>
             <dependency>
                 <name>paragraphs</name>
-                <href>../strings/config.xml</href>
+                <href>../paragraphs/config.xml</href>
             </dependency>
         </dependencies>
         <scripts>
             <resolve>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/fragments/scripts/resolve/resolve-fragments.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common-subjects/scripts/resolve/resolve-annotations-common-subjects.xsl</href>
                 </script>
             </resolve>
         </scripts>

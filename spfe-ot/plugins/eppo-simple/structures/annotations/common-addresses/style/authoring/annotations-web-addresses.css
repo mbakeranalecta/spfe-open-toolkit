@@ -16,6 +16,12 @@ p>feature, string>feature
    border: 1px solid #FFDEAD;
 }
 
+p>concept, string>concept
+{
+   font-weight:normal;
+   border: 1px solid #FFDEAD;
+}
+
 p>file-name, string>file-name
 { 
    font-weight:bold;

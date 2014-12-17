@@ -4,6 +4,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
     <xs:simpleType name="annotations-type">
-        <xs:union memberTypes="annotations-general"/>
+        <xs:union memberTypes="annotations-common-names annotations-common-subjects annotations-common-addresses"/>
     </xs:simpleType>
 </xs:schema>

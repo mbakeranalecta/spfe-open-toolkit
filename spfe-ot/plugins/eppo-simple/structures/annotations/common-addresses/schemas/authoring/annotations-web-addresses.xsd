@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:simpleType name="annotations-common-addresses">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="url"/>
+            <xs:enumeration value="link-external"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:group name="annotations-common-addresses">
+        <xs:choice>
+            <xs:element name="link-external">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="href" type="xs:anyURI"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="url"/>
+        </xs:choice>
+    </xs:group>
+</xs:schema>

@@ -29,6 +29,7 @@
         <section>
             <title>Creating an authoring schema</title>
             <p>The simplest schema you can create is a generic topic schema that uses only components from <feature>EPPO-simple</feature>. The easiest way to do this is to make a copy of the appropriate topic type schema from <feature>EPPO-simple</feature>. Topic type schemas in <feature>EPPO-simple</feature> consist entirely of include statements that pull in various schema modules to make up a complete topic type schema. This topic, for instance, is written in the generic topic schema of the SPFE docs schema set, which is entirely composed of modules from EPPO-simple, pulled together and assigned to a SPFE Docs namespace by the following schema file:</p>
+            <!-- FIXME: This sample is out of date. -->
             <codeblock><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->

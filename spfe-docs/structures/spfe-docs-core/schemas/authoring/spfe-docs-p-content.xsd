@@ -3,7 +3,9 @@
     <xs:group name="p-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>
-            <xs:group ref="annotations-general"/>
+            <xs:group ref="annotations-common-names"/>
+            <xs:group ref="annotations-common-subjects"/>
+            <xs:group ref="annotations-common-addresses"/>
             <xs:group ref="annotations-spfe-build"/>
             <xs:group ref="annotations-xml"/>
             <xs:group ref="resources"/>
@@ -12,6 +14,6 @@
     </xs:group>
     
     <xs:simpleType name="annotations-type">
-        <xs:union memberTypes="annotations-general annotations-spfe-build annotations-xml"/>
+        <xs:union memberTypes="annotations-common-addresses annotations-common-subjects annotations-common-names annotations-spfe-build annotations-xml"/>
     </xs:simpleType>
 </xs:schema>
