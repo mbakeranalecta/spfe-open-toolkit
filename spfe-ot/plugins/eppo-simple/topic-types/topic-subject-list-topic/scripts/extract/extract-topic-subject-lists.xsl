@@ -3,16 +3,12 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet version="2.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" 
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
 	exclude-result-prefixes="#all">
-	
-
-
-	
 <!-- =============================================================
 	extract-topic-subject-lists.xsl
 	
@@ -25,6 +21,7 @@
 	<xsl:variable name="config" as="element(config:spfe)">
 		<xsl:sequence select="/config:spfe"/>
 	</xsl:variable>
+	
 	<xsl:param name="topic-set-id"/>
 	
 	<xsl:param name="sources-to-extract-content-from"/>	

@@ -153,7 +153,7 @@ version="2.0"
 		</title>
 	</xsl:template>
 
-	<xsl:template match="es:author-note">
+	<xsl:template match="es:comment-author-to-author">
 		<xsl:if test="$config/config:build-command='draft'">
 			<xsl:element name="{local-name()}">
 				<xsl:copy-of select="@*"/>

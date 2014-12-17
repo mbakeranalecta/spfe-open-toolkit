@@ -91,6 +91,10 @@
             <name>admonitions.note-caution-warning</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/admonitions/note-caution-warning/config.xml</href>
         </structure>
+        <structure>
+            <name>comments</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/config.xml</href>
+        </structure>
         
     </structures>
 </spfe>

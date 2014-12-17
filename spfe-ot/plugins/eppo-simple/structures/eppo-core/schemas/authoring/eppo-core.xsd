@@ -40,6 +40,8 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/tracking/schemas/authoring/tracking.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/admonitions/note-caution-warning/schemas/authoring/note-caution-warning.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/comments/schemas/authoring/comments.xsd"/>
     <xs:group name="text-general">
         <xs:sequence>
             <xs:choice maxOccurs="1" minOccurs="1">
@@ -58,6 +60,7 @@
                 <xs:group ref="table-basic"/>
                 <xs:group ref="text-object-ref"/>
                 <xs:group ref="note-caution-warning"/>
+                <xs:group ref="comments-block"/>
             </xs:choice>
         </xs:sequence>
     </xs:group>

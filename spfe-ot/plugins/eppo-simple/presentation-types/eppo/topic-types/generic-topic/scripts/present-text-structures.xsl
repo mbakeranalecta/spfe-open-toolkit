@@ -28,9 +28,7 @@ version="2.0"
 		| tr
 		| td
 		| th
-		| note
-		| warning
-		| caution">
+">
 		
 		<xsl:element name="pe:{local-name()}" namespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo">
 			<xsl:copy-of select="@*"/>
@@ -92,7 +90,7 @@ version="2.0"
 	</xsl:template>
 	
 
-	<xsl:template match="author-note">
+	<xsl:template match="comment-author-to-author">
 		<xsl:if test="$config/config:build-command='draft'">
 			<xsl:element name="{local-name()}">
 				<xsl:copy-of select="@*"/>

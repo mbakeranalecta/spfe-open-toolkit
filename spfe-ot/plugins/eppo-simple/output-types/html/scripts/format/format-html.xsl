@@ -145,11 +145,11 @@
 								</xsl:for-each>
 							</p>
 						</xsl:if>
-						<xsl:if test=".//author-note">
+						<xsl:if test=".//comment-author-to-author">
 							<p>
 								<b>Index of author notes: </b>
-								<xsl:for-each select=".//author-note">
-									<a href="#author-note:{position()}"> [<xsl:value-of
+								<xsl:for-each select=".//comment-author-to-author">
+									<a href="#comment-author-to-author:{position()}"> [<xsl:value-of
 											select="position()"/>] </a>
 									<xsl:text> </xsl:text>
 								</xsl:for-each>
@@ -574,13 +574,13 @@
 	</xsl:template>
 	
 
-	<xsl:template match="author-note ">
+	<xsl:template match="comment-author-to-author ">
 		<xsl:variable name="my-page" select="ancestor::page"/>
 		<xsl:variable name="my-position"
-			select="count(preceding::author-note[ancestor::page is $my-page])+1"/>
+			select="count(preceding::comment-author-to-author[ancestor::page is $my-page])+1"/>
 		<xsl:if test="$draft">
-			<a name="author-note:{$my-position}">&#8194;</a>
-			<span class="author-note">
+			<a name="comment-author-to-author:{$my-position}">&#8194;</a>
+			<span class="comment-author-to-author">
 				<xsl:value-of select="$my-position"/>
 				<xsl:text> - </xsl:text>
 				<xsl:apply-templates/>
@@ -888,6 +888,19 @@
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>
+	
+	<xsl:template match="inline-comment">
+		<span class="{@class}">
+			<xsl:apply-templates/>
+		</span>
+	</xsl:template>
+	
+	<xsl:template match="block-comment">
+		<div class="{@class}">
+			<xsl:apply-templates/>
+		</div>
+	</xsl:template>
+	
 	
 	<xsl:template match="*" >
 		<xsl:call-template name="sf:error">

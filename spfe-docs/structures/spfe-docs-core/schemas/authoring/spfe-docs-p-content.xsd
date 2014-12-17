@@ -11,6 +11,7 @@
             <xs:group ref="annotations-common-resource-ids"/>
             <xs:group ref="annotations-fig-resource-id"/>
             <xs:group ref="strings"/>
+            <xs:group ref="comments-inline"/>
         </xs:choice>
     </xs:group>
     

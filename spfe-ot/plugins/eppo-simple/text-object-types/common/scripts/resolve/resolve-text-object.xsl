@@ -14,6 +14,7 @@
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:esto="http://spfeopentoolkit.org/ns/eppo-simple/text-objects"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	exclude-result-prefixes="#all">
 	<xsl:variable name="topic-set-id">spfe.text-objects</xsl:variable>
 
@@ -23,6 +24,7 @@
 		<xsl:sequence select="/config:spfe"/>
 	</xsl:variable>
 	
+	<xsl:variable name="draft" as="xs:boolean" select="$config/config:build-command='draft'"/>
 	<xsl:param name="authored-content-files"/>
 	<xsl:variable name="topics" select="sf:get-sources($authored-content-files)"/>
 	

@@ -149,3 +149,75 @@ p.admonition-title
     font-weight:bold;
     font-size:larger;
 }
+
+span.comment-author-to-author
+{
+    display:inline;
+    background-color:lime;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+div.comment-author-to-author
+{
+    display:block;
+    background-color:lime;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+.comment-author-to-author:before
+{
+    content:"Comment author to author:";
+    font-weight:bold;
+    padding-left:5pt;
+    padding-right:5pt;
+}
+
+span.comment-author-to-reviewer
+{
+    display:inline;
+    background-color:yellow;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+div.comment-author-to-reviewer
+{
+    display:block;
+    background-color:yellow;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+.comment-author-to-reviewer:before
+{
+    content:"Comment author to reviewer:";
+    font-weight:bold;
+    padding-left:5pt;
+    padding-right:5pt;
+}
+
+span.comment-reviewer-to-author
+{
+    display:inline;
+    background-color:orange;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+div.comment-reviewer-to-author
+{
+    display:block;
+    background-color:orange;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+.comment-reviewer-to-author:before
+{
+    content:"Comment reviewer to author:";
+    font-weight:bold;
+    padding-left:5pt;
+    padding-right:5pt;
+}
