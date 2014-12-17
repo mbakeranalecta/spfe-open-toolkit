@@ -8,7 +8,8 @@
             <xs:group ref="annotations-common-addresses"/>
             <xs:group ref="annotations-spfe-build"/>
             <xs:group ref="annotations-xml"/>
-            <xs:group ref="resources"/>
+            <xs:group ref="annotations-common-resource-ids"/>
+            <xs:group ref="annotations-fig-resource-id"/>
             <xs:group ref="strings"/>
         </xs:choice>
     </xs:group>

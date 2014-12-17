@@ -8,7 +8,8 @@
             <xs:group ref="annotations-common-names"/>
             <xs:group ref="annotations-common-subjects"/>
             <xs:group ref="annotations-common-addresses"/>
-            <xs:group ref="resources"/>
+            <xs:group ref="annotations-common-resource-ids"/>
+            <xs:group ref="annotations-fig-resource-id"/>
             <xs:group ref="strings"/>
         </xs:choice>
     </xs:group>

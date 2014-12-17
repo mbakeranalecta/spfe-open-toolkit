@@ -27,4 +27,13 @@
         <xs:attribute name="id" type="xs:NMTOKEN"/>
     </xs:complexType>
 
+    <xs:group name="annotations-fig-resource-id">
+        <xs:choice>
+           <xs:element name="fig-id">
+               <xs:complexType>
+                   <xs:attribute name="id-ref"/>
+               </xs:complexType>
+           </xs:element>
+        </xs:choice>
+    </xs:group>
 </xs:schema>
