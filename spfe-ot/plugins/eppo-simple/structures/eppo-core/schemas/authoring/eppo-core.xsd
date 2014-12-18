@@ -15,7 +15,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/text-object-ref/schemas/authoring/text-object-ref.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/graphics/schemas/authoring/graphics.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fig/schemas/authoring/fig.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/identity/schemas/authoring/identity.xsd"/>
     <xs:include
@@ -54,7 +54,7 @@
                 <xs:group ref="subhead"/>
                 <xs:group ref="lists"/>
                 <xs:group ref="programming"/>
-                <xs:group ref="graphics"/>
+                <xs:group ref="fig"/>
                 <xs:group ref="fragments"/>
                 <xs:group ref="fragment-ref"/>
                 <xs:group ref="table-basic"/>
@@ -79,7 +79,7 @@
                 <xs:group ref="subhead"/>
                 <xs:group ref="lists"/>
                 <xs:group ref="programming"/>
-                <xs:group ref="graphics"/>
+                <xs:group ref="fig"/>
             </xs:choice>
         </xs:sequence>    </xs:group>
     

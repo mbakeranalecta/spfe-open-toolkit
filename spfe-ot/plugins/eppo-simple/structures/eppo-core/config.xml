@@ -19,8 +19,8 @@
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/paragraphs/config.xml</href>
         </structure>
         <structure>
-            <name>graphics</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphics/config.xml</href>
+            <name>fig</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/fig/config.xml</href>
         </structure>
         <structure>
             <name>strings</name>

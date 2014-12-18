@@ -3,7 +3,7 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
-    <xs:group name="graphics">
+    <xs:group name="fig">
         <xs:choice>
             <xs:element name="fig" type="fig-type"/>
         </xs:choice>
@@ -29,11 +29,11 @@
 
     <xs:group name="annotations-fig-resource-id">
         <xs:choice>
-           <xs:element name="fig-id">
-               <xs:complexType>
-                   <xs:attribute name="id-ref"/>
-               </xs:complexType>
-           </xs:element>
+            <xs:element name="fig-id">
+                <xs:complexType>
+                    <xs:attribute name="id-ref"/>
+                </xs:complexType>
+            </xs:element>
         </xs:choice>
     </xs:group>
 </xs:schema>

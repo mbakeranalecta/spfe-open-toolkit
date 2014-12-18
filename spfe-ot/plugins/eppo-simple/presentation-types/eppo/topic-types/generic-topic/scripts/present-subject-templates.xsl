@@ -89,21 +89,6 @@
 		</xsl:choose>
 	</xsl:template>
 	
-	<xsl:template match="text-object-ref">
-		<xsl:variable name="id-ref" select="@id-ref"/>
-		<xsl:choose>
-			<xsl:when test="$text-objects/ss:synthesis/ss:text-object[@local-name eq $id-ref]">
-				<xsl:apply-templates select="$text-objects/ss:synthesis/ss:text-object[@local-name eq $id-ref]/*"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="sf:error">
-					<xsl:with-param name="message" select="'No text object found for text object reference: ', $id-ref"/>
-					<xsl:with-param name="in" select="base-uri(document(''))"/>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-	
 	<xsl:template match="link-external">
 	<!-- FIXME: support other protocols -->
 		<pe:xlink href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}">
