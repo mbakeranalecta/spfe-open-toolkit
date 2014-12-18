@@ -93,7 +93,7 @@
         </structure>
         <structure>
             <name>comments</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/config.xml</href>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/author-reviewer/config.xml</href>
         </structure>
         
     </structures>

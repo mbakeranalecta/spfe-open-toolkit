@@ -15,12 +15,12 @@
         <scripts>
             <resolve>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/scripts/resolve/resolve-comments.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/author-reviewer/scripts/resolve/resolve-simple-comments.xsl</href>
                 </script>
             </resolve>
             <presentation type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/scripts/presentation/eppo/present-comments.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/author-reviewer/scripts/presentation/eppo/present-comments.xsl</href>
                 </script>
             </presentation>
         </scripts>
