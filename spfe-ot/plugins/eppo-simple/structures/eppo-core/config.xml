@@ -11,8 +11,8 @@
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/common/config.xml</href>
         </structure> 
         <structure>
-            <name>lists</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/config.xml</href>
+            <name>lists.ol-ul-ll</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/ol-ul-ll/config.xml</href>
         </structure>
         <structure>
             <name>paragraphs</name>

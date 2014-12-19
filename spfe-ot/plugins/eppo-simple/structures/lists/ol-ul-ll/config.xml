@@ -5,11 +5,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <structure>
-        <name>lists</name>
+        <name>lists.ol-ul-ll</name>
         <scripts>
             <presentation type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/scripts/presentation/eppo/present-eppo-lists.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/ol-ul-ll/scripts/presentation/eppo/present-eppo-lists.xsl</href>
                 </script>
             </presentation>
         </scripts>

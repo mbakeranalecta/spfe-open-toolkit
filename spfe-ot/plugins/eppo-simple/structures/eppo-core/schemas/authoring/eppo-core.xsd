@@ -21,7 +21,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/index/schemas/authoring/index.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/schemas/authoring/lists.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/ol-ul-ll/schemas/authoring/lists.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/paragraphs/schemas/authoring/paragraphs.xsd"/>
     <xs:include
@@ -53,7 +53,7 @@
             <xs:choice maxOccurs="unbounded" minOccurs="0">
                 <xs:group ref="paragraphs"/>
                 <xs:group ref="subhead"/>
-                <xs:group ref="lists"/>
+                <xs:group ref="lists.ol-ul-ll"/>
                 <xs:group ref="programming"/>
                 <xs:group ref="fig"/>
                 <xs:group ref="fragments"/>
@@ -79,7 +79,7 @@
             <xs:choice>
                 <xs:group ref="paragraphs"/>
                 <xs:group ref="subhead"/>
-                <xs:group ref="lists"/>
+                <xs:group ref="lists.ol-ul-ll"/>
                 <xs:group ref="programming"/>
                 <xs:group ref="fig"/>
             </xs:choice>
