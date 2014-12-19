@@ -21,7 +21,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/index/schemas/authoring/index.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/ol-ul-ll/schemas/authoring/lists.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/ol-ul-ll/schemas/authoring/ol-ul-ll-lists.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/paragraphs/schemas/authoring/paragraphs.xsd"/>
     <xs:include

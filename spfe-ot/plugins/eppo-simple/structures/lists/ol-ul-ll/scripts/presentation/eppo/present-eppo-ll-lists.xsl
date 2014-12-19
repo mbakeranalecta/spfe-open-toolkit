@@ -10,7 +10,7 @@ version="2.0"
  xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 >
 
-	<xsl:template match="ol	| ul | li | ll | ll/li/label">
+	<xsl:template match="ll | ll/li/label">
 		<xsl:element name="pe:{local-name()}" namespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo">
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>

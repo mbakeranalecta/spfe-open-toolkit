@@ -24,33 +24,3 @@ li ol li {
 li ul li {
 	list-style-type:circle; 
 }
-
-ll
-{
-    display: block;
-}
-
-ll li
-{
-    display:list-item;
-    list-style-type:none;
-}
-
-ll>li>label
-{
-    display:inline;
-    font-weight:bold;
-    -oxy-display-tags:none
-}
-
-ll>li>label:after
-{
-    content: " - ";
-    font-weight:bold;
-}
-
-ll>li>p
-{
-    display:inline;
-    -oxy-display-tags:none
-}

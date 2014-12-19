@@ -1,0 +1,31 @@
+@import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/ol-ul/style/authoring/ol-ul-lists.css");
+
+ll
+{
+    display: block;
+}
+
+ll li
+{
+    display:list-item;
+    list-style-type:none;
+}
+
+ll>li>label
+{
+    display:inline;
+    font-weight:bold;
+    -oxy-display-tags:none
+}
+
+ll>li>label:after
+{
+    content: " - ";
+    font-weight:bold;
+}
+
+ll>li>p
+{
+    display:inline;
+    -oxy-display-tags:none
+}
