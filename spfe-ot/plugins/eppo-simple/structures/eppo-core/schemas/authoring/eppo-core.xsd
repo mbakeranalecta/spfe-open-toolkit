@@ -15,7 +15,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/text-object-ref/schemas/authoring/text-object-ref.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fig/schemas/authoring/fig.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/media/fig/schemas/authoring/fig.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/identity/schemas/authoring/identity.xsd"/>
     <xs:include
@@ -42,6 +42,7 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/admonitions/note-caution-warning/schemas/authoring/note-caution-warning.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/comments/author-reviewer/schemas/authoring/author-reviewer-comments.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/labeled-item/schemas/authoring/labeled-item.xsd"></xs:include>
     <xs:group name="text-general">
         <xs:sequence>
             <xs:choice maxOccurs="1" minOccurs="1">
@@ -61,6 +62,7 @@
                 <xs:group ref="text-object-ref"/>
                 <xs:group ref="note-caution-warning"/>
                 <xs:group ref="comments-block"/>
+                <xs:group ref="labeled-item"/>
             </xs:choice>
         </xs:sequence>
     </xs:group>

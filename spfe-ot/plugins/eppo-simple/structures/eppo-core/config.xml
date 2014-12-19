@@ -20,7 +20,7 @@
         </structure>
         <structure>
             <name>fig</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/fig/config.xml</href>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/media/fig/config.xml</href>
         </structure>
         <structure>
             <name>strings</name>
@@ -95,6 +95,9 @@
             <name>comments</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/author-reviewer/config.xml</href>
         </structure>
-        
+        <structure>
+            <name>labeled-item</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/labeled-item/config.xml</href>
+        </structure>
     </structures>
 </spfe>

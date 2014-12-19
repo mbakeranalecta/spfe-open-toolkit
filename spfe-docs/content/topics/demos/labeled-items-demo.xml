@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
+    <head>
+        <id>labeled-items-demo</id>
+        <history>
+            <revision>
+                <date>2014-12-17</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>author notes</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>author note</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>note-to-reviewer</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>review-comment</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Labeled items demo</title>
+        <p>The labeled items <feature>structure</feature> is a construct in which a label is applied
+            to a short piece of text as a heading. It is similar to the definition list construct
+            found in DITA and HTML, except that in EPPO-simple it is not a list. That is, there is
+            no list wrapper around a labeled item or a set of labeled items. This is consistent with
+            the EPPO-simple principle of keeping structures as flat as possible. In the case of
+            labeled items, formatting is generally not affected by the fact that several labeled
+            items appear in sequence. For instance, first or last items in such a sequence do not
+            usually require special formatting. (In the case that they do, a list wrapper could be
+            applied to a set of labeled items at the formatting stage.)</p>
+        <p>The follow is an example of a labeled item:</p>
+        <labeled-item>
+            <label>This is the label of a labeled item.</label>
+            <item>
+                <p>This is the item to which the label is applied. The
+                    <xml-element-name>item</xml-element-name> structure can contain structures from
+                    the <feature>nested-text-structures group</feature>. </p>
+            </item>
+        </labeled-item>
+        <p>The following is the XML code for the labeled item above:</p>
+        <codeblock>&lt;labeled-item>
+    &lt;label>This is the label of a labeled item.&lt;/label>
+    &lt;item>
+        &lt;p>This is the item to which the label is applied. The
+        &lt;xml-element-name>item&lt;/xml-element-name> structure can contain structures from
+        the &lt;feature>nested-text-structures group&lt;/feature>. &lt;/p>
+    &lt;/item>
+&lt;/labeled-item></codeblock>
+        <p> </p>
+    </body>
+</generic-topic>
