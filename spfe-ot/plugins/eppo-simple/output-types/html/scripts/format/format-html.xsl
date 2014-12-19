@@ -135,16 +135,6 @@
 							<b class="decoration-bold"> Topic Status: </b>
 							<xsl:value-of select="@status"/>
 						</p>
-						<xsl:if test=".//review-note">
-							<p>
-								<b>Index of review notes: </b>
-								<xsl:for-each select=".//review-note">
-									<a href="#review-note:{position()}"> [<xsl:value-of
-											select="position()"/>] </a>
-									<xsl:text> </xsl:text>
-								</xsl:for-each>
-							</p>
-						</xsl:if>
 						<xsl:if test=".//comment-author-to-author">
 							<p>
 								<b>Index of author notes: </b>
@@ -607,20 +597,6 @@
 		<xsl:if test="$draft">
 			<a name="comment-author-to-author:{$my-position}">&#8194;</a>
 			<span class="comment-author-to-author">
-				<xsl:value-of select="$my-position"/>
-				<xsl:text> - </xsl:text>
-				<xsl:apply-templates/>
-			</span>
-		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="review-note">
-		<xsl:variable name="my-page" select="ancestor::page"/>
-		<xsl:variable name="my-position"
-			select="count(preceding::review-note[ancestor::page is $my-page])+1"/>
-		<xsl:if test="$draft">
-			<a name="review-note:{$my-position}">&#8194;</a>
-			<span class="review-note">
 				<xsl:value-of select="$my-position"/>
 				<xsl:text> - </xsl:text>
 				<xsl:apply-templates/>

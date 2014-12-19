@@ -80,30 +80,6 @@ version="2.0"
 			<xsl:text/><xsl:apply-templates/><xsl:text/>
 		</xsl:if>
 	</xsl:template>
-
-	
-	<xsl:template match="string-literal">
-		<pe:bold><xsl:apply-templates/></pe:bold>
-	</xsl:template>
-	
-
-	<xsl:template match="comment-author-to-author">
-		<xsl:if test="$config/config:build-command='draft'">
-			<xsl:element name="{local-name()}">
-				<xsl:copy-of select="@*"/>
-				<xsl:apply-templates/>
-			</xsl:element>
-		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="review-note">
-		<xsl:if test="$config/config:build-command='draft'">
-			<xsl:element name="{local-name()}">
-				<xsl:copy-of select="@*"/>
-				<xsl:apply-templates/>
-			</xsl:element>
-		</xsl:if>
-	</xsl:template>
 	
 	<xsl:template match="procedure">
 		<pe:procedure id="{@id}">

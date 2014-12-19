@@ -161,15 +161,6 @@ version="2.0"
 			</xsl:element>
 		</xsl:if>
 	</xsl:template>
-
-	<xsl:template match="es:review-note">
-		<xsl:if test="$config/config:build-command='draft'">
-			<xsl:element name="{local-name()}">
-				<xsl:copy-of select="@*"/>
-				<xsl:apply-templates/>
-			</xsl:element>
-		</xsl:if>
-	</xsl:template>
 	
 	<xsl:template match="es:procedure">
 		<procedure id="{if (@id) then @id else generate-id()}">
