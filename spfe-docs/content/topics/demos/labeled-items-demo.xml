@@ -54,7 +54,7 @@
             </item>
         </labeled-item>
         <p>The following is the XML code for the labeled item above:</p>
-        <codeblock>&lt;labeled-item>
+        <codeblock language="xml">&lt;labeled-item>
     &lt;label>This is the label of a labeled item.&lt;/label>
     &lt;item>
         &lt;p>This is the item to which the label is applied. The
@@ -63,5 +63,30 @@
     &lt;/item>
 &lt;/labeled-item></codeblock>
         <p> </p>
+        <p>An alternate to the labeled item is the labeled list, or
+            <xml-element-name>ll</xml-element-name> element. The ll element is constructed on the
+            same model as the common <xml-element-name>ol</xml-element-name> and
+            <xml-element-name>ul</xml-element-name> list types, but rather than a number or a
+            bullet, it introduces the list items with a label. By default, the
+            <xml-element-name>ll</xml-element-name> element is limited to a single paragraph. </p>
+        <p>Here is an example of a labeled list:</p>
+        <ll><li>
+                <label>Fred</label>
+                <p>Fred Flintstone.</p>
+            </li><li>
+                <label>Wilma</label>
+                <p>Wilma Flintstone.</p>
+            </li></ll>
+        <p>Here is the code that produced it:</p>
+        <codeblock language="xml">&lt;ll>
+    &lt;li>
+        &lt;label>Fred&lt;/label>
+        &lt;p>Fred Flintstone.&lt;/p>
+    &lt;/li>
+    &lt;li>
+        &lt;label>Wilma&lt;/label>
+        &lt;p>Wilma Flintstone.&lt;/p>
+    &lt;/li>
+&lt;/ll></codeblock>
     </body>
 </generic-topic>

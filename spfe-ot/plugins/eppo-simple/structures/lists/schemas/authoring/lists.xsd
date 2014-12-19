@@ -6,6 +6,20 @@
         <xs:choice>
             <xs:element name="ol" type="list" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="ul" type="list" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="ll">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="li">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="label"/>
+                                    <xs:element name="p" type="paragraph-type"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
         </xs:choice>
     </xs:group>
     <xs:complexType name="list">

@@ -243,6 +243,18 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:complexType name="ll_type">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="li">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="label"/>
+            <xs:element name="p" type="paragraph-type"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="ul_type">
     <xs:sequence>
       <xs:element name="li" type="li_type" maxOccurs="unbounded"/>
@@ -306,7 +318,7 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  
+
   <xs:group name="admonitions-general">
     <xs:sequence>
       <xs:element name="admonition" type="general-admonition"/>
@@ -326,7 +338,7 @@
       <xs:element name="codeblock" type="codeblock_type"/>
       <xs:element name="ul" type="ul_type"/>
       <xs:element name="tree" type="tree_type"/>
-      <xs:element name="admonition" type="admonition-general"></xs:element>
+      <xs:element name="admonition" type="admonition-general"/>
     </xs:choice>
 
   </xs:group>

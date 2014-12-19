@@ -573,7 +573,33 @@
 		</li>
 	</xsl:template>
 	
+	<xsl:template match="ll">
+		<ol class="labeled-list">
+			<xsl:apply-templates/>
+		</ol>
+	</xsl:template>
+	
+	<xsl:template match="ll/li">
+		<li>
+			<p>
+				<b>
+					<xsl:apply-templates select="label"/>
+					<xsl:text> - </xsl:text>
+				</b>
+				<xsl:apply-templates select="p"/>
+			</p>
+		</li>
+	</xsl:template>
+	
+	<xsl:template match="ll/li/label">
+		<xsl:apply-templates/>
+	</xsl:template>
 
+	<xsl:template match="ll/li/p">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+		
 	<xsl:template match="comment-author-to-author ">
 		<xsl:variable name="my-page" select="ancestor::page"/>
 		<xsl:variable name="my-position"
