@@ -1,0 +1,12 @@
+procedure
+{
+    display:block;
+}
+
+procedure>title
+{
+    display:block;
+    font-size:larger;
+    font-weight:bold;
+    font-family:sans-serif;
+}

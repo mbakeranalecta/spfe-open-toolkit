@@ -42,7 +42,8 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/admonitions/note-caution-warning/schemas/authoring/note-caution-warning.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/comments/author-reviewer/schemas/authoring/author-reviewer-comments.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/labeled-item/schemas/authoring/labeled-item.xsd"></xs:include>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/labeled-item/schemas/authoring/labeled-item.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/procedures/procedure/schemas/authoring/procedure.xsd"/>
     <xs:group name="text-general">
         <xs:sequence>
             <xs:choice maxOccurs="1" minOccurs="1">
@@ -60,9 +61,10 @@
                 <xs:group ref="fragment-ref"/>
                 <xs:group ref="table-basic"/>
                 <xs:group ref="text-object-ref"/>
-                <xs:group ref="note-caution-warning"/>
+                <xs:group ref="admonitions.note-caution-warning"/>
                 <xs:group ref="comments-block"/>
                 <xs:group ref="labeled-item"/>
+                <xs:group ref="procedure"/>
             </xs:choice>
         </xs:sequence>
     </xs:group>
@@ -87,5 +89,15 @@
     
     <xs:complexType name="nested-text-structures">
         <xs:group ref="nested-text-structures"/>
+    </xs:complexType>
+    
+    <xs:group name="admonitions">
+        <xs:sequence>
+            <xs:group ref="admonitions.note-caution-warning" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:group>
+    
+    <xs:complexType name="admonitions">
+        <xs:group ref="admonitions"/>
     </xs:complexType>
 </xs:schema>

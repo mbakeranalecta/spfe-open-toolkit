@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
     <xs:include schemaLocation="../../../general/schemas/authoring/admonition-type.xsd"/>
-    <xs:group name="note-caution-warning">
+    <xs:group name="admonitions.note-caution-warning">
 
         <xs:choice>
             <xs:element name="warning" type="admonition"/>

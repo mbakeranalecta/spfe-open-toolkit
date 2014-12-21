@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:group name="procedure">
+        <xs:sequence>
+            <xs:element name="procedure" type="procedure">   </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="procedure">
+        <xs:sequence>
+            <xs:element name="title"/>
+            <xs:element name="intro">
+                <xs:complexType>
+                    <xs:group ref="nested-text-structures"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="admonitions" type="admonitions"/>
+            <xs:element minOccurs="0" name="inputs">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="input">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="name"/>
+                                    <xs:element name="p" type="paragraph-type"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="outputs">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="output">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="name"/>
+                                    <xs:element name="p" type="paragraph-type"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="steps">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="step">
+                            <xs:complexType>
+                                <xs:sequence>
+                                     <xs:element name="title"/>
+                                     <xs:group ref="nested-text-structures"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

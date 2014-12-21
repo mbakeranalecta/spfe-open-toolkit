@@ -99,5 +99,9 @@
             <name>labeled-item</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/labeled-item/config.xml</href>
         </structure>
+        <structure>
+            <name>procedures.procedure</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/procedures/procedure/config.xml</href>
+        </structure>
     </structures>
 </spfe>

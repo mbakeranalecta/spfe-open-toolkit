@@ -81,41 +81,6 @@ version="2.0"
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template match="procedure">
-		<pe:procedure id="{@id}">
-			<xsl:if test="@id">
-				<anchor name="procedure:{@id}"/>
-			</xsl:if>
-			<xsl:apply-templates/>
-		</pe:procedure>
-	</xsl:template>
-	
-	<xsl:template match="procedure/title">
-		<pe:title>
-			<xsl:apply-templates/>
-		</pe:title>
-	</xsl:template>
-	
-	<xsl:template match="procedure/intro">
-		<xsl:apply-templates/>
-	</xsl:template>
-	
-	<xsl:template match="step">
-		<pe:step>
-			<xsl:if test="@id">
-				<xsl:copy-of select="@id"/>
-				<pe:anchor name="step:{@id}"/>
-			</xsl:if>
-			<xsl:apply-templates/>
-		</pe:step>
-	</xsl:template>
-	
-	<xsl:template match="step/title">
-		<pe:title>
-			<xsl:apply-templates/>
-		</pe:title>
-	</xsl:template>
-
 	<xsl:template match="qa">
 		<pe:labeled-item>
 			<xsl:apply-templates/>

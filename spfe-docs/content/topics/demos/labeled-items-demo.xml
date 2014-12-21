@@ -17,19 +17,27 @@
         <index>
             <entry>
                 <type>feature</type>
-                <term>author notes</term>
+                <term>labeled item</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>labeled list</term>
             </entry>
             <entry>
                 <type>xml-element-name</type>
-                <term>author note</term>
+                <term>labeled-item</term>
             </entry>
             <entry>
                 <type>xml-element-name</type>
-                <term>note-to-reviewer</term>
+                <term>labeled-item/item</term>
             </entry>
             <entry>
                 <type>xml-element-name</type>
-                <term>review-comment</term>
+                <term>labeled-item/item</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>ll</term>
             </entry>
         </index>
     </head>

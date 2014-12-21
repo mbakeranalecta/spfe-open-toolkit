@@ -8,7 +8,6 @@ ul {
 ol {
 	display: block;
 	margin: 0.5em 0 0.5em 1.5em;
-	counter-reset:item
 }
 ul li {
 	display: list-item;
