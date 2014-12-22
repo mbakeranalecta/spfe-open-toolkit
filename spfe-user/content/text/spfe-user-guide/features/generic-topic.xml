@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
+
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+
+    <head>
+        <id>generic-topic</id>
+        <history>
+            <revision>
+                <date>2014-11-01</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>xml-element-name</type>
+                <term>generic-topic</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>generic topic</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>body content</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>head</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>body</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>EPPO simple generic topic</title>
+
+        <p> The <feature>EPPO simple</feature> generic topic serves many purposes and forms the base
+            for several more-specialized topics.</p>
+
+        <section>
+
+            <title>Structure</title>
+
+            <p> The <xml-element-name>generic-topic</xml-element-name> element is the top-level container for a
+                <feature>generic topic</feature> XML  document. A valid generic topic document has
+                the structure shown in the following <feature>structure diagram</feature>.</p>
+
+            <fig href="../../../graphics/generic-topic.png">
+                <title>EPPO simple generic-topic structure</title>
+                <caption>
+                    <p> The tag <code>&lt;generic-topic&gt;</code> labels the root element 
+                        of a generic topic document.</p>
+                </caption>
+            </fig>
+
+            <p> The <xml-element-name>head</xml-element-name> element holds the document
+                <feature>header</feature>, which comprises the <feature>identity</feature> group, the
+                revision <feature>history</feature> group, and the <feature>index</feature> group.
+                The latter contains the set of terms discussed in the topic.  </p>
+
+            <p> The <xml-element-name> body </xml-element-name> element holds the topic contents. A
+                <feature> body content </feature> group follows the main <xml-element-name> title
+            </xml-element-name> element and every section title.</p>
+
+        </section>
+
+        <section>
+            <title>Example</title>
+
+            <fragment-ref id-ref="generic-topic-example" />
+
+            <p> The code above displays as shown below.</p>
+
+            <fragment-ref id-ref="nursery-lessons-in-words-of-one-syllable"></fragment-ref>
+
+        </section>
+
+    </body>
+</feature-topic>
+

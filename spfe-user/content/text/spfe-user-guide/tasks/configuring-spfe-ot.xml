@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
+
+    <head>
+        <id>configuring-spfe-ot</id>
+        <history>
+            <revision>
+                <date>2014-11-26</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>configure</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>content set</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>topic set</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Configuring SPFE Open Toolkit</title>
+
+        <understanding>
+
+            <p> The <feature> SPFE Open Toolkit </feature> (SPFE-OT) must be configured to control
+                how it builds output from source XML markup. One or more configuration files
+                specifies which source content will be processed, how it will be processed, and how
+                it will be organized and linked. Together, the configuration files are the master
+                plan for a SPFE build.  </p>
+
+            <p> SPFE Open Toolkit configuration consists of the following major sections:</p>
+
+            <ul>
+                <li>
+                    <p> A <feature>content set</feature> configuration, which identifies topic sets
+                        to be included in the build and how they should be organized.</p>
+                </li>
+                <li>
+                    <p> One or more <feature>topic set</feature> configurations, which identifies
+                        source topics for the set and how they are to be processed.</p>
+                </li>
+                <li>
+                    <p> A <feature>topic-type</feature> configuration for each type of topic in the
+                        content set. The topic-type configuration specifies an <feature>XML
+                        Schema</feature> and the set of <feature>XSLT</feature> scripts that will be used to
+                        build output.</p>
+                </li>
+                <li>
+                    <p> An <feature>output format</feature> configuration for each output media.</p>
+                </li>
+
+            </ul>
+
+            <p> To create a body of content, an author will need to be concerned with the first two,
+                content set and topic set configurations, which identify content source.
+                Configuring topic types and output formats is not content specific and should be
+                done beforehand by a SPFE Open Toolkit developer.</p>
+
+        </understanding>
+
+        <planning>
+
+            <p> While configuration could be set in a single configuration file, in most cases it
+                will be convenient to create one file to configure the <feature> content set
+                </feature>, a separate file for each <feature> topic set </feature>, and a
+                configuration file for each <feature> topic type </feature> and <feature> output
+                    format </feature>. The first stage of the SPFE-OT build process will be to merge
+                all into a single configuration that will be used for the build.</p>
+
+            <p> The content set configuration file will be the entry point for the build process; it
+                will be specified as the first argument of the <file-name>spfe</file-name> command
+                that starts the build process. The content set configuration file will reference
+                topic set configuration files and output-format configuration files, and topic set
+                configuration files will, in turn, reference <feature>topic type</feature>
+                configuration files along with source files and other resources.</p>
+
+            <p> The content set and topic set configuration files may reside anywhere in the
+                filesystem that is convenient for the author. References to configuration, source,
+                and other files may be relative or absolute path names. A common setup has the
+                content set configuration file in the working directory, where the <code>spfe</code>
+                command will be executed and log files kept, with topic set configuration files and
+                content files in subdirectories and referenced with relative paths. This way the
+                entire set can be relocated without needing to edit configuration files.</p>
+
+            <p> The SPFE build system will, by default, organize topics hierarchically with topic
+                sets in separate groups and topics organized by topic type within a topic set. The
+                build system will generate table of contents (TOC) with this organization to aid
+                navigation. These TOCs are not the only navigation aids the build system generates;
+                the system also creates subject-affinity links (<feature>soft links</feature>)
+                and subject index lists. Nevertheless, hierarchical navigation is one way that
+                content users will find what they want.</p>
+
+            <p> Source content may be identified in topic set configuration files with wildcards
+                in file pathnames. The asterisk "*" matches any set of characters except for the
+                path-hierarchy separator, so that <code> &lt;include&gt;
+                ../content/text/my-topic-set/*.xml &lt;/include&gt; </code> will include all the XML
+                files in the "my-topic-set" directory. Thus, best practice is to keep topic source
+                files in directories that correspond to topic sets.</p>
+
+        </planning>
+
+        <doing>
+
+            <subhead>Author tasks</subhead>
+
+            <p> Create a <feature>content set</feature> configuration XML file
+                in the directory you will execute the <feature>spfe</feature> command to create
+                builds or any convenient location. Use the <config-setting> /spfe/content-set
+                </config-setting> XML structure. </p>
+
+            <p> Create a <feature>topic set</feature> configuration XML file for each topic set
+                using the <config-setting>/spfe/topic-set</config-setting> XML structure. </p>
+
+            <subhead>Developer tasks</subhead>
+
+            <p> Create a <feature>topic-type</feature> configuration XML file for each topic type
+                using the <config-setting>/spfe/topic-type</config-setting> XML structure. </p>
+
+            <p> Create a <feature>output-format</feature> configuration XML file for each output
+                format using the <config-setting>/spfe/output-format</config-setting> XML structure.
+            </p>
+
+        </doing>
+
+    </body> 
+</think-plan-do-topic>

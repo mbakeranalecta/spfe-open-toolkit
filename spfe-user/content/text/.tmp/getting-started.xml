@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/eppo-simple"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/generic-topic.xsd">
+ 
+    <head>
+        <id>getting-started</id>
+        <history>
+            <revision>
+                <date>2013-06-07</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+            <date>2013-06-21</date>
+            <author>jkeffer</author>
+            <comment>Submit for review</comment>
+            <status>Ready for technical review</status>
+            </revision>
+            <revision>
+                <date>2014-10-22-07:00</date>
+                <author>jfmacdonald</author>
+                <comment>Edit</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>getting started</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Getting started with the SPFE build system</title>      
+        <p>You can run the SPFE build system on Windows or a Unix-like OS, including Mac OS X and
+            Linux. You will use the build system by opening a terminal and executing commands on the
+            shell's command line. </p>
+        <p>To begin building your documents with SPFE, you need to download the SPFE Toolkit from
+            GitHub at <url>http://github.com/mbakeranalecta/spfe-open-toolkit</url>. You also need
+            to ensure that you have the required third-party packages installed on your computer and
+            that you set the required environment variables. </p>     
+        <section>
+            <title>Installing third-party packages</title>           
+            <p>To use the SPFE build system, you need to install Apache ANT and the Java Development Kit (JDK). Note that both ANT and SPFE require Java.
+            </p>
+            <p> Visit
+                    <url>http://www.oracle.com/technetwork/java/javase/overview/index.html</url>
+                to get information about Java and to download the installer. If you use a Linux
+                distribution that includes a package management system, such as RedHat or Debian, 
+                you may be able to install Java using the package manager. Ensure that you install the
+                <tool-name>Java Development Kit</tool-name>, not the <tool-name>Java Runtime Environment</tool-name>.</p>
+            <p>You can download ANT from <url>http://ant.apache.org</url>. If you use Linux, you
+                may be able to install it using the package management system or by using an RPM
+                from the website. For full installation instructions, follow the instructions in the
+                ANT manual on the ANT website.</p> 
+        </section>
+        <section>
+            <title>Setting up the environment variables</title>
+            <p>If you followed the instructions on the ANT website, you should have the following environment variables set:</p>
+            <ul>
+                <li>
+                    <p>ANT_HOME</p>
+                </li>
+                <li>
+                    <p>JAVA_HOME</p>
+                </li>
+            </ul>
+            <p>For example:</p>
+            <p>Windows:</p>
+                    <codeblock>
+   ANT_HOME=c:\ant
+   JAVA_HOME=c:\jdk-1.5.0.05 
+                    </codeblock>
+            <p>Linux:</p>
+               <codeblock>
+   ANT_HOME=/usr/local/ant
+   JAVA_HOME=/usr/local/jdk-1.5.0.05
+               </codeblock>
+            <p>Ensure that your <code>PATH</code> environment variable includes ANT_HOME\bin.</p>
+             <p> You also need to set the SPFE environment variable SPFEOT_HOME and include it in
+                your PATH environment variable. For example:</p>
+            <ul>
+                <li>
+                    <p>Windows: If you installed SPFE in <directory-name>C:\Users\yourname\Documents</directory-name>:  
+                    <code>SPFEOT_HOME=C:\Users\yourname\Documents\spfe\spfe-ot</code>
+                    </p>
+                </li>
+                <li>
+                    <p>Linux: If you installed SPFE in <directory-name>/home/yourname</directory-name>:  
+                    <code>SPFEOT_HOME=/home/yourname/spfe/spfe-ot</code>
+                    </p>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <title>Building the SPFE documentation</title>
+            <p> In the SPFEOT_HOME directory, you need to ensure that the
+                    <tool-name>spfe</tool-name> build tool uses the correct script for the operating
+                system. By default, it uses the file for Linux (<file-name>spfe.sh</file-name>). If
+                you use Windows, edit the file <file-name>spfe</file-name> and change the first line
+                to <file-name>spfe.bat</file-name>.</p>
+            <p> To verify that you set up the build environment correctly, build the SPFE HTML
+                documentation.</p>
+                <ol>
+                    <li>
+                        <p>Open a terminal window and change to the directory
+                            <directory-name>&lt;spfe-installation
+                            path>/spfe-docs/build</directory-name></p></li>
+                    <li>
+                        <p>Type <code>spfe spfe-docs-config.xml draft</code></p>
+                    </li>
+                </ol>
+                <p>The build system creates the  <directory-name>spfebuild</directory-name>
+                directory in your home directory. For example, in Windows the directory
+                    <directory-name><code>C:\Users\yourname\spfebuild\spfe-docs\output</code></directory-name>
+                contains the HTML files for the SPFE documentation set. Open the file
+                    <file-name>spfebuild\spfe-docs\output\index.html</file-name> in any standard
+                browser. If you can view the SPFE documentation in your browser, you have
+                successfully set up your build environment and built the SPFE documents.</p>
+        </section>
+    </body>
+</generic-topic>

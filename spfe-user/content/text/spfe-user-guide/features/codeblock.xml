@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    
+    <head>
+        <id>codeblock</id>
+        <history>
+            <revision>
+                <date>2014-11-24</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>xml-element-name</type>
+                <term>codeblock</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>codeblock</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>programming</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>EPPO simple codeblock</title>
+        
+        <p> A codeblock element may follow an initial <feature>paragraph</feature>, <feature>
+            fragment </feature>, or <feature> fragment reference </feature> in the <feature> body
+            content </feature> of a topic.</p>
+
+        <fig href="../../../graphics/codeblock-context.png">
+            <title>EPPO simple codeblock context</title>
+                <caption>
+                    <p></p>
+                </caption>
+            </fig>
+            
+        <p> A codeblock elements sets preformatted text, which is convenient for presenting
+            program code.</p>
+            
+        <section>
+            <title>Structure</title>
+
+            <p> The codeblock element has a very simple structure; it may contain text but may not
+                contain any XML element. The XML <code>&lt;![CDATA[ . . . ]]&gt;</code> construct
+                may be used to prevent misinterpretation of characters that have special meaning for
+                XML processing, such as "&lt;" and "&gt;."</p>
+
+        </section>
+        <section>
+            <title>Example</title>
+            <p> The following codeblock sample shows a simple Bash shell script to list all
+                the XML files in the current directory.</p>
+            
+            <codeblock><![CDATA[
+        <codeblock>
+            for file in *.xml
+            do echo $file
+            done
+        </codeblock>
+            ]]>
+            </codeblock>
+            
+            <p> When present in source markup, the codeblock produces the following output.</p>
+            <codeblock>
+        for file in *.xml
+        do echo $file
+        done
+            </codeblock>
+        
+        </section>
+        
+    </body>
+</feature-topic>
+

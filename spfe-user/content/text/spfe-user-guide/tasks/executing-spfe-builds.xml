@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
+
+    <head>
+        <id>executing-spfe-builds</id>
+        <history>
+            <revision>
+                <date>2014-11-01</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>topic set</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>content set</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>SPFE Open Toolkit</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe.bat</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe.sh</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Executing the SPFE build system</title>
+
+        <understanding>
+
+            <p> The <feature>SPFE Open Toolkit</feature> build system processes a set of topics
+                specified in its configuration to generate output. You will invoke the <file-name>
+                spfe </file-name> script with a <feature>content set</feature> configuration file
+                to run the build system. </p>
+
+        </understanding>
+        <planning>
+
+            <p> You must properly <task>install</task> the toolkit before executing the SPFE build system. 
+            </p>
+
+            <p> Set the environment variable <feature>SPFE_BUILD_DIR</feature> to the full path name
+                of a directory you want the build system to generate run files and output. The files
+                for each <feature> content set </feature> will go in a separate subdirectory with
+                the name of its <xml-element-name>content-set-id</xml-element-name>. </p>
+
+        </planning>
+        <doing>
+
+            <subhead>Executing builds</subhead>
+
+            <p> Execute either the Windows <file-name>spfe.bat</file-name> or Unix Bash <file-name>
+                    spfe.sh</file-name> script in the <feature>SPFEOT_HOME</feature> directory,
+                depending on your operating system. A link is provided so that, in most cases, you
+                will need only execute the command <code>spfe</code>. </p>
+
+            <p> Execute the <code>spfe</code> command with arguments specifying the content set
+                configuration file name and either <code>draft</code> or <code>final</code> output
+                forms. </p>
+
+            <codeblock>
+        spfe content-set.xml draft
+        spfe content-set.xml final
+            </codeblock>
+
+            <p> The draft form adds a number before each paragraph for reference by editors.</p>
+
+            <p> By default, the log will print to the screen. To save to a file you may pipe the 
+                command through the <code>tee</code> filter in a Unix environment or in Windows
+                PowerShell: </p>
+
+            <codeblock>
+        spfe content-set.xml final | tee spfe.log
+            </codeblock>
+
+            <p> Optional arguments provide additional messaging in the log:</p>
+
+            <codeblock>
+        spfe content-set.xml final -verbose | tee spfe.log
+        spfe content-set.xml final -verbose -debug | tee spfe.log
+            </codeblock>
+
+            <subhead>Reviewing the log</subhead>
+
+            <p> Review the output log for warnings and errors. Each stage of the build
+                process is preceded with a line indicating the stage. The following
+                label the primary stages:</p>
+
+            <codeblock>
+        --build.synthesis
+        --build.presentation
+        --build.format
+            </codeblock>
+
+            <p> Warnings such as the following indicate things that are not quite right but are not
+                serious enough to prevent output generation: </p>
+
+            <codeblock>
+        Warning: Authored element description found for an element not found in the schema: . . .
+        Subject not resolved: feature name "topic-type" not resolved in topic . . .
+            </codeblock>
+
+            <p> An "ERROR" message may or may not appear in the log if a build fails. 
+                Look for the string "Fatal" in the log if a build fails without an explicit
+                ERROR message or if a topic fails to appear in the output that should 
+                have. Such fatal errors occur when the XML syntax is invalid.</p>
+
+            <subhead>Reviewing output</subhead>
+
+            <p> Find output in the formats specified in the configuration in the directory
+                <feature>SPFE_BUILD_DIR</feature>/content-set-id/output, where "content-set-id"
+                is the <feature>content set</feature> identifier in the configuration. </p>
+
+        </doing>
+
+    </body> 
+</think-plan-do-topic>
+
+
