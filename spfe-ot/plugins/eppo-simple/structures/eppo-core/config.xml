@@ -64,8 +64,12 @@
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/programming/config.xml</href>
         </structure> 
         <structure>
-            <name>subhead</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/subhead/config.xml</href>
+            <name>headings.subhead</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/headings/subhead/config.xml</href>
+        </structure> 
+        <structure>
+            <name>headings.title</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/headings/title/config.xml</href>
         </structure> 
         <structure>
             <name>conditions</name>
@@ -111,6 +115,13 @@
             <name>q-and-a</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/q-and-a/config.xml</href>
         </structure>
-        
+        <structure>
+            <name>terminal-session</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/terminal-session/config.xml</href>
+        </structure>
+        <structure>
+            <name>terminal-session</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/body/config.xml</href>
+        </structure>
     </structures>
 </spfe>

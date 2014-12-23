@@ -19,13 +19,6 @@
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/present-subject-templates.xsl</href>
             </script>
             <script>
-                <remap-namespace>
-                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                    <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                </remap-namespace>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/present-text-structures.xsl</href>
-            </script>
-            <script>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/present-header-and-footer.xsl</href>
             </script>
             <script>

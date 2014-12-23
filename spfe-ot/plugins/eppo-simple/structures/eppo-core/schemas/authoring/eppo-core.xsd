@@ -29,9 +29,9 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/strings/schemas/authoring/strings.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/strings/schemas/authoring/strings.xsd"/>
-    <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/subhead/schemas/authoring/subhead.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/headings/subhead/schemas/authoring/subhead.xsd"/>
+    <!--<xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/headings/title/schemas/authoring/title.xsd"/>-->
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/table-basic/schemas/authoring/table-basic.xsd"/>
     <xs:include
