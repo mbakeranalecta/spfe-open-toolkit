@@ -21,6 +21,10 @@
                 </remap-namespace>  
             </structure>
             <structure>
+                <name>spfe-docs-core</name>
+                <href>../../structures/spfe-docs-core/config.xml</href>
+            </structure>
+            <structure>
                 <name>graphic-record</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
             </structure>
@@ -39,14 +43,6 @@
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/essay/scripts/resolve/resolve-essay.xsl</href>
-                </script>
-
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>../../topic-types/generic-topic/scripts/resolve/resolve-annotations.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>

@@ -103,5 +103,14 @@
             <name>procedures.procedure</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/procedures/procedure/config.xml</href>
         </structure>
+        <structure>
+            <name>procedures.instructions</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/procedures/instructions/config.xml</href>
+        </structure>
+        <structure>
+            <name>q-and-a</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/q-and-a/config.xml</href>
+        </structure>
+        
     </structures>
 </spfe>

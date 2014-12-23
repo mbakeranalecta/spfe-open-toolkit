@@ -15,6 +15,10 @@
                 </remap-namespace>  
             </structure>
             <structure>
+                <name>spfe-docs-core</name>
+                <href>../../structures/spfe-docs-core/config.xml</href>
+            </structure>
+            <structure>
                 <name>graphic-record</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
             </structure>
@@ -45,12 +49,7 @@
                 <script>
                     <href>../../topic-types/function-and-template-reference/scripts/resolve/resolve-xsl-function-ref.xsl</href>
                 </script>
-
-
-                <script>
-                    <href>../../topic-types/generic-topic/scripts/resolve/resolve-annotations.xsl</href>
-                </script>
-                <script>
+               <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>

@@ -5,11 +5,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <structure>
-        <name>procedures.instructions</name>
+        <name>q-and-a</name>
         <scripts>
             <presentation type="eppo">
                 <script>
-                    <href>scripts/presentation/eppo/present-eppo-instructions.xsl</href>
+                    <href>scripts/presentation/eppo/present-q-and-a.xsl</href>
                 </script>
             </presentation>
         </scripts>

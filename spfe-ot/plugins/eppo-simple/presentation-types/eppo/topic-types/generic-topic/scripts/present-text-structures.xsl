@@ -80,24 +80,4 @@ version="2.0"
 			<xsl:text/><xsl:apply-templates/><xsl:text/>
 		</xsl:if>
 	</xsl:template>
-	
-	<xsl:template match="qa">
-		<pe:labeled-item>
-			<xsl:apply-templates/>
-		</pe:labeled-item>
-	</xsl:template>
-	
-	<xsl:template match="qa/q">
-		<pe:label>
-			<xsl:apply-templates/>
-		</pe:label>
-	</xsl:template>
-	
-	<xsl:template match="qa/a">
-		<pe:item>
-			<xsl:apply-templates/>
-		</pe:item>
-	</xsl:template>
-	
-
 </xsl:stylesheet>

@@ -30,6 +30,10 @@
                 </remap-namespace>  
             </structure>
             <structure>
+                <name>spfe-docs-core</name>
+                <href>../../structures/spfe-docs-core/config.xml</href>
+            </structure>
+            <structure>
                 <name>graphic-record</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
             </structure>

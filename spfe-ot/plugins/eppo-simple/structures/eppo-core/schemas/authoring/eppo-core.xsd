@@ -44,6 +44,7 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/comments/author-reviewer/schemas/authoring/author-reviewer-comments.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/labeled-item/schemas/authoring/labeled-item.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/procedures/procedure/schemas/authoring/procedure.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/procedures/instructions/schemas/authoring/instructions.xsd"/>
     <xs:group name="text-general">
         <xs:sequence>
             <xs:choice maxOccurs="1" minOccurs="1">
@@ -65,6 +66,7 @@
                 <xs:group ref="comments-block"/>
                 <xs:group ref="labeled-item"/>
                 <xs:group ref="procedure"/>
+                <xs:group ref="instructions"/>
             </xs:choice>
         </xs:sequence>
     </xs:group>
@@ -84,8 +86,10 @@
                 <xs:group ref="lists.ol-ul-ll"/>
                 <xs:group ref="programming"/>
                 <xs:group ref="fig"/>
+                <xs:group ref="instructions"/>
             </xs:choice>
-        </xs:sequence>    </xs:group>
+        </xs:sequence>    
+    </xs:group>
     
     <xs:complexType name="nested-text-structures">
         <xs:group ref="nested-text-structures"/>
