@@ -18,6 +18,15 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common-subjects/scripts/resolve/resolve-annotations-common-subjects.xsl</href>
                 </script>
             </resolve>
-        </scripts>
+
+                <presentation type="eppo">
+                    <script>
+                        <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common/scripts/eppo/present-annotations-common-functions.xsl</href>
+                    </script>
+                    <script>
+                        <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common/scripts/eppo/present-annotations-common-templates.xsl</href>
+                    </script>
+                </presentation>
+                    </scripts>
     </structure>
 </spfe>

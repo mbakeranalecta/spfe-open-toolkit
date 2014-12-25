@@ -11,7 +11,6 @@
 	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
 	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config" 
-	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all">
 
 	<xsl:param name="link-catalog-files"/>

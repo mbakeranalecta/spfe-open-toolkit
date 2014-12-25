@@ -6,6 +6,15 @@
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <structure>
         <name>annotations.common-addresses</name>
-        <scripts></scripts>
+        <scripts>
+            <presentation type="eppo">
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common/scripts/eppo/present-annotations-common-functions.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common/scripts/eppo/present-annotations-common-templates.xsl</href>
+                </script>
+            </presentation>
+        </scripts>
     </structure>
 </spfe>

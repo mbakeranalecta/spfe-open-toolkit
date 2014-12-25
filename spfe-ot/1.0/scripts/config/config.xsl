@@ -6,6 +6,7 @@
     xmlns:spfe="http://spfeopentoolkit.org/spfe-ot/1.0/xslt/fuctions"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:gen="dummy-namespace-for-the-generated-xslt"
+    xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
     xpath-default-namespace="http://spfeopentoolkit/ns/spfe-ot/config"
     exclude-result-prefixes="#all">
     <xsl:output method="xml" indent="yes"/>
@@ -101,6 +102,10 @@
     <xsl:template name="main">
         <!-- Check the soundness of the config file -->
         <!-- FIXME: Check that each topic set file is unique. To do this, need to normalize the locations, not just check the paths as strings. -->
+        
+        <xsl:result-document href="config-log.txt">
+            <xsl:sequence select="$config"/>
+        </xsl:result-document>
         <xsl:call-template name="create-config-file"/>
         <xsl:call-template name="create-build-file"/>
         <xsl:for-each select="$config/topic-set">
@@ -453,25 +458,25 @@
                 <xsl:for-each
                     select="$config/text-object-set[text-object-set-id=$text-object-set-id]/text-object-types/text-object-type">
                     <xsl:variable name="name" select="name"/>
-                    <xsl:sequence select="$config/text-object-type[name=$name]/scripts"/>
+                    <xsl:sequence select="$config/text-object-type[name=$name][1]/scripts"/>
                 </xsl:for-each>
             </xsl:if>
             <xsl:if test="$topic-set-id">
                 <xsl:for-each
                     select="$config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type">
                     <xsl:variable name="name" select="name"/>
-                    <xsl:sequence select="$config/topic-type[name=$name]/scripts"/>
+                    <xsl:sequence select="$config/topic-type[name=$name][1]/scripts"/>
                 </xsl:for-each>
                 <xsl:for-each
                     select="$config/topic-set[topic-set-id=$topic-set-id]/object-types/object-type">
                     <xsl:variable name="name" select="name"/>
-                    <xsl:sequence select="$config/object-type[name=$name]/scripts"/>
+                    <xsl:sequence select="$config/object-type[name=$name][1]/scripts"/>
                 </xsl:for-each>
             </xsl:if>
             <xsl:for-each
                 select="if ($text-object-set-id) 
-                        then $config/text-object-type[name = $config/text-object-set[text-object-set-id=$text-object-set-id]/text-object-types/text-object-type/name]/structures/structure 
-                        else $config/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name]/structures/structure">
+                then $config/text-object-type[name = $config/text-object-set[text-object-set-id=$text-object-set-id][1]/text-object-types/text-object-type/name]/structures/structure 
+                else $config/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name][1]/structures/structure">
                 <xsl:variable name="name" select="name"/>
                 
                 <xsl:if test="not($config/structures[name=$name]) and not($config/structure[name=$name])">
@@ -486,16 +491,17 @@
                     <xsl:when test="remap-namespace">
                         <xsl:variable name="remap" select="remap-namespace"/>
                         <xsl:choose>
-                            <xsl:when test="$config/structures[name=$name]">
-                                <xsl:for-each select="$config/structures[name=$name]/structure">
+                            <xsl:when test="$config/structures[name=$name][1]">
+                                <xsl:message select="count($config/structures[name=$name][1]/structure)"> Structures</xsl:message>
+                                <xsl:for-each select="$config/structures[name=$name][1]/structure">
                                     <xsl:variable name="name" select="name"/>
-                                    <xsl:if test="not($config/structures[name=$name]) and not($config/structure[name=$name])">
+                                    <xsl:if test="not($config/structures[name=$name][1]) and not($config/structure[name=$name][1])">
                                         <xsl:call-template name="sf:error">
                                             <xsl:with-param name="message" select="'No structure config found for structure name: ', $name"/>
                                             <xsl:with-param name="in" select="base-uri(.)"/>
                                         </xsl:call-template>
                                     </xsl:if>
-                                    <xsl:for-each select="$config/structure[name=$name]/scripts">
+                                    <xsl:for-each select="$config/structure[name=$name][1]/scripts">
                                         <xsl:copy>
                                             <xsl:for-each select="child::*">
                                                 <xsl:copy>
@@ -513,7 +519,7 @@
                                 </xsl:for-each>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:for-each select="$config/structure[name=$name]/scripts">
+                                <xsl:for-each select="$config/structure[name=$name][1]/scripts">
                                     <xsl:copy>
                                         <xsl:for-each select="child::*">
                                             <xsl:copy>
@@ -534,7 +540,7 @@
                     <xsl:otherwise>
                         <xsl:choose>
                             <xsl:when test="$config/structures[name=$name]">
-                                <xsl:for-each select="$config/structures[name=$name]/structure">
+                                <xsl:for-each select="$config/structures[name=$name][1]/structure">
                                     <xsl:variable name="name" select="name"/>
                                     <xsl:if test="not($config/structures[name=$name]) and not($config/structure[name=$name])">
                                         <xsl:call-template name="sf:error">
@@ -542,11 +548,11 @@
                                             <xsl:with-param name="in" select="base-uri(.)"/>
                                         </xsl:call-template>
                                     </xsl:if>
-                                    <xsl:sequence select="$config/structure[name=$name]/scripts"/>
+                                    <xsl:sequence select="$config/structure[name=$name][1]/scripts"/>
                                 </xsl:for-each>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:sequence select="$config/structure[name=$name]/scripts"/>
+                                <xsl:sequence select="$config/structure[name=$name][1]/scripts"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:otherwise>
@@ -561,7 +567,7 @@
             </xsl:for-each>
 
             <xsl:for-each
-                select="$config/presentation-type/topic-types/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name]">
+                select="$config/presentation-type/topic-types/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id][1]/topic-types/topic-type/name]">
                 <scripts>
                     <presentation type="{../../name}">
                         <xsl:sequence select="scripts/script"/>
@@ -572,9 +578,12 @@
                 <xsl:sequence select="scripts"/>
             </xsl:for-each>
         </xsl:variable>
+        
+        <xsl:message select="count($script-sets/scripts/presentation)"> = number of script sets</xsl:message>
 
         <!-- FIXME: Should test that each of the required script sets is present and raise error if not. -->
         <xsl:for-each-group select="$script-sets/scripts/*" group-by="concat(name(), '.', @type)">
+            <xsl:message select="count(current-group())"> = number of script sets in current group</xsl:message>            
             <xsl:variable name="script-type"
                 select="if (name()='other') then concat('other.',@name) else name()"/>
             <xsl:variable name="script-name-with-type"
@@ -583,55 +592,117 @@
                 select="if ($text-object-set-id)
                 then concat($content-set-build, '/text-object-sets/', $text-object-set-id, '/', $script-name-with-type)
                 else concat($content-set-build, '/topic-sets/', $topic-set-id, '/', $script-name-with-type)"/>
+            <xsl:variable name="script-rewrite-list">
+                <xsl:for-each-group select="current-group()/config:script"
+                group-by="concat(*:href/text(), ' ', normalize-space(config:remap-namespace/config:from), normalize-space(config:remap-namespace/config:to))">
+                <xsl:message>-- begin group --</xsl:message>
+                <script>
+                    <xsl:choose>
+                    <!-- If namespace remapping is specified, create a temp file with remapped namespaces -->
+                    <xsl:when test="current-group()/config:remap-namespace">
+                        <xsl:variable name="script-to-be-remapped" select="unparsed-text(concat('file:///',config:href))"/>
+                        <xsl:variable name="map-from-namespace" select="normalize-space(config:remap-namespace/config:from)"/>
+                        <xsl:variable name="map-to-namespace" select="normalize-space(config:remap-namespace/config:to)"/>
+                        <xsl:variable name="regex">
+                            <xsl:text>(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;])</xsl:text>
+                            <xsl:value-of select="sf:escape-for-regex($map-from-namespace)"/>
+                            <xsl:text>([&quot;&apos;])</xsl:text>
+                        </xsl:variable>
+                        
+                        <map-from-namespace>
+                            <xsl:sequence select="$map-from-namespace"/>
+                        </map-from-namespace>
+                        <map-to-namespace>
+                            <xsl:sequence select="$map-to-namespace"/>
+                        </map-to-namespace>
+                        <script-to-be-remapped>
+                            <xsl:sequence select="$script-to-be-remapped"/>
+                        </script-to-be-remapped>
+                        
+                        <xsl:choose>
+                            <xsl:when test="matches($script-to-be-remapped, $regex)">
+                                <regex><xsl:value-of select="$regex"/></regex>
+                                <output-file-name>
+                                    <xsl:value-of select="concat(generate-id(config:remap-namespace/config:from), position(), sf:get-file-name-from-path(config:href))"/>
+                                </output-file-name>"
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:variable name="href" select="config:href"/>
+<!--                                <xsl:message select="$href/text()"> = $href</xsl:message>
+                                <xsl:message select="string($topic-set-id),string($text-object-set-id)"/>
+                                <xsl:message select="current-grouping-key()"/>
+                                <xsl:message select="$href is current-group()[config:href eq $href][1]/config:href"/>
+                                <xsl:message>
+                                <xsl:for-each select="current-group()[config:href eq $href]/config:href">
+                                    <xsl:value-of select="generate-id()"/>, <xsl:value-of select="."/>
+                                    <xsl:text>
+</xsl:text>
+                                    
+                                </xsl:for-each>-->
+                                
+                                <output-file-name remap="no">
+                                    <xsl:value-of select="concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)"/>
+                                </output-file-name>"
+                                    
+                                <!--</xsl:message>-->
+<!--                                <xsl:message select="count(current-group()[config:href eq $href])"> = occurrences of this href in current group.</xsl:message>
+-->                                <!--<xsl:message select="current-group()[config:href eq $href]"> !!!!!!!!!!!!!!!!</xsl:message>-->
+<!--                                <xsl:if test="position() eq 1">
+                                    <!-\- If there is no remapable namespace then we only want to include the first instance. -\->
+                                    <gen:include href="{concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)}"/>
+                                </xsl:if>
+-->                            </xsl:otherwise>
+                        </xsl:choose>
+                        
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- Otherwise, just link to existing file. -->
+                        <!-- FIXME: need function for fixup if current one does not work 
+                        <gen:include
+                            href="{concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)}"
+                        />-->
+                        <output-file-name remap="no">
+                            <xsl:value-of select="concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)"/>
+                        </output-file-name>
+                    </xsl:otherwise>
+                </xsl:choose>
+                </script>
+            </xsl:for-each-group>
+            </xsl:variable>
+            
+ <!--           <xsl:message select="$script-rewrite-list"/>-->
+            
+            <xsl:for-each-group select="$script-rewrite-list/config:script" group-by="config:output-file-name">
+                <xsl:message select="current-group()">@@@@@@@@</xsl:message>
+                <xsl:if test="not(config:output-file-name/@remap='no')">
+                   <xsl:result-document
+                       href="file:///{$script-output-directory}/{config:output-file-name}"
+                       method="text" indent="no"
+                       xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
+                       <xsl:variable name="map-to-namespace" select="config:map-to-namespace"/>
+                       <xsl:message select="config:regex">  = regex</xsl:message>
+                       <xsl:analyze-string select="config:script-to-be-remapped" regex="{config:regex}">
+                           <xsl:matching-substring>
+                               <xsl:value-of select="concat(regex-group(1),$map-to-namespace,regex-group(2))"/>
+                           </xsl:matching-substring>
+                           <xsl:non-matching-substring>
+                               <xsl:value-of select="."/>
+                           </xsl:non-matching-substring>
+                       </xsl:analyze-string>
+                   </xsl:result-document>
+                </xsl:if>
+            </xsl:for-each-group>
             <xsl:result-document
                 href="file:///{$script-output-directory}/spfe.{$script-name-with-type}.xsl"
                 method="xml" indent="yes"
                 xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                 <gen:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
-                    <!-- It is a mystery to me why we need to put *:script here. The default namespace here
-                    should be config, but it does not works without *: prefix. -->
-                    <xsl:for-each-group select="current-group()/*:script"
-                        group-by="concat(*:href/text(), ' ', normalize-space(*:remap-namespace/*:from), normalize-space(*:remap-namespace/*:to))">
-                        <xsl:choose>
-                            <!-- If namespace remapping is specified, create a temp file with remapped namespaces -->
-                            <xsl:when test="current-group()/*:remap-namespace">
-                                <xsl:variable name="map-from-namespace"
-                                    select="normalize-space(*:remap-namespace/*:from)"/>
-                                <xsl:variable name="map-to-namespace"
-                                    select="normalize-space(*:remap-namespace/*:to)"/>
-                                <xsl:variable name="temp-file-name"
-                                    select="concat(generate-id(*:remap-namespace/*:from), position(), sf:get-file-name-from-path(*:href))"/>
-
-                                <gen:include href="{$temp-file-name}"/>
-                                <xsl:result-document
-                                    href="file:///{$script-output-directory}/{$temp-file-name}"
-                                    method="text" indent="no"
-                                    xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
-                                    <xsl:analyze-string
-                                        select="unparsed-text(concat('file:///',*:href))"
-                                        regex="(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;]){sf:escape-for-regex($map-from-namespace)}([&quot;&apos;])">
-                                        <xsl:matching-substring>
-                                            <xsl:value-of
-                                                select="concat(regex-group(1),$map-to-namespace,regex-group(2))"
-                                            />
-                                        </xsl:matching-substring>
-                                        <xsl:non-matching-substring>
-                                            <xsl:value-of select="."/>
-                                        </xsl:non-matching-substring>
-                                    </xsl:analyze-string>
-                                </xsl:result-document>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <!-- Otherwise, just link to existing file. -->
-                                <!-- FIXME: need function for fixup is current one does not work -->
-                                <gen:include
-                                    href="{concat(if(starts-with(*:href,'/')) then 'file://' else 'file:/', *:href)}"
-                                />
-                            </xsl:otherwise>
-                        </xsl:choose>
+                    <xsl:for-each-group select="$script-rewrite-list/config:script" group-by="config:output-file-name">
+                        <gen:include href="{config:output-file-name}"/>
                     </xsl:for-each-group>
                 </gen:stylesheet>
             </xsl:result-document>
+            
         </xsl:for-each-group>
     </xsl:template>
 

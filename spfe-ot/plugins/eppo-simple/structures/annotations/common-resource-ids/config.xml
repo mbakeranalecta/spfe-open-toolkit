@@ -7,7 +7,13 @@
     <structure>
         <name>annotations.common-subjects</name>
         <scripts>
-           
-        </scripts>
-    </structure>
+            <presentation type="eppo">
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common/scripts/eppo/present-annotations-common-functions.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common/scripts/eppo/present-annotations-common-templates.xsl</href>
+                </script>
+            </presentation>
+        </scripts>    </structure>
 </spfe>

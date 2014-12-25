@@ -148,7 +148,7 @@
               <xs:element minOccurs="0" name="text-object-sets">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="text-object-set">
+                    <xs:element name="text-object-set" maxOccurs="unbounded">
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="text-object-set-id"/>

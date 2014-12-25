@@ -120,7 +120,7 @@
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/terminal-session/config.xml</href>
         </structure>
         <structure>
-            <name>terminal-session</name>
+            <name>body</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/body/config.xml</href>
         </structure>
     </structures>
