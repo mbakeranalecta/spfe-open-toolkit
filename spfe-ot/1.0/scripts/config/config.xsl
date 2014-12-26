@@ -296,7 +296,6 @@
                 </xsl:for-each>
             </target>
 
-
             <target name="--build.presentation">
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
@@ -315,7 +314,6 @@
                     </xsl:for-each>
                 </xsl:for-each>
             </target>
-
 
             <target name="--build.format">
                 <xsl:for-each select="$config/topic-set">
@@ -341,7 +339,6 @@
                 </xsl:for-each>
             </target>
 
-
             <target name="--build.encode">
                 <xsl:for-each select="$config/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
@@ -350,7 +347,6 @@
                     > </build.pdf-encode>
                 </xsl:for-each>
             </target>
-
 
             <import file="{$spfeot-home}/1.0/build-tools/spfe-rules.xml"/>
         </project>
@@ -486,7 +482,6 @@
                     </xsl:call-template>
                 </xsl:if>
                 
-      
                 <xsl:choose>
                     <xsl:when test="remap-namespace">
                         <xsl:variable name="remap" select="remap-namespace"/>
@@ -579,11 +574,8 @@
             </xsl:for-each>
         </xsl:variable>
         
-        <xsl:message select="count($script-sets/scripts/presentation)"> = number of script sets</xsl:message>
-
         <!-- FIXME: Should test that each of the required script sets is present and raise error if not. -->
         <xsl:for-each-group select="$script-sets/scripts/*" group-by="concat(name(), '.', @type)">
-            <xsl:message select="count(current-group())"> = number of script sets in current group</xsl:message>            
             <xsl:variable name="script-type"
                 select="if (name()='other') then concat('other.',@name) else name()"/>
             <xsl:variable name="script-name-with-type"
@@ -595,7 +587,6 @@
             <xsl:variable name="script-rewrite-list">
                 <xsl:for-each-group select="current-group()/config:script"
                 group-by="concat(*:href/text(), ' ', normalize-space(config:remap-namespace/config:from), normalize-space(config:remap-namespace/config:to))">
-                <xsl:message>-- begin group --</xsl:message>
                 <script>
                     <xsl:choose>
                     <!-- If namespace remapping is specified, create a temp file with remapped namespaces -->
@@ -627,40 +618,15 @@
                                 </output-file-name>"
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:variable name="href" select="config:href"/>
-<!--                                <xsl:message select="$href/text()"> = $href</xsl:message>
-                                <xsl:message select="string($topic-set-id),string($text-object-set-id)"/>
-                                <xsl:message select="current-grouping-key()"/>
-                                <xsl:message select="$href is current-group()[config:href eq $href][1]/config:href"/>
-                                <xsl:message>
-                                <xsl:for-each select="current-group()[config:href eq $href]/config:href">
-                                    <xsl:value-of select="generate-id()"/>, <xsl:value-of select="."/>
-                                    <xsl:text>
-</xsl:text>
-                                    
-                                </xsl:for-each>-->
-                                
+                                <!-- Otherwise, just link to existing file. -->                                
                                 <output-file-name remap="no">
                                     <xsl:value-of select="concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)"/>
-                                </output-file-name>"
-                                    
-                                <!--</xsl:message>-->
-<!--                                <xsl:message select="count(current-group()[config:href eq $href])"> = occurrences of this href in current group.</xsl:message>
--->                                <!--<xsl:message select="current-group()[config:href eq $href]"> !!!!!!!!!!!!!!!!</xsl:message>-->
-<!--                                <xsl:if test="position() eq 1">
-                                    <!-\- If there is no remapable namespace then we only want to include the first instance. -\->
-                                    <gen:include href="{concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)}"/>
-                                </xsl:if>
--->                            </xsl:otherwise>
+                                </output-file-name>
+                           </xsl:otherwise>
                         </xsl:choose>
-                        
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- Otherwise, just link to existing file. -->
-                        <!-- FIXME: need function for fixup if current one does not work 
-                        <gen:include
-                            href="{concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)}"
-                        />-->
                         <output-file-name remap="no">
                             <xsl:value-of select="concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)"/>
                         </output-file-name>
