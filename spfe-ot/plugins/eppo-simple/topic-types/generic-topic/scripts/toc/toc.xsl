@@ -47,10 +47,10 @@
 				<xsl:choose>
 					<!-- If there is a TOC file for this media, use it to create TOC -->
 					<!-- FIXME: still need to add toc spport to config and make this work with it. -->
-					<xsl:when test="$media = tokenize(document($toc-file)/toc/@media, '\s+')">
+					<xsl:when test="false()">
 						
 						<xsl:call-template name="sf:info">
-							<xsl:with-param name="message" select="'Processing toc file ', $toc-file, 'for ', $media"/>
+							<xsl:with-param name="message" select="'Processing toc file ', $toc-file"/>
 						</xsl:call-template>
 						
 						<xsl:variable name="toc-topics" select="document($toc-file)//topic/@name" as="xs:string*"/>
@@ -104,7 +104,7 @@
 					<!-- If not TOC file, create TOC based on topic types -->
 					<xsl:otherwise>	
 						<xsl:call-template name="sf:info">
-							<xsl:with-param name="message" select="'No toc file, using topic type order for ', $media"/>
+							<xsl:with-param name="message" select="'No toc file, using topic type order.'"/>
 						</xsl:call-template>
 						<xsl:if test="$synthesis/ss:synthesis/ss:topic[matches(@local-name, '^[iI][nN][dD][eE][xX]$')]">
 							<xsl:attribute name="index">index</xsl:attribute>

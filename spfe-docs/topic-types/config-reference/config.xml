@@ -30,14 +30,14 @@
         <scripts>
             <extract>
                 <script>
-                    <href>../../topic-types/config-reference/scripts/extract/schema-defs.xsl</href>
+                    <href>scripts/extract/schema-defs.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </extract>
             <merge>
-                <script><href>../../topic-types/config-reference/scripts/merge/merge-config-ref.xsl</href></script>
+                <script><href>scripts/merge/merge-config-ref.xsl</href></script>
                 <script><href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href></script>
             </merge>
             <resolve>
@@ -46,7 +46,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/resolve/resolve-topic.xsl</href>
                 </script>
                 <script>
-                    <href>../../topic-types/config-reference/scripts/resolve/resolve-config-ref.xsl</href>
+                    <href>scripts/resolve/resolve-config-ref.xsl</href>
                 </script>
 
 
@@ -62,6 +62,14 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
                 </script>                
             </resolve>
+            <presentation type="eppo">
+                <script>
+                    <href>scripts/present/present-config-ref.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/presentation/eppo/present-topic-set-toc.xsl</href>
+                </script>
+            </presentation>
             <link-catalog>
                 <script>
                     <remap-namespace>

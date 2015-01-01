@@ -79,7 +79,10 @@
     -->
 
     <xsl:variable name="config" as="element(spfe)*">
-        <xsl:message select="'Loading config file ', $configfile"/>
+        <xsl:call-template name="sf:info">
+            <xsl:with-param name="message" select="'Loading config file ', $configfile"/>
+        </xsl:call-template>
+        
         <spfe>
             <xsl:apply-templates select="$config-doc" mode="load-config"/>
         </spfe>
@@ -103,9 +106,6 @@
         <!-- Check the soundness of the config file -->
         <!-- FIXME: Check that each topic set file is unique. To do this, need to normalize the locations, not just check the paths as strings. -->
         
-        <xsl:result-document href="config-log.txt">
-            <xsl:sequence select="$config"/>
-        </xsl:result-document>
         <xsl:call-template name="create-config-file"/>
         <xsl:call-template name="create-build-file"/>
         <xsl:for-each select="$config/topic-set">
@@ -325,7 +325,8 @@
                         <build.format topic-set-id="{$topic-set-id}"
                             style="{$content-set-build}/topic-sets/{$topic-set-id}/format-{name}/spfe.format-{name}.xsl"
                             input-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out"
-                            output-directory="{if ($topic-set-id=$config/content-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
+                            
+                            output-directory="{$content-set-output}/{if ($topic-set-id=$config/content-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
                             <files-elements>
                                 <files id="files.{$name}.support-files">
                                     <xsl:for-each
@@ -360,14 +361,19 @@
 
     <xsl:template name="create-config-file">
         <xsl:if test="not($config//content-set)">
-            <xsl:message terminate="yes">
-                <xsl:text>ERROR: /spfe/content-set not found in </xsl:text>
-                <xsl:value-of select="$configfile"/>
-                <xsl:text>. The configuration file provided to the build system must define a content set.</xsl:text>
-            </xsl:message>
+            <xsl:call-template name="sf:error">
+                <xsl:with-param name="message">
+                 <xsl:text>Element /spfe/content-set not found in </xsl:text>
+                 <xsl:value-of select="$configfile"/>
+                 <xsl:text>. The configuration file provided to the build system must define a content set.</xsl:text>
+                </xsl:with-param>
+                <xsl:with-param name="in" select="$configfile"/>
+            </xsl:call-template>
         </xsl:if>
-        <xsl:message
-            select="concat('Generating config file: ', 'file:///', $content-set-build, '/config/spfe-config.xml')"/>
+        <xsl:call-template name="sf:info">
+            <xsl:with-param name="message" select="concat('Generating config file: ', 'file:///', $content-set-build, '/config/spfe-config.xml')"/>
+        </xsl:call-template>
+            
         <xsl:result-document href="file:///{$content-set-config}/spfe-config.xml" method="xml"
             indent="yes" xpath-default-namespace="http://spfeopentoolkit/ns/spfe-ot/config"
             xmlns="http://spfeopentoolkit/ns/spfe-ot/config" exclude-result-prefixes="#all">
@@ -487,7 +493,6 @@
                         <xsl:variable name="remap" select="remap-namespace"/>
                         <xsl:choose>
                             <xsl:when test="$config/structures[name=$name][1]">
-                                <xsl:message select="count($config/structures[name=$name][1]/structure)"> Structures</xsl:message>
                                 <xsl:for-each select="$config/structures[name=$name][1]/structure">
                                     <xsl:variable name="name" select="name"/>
                                     <xsl:if test="not($config/structures[name=$name][1]) and not($config/structure[name=$name][1])">
@@ -636,17 +641,13 @@
             </xsl:for-each-group>
             </xsl:variable>
             
- <!--           <xsl:message select="$script-rewrite-list"/>-->
-            
             <xsl:for-each-group select="$script-rewrite-list/config:script" group-by="config:output-file-name">
-                <xsl:message select="current-group()">@@@@@@@@</xsl:message>
                 <xsl:if test="not(config:output-file-name/@remap='no')">
                    <xsl:result-document
                        href="file:///{$script-output-directory}/{config:output-file-name}"
                        method="text" indent="no"
                        xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
                        <xsl:variable name="map-to-namespace" select="config:map-to-namespace"/>
-                       <xsl:message select="config:regex">  = regex</xsl:message>
                        <xsl:analyze-string select="config:script-to-be-remapped" regex="{config:regex}">
                            <xsl:matching-substring>
                                <xsl:value-of select="concat(regex-group(1),$map-to-namespace,regex-group(2))"/>

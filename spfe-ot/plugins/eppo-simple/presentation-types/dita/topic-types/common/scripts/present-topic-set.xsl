@@ -16,10 +16,7 @@
 	<xsl:variable name="media">online</xsl:variable>
 
 <!-- parameters -->
-	
-	<!-- FIXME: This should be in config. -->
-	<xsl:param name="output-image-directory">graphics</xsl:param>
-	<xsl:param name="output-directory" select="concat($config/config:content-set-build, '/topic-sets/', $topic-set-id, '/presentation/out')"/>
+	<xsl:param name="output-directory" />
 	<!-- FIXME: This shoud be read from config file. -->
 <xsl:param name="draft">no</xsl:param>
 	

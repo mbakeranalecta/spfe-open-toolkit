@@ -471,6 +471,7 @@
 				<params>
 					<arg value="topic-set-id=@{topic-set-id}"/>
 					<arg value="presentation-files=${presentation-files}"/>
+					<arg value="output-directory=@{output-directory}"/>
 <!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 					<param name="presentation-files" expression="${presentation-files}"/>
@@ -482,17 +483,17 @@
 			<files id="files.images.html"
 				includesfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/image-list.txt" excludes="*"/>
 	
-			<mkdir dir="${spfe.build.output-directory}/@{output-directory}images"/>
-			<copy todir="${spfe.build.output-directory}/@{output-directory}images" flatten="true" failonerror="false"
+			<mkdir dir="@{output-directory}images"/>
+			<copy todir="@{output-directory}images" flatten="true" failonerror="false"
 				preservelastmodified="true" verbose="true">
 				<files refid="files.images.html"/>
 			</copy>
 			
 			<!-- copy the support files (css, scripts, etc.) to the output directory -->
-			<mkdir dir="${spfe.build.output-directory}/@{output-directory}style"/>		
+			<mkdir dir="@{output-directory}style"/>		
 			<!-- FIXME: the copy has to use flatten, because the files element contains absolute paths which do not copy as desired.
 			            Should maybe switch to filesets, but that has issues at config level. -->
-			<copy todir="${spfe.build.output-directory}/@{output-directory}style"  flatten="true" failonerror="false"
+			<copy todir="@{output-directory}style"  flatten="true" failonerror="false"
 				preservelastmodified="true" verbose="true">
 				<files refid="files.html.support-files"/>
 			</copy>

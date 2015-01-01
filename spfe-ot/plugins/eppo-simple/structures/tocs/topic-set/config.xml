@@ -5,20 +5,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <structure>
-        <name>body</name>
-        <dependencies>
-            <dependency>
-                <name>paragraphs</name>
-                <href>../paragraphs/config.xml</href>
-            </dependency>
-        </dependencies>
+        <name>tocs.topic-set</name>
         <scripts>
             <presentation type="eppo">
                 <script>
-                    <href>scripts/presentation/eppo/present-body.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/common/scripts/present-topic-set-toc.xsl</href>
                 </script>
                 <script>
-                    <href>scripts/presentation/eppo/present-header-and-footer.xsl</href>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </presentation>
         </scripts>

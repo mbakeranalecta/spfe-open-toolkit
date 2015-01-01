@@ -26,7 +26,7 @@
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
-											<String>file:/C:/Users/Mark/spfe-open-toolkit/spfe-docs/topic-types/common/authoring/css/spfe-docs.css</String>
+											<String>${pdu}/spfe-docs/structures/spfe-docs-core/style/authoring/spfe-docs.css</String>
 										</field>
 										<field name="title">
 											<String>SPFE Docs Common CSS</String>

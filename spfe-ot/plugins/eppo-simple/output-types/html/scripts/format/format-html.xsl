@@ -24,7 +24,7 @@
 	<xsl:variable name="draft" as="xs:boolean" select="$config/config:build-command='draft'"/>
 	
 	<xsl:param name="topic-set-id"/>
-	<xsl:param name="output-directory" select="$config/config:content-set-output"/>
+	<xsl:param name="output-directory"/>
 	
 	<xsl:param name="presentation-files"/>
 	<xsl:variable name="presentation" select="sf:get-sources($presentation-files)"/>
@@ -78,7 +78,7 @@
 		</xsl:call-template>
 
 		<xsl:result-document
-			href="file:///{$output-directory}/{$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:output-directory}{$file-name}"
+			href="file:///{$output-directory}/{$file-name}"
 			method="html" indent="no" omit-xml-declaration="no"
 			doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 			doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -288,6 +288,7 @@
 				<xsl:value-of select="$available-preferred-formats/gr:format[1]/gr:href"/>
 			</xsl:for-each>
 		</xsl:variable>
+		<!-- FIXME: Get this in sync with config file settings. -->
 		<xsl:result-document
 			href="file:///{$config/config:content-set-build}/topic-sets/{$topic-set-id}/image-list.txt"
 			method="text">

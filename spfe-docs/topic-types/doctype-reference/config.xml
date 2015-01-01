@@ -78,6 +78,14 @@
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </toc>
+            <presentation type="eppo">
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/presentation/eppo/present-topic-set-toc.xsl</href>
+                </script>
+                <script>
+                    <href>scripts/present/eppo/present-doctype-ref.xsl</href>
+                </script>
+            </presentation>
         </scripts>
     </topic-type>
 </spfe>

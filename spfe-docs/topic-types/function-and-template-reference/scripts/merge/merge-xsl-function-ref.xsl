@@ -27,7 +27,7 @@ exclude-result-prefixes="#all" >
 	
 <xsl:param name="topic-set-id"/>
 
-	<xsl:param name="output-directory" select="concat($config/config:content-set-build, '/topic-sets/', $topic-set-id, '/merge/out')"></xsl:param>
+	<xsl:param name="output-directory"/>
 
 	<xsl:param name="extracted-content-files"/>
 	<xsl:variable name="function-defs" select="sf:get-sources($extracted-content-files)"/>
