@@ -88,14 +88,14 @@
             </toc>
             <presentation type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/content-set/scripts/presentation/eppo/present-content-set-toc.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/content-set/scripts/present/eppo/present-content-set-toc.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/docset-home-topic/scripts/present-docset-home-topic.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/docset-home-topic/scripts/present/eppo/present-docset-home-topic.xsl</href>
                 </script>
             </presentation>
         </scripts>

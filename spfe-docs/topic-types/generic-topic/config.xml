@@ -102,14 +102,14 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/presentation/eppo/present-table-basic.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/presentation/eppo/present-topic-set-toc.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/present-generic-topic.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/present/eppo/present-generic-topic.xsl</href>
                 </script>
             </presentation>
 

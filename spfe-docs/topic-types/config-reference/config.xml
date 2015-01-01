@@ -67,7 +67,7 @@
                     <href>scripts/present/present-config-ref.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/presentation/eppo/present-topic-set-toc.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
                 </script>
             </presentation>
             <link-catalog>

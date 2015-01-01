@@ -73,14 +73,14 @@
             </toc>
             <presentation type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/presentation/eppo/present-topic-set-toc.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/essay/scripts/present-essay-topic.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/essay/scripts/present/eppo/present-essay-topic.xsl</href>
                 </script>
             </presentation>
         </scripts>

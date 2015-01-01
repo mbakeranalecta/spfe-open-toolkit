@@ -66,6 +66,11 @@
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </toc>
+            <presentation type="eppo">
+                <script>
+                    <href>scripts/present/eppo/present-topic-subject-lists.xsl</href>
+                </script>
+            </presentation>
         </scripts>
     </topic-type>
 </spfe>
