@@ -63,7 +63,7 @@
                 <xml-element-name>section</xml-element-name>,
                 <xml-element-name>xref</xml-element-name>, or
                 <xml-element-name>table</xml-element-name> you are looking at. Namespaces names are
-                intended to be globally uniques, so there should no confusion about which vocabulary
+                intended to be globally unique, so there should be no confusion about which vocabulary
                 each element name belongs to. </p>
             <p>This makes is sound like namespaces make element names unique in the world. But they
                 don't, and this is one possible source of confusion. Namespace names themselves are
@@ -73,7 +73,7 @@
                 themselves.) But adding a globally unique namespace name to an XML element name does
                 not make that element name globally unique, because XML element names are not unique
                 within their own namespace. </p>
-            <p>In fact, there same element name can occur several times in an XML vocabulary, and
+            <p>In fact, the same element name can occur several times in an XML vocabulary, and
                 can mean different things in each case. A common example is to have an element named
                 <xml-element-name>name</xml-element-name> which is used to capture the name of
                 several different things described by the vocabulary. In the SPFE configuration
@@ -81,7 +81,7 @@
                 <xml-element-name>name</xml-element-name>, and every one of them is part of the SPFE
                 configuration namespace,
                     <xml-namespace-uri>http://spfeopentoolkit/ns/spfe-ot/config</xml-namespace-uri>.
-                What distinguishes them is there position relative to other elements in a
+                What distinguishes them is their position relative to other elements in a
                 configuration document. They include: </p>
             <ul>
                 <li>
@@ -103,7 +103,7 @@
             <p>Namespaces, therefore, are not about uniquely identifying an element. Namespaces are
                 actually about ownership. A namespace name tells you who the element name belongs
                 to. Whether or not the name is unique within the namespace is entirely up to the
-                person who owns the namespace. </p>
+                person who owns the namespace. (And yes, that does mean that, technically speaking, XML namespaces are not really namespaces.)</p>
             <p>Typically, ownership of a namespace is expressed in terms of the organization and the
                 project within that organization that created the vocabulary that the namespace is
                 assigned to. Thus the namespace identifier,
@@ -145,7 +145,7 @@
                 potentially confusing. It also forces us to make decisions about what document types
                 mean to us and what rules we are going to apply to them.</p>
             <p>One of those decisions is about the relationship between namespaces and document
-                types. It is very tempting to think that a document types has a unique namespace and
+                types. It is very tempting to think that every document type has a unique namespace and
                 that is the end of the matter. A number of public document types, such as XML
                 schema, XSLT, and HTML work this way. But there is no law that says it has to be
                 this way. These public document types have very broad use and very firmly

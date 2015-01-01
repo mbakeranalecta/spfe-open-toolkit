@@ -426,7 +426,7 @@
 
 			<copy todir="@{copy-to}" flatten="false" verbose="true">
 				<fileset dir="@{output-directory}">
-					<exclude name="*.*" unless="copy-to-specified"/>
+					<exclude name="**/*.*"/>
 					<include name="**/*.*" if="copy-to-specified"/>
 				</fileset>
 			</copy>

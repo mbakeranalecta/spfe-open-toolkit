@@ -70,6 +70,18 @@
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </toc>
+            <presentation type="eppo">
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/presentation/eppo/present-topic-set-toc.xsl</href>
+                </script>
+                <script>                            
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/feature-topic/scripts/present-feature-topic.xsl</href>
+                </script>
+            </presentation>
         </scripts>
     </topic-type>
 </spfe>

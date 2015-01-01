@@ -84,8 +84,9 @@
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </toc>
-            <!-- FIXME: This is to process imported text objects. But is this the right place to do this? -->
+           
             <presentation type="eppo">
+                <!-- FIXME: This is to process imported text objects. But is this the right place to do this? -->
                 <script>
                     <remap-namespace>                          
                         <from>http://spfeopentoolkit.org/ns/eppo-simple/text-objects</from>
@@ -100,8 +101,19 @@
                     </remap-namespace>                  
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/presentation/eppo/present-table-basic.xsl</href>
                 </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/presentation/eppo/present-topic-set-toc.xsl</href>
+                </script>
+                <script>
+                    <remap-namespace>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
+                    </remap-namespace>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/generic-topic/scripts/present-generic-topic.xsl</href>
+                </script>
             </presentation>
-             
+
+            
         </scripts>
     </topic-type>
 </spfe>
