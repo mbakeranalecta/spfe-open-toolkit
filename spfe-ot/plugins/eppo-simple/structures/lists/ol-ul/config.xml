@@ -7,11 +7,11 @@
     <structure>
         <name>lists.ol-ul-ll</name>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/ol-ul-ll/scripts/presentation/eppo/present-eppo-ol-ul-lists.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/ol-ul-ll/scripts/present/eppo/present-eppo-ol-ul-lists.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

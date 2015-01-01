@@ -301,16 +301,16 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <xsl:for-each select="presentation-types/presentation-type">
                         <xsl:variable name="presentation-type" select="."/>
-                        <build.presentation topic-set-id="{$topic-set-id}"
-                            style="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/spfe.presentation-{$presentation-type}.xsl"
-                            output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out">
+                        <build.present topic-set-id="{$topic-set-id}"
+                            style="{$content-set-build}/topic-sets/{$topic-set-id}/present-{$presentation-type}/spfe.present-{$presentation-type}.xsl"
+                            output-directory="{$content-set-build}/topic-sets/{$topic-set-id}/present-{$presentation-type}/out">
                             <xsl:if
                                 test="$config/content-set/presentation-types/presentation-type[name eq $presentation-type]/copy-to">
                                 <xsl:attribute name="copy-to"
                                     select="spfe:resolve-defines($config/content-set/presentation-types/presentation-type[name eq $presentation-type]/copy-to)"
                                 />
                             </xsl:if>
-                        </build.presentation>
+                        </build.present>
                     </xsl:for-each>
                 </xsl:for-each>
             </target>
@@ -324,7 +324,7 @@
                             select="$config/output-format[name=$name][1]/presentation-type"/>
                         <build.format topic-set-id="{$topic-set-id}"
                             style="{$content-set-build}/topic-sets/{$topic-set-id}/format-{name}/spfe.format-{name}.xsl"
-                            input-directory="{$content-set-build}/topic-sets/{$topic-set-id}/presentation-{$presentation-type}/out"
+                            input-directory="{$content-set-build}/topic-sets/{$topic-set-id}/present-{$presentation-type}/out"
                             
                             output-directory="{$content-set-output}/{if ($topic-set-id=$config/content-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
                             <files-elements>
@@ -560,18 +560,18 @@
             </xsl:for-each>
             <xsl:for-each select="$config/presentation-type">
                 <scripts>
-                    <presentation type="{name}">
+                    <present type="{name}">
                         <xsl:sequence select="scripts/script"/>
-                    </presentation>
+                    </present>
                 </scripts>
             </xsl:for-each>
 
             <xsl:for-each
                 select="$config/presentation-type/topic-types/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id][1]/topic-types/topic-type/name]">
                 <scripts>
-                    <presentation type="{../../name}">
+                    <present type="{../../name}">
                         <xsl:sequence select="scripts/script"/>
-                    </presentation>
+                    </present>
                 </scripts>
             </xsl:for-each>
             <xsl:for-each select="$config/output-format">

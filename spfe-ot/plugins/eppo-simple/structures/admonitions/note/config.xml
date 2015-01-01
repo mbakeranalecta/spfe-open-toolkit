@@ -12,11 +12,11 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/admonitions/note/scripts/resolve/resolve-note-admonition.xsl</href>
                 </script>
             </resolve>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/admonitions/general/scripts/presentation/eppo/present-eppo-admonitions.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/admonitions/general/scripts/present/eppo/present-eppo-admonitions.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

@@ -70,7 +70,7 @@
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </toc>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
                 </script>
@@ -81,7 +81,7 @@
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/feature-topic/scripts/present/eppo/present-feature-topic.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </topic-type>
 </spfe>

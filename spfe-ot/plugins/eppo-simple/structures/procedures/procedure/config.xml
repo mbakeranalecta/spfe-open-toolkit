@@ -7,11 +7,11 @@
     <structure>
         <name>procedures.procedure</name>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/procedures/procedure/scripts/presentation/eppo/present-eppo-procedure.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/procedures/procedure/scripts/present/eppo/present-eppo-procedure.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

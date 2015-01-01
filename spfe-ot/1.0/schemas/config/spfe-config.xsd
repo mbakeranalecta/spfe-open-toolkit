@@ -471,7 +471,7 @@
       <xs:element name="link-catalog" type="script-list-type" minOccurs="0"/>
       <xs:element name="toc" type="script-list-type" minOccurs="0"/>
       <xs:element name="image-list" type="script-list-type" minOccurs="0"/>
-      <xs:element name="presentation" minOccurs="0">
+      <xs:element name="present" minOccurs="0">
         <xs:complexType>
           <xs:complexContent>
             <xs:extension base="script-list-type">

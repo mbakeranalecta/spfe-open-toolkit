@@ -7,11 +7,11 @@
     <structure>
         <name>headings.subhead</name>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>scripts/presentation/eppo/present-eppo-subhead.xsl</href>
+                    <href>scripts/present/eppo/present-eppo-subhead.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

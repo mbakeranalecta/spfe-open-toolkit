@@ -18,11 +18,11 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/author-reviewer/scripts/resolve/resolve-author-reviewer-comments.xsl</href>
                 </script>
             </resolve>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/simple-comment/scripts/presentation/eppo/present-comments.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/simple-comment/scripts/present/eppo/present-comments.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

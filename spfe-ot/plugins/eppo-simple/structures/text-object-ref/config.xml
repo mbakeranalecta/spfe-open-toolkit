@@ -7,11 +7,11 @@
     <structure>
         <name>text-object-ref</name>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/text-object-ref/scripts/presentation/present-text-object-ref.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/text-object-ref/scripts/present/present-text-object-ref.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

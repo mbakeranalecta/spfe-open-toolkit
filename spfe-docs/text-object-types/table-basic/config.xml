@@ -39,15 +39,15 @@
                 </script>
                 
             </resolve>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
                     </remap-namespace>  
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/presentation/eppo/present-eppo-table-basic-object.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/present/eppo/present-eppo-table-basic-object.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </text-object-type>
 </spfe>

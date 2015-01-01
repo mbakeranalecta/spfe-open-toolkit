@@ -6,7 +6,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:re="http://spfeopentoolkit.org/ns/spfe-docs" exclude-result-prefixes="#all"
-	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs">
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs">
 
 
 	<!--================================================

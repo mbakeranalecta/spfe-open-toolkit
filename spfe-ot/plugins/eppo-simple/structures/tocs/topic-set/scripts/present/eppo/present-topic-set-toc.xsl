@@ -4,7 +4,7 @@
     xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-    xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
+    xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
     xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config" exclude-result-prefixes="#all">
 
     <!-- processing directives -->

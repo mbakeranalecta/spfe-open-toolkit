@@ -345,13 +345,13 @@
 	<target name="-current.presentation">
 		<uptodate property="-current.presentation"
 			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"
-			targetfile="${temp}/presentation/presentation.flag"/>
+			targetfile="${temp}/present/presentation.flag"/>
 	</target>
 
 	<!-- build the presentation -->
 	<target name="-build.presentation"
 		depends="-build.synthesis, --build.presentation"/>
-	<macrodef name="build.presentation" description="presentation step.">
+	<macrodef name="build.present" description="Present step.">
 		<!--		depends="-current.presentation"
 		unless="-current.presentation">-->
 		<attribute name="style"/>

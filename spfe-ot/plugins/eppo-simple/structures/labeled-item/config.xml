@@ -7,11 +7,11 @@
     <structure>
         <name>labeled-item</name>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/labeled-item/scripts/presentation/eppo/present-eppo-labeled-item.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/labeled-item/scripts/present/eppo/present-eppo-labeled-item.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

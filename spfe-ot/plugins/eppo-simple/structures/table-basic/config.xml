@@ -7,11 +7,11 @@
     <structure>
         <name>table-basic</name>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/presentation/eppo/present-table-basic.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/present/eppo/present-table-basic.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

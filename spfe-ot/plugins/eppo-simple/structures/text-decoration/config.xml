@@ -13,11 +13,11 @@
             </dependency>
         </dependencies>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/text-decoration/scripts/presentation/present-text-decoration.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/text-decoration/scripts/present/present-text-decoration.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

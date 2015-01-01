@@ -12,11 +12,11 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/programming/scripts/resolve/resolve-programming-structures.xsl</href>
                 </script>          
             </resolve>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/programming/scripts/presentation/eppo/present-programming-structures.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/programming/scripts/present/eppo/present-programming-structures.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

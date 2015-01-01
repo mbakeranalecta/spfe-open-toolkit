@@ -7,11 +7,11 @@
     <structure>
         <name>q-and-a</name>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>scripts/presentation/eppo/present-q-and-a.xsl</href>
+                    <href>scripts/present/eppo/present-q-and-a.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

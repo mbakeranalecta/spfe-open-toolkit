@@ -9,8 +9,8 @@
 	xmlns:lf="local-functions"
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
-	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
-	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
+	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
 	exclude-result-prefixes="#all">
 	<xsl:output method="xml" indent="yes"/>
 

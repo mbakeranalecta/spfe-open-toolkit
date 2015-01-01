@@ -7,11 +7,11 @@
     <structure>
         <name>tocs.content-set</name>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>scripts/presentation/eppo/present-content-set-toc.xsl</href>
+                    <href>scripts/present/eppo/present-content-set-toc.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

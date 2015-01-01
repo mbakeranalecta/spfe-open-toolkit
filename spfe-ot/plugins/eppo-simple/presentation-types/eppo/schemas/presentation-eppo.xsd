@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
   xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
-  targetNamespace="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
-  xmlns="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo">
+  targetNamespace="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
+  xmlns="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo">
   <xs:import namespace="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphic-record.xsd"/>
   <xs:element name="pages">

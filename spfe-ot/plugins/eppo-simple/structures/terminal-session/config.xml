@@ -7,11 +7,11 @@
     <structure>
         <name>terminal-session</name>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/terminal-session/scripts/presentation/eppo/present-terminal-session.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/terminal-session/scripts/present/eppo/present-terminal-session.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

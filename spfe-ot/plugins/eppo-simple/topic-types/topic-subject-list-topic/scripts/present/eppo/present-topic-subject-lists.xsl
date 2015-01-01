@@ -5,7 +5,7 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xmlns:lf="local-functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/presentation/eppo"
+	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
 	exclude-result-prefixes="#all"
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple">
 

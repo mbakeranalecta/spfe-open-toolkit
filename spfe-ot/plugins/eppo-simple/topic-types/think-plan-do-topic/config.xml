@@ -40,11 +40,11 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/link-catalog/topic/topic-link-catalog.xsl</href>
                 </script>
             </link-catalog>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
                     <href>scripts/present/eppo/present-think-plan-do-topic.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </topic-type>
 </spfe>

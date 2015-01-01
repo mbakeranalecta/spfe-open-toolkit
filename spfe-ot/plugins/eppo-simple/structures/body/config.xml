@@ -13,14 +13,14 @@
             </dependency>
         </dependencies>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>scripts/presentation/eppo/present-body.xsl</href>
+                    <href>scripts/present/eppo/present-body.xsl</href>
                 </script>
                 <script>
-                    <href>scripts/presentation/eppo/present-header-and-footer.xsl</href>
+                    <href>scripts/present/eppo/present-header-and-footer.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>

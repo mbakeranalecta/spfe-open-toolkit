@@ -664,7 +664,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation/script</xpath>
+            <xpath>/spfe/object-type/scripts/present/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1532,7 +1532,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation/script</xpath>
+            <xpath>/spfe/topic-type/scripts/present/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1851,7 +1851,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation/script</xpath>
+            <xpath>/spfe/output-format/scripts/present/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1959,7 +1959,7 @@
         <config-setting-description>
             <xpath>/spfe/topic-set/presentation-types</xpath>
             <description>
-                <p>A container element for a list of <feature>presentation types</feature> to be generated for a topic set. A presentation type is a way of presenting content for use in a particular class of media (online vs. paper, top-down vs. bottom-up, etc.). A presentation type is expressed as a <feature>presentation schema</feature>. Each <feature>output format</feature> is written to format a particular presentation type. Therefore, you must ensure that there is an appropriate presentation type specified for each of the output formats you specify for a topic type. The output format configuration specifies the presentation format that it uses in the setting <config-setting>/spfe/output-format/presentation-type</config-setting>. In order to build a <feature>presentation</feature> of the specified type, there must be a set of <feature>presentation scripts</feature> for this presentation type for each <feature>topic type</feature> included in the <feature>topic set</feature>. The scripts for a presentation type are contained in a <config-setting>/spfe/topic-type/scripts/presentation</config-setting> element with a <config-setting xpath="/spfe/topic-type/scripts/presentation/@type">type</config-setting> attribute that matches the name of the presentation type, as specified in <config-setting>/spfe/topic-set/presentation-types/presentation-type/name</config-setting>.</p>
+                <p>A container element for a list of <feature>presentation types</feature> to be generated for a topic set. A presentation type is a way of presenting content for use in a particular class of media (online vs. paper, top-down vs. bottom-up, etc.). A presentation type is expressed as a <feature>presentation schema</feature>. Each <feature>output format</feature> is written to format a particular presentation type. Therefore, you must ensure that there is an appropriate presentation type specified for each of the output formats you specify for a topic type. The output format configuration specifies the presentation format that it uses in the setting <config-setting>/spfe/output-format/presentation-type</config-setting>. In order to build a <feature>presentation</feature> of the specified type, there must be a set of <feature>presentation scripts</feature> for this presentation type for each <feature>topic type</feature> included in the <feature>topic set</feature>. The scripts for a presentation type are contained in a <config-setting>/spfe/topic-type/scripts/presentation</config-setting> element with a <config-setting xpath="/spfe/topic-type/scripts/present/@type">type</config-setting> attribute that matches the name of the presentation type, as specified in <config-setting>/spfe/topic-set/presentation-types/presentation-type/name</config-setting>.</p>
             </description>
             <values></values>
             <restrictions></restrictions>
@@ -2327,7 +2327,7 @@
         
 
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation/script/remap-namespace</xpath>
+            <xpath>/spfe/topic-type/scripts/present/script/remap-namespace</xpath>
             <description><fragment-ref id-ref="remap-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2336,7 +2336,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation/script/remap-namespace/from</xpath>
+            <xpath>/spfe/topic-type/scripts/present/script/remap-namespace/from</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2345,7 +2345,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation/script/remap-namespace/to</xpath>
+            <xpath>/spfe/topic-type/scripts/present/script/remap-namespace/to</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2354,7 +2354,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation/script/href</xpath>
+            <xpath>/spfe/topic-type/scripts/present/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2593,7 +2593,7 @@
         
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation/script/remap-namespace</xpath>
+            <xpath>/spfe/object-type/scripts/present/script/remap-namespace</xpath>
             <description><fragment-ref id-ref="remap-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2602,7 +2602,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation/script/remap-namespace/from</xpath>
+            <xpath>/spfe/object-type/scripts/present/script/remap-namespace/from</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2611,7 +2611,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation/script/remap-namespace/to</xpath>
+            <xpath>/spfe/object-type/scripts/present/script/remap-namespace/to</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2620,7 +2620,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation/script/href</xpath>
+            <xpath>/spfe/object-type/scripts/present/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2858,7 +2858,7 @@
         
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation/script/remap-namespace</xpath>
+            <xpath>/spfe/output-format/scripts/present/script/remap-namespace</xpath>
             <description><fragment-ref id-ref="remap-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2867,7 +2867,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation/script/remap-namespace/from</xpath>
+            <xpath>/spfe/output-format/scripts/present/script/remap-namespace/from</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2876,7 +2876,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation/script/remap-namespace/to</xpath>
+            <xpath>/spfe/output-format/scripts/present/script/remap-namespace/to</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2885,7 +2885,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation/script/href</xpath>
+            <xpath>/spfe/output-format/scripts/present/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>

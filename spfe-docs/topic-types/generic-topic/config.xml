@@ -85,21 +85,21 @@
                 </script>
             </toc>
            
-            <presentation type="eppo">
+            <present type="eppo">
                 <!-- FIXME: This is to process imported text objects. But is this the right place to do this? -->
                 <script>
                     <remap-namespace>                          
                         <from>http://spfeopentoolkit.org/ns/eppo-simple/text-objects</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
                     </remap-namespace>                  
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/presentation/eppo/present-eppo-table-basic-object.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/present/eppo/present-eppo-table-basic-object.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
                     </remap-namespace>                  
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/presentation/eppo/present-table-basic.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/present/eppo/present-table-basic.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
@@ -111,7 +111,7 @@
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/present/eppo/present-generic-topic.xsl</href>
                 </script>
-            </presentation>
+            </present>
 
             
         </scripts>

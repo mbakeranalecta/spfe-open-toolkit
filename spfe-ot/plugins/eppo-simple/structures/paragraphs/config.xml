@@ -7,11 +7,11 @@
     <structure>
         <name>paragraphs</name>
         <scripts>
-            <presentation type="eppo">
+            <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/paragraphs/scripts/presentation/eppo/present-eppo-paragraphs.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/paragraphs/scripts/present/eppo/present-eppo-paragraphs.xsl</href>
                 </script>
-            </presentation>
+            </present>
         </scripts>
     </structure>
 </spfe>
