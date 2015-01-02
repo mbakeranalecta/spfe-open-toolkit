@@ -9,6 +9,7 @@
             <xs:group ref="annotations-spfe-build"/>
             <xs:group ref="annotations-eppo-simple"/>
             <xs:group ref="annotations-xml"/>
+            <xs:group ref="annotations-xslt"/>
             <xs:group ref="annotations-common-resource-ids"/>
             <xs:group ref="annotations-fig-resource-id"/>
             <xs:group ref="strings"/>
@@ -17,6 +18,6 @@
     </xs:group>
     
     <xs:simpleType name="annotations-type">
-        <xs:union memberTypes="annotations-common-addresses annotations-common-subjects annotations-common-names annotations-spfe-build annotations-xml annotations-eppo-simple"/>
+        <xs:union memberTypes="annotations-common-addresses annotations-common-subjects annotations-common-names annotations-spfe-build annotations-xml annotations-xslt annotations-eppo-simple"/>
     </xs:simpleType>
 </xs:schema>
