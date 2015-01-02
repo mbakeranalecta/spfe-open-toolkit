@@ -51,11 +51,11 @@ version="2.0"
 	</xsl:template>
 	
 	<xsl:template match="es:subhead">
-		<p><b><xsl:apply-templates/></b></p>
+		<p><decoration class="bold"><xsl:apply-templates/></decoration></p>
 	</xsl:template>
 	
 	<xsl:template match="es:bold">
-		<b><xsl:apply-templates/></b>
+		<decoration class="bold"><xsl:apply-templates/></decoration>
 	</xsl:template>
 	
 	<xsl:template match="es:labeled-item">

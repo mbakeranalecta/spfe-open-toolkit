@@ -46,7 +46,7 @@
 		<xsl:choose>
 			<!-- make sure that the target exists -->
 			<xsl:when test="esf:target-exists($topic, 'topic')">
-						<pe:italic>
+						<pe:decoration class='italic'>
 							<xsl:call-template name="output-link">
 								<xsl:with-param name="target" select="$topic"/>
 								<xsl:with-param name="type">topic</xsl:with-param>
@@ -55,7 +55,7 @@
 								</xsl:with-param>
 								<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 							</xsl:call-template>
-						</pe:italic>
+						</pe:decoration>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="sf:error">

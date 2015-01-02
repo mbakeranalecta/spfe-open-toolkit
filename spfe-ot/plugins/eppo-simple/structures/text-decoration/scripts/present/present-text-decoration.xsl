@@ -8,21 +8,21 @@
 	exclude-result-prefixes="#all">
 	
 	<xsl:template match="p/bold | string/bold">
-		<pe:bold>
+		<pe:decoration class='bold'>
 			<xsl:apply-templates/>
-		</pe:bold>
+		</pe:decoration>
 	</xsl:template>
 	
 	<xsl:template match="p/italic | string/italic">
-		<pe:italic>
+		<pe:decoration class="italic">
 			<xsl:apply-templates/>
-		</pe:italic>
+		</pe:decoration>
 	</xsl:template>
 	
 	<xsl:template match="p/code | string/code">
-		<pe:code>
+		<pe:decoration class="code">
 			<xsl:apply-templates/>
-		</pe:code>
+		</pe:decoration>
 	</xsl:template>
 	
 	<xsl:template match="p/quote | string/quote">
@@ -30,13 +30,5 @@
 			<xsl:apply-templates/>
 		<xsl:text>”</xsl:text>
 	</xsl:template>
-	
-	<!-- FIXME: Need to do something more definite here. Need to give a clear contract to the format layer. -->
-	<!-- FIXME: Does this ever get called? -->
-	<xsl:template match="decoration">
-		<xsl:message terminate="yes">decoration template got called. Who knew?</xsl:message>
-		<xsl:copy-of select="."/>
-	</xsl:template>
-
 
 </xsl:stylesheet>

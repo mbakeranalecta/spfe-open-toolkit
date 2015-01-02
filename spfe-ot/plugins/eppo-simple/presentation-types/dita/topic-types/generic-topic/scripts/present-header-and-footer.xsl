@@ -93,7 +93,7 @@
             <pe:table hint="context">
                 <pe:tr>
                     <pe:td>
-                        <pe:bold>See also</pe:bold>
+                        <pe:decoration class="bold">See also</pe:decoration>
                     </pe:td>
                     <pe:td>
                         <pe:ul>

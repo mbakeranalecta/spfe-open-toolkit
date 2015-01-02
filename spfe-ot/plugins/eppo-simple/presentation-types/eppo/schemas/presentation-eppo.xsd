@@ -201,9 +201,15 @@
           </xs:simpleContent>
         </xs:complexType>
       </xs:element>
-      <xs:element name="bold" type="xs:string"/>
-      <xs:element name="code" type="xs:string"/>
-      <xs:element name="italic" type="xs:string"/>
+      <xs:element name="decoration">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="class"/>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="name" type="name_type"/>
       <xs:element name="xref" type="xref_type"/>
     </xs:choice>

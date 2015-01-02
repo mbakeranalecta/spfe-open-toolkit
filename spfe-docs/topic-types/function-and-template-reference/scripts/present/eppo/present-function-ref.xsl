@@ -32,7 +32,7 @@
 			<pe:title>Function: <xsl:value-of select="$display-name"/></pe:title>
 
 			<pe:p>
-				<pe:bold>
+				<pe:decoration class="bold">
 					<xsl:value-of select="$display-name"/>
 					<xsl:text>(</xsl:text>
 					<xsl:for-each select="parameters/parameter">
@@ -43,7 +43,7 @@
 					</xsl:for-each>
 					<xsl:text>) as </xsl:text>
 					<xsl:value-of select="return-value/type"/>
-				</pe:bold>
+				</pe:decoration>
 			</pe:p>
 			<pe:labeled-item>
 				<pe:label>Description</pe:label>

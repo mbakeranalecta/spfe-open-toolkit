@@ -819,19 +819,36 @@
 
 	<!-- CHARACTERS -->
 
-	<xsl:template match="name|value|gui-label|bold|code">
+	<xsl:template match="name|value|gui-label">
+		<b class="decoration-bold">
+			<xsl:apply-templates/>
+		</b>
+	</xsl:template>
+
+	<xsl:template match="decoration[@class='code']">
+		<tt class="decoration-code">
+			<xsl:apply-templates/>
+		</tt>
+	</xsl:template>
+	
+	<xsl:template match="decoration[@class='bold']">
 		<b class="decoration-bold">
 			<xsl:apply-templates/>
 		</b>
 	</xsl:template>
 	
-
-	<xsl:template match="placeholder|italic">
-		<em>
+	<xsl:template match="placeholder">
+		<em class="decoration-italic">
 			<xsl:apply-templates/>
 		</em>
 	</xsl:template>
-
+	
+	<xsl:template match="decoration[@class='italic']">
+		<em class="decoration-italic">
+			<xsl:apply-templates/>
+		</em>
+	</xsl:template>
+	
 	<xsl:template match="procedure">
 		<xsl:apply-templates/>
 	</xsl:template>

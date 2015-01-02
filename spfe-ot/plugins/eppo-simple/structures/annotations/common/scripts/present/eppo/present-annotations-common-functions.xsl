@@ -389,13 +389,13 @@
 			
 			<!-- outside this book -->
 			<xsl:otherwise>
-				<pe:bold>
+				<pe:decoration class="bold">
 					<xsl:value-of select="$target-page/@title"/>
-				</pe:bold>
+				</pe:decoration>
 				<xsl:text> in </xsl:text>
-				<pe:italic>
+				<pe:decoration class="italic">
 					<xsl:value-of select="$link-catalogs/lc:link-catalog[@topic-set-id=$target-topic-set]/@title"/>
-				</pe:italic> 
+				</pe:decoration> 
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
