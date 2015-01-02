@@ -8,8 +8,7 @@
     xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config" exclude-result-prefixes="#all"
     version="2.0">
     <xsl:template name="show-header">
-        <xsl:variable name="topic-type"
-            select="if (ancestor::ss:topic/@virtual-type) then ancestor::ss:topic/@virtual-type else ancestor::ss:topic/@type"/>
+        <xsl:variable name="topic-type" select="ancestor::ss:topic/@type"/>
 
         <xsl:variable name="topic-set-title"
             select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>

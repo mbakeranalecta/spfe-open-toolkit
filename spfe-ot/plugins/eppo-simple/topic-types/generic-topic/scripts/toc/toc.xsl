@@ -117,8 +117,7 @@
 	
 						
 						<!-- Make sure there is an entry on the topic type order list for every topic type. Exclude topic types starting with "spfe." -->
-						<!-- FIXME: decide if still using virutal types. If not, remove code. -->
-						<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic[not(@virtual-type)]/@type union $synthesis/ss:synthesis/ss:topic[not(starts-with(@virtual-type, 'spfe.'))]/@virtual-type)"/>
+						<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic/@type)"/>
 						
 						<xsl:variable name="topic-type-order-list" select="$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type/config:name/text()"/>
 						<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type/config:name/text()"/>
@@ -140,9 +139,7 @@
 						<xsl:for-each select="$topic-type-order-list">
 							<xsl:variable name="this-topic-type" select="."/>
 							<xsl:variable name="included-topics" 
-								select="($topics[@type=$this-topic-type] 
-								union $topics[@virtual-type=$this-topic-type]) 
-								except $topics[@virtual-type!=$this-topic-type]"/>
+								select="$topics[@type=$this-topic-type]"/>
 							
 						
 							<xsl:variable name="topics-of-this-type">
@@ -200,14 +197,4 @@
 			<node id="{@local-name}" name="{@title}"/>
 		</xsl:for-each>
 	</xsl:template>
-
-	<!-- don't create a TOC category for title-pages -->
-	<xsl:template match="topics-of-type[@virtual-type='spfe.title-page']"/>
-
-		
-	
-	<!-- 	<xsl:template match="topic" mode="toc" priority="-0.1">
-		<node id="{name}" name="{title}"/>
-	</xsl:template>
- -->
 </xsl:stylesheet>

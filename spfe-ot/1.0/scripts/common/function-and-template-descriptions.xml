@@ -7,7 +7,6 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/authoring/xslt-function-and-template-descriptions.xsd">
     <head>
         <id>function-and-template-descriptions</id>
-        <virtual-type/>
         <history>
             <revision>
                 <date>2012-09-21</date>
