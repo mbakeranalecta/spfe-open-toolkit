@@ -31,9 +31,9 @@
 		</pe:title>
 		<!-- page toc -->
 		<pe:toc>
-			<pe:toc-entry><pe:xref target="#Think">Understanding <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
-			<pe:toc-entry><pe:xref target="#Plan">Planning <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
-			<pe:toc-entry><pe:xref target="#Do">Doing <xsl:value-of select="$title"/></pe:xref></pe:toc-entry>
+			<pe:toc-entry><pe:link href="#Think">Understanding <xsl:value-of select="$title"/></pe:link></pe:toc-entry>
+			<pe:toc-entry><pe:link href="#Plan">Planning <xsl:value-of select="$title"/></pe:link></pe:toc-entry>
+			<pe:toc-entry><pe:link href="#Do">Doing <xsl:value-of select="$title"/></pe:link></pe:toc-entry>
 		</pe:toc>
 		
 	</xsl:template>

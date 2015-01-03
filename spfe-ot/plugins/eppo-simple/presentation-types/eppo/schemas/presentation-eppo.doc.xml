@@ -53,7 +53,7 @@
             <attributes></attributes>
         </doctype-element-description>
         <doctype-element-description>
-            <name>xref</name>
+            <name>link</name>
             <description><p>An annotation describing a link to another piece of content.</p></description>
             <attributes>
                 <attribute>

@@ -155,7 +155,7 @@
 					</div>
 				</div>
 
-				<xsl:call-template name="output-xref-sets"/>
+				<xsl:call-template name="output-link-sets"/>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
@@ -607,19 +607,23 @@
 
 	<!-- LINKS -->
 
-	<xsl:template match="xref">
+	<xsl:template match="link">
 		<xsl:variable name="class" select="if (@class) then @class else 'default'"/>
-		<xsl:variable name="target" select="@target"/>
-		<a href="{$target}" class="{$class}"
+		<xsl:variable name="href" select="@href"/>
+		<a href="{$href}" class="{$class}"
 			title="{if(ancestor::context) then 'See also - ' else ''}{@title}">
 			<xsl:if test="@onclick">
 				<xsl:attribute name="onClick" select="@onclick"/>
+			</xsl:if>
+			<xsl:if test="@external = 'true'">
+				<xsl:attribute name="target">_blank</xsl:attribute>
 			</xsl:if>
 			<xsl:apply-templates/>
 		</a>
 	</xsl:template>
 
-	<xsl:template match="xref[@hint='term']">
+	<!-- FIXME: gloss not implemented at presentation level yet -->
+	<xsl:template match="gloss">
 		<xsl:variable name="target" select="@target"/>
 		<a class="gloss-fold" onclick="toggle_visibility('gloss-fold-{generate-id()}');"
 			title="Definition of: {.}">
@@ -657,51 +661,6 @@
 		</a>
 	</xsl:template>
 
-	<xsl:template match="xref-set">
-		<!-- FIXME: This should have a title, but it interferes with colorbox. Fix? Alternative? -->
-		<!-- title="{if(ancestor::context) then 'See also - ' else ''}{string-join(xref/@title, '; ')}" -->
-		<a class="inline" href="#{generate-id()}">
-			<xsl:value-of select="content"/>
-		</a>
-	</xsl:template>
-
-	<xsl:template name="output-xref-sets">
-		<div style="display:none">
-			<xsl:for-each select="//xref-set">
-
-				<div id="{generate-id()}" style="padding:10px; background:#fff;">
-
-					<xsl:variable name="class"
-						select="if (xref/@class = 'gloss') then 'gloss' else 'default'"/>
-					<h4>Resources on "<xsl:value-of select="content"/>"</h4>
-
-
-
-					<div style="display:list; list-style-type:disc; list-style-position: inside; ">
-						<xsl:for-each select="xref">
-							<span style="display:list-item">
-								<xsl:value-of select="@topic-type"/>
-								<xsl:text>: </xsl:text>
-								<a href="{@target}" class="default">
-									<xsl:if test="@onclick">
-										<xsl:attribute name="onClick" select="@onclick"/>
-									</xsl:if>
-									<xsl:value-of select="@topic-title"/>
-								</a>
-								<!--
-							<xsl:text> (</xsl:text>
-							<xsl:value-of select="@topic-product"/>
-							<xsl:text>)</xsl:text>-->
-							</span>
-						</xsl:for-each>
-					</div>
-
-				</div>
-			</xsl:for-each>
-		</div>
-
-
-	</xsl:template>
 
 	<xsl:template match="xlink">
 		<a href="{@href}" target="_blank">
@@ -870,7 +829,7 @@
 			<xsl:choose>
 				<xsl:when test="branch">
 					<label for="{generate-id()}">
-						<xsl:if test="not(content/xref)">
+						<xsl:if test="not(content/link)">
 							<xsl:attribute name="class">folder</xsl:attribute>
 						</xsl:if>
 						<xsl:apply-templates select="content"/>
@@ -920,6 +879,41 @@
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
+	
+	<xsl:template name="output-link-sets">
+		<div style="display:none">
+			<xsl:for-each select="//link-set">
+				
+				<div id="{generate-id()}" style="padding:10px; background:#fff;">
+					
+					<xsl:variable name="class"
+						select="if (link/@class = 'gloss') then 'gloss' else 'default'"/>
+					<h4>Resources on "<xsl:value-of select="content"/>"</h4>
+					
+					
+					
+					<div style="display:list; list-style-type:disc; list-style-position: inside; ">
+						<xsl:for-each select="link">
+							<span style="display:list-item">
+								<xsl:value-of select="@topic-type"/>
+								<xsl:text>: </xsl:text>
+								<a href="{@href}" class="default">
+									<xsl:if test="@onclick">
+										<xsl:attribute name="onClick" select="@onclick"/>
+									</xsl:if>
+									<xsl:value-of select="@topic-title"/>
+								</a>
+							</span>
+						</xsl:for-each>
+					</div>
+					
+				</div>
+			</xsl:for-each>
+		</div>
+		
+		
+	</xsl:template>
+	
 	
 	
 	<xsl:template match="*" >

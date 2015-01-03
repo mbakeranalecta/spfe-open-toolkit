@@ -151,9 +151,9 @@
     <xsl:template match="node">
         <pe:branch state="open">
             <pe:content>
-                <pe:xref target="{normalize-space(@id)}.html">
+                <pe:link href="{normalize-space(@id)}.html">
                     <xsl:value-of select="@name"/>
-                </pe:xref>
+                </pe:link>
             </pe:content>
             <xsl:apply-templates/>
         </pe:branch>

@@ -28,7 +28,7 @@
                 <p>it returns the part of the path after the base path:</p>
                 <codeblock>/1.0/scripts/common/utility-functions.xsl</codeblock>
                 <p>Optionally, you can specify a prefix to be added to the returned path:</p>
-                <codeblock>&lt;xsl:value-of select=" sf:relative-from-absolute-path(source-file, $config/config:spfeot-home,'$SPFEOT_HOME')"/>
+                <codeblock>&lt;xsl:value-of select="sf:relative-from-absolute-path(source-file, $config/config:spfeot-home,'$SPFEOT_HOME')"/>
                 </codeblock>
 
                 <p>In this example, <code>source-file</code> is an element containing the full path of a source file, <code>$config/config:spfeot-home</code> pulls the local path of the spfe open toolkit on the users machine from the config file, and <code>'$SPFEOT_HOME'</code> is a prefix string. Assuming that the value of <code>source-file</code> is <code>file:/C:/Users/Joe/spfe-open-toolkit/spfe-ot/1.0/scripts/common/utility-functions.xsl</code>, the return value will be:</p>

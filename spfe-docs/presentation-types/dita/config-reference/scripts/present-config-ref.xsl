@@ -244,7 +244,7 @@
 							<xsl:sort select="."/>
 							<xsl:variable name="child-xpath" select="."/>
 							<p>
-								<b><!-- FIX?ME: changed keyword to bold here because can't nest xref in keyword in DITA. Needs to be other way round.  -->
+								<b><!-- FIXME: changed keyword to bold here because can't nest xref in keyword in DITA. Needs to be other way round.  -->
 									<xsl:sequence
 										select="lf:link-xpath($child-xpath,//spfe-configuration-reference-entry[xpath eq $child-xpath]/name)"
 									/>

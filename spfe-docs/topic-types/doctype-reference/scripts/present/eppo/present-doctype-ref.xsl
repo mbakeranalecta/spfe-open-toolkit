@@ -126,9 +126,9 @@
 					</xsl:if>
 				</xsl:variable>
 
-				<pe:xref target="{$href}" title="Link to: {$target}">
+				<pe:link href="{$href}" title="Link to: {$target}">
 					<xsl:value-of select="$link-text"/>
-				</pe:xref>
+				</pe:link>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -299,9 +299,9 @@
 						<xsl:sort select="name"/>
 						<pe:p>
 							<pe:name hint="attribute-name">
-								<pe:xref target="#{name}">
+								<pe:link link="#{name}">
 									<xsl:value-of select="name"/>
-								</pe:xref>
+								</pe:link>
 							</pe:name>
 						</pe:p>
 					</xsl:for-each>

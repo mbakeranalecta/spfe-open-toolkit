@@ -21,7 +21,7 @@
             <xs:element name="home">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="xref" type="xref_type"/>
+                  <xs:element name="link" type="link_type"/>
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
@@ -31,7 +31,7 @@
                   <xs:element maxOccurs="unbounded" name="breadcrumb">
                     <xs:complexType>
                       <xs:sequence>
-                        <xs:element name="xref" type="xref_type"/>
+                        <xs:element name="link" type="link_type"/>
                       </xs:sequence>
                     </xs:complexType>
                   </xs:element>
@@ -45,7 +45,7 @@
                   <xs:element maxOccurs="unbounded" name="keyword">
                     <xs:complexType>
                       <xs:sequence>
-                        <xs:element name="xref" type="xref_type"/>
+                        <xs:element name="link" type="link_type"/>
                       </xs:sequence>
                     </xs:complexType>
                   </xs:element>
@@ -72,7 +72,7 @@
                   <xs:element name="category">
                     <xs:complexType>
                       <xs:sequence>
-                        <xs:element name="xref" type="xref_type"/>
+                        <xs:element name="link" type="link_type"/>
                       </xs:sequence>
                     </xs:complexType>
                   </xs:element>
@@ -85,7 +85,7 @@
                   <xs:element name="see-also">
                     <xs:complexType>
                       <xs:sequence>
-                        <xs:element name="xref" type="xref_type"/>
+                        <xs:element name="link" type="link_type"/>
                       </xs:sequence>
                     </xs:complexType>
                   </xs:element>
@@ -109,7 +109,7 @@
             <xs:element maxOccurs="unbounded" name="toc-entry">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="xref" type="xref_type"/>
+                  <xs:element name="link" type="link_type"/>
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
@@ -163,7 +163,7 @@
       <xs:element name="label">
         <xs:complexType mixed="true">
           <xs:sequence>
-            <xs:element name="xref" type="xref_type" minOccurs="0"/>
+            <xs:element name="link" type="link_type" minOccurs="0"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -211,13 +211,13 @@
         </xs:complexType>
       </xs:element>
       <xs:element name="name" type="name_type"/>
-      <xs:element name="xref" type="xref_type"/>
+      <xs:element name="link" type="link_type"/>
     </xs:choice>
     <xs:attribute name="hint" type="xs:NCName"/>
   </xs:complexType>
   <xs:complexType mixed="true" name="name_type">
     <xs:sequence>
-      <xs:element name="xref" type="xref_type" minOccurs="0"/>
+      <xs:element name="link" type="link_type" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="hint" type="xs:NCName"/>
     <xs:attribute name="type" type="xs:NCName"/>
@@ -232,20 +232,21 @@
   </xs:complexType>
   <xs:complexType mixed="true" name="codeblock_type">
     <xs:sequence>
-      <xs:element name="xref" type="xref_type" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element name="link" type="link_type" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="language" type="xs:NCName"/>
     <xs:attribute name="namespace" type="xs:anyURI"/>
   </xs:complexType>
-  <xs:complexType name="xref_type">
+  <xs:complexType name="link_type">
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="class" type="xs:NCName"/>
         <xs:attribute name="hint" type="xs:NCName"/>
-        <xs:attribute name="target" use="required"/>
+        <xs:attribute name="href" use="required"/>
         <xs:attribute name="title"/>
         <xs:attribute name="topic-title"/>
         <xs:attribute name="topic-type"/>
+        <xs:attribute name="external" type="xs:boolean"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -297,7 +298,7 @@
       <xs:element name="content">
         <xs:complexType mixed="true">
           <xs:sequence>
-            <xs:element name="xref" type="xref_type" minOccurs="0"/>
+            <xs:element name="link" type="link_type" minOccurs="0"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>

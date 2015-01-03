@@ -64,7 +64,7 @@
             </resolve>
             <present type="eppo">
                 <script>
-                    <href>scripts/present/present-config-ref.xsl</href>
+                    <href>scripts/present/eppo/present-config-ref.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>

@@ -31,9 +31,9 @@
 			<pe:toc>
 				<xsl:for-each select="../es:section/es:title">
 					<pe:toc-entry>
-						<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
+						<pe:link href="#{sf:title-to-anchor(normalize-space(.))}">
 							<xsl:value-of select="."/>
-						</pe:xref>
+						</pe:link>
 					</pe:toc-entry>
 				</xsl:for-each>
 			</pe:toc>
