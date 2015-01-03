@@ -27,7 +27,13 @@
         <title> Namespaces in SPFE</title>
         <byline><author-name>Mark Baker</author-name></byline>
         <precis>
-<p><string-ref id-ref="product"/> uses namespaces extensively. </p>
+<p><string-ref id-ref="product"/> uses namespaces extensively. Namespaces express the ownership of a
+                document type. They do not guarantee that an element name is globally unique, or
+                even unique within a namespace. Some XML vocabularies assign one namespace to a
+                single document type. The SPFE Open Toolkit assigns one namespace to a set of
+                related document types and used a chameleon schema model for building schemas from
+                component pieces. However, you can use namespace however you like when creating your
+                own schemas. </p>
         </precis>
 <p><string-ref id-ref="product"/> makes extensive use of XML namespaces. It does not force your to
             use namespaces for your own content, but I do recommend that you do. You have some
@@ -92,9 +98,6 @@
                 </li>
                 <li>
                     <p><config-setting>/spfe/topic-set/topic-types/topic-type/name</config-setting></p>
-                </li>
-                <li>
-                    <p><config-setting>/spfe/topic-set/presentation-types/presentation-type/name</config-setting></p>
                 </li>
             </ul>
             <p>So, having a element name and namespace does not tell you what that element means, or

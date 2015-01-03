@@ -1970,27 +1970,19 @@
         <config-setting-description>
             <xpath>/spfe/topic-set/presentation-types/presentation-type</xpath>
             <description>
-                <p>A container element for the <config-setting xpath="/spfe/topic-set/presentation-types/presentation-type/name">name</config-setting> of <feature>presentation type</feature>.</p>
-            </description>
-            <values></values>
-            <restrictions></restrictions>
-            <build-property></build-property>
-            <attributes></attributes>
-        </config-setting-description>
-        
-        <config-setting-description>
-            <xpath>/spfe/topic-set/presentation-types/presentation-type/name</xpath>
-            <description>
                 <p>The name of a <feature>presentation type</feature>.</p>
             </description>
-            <values></values>
+            <values/>
             <restrictions>
                 <restriction>
-                    <p>An error will result if there is no <feature>presentation type</feature> specified for any <feature>output format</feature> used for the topic type. The presentation type used by an output format is specified in the setting <config-setting>/spfe/output-format/presentation-type</config-setting>.</p>
+                    <p>An error will result if there is no <feature>presentation type</feature>
+                        specified for any <feature>output format</feature> used for the topic type.
+                        The presentation type used by an output format is specified in the setting
+                        <config-setting>/spfe/output-format/presentation-type</config-setting>.</p>
                 </restriction>
             </restrictions>
-            <build-property></build-property>
-            <attributes></attributes>
+            <build-property/>
+            <attributes/>
         </config-setting-description>
         
         <config-setting-description>
