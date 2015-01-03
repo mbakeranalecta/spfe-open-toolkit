@@ -192,15 +192,6 @@
   </xs:complexType>
   <xs:complexType mixed="true" name="p_type">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="xlink">
-        <xs:complexType>
-          <xs:simpleContent>
-            <xs:extension base="xs:string">
-              <xs:attribute name="href" type="xs:anyURI"/>
-            </xs:extension>
-          </xs:simpleContent>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="decoration">
         <xs:complexType>
           <xs:simpleContent>
@@ -275,10 +266,6 @@
         <xs:element name="ul" type="ul_type"/>
       </xs:choice>
     </xs:sequence>
-  </xs:complexType>
-  <xs:complexType mixed="true" name="xlink_type">
-    <xs:attribute name="href" use="required" type="xs:anyURI"/>
-    <xs:attribute name="title"/>
   </xs:complexType>
   <xs:complexType name="tree_type">
     <xs:sequence>
