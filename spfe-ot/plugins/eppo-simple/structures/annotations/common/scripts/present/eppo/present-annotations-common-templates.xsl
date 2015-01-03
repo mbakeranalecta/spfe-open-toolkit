@@ -91,16 +91,16 @@
 	
 	<xsl:template match="link-external">
 	<!-- FIXME: support other protocols -->
-		<pe:xlink href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}">
+		<pe:link href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}">
 			<xsl:apply-templates/>
-		</pe:xlink>	
+		</pe:link>	
 	</xsl:template>
 
 	<xsl:template match="url">
 	<!-- FIXME: support other protocols -->
-		<pe:xlink href="{if (starts-with(., 'http://')) then . else concat('http://',.)}">
+		<pe:link href="{if (starts-with(., 'http://')) then . else concat('http://',.)}">
 		 <xsl:apply-templates/>
-		</pe:xlink>	
+		</pe:link>	
 	</xsl:template>
 
 	<xsl:template match="subject">
