@@ -662,12 +662,6 @@
 	</xsl:template>
 
 
-	<xsl:template match="xlink">
-		<a href="{@href}" target="_blank">
-			<xsl:apply-templates/>
-		</a>
-	</xsl:template>
-
 	<xsl:template match="tool-tip">
 		<xsl:variable name="class" select="if (@class) then @class else 'default'"/>
 		<a class="{$class}" title="{@title}">
