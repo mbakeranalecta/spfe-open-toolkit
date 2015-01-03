@@ -299,7 +299,7 @@
 						<xsl:sort select="name"/>
 						<pe:p>
 							<pe:name hint="attribute-name">
-								<pe:link link="#{name}">
+								<pe:link href="#{name}">
 									<xsl:value-of select="name"/>
 								</pe:link>
 							</pe:name>

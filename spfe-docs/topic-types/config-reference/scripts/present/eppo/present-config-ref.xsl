@@ -110,7 +110,7 @@
 					</xsl:if>
 				</xsl:variable>
 
-				<pe:link link="{$href}" title="Link to: {$target}">
+				<pe:link href="{$href}" title="Link to: {$target}">
 					<xsl:value-of select="$link-text"/>
 				</pe:link>
 			</xsl:otherwise>
