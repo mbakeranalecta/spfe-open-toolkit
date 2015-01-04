@@ -178,7 +178,20 @@
 				<xsl:with-param name="message" select="'No table/title element found for referenced table:', $table-id, '. A title is required for all referenced tables.'"/>
 			</xsl:call-template>
 		</xsl:if>
-		<pe:cross-ref target="{@id-ref}" type="table"/>
+		<pe:structure-reference target="{@id-ref}" type="table"/>
+		<xsl:variable name="target-table" select="ancestor::ss:topic//table[@id=$table-id]"/>
+		<pe:reference type="table">
+			<pe:link href="#table:{$table-id}">
+				<!-- Insert a zero-width-non-breaking-space so indenter recognizes 
+						this as a text node and does not indent it (which would add spurious
+						white space to output -->
+				<xsl:text>Table&#160;</xsl:text>
+				<xsl:value-of
+					select="count(ancestor::page//table/title intersect $target-table/preceding::table/title)+1"
+				/>
+			</pe:link>
+		</pe:reference>
+		
 	</xsl:template>
 	
 	<xsl:template match="fig-id">
@@ -189,26 +202,50 @@
 				<xsl:with-param name="message" select="'No fig/title element found for referenced fig:', if($uri) then $uri else $fig-id, '. A title is required for all referenced figs.'"/>
 			</xsl:call-template>
 		</xsl:if>
-		<xsl:choose>
-			<xsl:when test="$uri">
-				<pe:cross-ref target="{generate-id(ancestor::ss:topic//fig[@uri=$uri]/@uri)}" type="fig"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<pe:cross-ref target="{@id-ref}" type="fig"/>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:variable name="target" select="if ($uri) then generate-id(ancestor::ss:topic//fig[@uri=$uri]/@uri) else @id-ref"/>
+		<pe:reference type="fig">
+			<pe:link href="#fig:{$target}">
+				<xsl:text>Figure&#160;</xsl:text>
+				<xsl:value-of select="count(ancestor::ss:topic//fig/title intersect $target/preceding::fig/title)+1"/>
+			</pe:link>
+		</pe:reference>
 	</xsl:template>
 
 	<xsl:template match="code-sample-id">
-		<pe:cross-ref target="{@id-ref}" type="code-sample"/>
+		<xsl:variable name="code-sample-id" select="@id-ref"/>
+		<xsl:variable name="target-sample" select="ancestor::page//code-sample[@id=$code-sample-id]"/>
+		<pe:reference type="fig">
+			<pe:link href="#code-sample:{$code-sample-id}">
+				<!-- Insert a zero-width-non-breaking-space so indenter recognizes 
+					this as a text node and does not indent it (which would add spurious
+					white space to output -->
+				<xsl:text>Example&#160;</xsl:text>
+				<xsl:value-of
+					select="count(ancestor::page//code-sample/title intersect $target-sample/preceding::code-sample/title)+1"
+				/>
+			</pe:link>
+		</pe:reference>
 	</xsl:template>
 
 	<xsl:template match="procedure-id">
-		<pe:cross-ref target="{@id-ref}" type="procedure"/>
+		<xsl:variable name="id-ref" select="@id-ref"/>
+		<xsl:variable name="target-procedure" select="ancestor::ss:topic//procedure[@id=$id-ref]"/>
+		<pe:reference type="procedure">
+			<pe:link href="#procedure:{$target-procedure/@id}">
+					<xsl:value-of select="$target-procedure/title"/>
+				</pe:link>
+			</pe:reference>
 	</xsl:template>
 
 	<xsl:template match="step-id">
-		<pe:cross-ref target="{@id-ref}" type="step"/>
+		<xsl:variable name="id-ref" select="@id-ref"/>
+		<xsl:variable name="target-step" select="ancestor::ss:topic//step[@id=$id-ref]"/>
+		<pe:reference type="step">
+			<pe:link href="#step:{$target-step/id}">
+				<xsl:value-of select="concat('Step ', count(//step[@id=$id-ref]/preceding-sibling::step)+1)"/>
+				<xsl:value-of select="//step[@id=current()/@id-ref]/title"/>
+			</pe:link>
+		</pe:reference>
 	</xsl:template>
 	
 	<xsl:template match="index-entry">

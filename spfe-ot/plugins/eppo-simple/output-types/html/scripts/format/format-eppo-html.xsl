@@ -699,75 +699,11 @@
 			<xsl:apply-templates/>
 		</li>
 	</xsl:template>
-
-	<xsl:template match="cross-ref">
-		<xsl:variable name="target" select="@target"/>
-		<xsl:variable name="type" select="@type"/>
-		<xsl:choose>
-
-			<xsl:when test="$type='procedure'">
-				<xsl:variable name="target-procedure"
-					select="ancestor::page//procedure[@id=$target]"/>
-				<a href="#procedure:{$target-procedure/@id}">
-					<i>
-						<xsl:value-of select="$target-procedure/title"/>
-					</i>
-				</a>
-			</xsl:when>
-
-			<xsl:when test="$type='step'">
-				<xsl:variable name="target-step" select="ancestor::page//step[@id=$target]"/>
-				<a href="#step:{$target-step/id}">
-					<xsl:value-of
-						select="concat('Step ', count(//step[@id=current()/$target]/preceding-sibling::step)+1)"/>
-					<xsl:value-of select="//step[@id=current()/@id-ref]/title"/>
-				</a>
-			</xsl:when>
-
-			<xsl:when test="$type='fig'">
-				<xsl:variable name="target-fig" select="ancestor::page//fig[@id=$target]"/>
-				<a href="#fig:{$target}">
-					<xsl:text>Figure&#160;</xsl:text>
-					<xsl:value-of
-						select="count(ancestor::page//fig/title intersect $target-fig/preceding::fig/title)+1"
-					/>
-				</a>
-			</xsl:when>
-
-			<xsl:when test="$type='table'">
-				<xsl:variable name="target-table" select="ancestor::page//table[@id=$target]"/>
-				<a href="#table:{$target}">
-					<!-- Insert a zero-width-non-breaking-space so indenter recognizes 
-					this as a text node and does not indent it (which would add spurious
-					white space to output -->
-					<xsl:text>Table&#160;</xsl:text>
-					<xsl:value-of
-						select="count(ancestor::page//table/title intersect $target-table/preceding::table/title)+1"
-					/>
-				</a>
-			</xsl:when>
-
-			<xsl:when test="$type='code-sample'">
-				<xsl:variable name="target-sample" select="ancestor::page//code-sample[@id=$target]"/>
-				<a href="#code-sample:{$target}">
-					<!-- Insert a zero-width-non-breaking-space so indenter recognizes 
-					this as a text node and does not indent it (which would add spurious
-					white space to output -->
-					<xsl:text>Example&#160;</xsl:text>
-					<xsl:value-of
-						select="count(ancestor::page//code-sample/title intersect $target-sample/preceding::code-sample/title)+1"
-					/>
-				</a>
-
-			</xsl:when>
-
-			<xsl:otherwise>
-				<xsl:call-template name="sf:error">
-					<xsl:with-param name="message">Unknown cross-reference type "<xsl:value-of
-							select="$type"/>.</xsl:with-param>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
+	
+	<xsl:template match="p/reference">
+		<i class="reference-{@type}">
+			<xsl:apply-templates/>
+		</i>
 	</xsl:template>
 
 	<!-- CHARACTERS -->

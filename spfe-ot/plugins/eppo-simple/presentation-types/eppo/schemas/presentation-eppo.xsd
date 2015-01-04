@@ -201,6 +201,7 @@
           </xs:simpleContent>
         </xs:complexType>
       </xs:element>
+      <xs:element name="reference" type="reference_type"/>
       <xs:element name="name" type="name_type"/>
       <xs:element name="link" type="link_type"/>
     </xs:choice>
@@ -361,4 +362,11 @@
   <xs:simpleType name="other_title_type">
     <xs:restriction base="xs:string"/>
   </xs:simpleType>
+  <xs:complexType mixed="true" name="reference_type">
+    <xs:sequence>
+      <xs:element name="link" type="link_type" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="hint" type="xs:NCName"/>
+    <xs:attribute name="type" type="xs:NCName"/>
+  </xs:complexType>
 </xs:schema>

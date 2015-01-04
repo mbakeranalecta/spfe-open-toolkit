@@ -330,7 +330,7 @@
 	</xsl:template>
 	
 
-	<xsl:template name="output-cross-reference">
+	<xsl:template name="output-structure-referenceerence">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
 				
@@ -343,7 +343,7 @@
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="make-cross-ref">
+				<xsl:call-template name="make-structure-reference">
 					<xsl:with-param name="target-page" select="$target-page"/>
 					<xsl:with-param name="target" select="$target"/>
 					<xsl:with-param name="type" select="$type"/>
@@ -352,9 +352,9 @@
 		</xsl:choose>		
 	</xsl:template>
 
-		<!--make-cross-ref template-->
+		<!--make-structure-reference template-->
 	<!-- FIXME: needs to be updated for namespaces, if it gets used at all -->
-	<xsl:template name="make-cross-ref">
+	<xsl:template name="make-structure-reference">
 		<xsl:param name="target-page"/>
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
@@ -382,7 +382,7 @@
 		<xsl:choose>
 			<!-- this book -->
 			<xsl:when test="$topic-set-id eq $target-topic-set">
-				<pe:cross-ref 
+				<pe:structure-reference 
 					type="{$type}"
 					target="{$target}"/>
 			</xsl:when>
