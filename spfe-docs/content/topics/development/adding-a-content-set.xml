@@ -108,8 +108,8 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
                 </li>
                 <li>
                     <p><config-setting>/spfe/content-set/topic-set-type-order</config-setting>: You can
-                        declare topic sets to be of different types, such as <quote>guide</quote>,
-                        or <quote>reference</quote>. (You do this in the <feature>topic set
+                        declare topic sets to be of different types, such as <quotes>guide</quotes>,
+                        or <quotes>reference</quotes>. (You do this in the <feature>topic set
                             configuration file</feature> in
                         <config-setting>/spfe/topic-set/topic-set-type</config-setting>.) You can
                         then use this setting to determine the order in which different topic set

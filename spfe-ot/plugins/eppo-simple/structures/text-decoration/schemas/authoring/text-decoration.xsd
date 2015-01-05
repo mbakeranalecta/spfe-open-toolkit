@@ -7,7 +7,7 @@
             <xs:element name="bold" type="xs:string"/>
             <xs:element name="italic" type="xs:string"/>
             <xs:element name="code"  type="xs:string"/>
-            <xs:element name="quote" type="xs:string"/>
+            <xs:element name="quotes" type="xs:string"/>
         </xs:choice>
     </xs:group>
 </xs:schema>

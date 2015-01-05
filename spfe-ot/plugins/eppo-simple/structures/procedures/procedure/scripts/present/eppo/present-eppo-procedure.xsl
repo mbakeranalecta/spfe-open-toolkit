@@ -9,6 +9,7 @@ version="2.0"
  xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
  xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
  xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
+ xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
  exclude-result-prefixes="#all" 
  xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 >
@@ -83,5 +84,27 @@ version="2.0"
 			<xsl:apply-templates/>
 		</pe:title>
 	</xsl:template>	
-
+	
+	<xsl:template match="p/procedure-id">
+		<xsl:variable name="id-ref" select="@id-ref"/>
+		<xsl:variable name="target-procedure" select="ancestor::ss:topic//procedure[@id=$id-ref]"/>
+		<pe:reference type="procedure">
+			<pe:link href="#procedure:{$target-procedure/@id}">
+				<xsl:value-of select="$target-procedure/title"/>
+			</pe:link>
+		</pe:reference>
+	</xsl:template>
+	
+	<xsl:template match="p/step-id">
+		<xsl:variable name="id-ref" select="@id-ref"/>
+		<xsl:variable name="target-step" select="ancestor::ss:topic//step[@id=$id-ref]"/>
+		<pe:reference type="step">
+			<pe:link href="#step:{$target-step/id}">
+				<xsl:value-of select="concat('Step ', count(//step[@id=$id-ref]/preceding-sibling::step)+1)"/>
+				<xsl:value-of select="//step[@id=current()/@id-ref]/title"/>
+			</pe:link>
+		</pe:reference>
+	</xsl:template>
+	
+	
 </xsl:stylesheet>

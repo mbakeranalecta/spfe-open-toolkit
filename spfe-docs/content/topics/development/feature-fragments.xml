@@ -56,7 +56,7 @@
 &lt;/fragment-ref></codeblock>
         <p>When the topic containing this fragment and fragment ref is resolved, and assuming that
             there is a more globally defined string with the ID product and the value
-            <quote>SPFE Open Toolkit</quote>, the result will be as follows:</p>
+            <quotes>SPFE Open Toolkit</quotes>, the result will be as follows:</p>
         <codeblock>&lt;p>This is a piece of text in a fragment. It includes references to local 
    strings &lt;bold>test string one&lt;/bold> and 
    &lt;italic>test string two&lt;/italic>. 

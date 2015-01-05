@@ -14,13 +14,13 @@ p>code, string>code
     font-weight:bold;
 }
 
-p>quote:before, string>quote:before
+p>quotes:before, string>quotes:before
 {
     background-color:#FFDEAD;
     content:'“';
 }
 
-p>quote:after, string>quote:after
+p>quotes:after, string>quotes:after
 {
     background-color:#FFDEAD;
     content:'”';

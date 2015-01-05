@@ -20,10 +20,10 @@
             </resolve>
             <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common/scripts/present/eppo/present-annotations-common-functions.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/present/eppo/present-annotations-common-functions.xsl</href>
                 </script>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common/scripts/present/eppo/present-annotations-common-templates.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/present/eppo/present-annotations-common-templates.xsl</href>
                 </script>
             </present>
         </scripts>

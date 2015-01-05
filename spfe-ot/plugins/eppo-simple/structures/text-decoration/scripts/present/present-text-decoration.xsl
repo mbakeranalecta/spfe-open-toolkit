@@ -25,7 +25,7 @@
 		</pe:decoration>
 	</xsl:template>
 	
-	<xsl:template match="p/quote | string/quote">
+	<xsl:template match="p/quotes | string/quotes">
 		<xsl:text>“</xsl:text>
 			<xsl:apply-templates/>
 		<xsl:text>”</xsl:text>

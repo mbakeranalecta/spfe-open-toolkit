@@ -36,11 +36,7 @@ Main template
 -->
 <xsl:template name="main">
 	<xsl:result-document href="file:///{$output-directory}/presentation.xml" method="xml" indent="yes" omit-xml-declaration="no" >
-		
-		
-		
-		
-		
+
 		<pe:pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/eppo/schemas/presentation-eppo.xsd">
 			<pe:title>

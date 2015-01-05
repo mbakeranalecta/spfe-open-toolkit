@@ -120,7 +120,7 @@
         <section>
             <title>Document types and namespaces</title>
             <p>You may have noticed that to this point I have not used the phrase
-                <quote>document type</quote>. I have used <quote>vocabulary</quote> to describe a
+                <quotes>document type</quotes>. I have used <quotes>vocabulary</quotes> to describe a
                 set of XML elements designed to be used together. We may think of schemas and DTDs
                 as defining document types, and that is what we generally use them to do. But
                 actually, neither schemas not DTDs define document types. Rather, documents declare

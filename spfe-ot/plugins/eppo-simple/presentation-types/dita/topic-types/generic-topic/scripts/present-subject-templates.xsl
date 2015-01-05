@@ -132,7 +132,7 @@
 		</b>
 	</xsl:template>
 	
-	<xsl:template match="p/quote">
+	<xsl:template match="p/quotes">
 		<xsl:text>“</xsl:text>
 			<xsl:apply-templates/>
 		<xsl:text>”</xsl:text>
@@ -225,13 +225,4 @@
 		<xref target="{@id-ref}" type="step"/>
 	</xsl:template>
 		
-	<xsl:template match="index-entry">
-		<xsl:call-template name="create-reference-link">
-			<xsl:with-param name="type" select="@type"/>
-			<xsl:with-param name="content">
-				<xsl:apply-templates/>				
-			</xsl:with-param>
-		</xsl:call-template> 
-	</xsl:template>
-
 </xsl:stylesheet>

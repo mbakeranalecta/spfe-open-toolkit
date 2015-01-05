@@ -2,7 +2,15 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     <xs:group name="procedure">
         <xs:sequence>
-            <xs:element name="procedure" type="procedure">   </xs:element>
+            <xs:element name="procedure">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="procedure">
+                            <xs:attribute name="id" type="xs:NMTOKEN"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
         </xs:sequence>
     </xs:group>
     <xs:complexType name="procedure">
@@ -48,9 +56,10 @@
                         <xs:element maxOccurs="unbounded" name="step">
                             <xs:complexType>
                                 <xs:sequence>
-                                     <xs:element name="title"/>
-                                     <xs:group ref="nested-text-structures"/>
+                                    <xs:element name="title"/>
+                                    <xs:group ref="nested-text-structures"/>
                                 </xs:sequence>
+                                <xs:attribute name="id" type="xs:NMTOKEN"/>
                             </xs:complexType>
                         </xs:element>
                     </xs:sequence>
@@ -58,4 +67,13 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+    <xs:group name="annotations-procedure-resource-id">
+        <xs:choice>
+            <xs:element name="procedure-id">
+                <xs:complexType>
+                    <xs:attribute name="id-ref"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:group>
 </xs:schema>

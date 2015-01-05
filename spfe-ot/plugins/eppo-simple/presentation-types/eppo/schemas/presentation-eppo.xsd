@@ -5,6 +5,7 @@
   xmlns="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo">
   <xs:import namespace="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphic-record.xsd"/>
+  <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/base/schemas/presentaion/annotations-base-presentation.xsd"/>
   <xs:element name="pages">
     <xs:complexType>
       <xs:sequence>
@@ -191,22 +192,11 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType mixed="true" name="p_type">
-    <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="decoration">
-        <xs:complexType>
-          <xs:simpleContent>
-            <xs:extension base="xs:string">
-              <xs:attribute name="class"/>
-            </xs:extension>
-          </xs:simpleContent>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="reference" type="reference_type"/>
-      <xs:element name="name" type="name_type"/>
-      <xs:element name="link" type="link_type"/>
-    </xs:choice>
+    <xs:group ref="annotations-base-presentation" maxOccurs="unbounded" minOccurs="0"/>
     <xs:attribute name="hint" type="xs:NCName"/>
   </xs:complexType>
+  
+  
   <xs:complexType mixed="true" name="name_type">
     <xs:sequence>
       <xs:element name="link" type="link_type" minOccurs="0"/>

@@ -94,8 +94,8 @@
             the procedure) and post requisites (things you can or must do after the procedure). This
             model does not fit with the Every Page is Page One philosophy that topic should be
             self-contained. </p>
-        <p>The idea of <quote>things you need to do before this</quote> can be re-expressed (more
-            precisely) as <quote>things you need to have in order to do this</quote>. The
+        <p>The idea of <quotes>things you need to do before this</quotes> can be re-expressed (more
+            precisely) as <quotes>things you need to have in order to do this</quotes>. The
             EPPO-simple procedure model provides an <eppo-simple-element-name>inputs</eppo-simple-element-name>
             structure for this purpose. You can list each of the inputs (materials and tools) that
             the reader will need to complete the procedure. (Think of this like the ingredients list

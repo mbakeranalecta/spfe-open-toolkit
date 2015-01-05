@@ -37,13 +37,13 @@
             to. Nor does it do indirect linking, which is when the topic points to a key, which is
             then mapped to a specific topic in another place. Rather, the topic simply identifies
             the subject is it referring to. For example, if the topic on programming mentioned the
-            <quote>printf()</quote> function, it would use markup to create an annotation that
-            specifies that the string <quote>printf()</quote> was the name of a function, using
+            <quotes>printf()</quotes> function, it would use markup to create an annotation that
+            specifies that the string <quotes>printf()</quotes> was the name of a function, using
             markup something like this: </p>
         <codeblock>&lt;function-name>printf()&lt;/function-name></codeblock>
         <p>In SPFE, this is called subject affinity annotation, or, more simply, subject annotation.
             At build time, the SPFE process finds this annotation and looks for a topic on the
-            function named <quote>printf()</quote>. If it finds one, it generates a link from the
+            function named <quotes>printf()</quotes>. If it finds one, it generates a link from the
             annotated text to the topic on that subject. </p>
         <section>
             <title>How SPFE finds topics to link to</title>
@@ -69,7 +69,7 @@
             <p>In order to identify a topic suitable for linking to on a particular subject, SPFE
                 considers several factors. Basing the link on the text of the annotated content
                 alone might produce false links. For instance, if you annotated the word
-                <quote>Paris</quote> it would not be clear if you meant the city of Paris in France,
+                <quotes>Paris</quotes> it would not be clear if you meant the city of Paris in France,
                 a person named Paris, or the small town in Ontario, Canada, named Paris. </p>
             <p>To handle this problem, SPFE uses three pieces of information:</p>
             <ul>
@@ -77,10 +77,10 @@
                     <p>The text of the annotated string, or the canonical version of the text
                         specified in the annotation itself. For instance, in the annotation
                         <code>&lt;actor>John Wayne&lt;/actor></code> the text itself,
-                        <quote>John Wayne</quote>, would be used. In the annotation
+                        <quotes>John Wayne</quotes>, would be used. In the annotation
                         <code>&lt;actor name="John Wayne">the Duke&lt;/actor></code>, the value of
-                        the name attribute, <quote>John Wayne</quote>, would be used, and the text,
-                        <quote>the Duke</quote> would not be used for linking, though it would be
+                        the name attribute, <quotes>John Wayne</quotes>, would be used, and the text,
+                        <quotes>the Duke</quotes> would not be used for linking, though it would be
                         the displayed value of the linked text in the output.</p>
                 </li>
                 <li>

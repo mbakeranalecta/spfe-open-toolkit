@@ -50,7 +50,7 @@
     &lt;title>This is something to take note of&lt;/title>
     &lt;p>Take note of this.&lt;/p>
 &lt;/note></codeblock>
-        <p>The signal word <quote>Note</quote> (or whatever other word is specified by the script)
+        <p>The signal word <quotes>Note</quotes> (or whatever other word is specified by the script)
             will be added at the <feature>presentation stage</feature>. Similarly, any graphic
             associated with this class of admonition will be added (if specified) at the
                 <feature>presentation stage</feature>.</p>

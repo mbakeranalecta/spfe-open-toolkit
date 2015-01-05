@@ -414,32 +414,4 @@
 			</xsl:non-matching-substring>
 		</xsl:analyze-string>
 	</xsl:function>
-	<xsl:template name="create-reference-link">
-		<xsl:param name="type"/>
-		<xsl:param name="content"/>
-		<xsl:variable name="target" select="if (@key) then normalize-space(@key) else normalize-space(.)"/>
-		<xsl:choose>
-			<!-- make sure that the target exists -->
-			<xsl:when test="esf:target-exists($target, $type)">
-				<xsl:call-template name="output-link">
-					<xsl:with-param name="target" select="$target"/>
-					<xsl:with-param name="type" select="$type"/>
-					<xsl:with-param name="content" select="$content"/>
-					<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:variable name="not-resolved-message">
-					<xsl:value-of select="$type"/> string not found: <xsl:value-of select="$target"/>.
-				</xsl:variable>
-				<xsl:call-template name="sf:subject-not-resolved">
-					<xsl:with-param name="message">
-						<xsl:value-of select="$type"/> string not found: &quot;<xsl:value-of select="$target"/>&quot; 
-					</xsl:with-param>
-					<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
-				</xsl:call-template>
-				<xsl:sequence select="$content"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
 </xsl:stylesheet>

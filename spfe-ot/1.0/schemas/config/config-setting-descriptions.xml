@@ -1292,7 +1292,7 @@
                 <fragment-ref id-ref="aliases-description">
                     <local-strings>
                         <string id="singular-or-plural">plural</string>
-                        <string id="example-alias"><quote>Configuration settings</quote></string>
+                        <string id="example-alias"><quotes>Configuration settings</quotes></string>
                     </local-strings>
                 </fragment-ref>
             </description>
@@ -1308,7 +1308,7 @@
                 <fragment id="aliases-description">
                     <local-strings>
                         <string id="singular-or-plural">singular</string>
-                        <string id="example-alias"><quote>Configuration setting</quote></string>
+                        <string id="example-alias"><quotes>Configuration setting</quotes></string>
                     </local-strings>
                     <p>A <string-ref id-ref="singular-or-plural"/> version of the <feature>topic
                             type alias</feature>. For instance, in the SPFE documentation, the
@@ -2040,7 +2040,7 @@
         <config-setting-description>
             <xpath>/spfe/content-set/subject-types</xpath>
             <description>
-                <p>A container for a list of <feature>subject types</feature> used in the <feature>content set</feature>. Subject types are the classification of subjects referred to by <feature>subject affinity markup</feature> and used to <task>index topics</task>. The subject type listing is used to provide aliases for the subject types when the name of the subject types is displayed in the output. For example, in the SPFE content, SPFE configuration settings are marked up using the <xml-element-name>config-setting</xml-element-name> element. <quote>config-setting</quote> is thus a subject type in this content set. However, when the output explicitly refers to a configuration setting (for instance, in a <feature>list page</feature>) the string <quote>Configuration setting</quote> is used in the singular and <quote>Configuration settings</quote> is used in the plural. These string are generated based on the value of the <config-setting>/spfe/content-set/subject-types/subject-type/aliases/singular</config-setting> and <config-setting>/spfe/content-set/subject-types/subject-type/aliases/plural</config-setting> settings for the <quote>config-setting</quote> subject type, as defined in the <feature>configuration file</feature> for this <feature>content set</feature>.</p>
+                <p>A container for a list of <feature>subject types</feature> used in the <feature>content set</feature>. Subject types are the classification of subjects referred to by <feature>subject affinity markup</feature> and used to <task>index topics</task>. The subject type listing is used to provide aliases for the subject types when the name of the subject types is displayed in the output. For example, in the SPFE content, SPFE configuration settings are marked up using the <xml-element-name>config-setting</xml-element-name> element. <quotes>config-setting</quotes> is thus a subject type in this content set. However, when the output explicitly refers to a configuration setting (for instance, in a <feature>list page</feature>) the string <quotes>Configuration setting</quotes> is used in the singular and <quotes>Configuration settings</quotes> is used in the plural. These string are generated based on the value of the <config-setting>/spfe/content-set/subject-types/subject-type/aliases/singular</config-setting> and <config-setting>/spfe/content-set/subject-types/subject-type/aliases/plural</config-setting> settings for the <quotes>config-setting</quotes> subject type, as defined in the <feature>configuration file</feature> for this <feature>content set</feature>.</p>
                 <codeblock>
 &lt;subject-types>
     &lt;subject-type>
