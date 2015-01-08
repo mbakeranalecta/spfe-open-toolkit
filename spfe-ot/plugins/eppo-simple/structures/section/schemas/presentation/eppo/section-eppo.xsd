@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:group name="section">
+        <xs:sequence>
+            <xs:element name="section" type="section"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="section">
+        <xs:sequence>
+            <xs:element name="anchor" type="anchor"/>
+            <xs:element name="title" type="title_type"/>
+            <xs:group maxOccurs="unbounded" ref="text-general"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

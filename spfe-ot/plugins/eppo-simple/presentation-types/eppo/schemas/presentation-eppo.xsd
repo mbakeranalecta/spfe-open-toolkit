@@ -22,7 +22,15 @@
   <xs:include
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/media/fig/schemas/presentation/fig.xsd"/>
   <xs:include
-    schemaLocation="file:/C:/Users/Mark/spfe-open-toolkit/spfe-ot/plugins/eppo-simple/structures/tree/schemas/presentation/tree.xsd"/>
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/tree/schemas/presentation/tree.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/paragraphs/schemas/presentation/paragraphs.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/section/schemas/presentation/eppo/section-eppo.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/anchor/schemas/presentation/eppo/anchor-eppo.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/table-basic/schemas/presentation/eppo/table-basic-eppo.xsd"/>
   <xs:element name="pages">
     <xs:complexType>
       <xs:sequence>
@@ -155,7 +163,7 @@
       </xs:element>
       <xs:element name="precis" type="precis_type" minOccurs="0"/>
       <xs:group minOccurs="0" maxOccurs="unbounded" ref="text-general"/>
-      <xs:element name="section" type="section_type" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="section" type="section" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="name" use="required" type="xs:NCName"/>
     <xs:attribute name="status"/>
@@ -179,23 +187,6 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="section_type">
-    <xs:sequence>
-      <xs:element name="anchor" type="anchor_type"/>
-      <xs:element name="title" type="title_type"/>
-      <xs:group maxOccurs="unbounded" ref="text-general"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:group name="paragraph">
-    <xs:sequence>
-      <xs:element name="p" type="paragraph"/>
-    </xs:sequence>
-  </xs:group>
-  <xs:complexType mixed="true" name="paragraph">
-    <xs:group ref="paragraph-content"/>
-    <xs:attribute name="hint" type="xs:NCName"/>
-  </xs:complexType>
-
 
   <xs:complexType mixed="true" name="name_type">
     <xs:sequence>
@@ -203,9 +194,6 @@
     </xs:sequence>
     <xs:attribute name="hint" type="xs:NCName"/>
     <xs:attribute name="type" type="xs:NCName"/>
-  </xs:complexType>
-  <xs:complexType name="anchor_type">
-    <xs:attribute name="name" use="required" type="xs:NCName"/>
   </xs:complexType>
   <xs:complexType name="ol_type">
     <xs:sequence>
@@ -258,7 +246,7 @@
       <xs:group ref="subhead"/>
       <xs:group ref="procedure"/>
       <xs:group ref="paragraph"/>
-      <xs:element name="anchor" type="anchor_type"/>
+      <xs:group ref="anchor"/>
       <xs:group ref="codeblock"/>
       <xs:group ref="lists.ol-ul-ll"/>
       <xs:group ref="tree"/>
@@ -282,7 +270,7 @@
       <xs:element name="fig" type="fig"/>
       <xs:element name="subhead" type="xs:string"/>
       <xs:element name="p" type="paragraph"/>
-      <xs:element name="anchor" type="anchor_type"/>
+      <xs:element name="anchor" type="anchor"/>
       <xs:element name="ol" type="ol_type"/>
       <xs:element name="codeblock" type="codeblock"/>
       <xs:element name="ul" type="ul_type"/>
@@ -298,68 +286,6 @@
     </xs:sequence>
     <xs:attribute name="hint" type="xs:NCName"/>
     <xs:attribute name="type" type="xs:NCName"/>
-  </xs:complexType>
-  <xs:group name="table-basic">
-    <xs:sequence>
-      <xs:element name="table">
-        <xs:complexType>
-          <xs:complexContent>
-            <xs:extension base="table-basic">
-              <xs:attribute name="id"/>
-            </xs:extension>
-          </xs:complexContent>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-  </xs:group>
-  <xs:complexType name="table-basic">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="title"/>
-      <xs:element minOccurs="0" name="caption">
-        <xs:complexType>
-          <xs:group ref="text-minimal"/>
-        </xs:complexType>
-      </xs:element>
-      <xs:element minOccurs="0" name="thead">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="tr">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element maxOccurs="unbounded" name="td" type="td-type"/>
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="tbody">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="tr">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element maxOccurs="unbounded" name="td">
-                    <xs:complexType>
-                      <xs:complexContent>
-                        <xs:extension base="td-type">
-                          <xs:attribute name="rowspan" type="xs:integer"/>
-                        </xs:extension>
-                      </xs:complexContent>
-                    </xs:complexType>
-                  </xs:element>
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="td-type">
-    <xs:sequence>
-      <xs:group ref="table-cell-content"/>
-    </xs:sequence>
   </xs:complexType>
   <xs:group name="table-cell-content">
     <xs:sequence>

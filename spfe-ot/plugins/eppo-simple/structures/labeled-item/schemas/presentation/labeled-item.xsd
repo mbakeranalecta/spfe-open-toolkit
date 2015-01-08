@@ -11,7 +11,7 @@
     
     <xs:complexType name="labeled-item">
         <xs:sequence>
-            <xs:element name="anchor" type="anchor_type" minOccurs="0"/>
+            <xs:element name="anchor" type="anchor" minOccurs="0"/>
             <xs:element name="label">
                 <xs:complexType mixed="true">
                     <xs:sequence>
