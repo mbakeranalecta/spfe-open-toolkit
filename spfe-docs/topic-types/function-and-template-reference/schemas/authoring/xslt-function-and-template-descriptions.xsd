@@ -38,11 +38,11 @@
 	<xs:complexType name="function-or-template-description-type">
 		<xs:sequence>
 			<xs:element name="name" type="xs:string"/>
-			<xs:element name="description" type="sd:text-general-type"/>
+			<xs:element name="description" type="sd:text-general"/>
 			<xs:element name="return-value">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="description" type="sd:text-general-type"/>
+						<xs:element name="description" type="sd:text-general"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -54,7 +54,7 @@
 								<xs:sequence>
 									<xs:element name="name" type="xs:string"/>
 									<xs:element name="description"
-										type="sd:text-general-type"/>
+										type="sd:text-general"/>
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>

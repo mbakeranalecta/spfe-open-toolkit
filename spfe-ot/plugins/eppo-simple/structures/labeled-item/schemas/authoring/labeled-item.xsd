@@ -7,7 +7,7 @@
             <xs:element name="item">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:group ref="nested-text-structures"/>
+                        <xs:group ref="text-nested"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>

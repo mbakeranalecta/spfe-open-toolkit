@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
-    <xs:group name="p-content">
+    <xs:group name="paragraph-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>
             <xs:group ref="annotations-common-names"/>

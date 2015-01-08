@@ -47,7 +47,7 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="planning-question-title" type="xs:string"/>
-                        <xs:element name="planning-question-body" type="text-general-type"/>
+                        <xs:element name="planning-question-body" type="text-general"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>

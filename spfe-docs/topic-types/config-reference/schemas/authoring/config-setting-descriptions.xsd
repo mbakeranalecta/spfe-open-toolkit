@@ -26,16 +26,16 @@
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="xpath" type="xs:string"/>
-										<xs:element name="description" type="csd:text-general-type"/>
+										<xs:element name="description" type="csd:text-general"/>
 										<xs:element name="values">
 											<xs:complexType>
 												<xs:sequence>
 												<xs:element name="default" minOccurs="0"
-												maxOccurs="1" type="csd:text-general-type"/>
+												maxOccurs="1" type="csd:text-general"/>
 												<xs:sequence maxOccurs="unbounded" minOccurs="0">
 												<xs:element name="value" type="xs:string"/>
 												<xs:element name="description"
-												type="csd:text-general-type"/>
+												type="csd:text-general"/>
 												</xs:sequence>
 												</xs:sequence>
 											</xs:complexType>
@@ -59,7 +59,7 @@
 	
 	<xs:complexType name="restrictionsType">
 		<xs:sequence>
-			<xs:element name="restriction" minOccurs="0" maxOccurs="unbounded" type="csd:text-general-type"/>
+			<xs:element name="restriction" minOccurs="0" maxOccurs="unbounded" type="csd:text-general"/>
 		</xs:sequence>
 	</xs:complexType>
 	
@@ -69,11 +69,11 @@
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="name" type="xs:string"/>
-						<xs:element name="description" type="csd:text-general-type"/>
+						<xs:element name="description" type="csd:text-general"/>
 						<xs:element name="target" minOccurs="0">
 							<xs:complexType>
 								<xs:all>
-									<xs:element name="location" minOccurs="0" type="csd:paragraph-type"/>
+									<xs:element name="location" minOccurs="0" type="csd:paragraph"/>
 									<xs:element name="type" type="xs:string"/>
 								</xs:all>
 							</xs:complexType>
@@ -81,11 +81,11 @@
 						<xs:element name="values" minOccurs="0">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="unspecified" type="csd:text-general-type"
+									<xs:element name="unspecified" type="csd:text-general"
 										minOccurs="0" maxOccurs="1"/>
 									<xs:sequence maxOccurs="unbounded" minOccurs="0">
 										<xs:element name="value" type="xs:string"/>
-										<xs:element name="description" type="csd:text-general-type"/>
+										<xs:element name="description" type="csd:text-general"/>
 									</xs:sequence>
 								</xs:sequence>
 							</xs:complexType>

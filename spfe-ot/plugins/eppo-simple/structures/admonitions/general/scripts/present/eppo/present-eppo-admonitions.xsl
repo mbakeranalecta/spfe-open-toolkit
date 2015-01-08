@@ -11,22 +11,25 @@ version="2.0"
 >
 
 	<xsl:template match="admonition">
-		<xsl:element name="pe:{local-name()}" namespace="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo">
+		<pe:admonition>
 			<xsl:attribute name="class" select="lower-case(signal-word)"/>
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
-		</xsl:element>
+		</pe:admonition>
 	</xsl:template>
 
 	<xsl:template match="admonition/title">
-		<xsl:element name="pe:{local-name()}" namespace="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo">
+		<pe:title>
 			<xsl:copy-of select="@*"/>
-			<xsl:value-of select="../signal-word"/>
-			<xsl:text>: </xsl:text>
 			<xsl:apply-templates/>
-		</xsl:element>
+		</pe:title>
 	</xsl:template>
 	
-	<xsl:template match="admonition/signal-word"/>
+	<xsl:template match="admonition/signal-word">
+		<pe:signal-word>
+			<xsl:copy-of select="@*"/>
+			<xsl:apply-templates/>
+		</pe:signal-word>
+	</xsl:template>
 	
 </xsl:stylesheet>

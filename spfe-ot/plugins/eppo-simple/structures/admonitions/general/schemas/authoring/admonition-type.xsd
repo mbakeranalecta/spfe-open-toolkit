@@ -4,7 +4,7 @@
     <xs:complexType name="admonition">
         <xs:sequence>
             <xs:element name="title"/>
-            <xs:group ref="nested-text-structures"/>
+            <xs:group ref="text-nested"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

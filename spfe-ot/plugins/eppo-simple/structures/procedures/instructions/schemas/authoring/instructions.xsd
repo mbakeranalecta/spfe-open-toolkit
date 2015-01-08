@@ -17,10 +17,10 @@
     <xs:group name="instructions-text-structures">
         <xs:sequence>
             <xs:choice maxOccurs="1" minOccurs="1">
-                <xs:group ref="paragraphs"/>
+                <xs:group ref="paragraph"/>
             </xs:choice>
             <xs:choice>
-                <xs:group ref="paragraphs"/>
+                <xs:group ref="paragraph"/>
                 <xs:group ref="lists.ol-ul-ll"/>
                 <xs:group ref="programming"/>
                 <xs:group ref="fig"/>

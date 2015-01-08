@@ -58,7 +58,7 @@
             <item>
                 <p>This is the item to which the label is applied. The
                     <xml-element-name>item</xml-element-name> structure can contain structures from
-                    the <feature>nested-text-structures group</feature>. </p>
+                    the <feature>text-nested group</feature>. </p>
             </item>
         </labeled-item>
         <p>The following is the XML code for the labeled item above:</p>
@@ -67,7 +67,7 @@
     &lt;item>
         &lt;p>This is the item to which the label is applied. The
         &lt;xml-element-name>item&lt;/xml-element-name> structure can contain structures from
-        the &lt;feature>nested-text-structures group&lt;/feature>. &lt;/p>
+        the &lt;feature>text-nested group&lt;/feature>. &lt;/p>
     &lt;/item>
 &lt;/labeled-item></codeblock>
         <p> </p>

@@ -3,18 +3,10 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
-    <xs:group name="paragraph">
+    <xs:group name="subhead">
         <xs:choice>
-            <xs:element name="p" type="paragraph"/>
+            <xs:element name="subhead" type="xs:string"/>
         </xs:choice>
     </xs:group>
 
-
-  <xs:complexType name="paragraph" mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:group ref="paragraph-content"/>
-      </xs:choice>
-      <xs:attributeGroup ref="conditions"/>
-  </xs:complexType>
-    
 </xs:schema>

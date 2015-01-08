@@ -15,8 +15,9 @@ version="2.0"
 >
 	
 	<xsl:template match="procedure">
-		<pe:procedure id="{@id}">
+		<pe:procedure>
 			<xsl:if test="@id">
+				<xsl:copy-of select="@id"/>
 				<anchor name="procedure:{@id}"/>
 			</xsl:if>
 			<xsl:apply-templates/>
@@ -66,7 +67,9 @@ version="2.0"
 
 	
 	<xsl:template match="procedure/steps">
-		<xsl:apply-templates/>
+		<pe:steps>
+			<xsl:apply-templates/>
+		</pe:steps>
 	</xsl:template>	
 	
 	<xsl:template match="procedure/steps/step">

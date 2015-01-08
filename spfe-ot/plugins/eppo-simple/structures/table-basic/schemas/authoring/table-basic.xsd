@@ -19,7 +19,7 @@
             <xs:element name="title" minOccurs="0"/>
             <xs:element minOccurs="0" name="caption">
                 <xs:complexType>
-                    <xs:group ref="paragraphs"/>
+                    <xs:group ref="paragraph"/>
                 </xs:complexType>
             </xs:element>
             <xs:element minOccurs="0" name="thead">
@@ -57,7 +57,7 @@
     </xs:complexType>
     <xs:group name="table-cell-content">
         <xs:sequence>
-            <xs:group ref="paragraphs"/>
+            <xs:group ref="paragraph"/>
         </xs:sequence>
     </xs:group>
 </xs:schema>

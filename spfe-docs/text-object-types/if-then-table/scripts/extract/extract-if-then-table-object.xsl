@@ -46,12 +46,15 @@
                        </xsl:if>
                        <xsl:if test="caption">
                            <sdto:caption>
-                               <xsl:apply-templates select="caption"/>
+                               <sdto:p>
+                                <xsl:apply-templates select="caption"/>
+                               </sdto:p>
                            </sdto:caption>
                        </xsl:if>
                        <sdto:if-then-table-head>
                            <xsl:for-each select="signs/sign">
                                <sdto:td>
+                                   <sdto:p>
                                    <xsl:choose>
                                        <xsl:when test="position()=1">
                                            <xsl:text>When </xsl:text>
@@ -62,9 +65,12 @@
                                    </xsl:choose>
                                    <xsl:value-of select="caption"/>
                                    <xsl:text> ...</xsl:text>
+                                   </sdto:p>
                                </sdto:td>
                            </xsl:for-each>
-                           <sdto:td>Then ...</sdto:td>
+                           <sdto:td>
+                               <sdto:p>Then ...</sdto:p>
+                           </sdto:td>
                        </sdto:if-then-table-head>
                        <sdto:if-then-table-body>
                            <xsl:call-template name="process-signs">
@@ -100,7 +106,9 @@
             <xsl:variable name="this-signal" select="."/>
             <sdto:if-then-row>
                 <sdto:if>
-                    <xsl:value-of select="$this-signal"/>
+                    <sdto:p>
+                        <xsl:value-of select="$this-signal"/>
+                    </sdto:p>
                 </sdto:if>
                 <sdto:then>
                     <xsl:choose>
@@ -113,7 +121,9 @@
                             </xsl:if>
                          
                             <sdto:do>
-                                <xsl:value-of select="$states[signs/sign[name = $this-sign/name][signal = $this-signal]]/action"/>
+                                <sdto:p>
+                                    <xsl:value-of select="$states[signs/sign[name = $this-sign/name][signal = $this-signal]]/action"/>
+                                </sdto:p>
                             </sdto:do>
                         </xsl:when>
                         <xsl:otherwise>

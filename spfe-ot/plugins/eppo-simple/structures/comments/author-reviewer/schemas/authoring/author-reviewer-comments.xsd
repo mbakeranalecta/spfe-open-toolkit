@@ -31,17 +31,17 @@
         <xs:choice>
             <xs:element name="comment-author-to-author">
                 <xs:complexType>
-                    <xs:group ref="nested-text-structures"/>
+                    <xs:group ref="text-nested"/>
                 </xs:complexType>
             </xs:element>
             <xs:element name="comment-author-to-reviewer">
                 <xs:complexType>
-                    <xs:group ref="nested-text-structures"/>
+                    <xs:group ref="text-nested"/>
                 </xs:complexType>
             </xs:element>
             <xs:element name="comment-reviewer-to-author">
                 <xs:complexType>
-                    <xs:group ref="nested-text-structures"/>
+                    <xs:group ref="text-nested"/>
                 </xs:complexType>
             </xs:element>
         </xs:choice>

@@ -13,7 +13,7 @@
             <xs:element name="li" maxOccurs="unbounded">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:group ref="paragraphs"/>
+                        <xs:group ref="paragraph"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>

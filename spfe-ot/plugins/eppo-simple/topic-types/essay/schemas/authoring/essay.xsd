@@ -9,7 +9,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/essay/schemas/authoring/essay-root.xsd"/>
 
-    <xs:group name="p-content">
+    <xs:group name="paragraph-content">
         <xs:choice>
             <xs:group ref="text-decoration"/>
             <xs:group ref="annotations-common-names"/>

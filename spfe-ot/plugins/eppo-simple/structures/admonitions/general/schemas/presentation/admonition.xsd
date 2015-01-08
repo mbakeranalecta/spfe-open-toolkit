@@ -8,6 +8,7 @@
             <xs:element name="title"/>
             <xs:group ref="text-nested"/>
         </xs:sequence>
+        <xs:attribute name="class"/>
     </xs:complexType>
 
     <xs:group name="admonitions">

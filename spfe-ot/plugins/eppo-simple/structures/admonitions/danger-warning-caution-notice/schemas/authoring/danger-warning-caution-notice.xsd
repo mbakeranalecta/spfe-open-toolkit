@@ -4,10 +4,10 @@
     <xs:complexType name="admonition">
         <xs:sequence>
             <xs:element name="title"/>
-            <xs:element name="body" type="nested-text-structures"/>
+            <xs:element name="body" type="text-nested"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:group name="danger-warning-caution-notice">
+    <xs:group name="admonitions">
 
         <xs:choice>
             <xs:element name="danger" type="admonition"/>

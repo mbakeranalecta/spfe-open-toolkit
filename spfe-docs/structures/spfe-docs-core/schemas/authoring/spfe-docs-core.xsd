@@ -5,5 +5,5 @@
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/xslt/schemas/authoring/annotations-xslt.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/annotations/spfe-build/schemas/authoring/annotations-spfe-build.xsd"/>
     <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/annotations/eppo-simple/schemas/authoring/annotations-eppo-simple.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/spfe-docs-core/schemas/authoring/spfe-docs-p-content.xsd"/> 
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/spfe-docs-core/schemas/authoring/spfe-docs-paragraph-content.xsd"/> 
 </xs:schema>

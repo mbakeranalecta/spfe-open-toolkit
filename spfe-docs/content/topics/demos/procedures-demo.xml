@@ -218,11 +218,11 @@
             step, the <eppo-simple-element-name>instructions</eppo-simple-element-name> element is
             not part of the <eppo-simple-structure-name>procedure</eppo-simple-structure-name>
             structure. Rather, it is in independent structure that is, by default, part of the
-                <eppo-simple-group-name>nested-text-structures</eppo-simple-group-name> group. It is
+                <eppo-simple-group-name>text-nested</eppo-simple-group-name> group. It is
             available in a <eppo-simple-element-name>procedure</eppo-simple-element-name>
             <eppo-simple-element-name>step</eppo-simple-element-name> because the default content
             model of <eppo-simple-element-name>step</eppo-simple-element-name> is the
-                <eppo-simple-group-name>nested-text-structures</eppo-simple-group-name> group. </p>
+                <eppo-simple-group-name>text-nested</eppo-simple-group-name> group. </p>
         <section>
             <title>Reasons to develop your own procedure structure</title>
             <p>You might want to develop your own procedure structure if:</p>

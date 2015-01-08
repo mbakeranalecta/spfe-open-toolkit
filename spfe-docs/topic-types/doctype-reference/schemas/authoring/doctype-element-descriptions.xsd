@@ -28,7 +28,7 @@
 										<xs:element name="name" type="xs:string"/>
 										<xs:element maxOccurs="unbounded" minOccurs="0"
 											name="parent" type="xs:string"/>
-										<xs:element name="description" type="dd:text-general-type"/>
+										<xs:element name="description" type="dd:text-general"/>
 										<xs:element name="attributes" type="dd:attributesType"/>
 									</xs:sequence>
 								</xs:complexType>
@@ -49,11 +49,11 @@
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="name" type="xs:string"/>
-						<xs:element name="description" type="dd:text-general-type"/>
+						<xs:element name="description" type="dd:text-general"/>
 						<xs:element name="target" minOccurs="0">
 							<xs:complexType>
 								<xs:all>
-									<xs:element name="location" minOccurs="0" type="dd:paragraph-type"/>
+									<xs:element name="location" minOccurs="0" type="dd:paragraph"/>
 									<xs:element name="type" type="xs:string"/>
 								</xs:all>
 							</xs:complexType>
@@ -61,11 +61,11 @@
 						<xs:element name="values" minOccurs="0">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="unspecified" type="dd:text-general-type"
+									<xs:element name="unspecified" type="dd:text-general"
 										minOccurs="0" maxOccurs="1"/>
 									<xs:sequence maxOccurs="unbounded" minOccurs="0">
 										<xs:element name="value" type="xs:string"/>
-										<xs:element name="description" type="dd:text-general-type"/>
+										<xs:element name="description" type="dd:text-general"/>
 									</xs:sequence>
 								</xs:sequence>
 							</xs:complexType>
@@ -81,7 +81,7 @@
 	<xs:complexType name="restrictionsType">
 		<xs:sequence>
 			<xs:element maxOccurs="unbounded" minOccurs="0" name="restriction"
-				type="dd:text-general-type"/>
+				type="dd:text-general"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

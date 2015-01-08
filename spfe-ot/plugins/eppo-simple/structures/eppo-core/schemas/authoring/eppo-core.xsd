@@ -7,10 +7,12 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-subjects/schemas/authoring/annotations-common-subjects.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-addresses/schemas/authoring/annotations-common-addresses.xsd"/>    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-addresses/schemas/authoring/annotations-common-addresses.xsd"/>
+    <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/conditions/schemas/authoring/conditions.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-resource-ids/schemas/authoring/annotations-common-resource-ids.xsd"/>    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-resource-ids/schemas/authoring/annotations-common-resource-ids.xsd"/>
+    <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fragments/schemas/authoring/fragments.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/text-object-ref/schemas/authoring/text-object-ref.xsd"/>
@@ -42,18 +44,21 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/admonitions/note-caution-warning/schemas/authoring/note-caution-warning.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/comments/author-reviewer/schemas/authoring/author-reviewer-comments.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/labeled-item/schemas/authoring/labeled-item.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/procedures/procedure/schemas/authoring/procedure.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/procedures/instructions/schemas/authoring/instructions.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/labeled-item/schemas/authoring/labeled-item.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/procedures/procedure/schemas/authoring/procedure.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/procedures/instructions/schemas/authoring/instructions.xsd"/>
     <xs:group name="text-general">
         <xs:sequence>
             <xs:choice maxOccurs="1" minOccurs="1">
-                <xs:group ref="paragraphs"/>
+                <xs:group ref="paragraph"/>
                 <xs:group ref="fragments"/>
                 <xs:group ref="fragment-ref"/>
             </xs:choice>
             <xs:choice maxOccurs="unbounded" minOccurs="0">
-                <xs:group ref="paragraphs"/>
+                <xs:group ref="paragraph"/>
                 <xs:group ref="subhead"/>
                 <xs:group ref="lists.ol-ul-ll"/>
                 <xs:group ref="programming"/>
@@ -62,7 +67,7 @@
                 <xs:group ref="fragment-ref"/>
                 <xs:group ref="table-basic"/>
                 <xs:group ref="text-object-ref"/>
-                <xs:group ref="admonitions.note-caution-warning"/>
+                <xs:group ref="admonitions"/>
                 <xs:group ref="comments-block"/>
                 <xs:group ref="labeled-item"/>
                 <xs:group ref="procedure"/>
@@ -71,36 +76,47 @@
         </xs:sequence>
     </xs:group>
 
-    <xs:complexType name="text-general-type">
+    <xs:complexType name="text-general">
         <xs:group ref="text-general"/>
     </xs:complexType>
-    
-    <xs:group name="nested-text-structures">
+
+    <xs:group name="text-nested">
         <xs:sequence>
             <xs:choice maxOccurs="1" minOccurs="1">
-                <xs:group ref="paragraphs"/>
+                <xs:group ref="paragraph"/>
             </xs:choice>
             <xs:choice>
-                <xs:group ref="paragraphs"/>
+                <xs:group ref="paragraph"/>
                 <xs:group ref="subhead"/>
                 <xs:group ref="lists.ol-ul-ll"/>
                 <xs:group ref="programming"/>
                 <xs:group ref="fig"/>
                 <xs:group ref="instructions"/>
             </xs:choice>
-        </xs:sequence>    
+        </xs:sequence>
     </xs:group>
-    
-    <xs:complexType name="nested-text-structures">
-        <xs:group ref="nested-text-structures"/>
+
+    <xs:complexType name="text-nested">
+        <xs:group ref="text-nested"/>
     </xs:complexType>
-    
-    <xs:group name="admonitions">
+
+    <xs:group name="text-minimal">
         <xs:sequence>
-            <xs:group ref="admonitions.note-caution-warning" maxOccurs="unbounded"/>
+            <xs:choice maxOccurs="1" minOccurs="1">
+                <xs:group ref="paragraph"/>
+            </xs:choice>
+            <xs:choice>
+                <xs:group ref="paragraph"/>
+                <xs:group ref="lists.ol-ul-ll"/>
+            </xs:choice>
         </xs:sequence>
     </xs:group>
     
+    <xs:complexType name="text-minimal">
+        <xs:group ref="text-minimal"/>
+    </xs:complexType>
+
+
     <xs:complexType name="admonitions">
         <xs:group ref="admonitions"/>
     </xs:complexType>

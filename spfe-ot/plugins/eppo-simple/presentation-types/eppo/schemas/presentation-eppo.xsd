@@ -5,7 +5,16 @@
   xmlns="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo">
   <xs:import namespace="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphic-record.xsd"/>
-  <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/base/schemas/presentaion/annotations-base-presentation.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/base/schemas/presentaion/annotations-base-presentation.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/ol-ul-ll/schemas/authoring/ol-ul-ll-lists.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/procedures/procedure/schemas/presentation/procedure.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/admonitions/general/schemas/presentation/admonition.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/headings/subhead/schemas/presentation/subhead.xsd"/>
   <xs:element name="pages">
     <xs:complexType>
       <xs:sequence>
@@ -14,6 +23,11 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:group name="paragraph-content">
+    <xs:sequence>
+      <xs:group ref="annotations-base-presentation" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
   <xs:complexType name="page_type">
     <xs:sequence>
       <xs:element name="context-nav">
@@ -57,7 +71,7 @@
               <xs:complexType>
                 <xs:sequence>
                   <xs:element name="title" type="title_type"/>
-                  <xs:element name="p" type="p_type"/>
+                  <xs:element name="p" type="paragraph"/>
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
@@ -99,7 +113,7 @@
       <xs:element minOccurs="0" name="site-nav">
         <xs:complexType>
           <xs:sequence>
-            <xs:group ref="nested-text-structure-group"/>
+            <xs:group ref="text-nested"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -132,7 +146,7 @@
         </xs:complexType>
       </xs:element>
       <xs:element name="precis" type="precis_type" minOccurs="0"/>
-      <xs:group minOccurs="0" maxOccurs="unbounded" ref="text-structure-group"/>
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="text-general"/>
       <xs:element name="section" type="section_type" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="name" use="required" type="xs:NCName"/>
@@ -141,11 +155,10 @@
   </xs:complexType>
   <xs:complexType name="header_type">
     <xs:sequence>
-      <xs:element name="p" type="p_type"/>
-      <xs:element name="table" type="table_type"/>
+      <xs:element name="p" type="paragraph"/>
+      <xs:element name="table" type="table-basic"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="table_type"/>
   <xs:complexType name="fig_type">
     <xs:sequence>
       <xs:element ref="gr:graphic-record"/>
@@ -155,7 +168,7 @@
   </xs:complexType>
   <xs:complexType name="caption_type">
     <xs:sequence>
-      <xs:element name="p" type="p_type"/>
+      <xs:element name="p" type="paragraph"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="labeled-item_type">
@@ -171,7 +184,7 @@
       <xs:element name="item">
         <xs:complexType>
           <xs:sequence>
-            <xs:group maxOccurs="unbounded" ref="nested-text-structure-group"/>
+            <xs:group maxOccurs="unbounded" ref="text-nested"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -180,7 +193,7 @@
   <xs:complexType name="precis_type">
     <xs:sequence>
       <xs:element name="title" type="title_type"/>
-      <xs:group maxOccurs="unbounded" ref="basic-text-structure-group"/>
+      <xs:group maxOccurs="unbounded" ref="text-minimal"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -188,15 +201,20 @@
     <xs:sequence>
       <xs:element name="anchor" type="anchor_type"/>
       <xs:element name="title" type="title_type"/>
-      <xs:group maxOccurs="unbounded" ref="text-structure-group"/>
+      <xs:group maxOccurs="unbounded" ref="text-general"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType mixed="true" name="p_type">
-    <xs:group ref="annotations-base-presentation" maxOccurs="unbounded" minOccurs="0"/>
+  <xs:group name="paragraph">
+    <xs:sequence>
+      <xs:element name="p" type="paragraph"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType mixed="true" name="paragraph">
+    <xs:group ref="paragraph-content"/>
     <xs:attribute name="hint" type="xs:NCName"/>
   </xs:complexType>
-  
-  
+
+
   <xs:complexType mixed="true" name="name_type">
     <xs:sequence>
       <xs:element name="link" type="link_type" minOccurs="0"/>
@@ -238,7 +256,7 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element name="label"/>
-            <xs:element name="p" type="p_type"/>
+            <xs:element name="p" type="paragraph"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -253,7 +271,7 @@
     <xs:sequence>
       <xs:element name="subhead" minOccurs="0" type="xs:string"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="p" type="p_type"/>
+        <xs:element name="p" type="paragraph"/>
         <xs:element name="ul" type="ul_type"/>
       </xs:choice>
     </xs:sequence>
@@ -292,56 +310,37 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:complexType>
-  <xs:complexType name="general-admonition">
-    <xs:sequence>
-      <xs:element name="signal-word"/>
-      <xs:element name="title"/>
-      <xs:element name="body">
-        <xs:complexType>
-          <xs:group ref="nested-text-structure-group"/>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:group name="admonitions-general">
-    <xs:sequence>
-      <xs:element name="admonition" type="general-admonition"/>
-    </xs:sequence>
-  </xs:group>
-  <xs:complexType name="admonition-general">
-    <xs:group ref="admonitions-general"/>
-  </xs:complexType>
-  <xs:group name="text-structure-group">
+  <xs:group name="text-general">
     <xs:choice>
       <xs:element name="fig" type="fig_type"/>
       <xs:element name="labeled-item" type="labeled-item_type"/>
       <xs:element name="subhead" type="xs:string"/>
-      <xs:element name="p" type="p_type"/>
+      <xs:group ref="procedure"/>
+      <xs:group ref="paragraph"/>
       <xs:element name="anchor" type="anchor_type"/>
-      <xs:element name="ol" type="ol_type"/>
       <xs:element name="codeblock" type="codeblock_type"/>
-      <xs:element name="ul" type="ul_type"/>
+      <xs:group ref="lists.ol-ul-ll"/>
       <xs:element name="tree" type="tree_type"/>
-      <xs:element name="admonition" type="admonition-general"/>
+      <xs:group ref="table-basic"/>
+      <xs:group ref="admonitions"/>
     </xs:choice>
 
   </xs:group>
   <xs:simpleType name="title_type">
     <xs:restriction base="xs:string"/>
   </xs:simpleType>
-  <xs:group name="basic-text-structure-group">
+  <xs:group name="text-minimal">
     <xs:choice>
-      <xs:element name="p" type="p_type"/>
+      <xs:element name="p" type="paragraph"/>
       <xs:element name="ol" type="ol_type"/>
       <xs:element name="ul" type="ul_type"/>
     </xs:choice>
   </xs:group>
-  <xs:group name="nested-text-structure-group">
+  <xs:group name="text-nested">
     <xs:choice>
       <xs:element name="fig" type="fig_type"/>
       <xs:element name="subhead" type="xs:string"/>
-      <xs:element name="p" type="p_type"/>
+      <xs:element name="p" type="paragraph"/>
       <xs:element name="anchor" type="anchor_type"/>
       <xs:element name="ol" type="ol_type"/>
       <xs:element name="codeblock" type="codeblock_type"/>
@@ -359,4 +358,71 @@
     <xs:attribute name="hint" type="xs:NCName"/>
     <xs:attribute name="type" type="xs:NCName"/>
   </xs:complexType>
+  <xs:group name="table-basic">
+    <xs:sequence>
+      <xs:element name="table">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="table-basic">
+              <xs:attribute name="id"/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="table-basic">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="title"/>
+      <xs:element minOccurs="0" name="caption">
+        <xs:complexType>
+          <xs:group ref="text-minimal"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="thead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="tr">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="td" type="td-type"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="tbody">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="tr">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" name="td">
+                    <xs:complexType>
+                      <xs:complexContent>
+                        <xs:extension base="td-type">
+                          <xs:attribute name="rowspan" type="xs:integer"/>
+                        </xs:extension>
+                      </xs:complexContent>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="td-type">
+    <xs:sequence>
+      <xs:group ref="table-cell-content"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:group name="table-cell-content">
+    <xs:sequence>
+      <xs:group ref="text-minimal"/>
+    </xs:sequence>
+  </xs:group>
 </xs:schema>

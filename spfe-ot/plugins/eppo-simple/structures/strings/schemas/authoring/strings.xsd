@@ -19,7 +19,7 @@
     
     <xs:complexType name="string-type">
         <xs:complexContent>
-            <xs:extension base="paragraph-type">
+            <xs:extension base="paragraph">
                 <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
             </xs:extension>
         </xs:complexContent>

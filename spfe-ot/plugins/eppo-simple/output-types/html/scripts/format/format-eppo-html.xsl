@@ -371,6 +371,10 @@
 			<xsl:apply-templates/>
 		</h3>
 	</xsl:template>
+	
+	<xsl:template match="procedure/steps">
+		<xsl:apply-templates/>
+	</xsl:template>
 
 	<xsl:template match="step/title">
 		<h4>
@@ -794,9 +798,15 @@
 	
 	<xsl:template match="admonition/title">
 		<p class="admonition-title">
+			<span class="admonition-signal-word">
+				<xsl:value-of select="../signal-word"/>
+			</span>
+			<xsl:text>: </xsl:text>
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>
+	
+	<xsl:template match="admonition/signal-word"/>
 	
 	<xsl:template match="inline-comment">
 		<span class="{@class}">

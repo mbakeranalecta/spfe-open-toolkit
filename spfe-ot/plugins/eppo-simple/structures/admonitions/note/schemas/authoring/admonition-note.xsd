@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     <xs:include schemaLocation="../../../general/schemas/authoring/admonition-type.xsd"/>
-    <xs:group name="note">
+    <xs:group name="admonitions">
 
         <xs:choice>
             <xs:element name="note" type="admonition"/>

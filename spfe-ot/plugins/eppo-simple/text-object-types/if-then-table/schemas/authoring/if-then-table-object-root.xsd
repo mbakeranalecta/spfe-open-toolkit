@@ -25,7 +25,7 @@
                                         <xs:element minOccurs="0" name="title"/>
                                         <xs:element minOccurs="0" name="caption">
                                             <xs:complexType>
-                                                <xs:group ref="paragraphs"/>
+                                                <xs:group ref="paragraph"/>
                                             </xs:complexType>
                                         </xs:element>
                                         <xs:element name="if-then-table-head">

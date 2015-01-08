@@ -2,32 +2,41 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:group name="lists">
+        <xs:sequence>
+            <xs:group ref="lists.ol-ul-ll"/>
+        </xs:sequence>
+    </xs:group>
     <xs:group name="lists.ol-ul-ll">
         <xs:choice>
             <xs:element name="ol" type="list" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="ul" type="list" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" name="ll">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="unbounded" name="li">
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element name="label"/>
-                                    <xs:element name="p" type="paragraph-type"/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="ll" type="ll"> </xs:element>
         </xs:choice>
+    </xs:group>
+    <xs:group name="lists.ll">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="ll" type="ll"> </xs:element>
+        </xs:sequence>
     </xs:group>
     <xs:complexType name="list">
         <xs:sequence>
             <xs:element name="li" maxOccurs="unbounded">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:group ref="paragraphs"/>
+                        <xs:group ref="paragraph" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ll">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="li">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="label"/>
+                        <xs:element name="p" type="paragraph"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
