@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
+    elementFormDefault="qualified">
+
+    <xs:import namespace="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/graphics/schemas/graphic-record.xsd"/>
+    <xs:group name="fig">
+        <xs:choice>
+            <xs:element name="fig" type="fig"/>
+        </xs:choice>
+    </xs:group>
+    <xs:complexType name="fig">
+        <xs:sequence>
+            <xs:element ref="gr:graphic-record"/>
+            <xs:element name="title" type="title_type"/>
+            <xs:element name="caption" type="caption_type"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

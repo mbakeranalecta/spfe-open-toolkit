@@ -27,13 +27,11 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/paragraphs/schemas/authoring/paragraphs.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/programming/schemas/authoring/programming.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/codeblock/schemas/authoring/codeblock.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/strings/schemas/authoring/strings.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/headings/subhead/schemas/authoring/subhead.xsd"/>
-    <!--<xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/headings/title/schemas/authoring/title.xsd"/>-->
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/table-basic/schemas/authoring/table-basic.xsd"/>
     <xs:include
@@ -61,7 +59,7 @@
                 <xs:group ref="paragraph"/>
                 <xs:group ref="subhead"/>
                 <xs:group ref="lists.ol-ul-ll"/>
-                <xs:group ref="programming"/>
+                <xs:group ref="codeblock"/>
                 <xs:group ref="fig"/>
                 <xs:group ref="fragments"/>
                 <xs:group ref="fragment-ref"/>
@@ -89,7 +87,7 @@
                 <xs:group ref="paragraph"/>
                 <xs:group ref="subhead"/>
                 <xs:group ref="lists.ol-ul-ll"/>
-                <xs:group ref="programming"/>
+                <xs:group ref="codeblock"/>
                 <xs:group ref="fig"/>
                 <xs:group ref="instructions"/>
             </xs:choice>

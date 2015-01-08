@@ -15,6 +15,14 @@
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/admonitions/general/schemas/presentation/admonition.xsd"/>
   <xs:include
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/headings/subhead/schemas/presentation/subhead.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/codeblock/schemas/presentation/codeblock.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/labeled-item/schemas/presentation/labeled-item.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/media/fig/schemas/presentation/fig.xsd"/>
+  <xs:include
+    schemaLocation="file:/C:/Users/Mark/spfe-open-toolkit/spfe-ot/plugins/eppo-simple/structures/tree/schemas/presentation/tree.xsd"/>
   <xs:element name="pages">
     <xs:complexType>
       <xs:sequence>
@@ -159,35 +167,9 @@
       <xs:element name="table" type="table-basic"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="fig_type">
-    <xs:sequence>
-      <xs:element ref="gr:graphic-record"/>
-      <xs:element name="title" type="title_type"/>
-      <xs:element name="caption" type="caption_type"/>
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="caption_type">
     <xs:sequence>
       <xs:element name="p" type="paragraph"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="labeled-item_type">
-    <xs:sequence>
-      <xs:element name="anchor" type="anchor_type" minOccurs="0"/>
-      <xs:element name="label">
-        <xs:complexType mixed="true">
-          <xs:sequence>
-            <xs:element name="link" type="link_type" minOccurs="0"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="item">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:group maxOccurs="unbounded" ref="text-nested"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="precis_type">
@@ -230,13 +212,6 @@
       <xs:element name="li" type="li_type" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType mixed="true" name="codeblock_type">
-    <xs:sequence>
-      <xs:element name="link" type="link_type" maxOccurs="unbounded" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attribute name="language" type="xs:NCName"/>
-    <xs:attribute name="namespace" type="xs:anyURI"/>
-  </xs:complexType>
   <xs:complexType name="link_type">
     <xs:simpleContent>
       <xs:extension base="xs:string">
@@ -276,51 +251,17 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="tree_type">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="branch" type="branch_type"> </xs:element>
-    </xs:sequence>
-    <xs:attribute name="class">
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="toc"/>
-          <xs:enumeration value="general"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:complexType>
-  <xs:complexType name="branch_type">
-    <xs:sequence>
-      <xs:element name="content">
-        <xs:complexType mixed="true">
-          <xs:sequence>
-            <xs:element name="link" type="link_type" minOccurs="0"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="branch" type="branch_type" maxOccurs="unbounded" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attribute name="state">
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="open"/>
-          <xs:enumeration value="closed"/>
-          <xs:enumeration value="fixed"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:complexType>
   <xs:group name="text-general">
     <xs:choice>
-      <xs:element name="fig" type="fig_type"/>
-      <xs:element name="labeled-item" type="labeled-item_type"/>
-      <xs:element name="subhead" type="xs:string"/>
+      <xs:group ref="fig"/>
+      <xs:group ref="labeled-item"/>
+      <xs:group ref="subhead"/>
       <xs:group ref="procedure"/>
       <xs:group ref="paragraph"/>
       <xs:element name="anchor" type="anchor_type"/>
-      <xs:element name="codeblock" type="codeblock_type"/>
+      <xs:group ref="codeblock"/>
       <xs:group ref="lists.ol-ul-ll"/>
-      <xs:element name="tree" type="tree_type"/>
+      <xs:group ref="tree"/>
       <xs:group ref="table-basic"/>
       <xs:group ref="admonitions"/>
     </xs:choice>
@@ -338,12 +279,12 @@
   </xs:group>
   <xs:group name="text-nested">
     <xs:choice>
-      <xs:element name="fig" type="fig_type"/>
+      <xs:element name="fig" type="fig"/>
       <xs:element name="subhead" type="xs:string"/>
       <xs:element name="p" type="paragraph"/>
       <xs:element name="anchor" type="anchor_type"/>
       <xs:element name="ol" type="ol_type"/>
-      <xs:element name="codeblock" type="codeblock_type"/>
+      <xs:element name="codeblock" type="codeblock"/>
       <xs:element name="ul" type="ul_type"/>
     </xs:choice>
 

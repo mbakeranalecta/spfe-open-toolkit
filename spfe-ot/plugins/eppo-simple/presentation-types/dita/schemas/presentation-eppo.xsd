@@ -145,7 +145,7 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="table_type"/>
-  <xs:complexType name="fig_type">
+  <xs:complexType name="fig">
     <xs:sequence>
       <xs:element ref="gr:graphic-record"/>
       <xs:element name="title" type="title_type"/>
@@ -157,7 +157,7 @@
       <xs:element name="p" type="paragraph"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="labeled-item_type">
+  <xs:complexType name="labeled-item">
     <xs:sequence>
       <xs:element name="anchor" type="anchor_type" minOccurs="0"/>
       <xs:element name="label">
@@ -224,7 +224,7 @@
       <xs:element name="li" type="li_type" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType mixed="true" name="codeblock_type">
+  <xs:complexType mixed="true" name="codeblock">
     <xs:sequence>
       <xs:element name="xref" type="xref_type" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
@@ -297,13 +297,13 @@
   </xs:complexType>
   <xs:group name="text-structure-group">
     <xs:choice>
-      <xs:element name="fig" type="fig_type"/>
-      <xs:element name="labeled-item" type="labeled-item_type"/>
+      <xs:element name="fig" type="fig"/>
+      <xs:element name="labeled-item" type="labeled-item"/>
       <xs:element name="subhead" type="xs:string"/>
       <xs:element name="p" type="paragraph"/>
       <xs:element name="anchor" type="anchor_type"/>
       <xs:element name="ol" type="ol_type"/>
-      <xs:element name="codeblock" type="codeblock_type"/>
+      <xs:element name="codeblock" type="codeblock"/>
       <xs:element name="ul" type="ul_type"/>
       <xs:element name="tree" type="tree_type"/>
     </xs:choice>
@@ -321,12 +321,12 @@
   </xs:group>
   <xs:group name="nested-text-structure-group">
     <xs:choice>
-      <xs:element name="fig" type="fig_type"/>
+      <xs:element name="fig" type="fig"/>
       <xs:element name="subhead" type="xs:string"/>
       <xs:element name="p" type="paragraph"/>
       <xs:element name="anchor" type="anchor_type"/>
       <xs:element name="ol" type="ol_type"/>
-      <xs:element name="codeblock" type="codeblock_type"/>
+      <xs:element name="codeblock" type="codeblock"/>
       <xs:element name="ul" type="ul_type"/>
     </xs:choice>
 

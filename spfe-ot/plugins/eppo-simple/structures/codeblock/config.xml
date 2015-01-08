@@ -5,16 +5,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <structure>
-        <name>programming</name>
+        <name>codeblock</name>
         <scripts>
             <resolve>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/programming/scripts/resolve/resolve-programming-structures.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/codeblock/scripts/resolve/resolve-codeblock.xsl</href>
                 </script>          
             </resolve>
             <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/programming/scripts/present/eppo/present-programming-structures.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/codeblock/scripts/present/eppo/present-codeblock.xsl</href>
                 </script>
             </present>
         </scripts>

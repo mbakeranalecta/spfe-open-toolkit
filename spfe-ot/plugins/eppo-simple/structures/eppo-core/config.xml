@@ -64,8 +64,8 @@
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/text-decoration/config.xml</href>
         </structure> 
         <structure>
-            <name>programming</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/programming/config.xml</href>
+            <name>codeblock</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/codeblock/config.xml</href>
         </structure> 
         <structure>
             <name>headings.subhead</name>

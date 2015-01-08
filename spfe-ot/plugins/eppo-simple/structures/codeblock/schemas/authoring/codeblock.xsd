@@ -3,7 +3,7 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
-    <xs:group name="programming">
+    <xs:group name="codeblock">
         <xs:choice>
             <xs:element name="codeblock">
                 <xs:complexType>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:group name="tree">
+        <xs:sequence>
+            <xs:element name="tree" type="tree"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="tree">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="branch" type="branch"> </xs:element>
+        </xs:sequence>
+        <xs:attribute name="class">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="toc"/>
+                    <xs:enumeration value="general"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="branch">
+        <xs:sequence>
+            <xs:element name="content">
+                <xs:complexType mixed="true">
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="link" type="link_type"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="branch" type="branch"/>
+        </xs:sequence>
+        <xs:attribute name="state">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="open"/>
+                    <xs:enumeration value="closed"/>
+                    <xs:enumeration value="fixed"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+</xs:schema>

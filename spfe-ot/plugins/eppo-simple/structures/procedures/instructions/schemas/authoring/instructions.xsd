@@ -22,7 +22,7 @@
             <xs:choice>
                 <xs:group ref="paragraph"/>
                 <xs:group ref="lists.ol-ul-ll"/>
-                <xs:group ref="programming"/>
+                <xs:group ref="codeblock"/>
                 <xs:group ref="fig"/>
             </xs:choice>
         </xs:sequence>    

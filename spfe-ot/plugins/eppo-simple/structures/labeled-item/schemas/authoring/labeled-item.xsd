@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
-    <xs:complexType name="labeled-item_type">
+    <xs:complexType name="labeled-item">
         <xs:sequence>
             <xs:element name="label"> </xs:element>
             <xs:element name="item">
@@ -16,7 +16,7 @@
 
     <xs:group name="labeled-item">
         <xs:choice>
-            <xs:element name="labeled-item" type="labeled-item_type"/>
+            <xs:element name="labeled-item" type="labeled-item"/>
         </xs:choice>
     </xs:group>
 </xs:schema>
