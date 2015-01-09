@@ -19,28 +19,6 @@ version="2.0"
 		</pe:codeblock>
 	</xsl:template>
 
-	<xsl:template match="code-sample">
-		<pe:code-sample id="{@id}">
-			<xsl:if test="@id">
-				<anchor name="code-sample:{@id}"/>
-			</xsl:if>
-			<xsl:apply-templates select="title"/>
-			<xsl:if test="file-ref">
-				<pe:p>
-					<xsl:text>Source file: </xsl:text>
-					<xsl:apply-templates select="file-ref"/>
-				</pe:p>
-			</xsl:if>
-			<xsl:apply-templates select="codeblock"/>
-		</pe:code-sample>
-	</xsl:template>
-
-	<xsl:template match="code-sample/title">
-		<pe:title>
-			<xsl:apply-templates/>
-		</pe:title>
-	</xsl:template>
-
 	<xsl:template match="codeblock[@language='C']">
 		<xsl:variable name="scope" select="@scope"/>
 		<pe:codeblock>

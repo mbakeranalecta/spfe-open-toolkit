@@ -131,28 +131,6 @@ version="2.0"
 		</table>
 	</xsl:template>
 	
-	<xsl:template match="es:code-sample">
-		<code-sample id="{@id}">
-			<xsl:if test="@id">
-				<anchor name="code-sample:{@id}"/>
-			</xsl:if>
-			<xsl:apply-templates select="es:title"/>
-			<xsl:if test="es:file-ref">
-				<p>
-					<xsl:text>Source file: </xsl:text>
-					<xsl:apply-templates select="es:file-ref"/>
-				</p>
-			</xsl:if>
-			<xsl:apply-templates select="es:codeblock"/>
-		</code-sample>
-	</xsl:template>
-
-	<xsl:template match="es:code-sample/es:title">
-		<title>
-			<xsl:apply-templates/>
-		</title>
-	</xsl:template>
-
 	<xsl:template match="es:comment-author-to-author">
 		<xsl:if test="$config/config:build-command='draft'">
 			<xsl:element name="{local-name()}">

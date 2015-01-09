@@ -39,11 +39,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:group name="paragraph-content">
-    <xs:sequence>
-      <xs:group ref="annotations-base-presentation" maxOccurs="unbounded" minOccurs="0"/>
-    </xs:sequence>
-  </xs:group>
   <xs:complexType name="page_type">
     <xs:sequence>
       <xs:element name="context-nav">
@@ -169,6 +164,11 @@
     <xs:attribute name="status"/>
     <xs:attribute name="type" type="xs:NCName"/>
   </xs:complexType>
+  <xs:group name="paragraph-content">
+    <xs:sequence>
+      <xs:group ref="annotations-base-presentation" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:group>
   <xs:complexType name="header_type">
     <xs:sequence>
       <xs:element name="p" type="paragraph"/>
@@ -232,7 +232,6 @@
   </xs:complexType>
   <xs:complexType name="li_type">
     <xs:sequence>
-      <xs:element name="subhead" minOccurs="0" type="xs:string"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="p" type="paragraph"/>
         <xs:element name="ul" type="ul_type"/>

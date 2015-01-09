@@ -213,10 +213,6 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template match="code-sample-id">
-		<xref target="{@id-ref}" type="code-sample"/>
-	</xsl:template>
-
 	<xsl:template match="procedure-id">
 		<xref target="{@id-ref}" type="procedure"/>
 	</xsl:template>

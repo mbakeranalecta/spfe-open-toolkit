@@ -14,7 +14,7 @@
             </resolve>
             <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/codeblock/scripts/present/eppo/present-codeblock.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/codeblock/scripts/present/eppo/present-codeblock-eppo.xsl</href>
                 </script>
             </present>
         </scripts>
