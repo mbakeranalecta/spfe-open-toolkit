@@ -317,6 +317,16 @@ Main content processing templates
 					<xsl:value-of select="xpath"/>
 				</cr:child>
 			</xsl:for-each-group>
+			<xsl:if test="count($referenced-group) gt 1">
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message">
+						<xsl:text>More than one referenced group found. This probably indicates an error in the schemas. Check schema validity and try again. </xsl:text>
+						<xsl:text>The referenced groups found are: </xsl:text>
+						<xsl:value-of select="$referenced-group"/>
+					</xsl:with-param>
+					<xsl:with-param name="in" select="base-uri(document(''))"/>
+				</xsl:call-template>
+			</xsl:if>
 			<xsl:call-template name="get-nested-groups">
 				<xsl:with-param name="referenced-group" select="$referenced-group"/>
 			</xsl:call-template>

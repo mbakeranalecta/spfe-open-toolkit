@@ -35,10 +35,12 @@
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/ol-ul-ll/schemas/authoring/ol-ul-ll-lists.xsd"/>
   <xs:include
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/pages/simple/schemas/presentation/eppo/page-eppo.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/headings/title/schemas/presentation/eppo/title-eppo.xsd"/>
   <xs:element name="pages">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="title" type="title_type"/>
+        <xs:group ref="title"/>
         <xs:group maxOccurs="unbounded" ref="page"/>
       </xs:sequence>
     </xs:complexType>
@@ -71,7 +73,7 @@
             <xs:element minOccurs="0" name="keywords">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="title" type="title_type"/>
+                  <xs:element name="title" type="title"/>
                   <xs:element maxOccurs="unbounded" name="keyword">
                     <xs:complexType>
                       <xs:sequence>
@@ -85,7 +87,7 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" name="disambiguation">
               <xs:complexType>
                 <xs:sequence>
-                  <xs:element name="title" type="title_type"/>
+                  <xs:element name="title" type="title"/>
                   <xs:element name="p" type="paragraph"/>
                 </xs:sequence>
               </xs:complexType>
@@ -132,7 +134,7 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="title" type="title_type"/>
+      <xs:group ref="title"/>
       <xs:element minOccurs="0" name="toc">
         <xs:complexType>
           <xs:sequence>
@@ -170,13 +172,10 @@
   </xs:complexType>
   <xs:complexType name="precis_type">
     <xs:sequence>
-      <xs:element name="title" type="title_type"/>
+      <xs:group ref="title"/>
       <xs:group maxOccurs="unbounded" ref="text-minimal"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:simpleType name="title_type">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
   <xs:complexType name="caption_type">
     <xs:sequence>
       <xs:element name="p" type="paragraph"/>

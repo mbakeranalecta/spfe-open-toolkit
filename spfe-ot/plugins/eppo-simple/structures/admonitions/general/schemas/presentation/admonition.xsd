@@ -5,7 +5,7 @@
     <xs:complexType name="general-admonition">
         <xs:sequence>
             <xs:element name="signal-word"/>
-            <xs:element name="title"/>
+            <xs:group ref="title"/>
             <xs:group ref="text-nested"/>
         </xs:sequence>
         <xs:attribute name="class"/>

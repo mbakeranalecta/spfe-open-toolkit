@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:complexType name="page">
+        <xs:sequence>
+            <xs:element name="context-nav">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="home">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="link" type="link_type"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="breadcrumbs">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element maxOccurs="unbounded" name="breadcrumb">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="link" type="link_type"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="keywords">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="title" type="title_type"/>
+                                    <xs:element maxOccurs="unbounded" name="keyword">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="link" type="link_type"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="disambiguation">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="title" type="title_type"/>
+                                    <xs:element name="p" type="paragraph"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="related-nav">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="categories">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="category">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="link" type="link_type"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="see-alsos">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="see-also">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="link" type="link_type"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="site-nav">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="text-nested"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="title" type="title_type"/>
+            <xs:element minOccurs="0" name="toc">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="toc-entry">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="link" type="link_type"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="byline">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="by-label"/>
+                        <xs:element name="authors">
+                            <xs:complexType mixed="true">
+                                <xs:sequence>
+                                    <xs:element maxOccurs="unbounded" name="name" type="name_type"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="precis" type="precis_type"/>
+            <xs:group maxOccurs="unbounded" minOccurs="0" ref="text-general"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="section" type="section"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:NCName" use="required"/>
+        <xs:attribute name="status"/>
+        <xs:attribute name="type" type="xs:NCName"/>
+    </xs:complexType>
+    <xs:group name="page">
+        <xs:sequence>
+            <xs:element name="page" type="page"/>
+        </xs:sequence>
+    </xs:group>
+</xs:schema>

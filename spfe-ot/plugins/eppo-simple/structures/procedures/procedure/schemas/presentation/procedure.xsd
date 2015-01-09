@@ -7,7 +7,7 @@
     </xs:group>
     <xs:complexType name="procedure">
         <xs:sequence>
-            <xs:element name="title"/>
+            <xs:group ref="title"/>
             <xs:group ref="text-nested" maxOccurs="unbounded"/>
             <xs:group ref="admonitions" maxOccurs="unbounded"/>
             <xs:sequence maxOccurs="2" minOccurs="0">
@@ -20,7 +20,7 @@
                         <xs:element maxOccurs="unbounded" name="step">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="title"/>
+                                    <xs:group ref="title"/>
                                     <xs:group ref="text-nested" maxOccurs="unbounded"/>
                                 </xs:sequence>
                                 <xs:attribute name="id" type="xs:NMTOKEN"/>

@@ -9,7 +9,7 @@
     <xs:complexType name="section">
         <xs:sequence>
             <xs:element name="anchor" type="anchor"/>
-            <xs:element name="title" type="title_type"/>
+            <xs:group ref="title"/>
             <xs:group maxOccurs="unbounded" ref="text-general"/>
         </xs:sequence>
     </xs:complexType>

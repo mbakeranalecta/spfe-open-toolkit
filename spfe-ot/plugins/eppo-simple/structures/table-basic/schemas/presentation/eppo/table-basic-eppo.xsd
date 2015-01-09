@@ -16,7 +16,7 @@
     </xs:group>
     <xs:complexType name="table-basic">
         <xs:sequence>
-            <xs:element minOccurs="0" name="title"/>
+            <xs:group ref="title"/>
             <xs:element minOccurs="0" name="caption">
                 <xs:complexType>
                     <xs:group ref="text-minimal"/>
