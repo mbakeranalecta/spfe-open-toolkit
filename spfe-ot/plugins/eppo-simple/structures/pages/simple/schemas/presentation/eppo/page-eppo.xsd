@@ -118,7 +118,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element minOccurs="0" name="precis" type="precis_type"/>
+            <xs:element minOccurs="0" name="precis" type="precis"/>
             <xs:group maxOccurs="unbounded" minOccurs="0" ref="text-general"/>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="section" type="section"/>
         </xs:sequence>
@@ -131,4 +131,10 @@
             <xs:element name="page" type="page"/>
         </xs:sequence>
     </xs:group>
+    <xs:complexType name="precis">
+        <xs:sequence>
+            <xs:group ref="title"/>
+            <xs:group maxOccurs="unbounded" ref="text-minimal"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

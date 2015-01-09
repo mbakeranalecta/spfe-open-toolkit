@@ -16,7 +16,7 @@
         <xs:sequence>
             <xs:element ref="gr:graphic-record"/>
             <xs:element name="title" type="title"/>
-            <xs:element name="caption" type="caption_type"/>
+            <xs:element name="caption" type="caption"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

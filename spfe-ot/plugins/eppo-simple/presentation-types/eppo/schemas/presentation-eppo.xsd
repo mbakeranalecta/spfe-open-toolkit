@@ -37,6 +37,8 @@
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/pages/simple/schemas/presentation/eppo/page-eppo.xsd"/>
   <xs:include
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/headings/title/schemas/presentation/eppo/title-eppo.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/captions/simple/schemas/presentation/caption.xsd"/>
   <xs:element name="pages">
     <xs:complexType>
       <xs:sequence>
@@ -45,17 +47,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:complexType name="precis_type">
-    <xs:sequence>
-      <xs:group ref="title"/>
-      <xs:group maxOccurs="unbounded" ref="text-minimal"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="caption_type">
-    <xs:sequence>
-      <xs:element name="p" type="paragraph"/>
-    </xs:sequence>
-  </xs:complexType>
   <xs:group name="paragraph-content">
     <xs:sequence>
       <xs:group ref="annotations-base-presentation" maxOccurs="unbounded" minOccurs="0"/>
