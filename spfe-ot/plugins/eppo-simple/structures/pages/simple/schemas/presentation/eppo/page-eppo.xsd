@@ -29,7 +29,7 @@
                         <xs:element minOccurs="0" name="keywords">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="title" type="title_type"/>
+                                    <xs:element name="title" type="title"/>
                                     <xs:element maxOccurs="unbounded" name="keyword">
                                         <xs:complexType>
                                             <xs:sequence>
@@ -43,7 +43,7 @@
                         <xs:element maxOccurs="unbounded" minOccurs="0" name="disambiguation">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="title" type="title_type"/>
+                                    <xs:element name="title" type="title"/>
                                     <xs:element name="p" type="paragraph"/>
                                 </xs:sequence>
                             </xs:complexType>
@@ -90,7 +90,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="title" type="title_type"/>
+            <xs:element name="title" type="title"/>
             <xs:element minOccurs="0" name="toc">
                 <xs:complexType>
                     <xs:sequence>

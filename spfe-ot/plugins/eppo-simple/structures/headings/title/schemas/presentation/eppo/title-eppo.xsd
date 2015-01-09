@@ -6,7 +6,7 @@
     </xs:simpleType>
     <xs:group name="title">
         <xs:sequence>
-            <xs:element name="title" type="title_type"/>
+            <xs:element name="title" type="title"/>
         </xs:sequence>
     </xs:group>
 </xs:schema>
