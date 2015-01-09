@@ -18,4 +18,31 @@
             <xs:element name="link" type="link_type"/>
         </xs:choice>
     </xs:group>
+    <xs:complexType mixed="true" name="name_type">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="link" type="link_type"/>
+        </xs:sequence>
+        <xs:attribute name="hint" type="xs:NCName"/>
+        <xs:attribute name="type" type="xs:NCName"/>
+    </xs:complexType>
+    <xs:complexType name="link_type">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="class" type="xs:NCName"/>
+                <xs:attribute name="hint" type="xs:NCName"/>
+                <xs:attribute name="href" use="required"/>
+                <xs:attribute name="title"/>
+                <xs:attribute name="topic-title"/>
+                <xs:attribute name="topic-type"/>
+                <xs:attribute name="external" type="xs:boolean"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="reference_type">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="link" type="link_type"/>
+        </xs:sequence>
+        <xs:attribute name="hint" type="xs:NCName"/>
+        <xs:attribute name="type" type="xs:NCName"/>
+    </xs:complexType>
 </xs:schema>

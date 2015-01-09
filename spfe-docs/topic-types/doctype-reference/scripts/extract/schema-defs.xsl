@@ -69,9 +69,6 @@
 	<xsl:template match="xs:include" mode="combine-schemas">
 		<xsl:apply-templates select="document(tokenize(@schemaLocation, ' ')[2])" mode="combine-schemas"/>
 	</xsl:template>
-<!--	<xsl:template match="xs:import" mode="combine-schemas">
-		<xsl:apply-templates select="document(@schemaLocation)" mode="combine-schemas"/>
-	</xsl:template>-->
 
 	<xsl:template match="xs:*" mode="combine-schemas" priority="-1">
 		<xsl:copy>

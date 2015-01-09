@@ -31,11 +31,15 @@
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/anchor/schemas/presentation/eppo/anchor-eppo.xsd"/>
   <xs:include
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/table-basic/schemas/presentation/eppo/table-basic-eppo.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/ol-ul-ll/schemas/authoring/ol-ul-ll-lists.xsd"/>
+  <xs:include
+    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/pages/simple/schemas/presentation/eppo/page-eppo.xsd"/>
   <xs:element name="pages">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="title" type="title_type"/>
-        <xs:element name="page" type="page_type" maxOccurs="unbounded"/>
+        <xs:group maxOccurs="unbounded" ref="page"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -128,7 +132,7 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="title" type="other_title_type"/>
+      <xs:element name="title" type="title_type"/>
       <xs:element minOccurs="0" name="toc">
         <xs:complexType>
           <xs:sequence>
@@ -164,80 +168,25 @@
     <xs:attribute name="status"/>
     <xs:attribute name="type" type="xs:NCName"/>
   </xs:complexType>
-  <xs:group name="paragraph-content">
-    <xs:sequence>
-      <xs:group ref="annotations-base-presentation" maxOccurs="unbounded" minOccurs="0"/>
-    </xs:sequence>
-  </xs:group>
-  <xs:complexType name="header_type">
-    <xs:sequence>
-      <xs:element name="p" type="paragraph"/>
-      <xs:element name="table" type="table-basic"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="caption_type">
-    <xs:sequence>
-      <xs:element name="p" type="paragraph"/>
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="precis_type">
     <xs:sequence>
       <xs:element name="title" type="title_type"/>
       <xs:group maxOccurs="unbounded" ref="text-minimal"/>
     </xs:sequence>
   </xs:complexType>
-
-
-  <xs:complexType mixed="true" name="name_type">
+  <xs:simpleType name="title_type">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="caption_type">
     <xs:sequence>
-      <xs:element name="link" type="link_type" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attribute name="hint" type="xs:NCName"/>
-    <xs:attribute name="type" type="xs:NCName"/>
-  </xs:complexType>
-  <xs:complexType name="ol_type">
-    <xs:sequence>
-      <xs:element name="li" type="li_type" maxOccurs="unbounded"/>
+      <xs:element name="p" type="paragraph"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="link_type">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="class" type="xs:NCName"/>
-        <xs:attribute name="hint" type="xs:NCName"/>
-        <xs:attribute name="href" use="required"/>
-        <xs:attribute name="title"/>
-        <xs:attribute name="topic-title"/>
-        <xs:attribute name="topic-type"/>
-        <xs:attribute name="external" type="xs:boolean"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name="ll_type">
+  <xs:group name="paragraph-content">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="li">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="label"/>
-            <xs:element name="p" type="paragraph"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
+      <xs:group ref="annotations-base-presentation" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="ul_type">
-    <xs:sequence>
-      <xs:element name="li" type="li_type" maxOccurs="unbounded"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="li_type">
-    <xs:sequence>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="p" type="paragraph"/>
-        <xs:element name="ul" type="ul_type"/>
-      </xs:choice>
-    </xs:sequence>
-  </xs:complexType>
+  </xs:group>
   <xs:group name="text-general">
     <xs:choice>
       <xs:group ref="fig"/>
@@ -254,38 +203,23 @@
     </xs:choice>
 
   </xs:group>
-  <xs:simpleType name="title_type">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
   <xs:group name="text-minimal">
     <xs:choice>
-      <xs:element name="p" type="paragraph"/>
-      <xs:element name="ol" type="ol_type"/>
-      <xs:element name="ul" type="ul_type"/>
+      <xs:group ref="paragraph"/>
+      <xs:group ref="lists.ol-ul"/>
     </xs:choice>
   </xs:group>
   <xs:group name="text-nested">
     <xs:choice>
-      <xs:element name="fig" type="fig"/>
-      <xs:element name="subhead" type="xs:string"/>
-      <xs:element name="p" type="paragraph"/>
-      <xs:element name="anchor" type="anchor"/>
-      <xs:element name="ol" type="ol_type"/>
-      <xs:element name="codeblock" type="codeblock"/>
-      <xs:element name="ul" type="ul_type"/>
+      <xs:group ref="fig"/>
+      <xs:group ref="subhead"/>
+      <xs:group ref="paragraph"/>
+      <xs:group ref="anchor"/>
+      <xs:group ref="lists.ol-ul"/>
+      <xs:group ref="codeblock"/>
     </xs:choice>
 
   </xs:group>
-  <xs:simpleType name="other_title_type">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
-  <xs:complexType mixed="true" name="reference_type">
-    <xs:sequence>
-      <xs:element name="link" type="link_type" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attribute name="hint" type="xs:NCName"/>
-    <xs:attribute name="type" type="xs:NCName"/>
-  </xs:complexType>
   <xs:group name="table-cell-content">
     <xs:sequence>
       <xs:group ref="text-minimal"/>

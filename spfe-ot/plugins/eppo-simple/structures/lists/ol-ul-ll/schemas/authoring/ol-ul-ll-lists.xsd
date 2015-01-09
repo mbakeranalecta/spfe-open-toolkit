@@ -14,6 +14,12 @@
             <xs:element maxOccurs="unbounded" minOccurs="0" name="ll" type="ll"> </xs:element>
         </xs:choice>
     </xs:group>
+    <xs:group name="lists.ol-ul">
+        <xs:sequence>
+            <xs:element name="ol" type="list" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="ul" type="list" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:group>
     <xs:group name="lists.ll">
         <xs:sequence>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="ll" type="ll"> </xs:element>
