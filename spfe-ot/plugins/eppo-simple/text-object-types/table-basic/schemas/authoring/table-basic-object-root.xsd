@@ -18,7 +18,15 @@
                 </xs:element>
                 <xs:element name="body">
                     <xs:complexType>
-                        <xs:group ref="table"/>
+                        <xs:sequence>
+                            <xs:element name="title"/>
+                            <xs:element name="caption">
+                                <xs:complexType>
+                                    <xs:group ref="text-minimal"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:group ref="table"/>
+                        </xs:sequence>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>

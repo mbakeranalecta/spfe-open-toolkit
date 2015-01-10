@@ -5,7 +5,7 @@
 
     <xs:group name="graphic">
         <xs:choice>
-            <xs:element name="fig" type="fig"/>
+            <xs:element name="graphic" type="graphic"/>
         </xs:choice>
     </xs:group>
 
@@ -14,6 +14,5 @@
         <xs:attributeGroup ref="conditions"/>
         <xs:attribute name="href" type="xs:anyURI"/>
         <xs:attribute name="uri" type="xs:anyURI"/>
-        <xs:attribute name="id" type="xs:NMTOKEN"/>
     </xs:complexType>
 </xs:schema>

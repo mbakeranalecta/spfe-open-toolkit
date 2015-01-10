@@ -24,8 +24,11 @@
         </index>
     </head>
     <body>
+        <title>Test table object</title>
+        <caption>
+            <p>This is a test table object.</p>
+        </caption>
         <table>
-            <caption><p>This is a test table.</p></caption>
             <thead>
                 <tr>
                     <td>

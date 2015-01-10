@@ -20,7 +20,7 @@
         </xs:choice>
     </xs:group>
 
-    <xs:simpleType name="annotations-type">
+    <xs:simpleType name="annotations">
         <xs:union memberTypes="annotations-common-names annotations-common-subjects annotations-common-addresses"/>
     </xs:simpleType>
 </xs:schema>

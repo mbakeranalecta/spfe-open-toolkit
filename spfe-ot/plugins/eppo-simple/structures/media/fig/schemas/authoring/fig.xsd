@@ -23,6 +23,7 @@
             <xs:group ref="fig-content"/>
         </xs:sequence>
         <xs:attributeGroup ref="conditions"/>
+        <xs:attribute name="id" type="xs:NMTOKEN"/>
     </xs:complexType>
 
     <xs:group name="annotations-fig-resource-id">
