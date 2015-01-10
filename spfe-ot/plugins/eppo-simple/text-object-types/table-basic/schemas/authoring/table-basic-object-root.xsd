@@ -18,7 +18,7 @@
                 </xs:element>
                 <xs:element name="body">
                     <xs:complexType>
-                        <xs:group ref="table-basic"/>
+                        <xs:group ref="table"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>

@@ -13,7 +13,11 @@
                     <xs:group ref="text-nested"/>
                 </xs:complexType>
             </xs:element>
-            <xs:group ref="admonitions"/>
+            <xs:element name="admonitions">
+                <xs:complexType>
+                    <xs:group ref="admonitions" maxOccurs="unbounded"/>
+                </xs:complexType>
+            </xs:element>
             <xs:element minOccurs="0" name="inputs">
                 <xs:complexType>
                     <xs:sequence>

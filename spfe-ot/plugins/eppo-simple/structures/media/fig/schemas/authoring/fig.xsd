@@ -12,7 +12,7 @@
 
     <xs:complexType name="fig">
         <xs:sequence>
-            <xs:element name="title" type="xs:string" minOccurs="0"/>
+            <xs:element name="title" type="xs:string"/>
             <xs:element name="caption" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
@@ -20,11 +20,9 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
+            <xs:group ref="fig-content"/>
         </xs:sequence>
         <xs:attributeGroup ref="conditions"/>
-        <xs:attribute name="href" type="xs:anyURI"/>
-        <xs:attribute name="uri" type="xs:anyURI"/>
-        <xs:attribute name="id" type="xs:NMTOKEN"/>
     </xs:complexType>
 
     <xs:group name="annotations-fig-resource-id">

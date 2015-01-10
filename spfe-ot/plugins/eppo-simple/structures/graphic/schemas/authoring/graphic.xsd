@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:group name="graphic">
+        <xs:choice>
+            <xs:element name="fig" type="fig"/>
+        </xs:choice>
+    </xs:group>
+
+
+    <xs:complexType name="graphic">
+        <xs:attributeGroup ref="conditions"/>
+        <xs:attribute name="href" type="xs:anyURI"/>
+        <xs:attribute name="uri" type="xs:anyURI"/>
+        <xs:attribute name="id" type="xs:NMTOKEN"/>
+    </xs:complexType>
+</xs:schema>

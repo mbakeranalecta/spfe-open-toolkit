@@ -32,4 +32,31 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/annotations/spfe-build/schemas/authoring/annotations-spfe-build.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/text-object-types/table-basic/schemas/authoring/table-basic-object-root.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/annotations/eppo-simple/schemas/authoring/annotations-eppo-simple.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/xslt/schemas/authoring/annotations-xslt.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/media/fig/schemas/authoring/fig.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/comments/author-reviewer/schemas/authoring/author-reviewer-comments.xsd"></xs:include>
+    <xs:group name="fig-content">
+        <xs:choice>
+            <xs:group ref="table"/>
+        </xs:choice>
+    </xs:group>
+    
+    <xs:group name="text-nested">
+        <xs:sequence>
+            <xs:choice maxOccurs="1" minOccurs="1">
+                <xs:group ref="paragraph"/>
+            </xs:choice>
+            <xs:choice maxOccurs="unbounded">
+                <xs:group ref="paragraph"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+    
+    <xs:complexType name="text-nested">
+        <xs:group ref="text-nested"/>
+    </xs:complexType>
+    
+    
 </xs:schema>

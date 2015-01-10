@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
-    <xs:group name="table-basic">
+    <xs:group name="table">
         <xs:sequence>
             <xs:element name="table">
                 <xs:complexType>
@@ -16,12 +16,6 @@
     </xs:group>
     <xs:complexType name="table-basic">
         <xs:sequence>
-            <xs:element name="title" minOccurs="0"/>
-            <xs:element minOccurs="0" name="caption">
-                <xs:complexType>
-                    <xs:group ref="paragraph"/>
-                </xs:complexType>
-            </xs:element>
             <xs:element minOccurs="0" name="thead">
                 <xs:complexType>
                     <xs:sequence>

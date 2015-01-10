@@ -48,6 +48,8 @@
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/procedures/procedure/schemas/authoring/procedure.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/procedures/instructions/schemas/authoring/instructions.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/graphic/schemas/authoring/graphic.xsd"/>
     <xs:group name="text-general">
         <xs:sequence>
             <xs:choice maxOccurs="1" minOccurs="1">
@@ -63,7 +65,7 @@
                 <xs:group ref="fig"/>
                 <xs:group ref="fragments"/>
                 <xs:group ref="fragment-ref"/>
-                <xs:group ref="table-basic"/>
+                <xs:group ref="table"/>
                 <xs:group ref="text-object-ref"/>
                 <xs:group ref="admonitions"/>
                 <xs:group ref="comments-block"/>
@@ -109,7 +111,7 @@
             </xs:choice>
         </xs:sequence>
     </xs:group>
-    
+
     <xs:complexType name="text-minimal">
         <xs:group ref="text-minimal"/>
     </xs:complexType>
@@ -118,4 +120,11 @@
     <xs:complexType name="admonitions">
         <xs:group ref="admonitions"/>
     </xs:complexType>
+    <xs:group name="fig-content">
+        <xs:choice>
+            <xs:group ref="graphic"/>
+            <xs:group ref="table"/>
+            <xs:group ref="codeblock"/>
+        </xs:choice>
+    </xs:group>
 </xs:schema>
