@@ -9,12 +9,12 @@
         <scripts>
             <resolve>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/media/fig/scripts/resolve/resolve-fig.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/fig/scripts/resolve/resolve-fig.xsl</href>
                 </script>            
             </resolve>
             <present type="eppo">
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/media/fig/scripts/present/eppo/present-eppo-fig.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/fig/scripts/present/eppo/present-eppo-fig.xsl</href>
                 </script>
             </present>
         </scripts>

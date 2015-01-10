@@ -24,7 +24,11 @@
         </structure>
         <structure>
             <name>fig</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/media/fig/config.xml</href>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/fig/config.xml</href>
+        </structure>
+        <structure>
+            <name>graphic</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic/config.xml</href>
         </structure>
         <structure>
             <name>strings</name>

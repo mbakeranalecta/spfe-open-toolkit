@@ -10,15 +10,15 @@
     xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     exclude-result-prefixes="#all" version="2.0">
 
-    <!-- Make sure that the fig href is an absolute URI so that we know where to copy it from -->
-    <xsl:template match="fig">
+    <!-- Make sure that the graphic href is an absolute URI so that we know where to copy it from -->
+    <xsl:template match="graphic">
         <!-- FIXME: is this regex smart enough? -->
         <!-- FIXME: Stop this from reloading the source file -->
  
         <!-- Need to do matches before replace here because replace returns the original string if no match. -->
         <xsl:variable name="graphic-record-file" select="if (matches(@href, '(.+)\.[a-zA-Z0-9]+$')) then replace(@href,'(.+)\.[a-zA-Z0-9]+$','$1.xml') else ''"/>
 
-        <!-- check that $graphic-record-file has content of this will return base URI of source file -->
+        <!-- check that $graphic-record-file has content or this will return base URI of source file -->
         <xsl:variable name="graphic-record-file-uri"
             select="if ($graphic-record-file ne '') then resolve-uri($graphic-record-file, base-uri(.)) else 'NONE'"/>
         <xsl:choose>
@@ -30,17 +30,10 @@
             <!-- There is a graphic record file the matches the name of the graphic specified in an href -->
             
             <xsl:when test="doc-available($graphic-record-file-uri)">
-                <xsl:variable name="graphic-record"
-                    select="document($graphic-record-file-uri)"/>
-                <fig>
-                    <xsl:if test="@id">
-                        <xsl:attribute name="id" select="@id"/>
-                    </xsl:if>
-                    <xsl:apply-templates select="$graphic-record">
-                        <xsl:with-param name="graphic-record-file-uri" select="$graphic-record-file-uri" tunnel="yes"/>
-                    </xsl:apply-templates>
-                    <xsl:apply-templates/>
-                </fig>
+                <xsl:variable name="graphic-record" select="document($graphic-record-file-uri)"/>
+                <xsl:apply-templates select="$graphic-record">
+                    <xsl:with-param name="graphic-record-file-uri" select="$graphic-record-file-uri" tunnel="yes"/>
+                </xsl:apply-templates>       
             </xsl:when>
             
             <!-- The graphic is specified in an href -->
@@ -56,42 +49,36 @@
                                 <xsl:value-of select="@href"/>
                             </xsl:otherwise>
                         </xsl:choose>
-                        <xsl:text>. In topic </xsl:text>
-                        <xsl:value-of select="ancestor::*/head/id"/>
                         <xsl:text>.</xsl:text>
                     </xsl:with-param>
+                    <xsl:with-param name="in">
+                        <xsl:value-of select="ancestor::*/head/id"/>
+                    </xsl:with-param>
                 </xsl:call-template>
-                <fig>
-                    <xsl:for-each select="@*[not(name()='href')]">
-                        <xsl:copy/>
-                    </xsl:for-each>
-                    <gr:graphic-record>
-                        <gr:formats>
-                            <gr:format>
-                                <gr:type>
-                                    <xsl:value-of select="replace(@href, '.+\.([^/\.\\]+)$', '$1')"/>
-                                </gr:type>
-                                <gr:href>
-                                    <xsl:value-of select="resolve-uri(@href, base-uri(.))"/>
-                                </gr:href>
-                            </gr:format>
-                        </gr:formats>
-                    </gr:graphic-record>
-                    <xsl:apply-templates/>
-                </fig>             
-                
-                
+                <xsl:for-each select="@*[not(name()='href')]">
+                    <xsl:copy/>
+                </xsl:for-each>
+                <gr:graphic-record>
+                    <gr:formats>
+                        <gr:format>
+                            <gr:type>
+                                <xsl:value-of select="replace(@href, '.+\.([^/\.\\]+)$', '$1')"/>
+                            </gr:type>
+                            <gr:href>
+                                <xsl:value-of select="resolve-uri(@href, base-uri(.))"/>
+                            </gr:href>
+                        </gr:format>
+                    </gr:formats>
+                </gr:graphic-record>
+                <xsl:apply-templates/>                
             </xsl:when>            
             <xsl:otherwise>
+                <!-- FIXME: What is the case here? -->
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="fig/caption | fig/title">
-        <xsl:element name="{local-name()}">
-            <xsl:apply-templates/>
-        </xsl:element>
-    </xsl:template>
+
     
 
 </xsl:stylesheet>

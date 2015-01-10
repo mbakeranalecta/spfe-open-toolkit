@@ -16,6 +16,21 @@
     <xsl:template match="table-basic-object/head"/>
     
     <xsl:template match="table-basic-object/body">
-        <xsl:apply-templates/>
+        <pe:fig>
+            <xsl:apply-templates/>
+        </pe:fig>
     </xsl:template>
+    
+    <xsl:template match="table-basic-object/body/title">
+        <pe:title>
+            <xsl:apply-templates/>
+        </pe:title>
+    </xsl:template>
+    
+    <xsl:template match="table-basic-object/body/caption">
+        <pe:caption>
+            <xsl:apply-templates/>
+        </pe:caption>
+    </xsl:template>
+    
 </xsl:stylesheet>

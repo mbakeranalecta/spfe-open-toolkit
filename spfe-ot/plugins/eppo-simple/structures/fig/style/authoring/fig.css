@@ -1,7 +1,6 @@
 fig
 {
     display:block;
-    content: attr(href, url);
     margin-left:2em;
 }
 

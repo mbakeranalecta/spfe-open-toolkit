@@ -19,7 +19,8 @@
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/ol-ul-ll/style/authoring/ol-ul-ll-lists.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/codeblock/style/authoring/codeblock.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/table-basic/style/authoring/table-basic.css");
-@import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/media/fig/style/authoring/fig.css");
+@import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fig/style/authoring/fig.css");
+@import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/graphic/style/authoring/graphic.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/admonitions/note-caution-warning/style/authoring/note-caution-warning.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/text-object-types/if-then-table/style/authoring/if-then-table.css");
 @import url("http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/comments/author-reviewer/style/authoring/comments.css");
