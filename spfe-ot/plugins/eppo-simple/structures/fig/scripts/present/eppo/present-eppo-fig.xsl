@@ -18,16 +18,6 @@
             <xsl:if test="@id">
                 <xsl:attribute name="fig" select="concat('fig:', @id)"/>
             </xsl:if>
-<!--            <xsl:if test="not(title) and gr:graphic-record/gr:default-title">
-                <pe:title>
-                    <xsl:value-of select="gr:graphic-record/gr:default-title"/>
-                </pe:title>
-            </xsl:if>   
-            <xsl:if test="not(caption) and gr:graphic-record/gr:default-caption">
-                <pe:caption>
-                    <xsl:apply-templates select="gr:graphic-record/gr:default-caption"/>
-                </pe:caption>
-            </xsl:if>   -->
             <xsl:apply-templates/> 
         </pe:fig>
     </xsl:template>
