@@ -258,20 +258,23 @@
 				<xsl:value-of select="title"/>
 			</h4>
 		</xsl:if>
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template match="gr:graphic-record">
 		<!-- Select preferred format -->
 		<xsl:variable name="available-preferred-formats">
-			<xsl:variable name="fig" select="."/>
+			<xsl:variable name="graphic" select="."/>
 			<xsl:for-each select="$preferred-formats">
 				<xsl:variable name="format" select="."/>
-				<xsl:sequence select="$fig//gr:format[gr:type/text() eq $format]"/>
+				<xsl:sequence select="$graphic//gr:format[gr:type/text() eq $format]"/>
 			</xsl:for-each>
 		</xsl:variable>
-
-		<!-- FIXME: should test for no match, and decide what to do if unexpected format provided -->
-		<xsl:variable name="graphic-file-name" select="sf:get-file-name-from-path($available-preferred-formats/gr:format[1]/gr:href)"/>
-		<!-- FIXME: image directory location should probably be configurable -->
-		<img src="images/{$graphic-file-name}" alt="{gr:graphic-record/gr:alt}" title="{gr:graphic-record/gr:name}"/>
-		<xsl:apply-templates/>
+	
+	<!-- FIXME: should test for no match, and decide what to do if unexpected format provided -->
+	<xsl:variable name="graphic-file-name" select="sf:get-file-name-from-path($available-preferred-formats/gr:format[1]/gr:href)"/>
+	<!-- FIXME: image directory location should probably be configurable -->
+	<img src="images/{$graphic-file-name}" alt="{gr:graphic-record/gr:alt}" title="{gr:graphic-record/gr:name}"/>
 	</xsl:template>
 	
 	<xsl:template name="generate-graphics-list">
@@ -398,14 +401,6 @@
 			<xsl:apply-templates/>
 		</h4>
 	</xsl:template>
-
-	<!-- FIXME: Procedures and steps??? -->
-
-	<!-- suppress fig and table titles because they are handled in  the parent -->
-	<xsl:template match="table/title"/>
-
-
-
 
 	<!-- PARAGRAPHS -->
 

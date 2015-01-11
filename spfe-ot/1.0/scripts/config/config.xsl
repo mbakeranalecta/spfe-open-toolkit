@@ -48,7 +48,7 @@
     </xsl:variable>
     <xsl:variable name="link-catalog-directory" select="concat($content-set-build, '/link-catalogs')"/>
     <xsl:variable name="toc-directory" select="concat($content-set-build, '/tocs')"/>
-    <xsl:variable name="text-objects-directory" select="concat($content-set-build, '/text-objects')"/>
+    <xsl:variable name="objects-directory" select="concat($content-set-build, '/objects')"/>
 
     <xsl:function name="spfe:resolve-defines" as="xs:string">
         <xsl:param name="value"/>
@@ -113,9 +113,9 @@
                 <xsl:with-param name="topic-set-id" select="topic-set-id"/>
             </xsl:call-template>
         </xsl:for-each>
-        <xsl:for-each select="$config/text-object-set">
+        <xsl:for-each select="$config/object-set">
             <xsl:call-template name="create-script-files">
-                <xsl:with-param name="text-object-set-id" select="text-object-set-id"/>
+                <xsl:with-param name="object-set-id" select="object-set-id"/>
             </xsl:call-template>
         </xsl:for-each>
     </xsl:template>
@@ -124,7 +124,7 @@
         <xsl:variable name="this" select="."/>
         <xsl:apply-templates mode="load-config"/>
         <xsl:for-each
-            select="//topic-type/href, //object-type/href, //output-format/href, //presentation-type/href, //topic-set/href, //text-object-set/href, //structure/href, //text-object-type/href">
+            select="//topic-type/href, //object-type/href, //output-format/href, //presentation-type/href, //topic-set/href, //object-set/href, //structure/href, //object-type/href">
             <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
                 <xsl:call-template name="sf:error">
                     <xsl:with-param name="message">
@@ -173,17 +173,17 @@
             <property name="spfe.build.build-directory" value="{$content-set-build}"/>
             <property name="spfe.build.output-directory" value="{$content-set-home}"/>
             <property name="spfe.build.link-catalog-directory" value="{$link-catalog-directory}"/>
-            <property name="spfe.build.text-objects-directory" value="{$text-objects-directory}"/>
+            <property name="spfe.build.objects-directory" value="{$objects-directory}"/>
             <property name="spfe.build.toc-directory" value="{$toc-directory}"/>
             <property name="spfe.content-set-id" value="{$config/content-set/content-set-id}"/>
 
 
             <target name="--build.synthesis">
-                <xsl:for-each select="$config/topic-set, $config/text-object-set">
-                    <xsl:variable name="set-id" select="if (topic-set-id) then topic-set-id else text-object-set-id"/>
+                <xsl:for-each select="$config/topic-set, $config/object-set">
+                    <xsl:variable name="set-id" select="if (topic-set-id) then topic-set-id else object-set-id"/>
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
-                    <xsl:variable name="text-object-set-id" select="text-object-set-id"/>
-                    <xsl:variable name="dir-path" select="if($topic-set-id) then 'topic-sets' else 'text-object-sets'"/>
+                    <xsl:variable name="object-set-id" select="object-set-id"/>
+                    <xsl:variable name="dir-path" select="if($topic-set-id) then 'topic-sets' else 'object-sets'"/>
                     <xsl:comment select="$set-id"/>
                     <xsl:text>&#xa;</xsl:text>
 
@@ -202,7 +202,7 @@
                                         <include name="{.}"/>
                                     </xsl:for-each>
                                     <xsl:for-each
-                                        select="$config/text-object-set[text-object-set-id=$set-id]/sources/sources-to-extract-content-from/include">
+                                        select="$config/object-set[object-set-id=$set-id]/sources/sources-to-extract-content-from/include">
                                         <include name="{.}"/>
                                     </xsl:for-each>
                                 </files>
@@ -243,8 +243,8 @@
 
                     <build.resolve topic-set-id="{$set-id}"
                         style="{$content-set-build}/{$dir-path}/{$set-id}/resolve/spfe.resolve.xsl"
-                        output-directory="{if ($text-object-set-id)
-                                           then concat($text-objects-directory, '/', $text-object-set-id)
+                        output-directory="{if ($object-set-id)
+                                           then concat($objects-directory, '/', $object-set-id)
                                            else concat($content-set-build,'/topic-sets/',$topic-set-id,'/resolve/out')}">
                         <files-elements>
                             <files id="{$set-id}.authored-content">
@@ -260,8 +260,8 @@
                                             name="{$content-set-build}/{$dir-path}/{$set-id}/extract/out/*.xml"
                                         />
                                     </xsl:when>
-                                    <xsl:when test="$text-object-set-id">
-                                        <xsl:for-each select="$config/text-object-set[text-object-set-id=$text-object-set-id]/sources/authored-content/include">
+                                    <xsl:when test="$object-set-id">
+                                        <xsl:for-each select="$config/object-set[object-set-id=$object-set-id]/sources/authored-content/include">
                                             <include name="{.}"/>
                                         </xsl:for-each>
                                     </xsl:when>
@@ -281,8 +281,8 @@
                     <xsl:if test="$topic-set-id"> 
                         <!-- FIXME: Should be building a link catalog for text objects. -->
                     <build.link-catalog topic-set-id="{$topic-set-id}"
-                        style="{if ($text-object-set-id)
-                        then concat($content-set-build, '/text-object-sets/', $text-object-set-id, '/link-catalog/spfe.link-catalog.xsl')
+                        style="{if ($object-set-id)
+                        then concat($content-set-build, '/object-sets/', $object-set-id, '/link-catalog/spfe.link-catalog.xsl')
                         else concat($content-set-build, '/topic-sets/', $topic-set-id, '/link-catalog/spfe.link-catalog.xsl')}"
                         output-directory="{$content-set-build}/link-catalogs"> </build.link-catalog>
                     </xsl:if>
@@ -421,8 +421,8 @@
                     </xsl:copy>
                 </xsl:for-each>
                 
-                <xsl:copy-of select="$config/text-object-set"/>                
-                <xsl:copy-of select="$config/text-object-type"/>  
+                <xsl:copy-of select="$config/object-set"/>                
+                <xsl:copy-of select="$config/object-type"/>  
                 
                 <xsl:for-each-group select="$config/topic-type" group-by="name">
                     <xsl:variable name="this-topic-type" select="current-group()[1]"/>
@@ -453,14 +453,14 @@
     <xsl:namespace-alias stylesheet-prefix="gen" result-prefix="xsl"/>
     <xsl:template name="create-script-files">
         <xsl:param name="topic-set-id" select="''"/>
-        <xsl:param name="text-object-set-id" select="''"/>
+        <xsl:param name="object-set-id" select="''"/>
 
         <xsl:variable name="script-sets">
-            <xsl:if test="$text-object-set-id">
+            <xsl:if test="$object-set-id">
                 <xsl:for-each
-                    select="$config/text-object-set[text-object-set-id=$text-object-set-id]/text-object-types/text-object-type">
+                    select="$config/object-set[object-set-id=$object-set-id]/object-types/object-type">
                     <xsl:variable name="name" select="name"/>
-                    <xsl:sequence select="$config/text-object-type[name=$name][1]/scripts"/>
+                    <xsl:sequence select="$config/object-type[name=$name][1]/scripts"/>
                 </xsl:for-each>
             </xsl:if>
             <xsl:if test="$topic-set-id">
@@ -476,8 +476,8 @@
                 </xsl:for-each>
             </xsl:if>
             <xsl:for-each
-                select="if ($text-object-set-id) 
-                then $config/text-object-type[name = $config/text-object-set[text-object-set-id=$text-object-set-id][1]/text-object-types/text-object-type/name]/structures/structure 
+                select="if ($object-set-id) 
+                then $config/object-type[name = $config/object-set[object-set-id=$object-set-id][1]/object-types/object-type/name]/structures/structure 
                 else $config/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name][1]/structures/structure">
                 <xsl:variable name="name" select="name"/>
                 
@@ -586,8 +586,8 @@
             <xsl:variable name="script-name-with-type"
                 select="concat($script-type, if (@type) then concat('-', @type) else '')"/>
             <xsl:variable name="script-output-directory"
-                select="if ($text-object-set-id)
-                then concat($content-set-build, '/text-object-sets/', $text-object-set-id, '/', $script-name-with-type)
+                select="if ($object-set-id)
+                then concat($content-set-build, '/object-sets/', $object-set-id, '/', $script-name-with-type)
                 else concat($content-set-build, '/topic-sets/', $topic-set-id, '/', $script-name-with-type)"/>
             <xsl:variable name="script-rewrite-list">
                 <xsl:for-each-group select="current-group()/config:script"

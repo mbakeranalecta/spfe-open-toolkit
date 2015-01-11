@@ -26,7 +26,7 @@
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
                 <remap-namespace>
                     <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                    <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
+                    <to>http://spfeopentoolkit.org/ns/spfe-docs/objects</to>
                 </remap-namespace>  
             </structure>
             <structure>
@@ -39,7 +39,7 @@
             </structure>
             
         </structures>
-     <!-- FIXME: text-object-types here?????????-->
+     <!-- FIXME: object-types here?????????-->
         <scripts>
             <resolve>
                 <script>
@@ -89,15 +89,15 @@
                 <!-- FIXME: This is to process imported text objects. But is this the right place to do this? -->
                 <script>
                     <remap-namespace>                          
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple/text-objects</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
+                        <from>http://spfeopentoolkit.org/ns/eppo-simple/objects</from>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs/objects</to>
                     </remap-namespace>                  
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/text-object-types/table-basic/scripts/present/eppo/present-eppo-table-basic-object.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/object-types/table-basic/scripts/present/eppo/present-eppo-table-basic-object.xsl</href>
                 </script>
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</to>
+                        <to>http://spfeopentoolkit.org/ns/spfe-docs/objects</to>
                     </remap-namespace>                  
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/present/eppo/present-table-basic.xsl</href>
                 </script>

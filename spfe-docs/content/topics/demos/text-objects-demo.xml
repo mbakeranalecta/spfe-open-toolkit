@@ -5,7 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
     <head>
-        <id>text-objects-demo</id>
+        <id>objects-demo</id>
         <history>
             <revision>
                 <date>2014-07-31</date>
@@ -17,7 +17,7 @@
         <index>
             <entry>
                 <type>feature</type>
-                <term>text object</term>
+                <term>object</term>
             </entry>
             <entry>
                 <type>feature</type>
@@ -29,9 +29,9 @@
         <title>Text Objects Demo</title>
 
         <p>This is a test of text objects</p>
-        <text-object-ref id-ref="test-table-basic-text-object-1"/>
+        <object-ref id-ref="test-table-basic-object-1"/>
         <subhead>This is another test of text objects</subhead>
-        <text-object-ref id-ref="test-table-basic-text-object-2"/>
+        <object-ref id-ref="test-table-basic-object-2"/>
        
     </body>
 </generic-topic>

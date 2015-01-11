@@ -29,8 +29,8 @@
 		<xsl:sequence select="$temp-link-catalogs"/>
 	</xsl:variable>
 	
-	<xsl:param name="text-objects-files"/>
-	<xsl:variable name="text-objects" select="sf:get-sources($text-objects-files, 'Loading text objects file:')"/>
+	<xsl:param name="objects-files"/>
+	<xsl:variable name="objects" select="sf:get-sources($objects-files, 'Loading text objects file:')"/>
 	
 	<xsl:function name="esf:target-exists" as="xs:boolean">
 		<xsl:param name="target"/>

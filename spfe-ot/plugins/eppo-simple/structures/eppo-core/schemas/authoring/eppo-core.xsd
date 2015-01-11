@@ -15,7 +15,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fragments/schemas/authoring/fragments.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/text-object-ref/schemas/authoring/text-object-ref.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/object-ref/schemas/authoring/object-ref.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fig/schemas/authoring/fig.xsd"/>
     <xs:include
@@ -68,7 +68,7 @@
                 <xs:group ref="fragments"/>
                 <xs:group ref="fragment-ref"/>
                 <xs:group ref="table"/>
-                <xs:group ref="text-object-ref"/>
+                <xs:group ref="object-ref"/>
                 <xs:group ref="admonitions"/>
                 <xs:group ref="comments-block"/>
                 <xs:group ref="labeled-item"/>

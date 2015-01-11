@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2014 All Rights Reserved. -->
+<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    
+    <object-type>
+        <name>{http://spfeopentoolkit.org/ns/spfe-docs/objects}if-then-table-object</name>
+        <structures>
+            <structure>
+                <name>eppo-core</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
+            </structure>
+            <structure>
+                <name>graphic-record</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
+            </structure>
+        </structures>
+        <scripts>
+            <resolve>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/object-types/common/scripts/resolve/resolve-object.xsl</href>
+                </script>
+
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/object-types/table-basic/scripts/resolve/resolve-if-then-table-object.xsl</href>
+                </script>
+            </resolve>
+            <link-catalog>
+                <script>
+                  
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/link-catalog/topic/topic-link-catalog.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+            </link-catalog>
+            <toc>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/toc/toc.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+            </toc>            
+        </scripts>
+    </object-type>
+</spfe>

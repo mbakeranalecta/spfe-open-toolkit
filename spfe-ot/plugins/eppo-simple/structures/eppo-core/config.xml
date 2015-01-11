@@ -39,8 +39,8 @@
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/fragments/config.xml</href>
         </structure>
         <structure>
-            <name>text-object-ref</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/text-object-ref/config.xml</href>
+            <name>object-ref</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/object-ref/config.xml</href>
         </structure>
         <structure>
             <name>annotations.common-names</name>

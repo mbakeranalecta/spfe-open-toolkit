@@ -99,7 +99,7 @@
 
         <xsl:variable name="topic-set-title">
             <xsl:choose>
-                <xsl:when test="$topic-set-id eq 'spfe.text-objects'">
+                <xsl:when test="$topic-set-id eq 'spfe.objects'">
                     <xsl:text>Text Objects</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>

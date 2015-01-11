@@ -17,7 +17,7 @@
         <index>
             <entry>
                 <type>feature</type>
-                <term>text object</term>
+                <term>object</term>
             </entry>
             <entry>
                 <type>feature</type>
@@ -29,7 +29,7 @@
         <title>State Detection Demo: Advanced Printer</title>
         <p>This is a demo of transforming the advanced printer state-detection matrix to an if-then table.</p>
         
-        <text-object-ref id-ref="troubleshoot-advanced-printer"/>  
+        <object-ref id-ref="troubleshoot-advanced-printer"/>  
         
     </body>
 </generic-topic>

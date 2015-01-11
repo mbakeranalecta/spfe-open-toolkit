@@ -4,7 +4,7 @@
 <!-- ===================================================
 	resolve-topic.xsl
 	
-	Reads the collection of topic files and text object files
+	Reads the collection of topic files and object files
 	for the topic set, creates the synthesis element, and hands 
 	the rest of the processing off to the inculded/including stylesheets.
 

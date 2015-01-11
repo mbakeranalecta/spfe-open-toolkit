@@ -17,7 +17,7 @@
         <index>
             <entry>
                 <type>feature</type>
-                <term>text object</term>
+                <term>object</term>
             </entry>
             <entry>
                 <type>feature</type>
@@ -28,7 +28,7 @@
     <body>
         <title>State Detection Demo: Simple Printer with Toner</title>
         <p>This is a demo of transforming the simple printer state-detection matrix with toner to an if-then table.</p>
-        <text-object-ref id-ref="troubleshoot-simple-printer-toner"/>  
+        <object-ref id-ref="troubleshoot-simple-printer-toner"/>  
         
     </body>
 </generic-topic>

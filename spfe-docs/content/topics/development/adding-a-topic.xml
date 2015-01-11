@@ -48,7 +48,7 @@
     <body>
         <title>Adding a new topic</title>
         <understanding>
-            <p>A <feature>topic</feature> is the basic unit of content that is presented to the user. If you are trying to create a reusable content building block that is not a full topic, you should be creating a <feature>fragment</feature>, a <feature>string</feature>, or a <feature>text object</feature>.</p>
+            <p>A <feature>topic</feature> is the basic unit of content that is presented to the user. If you are trying to create a reusable content building block that is not a full topic, you should be creating a <feature>fragment</feature>, a <feature>string</feature>, or a <feature>object</feature>.</p>
        </understanding>
        <planning>
            <planning-question>

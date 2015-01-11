@@ -95,14 +95,14 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="text-object-set">
+        <xs:element name="object-set">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="text-object-set-id" type="xs:NMTOKEN"/>
-              <xs:element name="text-object-types">
+              <xs:element name="object-set-id" type="xs:NMTOKEN"/>
+              <xs:element name="object-types">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="text-object-type">
+                    <xs:element maxOccurs="unbounded" name="object-type">
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="name" type="xs:string"/>
@@ -145,13 +145,13 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element minOccurs="0" name="text-object-sets">
+              <xs:element minOccurs="0" name="object-sets">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="text-object-set" maxOccurs="unbounded">
+                    <xs:element name="object-set" maxOccurs="unbounded">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="text-object-set-id"/>
+                          <xs:element name="object-set-id"/>
                           <xs:element name="href"/>
                         </xs:sequence>
                       </xs:complexType>
@@ -159,10 +159,10 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="text-object-types" minOccurs="0">
+              <xs:element name="object-types" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="text-object-type">
+                    <xs:element maxOccurs="unbounded" name="object-type">
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="name" type="xs:string"/>
@@ -363,7 +363,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="text-object-type">
+        <xs:element name="object-type">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="name" type="xs:string"/>
@@ -391,11 +391,11 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:complexType name="text-object-type">
+  <xs:complexType name="object-type">
     <xs:sequence>
-      <xs:element name="text-object-id"/>
+      <xs:element name="object-id"/>
       <xs:element name="sources" type="sources-type"/>
-      <xs:element name="text-object-type">
+      <xs:element name="object-type">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="name" type="xs:string"/>
