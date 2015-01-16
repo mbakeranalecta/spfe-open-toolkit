@@ -32,10 +32,7 @@
 
                 <script>                    
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-generic-topic.xsl</href>
-                </script>
-                <script>                    
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/file-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
-                </script>                
+                </script>      
             </resolve>
             <link-catalog>
                 <script>

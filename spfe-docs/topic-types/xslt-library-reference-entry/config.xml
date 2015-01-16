@@ -60,15 +60,7 @@
                 </script>
                 <script>
                     <href>../../topic-types/xslt-library-reference-entry/scripts/resolve/resolve-xsl-function-ref.xsl</href>
-                </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>                      
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/file-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
-                </script>                
-                
+                </script>               
             </resolve>
             <link-catalog>
                 <script>

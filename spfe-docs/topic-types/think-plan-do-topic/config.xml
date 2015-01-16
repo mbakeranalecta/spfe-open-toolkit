@@ -36,7 +36,6 @@
                      <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                  </remap-namespace>  
              </structure>
-             
         </structures>
         <scripts>
             <resolve>
@@ -53,13 +52,6 @@
                     </remap-namespace>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/think-plan-do-topic/scripts/resolve/resolve-think-plan-do-topic.xsl</href>
                 </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>                        
-                    </remap-namespace>                   
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/file-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
-                </script>                
             </resolve>
             <link-catalog>
                 <script>

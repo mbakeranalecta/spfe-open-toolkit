@@ -38,6 +38,7 @@
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
             </structure>
         </structures>
+
         <scripts>
             <resolve>
                 <script>
@@ -63,17 +64,6 @@
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/docset-home-topic/scripts/resolve/resolve-docset-home-topic.xsl</href>
                 </script>
-                
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                        
-                    </remap-namespace>                   
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/file-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
-                </script>                
-                
-                
             </resolve>
             <link-catalog>
                 <script>
