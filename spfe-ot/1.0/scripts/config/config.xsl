@@ -137,6 +137,8 @@
     <xsl:template match="spfe/object-type/name" mode="load-config"/>
     <xsl:template match="spfe/structure" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
     <xsl:template match="spfe/structure/name" mode="load-config"/>
+    <xsl:template match="spfe/file-type" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="spfe/file-type/name" mode="load-config"/>
     <xsl:template match="spfe/structures/name" mode="load-config"/>
     <xsl:template match="spfe/content-set/topic-sets" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
     <xsl:template match="spfe/content-set/object-sets" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
@@ -162,7 +164,7 @@
     <xsl:template match="topic-type[href]/name" mode="load-config"/>
 
     
-    <xsl:template match="//topic-type/href| //object-type/href| //output-format/href| //presentation-type/href| //topic-set/href| //object-set/href| //structure/href| //object-type/href" mode="load-config">
+    <xsl:template match="//topic-type/href| //object-type/href| //output-format/href| //presentation-type/href| //topic-set/href| //object-set/href| //structure/href| //file-type/href //object-type/href" mode="load-config">
         <xsl:variable name="this" select="."/>
         <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
             <xsl:call-template name="sf:error">
@@ -507,134 +509,7 @@
 
     <xsl:namespace-alias stylesheet-prefix="gen" result-prefix="xsl"/>
     <xsl:template name="create-script-files">
-<!--        <xsl:param name="topic-set-id" select="''"/>
-        <xsl:param name="object-set-id" select="''"/>
--->
-<!--        <xsl:variable name="script-sets">
-       
-            <xsl:if test="$object-set-id">
-                <xsl:for-each
-                    select="$config/object-set[object-set-id=$object-set-id]/object-types/object-type">
-                    <xsl:variable name="name" select="name"/>
-                    <xsl:sequence select="$config/object-type[name=$name][1]/scripts"/>
-                </xsl:for-each>
-            </xsl:if>
-            <xsl:if test="$topic-set-id">
-                <xsl:for-each
-                    select="$config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type">
-                    <xsl:variable name="name" select="name"/>
-                    <xsl:sequence select="$config/topic-type[name=$name][1]/scripts"/>
-                </xsl:for-each>
-                <xsl:for-each
-                    select="$config/topic-set[topic-set-id=$topic-set-id]/object-types/object-type">
-                    <xsl:variable name="name" select="name"/>
-                    <xsl:sequence select="$config/object-type[name=$name][1]/scripts"/>
-                </xsl:for-each>
-            </xsl:if>
-            <xsl:for-each
-                select="if ($object-set-id) 
-                then $config/object-type[name = $config/object-set[object-set-id=$object-set-id][1]/object-types/object-type/name]/structures/structure 
-                else $config/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id]/topic-types/topic-type/name][1]/structures/structure">
-                <xsl:variable name="name" select="name"/>
-                
-                <xsl:if test="not($config/structures[name=$name]) and not($config/structure[name=$name])">
-                    <xsl:call-template name="sf:error">
-                        <xsl:with-param name="message" select="'No structure config found for structure name: ', $name"/>
-                        <xsl:with-param name="in" select="base-uri(.)"/>
-                    </xsl:call-template>
-                </xsl:if>
-                
-                <xsl:choose>
-                    <xsl:when test="remap-namespace">
-                        <xsl:variable name="remap" select="remap-namespace"/>
-                        <xsl:choose>
-                            <xsl:when test="$config/structures[name=$name][1]">
-                                <xsl:for-each select="$config/structures[name=$name][1]/structure">
-                                    <xsl:variable name="name" select="name"/>
-                                    <xsl:if test="not($config/structures[name=$name][1]) and not($config/structure[name=$name][1])">
-                                        <xsl:call-template name="sf:error">
-                                            <xsl:with-param name="message" select="'No structure config found for structure name: ', $name"/>
-                                            <xsl:with-param name="in" select="base-uri(.)"/>
-                                        </xsl:call-template>
-                                    </xsl:if>
-                                    <xsl:for-each select="$config/structure[name=$name][1]/scripts">
-                                        <xsl:copy>
-                                            <xsl:for-each select="child::*">
-                                                <xsl:copy>
-                                                  <xsl:copy-of select="@*"/>
-                                                  <xsl:for-each select="script">
-                                                  <xsl:copy>
-                                                  <xsl:copy-of select="*"/>
-                                                  <xsl:sequence select="$remap"/>
-                                                  </xsl:copy>
-                                                  </xsl:for-each>
-                                                </xsl:copy>
-                                            </xsl:for-each>
-                                        </xsl:copy>
-                                    </xsl:for-each>
-                                </xsl:for-each>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:for-each select="$config/structure[name=$name][1]/scripts">
-                                    <xsl:copy>
-                                        <xsl:for-each select="child::*">
-                                            <xsl:copy>
-                                                <xsl:copy-of select="@*"/>
-                                                <xsl:for-each select="script">
-                                                  <xsl:copy>
-                                                  <xsl:copy-of select="*"/>
-                                                  <xsl:sequence select="$remap"/>
-                                                  </xsl:copy>
-                                                </xsl:for-each>
-                                            </xsl:copy>
-                                        </xsl:for-each>
-                                    </xsl:copy>
-                                </xsl:for-each>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:choose>
-                            <xsl:when test="$config/structures[name=$name]">
-                                <xsl:for-each select="$config/structures[name=$name][1]/structure">
-                                    <xsl:variable name="name" select="name"/>
-                                    <xsl:if test="not($config/structures[name=$name]) and not($config/structure[name=$name])">
-                                        <xsl:call-template name="sf:error">
-                                            <xsl:with-param name="message" select="'No structure config found for structure name: ', $name"/>
-                                            <xsl:with-param name="in" select="base-uri(.)"/>
-                                        </xsl:call-template>
-                                    </xsl:if>
-                                    <xsl:sequence select="$config/structure[name=$name][1]/scripts"/>
-                                </xsl:for-each>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:sequence select="$config/structure[name=$name][1]/scripts"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
-            <xsl:for-each select="$config/presentation-type">
-                <scripts>
-                    <present type="{name}">
-                        <xsl:sequence select="scripts/script"/>
-                    </present>
-                </scripts>
-            </xsl:for-each>
-
-            <xsl:for-each
-                select="$config/presentation-type/topic-types/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id][1]/topic-types/topic-type/name]">
-                <scripts>
-                    <present type="{../../name}">
-                        <xsl:sequence select="scripts/script"/>
-                    </present>
-                </scripts>
-            </xsl:for-each>
-            <xsl:for-each select="$config/output-format">
-                <xsl:sequence select="scripts"/>
-            </xsl:for-each>
-        </xsl:variable>
--->        
+        
         <xsl:for-each select="$config/content-set/topic-set">
             <xsl:variable name="topic-set-id" select="topic-set-id"/>
             

@@ -279,6 +279,22 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
+              <xs:element minOccurs="0" name="file-types">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="file-type">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="xs:string"/>
+                          <xs:element name="href" type="xs:anyURI"/>
+                          <xs:element minOccurs="0" name="remap-namespace"
+                            type="remap-namespaces-type"> </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
             </xs:sequence>
           </xs:complexType>
@@ -317,6 +333,28 @@
           </xs:complexType>
         </xs:element>
         <xs:element name="structure">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element name="dependencies" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="dependency">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="xs:string"/>
+                          <xs:element name="href" type="xs:anyURI"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="scripts" type="scripts-type"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="file-type">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="name" type="xs:string"/>
