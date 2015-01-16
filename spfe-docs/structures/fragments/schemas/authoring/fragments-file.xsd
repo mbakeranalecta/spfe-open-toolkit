@@ -7,5 +7,5 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/spfe-docs-core/schemas/authoring/spfe-docs-core.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/file-types/fragments-file/schemas/authoring/fragments-file-root.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fragments/schemas/authoring/fragments-file-root.xsd"/>
 </xs:schema>

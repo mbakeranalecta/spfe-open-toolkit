@@ -7,7 +7,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/eppo-core/schemas/authoring/eppo-core.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/file-types/fragments-file/schemas/authoring/fragments-file-root.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fragments/schemas/authoring/fragments-file-root.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/eppo-core/schemas/authoring/paragraph-content.xsd"/>
     <xs:include
