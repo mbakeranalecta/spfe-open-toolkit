@@ -6,5 +6,4 @@
     <rewriteURI uriStartString="http://spfeopentoolkit.org/spfe-ot/plugins/" rewritePrefix="./"/>
     <rewriteSystem
         systemIdStartString="http://spfeopentoolkit.org/spfe-ot/plugins/" rewritePrefix="./" />
-
 </catalog>

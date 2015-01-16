@@ -22,8 +22,6 @@
   <xs:include
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/fig/schemas/presentation/fig.xsd"/>
   <xs:include
-    schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/graphic/schemas/presentation/graphic.xsd"/>
-  <xs:include
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/tree/schemas/presentation/tree.xsd"/>
   <xs:include
     schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/paragraphs/schemas/presentation/paragraphs.xsd"/>

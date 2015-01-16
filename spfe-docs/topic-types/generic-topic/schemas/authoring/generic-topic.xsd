@@ -7,6 +7,6 @@
 
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/spfe-docs-core/schemas/authoring/spfe-docs-core.xsd"/>
-    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/generic-topic-root.xsd"/>
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/generic-topic/schemas/authoring/generic-topic-root.xsd"/>
 
 </xs:schema>
