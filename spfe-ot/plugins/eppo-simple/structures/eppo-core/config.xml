@@ -11,10 +11,6 @@
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/common/config.xml</href>
         </structure> 
         <structure>
-            <name>topic-set</name>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config.xml</href>
-        </structure>
-        <structure>
             <name>lists.ol-ul-ll</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/ol-ul-ll/config.xml</href>
         </structure>
@@ -131,5 +127,10 @@
             <name>body</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/body/config.xml</href>
         </structure>
+        <structure>
+            <name>section</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/section/config.xml</href>
+        </structure>
+        
     </structures>
 </spfe>

@@ -43,18 +43,6 @@
 		</xsl:if>
 		
 		<body>
-			<!-- page toc -->
-			<!--<xsl:if test="count(../es:section/es:title) gt 1">
-							<pe:toc>
-				<xsl:for-each select="../es:section/es:title">
-					<pe:toc-entry>
-						<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
-							<xsl:value-of select="."/>
-						</pe:xref>
-					</pe:toc-entry>
-				</xsl:for-each>
-			</pe:toc>
-		</xsl:if>-->
 			<xsl:apply-templates/>
 		</body>		
 	</xsl:template>

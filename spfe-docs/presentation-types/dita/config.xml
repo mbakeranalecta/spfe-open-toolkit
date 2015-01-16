@@ -59,7 +59,7 @@
                 </scripts>
             </topic-type>
             <topic-type>
-                <name>{http://spfeopentoolkit.org/ns/spfe-docs}xslt-function-reference-entry</name>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}xslt-library-reference-entry</name>
                 <scripts>
                     <script>
                         <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/dita/topic-types/common/scripts/present-topic-set-toc.xsl</href>

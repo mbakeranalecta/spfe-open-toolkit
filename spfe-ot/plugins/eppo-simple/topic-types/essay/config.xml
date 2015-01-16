@@ -27,7 +27,7 @@
 
                 <script>
              
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/file-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
                 </script>                
             </resolve>
             <link-catalog>

@@ -29,7 +29,14 @@
                 <name>graphic-record</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
             </structure>
-            
+            <structure>
+                <name>topic-set</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config-with-topic-set-toc.xml</href>
+                <remap-namespace>
+                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                    <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
+                </remap-namespace>  
+            </structure>
         </structures>
         <scripts>
             <extract>
@@ -58,7 +65,7 @@
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>                      
                     </remap-namespace>                   
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/file-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
                 </script>                
             </resolve>
             <link-catalog>
@@ -87,10 +94,10 @@
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </remap-namespace>                        <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/topic-subject-list-topic/scripts/present/eppo/present-topic-subject-lists.xsl</href>
                 </script>
-                <script>
+<!--                <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
                 </script>
-            </present>
+-->            </present>
         </scripts>
     </topic-type>
 </spfe>

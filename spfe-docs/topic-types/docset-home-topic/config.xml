@@ -26,6 +26,14 @@
                 <href>../../structures/spfe-docs-core/config.xml</href>
             </structure>
             <structure>
+                <name>topic-set</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config-with-content-set-toc.xml</href>
+                <remap-namespace>
+                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                    <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
+                </remap-namespace>  
+            </structure>            
+            <structure>
                 <name>graphic-record</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
             </structure>
@@ -48,7 +56,8 @@
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/resolve/resolve-topic.xsl</href>
+                    </remap-namespace>                    
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/resolve/resolve-topic.xsl</href>
                 </script>
 
                 <script>
@@ -61,7 +70,7 @@
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                         
                     </remap-namespace>                   
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/file-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
                 </script>                
                 
                 
@@ -87,9 +96,9 @@
                 </script>
             </toc>
             <present type="eppo">
-                <script>
+<!--                <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/content-set/scripts/present/eppo/present-content-set-toc.xsl</href>
-                </script>
+                </script>-->
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>

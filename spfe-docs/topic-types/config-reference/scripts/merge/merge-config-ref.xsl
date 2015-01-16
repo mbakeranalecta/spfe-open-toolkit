@@ -18,7 +18,7 @@
 	<xsl:variable 
 		name="strings" 
 		select="
-		$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
+		$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings/config:string, 
 		$config/config:content-set/config:strings/config:string"
 		as="element()*"/>
 
@@ -119,7 +119,7 @@ Main content processing templates
 					 else $xpath"/>
 
 		<xsl:variable name="topic-type-alias"
-			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}spfe-configuration-reference-entry', $config)"/>
+			select="sf:get-topic-type-alias-singular($topic-set-id, '{http://spfeopentoolkit.org/ns/spfe-docs}spfe-configuration-reference-entry', $config)"/>
 
 		<!-- is it this doctype or a group, but not clear we need this check again -->
 

@@ -82,21 +82,4 @@
 			<xsl:apply-templates/>
 		</pe:precis>
 	</xsl:template>
-
-	<xsl:template match="es:essay/es:body/es:section">
-		<xsl:if
-			test="$config/config:build-command='draft' or sf:has-content(es:title/following-sibling::*) ">
-			<pe:section>
-				<pe:anchor name="{sf:title-to-anchor(es:title)}"/>
-				<xsl:apply-templates/>
-			</pe:section>
-		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="es:essay/es:body/es:section/es:title">
-		<pe:title>
-			<xsl:apply-templates/>
-		</pe:title>
-	</xsl:template>
-
 </xsl:stylesheet>

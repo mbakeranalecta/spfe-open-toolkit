@@ -36,16 +36,6 @@
         select="concat($content-set-build-root-directory, '/output')"/>
     <xsl:variable name="content-set-home"
         select="concat($build-directory, '/', $config/content-set/content-set-id,'/output')"/>
-    <xsl:variable name="topicset-home">
-        <xsl:choose>
-            <xsl:when test="$config/topic-set-id eq $config/content-set/home-topic-set">
-                <xsl:value-of select="$content-set-home"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="concat($content-set-home, '/', $config/topic-set-id)"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
     <xsl:variable name="link-catalog-directory" select="concat($content-set-build, '/link-catalogs')"/>
     <xsl:variable name="toc-directory" select="concat($content-set-build, '/tocs')"/>
     <xsl:variable name="objects-directory" select="concat($content-set-build, '/objects')"/>
@@ -105,42 +95,105 @@
     <xsl:template name="main">
         <!-- Check the soundness of the config file -->
         <!-- FIXME: Check that each topic set file is unique. To do this, need to normalize the locations, not just check the paths as strings. -->
-        
+        <xsl:result-document href="log.xml">
+            <xsl:sequence select="$config"/>
+        </xsl:result-document>
         <xsl:call-template name="create-config-file"/>
         <xsl:call-template name="create-build-file"/>
-        <xsl:for-each select="$config/topic-set">
+        <xsl:call-template name="create-script-files"/>
+<!--        <xsl:for-each select="$config/content-set/topic-set">
             <xsl:call-template name="create-script-files">
                 <xsl:with-param name="topic-set-id" select="topic-set-id"/>
             </xsl:call-template>
         </xsl:for-each>
-        <xsl:for-each select="$config/object-set">
+        <xsl:for-each select="$config/content-set/object-set">
             <xsl:call-template name="create-script-files">
                 <xsl:with-param name="object-set-id" select="object-set-id"/>
             </xsl:call-template>
         </xsl:for-each>
-    </xsl:template>
-
-    <xsl:template match="spfe" mode="load-config">
-        <xsl:variable name="this" select="."/>
+-->    </xsl:template>
+    
+    <xsl:template match="spfe" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="spfe/topic-set" mode="load-config">
+        <xsl:if test="not(topic-set-link-priority)">
+            <topic-set-link-priority>1</topic-set-link-priority>
+        </xsl:if>
         <xsl:apply-templates mode="load-config"/>
-        <xsl:for-each
-            select="//topic-type/href, //object-type/href, //output-format/href, //presentation-type/href, //topic-set/href, //object-set/href, //structure/href, //object-type/href">
-            <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
-                <xsl:call-template name="sf:error">
-                    <xsl:with-param name="message">
-                        <xsl:text>Configuration file </xsl:text>
-                        <xsl:value-of select="resolve-uri(spfe:resolve-defines(.),base-uri($this))"/>
-                        <xsl:text> not found. </xsl:text>
-                    </xsl:with-param>
-                    <xsl:with-param name="in" select="base-uri(document(''))"/>
-                </xsl:call-template>
-            </xsl:if>
-            <xsl:apply-templates
-                select="document(resolve-uri(spfe:resolve-defines(.),base-uri($this)))"
-                mode="load-config"/>
-        </xsl:for-each>
     </xsl:template>
+    <xsl:template match="spfe/topic-set/topic-set-id" mode="load-config"/>
+    <xsl:template match="spfe/object-set" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="spfe/object-set/object-set-id" mode="load-config"/>
+    <xsl:template match="spfe/topic-type" mode="load-config">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:if test="not(topic-type-link-priority)">
+                <topic-type-link-priority>1</topic-type-link-priority>
+            </xsl:if>
+            <xsl:apply-templates mode="load-config"/>
+        </xsl:copy>
+    </xsl:template>
+    <!--<xsl:template match="spfe/topic-type/name" mode="load-config"/>-->
+    <xsl:template match="spfe/object-type" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="spfe/object-type/name" mode="load-config"/>
+    <xsl:template match="spfe/structure" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="spfe/structure/name" mode="load-config"/>
+    <xsl:template match="spfe/structures/name" mode="load-config"/>
+    <xsl:template match="spfe/content-set/topic-sets" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="spfe/content-set/object-sets" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="spfe/content-set/output-formats/output-format" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="spfe/content-set/output-formats/output-format/name" mode="load-config"/>
+    <xsl:template match="spfe/topic-set/topic-types" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
 
+    <xsl:template match="script" mode="load-config">
+        <xsl:param tunnel="yes" name="rewrite-namespace"/>
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+        <xsl:apply-templates mode="load-config"/>
+        <xsl:if test="$rewrite-namespace">
+            <xsl:sequence select="$rewrite-namespace"/>
+        </xsl:if>
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- surpress the including version of the name in favor to the included one -->
+    <xsl:template match="topic-type[href]" mode="load-config">
+        <xsl:apply-templates mode="load-config"/>
+    </xsl:template>
+    <xsl:template match="topic-type[href]/name" mode="load-config"/>
+
+    
+    <xsl:template match="//topic-type/href| //object-type/href| //output-format/href| //presentation-type/href| //topic-set/href| //object-set/href| //structure/href| //object-type/href" mode="load-config">
+        <xsl:variable name="this" select="."/>
+        <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
+            <xsl:call-template name="sf:error">
+                <xsl:with-param name="message">
+                    <xsl:text>Configuration file </xsl:text>
+                    <xsl:value-of select="resolve-uri(spfe:resolve-defines(.),base-uri($this))"/>
+                    <xsl:text> not found. </xsl:text>
+                </xsl:with-param>
+                <xsl:with-param name="in" select="base-uri(document(''))"/>
+            </xsl:call-template>
+        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="../remap-namespace">
+                <xsl:apply-templates
+                    select="document(resolve-uri(spfe:resolve-defines(.),base-uri($this)))"
+                    mode="load-config">
+                    <xsl:with-param name="rewrite-namespace" tunnel="yes">
+                        <xsl:sequence select="../remap-namespace"/>
+                    </xsl:with-param>
+                </xsl:apply-templates>
+                
+            </xsl:when>
+        
+        <xsl:otherwise>
+        <xsl:apply-templates
+            select="document(resolve-uri(spfe:resolve-defines(.),base-uri($this)))"
+            mode="load-config"/>
+        </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+        
     <xsl:template match="href|include|script[not(href)]|build-rules" mode="load-config">
         <xsl:element name="{name()}">
             <xsl:copy-of select="@*"/>
@@ -179,7 +232,7 @@
 
 
             <target name="--build.synthesis">
-                <xsl:for-each select="$config/topic-set, $config/object-set">
+                <xsl:for-each select="$config/content-set/topic-set, $config/content-set/object-set">
                     <xsl:variable name="set-id" select="if (topic-set-id) then topic-set-id else object-set-id"/>
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <xsl:variable name="object-set-id" select="object-set-id"/>
@@ -198,11 +251,11 @@
                             <files-elements>
                                 <files id="{$set-id}.sources-to-extract-content-from">
                                     <xsl:for-each
-                                        select="$config/topic-set[topic-set-id=$topic-set-id]/sources/sources-to-extract-content-from/include">
+                                        select="$config/content-set/topic-set[topic-set-id=$topic-set-id]/sources/sources-to-extract-content-from/include">
                                         <include name="{.}"/>
                                     </xsl:for-each>
                                     <xsl:for-each
-                                        select="$config/object-set[object-set-id=$set-id]/sources/sources-to-extract-content-from/include">
+                                        select="$config/content-set/object-set[object-set-id=$set-id]/sources/sources-to-extract-content-from/include">
                                         <include name="{.}"/>
                                     </xsl:for-each>
                                 </files>
@@ -229,7 +282,7 @@
                                         refid="{$set-id}.extracts-to-merge-content-with"/>
                                     <files id="{$set-id}.authored-content">
                                         <xsl:for-each
-                                            select="$config/topic-set[topic-set-id=$topic-set-id]/sources/authored-content/include">
+                                            select="$config/content-set/topic-set[topic-set-id=$topic-set-id]/sources/authored-content/include">
                                             <include name="{.}"/>
                                         </xsl:for-each>
                                     </files>
@@ -261,13 +314,13 @@
                                         />
                                     </xsl:when>
                                     <xsl:when test="$object-set-id">
-                                        <xsl:for-each select="$config/object-set[object-set-id=$object-set-id]/sources/authored-content/include">
+                                        <xsl:for-each select="$config/content-set/object-set[object-set-id=$object-set-id]/sources/authored-content/include">
                                             <include name="{.}"/>
                                         </xsl:for-each>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:for-each
-                                            select="$config/topic-set[topic-set-id=$topic-set-id]/sources/authored-content/include">
+                                            select="$config/content-set/topic-set[topic-set-id=$topic-set-id]/sources/authored-content/include">
                                             <include name="{.}"/>
                                         </xsl:for-each>
                                     </xsl:otherwise>
@@ -297,7 +350,7 @@
             </target>
 
             <target name="--build.presentation">
-                <xsl:for-each select="$config/topic-set">
+                <xsl:for-each select="$config/content-set/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <xsl:for-each select="presentation-types/presentation-type">
                         <xsl:variable name="presentation-type" select="."/>
@@ -316,12 +369,12 @@
             </target>
 
             <target name="--build.format">
-                <xsl:for-each select="$config/topic-set">
+                <xsl:for-each select="$config/content-set/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <xsl:for-each select="output-formats/output-format">
                         <xsl:variable name="name" select="name"/>
                         <xsl:variable name="presentation-type"
-                            select="$config/output-format[name=$name][1]/presentation-type"/>
+                            select="$config/content-set/output-formats/output-format[name=$name][1]/presentation-type"/>
                         <build.format topic-set-id="{$topic-set-id}"
                             style="{$content-set-build}/topic-sets/{$topic-set-id}/format-{name}/spfe.format-{name}.xsl"
                             input-directory="{$content-set-build}/topic-sets/{$topic-set-id}/present-{$presentation-type}/out"
@@ -330,7 +383,7 @@
                             <files-elements>
                                 <files id="files.{$name}.support-files">
                                     <xsl:for-each
-                                        select="$config/output-format[name=$name]/support-files/include">
+                                        select="$config/content-set/output-formats/output-format[name=$name]/support-files/include">
                                         <include name="{.}"/>
                                     </xsl:for-each>
                                 </files>
@@ -341,7 +394,7 @@
             </target>
 
             <target name="--build.encode">
-                <xsl:for-each select="$config/topic-set">
+                <xsl:for-each select="$config/content-set/topic-set">
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <build.pdf-encode topic-set-id="{$topic-set-id}"
                         style="{$content-set-build}/topic-sets/{$topic-set-id}/encode/spfe.encode.xsl"
@@ -400,31 +453,33 @@
                     <xsl:value-of select="$toc-directory"/>
                 </toc-directory>
                 <!-- FIXME: don't need to copy the topic set list as it is redundant -->
-                <xsl:copy-of select="$config/content-set"/>
-                <xsl:for-each select="$config/topic-set">
-                    <xsl:copy>
-                        <output-directory>
-                            <!-- FIXME: This dir ends with spearator. Others don't. Make consistent (by changing others) -->
-                            <xsl:choose>
-                                <xsl:when test="topic-set-id=$config/content-set/home-topic-set">
-                                    <xsl:text/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="concat( topic-set-id, '/')"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </output-directory>
-                        <xsl:if test="not(topic-set-link-priority)">
-                            <topic-set-link-priority>1</topic-set-link-priority>
-                        </xsl:if>
-                        <xsl:copy-of select="*"/>
-                    </xsl:copy>
-                </xsl:for-each>
-                
+                <content-set>                
+                    <xsl:copy-of select="$config/content-set/@*"/>
+                    <xsl:for-each select="$config/content-set/topic-set">
+                        <xsl:copy>
+                            <output-directory>
+                                <!-- FIXME: This dir ends with spearator. Others don't. Make consistent (by changing others) -->
+                                <xsl:choose>
+                                    <xsl:when test="topic-set-id=$config/content-set/home-topic-set">
+                                        <xsl:text/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat( topic-set-id, '/')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </output-directory>
+                            <xsl:if test="not(topic-set-link-priority)">
+                                <topic-set-link-priority>1</topic-set-link-priority>
+                            </xsl:if>
+                            <xsl:copy-of select="*"/>
+                        </xsl:copy>
+                    </xsl:for-each>
+                    <xsl:copy-of select="$config/content-set/*[not(name()='topic-set')]"/>
+                </content-set>                
                 <xsl:copy-of select="$config/object-set"/>                
                 <xsl:copy-of select="$config/object-type"/>  
                 
-                <xsl:for-each-group select="$config/topic-type" group-by="name">
+<!--                <xsl:for-each-group select="$config/topic-type" group-by="name">
                     <xsl:variable name="this-topic-type" select="current-group()[1]"/>
                     <topic-type>
                         <xsl:if test="not($this-topic-type/topic-type-link-priority)">
@@ -433,7 +488,7 @@
                         <xsl:copy-of select="$this-topic-type/*"/>
                     </topic-type>
                 </xsl:for-each-group>
-
+-->
                 <xsl:for-each-group select="$config//subject-type" group-by="id">
                     <xsl:copy-of select="current-group()[1]" copy-namespaces="no"/>
                 </xsl:for-each-group>
@@ -452,10 +507,11 @@
 
     <xsl:namespace-alias stylesheet-prefix="gen" result-prefix="xsl"/>
     <xsl:template name="create-script-files">
-        <xsl:param name="topic-set-id" select="''"/>
+<!--        <xsl:param name="topic-set-id" select="''"/>
         <xsl:param name="object-set-id" select="''"/>
-
-        <xsl:variable name="script-sets">
+-->
+<!--        <xsl:variable name="script-sets">
+       
             <xsl:if test="$object-set-id">
                 <xsl:for-each
                     select="$config/object-set[object-set-id=$object-set-id]/object-types/object-type">
@@ -578,9 +634,81 @@
                 <xsl:sequence select="scripts"/>
             </xsl:for-each>
         </xsl:variable>
+-->        
+        <xsl:for-each select="$config/content-set/topic-set">
+            <xsl:variable name="topic-set-id" select="topic-set-id"/>
+            
+            <xsl:variable name="script-list">
+                <xsl:sequence select="descendant::scripts"/>
+                <xsl:for-each select="$config/content-set/presentation-type">
+                    <scripts>
+                        <present type="{name}">
+                            <xsl:sequence select="scripts/script"/>
+                        </present>
+                    </scripts>
+                </xsl:for-each>
+                
+                <xsl:for-each
+                    select="$config/content-set/presentation-type/topic-types/topic-type[name = $config/topic-set[topic-set-id=$topic-set-id][1]/topic-types/topic-type/name]">
+                    <scripts>
+                        <present type="{../../name}">
+                            <xsl:sequence select="scripts/script"/>
+                        </present>
+                    </scripts>
+                </xsl:for-each>
+                
+                <!-- FIXME: Do we need to check which output formats are being built, or has this been done above? -->
+                <xsl:for-each select="$config/content-set/output-formats/output-format">
+                    <xsl:sequence select="scripts"/>
+                </xsl:for-each>
+            </xsl:variable>
+            
+            <xsl:call-template name="output-script-set-files">
+                <xsl:with-param name="script-list" select="$script-list"/>
+                <xsl:with-param name="topic-set-id" select="$topic-set-id"/>
+            </xsl:call-template>
+        </xsl:for-each>
+            <!-- FIXME: Need to get the presentation-type scripts for objects. (Not format.) -->
+            
+        <xsl:for-each select="$config/content-set/object-set">
+            <xsl:variable name="object-set-id" select="object-set-id"/>
+            
+            <xsl:variable name="script-list">
+                <xsl:sequence select="descendant::scripts"/>
+                <xsl:for-each select="$config/content-set/presentation-type">
+                    <scripts>
+                        <present type="{name}">
+                            <xsl:sequence select="scripts/script"/>
+                        </present>
+                    </scripts>
+                </xsl:for-each>
+                
+                <xsl:for-each
+                    select="$config/content-set/presentation-type/topic-types/topic-type[name = $config/topic-set[object-set-id=$object-set-id][1]/topic-types/topic-type/name]">
+                    <scripts>
+                        <present type="{../../name}">
+                            <xsl:sequence select="scripts/script"/>
+                        </present>
+                    </scripts>
+                </xsl:for-each>
+            </xsl:variable>
+            
+            <xsl:call-template name="output-script-set-files">
+                <xsl:with-param name="script-list" select="$script-list"/>
+                <xsl:with-param name="object-set-id" select="$object-set-id"/>
+            </xsl:call-template>
+        </xsl:for-each>
+        
+    </xsl:template>
+        
+    <xsl:template name="output-script-set-files">
+        <xsl:param name="script-list"/>
+        <xsl:param name="topic-set-id" select="''"/>
+        <xsl:param name="object-set-id" select="''"/>
         
         <!-- FIXME: Should test that each of the required script sets is present and raise error if not. -->
-        <xsl:for-each-group select="$script-sets/scripts/*" group-by="concat(name(), '.', @type)">
+        <xsl:for-each-group select="$script-list/scripts/*" group-by="concat(name(), '.', @type)">
+            <!-- FIXME: is other still supported? Should it be? -->
             <xsl:variable name="script-type"
                 select="if (name()='other') then concat('other.',@name) else name()"/>
             <xsl:variable name="script-name-with-type"
@@ -589,74 +717,75 @@
                 select="if ($object-set-id)
                 then concat($content-set-build, '/object-sets/', $object-set-id, '/', $script-name-with-type)
                 else concat($content-set-build, '/topic-sets/', $topic-set-id, '/', $script-name-with-type)"/>
+                       
             <xsl:variable name="script-rewrite-list">
                 <xsl:for-each-group select="current-group()/config:script"
-                group-by="concat(*:href/text(), ' ', normalize-space(config:remap-namespace/config:from), normalize-space(config:remap-namespace/config:to))">
-                <script>
-                    <xsl:choose>
-                    <!-- If namespace remapping is specified, create a temp file with remapped namespaces -->
-                    <xsl:when test="current-group()/config:remap-namespace">
-                        <xsl:variable name="script-to-be-remapped" select="unparsed-text(concat('file:///',config:href))"/>
-                        <xsl:variable name="map-from-namespace" select="normalize-space(config:remap-namespace/config:from)"/>
-                        <xsl:variable name="map-to-namespace" select="normalize-space(config:remap-namespace/config:to)"/>
-                        <xsl:variable name="regex">
-                            <xsl:text>(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;])</xsl:text>
-                            <xsl:value-of select="sf:escape-for-regex($map-from-namespace)"/>
-                            <xsl:text>([&quot;&apos;])</xsl:text>
-                        </xsl:variable>
-                        
-                        <map-from-namespace>
-                            <xsl:sequence select="$map-from-namespace"/>
-                        </map-from-namespace>
-                        <map-to-namespace>
-                            <xsl:sequence select="$map-to-namespace"/>
-                        </map-to-namespace>
-                        <script-to-be-remapped>
-                            <xsl:sequence select="$script-to-be-remapped"/>
-                        </script-to-be-remapped>
-                        
+                    group-by="concat(*:href/text(), ' ', normalize-space(config:remap-namespace/config:from), normalize-space(config:remap-namespace/config:to))">
+                    <script>
                         <xsl:choose>
-                            <xsl:when test="matches($script-to-be-remapped, $regex)">
-                                <regex><xsl:value-of select="$regex"/></regex>
-                                <output-file-name>
-                                    <xsl:value-of select="concat(generate-id(config:remap-namespace/config:from), position(), sf:get-file-name-from-path(config:href))"/>
-                                </output-file-name>"
+                            <!-- If namespace remapping is specified, create a temp file with remapped namespaces -->
+                            <xsl:when test="current-group()/config:remap-namespace">
+                                <xsl:variable name="script-to-be-remapped" select="unparsed-text(concat('file:///',config:href))"/>
+                                <xsl:variable name="map-from-namespace" select="normalize-space(config:remap-namespace/config:from)"/>
+                                <xsl:variable name="map-to-namespace" select="normalize-space(config:remap-namespace/config:to)"/>
+                                <xsl:variable name="regex">
+                                    <xsl:text>(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;])</xsl:text>
+                                    <xsl:value-of select="sf:escape-for-regex($map-from-namespace)"/>
+                                    <xsl:text>([&quot;&apos;])</xsl:text>
+                                </xsl:variable>
+                                
+                                <map-from-namespace>
+                                    <xsl:sequence select="$map-from-namespace"/>
+                                </map-from-namespace>
+                                <map-to-namespace>
+                                    <xsl:sequence select="$map-to-namespace"/>
+                                </map-to-namespace>
+                                <script-to-be-remapped>
+                                    <xsl:sequence select="$script-to-be-remapped"/>
+                                </script-to-be-remapped>
+                                
+                                <xsl:choose>
+                                    <xsl:when test="matches($script-to-be-remapped, $regex)">
+                                        <regex><xsl:value-of select="$regex"/></regex>
+                                        <output-file-name>
+                                            <xsl:value-of select="concat(generate-id(config:remap-namespace/config:from), position(), sf:get-file-name-from-path(config:href))"/>
+                                        </output-file-name>"
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <!-- Otherwise, just link to existing file. -->                                
+                                        <output-file-name remap="no">
+                                            <xsl:value-of select="concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)"/>
+                                        </output-file-name>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:when>
                             <xsl:otherwise>
-                                <!-- Otherwise, just link to existing file. -->                                
+                                <!-- Otherwise, just link to existing file. -->
                                 <output-file-name remap="no">
                                     <xsl:value-of select="concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)"/>
                                 </output-file-name>
-                           </xsl:otherwise>
+                            </xsl:otherwise>
                         </xsl:choose>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <!-- Otherwise, just link to existing file. -->
-                        <output-file-name remap="no">
-                            <xsl:value-of select="concat(if(starts-with(config:href,'/')) then 'file://' else 'file:/', config:href)"/>
-                        </output-file-name>
-                    </xsl:otherwise>
-                </xsl:choose>
-                </script>
-            </xsl:for-each-group>
+                    </script>
+                </xsl:for-each-group>
             </xsl:variable>
-            
+                        
             <xsl:for-each-group select="$script-rewrite-list/config:script" group-by="config:output-file-name">
                 <xsl:if test="not(config:output-file-name/@remap='no')">
-                   <xsl:result-document
-                       href="file:///{$script-output-directory}/{config:output-file-name}"
-                       method="text" indent="no"
-                       xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
-                       <xsl:variable name="map-to-namespace" select="config:map-to-namespace"/>
-                       <xsl:analyze-string select="config:script-to-be-remapped" regex="{config:regex}">
-                           <xsl:matching-substring>
-                               <xsl:value-of select="concat(regex-group(1),$map-to-namespace,regex-group(2))"/>
-                           </xsl:matching-substring>
-                           <xsl:non-matching-substring>
-                               <xsl:value-of select="."/>
-                           </xsl:non-matching-substring>
-                       </xsl:analyze-string>
-                   </xsl:result-document>
+                    <xsl:result-document
+                        href="file:///{$script-output-directory}/{config:output-file-name}"
+                        method="text" indent="no"
+                        xpath-default-namespace="http://www.w3.org/1999/XSL/Transform">
+                        <xsl:variable name="map-to-namespace" select="config:map-to-namespace"/>
+                        <xsl:analyze-string select="config:script-to-be-remapped" regex="{config:regex}">
+                            <xsl:matching-substring>
+                                <xsl:value-of select="concat(regex-group(1),$map-to-namespace,regex-group(2))"/>
+                            </xsl:matching-substring>
+                            <xsl:non-matching-substring>
+                                <xsl:value-of select="."/>
+                            </xsl:non-matching-substring>
+                        </xsl:analyze-string>
+                    </xsl:result-document>
                 </xsl:if>
             </xsl:for-each-group>
             <xsl:result-document

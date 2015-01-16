@@ -22,7 +22,7 @@
 	<xsl:template match="es:*[@if]" priority="1">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:choose>
-			<xsl:when test="sf:conditions-met($conditions, $config/config:topic-set[config:topic-set-id=$topic-set-id]/config:condition-tokens)">
+			<xsl:when test="sf:conditions-met($conditions, $config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:condition-tokens)">
 				<xsl:next-match/>
 			</xsl:when>
 			<xsl:otherwise>

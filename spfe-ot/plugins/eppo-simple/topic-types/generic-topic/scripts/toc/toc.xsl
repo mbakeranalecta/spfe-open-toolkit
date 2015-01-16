@@ -30,7 +30,7 @@
 		<xsl:choose>
 			<xsl:when test="$topic-set-id eq 'spfe.objects'">Text Objects</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+				<xsl:value-of select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable> 
@@ -41,8 +41,8 @@
 		<xsl:result-document href="file:///{$output-directory}/{$topic-set-id}.toc.xml" method="xml" indent="yes" omit-xml-declaration="no">
 			<toc 
 				topic-set-id="{$topic-set-id}" 
-				topic-set-type="{$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-set-type}" 
-				deployment-relative-path="{$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:output-directory}" 
+				topic-set-type="{$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-set-type}" 
+				deployment-relative-path="{$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:output-directory}" 
 				title="{$title-string}">
 				<xsl:choose>
 					<!-- If there is a TOC file for this media, use it to create TOC -->
@@ -109,7 +109,7 @@
 						<xsl:if test="$synthesis/ss:synthesis/ss:topic[matches(@local-name, '^[iI][nN][dD][eE][xX]$')]">
 							<xsl:attribute name="index">index</xsl:attribute>
 						</xsl:if>
-						<!-- Allow the presentation script to add entires before main TOC -->
+						<!-- Allow the user script to add entires before main TOC -->
 						<xsl:call-template name="toc-prefix-entries"/>
 						
 						<!-- Get all the topics, but omit any named index -->
@@ -119,12 +119,12 @@
 						<!-- Make sure there is an entry on the topic type order list for every topic type. Exclude topic types starting with "spfe." -->
 						<xsl:variable name="topic-types-found" select="distinct-values($synthesis/ss:synthesis/ss:topic/@type)"/>
 						
-						<xsl:variable name="topic-type-order-list" select="$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type/config:name/text()"/>
-						<xsl:variable name="topic-type-alias-list" select="$config/config:topic-type/config:name/text()"/>
+						<xsl:variable name="topic-type-order-list" select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type/config:name/text()"/>
+						<xsl:variable name="topic-type-alias-list" select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type/config:name/text()"/>
 						<!-- FIXME: review this code -->
 						<xsl:if test="count($topic-types-found[not(.=$topic-type-alias-list)])">
 							<xsl:call-template name="sf:error">
-								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list: ', string-join($topic-types-found[not(.=$config/config:topic-type-order/config:topic-type)], ', ')"/>
+								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list: ', string-join($topic-types-found[not(.=$topic-type-alias-list)], ', ')"/>
 							</xsl:call-template>
 						</xsl:if>
 						
@@ -132,7 +132,7 @@
 						<!-- FIXME: This check could be moved to the config script -->
 						<xsl:if test="not(every $x in $topic-type-order-list satisfies $x = $topic-type-alias-list)">
 							<xsl:call-template name="sf:error">
-								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list:', string-join($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type-order/config:topic-type-name[not(.=$config/config:topic-type/config:name)], ', ')"/>
+								<xsl:with-param name="message" select="'Topic type(s) missing from topic type alias list:', string-join($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-types/config:topic-type-order/config:topic-type-name[not(.=$config/config:topic-type/config:name)], ', ')"/>
 							</xsl:call-template>
 						</xsl:if>
 	
@@ -157,7 +157,7 @@
 								</xsl:when>
 								<!-- if more than one topic, create group -->
 								<xsl:when test="$included-topics">
-									<node topic-type="{$this-topic-type}"  name="{$config/config:topic-type[config:name=$this-topic-type]/config:aliases/config:plural}">
+									<node topic-type="{$this-topic-type}"  name="{$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$this-topic-type]/config:aliases/config:plural}">
 										<xsl:apply-templates select="$topics-of-this-type" mode="toc"/>
 									</node>
 

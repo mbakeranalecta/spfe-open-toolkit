@@ -29,7 +29,7 @@
 <xsl:param name="synthesis-files"/>
 <xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
 
-<xsl:variable name="topic-set-title" select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+<xsl:variable name="topic-set-title" select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 <!--  
 =============
 Main template

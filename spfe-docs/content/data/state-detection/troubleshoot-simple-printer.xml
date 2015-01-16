@@ -3,7 +3,7 @@
 <!-- (c) Copyright Analecta Communications Inc. 2014 All Rights Reserved. -->
 <state-detection xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/data-types/state-detection/schemas/state-detection-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/file-types/state-detection/schemas/state-detection-topic.xsd">
     <id>troubleshoot-simple-printer</id>
     <title>Troubleshoot your simple printer</title>
     <caption>Determining the status of your simple printer.</caption>

@@ -74,7 +74,7 @@ Main content processing templates
 			type="{$type}" 
 			full-name="{$type}#{$name}"
 			local-name="{$name}"			
-			topic-type-alias="{sf:get-topic-type-alias-singular($type, $config)}"
+			topic-type-alias="{sf:get-topic-type-alias-singular($topic-set-id, $type, $config)}"
 			title="{sf:get-subject-type-alias-singular(es:subject-type, $config)}: {es:subject}"
 			excerpt="A list of topics related to the {sf:get-subject-type-alias-singular(es:subject-type, $config)} {es:subject}.">
 			

@@ -446,13 +446,14 @@
 	</xsl:function>
 
 	<xsl:function name="sf:get-topic-type-alias-singular">
+		<xsl:param name="topic-set-id"/>
 		<xsl:param name="topic-type-name"/>
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular">
+				test="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular">
 				<xsl:value-of
-					select="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular"
+					select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -470,13 +471,14 @@
 		</xsl:choose>
 	</xsl:function>
 	<xsl:function name="sf:get-topic-type-alias-plural">
+		<xsl:param name="topic-set-id"/>
 		<xsl:param name="topic-type-name"/>
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural">
+				test="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural">
 				<xsl:value-of
-					select="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural"
+					select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -546,8 +548,10 @@
 		<xsl:param name="topic-type-name"/>
 		<xsl:param name="topic-set-id"/>
 		<xsl:param name="config"/>
-		<xsl:variable name="topic-type-link-priority" select="$config/config:topic-type[config:name eq $topic-type-name]/config:topic-type-link-priority"/>
-		<xsl:variable name="topic-set-link-priority" select="$config/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"/>
+
+		<xsl:variable name="topic-type-link-priority" select="$config/config:content-set/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-type[config:name eq $topic-type-name]/config:topic-type-link-priority"/>
+		<xsl:if test="count($topic-type-link-priority) gt 1"><xsl:message select="count($topic-type-link-priority), $topic-set-id, $topic-type-name, for $i in $topic-type-link-priority return generate-id($i)"></xsl:message></xsl:if>
+		<xsl:variable name="topic-set-link-priority" select="$config/config:content-set/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"/>
 		<xsl:if test="normalize-space($topic-type-link-priority) eq ''">
 			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message" select="'Topic type link priority not set for namespace ', $topic-type-name"/>

@@ -28,7 +28,7 @@
 <xsl:param name="synthesis-files"/>
 <xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
 
-<xsl:variable name="topic-set-title" select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+<xsl:variable name="topic-set-title" select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 <!--  
 =============
 Main template
@@ -40,7 +40,7 @@ Main template
 		<pe:pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/eppo/schemas/presentation-eppo.xsd">
 			<pe:title>
-				<xsl:value-of select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+				<xsl:value-of select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 			</pe:title>
 				
 			<!-- process the topics --> 

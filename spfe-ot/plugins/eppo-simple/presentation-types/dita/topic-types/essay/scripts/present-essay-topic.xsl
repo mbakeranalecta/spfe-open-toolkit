@@ -37,18 +37,6 @@
 			<xsl:apply-templates select="es:precis" mode="precis"/>
 		</shortdesc>
 		<body>
-			<!-- page toc -->
-			<!--<xsl:if test="count(../es:section/es:title) gt 1">
-							<pe:toc>
-				<xsl:for-each select="../es:section/es:title">
-					<pe:toc-entry>
-						<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
-							<xsl:value-of select="."/>
-						</pe:xref>
-					</pe:toc-entry>
-				</xsl:for-each>
-			</pe:toc>
-		</xsl:if>-->
 			<xsl:apply-templates/>
 		</body>		
 	</xsl:template>
@@ -101,19 +89,4 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<xsl:template match="es:essay/es:body/es:section">
-		<xsl:if
-			test="$config/config:build-command='draft' or sf:has-content(es:title/following-sibling::*) ">
-			<section id="{sf:title-to-anchor(es:title)}">
-				<xsl:apply-templates/>
-			</section>
-		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="es:essay/es:body/es:section/es:title">
-		<title>
-			<xsl:apply-templates/>
-		</title>
-	</xsl:template>
-
 </xsl:stylesheet>

@@ -16,7 +16,7 @@
 
 
 	<!-- spfe-function-reference-entry -->
-	<xsl:template match="xslt-function-reference-entry">
+	<xsl:template match="xslt-library-reference-entry">
 		<xsl:apply-templates/>
 	</xsl:template>
 
@@ -107,7 +107,7 @@
 	</xsl:template>
 
 	<!-- spfe-template-reference-entry -->
-	<xsl:template match="xslt-template-reference-entry">
+	<xsl:template match="xslt-library-reference-entry">
 		<xsl:apply-templates/>
 	</xsl:template>
 

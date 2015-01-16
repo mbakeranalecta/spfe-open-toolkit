@@ -38,16 +38,16 @@
                 <href>topic-sets/eppo-presentation-reference.xml</href>
             </topic-set>  
             
-			 <topic-set>
+<!--			 <topic-set>
 			     <topic-set-id>eppo-graphic-record-doctype-reference</topic-set-id>
 			     <href>topic-sets/eppo-graphic-record-reference.xml</href>
             </topic-set>  
-            
-			 <topic-set>
+-->            
+<!--			 <topic-set>
 			     <topic-set-id>eppo-generic-topic-reference</topic-set-id>
 			     <href>topic-sets/eppo-generic-topic-reference.xml</href>
             </topic-set>  
-            
+-->            
             <topic-set>
                 <topic-set-id>spfe-function-reference</topic-set-id>
                 <href>topic-sets/spfe-function-reference.xml</href>
@@ -105,7 +105,7 @@
                 </aliases> 
             </subject-type>
             <subject-type>
-                <id>xslt-function-reference-entry</id>
+                <id>xslt-library-reference-entry</id>
                 <aliases>
                     <singular>SPFE function</singular>
                     <plural>SPFE functions</plural>
@@ -118,6 +118,14 @@
                     <plural>XSLT functions</plural>
                 </aliases>
             </subject-type>
+            <subject-type>
+                <id>xslt-template-name</id>
+                <aliases>
+                    <singular>XSLT template</singular>
+                    <plural>XSLT templates</plural>
+                </aliases>
+            </subject-type>
+            
             <subject-type>
                 <id>task</id>
                 <aliases>

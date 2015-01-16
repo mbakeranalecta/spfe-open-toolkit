@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fragments xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/fragments-file/schemas/authoring/fragments-file.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/file-types/fragments-file/schemas/authoring/fragments-file.xsd">
     <head>
         <id>fragments-test</id>
         <history>

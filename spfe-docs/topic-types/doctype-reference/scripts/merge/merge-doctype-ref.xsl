@@ -16,7 +16,7 @@
 
 	<xsl:variable name="strings"
 		select="
-		$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
+		$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings/config:string, 
 		$config/config:content-set/config:strings/config:string"
 		as="element()*"/>
 
@@ -95,7 +95,7 @@ Main content processing templates
 			select="$doctypes/doctype[starts-with($xpath[1], @xpath)][1]/@name"/>
 
 		<xsl:variable name="topic-type-alias"
-			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry', $config)"/>
+			select="sf:get-topic-type-alias-singular($topic-set-id, '{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry', $config)"/>
 		
 
 		<xsl:choose>
@@ -336,11 +336,11 @@ Main content processing templates
 	<xsl:template name="get-nested-groups">
 		<xsl:param name="referenced-group"/>
 		<xsl:for-each
-			select="/schema-definitions/schema-group-ref[referenced-in-group eq $referenced-group]">
+			select="/schema-definitions/schema-group-ref[referenced-in-group = $referenced-group]">
 			<xsl:variable name="referenced-group" select="referenced-group"/>
 			<!-- each element that is in the group and has only one step in its path (so not the children of the element at the group level -->
 			<xsl:for-each-group
-				select="/schema-definitions/schema-element[belongs-to-group eq $referenced-group]"
+				select="/schema-definitions/schema-element[belongs-to-group = $referenced-group]"
 				group-by="name">
 				<cr:child child-namespace="{xml-namespace}">
 					<xsl:value-of select="name"/>

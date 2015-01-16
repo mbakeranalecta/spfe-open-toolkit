@@ -11,7 +11,7 @@
         <xsl:variable name="topic-type" select="ancestor::ss:topic/@type"/>
 
         <xsl:variable name="topic-set-title"
-            select="sf:string($config/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+            select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 
         <xsl:variable name="content-set-title" select="$config/config:content-set/config:title"/>
 
@@ -35,7 +35,7 @@
             </pe:home>
             <pe:breadcrumbs>
                 <pe:breadcrumb>
-                    <pe:link href="{$content-set-toc-file}">TOC</pe:link>
+                    <pe:link href="{$content-set-toc-file}">Collections</pe:link>
                 </pe:breadcrumb>
                 <xsl:if test="not($is-home-topic-set)">
                     <pe:breadcrumb>

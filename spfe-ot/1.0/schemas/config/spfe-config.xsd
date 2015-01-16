@@ -279,7 +279,7 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="scripts" type="scripts-type"/>
+              <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -302,14 +302,6 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="object-type">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="name" type="xs:string"/>
-              <xs:element name="scripts" type="scripts-type"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

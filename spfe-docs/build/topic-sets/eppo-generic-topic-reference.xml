@@ -33,7 +33,6 @@
             </authored-content>
             <sources-to-extract-content-from>
                 <include>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/schemas/authoring/generic-topic.xsd</include>
-                
             </sources-to-extract-content-from>
         </sources>
 

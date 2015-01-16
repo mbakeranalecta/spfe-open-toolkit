@@ -63,7 +63,10 @@ Main template
 
 	
 	<xsl:template name="main" >
-		<!-- Create the root "synthesis element" -->
+		<xsl:result-document href="tlp-log.xml">
+			<xsl:sequence select="$config"/>
+		</xsl:result-document>
+		
 		<xsl:result-document href="file:///{concat($output-directory, '/', $topic-set-id, '.link-catalog.xml')}" method="xml" indent="yes" encoding="UTF-8" omit-xml-declaration="no">
 			<xsl:apply-templates select="$synthesis"/>
 		</xsl:result-document>
@@ -71,7 +74,7 @@ Main template
 
 	<xsl:template match="ss:synthesis">
 		<link-catalog topic-set-id="{@topic-set-id}"
-		output-directory="{$config/config:topic-set[config:topic-set-id=$topic-set-id]/config:output-directory}"		
+		output-directory="{$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:output-directory}"		
 			title="{@title}"
 			time-stamp="{current-dateTime()}">
 			<xsl:apply-templates/>

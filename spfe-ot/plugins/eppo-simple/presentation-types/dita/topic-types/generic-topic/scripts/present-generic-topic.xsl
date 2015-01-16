@@ -34,21 +34,6 @@
 	<xsl:template match="es:generic-topic/es:body/es:title"/>
 
 	
-	<xsl:template match="es:generic-topic/es:body/es:section">
-		<xsl:if
-			test="$config/config:build-command='draft' or sf:has-content(es:title/following-sibling::*) ">
-			<section id="{sf:title-to-anchor(es:title)}">
-				<xsl:apply-templates/>
-			</section>
-		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="es:generic-topic/es:body/es:section/es:title">
-		<title>
-			<xsl:apply-templates/>
-		</title>
-	</xsl:template>
-
 	<xsl:template match="es:generic-topic/es:body">
 		<!-- Move title outside body because DITA is wierd like that. -->
 		<xsl:if test="es:title">
@@ -58,18 +43,6 @@
 		</xsl:if>
 		
 		<body>
-			<!-- page toc -->
-			<!--<xsl:if test="count(../es:section/es:title) gt 1">
-							<pe:toc>
-				<xsl:for-each select="../es:section/es:title">
-					<pe:toc-entry>
-						<pe:xref target="#{sf:title-to-anchor(normalize-space(.))}">
-							<xsl:value-of select="."/>
-						</pe:xref>
-					</pe:toc-entry>
-				</xsl:for-each>
-			</pe:toc>
-		</xsl:if>-->
 			<xsl:apply-templates/>
 		</body>		
 	</xsl:template>
