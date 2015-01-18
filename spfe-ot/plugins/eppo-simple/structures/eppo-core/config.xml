@@ -131,6 +131,5 @@
             <name>section</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/section/config.xml</href>
         </structure>
-        
     </structures>
 </spfe>

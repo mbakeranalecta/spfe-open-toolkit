@@ -21,6 +21,10 @@
                 </remap-namespace>  
             </structure>
             <structure>
+                <name>topic</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic/config-with-resolve-main.xml</href>
+            </structure>
+            <structure>
                 <name>topic-set</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config-with-topic-set-toc.xml</href>
                 <remap-namespace>
@@ -38,10 +42,6 @@
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/resolve/resolve-topic.xsl</href>
-                </script>
-
                 <script>
                     <remap-namespace>
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
