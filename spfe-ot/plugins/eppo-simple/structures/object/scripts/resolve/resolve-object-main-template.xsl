@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
-<!-- (c) Copyright Analecta Communications Inc. 2014 All Rights Reserved. -->
+<!-- (c) Copyright Analecta Communications Inc. 2015 All Rights Reserved. -->
 <!-- ===================================================
-	resolve-object.xsl
+	resolve-object-main-template.xsl
 	
 	Reads the collection of object files
 	for the content set, creates the synthesis element, and hands 

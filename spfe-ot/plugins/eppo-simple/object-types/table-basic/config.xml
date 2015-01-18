@@ -16,14 +16,15 @@
                 <name>graphic-record</name>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
             </structure>
+            <structure>
+                <name>object</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/object/config-with-resolve-main.xml</href>
+            </structure>
         </structures>
         <scripts>
             <resolve>
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/object-types/common/scripts/resolve/resolve-object.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/object-types/table-basic/scripts/resolve/resolve-table-basic-object.xsl</href>
