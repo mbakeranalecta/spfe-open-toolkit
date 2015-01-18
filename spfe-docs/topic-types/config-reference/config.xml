@@ -64,21 +64,7 @@
                 <script>
                     <href>scripts/present/eppo/present-config-ref.xsl</href>
                 </script>
-<!--                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
-                </script>-->
             </present>
-            <link-catalog>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>                      <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/link-catalog/topic/topic-link-catalog.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
-                </script>
-            </link-catalog>
             <toc>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/toc/toc.xsl</href>
