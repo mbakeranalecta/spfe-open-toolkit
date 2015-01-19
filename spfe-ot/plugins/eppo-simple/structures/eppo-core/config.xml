@@ -16,6 +16,10 @@
         </structure>
         <structure>
             <name>paragraphs</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/anchor/config.xml</href>
+        </structure>
+        <structure>
+            <name>paragraphs</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/paragraphs/config.xml</href>
         </structure>
         <structure>
@@ -25,6 +29,10 @@
         <structure>
             <name>graphic</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic/config.xml</href>
+        </structure>
+        <structure>
+            <name>graphic-record</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
         </structure>
         <structure>
             <name>strings</name>
@@ -41,6 +49,10 @@
         <structure>
             <name>annotations.common-names</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/common-subjects/config.xml</href>
+        </structure>
+        <structure>
+            <name>captions.simple</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/captions/simple/config.xml</href>
         </structure>
         <structure>
             <name>annotations.common-subjects</name>
@@ -131,5 +143,14 @@
             <name>section</name>
             <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/section/config.xml</href>
         </structure>
+        <structure>
+            <name>pages.simple</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/pages/simple/config.xml</href>
+        </structure>
+        <structure>
+            <name>tree</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tree/config.xml</href>
+        </structure>
+        
     </structures>
 </spfe>

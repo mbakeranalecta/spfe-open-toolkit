@@ -12,6 +12,11 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/procedures/procedure/scripts/present/eppo/present-eppo-procedure.xsl</href>
                 </script>
             </present>
+            <format type="html">
+                <script>
+                    <href>scripts/format/xhtml/format-procedure-xhtml.xsl</href>
+                </script>
+            </format>
         </scripts>
     </structure>
 </spfe>

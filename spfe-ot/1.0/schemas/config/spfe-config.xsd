@@ -514,7 +514,7 @@
         <xs:complexType>
           <xs:complexContent>
             <xs:extension base="script-list-type">
-              <xs:attribute name="type" type="xs:NMTOKEN"/>
+              <xs:attribute name="type" type="xs:NMTOKEN" use="required"/>
             </xs:extension>
           </xs:complexContent>
         </xs:complexType>

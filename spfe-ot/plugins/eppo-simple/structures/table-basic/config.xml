@@ -12,6 +12,11 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/present/eppo/present-table-basic.xsl</href>
                 </script>
             </present>
+            <format type="html">
+                <script>
+                    <href>scripts/format/xhtml/format-table-basic-xhtml.xsl</href>
+                </script>
+            </format>
         </scripts>
     </structure>
 </spfe>

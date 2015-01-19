@@ -12,6 +12,11 @@
                     <href>scripts/present/present-section-eppo.xsl</href>
                 </script>
             </present>
+            <format type="html">
+                <script>
+                    <href>scripts/format/xhtml/format-section-xhtml.xsl</href>
+                </script>
+            </format>
         </scripts>
     </structure>
 </spfe>

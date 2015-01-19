@@ -12,6 +12,11 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/ol-ul-ll/scripts/present/eppo/present-eppo-ol-ul-lists.xsl</href>
                 </script>
             </present>
+            <format type="html">
+                <script>
+                    <href>scripts/format/xhtml/format-ol-ul-xhtml.xsl</href>
+                </script>
+            </format>
         </scripts>
     </structure>
 </spfe>

@@ -88,7 +88,7 @@
             </xsl:for-each>
         </xsl:variable>
 
-        <xsl:if test="$see-also-links/link | $see-also-links/link-set">
+        <xsl:if test="$see-also-links/link">
             <pe:table hint="context">
                 <pe:tr>
                     <pe:td>
@@ -97,7 +97,7 @@
                     <pe:td>
                         <pe:ul>
                             <xsl:for-each-group
-                                select="$see-also-links/link | $see-also-links/link-set/link"
+                                select="$see-also-links/link"
                                 group-by="@href">
                                 <pe:li>
                                     <xsl:sequence select="."/>

@@ -15,6 +15,14 @@
                     <href>scripts/present/eppo/present-eppo-ll-lists.xsl</href>
                 </script>
             </present>
+            <format type="html">
+                <script>
+                    <href>scripts/format/xhtml/format-ll-xhtml.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/lists/ol-ul/scripts/format/xhtml/format-ol-ul-xhtml.xsl</href>
+                </script>
+            </format>
         </scripts>
     </structure>
 </spfe>
