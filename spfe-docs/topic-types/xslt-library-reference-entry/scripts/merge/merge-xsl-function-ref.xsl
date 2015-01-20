@@ -87,8 +87,8 @@ Main template
 								<xsl:when test="exists($function-description/*)">
 									<xsl:apply-templates select="$function-description/fd:description"/>
 								</xsl:when>
-								<xsl:otherwise><!-- If not found, report warning. -->
-									<xsl:call-template name="sf:warning">
+								<xsl:otherwise><!-- If not found, report unresolved. -->
+									<xsl:call-template name="sf:unresolved">
 										<xsl:with-param name="message" select="'Function description not found ', string($name)"/>
 									</xsl:call-template>
 								</xsl:otherwise>
@@ -117,7 +117,7 @@ Main template
 										
 										<xsl:variable name="authored" select="$function-description/fd:parameters/fd:parameter[fd:name = $parameter-name]/fd:description"/>
 										<xsl:if test="not($authored)">
-											<xsl:call-template name="sf:warning">
+											<xsl:call-template name="sf:unresolved">
 												<xsl:with-param name="message" select="concat('Parameter description not found &quot;', string($parameter-name), '&quot; for function ', $name)"/>
 											</xsl:call-template>
 										</xsl:if>
@@ -159,8 +159,8 @@ Main template
 								<xsl:when test="exists($template-description/*)">
 									<xsl:apply-templates select="$template-description/fd:description"/>
 								</xsl:when>
-								<xsl:otherwise><!-- If not found, report warning. -->
-									<xsl:call-template name="sf:warning">
+								<xsl:otherwise><!-- If not found, report unresolved. -->
+									<xsl:call-template name="sf:unresolved">
 										<xsl:with-param name="message" select="'Template description not found ', string($name)"/>
 									</xsl:call-template>
 								</xsl:otherwise>

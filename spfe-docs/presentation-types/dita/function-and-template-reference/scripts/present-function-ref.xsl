@@ -106,11 +106,6 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 
-	<!-- spfe-template-reference-entry -->
-	<xsl:template match="xslt-library-reference-entry">
-		<xsl:apply-templates/>
-	</xsl:template>
-
 	<!-- XSL template -->
 	<xsl:template match="xsl-template">
 		<xsl:variable name="display-name" select="name/text()"/>

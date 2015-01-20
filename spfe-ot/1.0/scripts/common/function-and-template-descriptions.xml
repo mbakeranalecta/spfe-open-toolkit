@@ -785,7 +785,7 @@
             </parameters>
         </template-description>
         <template-description>
-            <name>subject-not-resolved</name>
+            <name>unresolved</name>
             <description>
                 <p>Outputs a message to the build console stating that a particular <feature>subject affinity</feature> found in a topic could not be resolved to any subject in the index of any in-scope topic, meaning that no link will be created for that subject.</p>
             </description>
@@ -798,7 +798,7 @@
                 <parameter>
                     <name>message</name>
                     <description>
-                        <p>The message to be output. The string "No content to link to on subject: " will be prefixed to the message.</p>
+                        <p>The message to be output. The string "Unresolved: No content to link to on subject " will be prefixed to the message.</p>
                     </description>
                 </parameter>
             </parameters>

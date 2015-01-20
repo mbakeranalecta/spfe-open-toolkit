@@ -72,9 +72,10 @@
                 
             </xsl:when>
             <xsl:otherwise>
+                <!-- FIXME: Is this even possible now? -->
                 <xsl:call-template name="sf:warning">
                     <xsl:with-param name="message">
-                        <xsl:text>Doc set configuration not found in config file. TOC will be in alphabetical order by topic-set-type.</xsl:text>
+                        <xsl:text>Content set configuration not found in config file. TOC will be in alphabetical order by topic-set-type.</xsl:text>
                     </xsl:with-param>
                 </xsl:call-template>
                 <xsl:for-each select="$unsorted-toc/toc">

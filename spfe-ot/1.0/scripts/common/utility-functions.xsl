@@ -126,13 +126,13 @@
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template name="sf:subject-not-resolved">
+	<xsl:template name="sf:unresolved">
 		<xsl:param name="message"/>
 		<xsl:param name="in">Not specified.</xsl:param>
 		<xsl:if test="$verbosity='warning'">
 			<xsl:message>------------------------------------------------------</xsl:message>
 			<xsl:message>
-				<xsl:text>No content to link to on subject: </xsl:text>
+				<xsl:text>Unresolved: </xsl:text>
 				<xsl:sequence select="string-join($message, '')"/>
 			</xsl:message>
 			<xsl:message select="'In: ', string-join($in, '')"/>

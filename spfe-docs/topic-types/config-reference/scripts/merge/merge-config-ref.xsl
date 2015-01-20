@@ -87,7 +87,7 @@ Main template
 		<xsl:for-each select="$config-setting-source//ed:config-setting-description">
 			<xsl:if
 				test="not(normalize-space(ed:xpath) = $schema-defs/schema-definitions/schema-element/normalize-space(xpath))">
-				<xsl:call-template name="sf:warning">
+				<xsl:call-template name="sf:unresolved">
 					<xsl:with-param name="message"
 						select="'Authored element description found for an element not found in the schema:', normalize-space(ed:xpath)"
 					/>
@@ -185,8 +185,8 @@ Main content processing templates
 						</xsl:when>
 
 						<xsl:otherwise>
-							<!-- If not found, report warning. -->
-							<xsl:call-template name="sf:warning">
+							<!-- If not found, report unresolved. -->
+							<xsl:call-template name="sf:unresolved">
 								<xsl:with-param name="message"
 									select="'Configuration setting description not found ', string($xpath)"/>
 							</xsl:call-template>
@@ -247,7 +247,7 @@ Main content processing templates
 								<xsl:variable name="authored"
 									select="$source[normalize-space(ed:xpath)=$xpath]/ed:attributes/ed:attribute[ed:name=$attribute-name]"/>
 								<xsl:if test="not($authored/ed:description/*)">
-									<xsl:call-template name="sf:warning">
+									<xsl:call-template name="sf:unresolved">
 										<xsl:with-param name="message"
 											select="'Configuration setting description not found ', string(xpath)"
 										/>

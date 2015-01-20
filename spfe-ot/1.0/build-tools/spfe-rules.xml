@@ -74,7 +74,7 @@
 		<echo/>
 		<echo/>
 		<echo>=====================================================</echo>
-		<echo>Beginning ${ant.project.invoked-targets} build of ${spfe.content-set-id}</echo>
+		<echo>Info: Beginning ${ant.project.invoked-targets} build of ${spfe.content-set-id}</echo>
 		<echo>====================================================</echo>
 		<echo/>
 		<echo/>
@@ -100,7 +100,7 @@
 		<echo/>
 		<echo/>
 		<echo>===========================================================================</echo>
-		<echo>Last build failed and left a mess. Please run 'spfe -clean'. and try again.</echo>
+		<echo>Error: Last build failed and left a mess. Please run 'spfe -clean'. and try again.</echo>
 		<echo>===========================================================================</echo>
 		<echo/>
 		<echo/>
@@ -109,7 +109,7 @@
 
 	<!-- recorder target -->
 	<target name="-recorder" if="spfe.topic-set-id">
-		<echo message="Logging to: ${spfe.build.build-directory}/logs/${spfe.topic-set-id}.txt"/>
+		<echo message="Info: Logging to: ${spfe.build.build-directory}/logs/${spfe.topic-set-id}.txt"/>
 		<mkdir dir="${spfe.build.build-directory}/logs"/>
 		<record name="${spfe.build.build-directory}/logs/${spfe.topic-set-id}-log.txt"
 			action="start"/>
@@ -208,7 +208,7 @@
 			<local name="extracts-to-merge-content-with"/>
 			<local name="authored-content-files"/>
 			<files-elements/>
-			<echo>Building merge for @{topic-set-id}.</echo>
+			<echo>Info: Building merge for @{topic-set-id}.</echo>
 			<saxon-xslt 
 				style="@{style}" 
 				in="${spfe.config-file}"
@@ -239,7 +239,7 @@
 		<attribute name="output-directory"/>
 		<element name="files-elements"/>
 		<sequential>
-			<echo>Building synthesis for @{topic-set-id} in @{output-directory}.</echo>
+			<echo>Info: Building synthesis for @{topic-set-id} in @{output-directory}.</echo>
 			<!-- run the XSLT script to produce the output -->
 			<local name="authored-content-files"/>
 			<files-elements/>
@@ -410,7 +410,7 @@
 			</saxon-xslt>
 			
 			<!-- validate the output file -->
-			<echo>Validating presentation files for @{topic-set-id}.</echo>
+			<echo>Info: Validating presentation files for @{topic-set-id}.</echo>
 <!--			<xmlvalidate lenient="no">
 				<fileset dir="@{output-directory}" includes="**/*.xml"/>
 				<xmlcatalog refid="spfe-catalogs"/>

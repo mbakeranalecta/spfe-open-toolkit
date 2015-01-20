@@ -58,8 +58,8 @@
 								</xsl:call-template>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:call-template name="sf:subject-not-resolved">
-									<xsl:with-param name="message" select="'Author name  &quot;', ., '&quot;'"/> 
+								<xsl:call-template name="sf:unresolved">
+									<xsl:with-param name="message" select="'No content to link to for author name  &quot;', ., '&quot;'"/> 
 									<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 								</xsl:call-template>
 								<xsl:apply-templates/>
