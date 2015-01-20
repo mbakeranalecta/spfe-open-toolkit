@@ -21,6 +21,11 @@
                     <href>scripts/present/eppo/present-content-set-toc.xsl</href>
                 </script>
             </present>
+            <format type="html">
+                <script>
+                    <href>scripts/format/xhtml/format-topic-set-xhtml.xsl</href>
+                </script>
+            </format>
         </scripts>
     </structure>
 </spfe>

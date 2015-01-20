@@ -166,13 +166,13 @@
                     <href>../presentation-types/dita/config.xml</href>
                     <copy-to>${CONTENT_SET_BUILD_ROOT_DIR}/ditaout</copy-to>
                 </presentation-type>
-        </presentation-types>-->
+        </presentation-types>
         <output-formats>
             <output-format>
                 <name>html</name>
                 <href>../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml</href>
             </output-format>
-        </output-formats>               
+        </output-formats>-->               
         <wip-site>
             <url>wip-site.href</url>
             <ftp>

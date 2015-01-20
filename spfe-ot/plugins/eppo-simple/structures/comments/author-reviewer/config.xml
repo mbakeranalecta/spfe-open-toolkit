@@ -15,7 +15,7 @@
         <scripts>
             <resolve>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/author-reviewer/scripts/resolve/resolve-author-reviewer-comments.xsl</href>
+                    <href>scripts/resolve/resolve-author-reviewer-comments.xsl</href>
                 </script>
             </resolve>
             <present type="eppo">
@@ -23,6 +23,11 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/simple-comment/scripts/present/eppo/present-comments.xsl</href>
                 </script>
             </present>
+            <format type="xhtml">
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/comments/simple-comment/scripts/format/xhtml/format-comment-xhtml.xsl</href>
+                </script>
+            </format>
         </scripts>
     </structure>
 </spfe>

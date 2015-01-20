@@ -12,6 +12,11 @@
                     <href>scripts/present/eppo/present-eppo-subhead.xsl</href>
                 </script>
             </present>
+            <format type="html">
+                <script>
+                    <href>scripts/format/xhtml/format-subhead-xhtml.xsl</href>
+                </script>
+            </format>
         </scripts>
     </structure>
 </spfe>

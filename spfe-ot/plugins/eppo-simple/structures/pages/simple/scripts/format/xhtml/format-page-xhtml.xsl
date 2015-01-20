@@ -62,4 +62,24 @@
         </li>
     </xsl:template>
     
+    <xsl:template match="context-nav">
+        <p>
+            <xsl:apply-templates select="home"/>   
+            | 
+            <xsl:for-each select="breadcrumbs/breadcrumb">
+                <xsl:apply-templates select="."/>
+                <xsl:if test="position() ne last()"> > </xsl:if>
+            </xsl:for-each>
+        </p>
+    </xsl:template>
+    
+    <xsl:template match="context-nav/home">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="context-nav/breadcrumbs/breadcrumb">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    
 </xsl:stylesheet>

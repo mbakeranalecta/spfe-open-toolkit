@@ -27,6 +27,11 @@
                         <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/present/eppo/present-annotations-common-templates.xsl</href>
                     </script>
                 </present>
-                    </scripts>
+            <format type="html">
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/format/xhtml/format-annotations-xhtml.xsl</href>
+                </script>
+            </format>
+        </scripts>
     </structure>
 </spfe>
