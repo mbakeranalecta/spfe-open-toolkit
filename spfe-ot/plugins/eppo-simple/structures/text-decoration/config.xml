@@ -18,7 +18,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/text-decoration/scripts/present/present-text-decoration.xsl</href>
                 </script>
             </present>
-            <format type="html">
+            <format type="xhtml">
                 <script>
                     <href>scripts/format/xhtml/format-decoration-xhtml.xsl</href>
                 </script>

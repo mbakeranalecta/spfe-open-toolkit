@@ -63,7 +63,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/essay/scripts/present/eppo/present-essay-topic.xsl</href>
                 </script>
             </present>
-            <format type="html"> 
+            <format type="xhtml"> 
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/essay/scripts/format/xhtml/format-essay-xhtml.xsl</href>
                 </script>

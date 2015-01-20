@@ -8,7 +8,7 @@
         <name>anchor</name>
         <scripts>
 
-            <format type="html">
+            <format type="xhtml">
                 <script>
                     <href>scripts/format/xhtml/format-anchor-xhtml.xsl</href>
                 </script>

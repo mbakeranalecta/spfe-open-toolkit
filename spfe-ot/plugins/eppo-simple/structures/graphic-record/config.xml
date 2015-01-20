@@ -17,7 +17,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/scripts/present/eppo/present-graphic-record.xsl</href>
                 </script>
             </present>
-            <format type="html">
+            <format type="xhtml">
                 <script>
                     <href>scripts/format/xhtml/format-graphic-record-xhtml.xsl</href>
                 </script>

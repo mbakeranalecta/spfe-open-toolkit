@@ -17,7 +17,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/codeblock/scripts/present/eppo/present-codeblock-eppo.xsl</href>
                 </script>
             </present>
-            <format type="html">
+            <format type="xhtml">
                 <script>
                     <href>scripts/format/xhtml/format-codeblock-xhtml.xsl</href>
                 </script>

@@ -452,12 +452,12 @@
 			<local name="presentation-files"/>
 			<local name="presentation-files-list"/>
 			<local name="files.images.html"/>
-			<local name="files.html.support-files"/>
+			<local name="files.support-files"/>
 			<local name="support-files"/>
 			<local name="echo-files"/>
 			<files-elements/>
 			<pathconvert dirsep="/" pathsep=";" property="support-files"
-				refid="files.html.support-files"/>
+				refid="files.support-files"/>
 			<fileset dir="@{input-directory}" id="presentation-file-list">
 				<include name="*.xml"/>
 			</fileset>
@@ -495,7 +495,7 @@
 			            Should maybe switch to filesets, but that has issues at config level. -->
 			<copy todir="@{output-directory}style"  flatten="true" failonerror="false"
 				preservelastmodified="true" verbose="true">
-				<files refid="files.html.support-files"/>
+				<files refid="files.support-files"/>
 			</copy>
 			
 		</sequential>

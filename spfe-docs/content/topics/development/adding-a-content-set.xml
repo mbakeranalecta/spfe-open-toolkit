@@ -184,8 +184,8 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
         
         <output-formats>
             <output-format>
-                <name>html</name>
-                <href>../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml</href>
+                <name>xhtml</name>
+                <href>../../spfe-ot/plugins/eppo-simple/output-types/xhtml/config.xml</href>
             </output-format>
         </output-formats>
         

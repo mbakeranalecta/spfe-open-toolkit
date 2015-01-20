@@ -7,7 +7,7 @@
     <structure>
         <name>pages.simple</name>
         <scripts>
-            <format type="html">
+            <format type="xhtml">
                 <script>
                     <href>scripts/format/xhtml/format-page-xhtml.xsl</href>
                 </script>

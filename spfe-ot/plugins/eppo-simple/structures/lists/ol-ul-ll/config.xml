@@ -15,7 +15,7 @@
                     <href>scripts/present/eppo/present-eppo-ll-lists.xsl</href>
                 </script>
             </present>
-            <format type="html">
+            <format type="xhtml">
                 <script>
                     <href>scripts/format/xhtml/format-ll-xhtml.xsl</href>
                 </script>

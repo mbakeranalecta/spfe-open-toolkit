@@ -8,7 +8,7 @@
         <name>tree</name>
         <scripts>
 
-            <format type="html">
+            <format type="xhtml">
                 <script>
                     <href>scripts/format/xhtml/format-tree-xhtml.xsl</href>
                 </script>

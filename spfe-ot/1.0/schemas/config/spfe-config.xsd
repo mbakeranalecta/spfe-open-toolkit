@@ -56,7 +56,7 @@
                     <xs:element maxOccurs="unbounded" name="output-format">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="name"/>
+                          <xs:element name="type"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
@@ -326,10 +326,9 @@
             <xs:sequence>
               <xs:element name="name" type="xs:string"/>
               <xs:element name="presentation-type" type="xs:NMTOKEN"/>
-              <xs:element name="scripts" type="scripts-type"/>
-              <xs:element name="support-files" type="fileset-type"/>
+              <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
+              <xs:element name="support-files" type="fileset-type" minOccurs="0"/>
             </xs:sequence>
-            <xs:attribute name="type"/>
           </xs:complexType>
         </xs:element>
         <xs:element name="structure">

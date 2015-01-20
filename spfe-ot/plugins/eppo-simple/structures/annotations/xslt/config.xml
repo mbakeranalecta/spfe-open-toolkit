@@ -28,7 +28,7 @@
                     </script>
                 </present>
                     </scripts>
-        <format type="html">
+        <format type="xhtml">
             <script>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/format/xhtml/format-annotations-xhtml.xsl</href>
             </script>

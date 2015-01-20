@@ -7,7 +7,7 @@
     <structure>
         <name>captions.simple</name>
         <scripts>
-            <format type="html">
+            <format type="xhtml">
                 <script>
                     <href>scripts/format/xhtml/format-caption-xhtml.xsl</href>
                 </script>

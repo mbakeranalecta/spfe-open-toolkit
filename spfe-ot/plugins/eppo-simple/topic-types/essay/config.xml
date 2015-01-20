@@ -56,7 +56,7 @@
                     <href>scripts/present/eppo/present-essay-topic.xsl</href>
                 </script>
             </present>
-            <format type="html"> 
+            <format type="xhtml"> 
                 <script>
                     <href>scripts/format/xhtml/format-essay-xhtml.xsl</href>
                 </script>

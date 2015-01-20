@@ -20,7 +20,7 @@
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/admonitions/general/scripts/present/eppo/present-eppo-admonitions.xsl</href>
                 </script>
             </present>
-            <format type="html">
+            <format type="xhtml">
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/admonitions/general/scripts/format/xhtml/format-admonitions-xhtml.xsl</href>
                 </script>

@@ -372,6 +372,37 @@
                     <xsl:variable name="topic-set-id" select="topic-set-id"/>
                     <xsl:for-each select="output-formats/output-format">
                         <xsl:variable name="name" select="name"/>
+                        <xsl:if test="not($config/content-set/output-formats/output-format[name=$name])">
+                            <xsl:call-template name="sf:error">
+                                <xsl:with-param name="message">
+                                    <xsl:text>Unknown output format specified in topic set configuration.</xsl:text>
+                                    <xsl:text> The topic set is: </xsl:text>
+                                    <xsl:value-of select="$topic-set-id"/>
+                                    <xsl:text>. The specified output format is: </xsl:text>
+                                    <xsl:value-of select="$name"/>
+                                    <xsl:text>. The known output formats are: </xsl:text>
+                                    <xsl:value-of select="string-join($config/content-set/output-formats/output-format/name, ', ')"/>
+                                    <xsl:text>.</xsl:text>
+                                </xsl:with-param>
+                                <xsl:with-param name="in">
+                                    <xsl:value-of select="$topic-set-id"/>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </xsl:if>
+                        <xsl:if test="not(ancestor::topic-set//scripts/format[@type=$name])">
+                            <xsl:call-template name="sf:error">
+                                <xsl:with-param name="message">
+                                    <xsl:text>No format scripts found for specified output format.</xsl:text>
+                                    <xsl:text> The topic set is: </xsl:text>
+                                    <xsl:value-of select="$topic-set-id"/>
+                                    <xsl:text>. The specified output format is: </xsl:text>
+                                    <xsl:value-of select="$name"/>
+                                    <xsl:text>. The known script types are: </xsl:text>
+                                    <xsl:value-of select="string-join(distinct-values(ancestor::topic-set//scripts/format/@type), ', ')"/>
+                                    <xsl:text>.</xsl:text>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </xsl:if>
                         <xsl:variable name="presentation-type"
                             select="$config/content-set/output-formats/output-format[name=$name][1]/presentation-type"/>
                         <build.format topic-set-id="{$topic-set-id}"
@@ -380,7 +411,7 @@
                             
                             output-directory="{$content-set-output}/{if ($topic-set-id=$config/content-set/home-topic-set) then '' else concat($topic-set-id, '/')}">
                             <files-elements>
-                                <files id="files.{$name}.support-files">
+                                <files id="files.support-files">
                                     <xsl:for-each
                                         select="$config/content-set/output-formats/output-format[name=$name]/support-files/include">
                                         <include name="{.}"/>

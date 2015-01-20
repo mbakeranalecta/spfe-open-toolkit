@@ -169,8 +169,8 @@
         </presentation-types>--> 
         <output-formats>
             <output-format>
-                <name>html</name>
-                <href>../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml</href>
+                <name>xhtml</name>
+                <href>../../spfe-ot/plugins/eppo-simple/output-types/xhtml/config.xml</href>
             </output-format>
         </output-formats>              
         <wip-site>

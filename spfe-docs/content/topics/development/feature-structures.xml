@@ -259,7 +259,7 @@
             &lt;/structure></codeblock>
         </section>
         <section>
-            <title>Using css files from a structure</title>
+            <title>Using CSS files from a structure</title>
             <p>A structure can provide CSS files for both authoring and formatting output.</p>
             <p>To use a CSS file from a structure, simply include it in your main CSS file:</p>
             <codeblock>@import url("http://spfeopentoolkit.org/spfe-docs/structures/annotations/spfe-build/style/authoring/annotations-spfe-build.css");</codeblock>

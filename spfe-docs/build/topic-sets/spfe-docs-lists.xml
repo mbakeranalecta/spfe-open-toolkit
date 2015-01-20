@@ -24,7 +24,7 @@
         </presentation-types>
         <output-formats>
             <output-format>
-                <name>html</name>
+                <name>xhtml</name>
             </output-format>
         </output-formats>
         
