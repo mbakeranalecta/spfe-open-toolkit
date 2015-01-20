@@ -95,9 +95,6 @@
     <xsl:template name="main">
         <!-- Check the soundness of the config file -->
         <!-- FIXME: Check that each topic set file is unique. To do this, need to normalize the locations, not just check the paths as strings. -->
-        <xsl:result-document href="log.xml">
-            <xsl:sequence select="$config"/>
-        </xsl:result-document>
         <xsl:call-template name="create-config-file"/>
         <xsl:call-template name="create-build-file"/>
         <xsl:call-template name="create-script-files"/>
