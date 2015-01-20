@@ -9,7 +9,7 @@
     <output-format type="html">
         <name>html</name>
         <presentation-type>eppo</presentation-type>
-        <scripts>
+<!--        <scripts>
             <format type="html">
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/scripts/format/format-eppo-html.xsl</href>
@@ -18,7 +18,7 @@
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </format>
-        </scripts>
+        </scripts>-->
         <support-files>
             <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css/**/*.*</include>
             <include>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/css/eppo-simple.css</include>

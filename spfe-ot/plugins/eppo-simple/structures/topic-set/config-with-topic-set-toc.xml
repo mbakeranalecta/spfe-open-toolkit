@@ -25,6 +25,9 @@
                 <script>
                     <href>scripts/format/xhtml/format-topic-set-xhtml.xsl</href>
                 </script>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
             </format>
         </scripts>
     </structure>
