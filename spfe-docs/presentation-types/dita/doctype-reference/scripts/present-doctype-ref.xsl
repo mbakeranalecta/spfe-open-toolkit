@@ -273,7 +273,7 @@
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:call-template name="sf:unresolved">
-													<xsl:with-param name="message" select="concat('No content to link to on subject','xml-element-name &quot;', $child-name, '&quot;')"/> 
+													<xsl:with-param name="message" select="concat('No content to link to on xml-element-name &quot;', $child-name, '&quot;')"/> 
 													<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 												</xsl:call-template>
 												<xsl:value-of select="$child-name"/>								

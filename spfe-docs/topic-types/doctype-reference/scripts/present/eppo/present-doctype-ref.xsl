@@ -55,7 +55,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="sf:unresolved">
-						<xsl:with-param name="message" select="concat('No content to link to on subject','xml-element-name &quot;', $xpath, '&quot;')"/> 
+						<xsl:with-param name="message" select="concat('No content to link to on xml-element-name &quot;', $xpath, '&quot;')"/> 
 						<xsl:with-param name="in" select="$current-page-name"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$xpath"/>								
@@ -250,7 +250,7 @@
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:call-template name="sf:unresolved">
-													<xsl:with-param name="message" select="'No content to link to on subject',concat('xml-element-name &quot;', $child-name, '&quot;')"/> 
+													<xsl:with-param name="message" select="concat('No content to link to for xml-element-name &quot;', $child-name, '&quot;')"/> 
 													<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 												</xsl:call-template>
 												<xsl:value-of select="$child-name"/>								
@@ -274,7 +274,7 @@
 											</xsl:when>
 											<xsl:otherwise>
 												<xsl:call-template name="sf:unresolved">
-													<xsl:with-param name="message" select="concat('No content to link to on subject','xml-element-name &quot;', $child-name, '&quot;')"/> 
+													<xsl:with-param name="message" select="concat('No content to link to on xml-element-name &quot;', $child-name, '&quot;')"/> 
 													<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 												</xsl:call-template>
 												<xsl:value-of select="$child-name"/>								

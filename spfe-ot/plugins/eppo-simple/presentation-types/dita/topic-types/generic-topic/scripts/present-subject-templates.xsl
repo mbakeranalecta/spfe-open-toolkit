@@ -118,7 +118,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="sf:unresolved">
-						<xsl:with-param name="message" select="concat('No content to link to on subject',@type, ' name &quot;', @key, '&quot;')"/>
+						<xsl:with-param name="message" select="concat('No content to link to on ',@type, ' name &quot;', @key, '&quot;')"/>
 						<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
@@ -162,7 +162,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="sf:unresolved">
-						<xsl:with-param name="message" select="concat('No content to link to on subject',@type, ' name &quot;', (if (@key) then @key else .), '&quot;')"/> 
+						<xsl:with-param name="message" select="concat('No content to link to on ',@type, ' name &quot;', (if (@key) then @key else .), '&quot;')"/> 
 						<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/>
 					</xsl:call-template>
 					<xsl:value-of select="$content"/>								
