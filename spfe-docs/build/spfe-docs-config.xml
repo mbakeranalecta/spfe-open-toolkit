@@ -38,16 +38,16 @@
                 <href>topic-sets/eppo-presentation-reference.xml</href>
             </topic-set>  
             
-			 <topic-set>
+<!--			 <topic-set>
 			     <topic-set-id>eppo-graphic-record-doctype-reference</topic-set-id>
 			     <href>topic-sets/eppo-graphic-record-reference.xml</href>
             </topic-set>  
-            
-			 <topic-set>
+-->            
+<!--			 <topic-set>
 			     <topic-set-id>eppo-generic-topic-reference</topic-set-id>
 			     <href>topic-sets/eppo-generic-topic-reference.xml</href>
             </topic-set>  
-            
+-->            
             <topic-set>
                 <topic-set-id>spfe-function-reference</topic-set-id>
                 <href>topic-sets/spfe-function-reference.xml</href>
@@ -57,12 +57,28 @@
                 <topic-set-id>spfe-docs-essays</topic-set-id>
                 <href>topic-sets/spfe-docs-essays.xml</href>
             </topic-set>
-
+            
+            <topic-set>
+                <topic-set-id>spfe-demos</topic-set-id>
+                <href>topic-sets/spfe-demos.xml</href>
+            </topic-set>
+            
             <topic-set>
                 <topic-set-id>spfe-docs-lists</topic-set-id>
                 <href>topic-sets/spfe-docs-lists.xml</href>
             </topic-set>
         </topic-sets>
+        
+        <object-sets>
+            <object-set>
+                <object-set-id>spfe-docs-misc-tables</object-set-id>
+                <href>object-sets/spfe-docs-misc-tables.xml</href>                 
+            </object-set>
+            <object-set>
+                <object-set-id>spfe-docs-if-then-tables</object-set-id>
+                <href>object-sets/spfe-docs-if-then-tables.xml</href>                 
+            </object-set>
+        </object-sets>
         
 
         
@@ -89,7 +105,7 @@
                 </aliases> 
             </subject-type>
             <subject-type>
-                <id>xslt-function-reference-entry</id>
+                <id>xslt-library-reference-entry</id>
                 <aliases>
                     <singular>SPFE function</singular>
                     <plural>SPFE functions</plural>
@@ -102,6 +118,14 @@
                     <plural>XSLT functions</plural>
                 </aliases>
             </subject-type>
+            <subject-type>
+                <id>xslt-template-name</id>
+                <aliases>
+                    <singular>XSLT template</singular>
+                    <plural>XSLT templates</plural>
+                </aliases>
+            </subject-type>
+            
             <subject-type>
                 <id>task</id>
                 <aliases>
@@ -133,12 +157,22 @@
         </subject-types>
 
         <messages>warning info</messages>
+<!--          <presentation-types>
+          <presentation-type>
+                <name>eppo</name>
+            </presentation-type>
+--><!--                <presentation-type>
+                    <name>dita</name>
+                    <href>../presentation-types/dita/config.xml</href>
+                    <copy-to>${CONTENT_SET_BUILD_ROOT_DIR}/ditaout</copy-to>
+                </presentation-type>
+        </presentation-types>--> 
         <output-formats>
             <output-format>
-                <name>html</name>
-                <href>../../spfe-ot/plugins/eppo-simple/output-types/html/config.xml</href>
+                <name>xhtml</name>
+                <href>../../spfe-ot/plugins/eppo-simple/output-types/xhtml/config.xml</href>
             </output-format>
-        </output-formats>               
+        </output-formats>              
         <wip-site>
             <url>wip-site.href</url>
             <ftp>

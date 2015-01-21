@@ -42,7 +42,7 @@ Main content processing templates
 			type="{$type}" 
 			full-name="{$type}#{$topic-name}"
 			local-name="{$topic-name}"
-			topic-type-alias="{sf:get-topic-type-alias-singular($type, $config)}"
+			topic-type-alias="{sf:get-topic-type-alias-singular($topic-set-id, $type, $config)}"
 			title="{$element-name}"
 			excerpt="{sf:escape-for-xml(sf:first-n-words(descendant::p[1], 30, ' ...'))}">
 				

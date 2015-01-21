@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
+    <head>
+        <id>comments-demo</id>
+        <history>
+            <revision>
+                <date>2014-12-17</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>author notes</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>author note</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>note-to-reviewer</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>review-comment</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Review note demo</title>
+        <p>This is a demonstration of author notes. Author notes can be included either inline in a
+            paragraph or as a block at the text objects
+            level<comment-author-to-author>This is an inline comment</comment-author-to-author>.</p>
+        <comment-author-to-author>
+            <p >The is an author note at the text structure level.</p>
+        </comment-author-to-author>
+        <comment-author-to-reviewer>
+            <p>This is a comment to the reviewer.</p>
+        </comment-author-to-reviewer>
+        <comment-reviewer-to-author>
+            <p>This is a comment from the reviewer.</p>
+        </comment-reviewer-to-author>
+        <note>
+            <title>Comments not visible in final build</title>
+            <p>Because comments are intended for communication between authors and reviewers,
+                comments are not shown in <feature>final output</feature>. So if you are looking at
+                this page in the online docs, chances are you are not going to see any comments. To
+                see the comments in action, <task>do your own build of the SPFE docs</task> with the
+                    <feature>draft build flag</feature>.</p>
+        </note>
+    </body>
+</generic-topic>

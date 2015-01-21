@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
+    <head>
+        <id>fragments-demo</id>
+        <history>
+            <revision>
+                <date>2014-07-31</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>fragments</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>strings</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Fragments Demo</title>
+        <p>This is a demo of fragments and stings. </p>
+<subhead>This is a test of the string feature</subhead>
+
+        <p> What follows is a string defined inline with <code>&lt;string id="a-string">This is a string&lt;/string></code>: <string id="a-string">This is a string</string></p>
+        <p>This is a reference to that inline string with <code>&lt;string-ref id-ref="a-string"/></code>
+            <string-ref id-ref="a-string"/></p>
+        <subhead>This is a test of the fragment feature</subhead>
+        <p>There are two fragment references to an externally define fragment. The first pulls in
+            the fragment without redefining any strings. The second pulls it in but redefines the
+            string "my-local-string".</p>
+        
+        <fragment-ref id-ref="my-fragment"/>
+        
+      <fragment-ref id-ref="my-fragment">
+          <local-strings>
+              <string id="my-local-string"><italic>a local string from the topic file</italic></string>
+          </local-strings>
+      </fragment-ref>
+        <p>Next we have a locally defined fragment:</p>
+        <fragment id="favorite-holiday">
+            <local-strings>
+                <string id="holiday">Christmas</string>
+            </local-strings>
+            <p>My favorite holiday is <string-ref id-ref="holiday"/>.</p>
+        </fragment>
+        <p>And a reference to the locally defined fragment:</p>
+        <fragment-ref id-ref="favorite-holiday">
+            <local-strings>
+                <string id="holiday">Easter</string>
+            </local-strings>
+        </fragment-ref>        
+    </body>
+</generic-topic>

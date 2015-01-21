@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:complexType name="instructions">
+        <xs:sequence>
+            <xs:element name="step" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:group ref="instructions-text-structures"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:group name="instructions">
+        <xs:sequence>
+            <xs:element name="instructions" type="instructions"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="instructions-text-structures">
+        <xs:sequence>
+            <xs:choice maxOccurs="1" minOccurs="1">
+                <xs:group ref="paragraph"/>
+            </xs:choice>
+            <xs:choice>
+                <xs:group ref="paragraph"/>
+                <xs:group ref="lists.ol-ul-ll"/>
+                <xs:group ref="codeblock"/>
+                <xs:group ref="fig"/>
+            </xs:choice>
+        </xs:sequence>    
+    </xs:group>
+</xs:schema>

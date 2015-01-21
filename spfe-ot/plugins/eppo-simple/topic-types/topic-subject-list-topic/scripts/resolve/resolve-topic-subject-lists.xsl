@@ -11,11 +11,12 @@
 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"   
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	exclude-result-prefixes="#all" >
 	
 <xsl:param name="topic-set-id"/>
 	<!-- FIXME: This should not be defaulted. -->
-	<xsl:param name="output-directory" select="concat($config/config:content-set-build, '/topic-sets/', $topic-set-id, '/resolve/out')"/>
+	<xsl:param name="output-directory"/>
 	
 <xsl:output method="xml" indent="yes" />
 
@@ -27,7 +28,7 @@
 	<xsl:sequence select="/config:spfe"/>
 </xsl:variable>
 	
-
+	<xsl:variable name="draft" as="xs:boolean" select="$config/config:build-command='draft'"/>
 <!-- 
 =============
 Main template
@@ -73,7 +74,7 @@ Main content processing templates
 			type="{$type}" 
 			full-name="{$type}#{$name}"
 			local-name="{$name}"			
-			topic-type-alias="{sf:get-topic-type-alias-singular($type, $config)}"
+			topic-type-alias="{sf:get-topic-type-alias-singular($topic-set-id, $type, $config)}"
 			title="{sf:get-subject-type-alias-singular(es:subject-type, $config)}: {es:subject}"
 			excerpt="A list of topics related to the {sf:get-subject-type-alias-singular(es:subject-type, $config)} {es:subject}.">
 			
@@ -81,7 +82,7 @@ Main content processing templates
 			<ss:index>
 				<ss:entry>
 					<ss:type><xsl:value-of select="es:subject-type"/></ss:type>
-					<ss:namespace>http://spfeopentoolkit.org/ns/eppo-simple</ss:namespace>
+					<ss:namespace><xsl:value-of select="es:subject-namespace"/></ss:namespace>
 					<ss:term><xsl:value-of select="es:subject"/></ss:term>
 				</ss:entry>
 			</ss:index>

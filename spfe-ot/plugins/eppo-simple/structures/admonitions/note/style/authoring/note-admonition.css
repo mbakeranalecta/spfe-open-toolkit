@@ -1,0 +1,21 @@
+note
+{
+    display:block;
+    border:2pt solid green;
+    margin:5pt;
+    padding:5pt;
+}
+
+note>title:before
+{
+    content:"Note: ";
+}
+
+note>title
+{
+    display:block;
+    font-weight:bold;
+    font-size:larger;
+    padding-bottom:5pt;
+}
+

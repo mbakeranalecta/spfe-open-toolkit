@@ -1,0 +1,15 @@
+@namespace oxy url('http://www.oxygenxml.com/extensions/author');
+
+head
+{
+ display:block;
+ padding: 1em;
+ background-color:#F0F5F5;
+ font-family:sans-serif;
+ -oxy-display-tags:none;
+}
+
+oxy|comment
+{
+    -oxy-display-tags:none;
+}

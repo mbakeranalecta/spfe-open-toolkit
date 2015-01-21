@@ -1,0 +1,10 @@
+instructions
+{
+    display:block;
+    margin: 0.5em 0 0.5em 1.5em;
+}
+
+instructions>step {
+	display: list-item;
+	list-style-type: decimal;
+}

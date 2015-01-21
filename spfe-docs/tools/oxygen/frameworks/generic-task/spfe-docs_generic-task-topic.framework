@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="16.0" xml:space="preserve">
+<serialized version="16.1" xml:space="preserve">
 	<serializableOrderedMap>
 		<entry>
 			<String>document.types</String>
@@ -26,7 +26,7 @@
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
-											<String>http://spfeopentoolkit.org/spfe-docs/topic-types/common/authoring/css/spfe-docs.css</String>
+											<String>${pdu}/spfe-docs/structures/spfe-docs-core/style/authoring/spfe-docs.css</String>
 										</field>
 										<field name="title">
 											<String>SPFE Docs Common CSS</String>
@@ -41,7 +41,219 @@
 								<Boolean>false</Boolean>
 							</field>
 							<field name="actionDescriptors">
-								<action-array/>
+								<action-array>
+									<action>
+										<field name="id">
+											<String>add-an-indication</String>
+										</field>
+										<field name="name">
+											<String>Add an indication</String>
+										</field>
+										<field name="description">
+											<String></String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;sign xmlns="http://spfeopentoolkit.org/ns/spfe-docs">&lt;name>&lt;/name>&lt;signal>&lt;/signal>&lt;/sign></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String>child::signs[last()]</String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as last child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>add-a-state</String>
+										</field>
+										<field name="name">
+											<String>Add a state</String>
+										</field>
+										<field name="description">
+											<String>Add a state to a state detection matrix</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>        &lt;state xmlns="http://spfeopentoolkit.org/ns/spfe-docs">
+            &lt;name>&lt;/name>
+            &lt;action>&lt;/action>
+            &lt;signs>
+                &lt;sign>
+                    &lt;name>&lt;/name>
+                    &lt;signal>&lt;/signal>
+                &lt;/sign>
+            &lt;/signs>
+        &lt;/state></String>
+															</entry>
+															<entry>
+																<String>insertLocation</String>
+																<String></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as last child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>add-a-sign</String>
+										</field>
+										<field name="name">
+											<String>Add a sign</String>
+										</field>
+										<field name="description">
+											<String>Add a sign to a state detection matrix</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>        &lt;sign xmlns="http://spfeopentoolkit.org/ns/spfe-docs">
+            &lt;name>&lt;/name>
+            &lt;caption>&lt;/caption>
+            &lt;signals>
+                &lt;signal>&lt;/signal>
+            &lt;/signals>
+        &lt;/sign></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as last child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>add-a-signal</String>
+										</field>
+										<field name="name">
+											<String>Add a signal</String>
+										</field>
+										<field name="description">
+											<String>Add a signal to a state detection matrix</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;signal xmlns="http://spfeopentoolkit.org/ns/spfe-docs">&lt;/signal></String>
+															</entry>
+															<entry>
+																<String>insertPosition</String>
+																<String>Inside as last child</String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+								</action-array>
 							</field>
 							<field name="menubarDescriptor">
 								<menu>
@@ -129,7 +341,7 @@
 					</field>
 					<field name="xmlCatalogs">
 						<String-array>
-							<String>http://spfeopentoolkit.org/spfe-docs/catalog.xml</String>
+							<String>${pdu}/catalog.xml</String>
 						</String-array>
 					</field>
 					<field name="description">
@@ -166,6 +378,32 @@
 							<documentTypeRule>
 								<field name="namespace">
 									<String>http://spfeopentoolkit.org/ns/spfe-docs</String>
+								</field>
+								<field name="rootElem">
+									<String>*</String>
+								</field>
+								<field name="fileName">
+									<String>*</String>
+								</field>
+								<field name="publicID">
+									<String>*</String>
+								</field>
+								<field name="javaRuleClass">
+									<String></String>
+								</field>
+								<field name="attributeLocalName">
+									<String>*</String>
+								</field>
+								<field name="attributeNamespace">
+									<String>*</String>
+								</field>
+								<field name="attributeValue">
+									<String>*</String>
+								</field>
+							</documentTypeRule>
+							<documentTypeRule>
+								<field name="namespace">
+									<String>http://spfeopentoolkit.org/ns/spfe-docs/text-objects</String>
 								</field>
 								<field name="rootElem">
 									<String>*</String>

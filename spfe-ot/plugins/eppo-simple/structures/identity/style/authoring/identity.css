@@ -1,0 +1,32 @@
+@namespace oxy url('http://www.oxygenxml.com/extensions/author');
+
+
+head>uri 
+{
+    display:block;
+    background-color:white;
+    -oxy-display-tags:none;
+}
+
+head>uri:before
+{
+    content: "URI:";
+    background-color:#F0F5F5;
+    padding: 2px;
+    display:block;
+    font-size:small;
+    -oxy-display-tags:none;
+    
+}
+
+head id
+{
+    -oxy-display-tags:none;
+}
+
+
+
+oxy|comment
+{
+    -oxy-display-tags:none;
+}

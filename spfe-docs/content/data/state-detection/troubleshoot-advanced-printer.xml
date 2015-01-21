@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2014 All Rights Reserved. -->
+<state-detection xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/file-types/state-detection/schemas/state-detection-topic.xsd">
+    <id>troubleshoot-advanced-printer</id>
+    <title>Troubleshoot your advanced printer</title>
+    <caption>Determining the status of your advanced printer.</caption>
+    <signs>
+        <sign>
+            <name>printer</name>
+            <caption>the printer</caption>
+            <signals>
+                <signal>chirps</signal>
+                <signal>beeps twice</signal>
+                <signal>beeps three times</signal>
+            </signals>
+        </sign>
+        <sign>
+            <name>indicator</name>
+            <caption>the indicator</caption>
+            <signals>
+                <signal>red</signal>
+                <signal>yellow</signal>
+                <signal>green</signal>
+            </signals>
+        </sign>
+        <sign>
+            <name>screen</name>
+            <caption>the screen reads</caption>
+            <signals>
+                <signal>paper jam</signal>
+                <signal>out of toner</signal>
+                <signal>call technician</signal>
+                <signal>print job complete</signal>
+                <signal>out of paper</signal>
+            </signals>
+        </sign>
+    </signs>
+    <states>
+        <state>
+            <name>success</name>
+            <action>retrieve print job</action>
+            <signs>
+                <sign>
+                    <name>printer</name>
+                    <signal>chirps</signal>
+                </sign>
+                <sign>
+                    <name>indicator</name>
+                    <signal>green</signal>
+                </sign>
+                <sign>
+                    <name>screen</name>
+                    <signal>print job complete</signal>
+                </sign>
+            </signs>
+        </state>
+        <state>
+            <name>jammed</name>
+            <action>clear the printer jam</action>
+            <signs>
+                <sign>
+                    <name>printer</name>
+                    <signal>beeps twice</signal>
+                </sign>
+                <sign>
+                    <name>indicator</name>
+                    <signal>yellow</signal>
+                </sign>
+                <sign>
+                    <name>screen</name>
+                    <signal>paper jam</signal>
+                </sign>
+            </signs>
+        </state>
+        <state>
+            <name>broken</name>
+            <action>call the service desk</action>
+            <signs>
+                <sign>
+                    <name>printer</name>
+                    <signal>beeps twice</signal>
+                </sign>
+                <sign>
+                    <name>indicator</name>
+                    <signal>red</signal>
+                </sign>
+                <sign>
+                    <name>screen</name>
+                    <signal>call technician</signal>
+                </sign>
+            </signs>
+        </state>
+        <state>
+            <name>toner-low</name>
+            <action>install new toner cartridge</action>
+            <signs>
+                <sign>
+                    <name>printer</name>
+                    <signal>beeps three times</signal>
+                </sign>
+                <sign>
+                    <name>indicator</name>
+                    <signal>yellow</signal>
+                </sign>
+                <sign>
+                    <name>screen</name>
+                    <signal>out of toner</signal>
+                </sign>
+            </signs>
+        </state>
+        <state>
+            <name>out-of-paper</name>
+            <action>add paper to paper tray</action>
+            <signs>
+                <sign>
+                    <name>printer</name>
+                    <signal>beeps twice</signal>
+                </sign>
+                <sign>
+                    <name>indicator</name>
+                    <signal>yellow</signal>
+                </sign>
+                <sign>
+                    <name>screen</name>
+                    <signal>out of paper</signal>
+                </sign>
+            </signs>
+        </state>
+    </states>
+</state-detection>

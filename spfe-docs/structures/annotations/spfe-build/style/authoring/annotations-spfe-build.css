@@ -1,0 +1,38 @@
+p>config-setting
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>spfe-build-property
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>ant-element
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+
+p>spfe-build-function
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+p>spfe-build-template
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+p>spfe-build-variable
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}
+p>spfe-build-script
+{
+   font-weight:bold;
+   border: 1px solid #FFDEAD;
+}

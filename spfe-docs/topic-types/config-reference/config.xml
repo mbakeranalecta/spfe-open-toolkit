@@ -8,155 +8,68 @@
             <singular>Configuration setting</singular>
             <plural>Configuration settings</plural>
         </aliases>
+        <structures>
+            <structure>
+                <name>eppo-core</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
+                <remap-namespace>
+                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                    <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
+                </remap-namespace>  
+            </structure>
+            <structure>
+                <name>spfe-docs-core</name>
+                <href>../../structures/spfe-docs-core/config.xml</href>
+            </structure>
+            <structure>
+                <name>topic</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic/config-with-resolve-main.xml</href>
+            </structure>
+            <structure>
+                <name>topic-set</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config-with-topic-set-toc.xml</href>
+                <remap-namespace>
+                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                    <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
+                </remap-namespace>  
+            </structure>
+        <structure>
+                <name>graphic-record</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
+            </structure>
+        </structures>
+        
         <scripts>
             <extract>
                 <script>
-                    <href>../../topic-types/config-reference/scripts/extract/schema-defs.xsl</href>
+                    <href>scripts/extract/schema-defs.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
                 </script>
             </extract>
             <merge>
-                <script><href>../../topic-types/config-reference/scripts/merge/merge-config-ref.xsl</href></script>
+                <script><href>scripts/merge/merge-config-ref.xsl</href></script>
                 <script><href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href></script>
             </merge>
             <resolve>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/resolve/resolve-topic.xsl</href>
-                </script>
-                <script>
-                    <href>../../topic-types/config-reference/scripts/resolve/resolve-config-ref.xsl</href>
-                </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-text-structures.xsl</href>
-                </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-annotations.xsl</href>
-                </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-strings.xsl</href>
-                </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>../../topic-types/generic-topic/scripts/resolve/resolve-annotations.xsl</href>
-                </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-fig.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-graphic-record.xsl</href>
+                    <href>scripts/resolve/resolve-config-ref.xsl</href>
                 </script>
                 <script>
                     <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
-                </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                        
-                    </remap-namespace>                   
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/fragments-file/scripts/resolve/resolve-fragments.xsl</href>
-                </script>                
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>                   
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/resolve/resolve-strings.xsl</href>
-                </script>
-
+                </script>               
             </resolve>
-            <link-catalog>
+            <present type="eppo">
                 <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>                      <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/link-catalog/topic/topic-link-catalog.xsl</href>
+                    <href>scripts/present/eppo/present-config-ref.xsl</href>
                 </script>
-                <script>
-                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
-                </script>
-            </link-catalog>
+            </present>
             <toc>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/toc/toc.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
-                </script>
                 <script>
                     <href>../../topic-types/config-reference/scripts/toc/schema-toc.xsl</href>
                 </script>
             </toc>
-            <image-list>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/get-image-list.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
-                </script>
-            </image-list>
-            <presentation type="eppo">
-                <script>
-                    <href>../../topic-types/config-reference/scripts/presentation/present-config-ref.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-topic-set-toc.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-functions.xsl</href>
-                </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-subject-templates.xsl</href>
-                </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-text-structures.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/present-header-and-footer.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/common/scripts/presentation/present-topic-set.xsl</href>
-                </script>
-                <script>
-                    <remap-namespace>
-                        <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                        <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
-                    </remap-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/scripts/presentation/presentation-fig.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
-                </script>
-            </presentation>
         </scripts>
     </topic-type>
 </spfe>

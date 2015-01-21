@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
+    <head>
+        <id>feature-formatting</id>
+        <history>
+            <revision>
+                <date>2014-06-23</date>
+                <author>mbaker</author>
+                <comment>New Topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>formatting</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>format process</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Formatting</title>
+        <p>The <feature>formatting</feature> step is the third phase of the <feature>SPFE build</feature> process. It is responsible for creating the final appearance of a topic set in a particular media.</p>
+        <p>The formatting step takes the output of a <feature>presentation</feature> process appropriate to the particular media. You might have more than one <feature>formatting</feature> process for a particular presentation. For example, you might have a different formatting process for an online PDF (color, links) and for a prepress PDF (black and white, cross references).</p>
+        <p>The formatting stage should never add anything to the content. Formatting scripts should
+            not have to change for translation, excepting cases where a different layout is required
+            for the target language.</p>
+        
+    </body>
+</feature-topic>

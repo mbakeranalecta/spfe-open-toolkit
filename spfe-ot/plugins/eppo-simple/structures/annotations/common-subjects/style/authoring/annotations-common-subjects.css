@@ -1,0 +1,23 @@
+p>feature, string>feature
+{
+   font-weight:normal;
+   border: 1px solid #FFDEAD;
+}
+
+p>concept, string>concept
+{
+   font-weight:normal;
+   border: 1px solid #FFDEAD;
+}
+
+p>task, string>task
+{
+   font-weight:normal;
+   border: 1px solid #FFDEAD;
+}
+
+p>term, string>term
+{
+   font-weight:normal;
+   border: 1px solid #FFDEAD;
+}

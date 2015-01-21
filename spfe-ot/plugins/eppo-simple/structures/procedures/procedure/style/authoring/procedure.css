@@ -1,0 +1,105 @@
+procedure
+{
+    display:block;
+}
+
+procedure>title
+{
+    display:block;
+    font-size:larger;
+    font-weight:bold;
+    font-family:sans-serif;
+}
+
+procedure>steps
+{
+    counter-reset:step;
+}
+
+procedure>steps>step>title
+{
+    display:block;
+    font-size:larger;
+    font-weight:bold;
+    font-family:sans-serif;
+}
+
+procedure>steps>step>title:before
+{
+    counter-increment: step;
+    content:"Step " counter(step) ": ";
+}
+
+procedure>inputs
+{
+    display:block;
+}
+
+procedure>inputs:before
+{
+    content:"Inputs:";
+    display:block;
+    font-size:larger;
+    font-weight:bold;
+    font-family:sans-serif;
+}
+
+procedure>inputs>input
+{
+    display:block;
+}
+
+procedure>inputs>input>name
+{
+    display:inline;
+    font-weight:bold;
+}
+
+procedure>inputs>input>name:after
+{
+    display:inline;
+    font-weight:bold;
+    content:": ";
+}
+
+procedure>inputs>input>p
+{
+    display:inline;
+}
+
+procedure>outputs
+{
+    display:block;
+}
+
+procedure>outputs:before
+{
+    content:"Outputs:";
+    display:block;
+    font-size:larger;
+    font-weight:bold;
+    font-family:sans-serif;
+}
+
+procedure>outputs>output
+{
+    display:block;
+}
+
+procedure>outputs>output>name
+{
+    display:inline;
+    font-weight:bold;
+}
+
+procedure>outputs>output>name:after
+{
+    display:inline;
+    font-weight:bold;
+    content:": ";
+}
+
+procedure>outputs>output>p
+{
+    display:inline;
+}

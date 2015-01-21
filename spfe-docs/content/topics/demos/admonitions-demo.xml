@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
+
+    <head>
+        <id>admonition-demo</id>
+        <history>
+            <revision>
+                <date>2104-12-16-05:00</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>admonition</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>note</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>caution</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>warning</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Admonition Demo</title>  
+        <p>This page demonstrates the use of <feature>admonitions</feature>. The admonitions shown
+            here are from the note-caution-warning set available in the <feature>EPPO-simple
+                structures</feature> collection. This set contains the admonitions most often used
+            in software documentation The collection also includes the note set, which just contains
+            a note admonition, a danger-warning-caution-notice set, most often used in hardware
+            documentation, and a generic admonition. </p>
+        <p>The model of these admonitions is very simple. If you require more complex admonitions
+            you can create your own admonition structure to use in your topic types.</p>
+        <codeblock language="xml">&lt;note>
+    &lt;title>This is something to take note of&lt;/title>
+    &lt;p>Take note of this.&lt;/p>
+&lt;/note></codeblock>
+        <p>The signal word <quotes>Note</quotes> (or whatever other word is specified by the script)
+            will be added at the <feature>presentation stage</feature>. Similarly, any graphic
+            associated with this class of admonition will be added (if specified) at the
+                <feature>presentation stage</feature>.</p>
+        <note>
+            <title>This is something to take note of</title>
+            <p>Take note of this.</p>
+        </note>
+        <p>The caution admonition is the same, except that the root element is
+            <xml-element-name>caution</xml-element-name>.</p>
+        <codeblock>&lt;caution>
+    &lt;title>Be cautious about this&lt;/title>
+    &lt;p>This is something to be cautious about.&lt;/p>
+&lt;/caution></codeblock>
+        <caution>
+            <title>Be cautious about this</title>
+            <p>This is something to be cautious about.</p></caution>
+        <p>The caution admonition is the same, except that the root element is
+            <xml-element-name>warning</xml-element-name>.</p>
+        <codeblock>&lt;warning>
+    &lt;title>Watch out!&lt;/title>
+    &lt;p>This could hurt real bad.&lt;/p>
+&lt;/warning></codeblock>
+        <warning>
+            <title>Watch out!</title>
+            <p>This could hurt real bad.</p>
+        </warning>
+        <p>All these forms are considered <feature>variants</feature> of the generic
+            admonition structure. Therefore the default synthesis scripts convert them to a generic
+            admonition of the appropriate type.</p>
+
+    </body>
+</generic-topic>

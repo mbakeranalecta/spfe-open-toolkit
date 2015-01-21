@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:group name="annotations-base-presentation">
+        <xs:choice>
+            <xs:element name="decoration">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="class"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="reference" type="reference_type"/>
+            <xs:element name="name" type="name_type"/>
+            <xs:element name="link" type="link_type"/>
+        </xs:choice>
+    </xs:group>
+    <xs:complexType mixed="true" name="name_type">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="link" type="link_type"/>
+        </xs:sequence>
+        <xs:attribute name="hint" type="xs:NCName"/>
+        <xs:attribute name="type" type="xs:NCName"/>
+    </xs:complexType>
+    <xs:complexType name="link_type">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="class" type="xs:NCName"/>
+                <xs:attribute name="hint" type="xs:NCName"/>
+                <xs:attribute name="href" use="required"/>
+                <xs:attribute name="title"/>
+                <xs:attribute name="topic-title"/>
+                <xs:attribute name="topic-type"/>
+                <xs:attribute name="external" type="xs:boolean"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="reference_type">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="link" type="link_type"/>
+        </xs:sequence>
+        <xs:attribute name="hint" type="xs:NCName"/>
+        <xs:attribute name="type" type="xs:NCName"/>
+    </xs:complexType>
+</xs:schema>

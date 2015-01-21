@@ -1,0 +1,27 @@
+p>bold, string>bold
+{
+    font-weight:bold;
+}
+
+p>italic, string>italic
+{
+    font-style:italic;
+}
+
+p>code, string>code
+{
+    font-family:monospace;
+    font-weight:bold;
+}
+
+p>quotes:before, string>quotes:before
+{
+    background-color:#FFDEAD;
+    content:'“';
+}
+
+p>quotes:after, string>quotes:after
+{
+    background-color:#FFDEAD;
+    content:'”';
+}

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
+    
+    <head>
+        <id>directory-structure</id>
+        <history>
+            <revision>
+                <date>2012-07-19</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2012-07-24</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+            <revision>
+                <date>2013-11-28</date>
+                <author>mbaker</author>
+                <comment>Removing reference to output directory. Now hard coded to topic-set-id.</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-06-19</date>
+                <author>mbaker</author>
+                <comment>Updating for new config system</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-10-11</date>
+                <author>mbaker</author>
+                <comment>Updating for new build structure</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>build directory</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>spfebuild</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>resolve</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>presentation</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>extract</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>merge</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfebuild.xml</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>image-list.txt</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>config</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>output</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>topic-sets</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>link-catalogs</term>
+            </entry>
+            <entry>
+                <type>directory-name</type>
+                <term>tocs</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Build directory structure</title>
+
+        <p>The build systems produces a directory structure inside the build directory. Understanding the build directory structure can help you debug problems with the build.</p>
+        
+        <p>By default, the build directory is named <directory-name>spfebuild</directory-name> and is created in the user's home directory. You can change the location of the build directory by setting the environment variable <code>SPFE_BUILD_DIR</code>.</p>
+        
+        <p>The build begins by running the configuration script, which creates an ANT build file named <file-name>spfebuild.xml</file-name> at the root of the build directory. This file is created dynamically each time the build is run. Don't try to edit it because it will be overwritten the next time the build is run.</p>
+        
+        <p>The configuration script also creates a directory for the content set being built,
+            which is named using the content set id (configured in
+            <config-setting>/spfe/content-set/content-set-id</config-setting>). Inside this directory it
+            creates a directory named <directory-name>config</directory-name> which contains the
+            consolidated <feature>configuration file</feature>, with the name
+                <file-name>spfe-config.xml</file-name>.</p>
+        
+        <p>The build script then runs ANT on the <file-name>spfebuild.xml</file-name> build file to
+            perform the rest of the build. The build then creates two additional directories in the
+            doc set directory, <directory-name>build</directory-name>, where all the temporary files
+            used by the build are created, and <directory-name>output</directory-name>, where the
+            output is created.</p>
+        
+        <p>Inside the <directory-name>build</directory-name> directory, there are three directories,
+                <directory-name>link-catalogs</directory-name>, where the <feature>link
+                catalogs</feature> are created, <directory-name>topic-sets</directory-name>, where
+            the each stage of the topic set build is created, and
+                <directory-name>tocs</directory-name>, where the temporary TOC files are created.
+            The link catalogs and temporary TOCs are located outside of the topic set directories
+            because they are used by all topic set builds.</p>
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        <p>Col 1</p>
+                    </td>
+                    <td>
+                        <p>Col 2</p>
+                    </td>
+                    <td>
+                        <p>Col 3</p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <p>This is a cell</p>
+                    </td>
+                    <td>
+                        <p>This is another cell</p>
+                    </td>
+                    <td>
+                        <p>This is a third cell</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>This is a new row</p>
+                    </td>
+                    <td>
+                        <p>This is a second <feature>cell</feature> in the new row</p>
+                    </td>
+                    <td>
+                        <p>This is a third cell in the new row</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p>Inside the <directory-name>topic-sets</directory-name> directory, a directory is created for each topic set in the build, with its name matching the <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> of each topic set.</p>
+        
+        <p>Inside each of these topic set directories, the following files and directories are created:</p>
+        
+        <ul>
+            <li>
+                <p>A build flag for each stage of the build. The build flag is used by the build for
+                    dependency checking purposes. </p>
+            </li>
+            <li>
+                <p>A directory named after each step in the build process (extract, merge, resolve,
+                    presentation, etc.). Each directory contains the generated scripts for that step
+                    and an out directory that hold the result of the step (except for the steps that
+                    produce the final output, where the output goes to the content set output
+                    directory.  </p>
+            </li>
+            <li>
+                <p>The <file-name>image-list.txt</file-name> file, which is used to copy image files used in the topic set to the output directory.</p>
+            </li>
+            
+        </ul>
+    </body>
+    
+</generic-topic>

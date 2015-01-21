@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
+    <head>
+        <id>feature-encoding</id>
+        <history>
+            <revision>
+                <date>2014-06-23</date>
+                <author>mbaker</author>
+                <comment>New Topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-10-11</date>
+                <author>mbaker</author>
+                <comment>Adding info on external tools</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>encoding</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Encoding</title>
+        <p>The <feature>encoding</feature> step is the final phase of the <feature>SPFE
+                build</feature> process. It is responsible for creating a compiled deliverable, such
+            as a PDF or EPub.</p>
+        <p>The encoding step is not needed in all cases. If the final output is an XML or HTML format, no encoding is needed as the <feature>formatting</feature> step can create the final output directly.</p>
+        <p>In most cases, the encoding step will be performed by an external tool, such as a PDF
+            generator of  the Microsoft Help Compiler. In this case, the job of the format stage it
+            to create the correct input file or files for this tool.    </p>
+        <p>Configuring the encoding stage consists of making sure that whatever configuration the
+            external tool requires in the right place.</p>
+    </body>
+</feature-topic>

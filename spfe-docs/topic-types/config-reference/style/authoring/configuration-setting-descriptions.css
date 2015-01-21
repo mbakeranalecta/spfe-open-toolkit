@@ -1,0 +1,208 @@
+config-setting-descriptions>head:before
+{
+    font-weight:bold;
+    font-size:larger;
+    content: "Configuration settings descriptions";
+    font-family:sans-serif;
+}
+
+config-setting-descriptions>body
+{
+    display:block;
+    background-color:#FFDEAD;
+    padding: 1em;
+    font-family:serif;    
+}
+
+
+config-setting-descriptions>body>*
+{
+    background-color:white;
+}
+
+config-setting-descriptions>body>config-setting-description
+{
+    border: 1pt groove white;
+    padding: 1em;
+    background-color:#FFDEAD; 
+    padding-left: 1em;
+}
+
+config-setting-descriptions>body>config-setting-description>*
+{
+    background-color:white;
+}
+
+
+config-setting-descriptions>body>config-setting-description:before
+{
+    display:block;
+    content: "config-setting-description";
+    background-color:#FFDEAD;
+    font-family:sans-serif;
+    font-size:small;  
+    padding-top:1em;
+}
+
+
+config-setting-descriptions>body>schema-namespace
+{
+    display:block;
+    font-family:sans-serif;
+    font-size:large;
+}
+
+config-setting-descriptions>body>schema-namespace:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "Schema namespace of the elements described:";
+    font-size:small;
+}
+
+config-setting-descriptions>body>config-setting-description>xpath
+{
+    display:block;
+    font-family:sans-serif;
+    font-size:large;
+    -oxy-show-placeholder: always;
+}
+
+config-setting-descriptions>body>config-setting-description>xpath:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "Element name as an xPath, starting from root (eg: /foo/bar ):";
+    font-size:small;
+    padding-top:1em;
+}
+
+    
+    
+config-setting-descriptions>body>config-setting-description>description
+{
+    -oxy-show-placeholder: always;
+}
+config-setting-descriptions>body>config-setting-description>description:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "Description of the element:";
+    font-size:small;
+    padding-top:1em;
+}
+
+config-setting-descriptions>body>config-setting-description>build-property:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "If the configuration element becomes an ANT build propery, write the property name:";
+    font-size:small;
+    padding-top:1em;
+
+}
+
+config-setting-descriptions>body>config-setting-description>build-property
+{
+    display:block;
+    background-color:white;
+    -oxy-show-placeholder: always;
+}
+
+config-setting-descriptions>body>config-setting-description>include-behavior:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "How is this element treated when the config file is included in another config file:";
+    font-size:small;
+    padding-top:1em;
+}
+
+config-setting-descriptions>body>config-setting-description>include-behavior
+{
+    display:inline;
+    background-color:white;
+    -oxy-show-placeholder: always;
+}
+
+
+
+config-setting-descriptions>body>config-setting-description>attributes
+{
+    background-color:#FFDEAD; 
+}
+
+
+config-setting-descriptions>body>config-setting-description>attributes>*
+{
+    background-color:white;
+}
+
+config-setting-descriptions>body>config-setting-description>attributes:before
+{
+    display:block;
+    content: "Attributes:";
+    background-color:#FFDEAD;
+    font-family:sans-serif;
+    font-size:small;  
+    padding-top:1em;
+}
+
+config-setting-descriptions>body>config-setting-description>attributes>attribute
+{
+    border: 1pt groove white;
+    padding: 1em;
+    background-color:#FFDEAD; 
+    padding-left: 1em;
+    -oxy-show-placeholder: always;
+}
+
+config-setting-descriptions>body>config-setting-description>attributes>attribute>*
+{
+    background-color:white;
+}
+
+config-setting-descriptions>body>config-setting-description>attributes>attribute:before
+{
+    display:block;
+    content: "Attribute";
+    background-color:#FFDEAD;
+    font-family:sans-serif;
+    font-size:small;  
+    padding-top:1em;
+}
+
+
+config-setting-descriptions>body>config-setting-description>attributes>attribute>name
+{
+    display:block;
+    font-family:sans-serif;
+    font-size:large;
+    -oxy-show-placeholder: always;
+ }
+
+config-setting-descriptions>body>config-setting-description>attributes>attribute>name:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "Attribute name (just the name, not an xPath)";
+    font-size:small;
+    padding-top:1em;
+}
+
+config-setting-descriptions>body>config-setting-description>attributes>attribute>description:before
+{
+    display:block;
+    font-family:sans-serif;
+    background-color:#FFDEAD;
+    content: "Description of the attribute:";
+    font-size:small;
+    padding-top:1em;
+}
+

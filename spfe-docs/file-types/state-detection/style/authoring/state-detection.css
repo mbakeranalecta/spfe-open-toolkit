@@ -1,0 +1,389 @@
+state-detection
+{
+    display:block;
+    color:#555555;
+    -oxy-display-tags:none;
+    background-color:#CCCCCC;
+    padding-left:2em;
+}
+
+state-detection:before
+{
+    content:'State detection matrix';
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#CCCCCC;
+    font-size:larger;
+}
+
+state-detection>id
+{
+    display:block;
+    background-color:white;
+    color:black;
+    font-size:larger;
+    -oxy-display-tags:none;
+    margin:2px;
+}
+
+state-detection>id:before
+{
+    display:inline;
+    content:'ID: ';
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#CCCCCC;
+}
+
+state-detection>title
+{
+    display:block;
+    background-color:white;
+    color:black;
+    font-size:larger;
+    -oxy-display-tags:none;
+    margin:2px;
+}
+
+state-detection>title:before
+{
+    display:inline;
+    content:'Title: ';
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#CCCCCC;
+}
+
+state-detection>caption
+{
+    display:block;
+    background-color:white;
+    color:black;
+    -oxy-display-tags:none;
+    margin:2px;
+}
+
+state-detection>caption:before
+{
+    display:inline;
+    content:'Caption: ';
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#CCCCCC;
+}
+
+state-detection>signs
+{
+    display:block;
+    margin-left:2em;
+    -oxy-display-tags:none;
+}
+
+state-detection>signs:before
+{
+    display:block;
+    content: "Signs are the places you can look for state information, such as indicator lights or log. Each sign has a name and a label.";
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+}
+
+state-detection>signs:after
+{
+    content: 
+        oxy_editor(
+            type, button,
+            actionID, "add-a-sign");  
+}
+
+state-detection>signs>sign 
+{
+    display:block;
+    margin-left:2em;
+    -oxy-display-tags:none;
+    border:1px solid black;
+    margin-bottom:1em;
+}
+
+state-detection>signs>sign>signals:after
+{
+    content: 
+        oxy_editor(
+            type, button,
+            actionID, "add-a-signal");  
+}
+state-detection>signs>sign>name:before
+{
+    display:inline;
+    content: "Sign: ";
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#CCCCCC;
+}
+
+state-detection>signs>sign>signals:before
+{
+    display: block;
+    content: "Signals are the way a sign communicates. An indicator flashes or shows a color. A log contains a specific message."; 
+    font-weight: bold;
+    -oxy-display-tags:none;
+    color:#555555;
+}
+
+
+state-detection>signs>sign>signals
+{
+    display: block;
+    margin-left:2em;
+    -oxy-display-tags:none;
+}
+
+state-detection>signs>sign>name
+{
+    display:block;
+    background-color:white;
+    -oxy-display-tags:none;
+    color:black;
+    margin:2px;
+    -oxy-editable:true;
+}
+
+state-detection>signs>sign>caption
+{
+    display:block;
+    margin-left:2em;
+    background-color:white;
+    -oxy-display-tags:none;
+    color:black;
+    margin:2px;
+}
+
+state-detection>signs>sign>caption:before
+{
+    display:inline;
+    font-weight: bold;
+    content: "Caption: ";
+    background-color:#CCCCCC;
+    -oxy-display-tags:none;
+    color:#555555;
+}
+
+
+state-detection>signs>sign>signals>signal
+{
+    display: block;
+    margin-left:2em;
+    background-color:white;
+    -oxy-display-tags:none;
+    color:black;
+    margin:2px;
+    -oxy-editable:true;
+}
+
+state-detection>signs>sign>signals>signal:before
+{
+    font-weight:bold;
+    display: inline;
+    content: "Signal: ";
+    -oxy-display-tags:none;
+    background-color:#CCCCCC;
+    color:#555555;
+}
+
+state-detection>states
+{
+    display:block;
+    -oxy-display-tags:none;
+    margin-left:2em;
+}
+state-detection>states:before
+{
+    display: block;
+    font-weight: bold;
+    content: "States are the condition a subject may be in. A state is indicated by a set of signs and signals.";
+    -oxy-display-tags:none;
+    color:#555555;
+}
+
+state-detection>states:after
+{
+        content: 
+        oxy_editor(
+            type, button,
+            actionID, "add-a-state");
+
+}
+
+state-detection>states>state
+{
+    -oxy-display-tags:none;
+    display:block;
+    border:1px solid black;
+    margin-bottom:1em;
+}
+
+state-detection>states>state>name
+{
+    -oxy-display-tags:none;
+    display: block;
+    background-color: white;
+    color:black;
+    margin:2px;
+    -oxy-editable:true;
+}
+
+state-detection>states>state>name:before
+{
+    display:inline;
+    font-weight: bold;
+    content: "State: ";
+    -oxy-display-tags:none;
+    color:#555555;
+    background-color:#CCCCCC;
+    margin-left:2em;
+}
+
+state-detection>states>state>action:before
+{
+    -oxy-display-tags:none;
+    display:inline;
+    background-color:#CCCCCC;
+    color:#555555;
+    content: "Action: ";
+    font-weight:bold;  
+    
+}
+
+state-detection>states>state>action
+{
+    -oxy-display-tags:none;
+    display: block;
+    background-color: white;
+    color:black;
+    margin-left:2em;
+    margin:2px;
+    -oxy-editable:true;
+}
+
+state-detection>states>state>action
+{
+    -oxy-display-tags:none;
+    display:inline;
+    background-color:white;
+    color:black;
+    margin-left:2em;
+    -oxy-editable:true;
+}
+state-detection>states>state>signs
+{
+    -oxy-display-tags:none;
+    display: table;
+    margin-left:2em;
+}
+
+state-detection>states>state>action:after
+{
+    -oxy-display-tags:none;
+    display:table-caption;
+    content: "Indications. (The combination of signs and signals that indicate this state.)";
+    background-color:#CCCCCC;
+    color:#555555;
+    font-weight:bold;  
+}
+
+state-detection states state:after 
+{
+    background-color:#CCCCCC;
+    color:#555555;
+    content: 
+        oxy_editor(
+            type, button,
+            actionID, "add-an-indication");
+    margin-left:2em;
+}
+
+state-detection>states>state>signs>sign
+{
+    -oxy-display-tags:none;
+    display: table-row;
+    margin-left:2em;
+}
+
+state-detection>states>state>signs>sign>name
+{
+    content: 
+        oxy_combobox(           
+            edit, "#text",
+            editable, true,
+            values, oxy_xpath(
+                "string-join(/state-detection/signs/sign/name/text(),',')",
+                processChageMarkers,
+                true));
+    visibility:-oxy-collapse-text;
+}
+
+state-detection>states>state>signs>sign>signal
+{
+    content: 
+        oxy_combobox(           
+            edit, "#text",
+            editable, true,
+            values, oxy_xpath(
+                oxy_concat(
+                    "string-join(/state-detection/signs/sign[name = '", oxy_xpath("preceding-sibling::name/text()"), "']/signals/signal/text(),',')")
+                    )
+         );
+    visibility:-oxy-collapse-text;
+}
+
+state-detection>states>state>signs>sign>name
+{
+    -oxy-display-tags:none;
+    display:table-cell;
+    background-color:white;
+    color:black;
+    margin-left:2em;
+    margin:2px;
+    -oxy-editable:true;
+    padding:2px;
+    border:1pt solid #CCCCCC;
+}
+
+state-detection>states>state>signs>sign:first-child>name:before
+{
+    -oxy-display-tags:none;
+    display:table-cell;
+    background-color:#CCCCCC;
+    color:#555555;
+    content: "Sign: ";
+    font-weight:bold;
+}
+
+state-detection>states>state>signs>sign>signal
+{
+    -oxy-display-tags:none;
+    display:table-cell;
+    background-color:white;
+    color:black;
+    margin-left:2em;
+    margin:2px;
+    -oxy-editable:true;
+    padding:2px;
+    border:1pt solid #CCCCCC;
+}
+
+state-detection>states>state>signs>sign:first-child>signal:before
+{
+    -oxy-display-tags:none;
+    display:table-cell;
+    color:#555555;
+    background-color:#CCCCCC;
+    content: "Signal: ";
+    font-weight:bold;
+}
+

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:group name="procedure">
+        <xs:sequence>
+            <xs:element name="procedure" type="procedure"> </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="procedure">
+        <xs:sequence>
+            <xs:element name="title"/>
+            <xs:element name="intro">
+                <xs:complexType>
+                    <xs:group ref="text-nested"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="admonitions">
+                <xs:complexType>
+                    <xs:group ref="admonitions" maxOccurs="unbounded"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="inputs">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="input">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="name"/>
+                                    <xs:element name="p" type="paragraph"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="outputs">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="output">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="name"/>
+                                    <xs:element name="p" type="paragraph"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="steps">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="step">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="title"/>
+                                    <xs:group ref="text-nested"/>
+                                </xs:sequence>
+                                <xs:attribute name="id" type="xs:NMTOKEN"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:NMTOKEN"/>
+    </xs:complexType>
+    <xs:group name="annotations-procedure-resource-id">
+        <xs:choice>
+            <xs:element name="procedure-id">
+                <xs:complexType>
+                    <xs:attribute name="id-ref"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:group>
+</xs:schema>

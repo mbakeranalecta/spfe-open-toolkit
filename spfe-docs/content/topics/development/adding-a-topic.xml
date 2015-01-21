@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
+
+    <head>
+        <id>adding-a-topic</id>
+        <history>
+            <revision>
+                <date>2013-06-14</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2013-06-14</date>
+                <author>jkeffer</author>
+                <comment>Remove some incorrect content.</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2013-06-21</date>
+                <author>jkeffer</author>
+                <comment>Remove some incorrect content.</comment>
+                <status>Ready for technical review</status>
+            </revision>
+            <revision>
+                <date>2014-06-17</date>
+                <author>mbaker</author>
+                <comment>Fixing config-setting references</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>topic</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>{add} a {topic}</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Adding a new topic</title>
+        <understanding>
+            <p>A <feature>topic</feature> is the basic unit of content that is presented to the user. If you are trying to create a reusable content building block that is not a full topic, you should be creating a <feature>fragment</feature>, a <feature>string</feature>, or a <feature>object</feature>.</p>
+       </understanding>
+       <planning>
+           <planning-question>
+               <planning-question-title>Which topic type should I use?</planning-question-title>
+                <planning-question-body>
+                   <p>Before you add a topic, you must decide what <feature>topic type</feature> to
+                        create. You should choose the topic type that is most specific to the
+                        subject matter you are writing about. You should also be aware that each
+                        topic set only allows a specific set to topic types to be included. While
+                        you don't create topics for topic sets, but as independent entities, you
+                        don't want to be surprised by this requirement down the line.  Each
+                            <feature>topic set configuration file</feature> lists the topic types
+                        that are allowed in that topic set.  That list should reflect the type of
+                        content the topic set is supposed to contain, so if the best topic type for
+                        your subject matter is not one that a topic set that wants to include it
+                        supports, the chances are that the problem lies with how the topic set is
+                        defined rather than with the topic type chosen for the topic.</p>
+                </planning-question-body>
+            </planning-question>
+       </planning>
+<doing>
+    <p>To add a new topic, create a file based on the schema for the topic type you have chosen.</p>
+            <p>Where you store your file will depend on the rules of the repository that you are
+                using. In the simplest case, you will store you file in a directory on the local
+                file system. One or more topic sets may be set up to pull files from that directory,
+                in which case you topic will then be included in those topic sets. In other cases,
+                the file may be included or excluded based on metadata it contains.</p>
+        </doing>
+    </body>
+</think-plan-do-topic>

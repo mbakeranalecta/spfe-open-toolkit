@@ -9,15 +9,11 @@
 	</xmlcatalog>
 	<xmlcatalog id="spfe-catalogs">
 		<classpath>
-			<fileset dir="${SPFEOT_HOME}/tools/xml-commons-resolver-1.2">
-				<include name="resolver.jar"/>
-			</fileset>
-			<fileset dir="${SPFEOT_HOME}/tools/config">
-				<include name="CatalogManager.properties"/>
-			</fileset>
+			<pathelement path="${SPFEOT_HOME}/tools/xml-commons-resolver-1.2/resolver.jar"/>
+			<pathelement path="${SPFEOT_HOME}/tools/config"/>
 		</classpath>
-		<catalogpath>
-			<fileset dir="${SPFEOT_HOME}/1.0/schemas">
+<!--		<catalogpath>
+			<fileset dir="${SPFEOT_HOME}/1.0">
 				<include name="**/catalog.xml"/>
 			</fileset>
 			<fileset dir="${SPFEOT_HOME}/plugins">
@@ -26,7 +22,7 @@
 			<fileset dir="${HOME}/.spfe" erroronmissingdir="no">
 				<include name="**/catalog.xml"/>
 			</fileset>
-		</catalogpath>
+		</catalogpath>-->
 
 	</xmlcatalog>
 
@@ -38,7 +34,24 @@
 		<attribute name="initial-template" default="main"/>
 		<element name="params"/>
 		<sequential>
-			<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar" style="@{style}" in="@{in}"
+			
+			<java classname="net.sf.saxon.Transform" failonerror="yes">
+				<classpath>
+					<pathelement path="${classpath}"/>
+					<pathelement path="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar"/>
+					<pathelement path="${SPFEOT_HOME}/tools/xml-commons-resolver-1.2/resolver.jar"/>
+					<pathelement path="${SPFEOT_HOME}/tools/config"/>
+				</classpath>
+				<params/>
+				<arg value="-s:@{in}"/>
+				<arg value="-xsl:@{style}"/> 
+				<arg value="-o:@{out}"/> 
+				<arg value="-it:@{initial-template}"/>
+				<arg value="-r:org.apache.xml.resolver.tools.CatalogResolver"/>
+				<arg value="-x:org.apache.xml.resolver.tools.ResolvingXMLReader"/>
+			</java>
+			
+<!--			<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar" style="@{style}" in="@{in}"
 				out="@{out}">
 				<xmlcatalog refid="spfe-catalogs"/>
 				<params/>
@@ -46,7 +59,7 @@
 					<attribute name="http://saxon.sf.net/feature/initialTemplate"
 						value="@{initial-template}"/>
 				</factory>
-			</xslt>
+			</xslt>-->
 		</sequential>
 	</macrodef>
 
@@ -61,7 +74,7 @@
 		<echo/>
 		<echo/>
 		<echo>=====================================================</echo>
-		<echo>Beginning ${ant.project.invoked-targets} build of ${spfe.content-set-id}</echo>
+		<echo>Info: Beginning ${ant.project.invoked-targets} build of ${spfe.content-set-id}</echo>
 		<echo>====================================================</echo>
 		<echo/>
 		<echo/>
@@ -87,7 +100,7 @@
 		<echo/>
 		<echo/>
 		<echo>===========================================================================</echo>
-		<echo>Last build failed and left a mess. Please run 'spfe -clean'. and try again.</echo>
+		<echo>Error: Last build failed and left a mess. Please run 'spfe -clean'. and try again.</echo>
 		<echo>===========================================================================</echo>
 		<echo/>
 		<echo/>
@@ -96,7 +109,7 @@
 
 	<!-- recorder target -->
 	<target name="-recorder" if="spfe.topic-set-id">
-		<echo message="Logging to: ${spfe.build.build-directory}/logs/${spfe.topic-set-id}.txt"/>
+		<echo message="Info: Logging to: ${spfe.build.build-directory}/logs/${spfe.topic-set-id}.txt"/>
 		<mkdir dir="${spfe.build.build-directory}/logs"/>
 		<record name="${spfe.build.build-directory}/logs/${spfe.topic-set-id}-log.txt"
 			action="start"/>
@@ -168,12 +181,16 @@
 				in="${spfe.config-file}"
 				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/extracted.flag">
 				<params>
-					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<arg value="topic-set-id=@{topic-set-id}"/>
+					<arg value="output-directory=@{output-directory}"/>
+					<arg value="sources-to-extract-content-from=${sources-to-extract-content-from}"/>
+					<arg value="draft=${draft}"/>
+<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="output-directory" expression="@{output-directory}"/>
 					<param name="sources-to-extract-content-from"	expression="${sources-to-extract-content-from}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 					<param name="draft" expression="${draft}" if="draft"/>
-				</params>
+-->				</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
@@ -191,19 +208,24 @@
 			<local name="extracts-to-merge-content-with"/>
 			<local name="authored-content-files"/>
 			<files-elements/>
-			<echo>Building merge for @{topic-set-id}.</echo>
+			<echo>Info: Building merge for @{topic-set-id}.</echo>
 			<saxon-xslt 
 				style="@{style}" 
 				in="${spfe.config-file}"
 				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/merge.flag">
 				<params>
-					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<arg value="topic-set-id=@{topic-set-id}"/>
+					<arg value="output-directory=@{output-directory}"/>
+					<arg value="authored-content-files=${authored-content-files}"/>
+					<arg value="extracted-content-files=${extracts-to-merge-content-with}"/>
+					<arg value="draft=${draft}"/>
+<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="output-directory" expression="@{output-directory}"/>
 					<param name="authored-content-files" expression="${authored-content-files}"/>
 					<param name="extracted-content-files" expression="${extracts-to-merge-content-with}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 					<param name="draft" expression="${draft}" if="draft"/>
-				</params>
+-->				</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
@@ -217,7 +239,7 @@
 		<attribute name="output-directory"/>
 		<element name="files-elements"/>
 		<sequential>
-			<echo>Building resolve for @{topic-set-id}.</echo>
+			<echo>Info: Building synthesis for @{topic-set-id} in @{output-directory}.</echo>
 			<!-- run the XSLT script to produce the output -->
 			<local name="authored-content-files"/>
 			<files-elements/>
@@ -226,11 +248,15 @@
 				in="${spfe.config-file}"
 				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/resolve.flag">
 				<params>
-					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<arg value="topic-set-id=@{topic-set-id}"/>
+					<arg value="authored-content-files=${authored-content-files}"/>
+					<arg value="output-directory=@{output-directory}"/>
+					<arg value="draft=${draft}"/>
+<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="authored-content-files" expression="${authored-content-files}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 					<param name="draft" expression="${draft}" if="draft"/>
-				</params>
+-->				</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
@@ -269,9 +295,11 @@
 				style="@{style}"
 				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/link-catalog.flag">
 				<params>
-					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<arg value="topic-set-id=@{topic-set-id}"/>
+					<arg value="synthesis-files=${synthesis-files-list}"/>
+<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files-list}"/>
-				</params>
+-->				</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
@@ -300,9 +328,11 @@
 				style="@{style}"
 				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/toc.flag">
 				<params>
-					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<arg value="topic-set-id=@{topic-set-id}"/>
+					<arg value="synthesis-files=${synthesis-files-list}"/>
+<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files-list}"/>
-				</params>
+-->				</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
@@ -315,18 +345,19 @@
 	<target name="-current.presentation">
 		<uptodate property="-current.presentation"
 			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/synthesis.flag"
-			targetfile="${temp}/presentation/presentation.flag"/>
+			targetfile="${temp}/present/presentation.flag"/>
 	</target>
 
 	<!-- build the presentation -->
 	<target name="-build.presentation"
 		depends="-build.synthesis, --build.presentation"/>
-	<macrodef name="build.presentation" description="presentation step.">
+	<macrodef name="build.present" description="Present step.">
 		<!--		depends="-current.presentation"
 		unless="-current.presentation">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<attribute name="output-directory"/>
+		<attribute name="copy-to" default=""/>
 		<sequential>
 			<local name="synthesis-files"/>
 			<local name="synthesis-files-list"/>
@@ -334,43 +365,72 @@
 			<local name="toc-files-list"/>
 			<local name="link-catalog-files"/>
 			<local name="link-catalog-list"/>
+			<local name="objects-files"/>
+			<local name="objects-list"/>
+			
 			<fileset id="synthesis-files" dir="${spfe.build.build-directory}/topic-sets/@{topic-set-id}">
 				<include name="resolve/out/*.xml"/>
 			</fileset>
 			<pathconvert dirsep="/" pathsep=";" property="synthesis-files-list"
 				refid="synthesis-files"/>
+			
 			<fileset id="toc-files" dir="${spfe.build.toc-directory}">
 				<include name="*.xml"/>
 			</fileset>
 			<pathconvert property="toc-files-list" dirsep="/" pathsep=";" refid="toc-files"/>
+			
 			<fileset id="link-catalog-files" dir="${spfe.build.link-catalog-directory}">
 				<include name="*.xml"/>
 			</fileset>			
 			<pathconvert property="link-catalog-files-list" dirsep="/" pathsep=";" refid="link-catalog-files"/>
+			
+			<fileset id="objects-files" dir="${spfe.build.objects-directory}">
+				<include name="**/*.xml"/>
+			</fileset>			
+			<pathconvert property="objects-files-list" dirsep="/" pathsep=";" refid="objects-files"/>
+			
 			<!-- run the XSLT script to produce the output -->
 			<saxon-xslt 
 				style="@{style}" 
 				in="${spfe.config-file}"
 				out="@{output-directory}/presentation.flag">
 				<params>
-					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<arg value="topic-set-id=@{topic-set-id}"/>
+					<arg value="synthesis-files=${synthesis-files-list}"/>
+					<arg value="link-catalog-files=${link-catalog-files-list}"/>
+					<arg value="objects-files=${objects-files-list}"/>
+					<arg value="output-directory=@{output-directory}"/>
+					<arg value="toc-files=${toc-files-list}"/>
+<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="synthesis-files" expression="${synthesis-files-list}"/>
 					<param name="link-catalog-files" expression="${link-catalog-files-list}"/>
 					<param name="output-directory" expression="@{output-directory}"/>
 					<param name="toc-files" expression="${toc-files-list}"/>
-				</params>
+-->				</params>
 			</saxon-xslt>
 			
 			<!-- validate the output file -->
-<!--			<echo>Validating presentation files for @{topic-set-id}.</echo>
-			<xmlvalidate lenient="no">
+			<echo>Info: Validating presentation files for @{topic-set-id}.</echo>
+<!--			<xmlvalidate lenient="no">
 				<fileset dir="@{output-directory}" includes="**/*.xml"/>
 				<xmlcatalog refid="spfe-catalogs"/>
 				<!-\- make the validation include namespaces -\->
 				<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
 				<attribute name="http://apache.org/xml/features/validation/schema" value="true"/>
-			</xmlvalidate>
--->		</sequential>
+			</xmlvalidate>-->
+			<condition property="copy-to-specified">
+				<not>
+					<equals arg1="${copy-to}" arg2=""/>
+				</not>
+			</condition>
+
+			<copy todir="@{copy-to}" flatten="false" verbose="true">
+				<fileset dir="@{output-directory}">
+					<exclude name="**/*.*"/>
+					<include name="**/*.*" if="copy-to-specified"/>
+				</fileset>
+			</copy>
+		</sequential>
 	</macrodef>
 
 	<!-- FORMAT STEP -->
@@ -392,12 +452,12 @@
 			<local name="presentation-files"/>
 			<local name="presentation-files-list"/>
 			<local name="files.images.html"/>
-			<local name="files.html.support-files"/>
+			<local name="files.support-files"/>
 			<local name="support-files"/>
 			<local name="echo-files"/>
 			<files-elements/>
 			<pathconvert dirsep="/" pathsep=";" property="support-files"
-				refid="files.html.support-files"/>
+				refid="files.support-files"/>
 			<fileset dir="@{input-directory}" id="presentation-file-list">
 				<include name="*.xml"/>
 			</fileset>
@@ -409,10 +469,13 @@
 				style="@{style}"
 				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/format.flag">
 				<params>
-					<param name="topic-set-id" expression="@{topic-set-id}"/>
+					<arg value="topic-set-id=@{topic-set-id}"/>
+					<arg value="presentation-files=${presentation-files}"/>
+					<arg value="output-directory=@{output-directory}"/>
+<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
 					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 					<param name="presentation-files" expression="${presentation-files}"/>
-				</params>
+-->				</params>
 			</saxon-xslt>
 			
 			<!-- copy the image files to the image directory using list created by format script -->
@@ -420,19 +483,19 @@
 			<files id="files.images.html"
 				includesfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/image-list.txt" excludes="*"/>
 	
-			<mkdir dir="${spfe.build.output-directory}/@{output-directory}images"/>
-			<copy todir="${spfe.build.output-directory}/@{output-directory}images" flatten="true" failonerror="false"
+			<mkdir dir="@{output-directory}images"/>
+			<copy todir="@{output-directory}images" flatten="true" failonerror="false"
 				preservelastmodified="true" verbose="true">
 				<files refid="files.images.html"/>
 			</copy>
 			
 			<!-- copy the support files (css, scripts, etc.) to the output directory -->
-			<mkdir dir="${spfe.build.output-directory}/@{output-directory}style"/>		
+			<mkdir dir="@{output-directory}style"/>		
 			<!-- FIXME: the copy has to use flatten, because the files element contains absolute paths which do not copy as desired.
 			            Should maybe switch to filesets, but that has issues at config level. -->
-			<copy todir="${spfe.build.output-directory}/@{output-directory}style"  flatten="true" failonerror="false"
+			<copy todir="@{output-directory}style"  flatten="true" failonerror="false"
 				preservelastmodified="true" verbose="true">
-				<files refid="files.html.support-files"/>
+				<files refid="files.support-files"/>
 			</copy>
 			
 		</sequential>
@@ -491,11 +554,14 @@
 			style="${spfe.scripts.image-list}"
 			out="${temp}/image-list-print">
 			<params>
-				<param name="topic-set-id" expression="@{topic-set-id}"/>
+				<arg value="topic-set-id=@{topic-set-id}"/>
+				<arg value="synthesis-files=${synthesis-files}"/>
+				<arg value="vector-if-available=yes"/>
+<!--				<param name="topic-set-id" expression="@{topic-set-id}"/>
 				<param name="synthesis-files" expression="${synthesis-files}"/>
 				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
 				<param name="vector-if-available" expression="yes"/>
-			</params>
+-->			</params>
 		</saxon-xslt>
 		<!--		<fileset id="files.graphics.print" dir="${spfe.directories.image-source}"
 			includesfile="${temp}/image-list-print"/>-->

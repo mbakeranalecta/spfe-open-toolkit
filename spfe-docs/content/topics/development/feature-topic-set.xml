@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
+    <head>
+        <id>feature-topic-sets</id>
+        <history>
+            <revision>
+                <date>2014-06-23</date>
+                <author>mbaker</author>
+                <comment>New Topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>topic set</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>topic sets</term>
+            </entry>
+            
+        </index>
+    </head>
+    <body>
+        <title>Topic sets</title>
+        <p>In SPFE, a <feature>content set</feature> consists of one of more <feature>topic sets</feature>. A topic set is a collection of topics, usually on a related subject. In a book-based environment, a topic set would be similar to a manual, in the sense that a paper-based documentation systems is made up of books or manuals. However, SPFE does not presume that a topic set constitutes a manual. It is simply a collection of related topics, and how the topics in the topic set are related to each other is up to the information architect.</p>
+        <p>A topic set may be made up of individual topics written by authors. It may also be made up of topics <task>generated from external sources</task>, or of a <task>combination of written and generated sources</task>. In the case of topic sets created from external sources, you can also merge written content with the extracted content to form complete topics. This is a common approach to creating a reference document.</p>
+        <p>A <task>topic set is defined</task> by a <feature>topic set configuration file</feature> using the configuration setting <config-setting>/spfe/topic-set</config-setting>. The topic set configuration specifies the topics t be included in the topic set. However, you should not think of this simply as a list of topics files to include. Instead, this of this as a query that returns a set of topics that meet a specific set of conditions. A topic may be added to a topic set simply by creating a topic that meets the conditions for inclusion in a particular topic set.</p>
+        <p>Because a topic set is simply a configuration of topics, you can have more than one topic-set configuration that includes the same or a similar set of topics. You can do this as a means of <task>reusing topics</task>, or simply to create different build variations.</p>
+    </body>
+</feature-topic>

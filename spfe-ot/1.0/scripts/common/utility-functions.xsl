@@ -91,44 +91,61 @@
 		<xsl:value-of select="replace($new-url, '%20', ' ')"/>
 	</xsl:function>
 
+	<!-- In the following functions, we us string-join to concatenate the messages and convert to strings. 
+	     This allows the messages to be specified in a number of ways and to potentially include multiple sequences.-->
+
 	<xsl:template name="sf:info">
 		<xsl:param name="message"/>
 		<xsl:if test="$verbosity='info'">
-			<xsl:message select="'Info: ', $message"/>
+			<xsl:message select="'Info: ', string-join($message, '')"/>
 		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="sf:debug">
 		<xsl:param name="message"/>
+		<xsl:param name="in">Not specified.</xsl:param>
 		<xsl:if test="$verbosity='debug'">
-			<xsl:message select="'Debug: ', $message"/>
+			<xsl:message>#######################################################</xsl:message>
+			<xsl:message select="'DEBUG: ', string-join($message, '')"/>
+			<xsl:message select="'In: ', string-join($in, '')"/>
+			<xsl:message>#######################################################</xsl:message>
 		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="sf:warning">
 		<xsl:param name="message"/>
+		<xsl:param name="in">Not specified.</xsl:param>
 		<xsl:if test="$verbosity='warning'">
+			<xsl:message>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</xsl:message>
 			<xsl:message>
 				<xsl:text>Warning: </xsl:text>
-				<xsl:sequence select="$message"/>
+				<xsl:sequence select="string-join($message, '')"/>
 			</xsl:message>
+			<xsl:message select="'In: ', string-join($in, '')"/>
+			<xsl:message>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</xsl:message>
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template name="sf:subject-not-resolved">
+	<xsl:template name="sf:unresolved">
 		<xsl:param name="message"/>
+		<xsl:param name="in">Not specified.</xsl:param>
 		<xsl:if test="$verbosity='warning'">
+			<xsl:message>------------------------------------------------------</xsl:message>
 			<xsl:message>
-				<xsl:text>Subject not resolved: </xsl:text>
-				<xsl:sequence select="$message"/>
+				<xsl:text>Unresolved: </xsl:text>
+				<xsl:sequence select="string-join($message, '')"/>
 			</xsl:message>
+			<xsl:message select="'In: ', string-join($in, '')"/>
+			<xsl:message>------------------------------------------------------</xsl:message>
 		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="sf:error">
 		<xsl:param name="message"/>
+		<xsl:param name="in">Not specified.</xsl:param>
 		<xsl:message>**********************************************************</xsl:message>
 		<xsl:message select="'ERROR: ', string-join($message,'')"/>
+		<xsl:message select="'In: ', string-join($in, '')"/>
 		<xsl:message>**********************************************************</xsl:message>
 		<xsl:message terminate="{$terminate-on-error}"/>
 	</xsl:template>
@@ -429,13 +446,14 @@
 	</xsl:function>
 
 	<xsl:function name="sf:get-topic-type-alias-singular">
+		<xsl:param name="topic-set-id"/>
 		<xsl:param name="topic-type-name"/>
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular">
+				test="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular">
 				<xsl:value-of
-					select="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular"
+					select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -453,13 +471,14 @@
 		</xsl:choose>
 	</xsl:function>
 	<xsl:function name="sf:get-topic-type-alias-plural">
+		<xsl:param name="topic-set-id"/>
 		<xsl:param name="topic-type-name"/>
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural">
+				test="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural">
 				<xsl:value-of
-					select="$config/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural"
+					select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$topic-type-name]/config:aliases/config:plural"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -529,8 +548,10 @@
 		<xsl:param name="topic-type-name"/>
 		<xsl:param name="topic-set-id"/>
 		<xsl:param name="config"/>
-		<xsl:variable name="topic-type-link-priority" select="$config/config:topic-type[config:name eq $topic-type-name]/config:topic-type-link-priority"/>
-		<xsl:variable name="topic-set-link-priority" select="$config/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"/>
+
+		<xsl:variable name="topic-type-link-priority" select="$config/config:content-set/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-type[config:name eq $topic-type-name]/config:topic-type-link-priority"/>
+		<xsl:if test="count($topic-type-link-priority) gt 1"><xsl:message select="count($topic-type-link-priority), $topic-set-id, $topic-type-name, for $i in $topic-type-link-priority return generate-id($i)"></xsl:message></xsl:if>
+		<xsl:variable name="topic-set-link-priority" select="$config/config:content-set/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"/>
 		<xsl:if test="normalize-space($topic-type-link-priority) eq ''">
 			<xsl:call-template name="sf:error">
 				<xsl:with-param name="message" select="'Topic type link priority not set for namespace ', $topic-type-name"/>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
+
+    <head>
+        <id>adding-a-topic-set</id>
+        <history>
+            <revision>
+                <date>2013-06-04</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <status>Not started</status>
+            </revision>
+            <revision>
+                <date>2013-06-14</date>
+                <author>jkeffer</author>
+                <comment>Add first content</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2013-06-21</date>
+                <author>jkeffer</author>
+                <comment>Update content</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-06-17</date>
+                <author>mbaker</author>
+                <comment>Updated for new build.</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>topic set</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>{adding} a {topic set}</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>add a topic set</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Adding a new topic set</title>
+        <understanding>
+            <p>A topic set is a collection of related topics.</p>
+                
+            <p>A <feature>content set</feature> must have at least one topic set. </p>
+       </understanding>
+       <planning>
+           <planning-question>
+               <planning-question-title>Do I need more than one topic set?</planning-question-title>
+                <planning-question-body>
+                    <p>You could have a single topic set that contains all your topics. This approach is consistent with the Every Page is Page One approach. However, you may want to divide your content set into multiple topic sets for two reasons:</p>
+                    <ol>
+                        <li>
+                            <p>To provide top-down navigation for your readers. While the Every Page is Page One approach emphasizes a bottom-up approach to navigation, top down navigation still has significant value, particularly for smaller content sets where it can be used effectively. Dividing your content into topic sets provides a level of top-down structure to your content set that can be useful to your readers.</p>
+                        </li>
+                        <li>
+                            <p>To separate the processing of different types of content. In some cases, you will want to process different sets of topics in different ways. This is particularly true in cases where you are building topics from content extracted from external sources, especially when you are combining that material with authored content. Dividing your content into different topic sets allows you to define different processing for different sets of topics.</p>
+                        </li>
+                    </ol>
+               
+                </planning-question-body>
+
+            </planning-question>
+           <planning-question>
+               <planning-question-title>Can I include more than one topic type in a topic set?</planning-question-title>
+               <planning-question-body>
+                   <p>Yes, you can include more than one <feature>topic type</feature> in a topic
+                        set. Each <feature>topic type configuration</feature> can define specific <feature>synthesis</feature> and <feature>presentation</feature> scripts for that topic type.</p>
+               </planning-question-body>
+           </planning-question>
+       </planning>
+       <doing>        
+           <p>To add a topic set to the build:</p>
+           <ol>
+               <li>
+                   <p>Create a <feature>topic set configuration file</feature> that describes the
+                        topic set. The composition of the topic set is determined entirely by the
+                        topic set configuration. Individual topics don't know what topic set (or
+                        topic sets) they belong to.</p>
+               </li>
+               <li>
+                   <p>Add a new <config-setting>/spfe/content-set/topic-sets/topic-set</config-setting> to the appropriate <feature>content set configuration file</feature>. You can add a topic set to more than one content set.</p>
+               </li>
+           </ol>
+       </doing>
+    </body>
+</think-plan-do-topic>

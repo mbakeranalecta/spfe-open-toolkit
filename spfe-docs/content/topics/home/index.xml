@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<docset-home-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic/schemas/authoring/docset-home-topic.xsd">
+    <head>
+        <id>index</id>
+        <history>
+            <revision>
+                <date>2012-04-22</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>document-name</type>
+                <term>SPFE Development</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>SPFE Open Toolkit Documentation</title>
+        <p>The <string-ref id-ref="product"/> is a toolkit for building
+            content creation systems using the <feature>SPFE architecture</feature>. </p>
+        <p>The SPFE architecture is designed to facilitate the creation of structured writing
+            systems that use a <feature>bottom-up architecture</feature>. A bottom up architecture
+            is characterized by:</p>
+        <ul>
+            <li>
+                <p><feature>Topics</feature> or pages are written on the <feature>Every Page is Page
+                        One</feature> principle: Each page is a potential landing page and starting
+                    point for the user, and there is no one preferred path through the content
+                    set.</p>
+            </li>
+            <li>
+                <p>Topics or pages are added to the collection individually, without the need to
+                    place them in a top-down structure or <feature>table of contents</feature>. New
+                    pages are integrated automatically into the collection based on their
+                        <feature>metadata</feature>. Collections are formed by queries and all
+                    topics that meet the conditions of the query are included automatically.</p>
+            </li>
+            <li>
+                <p>Topics or pages work as hubs of their local semantic space, <task>linking to
+                        topics on related subjects</task>. </p>
+            </li>
+        </ul>
+        <p>Bottom-up architectures are common on the Web. Both wikis and blogging platforms, as well
+            as many Web CMS work on the bottom-up pattern. However, there are no bottom-up systems
+            based on markup-based structured writing principles (some database-based structured
+            bottom-up systems exist). The <string-ref id-ref="product"/> is
+            designed to fill this gap.</p>
+        <p>The SPFE-OT is also capable of creating top-down and hybrid top-down/bottom-up
+            architectures.</p>
+        <p>Unlike the DocBook and DITA systems, SPFE is not based on a particular schema. Rather,
+            SPFE is a modular content processing architecture that can be used with a variety of
+            schemas. However, SPFE does make certain <feature>presumptions about how schemas will be
+                written</feature>. In particular it expects a <feature>declarative style of
+                markup</feature> in which the document markup does not contain any publishing or
+            content management directives. </p>
+        <p>To enable users to get up to speed quickly, and to provide a baseline of functionality
+            for building SPFE-compatible schemas, <string-ref id-ref="product"
+            /> includes the <feature>EPPO Simple schema set</feature>. EPPO Simple is a highly
+            modularized set of schemas and associated processing that you can use directly or as the
+            basis for <task>creating your own schemas</task>.</p>
+    </body>
+</docset-home-topic>

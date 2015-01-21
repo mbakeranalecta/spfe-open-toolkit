@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2014 All Rights Reserved. -->
+<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    
+    <object-type>
+        <name>{http://spfeopentoolkit.org/ns/eppo-simple/objects}table-basic-object</name>
+        <structures>
+            <structure>
+                <name>eppo-core</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
+            </structure>
+            <structure>
+                <name>graphic-record</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
+            </structure>
+            <structure>
+                <name>object</name>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/object/config-with-resolve-main.xml</href>
+            </structure>
+        </structures>
+        <scripts>
+            <resolve>
+                <script>
+                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+                </script>
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/object-types/table-basic/scripts/resolve/resolve-table-basic-object.xsl</href>
+                </script>
+            </resolve>
+            <present type="eppo">
+                <script>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/object-types/table-basic/scripts/present/eppo/present-eppo-table-basic-object.xsl</href>
+                </script>
+            </present>
+        </scripts>
+    </object-type>
+</spfe>

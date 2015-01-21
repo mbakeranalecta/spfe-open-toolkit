@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
+http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
+
+    <head>
+        <id>adding-a-content-set</id>
+        <history>
+            <revision>
+                <date>2013-06-14</date>
+                <author>jkeffer</author>
+                <comment>New topic</comment>
+                <status>Not started</status>
+            </revision>
+            <revision>
+                <date>2013-06-14</date>
+                <author>jkeffer</author>
+                <comment>Initial content</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2013-06-21</date>
+                <author>jkeffer</author>
+                <comment>Update content</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2013-07-02</date>
+                <author>jkeffer</author>
+                <comment>Update content</comment>
+                <status>Ready for technical review</status>
+            </revision>
+            <revision>
+                <date>2014-06-17</date>
+                <author>mbaker</author>
+                <comment>Bringing up to date with new config system.</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-01</date>
+                <author>mbaker</author>
+                <comment>Changing terminology to content set</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>content set</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>{add} a {content set}</term>
+            </entry>
+            <entry>
+                <type>config-setting</type>
+                <term>/spfe</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Adding a new content set</title>
+        <understanding>
+            <p>A <feature>content set</feature> is a collection of
+                one or more related <feature>topic sets</feature>. A content set generally contains all the content related to a single product, service, or site.</p>
+            <p>In SPFE, a content set is simply a particular <feature>build
+                    configuration</feature>. Topic source files do not contain anything that ties
+                them to a specific content set. Therefore, you can define as many
+                content sets as you like, simply by writing new content set
+                    <feature>configuration files</feature>. This makes it easy to <task>reuse</task>
+                topics in different content sets. It also makes it easy to set up different
+                build configurations for use during the development process.</p>
+       </understanding>
+       <planning>
+           <planning-question>
+               <planning-question-title>Do I need a content set?</planning-question-title>
+                <planning-question-body>
+                    <p>Yes. The SPFE build requires a content set as a build target.</p>
+                    <p>It is not necessary to create multiple topic sets; you use a single
+                            <feature>topic set</feature> to include all your topics. However, if you
+                        use a multiple topic sets, you can present multiple topic sets in a specific
+                        order in the <feature>table of contents</feature> in the output. </p>
+                </planning-question-body>
+            </planning-question>
+           <planning-question>
+               <planning-question-title>Do I always have to build the entire content set</planning-question-title>
+               <planning-question-body>
+                   <p>If your content set is large, it may take a long time to build. If you are working on a single topic set and you want to do frequent builds of that topic set, you may not want to have to build the entire content set each time. SPFE does not provide a way to build topic sets individually. However, because a content set is to inexpensive to set up, you can create a content set that contains just the topic set you are working on and build that.</p>
+               </planning-question-body>
+           </planning-question>
+       </planning>
+        <doing>        
+            <p>To add a content set, you create a <feature>content set configuration
+                file</feature>. A content set configuration file is a configuration file
+                that includes the <config-setting>/spfe/content-set</config-setting> element. You need
+                the following mandatory attributes and elements: </p>
+            <ul>
+                <li>
+                    <p><config-setting>/spfe/content-set/content-set-id</config-setting>: The ID of the
+                        content set. The build system uses the value to create a directory
+                        name and it must be a valid directory name in the operating system that runs
+                        the build system. </p>
+                </li>
+                <li>
+                    <p><config-setting>/spfe/content-set/title</config-setting>: The title of the
+                        content set to display in the output.</p>
+                </li>
+                <li>
+                    <p><config-setting>/spfe/content-set/topic-set-type-order</config-setting>: You can
+                        declare topic sets to be of different types, such as <quotes>guide</quotes>,
+                        or <quotes>reference</quotes>. (You do this in the <feature>topic set
+                            configuration file</feature> in
+                        <config-setting>/spfe/topic-set/topic-set-type</config-setting>.) You can
+                        then use this setting to determine the order in which different topic set
+                        types appear the content set table of contents. </p>
+                </li>
+                <li>
+                    <p><config-setting>/spfe/content-set/topic-sets</config-setting>: The list of
+                        the topic sets to include in the content set. The value of the
+                        <config-setting>/spfe/content-set/topic-sets/topic-set/topic-set-id</config-setting>
+                        setting should match the
+                        <config-setting>/spfe/topic-set/topic-set-id</config-setting> for the topic set.
+                        The
+                        <config-setting>/spfe/content-set/topic-sets/topic-set/href</config-setting>
+                        attribute is the URL of the topic set configuration file.</p>
+                </li>    
+            </ul>
+            <p>The following is an abbreviated version of  the content set configuration for
+                the SPFE content set:</p>
+            <codeblock>                <![CDATA[
+ <spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/authoring/config/spfe-config.xsd">
+    <content-set>
+        <content-set-id>tests</content-set-id>
+        <title>SPFE Documentation</title>
+        <topic-set-type-order>
+            <topic-set-type>docset</topic-set-type>
+            <topic-set-type>guide</topic-set-type>
+            <topic-set-type>task</topic-set-type>
+            <topic-set-type>reference</topic-set-type>
+            <topic-set-type>list</topic-set-type>
+        </topic-set-type-order>
+        <home-topic-set>home</home-topic-set>
+        <topic-sets>
+            
+            <topic-set>
+                <topic-set-id>spfe-development</topic-set-id>
+                <href>topic-sets/spfe-development.xml</href>
+            </topic-set>    
+            
+            <topic-set>
+                <topic-set-id>spfe-docs-home</topic-set-id>
+                <href>topic-sets/spfe-docs-home.xml</href>
+            </topic-set>
+            
+            <topic-set>
+                <topic-set-id>spfe-function-reference</topic-set-id>
+                <href>topic-sets/spfe-function-reference.xml</href>
+            </topic-set>
+            
+            <topic-set>
+                <topic-set-id>spfe-configuration-reference</topic-set-id>
+                <href>topic-sets/spfe-configuration-reference.xml</href>
+            </topic-set>
+            
+            <topic-set>
+                <topic-set-id>spfe-docs-lists</topic-set-id>
+                <href>topic-sets/spfe-docs-lists.xml</href>
+            </topic-set>
+        </topic-sets>
+        
+        <subject-types>
+            <subject-type>
+                <id>config-setting</id>
+                <aliases>
+                    <singular>Configuration setting</singular>
+                    <plural>Configuration settings</plural>
+                </aliases>
+            </subject-type>
+        </subject-types>
+
+        <messages>warning info</messages>
+        
+        <output-formats>
+            <output-format>
+                <name>xhtml</name>
+                <href>../../spfe-ot/plugins/eppo-simple/output-types/xhtml/config.xml</href>
+            </output-format>
+        </output-formats>
+        
+        <wip-site>
+            <url>wip-site.href</url>
+            <ftp>
+                <url>wip-site.ftp.url</url>
+                <user>wip-site.ftp.user</user>
+                <password>wip-site.ftp.password</password>
+            </ftp>
+            <path>wip-site.ftp</path>
+        </wip-site>
+
+        <strings>
+            <string id="product">SPFE Open Toolkit</string>
+            <string id="product-release">1.0 (alpha 1)</string>
+            <string id="copyright">Copyright © 2013 Analecta Communications Inc.</string>
+        </strings>
+     </content-set>
+</spfe>]]>
+            </codeblock>
+            <p>This content set includes three topic sets, each with their own configuration
+                file, which is specified by the <config-setting>/spfe/content-set/topic-sets/topic-set/href</config-setting>
+               setting. The
+                path is relative to the location of the configuration file that defines the <config-setting>/spfe/content-set</config-setting>
+                element. Each topic set configuration file defines a
+                <config-setting>/spfe/topic-set/topic-set-type</config-setting> element that matches one
+                of the values in the
+                <config-setting>/spfe/content-set/topic-set-type-order</config-setting> element.</p>
+            <p>To add an index page for the content set, you need to <task>add a topic
+                    set</task> that includes an index topic and includes the topic set in the list
+                of topic sets. For example, the topic set <bold>spfe-docs-home</bold> contains the
+                index topic for the SPFE content set.</p>
+            <p>Run the <tool-name>spfe</tool-name> build tool and specify the configuration file
+                that contains the <config-setting>/spfe/content-set</config-setting> element as the first
+                parameter. If you see the topic sets that your content set includes in the
+                table of contents you have successfully added a content set.</p>
+        </doing>
+    </body>
+</think-plan-do-topic>

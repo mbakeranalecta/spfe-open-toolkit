@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics">
+    targetNamespace="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
+    xmlns="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics">
     <xs:element name="graphic-record">
         <xs:complexType>
             <xs:sequence>
@@ -29,15 +30,6 @@
                         <xs:sequence>
                             <xs:element name="uri" type="xs:anyURI"/>
                             <xs:element name="credit"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="default-title" type="xs:string" minOccurs="0"/>
-                <xs:element name="default-caption" minOccurs="0">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="p" minOccurs="0" maxOccurs="unbounded"
-                                type="xs:string"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs/objects"
+    xmlns="http://spfeopentoolkit.org/ns/spfe-docs/objects">
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/paragraphs/schemas/authoring/paragraphs.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/identity/schemas/authoring/identity.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/index/schemas/authoring/index.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/tracking/schemas/authoring/tracking.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/conditions/schemas/authoring/conditions.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/text-decoration/schemas/authoring/text-decoration.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-names/schemas/authoring/annotations-common-names.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-subjects/schemas/authoring/annotations-common-subjects.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/common-addresses/schemas/authoring/annotations-common-addresses.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/strings/schemas/authoring/strings.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/xml/schemas/authoring/annotations-xml.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/annotations/spfe-build/schemas/authoring/annotations-spfe-build.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/object-types/table-basic/schemas/authoring/table-basic-object-root.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/annotations/eppo-simple/schemas/authoring/annotations-eppo-simple.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/xslt/schemas/authoring/annotations-xslt.xsd"/>
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/comments/author-reviewer/schemas/authoring/author-reviewer-comments.xsd"/>
+
+    <xs:include
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/lists/ol-ul-ll/schemas/authoring/ol-ul-ll-lists.xsd"/>
+    <xs:group name="text-nested">
+        <xs:sequence>
+            <xs:choice maxOccurs="1" minOccurs="1">
+                <xs:group ref="paragraph"/>
+            </xs:choice>
+            <xs:choice maxOccurs="unbounded">
+                <xs:group ref="paragraph"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:complexType name="text-nested">
+        <xs:group ref="text-nested"/>
+    </xs:complexType>
+
+
+    <xs:group name="paragraph-content">
+        <xs:choice>
+            <xs:group ref="text-decoration"/>
+            <xs:group ref="annotations-common-names"/>
+            <xs:group ref="annotations-common-subjects"/>
+            <xs:group ref="annotations-common-addresses"/>
+            <xs:group ref="annotations-spfe-build"/>
+            <xs:group ref="annotations-eppo-simple"/>
+            <xs:group ref="annotations-xml"/>
+            <xs:group ref="annotations-xslt"/>
+            <xs:group ref="strings"/>
+            <xs:group ref="comments-inline"/>
+        </xs:choice>
+    </xs:group>
+    
+    <xs:simpleType name="annotations">
+        <xs:union memberTypes="annotations-common-addresses annotations-common-subjects annotations-common-names annotations-spfe-build annotations-xml annotations-xslt annotations-eppo-simple"/>
+    </xs:simpleType>
+    
+    <xs:group name="text-minimal">
+        <xs:sequence>
+            <xs:choice maxOccurs="1" minOccurs="1">
+                <xs:group ref="paragraph"/>
+            </xs:choice>
+            <xs:choice>
+                <xs:group ref="paragraph"/>
+                <xs:group ref="lists"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="text-minimal">
+        <xs:group ref="text-minimal"/>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs"
+  xmlns="http://spfeopentoolkit.org/ns/spfe-docs/data/state-detection">
+  <xs:element name="state-detection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:NMTOKEN"/>
+        <xs:element name="title"/>
+        <xs:element name="caption"/>
+        <xs:element name="signs">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sign" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="name" type="xs:NCName"/>
+                    <xs:element name="caption" type="xs:string"/>
+                    <xs:element name="signals">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="signal" type="xs:string" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="states">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="state" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="name" type="xs:NCName"/>
+                    <xs:element name="action" type="xs:string"/>
+                    <xs:element name="signs">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="sign" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="name" type="xs:NCName"/>
+                                <xs:element name="signal" type="xs:string"> </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

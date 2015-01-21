@@ -16,7 +16,7 @@
 
 	<xsl:variable name="strings"
 		select="
-		$config/config:topic-set[@topic-set-id=$topic-set-id]/config:strings/config:string, 
+		$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings/config:string, 
 		$config/config:content-set/config:strings/config:string"
 		as="element()*"/>
 
@@ -95,7 +95,7 @@ Main content processing templates
 			select="$doctypes/doctype[starts-with($xpath[1], @xpath)][1]/@name"/>
 
 		<xsl:variable name="topic-type-alias"
-			select="sf:get-topic-type-alias-singular('{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry', $config)"/>
+			select="sf:get-topic-type-alias-singular($topic-set-id, '{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry', $config)"/>
 		
 
 		<xsl:choose>
@@ -160,6 +160,11 @@ Main content processing templates
 					</cr:parent>
 				</xsl:for-each>
 			</cr:parents>
+<!--			<cr:xpaths>
+				<xsl:for-each select="$this-element/xpath">
+					<cr:xpath><xsl:apply-templates/></cr:xpath>
+				</xsl:for-each>
+			</cr:xpaths>-->
 			<cr:group>
 				<xsl:value-of select="$group"/>
 			</cr:group>
@@ -199,8 +204,8 @@ Main content processing templates
 				</xsl:when>
 				
 				<xsl:otherwise>
-					<!-- If not found, report warning. -->
-					<xsl:call-template name="sf:warning">
+					<!-- If not found, report unresolved. -->
+					<xsl:call-template name="sf:unresolved">
 						<xsl:with-param name="message"
 							select="'Doctype element description not found ', string($name)"/>
 					</xsl:call-template>
@@ -270,7 +275,7 @@ Main content processing templates
 						<xsl:variable name="authored"
 			       	select="$source[normalize-space(ed:name)=$name]/ed:attributes/ed:attribute[ed:name=$attribute-name]"/>
 						<xsl:if test="not($authored/ed:description/*)">
-							<xsl:call-template name="sf:warning">
+							<xsl:call-template name="sf:unresolved">
 								<xsl:with-param name="message"
 									select="'Attribute description not found ', string(xpath)"/>
 							</xsl:call-template>
@@ -312,6 +317,16 @@ Main content processing templates
 					<xsl:value-of select="xpath"/>
 				</cr:child>
 			</xsl:for-each-group>
+			<xsl:if test="count($referenced-group) gt 1">
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message">
+						<xsl:text>More than one referenced group found. This probably indicates an error in the schemas. Check schema validity and try again. </xsl:text>
+						<xsl:text>The referenced groups found are: </xsl:text>
+						<xsl:value-of select="$referenced-group"/>
+					</xsl:with-param>
+					<xsl:with-param name="in" select="base-uri(document(''))"/>
+				</xsl:call-template>
+			</xsl:if>
 			<xsl:call-template name="get-nested-groups">
 				<xsl:with-param name="referenced-group" select="$referenced-group"/>
 			</xsl:call-template>
@@ -321,11 +336,11 @@ Main content processing templates
 	<xsl:template name="get-nested-groups">
 		<xsl:param name="referenced-group"/>
 		<xsl:for-each
-			select="/schema-definitions/schema-group-ref[referenced-in-group eq $referenced-group]">
+			select="/schema-definitions/schema-group-ref[referenced-in-group = $referenced-group]">
 			<xsl:variable name="referenced-group" select="referenced-group"/>
 			<!-- each element that is in the group and has only one step in its path (so not the children of the element at the group level -->
 			<xsl:for-each-group
-				select="/schema-definitions/schema-element[belongs-to-group eq $referenced-group]"
+				select="/schema-definitions/schema-element[belongs-to-group = $referenced-group]"
 				group-by="name">
 				<cr:child child-namespace="{xml-namespace}">
 					<xsl:value-of select="name"/>

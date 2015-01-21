@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
+    <xs:group name="paragraph-content">
+        <xs:choice>
+            <xs:group ref="text-decoration"/>
+            <xs:group ref="annotations-common-names"/>
+            <xs:group ref="annotations-common-subjects"/>
+            <xs:group ref="annotations-common-addresses"/>
+            <xs:group ref="annotations-spfe-build"/>
+            <xs:group ref="annotations-eppo-simple"/>
+            <xs:group ref="annotations-xml"/>
+            <xs:group ref="annotations-xslt"/>
+            <xs:group ref="annotations-common-resource-ids"/>
+            <xs:group ref="annotations-fig-resource-id"/>
+            <xs:group ref="strings"/>
+            <xs:group ref="comments-inline"/>
+        </xs:choice>
+    </xs:group>
+    
+    <xs:simpleType name="annotations">
+        <xs:union memberTypes="annotations-common-addresses annotations-common-subjects annotations-common-names annotations-spfe-build annotations-xml annotations-xslt annotations-eppo-simple"/>
+    </xs:simpleType>
+</xs:schema>

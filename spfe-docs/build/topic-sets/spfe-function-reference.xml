@@ -10,33 +10,23 @@
         <topic-types>
 
                 <topic-type>
-                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}xslt-function-and-template-descriptions</name>
-                    <href>../../topic-types/function-and-template-reference/config.xml</href>
-                </topic-type>
-                <topic-type>
-                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}xslt-function-reference-entry</name>
-                    <href>../../topic-types/function-and-template-reference/config.xml</href>
-                </topic-type>
-                <topic-type>
-                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}xslt-template-reference-entry</name>
-                    <href>../../topic-types/function-and-template-reference/config.xml</href>
-                </topic-type>
-            
+                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}xslt-library-reference-entry</name>
+                    <href>../../topic-types/xslt-library-reference-entry/config.xml</href>
+                </topic-type>            
 
         </topic-types>
         <presentation-types>
-            <presentation-type>
-                <name>eppo</name>
-            </presentation-type>
+            <presentation-type>eppo</presentation-type>
+            <!--<presentation-type>dita</presentation-type>-->
         </presentation-types>
         <output-formats>
             <output-format>
-                <name>html</name>
+                <name>xhtml</name>
             </output-format>
         </output-formats>
         <sources>
             <authored-content>
-                <include>../../content/text/xsl-function-ref/*.xml</include>
+                <include>../../content/topics/xsl-function-ref/*.xml</include>
                 <include>${SPFEOT_HOME}/1.0/scripts/common/function-and-template-descriptions.xml</include>
             </authored-content>
             <sources-to-extract-content-from>

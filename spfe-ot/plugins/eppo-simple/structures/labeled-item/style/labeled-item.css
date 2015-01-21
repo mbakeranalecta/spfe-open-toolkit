@@ -1,0 +1,18 @@
+labeled-item
+{
+    display:block;
+    margin-left:12pt;
+    border: 1px solid #FFDEAD;
+    margin-bottom:2pt;
+}
+
+labeled-item>label
+{
+    font-weight:bold;
+    font-size:larger;
+}
+
+labeled-item>item
+{
+    display:block;
+}

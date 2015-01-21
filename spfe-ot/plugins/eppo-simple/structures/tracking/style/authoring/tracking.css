@@ -1,0 +1,135 @@
+@namespace oxy url('http://www.oxygenxml.com/extensions/author');
+
+
+head>history 
+{
+    display:table;
+    background-color:white;
+    width:100%;
+    -oxy-display-tags:none;
+}
+
+head>history:before
+{
+    content: "History:";
+    background-color:#F0F5F5;
+    padding: 2px;
+    font-size:small;
+    display: block;
+    -oxy-display-tags:none;
+}
+
+head>history>revision
+{
+    display:table-row;
+    -oxy-display-tags:none;
+}
+
+head>history>revision:first-child>date:before
+{
+    content:"Date";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:#F0F5F5;
+    -oxy-display-tags:none;
+}
+
+head>history>revision>date
+{
+    display:table-column;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
+    -oxy-show-placeholder: always;
+    -oxy-placeholder-content: "YYYY-MM-DD";
+    -oxy-display-tags:none;
+}
+
+head>history>revision>date {
+    content:
+        oxy_datePicker(
+            columns, 16, 
+            edit, "#text",
+            format, "yyyy-MM-dd");
+    visibility: -oxy-collapse-text;
+    -oxy-display-tags:none;
+}
+
+head>history>revision:first-child>author:before
+{
+    content:"Author";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:#F0F5F5;
+    -oxy-display-tags:none;
+}
+
+head>history>revision>author
+{
+    display:table-column;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
+    -oxy-show-placeholder: always;
+    -oxy-display-tags:none;
+}
+
+head>history>revision:first-child>comment:before
+{
+    content:"Comment";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:#F0F5F5;
+    -oxy-display-tags:none;
+
+}
+
+head>history>revision>comment
+{
+    display:table-column;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
+    -oxy-show-placeholder: always;
+    -oxy-display-tags:none;
+}
+
+
+head>history>revision:first-child>status:before
+{
+    content:"Status";
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    font-size:small;
+    background-color:#F0F5F5;
+    -oxy-display-tags:none;
+}
+
+head>history>revision>status
+{
+    display:table-column;
+    border-bottom: 1px solid #F0F5F5;
+    border-left: 1px solid #F0F5F5;
+    -oxy-show-placeholder: always;
+    -oxy-display-tags:none;
+}
+
+head>history>revision>status
+{
+     visibility:-oxy-collapse-text;
+     content: 
+        oxy_editor(
+            type, combo, 
+            edit, "#text", 
+            editable, false);
+     -oxy-display-tags:none;
+}
+
+oxy|comment
+{
+    -oxy-display-tags:none;
+}

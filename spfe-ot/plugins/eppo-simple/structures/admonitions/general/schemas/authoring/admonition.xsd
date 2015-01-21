@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+
+    <xs:complexType name="general-admonition">
+        <xs:sequence>
+            <xs:element name="signal-word"/>
+            <xs:element name="title"/>
+            <xs:group ref="text-nested"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:group name="admonitions">
+        <xs:sequence>
+            <xs:element name="admonition" type="general-admonition"/>
+        </xs:sequence>
+    </xs:group>
+
+</xs:schema>

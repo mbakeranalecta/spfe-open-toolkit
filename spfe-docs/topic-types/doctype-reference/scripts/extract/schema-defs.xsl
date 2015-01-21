@@ -67,11 +67,19 @@
 
 
 	<xsl:template match="xs:include" mode="combine-schemas">
+		<xsl:if test="not(doc-available(resolve-uri(@schemaLocation,base-uri(.))))">
+			
+			<xsl:call-template name="sf:error">
+				<xsl:with-param name="message">
+					<xsl:text>Unable to load included schema when extracting schema defs. Include @schemaLocation is: </xsl:text>
+					<xsl:value-of select="@schemaLocation"/>
+					<xsl:text>.</xsl:text>
+				</xsl:with-param>
+				<xsl:with-param name="in" select="base-uri()"/>
+			</xsl:call-template>
+		</xsl:if>
 		<xsl:apply-templates select="document(@schemaLocation)" mode="combine-schemas"/>
 	</xsl:template>
-<!--	<xsl:template match="xs:import" mode="combine-schemas">
-		<xsl:apply-templates select="document(@schemaLocation)" mode="combine-schemas"/>
-	</xsl:template>-->
 
 	<xsl:template match="xs:*" mode="combine-schemas" priority="-1">
 		<xsl:copy>

@@ -4,10 +4,9 @@
 <function-and-template-descriptions
     xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/xslt-function-and-template-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/authoring/xslt-function-and-template-descriptions.xsd">
     <head>
         <id>function-and-template-descriptions</id>
-        <virtual-type/>
         <history>
             <revision>
                 <date>2012-09-21</date>
@@ -29,7 +28,7 @@
                 <p>it returns the part of the path after the base path:</p>
                 <codeblock>/1.0/scripts/common/utility-functions.xsl</codeblock>
                 <p>Optionally, you can specify a prefix to be added to the returned path:</p>
-                <codeblock>&lt;xsl:value-of select=" sf:relative-from-absolute-path(source-file, $config/config:spfeot-home,'$SPFEOT_HOME')"/>
+                <codeblock>&lt;xsl:value-of select="sf:relative-from-absolute-path(source-file, $config/config:spfeot-home,'$SPFEOT_HOME')"/>
                 </codeblock>
 
                 <p>In this example, <code>source-file</code> is an element containing the full path of a source file, <code>$config/config:spfeot-home</code> pulls the local path of the spfe open toolkit on the users machine from the config file, and <code>'$SPFEOT_HOME'</code> is a prefix string. Assuming that the value of <code>source-file</code> is <code>file:/C:/Users/Joe/spfe-open-toolkit/spfe-ot/1.0/scripts/common/utility-functions.xsl</code>, the return value will be:</p>
@@ -460,7 +459,7 @@
             <name>get-subject-type-alias-singular</name>
             <!-- keep this in sync with otehr get-alias functions -->
             <description>
-                <p>Gets the singular version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quote>xslt-function-name</quote>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>doc set configuration</feature>, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <p>Gets the singular version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quotes>xslt-function-name</quotes>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>doc set configuration</feature>, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
                 <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
 &lt;spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
@@ -515,7 +514,7 @@
             <name>get-subject-type-alias-plural</name>
             <!-- keep this in sync with otehr get-alias functions -->
             <description>
-                <p>Gets the plural version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quote>xslt-function-name</quote>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>doc set configuration</feature>, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <p>Gets the plural version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quotes>xslt-function-name</quotes>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>doc set configuration</feature>, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
                 <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
 &lt;spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
@@ -786,7 +785,7 @@
             </parameters>
         </template-description>
         <template-description>
-            <name>subject-not-resolved</name>
+            <name>unresolved</name>
             <description>
                 <p>Outputs a message to the build console stating that a particular <feature>subject affinity</feature> found in a topic could not be resolved to any subject in the index of any in-scope topic, meaning that no link will be created for that subject.</p>
             </description>
@@ -799,7 +798,7 @@
                 <parameter>
                     <name>message</name>
                     <description>
-                        <p>The message to be output. The string "Subject not resolved: " will be prefixed to the message.</p>
+                        <p>The message to be output. The string "Unresolved: No content to link to on subject " will be prefixed to the message.</p>
                     </description>
                 </parameter>
             </parameters>

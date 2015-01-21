@@ -19,19 +19,18 @@
 
         </topic-types>
         <presentation-types>
-            <presentation-type>
-                <name>eppo</name>
-            </presentation-type>
+            <presentation-type>eppo</presentation-type>
+            <!--<presentation-type>dita</presentation-type>-->
         </presentation-types>
         <output-formats>
             <output-format>
-                <name>html</name>
+                <name>xhtml</name>
             </output-format>
         </output-formats>
         
         <sources>
             <sources-to-extract-content-from>
-                <include>${DOC_SET_BUILD_DIR}/link-catalogs/*.link-catalog.xml</include>
+                <include>${CONTENT_SET_BUILD_DIR}/link-catalogs/*.link-catalog.xml</include>
             </sources-to-extract-content-from>
         </sources>
 

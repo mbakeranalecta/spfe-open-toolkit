@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+
+
+    <xs:group name="labeled-item">
+        <xs:choice>
+            <xs:element name="labeled-item" type="labeled-item"/>
+        </xs:choice>
+    </xs:group>
+    
+    <xs:complexType name="labeled-item">
+        <xs:sequence>
+            <xs:element name="anchor" type="anchor" minOccurs="0"/>
+            <xs:element name="label">
+                <xs:complexType mixed="true">
+                    <xs:sequence>
+                        <xs:element name="link" type="link_type" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="item">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group maxOccurs="unbounded" ref="text-nested"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>

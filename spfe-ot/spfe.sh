@@ -3,6 +3,16 @@
 # This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.
 # (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved.
 
+if [ $SPFE_BUILD_DIR == ""]; then 
+SPFE_BUILD_DIR=$HOME/spfebuild 
+fi
+
+if [[ "$1" == "-clean" ]]; then
+    echo "This will remove $SPFE_BUILD_DIR"
+    rm -Ir $SPFE_BUILD_DIR
+    exit 0
+fi
+
 function abs_path() {
     (cd $(dirname $1); echo $PWD/$(basename $1))
 }

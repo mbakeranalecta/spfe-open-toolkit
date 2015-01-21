@@ -1,0 +1,7 @@
+generic-topic head:before
+{
+    font-weight:bold;
+    font-size:larger;
+    content: "Generic topic";
+    font-family:sans-serif;
+}

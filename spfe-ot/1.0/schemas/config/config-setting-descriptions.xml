@@ -4,7 +4,7 @@
 <config-setting-descriptions
     xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/config-setting-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs  http://spfeopentoolkit.org/spfe-docs/topic-types/config-reference/schemas/authoring/config-setting-descriptions.xsd">
     <head>
         <id>config-setting-descriptions</id>
         <history>
@@ -664,7 +664,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation/script</xpath>
+            <xpath>/spfe/object-type/scripts/present/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1292,7 +1292,7 @@
                 <fragment-ref id-ref="aliases-description">
                     <local-strings>
                         <string id="singular-or-plural">plural</string>
-                        <string id="example-alias"><quote>Configuration settings</quote></string>
+                        <string id="example-alias"><quotes>Configuration settings</quotes></string>
                     </local-strings>
                 </fragment-ref>
             </description>
@@ -1308,7 +1308,7 @@
                 <fragment id="aliases-description">
                     <local-strings>
                         <string id="singular-or-plural">singular</string>
-                        <string id="example-alias"><quote>Configuration setting</quote></string>
+                        <string id="example-alias"><quotes>Configuration setting</quotes></string>
                     </local-strings>
                     <p>A <string-ref id-ref="singular-or-plural"/> version of the <feature>topic
                             type alias</feature>. For instance, in the SPFE documentation, the
@@ -1532,7 +1532,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation/script</xpath>
+            <xpath>/spfe/topic-type/scripts/present/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1851,7 +1851,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation/script</xpath>
+            <xpath>/spfe/output-format/scripts/present/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1959,7 +1959,7 @@
         <config-setting-description>
             <xpath>/spfe/topic-set/presentation-types</xpath>
             <description>
-                <p>A container element for a list of <feature>presentation types</feature> to be generated for a topic set. A presentation type is a way of presenting content for use in a particular class of media (online vs. paper, top-down vs. bottom-up, etc.). A presentation type is expressed as a <feature>presentation schema</feature>. Each <feature>output format</feature> is written to format a particular presentation type. Therefore, you must ensure that there is an appropriate presentation type specified for each of the output formats you specify for a topic type. The output format configuration specifies the presentation format that it uses in the setting <config-setting>/spfe/output-format/presentation-type</config-setting>. In order to build a <feature>presentation</feature> of the specified type, there must be a set of <feature>presentation scripts</feature> for this presentation type for each <feature>topic type</feature> included in the <feature>topic set</feature>. The scripts for a presentation type are contained in a <config-setting>/spfe/topic-type/scripts/presentation</config-setting> element with a <config-setting xpath="/spfe/topic-type/scripts/presentation/@type">type</config-setting> attribute that matches the name of the presentation type, as specified in <config-setting>/spfe/topic-set/presentation-types/presentation-type/name</config-setting>.</p>
+                <p>A container element for a list of <feature>presentation types</feature> to be generated for a topic set. A presentation type is a way of presenting content for use in a particular class of media (online vs. paper, top-down vs. bottom-up, etc.). A presentation type is expressed as a <feature>presentation schema</feature>. Each <feature>output format</feature> is written to format a particular presentation type. Therefore, you must ensure that there is an appropriate presentation type specified for each of the output formats you specify for a topic type. The output format configuration specifies the presentation format that it uses in the setting <config-setting>/spfe/output-format/presentation-type</config-setting>. In order to build a <feature>presentation</feature> of the specified type, there must be a set of <feature>presentation scripts</feature> for this presentation type for each <feature>topic type</feature> included in the <feature>topic set</feature>. The scripts for a presentation type are contained in a <config-setting>/spfe/topic-type/scripts/presentation</config-setting> element with a <config-setting xpath="/spfe/topic-type/scripts/present/@type">type</config-setting> attribute that matches the name of the presentation type, as specified in <config-setting>/spfe/topic-set/presentation-types/presentation-type/name</config-setting>.</p>
             </description>
             <values></values>
             <restrictions></restrictions>
@@ -1970,27 +1970,19 @@
         <config-setting-description>
             <xpath>/spfe/topic-set/presentation-types/presentation-type</xpath>
             <description>
-                <p>A container element for the <config-setting xpath="/spfe/topic-set/presentation-types/presentation-type/name">name</config-setting> of <feature>presentation type</feature>.</p>
-            </description>
-            <values></values>
-            <restrictions></restrictions>
-            <build-property></build-property>
-            <attributes></attributes>
-        </config-setting-description>
-        
-        <config-setting-description>
-            <xpath>/spfe/topic-set/presentation-types/presentation-type/name</xpath>
-            <description>
                 <p>The name of a <feature>presentation type</feature>.</p>
             </description>
-            <values></values>
+            <values/>
             <restrictions>
                 <restriction>
-                    <p>An error will result if there is no <feature>presentation type</feature> specified for any <feature>output format</feature> used for the topic type. The presentation type used by an output format is specified in the setting <config-setting>/spfe/output-format/presentation-type</config-setting>.</p>
+                    <p>An error will result if there is no <feature>presentation type</feature>
+                        specified for any <feature>output format</feature> used for the topic type.
+                        The presentation type used by an output format is specified in the setting
+                        <config-setting>/spfe/output-format/presentation-type</config-setting>.</p>
                 </restriction>
             </restrictions>
-            <build-property></build-property>
-            <attributes></attributes>
+            <build-property/>
+            <attributes/>
         </config-setting-description>
         
         <config-setting-description>
@@ -2048,7 +2040,7 @@
         <config-setting-description>
             <xpath>/spfe/content-set/subject-types</xpath>
             <description>
-                <p>A container for a list of <feature>subject types</feature> used in the <feature>content set</feature>. Subject types are the classification of subjects referred to by <feature>subject affinity markup</feature> and used to <task>index topics</task>. The subject type listing is used to provide aliases for the subject types when the name of the subject types is displayed in the output. For example, in the SPFE content, SPFE configuration settings are marked up using the <xml-element-name>config-setting</xml-element-name> element. <quote>config-setting</quote> is thus a subject type in this content set. However, when the output explicitly refers to a configuration setting (for instance, in a <feature>list page</feature>) the string <quote>Configuration setting</quote> is used in the singular and <quote>Configuration settings</quote> is used in the plural. These string are generated based on the value of the <config-setting>/spfe/content-set/subject-types/subject-type/aliases/singular</config-setting> and <config-setting>/spfe/content-set/subject-types/subject-type/aliases/plural</config-setting> settings for the <quote>config-setting</quote> subject type, as defined in the <feature>configuration file</feature> for this <feature>content set</feature>.</p>
+                <p>A container for a list of <feature>subject types</feature> used in the <feature>content set</feature>. Subject types are the classification of subjects referred to by <feature>subject affinity markup</feature> and used to <task>index topics</task>. The subject type listing is used to provide aliases for the subject types when the name of the subject types is displayed in the output. For example, in the SPFE content, SPFE configuration settings are marked up using the <xml-element-name>config-setting</xml-element-name> element. <quotes>config-setting</quotes> is thus a subject type in this content set. However, when the output explicitly refers to a configuration setting (for instance, in a <feature>list page</feature>) the string <quotes>Configuration setting</quotes> is used in the singular and <quotes>Configuration settings</quotes> is used in the plural. These string are generated based on the value of the <config-setting>/spfe/content-set/subject-types/subject-type/aliases/singular</config-setting> and <config-setting>/spfe/content-set/subject-types/subject-type/aliases/plural</config-setting> settings for the <quotes>config-setting</quotes> subject type, as defined in the <feature>configuration file</feature> for this <feature>content set</feature>.</p>
                 <codeblock>
 &lt;subject-types>
     &lt;subject-type>
@@ -2327,7 +2319,7 @@
         
 
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation/script/remap-namespace</xpath>
+            <xpath>/spfe/topic-type/scripts/present/script/remap-namespace</xpath>
             <description><fragment-ref id-ref="remap-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2336,7 +2328,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation/script/remap-namespace/from</xpath>
+            <xpath>/spfe/topic-type/scripts/present/script/remap-namespace/from</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2345,7 +2337,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation/script/remap-namespace/to</xpath>
+            <xpath>/spfe/topic-type/scripts/present/script/remap-namespace/to</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2354,7 +2346,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/topic-type/scripts/presentation/script/href</xpath>
+            <xpath>/spfe/topic-type/scripts/present/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2593,7 +2585,7 @@
         
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation/script/remap-namespace</xpath>
+            <xpath>/spfe/object-type/scripts/present/script/remap-namespace</xpath>
             <description><fragment-ref id-ref="remap-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2602,7 +2594,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation/script/remap-namespace/from</xpath>
+            <xpath>/spfe/object-type/scripts/present/script/remap-namespace/from</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2611,7 +2603,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation/script/remap-namespace/to</xpath>
+            <xpath>/spfe/object-type/scripts/present/script/remap-namespace/to</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2620,7 +2612,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/object-type/scripts/presentation/script/href</xpath>
+            <xpath>/spfe/object-type/scripts/present/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2858,7 +2850,7 @@
         
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation/script/remap-namespace</xpath>
+            <xpath>/spfe/output-format/scripts/present/script/remap-namespace</xpath>
             <description><fragment-ref id-ref="remap-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2867,7 +2859,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation/script/remap-namespace/from</xpath>
+            <xpath>/spfe/output-format/scripts/present/script/remap-namespace/from</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2876,7 +2868,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation/script/remap-namespace/to</xpath>
+            <xpath>/spfe/output-format/scripts/present/script/remap-namespace/to</xpath>
             <description><fragment-ref id-ref="remap-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2885,7 +2877,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/spfe/output-format/scripts/presentation/script/href</xpath>
+            <xpath>/spfe/output-format/scripts/present/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>

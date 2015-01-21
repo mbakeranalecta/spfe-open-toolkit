@@ -1,0 +1,22 @@
+
+body>section
+{
+
+}
+
+body>section:before
+{
+    display:block;
+    font-family:sans-serif;
+    content: "Section:";
+    font-size:small;
+    background-color:#FFDEAD;
+}
+
+body>section>title
+{
+    display:block;
+    font-family:sans-serif;
+    font-size:larger;
+    margin-top:1em;
+}

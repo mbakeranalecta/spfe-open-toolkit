@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
+    <head>
+        <id>labeled-items-demo</id>
+        <history>
+            <revision>
+                <date>2014-12-17</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>labeled item</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>labeled list</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>labeled-item</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>labeled-item/item</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>labeled-item/item</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>ll</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Labeled items demo</title>
+        <p>The labeled items <feature>structure</feature> is a construct in which a label is applied
+            to a short piece of text as a heading. It is similar to the definition list construct
+            found in DITA and HTML, except that in EPPO-simple it is not a list. That is, there is
+            no list wrapper around a labeled item or a set of labeled items. This is consistent with
+            the EPPO-simple principle of keeping structures as flat as possible. In the case of
+            labeled items, formatting is generally not affected by the fact that several labeled
+            items appear in sequence. For instance, first or last items in such a sequence do not
+            usually require special formatting. (In the case that they do, a list wrapper could be
+            applied to a set of labeled items at the formatting stage.)</p>
+        <p>The follow is an example of a labeled item:</p>
+        <labeled-item>
+            <label>This is the label of a labeled item.</label>
+            <item>
+                <p>This is the item to which the label is applied. The
+                    <xml-element-name>item</xml-element-name> structure can contain structures from
+                    the <feature>text-nested group</feature>. </p>
+            </item>
+        </labeled-item>
+        <p>The following is the XML code for the labeled item above:</p>
+        <codeblock language="xml">&lt;labeled-item>
+    &lt;label>This is the label of a labeled item.&lt;/label>
+    &lt;item>
+        &lt;p>This is the item to which the label is applied. The
+        &lt;xml-element-name>item&lt;/xml-element-name> structure can contain structures from
+        the &lt;feature>text-nested group&lt;/feature>. &lt;/p>
+    &lt;/item>
+&lt;/labeled-item></codeblock>
+        <p> </p>
+        <p>An alternate to the labeled item is the labeled list, or
+            <xml-element-name>ll</xml-element-name> element. The ll element is constructed on the
+            same model as the common <xml-element-name>ol</xml-element-name> and
+            <xml-element-name>ul</xml-element-name> list types, but rather than a number or a
+            bullet, it introduces the list items with a label. By default, the
+            <xml-element-name>ll</xml-element-name> element is limited to a single paragraph. </p>
+        <p>Here is an example of a labeled list:</p>
+        <ll><li>
+                <label>Fred</label>
+                <p>Fred Flintstone.</p>
+            </li><li>
+                <label>Wilma</label>
+                <p>Wilma Flintstone.</p>
+            </li></ll>
+        <p>Here is the code that produced it:</p>
+        <codeblock language="xml">&lt;ll>
+    &lt;li>
+        &lt;label>Fred&lt;/label>
+        &lt;p>Fred Flintstone.&lt;/p>
+    &lt;/li>
+    &lt;li>
+        &lt;label>Wilma&lt;/label>
+        &lt;p>Wilma Flintstone.&lt;/p>
+    &lt;/li>
+&lt;/ll></codeblock>
+    </body>
+</generic-topic>
