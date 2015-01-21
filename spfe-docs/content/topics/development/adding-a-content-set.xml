@@ -129,9 +129,9 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
             <p>The following is an abbreviated version of  the content set configuration for
                 the SPFE content set:</p>
             <codeblock>                <![CDATA[
- <spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/authoring/config/spfe-config.xsd">
-    <content-set>
+    <content-set xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
         <content-set-id>tests</content-set-id>
         <title>SPFE Documentation</title>
         <topic-set-type-order>
@@ -204,8 +204,7 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
             <string id="product-release">1.0 (alpha 1)</string>
             <string id="copyright">Copyright © 2013 Analecta Communications Inc.</string>
         </strings>
-     </content-set>
-</spfe>]]>
+     </content-set>]]>
             </codeblock>
             <p>This content set includes three topic sets, each with their own configuration
                 file, which is specified by the <config-setting>/spfe/content-set/topic-sets/topic-set/href</config-setting>

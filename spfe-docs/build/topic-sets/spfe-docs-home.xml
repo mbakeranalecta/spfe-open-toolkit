@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+<topic-set xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    <topic-set-id>spfe-docs-home</topic-set-id>
+    <topic-set-type>docset</topic-set-type>
+    <topic-types>
 
-    <topic-set>
-        <topic-set-id>spfe-docs-home</topic-set-id>
-        <topic-set-type>docset</topic-set-type>
-        <topic-types>
-
-                <topic-type>
-                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}docset-home-topic</name>
-                    <href>../../topic-types/docset-home-topic/config.xml</href>
-                </topic-type>
-            
-        </topic-types>
-        <presentation-types>
-            <presentation-type>eppo</presentation-type>
-            <!--<presentation-type>dita</presentation-type>-->
-        </presentation-types>        
-        <output-formats>
-            <output-format>
-                <name>xhtml</name>
-            </output-format>
-        </output-formats>
+            <topic-type>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}docset-home-topic</name>
+                <href>../../topic-types/docset-home-topic/config.xml</href>
+            </topic-type>
         
+    </topic-types>
+    <presentation-types>
+        <presentation-type>eppo</presentation-type>
+        <!--<presentation-type>dita</presentation-type>-->
+    </presentation-types>        
+    <output-formats>
+        <output-format>
+            <name>xhtml</name>
+        </output-format>
+    </output-formats>
+    
 
-        <sources>
-            <authored-content>
-                <include>../../content/topics/home/*.xml</include>
-                <include>../../content/topics/fragments/*.xml</include>
-            </authored-content>
-        </sources>
+    <sources>
+        <authored-content>
+            <include>../../content/topics/home/*.xml</include>
+            <include>../../content/topics/fragments/*.xml</include>
+        </authored-content>
+    </sources>
 
-        <default-topic-scope>spfe</default-topic-scope>
-        <default-subject-scope>spfe</default-subject-scope>
+    <default-topic-scope>spfe</default-topic-scope>
+    <default-subject-scope>spfe</default-subject-scope>
 
-        <strings>
-            <string id="eppo-simple-topic-set-title">SPFE Documentation</string>
-        </strings>
-    </topic-set>
-</spfe>
+    <strings>
+        <string id="eppo-simple-topic-set-title">SPFE Documentation</string>
+    </strings>
+</topic-set>
+

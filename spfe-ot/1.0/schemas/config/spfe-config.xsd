@@ -4,90 +4,74 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
   targetNamespace="http://spfeopentoolkit/ns/spfe-ot/config"
   xmlns="http://spfeopentoolkit/ns/spfe-ot/config">
-  <xs:element name="spfe">
+  <xs:element name="topic-set">
     <xs:complexType>
-      <xs:choice maxOccurs="unbounded">
-
-        <xs:element name="topic-set">
+      <xs:sequence>
+        <xs:element name="topic-set-id" type="xs:string"/>
+        <xs:element name="topic-set-type" type="xs:string"/>
+        <xs:element minOccurs="0" name="topic-set-link-priority" type="xs:int"/>
+        <xs:element name="topic-types">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="topic-set-id" type="xs:string"/>
-              <xs:element name="topic-set-type" type="xs:string"/>
-              <xs:element minOccurs="0" name="topic-set-link-priority" type="xs:int"/>
-              <xs:element name="topic-types">
+              <xs:element maxOccurs="unbounded" name="topic-type">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="topic-type">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="href" type="xs:anyURI"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="object-types" minOccurs="0">
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="object-types" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="object-type">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="object-type">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="href" type="xs:anyURI"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="presentation-types">
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="presentation-types">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="presentation-type" type="xs:NMTOKEN">
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="output-formats">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="output-format">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="presentation-type" type="xs:NMTOKEN">
-                    </xs:element>
+                    <xs:element name="name"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="output-formats">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="output-format">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="sources" type="sources-type"/>
-              <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
-              <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
-              <xs:element name="default-subject-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
-              <xs:element name="build-rules" type="xs:anyURI" minOccurs="0"/>
-              <xs:element name="strings" minOccurs="0">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="string" maxOccurs="unbounded">
-                      <xs:complexType>
-                        <xs:simpleContent>
-                          <xs:extension base="xs:string">
-                            <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
-                          </xs:extension>
-                        </xs:simpleContent>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="other" minOccurs="0" maxOccurs="unbounded">
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="sources" type="sources-type"/>
+        <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
+        <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
+        <xs:element name="default-subject-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
+        <xs:element name="build-rules" type="xs:anyURI" minOccurs="0"/>
+        <xs:element name="strings" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="string" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
-                      <xs:attribute name="name"/>
+                      <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
                     </xs:extension>
                   </xs:simpleContent>
                 </xs:complexType>
@@ -95,161 +79,161 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="object-set">
+        <xs:element name="other" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute name="name"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="object-set">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="object-set-id" type="xs:NMTOKEN"/>
+        <xs:element name="object-types">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="object-set-id" type="xs:NMTOKEN"/>
-              <xs:element name="object-types">
+              <xs:element maxOccurs="unbounded" name="object-type">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="object-type">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="href" type="xs:anyURI"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="sources" type="sources-type"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="content-set">
+        <xs:element name="sources" type="sources-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content-set">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="content-set-id" type="xs:NMTOKEN"/>
+        <xs:element name="title" type="xs:string"/>
+        <xs:element name="topic-set-type-order">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="content-set-id" type="xs:NMTOKEN"/>
-              <xs:element name="title" type="xs:string"/>
-              <xs:element name="topic-set-type-order">
+              <xs:element name="topic-set-type" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"
+              />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="home-topic-set" type="xs:string"/>
+        <xs:element name="topic-sets" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="topic-set" maxOccurs="unbounded" minOccurs="1">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="topic-set-type" minOccurs="1" maxOccurs="unbounded"
-                      type="xs:anyURI"/>
+                    <xs:element name="topic-set-id" type="xs:NCName"/>
+                    <xs:element name="href" type="xs:anyURI"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="home-topic-set" type="xs:string"/>
-              <xs:element name="topic-sets" minOccurs="1" maxOccurs="1">
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" name="object-sets">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="object-set" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="topic-set" maxOccurs="unbounded" minOccurs="1">
+                    <xs:element name="object-set-id"/>
+                    <xs:element name="href"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="object-types" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="object-type">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="href" type="xs:anyURI"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="subject-types" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="subject-type">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="id" type="xs:NMTOKEN"/>
+                    <xs:element name="aliases">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="topic-set-id" type="xs:NCName"/>
-                          <xs:element name="href" type="xs:anyURI"/>
+                          <xs:element name="singular" type="xs:string"/>
+                          <xs:element name="plural" type="xs:string"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element minOccurs="0" name="object-sets">
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
+        <xs:element name="messages" minOccurs="0">
+          <xs:simpleType>
+            <xs:list itemType="messages-type"/>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="presentation-types" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="presentation-type" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="object-set" maxOccurs="unbounded">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="object-set-id"/>
-                          <xs:element name="href"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
+                    <xs:element name="name" type="xs:NMTOKEN"/>
+                    <xs:element name="href" type="xs:anyURI"/>
+                    <xs:element minOccurs="0" name="copy-to" type="xs:anyURI"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="object-types" minOccurs="0">
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="output-formats" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="output-format">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="object-type">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="href" type="xs:anyURI"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="subject-types" minOccurs="0">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="subject-type">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="id" type="xs:NMTOKEN"/>
-                          <xs:element name="aliases">
-                            <xs:complexType>
-                              <xs:sequence>
-                                <xs:element name="singular" type="xs:string"/>
-                                <xs:element name="plural" type="xs:string"/>
-                              </xs:sequence>
-                            </xs:complexType>
-                          </xs:element>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
-              <xs:element name="messages" minOccurs="0">
-                <xs:simpleType>
-                  <xs:list itemType="messages-type"/>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="presentation-types" minOccurs="0">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="presentation-type" maxOccurs="unbounded">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:NMTOKEN"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                          <xs:element minOccurs="0" name="copy-to" type="xs:anyURI"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="output-formats" minOccurs="0">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="output-format">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="wip-site" type="wip-site-type" minOccurs="0"/>
-              <xs:element name="strings" minOccurs="0">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="string" maxOccurs="unbounded">
-                      <xs:complexType>
-                        <xs:simpleContent>
-                          <xs:extension base="xs:string">
-                            <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
-                          </xs:extension>
-                        </xs:simpleContent>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="other" minOccurs="0" maxOccurs="unbounded">
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="wip-site" type="wip-site-type" minOccurs="0"/>
+        <xs:element name="strings" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="string" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
-                      <xs:attribute name="name"/>
+                      <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
                     </xs:extension>
                   </xs:simpleContent>
                 </xs:complexType>
@@ -257,134 +241,33 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="topic-type">
+        <xs:element name="other" minOccurs="0" maxOccurs="unbounded">
           <xs:complexType>
-            <xs:sequence>
-              <xs:element name="name" type="xs:string"/>
-              <xs:element minOccurs="0" name="topic-type-link-priority" type="xs:int"/>
-              <xs:element name="aliases" type="topic-type-aliases-type" minOccurs="0"/>
-              <xs:element minOccurs="0" name="structures">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="structure">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                          <xs:element minOccurs="0" name="remap-namespace"
-                            type="remap-namespaces-type"> </xs:element>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element minOccurs="0" name="file-types">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="file-type">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                          <xs:element minOccurs="0" name="remap-namespace"
-                            type="remap-namespaces-type"> </xs:element>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
-            </xs:sequence>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute name="name"/>
+              </xs:extension>
+            </xs:simpleContent>
           </xs:complexType>
         </xs:element>
-        <xs:element name="presentation-type">
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="topic-type">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element minOccurs="0" name="topic-type-link-priority" type="xs:int"/>
+        <xs:element name="aliases" type="topic-type-aliases-type" minOccurs="0"/>
+        <xs:element minOccurs="0" name="structures">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="name" type="xs:string"/>
-              <xs:element name="scripts" minOccurs="0" type="script-list-type"/>
-              <xs:element name="topic-types" minOccurs="0">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="topic-type" maxOccurs="unbounded">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="scripts" type="script-list-type"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="output-format">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="name" type="xs:string"/>
-              <xs:element name="presentation-type" type="xs:NMTOKEN"/>
-              <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
-              <xs:element name="support-files" type="fileset-type" minOccurs="0"/>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="structure">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="name" type="xs:string"/>
-              <xs:element name="dependencies" minOccurs="0">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="dependency">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="scripts" type="scripts-type"/>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="file-type">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="name" type="xs:string"/>
-              <xs:element name="dependencies" minOccurs="0">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="dependency">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="scripts" type="scripts-type"/>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="structures">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="name" type="xs:string"/>
               <xs:element maxOccurs="unbounded" name="structure">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="name" type="xs:string"/>
                     <xs:element name="href" type="xs:anyURI"/>
-                    <xs:element minOccurs="0" name="remap-namespace" type="remap-namespaces-type">
+                    <xs:element minOccurs="0" name="rewrite-namespace" type="rewrite-namespaces-type">
                     </xs:element>
                   </xs:sequence>
                 </xs:complexType>
@@ -392,34 +275,131 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="object-type">
+        <xs:element minOccurs="0" name="file-types">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="name" type="xs:string"/>
-              <xs:element minOccurs="0" name="structures">
+              <xs:element maxOccurs="unbounded" name="file-type">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="structure">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="name" type="xs:string"/>
-                          <xs:element name="href" type="xs:anyURI"/>
-                          <xs:element minOccurs="0" name="remap-namespace"
-                            type="remap-namespaces-type"> </xs:element>
-                        </xs:sequence>
-                      </xs:complexType>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="href" type="xs:anyURI"/>
+                    <xs:element minOccurs="0" name="rewrite-namespace" type="rewrite-namespaces-type">
                     </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="scripts" type="scripts-type"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-      </xs:choice>
+        <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="presentation-type">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="scripts" minOccurs="0" type="script-list-type"/>
+        <xs:element name="topic-types" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="topic-type" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="scripts" type="script-list-type"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="output-format">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="presentation-type" type="xs:NMTOKEN"/>
+        <xs:element name="scripts" type="scripts-type" minOccurs="0"/>
+        <xs:element name="support-files" type="fileset-type" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="structure">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string"/>
+        <xs:choice>
+          <xs:element name="scripts" type="scripts-type"/>
+          <xs:element name="structures">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="structure">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="name" type="xs:string"/>
+                      <xs:element name="href" type="xs:anyURI"/>
+                      <xs:element minOccurs="0" name="rewrite-namespace" type="rewrite-namespaces-type">
+                      </xs:element>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="file-type">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="dependencies" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="dependency">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="href" type="xs:anyURI"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="scripts" type="scripts-type"/>
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 
+  <xs:element name="object-type">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element minOccurs="0" name="structures">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="structure">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="href" type="xs:anyURI"/>
+                    <xs:element minOccurs="0" name="rewrite-namespace" type="rewrite-namespaces-type">
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="scripts" type="scripts-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:complexType name="object-type">
     <xs:sequence>
       <xs:element name="object-id"/>
@@ -541,14 +521,14 @@
       <xs:element name="script" maxOccurs="unbounded">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="remap-namespace" type="remap-namespaces-type"> </xs:element>
+            <xs:element minOccurs="0" name="rewrite-namespace" type="rewrite-namespaces-type"> </xs:element>
             <xs:element name="href" type="xs:anyURI"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="remap-namespaces-type">
+  <xs:complexType name="rewrite-namespaces-type">
     <xs:sequence>
       <xs:element name="from" type="xs:anyURI"/>
       <xs:element name="to" type="xs:anyURI"/>

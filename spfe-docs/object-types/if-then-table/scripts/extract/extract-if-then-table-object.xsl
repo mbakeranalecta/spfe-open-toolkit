@@ -14,8 +14,8 @@
 
     <xsl:param name="topic-set-id"/>
 
-    <xsl:variable name="config" as="element(config:spfe)">
-        <xsl:sequence select="/config:spfe"/>
+    <xsl:variable name="config" as="element(config:config)">
+        <xsl:sequence select="/config:config"/>
     </xsl:variable>
 
     <xsl:param name="sources-to-extract-content-from"/>

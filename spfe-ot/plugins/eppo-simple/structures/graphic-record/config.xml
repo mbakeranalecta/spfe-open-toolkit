@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2014 All Rights Reserved. -->
-<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+
+<structure xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <structure>
-        <name>graphic-record</name>
-        <scripts>
-            <resolve>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/scripts/resolve/resolve-graphic-record.xsl</href>
-                </script>
-            </resolve>
-            <present type="eppo">
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/scripts/present/eppo/present-graphic-record.xsl</href>
-                </script>
-            </present>
-            <format type="xhtml">
-                <script>
-                    <href>scripts/format/xhtml/format-graphic-record-xhtml.xsl</href>
-                </script>
-            </format>
-        </scripts>
-    </structure>
-</spfe>
+    <name>graphic-record</name>
+    <scripts>
+        <resolve>
+            <script>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/scripts/resolve/resolve-graphic-record.xsl</href>
+            </script>
+        </resolve>
+        <present type="eppo">
+            <script>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/scripts/present/eppo/present-graphic-record.xsl</href>
+            </script>
+        </present>
+        <format type="xhtml">
+            <script>
+                <href>scripts/format/xhtml/format-graphic-record-xhtml.xsl</href>
+            </script>
+        </format>
+    </scripts>
+</structure>

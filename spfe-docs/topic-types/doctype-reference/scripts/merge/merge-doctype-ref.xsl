@@ -30,8 +30,8 @@
 	<xsl:param name="authored-content-files"/>
 	<xsl:variable name="doctype-source" select="sf:get-sources($authored-content-files)"/>
 
-	<xsl:variable name="config" as="element(config:spfe)">
-		<xsl:sequence select="/config:spfe"/>
+	<xsl:variable name="config" as="element(config:config)">
+		<xsl:sequence select="/config:config"/>
 	</xsl:variable>
 
 	<!-- Build a list of doctype xpaths 

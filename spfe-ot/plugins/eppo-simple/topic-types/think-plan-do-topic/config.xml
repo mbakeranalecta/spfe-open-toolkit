@@ -1,62 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    
+<topic-type xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    
-    <topic-type>
-        <name>{http://spfeopentoolkit.org/ns/eppo-simple}think-plan-do-topic</name>
-        <aliases>
-            <singular>Task</singular>
-            <plural>Tasks</plural>
-        </aliases>
-        <structures>
-            <structure>
-                <name>eppo-core</name>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
-            </structure>
-            <!-- FIXME: This is to make text objects in a different namespace work. But is it the correct solution?-->
-            <structure>
-                <name>eppo-core</name>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
-                <remap-namespace>
-                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
-                    <to>http://spfeopentoolkit.org/ns/eppo-simple/objects</to>
-                </remap-namespace>  
-            </structure>
-            <structure>
-                <name>spfe-docs-core</name>
-                <href>../../structures/spfe-docs-core/config.xml</href>
-            </structure>
-            <structure>
-                <name>graphic-record</name>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
-            </structure>
-            <structure>
-                <name>topic</name>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic/config-with-resolve-main.xml</href>
-            </structure>
-            <structure>
-                <name>topic-set</name>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config-with-topic-set-toc.xml</href>
-            </structure>
-        </structures>
-        <scripts>
-            <resolve>
-                <script>
-                    <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
-                </script>
-                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/think-plan-do-topic/scripts/resolve/resolve-think-plan-do-topic.xsl</href>
-                </script>
-            </resolve>
+    <name>{http://spfeopentoolkit.org/ns/eppo-simple}think-plan-do-topic</name>
+    <aliases>
+        <singular>Task</singular>
+        <plural>Tasks</plural>
+    </aliases>
+    <structures>
+        <structure>
+            <name>eppo-core</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
+        </structure>
+        <!-- FIXME: This is to make text objects in a different namespace work. But is it the correct solution?-->
+        <structure>
+            <name>eppo-core</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml</href>
+            <rewrite-namespace>
+                <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                <to>http://spfeopentoolkit.org/ns/eppo-simple/objects</to>
+            </rewrite-namespace>
+        </structure>
+        <structure>
+            <name>spfe-docs-core</name>
+            <href>../../structures/spfe-docs-core/config.xml</href>
+        </structure>
+        <structure>
+            <name>graphic-record</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml</href>
+        </structure>
+        <structure>
+            <name>topic</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic/config-with-resolve-main.xml</href>
+        </structure>
+        <structure>
+            <name>topic-set</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config-with-topic-set-toc.xml</href>
+        </structure>
+    </structures>
+    <scripts>
+        <resolve>
+            <script>
+                <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
+            </script>
+            <script>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/think-plan-do-topic/scripts/resolve/resolve-think-plan-do-topic.xsl</href>
+            </script>
+        </resolve>
 
-            <present type="eppo">
-                <script>
-                    <href>scripts/present/eppo/present-think-plan-do-topic.xsl</href>
-                </script>
-            </present>
-        </scripts>
-    </topic-type>
-</spfe>
+        <present type="eppo">
+            <script>
+                <href>scripts/present/eppo/present-think-plan-do-topic.xsl</href>
+            </script>
+        </present>
+    </scripts>
+</topic-type>

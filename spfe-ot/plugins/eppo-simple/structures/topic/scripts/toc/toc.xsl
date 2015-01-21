@@ -10,8 +10,8 @@
  xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
  exclude-result-prefixes="#all">
 	
-	<xsl:variable name="config" as="element(config:spfe)">
-		<xsl:sequence select="/config:spfe"/>
+	<xsl:variable name="config" as="element(config:config)">
+		<xsl:sequence select="/config:config"/>
 	</xsl:variable>
 	
 	<xsl:param name="topic-set-id"/>

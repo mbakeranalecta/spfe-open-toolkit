@@ -27,7 +27,7 @@
     <xsl:variable name="spfeot-home" select="translate($SPFEOT_HOME, '\', '/')"/>
     <xsl:variable name="build-directory" select="translate($SPFE_BUILD_DIR, '\', '/')"/>
     <xsl:variable name="content-set-build-root-directory"
-        select="concat($build-directory,  '/', $config-doc/spfe/content-set/content-set-id)"/>
+        select="concat($build-directory,  '/', $config-doc/content-set/content-set-id)"/>
     <xsl:variable name="content-set-build"
         select="concat($content-set-build-root-directory, '/build')"/>
     <xsl:variable name="content-set-config"
@@ -68,14 +68,11 @@
     =============================================================================
     -->
 
-    <xsl:variable name="config" as="element(spfe)*">
+    <xsl:variable name="config">
         <xsl:call-template name="sf:info">
             <xsl:with-param name="message" select="'Loading config file ', $configfile"/>
         </xsl:call-template>
-        
-        <spfe>
             <xsl:apply-templates select="$config-doc" mode="load-config"/>
-        </spfe>
     </xsl:variable>
 
     <!-- copy the attribute nodes from the config files -->
@@ -93,34 +90,22 @@
     </xsl:template>
 
     <xsl:template name="main">
-        <!-- Check the soundness of the config file -->
         <!-- FIXME: Check that each topic set file is unique. To do this, need to normalize the locations, not just check the paths as strings. -->
         <xsl:call-template name="create-config-file"/>
         <xsl:call-template name="create-build-file"/>
         <xsl:call-template name="create-script-files"/>
-<!--        <xsl:for-each select="$config/content-set/topic-set">
-            <xsl:call-template name="create-script-files">
-                <xsl:with-param name="topic-set-id" select="topic-set-id"/>
-            </xsl:call-template>
-        </xsl:for-each>
-        <xsl:for-each select="$config/content-set/object-set">
-            <xsl:call-template name="create-script-files">
-                <xsl:with-param name="object-set-id" select="object-set-id"/>
-            </xsl:call-template>
-        </xsl:for-each>
--->    </xsl:template>
+   </xsl:template>
     
-    <xsl:template match="spfe" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
-    <xsl:template match="spfe/topic-set" mode="load-config">
+    <xsl:template match="/topic-set" mode="load-config">
         <xsl:if test="not(topic-set-link-priority)">
             <topic-set-link-priority>1</topic-set-link-priority>
         </xsl:if>
         <xsl:apply-templates mode="load-config"/>
     </xsl:template>
-    <xsl:template match="spfe/topic-set/topic-set-id" mode="load-config"/>
-    <xsl:template match="spfe/object-set" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
-    <xsl:template match="spfe/object-set/object-set-id" mode="load-config"/>
-    <xsl:template match="spfe/topic-type" mode="load-config">
+    <xsl:template match="/topic-set/topic-set-id" mode="load-config"/>
+    <xsl:template match="/object-set" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="/object-set/object-set-id" mode="load-config"/>
+    <xsl:template match="/topic-type" mode="load-config">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:if test="not(topic-type-link-priority)">
@@ -130,18 +115,18 @@
         </xsl:copy>
     </xsl:template>
     <!--<xsl:template match="spfe/topic-type/name" mode="load-config"/>-->
-    <xsl:template match="spfe/object-type" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
-    <xsl:template match="spfe/object-type/name" mode="load-config"/>
-    <xsl:template match="spfe/structure" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
-    <xsl:template match="spfe/structure/name" mode="load-config"/>
-    <xsl:template match="spfe/file-type" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
-    <xsl:template match="spfe/file-type/name" mode="load-config"/>
-    <xsl:template match="spfe/structures/name" mode="load-config"/>
-    <xsl:template match="spfe/content-set/topic-sets" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
-    <xsl:template match="spfe/content-set/object-sets" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
-    <xsl:template match="spfe/content-set/output-formats/output-format" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
-    <xsl:template match="spfe/content-set/output-formats/output-format/name" mode="load-config"/>
-    <xsl:template match="spfe/topic-set/topic-types" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="/object-type" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="/object-type/name" mode="load-config"/>
+    <xsl:template match="/structure" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="/structure/name" mode="load-config"/>
+    <xsl:template match="/file-type" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="/file-type/name" mode="load-config"/>
+    <xsl:template match="/structures/name" mode="load-config"/>
+    <xsl:template match="content-set/topic-sets" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="/content-set/object-sets" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="/content-set/output-formats/output-format" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
+    <xsl:template match="/content-set/output-formats/output-format/name" mode="load-config"/>
+    <xsl:template match="/topic-set/topic-types" mode="load-config"><xsl:apply-templates mode="load-config"/></xsl:template>
 
     <xsl:template match="script" mode="load-config">
         <xsl:param tunnel="yes" name="rewrite-namespace"/>
@@ -174,12 +159,12 @@
             </xsl:call-template>
         </xsl:if>
         <xsl:choose>
-            <xsl:when test="../remap-namespace">
+            <xsl:when test="../rewrite-namespace">
                 <xsl:apply-templates
                     select="document(resolve-uri(spfe:resolve-defines(.),base-uri($this)))"
                     mode="load-config">
                     <xsl:with-param name="rewrite-namespace" tunnel="yes">
-                        <xsl:sequence select="../remap-namespace"/>
+                        <xsl:sequence select="../rewrite-namespace"/>
                     </xsl:with-param>
                 </xsl:apply-templates>
                 
@@ -446,7 +431,7 @@
         <xsl:if test="not($config//content-set)">
             <xsl:call-template name="sf:error">
                 <xsl:with-param name="message">
-                 <xsl:text>Element /spfe/content-set not found in </xsl:text>
+                 <xsl:text>Element /content-set not found in </xsl:text>
                  <xsl:value-of select="$configfile"/>
                  <xsl:text>. The configuration file provided to the build system must define a content set.</xsl:text>
                 </xsl:with-param>
@@ -460,7 +445,7 @@
         <xsl:result-document href="file:///{$content-set-config}/spfe-config.xml" method="xml"
             indent="yes" xpath-default-namespace="http://spfeopentoolkit/ns/spfe-ot/config"
             xmlns="http://spfeopentoolkit/ns/spfe-ot/config" exclude-result-prefixes="#all">
-            <spfe>
+            <config>
                 <build-directory>
                     <xsl:value-of select="$build-directory"/>
                 </build-directory>
@@ -484,7 +469,6 @@
                 </toc-directory>
                 <!-- FIXME: don't need to copy the topic set list as it is redundant -->
                 <content-set>                
-                    <xsl:copy-of select="$config/content-set/@*"/>
                     <xsl:for-each select="$config/content-set/topic-set">
                         <xsl:copy>
                             <output-directory>
@@ -504,8 +488,8 @@
                             <xsl:copy-of select="*"/>
                         </xsl:copy>
                     </xsl:for-each>
-                    <xsl:copy-of select="$config/content-set/*[not(name()='topic-set')]"/>
-                </content-set>                
+                   <xsl:copy-of select="$config/content-set/*[not(name()='topic-set')]"/>
+                </content-set>                 
                 <xsl:copy-of select="$config/object-set"/>                
                 <xsl:copy-of select="$config/object-type"/>  
                 
@@ -524,7 +508,7 @@
                 </xsl:for-each-group>
 
                 <xsl:copy-of select="$config/output-format"/>
-            </spfe>
+            </config>
 
         </xsl:result-document>
     </xsl:template>
@@ -623,14 +607,14 @@
                        
             <xsl:variable name="script-rewrite-list">
                 <xsl:for-each-group select="current-group()/config:script"
-                    group-by="concat(*:href/text(), ' ', normalize-space(config:remap-namespace/config:from), normalize-space(config:remap-namespace/config:to))">
+                    group-by="concat(*:href/text(), ' ', normalize-space(config:rewrite-namespace/config:from), normalize-space(config:rewrite-namespace/config:to))">
                     <script>
                         <xsl:choose>
                             <!-- If namespace remapping is specified, create a temp file with remapped namespaces -->
-                            <xsl:when test="current-group()/config:remap-namespace">
+                            <xsl:when test="current-group()/config:rewrite-namespace">
                                 <xsl:variable name="script-to-be-remapped" select="unparsed-text(concat('file:///',config:href))"/>
-                                <xsl:variable name="map-from-namespace" select="normalize-space(config:remap-namespace/config:from)"/>
-                                <xsl:variable name="map-to-namespace" select="normalize-space(config:remap-namespace/config:to)"/>
+                                <xsl:variable name="map-from-namespace" select="normalize-space(config:rewrite-namespace/config:from)"/>
+                                <xsl:variable name="map-to-namespace" select="normalize-space(config:rewrite-namespace/config:to)"/>
                                 <xsl:variable name="regex">
                                     <xsl:text>(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;])</xsl:text>
                                     <xsl:value-of select="sf:escape-for-regex($map-from-namespace)"/>
@@ -651,7 +635,7 @@
                                     <xsl:when test="matches($script-to-be-remapped, $regex)">
                                         <regex><xsl:value-of select="$regex"/></regex>
                                         <output-file-name>
-                                            <xsl:value-of select="concat(generate-id(config:remap-namespace/config:from), position(), sf:get-file-name-from-path(config:href))"/>
+                                            <xsl:value-of select="concat(generate-id(config:rewrite-namespace/config:from), position(), sf:get-file-name-from-path(config:href))"/>
                                         </output-file-name>"
                                     </xsl:when>
                                     <xsl:otherwise>

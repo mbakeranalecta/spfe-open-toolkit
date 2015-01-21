@@ -18,8 +18,8 @@
 
 	<xsl:output method="xml" indent="no"/>
 
-	<xsl:variable name="config" as="element(config:spfe)">
-		<xsl:sequence select="/config:spfe"/>
+	<xsl:variable name="config" as="element(config:config)">
+		<xsl:sequence select="/config:config"/>
 	</xsl:variable>
 	<xsl:variable name="draft" as="xs:boolean" select="$config/config:build-command='draft'"/>
 	

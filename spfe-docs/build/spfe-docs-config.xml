@@ -1,197 +1,196 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+
+<content-set xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <content-set>
-        <content-set-id>spfe-docs</content-set-id>
-        <title>SPFE Documentation</title>
-        <topic-set-type-order>
-            <topic-set-type>docset</topic-set-type>
-            <topic-set-type>guide</topic-set-type>
-            <topic-set-type>task</topic-set-type>
-            <topic-set-type>reference</topic-set-type>
-            <topic-set-type>essay</topic-set-type>
-            <topic-set-type>list</topic-set-type>
-        </topic-set-type-order>
-        <home-topic-set>spfe-docs-home</home-topic-set>
-        <topic-sets>
-            
-            <topic-set>
-                <topic-set-id>spfe-development</topic-set-id>
-                <href>topic-sets/spfe-development.xml</href>
-            </topic-set>    
-            
-            <topic-set>
-                <topic-set-id>spfe-docs-home</topic-set-id>
-                <href>topic-sets/spfe-docs-home.xml</href>
-            </topic-set>
-            
-            <topic-set>
-                <topic-set-id>spfe-configuration-reference</topic-set-id>
-                <href>topic-sets/spfe-configuration-reference.xml</href>
-            </topic-set>  
-			
-			 <topic-set>
-                <topic-set-id>eppo-presentation-reference</topic-set-id>
-                <href>topic-sets/eppo-presentation-reference.xml</href>
-            </topic-set>  
-            
+    <content-set-id>spfe-docs</content-set-id>
+    <title>SPFE Documentation</title>
+    <topic-set-type-order>
+        <topic-set-type>docset</topic-set-type>
+        <topic-set-type>guide</topic-set-type>
+        <topic-set-type>task</topic-set-type>
+        <topic-set-type>reference</topic-set-type>
+        <topic-set-type>essay</topic-set-type>
+        <topic-set-type>list</topic-set-type>
+    </topic-set-type-order>
+    <home-topic-set>spfe-docs-home</home-topic-set>
+    <topic-sets>
+        
+        <topic-set>
+            <topic-set-id>spfe-development</topic-set-id>
+            <href>topic-sets/spfe-development.xml</href>
+        </topic-set>    
+        
+        <topic-set>
+            <topic-set-id>spfe-docs-home</topic-set-id>
+            <href>topic-sets/spfe-docs-home.xml</href>
+        </topic-set>
+        
+        <topic-set>
+            <topic-set-id>spfe-configuration-reference</topic-set-id>
+            <href>topic-sets/spfe-configuration-reference.xml</href>
+        </topic-set>  
+		
+		 <topic-set>
+            <topic-set-id>eppo-presentation-reference</topic-set-id>
+            <href>topic-sets/eppo-presentation-reference.xml</href>
+        </topic-set>  
+        
 <!--			 <topic-set>
-			     <topic-set-id>eppo-graphic-record-doctype-reference</topic-set-id>
-			     <href>topic-sets/eppo-graphic-record-reference.xml</href>
-            </topic-set>  
+		     <topic-set-id>eppo-graphic-record-doctype-reference</topic-set-id>
+		     <href>topic-sets/eppo-graphic-record-reference.xml</href>
+        </topic-set>  
 -->            
 <!--			 <topic-set>
-			     <topic-set-id>eppo-generic-topic-reference</topic-set-id>
-			     <href>topic-sets/eppo-generic-topic-reference.xml</href>
-            </topic-set>  
+		     <topic-set-id>eppo-generic-topic-reference</topic-set-id>
+		     <href>topic-sets/eppo-generic-topic-reference.xml</href>
+        </topic-set>  
 -->            
-            <topic-set>
-                <topic-set-id>spfe-function-reference</topic-set-id>
-                <href>topic-sets/spfe-function-reference.xml</href>
-            </topic-set>
-            
-            <topic-set>
-                <topic-set-id>spfe-docs-essays</topic-set-id>
-                <href>topic-sets/spfe-docs-essays.xml</href>
-            </topic-set>
-            
-            <topic-set>
-                <topic-set-id>spfe-demos</topic-set-id>
-                <href>topic-sets/spfe-demos.xml</href>
-            </topic-set>
-            
-            <topic-set>
-                <topic-set-id>spfe-docs-lists</topic-set-id>
-                <href>topic-sets/spfe-docs-lists.xml</href>
-            </topic-set>
-        </topic-sets>
+        <topic-set>
+            <topic-set-id>spfe-function-reference</topic-set-id>
+            <href>topic-sets/spfe-function-reference.xml</href>
+        </topic-set>
         
-        <object-sets>
-            <object-set>
-                <object-set-id>spfe-docs-misc-tables</object-set-id>
-                <href>object-sets/spfe-docs-misc-tables.xml</href>                 
-            </object-set>
-            <object-set>
-                <object-set-id>spfe-docs-if-then-tables</object-set-id>
-                <href>object-sets/spfe-docs-if-then-tables.xml</href>                 
-            </object-set>
-        </object-sets>
+        <topic-set>
+            <topic-set-id>spfe-docs-essays</topic-set-id>
+            <href>topic-sets/spfe-docs-essays.xml</href>
+        </topic-set>
         
+        <topic-set>
+            <topic-set-id>spfe-demos</topic-set-id>
+            <href>topic-sets/spfe-demos.xml</href>
+        </topic-set>
+        
+        <topic-set>
+            <topic-set-id>spfe-docs-lists</topic-set-id>
+            <href>topic-sets/spfe-docs-lists.xml</href>
+        </topic-set>
+    </topic-sets>
+    
+    <object-sets>
+        <object-set>
+            <object-set-id>spfe-docs-misc-tables</object-set-id>
+            <href>object-sets/spfe-docs-misc-tables.xml</href>                 
+        </object-set>
+        <object-set>
+            <object-set-id>spfe-docs-if-then-tables</object-set-id>
+            <href>object-sets/spfe-docs-if-then-tables.xml</href>                 
+        </object-set>
+    </object-sets>
+    
 
+    
+    <subject-types>
+        <subject-type>
+            <id>config-setting</id>
+            <aliases>
+                <singular>Configuration setting</singular>
+                <plural>Configuration settings</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>spfe-build-property</id>
+            <aliases>
+                <singular>Build property</singular>
+                <plural>Build properties</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>feature</id>
+            <aliases>
+                <singular>Feature</singular>
+                <plural>Features</plural>
+            </aliases> 
+        </subject-type>
+        <subject-type>
+            <id>xslt-library-reference-entry</id>
+            <aliases>
+                <singular>SPFE function</singular>
+                <plural>SPFE functions</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>xslt-function-name</id>
+            <aliases>
+                <singular>XSLT function</singular>
+                <plural>XSLT functions</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>xslt-template-name</id>
+            <aliases>
+                <singular>XSLT template</singular>
+                <plural>XSLT templates</plural>
+            </aliases>
+        </subject-type>
         
-        <subject-types>
-            <subject-type>
-                <id>config-setting</id>
-                <aliases>
-                    <singular>Configuration setting</singular>
-                    <plural>Configuration settings</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>spfe-build-property</id>
-                <aliases>
-                    <singular>Build property</singular>
-                    <plural>Build properties</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>feature</id>
-                <aliases>
-                    <singular>Feature</singular>
-                    <plural>Features</plural>
-                </aliases> 
-            </subject-type>
-            <subject-type>
-                <id>xslt-library-reference-entry</id>
-                <aliases>
-                    <singular>SPFE function</singular>
-                    <plural>SPFE functions</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>xslt-function-name</id>
-                <aliases>
-                    <singular>XSLT function</singular>
-                    <plural>XSLT functions</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>xslt-template-name</id>
-                <aliases>
-                    <singular>XSLT template</singular>
-                    <plural>XSLT templates</plural>
-                </aliases>
-            </subject-type>
-            
-            <subject-type>
-                <id>task</id>
-                <aliases>
-                    <singular>Task</singular>
-                    <plural>Tasks</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>file-name</id>
-                <aliases>
-                    <singular>File name</singular>
-                    <plural>File names</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>document-name</id>
-                <aliases>
-                    <singular>Document name</singular>
-                    <plural>Document names</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>xml-element-name</id>
-                <aliases>
-                    <singular>XML element name</singular>
-                    <plural>XML element names</plural>
-                </aliases>
-            </subject-type>
-        </subject-types>
+        <subject-type>
+            <id>task</id>
+            <aliases>
+                <singular>Task</singular>
+                <plural>Tasks</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>file-name</id>
+            <aliases>
+                <singular>File name</singular>
+                <plural>File names</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>document-name</id>
+            <aliases>
+                <singular>Document name</singular>
+                <plural>Document names</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>xml-element-name</id>
+            <aliases>
+                <singular>XML element name</singular>
+                <plural>XML element names</plural>
+            </aliases>
+        </subject-type>
+    </subject-types>
 
-        <messages>warning info</messages>
+    <messages>warning info</messages>
 <!--          <presentation-types>
-          <presentation-type>
-                <name>eppo</name>
-            </presentation-type>
+      <presentation-type>
+            <name>eppo</name>
+        </presentation-type>
 --><!--                <presentation-type>
-                    <name>dita</name>
-                    <href>../presentation-types/dita/config.xml</href>
-                    <copy-to>${CONTENT_SET_BUILD_ROOT_DIR}/ditaout</copy-to>
-                </presentation-type>
-        </presentation-types>--> 
-        <output-formats>
-            <output-format>
-                <name>xhtml</name>
-                <href>../../spfe-ot/plugins/eppo-simple/output-types/xhtml/config.xml</href>
-            </output-format>
-        </output-formats>              
-        <wip-site>
-            <url>wip-site.href</url>
-            <ftp>
-                <url>wip-site.ftp.url</url>
-                <user>wip-site.ftp.user</user>
-                <password>wip-site.ftp.password</password>
-            </ftp>
-            <path>wip-site.ftp</path>
-        </wip-site>
+                <name>dita</name>
+                <href>../presentation-types/dita/config.xml</href>
+                <copy-to>${CONTENT_SET_BUILD_ROOT_DIR}/ditaout</copy-to>
+            </presentation-type>
+    </presentation-types>--> 
+    <output-formats>
+        <output-format>
+            <name>xhtml</name>
+            <href>../../spfe-ot/plugins/eppo-simple/output-types/xhtml/config.xml</href>
+        </output-format>
+    </output-formats>              
+    <wip-site>
+        <url>wip-site.href</url>
+        <ftp>
+            <url>wip-site.ftp.url</url>
+            <user>wip-site.ftp.user</user>
+            <password>wip-site.ftp.password</password>
+        </ftp>
+        <path>wip-site.ftp</path>
+    </wip-site>
 
-        <strings>
-            <string id="product">SPFE Open Toolkit</string>
-            <string id="product-release">1.0 (alpha 1)</string>
-            <string id="copyright">Copyright © 2014 Analecta Communications Inc.</string>
-        </strings>
-     </content-set>
-    
+    <strings>
+        <string id="product">SPFE Open Toolkit</string>
+        <string id="product-release">1.0 (alpha 1)</string>
+        <string id="copyright">Copyright © 2014 Analecta Communications Inc.</string>
+    </strings>
+ </content-set>
 
 
-    
 
-</spfe>
+
+

@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+
+<topic-set xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    <topic-set-id>eppo-generic-topic-doctype-reference</topic-set-id>
+    <topic-set-type>reference</topic-set-type>
 
-    <topic-set>
-        <topic-set-id>eppo-generic-topic-doctype-reference</topic-set-id>
-        <topic-set-type>reference</topic-set-type>
+    <topic-types>
+            <topic-type>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry</name>
+                <href>../../topic-types/doctype-reference/config.xml</href>
+            </topic-type>
+    </topic-types>
+    
+    <presentation-types>
+        <presentation-type>eppo</presentation-type>
+        <!--<presentation-type>dita</presentation-type>-->
+    </presentation-types>
+    
+    <output-formats>
+        <output-format>
+            <name>xhtml</name>
+        </output-format>
+    </output-formats>      
+    
+    <sources>
+        <authored-content>
+            <include>${SPFEOT_HOME}/1.0/schemas/config/config-setting-descriptions.xml</include>
+        </authored-content>
+        <sources-to-extract-content-from>
+            <include>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/schemas/authoring/generic-topic.xsd</include>
+        </sources-to-extract-content-from>
+    </sources>
 
-        <topic-types>
-                <topic-type>
-                    <name>{http://spfeopentoolkit.org/ns/spfe-docs}doctype-reference-entry</name>
-                    <href>../../topic-types/doctype-reference/config.xml</href>
-                </topic-type>
-        </topic-types>
-        
-        <presentation-types>
-            <presentation-type>eppo</presentation-type>
-            <!--<presentation-type>dita</presentation-type>-->
-        </presentation-types>
-        
-        <output-formats>
-            <output-format>
-                <name>xhtml</name>
-            </output-format>
-        </output-formats>      
-        
-        <sources>
-            <authored-content>
-                <include>${SPFEOT_HOME}/1.0/schemas/config/config-setting-descriptions.xml</include>
-            </authored-content>
-            <sources-to-extract-content-from>
-                <include>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/generic-topic/schemas/authoring/generic-topic.xsd</include>
-            </sources-to-extract-content-from>
-        </sources>
+    <default-topic-scope>eppo</default-topic-scope>
+    <default-subject-scope>eppo</default-subject-scope>
+    <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
+    
+    <strings>
+        <string id="eppo-simple-topic-set-title">EPPO Generic Topic Reference</string>
+    </strings>
+</topic-set>
 
-        <default-topic-scope>eppo</default-topic-scope>
-        <default-subject-scope>eppo</default-subject-scope>
-        <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
-        
-        <strings>
-            <string id="eppo-simple-topic-set-title">EPPO Generic Topic Reference</string>
-        </strings>
-    </topic-set>
-</spfe>

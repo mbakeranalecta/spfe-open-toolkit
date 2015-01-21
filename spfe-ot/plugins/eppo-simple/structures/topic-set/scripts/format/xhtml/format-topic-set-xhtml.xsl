@@ -9,8 +9,8 @@
     xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
     version="2.0">
     
-    <xsl:variable name="config" as="element(config:spfe)">
-        <xsl:sequence select="/config:spfe"/>
+    <xsl:variable name="config" as="element(config:config)">
+        <xsl:sequence select="/config:config"/>
     </xsl:variable>
     <!-- FIXME: The preferred formats should be settable outside the script -->
     <xsl:variable name="preferred-format-list">svg,png,jpg,jpeg,gif</xsl:variable>

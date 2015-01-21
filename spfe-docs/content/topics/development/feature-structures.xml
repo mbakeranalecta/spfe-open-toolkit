@@ -154,10 +154,10 @@
             &lt;structure>
                 &lt;name>eppo-core&lt;/name>
                 &lt;href>${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml&lt;/href>
-                &lt;remap-namespace>
+                &lt;rewrite-namespace>
                     &lt;from>http://spfeopentoolkit.org/ns/eppo-simple&lt;/from>
                     &lt;to>http://spfeopentoolkit.org/ns/spfe-docs&lt;/to>
-                &lt;/remap-namespace>  
+                &lt;/rewrite-namespace>  
             &lt;/structure>
             &lt;structure>
                 &lt;name>spfe-docs-core&lt;/name>
@@ -170,10 +170,10 @@
             &lt;structure>
                 &lt;name>topic-set&lt;/name>
                 &lt;href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config-with-topic-set-toc.xml&lt;/href>
-                &lt;remap-namespace>
+                &lt;rewrite-namespace>
                     &lt;from>http://spfeopentoolkit.org/ns/eppo-simple&lt;/from>
                     &lt;to>http://spfeopentoolkit.org/ns/spfe-docs&lt;/to>
-                &lt;/remap-namespace>  
+                &lt;/rewrite-namespace>  
             &lt;/structure>
         &lt;structure>
                 &lt;name>graphic-record&lt;/name>
@@ -252,10 +252,10 @@
             <codeblock>            &lt;structure>
                 &lt;name>topic-set&lt;/name>
                 &lt;href>${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config-with-topic-set-toc.xml&lt;/href>
-                &lt;remap-namespace>
+                &lt;rewrite-namespace>
                     &lt;from>http://spfeopentoolkit.org/ns/eppo-simple&lt;/from>
                     &lt;to>http://spfeopentoolkit.org/ns/spfe-docs&lt;/to>
-                &lt;/remap-namespace>  
+                &lt;/rewrite-namespace>  
             &lt;/structure></codeblock>
         </section>
         <section>

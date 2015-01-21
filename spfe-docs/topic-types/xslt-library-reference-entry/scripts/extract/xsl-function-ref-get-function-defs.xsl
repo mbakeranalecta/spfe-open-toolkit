@@ -13,8 +13,8 @@
    
   <!--  <xsl:output indent="yes" xpath-default-namespace="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"/>
 -->    
-    <xsl:variable name="config" as="element(config:spfe)">
-        <xsl:sequence select="/config:spfe"/>
+    <xsl:variable name="config" as="element(config:config)">
+        <xsl:sequence select="/config:config"/>
     </xsl:variable>
     
     <xsl:param name="topic-set-id"/>

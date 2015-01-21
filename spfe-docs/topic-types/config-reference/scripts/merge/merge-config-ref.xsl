@@ -32,8 +32,8 @@
 	<xsl:param name="authored-content-files"/>
 	<xsl:variable name="config-setting-source" select="sf:get-sources($authored-content-files)"/>
 
-	<xsl:variable name="config" as="element(config:spfe)">
-		<xsl:sequence select="/config:spfe"/>
+	<xsl:variable name="config" as="element(config:config)">
+		<xsl:sequence select="/config:config"/>
 	</xsl:variable>
 
 
@@ -64,7 +64,7 @@ Main template
 			<xsl:variable name="current-doctype" select="@name"/>
 
 			<xsl:result-document method="xml" indent="yes" omit-xml-declaration="no"
-				href="file:///{$output-directory}/merge.xml">
+				href="file:///{$output-directory}/{$current-doctype}-merge.xml">
 				<cr:spfe-configuration-reference-entries>
 
 					<!-- Use for-each-group to filter out duplicate xpaths -->
