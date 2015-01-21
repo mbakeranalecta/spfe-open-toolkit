@@ -56,7 +56,7 @@
                     <xs:element maxOccurs="unbounded" name="output-format">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="type"/>
+                          <xs:element name="name"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
