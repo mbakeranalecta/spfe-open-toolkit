@@ -56,16 +56,16 @@ Main template
 
 	<xsl:template name="main">
 		
-		
-		<!-- Create the schema element topic set -->
+
+			<xsl:result-document method="xml" indent="yes" omit-xml-declaration="no"
+				href="file:///{$output-directory}/merge.xml">
+				<cr:spfe-configuration-reference-entries>	
+					<!-- Create the schema element topic set -->
 		<xsl:for-each-group select="$doctypes/doctype" group-by="@name">
 			<!-- FIXME: Need a test for the root selection method using schema with more than one doc element. -->
 			<xsl:variable name="root" select=".[sf:index-of-shortest-string(@xpath)]/@xpath"/>
 			<xsl:variable name="current-doctype" select="@name"/>
 
-			<xsl:result-document method="xml" indent="yes" omit-xml-declaration="no"
-				href="file:///{$output-directory}/{$current-doctype}-merge.xml">
-				<cr:spfe-configuration-reference-entries>
 
 					<!-- Use for-each-group to filter out duplicate xpaths -->
 					<xsl:for-each-group
@@ -79,9 +79,11 @@ Main template
 								as="element()*" tunnel="yes"/>
 						</xsl:apply-templates>
 					</xsl:for-each-group>
+				
+		
+		</xsl:for-each-group>	
 				</cr:spfe-configuration-reference-entries>
 			</xsl:result-document>
-		</xsl:for-each-group>
 		<!-- Warn if there are any unmatched topics in the authored content. -->
 		<!-- FIXME: Should also search for unmatched attribute definitions. -->
 		<xsl:for-each select="$config-setting-source//ed:config-setting-description">
