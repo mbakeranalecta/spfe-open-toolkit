@@ -2,16 +2,18 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2014 All Rights Reserved. -->
 
-<structures xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+<structure xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <name>spfe-docs-core</name>
-    <structure>
-        <name>annotations.spfe-build</name>
-        <href>../annotations/spfe-build/config.xml</href>
-    </structure>
-    <structure>
-        <name>annotations.eppo-simple</name>
-        <href>../annotations/eppo-simple/config.xml</href>
-    </structure>
-</structures>
+    <structures>
+        <structure>
+            <name>annotations.spfe-build</name>
+            <href>../annotations/spfe-build/config.xml</href>
+        </structure>
+        <structure>
+            <name>annotations.eppo-simple</name>
+            <href>../annotations/eppo-simple/config.xml</href>
+        </structure>
+    </structures>
+</structure>
