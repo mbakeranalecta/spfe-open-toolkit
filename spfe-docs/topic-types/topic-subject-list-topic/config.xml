@@ -65,6 +65,16 @@
                 </rewrite-namespace>      <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/topic-subject-list-topic/scripts/resolve/resolve-topic-subject-lists.xsl</href>
             </script>              
         </resolve>
+        <toc>
+            <script>
+                <rewrite-namespace>
+                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                    <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
+                </rewrite-namespace>                        
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/topic-subject-list-topic/scripts/toc/topic-subject-list-toc.xsl</href>
+            </script>
+        </toc>
+        
         <present type="eppo">
             <script>
                 <rewrite-namespace>

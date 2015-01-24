@@ -616,9 +616,9 @@
                                 <xsl:variable name="map-from-namespace" select="normalize-space(config:rewrite-namespace/config:from)"/>
                                 <xsl:variable name="map-to-namespace" select="normalize-space(config:rewrite-namespace/config:to)"/>
                                 <xsl:variable name="regex">
-                                    <xsl:text>(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;])</xsl:text>
+                                    <xsl:text>(xmlns.*?=[&quot;&apos;]|xpath-default-namespace=[&quot;&apos;]|\{)</xsl:text>
                                     <xsl:value-of select="sf:escape-for-regex($map-from-namespace)"/>
-                                    <xsl:text>([&quot;&apos;])</xsl:text>
+                                    <xsl:text>([&quot;&apos;\}])</xsl:text>
                                 </xsl:variable>
                                 
                                 <map-from-namespace>

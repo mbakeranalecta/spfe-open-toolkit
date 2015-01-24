@@ -59,6 +59,11 @@
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/topic-subject-list-topic/scripts/resolve/resolve-topic-subject-lists.xsl</href>
             </script>
         </resolve>
+        <toc>
+            <script>
+                <href>scripts/toc/topic-subject-list-toc.xsl</href>
+            </script>
+        </toc>
         <present type="eppo">
             <script>
                 <href>scripts/present/eppo/present-topic-subject-lists.xsl</href>

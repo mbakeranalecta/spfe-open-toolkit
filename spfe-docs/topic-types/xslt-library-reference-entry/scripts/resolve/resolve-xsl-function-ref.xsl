@@ -20,7 +20,7 @@ exclude-result-prefixes="#all" >
 
 	<xsl:template match="xslt-library-reference-entry">
 		
-		<xsl:variable name="name" select="xsl-function/name"/>
+		<xsl:variable name="name" select="xsl-function/name |xsl-template/name"/>
 		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
 		
 		<ss:topic 
