@@ -3,29 +3,6 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <project name="spfe-rules" basedir="." default="draft">
 
-	<xmlcatalog id="oasis-catalogs">
-		<dtd publicId="-//OASIS//DTD XML Catalogs V1.1//EN"
-			location="${SPFEOT_HOME}/1.0/schemas/catalog1.1.dtd"/>
-	</xmlcatalog>
-	<xmlcatalog id="spfe-catalogs">
-		<classpath>
-			<pathelement path="${SPFEOT_HOME}/tools/xml-commons-resolver-1.2/resolver.jar"/>
-			<pathelement path="${SPFEOT_HOME}/tools/config"/>
-		</classpath>
-<!--		<catalogpath>
-			<fileset dir="${SPFEOT_HOME}/1.0">
-				<include name="**/catalog.xml"/>
-			</fileset>
-			<fileset dir="${SPFEOT_HOME}/plugins">
-				<include name="**/catalog.xml"/>
-			</fileset>
-			<fileset dir="${HOME}/.spfe" erroronmissingdir="no">
-				<include name="**/catalog.xml"/>
-			</fileset>
-		</catalogpath>-->
-
-	</xmlcatalog>
-
 	<!-- MACRO DEFINITIONS -->
 	<macrodef name="saxon-xslt">
 		<attribute name="style"/>
@@ -50,16 +27,6 @@
 				<arg value="-r:org.apache.xml.resolver.tools.CatalogResolver"/>
 				<arg value="-x:org.apache.xml.resolver.tools.ResolvingXMLReader"/>
 			</java>
-			
-<!--			<xslt classpath="${SPFEOT_HOME}/tools/saxon9he/saxon9he.jar" style="@{style}" in="@{in}"
-				out="@{out}">
-				<xmlcatalog refid="spfe-catalogs"/>
-				<params/>
-				<factory name="net.sf.saxon.TransformerFactoryImpl">
-					<attribute name="http://saxon.sf.net/feature/initialTemplate"
-						value="@{initial-template}"/>
-				</factory>
-			</xslt>-->
 		</sequential>
 	</macrodef>
 
@@ -185,12 +152,7 @@
 					<arg value="output-directory=@{output-directory}"/>
 					<arg value="sources-to-extract-content-from=${sources-to-extract-content-from}"/>
 					<arg value="draft=${draft}"/>
-<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="output-directory" expression="@{output-directory}"/>
-					<param name="sources-to-extract-content-from"	expression="${sources-to-extract-content-from}"/>
-					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-					<param name="draft" expression="${draft}" if="draft"/>
--->				</params>
+				</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
@@ -219,13 +181,7 @@
 					<arg value="authored-content-files=${authored-content-files}"/>
 					<arg value="extracted-content-files=${extracts-to-merge-content-with}"/>
 					<arg value="draft=${draft}"/>
-<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="output-directory" expression="@{output-directory}"/>
-					<param name="authored-content-files" expression="${authored-content-files}"/>
-					<param name="extracted-content-files" expression="${extracts-to-merge-content-with}"/>
-					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-					<param name="draft" expression="${draft}" if="draft"/>
--->				</params>
+				</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
@@ -252,11 +208,7 @@
 					<arg value="authored-content-files=${authored-content-files}"/>
 					<arg value="output-directory=@{output-directory}"/>
 					<arg value="draft=${draft}"/>
-<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="authored-content-files" expression="${authored-content-files}"/>
-					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-					<param name="draft" expression="${draft}" if="draft"/>
--->				</params>
+				</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
@@ -297,9 +249,7 @@
 				<params>
 					<arg value="topic-set-id=@{topic-set-id}"/>
 					<arg value="synthesis-files=${synthesis-files-list}"/>
-<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="synthesis-files" expression="${synthesis-files-list}"/>
--->				</params>
+			</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
@@ -330,9 +280,7 @@
 				<params>
 					<arg value="topic-set-id=@{topic-set-id}"/>
 					<arg value="synthesis-files=${synthesis-files-list}"/>
-<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="synthesis-files" expression="${synthesis-files-list}"/>
--->				</params>
+				</params>
 			</saxon-xslt>
 		</sequential>
 	</macrodef>
@@ -401,23 +349,9 @@
 					<arg value="objects-files=${objects-files-list}"/>
 					<arg value="output-directory=@{output-directory}"/>
 					<arg value="toc-files=${toc-files-list}"/>
-<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="synthesis-files" expression="${synthesis-files-list}"/>
-					<param name="link-catalog-files" expression="${link-catalog-files-list}"/>
-					<param name="output-directory" expression="@{output-directory}"/>
-					<param name="toc-files" expression="${toc-files-list}"/>
--->				</params>
+				</params>
 			</saxon-xslt>
 			
-			<!-- validate the output file -->
-			<echo>Info: Validating presentation files for @{topic-set-id}.</echo>
-<!--			<xmlvalidate lenient="no">
-				<fileset dir="@{output-directory}" includes="**/*.xml"/>
-				<xmlcatalog refid="spfe-catalogs"/>
-				<!-\- make the validation include namespaces -\->
-				<attribute name="http://xml.org/sax/features/namespaces" value="true"/>
-				<attribute name="http://apache.org/xml/features/validation/schema" value="true"/>
-			</xmlvalidate>-->
 			<condition property="copy-to-specified">
 				<not>
 					<equals arg1="${copy-to}" arg2=""/>
@@ -472,10 +406,7 @@
 					<arg value="topic-set-id=@{topic-set-id}"/>
 					<arg value="presentation-files=${presentation-files}"/>
 					<arg value="output-directory=@{output-directory}"/>
-<!--					<param name="topic-set-id" expression="@{topic-set-id}"/>
-					<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-					<param name="presentation-files" expression="${presentation-files}"/>
--->				</params>
+				</params>
 			</saxon-xslt>
 			
 			<!-- copy the image files to the image directory using list created by format script -->
@@ -557,11 +488,7 @@
 				<arg value="topic-set-id=@{topic-set-id}"/>
 				<arg value="synthesis-files=${synthesis-files}"/>
 				<arg value="vector-if-available=yes"/>
-<!--				<param name="topic-set-id" expression="@{topic-set-id}"/>
-				<param name="synthesis-files" expression="${synthesis-files}"/>
-				<param name="terminate-on-error" expression="no" if="maintenance-mode"/>
-				<param name="vector-if-available" expression="yes"/>
--->			</params>
+			</params>
 		</saxon-xslt>
 		<!--		<fileset id="files.graphics.print" dir="${spfe.directories.image-source}"
 			includesfile="${temp}/image-list-print"/>-->
