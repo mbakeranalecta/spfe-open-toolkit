@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
+http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
+
+    <head>
+        <id>adding-a-structure-to-your-project</id>
+        <history>
+            <revision>
+                <date>2015-01-24</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>structure</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>{add} a {structure}</term>
+            </entry>
+            <entry>
+                <type>config-setting</type>
+                <term>/structure</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Adding a new structure</title>
+        <understanding>
+            <p>A <feature>structure</feature> is a collection of document structure elements that
+                work together to provide some distinct text structure such as a
+                    <eppo-simple-structure-name>list</eppo-simple-structure-name> or a
+                    <eppo-simple-structure-name>table</eppo-simple-structure-name>. A <feature>topic
+                    type</feature> is made up of an appropriate collection of structures.
+                EPPO-simple provides a selection of structures that you can use to create
+                    <feature>topic types</feature> for your <feature>content set</feature>. In some
+                cases, however, you may want to create a new structure specifically for one or more
+                topic types in your content set. </p>
+            <p>For example, the SPFE Docs include a demo topic type which is designed to show how
+                various features of SPFE and EPPO-simple are used. Demo topics need to show samples
+                of the output produced by these features. To enable the formatting routines to set
+                these samples apart from ordinary text, it uses an output-sample structure. This
+                structure is not needed in most topic types in the SPFE docs, and is certainly not
+                needed by most content sets unless they describe structured text systems like
+                SPFE.</p>
+       </understanding>
+       <planning>
+           <planning-question>
+               <planning-question-title>Do I need a custom structure?</planning-question-title>
+                <planning-question-body>
+                    <p>In many cases, it is possible to use an existing structure that will produce
+                        the output effect you are looking for, or something close enough to it.
+                        Given this, is it worth creating a custom structure. For instance, the SPFE
+                        Docs could have used a generic
+                        <xml-element-name>blockquote</xml-element-name> element to contain and
+                        output sample. Some reasons to create a custom structure are:</p>
+                    <ll>
+                        <li>
+                            <label>Greater clarity</label>
+                            <p>A custom structure more clearly expresses what the content it contain
+                                means. This helps authors, editors, and downstream processes to
+                                process the structure correctly.</p>
+                        </li>
+                        <li>
+                            <label>More specific structure</label>
+                            <p>You can express more precise structural requirements with a custom
+                                structure. Parts of a generic structure may be optional whereas you
+                                want them to be required in your custom structure. You can also
+                                require or allow the custom structure at more specific places in
+                                your topic type. This also makes it easier to <task>audit and
+                                    validate your content</task>. </p>
+                        </li>
+                    </ll>
+                    <ll>
+                        <li>
+                            <label>More formatting control</label>
+                            <p>Creating a custom structure makes it easy to specify <task>specific
+                                    formatting for the structure in different media</task>.</p>
+                        </li>
+                    </ll>
+                </planning-question-body>
+            </planning-question>
+            <planning-question>
+                <planning-question-title>Why not just use an attribute to modify the handling of an existing structure</planning-question-title>
+                <planning-question-body>
+                    <p>Many structured text vocabularies use generic structures and then use
+                        attributes on the root element of those structures to designate a more
+                        specific type. For instance, in DITA, admonitions are indicated with a
+                        generic note element with a type elements that indicates the type of
+                        admonition:
+                        <code>note | tip | fastpath | restriction | important | remember | attention | caution | danger | other</code>.
+                        EPPO-simple, on the other hand, supplies different sets of admonition
+                        structures for different purposes. For instance, if you add the
+                            <eppo-simple-structure-name>admonitions.danger-warning-caution-notice</eppo-simple-structure-name>
+                        structure to your topic type, you will get for separate admonition
+                        structures: danger, warning, caution, and notice. There are a number of
+                        advantages to this approach:</p>
+                    <ll>
+                        <li>
+                            <label>Easier to author</label>
+                            <p>If an author wants to add a warning to a piece of text is easier to
+                                think <quotes>Warning</quotes> than to think
+                                <quotes>note with a warning attribute</quotes> and it is easier to
+                                create a warning element than to create a note element and add a
+                                warning attribute. </p>
+                        </li>
+                        <li>
+                            <label>Better guidance</label>
+                            <p>For any given subject matter, topic type, content set, or company
+                                style, only certain sets of admonitions are appropriate. You don't
+                                want authors to have to remember which are allowed and which are not
+                                allowed from a large set. You only want them to have the appropriate
+                                ones available. </p>
+                        </li>
+                    </ll>
+                </planning-question-body>
+            </planning-question>
+           <planning-question>
+               <planning-question-title>Should I create a custom structure in my content set project or as a SPFE-OT plugin</planning-question-title>
+               <planning-question-body>
+                   <p>You can define a custom structure within you content project or you can make
+                        it a separate plugin. If the structure is unique to a particular content
+                        set, create it there. If it is potentially usuable for several content sets,
+                        make it a plugin. If you think it is potentially useful to others and you
+                        are willing to share, you could <task>submit it to the SPFE Open
+                            Toolkit</task> for possible inclusion in the standard structures
+                        distributed with the toolkit. </p>
+               </planning-question-body>
+           </planning-question>
+       </planning>
+        <doing>        
+            <p>To create a custom structure:</p>
+            <procedure>
+                <title>Creating a custom structure</title>
+                <intro>
+                    <p>This is the high-level procedure for creating a custom structure.</p>
+                </intro>
+                <steps>
+                    <step>
+                        <title>Create the structure directory</title>
+                        <p>Select the appropriate location for your structure and create a
+                                <feature>structure directory</feature> there. If you want to create
+                            more than one version of a structure, create a main structure directory
+                            for this class of structure and one subdirectory for each specific type
+                            of this class. For an example, see the EPPO-simple admonitions
+                            structure, which contains a variety of different specific admonitions
+                            structures for various collections of admonitions.</p>
+                        <p>Unless it is a parent directory for different variation on the structure,
+                            each structure directory contain a config file and three directories:
+                            schemas, scripts, and style. (But not every structure needs to define
+                            all these things, so you may not need all three directories in each
+                            case.)</p>
+                    </step>
+                    <step>
+                        <title>Create an authoring schema for your structure</title>
+                        <p/>
+                    </step>
+                    <step>
+                        <title>Create one or more presentation schemas for your structure</title>
+                        <p/>
+                    </step>
+                    <step>
+                        <title>Create scripts for processing your structure</title>
+                        <p/>
+                    </step>
+                    <step>
+                        <title>Create CSS stylesheets for authoring and displaying your
+                            structure</title>
+                        <p/>
+                    </step>
+                    <step>
+                        <title>Create a configuration file for your structure</title>
+                        <p/>
+                    </step>
+                    <step>
+                        <title>Add your structure to your topic type</title>
+                        <p/>
+                    </step>
+                </steps>
+            </procedure>
+        </doing>
+    </body>
+</think-plan-do-topic>
