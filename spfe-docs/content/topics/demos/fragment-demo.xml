@@ -27,7 +27,13 @@
     </head>
     <body>
         <title>Fragments Demo</title>
-        <p>This is a demo of fragments and stings. </p>
+        <p>This is a demo of <feature>fragments</feature>. It also includes a demo of the related
+            feature <feature>stings</feature>. Fragments and strings are both <task>reuse</task>
+            features of SPFE and EPPO-simple. Both allow you to insert a piece of content defined
+            elsewhere into the current topic. Fragments insert content at the <feature>general text
+                level</feature>. Strings insert text at the <feature>paragraph level</feature>. You
+            can also define local strings for use within the body of a fragment. This allows you to
+            substitute different strings into a fragment each time it is used. </p>
 <subhead>This is a test of the string feature</subhead>
 
         <p> What follows is a string defined inline with <code>&lt;string id="a-string">This is a string&lt;/string></code>: <string id="a-string">This is a string</string></p>

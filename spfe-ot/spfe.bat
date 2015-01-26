@@ -1,6 +1,11 @@
 @ECHO OFF
 REM This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.
 REM (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved.
+
+REM Replacing bat with py
+python spfe.py %*
+GOTO END
+
 if "%SPFE_BUILD_DIR%" == "" set SPFE_BUILD_DIR=%HOMEDRIVE%%HOMEPATH%\spfebuild
 if "%1"=="-clean" goto CLEAN
 if "%1"=="" goto NOCONFIGFILE
@@ -15,7 +20,7 @@ java -classpath "%SPFEOT_HOME%/tools/saxon9he/saxon9he.jar" net.sf.saxon.Transfo
 
 IF %ERRORLEVEL% NEQ 0 goto CONFIGERROR 
 
-ant %2 -f "%SPFE_TEMP_BUILD_FILE%" -lib  "%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar" -emacs %3 %4 %5 %6 %7 %8 
+ant %2 -f "%SPFE_TEMP_BUILD_FILE%" -lib  "%SPFEOT_HOME%\tools\xml-commons-resolver-1.2\resolver.jar" -emacs %3 %4 %5 %6 %7 %8
 
 
 
