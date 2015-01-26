@@ -23,5 +23,5 @@ copyright-notice.txt
 spfe-docs/build/log.txt
 
 #PyCharm
-./idea
+.idea/*
 
