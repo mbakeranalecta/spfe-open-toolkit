@@ -22,3 +22,6 @@ $RECYCLE.BIN/
 copyright-notice.txt
 spfe-docs/build/log.txt
 
+#PyCharm
+./idea
+
