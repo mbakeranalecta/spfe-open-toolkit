@@ -39,59 +39,84 @@ except ImportError:
 
 
 class SPFEConfig:
-    def __init__(self, config_file, spfe_dirs):
+    def __init__(self, config_file, spfe_env):
         self.config_file = config_file
         self.abs_config_file = 'file:///' + os.path.abspath(config_file).replace('\\', '/')
-        print(config_file, self.abs_config_file)
-        self.spfe_dirs = spfe_dirs
         self.content_set_config = etree.parse(config_file)
         self.config_ns = {'c': 'http://spfeopentoolkit/ns/spfe-ot/config'}
         self.content_set_id = self.content_set_config.find('./c:content-set-id', namespaces=self.config_ns).text
-        self.content_set_build_root_dir = self.spfe_dirs['spfe_build_dir'] + '/' + self.content_set_id
+        self.spfe_env = spfe_env
+        self.content_set_build_root_dir = self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id
         self.content_set_build_dir = self.content_set_build_root_dir + '/build'
         self.content_set_config_dir = self.content_set_build_root_dir + '/config'
         self.content_set_output_dir = self.content_set_build_root_dir + '/output'
-        self.content_set_home = self.spfe_dirs['spfe_build_dir'] + '/' + self.content_set_id + '/output'
-        self.defines = {'HOME': self.spfe_dirs['home'],
-                        'SPFEOT_HOME': self.spfe_dirs['spfe_ot_home'],
-                        'CONTENT_SET_BUILD_DIR': self.content_set_build_dir,
-                        'CONTENT_SET_OUTPUT_DIR': self.content_set_output_dir,
-                        'CONTENT_SET_BUILD_ROOT_DIR': self.content_set_build_root_dir
-        }
-        self.full_config = self._resolve_config(self.content_set_config, self.abs_config_file)
+        self.content_set_home = self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id + '/output'
+        self.content_set_config = subprocess.check_output(
+            ['java',
+             '-classpath',
+             self.spfe_env['spfe_ot_home'] + '/tools/saxon9he/saxon9he.jar',
+             'net.sf.saxon.Transform',
+             '-xsl:' + self.spfe_env['spfe_ot_home'] + '/1.0/scripts/config/load-config.xsl',
+             '-s:' + self.abs_config_file,
+             'HOME=' + self.spfe_env['home'],
+             'SPFEOT_HOME=' + self.spfe_env['spfe_ot_home'],
+             'SPFE_BUILD_DIR=' + self.spfe_env['spfe_build_dir']])
 
-    def _resolve_config(self, config, file_name):
-        resolved_config = subprocess.check_output(['java',
-                                                   '-classpath',
-                                                   self.spfe_dirs.spfe_ot_home + '/tools/saxon9he/saxon9he.jar',
-                                                   'net.sf.saxon.Transform',
-                                                   '-it:main',
-                                                   '-xsl:' + self.spfe_dirs.spfe_ot_home + '/1.0/scripts/config/config.xsl',
-                                                   '-o:' + self.spfe_dirs.spfe_temp_build_file,
-                                                   'configfile=' + self.abs_config_file,
-                                                   'HOME=' + self.spfe_dirs.home,
-                                                   'SPFEOT_HOME=' + self.spfe_dirs.spfe_ot_home,
-                                                   'SPFE_BUILD_DIR=' + self.spfe_dirs.spfe_build_dir])
+    def write_config_file(self):
+        config = etree.Element('{http://spfeopentoolkit/ns/spfe-ot/config}config', nsmap=self.config_ns)
+        build_directory = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}build-directory')
+        build_directory.text = self.spfe_env['spfe_build_dir']
+        content_set_build = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}content_set_build')
+        content_set_build.text = self.content_set_build_dir
+        content_set_output = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}content_set_output')
+        content_set_output.text = self.content_set_output_dir
+        spfe_ot_home = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}spfeot-home')
+        spfe_ot_home.text = self.spfe_env['spfe_ot_home']
+        build_command = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}spfeot-home')
+        build_command.text = self.spfe_env['spfe_build_command']
+        link_catalog_directory = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}link-catalog-directory')
+        link_catalog_directory.text = self.content_set_build_dir + '/link-catalogs'
+        toc_directory = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}toc-directory')
+        toc_directory.text = self.content_set_build_dir + '/tocs'
+        config.extend(etree.XML(self.content_set_config))
 
-        # for href in resolved_config.iterfind('.//c:href', namespaces=self.config_ns):
-        # url = urljoin(file_name, self._resolve_defines(href.text))
-        #     print('URL: ' + url)
-        #     href.extend(self._resolve_config(etree.parse(url), url))
-        # if resolved_config is not None:
-        #     print(etree.tostring(resolved_config))
-        return resolved_config
+        etree.ElementTree(config).write(self.content_set_config_dir + '/pconfig.xml', pretty_print=True, encoding="utf-8")
+        x = """
 
-    def _resolve_defines(self, string):
-        defines_pattern = re.compile('\$\{([^}]*)\}')
-        resolved = re.sub(defines_pattern, self._replace_defines, string)
-        return resolved
+                <toc-directory>
+                    <xsl:value-of select="$toc-directory"/>
+                </toc-directory>
+                <!-- FIXME: don't need to copy the topic set list as it is redundant -->
+                <content-set>
+                    <xsl:for-each select="$config/content-set/topic-set">
+                        <xsl:copy>
+                            <output-directory>
+                                <!-- FIXME: This dir ends with spearator. Others don't. Make consistent (by changing others) -->
+                                <xsl:choose>
+                                    <xsl:when test="topic-set-id=$config/content-set/home-topic-set">
+                                        <xsl:text/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat( topic-set-id, '/')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </output-directory>
+                            <xsl:if test="not(topic-set-link-priority)">
+                                <topic-set-link-priority>1</topic-set-link-priority>
+                            </xsl:if>
+                            <xsl:copy-of select="*"/>
+                        </xsl:copy>
+                    </xsl:for-each>
+                   <xsl:copy-of select="$config/content-set/*[not(name()='topic-set')]"/>
+                </content-set>
+                <xsl:copy-of select="$config/object-set"/>
+                <xsl:copy-of select="$config/object-type"/>
+                <xsl:for-each-group select="$config//subject-type" group-by="id">
+                    <xsl:copy-of select="current-group()[1]" copy-namespaces="no"/>
+                </xsl:for-each-group>
 
-    def _replace_defines(self, match):
-        try:
-            return self.defines[match.group(1)]
-        except KeyError:
-            Exception("Invalid define ${" + match.group(1) + "}")
+                <xsl:copy-of select="$config/output-format"/>
+            </config>"""
 
-
-if __name__ == '__main__':
-    pass
+        if __name__ == '__main__':
+            pass

@@ -3,7 +3,7 @@ REM This file is part of the SPFE Open Toolkit. See the accompanying license.txt
 REM (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved.
 
 REM Replacing bat with py
-python spfe.py %*
+python %SPFEOT_HOME%/spfe.py %*
 GOTO END
 
 if "%SPFE_BUILD_DIR%" == "" set SPFE_BUILD_DIR=%HOMEDRIVE%%HOMEPATH%\spfebuild
