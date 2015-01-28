@@ -6,7 +6,6 @@ Configuration parser for SPFE.
 """
 
 import os
-from urllib.parse import urljoin
 import subprocess
 
 try:
@@ -48,6 +47,17 @@ class SPFEConfig:
         self.spfe_env = spfe_env
         self.content_set_build_root_dir = self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id
         self.content_set_build_dir = self.content_set_build_root_dir + '/build'
+        self.spfe_env.update(
+            {'content_set_build_root_dir': self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id,
+             'content_set_build_dir': self.content_set_build_root_dir + '/build',
+             'content_set_config_dir': self.content_set_build_root_dir + '/config',
+             'content_set_output_dir': self.content_set_build_root_dir + '/output',
+             'content_set_home': self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id + '/output',
+             'link_catalog_directory': self.content_set_build_dir + '/link-catalogs',
+             'toc_directory': self.content_set_build_dir + '/tocs'
+            }
+        )
+        self.content_set_build_dir = self.content_set_build_root_dir + '/build'
         self.content_set_config_dir = self.content_set_build_root_dir + '/config'
         self.content_set_output_dir = self.content_set_build_root_dir + '/output'
         self.content_set_home = self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id + '/output'
@@ -65,27 +75,29 @@ class SPFEConfig:
     def write_config_file(self):
         etree.register_namespace('config', "http://spfeopentoolkit/ns/spfe-ot/config")
 
-        config = etree.Element('{http://spfeopentoolkit/ns/spfe-ot/config}config')
-        build_directory = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}build-directory')
-        build_directory.text = self.spfe_env['spfe_build_dir']
-        content_set_build = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}content-set-build')
-        content_set_build.text = self.content_set_build_dir
-        content_set_output = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}content-set-output')
-        content_set_output.text = self.content_set_output_dir
-        spfe_ot_home = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}spfeot-home')
-        spfe_ot_home.text = self.spfe_env['spfe_ot_home']
-        build_command = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}build-command')
-        build_command.text = self.spfe_env['spfe_build_command']
-        link_catalog_directory = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}link-catalog-directory')
-        link_catalog_directory.text = self.content_set_build_dir + '/link-catalogs'
-        toc_directory = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}toc-directory')
-        toc_directory.text = self.content_set_build_dir + '/tocs'
-        content_set = etree.SubElement(config,'{http://spfeopentoolkit/ns/spfe-ot/config}content-set')
+        # Write the spfe environment variables to the config file.
+        config = etree.XML(
+            """
+<config xmlns="http://spfeopentoolkit/ns/spfe-ot/config">
+    <build-directory>{spfe_build_dir}</build-directory>
+    <content-set-build>{content_set_build_dir}</content-set-build>
+    <content-set-output>{content_set_output_dir}</content-set-output>
+    <spfeot-home>{spfe_ot_home}</spfeot-home>
+    <build-command>{spfe_build_command}</build-command>
+    <link-catalog-directory>{link_catalog_directory}</link-catalog-directory>
+    <toc-directory>{toc_directory}</toc-directory>
+</config>
+""".format(**self.spfe_env))
+
+        content_set = etree.SubElement(config, '{http://spfeopentoolkit/ns/spfe-ot/config}content-set')
         content_set.extend(etree.XML(self.content_set_config))
 
-        for topic_set in config.iterfind('{http://spfeopentoolkit/ns/spfe-ot/config}content-set/{http://spfeopentoolkit/ns/spfe-ot/config}topic-set'):
+        # Calculate output directories for each topic set.
+        for topic_set in config.iterfind(
+                '{http://spfeopentoolkit/ns/spfe-ot/config}content-set/{http://spfeopentoolkit/ns/spfe-ot/config}topic-set'):
             topic_set_id = topic_set.find('{http://spfeopentoolkit/ns/spfe-ot/config}topic-set-id').text
-            home_topic_set = config.find('{http://spfeopentoolkit/ns/spfe-ot/config}content-set/{http://spfeopentoolkit/ns/spfe-ot/config}home-topic-set').text
+            home_topic_set = config.find(
+                '{http://spfeopentoolkit/ns/spfe-ot/config}content-set/{http://spfeopentoolkit/ns/spfe-ot/config}home-topic-set').text
             output_directory = etree.Element('{http://spfeopentoolkit/ns/spfe-ot/config}output-directory')
             if topic_set_id != home_topic_set:
                 output_directory.text = topic_set_id + '/'
@@ -94,44 +106,11 @@ class SPFEConfig:
         etree.ElementTree(config).write(self.content_set_config_dir + '/pconfig.xml',
                                         pretty_print=True,
                                         xml_declaration=True,
-                                        encoding="utf-8",
-                                        )
-        x = """
+                                        encoding="utf-8")
 
-                <toc-directory>
-                    <xsl:value-of select="$toc-directory"/>
-                </toc-directory>
-                <!-- FIXME: don't need to copy the topic set list as it is redundant -->
-                <content-set>
-                    <xsl:for-each select="$config/content-set/topic-set">
-                        <xsl:copy>
-                            <output-directory>
-                                <!-- FIXME: This dir ends with spearator. Others don't. Make consistent (by changing others) -->
-                                <xsl:choose>
-                                    <xsl:when test="topic-set-id=$config/content-set/home-topic-set">
-                                        <xsl:text/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="concat( topic-set-id, '/')"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </output-directory>
-                            <xsl:if test="not(topic-set-link-priority)">
-                                <topic-set-link-priority>1</topic-set-link-priority>
-                            </xsl:if>
-                            <xsl:copy-of select="*"/>
-                        </xsl:copy>
-                    </xsl:for-each>
-                   <xsl:copy-of select="$config/content-set/*[not(name()='topic-set')]"/>
-                </content-set>
-                <xsl:copy-of select="$config/object-set"/>
-                <xsl:copy-of select="$config/object-type"/>
-                <xsl:for-each-group select="$config//subject-type" group-by="id">
-                    <xsl:copy-of select="current-group()[1]" copy-namespaces="no"/>
-                </xsl:for-each-group>
+    def write_script_files(self):
+        pass
 
-                <xsl:copy-of select="$config/output-format"/>
-            </config>"""
 
-        if __name__ == '__main__':
-            pass
+if __name__ == '__main__':
+    pass
