@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
-    xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
     exclude-result-prefixes="#all" 
     xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"

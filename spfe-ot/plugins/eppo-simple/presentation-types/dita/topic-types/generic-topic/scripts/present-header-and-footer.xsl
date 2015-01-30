@@ -5,7 +5,7 @@
     xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
     xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
     xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
-    xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config" exclude-result-prefixes="#all"
+    xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" exclude-result-prefixes="#all"
     version="2.0">
     <xsl:template name="show-header">
         <xsl:variable name="topic-type" select="ancestor::ss:topic/@type"/>

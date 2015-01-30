@@ -10,7 +10,7 @@
         <name>
             <xsl:attribute name="type">config-setting</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
-            <xsl:attribute name="namespace">http://spfeopentoolkit/ns/spfe-ot/config</xsl:attribute> 
+            <xsl:attribute name="namespace">http://spfeopentoolkit.org/ns/spfe-ot/config</xsl:attribute> 
             <xsl:apply-templates/>
         </name>
     </xsl:template>    

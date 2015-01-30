@@ -7,7 +7,7 @@
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog" 
 	xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
 	exclude-result-prefixes="#all">

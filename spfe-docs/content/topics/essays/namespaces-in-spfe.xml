@@ -86,7 +86,7 @@
                 vocabulary, for example, there are several elements named
                 <xml-element-name>name</xml-element-name>, and every one of them is part of the SPFE
                 configuration namespace,
-                    <xml-namespace-uri>http://spfeopentoolkit/ns/spfe-ot/config</xml-namespace-uri>.
+                    <xml-namespace-uri>http://spfeopentoolkit.org/ns/spfe-ot/config</xml-namespace-uri>.
                 What distinguishes them is their position relative to other elements in a
                 configuration document. They include: </p>
             <ul>
@@ -113,7 +113,7 @@
                     <xml-namespace-uri>http://www.w3.org/2001/XMLSchema</xml-namespace-uri> states
                 that it belong to the W3C and to the XML Schema project within the W3C. The SPFE
                 configuration namespace,
-                    <xml-namespace-uri>http://spfeopentoolkit/ns/spfe-ot/config</xml-namespace-uri>
+                    <xml-namespace-uri>http://spfeopentoolkit.org/ns/spfe-ot/config</xml-namespace-uri>
                 states that it belongs to the SPFE Open Toolkit, and to the configuration project
                 within the SPFE Open Toolkit.</p>
         </section>

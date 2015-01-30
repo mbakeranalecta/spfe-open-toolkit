@@ -6,7 +6,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:lf="local-functions"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
 	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"

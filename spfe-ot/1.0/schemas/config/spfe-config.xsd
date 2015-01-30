@@ -2,8 +2,8 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-  targetNamespace="http://spfeopentoolkit/ns/spfe-ot/config"
-  xmlns="http://spfeopentoolkit/ns/spfe-ot/config">
+  targetNamespace="http://spfeopentoolkit.org/ns/spfe-ot/config"
+  xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config">
   <xs:element name="topic-set">
     <xs:complexType>
       <xs:sequence>

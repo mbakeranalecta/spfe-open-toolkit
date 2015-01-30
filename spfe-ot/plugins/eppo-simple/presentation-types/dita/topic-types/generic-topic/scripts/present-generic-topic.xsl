@@ -9,7 +9,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config" exclude-result-prefixes="#all">
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" exclude-result-prefixes="#all">
 
 	<!-- topic -->
 	<!-- FIXME: Need a way to add topic metadata. -->
