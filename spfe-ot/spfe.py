@@ -24,6 +24,7 @@ def do_build(build_args):
         spfe_env.update({'spfe_build_command': build_args.build_type})
         config = spfeconfig.SPFEConfig(build_args.config_file, spfe_env)
         config.write_config_file()
+        config.write_script_files()
         #print(config.content_set_config.decode("utf-8"))
 
         # subprocess.call(['java',
