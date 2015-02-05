@@ -8,23 +8,21 @@ Configuration parser for SPFE.
 import os
 import subprocess
 from collections import namedtuple
+import rewriteurl
+
 
 try:
     import regex as re
-
     re_supports_unicode_categories = True
 except ImportError:
     import re
-
     re_supports_unicode_categories = False
 
 try:
     from lxml import etree
-
     print("running with lxml.etree")
 except ImportError:
     import xml.etree.ElementTree as etree
-
     print("running with ElementTree")
 
 
@@ -120,6 +118,7 @@ class SPFEConfig:
 
     def write_script_files(self):
         Script = namedtuple('Script', 'href step step_type rw_from rw_to')
+        TopicSet =namedtuple('TopicSet', 'id scripts')
         topic_sets = []
         for topic_set in self.config.iterfind(
                 '{http://spfeopentoolkit.org/ns/spfe-ot/config}content-set/{http://spfeopentoolkit.org/ns/spfe-ot/config}topic-set'):
@@ -131,7 +130,7 @@ class SPFEConfig:
                     for script in step:
                         step_name = step.tag.split("}")[1][0:]
                         try:
-                            step_type = script.attrib['type']
+                            step_type = step.attrib['type']
                         except KeyError:
                             step_type = None
                         href = script.find('{http://spfeopentoolkit.org/ns/spfe-ot/config}href').text
@@ -143,8 +142,8 @@ class SPFEConfig:
                             rw_to = script.find('{http://spfeopentoolkit.org/ns/spfe-ot/config}rewrite-namespace/{http://spfeopentoolkit.org/ns/spfe-ot/config}to').text
                         except AttributeError:
                             rw_to = None
-                        scripts_set.add( Script(href, step_name , step_type,  rw_from, rw_to))
-            topic_sets.append( (topic_set_id, list(scripts_set)) )
+                        scripts_set.add(Script(href, step_name, step_type,  rw_from, rw_to))
+            topic_sets.append( TopicSet(topic_set_id, list(scripts_set)))
 
         # For each topic set
         # 	For each step
@@ -159,20 +158,68 @@ class SPFEConfig:
         # 					Continue
         # 			Add original file url to base script
 
-        os.environ["XML_CATALOG_FILES"] = os.path.abspath(self.spfe_env["spfe_ot_home"] + "/../catalog.xml")
-        print (os.environ["XML_CATALOG_FILES"])
+        # os.environ["XML_CATALOG_FILES"] = os.path.abspath(self.spfe_env["spfe_ot_home"] + "/../catalog.xml")
+        # print (os.environ["XML_CATALOG_FILES"])
 
         for ts in topic_sets:
-            print( ts[0] )
-            print( ts[1][1].href )
-            r=etree.Resolver()
-            rs= r.resolve_string(ts[1][1].href, None)
-            print (rs)
+            print(ts.id)
+            #pull out a list of steps using set comprehension
+            for step in {(s.step, s.step_type) for s in ts.scripts}:
+                script_dir = '/'.join([self.content_set_build_dir,
+                            'topic-sets',
+                            ts.id,
+                            step[0]])
+                if step[1]:
+                    script_dir += '-' + step[1]
+                #for all the scripts for this step
+                print( step)
+                scripts_to_include=[]
+                for script in {t for t in ts.scripts if (t.step, t.step_type) == step}:
+                    if script.rw_to:
+                        scripts_to_include.append(self.rewrite_namespaces(script, script_dir))
+                    else:
+                        scripts_to_include.append(script.href)
+                print(*scripts_to_include, sep='\n')
 
-    def rewrite_namespaces(self, script):
-        for line in script.splitlines(True):
-            pass
+                # Write out the containing script
+                script_file = "spfe." + script.step
+                if script.step_type:
+                    script_file += '-' + script.step_type
+                script_file += '.xsl'
+                new_fn = "/".join([script_dir, script_file ])
+                print(new_fn)
+                os.makedirs(script_dir, exist_ok=True)
+                with open(new_fn, 'w', encoding="utf8") as of:
+                    print('<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">', file=of)
+                    for line in {s for s in scripts_to_include}:
+                        print('<xsl:include href="file:///{0}"/>'.format(line), file=of)
+                    print('</xsl:stylesheet>', file=of)
 
+
+
+
+    def rewrite_namespaces(self, script, script_dir):
+        """
+        Rewrite the namespaces in a script, write out the temporary script
+        to a file, and return the path to that file.
+        :param script: A named tuple of type Script
+        :return: The file path of the created file
+        """
+        doctored_file_name = re.sub(r'\W', '_', script.rw_to) + '_' + os.path.basename(script.href)
+        regex = re.compile("(xmlns.*?=['\"]|xpath-default-namespace=['\"]|\\{)" + re.escape(script.rw_from) + "(['\"\\}])")
+
+        with open(script.href, encoding="utf8") as f:
+            scr = f.read()
+            Result = namedtuple("Result", "text count")
+            result = Result(*regex.subn(r'\1' + script.rw_to + r'\2',scr))
+            if result.count == 0: # no substitutions made
+                return script.href
+            else:
+                new_fn = "/".join([script_dir, doctored_file_name])
+                os.makedirs(script_dir, exist_ok=True)
+                with open(new_fn, 'w', encoding="utf8") as of:
+                    of.write(result.text)
+                return new_fn
 
 
 if __name__ == '__main__':

@@ -108,7 +108,7 @@ class URLRewriter:
                 if url.startswith(prefix):
                     return url
 
-        raise KeyError("uriStartString not found.")
+        raise KeyError("uriStartString not found for URL: " + url)
 
 if __name__ == '__main__':
     re=URLRewriter(['C:/Users/Mark/spfe-open-toolkit/catalog.xml',r'C:\Users\Mark\spfe-open-toolkit\spfe-ot\1.0\catalog.xml'])
