@@ -51,16 +51,22 @@ class SPFEConfig:
         self.content_set_output_dir = self.content_set_build_root_dir + '/output'
         self.content_set_home = self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id + '/output'
         self.content_set_config = etree.XML(
-            subprocess.check_output(
-            ['java',
-             '-classpath',
-             self.spfe_env['spfe_ot_home'] + '/tools/saxon9he/saxon9he.jar',
-             'net.sf.saxon.Transform',
-             '-xsl:' + self.spfe_env['spfe_ot_home'] + '/1.0/scripts/config/load-config.xsl',
-             '-s:' + self.abs_config_file,
-             'HOME=' + self.spfe_env['home'],
-             'SPFEOT_HOME=' + self.spfe_env['spfe_ot_home'],
-             'SPFE_BUILD_DIR=' + self.spfe_env['spfe_build_dir']]))
+            self.run_XSLT(script=self.spfe_env['spfe_ot_home'] + '/1.0/scripts/config/load-config.xsl',
+                          infile=self.abs_config_file,
+                          HOME=self.spfe_env['home'],
+                          SPFEOT_HOME=self.spfe_env['spfe_ot_home'],
+                          SPFE_BUILD_DIR=self.spfe_env['spfe_build_dir']
+                          ))
+            # subprocess.check_output(
+            # ['java',
+            #  '-classpath',
+            #  self.spfe_env['spfe_ot_home'] + '/tools/saxon9he/saxon9he.jar',
+            #  'net.sf.saxon.Transform',
+            #  '-xsl:' + self.spfe_env['spfe_ot_home'] + '/1.0/scripts/config/load-config.xsl',
+            #  '-s:' + self.abs_config_file,
+            #  'HOME=' + self.spfe_env['home'],
+            #  'SPFEOT_HOME=' + self.spfe_env['spfe_ot_home'],
+            #  'SPFE_BUILD_DIR=' + self.spfe_env['spfe_build_dir']]))
 
         self.config = etree.XML(
             """
@@ -221,6 +227,46 @@ class SPFEConfig:
                     of.write(result.text)
                 return new_fn
 
+    def run_XSLT(self, script, infile=None, outfile=None, **kwargs):
+        """
+        Encapsulate an XSLT call so we can change how they are run.
+        :param script: The file name of the XSLT script to be run.
+        :param infile: The file name of the input to process.
+        :param outfile: The file name of the output to create.
+        :param initial_template: The name of the initial XSLT template to run.
+        :param kwargs: Any parameters to pass to the XSLT script.
+        :return: The output of the XSLT processes, unless output is specified.
+        """
+
+        process_call = ['java',
+                        '-classpath',
+                        self.spfe_env["spfe_ot_home"] + '/tools/saxon9he/saxon9he.jar',
+                        'net.sf.saxon.Transform',
+                        '-xsl:{0}'.format(script)]
+        if infile:
+            process_call.append('-s:{0}'.format(infile))
+        if outfile:
+            process_call.append('-o:{0}'.format(outfile))
+        for key, value in kwargs.items():
+            process_call.append("{0}={1}".format(key, value))
+        if outfile:
+            subprocess.call(process_call)
+            return None
+        else:
+            return subprocess.check_output(process_call)
+
+        # subprocess.call(['java',
+        #                  '-classpath',
+        #                  spfe_ot_home + '/tools/saxon9he/saxon9he.jar',
+        #                  'net.sf.saxon.Transform',
+        #                  '-it:main',
+        #                  '-xsl:' + spfe_ot_home + '/1.0/scripts/config/config.xsl',
+        #                  '-o:' + spfe_temp_build_file,
+        #                  'configfile=' + os.path.abspath(build_args.config_file),
+        #                  'HOME=' + home,
+        #                  'SPFEOT_HOME=' + spfe_ot_home,
+        #                  'SPFE_BUILD_DIR=' + spfe_build_dir,
+        #                  'SPFE_BUILD_COMMAND=' + build_args.build_type])
 
 if __name__ == '__main__':
     pass
