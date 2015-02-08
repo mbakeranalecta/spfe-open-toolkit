@@ -17,8 +17,7 @@
 
 <!-- parameters -->
 	<xsl:param name="output-directory" />
-	<!-- FIXME: This shoud be read from config file. -->
-<xsl:param name="draft">no</xsl:param>
+	<xsl:variable name="draft" select="if (lower-case(config:config/config:build-command) eq 'draft') then 'yes' else 'no'"/>
 	
 <xsl:param name="topic-set-id"/>
 
