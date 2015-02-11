@@ -10,6 +10,7 @@ import os
 import posixpath
 import shutil
 import subprocess
+import glob
 from collections import namedtuple
 
 
@@ -62,7 +63,11 @@ class SPFEConfig:
                             HOME=self.spfe_env['home'],
                             SPFEOT_HOME=self.spfe_env['spfe_ot_home'],
                             SPFE_BUILD_DIR=self.spfe_env['spfe_build_dir']
-            ))
+            )
+        )
+
+        self.build_scripts = {}
+
         self.config = etree.XML(
             """
 <config xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config">
@@ -159,8 +164,8 @@ class SPFEConfig:
             topic_sets.append(TopicSet(topic_set_id, list(scripts_set)))
 
         # For each topic set
-        # 	For each step
-        # 		Create a base script for step
+        # For each step
+        # Create a base script for step
         # 		For each script
         # 			If namespace rewrite specified
         # 				If namespace found in script
@@ -174,6 +179,7 @@ class SPFEConfig:
 
         for ts in topic_sets:
             print("Configuring build for " + ts.id)
+            self.build_scripts.update({ts.id:{}})
             #pull out a list of steps using set comprehension
             for step in {(s.step, s.step_type) for s in ts.scripts}:
                 script_dir = '/'.join([self.content_set_build_dir,
@@ -191,37 +197,78 @@ class SPFEConfig:
                         scripts_to_include.append(script.href)
 
                 # Write out the containing script
-                script_file = "spfe." + script.step
-                if script.step_type:
-                    script_file += '-' + script.step_type
-                script_file += '.xsl'
+                step_name_with_type = "{step}{type}".format(
+                    step=script.step, type=('-' + script.step_type) if script.step_type else '')
+                script_file = "spfe.{step_name_with_type}.xsl".format(
+                    step_name_with_type=step_name_with_type)
+                # script_file = "spfe." + script.step
+                # if script.step_type:
+                #     script_file += '-' + script.step_type
+                # script_file += '.xsl'
                 new_fn = "/".join([script_dir, script_file])
+
                 os.makedirs(script_dir, exist_ok=True)
                 with open(new_fn, 'w', encoding="utf8") as of:
                     print('<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">', file=of)
                     for line in {s for s in scripts_to_include}:
                         print('<xsl:include href="file:///{0}"/>'.format(line), file=of)
                     print('</xsl:stylesheet>', file=of)
+                self.build_scripts[ts.id].update({step_name_with_type: new_fn})
 
     def build_topic_sets(self):
-        pass
+        for topic_set in self.config.iterfind(
+                '{ns}content-set/{ns}topic-set'.format(ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}")):
+            topic_set_id = topic_set.find('./{http://spfeopentoolkit.org/ns/spfe-ot/config}topic-set-id').text
+            self._build_synthesis_stage(topic_set_id)
+            self._build_presentation_stage(topic_set_id)
+            self._build_formatting_stage(topic_set_id)
+            self._build_encoding_stage(topic_set_id)
 
-    def _build_synthesis_stage(self):
-        pass
+
+    def _build_synthesis_stage(self, topic_set_id):
+        print("Starting synthesis stage for " + topic_set_id)
+        ts_config=self.config.find('{ns}content-set/{ns}topic-set[{ns}topic-set-id="{tsid}"]'.format(
+            ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", tsid=topic_set_id))
+        if ts_config.find("{0}sources/{0}sources-to-extract-content-from/{0}include".format(
+                        '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
+            # print(ts_config.findall(
+            #     "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
+            #     '{http://spfeopentoolkit.org/ns/spfe-ot/config}')))
+            #
+            # print([x.text for x in ts_config.findall(
+            #     "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
+            #     '{http://spfeopentoolkit.org/ns/spfe-ot/config}'))])
+
+            source_files=[]
+            for x in ts_config.findall(
+                "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
+                '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
+                print(x.text)
+                source_files += (glob.glob(x.text))
+            # source_files.extend( [glob.glob(x.text) for x in ts_config.findall(
+            #     "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
+            #     '{http://spfeopentoolkit.org/ns/spfe-ot/config}'))])
+            print(source_files)
+            self._build_extract_step(topic_set_id=topic_set_id,
+                                     script=self.build_scripts[topic_set_id]['extract'],
+                                     output_dir=posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id]['extract']),'out'),
+                                     source_files=source_files)
 
     def _build_extract_step(self, topic_set_id, script, output_dir, source_files):
+        print(script, output_dir, source_files)
+        print("Building extract step for " + topic_set_id)
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'extracted.flag')
         parameters = {'topic-set-id': topic_set_id,
-                      'output_directory': output_dir,
+                      'output-directory': output_dir,
                       'sources-to-extract-content-from': ';'.join(source_files)}
-        self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
+        self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
     def _build_merge_step(self, topic_set_id, script, output_dir, authored_files, extracted_files):
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'merge.flag')
         parameters = {'topic-set-id': topic_set_id,
-                      'output_directory': output_dir,
+                      'output-directory': output_dir,
                       'authored-content-files': ';'.join(authored_files),
                       'extracted-content-files': ';'.join(extracted_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
@@ -230,7 +277,7 @@ class SPFEConfig:
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'resolve.flag')
         parameters = {'topic-set-id': topic_set_id,
-                      'output_directory': output_dir,
+                      'output-directory': output_dir,
                       'authored-content-files': ';'.join(topic_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
 
@@ -246,13 +293,13 @@ class SPFEConfig:
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'link-catalog.flag')
         parameters = {'topic-set-id': topic_set_id,
-                      'output_directory': output_dir,
+                      'output-directory': output_dir,
                       'synthesis-files': ';'.join(synthesis_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
 
 
-    def _build_presentation_stage(self):
-        pass
+    def _build_presentation_stage(self, topic_set_id):
+        print("Starting presentation stage for " + topic_set_id)
 
     def _build_present_step(self,
                             topic_set_id,
@@ -265,28 +312,22 @@ class SPFEConfig:
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'link-catalog.flag')
         parameters = {'topic-set-id': topic_set_id,
-                      'output_directory': output_dir,
+                      'output-directory': output_dir,
                       'synthesis-files-list': ';'.join(synthesis_files),
                       'toc-files-list': ';'.join(toc_files),
                       'link-catalog-list': ';'.join(link_catalog_files),
                       'objects-list': ';'.join(object_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
 
-    def _build_formatting_stage(self,
-                                topic_set_id,
-                                script,
-                                output_dir,
-                                presentation_files,
-                                toc_files,
-                                link_catalog_files,
-                                object_files):
-        self._build_format_step(topic_set_id,
-                                script,
-                                output_dir,
-                                presentation_files,
-                                toc_files,
-                                link_catalog_files,
-                                object_files)
+    def _build_formatting_stage(self, topic_set_id):
+        print("Starting formatting stage for " + topic_set_id)
+        # self._build_format_step(topic_set_id,
+        #                         script,
+        #                         output_dir,
+        #                         presentation_files,
+        #                         toc_files,
+        #                         link_catalog_files,
+        #                         object_files)
 
     def _build_format_step(self,
                            format_type,
@@ -300,7 +341,7 @@ class SPFEConfig:
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'format.flag')
         parameters = {'topic-set-id': topic_set_id,
-                      'output_directory': output_dir,
+                      'output-directory': output_dir,
                       'presentation-file-list': ';'.join(presentation_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
 
@@ -314,15 +355,15 @@ class SPFEConfig:
 
         # Copy support files
         for sf in self.config.iterfind(
-                "{0}content-set/{0}output-formats/{0}output-format[{0}name={1}]/{0}support-files/{0}include".format(
-                        'http://spfeopentoolkit.org/ns/spfe-ot/config', format_type)):
+                "{0}content-set/{0}output-formats/{0}output-format[{0}name='{1}']/{0}support-files/{0}include".format(
+                        '{http://spfeopentoolkit.org/ns/spfe-ot/config}', format_type)):
             if os.path.isdir(sf):
                 shutil.copytree(sf, output_dir)
             else:
                 shutil.copy(sf, output_dir)
 
-    def _build_encoding_stage(self):
-        pass
+    def _build_encoding_stage(self, topic_set_id):
+        print("Starting encoding stage for " + topic_set_id)
 
     def _build_encode_step(self):
         pass
@@ -352,7 +393,7 @@ class SPFEConfig:
                     of.write(result.text)
                 return new_fn
 
-    def _run_XSLT2(self, script, infile=None, outfile=None, **kwargs):
+    def _run_XSLT2(self, script, infile=None, outfile=None, initial_template=None, **kwargs):
         """
         Encapsulate an XSLT call so we can change how they are run.
         :param script: The file name of the XSLT script to be run.
@@ -363,19 +404,28 @@ class SPFEConfig:
         :return: The output of the XSLT processes, unless output is specified.
         """
 
+        print(locals())
+
         process_call = ['java',
                         '-classpath',
-                        self.spfe_env["spfe_ot_home"] + '/tools/saxon9he/saxon9he.jar',
+                        self.spfe_env["spfe_ot_home"] + '/tools/saxon9he/saxon9he.jar' + os.pathsep +
+					    self.spfe_env["spfe_ot_home"] + '/tools/xml-commons-resolver-1.2/resolver.jar' + os.pathsep +
+					    self.spfe_env["spfe_ot_home"] + '/tools/config',
                         'net.sf.saxon.Transform',
                         '-xsl:{0}'.format(script)]
         if infile:
             process_call.append('-s:{0}'.format(infile))
         if outfile:
             process_call.append('-o:{0}'.format(outfile))
+        if initial_template:
+            process_call.append('-it:{0}'.format(initial_template))
         for key, value in kwargs.items():
             process_call.append("{0}={1}".format(key, value))
+            print(process_call)
         if outfile:
+            print(process_call)
             subprocess.call(process_call)
+            print(process_call)
             return None
         else:
             return subprocess.check_output(process_call)

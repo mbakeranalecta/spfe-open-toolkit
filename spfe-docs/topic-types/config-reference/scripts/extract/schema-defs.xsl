@@ -41,6 +41,7 @@
 	<xsl:variable name="xsd-prefix" select="substring-before(name(xs:schema), local-name(xs:schema))"/> -->
 	
 	<xsl:param name="topic-set-id"/>
+	<xsl:param name="output-directory"></xsl:param>
 
 	<xsl:variable name="config" as="element(config:config)">
 		<xsl:sequence select="/config:config"/>
@@ -73,7 +74,8 @@
 	
 	<xsl:template name="main" >
 		<!-- Create the root "extracted-content element" -->
-		<xsl:result-document href="file:///{concat($config/config:content-set-build, '/topic-sets/', $topic-set-id, '/extract/out/schema-defs.xml')}" method="xml" indent="no" omit-xml-declaration="no">
+		<xsl:message select="concat('Extracting to: file:///', $output-directory, '/schema-defs.xml')"></xsl:message>
+		<xsl:result-document href="file:///{concat($output-directory, '/schema-defs.xml')}" method="xml" indent="no" omit-xml-declaration="no">
  
 			<xsl:apply-templates select="$schema"/>
 
