@@ -10,7 +10,7 @@ import os
 import posixpath
 import shutil
 import subprocess
-import glob
+from glob import glob
 from collections import namedtuple
 
 
@@ -223,7 +223,7 @@ class SPFEConfig:
 
     def _build_synthesis_stage(self, topic_set_id):
         print("Starting synthesis stage for " + topic_set_id)
-        ts_config=self.config.find('{ns}content-set/{ns}topic-set[{ns}topic-set-id="{tsid}"]'.format(
+        ts_config = self.config.find('{ns}content-set/{ns}topic-set[{ns}topic-set-id="{tsid}"]'.format(
             ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", tsid=topic_set_id))
         if ts_config.find("{0}sources/{0}sources-to-extract-content-from/{0}include".format(
                         '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
@@ -231,8 +231,8 @@ class SPFEConfig:
             for x in ts_config.findall(
                 "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
                 '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
-                print(x.text)
-                source_files += (glob.glob(x.text))
+                source_files += (glob(x.text))
+            print(source_files)
             extract_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id]['extract']),'out')
             self._build_extract_step(topic_set_id=topic_set_id,
                                      script=self.build_scripts[topic_set_id]['extract'],
@@ -241,11 +241,9 @@ class SPFEConfig:
 
             if ts_config.find("{0}sources/{0}authored-content/{0}include".format(
                         '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
-                extracted_files = glob.glob(extract_output_dir+'/*')
-                print('extracted files:', extracted_files)
+                extracted_files = glob(extract_output_dir+'/*')
 
     def _build_extract_step(self, topic_set_id, script, output_dir, source_files):
-        print(script, output_dir, source_files)
         print("Building extract step for " + topic_set_id)
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'extracted.flag')
@@ -393,9 +391,6 @@ class SPFEConfig:
         :param kwargs: Any parameters to pass to the XSLT script.
         :return: The output of the XSLT processes, unless output is specified.
         """
-
-        print(locals())
-
         process_call = ['java',
                         '-classpath',
                         self.spfe_env["spfe_ot_home"] + '/tools/saxon9he/saxon9he.jar' + os.pathsep +
@@ -412,11 +407,8 @@ class SPFEConfig:
             process_call.append('-it:{0}'.format(initial_template))
         for key, value in kwargs.items():
             process_call.append("{0}={1}".format(key, value))
-            print(process_call)
         if outfile:
-            print(process_call)
-            subprocess.call(process_call)
-            print(process_call)
+            subprocess.check_call(process_call)
             return None
         else:
             return subprocess.check_output(process_call)

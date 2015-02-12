@@ -49,7 +49,7 @@
 	<xsl:function name="sf:local-to-url">
 		<xsl:param name="local-path"/>
 		<xsl:choose>
-			<xsl:when test="starts-with($local-path,'file:/')">
+			<xsl:when test="matches($local-path, '^[a-zA-Z]{2,}:/')">
 				<xsl:value-of select="$local-path"/>
 			</xsl:when>
 			<xsl:otherwise>
