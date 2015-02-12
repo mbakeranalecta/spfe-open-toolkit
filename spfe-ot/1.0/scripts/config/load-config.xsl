@@ -121,7 +121,7 @@
     
     <xsl:template match="//topic-type/href| //object-type/href| //output-format/href| //presentation-type/href| //topic-set/href| //object-set/href| //structure/href| //file-type/href //object-type/href">
         <xsl:variable name="this" select="."/>
-        <xsl:if test="not(doc-available(resolve-uri(spfe:resolve-defines(.),base-uri($this))))">
+        <xsl:if test="not(doc-available(sf:local-to-url(resolve-uri(spfe:resolve-defines(.),base-uri($this)))))">
             <xsl:call-template name="sf:error">
                 <xsl:with-param name="message">
                     <xsl:text>Configuration file </xsl:text>
@@ -134,7 +134,7 @@
         <xsl:choose>
             <xsl:when test="../rewrite-namespace">
                 <xsl:apply-templates
-                    select="document(resolve-uri(spfe:resolve-defines(.),base-uri($this)))"
+                    select="document(sf:local-to-url(resolve-uri(spfe:resolve-defines(.),base-uri($this))))"
                    >
                     <xsl:with-param name="rewrite-namespace" tunnel="yes">
                         <xsl:sequence select="../rewrite-namespace"/>
@@ -143,7 +143,7 @@
             </xsl:when>
         <xsl:otherwise>
         <xsl:apply-templates
-            select="document(resolve-uri(spfe:resolve-defines(.),base-uri($this)))"
+            select="document(sf:local-to-url(resolve-uri(spfe:resolve-defines(.),base-uri($this))))"
            />
         </xsl:otherwise>
         </xsl:choose>

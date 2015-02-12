@@ -201,10 +201,6 @@ class SPFEConfig:
                     step=script.step, type=('-' + script.step_type) if script.step_type else '')
                 script_file = "spfe.{step_name_with_type}.xsl".format(
                     step_name_with_type=step_name_with_type)
-                # script_file = "spfe." + script.step
-                # if script.step_type:
-                #     script_file += '-' + script.step_type
-                # script_file += '.xsl'
                 new_fn = "/".join([script_dir, script_file])
 
                 os.makedirs(script_dir, exist_ok=True)
@@ -231,28 +227,22 @@ class SPFEConfig:
             ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", tsid=topic_set_id))
         if ts_config.find("{0}sources/{0}sources-to-extract-content-from/{0}include".format(
                         '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
-            # print(ts_config.findall(
-            #     "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
-            #     '{http://spfeopentoolkit.org/ns/spfe-ot/config}')))
-            #
-            # print([x.text for x in ts_config.findall(
-            #     "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
-            #     '{http://spfeopentoolkit.org/ns/spfe-ot/config}'))])
-
-            source_files=[]
+            source_files = []
             for x in ts_config.findall(
                 "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
                 '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
                 print(x.text)
                 source_files += (glob.glob(x.text))
-            # source_files.extend( [glob.glob(x.text) for x in ts_config.findall(
-            #     "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
-            #     '{http://spfeopentoolkit.org/ns/spfe-ot/config}'))])
-            print(source_files)
+            extract_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id]['extract']),'out')
             self._build_extract_step(topic_set_id=topic_set_id,
                                      script=self.build_scripts[topic_set_id]['extract'],
-                                     output_dir=posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id]['extract']),'out'),
+                                     output_dir=extract_output_dir,
                                      source_files=source_files)
+
+            if ts_config.find("{0}sources/{0}authored-content/{0}include".format(
+                        '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
+                extracted_files = glob.glob(extract_output_dir+'/*')
+                print('extracted files:', extracted_files)
 
     def _build_extract_step(self, topic_set_id, script, output_dir, source_files):
         print(script, output_dir, source_files)
@@ -271,7 +261,7 @@ class SPFEConfig:
                       'output-directory': output_dir,
                       'authored-content-files': ';'.join(authored_files),
                       'extracted-content-files': ';'.join(extracted_files)}
-        self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
+        self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
     def _build_resolve_step(self, topic_set_id, script, output_dir, topic_files):
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
@@ -279,7 +269,7 @@ class SPFEConfig:
         parameters = {'topic-set-id': topic_set_id,
                       'output-directory': output_dir,
                       'authored-content-files': ';'.join(topic_files)}
-        self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
+        self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
     def _build_toc_step(self, topic_set_id, script, output_dir, synthesis_files):
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
@@ -287,7 +277,7 @@ class SPFEConfig:
         parameters = {'topic-set-id': topic_set_id,
                       'output_directory': output_dir,
                       'synthesis-files': ';'.join(synthesis_files)}
-        self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
+        self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
     def _build_link_catalog_step(self, topic_set_id, script, output_dir, synthesis_files):
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
@@ -295,7 +285,7 @@ class SPFEConfig:
         parameters = {'topic-set-id': topic_set_id,
                       'output-directory': output_dir,
                       'synthesis-files': ';'.join(synthesis_files)}
-        self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
+        self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
 
     def _build_presentation_stage(self, topic_set_id):
@@ -409,10 +399,11 @@ class SPFEConfig:
         process_call = ['java',
                         '-classpath',
                         self.spfe_env["spfe_ot_home"] + '/tools/saxon9he/saxon9he.jar' + os.pathsep +
-					    self.spfe_env["spfe_ot_home"] + '/tools/xml-commons-resolver-1.2/resolver.jar' + os.pathsep +
-					    self.spfe_env["spfe_ot_home"] + '/tools/config',
+					    self.spfe_env["spfe_ot_home"] + '/tools/xml-commons-resolver-1.2/resolver.jar',
                         'net.sf.saxon.Transform',
-                        '-xsl:{0}'.format(script)]
+                        '-xsl:{0}'.format(script),
+                        '-catalog:{0}'.format('file:/'+self.spfe_env["spfe_ot_home"]+'/../catalog.xml'+os.pathsep+self.spfe_env["home"]+'/.spfe/catalog.xml')
+        ]
         if infile:
             process_call.append('-s:{0}'.format(infile))
         if outfile:
