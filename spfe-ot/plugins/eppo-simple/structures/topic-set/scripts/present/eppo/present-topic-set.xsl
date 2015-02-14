@@ -34,6 +34,12 @@ Main template
 =============
 -->
 <xsl:template name="main">
+	<xsl:message select="'$synthesis-files', $synthesis-files"/>
+	<xsl:if test="$synthesis eq ''">
+		<xsl:call-template name="sf:error">
+			<xsl:with-param name="message" select="'No synthesis files found in ', $synthesis-files"/>
+		</xsl:call-template>
+	</xsl:if>
 	<xsl:result-document href="file:///{$output-directory}/presentation.xml" method="xml" indent="yes" omit-xml-declaration="no" >
 
 		<pe:pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 

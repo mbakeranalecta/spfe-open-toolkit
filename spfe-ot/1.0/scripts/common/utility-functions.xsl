@@ -500,9 +500,9 @@
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular">
+				test="$config/config:content-set/config:subject-types/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular">
 				<xsl:value-of
-					select="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular"
+					select="$config/config:content-set/config:subject-types/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -524,9 +524,9 @@
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural">
+				test="$config/config:content-set/config:subject-types/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural">
 				<xsl:value-of
-					select="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural"
+					select="$config/config:content-set/config:subject-types/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural"
 				/>
 			</xsl:when>
 			<xsl:otherwise>

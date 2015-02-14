@@ -209,15 +209,20 @@ class SPFEConfig:
                     for line in {s for s in scripts_to_include}:
                         print('<xsl:include href="file:///{0}"/>'.format(line), file=of)
                     print('</xsl:stylesheet>', file=of)
-                self.build_scripts[ts.id].update({step_name_with_type: new_fn})
+                self.build_scripts[ts.id].update({(script.step, script.step_type): new_fn})
 
     def build_topic_sets(self):
+        topic_set_id_list = []
         for topic_set in self.config.iterfind(
                 '{ns}content-set/{ns}topic-set'.format(ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}")):
-            topic_set_id = topic_set.find('./{http://spfeopentoolkit.org/ns/spfe-ot/config}topic-set-id').text
+            topic_set_id_list.append(topic_set.find('./{http://spfeopentoolkit.org/ns/spfe-ot/config}topic-set-id').text)
+        for topic_set_id in topic_set_id_list:
             self._build_synthesis_stage(topic_set_id)
+        for topic_set_id in topic_set_id_list:
             self._build_presentation_stage(topic_set_id)
+        for topic_set_id in topic_set_id_list:
             self._build_formatting_stage(topic_set_id)
+        for topic_set_id in topic_set_id_list:
             self._build_encoding_stage(topic_set_id)
 
 
@@ -225,23 +230,70 @@ class SPFEConfig:
         print("Starting synthesis stage for " + topic_set_id)
         ts_config = self.config.find('{ns}content-set/{ns}topic-set[{ns}topic-set-id="{tsid}"]'.format(
             ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", tsid=topic_set_id))
+        executed_steps=[]
         if ts_config.find("{0}sources/{0}sources-to-extract-content-from/{0}include".format(
                         '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
+            executed_steps.append('extract')
             source_files = []
             for x in ts_config.findall(
                 "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
                 '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
                 source_files += (glob(x.text))
-            print(source_files)
-            extract_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id]['extract']),'out')
+            extract_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('extract', None)]),'out')
             self._build_extract_step(topic_set_id=topic_set_id,
-                                     script=self.build_scripts[topic_set_id]['extract'],
+                                     script=self.build_scripts[topic_set_id][('extract', None)],
                                      output_dir=extract_output_dir,
                                      source_files=source_files)
 
             if ts_config.find("{0}sources/{0}authored-content/{0}include".format(
                         '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
+                executed_steps.append('merge')
                 extracted_files = glob(extract_output_dir+'/*')
+                source_files = []
+                for y in ts_config.findall(
+                "{0}sources/{0}authored-content/{0}include".format(
+                '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
+                    source_files += (glob(y.text))
+                merge_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('merge', None)]),'out')
+                self._build_merge_step(topic_set_id=topic_set_id,
+                                         script=self.build_scripts[topic_set_id][('merge', None)],
+                                         output_dir=merge_output_dir,
+                                         authored_files=source_files,
+                                         extracted_files=extracted_files)
+
+        # Call the resolve step
+        topic_files =[]
+        if 'merge' in executed_steps:
+            topic_files = glob(merge_output_dir+'/*')
+        elif 'extract' in executed_steps:
+            topic_files = glob(extract_output_dir+'/*')
+        else:
+            for y in ts_config.findall(
+                "{0}sources/{0}authored-content/{0}include".format(
+                '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
+                    topic_files += (glob(y.text))
+        resolve_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('resolve', None)]),'out')
+        self._build_resolve_step(topic_set_id=topic_set_id,
+                                 script=self.build_scripts[topic_set_id][('resolve', None)],
+                                 output_dir=resolve_output_dir,
+                                 topic_files=topic_files)
+
+        # Call the toc step
+        toc_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('toc', None)]),'out')
+        synthesis_files = glob(resolve_output_dir+'/*')
+        self._build_toc_step(topic_set_id=topic_set_id,
+                                 script=self.build_scripts[topic_set_id][('toc', None)],
+                                 output_dir=toc_output_dir,
+                                 synthesis_files=synthesis_files)
+
+        # Call the link-catalog step
+        link_catalog_output_dir = posixpath.join(self.content_set_build_dir, 'link-catalogs')
+        synthesis_files = glob(resolve_output_dir+'/*')
+        self._build_toc_step(topic_set_id=topic_set_id,
+                             script=self.build_scripts[topic_set_id][('link-catalog', None)],
+                             output_dir=link_catalog_output_dir,
+                             synthesis_files=synthesis_files)
+
 
     def _build_extract_step(self, topic_set_id, script, output_dir, source_files):
         print("Building extract step for " + topic_set_id)
@@ -288,6 +340,15 @@ class SPFEConfig:
 
     def _build_presentation_stage(self, topic_set_id):
         print("Starting presentation stage for " + topic_set_id)
+        for presentation_type in [item[1] for item in self.build_scripts[topic_set_id] if item[0] == 'present']:
+            present_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('present', presentation_type)]),'out')
+            self._build_present_step(topic_set_id=topic_set_id,
+                                     script=self.build_scripts[topic_set_id][('present', presentation_type)],
+                                     output_dir=present_output_dir,
+                                     synthesis_files=glob(posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('resolve', None)]),'out')+'/*'),
+                                     toc_files=glob(posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('toc', None)]),'out') + '/*'),
+                                     link_catalog_files=glob(posixpath.join(self.content_set_build_dir, 'link-catalogs')+'/*'),
+                                     object_files=[])
 
     def _build_present_step(self,
                             topic_set_id,
@@ -301,11 +362,11 @@ class SPFEConfig:
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'link-catalog.flag')
         parameters = {'topic-set-id': topic_set_id,
                       'output-directory': output_dir,
-                      'synthesis-files-list': ';'.join(synthesis_files),
+                      'synthesis-files': ';'.join(synthesis_files),
                       'toc-files-list': ';'.join(toc_files),
                       'link-catalog-list': ';'.join(link_catalog_files),
                       'objects-list': ';'.join(object_files)}
-        self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
+        self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
     def _build_formatting_stage(self, topic_set_id):
         print("Starting formatting stage for " + topic_set_id)
@@ -391,28 +452,32 @@ class SPFEConfig:
         :param kwargs: Any parameters to pass to the XSLT script.
         :return: The output of the XSLT processes, unless output is specified.
         """
-        process_call = ['java',
-                        '-classpath',
-                        self.spfe_env["spfe_ot_home"] + '/tools/saxon9he/saxon9he.jar' + os.pathsep +
-					    self.spfe_env["spfe_ot_home"] + '/tools/xml-commons-resolver-1.2/resolver.jar',
-                        'net.sf.saxon.Transform',
-                        '-xsl:{0}'.format(script),
-                        '-catalog:{0}'.format('file:/'+self.spfe_env["spfe_ot_home"]+'/../catalog.xml'+os.pathsep+self.spfe_env["home"]+'/.spfe/catalog.xml')
-        ]
-        if infile:
-            process_call.append('-s:{0}'.format(infile))
-        if outfile:
-            process_call.append('-o:{0}'.format(outfile))
-        if initial_template:
-            process_call.append('-it:{0}'.format(initial_template))
-        for key, value in kwargs.items():
-            process_call.append("{0}={1}".format(key, value))
-        if outfile:
-            subprocess.check_call(process_call)
-            return None
-        else:
-            return subprocess.check_output(process_call)
-
+        try:
+            process_call = ['java',
+                            '-classpath',
+                            self.spfe_env["spfe_ot_home"] + '/tools/saxon9he/saxon9he.jar' + os.pathsep +
+                            self.spfe_env["spfe_ot_home"] + '/tools/xml-commons-resolver-1.2/resolver.jar',
+                            'net.sf.saxon.Transform',
+                            '-xsl:{0}'.format(script),
+                            '-catalog:{0}'.format('file:/'+self.spfe_env["spfe_ot_home"]+'/../catalog.xml'+os.pathsep+self.spfe_env["home"]+'/.spfe/catalog.xml')
+            ]
+            if infile:
+                process_call.append('-s:{0}'.format(infile))
+            if outfile:
+                process_call.append('-o:{0}'.format(outfile))
+            if initial_template:
+                process_call.append('-it:{0}'.format(initial_template))
+            for key, value in kwargs.items():
+                process_call.append("{0}={1}".format(key, value))
+            if outfile:
+                subprocess.check_call(process_call)
+                return None
+            else:
+                return subprocess.check_output(process_call)
+        except subprocess.CalledProcessError as err:
+            if err.returncode == 1:
+                exit("Build failed due to error reported by XSLT script.")
+            raise
 
 if __name__ == '__main__':
     pass
