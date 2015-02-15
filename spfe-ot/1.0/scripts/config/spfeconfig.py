@@ -380,7 +380,7 @@ class SPFEConfig:
                                      script=self.build_scripts[topic_set_id][('present', presentation_type)],
                                      output_dir=present_output_dir,
                                      synthesis_files= [x.replace('\\', '/') for x in glob(posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('resolve', None)]),'out')+'/*')],
-                                     toc_files=glob(posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('toc', None)]),'out') + '/*'),
+                                     toc_files=glob(posixpath.join(self.content_set_build_dir, 'tocs')+'/*'),
                                      link_catalog_files=glob(posixpath.join(self.content_set_build_dir, 'link-catalogs')+'/*'),
                                      object_files=[x.replace('\\', '/') for x in glob(posixpath.join(self.content_set_build_dir, 'objects')+'/*/*')])
 
