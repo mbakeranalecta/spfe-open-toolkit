@@ -407,8 +407,13 @@ class SPFEConfig:
         print("Starting formatting stage for " + topic_set_id)
         for format_type in [item[1] for item in self.build_scripts[topic_set_id] if item[0] == 'format']:
             # FIXME: This should be calculated based on whether there is encoding to be done
-            format_output_dir = posixpath.join(self.content_set_output_dir, topic_set_id)
-            presentation_type=self.config.find('{ns}content-set/{ns}output-formats/{ns}output-format[{ns}name="{ft}"]/{ns}presentation-type'.format(
+            home_topic_set = self.config.find('{ns}content-set/{ns}home-topic-set'.format(
+                ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}")).text
+            if home_topic_set == topic_set_id:
+                format_output_dir = self.content_set_output_dir
+            else:
+                format_output_dir = posixpath.join(self.content_set_output_dir, topic_set_id)
+            presentation_type = self.config.find('{ns}content-set/{ns}output-formats/{ns}output-format[{ns}name="{ft}"]/{ns}presentation-type'.format(
                 ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", ft=format_type)).text
 
             print(presentation_type, self.build_scripts)
