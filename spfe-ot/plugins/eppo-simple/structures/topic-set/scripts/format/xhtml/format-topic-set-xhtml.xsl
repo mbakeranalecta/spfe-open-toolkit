@@ -89,6 +89,12 @@
     </xsl:template>
     
     <xsl:template name="main">
+        <xsl:if test="$presentation-files eq ''">
+            <xsl:call-template name="sf:error">
+                <xsl:with-param name="message">No presentation files found for topic set <xsl:value-of select="$topic-set-id"/></xsl:with-param>
+                <xsl:with-param name="in" select="base-uri(doc(''))"></xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
         <xsl:call-template name="sf:info">
             <xsl:with-param name="message">
                 <xsl:choose>

@@ -142,7 +142,7 @@ class SPFEConfig:
                 '{0}content-set/{0}object-set'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}'))):
             try:
                 set_id = topic_or_object_set.find('./{0}topic-set-id'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')).text
-                set_type = 'topic_set'
+                set_type = 'topic-set'
             except AttributeError:
                 set_id = topic_or_object_set.find('./{0}object-set-id'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')).text
                 set_type = 'object-set'
@@ -242,7 +242,7 @@ class SPFEConfig:
     def _build_synthesis_stage(self, *, topic_set_id=None, object_set_id=None):
         assert topic_set_id is None or object_set_id is None
         set_id = topic_set_id if topic_set_id is not None else object_set_id
-        set_type = 'topic-set' if topic_set_id is not None else "object_set"
+        set_type = 'topic-set' if topic_set_id is not None else "object-set"
         print("Starting synthesis stage for " + set_id)
         ts_config = self.config.find('{ns}content-set/{ns}topic-set[{ns}topic-set-id="{tsid}"]'.format(
             ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", tsid=topic_set_id)
@@ -405,29 +405,35 @@ class SPFEConfig:
 
     def _build_formatting_stage(self, topic_set_id):
         print("Starting formatting stage for " + topic_set_id)
-        # self._build_format_step(topic_set_id,
-        #                         script,
-        #                         output_dir,
-        #                         presentation_files,
-        #                         toc_files,
-        #                         link_catalog_files,
-        #                         object_files)
+        for format_type in [item[1] for item in self.build_scripts[topic_set_id] if item[0] == 'format']:
+            # FIXME: This should be calculated based on whether there is encoding to be done
+            format_output_dir = posixpath.join(self.content_set_output_dir, topic_set_id)
+            presentation_type=self.config.find('{ns}content-set/{ns}output-formats/{ns}output-format[{ns}name="{ft}"]/{ns}presentation-type'.format(
+                ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", ft=format_type)).text
+
+            print(presentation_type, self.build_scripts)
+            try:
+                presentation_files = [x.replace('\\', '/') for x in glob(posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('present', presentation_type)]),'out')+'/*')]
+            except KeyError:
+                exit("Could not find presentation files of type " + presentation_type + " for format type " + format_type + ".")
+            self._build_format_step(topic_set_id=topic_set_id,
+                                    format_type=format_type,
+                                    script=self.build_scripts[topic_set_id][('format', format_type)],
+                                    output_dir=format_output_dir,
+                                    presentation_files=presentation_files)
 
     def _build_format_step(self,
-                           format_type,
                            topic_set_id,
+                           format_type,
                            script,
                            output_dir,
-                           presentation_files,
-                           toc_files,
-                           link_catalog_files,
-                           object_files):
+                           presentation_files):
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'format.flag')
         parameters = {'topic-set-id': topic_set_id,
                       'output-directory': output_dir,
-                      'presentation-file-list': ';'.join(presentation_files)}
-        self._run_XSLT2(script=script, infile=infile, outfile=outfile, kwargs=parameters)
+                      'presentation-files': ';'.join(presentation_files)}
+        self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
         # Copy images to output
         image_output_dir = os.path.join(output_dir, 'images')
@@ -435,16 +441,19 @@ class SPFEConfig:
         image_list = os.path.join(self.content_set_build_dir, 'topic-sets', topic_set_id, "image-list.txt")
         with open(image_list) as il:
             for image_file in il:
-                shutil.copy(image_file, image_output_dir)
+                shutil.copy(image_file.strip(), image_output_dir)
 
         # Copy support files
+        style_output_dir = os.path.join(output_dir, 'style')
+        os.makedirs(style_output_dir, exist_ok=True)
         for sf in self.config.iterfind(
                 "{0}content-set/{0}output-formats/{0}output-format[{0}name='{1}']/{0}support-files/{0}include".format(
                         '{http://spfeopentoolkit.org/ns/spfe-ot/config}', format_type)):
-            if os.path.isdir(sf):
-                shutil.copytree(sf, output_dir)
+            if os.path.isdir(sf.text):
+                shutil.copytree(sf.text, style_output_dir)
             else:
-                shutil.copy(sf, output_dir)
+                for file in glob(sf.text):
+                    shutil.copy(file, style_output_dir)
 
     def _build_encoding_stage(self, topic_set_id):
         print("Starting encoding stage for " + topic_set_id)
