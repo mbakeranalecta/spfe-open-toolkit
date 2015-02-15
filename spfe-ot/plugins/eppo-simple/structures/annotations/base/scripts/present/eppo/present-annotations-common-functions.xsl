@@ -15,6 +15,11 @@
 
 	<xsl:param name="link-catalog-files"/>
 	<xsl:variable name="link-catalogs" >
+		<xsl:if test="$link-catalog-files =''">
+			<xsl:call-template name="sf:error">
+				<xsl:with-param name="message">No link catalogs found for topic set <xsl:value-of select="$topic-set-id"/>.</xsl:with-param>
+			</xsl:call-template>
+		</xsl:if>
 		<xsl:variable name="temp-link-catalogs" select="sf:get-sources($link-catalog-files, 'Loading link catalog file:')"/>
 		<xsl:if test="count(distinct-values($temp-link-catalogs/lc:link-catalog/@topic-set-id)) lt count($temp-link-catalogs/lc:link-catalog)">
 			<xsl:call-template name="sf:error">

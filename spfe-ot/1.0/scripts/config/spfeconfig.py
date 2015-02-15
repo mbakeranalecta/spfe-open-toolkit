@@ -398,8 +398,8 @@ class SPFEConfig:
         parameters = {'topic-set-id': topic_set_id,
                       'output-directory': output_dir,
                       'synthesis-files': ';'.join(synthesis_files),
-                      'toc-files-list': ';'.join(toc_files),
-                      'link-catalog-list': ';'.join(link_catalog_files),
+                      'toc-files': ';'.join(toc_files),
+                      'link-catalog-files': ';'.join(link_catalog_files),
                       'object-files': ';'.join(object_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 

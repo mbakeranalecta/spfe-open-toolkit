@@ -25,3 +25,4 @@ spfe-docs/build/log.txt
 #PyCharm
 .idea/*
 
+*.pyc
