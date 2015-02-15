@@ -12,7 +12,8 @@
 	xmlns:ed="http://spfeopentoolkit.org/ns/spfe-docs"
 	xmlns:cr="http://spfeopentoolkit.org/ns/spfe-docs" exclude-result-prefixes="#all">
 
-	<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 
 	<xsl:variable name="strings"
 		select="

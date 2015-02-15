@@ -14,7 +14,8 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	exclude-result-prefixes="#all" >
 	
-<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 	<!-- FIXME: This should not be defaulted. -->
 	<xsl:param name="output-directory"/>
 	

@@ -10,9 +10,9 @@ import os
 import posixpath
 import shutil
 import subprocess
+import itertools
 from glob import glob
 from collections import namedtuple
-
 
 try:
     import regex as re
@@ -102,7 +102,7 @@ class SPFEConfig:
         etree.register_namespace('config', "http://spfeopentoolkit.org/ns/spfe-ot/config")
 
         # Write the spfe environment variables to the config file.
-
+        os.makedirs(self.content_set_config_dir, exist_ok=True)
         etree.ElementTree(self.config).write(self.content_set_config_dir + '/pconfig.xml',
                                              xml_declaration=True,
                                              encoding="utf-8")
@@ -134,13 +134,20 @@ class SPFEConfig:
         :return: Nothing
         """
         Script = namedtuple('Script', 'href step step_type rw_from rw_to')
-        TopicSet = namedtuple('TopicSet', 'id scripts')
+        SetScripts = namedtuple('SetScripts', 'id set_type scripts')
         topic_sets = []
-        for topic_set in self.config.iterfind(
-                '{http://spfeopentoolkit.org/ns/spfe-ot/config}content-set/{http://spfeopentoolkit.org/ns/spfe-ot/config}topic-set'):
-            topic_set_id = topic_set.find('./{http://spfeopentoolkit.org/ns/spfe-ot/config}topic-set-id').text
+        for topic_or_object_set in itertools.chain(self.config.iterfind(
+                '{0}content-set/{0}topic-set'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')),
+                                                   self.config.iterfind(
+                '{0}content-set/{0}object-set'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}'))):
+            try:
+                set_id = topic_or_object_set.find('./{0}topic-set-id'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')).text
+                set_type = 'topic_set'
+            except AttributeError:
+                set_id = topic_or_object_set.find('./{0}object-set-id'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')).text
+                set_type = 'object-set'
             scripts_set = set()
-            for scripts in topic_set.iterfind('.//{http://spfeopentoolkit.org/ns/spfe-ot/config}scripts'):
+            for scripts in topic_or_object_set.iterfind('.//{0}scripts'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
                 for step in scripts:
                     script_type = step.tag
                     for script in step:
@@ -161,7 +168,7 @@ class SPFEConfig:
                         except AttributeError:
                             rw_to = None
                         scripts_set.add(Script(href, step_name, step_type, rw_from, rw_to))
-            topic_sets.append(TopicSet(topic_set_id, list(scripts_set)))
+            topic_sets.append(SetScripts(set_id, set_type, list(scripts_set)))
 
         # For each topic set
         # For each step
@@ -183,7 +190,7 @@ class SPFEConfig:
             #pull out a list of steps using set comprehension
             for step in {(s.step, s.step_type) for s in ts.scripts}:
                 script_dir = '/'.join([self.content_set_build_dir,
-                                       'topic-sets',
+                                       ts.set_type+'s',
                                        ts.id,
                                        step[0]])
                 if step[1]:
@@ -216,8 +223,14 @@ class SPFEConfig:
         for topic_set in self.config.iterfind(
                 '{ns}content-set/{ns}topic-set'.format(ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}")):
             topic_set_id_list.append(topic_set.find('./{http://spfeopentoolkit.org/ns/spfe-ot/config}topic-set-id').text)
+        object_set_id_list = []
+        for object_set in self.config.iterfind(
+                '{ns}content-set/{ns}object-set'.format(ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}")):
+            object_set_id_list.append(object_set.find('./{http://spfeopentoolkit.org/ns/spfe-ot/config}object-set-id').text)
         for topic_set_id in topic_set_id_list:
-            self._build_synthesis_stage(topic_set_id)
+            self._build_synthesis_stage(topic_set_id=topic_set_id)
+        for object_set_id in object_set_id_list:
+            self._build_synthesis_stage(object_set_id=object_set_id)
         for topic_set_id in topic_set_id_list:
             self._build_presentation_stage(topic_set_id)
         for topic_set_id in topic_set_id_list:
@@ -226,10 +239,18 @@ class SPFEConfig:
             self._build_encoding_stage(topic_set_id)
 
 
-    def _build_synthesis_stage(self, topic_set_id):
-        print("Starting synthesis stage for " + topic_set_id)
+    def _build_synthesis_stage(self, *, topic_set_id=None, object_set_id=None):
+        assert topic_set_id is None or object_set_id is None
+        set_id = topic_set_id if topic_set_id is not None else object_set_id
+        set_type = 'topic-set' if topic_set_id is not None else "object_set"
+        print("Starting synthesis stage for " + set_id)
         ts_config = self.config.find('{ns}content-set/{ns}topic-set[{ns}topic-set-id="{tsid}"]'.format(
-            ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", tsid=topic_set_id))
+            ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", tsid=topic_set_id)
+        ) if topic_set_id is not None else self.config.find(
+            '{ns}content-set/{ns}object-set[{ns}object-set-id="{osid}"]'.format(
+            ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", osid=object_set_id)
+        )
+
         executed_steps=[]
         if ts_config.find("{0}sources/{0}sources-to-extract-content-from/{0}include".format(
                         '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
@@ -239,9 +260,10 @@ class SPFEConfig:
                 "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
                 '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
                 source_files += (glob(x.text))
-            extract_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('extract', None)]),'out')
-            self._build_extract_step(topic_set_id=topic_set_id,
-                                     script=self.build_scripts[topic_set_id][('extract', None)],
+            extract_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[set_id][('extract', None)]),'out')
+            self._build_extract_step(set_id=set_id,
+                                     set_type=set_type,
+                                     script=self.build_scripts[set_id][('extract', None)],
                                      output_dir=extract_output_dir,
                                      source_files=source_files)
 
@@ -254,12 +276,13 @@ class SPFEConfig:
                 "{0}sources/{0}authored-content/{0}include".format(
                 '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
                     source_files += (glob(y.text))
-                merge_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('merge', None)]),'out')
-                self._build_merge_step(topic_set_id=topic_set_id,
-                                         script=self.build_scripts[topic_set_id][('merge', None)],
-                                         output_dir=merge_output_dir,
-                                         authored_files=source_files,
-                                         extracted_files=extracted_files)
+                merge_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[set_id][('merge', None)]),'out')
+                self._build_merge_step(set_id=set_id,
+                                       set_type=set_type,
+                                       script=self.build_scripts[set_id][('merge', None)],
+                                       output_dir=merge_output_dir,
+                                       authored_files=source_files,
+                                       extracted_files=extracted_files)
 
         # Call the resolve step
         topic_files =[]
@@ -271,68 +294,79 @@ class SPFEConfig:
             for y in ts_config.findall(
                 "{0}sources/{0}authored-content/{0}include".format(
                 '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
-                    topic_files += (glob(y.text))
-        resolve_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('resolve', None)]),'out')
-        self._build_resolve_step(topic_set_id=topic_set_id,
-                                 script=self.build_scripts[topic_set_id][('resolve', None)],
+                    topic_files += [posixpath.normpath(x) for x in glob(y.text)]
+
+        resolve_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[set_id][('resolve', None)]),'out') if topic_set_id is not None else posixpath.join(self.content_set_build_dir, 'objects', set_id)
+        self._build_resolve_step(set_id=set_id,
+                                 set_type=set_type,
+                                 script=self.build_scripts[set_id][('resolve', None)],
                                  output_dir=resolve_output_dir,
                                  topic_files=topic_files)
 
         # Call the toc step
-        toc_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('toc', None)]),'out')
-        synthesis_files = glob(resolve_output_dir+'/*')
-        self._build_toc_step(topic_set_id=topic_set_id,
-                                 script=self.build_scripts[topic_set_id][('toc', None)],
+        try:
+            toc_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[set_id][('toc', None)]),'out')
+            synthesis_files = glob(resolve_output_dir+'/*')
+            self._build_toc_step(set_id=set_id,
+                                 set_type=set_type,
+                                 script=self.build_scripts[set_id][('toc', None)],
                                  output_dir=toc_output_dir,
                                  synthesis_files=synthesis_files)
+        except KeyError:
+            # There is no toc set script, so skip it
+            pass
+
 
         # Call the link-catalog step
-        link_catalog_output_dir = posixpath.join(self.content_set_build_dir, 'link-catalogs')
-        synthesis_files = glob(resolve_output_dir+'/*')
-        self._build_toc_step(topic_set_id=topic_set_id,
-                             script=self.build_scripts[topic_set_id][('link-catalog', None)],
-                             output_dir=link_catalog_output_dir,
-                             synthesis_files=synthesis_files)
+        try:
+            link_catalog_output_dir = posixpath.join(self.content_set_build_dir, 'link-catalogs')
+            synthesis_files = glob(resolve_output_dir+'/*')
+            self._build_toc_step(set_id=set_id,
+                                 set_type=set_type,
+                                 script=self.build_scripts[set_id][('link-catalog', None)],
+                                 output_dir=link_catalog_output_dir,
+                                 synthesis_files=synthesis_files)
+        except KeyError:
+            pass
 
-
-    def _build_extract_step(self, topic_set_id, script, output_dir, source_files):
-        print("Building extract step for " + topic_set_id)
+    def _build_extract_step(self, set_id, set_type, script, output_dir, source_files):
+        print("Building extract step for " + set_id)
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
-        outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'extracted.flag')
-        parameters = {'topic-set-id': topic_set_id,
+        outfile = posixpath.join(self.content_set_build_dir, set_type+'s', set_id, 'extracted.flag')
+        parameters = {'set-id': set_id,
                       'output-directory': output_dir,
                       'sources-to-extract-content-from': ';'.join(source_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
-    def _build_merge_step(self, topic_set_id, script, output_dir, authored_files, extracted_files):
+    def _build_merge_step(self, set_id, set_type, script, output_dir, authored_files, extracted_files):
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
-        outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'merge.flag')
-        parameters = {'topic-set-id': topic_set_id,
+        outfile = posixpath.join(self.content_set_build_dir, set_type+'s', set_id, 'merge.flag')
+        parameters = {'set-id': set_id,
                       'output-directory': output_dir,
                       'authored-content-files': ';'.join(authored_files),
                       'extracted-content-files': ';'.join(extracted_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
-    def _build_resolve_step(self, topic_set_id, script, output_dir, topic_files):
+    def _build_resolve_step(self, set_id, set_type, script, output_dir, topic_files):
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
-        outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'resolve.flag')
-        parameters = {'topic-set-id': topic_set_id,
+        outfile = posixpath.join(self.content_set_build_dir, set_type+'s', set_id, 'resolve.flag')
+        parameters = {'set-id': set_id,
                       'output-directory': output_dir,
                       'authored-content-files': ';'.join(topic_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
-    def _build_toc_step(self, topic_set_id, script, output_dir, synthesis_files):
+    def _build_toc_step(self, set_id, set_type, script, output_dir, synthesis_files):
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
-        outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'toc.flag')
-        parameters = {'topic-set-id': topic_set_id,
+        outfile = posixpath.join(self.content_set_build_dir, set_type+'s', set_id, 'toc.flag')
+        parameters = {'set-id': set_id,
                       'output_directory': output_dir,
                       'synthesis-files': ';'.join(synthesis_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
-    def _build_link_catalog_step(self, topic_set_id, script, output_dir, synthesis_files):
+    def _build_link_catalog_step(self, set_id, set_type, script, output_dir, synthesis_files):
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
-        outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'link-catalog.flag')
-        parameters = {'topic-set-id': topic_set_id,
+        outfile = posixpath.join(self.content_set_build_dir, set_type+'s', set_id, 'link-catalog.flag')
+        parameters = {'set-id': set_id,
                       'output-directory': output_dir,
                       'synthesis-files': ';'.join(synthesis_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
@@ -345,10 +379,10 @@ class SPFEConfig:
             self._build_present_step(topic_set_id=topic_set_id,
                                      script=self.build_scripts[topic_set_id][('present', presentation_type)],
                                      output_dir=present_output_dir,
-                                     synthesis_files=glob(posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('resolve', None)]),'out')+'/*'),
+                                     synthesis_files= [x.replace('\\', '/') for x in glob(posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('resolve', None)]),'out')+'/*')],
                                      toc_files=glob(posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('toc', None)]),'out') + '/*'),
                                      link_catalog_files=glob(posixpath.join(self.content_set_build_dir, 'link-catalogs')+'/*'),
-                                     object_files=[])
+                                     object_files=[x.replace('\\', '/') for x in glob(posixpath.join(self.content_set_build_dir, 'objects')+'/*/*')])
 
     def _build_present_step(self,
                             topic_set_id,
@@ -358,6 +392,7 @@ class SPFEConfig:
                             toc_files,
                             link_catalog_files,
                             object_files):
+        print('object_files', object_files)
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'link-catalog.flag')
         parameters = {'topic-set-id': topic_set_id,
@@ -365,7 +400,7 @@ class SPFEConfig:
                       'synthesis-files': ';'.join(synthesis_files),
                       'toc-files-list': ';'.join(toc_files),
                       'link-catalog-list': ';'.join(link_catalog_files),
-                      'objects-list': ';'.join(object_files)}
+                      'object-files': ';'.join(object_files)}
         self._run_XSLT2(script=script, infile=infile, outfile=outfile, initial_template='main', **parameters)
 
     def _build_formatting_stage(self, topic_set_id):

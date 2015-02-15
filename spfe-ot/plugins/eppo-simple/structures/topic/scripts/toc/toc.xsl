@@ -14,7 +14,8 @@
 		<xsl:sequence select="/config:config"/>
 	</xsl:variable>
 	
-	<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 	
 	<xsl:param name="synthesis-files"/>
 	<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>

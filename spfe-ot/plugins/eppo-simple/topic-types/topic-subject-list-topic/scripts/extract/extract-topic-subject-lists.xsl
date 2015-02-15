@@ -22,7 +22,8 @@
 		<xsl:sequence select="/config:config"/>
 	</xsl:variable>
 	
-	<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 	
 	<xsl:param name="sources-to-extract-content-from"/>	
 	<xsl:variable name="sources" select="sf:get-sources($sources-to-extract-content-from)"/>

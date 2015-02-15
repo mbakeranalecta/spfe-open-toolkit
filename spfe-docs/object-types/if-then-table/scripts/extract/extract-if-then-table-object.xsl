@@ -12,7 +12,8 @@
     xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs" exclude-result-prefixes="#all"
     version="2.0">
 
-    <xsl:param name="topic-set-id"/>
+    <xsl:param name="set-id"/>
+    <xsl:variable name="topic-set-id" select="$set-id"/>
 
     <xsl:variable name="config" as="element(config:config)">
         <xsl:sequence select="/config:config"/>

@@ -19,7 +19,8 @@
 	<xsl:param name="synthesis-files"/>
 	<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
 
-	<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 	<!-- processing directives -->
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 	<xsl:strip-space elements="element-name attribute-name xpath attribute-value code term"/>
@@ -62,11 +63,7 @@ Main template
 -->
 
 	
-	<xsl:template name="main" >
-		<xsl:result-document href="tlp-log.xml">
-			<xsl:sequence select="$config"/>
-		</xsl:result-document>
-		
+	<xsl:template name="main" >		
 		<xsl:result-document href="file:///{concat($output-directory, '/', $topic-set-id, '.link-catalog.xml')}" method="xml" indent="yes" encoding="UTF-8" omit-xml-declaration="no">
 			<xsl:apply-templates select="$synthesis"/>
 		</xsl:result-document>

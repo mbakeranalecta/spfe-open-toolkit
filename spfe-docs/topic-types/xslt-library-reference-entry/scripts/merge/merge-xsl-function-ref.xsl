@@ -25,7 +25,8 @@ exclude-result-prefixes="#all" >
 
 <xsl:output method="xml" indent="yes" />
 	
-<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 
 	<xsl:param name="output-directory"/>
 
