@@ -6,8 +6,8 @@ import argparse
 import subprocess
 import sys
 import shutil
-sys.path.append(sys.path[0] + '/1.0/scripts/config')
-import spfeconfig
+sys.path.append(sys.path[0] + '/1.0/scripts/python')
+import spfepy
 
 
 def do_clean(clean_args):
@@ -22,7 +22,7 @@ def do_build(build_args):
         print("Creating a " + build_args.build_type + " build  for " + build_args.config_file + " in " + spfe_build_dir)
         spfe_env = dict(((k, globals()[k]) for k in ('home', 'spfe_build_dir', 'spfe_ot_home', 'spfe_temp_build_file')))
         spfe_env.update({'spfe_build_command': build_args.build_type})
-        config = spfeconfig.SPFEConfig(build_args.config_file, spfe_env)
+        config = spfepy.SPFEConfig(build_args.config_file, spfe_env)
         config.write_config_file()
         config.write_script_files()
         config.build_topic_sets()
