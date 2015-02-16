@@ -508,7 +508,7 @@ class SPFEConfig:
                             self.spfe_env["spfe_ot_home"] + '/tools/xml-commons-resolver-1.2/resolver.jar',
                             'net.sf.saxon.Transform',
                             '-xsl:{0}'.format(script),
-                            '-catalog:{0}'.format('file:/'+self.spfe_env["spfe_ot_home"]+'/../catalog.xml'+os.pathsep+self.spfe_env["home"]+'/.spfe/catalog.xml')
+                            '-catalog:{0}'.format('file:///'+self.spfe_env["spfe_ot_home"]+'/../catalog.xml;file:///'+self.spfe_env["home"]+'/.spfe/catalog.xml')
             ]
             if infile:
                 process_call.append('-s:{0}'.format(infile))
