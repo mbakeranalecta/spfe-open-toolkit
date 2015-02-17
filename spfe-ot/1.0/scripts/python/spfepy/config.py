@@ -97,7 +97,11 @@ class SPFEConfig:
 
         self._prettyprint(self.config)
 
-
+    def setting(self, setting_path):
+        config_ns = "{http://spfeopentoolkit.org/ns/spfe-ot/config}"
+        sp = ''.join([config_ns+x for x in re.findall(r'.*?[/\[]|[-._\w]+', setting_path)])
+        result = self.config.find(sp)
+        return result.text if result is not None else None
     def write_config_file(self):
         etree.register_namespace('config', "http://spfeopentoolkit.org/ns/spfe-ot/config")
 
@@ -392,7 +396,6 @@ class SPFEConfig:
                             toc_files,
                             link_catalog_files,
                             object_files):
-        print('object_files', object_files)
         infile = posixpath.join(self.content_set_config_dir, 'pconfig.xml')
         outfile = posixpath.join(self.content_set_build_dir, 'topic-sets', topic_set_id, 'link-catalog.flag')
         parameters = {'topic-set-id': topic_set_id,
@@ -415,6 +418,9 @@ class SPFEConfig:
                 format_output_dir = posixpath.join(self.content_set_output_dir, topic_set_id)
             presentation_type = self.config.find('{ns}content-set/{ns}output-formats/{ns}output-format[{ns}name="{ft}"]/{ns}presentation-type'.format(
                 ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", ft=format_type)).text
+
+            presentation_type = self.setting('content-set/output-formats/output-format[name="{ft}"]/presentation-type'.format(
+                ft=format_type))
 
             print(presentation_type, self.build_scripts)
             try:
