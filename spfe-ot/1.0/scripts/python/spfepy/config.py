@@ -97,10 +97,10 @@ class SPFEConfig:
 
         self._prettyprint(self.config)
 
+    def _add_namespace_to_xpath(self, xpath, ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}"):
+        return ''.join([ns+x for x in re.findall(r'.*?[/\[]|[-._\w]+', xpath)])
     def setting(self, setting_path):
-        config_ns = "{http://spfeopentoolkit.org/ns/spfe-ot/config}"
-        sp = ''.join([config_ns+x for x in re.findall(r'.*?[/\[]|[-._\w]+', setting_path)])
-        result = self.config.find(sp)
+        result = self.config.find(self._add_namespace_to_xpath(setting_path))
         return result.text if result is not None else None
     def write_config_file(self):
         etree.register_namespace('config', "http://spfeopentoolkit.org/ns/spfe-ot/config")
@@ -235,12 +235,17 @@ class SPFEConfig:
             self._build_synthesis_stage(topic_set_id=topic_set_id)
         for object_set_id in object_set_id_list:
             self._build_synthesis_stage(object_set_id=object_set_id)
+        # FIXME: This is using step scripts to determine if stages should be run
+        # and might be fragile if steps were added to a stage.
         for topic_set_id in topic_set_id_list:
-            self._build_presentation_stage(topic_set_id)
+            if any(step == "present" for (step, _) in self.build_scripts[topic_set_id]):
+                self._build_presentation_stage(topic_set_id)
         for topic_set_id in topic_set_id_list:
-            self._build_formatting_stage(topic_set_id)
+            if any(step == "format" for (step, _) in self.build_scripts[topic_set_id]):
+                self._build_formatting_stage(topic_set_id)
         for topic_set_id in topic_set_id_list:
-            self._build_encoding_stage(topic_set_id)
+            if any(step == "encode" for (step, _) in self.build_scripts[topic_set_id]):
+                self._build_encoding_stage(topic_set_id)
 
 
     def _build_synthesis_stage(self, *, topic_set_id=None, object_set_id=None):
