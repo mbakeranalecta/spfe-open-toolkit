@@ -32,6 +32,25 @@ except ImportError:
 
     print("running with ElementTree")
 
+class SPFEConfigSettingNotFound(Exception):
+    """
+    Raised if a setting path is not found in the config object.
+    """
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+
+class SPFEConfigNotASetting(Exception):
+    """
+    Raised if a setting path is not the leaf of a tree, and is therefore
+    not a single setting but a group of settings.
+    """
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+
 
 class SPFEConfig:
     def __init__(self, config_file, spfe_env):
@@ -88,8 +107,7 @@ class SPFEConfig:
         for topic_set in self.config.iterfind(
                 '{http://spfeopentoolkit.org/ns/spfe-ot/config}content-set/{http://spfeopentoolkit.org/ns/spfe-ot/config}topic-set'):
             topic_set_id = topic_set.find('{http://spfeopentoolkit.org/ns/spfe-ot/config}topic-set-id').text
-            home_topic_set = self.config.find(
-                '{http://spfeopentoolkit.org/ns/spfe-ot/config}content-set/{http://spfeopentoolkit.org/ns/spfe-ot/config}home-topic-set').text
+            home_topic_set = self.setting('content-set/home-topic-set')
             output_directory = etree.Element('{http://spfeopentoolkit.org/ns/spfe-ot/config}output-directory')
             if topic_set_id != home_topic_set:
                 output_directory.text = topic_set_id + '/'
@@ -98,10 +116,61 @@ class SPFEConfig:
         self._prettyprint(self.config)
 
     def _add_namespace_to_xpath(self, xpath, ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}"):
-        return ''.join([ns+x for x in re.findall(r'.*?[/\[]|[-._\w]+', xpath)])
-    def setting(self, setting_path):
-        result = self.config.find(self._add_namespace_to_xpath(setting_path))
-        return result.text if result is not None else None
+        result = []
+        for x in re.split(r'([/\[]+)', xpath):
+            try:
+                result.append(ns+x if re.match('[_\w]', x[0]) else x)
+            except IndexError:
+                pass
+        return ''.join(result)
+    def setting(self, setting_path, settings_object=None):
+        if settings_object is None:
+            settings_object = self.config
+        result = settings_object.find(self._add_namespace_to_xpath(setting_path))
+        if result is None:
+            raise SPFEConfigSettingNotFound(setting_path)
+        elif len(result) != 0:
+            # result has children, so it not a setting
+            raise SPFEConfigNotASetting(setting_path)
+        else:
+            return result.text
+
+    def setting_exists(self, setting_path, settings_object=None):
+        """
+        Test if a setting is defined.
+        :param setting_path: The xpath of the setting.
+        :param settings_object: The settings object to search. Defaults to the full config object.
+        :return: True is the setting exists; else False.
+        """
+        try:
+            _ = self.setting(setting_path, settings_object)
+            return True
+        except SPFEConfigSettingNotFound:
+            return False
+    def settings(self, setting_path, settings_object=None):
+        if settings_object is None:
+            settings_object = self.config
+        result = settings_object.findall(self._add_namespace_to_xpath(setting_path))
+        if not result:
+            raise SPFEConfigSettingNotFound(setting_path)
+        else:
+            return [r.text for r in result]
+
+    def config_subset(self,setting_path, settings_object=None):
+        if settings_object is None:
+            settings_object = self.config
+        result = settings_object.find(self._add_namespace_to_xpath(setting_path))
+        if result is None:
+            raise SPFEConfigSettingNotFound(setting_path)
+        else:
+            return result
+
+    def iter_config_subset(self,setting_path, settings_object=None):
+        if settings_object is None:
+            settings_object = self.config
+        return settings_object.iterfind(self._add_namespace_to_xpath(setting_path))
+
+
     def write_config_file(self):
         etree.register_namespace('config', "http://spfeopentoolkit.org/ns/spfe-ot/config")
 
@@ -140,18 +209,18 @@ class SPFEConfig:
         Script = namedtuple('Script', 'href step step_type rw_from rw_to')
         SetScripts = namedtuple('SetScripts', 'id set_type scripts')
         topic_sets = []
-        for topic_or_object_set in itertools.chain(self.config.iterfind(
-                '{0}content-set/{0}topic-set'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')),
-                                                   self.config.iterfind(
-                '{0}content-set/{0}object-set'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}'))):
+        for topic_or_object_set in itertools.chain(
+            self.iter_config_subset('content-set/topic-set'),
+            self.iter_config_subset('content-set/object-set')
+        ):
             try:
-                set_id = topic_or_object_set.find('./{0}topic-set-id'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')).text
+                set_id = self.setting('topic-set-id', topic_or_object_set)
                 set_type = 'topic-set'
-            except AttributeError:
-                set_id = topic_or_object_set.find('./{0}object-set-id'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')).text
+            except SPFEConfigSettingNotFound:
+                set_id = self.setting('object-set-id', topic_or_object_set)
                 set_type = 'object-set'
             scripts_set = set()
-            for scripts in topic_or_object_set.iterfind('.//{0}scripts'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
+            for scripts in self.iter_config_subset('.//scripts', topic_or_object_set): #.iterfind('.//{0}scripts'.format('{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
                 for step in scripts:
                     script_type = step.tag
                     for script in step:
@@ -160,16 +229,14 @@ class SPFEConfig:
                             step_type = step.attrib['type']
                         except KeyError:
                             step_type = None
-                        href = script.find('{http://spfeopentoolkit.org/ns/spfe-ot/config}href').text
+                        href = self.setting('href', script)
                         try:
-                            rw_from = script.find(
-                                '{http://spfeopentoolkit.org/ns/spfe-ot/config}rewrite-namespace/{http://spfeopentoolkit.org/ns/spfe-ot/config}from').text
-                        except AttributeError:
+                            rw_from = self.setting('rewrite-namespace/from', script)
+                        except SPFEConfigSettingNotFound:
                             rw_from = None
                         try:
-                            rw_to = script.find(
-                                '{http://spfeopentoolkit.org/ns/spfe-ot/config}rewrite-namespace/{http://spfeopentoolkit.org/ns/spfe-ot/config}to').text
-                        except AttributeError:
+                            rw_to = self.setting('rewrite-namespace/to', script)
+                        except SPFEConfigSettingNotFound:
                             rw_to = None
                         scripts_set.add(Script(href, step_name, step_type, rw_from, rw_to))
             topic_sets.append(SetScripts(set_id, set_type, list(scripts_set)))
@@ -224,13 +291,11 @@ class SPFEConfig:
 
     def build_topic_sets(self):
         topic_set_id_list = []
-        for topic_set in self.config.iterfind(
-                '{ns}content-set/{ns}topic-set'.format(ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}")):
-            topic_set_id_list.append(topic_set.find('./{http://spfeopentoolkit.org/ns/spfe-ot/config}topic-set-id').text)
+        for topic_set in self.iter_config_subset('content-set/topic-set'):
+            topic_set_id_list.append(self.setting('topic-set-id', topic_set))
         object_set_id_list = []
-        for object_set in self.config.iterfind(
-                '{ns}content-set/{ns}object-set'.format(ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}")):
-            object_set_id_list.append(object_set.find('./{http://spfeopentoolkit.org/ns/spfe-ot/config}object-set-id').text)
+        for object_set in self.iter_config_subset('content-set/object-set'):
+            object_set_id_list.append(self.setting('object-set-id', object_set))
         for topic_set_id in topic_set_id_list:
             self._build_synthesis_stage(topic_set_id=topic_set_id)
         for object_set_id in object_set_id_list:
@@ -253,22 +318,20 @@ class SPFEConfig:
         set_id = topic_set_id if topic_set_id is not None else object_set_id
         set_type = 'topic-set' if topic_set_id is not None else "object-set"
         print("Starting synthesis stage for " + set_id)
-        ts_config = self.config.find('{ns}content-set/{ns}topic-set[{ns}topic-set-id="{tsid}"]'.format(
-            ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", tsid=topic_set_id)
-        ) if topic_set_id is not None else self.config.find(
-            '{ns}content-set/{ns}object-set[{ns}object-set-id="{osid}"]'.format(
-            ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", osid=object_set_id)
+        ts_config = self.config_subset('content-set/topic-set[topic-set-id="{tsid}"]'.format(tsid=topic_set_id)
+
+        ) if topic_set_id is not None else self.config_subset(
+            'content-set/object-set[object-set-id="{osid}"]'.format(osid=object_set_id)
         )
 
         executed_steps=[]
-        if ts_config.find("{0}sources/{0}sources-to-extract-content-from/{0}include".format(
-                        '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
+        if self.setting_exists('sources/sources-to-extract-content-from/include', ts_config):
+        # if ts_config.find("{0}sources/{0}sources-to-extract-content-from/{0}include".format(
+        #                 '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
             executed_steps.append('extract')
             source_files = []
-            for x in ts_config.findall(
-                "{0}sources/{0}sources-to-extract-content-from/{0}include".format(
-                '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
-                source_files += (glob(x.text))
+            for x in self.settings('sources/sources-to-extract-content-from/include', ts_config):
+                source_files += (glob(x))
             extract_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[set_id][('extract', None)]),'out')
             self._build_extract_step(set_id=set_id,
                                      set_type=set_type,
@@ -415,19 +478,19 @@ class SPFEConfig:
         print("Starting formatting stage for " + topic_set_id)
         for format_type in [item[1] for item in self.build_scripts[topic_set_id] if item[0] == 'format']:
             # FIXME: This should be calculated based on whether there is encoding to be done
-            home_topic_set = self.config.find('{ns}content-set/{ns}home-topic-set'.format(
-                ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}")).text
+            home_topic_set = self.setting('content-set/home-topic-set')
             if home_topic_set == topic_set_id:
                 format_output_dir = self.content_set_output_dir
             else:
                 format_output_dir = posixpath.join(self.content_set_output_dir, topic_set_id)
-            presentation_type = self.config.find('{ns}content-set/{ns}output-formats/{ns}output-format[{ns}name="{ft}"]/{ns}presentation-type'.format(
-                ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", ft=format_type)).text
+            presentation_type = self.setting('content-set/output-formats/output-format[name="{ft}"]/presentation-type'.format(
+                 ft=format_type))
+            #presentation_type = self.config.find('{ns}content-set/{ns}output-formats/{ns}output-format[{ns}name="{ft}"]/{ns}presentation-type'.format(
+            #    ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", ft=format_type)).text
 
             presentation_type = self.setting('content-set/output-formats/output-format[name="{ft}"]/presentation-type'.format(
                 ft=format_type))
 
-            print(presentation_type, self.build_scripts)
             try:
                 presentation_files = [x.replace('\\', '/') for x in glob(posixpath.join(posixpath.dirname(self.build_scripts[topic_set_id][('present', presentation_type)]),'out')+'/*')]
             except KeyError:
