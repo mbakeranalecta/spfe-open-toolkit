@@ -339,15 +339,12 @@ class SPFEConfig:
                                      output_dir=extract_output_dir,
                                      source_files=source_files)
 
-            if ts_config.find("{0}sources/{0}authored-content/{0}include".format(
-                        '{http://spfeopentoolkit.org/ns/spfe-ot/config}')) is not None:
+            if self.setting_exists("sources/authored-content/include", ts_config):
                 executed_steps.append('merge')
                 extracted_files = glob(extract_output_dir+'/*')
                 source_files = []
-                for y in ts_config.findall(
-                "{0}sources/{0}authored-content/{0}include".format(
-                '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
-                    source_files += (glob(y.text))
+                for y in self.settings("sources/authored-content/include",ts_config):
+                    source_files += (glob(y))
                 merge_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[set_id][('merge', None)]),'out')
                 self._build_merge_step(set_id=set_id,
                                        set_type=set_type,
@@ -363,10 +360,8 @@ class SPFEConfig:
         elif 'extract' in executed_steps:
             topic_files = glob(extract_output_dir+'/*')
         else:
-            for y in ts_config.findall(
-                "{0}sources/{0}authored-content/{0}include".format(
-                '{http://spfeopentoolkit.org/ns/spfe-ot/config}')):
-                    topic_files += [posixpath.normpath(x) for x in glob(y.text)]
+            for y in self.settings('sources/authored-content/include',ts_config):
+                    topic_files += [posixpath.normpath(x) for x in glob(y)]
 
         resolve_output_dir = posixpath.join(posixpath.dirname(self.build_scripts[set_id][('resolve', None)]),'out') if topic_set_id is not None else posixpath.join(self.content_set_build_dir, 'objects', set_id)
         self._build_resolve_step(set_id=set_id,
@@ -485,8 +480,6 @@ class SPFEConfig:
                 format_output_dir = posixpath.join(self.content_set_output_dir, topic_set_id)
             presentation_type = self.setting('content-set/output-formats/output-format[name="{ft}"]/presentation-type'.format(
                  ft=format_type))
-            #presentation_type = self.config.find('{ns}content-set/{ns}output-formats/{ns}output-format[{ns}name="{ft}"]/{ns}presentation-type'.format(
-            #    ns="{http://spfeopentoolkit.org/ns/spfe-ot/config}", ft=format_type)).text
 
             presentation_type = self.setting('content-set/output-formats/output-format[name="{ft}"]/presentation-type'.format(
                 ft=format_type))
@@ -525,13 +518,12 @@ class SPFEConfig:
         # Copy support files
         style_output_dir = os.path.join(output_dir, 'style')
         os.makedirs(style_output_dir, exist_ok=True)
-        for sf in self.config.iterfind(
-                "{0}content-set/{0}output-formats/{0}output-format[{0}name='{1}']/{0}support-files/{0}include".format(
-                        '{http://spfeopentoolkit.org/ns/spfe-ot/config}', format_type)):
-            if os.path.isdir(sf.text):
-                shutil.copytree(sf.text, style_output_dir)
+        for sf in self.settings(
+                "content-set/output-formats/output-format[name='{0}']/support-files/include".format(format_type)):
+            if os.path.isdir(sf):
+                shutil.copytree(sf, style_output_dir)
             else:
-                for file in glob(sf.text):
+                for file in glob(sf):
                     shutil.copy(file, style_output_dir)
 
     def _build_encoding_stage(self, topic_set_id):
