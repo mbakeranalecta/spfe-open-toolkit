@@ -6,8 +6,10 @@ import argparse
 import subprocess
 import sys
 import shutil
+import importlib
 sys.path.append(sys.path[0] + '/1.0/scripts/python')
-import spfepy
+spfelib = importlib.import_module('spfelib')
+#import spfelib
 
 
 def do_clean(clean_args):
@@ -22,32 +24,10 @@ def do_build(build_args):
         print("Creating a " + build_args.build_type + " build  for " + build_args.config_file + " in " + spfe_build_dir)
         spfe_env = dict(((k, globals()[k]) for k in ('home', 'spfe_build_dir', 'spfe_ot_home', 'spfe_temp_build_file')))
         spfe_env.update({'spfe_build_command': build_args.build_type})
-        config = spfepy.SPFEConfig(build_args.config_file, spfe_env)
+        config = spfelib.config.SPFEConfig(build_args.config_file, spfe_env)
         config.write_config_file()
         config.write_script_files()
-        config.build_topic_sets()
-        #print(config.content_set_config.decode("utf-8"))
-
-        # subprocess.call(['java',
-        #                  '-classpath',
-        #                  spfe_ot_home + '/tools/saxon9he/saxon9he.jar',
-        #                  'net.sf.saxon.Transform',
-        #                  '-it:main',
-        #                  '-xsl:' + spfe_ot_home + '/1.0/scripts/config/config.xsl',
-        #                  '-o:' + spfe_temp_build_file,
-        #                  'configfile=' + os.path.abspath(build_args.config_file),
-        #                  'HOME=' + home,
-        #                  'SPFEOT_HOME=' + spfe_ot_home,
-        #                  'SPFE_BUILD_DIR=' + spfe_build_dir,
-        #                  'SPFE_BUILD_COMMAND=' + build_args.build_type])
-        #
-        # subprocess.call(['ant',
-        #                  build_args.build_type,
-        #                  '-f',
-        #                  spfe_temp_build_file,
-        #                  '-lib',
-        #                  spfe_ot_home + r'\tools\xml-commons-resolver-1.2\resolver.jar',
-        #                  '-emacs'], shell=True)
+        spfelib.build.build_topic_sets(config)
     else:
         print("Config file not found: " + build_args.config_file)
         sys.exit(1)
