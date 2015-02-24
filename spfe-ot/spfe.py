@@ -3,7 +3,6 @@ __copyright__ = "Analecta Communications Inc. 2015"
 
 import os
 import argparse
-import subprocess
 import sys
 import shutil
 import importlib
@@ -27,7 +26,7 @@ def do_build(build_args):
         config = spfelib.config.SPFEConfig(build_args.config_file, spfe_env)
         config.write_config_file()
         config.write_script_files()
-        spfelib.build.build_topic_sets(config)
+        spfelib.build.build_content_set(config)
     else:
         print("Config file not found: " + build_args.config_file)
         sys.exit(1)
