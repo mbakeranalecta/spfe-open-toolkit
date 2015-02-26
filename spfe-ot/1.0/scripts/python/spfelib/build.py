@@ -37,8 +37,8 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
     set_type = 'topic-set' if topic_set_id is not None else "object-set"
     print("Starting synthesis stage for " + set_id)
     ts_config = config.config_subset('content-set/topic-set[topic-set-id="{tsid}"]'.format(tsid=set_id)
-        ) if set_type == 'topic-set' else config.config_subset(
-            'content-set/object-set[object-set-id="{osid}"]'.format(osid=set_id)
+    ) if set_type == 'topic-set' else config.config_subset(
+        'content-set/object-set[object-set-id="{osid}"]'.format(osid=set_id)
     )
 
     executed_steps = []
@@ -116,10 +116,10 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
 
 def _build_extract_step(config, set_id, set_type, output_dir):
     print("Building extract step for " + set_type + ' ' + set_id)
-    script=config.build_scripts[set_id][('extract', None)]
+    script = config.build_scripts[set_id][('extract', None)]
     ts_config = config.config_subset('content-set/topic-set[topic-set-id="{tsid}"]'.format(tsid=set_id)
-        ) if set_type == 'topic-set' else config.config_subset(
-            'content-set/object-set[object-set-id="{osid}"]'.format(osid=set_id)
+    ) if set_type == 'topic-set' else config.config_subset(
+        'content-set/object-set[object-set-id="{osid}"]'.format(osid=set_id)
     )
     source_files = []
     for x in config.settings('sources/sources-to-extract-content-from/include', ts_config):
@@ -177,6 +177,20 @@ def _build_link_catalog_step(config, set_id, set_type, script, output_dir, synth
 def _build_presentation_stage(config, topic_set_id):
     print("Starting presentation stage for " + topic_set_id)
     for presentation_type in [item[1] for item in config.build_scripts[topic_set_id] if item[0] == 'present']:
+        link_output_dir = posixpath.join(
+            posixpath.dirname(config.build_scripts[topic_set_id][('link', presentation_type)]), 'out')
+        _build_link_step(config=config,
+                         topic_set_id=topic_set_id,
+                         script=config.build_scripts[topic_set_id][('link', presentation_type)],
+                         output_dir=link_output_dir,
+                         synthesis_files=[x.replace('\\', '/') for x in glob(
+                             posixpath.join(posixpath.dirname(config.build_scripts[topic_set_id][('resolve', None)]),
+                                            'out') + '/*')],
+                         link_catalog_files=glob(
+                             posixpath.join(config.content_set_build_dir, 'link-catalogs') + '/*'),
+                         object_files=[x.replace('\\', '/') for x in
+                                       glob(posixpath.join(config.content_set_build_dir, 'objects') + '/*/*')])
+
         present_output_dir = posixpath.join(
             posixpath.dirname(config.build_scripts[topic_set_id][('present', presentation_type)]), 'out')
         _build_present_step(config=config,
@@ -184,13 +198,30 @@ def _build_presentation_stage(config, topic_set_id):
                             script=config.build_scripts[topic_set_id][('present', presentation_type)],
                             output_dir=present_output_dir,
                             synthesis_files=[x.replace('\\', '/') for x in glob(
-                                posixpath.join(posixpath.dirname(config.build_scripts[topic_set_id][('resolve', None)]),
+                                posixpath.join(posixpath.dirname(config.build_scripts[topic_set_id][('link', presentation_type)]),
                                                'out') + '/*')],
                             toc_files=glob(posixpath.join(config.content_set_build_dir, 'tocs') + '/*'),
-                            link_catalog_files=glob(
-                                posixpath.join(config.content_set_build_dir, 'link-catalogs') + '/*'),
                             object_files=[x.replace('\\', '/') for x in
                                           glob(posixpath.join(config.content_set_build_dir, 'objects') + '/*/*')])
+
+
+def _build_link_step(config,
+                     topic_set_id,
+                     script,
+                     output_dir,
+                     synthesis_files,
+                     link_catalog_files,
+                     object_files):
+    print("Building the link step for " + topic_set_id)
+    infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
+    outfile = posixpath.join(config.content_set_build_dir, 'topic-sets', topic_set_id, 'link-catalog.flag')
+    parameters = {'topic-set-id': topic_set_id,
+                  'output-directory': output_dir,
+                  'synthesis-files': ';'.join(synthesis_files),
+                  'link-catalog-files': ';'.join(link_catalog_files),
+                  'object-files': ';'.join(object_files)}
+    util.run_XSLT2(script=script, env=config.spfe_env, infile=infile, outfile=outfile, initial_template='main',
+                   **parameters)
 
 
 def _build_present_step(config,
@@ -199,15 +230,14 @@ def _build_present_step(config,
                         output_dir,
                         synthesis_files,
                         toc_files,
-                        link_catalog_files,
                         object_files):
+    print("Building the present step for " + topic_set_id)
     infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
     outfile = posixpath.join(config.content_set_build_dir, 'topic-sets', topic_set_id, 'link-catalog.flag')
     parameters = {'topic-set-id': topic_set_id,
                   'output-directory': output_dir,
                   'synthesis-files': ';'.join(synthesis_files),
                   'toc-files': ';'.join(toc_files),
-                  'link-catalog-files': ';'.join(link_catalog_files),
                   'object-files': ';'.join(object_files)}
     util.run_XSLT2(script=script, env=config.spfe_env, infile=infile, outfile=outfile, initial_template='main',
                    **parameters)

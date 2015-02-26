@@ -19,12 +19,17 @@
             </script>
         </resolve>
 
-        <present type="eppo">
+        <link type="eppo">
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/present/eppo/present-annotations-common-functions.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/link/eppo/present-annotations-common-functions.xsl</href>
             </script>
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/present/eppo/present-annotations-common-templates.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/link/eppo/present-annotations-common-templates.xsl</href>
+            </script>
+        </link>
+        <present type="eppo">
+            <script>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/present/eppo/present-annotations-eppo.xsl</href>
             </script>
         </present>
     </scripts>

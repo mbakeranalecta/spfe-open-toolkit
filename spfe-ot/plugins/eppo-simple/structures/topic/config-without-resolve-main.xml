@@ -23,10 +23,10 @@
                 <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
             </script>
         </toc>
-        <present type="eppo">
+        <link type="eppo">
             <script>
-                <href>scripts/present/eppo/present-annotations-topic-id.xsl</href>
+                <href>scripts/link/eppo/present-annotations-topic-id.xsl</href>
             </script>
-        </present>
+        </link>
     </scripts>
 </structure>

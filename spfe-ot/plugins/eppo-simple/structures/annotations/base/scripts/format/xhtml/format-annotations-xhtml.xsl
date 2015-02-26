@@ -12,6 +12,8 @@
         </b>
     </xsl:template>
     
+    <!-- FIXME: Should this be in a "link" structure? It is not an annotation at this point. -->
+    
     <xsl:template match="link">
         <xsl:variable name="class" select="if (@class) then @class else 'default'"/>
         <xsl:variable name="href" select="@href"/>

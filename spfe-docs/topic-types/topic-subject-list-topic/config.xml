@@ -75,6 +75,14 @@
             </script>
         </toc>
         
+        <link type="eppo">
+            <script>
+                <rewrite-namespace>
+                    <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
+                    <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
+                </rewrite-namespace>                        <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/topic-subject-list-topic/scripts/link/eppo/link-topic-subject-lists.xsl</href>
+            </script>
+        </link>
         <present type="eppo">
             <script>
                 <rewrite-namespace>
@@ -82,10 +90,7 @@
                     <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                 </rewrite-namespace>                        <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/topic-subject-list-topic/scripts/present/eppo/present-topic-subject-lists.xsl</href>
             </script>
-<!--                <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
-            </script>
--->            </present>
+        </present>
     </scripts>
 </topic-type>
 

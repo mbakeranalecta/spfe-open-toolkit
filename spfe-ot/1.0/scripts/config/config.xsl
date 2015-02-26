@@ -153,7 +153,7 @@
                 <xsl:with-param name="message">
                     <xsl:text>Configuration file </xsl:text>
                     <xsl:value-of select="resolve-uri(spfe:resolve-defines(.),base-uri($this))"/>
-                    <xsl:text> not found. </xsl:text>
+                    <xsl:text> not found. This may mean the file is not present or that is it not a valid XML file.</xsl:text>
                 </xsl:with-param>
                 <xsl:with-param name="in" select="base-uri(document(''))"/>
             </xsl:call-template>

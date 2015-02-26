@@ -46,25 +46,7 @@
 			<pe:authors>
 				<xsl:for-each select="es:name">
 					<pe:name hint="author">
-						<xsl:choose>
-							<!-- make sure that the target exists -->
-							<xsl:when test="esf:target-exists(., 'author')">
-								<xsl:call-template name="output-link">
-									<xsl:with-param name="target" select="@key"/>
-									<xsl:with-param name="type" select="@type"/>
-									<xsl:with-param name="class">author</xsl:with-param>
-									<xsl:with-param name="content" select="normalize-space(string-join(.,''))"/>
-									<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
-								</xsl:call-template>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:call-template name="sf:unresolved">
-									<xsl:with-param name="message" select="'No content to link to for author name  &quot;', ., '&quot;'"/> 
-									<xsl:with-param name="in" select="ancestor::ss:topic/@full-name"/> 
-								</xsl:call-template>
-								<xsl:apply-templates/>
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:apply-templates/>
 					</pe:name>
 					<xsl:if test="not(position() eq last())">, </xsl:if>
 				</xsl:for-each>

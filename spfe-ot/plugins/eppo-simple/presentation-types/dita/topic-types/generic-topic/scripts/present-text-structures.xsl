@@ -6,7 +6,7 @@ version="2.0"
  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
- xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
+ xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
  exclude-result-prefixes="#all" 
  xpath-default-namespace=""
@@ -111,7 +111,7 @@ version="2.0"
 	
 	<xsl:template match="es:terminal-session/es:entry">
 		<xsl:if test="normalize-space(.)">
-			<xsl:sequence select="esf:process-placeholders(., 'code', 'placeholder')"/>
+			<xsl:sequence select="sf:process-placeholders(., 'code', 'placeholder')"/>
 		</xsl:if>
 	</xsl:template>
 	
@@ -185,14 +185,14 @@ version="2.0"
 			<xsl:apply-templates/>
 		</item>
 	</xsl:template>
-	
-	<xsl:template match="es:codeblock[@language='C']">
+<!-- FIXME: This is a link function, not a present function -->
+<!--	<xsl:template match="es:codeblock[@language='C']">
 		<xsl:variable name="scope" select="@scope"/>
 		<codeblock>
 			<xsl:analyze-string select="." regex="([a-zA-z0-9]+)(\s*\()">
 				<xsl:matching-substring>
 					<xsl:choose>
-						<!-- FIXME: can we avoid enbedding "routine" here? -->
+						<!-\- FIXME: can we avoid enbedding "routine" here? -\->
 						<xsl:when test="esf:target-exists(regex-group(1), 'routine')">
 							<xsl:variable name="routine">
 								<routine-name scope="{$scope}"><xsl:value-of select="regex-group(1)"/></routine-name>
@@ -211,5 +211,5 @@ version="2.0"
 			</xsl:analyze-string>
 		</codeblock>
 	</xsl:template>
-
+-->
 </xsl:stylesheet>

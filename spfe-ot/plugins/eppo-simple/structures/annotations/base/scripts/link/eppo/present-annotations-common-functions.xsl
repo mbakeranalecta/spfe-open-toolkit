@@ -11,11 +11,15 @@
 	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
 	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
 	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" 
-	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all">
 
 	<xsl:param name="link-catalog-files"/>
 	<xsl:variable name="link-catalogs" >
+		<xsl:if test="$link-catalog-files =''">
+			<xsl:call-template name="sf:error">
+				<xsl:with-param name="message">No link catalogs found for topic set <xsl:value-of select="$topic-set-id"/>.</xsl:with-param>
+			</xsl:call-template>
+		</xsl:if>
 		<xsl:variable name="temp-link-catalogs" select="sf:get-sources($link-catalog-files, 'Loading link catalog file:')"/>
 		<xsl:if test="count(distinct-values($temp-link-catalogs/lc:link-catalog/@topic-set-id)) lt count($temp-link-catalogs/lc:link-catalog)">
 			<xsl:call-template name="sf:error">
@@ -29,8 +33,6 @@
 		</xsl:if>
 		<xsl:sequence select="$temp-link-catalogs"/>
 	</xsl:variable>
-	<xsl:param name="objects-files"/>
-	<xsl:variable name="objects" select="sf:get-sources($link-catalog-files, 'Loading link catalog file:')"/>
 	
 	<xsl:function name="esf:target-exists" as="xs:boolean">
 		<xsl:param name="target"/>
@@ -195,7 +197,6 @@
 				<!-- Choose the target page with the highest link priority -->
 				<!-- Arbitrarilly picks the first in sequence if more than one page with same priority -->
 				<xsl:variable name="highest-priority-page" select="$target-page[number(@link-priority) eq min($target-page/@link-priority)][1]"/>	
-				<!-- FIXME: This test has never been tested. Need a test case for it. -->
 				<xsl:if test="count($target-page[number(@link-priority) eq min($target-page/@link-priority)]) > 1">
 					<xsl:call-template name="sf:warning">
 						<xsl:with-param name="message">
@@ -205,11 +206,12 @@
 							<xsl:value-of select="'&#x000A;The target is: ', $target"/>
 							<xsl:value-of select="'&#x000A;The type is: ', $type"/>
 							<xsl:value-of select="'&#x000A;The priority is: ', min($target-page/@link-priority)"/>
+							<xsl:text>&#x000A;Arbitrarily picking a page to link to.</xsl:text>
 						</xsl:with-param>
 					</xsl:call-template>					
 				</xsl:if>
 
-				<xsl:call-template name="make-xref">
+				<xsl:call-template name="make-link">
 					<xsl:with-param name="target-page" select="$highest-priority-page"/>
 					<xsl:with-param name="target" select="$target"/>
 					<xsl:with-param name="type" select="$type"/>
@@ -232,8 +234,8 @@
 		</xsl:choose>		
 	</xsl:template>
 	
-	<!--make-xref template-->
-	<xsl:template name="make-xref">
+	<!--make-link template-->
+	<xsl:template name="make-link">
 		<xsl:param name="target-page"/>
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
@@ -261,9 +263,72 @@
 		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][lc:namespace=$namespace][@type=$type][1]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][@type=$type][1]/@anchor) else ''"/>
 
 		
-		<xref keyref="{$target-topic-set}.{$target-page[1]/@local-name}" type="topic" scope="local">
-			<xsl:sequence select="$content"/>
-		</xref>
+		<pe:link hint="{$type}">
+			<xsl:attribute name="href">
+				<xsl:choose>
+					<!-- this page -->
+					<xsl:when test="$current-page-name=$target-page[1]/@full-name">
+						<xsl:choose>
+							<xsl:when test="not($target-anchor='')">
+								 <xsl:value-of select="$target-anchor"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:call-template name="sf:warning">
+									<xsl:with-param name="message">
+										<xsl:text>A page is linking to itself. This is a tool problem, not a content problem. The tools should not generate links to the current page. Report this as bug. Include the following information in the bug report: &#x000A;</xsl:text>
+										<xsl:value-of select="'Reference-type=', $type, '&#x000A;'"/>
+										<xsl:value-of select="'Target=', $target, '&#x000A;'"/>
+										<!-- FIXME: What is this supposed to match, and in what namespace? -->
+										<xsl:value-of select="'Topic id=', ancestor::topic/name, '&#x000A;'"/>
+									</xsl:with-param>
+								</xsl:call-template>
+								<xsl:value-of select="$target-anchor"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					
+					<!-- this topic-set -->
+					<xsl:when test="$topic-set-id=$target-topic-set">
+						 <xsl:value-of select="concat($target-file, $target-anchor)"/>
+					</xsl:when>
+					
+					<!-- outside this topic-set -->
+					<xsl:otherwise>
+						<xsl:value-of select="concat($target-directory-path, $target-file, $target-anchor)"/>
+					</xsl:otherwise>
+					
+				</xsl:choose>
+			</xsl:attribute>
+			
+			<xsl:variable name="title">
+				<xsl:variable name="target-content" select="normalize-space(string($target-page/lc:target[lc:key=$target][@type=$type]/lc:label))"/>
+				
+				<xsl:choose>
+					<xsl:when test="$target-content">
+						<xsl:value-of select="$target-content"/>
+					</xsl:when>
+ 					<xsl:otherwise>
+ 						<xsl:value-of select="$target-page/@topic-type-alias"/>
+						<xsl:text>: </xsl:text>
+						<xsl:value-of select="$target-page/@title"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+			
+			<xsl:attribute name="title" select="$title"/>
+			<xsl:attribute name="topic-type" select="$target-page/@topic-type-alias"/>
+			<xsl:attribute name="topic-title" select="$target-page/@title"/>
+			<xsl:attribute name="class" select="$class"/>
+
+			<xsl:choose>
+				<xsl:when test="$see-also">
+					<xsl:sequence select="$title"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:sequence select="$content"/>
+				</xsl:otherwise>
+			</xsl:choose>
+			</pe:link>
 	</xsl:template>
 	
 
@@ -319,70 +384,23 @@
 		<xsl:choose>
 			<!-- this book -->
 			<xsl:when test="$topic-set-id eq $target-topic-set">
-				<xref 
+				<pe:structure-reference 
 					type="{$type}"
 					target="{$target}"/>
 			</xsl:when>
 			
 			<!-- outside this book -->
 			<xsl:otherwise>
-				<b>
+				<pe:decoration class="bold">
 					<xsl:value-of select="$target-page/@title"/>
-				</b>
+				</pe:decoration>
 				<xsl:text> in </xsl:text>
-				<i>
+				<pe:decoration class="italic">
 					<xsl:value-of select="$link-catalogs/lc:link-catalog[@topic-set-id=$target-topic-set]/@title"/>
-				</i> 
+				</pe:decoration> 
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:function name="esf:process-placeholders" as="node()*">
-	<!-- Processes a string to determine if it contains placeholder markup in 
-	     the form of a string contained between "{" and "}". Recognizes "{{}"
-	     as an escape sequence for a literal "{". Nesting of placeholders is
-	     not supported. The use of a literal "{" or "}" inside the placeholder 
-	     string is not supported. Does not attempt to detect or report these
-	     conditions, however.
-	     
-	     $string is the string to process.
-	     $literal-name is the element name to wrap around a the literal parts
-	     of $string.
-	     $placeholder-name is the element name to wrap around the placeholder
-	     parts of $string.
-	 -->
-		<xsl:param name="string"/><!-- the string to process -->
-		<xsl:param name="literal-name"/><!-- the element name to wrap around literal parts of $string -->
-		<xsl:param name="placeholder-name"/><!-- the element name to wrap around placeholder parts of $string -->
-		<xsl:analyze-string select="$string" regex="\{{([^}}]*)\}}">
-			<xsl:matching-substring>
-				<xsl:choose>
-					<!-- if empty, ignore -->
-					<xsl:when test="regex-group(1)=''"/>
-					<!-- recognize {{} as escape sequence for { -->
-					<xsl:when test="regex-group(1)='{'">
-						<xsl:choose>
-							<xsl:when test="$literal-name ne ''">
-								<xsl:element name="pe:{$literal-name}"><xsl:value-of select="regex-group(1)"/></xsl:element>
-							</xsl:when>
-							<xsl:otherwise><xsl:value-of select="regex-group(1)"/></xsl:otherwise>
-						</xsl:choose>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:element name="pe:{$placeholder-name}"><xsl:value-of select="regex-group(1)"/></xsl:element>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:matching-substring>
-			<xsl:non-matching-substring>
-				<xsl:if test="not(normalize-space(.)='')">
-						<xsl:choose>
-							<xsl:when test="$literal-name ne''">
-								<xsl:element name="pe:{$literal-name}"><xsl:value-of select="."/></xsl:element>
-							</xsl:when>
-							<xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
-						</xsl:choose>
-				</xsl:if>
-			</xsl:non-matching-substring>
-		</xsl:analyze-string>
-	</xsl:function>
+	
 </xsl:stylesheet>

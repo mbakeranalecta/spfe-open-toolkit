@@ -5,8 +5,6 @@
 version="2.0"
  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
- xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
- xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
  xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
  exclude-result-prefixes="#all" 
  xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
@@ -19,30 +17,5 @@ version="2.0"
 		</pe:codeblock>
 	</xsl:template>
 
-	<xsl:template match="codeblock[@language='C']">
-		<xsl:variable name="scope" select="@scope"/>
-		<pe:codeblock>
-			<xsl:analyze-string select="." regex="([a-zA-z0-9]+)(\s*\()">
-				<xsl:matching-substring>
-					<xsl:choose>
-						<!-- FIXME: can we avoid enbedding "routine" here? -->
-						<xsl:when test="esf:target-exists(regex-group(1), 'routine')">
-							<xsl:variable name="routine">
-								<function-name scope="{$scope}"><xsl:value-of select="regex-group(1)"/></function-name>
-							</xsl:variable>
-							<xsl:apply-templates select="$routine"/>
-							<xsl:value-of select="regex-group(2)"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="."/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:matching-substring>
-				<xsl:non-matching-substring>
-					<xsl:value-of select="."/>
-				</xsl:non-matching-substring>
-			</xsl:analyze-string>
-		</pe:codeblock>
-	</xsl:template>
 
 </xsl:stylesheet>

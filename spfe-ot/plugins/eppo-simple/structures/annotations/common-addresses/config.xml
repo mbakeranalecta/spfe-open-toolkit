@@ -7,12 +7,17 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <name>annotations.common-addresses</name>
     <scripts>
-        <present type="eppo">
+        <link type="eppo">
             <script>
-                <href>scripts/present/eppo/present-annotations-common-addresses.xsl</href>
+                <href>scripts/link/eppo/present-annotations-common-addresses.xsl</href>
             </script>
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/present/eppo/present-annotations-common-templates.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/link/eppo/present-annotations-common-templates.xsl</href>
+            </script>
+        </link>
+        <present type="eppo">
+            <script>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/present/eppo/present-annotations-eppo.xsl</href>
             </script>
         </present>
     </scripts>

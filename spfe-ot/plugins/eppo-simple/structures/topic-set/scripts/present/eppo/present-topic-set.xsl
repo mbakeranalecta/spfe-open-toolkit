@@ -26,6 +26,10 @@
 
 <xsl:param name="synthesis-files"/>
 <xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
+	
+<xsl:param name="object-files"/>
+<xsl:variable name="objects" select="sf:get-sources($object-files, 'Loading text objects file:')"/>
+	
 
 <xsl:variable name="topic-set-title" select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
 <!--  

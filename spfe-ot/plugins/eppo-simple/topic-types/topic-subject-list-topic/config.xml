@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
-<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<!-- (c) Copyright Analecta Communications Inc. 2014 All Rights Reserved. -->
     
 <topic-type xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -64,6 +64,11 @@
                 <href>scripts/toc/topic-subject-list-toc.xsl</href>
             </script>
         </toc>
+        <link type="eppo">
+            <script>
+                <href>scripts/link/eppo/link-topic-subject-lists.xsl</href>
+            </script>
+        </link>
         <present type="eppo">
             <script>
                 <href>scripts/present/eppo/present-topic-subject-lists.xsl</href>

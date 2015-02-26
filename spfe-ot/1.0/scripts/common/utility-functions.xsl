@@ -577,5 +577,53 @@
 		<xsl:param name="element"/>
 		<xsl:value-of select="concat('{', namespace-uri($element), '}', local-name($element))"/>
 	</xsl:function>
-
+	<xsl:function name="sf:process-placeholders" as="node()*">
+		<!-- Processes a string to determine if it contains placeholder markup in 
+	     the form of a string contained between "{" and "}". Recognizes "{{}"
+	     as an escape sequence for a literal "{". Nesting of placeholders is
+	     not supported. The use of a literal "{" or "}" inside the placeholder 
+	     string is not supported. Does not attempt to detect or report these
+	     conditions, however.
+	     
+	     $string is the string to process.
+	     $literal-name is the element name to wrap around a the literal parts
+	     of $string.
+	     $placeholder-name is the element name to wrap around the placeholder
+	     parts of $string.
+	 -->
+		<xsl:param name="string"/><!-- the string to process -->
+		<xsl:param name="literal-name"/><!-- the element name to wrap around literal parts of $string -->
+		<xsl:param name="placeholder-name"/><!-- the element name to wrap around placeholder parts of $string -->
+		<xsl:analyze-string select="$string" regex="\{{([^}}]*)\}}">
+			<xsl:matching-substring>
+				<xsl:choose>
+					<!-- if empty, ignore -->
+					<xsl:when test="regex-group(1)=''"/>
+					<!-- recognize {{} as escape sequence for { -->
+					<xsl:when test="regex-group(1)='{'">
+						<xsl:choose>
+							<xsl:when test="$literal-name ne ''">
+								<xsl:element name="pe:{$literal-name}"><xsl:value-of select="regex-group(1)"/></xsl:element>
+							</xsl:when>
+							<xsl:otherwise><xsl:value-of select="regex-group(1)"/></xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:element name="pe:{$placeholder-name}"><xsl:value-of select="regex-group(1)"/></xsl:element>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:matching-substring>
+			<xsl:non-matching-substring>
+				<xsl:if test="not(normalize-space(.)='')">
+					<xsl:choose>
+						<xsl:when test="$literal-name ne''">
+							<xsl:element name="pe:{$literal-name}"><xsl:value-of select="."/></xsl:element>
+						</xsl:when>
+						<xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+					</xsl:choose>
+				</xsl:if>
+			</xsl:non-matching-substring>
+		</xsl:analyze-string>
+	</xsl:function>
+	
 </xsl:stylesheet>

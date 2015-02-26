@@ -50,6 +50,11 @@
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/topic-types/essay/scripts/resolve/resolve-essay.xsl</href>
             </script>
         </resolve>
+        <link type="eppo">
+            <script>
+                <href>scripts/link/eppo/link-essay-topic.xsl</href>
+            </script>
+        </link>
         <present type="eppo">
             <script>
                 <href>scripts/present/eppo/present-essay-topic.xsl</href>

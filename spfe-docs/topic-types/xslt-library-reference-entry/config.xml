@@ -64,11 +64,13 @@
                 <href>../../topic-types/xslt-library-reference-entry/scripts/resolve/resolve-xsl-function-ref.xsl</href>
             </script>               
         </resolve>
-        <present type="eppo">
-            <!--                <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
+        <link type="eppo">
+            <script>
+                <href>scripts/link/eppo/link-function-ref.xsl</href>
             </script>
--->                <script>
+        </link>
+        <present type="eppo">
+            <script>
                 <href>scripts/present/eppo/present-function-ref.xsl</href>
             </script>
         </present>

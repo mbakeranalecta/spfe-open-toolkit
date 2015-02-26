@@ -45,7 +45,8 @@
                     </pe:breadcrumb>
                 </xsl:if>
             </pe:breadcrumbs>
-            <xsl:if test="index/entry/term[normalize-space(.) ne '']">
+            <!-- FIXME: If used, this needs to be based on a set of topic-level realtionships derived in the link step. -->
+<!--            <xsl:if test="index/entry/term[normalize-space(.) ne '']">
                 <pe:keywords>
                     <pe:title>Tags</pe:title>
                     <pe:keyword>
@@ -71,11 +72,11 @@
                     </pe:keyword>
                 </pe:keywords>
             </xsl:if>
-        </pe:context-nav>
+-->        </pe:context-nav>
     </xsl:template>
 
     <xsl:template name="show-footer">
-        <xsl:variable name="see-also-links">
+<!--        <xsl:variable name="see-also-links">
             <xsl:for-each select="index/reference[esf:target-exists(key[1], type)]">
                 <xsl:call-template name="output-link">
                     <xsl:with-param name="target" select="key[1]"/>
@@ -107,7 +108,7 @@
                     </pe:td>
                 </pe:tr>
             </pe:table>
-        </xsl:if>
-
+       </xsl:if>
+--> 
     </xsl:template>
 </xsl:stylesheet>

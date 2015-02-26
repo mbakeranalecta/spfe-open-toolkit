@@ -35,14 +35,7 @@
 			<xsl:for-each select="topics-on-subject/topic">
 				<pe:labeled-item>
 					<pe:label>
-						<xsl:call-template name="output-link">
-							<xsl:with-param name="target" select="full-name"/>
-							<xsl:with-param name="type">topic</xsl:with-param>
-							<xsl:with-param name="content">
-								<xsl:value-of select="topic-type-alias"/>: <xsl:value-of select="title"/>
-							</xsl:with-param>
-							<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
-						</xsl:call-template>
+						<xsl:apply-templates/>
 					</pe:label>
 	
 					<pe:item>
