@@ -9,10 +9,10 @@
     <scripts>
         <link type="eppo">
             <script>
-                <href>scripts/link/eppo/present-annotations-common-addresses.xsl</href>
+                <href>scripts/link/eppo/link-annotations-common-addresses.xsl</href>
             </script>
             <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/link/eppo/present-annotations-common-templates.xsl</href>
+                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/link/eppo/link-annotations-common-templates.xsl</href>
             </script>
         </link>
         <present type="eppo">
