@@ -79,10 +79,6 @@
                 </rewrite-namespace>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/present/eppo/present-table-basic.xsl</href>
             </script>
-            <!--                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
-                </script>
--->
             <script>
                 <rewrite-namespace>
                     <from>http://spfeopentoolkit.org/ns/eppo-simple</from>

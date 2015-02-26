@@ -49,13 +49,14 @@
 			<xsl:variable name="consumed-segments"
 				select="tokenize(if (starts-with($consumed, '/')) then substring($consumed,2) else $consumed, '/')"/>
 			<xsl:variable name="segment" select="$xpath-segments[count($consumed-segments)+1]"/>
+			<xsl:variable name="segment-xpath" select="concat($consumed, if($consumed='' and not($is-root-xpath)) then '' else '/', $segment)"/>
 
 			<!-- output this segment with link -->
 			<xsl:if test="not($consumed='' and not($is-root-xpath))">/</xsl:if>
 			<xsl:choose>
-				<xsl:when test="esf:target-exists($xpath, 'xml-element-name', $namespace)">
+				<xsl:when test="esf:target-exists($segment-xpath, 'xml-element-name', $namespace)">
 					<xsl:call-template name="output-link">
-						<xsl:with-param name="target" select="$xpath"/>
+						<xsl:with-param name="target" select="$segment-xpath"/>
 						<xsl:with-param name="type" select="'xml-element-name'"/>
 						<!-- FIXME: Should use parent element's subject namespace rather than current element subject namespace. -->
 						<xsl:with-param name="namespace" select="$namespace"/>
@@ -66,30 +67,21 @@
 				<xsl:otherwise>
 					<xsl:call-template name="sf:unresolved">
 						<xsl:with-param name="message"
-							select="concat('No content to link to on xml-element-name &quot;', $xpath, '&quot;')"/>
+							select="concat('No content to link to on xml-element-name &quot;', $segment-xpath, '&quot;')"/>
 						<xsl:with-param name="in" select="$current-page-name"/>
 					</xsl:call-template>
 					<xsl:value-of select="$xpath"/>
 				</xsl:otherwise>
 			</xsl:choose>
 
-			<!-- call the link template 
-			<xsl:sequence select="lf:link-xpath(
-				concat(
-					if($is-root-xpath) then '/' else '',
-					string-join($xpath-segments[position() le count($consumed-segments)+1], '/')
-				),
-				$segment)"/>-->
 			<!-- recursive call -->
 			<xsl:call-template name="lf:link-next-xpath-segment">
 				<xsl:with-param name="xpath" select="$xpath"/>
 				<xsl:with-param name="namespace" select="$namespace"/>
 				<xsl:with-param name="consumed"
-					select="concat($consumed, if($consumed='' and not($is-root-xpath)) then '' else '/', $segment)"
+					select="$segment-xpath"
 				/>
 			</xsl:call-template>
-
-			<!--<xsl:call-template select="lf:link-xpath-segments($xpath, $namespace, concat($consumed, if($consumed='' and not($is-root-xpath)) then '' else '/', $segment))"/>-->
 		</xsl:if>
 	</xsl:template>
 
