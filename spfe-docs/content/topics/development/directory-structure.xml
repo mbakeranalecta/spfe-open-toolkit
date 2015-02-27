@@ -87,7 +87,7 @@
             </entry>
             <entry>
                 <type>directory-name</type>
-                <term>link-catalogs</term>
+                <term>catalogs</term>
             </entry>
             <entry>
                 <type>directory-name</type>
@@ -118,7 +118,7 @@
             output is created.</p>
         
         <p>Inside the <directory-name>build</directory-name> directory, there are three directories,
-                <directory-name>link-catalogs</directory-name>, where the <feature>link
+                <directory-name>catalogs</directory-name>, where the <feature>link
                 catalogs</feature> are created, <directory-name>topic-sets</directory-name>, where
             the each stage of the topic set build is created, and
                 <directory-name>tocs</directory-name>, where the temporary TOC files are created.

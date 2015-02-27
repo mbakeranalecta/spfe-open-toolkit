@@ -8,8 +8,8 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
-	xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog" 
-	xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
+	xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/catalog" 
+	xpath-default-namespace="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/catalog"
 	exclude-result-prefixes="#all">
 
 	<xsl:variable name="config" as="element(config:config)">
@@ -34,7 +34,7 @@
 		</xsl:for-each>
 	</xsl:variable>
 	
-	<xsl:param name="output-directory" select="$config/config:link-catalog-directory"/>
+	<xsl:param name="output-directory" select="$config/config:catalog-directory"/>
 
 	<xsl:variable name="synonyms">
 		<synonyms>
@@ -64,18 +64,18 @@ Main template
 
 	
 	<xsl:template name="main" >		
-		<xsl:result-document href="file:///{concat($output-directory, '/', $topic-set-id, '.link-catalog.xml')}" method="xml" indent="yes" encoding="UTF-8" omit-xml-declaration="no">
+		<xsl:result-document href="file:///{concat($output-directory, '/', $topic-set-id, '.catalog.xml')}" method="xml" indent="yes" encoding="UTF-8" omit-xml-declaration="no">
 			<xsl:apply-templates select="$synthesis"/>
 		</xsl:result-document>
 	</xsl:template>
 
 	<xsl:template match="ss:synthesis">
-		<link-catalog topic-set-id="{@topic-set-id}"
+		<catalog topic-set-id="{@topic-set-id}"
 		output-directory="{$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:output-directory}"		
 			title="{@title}"
 			time-stamp="{current-dateTime()}">
 			<xsl:apply-templates/>
-		</link-catalog>
+		</catalog>
 	</xsl:template>
 	
 	<!-- FIXME: should this match be qualified by a type parameter? -->

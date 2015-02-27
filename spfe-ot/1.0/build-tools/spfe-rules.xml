@@ -59,7 +59,7 @@
 		<antcall target="-check-last-build-status"/>
 
 		<!-- mkdir in case no link catalogs have been created - make sure file list is created correctly even if empty. -->
-		<mkdir dir="${spfe.build.link-catalog-directory}"/>
+		<mkdir dir="${spfe.build.catalog-directory}"/>
 		<mkdir dir="${temp}"/>
 	</target>
 
@@ -216,19 +216,19 @@
 
 	<!-- LINK CATALOG STEP -->
 
-	<!-- check if link-catalog is up to date 
+	<!-- check if catalog is up to date 
 
-	<target name="-current.link-catalog">
-		<uptodate property="-current.link-catalog"
-			targetfile="${spfe.build.link-catalog-directory}/${spfe.topic-set-id}.link-catalog"
+	<target name="-current.catalog">
+		<uptodate property="-current.catalog"
+			targetfile="${spfe.build.catalog-directory}/${spfe.topic-set-id}.catalog"
 			srcfile="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/resolve.flag"/>
 	</target>-->
 
-	<!-- target for link-catalog -->
-	<!--<target name="-build.link-catalog" depends="-build.resolve, -\-build.link-catalog"/>-->
-	<macrodef name="build.link-catalog" description="Link catalog step.">
-		<!-- FIXME		depends="-current.link-catalog"
-		unless="-current.link-catalog">-->
+	<!-- target for catalog -->
+	<!--<target name="-build.catalog" depends="-build.resolve, -\-build.catalog"/>-->
+	<macrodef name="build.catalog" description="Link catalog step.">
+		<!-- FIXME		depends="-current.catalog"
+		unless="-current.catalog">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<attribute name="output-directory"/>
@@ -245,7 +245,7 @@
 			<saxon-xslt 
 				in="${spfe.config-file}" 
 				style="@{style}"
-				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/link-catalog.flag">
+				out="${spfe.build.build-directory}/topic-sets/@{topic-set-id}/catalog.flag">
 				<params>
 					<arg value="topic-set-id=@{topic-set-id}"/>
 					<arg value="synthesis-files=${synthesis-files-list}"/>
@@ -258,7 +258,7 @@
 	<!-- macro for toc -->
 
 	<macrodef name="build.toc" description="TOC step.">
-		<!-- FIXME		depends="  -current.link-catalog" unless="-current.link-catalog">-->
+		<!-- FIXME		depends="  -current.catalog" unless="-current.catalog">-->
 		<attribute name="style"/>
 		<attribute name="topic-set-id"/>
 		<attribute name="output-directory"/>
@@ -311,8 +311,8 @@
 			<local name="synthesis-files-list"/>
 			<local name="toc-files"/>
 			<local name="toc-files-list"/>
-			<local name="link-catalog-files"/>
-			<local name="link-catalog-list"/>
+			<local name="catalog-files"/>
+			<local name="catalog-list"/>
 			<local name="objects-files"/>
 			<local name="objects-list"/>
 			
@@ -327,10 +327,10 @@
 			</fileset>
 			<pathconvert property="toc-files-list" dirsep="/" pathsep=";" refid="toc-files"/>
 			
-			<fileset id="link-catalog-files" dir="${spfe.build.link-catalog-directory}">
+			<fileset id="catalog-files" dir="${spfe.build.catalog-directory}">
 				<include name="*.xml"/>
 			</fileset>			
-			<pathconvert property="link-catalog-files-list" dirsep="/" pathsep=";" refid="link-catalog-files"/>
+			<pathconvert property="catalog-files-list" dirsep="/" pathsep=";" refid="catalog-files"/>
 			
 			<fileset id="objects-files" dir="${spfe.build.objects-directory}">
 				<include name="**/*.xml"/>
@@ -345,7 +345,7 @@
 				<params>
 					<arg value="topic-set-id=@{topic-set-id}"/>
 					<arg value="synthesis-files=${synthesis-files-list}"/>
-					<arg value="link-catalog-files=${link-catalog-files-list}"/>
+					<arg value="catalog-files=${catalog-files-list}"/>
 					<arg value="objects-files=${objects-files-list}"/>
 					<arg value="output-directory=@{output-directory}"/>
 					<arg value="toc-files=${toc-files-list}"/>

@@ -12,14 +12,14 @@
                 <href>scripts/resolve/resolve-topic-main-template.xsl</href>
             </script>
         </resolve>
-        <link-catalog>
+        <catalog>
             <script>
                 <href>${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl</href>
             </script>
             <script>
-                <href>scripts/link-catalog/topic/topic-link-catalog.xsl</href>
+                <href>scripts/catalog/topic/topic-catalog.xsl</href>
             </script>
-        </link-catalog>
+        </catalog>
         <toc>
             <script>
                 <href>scripts/toc/toc.xsl</href>

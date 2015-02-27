@@ -533,10 +533,10 @@
 
 
         <config-setting-description>
-            <xpath>/object-type/scripts/link-catalog</xpath>
+            <xpath>/object-type/scripts/catalog</xpath>
             <description>
                 
-                <fragment-ref id-ref="link-catalog-script-description"/>
+                <fragment-ref id-ref="catalog-script-description"/>
                 
                 <p>Objects can also be indexed. The indexes can be use to resolve subject affinities to objects, rahter than having authors insert objects explicitly into topics.</p>
             </description>
@@ -547,7 +547,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/object-type/scripts/link-catalog/script</xpath>
+            <xpath>/object-type/scripts/catalog/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -1399,10 +1399,10 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/topic-type/scripts/link-catalog</xpath>
+            <xpath>/topic-type/scripts/catalog</xpath>
             <description>
-                <fragment id="link-catalog-script-description">
-                <p>Container element for a list of link-catalog scripts. The <feature>link catalog</feature> script is responsible for creating a catalog of all the link targets in a topic set. For topics types whose resolve scripts produce a <feature>standard synthesis header</feature> with index terms embedded, the standard EPPO-simple link-catalog script can be used. In most cases it will be preferable to create the index header at the resolve stage rather than to produce a non-standard synthesis and then write your own link catalog script. However, that option is available and you can specify the use of your own link-catalog script using this setting.</p>
+                <fragment id="catalog-script-description">
+                <p>Container element for a list of catalog scripts. The <feature>link catalog</feature> script is responsible for creating a catalog of all the link targets in a topic set. For topics types whose resolve scripts produce a <feature>standard synthesis header</feature> with index terms embedded, the standard EPPO-simple catalog script can be used. In most cases it will be preferable to create the index header at the resolve stage rather than to produce a non-standard synthesis and then write your own link catalog script. However, that option is available and you can specify the use of your own catalog script using this setting.</p>
                 </fragment>
             </description>
             <values/>
@@ -1412,11 +1412,11 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/topic-type/scripts/link-catalog/script</xpath>
+            <xpath>/topic-type/scripts/catalog/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
-                        <string id="script-type">a link-catalog</string>
+                        <string id="script-type">a catalog</string>
                     </local-strings>
                 </fragment-ref>
             </description>
@@ -1721,10 +1721,10 @@
 
 
         <config-setting-description>
-            <xpath>/output-format/scripts/link-catalog</xpath>
+            <xpath>/output-format/scripts/catalog</xpath>
             <description>
                 
-                <fragment-ref id-ref="link-catalog-script-description"/>
+                <fragment-ref id-ref="catalog-script-description"/>
                 
                 <p>Output types cannot be indexed and it is unlikely that an output type would want to change the way content is indexed. However, this setting lets you contribute an output-type-specific link catalog script to the build.</p>
             </description>
@@ -1735,7 +1735,7 @@
         </config-setting-description>
 
         <config-setting-description>
-            <xpath>/output-format/scripts/link-catalog/script</xpath>
+            <xpath>/output-format/scripts/catalog/script</xpath>
             <description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
@@ -2149,7 +2149,7 @@
         
         
         <config-setting-description>
-            <xpath>/topic-type/scripts/link-catalog/script/rewrite-namespace</xpath>
+            <xpath>/topic-type/scripts/catalog/script/rewrite-namespace</xpath>
             <description><fragment-ref id-ref="rewrite-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2158,7 +2158,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/topic-type/scripts/link-catalog/script/rewrite-namespace/from</xpath>
+            <xpath>/topic-type/scripts/catalog/script/rewrite-namespace/from</xpath>
             <description><fragment-ref id-ref="rewrite-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2167,7 +2167,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/topic-type/scripts/link-catalog/script/rewrite-namespace/to</xpath>
+            <xpath>/topic-type/scripts/catalog/script/rewrite-namespace/to</xpath>
             <description><fragment-ref id-ref="rewrite-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2176,7 +2176,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/topic-type/scripts/link-catalog/script/href</xpath>
+            <xpath>/topic-type/scripts/catalog/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2415,7 +2415,7 @@
         
         
         <config-setting-description>
-            <xpath>/object-type/scripts/link-catalog/script/rewrite-namespace</xpath>
+            <xpath>/object-type/scripts/catalog/script/rewrite-namespace</xpath>
             <description><fragment-ref id-ref="rewrite-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2424,7 +2424,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/object-type/scripts/link-catalog/script/rewrite-namespace/from</xpath>
+            <xpath>/object-type/scripts/catalog/script/rewrite-namespace/from</xpath>
             <description><fragment-ref id-ref="rewrite-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2433,7 +2433,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/object-type/scripts/link-catalog/script/rewrite-namespace/to</xpath>
+            <xpath>/object-type/scripts/catalog/script/rewrite-namespace/to</xpath>
             <description><fragment-ref id-ref="rewrite-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2442,7 +2442,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/object-type/scripts/link-catalog/script/href</xpath>
+            <xpath>/object-type/scripts/catalog/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2680,7 +2680,7 @@
         
         
         <config-setting-description>
-            <xpath>/output-format/scripts/link-catalog/script/rewrite-namespace</xpath>
+            <xpath>/output-format/scripts/catalog/script/rewrite-namespace</xpath>
             <description><fragment-ref id-ref="rewrite-namespace-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2689,7 +2689,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/output-format/scripts/link-catalog/script/rewrite-namespace/from</xpath>
+            <xpath>/output-format/scripts/catalog/script/rewrite-namespace/from</xpath>
             <description><fragment-ref id-ref="rewrite-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2698,7 +2698,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/output-format/scripts/link-catalog/script/rewrite-namespace/to</xpath>
+            <xpath>/output-format/scripts/catalog/script/rewrite-namespace/to</xpath>
             <description><fragment-ref id-ref="rewrite-namespace-from-description"/></description>
             <values></values>
             <restrictions></restrictions>
@@ -2707,7 +2707,7 @@
         </config-setting-description>
         
         <config-setting-description>
-            <xpath>/output-format/scripts/link-catalog/script/href</xpath>
+            <xpath>/output-format/scripts/catalog/script/href</xpath>
             <description><fragment-ref id-ref="script-href-description"/></description>
             <values></values>
             <restrictions></restrictions>

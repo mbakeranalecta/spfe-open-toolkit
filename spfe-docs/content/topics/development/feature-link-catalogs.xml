@@ -6,7 +6,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
     <head>
-        <id>feature-link-catalogs</id>
+        <id>feature-catalogs</id>
         <history>
             <revision>
                 <date>2014-06-26</date>
@@ -32,12 +32,12 @@
             during the <feature>synthesis stage</feature>. They are used to generate links between
             topics during the <feature>presentation stage</feature>.</p>
         <p>For topic types that use the standard <feature>EPPO-simple index markup</feature>, the
-                <spfe-build-script>topic-link-catalog.xsl</spfe-build-script> script creates the
+                <spfe-build-script>topic-catalog.xsl</spfe-build-script> script creates the
             link catalog. For topic types that do not use the standard index, you will need to write
             a script to generate the link catalogs for that topic type. Alternatively, you can
             generate index entries in the standard form in your main <feature>resolve script</feature>. These can
             then be processed by the standard
-                <spfe-build-script>topic-link-catalog.xsl</spfe-build-script>
+                <spfe-build-script>topic-catalog.xsl</spfe-build-script>
             script.<!--The latter may be the only recommended way to do it. That way we do not need multiple link catalog scripts, which allows us to use python for that script.--></p>
     </body>
 </feature-topic>

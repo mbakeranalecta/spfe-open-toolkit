@@ -477,7 +477,7 @@
       <xs:element minOccurs="0" name="extract" type="script-list-type"/>
       <xs:element minOccurs="0" name="merge" type="script-list-type"/>
       <xs:element name="resolve" type="script-list-type" minOccurs="0"/>
-      <xs:element name="link-catalog" type="script-list-type" minOccurs="0"/>
+      <xs:element name="catalog" type="script-list-type" minOccurs="0"/>
       <xs:element name="toc" type="script-list-type" minOccurs="0"/>
       <xs:element name="image-list" type="script-list-type" minOccurs="0"/>
       <xs:element name="present" minOccurs="0">

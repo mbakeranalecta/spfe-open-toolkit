@@ -6,7 +6,7 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
+	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/catalog"
 	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"	
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all">
@@ -21,7 +21,7 @@
 					<xsl:with-param name="target" select="$topic-set"/>
 					<xsl:with-param name="type">topic-set</xsl:with-param>
 					<xsl:with-param name="content">
-						<xsl:value-of select="$link-catalogs//lc:target[@type='topic-set'][lc:key=$topic-set]/parent::lc:page/@title"/>
+						<xsl:value-of select="$catalogs//lc:target[@type='topic-set'][lc:key=$topic-set]/parent::lc:page/@title"/>
 					</xsl:with-param>
 					<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 				</xsl:call-template>

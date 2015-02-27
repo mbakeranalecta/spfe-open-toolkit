@@ -7,7 +7,7 @@
 	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" 
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
-	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
+	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/catalog"
 	exclude-result-prefixes="#all">
 <!-- =============================================================
 	extract-topic-subject-lists.xsl
@@ -67,7 +67,7 @@
 	
 
 	
-	<xsl:template match="lc:link-catalog">
+	<xsl:template match="lc:catalog">
 	
 	</xsl:template>
 	

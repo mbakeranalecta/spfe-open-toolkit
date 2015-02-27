@@ -64,7 +64,7 @@ class SPFEConfig:
              'content_set_config_dir': self.content_set_build_root_dir + '/config',
              'content_set_output_dir': self.content_set_build_root_dir + '/output',
              'content_set_home': self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id + '/output',
-             'link_catalog_directory': self.content_set_build_dir + '/link-catalogs',
+             'catalog_directory': self.content_set_build_dir + '/catalogs',
              'toc_directory': self.content_set_build_dir + '/tocs'
             }
         )
@@ -92,7 +92,7 @@ class SPFEConfig:
     <content-set-output>{content_set_output_dir}</content-set-output>
     <spfeot-home>{spfe_ot_home}</spfeot-home>
     <build-command>{spfe_build_command}</build-command>
-    <link-catalog-directory>{link_catalog_directory}</link-catalog-directory>
+    <catalog-directory>{catalog_directory}</catalog-directory>
     <toc-directory>{toc_directory}</toc-directory>
 </config>
 """.format(**self.spfe_env))

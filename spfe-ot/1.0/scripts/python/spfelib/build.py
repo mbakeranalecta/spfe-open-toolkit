@@ -99,18 +99,18 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
         pass
 
 
-    # Call the link-catalog step
+    # Call the catalog step
     try:
-        link_catalog_output_dir = posixpath.join(config.content_set_build_dir, 'link-catalogs')
+        catalog_output_dir = posixpath.join(config.content_set_build_dir, 'catalogs')
         synthesis_files = glob(resolve_output_dir + '/*')
         _build_toc_step(config=config,
                         set_id=set_id,
                         set_type=set_type,
-                        script=config.build_scripts[set_id][('link-catalog', None)],
-                        output_dir=link_catalog_output_dir,
+                        script=config.build_scripts[set_id][('catalog', None)],
+                        output_dir=catalog_output_dir,
                         synthesis_files=synthesis_files)
     except KeyError:
-        # There is no link-catalog script, so skip it
+        # There is no catalog script, so skip it
         pass
 
 
@@ -164,9 +164,9 @@ def _build_toc_step(config, set_id, set_type, script, output_dir, synthesis_file
                    **parameters)
 
 
-def _build_link_catalog_step(config, set_id, set_type, script, output_dir, synthesis_files):
+def _build_catalog_step(config, set_id, set_type, script, output_dir, synthesis_files):
     infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
-    outfile = posixpath.join(config.content_set_build_dir, set_type + 's', set_id, 'link-catalog.flag')
+    outfile = posixpath.join(config.content_set_build_dir, set_type + 's', set_id, 'catalog.flag')
     parameters = {'set-id': set_id,
                   'output-directory': output_dir,
                   'synthesis-files': ';'.join(synthesis_files)}
@@ -186,8 +186,8 @@ def _build_presentation_stage(config, topic_set_id):
                          synthesis_files=[x.replace('\\', '/') for x in glob(
                              posixpath.join(posixpath.dirname(config.build_scripts[topic_set_id][('resolve', None)]),
                                             'out') + '/*')],
-                         link_catalog_files=glob(
-                             posixpath.join(config.content_set_build_dir, 'link-catalogs') + '/*'),
+                         catalog_files=glob(
+                             posixpath.join(config.content_set_build_dir, 'catalogs') + '/*'),
                          object_files=[x.replace('\\', '/') for x in
                                        glob(posixpath.join(config.content_set_build_dir, 'objects') + '/*/*')])
 
@@ -210,15 +210,15 @@ def _build_link_step(config,
                      script,
                      output_dir,
                      synthesis_files,
-                     link_catalog_files,
+                     catalog_files,
                      object_files):
     print("Building the link step for " + topic_set_id)
     infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
-    outfile = posixpath.join(config.content_set_build_dir, 'topic-sets', topic_set_id, 'link-catalog.flag')
+    outfile = posixpath.join(config.content_set_build_dir, 'topic-sets', topic_set_id, 'catalog.flag')
     parameters = {'topic-set-id': topic_set_id,
                   'output-directory': output_dir,
                   'synthesis-files': ';'.join(synthesis_files),
-                  'link-catalog-files': ';'.join(link_catalog_files),
+                  'catalog-files': ';'.join(catalog_files),
                   'object-files': ';'.join(object_files)}
     util.run_XSLT2(script=script, env=config.spfe_env, infile=infile, outfile=outfile, initial_template='main',
                    **parameters)
@@ -233,7 +233,7 @@ def _build_present_step(config,
                         object_files):
     print("Building the present step for " + topic_set_id)
     infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
-    outfile = posixpath.join(config.content_set_build_dir, 'topic-sets', topic_set_id, 'link-catalog.flag')
+    outfile = posixpath.join(config.content_set_build_dir, 'topic-sets', topic_set_id, 'catalog.flag')
     parameters = {'topic-set-id': topic_set_id,
                   'output-directory': output_dir,
                   'synthesis-files': ';'.join(synthesis_files),

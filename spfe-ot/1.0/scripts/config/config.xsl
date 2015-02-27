@@ -36,7 +36,7 @@
         select="concat($content-set-build-root-directory, '/output')"/>
     <xsl:variable name="content-set-home"
         select="concat($build-directory, '/', $config/content-set/content-set-id,'/output')"/>
-    <xsl:variable name="link-catalog-directory" select="concat($content-set-build, '/link-catalogs')"/>
+    <xsl:variable name="catalog-directory" select="concat($content-set-build, '/catalogs')"/>
     <xsl:variable name="toc-directory" select="concat($content-set-build, '/tocs')"/>
     <xsl:variable name="objects-directory" select="concat($content-set-build, '/objects')"/>
 
@@ -209,7 +209,7 @@
                 value="{$content-set-build-root-directory}"/>
             <property name="spfe.build.build-directory" value="{$content-set-build}"/>
             <property name="spfe.build.output-directory" value="{$content-set-home}"/>
-            <property name="spfe.build.link-catalog-directory" value="{$link-catalog-directory}"/>
+            <property name="spfe.build.catalog-directory" value="{$catalog-directory}"/>
             <property name="spfe.build.objects-directory" value="{$objects-directory}"/>
             <property name="spfe.build.toc-directory" value="{$toc-directory}"/>
             <property name="spfe.content-set-id" value="{$config/content-set/content-set-id}"/>
@@ -317,11 +317,11 @@
 
                     <xsl:if test="$topic-set-id"> 
                         <!-- FIXME: Should be building a link catalog for text objects. -->
-                    <build.link-catalog topic-set-id="{$topic-set-id}"
+                    <build.catalog topic-set-id="{$topic-set-id}"
                         style="{if ($object-set-id)
-                        then concat($content-set-build, '/object-sets/', $object-set-id, '/link-catalog/spfe.link-catalog.xsl')
-                        else concat($content-set-build, '/topic-sets/', $topic-set-id, '/link-catalog/spfe.link-catalog.xsl')}"
-                        output-directory="{$content-set-build}/link-catalogs"> </build.link-catalog>
+                        then concat($content-set-build, '/object-sets/', $object-set-id, '/catalog/spfe.catalog.xsl')
+                        else concat($content-set-build, '/topic-sets/', $topic-set-id, '/catalog/spfe.catalog.xsl')}"
+                        output-directory="{$content-set-build}/catalogs"> </build.catalog>
                     </xsl:if>
 
                    <xsl:if test="$topic-set-id"> 
@@ -461,9 +461,9 @@
                 <build-command>
                     <xsl:value-of select="$SPFE_BUILD_COMMAND"/>
                 </build-command>
-                <link-catalog-directory>
-                    <xsl:value-of select="$link-catalog-directory"/>
-                </link-catalog-directory>
+                <catalog-directory>
+                    <xsl:value-of select="$catalog-directory"/>
+                </catalog-directory>
                 <toc-directory>
                     <xsl:value-of select="$toc-directory"/>
                 </toc-directory>
