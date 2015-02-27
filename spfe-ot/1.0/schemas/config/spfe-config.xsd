@@ -480,6 +480,15 @@
       <xs:element name="catalog" type="script-list-type" minOccurs="0"/>
       <xs:element name="toc" type="script-list-type" minOccurs="0"/>
       <xs:element name="image-list" type="script-list-type" minOccurs="0"/>
+      <xs:element name="link" minOccurs="0">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="script-list-type">
+              <xs:attribute name="type" type="xs:NMTOKEN" use="required"/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="present" minOccurs="0">
         <xs:complexType>
           <xs:complexContent>

@@ -6,12 +6,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <name>annotations-xslt</name>
-    <dependencies>
-        <dependency>
-            <name>paragraphs</name>
-            <href>../paragraphs/config.xml</href>
-        </dependency>
-    </dependencies>
     <scripts>
         <resolve>
             <script>
@@ -32,10 +26,11 @@
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/present/eppo/present-annotations-eppo.xsl</href>
             </script>
         </present>
+         <format type="xhtml">
+             <script>
+                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/format/xhtml/format-annotations-xhtml.xsl</href>
+             </script>
+         </format>    
     </scripts>
-    <format type="xhtml">
-        <script>
-            <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/annotations/base/scripts/format/xhtml/format-annotations-xhtml.xsl</href>
-        </script>
-    </format>
+
 </structure>
