@@ -107,7 +107,7 @@ class SPFEConfig:
             home_topic_set = self.setting('content-set/home-topic-set')
             output_directory = etree.Element('{http://spfeopentoolkit.org/ns/spfe-ot/config}output-directory')
             if topic_set_id != home_topic_set:
-                output_directory.text = topic_set_id + '/'
+                output_directory.text = topic_set_id
             topic_set.insert(0, output_directory)
 
         self._prettyprint(self.config)

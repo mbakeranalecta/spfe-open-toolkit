@@ -155,10 +155,6 @@
 		<xsl:param name="current-page-name" as="xs:string"/>
 		<xsl:param name="see-also" as="xs:boolean" select="false()"/>
 		
-
-		<!-- check that we are not linking to the current page
-		<xsl:variable name="current-page" select="if (. instance of node() and ancestor::ss:topic/@full-name) then ancestor::ss:topic/@full-name else 'no-current-page'"/> -->
-		
 		<xsl:variable name="target-page" as="node()*"> 		
 			<!-- single key lookup -->
 			<xsl:sequence select="$catalogs/lc:catalog/lc:page[lc:target/@type=$type]
@@ -245,61 +241,13 @@
 		<xsl:param name="content"/>
 		<xsl:param name="see-also" as="xs:boolean" select="false()"/>
 		
-		<xsl:variable name="target-topic-set" select="$target-page/parent::lc:catalog/@topic-set-id"/>
-
-		<xsl:variable name="target-directory" select="$target-page/parent::lc:catalog/@output-directory"/>
-		
-		<xsl:variable name="target-directory-path" >
-			<xsl:for-each select="tokenize($target-directory, '/')">
-				<xsl:if test="position()!=last()">
-					<xsl:text>../</xsl:text>
-				</xsl:if>
-			</xsl:for-each>
-			<xsl:value-of select="$target-directory"/>
-		</xsl:variable>
-		
+		<xsl:variable name="target-topic-set" select="$target-page/parent::lc:catalog/@topic-set-id"/>	
 		<xsl:variable name="target-file"  select="string($target-page/@file)"/>		
 		
 		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][lc:namespace=$namespace][@type=$type][1]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][@type=$type][1]/@anchor) else ''"/>
 
 		
 		<pe:link hint="{$type}">
-			<xsl:attribute name="href">
-				<xsl:choose>
-					<!-- this page -->
-					<xsl:when test="$current-page-name=$target-page[1]/@full-name">
-						<xsl:choose>
-							<xsl:when test="not($target-anchor='')">
-								 <xsl:value-of select="$target-anchor"/>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:call-template name="sf:warning">
-									<xsl:with-param name="message">
-										<xsl:text>A page is linking to itself. This is a tool problem, not a content problem. The tools should not generate links to the current page. Report this as bug. Include the following information in the bug report: &#x000A;</xsl:text>
-										<xsl:value-of select="'Reference-type=', $type, '&#x000A;'"/>
-										<xsl:value-of select="'Target=', $target, '&#x000A;'"/>
-										<!-- FIXME: What is this supposed to match, and in what namespace? -->
-										<xsl:value-of select="'Topic id=', ancestor::topic/name, '&#x000A;'"/>
-									</xsl:with-param>
-								</xsl:call-template>
-								<xsl:value-of select="$target-anchor"/>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:when>
-					
-					<!-- this topic-set -->
-					<xsl:when test="$topic-set-id=$target-topic-set">
-						 <xsl:value-of select="concat($target-file, $target-anchor)"/>
-					</xsl:when>
-					
-					<!-- outside this topic-set -->
-					<xsl:otherwise>
-						<xsl:value-of select="concat($target-directory-path, $target-file, $target-anchor)"/>
-					</xsl:otherwise>
-					
-				</xsl:choose>
-			</xsl:attribute>
-			
 			<xsl:variable name="title">
 				<xsl:variable name="target-content" select="normalize-space(string($target-page/lc:target[lc:key=$target][@type=$type]/lc:label))"/>
 				
@@ -319,6 +267,8 @@
 			<xsl:attribute name="topic-type" select="$target-page/@topic-type-alias"/>
 			<xsl:attribute name="topic-title" select="$target-page/@title"/>
 			<xsl:attribute name="class" select="$class"/>
+			<xsl:attribute name="topic-id" select="$target-page/@local-name"/>
+			<xsl:attribute name="topic-dir" select="$target-page/../@output-directory"/>
 
 			<xsl:choose>
 				<xsl:when test="$see-also">
@@ -365,10 +315,10 @@
 			<xsl:value-of select="$catalogs/lc:catalog[lc:page/@full-name=$target-page/@full-name]/@topic-set-id"/>
 		</xsl:variable>
 		
-		<xsl:variable name="target-directory" select="$catalogs/lc:catalog/lc:page[@full-name=$target-page/@full-name]/parent::lc:catalog/@output-directory"/>
-
+<!--		<xsl:variable name="target-directory" select="$catalogs/lc:catalog/lc:page[@full-name=$target-page/@full-name]/parent::lc:catalog/@output-directory"/>
+-->
 		
-		<xsl:variable name="target-directory-path" >
+<!--		<xsl:variable name="target-directory-path" >
 			<xsl:for-each select="tokenize($target-directory, '/')">
 				<xsl:if test="position()!=last()">
 					<xsl:text>../</xsl:text>
@@ -376,7 +326,7 @@
 			</xsl:for-each>
 			<xsl:value-of select="$target-directory"/>
 		</xsl:variable>
-	
+-->	
 		<xsl:variable name="target-file"  select="string($target-page/@file)"/>		
 		
 		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][@type=$type]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][@type=$type]/@anchor) else ''"/>

@@ -158,7 +158,7 @@ def _build_toc_step(config, set_id, set_type, script, output_dir, synthesis_file
     infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
     outfile = posixpath.join(config.content_set_build_dir, set_type + 's', set_id, 'toc.flag')
     parameters = {'set-id': set_id,
-                  'output_directory': output_dir,
+                  'output-directory': output_dir,
                   'synthesis-files': ';'.join(synthesis_files)}
     util.run_XSLT2(script=script, env=config.spfe_env, infile=infile, outfile=outfile, initial_template='main',
                    **parameters)
