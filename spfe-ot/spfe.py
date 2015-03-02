@@ -1,11 +1,14 @@
 __author__ = 'Mark Baker'
 __copyright__ = "Analecta Communications Inc. 2015"
 
+from datetime import datetime
+start_time = datetime.now()
 import os
 import argparse
 import sys
 import shutil
 import importlib
+
 sys.path.append(sys.path[0] + '/1.0/scripts/python')
 spfelib = importlib.import_module('spfelib')
 #import spfelib
@@ -27,6 +30,8 @@ def do_build(build_args):
         config.write_config_file()
         config.write_script_files()
         spfelib.build.build_content_set(config)
+        end_time = datetime.now()
+        print('Build completed in : {}'.format(end_time - start_time))
     else:
         print("Config file not found: " + build_args.config_file)
         sys.exit(1)
