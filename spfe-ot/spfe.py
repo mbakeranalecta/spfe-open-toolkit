@@ -42,7 +42,8 @@ spfe_build_dir = os.environ.get("SPFE_BUILD_DIR")
 if spfe_build_dir is None:
     spfe_build_dir = home + "/spfebuild"
 spfe_build_dir.replace(os.path.sep, '/')
-spfe_ot_home = os.environ.get("SPFEOT_HOME").replace(os.path.sep, '/')
+#spfe_ot_home = os.environ.get("SPFEOT_HOME").replace(os.path.sep, '/')
+spfe_ot_home = os.path.dirname(os.path.realpath(__file__)).replace(os.path.sep, '/')
 spfe_temp_build_file = spfe_build_dir + "/spfebuild.xml"
 
 
