@@ -9,6 +9,7 @@ import os
 import itertools
 from collections import namedtuple
 from . import util
+import copy
 
 try:
     import regex as re
@@ -21,12 +22,11 @@ except ImportError:
 
 try:
     from lxml import etree
-
-    print("running with lxml.etree")
 except ImportError:
-    import xml.etree.ElementTree as etree
-
-    print("running with ElementTree")
+    print("SPFE requires the lxml module. The easiest way to install it, "
+          "particularly on Windows, may be to install a preconfigured "
+          "package such as Anaconda which installs all the required libraries.")
+    raise
 
 class SPFEConfigSettingNotFound(Exception):
     """
@@ -173,7 +173,12 @@ class SPFEConfig:
 
         # Write the spfe environment variables to the config file.
         os.makedirs(self.content_set_config_dir, exist_ok=True)
-        etree.ElementTree(self.config).write(self.content_set_config_dir + '/pconfig.xml',
+        config_file = copy.copy(self.config)
+        for structures in config_file.findall('*//{http://spfeopentoolkit.org/ns/spfe-ot/config}structures'):
+            structures.getparent().remove(structures)
+        for scripts in config_file.findall('*//{http://spfeopentoolkit.org/ns/spfe-ot/config}scripts'):
+            scripts.getparent().remove(scripts)
+        etree.ElementTree(config_file).write(self.content_set_config_dir + '/spfe-config.xml',
                                              xml_declaration=True,
                                              encoding="utf-8")
 

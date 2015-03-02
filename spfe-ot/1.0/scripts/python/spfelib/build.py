@@ -124,7 +124,7 @@ def _build_extract_step(config, set_id, set_type, output_dir):
     source_files = []
     for x in config.settings('sources/sources-to-extract-content-from/include', ts_config):
         source_files += (glob(x))
-    infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
+    infile = posixpath.join(config.content_set_config_dir, 'spfe-config.xml')
     outfile = posixpath.join(config.content_set_build_dir, set_type + 's', set_id, 'extracted.flag')
     parameters = {'set-id': set_id,
                   'output-directory': output_dir,
@@ -134,7 +134,7 @@ def _build_extract_step(config, set_id, set_type, output_dir):
 
 
 def _build_merge_step(config, set_id, set_type, script, output_dir, authored_files, extracted_files):
-    infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
+    infile = posixpath.join(config.content_set_config_dir, 'spfe-config.xml')
     outfile = posixpath.join(config.content_set_build_dir, set_type + 's', set_id, 'merge.flag')
     parameters = {'set-id': set_id,
                   'output-directory': output_dir,
@@ -145,7 +145,7 @@ def _build_merge_step(config, set_id, set_type, script, output_dir, authored_fil
 
 
 def _build_resolve_step(config, set_id, set_type, script, output_dir, topic_files):
-    infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
+    infile = posixpath.join(config.content_set_config_dir, 'spfe-config.xml')
     outfile = posixpath.join(config.content_set_build_dir, set_type + 's', set_id, 'resolve.flag')
     parameters = {'set-id': set_id,
                   'output-directory': output_dir,
@@ -155,7 +155,7 @@ def _build_resolve_step(config, set_id, set_type, script, output_dir, topic_file
 
 
 def _build_toc_step(config, set_id, set_type, script, output_dir, synthesis_files):
-    infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
+    infile = posixpath.join(config.content_set_config_dir, 'spfe-config.xml')
     outfile = posixpath.join(config.content_set_build_dir, set_type + 's', set_id, 'toc.flag')
     parameters = {'set-id': set_id,
                   'output-directory': output_dir,
@@ -165,7 +165,7 @@ def _build_toc_step(config, set_id, set_type, script, output_dir, synthesis_file
 
 
 def _build_catalog_step(config, set_id, set_type, script, output_dir, synthesis_files):
-    infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
+    infile = posixpath.join(config.content_set_config_dir, 'spfe-config.xml')
     outfile = posixpath.join(config.content_set_build_dir, set_type + 's', set_id, 'catalog.flag')
     parameters = {'set-id': set_id,
                   'output-directory': output_dir,
@@ -213,7 +213,7 @@ def _build_link_step(config,
                      catalog_files,
                      object_files):
     print("Building the link step for " + topic_set_id)
-    infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
+    infile = posixpath.join(config.content_set_config_dir, 'spfe-config.xml')
     outfile = posixpath.join(config.content_set_build_dir, 'topic-sets', topic_set_id, 'catalog.flag')
     parameters = {'topic-set-id': topic_set_id,
                   'output-directory': output_dir,
@@ -232,7 +232,7 @@ def _build_present_step(config,
                         toc_files,
                         object_files):
     print("Building the present step for " + topic_set_id)
-    infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
+    infile = posixpath.join(config.content_set_config_dir, 'spfe-config.xml')
     outfile = posixpath.join(config.content_set_build_dir, 'topic-sets', topic_set_id, 'catalog.flag')
     parameters = {'topic-set-id': topic_set_id,
                   'output-directory': output_dir,
@@ -281,7 +281,7 @@ def _build_format_step(config,
                        script,
                        output_dir,
                        presentation_files):
-    infile = posixpath.join(config.content_set_config_dir, 'pconfig.xml')
+    infile = posixpath.join(config.content_set_config_dir, 'spfe-config.xml')
     outfile = posixpath.join(config.content_set_build_dir, 'topic-sets', topic_set_id, 'format.flag')
     parameters = {'topic-set-id': topic_set_id,
                   'output-directory': output_dir,
