@@ -14,7 +14,7 @@ Create an environment variable SPFEOT_HOME and set it to the location of the spf
 4. If not already installed, install the Python lxml and nltk libraries. 
 
 An easy way to install Python 3.4 and the required libraries is to install a packaged 
-version of Python that already includes the, such as Anaconda (http://continuum.io/downloads#py34). 
+version of Python that already includes the libraries, such as Anaconda (http://continuum.io/downloads#py34). 
 
 To build the SPFE docs:
 
