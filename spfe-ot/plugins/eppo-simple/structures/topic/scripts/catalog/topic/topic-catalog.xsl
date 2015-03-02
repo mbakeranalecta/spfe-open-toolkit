@@ -84,7 +84,6 @@ Main template
 		<page local-name="{@local-name}" 
 			  full-name="{@full-name}"
 			  title="{@title}" 
-			  file="{@local-name}.html"
 			  topic-type="{@type}" 
 			  topic-type-alias="{@topic-type-alias}"
 			  excerpt="{@excerpt}"
