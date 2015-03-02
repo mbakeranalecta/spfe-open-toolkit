@@ -23,10 +23,11 @@ except ImportError:
 try:
     from lxml import etree
 except ImportError:
-    print("SPFE requires the lxml module. The easiest way to install it, "
+    print("SPFE requires the Python lxml module. The easiest way to install it, "
           "particularly on Windows, may be to install a preconfigured "
           "package such as Anaconda which installs all the required libraries.")
     raise
+
 
 class SPFEConfigSettingNotFound(Exception):
     """
