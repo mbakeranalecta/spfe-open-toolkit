@@ -89,7 +89,7 @@
 			<xsl:for-each select="definition">
 				<pe:codeblock language="XSLT">
     			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
-    			<xsl:apply-templates select="*"/>
+    			<xsl:apply-templates/>
     		</pe:codeblock>
 			</xsl:for-each>
 			<xsl:call-template name="show-footer"/>
@@ -145,9 +145,9 @@
 			<pe:subhead>Definition</pe:subhead>
 			<xsl:for-each select="definition">
 				<pe:codeblock language="XSLT">
-    			<!-- select="*" here so as not to pick up the whitespace in the definition element -->
-    			<xsl:apply-templates select="*"/>
-    		</pe:codeblock>
+					<xsl:value-of select="."/>
+    				<xsl:apply-templates/>
+    			</pe:codeblock>
 			</xsl:for-each>
 			<xsl:call-template name="show-footer"/>
 		</pe:page>
