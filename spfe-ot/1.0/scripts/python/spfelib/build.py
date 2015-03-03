@@ -85,9 +85,9 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
                         topic_files=topic_files)
 
     # Call the toc step
+    toc_output_dir = posixpath.join(config.content_set_build_dir, 'tocs')
+    synthesis_files = glob(resolve_output_dir + '/*')
     try:
-        toc_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('toc', None)]), 'out')
-        synthesis_files = glob(resolve_output_dir + '/*')
         _build_toc_step(config=config,
                         set_id=set_id,
                         set_type=set_type,
@@ -100,9 +100,9 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
 
 
     # Call the catalog step
+    catalog_output_dir = posixpath.join(config.content_set_build_dir, 'catalogs')
+    synthesis_files = glob(resolve_output_dir + '/*')
     try:
-        catalog_output_dir = posixpath.join(config.content_set_build_dir, 'catalogs')
-        synthesis_files = glob(resolve_output_dir + '/*')
         _build_toc_step(config=config,
                         set_id=set_id,
                         set_type=set_type,
