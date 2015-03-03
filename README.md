@@ -6,7 +6,6 @@ The SPFE Open Toolkit
 To make it run:
 
 Unpack the archive to a suitable location.
-Create an environment variable SPFEOT_HOME and set it to the location of the spfe-ot directory. For example: SPFEOT_HOME=/home/yourname/spfe/spfe-ot
 
 1. Add the spfe-ot directory to your path.
 2. If not already installed, install Java.
@@ -22,5 +21,5 @@ To build the SPFE docs:
 2. Enter: spfe build spfe-docs-config.xml final. 
 
 The build will create a directory spfebuild in your home directory. 
-The SPFE docs will be in /spfebuild/spfe-docs/output.
+The SPFE docs will be in {home}/spfebuild/spfe-docs/output.
 
