@@ -21,5 +21,5 @@ To build the SPFE docs:
 2. Enter: spfe build spfe-docs-config.xml final. 
 
 The build will create a directory spfebuild in your home directory. 
-The SPFE docs will be in {home}/spfebuild/spfe-docs/output.
+The SPFE docs will be in \{home\}/spfebuild/spfe-docs/output.
 
