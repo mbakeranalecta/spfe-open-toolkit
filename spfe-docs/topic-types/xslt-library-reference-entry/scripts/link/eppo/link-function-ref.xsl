@@ -62,18 +62,18 @@
 				<xsl:apply-templates/>
 				<xsl:text>&lt;/</xsl:text>
 				<xsl:value-of select="name()"/>
-				<xsl:text>&gt;&#xa;</xsl:text>
+				<xsl:text>&gt;</xsl:text>
 			</xsl:when>
 			<xsl:when test="child::*">
-				<xsl:text>&gt;&#xa;</xsl:text>
+				<xsl:text>&gt;</xsl:text>
 				<xsl:apply-templates/>
 				<xsl:value-of select="$indent"/>
 				<xsl:text>&lt;/</xsl:text>
 				<xsl:value-of select="name()"/>
-				<xsl:text>&gt;&#xa;</xsl:text>
+				<xsl:text>&gt;</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:text>/&gt;&#xa;</xsl:text>
+				<xsl:text>/&gt;</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
