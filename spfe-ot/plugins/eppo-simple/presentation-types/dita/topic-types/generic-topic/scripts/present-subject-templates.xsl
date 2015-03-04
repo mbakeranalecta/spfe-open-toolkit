@@ -51,7 +51,7 @@
 								<xsl:with-param name="target" select="$topic"/>
 								<xsl:with-param name="type">topic</xsl:with-param>
 								<xsl:with-param name="content" as="xs:string">
-									<xsl:value-of select="$catalogs//lc:target[@type='topic'][lc:key=$topic]/parent::lc:page/@title"/>
+									<xsl:value-of select="$catalogs//lc:target[lc:type='topic'][lc:key=$topic]/parent::lc:page/@title"/>
 								</xsl:with-param>
 								<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 							</xsl:call-template>
@@ -75,7 +75,7 @@
 					<xsl:with-param name="target" select="$topic-set"/>
 					<xsl:with-param name="type">topic-set</xsl:with-param>
 					<xsl:with-param name="content">
-						<xsl:value-of select="$catalogs//lc:target[@type='topic-set'][lc:key=$topic-set]/parent::lc:page/@title"/>
+						<xsl:value-of select="$catalogs//lc:target[lc:type='topic-set'][lc:key=$topic-set]/parent::lc:page/@title"/>
 					</xsl:with-param>
 					<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 				</xsl:call-template>
@@ -108,7 +108,7 @@
 	<xsl:template match="subject">
 		<xsl:variable name="content" select="normalize-space(.)"/>
 			<xsl:choose>
-				<xsl:when test="esf:target-exists(@key, @type)">
+				<xsl:when test="esf:target-exists(@key, lc:type)">
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="@key"/>
 						<xsl:with-param name="type" select="@type"/>
