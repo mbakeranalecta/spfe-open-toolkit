@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/catalog"
+         topic-set-id="spfe-development"
+         output-directory="spfe-development"
+         title="SPFE Open Toolkit 1.0 (alpha 1)"
+         time-stamp="2015-03-04T20:16:59.59-05:00">
+   <page local-name="adding-a-content-set"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#adding-a-content-set"
+         title="Adding a new content set"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic"
+         topic-type-alias="Task"
+         excerpt="A content set is a collection of one or more related topic sets. A content set generally contains all the content related to a single product, service, or site. ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Adding a new content set</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#adding-a-content-set</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>content set</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>{add} a {content set}</key>
+      </target>
+      <target type="config-setting">
+         <type>config-setting</type>
+         <key>/spfe</key>
+      </target>
+   </page>
+   <page local-name="adding-a-structure-to-your-project"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#adding-a-structure-to-your-project"
+         title="Adding a new structure"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic"
+         topic-type-alias="Task"
+         excerpt="A structure is a collection of document structure elements that work together to provide some distinct text structure such as a list or a table. A topic type is made  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Adding a new structure</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#adding-a-structure-to-your-project</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>structure</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>{add} a {structure}</key>
+      </target>
+      <target type="config-setting">
+         <type>config-setting</type>
+         <key>/structure</key>
+      </target>
+   </page>
+   <page local-name="adding-a-topic-set"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#adding-a-topic-set"
+         title="Adding a new topic set"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic"
+         topic-type-alias="Task"
+         excerpt="A topic set is a collection of related topics. ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Adding a new topic set</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#adding-a-topic-set</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>topic set</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>{adding} a {topic set}</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>add a topic set</key>
+      </target>
+   </page>
+   <page local-name="adding-a-topic"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#adding-a-topic"
+         title="Adding a new topic"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic"
+         topic-type-alias="Task"
+         excerpt="A topic is the basic unit of content that is presented to the user. If you are trying to create a reusable content building block that is not a full  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Adding a new topic</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#adding-a-topic</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>topic</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>{add} a {topic}</key>
+      </target>
+   </page>
+   <page local-name="background-build-system"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#background-build-system"
+         title="How the build system works"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="The SPFE build system has a modular architecture with four major stages, synthesis, presentation, formatting, and encoding. ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>How the build system works</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#background-build-system</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>build system</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>SPFE build</key>
+      </target>
+   </page>
+   <page local-name="configuration-file-overview"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic#configuration-file-overview"
+         title="Configuration file overview"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic"
+         topic-type-alias="Concept"
+         excerpt="The SPFE build system is configured by the SPFE configuration file. Configuration file determines the behavior of the SPFE build. The first stage of the build process is to run  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Configuration file overview</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic#configuration-file-overview</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>configuration file</key>
+      </target>
+      <target type="config-setting">
+         <type>config-setting</type>
+         <key>/spfe</key>
+      </target>
+   </page>
+   <page local-name="customizing-build"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#customizing-build"
+         title="Customizing the build"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic"
+         topic-type-alias="Task"
+         excerpt="The default SPFE build file (spfe-rules.xml) implements a standard order of build steps for each stage which will work for most topic sets. However, sometimes you will want to insert  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Customizing the build</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#customizing-build</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>customize build system</key>
+      </target>
+      <target type="config-setting">
+         <type>config-setting</type>
+         <key>/spfe</key>
+      </target>
+   </page>
+   <page local-name="directory-structure"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic#directory-structure"
+         title="Build directory structure"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic"
+         topic-type-alias="Concept"
+         excerpt="The build systems produces a directory structure inside the build directory. Understanding the build directory structure can help you debug problems with the build. ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Build directory structure</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic#directory-structure</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>build directory</key>
+      </target>
+      <target type="directory-name">
+         <type>directory-name</type>
+         <key>spfebuild</key>
+      </target>
+      <target type="directory-name">
+         <type>directory-name</type>
+         <key>resolve</key>
+      </target>
+      <target type="directory-name">
+         <type>directory-name</type>
+         <key>presentation</key>
+      </target>
+      <target type="directory-name">
+         <type>directory-name</type>
+         <key>extract</key>
+      </target>
+      <target type="directory-name">
+         <type>directory-name</type>
+         <key>merge</key>
+      </target>
+      <target type="file-name">
+         <type>file-name</type>
+         <key>spfebuild.xml</key>
+      </target>
+      <target type="file-name">
+         <type>file-name</type>
+         <key>image-list.txt</key>
+      </target>
+      <target type="directory-name">
+         <type>directory-name</type>
+         <key>config</key>
+      </target>
+      <target type="directory-name">
+         <type>directory-name</type>
+         <key>output</key>
+      </target>
+      <target type="directory-name">
+         <type>directory-name</type>
+         <key>topic-sets</key>
+      </target>
+      <target type="directory-name">
+         <type>directory-name</type>
+         <key>catalogs</key>
+      </target>
+      <target type="directory-name">
+         <type>directory-name</type>
+         <key>tocs</key>
+      </target>
+   </page>
+   <page local-name="feature-content-sets"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-content-sets"
+         title="Content Set"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="A content set is the full set of content built by a SPFE build. A content set may contain one or more topic sets. A content set is defined by  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Content Set</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-content-sets</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>content set</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>content sets</key>
+      </target>
+   </page>
+   <page local-name="feature-encoding"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-encoding"
+         title="Encoding"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="The encoding step is the final phase of the SPFE build process. It is responsible for creating a compiled deliverable, such as a PDF or EPub. ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Encoding</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-encoding</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>encoding</key>
+      </target>
+   </page>
+   <page local-name="feature-formatting"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-formatting"
+         title="Formatting"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="The formatting step is the third phase of the SPFE build process. It is responsible for creating the final appearance of a topic set in a particular media. ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Formatting</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-formatting</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>formatting</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>format process</key>
+      </target>
+   </page>
+   <page local-name="feature-fragments"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-fragments"
+         title="Fragments"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="Fragments are a content reuse feature of the EPPO-simple plugin. ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Fragments</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-fragments</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>fragment</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>fragments</key>
+      </target>
+   </page>
+   <page local-name="feature-how-linking-works"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-how-linking-works"
+         title="How linking works"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="Linking in SPFE is done using soft linking (though you can certainly define your own vocabularies that do hard linking if you want to). The EPPO-simple schema toolkit, and schemas  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>How linking works</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-how-linking-works</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>linking</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>soft linking</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>Creating {list topics}</key>
+      </target>
+   </page>
+   <page local-name="feature-catalogs"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-catalogs"
+         title="Link Catalogs"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="Link catalogs are a feature of the build system. They are generated during the synthesis stage. They are used to generate links between topics during the presentation stage. ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Link Catalogs</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-catalogs</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>link catalog</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>link catalogs</key>
+      </target>
+   </page>
+   <page local-name="feature-presentation"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-presentation"
+         title="Presentation"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="The presentation step is the second phase of the SPFE build process. It is responsible for creating the final text, organization, and behavior of the topics in a topic set.  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Presentation</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-presentation</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>presentation</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>presentation process</key>
+      </target>
+   </page>
+   <page local-name="feature-strings"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-strings"
+         title="Strings"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="Strings are a content reuse feature of the EPPO-simple plugin. ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Strings</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-strings</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>string</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>strings</key>
+      </target>
+   </page>
+   <page local-name="feature-structures"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-structures"
+         title="Structures"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="Structures are a topic type definition feature of the SPFE open toolkit. You can rapidly define a new topic type by plugging together existing structures or you can create your  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Structures</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-structures</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>structure</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>structures</key>
+      </target>
+   </page>
+   <page local-name="feature-subject-list-topics"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-subject-list-topics"
+         title="Subject List Topics"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="The soft linking feature of SPFE can often lead to more than one resource being identified as a possible link target for a particular subject affinity. There are several options  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Subject List Topics</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-subject-list-topics</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>subject list topics</key>
+      </target>
+   </page>
+   <page local-name="feature-synthesis"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-synthesis"
+         title="Synthesis"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="Synthesis is the first stage in the SPFE build process. The job of the synthesis stage is to create a collection of fully resolved topic files as input to the  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Synthesis</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-synthesis</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>synthesis</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>synthesis process</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>synthesis stage</key>
+      </target>
+   </page>
+   <page local-name="feature-topic-sets"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-topic-sets"
+         title="Topic sets"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic"
+         topic-type-alias="Feature"
+         excerpt="In SPFE, a content set consists of one of more topic sets. A topic set is a collection of topics, usually on a related subject. In a book-based environment, a  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Topic sets</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic#feature-topic-sets</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>topic set</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>topic sets</key>
+      </target>
+   </page>
+   <page local-name="getting-started"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic#getting-started"
+         title="Getting started with the SPFE build system"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic"
+         topic-type-alias="Concept"
+         excerpt="You can run the SPFE build system on Windows or Linux. To begin building your documents with SPFE, you need to download the SPFE Toolkit from GitHub at http://github.com/mbakeranalecta/spfe-open-toolkit. You  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Getting started with the SPFE build system</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic#getting-started</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>getting started</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>{install} {the SPFE Open Toolkit}</key>
+      </target>
+      <target type="file-name">
+         <type>file-name</type>
+         <key>spfe.bat</key>
+      </target>
+      <target type="file-name">
+         <type>file-name</type>
+         <key>spfe.sh</key>
+      </target>
+      <target type="tool-name">
+         <type>tool-name</type>
+         <key>spfe</key>
+      </target>
+   </page>
+   <page local-name="reuse-techniques"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic#reuse-techniques"
+         title="Reuse in SPFE and EPPO Simple"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic"
+         topic-type-alias="Concept"
+         excerpt="As a processing architecture, SPFE allows you to implement many kinds of reuse in your schemas and processing scripts. The SPFE architecture itself neither implements nor prevents any method of  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Reuse in SPFE and EPPO Simple</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic#reuse-techniques</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>reuse</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>fragments</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>strings</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>text objects</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>URI remapping</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>content reuse</key>
+      </target>
+   </page>
+   <page local-name="spfe-strings-processing"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#spfe-strings-processing"
+         title="Processing strings"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic"
+         topic-type-alias="Task"
+         excerpt="Strings are a means of inserting variable text into a topic. If you design a topic type, or write your own resolve code for a topic type, you may need  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Processing strings</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic#spfe-strings-processing</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>processing strings</key>
+      </target>
+      <target type="feature">
+         <type>feature</type>
+         <key>strings</key>
+      </target>
+   </page>
+   <page local-name="writing-schemas"
+         full-name="{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic#writing-schemas"
+         title="Writing Schemas"
+         topic-type="{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic"
+         topic-type-alias="Concept"
+         excerpt="Before you can create content, you must create a schema for that content. You may choose to use one of the schemas from the EPPO-simple schema set, which is supplied  ..."
+         link-priority="2">
+      <target type="topic">
+         <type>topic</type>
+         <label>Writing Schemas</label>
+         <key>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic#writing-schemas</key>
+      </target>
+      <target type="task">
+         <type>task</type>
+         <key>{writing} {schemas}</key>
+      </target>
+   </page>
+</catalog>
