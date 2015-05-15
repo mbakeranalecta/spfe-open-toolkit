@@ -100,6 +100,7 @@ Main template
 			
 			<!-- topic references -->
 			<target type="topic">
+				<type>topic</type>
 				<label>
 					<xsl:value-of select="@title"/>
 				</label>
@@ -111,42 +112,16 @@ Main template
 			<xsl:for-each select="descendant::*:index/*:entry[normalize-space(.) ne '']">
 				<!-- collect up all the references -->
 				<target type="{*:type}">
+					<type><xsl:value-of select="*:type"/></type>
 					<xsl:if test="*:namespace">					
 						<namespace>
 							<xsl:value-of select="*:namespace"/>
 						</namespace>
-					</xsl:if>					
-					<original-key>
-						<xsl:value-of select="translate(*:term[1], '{}', '')"/>
-						<xsl:if test="*:term[2]">
-							<xsl:call-template name="sf:warning">
-								<xsl:with-param name="message">only one term allowed per reference -
-									please split up your terms: term 1 is "<xsl:value-of
-										select="*:term[1]"/>", term 2 is "<xsl:value-of
-										select="*:term[2]"/>" </xsl:with-param>
-							</xsl:call-template>
-						</xsl:if>
-					</original-key>
-					<xsl:variable name="references">
-						<xsl:for-each-group select="*:term[normalize-space(.) ne '']" group-by=".">
-							<xsl:call-template name="construct-index-key">
-								<xsl:with-param name="key" select="."/>
-							</xsl:call-template>
-							<!-- get the synonyms for this key -->
-							<xsl:for-each select="$synonyms/synonyms/synonym[word=current()]/word">
-								<xsl:call-template name="construct-index-key">
-									<xsl:with-param name="key" select="."/>
-								</xsl:call-template>
-							</xsl:for-each>
-						</xsl:for-each-group>
-					</xsl:variable>
-					<!-- eliminate the duplicates -->
-					<xsl:for-each-group select="$references/key" group-by=".">
-						<xsl:sequence select="."/>
-					</xsl:for-each-group>
-					<xsl:sequence select="$references/key-set"/>
-					<xsl:for-each select="*:key">
-						<key><xsl:value-of select="."/></key>
+					</xsl:if>	
+					<xsl:for-each select="*:term">
+						<key>
+							<xsl:value-of select="."/>
+						</key>
 					</xsl:for-each>
 				</target>
 			</xsl:for-each>
@@ -154,16 +129,16 @@ Main template
 		</page>
 	</xsl:template>
 
-	<xsl:template name="construct-index-key">
+<!--	<xsl:template name="construct-index-key">
 		<xsl:param name="key" as="xs:string"/>
 		<xsl:choose>
 			<xsl:when test="matches($key, '\{([^\}]*)\}')">
 				<xsl:analyze-string select="$key" regex="\{{([^}}]*)\}}">
 					<xsl:matching-substring>
 						<xsl:choose>
-							<!-- if empty, ignore -->
+							<!-\- if empty, ignore -\->
 							<xsl:when test="regex-group(1)=''"/>
-							<!-- recognize {{} as escape sequence for { -->
+							<!-\- recognize {{} as escape sequence for { -\->
 							<xsl:when test="regex-group(1)='{'">
 								<xsl:value-of select="regex-group(1)"/>
 							</xsl:when>
@@ -183,7 +158,7 @@ Main template
 						</xsl:choose>
 					</xsl:matching-substring>
 					<xsl:non-matching-substring>
-						<!-- throw away any text that is not part if a key -->
+						<!-\- throw away any text that is not part if a key -\->
 					</xsl:non-matching-substring>
 				</xsl:analyze-string>
 			</xsl:when>
@@ -194,7 +169,7 @@ Main template
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
+-->
 	<!-- Suppress everything else, but process all templates to allow other link 
 		catalog scripts to include this script and process other elements to create 
 		other targets. -->
