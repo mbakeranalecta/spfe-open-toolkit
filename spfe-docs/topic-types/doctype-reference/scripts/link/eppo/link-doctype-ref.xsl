@@ -67,7 +67,7 @@
 				<xsl:otherwise>
 					<xsl:call-template name="sf:unresolved">
 						<xsl:with-param name="message"
-							select="concat('No content to link to on xml-element-name &quot;', $segment-xpath, '&quot;')"/>
+							select="concat('No content to link to on xml-element-name &quot;', $segment-xpath, '&quot;', ' in namespace ', $namespace )"/>
 						<xsl:with-param name="in" select="$current-page-name"/>
 					</xsl:call-template>
 					<xsl:value-of select="$segment"/>

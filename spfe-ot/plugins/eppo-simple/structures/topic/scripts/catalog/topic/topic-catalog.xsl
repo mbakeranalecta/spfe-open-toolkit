@@ -119,6 +119,14 @@ Main template
 						</namespace>
 					</xsl:if>	
 					<xsl:for-each select="*:term">
+						<term>
+							<xsl:value-of select="."/>
+						</term>
+						<key>
+							<xsl:value-of select="."/>
+						</key>
+					</xsl:for-each>
+					<xsl:for-each select="*:key">
 						<key>
 							<xsl:value-of select="."/>
 						</key>
