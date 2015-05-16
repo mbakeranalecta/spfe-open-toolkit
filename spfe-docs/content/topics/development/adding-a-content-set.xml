@@ -93,36 +93,36 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
         <doing>        
             <p>To add a content set, you create a <feature>content set configuration
                 file</feature>. A content set configuration file is a configuration file
-                that includes the <config-setting>/spfe/content-set</config-setting> element. You need
+                that includes the <config-setting>content-set</config-setting> element. You need
                 the following mandatory attributes and elements: </p>
             <ul>
                 <li>
-                    <p><config-setting>/spfe/content-set/content-set-id</config-setting>: The ID of the
+                    <p><config-setting>/content-set/content-set-id</config-setting>: The ID of the
                         content set. The build system uses the value to create a directory
                         name and it must be a valid directory name in the operating system that runs
                         the build system. </p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/content-set/title</config-setting>: The title of the
+                    <p><config-setting>/content-set/title</config-setting>: The title of the
                         content set to display in the output.</p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/content-set/topic-set-type-order</config-setting>: You can
+                    <p><config-setting>/content-set/topic-set-type-order</config-setting>: You can
                         declare topic sets to be of different types, such as <quotes>guide</quotes>,
                         or <quotes>reference</quotes>. (You do this in the <feature>topic set
                             configuration file</feature> in
-                        <config-setting>/spfe/topic-set/topic-set-type</config-setting>.) You can
+                        <config-setting>topic-set/topic-set-type</config-setting>.) You can
                         then use this setting to determine the order in which different topic set
                         types appear the content set table of contents. </p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/content-set/topic-sets</config-setting>: The list of
+                    <p><config-setting>/content-set/topic-sets</config-setting>: The list of
                         the topic sets to include in the content set. The value of the
-                        <config-setting>/spfe/content-set/topic-sets/topic-set/topic-set-id</config-setting>
+                        <config-setting>/content-set/topic-sets/topic-set/topic-set-id</config-setting>
                         setting should match the
-                        <config-setting>/spfe/topic-set/topic-set-id</config-setting> for the topic set.
+                        <config-setting>/topic-set/topic-set-id</config-setting> for the topic set.
                         The
-                        <config-setting>/spfe/content-set/topic-sets/topic-set/href</config-setting>
+                        <config-setting>/content-set/topic-sets/topic-set/href</config-setting>
                         attribute is the URL of the topic set configuration file.</p>
                 </li>    
             </ul>
