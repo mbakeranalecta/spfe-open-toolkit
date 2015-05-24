@@ -29,6 +29,6 @@
     </head>
     <body>
         <title>Content Set</title>
-        <p>A <feature>content set</feature> is the full set of content built by a SPFE build. A content set  may contain one or more <feature>topic sets</feature>. A content set is defined by a <feature>content set configuration file</feature>, using the <feature>configuration setting</feature> <config-setting>/spfe/content-set</config-setting>.</p>
+        <p>A <feature>content set</feature> is the full set of content built by a SPFE build. A content set  may contain one or more <feature>topic sets</feature>. A content set is defined by a <feature>content set configuration file</feature>, using the <feature>configuration setting</feature> <config-setting>/content-set</config-setting>.</p>
     </body>
 </feature-topic>

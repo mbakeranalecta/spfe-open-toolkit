@@ -357,20 +357,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="name" type="xs:string"/>
-        <xs:element name="dependencies" minOccurs="0">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="dependency">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="name" type="xs:string"/>
-                    <xs:element name="href" type="xs:anyURI"/>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="scripts" type="scripts-type"/>
       </xs:sequence>
     </xs:complexType>

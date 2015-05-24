@@ -91,13 +91,13 @@
                 configuration document. They include: </p>
             <ul>
                 <li>
-                    <p><config-setting>/spfe/topic-type/name</config-setting></p>
+                    <p><config-setting>topic-type/name</config-setting></p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/content-set/output-formats/output-format/name</config-setting></p>
+                    <p><config-setting>/content-set/output-formats/output-format/name</config-setting></p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/topic-set/topic-types/topic-type/name</config-setting></p>
+                    <p><config-setting>/topic-set/topic-types/topic-type/name</config-setting></p>
                 </li>
             </ul>
             <p>So, having a element name and namespace does not tell you what that element means, or

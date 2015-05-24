@@ -114,7 +114,7 @@
                 <p>-build.pdf-encode</p>
             </li>
         </ul>
-        <p>To make your new build file the build file used for your topic set build, you add a <config-setting>/spfe/topic-set/build-rules</config-setting> element to the configuration file for that topic set:</p>
+        <p>To make your new build file the build file used for your topic set build, you add a <config-setting>/topic-set/build-rules</config-setting> element to the configuration file for that topic set:</p>
 
 <codeblock>
     <![CDATA[

@@ -106,7 +106,7 @@
         
         <p>The configuration script also creates a directory for the content set being built,
             which is named using the content set id (configured in
-            <config-setting>/spfe/content-set/content-set-id</config-setting>). Inside this directory it
+            <config-setting>/content-set/content-set-id</config-setting>). Inside this directory it
             creates a directory named <directory-name>config</directory-name> which contains the
             consolidated <feature>configuration file</feature>, with the name
                 <file-name>spfe-config.xml</file-name>.</p>
@@ -164,7 +164,7 @@
             </tbody>
         </table>
         
-        <p>Inside the <directory-name>topic-sets</directory-name> directory, a directory is created for each topic set in the build, with its name matching the <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> of each topic set.</p>
+        <p>Inside the <directory-name>topic-sets</directory-name> directory, a directory is created for each topic set in the build, with its name matching the <config-setting xpath="/topic-set/topic-set-id">topic-set-id</config-setting> of each topic set.</p>
         
         <p>Inside each of these topic set directories, the following files and directories are created:</p>
         

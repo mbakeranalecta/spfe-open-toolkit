@@ -6,12 +6,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <name>comments</name>
-    <dependencies>
-        <dependency>
-            <name>paragraphs</name>
-            <href>../paragraphs/config.xml</href>
-        </dependency>
-    </dependencies>
     <scripts>
         <resolve>
             <script>
