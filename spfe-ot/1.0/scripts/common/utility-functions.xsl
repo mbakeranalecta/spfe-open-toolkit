@@ -462,7 +462,7 @@
 						<xsl:text>No singular topic type alias found for topic type </xsl:text>
 						<xsl:value-of select="$topic-type-name"/>
 						<xsl:text>. This setting should be defined in the configuration files at </xsl:text>
-						<xsl:text>/spfe/topic-type/aliases/singular.</xsl:text>
+						<xsl:text>/topic-type/aliases/singular.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
 				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->

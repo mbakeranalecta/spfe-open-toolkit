@@ -3300,20 +3300,12 @@
                     <local-strings>
                         <string id="object-to-be-processed">a topic type</string>
                     </local-strings>
-                    <p>A container for the list of scripts to be used to process <string-ref id-ref="object-to-be-processed"/> at each stage of the build process.
-                        Each build script for each stage should be written to use the standard SPFE
-                        interface for a script at that stage (which you can determine by examining
-                        the <file-name>spfe.rules</file-name> build rules file). Listing the full
-                        path of the script for each stage in this list will then cause that script
-                        to be called at the appropriate stage of the build process. If you need to
-                        change the interface to a script at a particular stage, you can override the
-                        build rule for that step by specifying a build rule with the same name as
-                        the one in <file-name>spfe.rules</file-name>. If you need to add additional
-                        steps, you can use the
-                        <config-setting>/topic-type/scripts/other</config-setting>. If you do this,
-                        you must override the normal sequence in which the scripts are run in your
-                        local build rules file (the one specified by
-                        <config-setting>/topic-set/build-rules</config-setting>).</p>
+                    <p>A container for the list of scripts to be used to process <string-ref
+                            id-ref="object-to-be-processed"/> at each step of the build process.
+                        Each build script for each step should be written to use the standard SPFE
+                        interface for a script. Listing the full path of the script for each step in
+                        this list will then cause that script to be called at the appropriate step
+                        of the build process. </p>
                     <p>You may specify more than one script for each stage. The build will create a
                         temporary script file that includes each of the scripts listed for each
                         stage. One, and only one, of the included scripts must have a template named

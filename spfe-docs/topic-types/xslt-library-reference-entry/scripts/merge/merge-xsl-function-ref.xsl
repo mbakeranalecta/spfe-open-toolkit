@@ -182,8 +182,8 @@ Main template
 										
 										<xsl:variable name="authored" select="$template-description/fd:parameters/fd:parameter[fd:name = $parameter-name]/fd:description"/>
 										<xsl:if test="not($authored)">
-											<xsl:call-template name="sf:warning">
-												<xsl:with-param name="message" select="concat('Parameter description not found &quot;', string($parameter-name), '&quot; for template ', $name)"/>
+											<xsl:call-template name="sf:unresolved">
+												<xsl:with-param name="message" select="concat('Parameter description not found for parameter &quot;', string($parameter-name), '&quot; for template &quot;', $name,'&quot;')"/>
 											</xsl:call-template>
 										</xsl:if>
 										

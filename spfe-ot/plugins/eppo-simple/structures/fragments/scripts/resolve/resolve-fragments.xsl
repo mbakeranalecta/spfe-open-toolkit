@@ -59,6 +59,7 @@
 						<xsl:value-of select="$fragment-id"/>
 						<xsl:text>.</xsl:text>
 					</xsl:with-param>
+					<xsl:with-param name="in" select="if (ancestor::ss:topic/@full-name ne '') then ancestor::ss:topic/@full-name else base-uri()"/>
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>

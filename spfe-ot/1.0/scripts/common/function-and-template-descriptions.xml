@@ -4,7 +4,7 @@
 <function-and-template-descriptions
     xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/authoring/xslt-function-and-template-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/xslt-library-reference-entry/schemas/authoring/xslt-function-and-template-descriptions.xsd">
     <head>
         <id>function-and-template-descriptions</id>
         <history>
@@ -131,7 +131,15 @@
         <function-description>
             <name>get-sources</name>
             <description>
-                <p>The <xslt-function-name>get-sources</xslt-function-name> is used to load a set of XML source files into a variable. It takes a string value that contains a set of file paths separated by semicolons. The function will fix directory separators charactres in the file paths. You should use the <xslt-function-name>get-sources</xslt-function-name> function to load sourse files, irrespective of whether you are laoding one file or several. This makes your script resiliant if the number of source files should change, and also allows for more flecibity in downstream processes, allowing them to produce one file or many.</p>
+                <p>The <xslt-function-name>get-sources</xslt-function-name> is used to load a set of
+                    XML source files into a variable. It takes a string value that contains a set of
+                    file paths separated by semicolons. The function will fix directory separators
+                    characters in the file paths. You should use the
+                    <xslt-function-name>get-sources</xslt-function-name> function to load source
+                    files, irrespective of whether you are loading one file or several. This makes
+                    your script resilient if the number of source files should change, and also
+                    allows for more flexibility in downstream processes, allowing them to produce
+                    one file or many.</p>
             </description>
             <return-value>
                 <description>
@@ -400,11 +408,9 @@
                     </description>
                 </parameter>
                 <parameter>
-                    <name>config</name>
+                    <name>topic-set-id</name>
                     <description>
-                        <fragment id="config-description">
-                            <p>A reference to the configuration file.</p>
-                        </fragment>
+                        <p>The id of the current topic set.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -448,9 +454,9 @@
                     </description>
                 </parameter>
                 <parameter>
-                    <name>config</name>
+                    <name>topic-set-id</name>
                     <description>
-                        <fragment-ref id-ref="config-description"/>
+                        <p>The id of the current topic set.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -505,7 +511,7 @@
                 <parameter>
                     <name>config</name>
                     <description>
-                        <fragment-ref id-ref="config-description"/>
+                        <fragment id="config-description"><p>The config variable.</p></fragment>
                     </description>
                 </parameter>
             </parameters>
@@ -578,9 +584,9 @@
             </return-value>
             <parameters>
                 <parameter>
-                    <name>topic-namespace-uri</name>
+                    <name>topic-type-name</name>
                     <description>
-                        <p>The <feature>namespace URI of the topic type schema</feature>. By default, the <feature>resolve step</feature>  places the namespace URI of the topic in the <xml-attribute-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic/@type">type</xml-attribute-name> attribute of the <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic">ss:topic</xml-element-name> wrapper element.</p>
+                        <p>The name of the <feature>topic type</feature>, as specified in its configuration file a <config-setting>/topic-type/name</config-setting>. By default, the <feature>resolve step</feature>  places the topic type name of the topic in the <xml-attribute-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic/@type">type</xml-attribute-name> attribute of the <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic">ss:topic</xml-element-name> wrapper element.</p>
                         <codeblock>
 &lt;ss:topic type="http://spfeopentoolkit.org/ns/eppo-simple"
     topic-type-alias="Task"
@@ -603,6 +609,75 @@
                     <description>
                         <fragment-ref id-ref="config-description"/>
                     </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>name-in-clark-notation</name>
+            <description>
+                <p>Returns the name of an element using Clark notation. Clark notation is a way of adding the namespace that an element belongs to its name. It consists of the namespace URI in curly braces prepended to the local name (without prefix).</p>
+            </description>
+            <return-value>
+                <description><p>The name of the element in Clark notation.</p></description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>element</name>
+                    <description><p>The element whose name it to be given in Clark notation. Note that the parameter value must be the element itself, not an element name.</p></description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>process-placeholders</name>
+            <description><p>
+                Processes a string to determine if it contains placeholder markup in the form of a string contained between "{" and "}". Recognizes "{{}"   as an escape sequence for a literal "{". Nesting of placeholders is not supported. The use of a literal "{" or "}" inside the placeholder string is not supported. The function does not attempt to detect or report these         conditions, however.
+                
+                $string is the string to process.
+                $literal-name is the element name to wrap around a the literal parts
+                of $string.
+                $placeholder-name is the element name to wrap around the placeholder
+                parts of $string.
+            </p></description>
+            <return-value>
+                <description><p>Returns an XML sequence in which the literal portions of the input string are wrapped in an element whose name is passed as the <code>literal-name</code> parameter and the placeholder portions of the string are wrapped in an element whose name is passed as the <code>placeholder-name</code>parameter.</p>
+                <p>For example, given the following call:</p>
+                <codeblock language="XSLT2">
+                    <![CDATA[
+sf:process-placeholders('foo{bar}bas','lit','var')
+]]>
+                </codeblock>
+                <p>The return value would be an XML sequence like this:</p>
+                <codeblock>
+                    <![CDATA[
+<lit>foo</lit><var>bar</var><lit>bas</lit>
+]]>
+                </codeblock></description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>string</name>
+                    <description><p>The string to be processed.</p></description>
+                </parameter>
+                <parameter>
+                    <name>literal-name</name>
+                    <description><p>The name of the XML element to use to wrap the literal portions of the string.</p></description>
+                </parameter>
+                <parameter>
+                    <name>placeholder-name</name>
+                    <description><p>The name of the XML element to use to wrap the placeholder portions of the string.</p></description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>has-content</name>
+            <description><p>Tests to see if an XML element has any text content.</p></description>
+            <return-value>
+                <description><p>True if the element has content. False otherwise.</p></description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>content</name>
+                    <description><p>The element to be tested.</p></description>
                 </parameter>
             </parameters>
         </function-description>
@@ -707,6 +782,53 @@
                 </parameter>
             </parameters>
         </function-description>
+        <function-description>
+            <name>local-to-url</name>
+            <description>
+                <p>Converts a local path expression into a file URL. Useful for calling XSLT functions that expect a URL.</p>
+            </description>
+            <return-value>
+                <description><p>The path converted to a file URL.</p></description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>local-path</name>
+                    <description><p>The local path to be converted.</p></description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>url-to-local</name>
+            <description>
+                <p>Converts a file URL into a local system path.</p>
+            </description>
+            <return-value>
+                <description><p>The file URL as a local system path.</p></description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>url</name>
+                    <description><p>The URL to be converted to a system path.</p></description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>escape-for-regex</name>
+            <description>
+                <p>Escapes a string value to make it suitable for inclusion in a regular expression as a literal string to be matched. </p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The string with any characters that are reserved characters in a regular expression replaced by the appropriate escape sequence.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>string</name>
+                    <description><p>The string to be escaped for use in a regular expression.</p></description>
+                </parameter>
+            </parameters>
+        </function-description>
         <template-description>
             <name>error</name>
             <description>
@@ -723,6 +845,12 @@
                     <name>message</name>
                     <description>
                         <p>The error message to report. The template outputs this message prefixed with "ERROR: ".</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>in</name>
+                    <description>
+                        <fragment id='in-parameter-description'><p>A string describing the location where the error occurred. This might be a location in a data file or in a script, depending on what would be most useful to the user in identifying and fixing the source of the problem.</p></fragment>
                     </description>
                 </parameter>
             </parameters>
@@ -763,6 +891,10 @@
                         <p>The message to be output. The string "Debug: " will be prefixed to the message.</p>
                     </description>
                 </parameter>
+                <parameter>
+                    <name>in</name>
+                    <description><fragment-ref id-ref="in-parameter-description"/></description>
+                </parameter>
             </parameters>
         </template-description>
         <template-description>
@@ -782,6 +914,10 @@
                         <p>The message to be output. The string "Warning: " will be prefixed to the message.</p>
                     </description>
                 </parameter>
+                <parameter>
+                    <name>in</name>
+                    <description><fragment-ref id-ref="in-parameter-description"/></description>
+                </parameter>
             </parameters>
         </template-description>
         <template-description>
@@ -800,6 +936,10 @@
                     <description>
                         <p>The message to be output. The string "Unresolved: No content to link to on subject " will be prefixed to the message.</p>
                     </description>
+                </parameter>
+                <parameter>
+                    <name>in</name>
+                    <description><fragment-ref id-ref="in-parameter-description"/></description>
                 </parameter>
             </parameters>
         </template-description>
