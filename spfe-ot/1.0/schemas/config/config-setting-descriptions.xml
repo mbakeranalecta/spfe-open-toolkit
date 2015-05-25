@@ -2688,22 +2688,6 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/topic-set/build-rules</xpath>
-            <description>
-                <p>Specifies the ANT <file-name>build rules</file-name> file to use to build the
-                    topic set.</p>
-            </description>
-            <values>
-                <default>
-                    <p>If this setting is not specified, the default
-                            <file-name>spfe-rules.xml</file-name> build rules file is used.</p>
-                </default>
-            </values>
-            <restrictions/>
-            <build-property>spfe.build-rules</build-property>
-            <attributes/>
-        </config-setting-description>
-        <config-setting-description>
             <xpath>/topic-set/condition-tokens</xpath>
             <description>
                 <p>Specifies the <feature>condition tokens</feature> that will be applied to this
@@ -2934,8 +2918,8 @@
                     <local-strings>
                         <string id="source-type"><feature>authored content</feature> files</string>
                     </local-strings>
-                    <p>A container element for a list of file selectors that select the <string-ref id-ref="source-type"/> to include in the build. This becomes an ANT
-                        <ant-element>files</ant-element> expression in the build file.</p>
+                    <p>A container element for a list of file selectors that select the <string-ref
+                            id-ref="source-type"/> to include in the build. </p>
                 </fragment>
                 <p>Authored content includes all textual sources created by authors. It includes
                         <feature>topics</feature>, <feature>text objects</feature>,
@@ -2955,9 +2939,8 @@
                     <local-strings>
                         <string id="source-type"><feature>authored content</feature> files</string>
                     </local-strings>
-                    <p>A path expression indicating which <string-ref id-ref="source-type"/> to
-                        include in the build.
-                        <comment-author-to-author>Need to state the rules for this expression now that we are using Python.</comment-author-to-author></p>
+                    <p>A <tool-name>glob</tool-name> expression indicating which <string-ref
+                            id-ref="source-type"/> to include in the build. </p>
                 </fragment>
             </description>
             <values/>
