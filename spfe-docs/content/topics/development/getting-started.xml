@@ -20,6 +20,12 @@
             <comment>Submit for review</comment>
             <status>Ready for technical review</status>
             </revision>
+            <revision>
+                <date>2015-05-25-04:00</date>
+                <author>mbaker</author>
+                <comment>Revised for python</comment>
+                <status>In progress</status>
+            </revision>
         </history>
         <index>
             <entry>
