@@ -10,7 +10,7 @@ Unpack the archive to a suitable location.
 1. Add the spfe-ot directory to your path.
 2. If not already installed, install Java.
 3. If not already installed, install Python 3.4 or later and add it to your path.
-4. If not already installed, install the Python lxml and nltk libraries. 
+4. If not already installed, install the Python lxml and regex libraries. 
 
 An easy way to install Python 3.4 and the required libraries is to install a packaged 
 version of Python that already includes the libraries, such as Anaconda (http://continuum.io/downloads#py34). 
