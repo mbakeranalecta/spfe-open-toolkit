@@ -54,18 +54,6 @@ Main content processing templates
 							</ss:anchor>
 						</ss:entry>
 					</xsl:for-each>
-					<xsl:if
-						test="normalize-space(build-property)">
-						<ss:entry>
-							<ss:type>spfe-build-property</ss:type>
-							<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/build</ss:namespace>
-							<ss:term>
-								<xsl:value-of
-									select="normalize-space(build-property)"
-								/>
-							</ss:term>
-						</ss:entry>
-					</xsl:if>
 				</ss:index>
 
 				<xsl:copy>

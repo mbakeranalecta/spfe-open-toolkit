@@ -91,13 +91,6 @@
             </aliases>
         </subject-type>
         <subject-type>
-            <id>spfe-build-property</id>
-            <aliases>
-                <singular>Build property</singular>
-                <plural>Build properties</plural>
-            </aliases>
-        </subject-type>
-        <subject-type>
             <id>feature</id>
             <aliases>
                 <singular>Feature</singular>

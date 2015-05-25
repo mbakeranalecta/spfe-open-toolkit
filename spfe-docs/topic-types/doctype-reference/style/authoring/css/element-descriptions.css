@@ -95,24 +95,6 @@ element-descriptions>body>element-description>description:before
     padding-top:1em;
 }
 
-element-descriptions>body>element-description>build-property:before
-{
-    display:block;
-    font-family:sans-serif;
-    background-color:#FFDEAD;
-    content: "If the configuration element becomes an ANT build propery, write the property name:";
-    font-size:small;
-    padding-top:1em;
-
-}
-
-element-descriptions>body>element-description>build-property
-{
-    display:block;
-    background-color:white;
-    -oxy-show-placeholder: always;
-}
-
 element-descriptions>body>element-description>include-behavior:before
 {
     display:block;

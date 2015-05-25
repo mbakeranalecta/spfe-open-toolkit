@@ -181,7 +181,7 @@ Main content processing templates
 
 						<xsl:when test="exists($authored-content/ed:description/*)">
 							<xsl:apply-templates
-								select="$authored-content/ed:description, $authored-content/ed:values, $authored-content/ed:restrictions, $authored-content/ed:build-property">
+								select="$authored-content/ed:description, $authored-content/ed:values, $authored-content/ed:restrictions">
 								<xsl:with-param name="in-scope-strings" select="$strings"
 									as="element()*" tunnel="yes"/>
 							</xsl:apply-templates>

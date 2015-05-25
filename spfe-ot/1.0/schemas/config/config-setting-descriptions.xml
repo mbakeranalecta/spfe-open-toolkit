@@ -40,7 +40,6 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
             <attributes>
                 <attribute>
                     <name>id</name>
@@ -60,7 +59,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -76,7 +75,7 @@
                         media.</p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -98,7 +97,7 @@
                         <config-setting>/topic-set/topic-set-id</config-setting>.</p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -109,7 +108,6 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>spfe.message-types</build-property>
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/content-set/object-sets</xpath><description>
@@ -124,11 +122,11 @@
                         the output. Choosing which object sets to include in the build is one way to
                             <task>manage reuse</task> or <task>create variant content</task>.</p>
                 </note>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/content-set/object-sets/object-set</xpath><description>
                 <p>A container element for the reference to an <feature>object set</feature>
                     configuration file. </p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/content-set/object-sets/object-set/href</xpath><description>
                 <fragment id="href-description">
                     <local-strings>
@@ -137,19 +135,19 @@
                     </local-strings>
                     <p>The href of a file containing <string-ref id-ref="file-type-with-article"/>.</p>
                 </fragment>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/content-set/object-sets/object-set/object-set-id</xpath><description>
                 <p>The object set id of a object set to be included in the current content set.
                     <comment-author-to-author>What does this correlate with?</comment-author-to-author></p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/content-set/object-types</xpath><description>
                 <p>A container element for a list of <feature>object types</feature> that are
                     included in a content set. </p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/content-set/object-types/object-type</xpath><description>
                 <p>A container element for a reference to an <feature>object type configuration
                         file</feature>. </p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/content-set/object-types/object-type/href</xpath><description>
                 <fragment-ref id-ref="href-description">
                     <local-strings>
@@ -157,7 +155,7 @@
                                 file</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/content-set/object-types/object-type/name</xpath>
             <description>
@@ -171,7 +169,7 @@
                         pointed to by the <config-setting>href</config-setting> setting.</p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -185,7 +183,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>name</name>
@@ -203,7 +201,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -213,7 +211,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -228,7 +226,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -238,21 +236,21 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/content-set/presentation-types</xpath><description>
                 <p>A container element for the configuration settings related to
                         <feature>presentation types</feature>. </p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/content-set/presentation-types/presentation-type</xpath><description>
                 <p>A container element for the setting related to a particular <feature>presentation
                         type</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/content-set/presentation-types/presentation-type/copy-to</xpath><description>
                 <p>A location to copy the output of the presentation stage to.
                     <comment-author-to-author>Likely to be deprecated.</comment-author-to-author></p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/content-set/presentation-types/presentation-type/href</xpath><description>
                 <fragment-ref id-ref="href-description">
                     <local-strings>
@@ -260,14 +258,14 @@
                                 configuration file</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/content-set/presentation-types/presentation-type/name</xpath><description>
                 <p>The name of a <feature>presentation type</feature> to be built for this
                         <feature>content set</feature>. The name is used in the configuration of an
                         <feature>output format</feature> to indicate which presentation type the
                     output format is to use as input. This is configured in
                     <config-setting>/output-format/presentation-type</config-setting>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/content-set/strings</xpath>
             <description>
@@ -285,7 +283,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -298,7 +296,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>id</name>
@@ -352,7 +350,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -362,7 +360,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -372,7 +370,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -382,7 +380,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -392,7 +390,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -403,7 +401,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -413,7 +411,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -425,7 +423,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -441,7 +439,7 @@
                         included in the doc set.</p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -452,7 +450,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -463,7 +461,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -478,7 +476,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -495,7 +493,7 @@
                         and should be a valid file name on all target operating systems.</p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -506,7 +504,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -517,7 +515,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -527,7 +525,6 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>spfe.wip-site.ftp.password</build-property>
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -537,7 +534,6 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>spfe.wip-site.ftp.url</build-property>
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -547,7 +543,6 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>spfe.wip-site.ftp.user</build-property>
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -557,7 +552,6 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>spfe.wip-site.path</build-property>
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -567,70 +561,70 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>spfe.wip-site.href</build-property>
+
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/file-type</xpath><description>
                 <p>The root element of a <feature>file type configuration file</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/name</xpath><description>
                 <p>The name of a <feature>file type</feature>.
                     <comment-author-to-author>What is this used for?</comment-author-to-author></p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts</xpath><description>
                 <fragment-ref id-ref="scripts-description">
                     <local-strings>
                         <string id="object-to-be-processed"> a file type</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/catalog</xpath><description>
                 <fragment-ref id-ref="catalog-script-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/catalog/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">a catalog</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/catalog/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/catalog/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/catalog/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/catalog/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/extract</xpath><description>
                 <fragment-ref id-ref="extract-script-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/extract/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">an extract</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/extract/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/extract/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/extract/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/extract/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/format</xpath><description>
                 <fragment-ref id-ref="scripts-format-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -651,48 +645,48 @@
                         <string id="script-type">a format</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/format/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/format/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/format/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/format/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/image-list</xpath><description>
                 <fragment-ref id-ref="scripts-image-list-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/image-list/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">an image list</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/image-list/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/image-list/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/image-list/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/image-list/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/link</xpath><description>
                 <fragment id="link-script-description">
                     <p>Container element for a list of link scripts. The link scripts are
                         responsible for generating links from one topic to another. They do this by
                         reading the topic catalog to find suitable topics to link to. </p>
                 </fragment>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -711,44 +705,44 @@
                         <string id="script-type">a link</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/link/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/link/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/link/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/link/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/merge</xpath><description>
                 <fragment-ref id-ref="scripts-merge-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/merge/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">a merge</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/merge/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/merge/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/merge/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/merge/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/other</xpath><description>
                 <fragment-ref id-ref="scripts-other-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>name</name>
                     <description>
@@ -762,22 +756,22 @@
                         <string id="script-type">an other</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/other/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/other/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/other/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/other/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/present</xpath><description>
                 <fragment-ref id-ref="scripts-present-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -795,84 +789,84 @@
                         <string id="script-type">a present</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/present/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/present/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/present/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/present/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/resolve</xpath><description>
                 <fragment-ref id-ref="resolve-script-description">
                     <local-strings>
                         <string id="thing-to-be-processed">a <feature>file type</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/resolve/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">a resolve</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/resolve/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/resolve/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/resolve/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/resolve/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/toc</xpath><description>
                 <fragment-ref id-ref="toc-script-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/toc/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">a TOC</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/toc/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/toc/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/toc/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/file-type/scripts/toc/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set</xpath><description>
                 <p>The root element of an <feature>object set configuration file</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/object-set-id</xpath><description>
                 <p>The id of an <feature>object set</feature> described by a <feature>object set
                         configuration
                     file</feature>.<comment-author-to-author>How is this used?</comment-author-to-author></p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/object-types</xpath><description>
                 <p>A container of a list of <feature>object types</feature> in an <feature>object
                         set</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/object-types/object-type</xpath><description>
                 <p>A container element for a list of <feature>object type configuration
                         files</feature> that describe the <feature>object types</feature> in this
                         <feature>object set</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/object-types/object-type/href</xpath><description>
                 <fragment-ref id-ref="href-description">
                     <local-strings>
@@ -880,44 +874,44 @@
                                 file</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/object-types/object-type/name</xpath><description>
                 <p>The name of an <feature>object type</feature> to be included in this
                         <feature>object set</feature>.
                     <comment-author-to-author>What does this value match with?</comment-author-to-author></p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/sources</xpath><description>
                 <p>A container element for a list of source files for the objects in this
                         <feature>object set</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/sources/authored-content</xpath><description>
                 <p>A container element for a list of <feature>authored content</feature> files to be
                     included in this <feature>object set</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/sources/authored-content/include</xpath><description>
                 <fragment-ref id-ref="sources-include-description">
                     <local-strings>
                         <string id="source-type"><feature>authored content</feature> files</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/sources/graphics</xpath><description>
                 <fragment-ref id-ref="sources-type-description">
                     <local-strings>
                         <string id="sources-type"><feature>graphics</feature> files</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/sources/graphics/include</xpath><description>
                 <fragment-ref id-ref="sources-include-description">
                     <local-strings>
                         <string id="source-type">graphics</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/sources/other</xpath><description>
                 <fragment-ref id-ref="scripts-other-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>name</name>
                     <description>
@@ -931,21 +925,21 @@
                         <string id="source-type">other files</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/sources/sources-to-extract-content-from</xpath><description>
                 <fragment-ref id-ref="sources-type-description">
                     <local-strings>
                         <string id="sources-type">files to extract content from</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-set/sources/sources-to-extract-content-from/include</xpath><description>
                 <fragment-ref id-ref="sources-include-description">
                     <local-strings>
                         <string id="source-type">files to extract content from</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/object-type</xpath>
             <description>
@@ -954,13 +948,13 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/object-type/name</xpath><description>
                 <p>The name of the object type defined by this configuration file.
                     <comment-author-to-author>How is this used?</comment-author-to-author></p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/object-type/scripts</xpath>
             <description>
@@ -972,7 +966,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -985,7 +979,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -999,7 +993,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1009,7 +1003,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1019,7 +1013,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1029,7 +1023,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1039,7 +1033,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1055,7 +1049,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1069,7 +1063,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1079,7 +1073,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1089,7 +1083,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1099,7 +1093,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1109,7 +1103,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1119,7 +1113,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>type</name>
@@ -1144,7 +1138,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1154,7 +1148,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1164,7 +1158,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1174,7 +1168,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1184,7 +1178,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1194,7 +1188,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1208,7 +1202,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1218,7 +1212,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1228,7 +1222,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1238,7 +1232,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1248,12 +1242,12 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/link</xpath><description>
                 <fragment-ref id-ref="link-script-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -1271,41 +1265,41 @@
                         <string id="script-type">a link</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/link/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/link/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/link/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/link/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/merge</xpath><description>
                 <fragment-ref id-ref="scripts-merge-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/merge/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">a merge</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/merge/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/merge/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/merge/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/merge/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/object-type/scripts/other</xpath>
             <description>
@@ -1313,7 +1307,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>name</name>
@@ -1334,7 +1328,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1344,7 +1338,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1354,7 +1348,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1364,7 +1358,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1374,12 +1368,12 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/object-type/scripts/present</xpath><description>
                 <fragment-ref id-ref="scripts-present-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -1402,7 +1396,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1412,7 +1406,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1422,7 +1416,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1432,7 +1426,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1442,7 +1436,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1457,7 +1451,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1471,7 +1465,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1481,7 +1475,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1491,7 +1485,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1501,7 +1495,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1511,7 +1505,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1521,7 +1515,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1535,7 +1529,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1545,7 +1539,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1555,7 +1549,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1565,7 +1559,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1575,7 +1569,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/object-type/structures</xpath><description>
@@ -1586,7 +1580,7 @@
                     <p>A container element for a list of <feature>structures</feature> used by this
                             <string-ref id-ref="container-type"/>.</p>
                 </fragment>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/structures/structure</xpath><description>
                 <fragment id="structures-structure-description">
                     <local-strings>
@@ -1596,7 +1590,7 @@
                         <config-setting>href</config-setting> of a structure configuration file for
                         a structure to be included in this <string-ref id-ref="container-type"/>.</p>
                 </fragment>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/structures/structure/href</xpath><description>
                 <fragment-ref id-ref="href-description">
                     <local-strings>
@@ -1604,20 +1598,20 @@
                                 file</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/structures/structure/name</xpath><description>
                 <p>The name of a structure used by this object type.
                     <comment-author-to-author>How it is used?</comment-author-to-author></p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/structures/structure/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/structures/structure/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/object-type/structures/structure/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/output-format</xpath>
             <description>
@@ -1626,7 +1620,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1636,7 +1630,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1658,7 +1652,7 @@
                     </p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1672,7 +1666,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1685,7 +1679,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1699,7 +1693,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1709,7 +1703,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1719,7 +1713,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1729,7 +1723,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1739,7 +1733,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1753,7 +1747,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1767,7 +1761,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1777,7 +1771,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1787,7 +1781,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1797,7 +1791,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1807,7 +1801,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1817,7 +1811,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>type</name>
@@ -1842,7 +1836,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1852,7 +1846,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1862,7 +1856,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1872,7 +1866,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1882,7 +1876,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1892,7 +1886,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1906,7 +1900,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1916,7 +1910,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1926,7 +1920,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1936,7 +1930,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -1946,12 +1940,12 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/link</xpath><description>
                 <fragment-ref id-ref="link-script-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -1969,41 +1963,41 @@
                         <string id="script-type">a link</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/link/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/link/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/link/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/link/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/merge</xpath><description>
                 <fragment-ref id-ref="scripts-merge-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/merge/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">a merge</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/merge/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/merge/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/merge/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/merge/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/output-format/scripts/other</xpath>
             <description>
@@ -2011,7 +2005,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>name</name>
@@ -2032,7 +2026,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2042,7 +2036,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2052,7 +2046,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2062,7 +2056,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2072,12 +2066,12 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/output-format/scripts/present</xpath><description>
                 <fragment-ref id-ref="scripts-present-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -2100,7 +2094,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2110,7 +2104,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2120,7 +2114,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2130,7 +2124,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2140,7 +2134,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2155,7 +2149,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2169,7 +2163,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2179,7 +2173,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2189,7 +2183,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2199,7 +2193,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2209,7 +2203,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2219,7 +2213,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2233,7 +2227,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2243,7 +2237,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2253,7 +2247,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2263,7 +2257,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2273,7 +2267,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2284,7 +2278,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2299,131 +2293,131 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/presentation-type</xpath><description>
                 <p>The root element of a <feature>presentation type</feature> configuration file.
                 </p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/name</xpath><description>
                 <p>The name of a presentation type. </p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/scripts</xpath><description>
                 <p>A container elements for a list of scripts for a particular <feature>presentation
                         type</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/scripts/script</xpath><description>
                 <p>A container for the configuration of a <feature>present script</feature> for this
                         <feature>presentation type</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/scripts/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/scripts/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/scripts/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/scripts/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/topic-types</xpath><description>
                 <p>A container element for the configuration of a <feature>topic type</feature> for
                     this <feature>presentation type</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/topic-types/topic-type</xpath><description>
                 <p>A container element for the configuration of scripts used for processing a
                     particular <feature>topic type</feature> for this <feature>presentation
                         type</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/topic-types/topic-type/name</xpath><description>
                 <p>The name of the <feature>topic type</feature> to  be configured for this
                         <feature>presentation type</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/topic-types/topic-type/scripts</xpath><description>
                 <p>A container element for a list of scripts used for processing this <feature>topic
                         type</feature> for this <feature>presentation type</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/topic-types/topic-type/scripts/script</xpath><description>
                 <p>A container for the configuration of a <feature>present script</feature> for this
                         <feature>topic type</feature> for this <feature>presentation
                     type</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/topic-types/topic-type/scripts/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/topic-types/topic-type/scripts/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/topic-types/topic-type/scripts/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/presentation-type/topic-types/topic-type/scripts/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure</xpath><description>
                 <p>A container element for the configuration of a <feature>structure</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/name</xpath><description>
                 <p>The name of the structure defined by this structure configuration file.
                     <comment-author-to-author>How it is used?</comment-author-to-author></p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts</xpath><description>
                 <fragment-ref id-ref="scripts-description">
                     <local-strings>
                         <string id="object-to-be-processed"> a structure</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/catalog</xpath><description>
                 <fragment-ref id-ref="catalog-script-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/catalog/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">a link catalog</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/catalog/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/catalog/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/catalog/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/catalog/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/extract</xpath><description>
                 <fragment-ref id-ref="extract-script-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/extract/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">an extract</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/extract/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/extract/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/extract/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/extract/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/format</xpath><description>
                 <fragment-ref id-ref="scripts-format-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -2441,44 +2435,44 @@
                         <string id="script-type">a format</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/format/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/format/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/format/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/format/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/image-list</xpath><description>
                 <fragment-ref id-ref="scripts-image-list-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/image-list/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">an image list</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/image-list/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/image-list/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/image-list/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/image-list/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/link</xpath><description>
                 <fragment-ref id-ref="link-script-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -2496,44 +2490,44 @@
                         <string id="script-type">a link</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/link/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/link/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/link/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/link/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/merge</xpath><description>
                 <fragment-ref id-ref="scripts-merge-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/merge/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">a merge</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/merge/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/merge/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/merge/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/merge/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/other</xpath><description>
                 <fragment-ref id-ref="scripts-other-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>name</name>
                     <description>
@@ -2547,22 +2541,22 @@
                         <string id="script-type">an other</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/other/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/other/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/other/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/other/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/present</xpath><description>
                 <fragment-ref id-ref="scripts-present-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -2580,67 +2574,67 @@
                         <string id="script-type">a present</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/present/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/present/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/present/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/present/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/resolve</xpath><description>
                 <fragment-ref id-ref="resolve-script-description">
                     <local-strings>
                         <string id="thing-to-be-processed">a <feature>structure</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/resolve/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">a resolve</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/resolve/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/resolve/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/resolve/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/resolve/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/toc</xpath><description>
                 <fragment-ref id-ref="toc-script-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/toc/script</xpath><description>
                 <fragment-ref id-ref="script-description">
                     <local-strings>
                         <string id="script-type">a TOC</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/toc/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/toc/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/toc/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/scripts/toc/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/structures</xpath><description>
                 <fragment-ref id-ref="structure-description">
                     <local-strings>
@@ -2648,14 +2642,14 @@
                     </local-strings>
                 </fragment-ref>
                 <p>Structures are recursive. That is, a structure may contain other structures. </p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/structures/structure</xpath><description>
                 <fragment-ref id-ref="structures-structure-description">
                     <local-strings>
                         <string id="container-type">structure</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/structures/structure/href</xpath><description>
                 <fragment-ref id-ref="href-description">
                     <local-strings>
@@ -2663,20 +2657,20 @@
                                 file</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/structures/structure/name</xpath><description>
                 <p>The name of a structure used by this structure.
                     <comment-author-to-author>How it is used?</comment-author-to-author></p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/structures/structure/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/structures/structure/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/structure/structures/structure/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/topic-set</xpath>
             <description>
@@ -2684,7 +2678,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2695,7 +2689,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2708,7 +2702,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2721,7 +2715,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2742,7 +2736,7 @@
                         type.</p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2763,7 +2757,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2783,13 +2777,13 @@
                         file.</p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/topic-set/object-types/object-type/name</xpath><description>
                 <p>The name of an <feature>object type</feature> to be included in this
                         <feature>topic set</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/topic-set/other</xpath>
             <description>
@@ -2803,7 +2797,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>name</name>
@@ -2827,7 +2821,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2839,7 +2833,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2852,7 +2846,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2879,7 +2873,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2896,7 +2890,7 @@
                         <config-setting>/output-format/presentation-type</config-setting>.</p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2908,7 +2902,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2929,7 +2923,6 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>topics</build-property>
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2945,7 +2938,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2959,7 +2952,6 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>graphics</build-property>
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2973,7 +2965,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -2987,7 +2979,6 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>other.{name}</build-property>
             <attributes>
                 <attribute>
                     <name>name</name>
@@ -3008,7 +2999,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3022,7 +3013,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3036,7 +3027,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3054,7 +3045,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3064,7 +3055,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>id</name>
@@ -3085,7 +3076,6 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property>spfe.topic-set-id</build-property>
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3107,7 +3097,7 @@
                 </default>
             </values>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3125,7 +3115,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3153,7 +3143,7 @@
                         type, which may result in unanticipated effects in the output. </p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3172,7 +3162,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3192,13 +3182,13 @@
                         file.</p>
                 </restriction>
             </restrictions>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/topic-set/topic-types/topic-type/name</xpath><description>
                 <p>The name of a <feature>topic type</feature> to be included in this <feature>topic
                         set</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/topic-type</xpath>
             <description>
@@ -3206,7 +3196,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3221,7 +3211,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3236,7 +3226,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3268,17 +3258,17 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/topic-type/file-types</xpath><description>
                 <p>A container element for a list of <feature>file types</feature> included in this
                         <feature>topic set</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/file-types/file-type</xpath><description>
                 <p>A container element for the configuration of a <feature>file type</feature>
                     included in this <feature>topic set</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/file-types/file-type/href</xpath><description>
                 <fragment-ref id-ref="href-description">
                     <local-strings>
@@ -3286,23 +3276,23 @@
                                 file</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/file-types/file-type/name</xpath><description>
                 <p>The name of the <feature>file type</feature> to be included in this
                         <feature>topic type</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/file-types/file-type/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/file-types/file-type/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/file-types/file-type/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/name</xpath><description>
                 <p>The name of this <feature>topic type</feature>.</p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/topic-type/scripts</xpath>
             <description>
@@ -3342,7 +3332,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3362,7 +3352,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3376,7 +3366,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3386,7 +3376,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3396,7 +3386,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3406,7 +3396,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3416,7 +3406,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3428,7 +3418,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3443,7 +3433,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3460,7 +3450,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3481,7 +3471,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3495,7 +3485,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3508,7 +3498,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3521,7 +3511,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>type</name>
@@ -3546,7 +3536,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3556,7 +3546,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3566,7 +3556,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3576,7 +3566,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3586,7 +3576,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3603,7 +3593,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3617,7 +3607,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3627,7 +3617,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3637,7 +3627,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3647,7 +3637,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3657,12 +3647,12 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/topic-type/scripts/link</xpath><description>
                 <fragment-ref id-ref="link-script-description"/>
-            </description><values/><restrictions/><build-property/><attributes>
+            </description><values/><restrictions/><attributes>
                 <attribute>
                     <name>type</name>
                     <description>
@@ -3680,19 +3670,19 @@
                         <string id="script-type">a link</string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/scripts/link/script/href</xpath><description>
                 <fragment-ref id-ref="script-href-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/scripts/link/script/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/scripts/link/script/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/scripts/link/script/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-to-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/topic-type/scripts/merge</xpath>
             <description>
@@ -3704,7 +3694,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3718,7 +3708,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3728,7 +3718,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3738,7 +3728,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3748,7 +3738,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3758,7 +3748,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3771,7 +3761,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>name</name>
@@ -3790,7 +3780,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3800,7 +3790,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3810,7 +3800,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3820,7 +3810,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3830,7 +3820,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3844,7 +3834,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes>
                 <attribute>
                     <name>type</name>
@@ -3869,7 +3859,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3879,7 +3869,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3889,7 +3879,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3899,7 +3889,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         
@@ -3910,7 +3900,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3930,7 +3920,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3944,7 +3934,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3954,7 +3944,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3964,7 +3954,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3974,7 +3964,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3984,7 +3974,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -3997,7 +3987,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -4011,7 +4001,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -4021,7 +4011,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -4031,7 +4021,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -4041,7 +4031,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description>
@@ -4051,7 +4041,7 @@
             </description>
             <values/>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
         <config-setting-description><xpath>/topic-type/structures</xpath><description>
@@ -4060,14 +4050,14 @@
                         <string id="container-type"><feature>topic-type</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/structures/structure</xpath><description>
                 <fragment-ref id-ref="structures-structure-description">
                     <local-strings>
                         <string id="container-type"><feature>topic type</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/structures/structure/href</xpath><description>
                 <fragment-ref id-ref="href-description">
                     <local-strings>
@@ -4075,20 +4065,20 @@
                                 file</feature></string>
                     </local-strings>
                 </fragment-ref>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/structures/structure/name</xpath><description>
                 <p>The name of a structure used by this object type.
                     <comment-author-to-author>How it is used?</comment-author-to-author></p>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/structures/structure/rewrite-namespace</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/structures/structure/rewrite-namespace/from</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-from-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description><xpath>/topic-type/structures/structure/rewrite-namespace/to</xpath><description>
                 <fragment-ref id-ref="rewrite-namespace-description"/>
-            </description><values/><restrictions/><build-property/><attributes/></config-setting-description>
+            </description><values/><restrictions/><attributes/></config-setting-description>
         <config-setting-description>
             <xpath>/topic-type/topic-type-link-priority</xpath>
             <description>
@@ -4104,7 +4094,7 @@
                 </default>
             </values>
             <restrictions/>
-            <build-property/>
+            
             <attributes/>
         </config-setting-description>
     </body>
