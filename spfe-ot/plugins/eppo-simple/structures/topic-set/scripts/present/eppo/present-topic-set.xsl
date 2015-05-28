@@ -31,7 +31,7 @@
 <xsl:variable name="objects" select="sf:get-sources($object-files, 'Loading text objects file:')"/>
 	
 
-<xsl:variable name="topic-set-title" select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+	<xsl:variable name="topic-set-title" select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:title"/>
 <!--  
 =============
 Main template
@@ -43,7 +43,7 @@ Main template
 		<pe:pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/eppo/schemas/presentation-eppo.xsd">
 			<pe:title>
-				<xsl:value-of select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+				<xsl:value-of select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:title"/>
 			</pe:title>
 				
 			<!-- process the topics --> 

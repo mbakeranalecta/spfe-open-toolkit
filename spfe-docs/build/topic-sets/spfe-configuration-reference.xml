@@ -6,6 +6,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set-id>spfe-configuration-reference</topic-set-id>
+    <title>SPFE Configuration Reference</title>
     <topic-set-type>reference</topic-set-type>
 
     <topic-types>
@@ -36,10 +37,6 @@
 
     <default-topic-scope>spfe</default-topic-scope>
     <default-subject-scope>spfe</default-subject-scope>
-
-    <strings>
-        <string id="eppo-simple-topic-set-title">SPFE Configuration Settings</string>
-    </strings>
 
     <other name="schema-file">${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</other>
 </topic-set>

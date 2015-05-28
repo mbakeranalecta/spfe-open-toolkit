@@ -89,11 +89,67 @@
         <pe:page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
             <pe:title><xsl:value-of select="$config/config:content-set/config:title"/> Contents</pe:title>       
-            <pe:ul>
-                <xsl:apply-templates select="$toc"/>
-            </pe:ul>
+
+                <xsl:apply-templates select="$config/config:content-set"/>
+            
             <xsl:call-template name="show-footer"/>		
         </pe:page>
+    </xsl:template>
+    
+    <xsl:template match="config:content-set">
+        <!-- 
+        Do any topic sets belong to groups?
+            If not, then just list all the topics sets alphabetically.
+        Do all topic sets belong to groups?
+            If not, generate error.
+        Recursively for each level of grouping:
+            List all topics in this group in alphabetical order
+            List all groups in this group in alphabetical order
+        
+        -->
+        <xsl:choose>
+            <xsl:when test="not(config:topic-set/config:grouping != '')">
+                
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="config:topic-set/config:grouping = ''">
+                    <xsl:call-template name="sf:error">
+                        <xsl:with-param name="message">Inconsistent topic set grouping found in content set configuration. Either all topics sets should be assigned to a group or none.</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:if>
+                <pe:tree class="toc">
+                    <xsl:call-template name="group-topic-sets">
+                        <xsl:with-param name="topic-sets" select="config:topic-set"/>
+                        <xsl:with-param name="level">1</xsl:with-param>
+                    </xsl:call-template>
+                </pe:tree>
+            </xsl:otherwise>
+        </xsl:choose>
+     </xsl:template>
+    
+    <xsl:template name="group-topic-sets">
+        <xsl:param name="topic-sets"/>
+        <xsl:param name="level" as="xs:integer"/>
+        <xsl:for-each-group select="$topic-sets" group-by="tokenize(config:grouping,'\s*;\s*')[$level]">
+            <pe:branch state="open">
+                <pe:content><xsl:value-of select="current-grouping-key()"/></pe:content>
+                <xsl:for-each select="current-group()/.">
+                    <xsl:sort select="config:title"/>
+                    <xsl:if test="not(tokenize(config:grouping,'\s*;\s*')[$level+1])">
+                        <pe:branch>
+                            <pe:content>
+                                <pe:link href="{normalize-space(config:output-directory)}{if (normalize-space(config:output-directory) = '') then '' else '/'}{normalize-space(config:topic-set-id)}-toc.html"><xsl:value-of select="config:title"/></pe:link>
+                            </pe:content>
+                        </pe:branch>
+                    </xsl:if>
+                </xsl:for-each>
+                <xsl:call-template name="group-topic-sets">
+                    <xsl:with-param name="topic-sets" select="current-group()"/>
+                    <xsl:with-param name="level" select="$level+1"/>
+                </xsl:call-template>
+                
+            </pe:branch>
+        </xsl:for-each-group>
     </xsl:template>
     
     <xsl:template match="toc[@topic-set-id ne $config/config:content-set/config:home-topic-set]">

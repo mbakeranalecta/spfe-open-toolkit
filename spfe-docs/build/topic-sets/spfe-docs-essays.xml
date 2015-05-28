@@ -6,6 +6,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set-id>spfe-docs-essays</topic-set-id>
+    <title>Essays on SPFE</title>
     <topic-set-type>guide</topic-set-type>
 
     <topic-types>
@@ -35,8 +36,5 @@
 
     <default-topic-scope>spfe</default-topic-scope>
     <default-subject-scope>spfe</default-subject-scope>
-    <strings>
-        <string id="eppo-simple-topic-set-title">Essays on SPFE</string>
-    </strings>
 </topic-set>
 

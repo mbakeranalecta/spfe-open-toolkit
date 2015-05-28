@@ -8,6 +8,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="topic-set-id" type="xs:string"/>
+        <xs:element name="title"/>
         <xs:element name="topic-set-type" type="xs:string"/>
         <xs:element minOccurs="0" name="topic-set-link-priority" type="xs:int"/>
         <xs:element name="topic-types">
@@ -134,6 +135,8 @@
                   <xs:sequence>
                     <xs:element name="topic-set-id" type="xs:NCName"/>
                     <xs:element name="href" type="xs:anyURI"/>
+                    <xs:element minOccurs="0" name="title"/>
+                    <xs:element minOccurs="0" name="grouping"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>

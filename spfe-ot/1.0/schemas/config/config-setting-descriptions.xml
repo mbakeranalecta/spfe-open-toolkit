@@ -417,8 +417,8 @@
         <config-setting-description>
             <xpath>/content-set/topic-set-type-order</xpath>
             <description>
-                <p>Defines the order in which topic set types will be listed in the <feature>doc
-                        set</feature>
+                <p>Defines the order in which topic set types will be listed in the 
+                    <feature>content set</feature>
                     <feature>table of contents</feature>.</p>
             </description>
             <values/>
@@ -4087,6 +4087,49 @@
             </values>
             <restrictions/>
             
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/content-set/topic-sets/topic-set/title</xpath>
+            <description>
+                <p>The title of a <feature>topic set</feature> is normally defined in the
+                        <feature>topic set configuration file</feature> in the setting
+                    <config-setting>/topic-set/title</config-setting>. However, the <feature>content
+                        set configuration file</feature> can override the title specified in the
+                    topic set configuration by defining this setting. </p>
+            </description>
+            <values/>
+            <restrictions/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/topic-set/title</xpath>
+            <description>
+                <p>The title of this <feature>topic set</feature>. This value can be overridden by
+                    the importing <feature>content set configuration file</feature> in the setting
+                    <config-setting>/content-set/topic-sets/topic-set/title</config-setting>.</p>
+            </description>
+            <values/>
+            <restrictions/>
+            <attributes/>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/content-set/topic-sets/topic-set/grouping</xpath>
+            <description>
+                <p>You can use this setting to assign a topic set to a group within the content set.
+                    Downstream processing is free to use the group information for any purpose, but
+                    the typical, and default, behavior is to use it to create a hierarchical table
+                    of contents for the content set. </p>
+                <p>By default, the name of groups are used directly as group names in the table of
+                    contents. </p>
+                <p>Groups may be nested to an arbitrary depth. To include a topic set in a nested
+                    group, separate the group names with semicolons. For example, in the SPFE docs,
+                    the SPFE Configuration Reference is assigned to the group SPFE and the sub-group
+                    References using the grouping value:</p>
+                <codeblock language="XML">&lt;grouping>SPFE; References&lt;/grouping></codeblock>
+            </description>
+            <values/>
+            <restrictions/>
             <attributes/>
         </config-setting-description>
     </body>

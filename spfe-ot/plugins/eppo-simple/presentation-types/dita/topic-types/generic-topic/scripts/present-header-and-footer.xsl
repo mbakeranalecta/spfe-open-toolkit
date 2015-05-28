@@ -11,7 +11,7 @@
         <xsl:variable name="topic-type" select="ancestor::ss:topic/@type"/>
 
         <xsl:variable name="topic-set-title"
-            select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+            select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:title"/>
 
         <xsl:variable name="content-set-title" select="$config/config:content-set/config:title"/>
 

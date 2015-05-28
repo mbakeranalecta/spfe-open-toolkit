@@ -39,8 +39,5 @@
 
     <default-topic-scope>eppo</default-topic-scope>
     <default-subject-scope>eppo</default-subject-scope>
-    <strings>
-        <string id="eppo-simple-topic-set-title">EPPO Graphic Record Reference</string>
-    </strings>
 </topic-set>
 

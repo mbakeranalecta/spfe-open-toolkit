@@ -26,6 +26,7 @@
         select="concat($content-set-build-root-directory, '/build')"/>
     <xsl:variable name="content-set-output"
         select="concat($content-set-build-root-directory, '/output')"/>
+    <xsl:variable name="content-set-config" select="/"/>
 
     <xsl:function name="spfe:resolve-defines" as="xs:string">
         <xsl:param name="value"/>
@@ -95,11 +96,34 @@
     <xsl:template match="/file-type"><xsl:apply-templates/></xsl:template>
     <xsl:template match="/file-type/name"/>
     <xsl:template match="/structures/name"/>
-    <xsl:template match="content-set/topic-sets"><xsl:apply-templates/></xsl:template>
+    <xsl:template match="/content-set/topic-sets"><xsl:apply-templates/></xsl:template>
+    <xsl:template match="/content-set/topic-sets/topic-set/grouping">
+        <!-- strip whitespace between group strings -->
+        <grouping><xsl:value-of select="string-join(tokenize(., '\s*;\s*'),';')"/></grouping>
+    </xsl:template>   
     <xsl:template match="/content-set/object-sets"><xsl:apply-templates/></xsl:template>
     <xsl:template match="/content-set/output-formats/output-format"><xsl:apply-templates/></xsl:template>
     <xsl:template match="/content-set/output-formats/output-format/name"/>
+    <xsl:template match="/content-set/topic-sets/topic-set/title"/>
+    <xsl:template match="/content-set/topic-sets/topic-set/title" mode="title-override">
+        <xsl:copy>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
     <xsl:template match="/topic-set/topic-types"><xsl:apply-templates/></xsl:template>
+    <xsl:template match="/topic-set/title">
+        <xsl:variable name="tsid" select="../topic-set-id"/>
+        <xsl:choose>
+            <xsl:when test="$content-set-config/content-set/topic-sets/topic-set[topic-set-id=$tsid]/title">
+                <xsl:apply-templates select="$content-set-config/content-set/topic-sets/topic-set[topic-set-id=$tsid]/title" mode="title-override"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <xsl:template match="script">
         <xsl:param tunnel="yes" name="rewrite-namespace"/>

@@ -103,7 +103,7 @@
                     <xsl:text>Text Objects</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+                    <xsl:value-of select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:title"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -139,7 +139,6 @@
     <xsl:template match="toc"/>
 
     <xsl:template match="node[@topic-type]">
-        <!-- FIXME: subhead may not be the right markup here, or may need explicit handling at format stage -->
         <pe:branch state="open">
             <pe:content>
                 <xsl:value-of select="@name"/>

@@ -21,6 +21,8 @@
         <topic-set>
             <topic-set-id>spfe-development</topic-set-id>
             <href>topic-sets/spfe-development.xml</href>
+            <title>SPFE Development override</title>
+            <grouping>SPFE; Guides</grouping>
         </topic-set>    
         
         <topic-set>
@@ -31,11 +33,13 @@
         <topic-set>
             <topic-set-id>spfe-configuration-reference</topic-set-id>
             <href>topic-sets/spfe-configuration-reference.xml</href>
+            <grouping>SPFE; Reference</grouping>
         </topic-set>  
 		
 		 <topic-set>
             <topic-set-id>eppo-presentation-reference</topic-set-id>
             <href>topic-sets/eppo-presentation-reference.xml</href>
+		     <grouping>EPPO Simple; Reference</grouping>
         </topic-set>  
         
 <!--			 <topic-set>
@@ -51,21 +55,25 @@
         <topic-set>
             <topic-set-id>spfe-function-reference</topic-set-id>
             <href>topic-sets/spfe-function-reference.xml</href>
+            <grouping>SPFE; Reference</grouping>
         </topic-set>
         
         <topic-set>
             <topic-set-id>spfe-docs-essays</topic-set-id>
             <href>topic-sets/spfe-docs-essays.xml</href>
+            <grouping>SPFE; Guides</grouping>
         </topic-set>
         
         <topic-set>
             <topic-set-id>spfe-demos</topic-set-id>
             <href>topic-sets/spfe-demos.xml</href>
+            <grouping>SPFE; Guides</grouping>
         </topic-set>
         
         <topic-set>
             <topic-set-id>spfe-docs-lists</topic-set-id>
             <href>topic-sets/spfe-docs-lists.xml</href>
+            <grouping>SPFE; Lists</grouping>
         </topic-set>
     </topic-sets>
     
