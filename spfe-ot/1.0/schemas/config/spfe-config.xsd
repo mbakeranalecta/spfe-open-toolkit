@@ -113,6 +113,12 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:complexType name="topic-set-group">
+    <xs:sequence>
+      <xs:element name="name"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="group" type="topic-set-group"/>
+    </xs:sequence>
+  </xs:complexType>
   <xs:element name="content-set">
     <xs:complexType>
       <xs:sequence>
@@ -127,6 +133,13 @@
           </xs:complexType>
         </xs:element>
         <xs:element name="home-topic-set" type="xs:string"/>
+        <xs:element name="topic-set-groups">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="group" type="topic-set-group"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="topic-sets" minOccurs="1" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
@@ -136,7 +149,7 @@
                     <xs:element name="topic-set-id" type="xs:NCName"/>
                     <xs:element name="href" type="xs:anyURI"/>
                     <xs:element minOccurs="0" name="title"/>
-                    <xs:element minOccurs="0" name="grouping"/>
+                    <xs:element minOccurs="0" name="group"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>

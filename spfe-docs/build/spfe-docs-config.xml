@@ -7,7 +7,7 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <content-set-id>spfe-docs</content-set-id>
     <title>SPFE Documentation</title>
-    <topic-set-type-order>
+<!--    <topic-set-type-order>
         <topic-set-type>docset</topic-set-type>
         <topic-set-type>guide</topic-set-type>
         <topic-set-type>task</topic-set-type>
@@ -15,31 +15,45 @@
         <topic-set-type>essay</topic-set-type>
         <topic-set-type>list</topic-set-type>
     </topic-set-type-order>
-    <home-topic-set>spfe-docs-home</home-topic-set>
+-->    <home-topic-set>spfe-docs-home</home-topic-set>
+
+    <topic-set-groups>
+        <group>
+            <name>SPFE</name>
+            <group><name>Guides</name></group>
+            <group><name>References</name></group>
+            <group><name>Lists</name></group>
+        </group>
+        <group>
+            <name>EPPO Simple</name>
+            <group><name>Guides</name></group>
+            <group><name>References</name></group>
+        </group>
+    </topic-set-groups>
     <topic-sets>
-        
         <topic-set>
             <topic-set-id>spfe-development</topic-set-id>
             <href>topic-sets/spfe-development.xml</href>
             <title>SPFE Development override</title>
-            <grouping>SPFE; Guides</grouping>
+            <group>SPFE; Guides</group>
         </topic-set>    
         
         <topic-set>
             <topic-set-id>spfe-docs-home</topic-set-id>
             <href>topic-sets/spfe-docs-home.xml</href>
+            <group>#HOME</group>
         </topic-set>
         
         <topic-set>
             <topic-set-id>spfe-configuration-reference</topic-set-id>
             <href>topic-sets/spfe-configuration-reference.xml</href>
-            <grouping>SPFE; Reference</grouping>
+            <group>SPFE; References</group>
         </topic-set>  
 		
 		 <topic-set>
             <topic-set-id>eppo-presentation-reference</topic-set-id>
             <href>topic-sets/eppo-presentation-reference.xml</href>
-		     <grouping>EPPO Simple; Reference</grouping>
+		     <group>EPPO Simple; References</group>
         </topic-set>  
         
 <!--			 <topic-set>
@@ -55,25 +69,25 @@
         <topic-set>
             <topic-set-id>spfe-function-reference</topic-set-id>
             <href>topic-sets/spfe-function-reference.xml</href>
-            <grouping>SPFE; Reference</grouping>
+            <group>SPFE; References</group>
         </topic-set>
         
         <topic-set>
             <topic-set-id>spfe-docs-essays</topic-set-id>
             <href>topic-sets/spfe-docs-essays.xml</href>
-            <grouping>SPFE; Guides</grouping>
+            <group>SPFE; Guides</group>
         </topic-set>
         
         <topic-set>
             <topic-set-id>spfe-demos</topic-set-id>
             <href>topic-sets/spfe-demos.xml</href>
-            <grouping>SPFE; Guides</grouping>
+            <group>SPFE; Guides</group>
         </topic-set>
         
         <topic-set>
             <topic-set-id>spfe-docs-lists</topic-set-id>
             <href>topic-sets/spfe-docs-lists.xml</href>
-            <grouping>SPFE; Lists</grouping>
+            <group>SPFE; Lists</group>
         </topic-set>
     </topic-sets>
     
@@ -87,8 +101,6 @@
             <href>object-sets/spfe-docs-if-then-tables.xml</href>                 
         </object-set>
     </object-sets>
-    
-
     
     <subject-types>
         <subject-type>

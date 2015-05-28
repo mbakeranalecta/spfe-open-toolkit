@@ -42,6 +42,11 @@
 					<xsl:with-param name="message" select="$load-message, $one-file "/>
 				</xsl:call-template>
 			</xsl:if>
+			<xsl:if test="not(doc-available($one-file))">
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message">File not found: <xsl:value-of select="$one-file"/></xsl:with-param>
+				</xsl:call-template>
+			</xsl:if>
 			<xsl:sequence select="document($one-file)"/>
 		</xsl:for-each>
 	</xsl:function>
