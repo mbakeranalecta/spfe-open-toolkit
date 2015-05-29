@@ -415,34 +415,6 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
-            <xpath>/content-set/topic-set-type-order</xpath>
-            <description>
-                <p>Defines the order in which topic set types will be listed in the 
-                    <feature>content set</feature>
-                    <feature>table of contents</feature>.</p>
-            </description>
-            <values/>
-            <restrictions/>
-            
-            <attributes/>
-        </config-setting-description>
-        <config-setting-description>
-            <xpath>/content-set/topic-set-type-order/topic-set-type</xpath>
-            <description>
-                <p>The name of a topic set type in the topic set type order list.</p>
-            </description>
-            <values/>
-            <restrictions>
-                <restriction>
-                    <p>The value must match one of the values defined in
-                        <config-setting>/topic-set/topic-set-type</config-setting> for topic sets
-                        included in the doc set.</p>
-                </restriction>
-            </restrictions>
-            
-            <attributes/>
-        </config-setting-description>
-        <config-setting-description>
             <xpath>/content-set/topic-sets</xpath>
             <description>
                 <p>A container element for the list of <feature>topic sets</feature> in a
@@ -3104,14 +3076,7 @@
             <xpath>/topic-set/topic-set-type</xpath>
             <description>
                 <p>This setting enables you to assign a type string to a <feature>topic
-                        set</feature>. You can use this element to group topic sets in output, and
-                    determine the order in which topic sets type appear in the <feature>content
-                        set</feature> table of contents. The order is set using the
-                    <config-setting>/content-set/topic-set-type-order</config-setting> element.
-                    There are no special limits or requirements on this value. You can use any topic
-                    set type names that make sense in your environment. The value must match one of
-                    the values in the element
-                    <config-setting>/content-set/topic-set-type-order</config-setting>.</p>
+                        set</feature>.</p>
             </description>
             <values/>
             <restrictions/>

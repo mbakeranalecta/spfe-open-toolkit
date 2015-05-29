@@ -107,15 +107,6 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
                         content set to display in the output.</p>
                 </li>
                 <li>
-                    <p><config-setting>/content-set/topic-set-type-order</config-setting>: You can
-                        declare topic sets to be of different types, such as <quotes>guide</quotes>,
-                        or <quotes>reference</quotes>. (You do this in the <feature>topic set
-                            configuration file</feature> in
-                        <config-setting>topic-set/topic-set-type</config-setting>.) You can
-                        then use this setting to determine the order in which different topic set
-                        types appear the content set table of contents. </p>
-                </li>
-                <li>
                     <p><config-setting>/content-set/topic-sets</config-setting>: The list of
                         the topic sets to include in the content set. The value of the
                         <config-setting>/content-set/topic-sets/topic-set/topic-set-id</config-setting>
@@ -134,13 +125,6 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
         <content-set-id>tests</content-set-id>
         <title>SPFE Documentation</title>
-        <topic-set-type-order>
-            <topic-set-type>docset</topic-set-type>
-            <topic-set-type>guide</topic-set-type>
-            <topic-set-type>task</topic-set-type>
-            <topic-set-type>reference</topic-set-type>
-            <topic-set-type>list</topic-set-type>
-        </topic-set-type-order>
         <home-topic-set>home</home-topic-set>
         <topic-sets>
             
@@ -206,14 +190,11 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
         </strings>
      </content-set>]]>
             </codeblock>
-            <p>This content set includes three topic sets, each with their own configuration
-                file, which is specified by the <config-setting>/spfe/content-set/topic-sets/topic-set/href</config-setting>
-               setting. The
-                path is relative to the location of the configuration file that defines the <config-setting>/spfe/content-set</config-setting>
-                element. Each topic set configuration file defines a
-                <config-setting>/spfe/topic-set/topic-set-type</config-setting> element that matches one
-                of the values in the
-                <config-setting>/spfe/content-set/topic-set-type-order</config-setting> element.</p>
+            <p>This content set includes three topic sets, each with their own configuration file,
+                which is specified by the
+                <config-setting>/spfe/content-set/topic-sets/topic-set/href</config-setting>
+                setting. The path is relative to the location of the configuration file that defines
+                the <config-setting>/spfe/content-set</config-setting> element. </p>
             <p>To add an index page for the content set, you need to <task>add a topic
                     set</task> that includes an index topic and includes the topic set in the list
                 of topic sets. For example, the topic set <bold>spfe-docs-home</bold> contains the

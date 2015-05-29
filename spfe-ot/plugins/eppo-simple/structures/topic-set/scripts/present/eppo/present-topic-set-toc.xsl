@@ -39,7 +39,7 @@
         </pe:page>
     </xsl:template>
 
-    <xsl:template match="toc[@topic-set-id=$topic-set-id]">
+    <xsl:template match="toc">
         <xsl:choose>
             <xsl:when test="node">
                 <pe:tree class="toc">
@@ -56,7 +56,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="toc"/>
+    
 
     <xsl:template match="node[@topic-type]">
         <pe:branch state="open">
