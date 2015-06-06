@@ -26,14 +26,12 @@
         <topic-set>
             <topic-set-id>spfe-development</topic-set-id>
             <href>topic-sets/spfe-development.xml</href>
-            <title>SPFE Development override</title>
             <group>SPFE; Guides</group>
         </topic-set>    
         
         <topic-set>
             <topic-set-id>spfe-docs-home</topic-set-id>
             <href>topic-sets/spfe-docs-home.xml</href>
-            <group>#HOME</group>
         </topic-set>
         
         <topic-set>

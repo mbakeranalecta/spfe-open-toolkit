@@ -124,14 +124,6 @@
       <xs:sequence>
         <xs:element name="content-set-id" type="xs:NMTOKEN"/>
         <xs:element name="title" type="xs:string"/>
-        <xs:element name="topic-set-type-order">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="topic-set-type" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"
-              />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="home-topic-set" type="xs:string"/>
         <xs:element name="topic-set-groups">
           <xs:complexType>

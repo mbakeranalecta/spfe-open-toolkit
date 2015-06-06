@@ -9,6 +9,25 @@
     xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
     xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" exclude-result-prefixes="#all">
 
+    <xsl:variable name="group-strings" select="esf:get-group-string-element($config/config:content-set/config:topic-set-groups/config:group)"/>
+
+    
+    <xsl:function name="esf:get-group-string-element">
+        <xsl:param name="group"/>
+        <xsl:for-each select="$group">
+            <xsl:value-of select="$group/name"/>
+            <xsl:if test="group">
+                <xsl:text>;</xsl:text>
+                <xsl:value-of select="esf:get-group-string-element(group)"/>              
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:function>
+
+    <xsl:function name="esf:group-exists">
+        <xsl:param name="group-string"/>
+        <xsl:value-of select="$group-strings = $group-string"/>
+    </xsl:function>
+
     <!-- TOC templates -->
     <xsl:template name="create-toc-page">
         <!--
@@ -20,12 +39,16 @@
                 If not, raise error.
             Create groups.
         -->
+        
+        
+        
         <pe:page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
             <xsl:choose>
                 <xsl:when test="not($config/config:content-set/config:topic-set-groups/config:group)">
+                    [[<xsl:value-of select="$group-strings"/>]]
                     <pe:ul>
-                        <xsl:for-each select="config:topic-set">
+                        <xsl:for-each select="config:topic-set[config:topic-set-id ne $config/config:content-set/config:home-topic-set]">
                             <pe:li>
                                 <pe:p>
                                     <pe:link
@@ -38,7 +61,7 @@
                     </pe:ul>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:if test="config:topic-set[string(config:group) = '']">
+                    <xsl:if test="config:topic-set[config:topic-set-id ne $config/config:content-set/config:home-topic-set][string(config:group) = '']">
                         <xsl:call-template name="sf:error">
                             <xsl:with-param name="message">The content set configuration file
                                 defines topic set groups, but not all topic sets are assigned to a
@@ -67,18 +90,8 @@
             List all groups in this group in alphabetical order
         -->
         <pe:tree class="toc">
-            <xsl:for-each select="config:topic-set[config:group eq '#HOME']">
-                <pe:branch>
-                    <pe:content>
-                        <pe:link href="index.html">
-                            <xsl:value-of select="config:title"/>
-                        </pe:link>
-                    </pe:content>
-                </pe:branch>
-            </xsl:for-each>
-
             <xsl:call-template name="group-topic-sets">
-                <xsl:with-param name="topic-sets" select="config:topic-set[config:group ne '#HOME']"/>
+                <xsl:with-param name="topic-sets" select="config:topic-set[config:topic-set-id ne $config/config:content-set/config:home-topic-set]"/>
                 <xsl:with-param name="level">1</xsl:with-param>
             </xsl:call-template>
         </pe:tree>
