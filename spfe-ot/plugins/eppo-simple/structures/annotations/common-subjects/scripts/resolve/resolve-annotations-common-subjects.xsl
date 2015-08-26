@@ -9,7 +9,7 @@
     <xsl:template match="p/task | string/task">
         <subject>
             <xsl:attribute name="type">task</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
+            <xsl:attribute name="key" select="if (@specifically) then @specifically else normalize-space(.)"/>
             <xsl:apply-templates/>
         </subject>
     </xsl:template>
@@ -25,7 +25,7 @@
     <xsl:template match="p/feature | string/feature">
         <subject>
             <xsl:attribute name="type">feature</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
+            <xsl:attribute name="key" select="if (@specifically) then @specifically else normalize-space(.)"/>
             <xsl:apply-templates/>
         </subject>
     </xsl:template>
@@ -33,7 +33,7 @@
     <xsl:template match="p/concept | string/concept">
         <subject>
             <xsl:attribute name="type">concept</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
+            <xsl:attribute name="key" select="if (@specifically) then @specifically else normalize-space(.)"/>
             <xsl:apply-templates/>
         </subject>
     </xsl:template>
