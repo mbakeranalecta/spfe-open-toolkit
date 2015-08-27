@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2015 All Rights Reserved. -->
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
+   <head>
+       <id>task-table-of-contents</id>
+       <history>
+           <revision>
+               <date>2015-08-26</date>
+               <author>mbaker</author>
+               <comment>New topic</comment>
+               <status>In progress</status>
+           </revision>
+       </history>
+       <index>
+           <entry>
+               <type>feature</type>
+               <term>table of contents</term>
+           </entry>
+            <entry>
+                <type>task</type>
+                <term>create table of contents</term>
+            </entry>
+       </index>
+   </head>
+    <body>
+        <title>Tables of Contents</title>
+        <understanding>
+            <p>Because SPFE is designed for <concept>bottom-up information architectures</concept>,
+                a table of contents is considered a secondary navigation tool. However, most
+                bottom-up information architectures should still have some form of table of
+                contents. This is not necessarily a single hierarchical table that encompasses the
+                entire <feature>content set</feature>. A typical arrangement might be to have one
+                table of contents for the <feature>content set</feature>, and individual tables of
+                contents for the <feature>topic sets</feature>. This is the default configuration
+                for <feature>EPPO-simple</feature> and its derivatives. </p>
+            <p>In EPPO-simple, and by default in topic types derived from it, a table of content for
+                the <feature>content set</feature> is built automatically from the
+                <feature>topic type groups</feature> define in the SPFE
+                <feature>content-set configuration file</feature>. Tables of contents for
+                <feature>topic sets</feature> are built automatically by the
+                <feature>toc build step</feature> according to the logic of the specified
+                <feature>TOC script</feature>. The default TOC script groups the topics in a topic
+                set by topic type and lists them in alphabetical order within the
+                <feature>topic type groupings</feature>. The order in which topic types appear in a
+                topic set TOC is determined by the order in which the <feature>topic types</feature>
+                in a <feature>topic set</feature> are listed in the setting
+                <config-setting>/topic-set/topic-types</config-setting>. </p>
+        </understanding>
+        <planning>
+            <planning-question>
+                <planning-question-title>Do you need to change the default TOC generation?</planning-question-title>
+                <planning-question-body>
+                    <p>If you are writing <concept>Every Page is Page One topics</concept>, you
+                        probably don't need to change the default TOC generation. If you are
+                        creating a topic set that is designed as a continuous narrative (like a
+                        book) and need to create a TOC with a specified order of topics, you can
+                        <task>specify the order in a TOC file</task>. </p>
+                    <note>
+                        <title>Pending feature</title>
+                        <p>Specifying an arbitrary TOC is a pending feature. It is not currently implemented.</p>
+                    </note>
+                </planning-question-body>
+            </planning-question>
+            <planning-question>
+                <planning-question-title>What do I need to configure to get the best table of contents?</planning-question-title>
+                <planning-question-body>
+                    <p>To configure the <feature>content set table of contents</feature>, use the
+                        <config-setting>/content-set/topic-set-groups</config-setting> setting. To
+                        configure the order of topic set types in a
+                        <feature>topic set TOC</feature>, use the setting
+                        <config-setting>/topic-set/topic-types</config-setting>. To specify a
+                        different way of auto-generating a content set TOC,
+                        <task specifically="create content set TOC script">write</task> and
+                        <task specifically="configure content set TOC script">configure</task> a new
+                        <feature>content set TOC script</feature> for your
+                        <feature>content set</feature>. To specify a different way of
+                        auto-generating a <feature>topic set TOC</feature>, write and configure a
+                        new <feature>topic set TOC script</feature> for your
+                        <feature>topic set</feature>.</p>
+                </planning-question-body>
+            </planning-question>
+        </planning>
+    </body>
+</think-plan-do-topic>

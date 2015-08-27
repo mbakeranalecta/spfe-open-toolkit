@@ -41,8 +41,16 @@
                 <term>configuration file</term>
             </entry>
             <entry>
+                <type>feature</type>
+                <term>configuration files</term>
+            </entry>
+            <entry>
                 <type>config-setting</type>
                 <term>/spfe</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>build configuration</term>
             </entry>
         </index>
     </head>

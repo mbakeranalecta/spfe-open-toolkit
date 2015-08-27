@@ -4079,6 +4079,71 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
+            <xpath>/content-set/topic-set-groups</xpath>
+            <description>
+                <p>Establishes a set of <feature>topic set groups</feature> for the
+                    <feature>content set</feature>. You can define groups and place
+                    <feature>topic sets</feature> into those groups, which forms the basis of a
+                    <feature>table of contents</feature> for the <feature>content set</feature>, or
+                    for any other way of presenting groups of topic sets. Groups can be defined
+                    hierarchically by nesting one group definition inside another. To place a topic
+                    set in a group, use the setting
+                    <config-setting>/content-set/topic-sets/topic-set/group</config-setting>.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <attributes></attributes>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/content-set/topic-set-groups/group</xpath>
+            <description>
+                <p>Defines a <feature>topic set group</feature>. The definition consists of the name
+                    of the group and the definition of any subgroups.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <attributes></attributes>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/content-set/topic-set-groups/group/name</xpath>
+            <description>
+                <p>The name of a <feature>topic set group</feature>. The use that the publishing
+                    process makes of this name is up to the developer, but it is assumed to be the
+                    group name as it will appear in the published content. </p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <attributes></attributes>
+        </config-setting-description>        
+        <config-setting-description>
+            <xpath>/content-set/topic-set-groups/group/group</xpath>
+            <description>
+                <p>You can define <feature>topic set groups</feature> recursively to form a
+                    hierarchy. You can define groups within groups to whatever level of depth you
+                    wish. However, publishing processes may have limits on how many level of topic
+                    set grouping they can support. It should be considered the responsibility of the
+                    publishing process to raise an error if it is presented with more levels of
+                    grouping than it expects.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <attributes></attributes>
+        </config-setting-description>
+        <config-setting-description>
+            <xpath>/content-set/topic-sets/topic-set/group</xpath>
+            <description>
+                <p>Assigns a <feature>topic set</feature> to a <feature>topic set group</feature> in
+                    the context of this content set. Note that the assignment of topic sets to
+                    groups is a feature of the content set configuration, not an intrinsic property
+                    of the topic set itself. A topic set can be assigned to different topic set
+                    groups in different content set configurations.</p>
+            </description>
+            <values></values>
+            <restrictions></restrictions>
+            <attributes></attributes>
+        </config-setting-description>
+        
+        <config-setting-description>
             <xpath>/content-set/topic-sets/topic-set/grouping</xpath>
             <description>
                 <p>You can use this setting to assign a topic set to a group within the content set.

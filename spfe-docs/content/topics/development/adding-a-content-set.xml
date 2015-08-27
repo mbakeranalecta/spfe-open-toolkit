@@ -91,10 +91,12 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
            </planning-question>
        </planning>
         <doing>        
-            <p>To add a content set, you create a <feature>content set configuration
-                file</feature>. A content set configuration file is a configuration file
-                that includes the <config-setting>content-set</config-setting> element. You need
-                the following mandatory attributes and elements: </p>
+            <p>To add a content set, you create a
+                <feature>content set configuration
+                file</feature>. A content set
+                configuration file is a configuration file that includes the
+                <config-setting>/content-set</config-setting> element. You need the following
+                mandatory attributes and elements: </p>
             <ul>
                 <li>
                     <p><config-setting>/content-set/content-set-id</config-setting>: The ID of the
@@ -192,17 +194,17 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
             </codeblock>
             <p>This content set includes three topic sets, each with their own configuration file,
                 which is specified by the
-                <config-setting>/spfe/content-set/topic-sets/topic-set/href</config-setting>
-                setting. The path is relative to the location of the configuration file that defines
-                the <config-setting>/spfe/content-set</config-setting> element. </p>
+                <config-setting>/content-set/topic-sets/topic-set/href</config-setting> setting. The
+                path is relative to the location of the configuration file that defines the
+                <config-setting>/content-set</config-setting> element. </p>
             <p>To add an index page for the content set, you need to <task>add a topic
                     set</task> that includes an index topic and includes the topic set in the list
                 of topic sets. For example, the topic set <bold>spfe-docs-home</bold> contains the
                 index topic for the SPFE content set.</p>
             <p>Run the <tool-name>spfe</tool-name> build tool and specify the configuration file
-                that contains the <config-setting>/spfe/content-set</config-setting> element as the first
-                parameter. If you see the topic sets that your content set includes in the
-                table of contents you have successfully added a content set.</p>
+                that contains the <config-setting>/content-set</config-setting> element as the first
+                parameter. If you see the topic sets that your content set includes in the table of
+                contents you have successfully added a content set.</p>
         </doing>
     </body>
 </think-plan-do-topic>

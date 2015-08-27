@@ -263,7 +263,7 @@
             <p>A structure can provide CSS files for both authoring and formatting output.</p>
             <p>To use a CSS file from a structure, simply include it in your main CSS file:</p>
             <codeblock>@import url("http://spfeopentoolkit.org/spfe-docs/structures/annotations/spfe-build/style/authoring/annotations-spfe-build.css");</codeblock>
-            <p>Selectors in a structure CSS file should be written to be a specific as possible to
+            <p>Selectors in a structure CSS file should be written to be as specific as possible to
                 avoid conflicts with other CSS files. </p>
         </section>
     </body>
