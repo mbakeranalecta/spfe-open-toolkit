@@ -67,10 +67,10 @@ Main template
 		<!-- FIXME: Should also search for unmatched attribute definitions. -->
 		<xsl:for-each select="$doctype-source//ed:doctype-element-description">
 			<xsl:if
-				test="not(normalize-space(ed:xpath) = $schema-defs/schema-definitions/schema-element/normalize-space(name))">
+				test="not(normalize-space(ed:name) = $schema-defs/schema-definitions/schema-element/normalize-space(name))">
 				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message"
-						select="'Authored element description found for an element not found in the schema:', normalize-space(ed:xpath)"
+						select="'Authored element description found for an element not found in the schema:', normalize-space(ed:name)"
 					/>
 				</xsl:call-template>
 			</xsl:if>
