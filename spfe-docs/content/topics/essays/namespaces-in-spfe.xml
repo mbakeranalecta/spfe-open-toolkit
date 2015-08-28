@@ -91,7 +91,7 @@
                 configuration document. They include: </p>
             <ul>
                 <li>
-                    <p><config-setting>topic-type/name</config-setting></p>
+                    <p><config-setting>/topic-type/name</config-setting></p>
                 </li>
                 <li>
                     <p><config-setting>/content-set/output-formats/output-format/name</config-setting></p>

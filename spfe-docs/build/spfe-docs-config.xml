@@ -46,7 +46,13 @@
 		     <group>EPPO Simple; References</group>
         </topic-set>  
         
-<!--			 <topic-set>
+		 <topic-set>
+            <topic-set-id>eppo-simple-writing</topic-set-id>
+            <href>topic-sets/eppo-simple-writing.xml</href>
+		     <group>EPPO Simple; Guides</group>
+        </topic-set>  
+
+		<!--			 <topic-set>
 		     <topic-set-id>eppo-graphic-record-doctype-reference</topic-set-id>
 		     <href>topic-sets/eppo-graphic-record-reference.xml</href>
         </topic-set>  

@@ -59,28 +59,24 @@
                         <task>specify the order in a TOC file</task>. </p>
                     <note>
                         <title>Pending feature</title>
-                        <p>Specifying an arbitrary TOC is a pending feature. It is not currently implemented.</p>
+                        <p>Specifying an arbitrary TOC is a pending feature. It is not currently
+                            implemented.</p>
                     </note>
                 </planning-question-body>
             </planning-question>
-            <planning-question>
-                <planning-question-title>What do I need to configure to get the best table of contents?</planning-question-title>
-                <planning-question-body>
-                    <p>To configure the <feature>content set table of contents</feature>, use the
-                        <config-setting>/content-set/topic-set-groups</config-setting> setting. To
-                        configure the order of topic set types in a
-                        <feature>topic set TOC</feature>, use the setting
-                        <config-setting>/topic-set/topic-types</config-setting>. To specify a
-                        different way of auto-generating a content set TOC,
-                        <task specifically="create content set TOC script">write</task> and
-                        <task specifically="configure content set TOC script">configure</task> a new
-                        <feature>content set TOC script</feature> for your
-                        <feature>content set</feature>. To specify a different way of
-                        auto-generating a <feature>topic set TOC</feature>, write and configure a
-                        new <feature>topic set TOC script</feature> for your
-                        <feature>topic set</feature>.</p>
-                </planning-question-body>
-            </planning-question>
         </planning>
+        <doing>
+            <p>To configure the <feature>content set table of contents</feature>, use the
+                <config-setting>/content-set/topic-set-groups</config-setting> setting. </p>
+            <p>To configure the order of topic set types in a <feature>topic set TOC</feature>, use
+                the setting <config-setting>/topic-set/topic-types</config-setting>. </p>
+            <p>To specify a different way of auto-generating a content set TOC,
+                <task specifically="create content set TOC script">write</task> and
+                <task specifically="configure content set TOC script">configure</task> a new
+                <feature>content set TOC script</feature> for your <feature>content set</feature>. </p>
+            <p>To specify a different way of auto-generating a <feature>topic set TOC</feature>,
+                write and configure a new <feature>topic set TOC script</feature> for your
+                <feature>topic set</feature>.</p>
+        </doing>
     </body>
 </think-plan-do-topic>
