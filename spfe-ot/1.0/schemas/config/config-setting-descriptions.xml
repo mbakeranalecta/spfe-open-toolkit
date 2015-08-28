@@ -322,7 +322,7 @@
                         <task>index topics</task>. The subject type listing is used to provide
                     aliases for the subject types when the name of the subject types is displayed in
                     the output. For example, in the SPFE content, SPFE configuration settings are
-                    marked up using the <xml-element-name>config-setting</xml-element-name> element.
+                    marked up using the <xml-element-name namespace-uri="http://spfeopentoolkit.org/ns/spfe-docs">config-setting</xml-element-name> element.
                     <quotes>config-setting</quotes> is thus a subject type in this content set.
                     However, when the output explicitly refers to a configuration setting (for
                     instance, in a <feature>list page</feature>) the string
