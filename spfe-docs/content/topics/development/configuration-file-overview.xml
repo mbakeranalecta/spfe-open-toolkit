@@ -85,12 +85,12 @@
                 </p>
             </li>
             <li>
-                <p>The <feature>output type</feature> configuration for each output type required
+                <p>The <feature>output format</feature> configuration for each output format required
                     for the content set, contained in the setting
                     <config-setting>/output-format</config-setting>: This defines the scripts
-                    used to create an output of a particular type. An output type configuration file
-                    is usually created as part of defining an output type. An output type
-                    configuration is included in the content set configuration using the
+                    used to create an output of a particular type. An <feature>output format configuration file</feature>
+                    is usually created as part of defining an output format. An <feature>output format
+                    configuration</feature> is included in the content set configuration using the
                     setting
                     <config-setting>/content-set/output-formats/output-format</config-setting>.</p>
             </li>

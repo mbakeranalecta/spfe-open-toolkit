@@ -109,7 +109,7 @@
             consolidated <feature>configuration file</feature>, with the name
                 <file-name>spfe-config.xml</file-name>.</p>
         
-        <p>The build then creates two additional directories in the doc set directory,
+        <p>The build then creates two additional directories in the <feature>content set directory</feature>,
                 <directory-name>build</directory-name>, where all the temporary files used by the
             build are created, and <directory-name>output</directory-name>, where the output is
             created.</p>
