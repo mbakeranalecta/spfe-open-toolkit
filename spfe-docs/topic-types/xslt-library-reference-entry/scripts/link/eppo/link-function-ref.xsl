@@ -14,13 +14,6 @@
 	<!-- processing directives -->
 	<xsl:output method="xml" indent="yes" cdata-section-elements="codeblock"/>
 
-<xsl:template match="node() | @*">
-	<xsl:copy>
-		<xsl:apply-templates select="node() | @*"/>
-	</xsl:copy>
-</xsl:template>
-	
-	
 	<!-- Add links to code samples -->
 	<xsl:template match="xsl:*">
 		<xsl:variable name="function-prefix" select="string(ancestor::ss:topic//local-prefix)"/>

@@ -13,14 +13,6 @@
 
 	<xsl:output indent="yes" method="xml"/>
 
-	<!-- Copy everything we don't explicitly modify -->
-	<xsl:template match="node() | @*">
-		<xsl:copy>
-			<xsl:apply-templates select="node() | @*"/>
-		</xsl:copy>
-	</xsl:template>
-
-
 	<!--================================================
 	link-xpath-segments function
 
