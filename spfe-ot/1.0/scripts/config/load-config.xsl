@@ -97,10 +97,6 @@
     <xsl:template match="/file-type/name"/>
     <xsl:template match="/structures/name"/>
     <xsl:template match="/content-set/topic-sets"><xsl:apply-templates/></xsl:template>
-    <xsl:template match="/content-set/topic-sets/topic-set/grouping">
-        <!-- strip whitespace between group strings -->
-        <grouping><xsl:value-of select="string-join(tokenize(., '\s*;\s*'),';')"/></grouping>
-    </xsl:template>   
     <xsl:template match="/content-set/object-sets"><xsl:apply-templates/></xsl:template>
     <xsl:template match="/content-set/output-formats/output-format"><xsl:apply-templates/></xsl:template>
     <xsl:template match="/content-set/output-formats/output-format/name"/>
