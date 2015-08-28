@@ -217,7 +217,7 @@ Main content processing templates
 					<cr:attributes>
 						<xsl:for-each
 							select="root()/schema-definitions/schema-attribute[starts-with(xpath, concat($xpath, '/@'))]">
-							<attribute>
+							<cr:attribute>
 
 								<!-- Copy the extracted element info. -->
 								<cr:name>
@@ -260,7 +260,7 @@ Main content processing templates
 									<xsl:with-param name="in-scope-strings" select="$strings"
 										as="element()*" tunnel="yes"/>
 								</xsl:apply-templates>
-							</attribute>
+							</cr:attribute>
 						</xsl:for-each>
 					</cr:attributes>
 				</cr:spfe-configuration-reference-entry>
