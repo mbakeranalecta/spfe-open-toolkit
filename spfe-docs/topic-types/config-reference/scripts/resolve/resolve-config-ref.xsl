@@ -53,6 +53,17 @@ Main content processing templates
 							</ss:anchor>
 						</ss:entry>
 					</xsl:for-each>
+					
+					<xsl:for-each select="index/entry">
+						<ss:entry>
+							<ss:type><xsl:value-of select="type"/></ss:type>
+							<ss:namespace><xsl:value-of select="namespace"/></ss:namespace>
+							<ss:term><xsl:value-of select="term"/></ss:term>
+							<ss:anchor>
+								<xsl:value-of select="term"/>
+							</ss:anchor>
+						</ss:entry>
+					</xsl:for-each>
 				</ss:index>
 
 				<xsl:copy>

@@ -130,7 +130,7 @@ Main content processing templates
 		<xsl:if test="($current-doctype = $doctype) or not($doctype)">
 
 				<cr:spfe-configuration-reference-entry>
-						<cr:namespace>
+					<cr:namespace>
 						<xsl:value-of select="ancestor::schema-definitions/@namespace"/>
 					</cr:namespace>
 					<cr:doctype>
@@ -181,7 +181,8 @@ Main content processing templates
 
 						<xsl:when test="exists($authored-content/ed:description/*)">
 							<xsl:apply-templates
-								select="$authored-content/ed:description, $authored-content/ed:values, $authored-content/ed:restrictions">
+								select="$authored-content/ed:index,
+								$authored-content/ed:description, $authored-content/ed:values, $authored-content/ed:restrictions">
 								<xsl:with-param name="in-scope-strings" select="$strings"
 									as="element()*" tunnel="yes"/>
 							</xsl:apply-templates>
@@ -270,7 +271,7 @@ Main content processing templates
 	<xsl:template match="ed:config-setting-description">
 			<xsl:apply-templates/>
 </xsl:template>
-
+	
 	<xsl:template
 		match="ed:*">
 		<xsl:element name="cr:{local-name()}" namespace="http://spfeopentoolkit.org/ns/spfe-docs">
