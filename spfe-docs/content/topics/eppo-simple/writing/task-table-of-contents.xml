@@ -38,7 +38,7 @@
             <p>In EPPO-simple, and by default in topic types derived from it, a table of content for
                 the <feature>content set</feature> is built automatically from the
                 <feature>topic type groups</feature> define in the SPFE
-                <feature>content-set configuration file</feature>. Tables of contents for
+                <feature>content set configuration file</feature>. Tables of contents for
                 <feature>topic sets</feature> are built automatically by the
                 <feature>toc build step</feature> according to the logic of the specified
                 <feature>TOC script</feature>. The default TOC script groups the topics in a topic

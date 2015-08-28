@@ -25,9 +25,23 @@
         </history>
     </head><body>
         <config-setting-description>
+            <index>
+                <entry>
+                    <type>feature</type>
+                    <term>content set</term>
+                </entry>
+                <entry>
+                    <type>feature</type>
+                    <term>content set configuration</term>
+                </entry>
+                <entry>
+                    <type>feature</type>
+                    <term>content set configuration file</term>
+                </entry>
+            </index>
             <xpath>/content-set</xpath>
             <description>
-                <p>A container element for information on a content set. A content set is a
+                <p>A container element for information on a <feature>content set</feature>. A content set is a
                     collection of <feature>topic sets</feature>. To define a content set, you list
                     the configuration files for each topic set in the content set using a
                     <config-setting>/content-set/topic-sets/topic-set</config-setting> element.</p>
