@@ -43,8 +43,7 @@ Main content processing templates
 						</ss:term>
 					</ss:entry>
 
-					<xsl:for-each
-						select="//schema-attribute[starts-with(normalize-space(xpath), concat($xpath, '/@'))]">
+					<xsl:for-each select="attributes/attribute">
 						<ss:entry>
 							<ss:type>config-setting</ss:type>
 							<ss:namespace>http://spfeopentoolkit.org/ns/spfe-ot/config</ss:namespace>
