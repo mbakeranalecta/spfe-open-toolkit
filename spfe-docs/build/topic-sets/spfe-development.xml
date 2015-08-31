@@ -2,10 +2,11 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 
-<topic-set xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+<topic-set xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set-id>spfe-development</topic-set-id>
+    <title>SPFE Development</title>
     <topic-set-type>guide</topic-set-type>
 
     <topic-types>
@@ -44,9 +45,5 @@
 
     <default-topic-scope>spfe</default-topic-scope>
     <default-subject-scope>spfe</default-subject-scope>
-    <build-rules>${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml</build-rules>
-    <strings>
-        <string id="eppo-simple-topic-set-title">SPFE Development</string>
-    </strings>
 </topic-set>
 

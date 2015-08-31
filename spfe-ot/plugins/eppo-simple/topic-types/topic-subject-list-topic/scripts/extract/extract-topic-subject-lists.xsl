@@ -4,10 +4,10 @@
 <xsl:stylesheet version="2.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" 
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
-	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
+	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/catalog"
 	exclude-result-prefixes="#all">
 <!-- =============================================================
 	extract-topic-subject-lists.xsl
@@ -22,7 +22,8 @@
 		<xsl:sequence select="/config:config"/>
 	</xsl:variable>
 	
-	<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 	
 	<xsl:param name="sources-to-extract-content-from"/>	
 	<xsl:variable name="sources" select="sf:get-sources($sources-to-extract-content-from)"/>
@@ -33,8 +34,8 @@
 		<!-- Create the root "extracted-content element" FIXME: Should use $output-directory. -->
 		<xsl:result-document href="file:///{concat($config/config:content-set-build, '/topic-sets/', $topic-set-id,'/extract/out/lists.xml')}" method="xml" indent="yes" omit-xml-declaration="no">
 			<es:subject-topic-lists>
-				<xsl:for-each-group select="$sources//lc:target[@type ne 'topic']" group-by="concat(@type, '+', lc:original-key, '+', lc:namespace)">
-					<xsl:variable name="this-key" select="lc:original-key"/>
+				<xsl:for-each-group select="$sources//lc:target[@type ne 'topic']" group-by="concat(@type, '+', lc:term, '+', lc:namespace)">
+					<xsl:variable name="this-key" select="lc:term"/>
 					<xsl:variable name="this-type" select="@type"/>
 					<xsl:variable name="this-namespace" select="lc:namespace"/>
 					<es:subject-topic-list>
@@ -43,7 +44,7 @@
 						<es:subject-namespace><xsl:value-of select="$this-namespace"/></es:subject-namespace>
 						<es:topics-on-subject>
 							<!-- Select topic on this subject and type, excluding those in subject-topic-list pages. -->
-							<xsl:for-each select="$sources//lc:page[lc:target/lc:original-key=$this-key]
+							<xsl:for-each select="$sources//lc:page[lc:target/lc:key=$this-key]
 								                                   [if($this-namespace) then lc:target/lc:namespace=$this-namespace else true()]
 								                                   [lc:target/@type=$this-type]
 								                                   [not( ends-with(@topic-type, '}subject-topic-list'))]">
@@ -66,7 +67,7 @@
 	
 
 	
-	<xsl:template match="lc:link-catalog">
+	<xsl:template match="lc:catalog">
 	
 	</xsl:template>
 	

@@ -5,13 +5,13 @@
     xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
     xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
     xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
-    xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config" exclude-result-prefixes="#all"
+    xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" exclude-result-prefixes="#all"
     version="2.0">
     <xsl:template name="show-header">
         <xsl:variable name="topic-type" select="ancestor::ss:topic/@type"/>
 
         <xsl:variable name="topic-set-title"
-            select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+            select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:title"/>
 
         <xsl:variable name="content-set-title" select="$config/config:content-set/config:title"/>
 

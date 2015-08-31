@@ -2,12 +2,13 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-  targetNamespace="http://spfeopentoolkit/ns/spfe-ot/config"
-  xmlns="http://spfeopentoolkit/ns/spfe-ot/config">
+  targetNamespace="http://spfeopentoolkit.org/ns/spfe-ot/config"
+  xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config">
   <xs:element name="topic-set">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="topic-set-id" type="xs:string"/>
+        <xs:element name="title"/>
         <xs:element name="topic-set-type" type="xs:string"/>
         <xs:element minOccurs="0" name="topic-set-link-priority" type="xs:int"/>
         <xs:element name="topic-types">
@@ -63,7 +64,6 @@
         <xs:element name="condition-tokens" minOccurs="0" maxOccurs="1" type="xs:NMTOKENS"/>
         <xs:element name="default-topic-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
         <xs:element name="default-subject-scope" minOccurs="0" maxOccurs="1" type="xs:string"/>
-        <xs:element name="build-rules" type="xs:anyURI" minOccurs="0"/>
         <xs:element name="strings" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
@@ -113,20 +113,25 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:complexType name="topic-set-group">
+    <xs:sequence>
+      <xs:element name="name"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="group" type="topic-set-group"/>
+    </xs:sequence>
+  </xs:complexType>
   <xs:element name="content-set">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="content-set-id" type="xs:NMTOKEN"/>
         <xs:element name="title" type="xs:string"/>
-        <xs:element name="topic-set-type-order">
+        <xs:element name="home-topic-set" type="xs:string"/>
+        <xs:element name="topic-set-groups">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="topic-set-type" minOccurs="1" maxOccurs="unbounded" type="xs:anyURI"
-              />
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="group" type="topic-set-group"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="home-topic-set" type="xs:string"/>
         <xs:element name="topic-sets" minOccurs="1" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
@@ -135,6 +140,8 @@
                   <xs:sequence>
                     <xs:element name="topic-set-id" type="xs:NCName"/>
                     <xs:element name="href" type="xs:anyURI"/>
+                    <xs:element minOccurs="0" name="title"/>
+                    <xs:element minOccurs="0" name="group"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -214,7 +221,7 @@
         <xs:element name="output-formats" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="output-format">
+              <xs:element name="output-format" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="name" type="xs:string"/>
@@ -267,8 +274,8 @@
                   <xs:sequence>
                     <xs:element name="name" type="xs:string"/>
                     <xs:element name="href" type="xs:anyURI"/>
-                    <xs:element minOccurs="0" name="rewrite-namespace" type="rewrite-namespaces-type">
-                    </xs:element>
+                    <xs:element minOccurs="0" name="rewrite-namespace"
+                      type="rewrite-namespaces-type"> </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -283,8 +290,8 @@
                   <xs:sequence>
                     <xs:element name="name" type="xs:string"/>
                     <xs:element name="href" type="xs:anyURI"/>
-                    <xs:element minOccurs="0" name="rewrite-namespace" type="rewrite-namespaces-type">
-                    </xs:element>
+                    <xs:element minOccurs="0" name="rewrite-namespace"
+                      type="rewrite-namespaces-type"> </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -341,8 +348,8 @@
                     <xs:sequence>
                       <xs:element name="name" type="xs:string"/>
                       <xs:element name="href" type="xs:anyURI"/>
-                      <xs:element minOccurs="0" name="rewrite-namespace" type="rewrite-namespaces-type">
-                      </xs:element>
+                      <xs:element minOccurs="0" name="rewrite-namespace"
+                        type="rewrite-namespaces-type"> </xs:element>
                     </xs:sequence>
                   </xs:complexType>
                 </xs:element>
@@ -357,20 +364,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="name" type="xs:string"/>
-        <xs:element name="dependencies" minOccurs="0">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="dependency">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="name" type="xs:string"/>
-                    <xs:element name="href" type="xs:anyURI"/>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="scripts" type="scripts-type"/>
       </xs:sequence>
     </xs:complexType>
@@ -388,8 +381,8 @@
                   <xs:sequence>
                     <xs:element name="name" type="xs:string"/>
                     <xs:element name="href" type="xs:anyURI"/>
-                    <xs:element minOccurs="0" name="rewrite-namespace" type="rewrite-namespaces-type">
-                    </xs:element>
+                    <xs:element minOccurs="0" name="rewrite-namespace"
+                      type="rewrite-namespaces-type"> </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -477,9 +470,18 @@
       <xs:element minOccurs="0" name="extract" type="script-list-type"/>
       <xs:element minOccurs="0" name="merge" type="script-list-type"/>
       <xs:element name="resolve" type="script-list-type" minOccurs="0"/>
-      <xs:element name="link-catalog" type="script-list-type" minOccurs="0"/>
+      <xs:element name="catalog" type="script-list-type" minOccurs="0"/>
       <xs:element name="toc" type="script-list-type" minOccurs="0"/>
       <xs:element name="image-list" type="script-list-type" minOccurs="0"/>
+      <xs:element name="link" minOccurs="0">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="script-list-type">
+              <xs:attribute name="type" type="xs:NMTOKEN" use="required"/>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="present" minOccurs="0">
         <xs:complexType>
           <xs:complexContent>

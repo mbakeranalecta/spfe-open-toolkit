@@ -4,8 +4,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  
 version="2.0"
  xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
- xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
- xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+ xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
+ xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
  xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
  exclude-result-prefixes="#all" 
  xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
@@ -33,7 +33,7 @@ version="2.0"
 	
 	<xsl:template match="terminal-session/entry">
 		<xsl:if test="normalize-space(.)">
-			<xsl:sequence select="esf:process-placeholders(., 'code', 'placeholder')"/>
+			<xsl:sequence select="sf:process-placeholders(., 'code', 'placeholder')"/>
 		</xsl:if>
 	</xsl:template>
 	

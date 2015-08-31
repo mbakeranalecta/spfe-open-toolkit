@@ -176,20 +176,6 @@
 				</dlentry>
 	
 				<dlentry>
-					<dt>Name in build file</dt>
-					<dd>
-						<p>
-							<xsl:choose>
-								<xsl:when test="normalize-space(build-property) ne ''">
-									<xsl:value-of select="build-property"/>
-								</xsl:when>
-								<xsl:otherwise>Not used in the build file.</xsl:otherwise>
-							</xsl:choose>
-						</p>
-					</dd>
-				</dlentry>
-	
-				<dlentry>
 					<dt>Default</dt>
 					<dd>
 	
@@ -304,7 +290,6 @@
 
 	<xsl:template match="spfe-configuration-reference-entry/type"/>
 	<xsl:template match="spfe-configuration-reference-entry/name"/>
-	<xsl:template match="spfe-configuration-reference-entry/build-property"/>
 
 	<!-- 
 		============================

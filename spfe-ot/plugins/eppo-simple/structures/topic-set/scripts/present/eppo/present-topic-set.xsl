@@ -6,7 +6,7 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
  	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
- 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+ 	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
  	exclude-result-prefixes="#all">
 	
 <!-- processing directives -->
@@ -16,8 +16,7 @@
 	
 	<!-- FIXME: This should be in config. -->
 	<xsl:param name="output-directory"/>
-<!-- FIXME: This shoud be read from config file. -->
-<xsl:param name="draft">no</xsl:param>
+	<xsl:variable name="draft" select="if (lower-case(config:config/config:build-command) eq 'draft') then 'yes' else 'no'"/>
 	
 <xsl:param name="topic-set-id"/>
 
@@ -27,8 +26,12 @@
 
 <xsl:param name="synthesis-files"/>
 <xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
+	
+<xsl:param name="object-files"/>
+<xsl:variable name="objects" select="sf:get-sources($object-files, 'Loading text objects file:')"/>
+	
 
-<xsl:variable name="topic-set-title" select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+	<xsl:variable name="topic-set-title" select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:title"/>
 <!--  
 =============
 Main template
@@ -40,7 +43,7 @@ Main template
 		<pe:pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:schemaLocation="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/presentation-types/eppo/schemas/presentation-eppo.xsd">
 			<pe:title>
-				<xsl:value-of select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+				<xsl:value-of select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:title"/>
 			</pe:title>
 				
 			<!-- process the topics --> 

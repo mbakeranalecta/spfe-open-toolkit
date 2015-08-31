@@ -7,7 +7,7 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/spfe-docs"
@@ -37,35 +37,33 @@ Main content processing templates
 				<ss:index>
 					<ss:entry>
 						<ss:type>config-setting</ss:type>
-						<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
+						<ss:namespace>http://spfeopentoolkit.org/ns/spfe-ot/config</ss:namespace>
 						<ss:term>
 							<xsl:value-of select="$xpath"/>
 						</ss:term>
 					</ss:entry>
 
-					<xsl:for-each
-						select="//schema-attribute[starts-with(normalize-space(xpath), concat($xpath, '/@'))]">
+					<xsl:for-each select="attributes/attribute">
 						<ss:entry>
 							<ss:type>config-setting</ss:type>
-							<ss:namespace>http://spfeopentoolkit/ns/spfe-ot/config</ss:namespace>
+							<ss:namespace>http://spfeopentoolkit.org/ns/spfe-ot/config</ss:namespace>
 							<ss:term><xsl:value-of select="$xpath"/>/@<xsl:value-of select="name"/></ss:term>
 							<ss:anchor>
 								<xsl:value-of select="name"/>
 							</ss:anchor>
 						</ss:entry>
 					</xsl:for-each>
-					<xsl:if
-						test="normalize-space(build-property)">
+					
+					<xsl:for-each select="index/entry">
 						<ss:entry>
-							<ss:type>spfe-build-property</ss:type>
-							<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/build</ss:namespace>
-							<ss:term>
-								<xsl:value-of
-									select="normalize-space(build-property)"
-								/>
-							</ss:term>
+							<ss:type><xsl:value-of select="type"/></ss:type>
+							<ss:namespace><xsl:value-of select="namespace"/></ss:namespace>
+							<ss:term><xsl:value-of select="term"/></ss:term>
+							<ss:anchor>
+								<xsl:value-of select="term"/>
+							</ss:anchor>
 						</ss:entry>
-					</xsl:if>
+					</xsl:for-each>
 				</ss:index>
 
 				<xsl:copy>

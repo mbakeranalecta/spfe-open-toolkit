@@ -20,6 +20,12 @@
             <comment>Submit for review</comment>
             <status>Ready for technical review</status>
             </revision>
+            <revision>
+                <date>2015-05-25-04:00</date>
+                <author>mbaker</author>
+                <comment>Revised for python</comment>
+                <status>In progress</status>
+            </revision>
         </history>
         <index>
             <entry>
@@ -53,64 +59,30 @@
             that you set the required environment variables. </p>     
         <section>
             <title>Installing third-party packages</title>           
-            <p>To use the SPFE build system, you need to install Apache ANT and the Java Development Kit (JDK). Note that both ANT and SPFE require Java.
-            </p>
-            <p> Visit
-                    <url>http://www.oracle.com/technetwork/java/javase/overview/index.html</url>
-                to get information about Java and to download the installer. If you use a Linux
-                distribution that includes a package management system, such as RedHat or Debian, 
-                you may be able to install Java using the package manager. Ensure that you install the
-                <tool-name>Java Development Kit</tool-name>, not the <tool-name>Java Runtime Environment</tool-name>.</p>
-            <p>You can download ANT from <url>http://ant.apache.org</url>. If you use Linux, you
-                may be able to install it using the package management system or by using an RPM
-                from the website. For full installation instructions, follow the instructions in the
-                ANT manual on the ANT website.</p> 
+            <p>To use the SPFE build system, you need to install </p>
+            <ul>
+                <li>
+                    <p>Python 3, with the libxml and regex packages installed. </p>
+                </li>
+                <li>
+                    <p>Java </p>
+                </li>
+            </ul>
+            <p>Visit <url>http://www.oracle.com/technetwork/java/javase/overview/index.html</url> to
+                get information about Java and to download the installer. If you use a Linux
+                distribution that includes a package management system, such as RedHat or Debian,
+                you may be able to install Java using the package manager. </p>
+            <p>You can download Python from <url>https://www.python.org/</url> and install the
+                libxml and regex packages yourself. However, you may find it more convenient to
+                install a Python distribution that includes the libxml and regex packages, such as
+                Anaconda (<url>https://store.continuum.io/cshop/anaconda/</url>).</p> 
         </section>
         <section>
-            <title>Setting up the environment variables</title>
-            <p>If you followed the instructions on the ANT website, you should have the following environment variables set:</p>
-            <ul>
-                <li>
-                    <p>ANT_HOME</p>
-                </li>
-                <li>
-                    <p>JAVA_HOME</p>
-                </li>
-            </ul>
-            <p>For example:</p>
-            <p>Windows:</p>
-                    <codeblock>
-                    ANT_HOME=c:\ant
-                    JAVA_HOME=c:\jdk-1.5.0.05 
-                    </codeblock>
-            <p>Linux:</p>
-               <codeblock>
-                   ANT_HOME=/usr/local/ant
-                   AVA_HOME=/usr/local/jdk-1.5.0.05
-               </codeblock>
-            <p>Ensure that your <code>PATH</code> environment variable includes ANT_HOME\bin.</p>
-             <p> You also need to set the SPFE environment variable SPFEOT_HOME and include it in
-                your PATH environment variable. For example:</p>
-            <ul>
-                <li>
-                    <p>Windows: If you installed SPFE in <directory-name>C:\Users\yourname\Documents</directory-name>:  
-                    <code>SPFEOT_HOME=C:\Users\yourname\Documents\spfe\spfe-ot</code>
-                    </p>
-                </li>
-                <li>
-                    <p>Linux: If you installed SPFE in <directory-name>/home/yourname</directory-name>:  
-                    <code>SPFEOT_HOME=/home/yourname/spfe/spfe-ot</code>
-                    </p>
-                </li>
-            </ul>
+            <title>Add the SPFE OT directory to your path</title>
+            <p>Add the SPFE OT directory to your path.</p>
         </section>
         <section>
             <title>Building the SPFE documentation</title>
-            <p> In the SPFEOT_HOME directory, you need to ensure that the
-                    <tool-name>spfe</tool-name> build tool uses the correct script for the operating
-                system. By default, it uses the file for Linux (<file-name>spfe.sh</file-name>). If
-                you use Windows, edit the file <file-name>spfe</file-name> and change the first line
-                to <file-name>spfe.bat</file-name>.</p>
             <p> To verify that you set up the build environment correctly, build the SPFE HTML
                 documentation.</p>
                 <ol>
@@ -119,7 +91,7 @@
                             <directory-name>&lt;spfe-installation
                             path>/spfe-docs/build</directory-name></p></li>
                     <li>
-                        <p>Type <code>spfe spfe-docs-config.xml draft</code></p>
+                        <p>Type <code>spfe build spfe-docs-config.xml draft</code></p>
                     </li>
                 </ol>
                 <p>The build system creates the  <directory-name>spfebuild</directory-name>

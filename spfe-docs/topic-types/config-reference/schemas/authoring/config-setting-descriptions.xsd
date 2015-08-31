@@ -8,6 +8,8 @@
 	<xs:include
 		schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/spfe-docs-core/schemas/authoring/spfe-docs-core.xsd"/>
 
+	<xs:include
+		schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/index/schemas/authoring/index.xsd"/>
 	<xs:element name="config-setting-descriptions">
 		<xs:complexType>
 			<xs:sequence>
@@ -25,6 +27,7 @@
 							<xs:element name="config-setting-description" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:sequence>
+										<xs:group ref="csd:index" maxOccurs="1" minOccurs="0"/>
 										<xs:element name="xpath" type="xs:string"/>
 										<xs:element name="description" type="csd:text-general"/>
 										<xs:element name="values">
@@ -41,7 +44,6 @@
 											</xs:complexType>
 										</xs:element>
 										<xs:element name="restrictions" type="csd:restrictionsType"/>
-										<xs:element name="build-property" type="xs:string"/>
 										<xs:element name="attributes" type="csd:attributesType"/>
 									</xs:sequence>
 								</xs:complexType>
@@ -56,13 +58,14 @@
 			<xs:field xpath="csd:xpath"/>
 		</xs:unique>
 	</xs:element>
-	
+
 	<xs:complexType name="restrictionsType">
 		<xs:sequence>
-			<xs:element name="restriction" minOccurs="0" maxOccurs="unbounded" type="csd:text-general"/>
+			<xs:element name="restriction" minOccurs="0" maxOccurs="unbounded"
+				type="csd:text-general"/>
 		</xs:sequence>
 	</xs:complexType>
-	
+
 	<xs:complexType name="attributesType">
 		<xs:sequence>
 			<xs:element name="attribute" maxOccurs="unbounded" minOccurs="0">
@@ -94,7 +97,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			
+
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

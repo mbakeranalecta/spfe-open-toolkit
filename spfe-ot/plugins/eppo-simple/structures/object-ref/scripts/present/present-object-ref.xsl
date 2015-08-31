@@ -7,7 +7,7 @@
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all">
-
+	
 	<xsl:template match="object-ref">
 		<xsl:variable name="id-ref" select="@id-ref"/>
 		<xsl:choose>

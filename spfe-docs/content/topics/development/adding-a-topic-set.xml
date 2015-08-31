@@ -92,7 +92,7 @@
                         topic sets) they belong to.</p>
                </li>
                <li>
-                   <p>Add a new <config-setting>/spfe/content-set/topic-sets/topic-set</config-setting> to the appropriate <feature>content set configuration file</feature>. You can add a topic set to more than one content set.</p>
+                   <p>Add a new <config-setting>/content-set/topic-sets/topic-set</config-setting> to the appropriate <feature>content set configuration file</feature>. You can add a topic set to more than one content set.</p>
                </li>
            </ol>
        </doing>

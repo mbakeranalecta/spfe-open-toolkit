@@ -10,7 +10,7 @@
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	exclude-result-prefixes="#all">
 	
 	<!-- topic -->
@@ -31,9 +31,9 @@
 		</pe:title>
 		<!-- page toc -->
 		<pe:toc>
-			<pe:toc-entry><pe:link href="#Think">Understanding <xsl:value-of select="$title"/></pe:link></pe:toc-entry>
-			<pe:toc-entry><pe:link href="#Plan">Planning <xsl:value-of select="$title"/></pe:link></pe:toc-entry>
-			<pe:toc-entry><pe:link href="#Do">Doing <xsl:value-of select="$title"/></pe:link></pe:toc-entry>
+			<pe:toc-entry><pe:link href="#Think">Think</pe:link></pe:toc-entry>
+			<pe:toc-entry><pe:link href="#Plan">Plan</pe:link></pe:toc-entry>
+			<pe:toc-entry><pe:link href="#Do">Do</pe:link></pe:toc-entry>
 		</pe:toc>
 		
 	</xsl:template>
@@ -58,7 +58,7 @@
 	<xsl:template match="es:think-plan-do-topic/es:body/es:understanding">	
 		<pe:section>
 			<pe:anchor name="Think"/>
-			<pe:title>Understanding <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
+			<pe:title>Think</pe:title>
 			<xsl:apply-templates/>
 		</pe:section>
 	</xsl:template>
@@ -66,7 +66,7 @@
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning">
 		<pe:section>
 			<pe:anchor name="Plan"/>
-			<pe:title>Planning <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
+			<pe:title>Plan</pe:title>
 			<xsl:apply-templates/>
 		</pe:section>
 	</xsl:template>
@@ -85,7 +85,7 @@
 	<xsl:template match="es:think-plan-do-topic/es:body/es:doing">	
 		<pe:section>
 			<pe:anchor name="Do"/>
-			<pe:title>Doing <xsl:value-of select="ancestor::es:body/es:title"/></pe:title>
+			<pe:title>Do</pe:title>
 			<xsl:apply-templates/>
 		</pe:section>
 	</xsl:template>	

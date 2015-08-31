@@ -7,14 +7,15 @@
  xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  xmlns:xs="http://www.w3.org/2001/XMLSchema"
  xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
- xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+ xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
  exclude-result-prefixes="#all">
 	
 	<xsl:variable name="config" as="element(config:config)">
 		<xsl:sequence select="/config:config"/>
 	</xsl:variable>
 	
-	<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 	
 	<xsl:param name="synthesis-files"/>
 	<xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
@@ -30,7 +31,7 @@
 		<xsl:choose>
 			<xsl:when test="$topic-set-id eq 'spfe.objects'">Text Objects</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+				<xsl:value-of select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:title"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable> 

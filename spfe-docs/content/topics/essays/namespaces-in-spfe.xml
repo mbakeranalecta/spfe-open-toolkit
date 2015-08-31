@@ -86,18 +86,18 @@
                 vocabulary, for example, there are several elements named
                 <xml-element-name>name</xml-element-name>, and every one of them is part of the SPFE
                 configuration namespace,
-                    <xml-namespace-uri>http://spfeopentoolkit/ns/spfe-ot/config</xml-namespace-uri>.
+                    <xml-namespace-uri>http://spfeopentoolkit.org/ns/spfe-ot/config</xml-namespace-uri>.
                 What distinguishes them is their position relative to other elements in a
                 configuration document. They include: </p>
             <ul>
                 <li>
-                    <p><config-setting>/spfe/topic-type/name</config-setting></p>
+                    <p><config-setting>/topic-type/name</config-setting></p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/content-set/output-formats/output-format/name</config-setting></p>
+                    <p><config-setting>/content-set/output-formats/output-format/name</config-setting></p>
                 </li>
                 <li>
-                    <p><config-setting>/spfe/topic-set/topic-types/topic-type/name</config-setting></p>
+                    <p><config-setting>/topic-set/topic-types/topic-type/name</config-setting></p>
                 </li>
             </ul>
             <p>So, having a element name and namespace does not tell you what that element means, or
@@ -113,7 +113,7 @@
                     <xml-namespace-uri>http://www.w3.org/2001/XMLSchema</xml-namespace-uri> states
                 that it belong to the W3C and to the XML Schema project within the W3C. The SPFE
                 configuration namespace,
-                    <xml-namespace-uri>http://spfeopentoolkit/ns/spfe-ot/config</xml-namespace-uri>
+                    <xml-namespace-uri>http://spfeopentoolkit.org/ns/spfe-ot/config</xml-namespace-uri>
                 states that it belongs to the SPFE Open Toolkit, and to the configuration project
                 within the SPFE Open Toolkit.</p>
         </section>

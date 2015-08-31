@@ -5,7 +5,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
-    xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
     xmlns="http://spfeopentoolkit.org/ns/eppo-simple/objects"
     exclude-result-prefixes="#all" 

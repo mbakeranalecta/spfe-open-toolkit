@@ -10,7 +10,7 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns="http://spfeopentoolkit.org/ns/eppo-simple"
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
@@ -59,6 +59,7 @@
 						<xsl:value-of select="$fragment-id"/>
 						<xsl:text>.</xsl:text>
 					</xsl:with-param>
+					<xsl:with-param name="in" select="if (ancestor::ss:topic/@full-name ne '') then ancestor::ss:topic/@full-name else base-uri()"/>
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>

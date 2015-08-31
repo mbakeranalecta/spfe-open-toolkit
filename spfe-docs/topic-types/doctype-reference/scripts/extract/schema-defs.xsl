@@ -3,7 +3,7 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" exclude-result-prefixes="#all">
 
 
@@ -33,7 +33,8 @@
 	attribute encountered.
 ===============================================================-->
 
-	<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 	<xsl:output method="xml" indent="yes"/>
 
 	<xsl:variable name="config" as="element(config:config)">

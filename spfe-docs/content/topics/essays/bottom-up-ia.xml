@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<essay xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/essay/schemas/authoring/essay.xsd">
+    <head>
+        <id>bottom-up-ia</id>
+        <history>
+            <revision>
+                <date>2012-04-22</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>concept</type>
+                <term>bottom-up information architecture</term>
+            </entry>
+            <entry>
+                <type>concept</type>
+                <term>bottom-up information architectures</term>
+            </entry>
+            <entry>
+                <type>concept</type>
+                <term>information architecture</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Bottom-up Information Architecture</title>
+        <byline>
+            <author-name>Mark Baker</author-name>
+        </byline>
+        <precis>
+            <p>A bottom-up information architecture is one which designed for the reader who enters a content set at an individual page, often unaware of the larger information set, its structure, or its scope.</p>
+        </precis>
+        <p>A bottom up architecture
+            is characterized by:</p>
+        <ul>
+            <li>
+                <p><feature>Topics</feature> or pages are written on the <feature>Every Page is Page
+                        One</feature> principle: Each page is a potential landing page and starting
+                    point for the user, and there is no one preferred path through the content
+                    set.</p>
+            </li>
+            <li>
+                <p>Topics or pages are added to the collection individually, without the need to
+                    place them in a top-down structure or <feature>table of contents</feature>. New
+                    pages are integrated automatically into the collection based on their
+                        <feature>metadata</feature>. Collections are formed by queries and all
+                    topics that meet the conditions of the query are included automatically.</p>
+            </li>
+            <li>
+                <p>Topics or pages work as hubs of their local semantic space, <task>linking to
+                        topics on related subjects</task>. </p>
+            </li>
+        </ul>
+    </body>
+</essay>

@@ -13,9 +13,33 @@
 
     <xs:group name="annotations-common-subjects">
         <xs:choice>
-            <xs:element name="feature"/>
-            <xs:element name="concept"/>
-            <xs:element name="task"/>
+            <xs:element name="feature">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="specifically"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="concept">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="specifically"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="task">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="specifically"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="term"/>
         </xs:choice>
     </xs:group>

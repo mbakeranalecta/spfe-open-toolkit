@@ -41,8 +41,16 @@
                 <term>configuration file</term>
             </entry>
             <entry>
+                <type>feature</type>
+                <term>configuration files</term>
+            </entry>
+            <entry>
                 <type>config-setting</type>
                 <term>/spfe</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>build configuration</term>
             </entry>
         </index>
     </head>
@@ -62,29 +70,29 @@
         <ul>
             <li>
                 <p>The <feature>content set</feature> configuration, contained in the setting,
-                    <config-setting>/spfe/content-set</config-setting>: This defines the set of topic
+                    <config-setting>/content-set</config-setting>: This defines the set of topic
                     sets to be included in the topic set as well as other settings that are common
                     to the entire content set.</p>
             </li>
             <li>
-                <p>The <feature>topic set</feature> configuration for each topic set, contained in the setting <config-setting>/spfe/topic-set</config-setting>: This defines the topics to include in each topic set and other setting that are common to a topic set. A topic set configuration is included in the content set configuration using the setting <config-setting>/spfe/content-set/topic-sets/topic-set</config-setting>.</p>
+                <p>The <feature>topic set</feature> configuration for each topic set, contained in the setting <config-setting>/topic-set</config-setting>: This defines the topics to include in each topic set and other setting that are common to a topic set. A topic set configuration is included in the content set configuration using the setting <config-setting>/content-set/topic-sets/topic-set</config-setting>.</p>
             </li>
             <li>
-                <p>The <feature>topic type</feature> configuration for each topic type in a topic set, contained in the setting <config-setting>/spfe/topic-type</config-setting>: This defines the scripts to use to process topics of a particular topic type, as well as other setting common to a topic type. A topic type configuration file is usually created as part of defining a topic type. A topic type configuration is included in the topic set configuration using the setting <config-setting>/spfe/topic-set/topic-types/topic-type</config-setting>.</p>
+                <p>The <feature>topic type</feature> configuration for each topic type in a topic set, contained in the setting <config-setting>/topic-type</config-setting>: This defines the scripts to use to process topics of a particular topic type, as well as other setting common to a topic type. A topic type configuration file is usually created as part of defining a topic type. A topic type configuration is included in the topic set configuration using the setting <config-setting>/topic-set/topic-types/topic-type</config-setting>.</p>
             </li>
             <li>
-                <p>The <feature>object type</feature> configuration for each <feature>object type</feature> in a topic set, contained in the setting <config-setting>/spfe/topic-set/object-types/object-type</config-setting>: This defines the scripts used to process objects of a particular type, as well as other settings related to objects.
+                <p>The <feature>object type</feature> configuration for each <feature>object type</feature> in a topic set, contained in the setting <config-setting>/topic-set/object-types/object-type</config-setting>: This defines the scripts used to process objects of a particular type, as well as other settings related to objects.
                 </p>
             </li>
             <li>
-                <p>The <feature>output type</feature> configuration for each output type required
+                <p>The <feature>output format</feature> configuration for each output format required
                     for the content set, contained in the setting
-                    <config-setting>/spfe/output-format</config-setting>: This defines the scripts
-                    used to create an output of a particular type. An output type configuration file
-                    is usually created as part of defining an output type. An output type
-                    configuration is included in the content set configuration using the
+                    <config-setting>/output-format</config-setting>: This defines the scripts
+                    used to create an output of a particular type. An <feature>output format configuration file</feature>
+                    is usually created as part of defining an output format. An <feature>output format
+                    configuration</feature> is included in the content set configuration using the
                     setting
-                    <config-setting>/spfe/content-set/output-formats/output-format</config-setting>.</p>
+                    <config-setting>/content-set/output-formats/output-format</config-setting>.</p>
             </li>
         </ul>
 

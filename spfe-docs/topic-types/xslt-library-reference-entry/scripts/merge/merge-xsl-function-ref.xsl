@@ -7,7 +7,7 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 xmlns:fd="http://spfeopentoolkit.org/ns/spfe-docs"
 xmlns:xfd="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"
@@ -25,7 +25,8 @@ exclude-result-prefixes="#all" >
 
 <xsl:output method="xml" indent="yes" />
 	
-<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 
 	<xsl:param name="output-directory"/>
 
@@ -181,8 +182,8 @@ Main template
 										
 										<xsl:variable name="authored" select="$template-description/fd:parameters/fd:parameter[fd:name = $parameter-name]/fd:description"/>
 										<xsl:if test="not($authored)">
-											<xsl:call-template name="sf:warning">
-												<xsl:with-param name="message" select="concat('Parameter description not found &quot;', string($parameter-name), '&quot; for template ', $name)"/>
+											<xsl:call-template name="sf:unresolved">
+												<xsl:with-param name="message" select="concat('Parameter description not found for parameter &quot;', string($parameter-name), '&quot; for template &quot;', $name,'&quot;')"/>
 											</xsl:call-template>
 										</xsl:if>
 										

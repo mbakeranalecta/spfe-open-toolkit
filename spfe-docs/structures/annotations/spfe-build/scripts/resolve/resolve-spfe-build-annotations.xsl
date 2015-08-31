@@ -10,7 +10,7 @@
         <name>
             <xsl:attribute name="type">config-setting</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(if (@xpath) then @xpath else .)"/>
-            <xsl:attribute name="namespace">http://spfeopentoolkit/ns/spfe-ot/config</xsl:attribute> 
+            <xsl:attribute name="namespace">http://spfeopentoolkit.org/ns/spfe-ot/config</xsl:attribute> 
             <xsl:apply-templates/>
         </name>
     </xsl:template>    
@@ -23,14 +23,6 @@
             <xsl:apply-templates/>
         </name>
     </xsl:template> 
-    
-    <xsl:template match="p/spfe-build-property | string/spfe-build-property">
-        <name>
-            <xsl:attribute name="type">spfe-build-property</xsl:attribute>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
-            <xsl:apply-templates/>
-        </name>
-    </xsl:template>
 
     <xsl:template match="p/spfe-build-function | string/spfe-build-function">
         <name>

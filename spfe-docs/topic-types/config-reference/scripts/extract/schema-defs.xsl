@@ -4,7 +4,7 @@
 <xsl:stylesheet version="2.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	exclude-result-prefixes="#all">
 
@@ -40,7 +40,9 @@
 	<!-- get the namespace prefix used in the source  
 	<xsl:variable name="xsd-prefix" select="substring-before(name(xs:schema), local-name(xs:schema))"/> -->
 	
-	<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
+	<xsl:param name="output-directory"></xsl:param>
 
 	<xsl:variable name="config" as="element(config:config)">
 		<xsl:sequence select="/config:config"/>

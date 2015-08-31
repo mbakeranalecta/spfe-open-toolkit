@@ -4,7 +4,7 @@
 <xsl:stylesheet 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xmlns="http://spfeopentoolkit.org/spfe-docs/extraction/xslt-function-definitions"
     exclude-result-prefixes="#all"
@@ -17,7 +17,8 @@
         <xsl:sequence select="/config:config"/>
     </xsl:variable>
     
-    <xsl:param name="topic-set-id"/>
+    <xsl:param name="set-id"/>
+    <xsl:variable name="topic-set-id" select="$set-id"/>
     
     <xsl:param name="sources-to-extract-content-from"/>
     <xsl:variable name="xslt-file-set" select="sf:get-sources($sources-to-extract-content-from)"/>

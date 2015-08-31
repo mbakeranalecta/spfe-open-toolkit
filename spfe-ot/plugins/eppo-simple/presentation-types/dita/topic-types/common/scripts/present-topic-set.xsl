@@ -6,7 +6,7 @@
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
  	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
  	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
- 	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+ 	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
  	exclude-result-prefixes="#all">
 	
 <!-- processing directives -->
@@ -17,8 +17,7 @@
 
 <!-- parameters -->
 	<xsl:param name="output-directory" />
-	<!-- FIXME: This shoud be read from config file. -->
-<xsl:param name="draft">no</xsl:param>
+	<xsl:variable name="draft" select="if (lower-case(config:config/config:build-command) eq 'draft') then 'yes' else 'no'"/>
 	
 <xsl:param name="topic-set-id"/>
 
@@ -29,7 +28,7 @@
 <xsl:param name="synthesis-files"/>
 <xsl:variable name="synthesis" select="sf:get-sources($synthesis-files)"/>
 
-<xsl:variable name="topic-set-title" select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+<xsl:variable name="topic-set-title" select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:title"/>
 <!--  
 =============
 Main template

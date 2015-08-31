@@ -3,7 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     exclude-result-prefixes="xs"
     xmlns:lf="local-functions"
-    xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
     xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
@@ -89,6 +89,12 @@
     </xsl:template>
     
     <xsl:template name="main">
+        <xsl:if test="$presentation-files eq ''">
+            <xsl:call-template name="sf:error">
+                <xsl:with-param name="message">No presentation files found for topic set <xsl:value-of select="$topic-set-id"/></xsl:with-param>
+                <xsl:with-param name="in" select="base-uri(doc(''))"></xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
         <xsl:call-template name="sf:info">
             <xsl:with-param name="message">
                 <xsl:choose>

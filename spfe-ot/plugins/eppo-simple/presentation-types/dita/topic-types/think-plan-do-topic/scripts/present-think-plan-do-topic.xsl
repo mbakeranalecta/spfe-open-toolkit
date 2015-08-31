@@ -10,7 +10,7 @@
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	exclude-result-prefixes="#all">
 	
 	<!-- topic -->
@@ -65,14 +65,14 @@
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:understanding">	
 		<section id="Think">
-			<title>Understanding <xsl:value-of select="ancestor::es:body/es:title"/></title>
+			<title>Think</title>
 			<xsl:apply-templates/>
 		</section>
 	</xsl:template>
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:planning">
 		<section id="Plan">
-			<title>Planning <xsl:value-of select="ancestor::es:body/es:title"/></title>
+			<title>Plan</title>
 			<dl>
 				<xsl:apply-templates/>
 			</dl>
@@ -93,7 +93,7 @@
 	
 	<xsl:template match="es:think-plan-do-topic/es:body/es:doing">	
 		<section id="Do">
-			<title>Doing <xsl:value-of select="ancestor::es:body/es:title"/></title>
+			<title>Do</title>
 			<xsl:apply-templates/>
 		</section>
 	</xsl:template>	

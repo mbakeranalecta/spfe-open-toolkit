@@ -4,7 +4,7 @@
 <function-and-template-descriptions
     xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/function-and-template-reference/schemas/authoring/xslt-function-and-template-descriptions.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/xslt-library-reference-entry/schemas/authoring/xslt-function-and-template-descriptions.xsd">
     <head>
         <id>function-and-template-descriptions</id>
         <history>
@@ -131,7 +131,15 @@
         <function-description>
             <name>get-sources</name>
             <description>
-                <p>The <xslt-function-name>get-sources</xslt-function-name> is used to load a set of XML source files into a variable. It takes a string value that contains a set of file paths separated by semicolons. The function will fix directory separators charactres in the file paths. You should use the <xslt-function-name>get-sources</xslt-function-name> function to load sourse files, irrespective of whether you are laoding one file or several. This makes your script resiliant if the number of source files should change, and also allows for more flecibity in downstream processes, allowing them to produce one file or many.</p>
+                <p>The <xslt-function-name>get-sources</xslt-function-name> is used to load a set of
+                    XML source files into a variable. It takes a string value that contains a set of
+                    file paths separated by semicolons. The function will fix directory separators
+                    characters in the file paths. You should use the
+                    <xslt-function-name>get-sources</xslt-function-name> function to load source
+                    files, irrespective of whether you are loading one file or several. This makes
+                    your script resilient if the number of source files should change, and also
+                    allows for more flexibility in downstream processes, allowing them to produce
+                    one file or many.</p>
             </description>
             <return-value>
                 <description>
@@ -365,7 +373,7 @@
             <name>get-topic-type-alias-singular</name>
             <!-- keep this in sync with otehr get-alias functions -->
             <description>
-                <p>Gets the singular version of a <feature>topic type alias</feature>. Topic types are formally named using their XML namespace URIs. However, if you want to display the name of a topic type publicly, for instance in a list of topics or in the visible metadata of a topic, you will need a human readable name for the topic type: the topic type alias. Topic type aliases are defined in the configuration of a topic type, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <p>Gets the singular version of a <feature>topic type alias</feature>. Topic types are formally named using their XML namespace URIs. However, if you want to display the name of a topic type publicly, for instance in a list of topics or in the visible metadata of a topic, you will need a human readable name for the topic type: the topic type alias. Topic type aliases are defined in the configuration of a topic type, in the setting <config-setting>/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
                 <codeblock language="XML">
 &lt;topic-type>
     &lt;xmlns>http://spfeopentoolkit.org/ns/spfe-docs&lt;/xmlns>
@@ -400,11 +408,9 @@
                     </description>
                 </parameter>
                 <parameter>
-                    <name>config</name>
+                    <name>topic-set-id</name>
                     <description>
-                        <fragment id="config-description">
-                            <p>A reference to the configuration file.</p>
-                        </fragment>
+                        <p>The id of the current topic set.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -413,7 +419,7 @@
             <name>get-topic-type-alias-plural</name>
             <!-- keep this in sync with otehr get-alias functions -->
             <description>
-                <p>Gets the plural version of a <feature>topic type alias</feature>. Topic types are formally named using their XML namespace URIs. However, if you want to display the name of a topic type publicly, for instance in a list of topics or in the visible metadata of a topic, you will need a human readable name for the topic type: the topic type alias. Topic type aliases are defined in the configuration of a topic type, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <p>Gets the plural version of a <feature>topic type alias</feature>. Topic types are formally named using their XML namespace URIs. However, if you want to display the name of a topic type publicly, for instance in a list of topics or in the visible metadata of a topic, you will need a human readable name for the topic type: the topic type alias. Topic type aliases are defined in the configuration of a topic type, in the setting <config-setting>/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
                 <codeblock language="XML">
 &lt;topic-type>
     &lt;xmlns>http://spfeopentoolkit.org/ns/spfe-docs&lt;/xmlns>
@@ -448,9 +454,9 @@
                     </description>
                 </parameter>
                 <parameter>
-                    <name>config</name>
+                    <name>topic-set-id</name>
                     <description>
-                        <fragment-ref id-ref="config-description"/>
+                        <p>The id of the current topic set.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -459,10 +465,10 @@
             <name>get-subject-type-alias-singular</name>
             <!-- keep this in sync with otehr get-alias functions -->
             <description>
-                <p>Gets the singular version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quotes>xslt-function-name</quotes>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>doc set configuration</feature>, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
-                <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
-&lt;spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+                <p>Gets the singular version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quotes>xslt-function-name</quotes>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>content set configuration file</feature>, in the setting <config-setting>/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <codeblock language="XML" namespace="http://spfeopentoolkit.org/ns/spfe-ot/config">
+&lt;spfe xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     &lt;content-set>
     ...
         &lt;subject-types>
@@ -505,7 +511,7 @@
                 <parameter>
                     <name>config</name>
                     <description>
-                        <fragment-ref id-ref="config-description"/>
+                        <fragment id="config-description"><p>The config variable.</p></fragment>
                     </description>
                 </parameter>
             </parameters>
@@ -514,10 +520,10 @@
             <name>get-subject-type-alias-plural</name>
             <!-- keep this in sync with otehr get-alias functions -->
             <description>
-                <p>Gets the plural version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quotes>xslt-function-name</quotes>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>doc set configuration</feature>, in the setting <config-setting>/spfe/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
-                <codeblock language="XML" namespace="http://spfeopentoolkit/ns/spfe-ot/config">
-&lt;spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+                <p>Gets the plural version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quotes>xslt-function-name</quotes>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>content set configuration file</feature>, in the setting <config-setting>/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <codeblock language="XML" namespace="http://spfeopentoolkit.org/ns/spfe-ot/config">
+&lt;spfe xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     &lt;content-set>
     ...
         &lt;subject-types>
@@ -569,7 +575,7 @@
             <name>get-topic-link-priority</name>
             <description>
                 <p>Gets the <feature>link priority</feature> of a topic. Link priority is used to determine which topic to link to when more than one topic is identified as a source for a subject. Lower numbers indicate a higher priority.</p>
-                <p>Link priority is calculated by adding the link priority of the <feature>topic type</feature>, defined in <config-setting>/spfe/topic-type/topic-type-link-priority</config-setting> to the link priority of the <feature>topic set</feature>, defined in <config-setting>/spfe/topic-set/topic-set-link-priority</config-setting>.</p>
+                <p>Link priority is calculated by adding the link priority of the <feature>topic type</feature>, defined in <config-setting>/topic-type/topic-type-link-priority</config-setting> to the link priority of the <feature>topic set</feature>, defined in <config-setting>/topic-set/topic-set-link-priority</config-setting>.</p>
             </description>
             <return-value>
                 <description>
@@ -578,9 +584,9 @@
             </return-value>
             <parameters>
                 <parameter>
-                    <name>topic-namespace-uri</name>
+                    <name>topic-type-name</name>
                     <description>
-                        <p>The <feature>namespace URI of the topic type schema</feature>. By default, the <feature>resolve step</feature>  places the namespace URI of the topic in the <xml-attribute-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic/@type">type</xml-attribute-name> attribute of the <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic">ss:topic</xml-element-name> wrapper element.</p>
+                        <p>The name of the <feature>topic type</feature>, as specified in its configuration file a <config-setting>/topic-type/name</config-setting>. By default, the <feature>resolve step</feature>  places the topic type name of the topic in the <xml-attribute-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic/@type">type</xml-attribute-name> attribute of the <xml-element-name namespace-uri="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" xpath="/ss:synthesis/ss:topic">ss:topic</xml-element-name> wrapper element.</p>
                         <codeblock>
 &lt;ss:topic type="http://spfeopentoolkit.org/ns/eppo-simple"
     topic-type-alias="Task"
@@ -595,7 +601,7 @@
                 <parameter>
                     <name>topic-set-id</name>
                     <description>
-                        <p>The <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> of the topic. The <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> is passed as a parameter to every processing script.</p>
+                        <p>The <config-setting xpath="/topic-set/topic-set-id">topic-set-id</config-setting> of the topic. The <config-setting xpath="/topic-set/topic-set-id">topic-set-id</config-setting> is passed as a parameter to every processing script.</p>
                     </description>
                 </parameter>
                 <parameter>
@@ -603,6 +609,75 @@
                     <description>
                         <fragment-ref id-ref="config-description"/>
                     </description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>name-in-clark-notation</name>
+            <description>
+                <p>Returns the name of an element using Clark notation. Clark notation is a way of adding the namespace that an element belongs to its name. It consists of the namespace URI in curly braces prepended to the local name (without prefix).</p>
+            </description>
+            <return-value>
+                <description><p>The name of the element in Clark notation.</p></description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>element</name>
+                    <description><p>The element whose name it to be given in Clark notation. Note that the parameter value must be the element itself, not an element name.</p></description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>process-placeholders</name>
+            <description><p>
+                Processes a string to determine if it contains placeholder markup in the form of a string contained between "{" and "}". Recognizes "{{}"   as an escape sequence for a literal "{". Nesting of placeholders is not supported. The use of a literal "{" or "}" inside the placeholder string is not supported. The function does not attempt to detect or report these         conditions, however.
+                
+                $string is the string to process.
+                $literal-name is the element name to wrap around a the literal parts
+                of $string.
+                $placeholder-name is the element name to wrap around the placeholder
+                parts of $string.
+            </p></description>
+            <return-value>
+                <description><p>Returns an XML sequence in which the literal portions of the input string are wrapped in an element whose name is passed as the <code>literal-name</code> parameter and the placeholder portions of the string are wrapped in an element whose name is passed as the <code>placeholder-name</code>parameter.</p>
+                <p>For example, given the following call:</p>
+                <codeblock language="XSLT2">
+                    <![CDATA[
+sf:process-placeholders('foo{bar}bas','lit','var')
+]]>
+                </codeblock>
+                <p>The return value would be an XML sequence like this:</p>
+                <codeblock>
+                    <![CDATA[
+<lit>foo</lit><var>bar</var><lit>bas</lit>
+]]>
+                </codeblock></description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>string</name>
+                    <description><p>The string to be processed.</p></description>
+                </parameter>
+                <parameter>
+                    <name>literal-name</name>
+                    <description><p>The name of the XML element to use to wrap the literal portions of the string.</p></description>
+                </parameter>
+                <parameter>
+                    <name>placeholder-name</name>
+                    <description><p>The name of the XML element to use to wrap the placeholder portions of the string.</p></description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>has-content</name>
+            <description><p>Tests to see if an XML element has any text content.</p></description>
+            <return-value>
+                <description><p>True if the element has content. False otherwise.</p></description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>content</name>
+                    <description><p>The element to be tested.</p></description>
                 </parameter>
             </parameters>
         </function-description>
@@ -707,6 +782,53 @@
                 </parameter>
             </parameters>
         </function-description>
+        <function-description>
+            <name>local-to-url</name>
+            <description>
+                <p>Converts a local path expression into a file URL. Useful for calling XSLT functions that expect a URL.</p>
+            </description>
+            <return-value>
+                <description><p>The path converted to a file URL.</p></description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>local-path</name>
+                    <description><p>The local path to be converted.</p></description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>url-to-local</name>
+            <description>
+                <p>Converts a file URL into a local system path.</p>
+            </description>
+            <return-value>
+                <description><p>The file URL as a local system path.</p></description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>url</name>
+                    <description><p>The URL to be converted to a system path.</p></description>
+                </parameter>
+            </parameters>
+        </function-description>
+        <function-description>
+            <name>escape-for-regex</name>
+            <description>
+                <p>Escapes a string value to make it suitable for inclusion in a regular expression as a literal string to be matched. </p>
+            </description>
+            <return-value>
+                <description>
+                    <p>The string with any characters that are reserved characters in a regular expression replaced by the appropriate escape sequence.</p>
+                </description>
+            </return-value>
+            <parameters>
+                <parameter>
+                    <name>string</name>
+                    <description><p>The string to be escaped for use in a regular expression.</p></description>
+                </parameter>
+            </parameters>
+        </function-description>
         <template-description>
             <name>error</name>
             <description>
@@ -723,6 +845,12 @@
                     <name>message</name>
                     <description>
                         <p>The error message to report. The template outputs this message prefixed with "ERROR: ".</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>in</name>
+                    <description>
+                        <fragment id='in-parameter-description'><p>A string describing the location where the error occurred. This might be a location in a data file or in a script, depending on what would be most useful to the user in identifying and fixing the source of the problem.</p></fragment>
                     </description>
                 </parameter>
             </parameters>
@@ -763,6 +891,10 @@
                         <p>The message to be output. The string "Debug: " will be prefixed to the message.</p>
                     </description>
                 </parameter>
+                <parameter>
+                    <name>in</name>
+                    <description><fragment-ref id-ref="in-parameter-description"/></description>
+                </parameter>
             </parameters>
         </template-description>
         <template-description>
@@ -782,6 +914,10 @@
                         <p>The message to be output. The string "Warning: " will be prefixed to the message.</p>
                     </description>
                 </parameter>
+                <parameter>
+                    <name>in</name>
+                    <description><fragment-ref id-ref="in-parameter-description"/></description>
+                </parameter>
             </parameters>
         </template-description>
         <template-description>
@@ -800,6 +936,10 @@
                     <description>
                         <p>The message to be output. The string "Unresolved: No content to link to on subject " will be prefixed to the message.</p>
                     </description>
+                </parameter>
+                <parameter>
+                    <name>in</name>
+                    <description><fragment-ref id-ref="in-parameter-description"/></description>
                 </parameter>
             </parameters>
         </template-description>

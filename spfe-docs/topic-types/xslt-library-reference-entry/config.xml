@@ -2,9 +2,9 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2014 All Rights Reserved. -->
 
-<topic-type xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+<topic-type xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <name>{http://spfeopentoolkit.org/ns/spfe-docs}xslt-library-reference-entry</name>
     <aliases>
         <singular>SPFE XSLT library routine</singular>
@@ -64,11 +64,13 @@
                 <href>../../topic-types/xslt-library-reference-entry/scripts/resolve/resolve-xsl-function-ref.xsl</href>
             </script>               
         </resolve>
-        <present type="eppo">
-            <!--                <script>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
+        <link type="eppo">
+            <script>
+                <href>scripts/link/eppo/link-function-ref.xsl</href>
             </script>
--->                <script>
+        </link>
+        <present type="eppo">
+            <script>
                 <href>scripts/present/eppo/present-function-ref.xsl</href>
             </script>
         </present>

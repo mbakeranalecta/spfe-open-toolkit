@@ -99,7 +99,7 @@
             EPPO-simple procedure model provides an <eppo-simple-element-name>inputs</eppo-simple-element-name>
             structure for this purpose. You can list each of the inputs (materials and tools) that
             the reader will need to complete the procedure. (Think of this like the ingredients list
-            for a recipe.) You can use <feature>semantic annotation</feature> within the body of a
+            for a recipe.) You can use <feature>annotations</feature> within the body of a
             input or output listing, which will generate links to topics that relate to those items,
             thus providing the reader with links to procedures for creating any of the inputs that
             they don't have on hand. </p>
@@ -107,7 +107,7 @@
             on one of two ideas. The first is that once you have the output that the procedure
             creates you can do a number of other things. This is not generally a significant use
             case since most readers will do not a procedure at all without some end goal in mind.
-            However, by using semantic annotation in the body of an output listing, you will allow
+            However, by using <feature>annotations</feature> in the body of an output listing, you will allow
             the build to produce links to any pages that discuss the use of those outputs. The
             second reason for listing post-requisites is to chain procedures into a workflow. This
             is not appropriate in Every Page is Page One design (and tends to hide the fact that a

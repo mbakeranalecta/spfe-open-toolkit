@@ -168,20 +168,6 @@
 			</pe:labeled-item>
 
 			<pe:labeled-item>
-				<pe:label>Name in build file</pe:label>
-				<pe:item>
-					<pe:p>
-						<xsl:choose>
-							<xsl:when test="normalize-space(build-property) ne ''">
-								<xsl:value-of select="build-property"/>
-							</xsl:when>
-							<xsl:otherwise>Not used in the build file.</xsl:otherwise>
-						</xsl:choose>
-					</pe:p>
-				</pe:item>
-			</pe:labeled-item>
-
-			<pe:labeled-item>
 				<pe:label>Default</pe:label>
 				<pe:item>
 
@@ -233,7 +219,7 @@
 						<pe:p>None</pe:p>
 					</xsl:if>
 					<xsl:for-each select="children/child">
-						<xsl:sort select="."/>
+						<!--<xsl:sort select="."/>-->
 						<xsl:variable name="child-xpath" select="."/>
 						<pe:p>
 							<pe:name hint="element-name">
@@ -295,7 +281,6 @@
 
 	<xsl:template match="spfe-configuration-reference-entry/type"/>
 	<xsl:template match="spfe-configuration-reference-entry/name"/>
-	<xsl:template match="spfe-configuration-reference-entry/build-property"/>
 
 	<!-- 
 		============================

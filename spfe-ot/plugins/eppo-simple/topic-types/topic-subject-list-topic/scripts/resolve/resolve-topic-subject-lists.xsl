@@ -8,13 +8,14 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"   
 	xmlns:es="http://spfeopentoolkit.org/ns/eppo-simple"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	exclude-result-prefixes="#all" >
 	
-<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 	<!-- FIXME: This should not be defaulted. -->
 	<xsl:param name="output-directory"/>
 	

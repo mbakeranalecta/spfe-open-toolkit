@@ -87,7 +87,7 @@
             </entry>
             <entry>
                 <type>directory-name</type>
-                <term>link-catalogs</term>
+                <term>catalogs</term>
             </entry>
             <entry>
                 <type>directory-name</type>
@@ -102,69 +102,27 @@
         
         <p>By default, the build directory is named <directory-name>spfebuild</directory-name> and is created in the user's home directory. You can change the location of the build directory by setting the environment variable <code>SPFE_BUILD_DIR</code>.</p>
         
-        <p>The build begins by running the configuration script, which creates an ANT build file named <file-name>spfebuild.xml</file-name> at the root of the build directory. This file is created dynamically each time the build is run. Don't try to edit it because it will be overwritten the next time the build is run.</p>
-        
-        <p>The configuration script also creates a directory for the content set being built,
-            which is named using the content set id (configured in
-            <config-setting>/spfe/content-set/content-set-id</config-setting>). Inside this directory it
+        <p>The build script creates a directory for the content set being built, which is named
+            using the content set id (configured in
+            <config-setting>/content-set/content-set-id</config-setting>). Inside this directory it
             creates a directory named <directory-name>config</directory-name> which contains the
             consolidated <feature>configuration file</feature>, with the name
                 <file-name>spfe-config.xml</file-name>.</p>
         
-        <p>The build script then runs ANT on the <file-name>spfebuild.xml</file-name> build file to
-            perform the rest of the build. The build then creates two additional directories in the
-            doc set directory, <directory-name>build</directory-name>, where all the temporary files
-            used by the build are created, and <directory-name>output</directory-name>, where the
-            output is created.</p>
+        <p>The build then creates two additional directories in the <feature>content set directory</feature>,
+                <directory-name>build</directory-name>, where all the temporary files used by the
+            build are created, and <directory-name>output</directory-name>, where the output is
+            created.</p>
         
         <p>Inside the <directory-name>build</directory-name> directory, there are three directories,
-                <directory-name>link-catalogs</directory-name>, where the <feature>link
+                <directory-name>catalogs</directory-name>, where the <feature>link
                 catalogs</feature> are created, <directory-name>topic-sets</directory-name>, where
             the each stage of the topic set build is created, and
                 <directory-name>tocs</directory-name>, where the temporary TOC files are created.
             The link catalogs and temporary TOCs are located outside of the topic set directories
             because they are used by all topic set builds.</p>
-        <table>
-            <thead>
-                <tr>
-                    <td>
-                        <p>Col 1</p>
-                    </td>
-                    <td>
-                        <p>Col 2</p>
-                    </td>
-                    <td>
-                        <p>Col 3</p>
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <p>This is a cell</p>
-                    </td>
-                    <td>
-                        <p>This is another cell</p>
-                    </td>
-                    <td>
-                        <p>This is a third cell</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>This is a new row</p>
-                    </td>
-                    <td>
-                        <p>This is a second <feature>cell</feature> in the new row</p>
-                    </td>
-                    <td>
-                        <p>This is a third cell in the new row</p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
         
-        <p>Inside the <directory-name>topic-sets</directory-name> directory, a directory is created for each topic set in the build, with its name matching the <config-setting xpath="/spfe/topic-set/topic-set-id">topic-set-id</config-setting> of each topic set.</p>
+        <p>Inside the <directory-name>topic-sets</directory-name> directory, a directory is created for each topic set in the build, with its name matching the <config-setting xpath="/topic-set/topic-set-id">topic-set-id</config-setting> of each topic set.</p>
         
         <p>Inside each of these topic set directories, the following files and directories are created:</p>
         

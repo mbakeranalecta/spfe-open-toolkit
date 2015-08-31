@@ -2,9 +2,9 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 
-<topic-type xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+<topic-type xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config  http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <name>{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic</name>
     <aliases>
         <singular>Concept</singular>
@@ -79,10 +79,6 @@
                 </rewrite-namespace>
                 <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/table-basic/scripts/present/eppo/present-table-basic.xsl</href>
             </script>
-            <!--                <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/structures/tocs/topic-set/scripts/present/eppo/present-topic-set-toc.xsl</href>
-                </script>
--->
             <script>
                 <rewrite-namespace>
                     <from>http://spfeopentoolkit.org/ns/eppo-simple</from>

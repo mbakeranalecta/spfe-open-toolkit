@@ -4,7 +4,7 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	exclude-result-prefixes="#all">
 
 	<xsl:param name="message-types">info debug warning</xsl:param>
@@ -42,6 +42,11 @@
 					<xsl:with-param name="message" select="$load-message, $one-file "/>
 				</xsl:call-template>
 			</xsl:if>
+			<xsl:if test="not(doc-available($one-file))">
+				<xsl:call-template name="sf:error">
+					<xsl:with-param name="message">File not found: <xsl:value-of select="$one-file"/></xsl:with-param>
+				</xsl:call-template>
+			</xsl:if>
 			<xsl:sequence select="document($one-file)"/>
 		</xsl:for-each>
 	</xsl:function>
@@ -49,7 +54,7 @@
 	<xsl:function name="sf:local-to-url">
 		<xsl:param name="local-path"/>
 		<xsl:choose>
-			<xsl:when test="starts-with($local-path,'file:/')">
+			<xsl:when test="matches($local-path, '^[a-zA-Z]{2,}:/')">
 				<xsl:value-of select="$local-path"/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -462,7 +467,7 @@
 						<xsl:text>No singular topic type alias found for topic type </xsl:text>
 						<xsl:value-of select="$topic-type-name"/>
 						<xsl:text>. This setting should be defined in the configuration files at </xsl:text>
-						<xsl:text>/spfe/topic-type/aliases/singular.</xsl:text>
+						<xsl:text>/topic-type/aliases/singular.</xsl:text>
 					</xsl:with-param>
 				</xsl:call-template>
 				<!-- FIXME: no point in this return if failure is error. Make fail behavior optional? -->
@@ -500,9 +505,9 @@
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular">
+				test="$config/config:content-set/config:subject-types/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular">
 				<xsl:value-of
-					select="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular"
+					select="$config/config:content-set/config:subject-types/config:subject-type[config:id=$subject-type-id]/config:aliases/config:singular"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -524,9 +529,9 @@
 		<xsl:param name="config"/>
 		<xsl:choose>
 			<xsl:when
-				test="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural">
+				test="$config/config:content-set/config:subject-types/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural">
 				<xsl:value-of
-					select="$config/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural"
+					select="$config/config:content-set/config:subject-types/config:subject-type[config:id=$subject-type-id]/config:aliases/config:plural"
 				/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -577,5 +582,53 @@
 		<xsl:param name="element"/>
 		<xsl:value-of select="concat('{', namespace-uri($element), '}', local-name($element))"/>
 	</xsl:function>
-
+	<xsl:function name="sf:process-placeholders" as="node()*">
+		<!-- Processes a string to determine if it contains placeholder markup in 
+	     the form of a string contained between "{" and "}". Recognizes "{{}"
+	     as an escape sequence for a literal "{". Nesting of placeholders is
+	     not supported. The use of a literal "{" or "}" inside the placeholder 
+	     string is not supported. Does not attempt to detect or report these
+	     conditions, however.
+	     
+	     $string is the string to process.
+	     $literal-name is the element name to wrap around a the literal parts
+	     of $string.
+	     $placeholder-name is the element name to wrap around the placeholder
+	     parts of $string.
+	 -->
+		<xsl:param name="string"/><!-- the string to process -->
+		<xsl:param name="literal-name"/><!-- the element name to wrap around literal parts of $string -->
+		<xsl:param name="placeholder-name"/><!-- the element name to wrap around placeholder parts of $string -->
+		<xsl:analyze-string select="$string" regex="\{{([^}}]*)\}}">
+			<xsl:matching-substring>
+				<xsl:choose>
+					<!-- if empty, ignore -->
+					<xsl:when test="regex-group(1)=''"/>
+					<!-- recognize {{} as escape sequence for { -->
+					<xsl:when test="regex-group(1)='{'">
+						<xsl:choose>
+							<xsl:when test="$literal-name ne ''">
+								<xsl:element name="pe:{$literal-name}"><xsl:value-of select="regex-group(1)"/></xsl:element>
+							</xsl:when>
+							<xsl:otherwise><xsl:value-of select="regex-group(1)"/></xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:element name="pe:{$placeholder-name}"><xsl:value-of select="regex-group(1)"/></xsl:element>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:matching-substring>
+			<xsl:non-matching-substring>
+				<xsl:if test="not(normalize-space(.)='')">
+					<xsl:choose>
+						<xsl:when test="$literal-name ne''">
+							<xsl:element name="pe:{$literal-name}"><xsl:value-of select="."/></xsl:element>
+						</xsl:when>
+						<xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+					</xsl:choose>
+				</xsl:if>
+			</xsl:non-matching-substring>
+		</xsl:analyze-string>
+	</xsl:function>
+	
 </xsl:stylesheet>

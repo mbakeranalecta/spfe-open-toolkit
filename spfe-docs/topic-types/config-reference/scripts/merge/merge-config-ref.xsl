@@ -7,13 +7,14 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:ed="http://spfeopentoolkit.org/ns/spfe-docs"
 	xmlns:cr="http://spfeopentoolkit.org/ns/spfe-docs"
 	exclude-result-prefixes="#all">
 
-	<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 
 	<xsl:variable 
 		name="strings" 
@@ -129,7 +130,7 @@ Main content processing templates
 		<xsl:if test="($current-doctype = $doctype) or not($doctype)">
 
 				<cr:spfe-configuration-reference-entry>
-						<cr:namespace>
+					<cr:namespace>
 						<xsl:value-of select="ancestor::schema-definitions/@namespace"/>
 					</cr:namespace>
 					<cr:doctype>
@@ -180,7 +181,8 @@ Main content processing templates
 
 						<xsl:when test="exists($authored-content/ed:description/*)">
 							<xsl:apply-templates
-								select="$authored-content/ed:description, $authored-content/ed:values, $authored-content/ed:restrictions, $authored-content/ed:build-property">
+								select="$authored-content/ed:index,
+								$authored-content/ed:description, $authored-content/ed:values, $authored-content/ed:restrictions">
 								<xsl:with-param name="in-scope-strings" select="$strings"
 									as="element()*" tunnel="yes"/>
 							</xsl:apply-templates>
@@ -216,7 +218,7 @@ Main content processing templates
 					<cr:attributes>
 						<xsl:for-each
 							select="root()/schema-definitions/schema-attribute[starts-with(xpath, concat($xpath, '/@'))]">
-							<attribute>
+							<cr:attribute>
 
 								<!-- Copy the extracted element info. -->
 								<cr:name>
@@ -259,7 +261,7 @@ Main content processing templates
 									<xsl:with-param name="in-scope-strings" select="$strings"
 										as="element()*" tunnel="yes"/>
 								</xsl:apply-templates>
-							</attribute>
+							</cr:attribute>
 						</xsl:for-each>
 					</cr:attributes>
 				</cr:spfe-configuration-reference-entry>
@@ -269,7 +271,7 @@ Main content processing templates
 	<xsl:template match="ed:config-setting-description">
 			<xsl:apply-templates/>
 </xsl:template>
-
+	
 	<xsl:template
 		match="ed:*">
 		<xsl:element name="cr:{local-name()}" namespace="http://spfeopentoolkit.org/ns/spfe-docs">

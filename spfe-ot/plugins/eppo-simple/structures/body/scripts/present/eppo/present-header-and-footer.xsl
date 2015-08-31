@@ -5,13 +5,13 @@
     xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
     xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
     xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
-    xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config" exclude-result-prefixes="#all"
+    xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" exclude-result-prefixes="#all"
     version="2.0">
     <xsl:template name="show-header">
         <xsl:variable name="topic-type" select="ancestor::ss:topic/@type"/>
 
         <xsl:variable name="topic-set-title"
-            select="sf:string($config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:strings, 'eppo-simple-topic-set-title')"/>
+            select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:title"/>
 
         <xsl:variable name="content-set-title" select="$config/config:content-set/config:title"/>
 
@@ -31,11 +31,11 @@
 
         <pe:context-nav>
             <pe:home>
-                <pe:link href="{$content-set-index-file}">Home</pe:link>
+                <pe:link href="{$content-set-index-file}"><xsl:value-of select="$content-set-title"/></pe:link>
             </pe:home>
             <pe:breadcrumbs>
                 <pe:breadcrumb>
-                    <pe:link href="{$content-set-toc-file}">Collections</pe:link>
+                    <pe:link href="{$content-set-toc-file}">Contents</pe:link>
                 </pe:breadcrumb>
                 <xsl:if test="not($is-home-topic-set)">
                     <pe:breadcrumb>
@@ -45,7 +45,8 @@
                     </pe:breadcrumb>
                 </xsl:if>
             </pe:breadcrumbs>
-            <xsl:if test="index/entry/term[normalize-space(.) ne '']">
+            <!-- FIXME: If used, this needs to be based on a set of topic-level realtionships derived in the link step. -->
+<!--            <xsl:if test="index/entry/term[normalize-space(.) ne '']">
                 <pe:keywords>
                     <pe:title>Tags</pe:title>
                     <pe:keyword>
@@ -71,11 +72,11 @@
                     </pe:keyword>
                 </pe:keywords>
             </xsl:if>
-        </pe:context-nav>
+-->        </pe:context-nav>
     </xsl:template>
 
     <xsl:template name="show-footer">
-        <xsl:variable name="see-also-links">
+<!--        <xsl:variable name="see-also-links">
             <xsl:for-each select="index/reference[esf:target-exists(key[1], type)]">
                 <xsl:call-template name="output-link">
                     <xsl:with-param name="target" select="key[1]"/>
@@ -107,7 +108,7 @@
                     </pe:td>
                 </pe:tr>
             </pe:table>
-        </xsl:if>
-
+       </xsl:if>
+--> 
     </xsl:template>
 </xsl:stylesheet>

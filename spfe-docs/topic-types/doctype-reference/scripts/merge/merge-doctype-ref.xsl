@@ -7,12 +7,13 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
 	xmlns:ed="http://spfeopentoolkit.org/ns/spfe-docs"
 	xmlns:cr="http://spfeopentoolkit.org/ns/spfe-docs" exclude-result-prefixes="#all">
 
-	<xsl:param name="topic-set-id"/>
+	<xsl:param name="set-id"/>
+	<xsl:variable name="topic-set-id" select="$set-id"/>
 
 	<xsl:variable name="strings"
 		select="
@@ -66,10 +67,10 @@ Main template
 		<!-- FIXME: Should also search for unmatched attribute definitions. -->
 		<xsl:for-each select="$doctype-source//ed:doctype-element-description">
 			<xsl:if
-				test="not(normalize-space(ed:xpath) = $schema-defs/schema-definitions/schema-element/normalize-space(name))">
+				test="not(normalize-space(ed:name) = $schema-defs/schema-definitions/schema-element/normalize-space(name))">
 				<xsl:call-template name="sf:warning">
 					<xsl:with-param name="message"
-						select="'Authored element description found for an element not found in the schema:', normalize-space(ed:xpath)"
+						select="'Authored element description found for an element not found in the schema:', normalize-space(ed:name)"
 					/>
 				</xsl:call-template>
 			</xsl:if>

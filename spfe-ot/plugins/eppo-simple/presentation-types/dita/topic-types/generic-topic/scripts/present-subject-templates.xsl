@@ -8,9 +8,9 @@
 	xmlns:lf="local-functions"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
-	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/link-catalog"
+	xmlns:lc="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/catalog"
 	xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"	
-	xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config" 
+	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" 
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all">
 
@@ -51,7 +51,7 @@
 								<xsl:with-param name="target" select="$topic"/>
 								<xsl:with-param name="type">topic</xsl:with-param>
 								<xsl:with-param name="content" as="xs:string">
-									<xsl:value-of select="$link-catalogs//lc:target[@type='topic'][lc:key=$topic]/parent::lc:page/@title"/>
+									<xsl:value-of select="$catalogs//lc:target[lc:type='topic'][lc:key=$topic]/parent::lc:page/@title"/>
 								</xsl:with-param>
 								<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 							</xsl:call-template>
@@ -75,7 +75,7 @@
 					<xsl:with-param name="target" select="$topic-set"/>
 					<xsl:with-param name="type">topic-set</xsl:with-param>
 					<xsl:with-param name="content">
-						<xsl:value-of select="$link-catalogs//lc:target[@type='topic-set'][lc:key=$topic-set]/parent::lc:page/@title"/>
+						<xsl:value-of select="$catalogs//lc:target[lc:type='topic-set'][lc:key=$topic-set]/parent::lc:page/@title"/>
 					</xsl:with-param>
 					<xsl:with-param name="current-page-name" select="ancestor-or-self::ss:topic/@full-name"/>
 				</xsl:call-template>
@@ -108,7 +108,7 @@
 	<xsl:template match="subject">
 		<xsl:variable name="content" select="normalize-space(.)"/>
 			<xsl:choose>
-				<xsl:when test="esf:target-exists(@key, @type)">
+				<xsl:when test="esf:target-exists(@key, lc:type)">
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="@key"/>
 						<xsl:with-param name="type" select="@type"/>

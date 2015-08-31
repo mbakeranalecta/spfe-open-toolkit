@@ -2,108 +2,133 @@
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    version="2.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0"
     xmlns:esf="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/functions"
     xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions"
-    xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis" 
+    xmlns:ss="http://spfeopentoolkit.org/spfe-ot/1.0/schemas/synthesis"
     xmlns:pe="http://spfeopentoolkit.org/ns/eppo-simple/present/eppo"
-    xmlns:config="http://spfeopentoolkit/ns/spfe-ot/config"
-    exclude-result-prefixes="#all">
+    xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" exclude-result-prefixes="#all">
+
+    <xsl:variable name="group-strings" select="esf:get-group-string-element($config/config:content-set/config:topic-set-groups/config:group)"/>
+
     
-    <xsl:param name="toc-files"/>
-    <xsl:variable name="unsorted-toc" >
-        <xsl:variable name="temp-tocs" select="sf:get-sources($toc-files, 'Loading toc file: ')"/>
-        <xsl:if test="count(distinct-values($temp-tocs/toc/@topic-set-id)) lt count($temp-tocs/toc)">
-            <xsl:call-template name="sf:error">
-                <xsl:with-param name="message">
-                    <xsl:text>Duplicate TOCs detected.&#x000A; There appears to be more than one TOC in scope for the same topic set. Topic set IDs encountered include:&#x000A;</xsl:text>
-                    <xsl:for-each select="$temp-tocs/toc">
-                        <xsl:value-of select="@topic-set-id,'&#x000A;'"/>
-                    </xsl:for-each>
-                </xsl:with-param>
-            </xsl:call-template>
-        </xsl:if>
-        <xsl:sequence select="$temp-tocs"/>
-    </xsl:variable>
-    
-    <xsl:variable name="toc">
-        <xsl:choose>
-            <xsl:when test="$config/config:content-set/config:topic-set-type-order/config:topic-set-type">
-                               
-                <!-- Make sure there is an entry on the topic set type order list for every topic set type. -->
-                <xsl:variable name="topic-set-types-found" select="distinct-values($unsorted-toc/toc/@topic-set-type)"/>
-                
-                <!-- Make sure all the topic set types appear on the topic type order list -->
-                <xsl:call-template name="sf:info">
-                    <xsl:with-param name="message">
-                        <xsl:text>Ordering the TOC according to the topic set type list:</xsl:text>
-                        <xsl:value-of select="string-join($config/config:content-set/config:topic-set-type-order/config:topic-set-type, ', ')"/>
-                    </xsl:with-param>
-                </xsl:call-template>				
-                
-                <xsl:if test="count($topic-set-types-found[not(.=$config/config:content-set/config:topic-set-type-order/config:topic-set-type)])">
-                    <xsl:call-template name="sf:error">
-                        <xsl:with-param name="message" select="'Topic type(s) missing from topic type order list: ', string-join($topic-set-types-found[not(.=$config/config:content-set/config:topic-set-type-order/config:topic-set-type)], ', ')"/>
-                        <xsl:with-param name="in" select="base-uri(document(''))"/>
-                    </xsl:call-template>
-                </xsl:if>
-                
-                <xsl:for-each select="$config/config:content-set/config:topic-set-type-order/config:topic-set-type">
-                    <xsl:variable name="this-topic-set-type" select="."/>
-                    <xsl:for-each select="$unsorted-toc/toc[@topic-set-type eq $this-topic-set-type]">
-                        <xsl:sequence select="."/>
-                    </xsl:for-each>
-                </xsl:for-each>
-                
-            </xsl:when>
-            <xsl:when test="$config/config:content-set/config:topic-sets">
-                <xsl:call-template name="sf:warning">
-                    <xsl:with-param name="message">
-                        <!-- FIXME: Should test for the two conditions subjects below. -->
-                        <xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/content-set configuration setting. External TOC files will be ignored. If topic set IDs specified in doc set configuration do not match those defined in the topic set, that topic set will not be included.</xsl:text>
-                    </xsl:with-param>
-                </xsl:call-template>
-                <xsl:for-each select="$config/config:content-set/config:topic-sets/config:topic-set">
-                    <xsl:variable name="id" select="config:id"/>
-                    <xsl:sequence select="$unsorted-toc/toc[@topic-set-id eq $id]"/>
-                </xsl:for-each>
-                
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:call-template name="sf:warning">
-                    <xsl:with-param name="message">
-                        <xsl:text>Doc set configuration not found in config file. TOC will be in alphabetical order by topic-set-type.</xsl:text>
-                    </xsl:with-param>
-                </xsl:call-template>
-                <xsl:for-each select="$unsorted-toc/toc">
-                    <xsl:sort select="@topic-set-type"/>
-                    <xsl:sequence select="."/>
-                </xsl:for-each>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-    
+    <xsl:function name="esf:get-group-string-element">
+        <xsl:param name="group"/>
+        <xsl:for-each select="$group">
+            <xsl:value-of select="$group/name"/>
+            <xsl:if test="group">
+                <xsl:text>;</xsl:text>
+                <xsl:value-of select="esf:get-group-string-element(group)"/>              
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:function>
+
+    <xsl:function name="esf:group-exists">
+        <xsl:param name="group-string"/>
+        <xsl:value-of select="$group-strings = $group-string"/>
+    </xsl:function>
+
     <!-- TOC templates -->
     <xsl:template name="create-toc-page">
+        <!--
+            Are topic set groups defined?
+                If not, just list topics.
+            Do all topic sets belong to a group?
+                If not, raise error.
+            Do all topic set groups match those defined in content set?
+                If not, raise error.
+            Create groups.
+        -->
+        
+        
+        
         <pe:page status="generated" name="{$topic-set-id}-toc">
             <xsl:call-template name="show-header"/>
-            <pe:title><xsl:value-of select="$config/config:content-set/config:title"/> Contents</pe:title>       
-            <pe:ul>
-                <xsl:apply-templates select="$toc"/>
-            </pe:ul>
-            <xsl:call-template name="show-footer"/>		
+            <xsl:choose>
+                <xsl:when test="not($config/config:content-set/config:topic-set-groups/config:group)">
+                    [[<xsl:value-of select="$group-strings"/>]]
+                    <pe:ul>
+                        <xsl:for-each select="config:topic-set[config:topic-set-id ne $config/config:content-set/config:home-topic-set]">
+                            <pe:li>
+                                <pe:p>
+                                    <pe:link
+                                        href="{normalize-space(config:output-directory)}{if (normalize-space(config:output-directory) = '') then '' else '/'}{normalize-space(config:topic-set-id)}-toc.html">
+                                        <xsl:value-of select="config:title"/>
+                                    </pe:link>
+                                </pe:p>
+                            </pe:li>
+                        </xsl:for-each>
+                    </pe:ul>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:if test="config:topic-set[config:topic-set-id ne $config/config:content-set/config:home-topic-set][string(config:group) = '']">
+                        <xsl:call-template name="sf:error">
+                            <xsl:with-param name="message">The content set configuration file
+                                defines topic set groups, but not all topic sets are assigned to a
+                                group.</xsl:with-param>
+                        </xsl:call-template>
+                    </xsl:if>
+                    <!-- FIXME: This could be validataed at the config stage
+                         FIXME: In fact,could calculate grouping entirely at config stage
+                    Make a list of allowed grouping strings from content set groups definition
+                    Check that every topic set group expression is on that list.
+                        Raise an error if not.
+                    -->
+                    
+
+                    <xsl:apply-templates select="$config/config:content-set"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:call-template name="show-footer"/>
         </pe:page>
     </xsl:template>
-    
-    <xsl:template match="toc[@topic-set-id ne $config/config:content-set/config:home-topic-set]">
-        <pe:li>
-            <pe:p><pe:link href="{normalize-space(@deployment-relative-path)}{normalize-space(@topic-set-id)}-toc.html"><xsl:value-of select="@title"/></pe:link></pe:p>
-        </pe:li>
-    </xsl:template>
-    <xsl:template match="toc"/>
 
-    <xsl:template match="node"/>
-    
-    
+    <xsl:template match="config:content-set">
+        <!-- 
+        Recursively for each level of grouping:
+            List all topics in this group in alphabetical order
+            List all groups in this group in alphabetical order
+        -->
+        <pe:tree class="toc">
+            <xsl:call-template name="group-topic-sets">
+                <xsl:with-param name="topic-sets" select="config:topic-set[config:topic-set-id ne $config/config:content-set/config:home-topic-set]"/>
+                <xsl:with-param name="level">1</xsl:with-param>
+            </xsl:call-template>
+        </pe:tree>
+    </xsl:template>
+
+    <xsl:template name="group-topic-sets">
+        <xsl:param name="topic-sets"/>
+        <xsl:param name="level" as="xs:integer"/>
+        <xsl:for-each-group select="$topic-sets"
+            group-by="tokenize(config:group, '\s*;\s*')[$level]">
+            <pe:branch state="open">
+                <pe:content>
+                    <xsl:value-of select="current-grouping-key()"/>
+                </pe:content>
+                <xsl:for-each select="current-group()/.">
+                    <xsl:sort select="config:title"/>
+                    <xsl:if test="not(tokenize(config:group, '\s*;\s*')[$level + 1])">
+                        <pe:branch>
+                            <pe:content>
+                                <pe:link
+                                    href="{normalize-space(config:output-directory)}{if (normalize-space(config:output-directory) = '') then '' else '/'}{normalize-space(config:topic-set-id)}-toc.html">
+                                    <xsl:value-of select="config:title"/>
+                                </pe:link>
+                            </pe:content>
+                        </pe:branch>
+                    </xsl:if>
+                </xsl:for-each>
+                <xsl:call-template name="group-topic-sets">
+                    <xsl:with-param name="topic-sets" select="current-group()"/>
+                    <xsl:with-param name="level" select="$level + 1"/>
+                </xsl:call-template>
+
+            </pe:branch>
+        </xsl:for-each-group>
+    </xsl:template>
+
+
+
+
 </xsl:stylesheet>
