@@ -219,7 +219,7 @@
 						<pe:p>None</pe:p>
 					</xsl:if>
 					<xsl:for-each select="children/child">
-						<xsl:sort select="."/>
+						<!--<xsl:sort select="."/>-->
 						<xsl:variable name="child-xpath" select="."/>
 						<pe:p>
 							<pe:name hint="element-name">

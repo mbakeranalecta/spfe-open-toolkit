@@ -31,7 +31,7 @@
 
         <pe:context-nav>
             <pe:home>
-                <pe:link href="{$content-set-index-file}">Home</pe:link>
+                <pe:link href="{$content-set-index-file}"><xsl:value-of select="$content-set-title"/></pe:link>
             </pe:home>
             <pe:breadcrumbs>
                 <pe:breadcrumb>

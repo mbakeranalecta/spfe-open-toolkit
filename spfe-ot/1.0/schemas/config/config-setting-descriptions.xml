@@ -100,9 +100,8 @@
             <xpath>/content-set/home-topic-set</xpath>
             <description>
                 <p>Designates one <feature>topic set</feature> as the
-                    <feature>home topic
-                        set</feature> for the content set.
-                    The <feature>home topic set</feature> becomes the home for the content set as a
+                    <feature>home topic set</feature> for the content set. The
+                    <feature>home topic set</feature> becomes the home for the content set as a
                     whole. In many cases, a home topic set will consist of a single topic, with the
                     name <code>index</code>, which will become the home page of the content set.
                     However, you can include as many topics as you like in the home topic set. If
@@ -509,7 +508,9 @@
         <config-setting-description>
             <xpath>/content-set/title</xpath>
             <description>
-                <p>The title of the <feature>content set</feature>.</p>
+                <p>The title of the <feature>content set</feature>. The build system may use this
+                    value in any way it wishes. The default use in <feature>EPPO-simple</feature> it
+                    to use it as the root of the navigation breadcrumbs of content set pages.</p>
             </description>
             <values/>
             <restrictions/>
