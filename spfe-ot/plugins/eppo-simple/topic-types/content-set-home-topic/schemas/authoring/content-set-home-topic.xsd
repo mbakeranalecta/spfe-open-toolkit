@@ -7,9 +7,10 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/eppo-core/schemas/authoring/eppo-core.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/docset-home-topic/schemas/authoring/docset-home-topic-root.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/content-set-home-topic/schemas/authoring/content-set-home-topic-root.xsd"/>
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/eppo-core/schemas/authoring/paragraph-content.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/eppo-core/schemas/authoring/annotations-type.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/eppo-core/schemas/authoring/annotations-type.xsd"
+    />
 </xs:schema>

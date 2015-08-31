@@ -8,7 +8,7 @@
     <xs:include
         schemaLocation="http://spfeopentoolkit.org/spfe-docs/structures/spfe-docs-core/schemas/authoring/spfe-docs-core.xsd"/>
     <xs:include
-        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/docset-home-topic/schemas/authoring/docset-home-topic-root.xsd"/>
+        schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/topic-types/content-set-home-topic/schemas/authoring/content-set-home-topic-root.xsd"/>
 
 
 </xs:schema>

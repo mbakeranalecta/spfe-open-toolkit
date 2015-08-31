@@ -10,7 +10,7 @@
 	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" exclude-result-prefixes="#all">
 
 	<!-- topic -->
-	<xsl:template match="es:docset-home-topic">
+	<xsl:template match="es:content-set-home-topic">
 		<xsl:result-document href="file:///{$output-directory}/{$topic-set-id}/{ancestor::ss:topic/@local-name}.dita" 
 			method="xml" 
 			indent="yes" 
@@ -23,15 +23,15 @@
 		</xsl:result-document>
 	</xsl:template>
 
-	<xsl:template match="es:docset-home-topic/es:head"/>
+	<xsl:template match="es:content-set-home-topic/es:head"/>
 	
-	<xsl:template match="es:docset-home-topic/es:body/es:title" mode="topic-title">
+	<xsl:template match="es:content-set-home-topic/es:body/es:title" mode="topic-title">
 		<xsl:apply-templates/>
 	</xsl:template>
-	<xsl:template match="es:docset-home-topic/es:body/es:title"/>
+	<xsl:template match="es:content-set-home-topic/es:body/es:title"/>
 	
 	<!-- FIXME: This could be made general just doing es:body once -->
-	<xsl:template match="es:docset-home-topic/es:body">
+	<xsl:template match="es:content-set-home-topic/es:body">
 		<!-- Move title outside body because DITA is wierd like that. -->
 		<xsl:if test="es:title">
 			<title>

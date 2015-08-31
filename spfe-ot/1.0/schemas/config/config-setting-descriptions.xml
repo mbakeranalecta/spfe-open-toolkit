@@ -51,9 +51,8 @@
                     set using a <config-setting>/content-set/topic-sets/topic-set</config-setting>
                     element.</p>
                 <p>To build a full content set, you simply run the <tool-name>spfe</tool-name> build
-                    tool with a configuration file that contains a
-                    <config-setting xpath="/content-set">content-set</config-setting> element
-                    directly (not via inclusion). The build tool will then run whichever build
+                    tool on a 
+                    <config-setting xpath="/content-set">content-set</config-setting> file. The build tool will then run whichever build
                     command you have specified on all the topic sets in the content set, as well as
                     creating the files that belong to the content set as a whole.</p>
             </description>
@@ -84,7 +83,7 @@
         <config-setting-description>
             <xpath>/content-set/content-set-id</xpath>
             <description>
-                <p>An identifier for the docset.</p>
+                <p>An identifier for the content set.</p>
             </description>
             <values/>
             <restrictions>
@@ -141,8 +140,8 @@
                     <p>Note that including an object set in a content set does not mean that those
                         objects will automatically become part of the output. Objects become part of
                         the output when they are included in topics, either through direct inclusion
-                        or via soft linking. If not topic includes an object, it will not be part of
-                        the output. Choosing which object sets to include in the build is one way to
+                        or via soft linking. If an object is not included by any topic, it will not be part of
+                        the output. Including different object sets include in the build is one way to
                         <task>manage reuse</task> or <task>create variant content</task>.</p>
                 </note>
             </description>

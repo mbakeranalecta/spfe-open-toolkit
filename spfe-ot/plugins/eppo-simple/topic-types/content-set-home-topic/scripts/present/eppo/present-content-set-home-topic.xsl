@@ -11,7 +11,7 @@
 	xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" exclude-result-prefixes="#all">
 
 	<!-- topic -->
-	<xsl:template match="es:docset-home-topic">
+	<xsl:template match="es:content-set-home-topic">
 		<pe:page status="{es:head/es:history/es:revision[last()]/es:status}"
 			name="{ancestor::ss:topic/@local-name}">
 			<xsl:call-template name="show-header"/>
@@ -20,9 +20,9 @@
 		</pe:page>
 	</xsl:template>
 
-	<xsl:template match="es:docset-home-topic/es:head"/>
+	<xsl:template match="es:content-set-home-topic/es:head"/>
 
-	<xsl:template match="es:docset-home-topic/es:title">
+	<xsl:template match="es:content-set-home-topic/es:title">
 		<pe:title>
 			<xsl:apply-templates/>
 		</pe:title>

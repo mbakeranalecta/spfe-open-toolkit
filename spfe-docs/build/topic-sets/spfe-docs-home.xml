@@ -7,12 +7,12 @@
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set-id>spfe-docs-home</topic-set-id>
     <title>SPFE Documentation</title>
-    <topic-set-type>docset</topic-set-type>
+    <topic-set-type>content-set-home</topic-set-type>
     <topic-types>
 
             <topic-type>
-                <name>{http://spfeopentoolkit.org/ns/spfe-docs}docset-home-topic</name>
-                <href>../../topic-types/docset-home-topic/config.xml</href>
+                <name>{http://spfeopentoolkit.org/ns/spfe-docs}content-set-home-topic</name>
+                <href>../../topic-types/content-set-home-topic/config.xml</href>
             </topic-type>
         
     </topic-types>

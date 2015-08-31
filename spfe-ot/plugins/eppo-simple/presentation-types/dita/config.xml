@@ -39,10 +39,10 @@
             </scripts>
         </topic-type>
         <topic-type>
-            <name>{http://spfeopentoolkit.org/ns/eppo-simple}docset-home-topic</name>
+            <name>{http://spfeopentoolkit.org/ns/eppo-simple}content-set-home-topic</name>
             <scripts>
                 <script>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/docset-home-topic/scripts/present-docset-home-topic.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/eppo/topic-types/content-set-home-topic/scripts/present-content-set-home-topic.xsl</href>
                 </script>
             </scripts>
         </topic-type>

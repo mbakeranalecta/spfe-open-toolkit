@@ -12,7 +12,7 @@ xmlns="http://spfeopentoolkit.org/ns/eppo-simple"
 xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 exclude-result-prefixes="#all">
 	
-	<xsl:template match="docset-home-topic">
+	<xsl:template match="content-set-home-topic">
 		<xsl:variable name="conditions" select="@if"/>
 		<xsl:variable name="name" select="head/id"/>
 		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>

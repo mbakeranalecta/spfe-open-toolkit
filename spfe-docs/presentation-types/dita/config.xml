@@ -84,7 +84,7 @@
             </scripts>
         </topic-type>
         <topic-type>
-            <name>{http://spfeopentoolkit.org/ns/spfe-docs}docset-home-topic</name>
+            <name>{http://spfeopentoolkit.org/ns/spfe-docs}content-set-home-topic</name>
             <scripts>
                 <script>
                     <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/dita/topic-types/common/scripts/present-content-set-toc.xsl</href>
@@ -94,7 +94,7 @@
                         <from>http://spfeopentoolkit.org/ns/eppo-simple</from>
                         <to>http://spfeopentoolkit.org/ns/spfe-docs</to>
                     </rewrite-namespace>
-                    <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/dita/topic-types/docset-home-topic/scripts/present-docset-home-topic.xsl</href>
+                    <href>${SPFEOT_HOME}/plugins/eppo-simple/presentation-types/dita/topic-types/content-set-home-topic/scripts/present-content-set-home-topic.xsl</href>
                 </script>
             </scripts>
         </topic-type>

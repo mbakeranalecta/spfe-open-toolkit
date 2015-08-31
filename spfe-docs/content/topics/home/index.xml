@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<docset-home-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+<content-set-home-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic/schemas/authoring/docset-home-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/content-set-home-topic/schemas/authoring/content-set-home-topic.xsd">
     <head>
         <id>index</id>
         <history>
@@ -71,4 +71,4 @@
             modularized set of schemas and associated processing that you can use directly or as the
             basis for <task>creating your own schemas</task>.</p>
 </section>    </body>
-</docset-home-topic>
+</content-set-home-topic>
