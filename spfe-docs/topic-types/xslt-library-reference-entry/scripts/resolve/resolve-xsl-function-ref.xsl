@@ -38,7 +38,7 @@ exclude-result-prefixes="#all" >
 					<ss:term><xsl:value-of select="$name"/></ss:term>
 				</ss:entry>
 				<ss:entry>
-					<ss:type>xslt-function-name</ss:type>
+					<ss:type>spfe-xslt-function</ss:type>
 					<ss:namespace>http://spfeopentoolkit.org/spfe-ot/1.0/functions</ss:namespace>
 					<ss:term><xsl:value-of select="$name"/></ss:term>
 				</ss:entry>

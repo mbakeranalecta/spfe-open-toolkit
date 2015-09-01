@@ -24,9 +24,9 @@
         </name>
     </xsl:template> 
 
-    <xsl:template match="p/spfe-build-function | string/spfe-build-function">
+    <xsl:template match="p/spfe-xslt-function | string/spfe-xslt-function">
         <name>
-            <xsl:attribute name="type">spfe-build-function</xsl:attribute>
+            <xsl:attribute name="type">spfe-xslt-function</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
             <xsl:apply-templates/>
         </name>

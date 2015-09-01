@@ -36,7 +36,7 @@
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target"
 							select="substring-after(regex-group(0), concat($function-prefix,':'))"/>
-						<xsl:with-param name="type">xslt-function-name</xsl:with-param>
+						<xsl:with-param name="type">spfe-xslt-function</xsl:with-param>
 						<xsl:with-param name="content" select="regex-group(0)"/>
 						<xsl:with-param name="current-page-name" select="$current-page-name"/>
 					</xsl:call-template>
