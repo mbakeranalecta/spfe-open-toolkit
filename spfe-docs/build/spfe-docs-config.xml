@@ -121,7 +121,7 @@
             </aliases>
         </subject-type>
         <subject-type>
-            <id>xslt-function-name</id>
+            <id>spfe-xslt-function</id>
             <aliases>
                 <singular>XSLT function</singular>
                 <plural>XSLT functions</plural>

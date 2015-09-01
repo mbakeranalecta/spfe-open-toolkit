@@ -5,8 +5,8 @@
     <xs:simpleType name="annotations-spfe-build">
         <xs:restriction base="xs:string">
             <xs:enumeration value="config-setting"/>
-            <xs:enumeration value="spfe-build-function"/>
-            <xs:enumeration value="spfe-build-template"/>
+            <xs:enumeration value="spfe-xslt-function"/>
+            <xs:enumeration value="spfe-xslt-template"/>
             <xs:enumeration value="spfe-build-variable"/>
             <xs:enumeration value="spfe-build-script"/>
         </xs:restriction>
@@ -23,8 +23,8 @@
                     </xs:simpleContent>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="spfe-build-function"/>
-            <xs:element name="spfe-build-template"/>
+            <xs:element name="spfe-xslt-function"/>
+            <xs:element name="spfe-xslt-template"/>
             <xs:element name="spfe-build-variable"/>
             <xs:element name="spfe-build-script"/>
         </xs:choice>

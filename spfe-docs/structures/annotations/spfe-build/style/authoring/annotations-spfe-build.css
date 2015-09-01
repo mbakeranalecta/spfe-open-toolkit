@@ -4,12 +4,12 @@ p>config-setting
    border: 1px solid #FFDEAD;
 }
 
-p>spfe-build-function
+p>spfe-xslt-function
 {
    font-weight:bold;
    border: 1px solid #FFDEAD;
 }
-p>spfe-build-template
+p>spfe-xslt-template
 {
    font-weight:bold;
    border: 1px solid #FFDEAD;

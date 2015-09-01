@@ -82,6 +82,9 @@ Main content processing templates
 
 	</xsl:template>
 	
+	<!-- suppress the index -->
+	<xsl:template match="spfe-configuration-reference-entry/index"/>
+	
 	<!-- IdentityTransform -->
  <xsl:template match="@* | node()">
       <xsl:copy>

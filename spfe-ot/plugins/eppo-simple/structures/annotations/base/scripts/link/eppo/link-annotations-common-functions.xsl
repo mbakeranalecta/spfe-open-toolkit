@@ -158,9 +158,9 @@
 		<xsl:variable name="target-page" as="node()*"> 		
 			<!-- single key lookup -->
 			<xsl:sequence select="$catalogs/lc:catalog/lc:page[lc:target/@type=$type]
-				                                                        [if($namespace) then lc:target/lc:namespace=$namespace else true()]
-				                                                        [@full-name ne $current-page-name]
-				                                                        [lc:target/lc:key=$target]"/>	
+				                  [if($namespace) then lc:target/lc:namespace=$namespace else true()]
+				                  [@full-name ne $current-page-name]
+				                  [lc:target/lc:key=$target]"/>	
 			
 			<!-- multi-key lookup -->
 			<xsl:sequence select="$catalogs/lc:catalog/lc:page[lc:target/@type=$type]
@@ -171,9 +171,10 @@
 		<!-- FIXME: Update this for namespaces? -->
 		<xsl:if test="count($target-page[1]/lc:target[@type=$type][lc:key=$target]) gt 1">
 			<xsl:call-template name="sf:warning">
-				<xsl:with-param name="message" select="'Detected a target page that contains more than one target of the same name and type. The name is:', string($target), '. The type is:', string($type), '. The topic is', string(ancestor::ss:topic/@full-name), '.'"/>
+				<xsl:with-param name="message" select="'Detected a target page that contains more than one target of the same name and type. The name is: ', string($target), '. The type is: ', string($type), '. The topic is: ', string(ancestor::ss:topic/@full-name), '.'"/>
 
 			</xsl:call-template>
+
 		</xsl:if>
 		
 		<xsl:choose>
@@ -204,7 +205,9 @@
 							<xsl:value-of select="'&#x000A;The priority is: ', min($target-page/@link-priority)"/>
 							<xsl:text>&#x000A;Arbitrarily picking a page to link to.</xsl:text>
 						</xsl:with-param>
-					</xsl:call-template>					
+						
+					</xsl:call-template>		
+					<xsl:message select="$target-page"/>
 				</xsl:if>
 
 				<xsl:call-template name="make-link">

@@ -34,7 +34,7 @@
 		<!-- Create the root "extracted-content element" FIXME: Should use $output-directory. -->
 		<xsl:result-document href="file:///{concat($config/config:content-set-build, '/topic-sets/', $topic-set-id,'/extract/out/lists.xml')}" method="xml" indent="yes" omit-xml-declaration="no">
 			<es:subject-topic-lists>
-				<xsl:for-each-group select="$sources//lc:target[@type ne 'topic']" group-by="concat(@type, '+', lc:term, '+', lc:namespace)">
+				<xsl:for-each-group select="$sources//lc:target[@type ne 'topic']" group-by="concat(@type, '+', lc:term, '+', string(lc:namespace))">
 					<xsl:variable name="this-key" select="lc:term"/>
 					<xsl:variable name="this-type" select="@type"/>
 					<xsl:variable name="this-namespace" select="lc:namespace"/>
@@ -45,7 +45,7 @@
 						<es:topics-on-subject>
 							<!-- Select topic on this subject and type, excluding those in subject-topic-list pages. -->
 							<xsl:for-each select="$sources//lc:page[lc:target/lc:key=$this-key]
-								                                   [if($this-namespace) then lc:target/lc:namespace=$this-namespace else true()]
+								                                   [if($this-namespace ne '') then lc:target/lc:namespace=$this-namespace else true()]
 								                                   [lc:target/@type=$this-type]
 								                                   [not( ends-with(@topic-type, '}subject-topic-list'))]">
 								<es:topic>

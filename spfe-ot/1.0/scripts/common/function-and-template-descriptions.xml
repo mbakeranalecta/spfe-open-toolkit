@@ -21,7 +21,7 @@
         <function-description>  
             <name>relative-from-absolute-path</name>
             <description>
-                <p>The <xslt-function-name>relative-from-absolute-path</xslt-function-name> function takes a full system path and returns the portion of that path relative to a base path. For example, given the path</p>
+                <p>The <spfe-xslt-function>relative-from-absolute-path</spfe-xslt-function> function takes a full system path and returns the portion of that path relative to a base path. For example, given the path</p>
                 <codeblock>C:/Users/Joe/spfe-open-toolkit/spfe-ot/1.0/scripts/common/utility-functions.xsl</codeblock>
                 <p>and the base path</p>
                 <codeblock>C:/Users/Joe/spfe-open-toolkit/spfe-ot</codeblock>
@@ -65,7 +65,7 @@
         <function-description>
             <name>title-to-anchor</name>
             <description>
-                <p>You can use the <xslt-function-name>title-to-anchor</xslt-function-name> function to convert a title text into a string that can be used as an anchor value. The function works by changing all characters not allowed in an anchor into underscores.</p>
+                <p>You can use the <spfe-xslt-function>title-to-anchor</spfe-xslt-function> function to convert a title text into a string that can be used as an anchor value. The function works by changing all characters not allowed in an anchor into underscores.</p>
                 <p>Typical uses for this function occur in the presentation stage where you want to create an anchor so that a link can be created to a point inside a topic. Where no other identifier is available, you can use title-to-anchor to create a suitable anchor value.</p>
 
             </description>
@@ -86,7 +86,7 @@
         <function-description>
             <name>conditions-met</name>
             <description>
-                <p>The <xslt-function-name>conditions-met</xslt-function-name> function is used to determine if a conditional element meets the conditions applied to the build. </p>
+                <p>The <spfe-xslt-function>conditions-met</spfe-xslt-function> function is used to determine if a conditional element meets the conditions applied to the build. </p>
             </description>
             <return-value>
                 <description>
@@ -131,11 +131,11 @@
         <function-description>
             <name>get-sources</name>
             <description>
-                <p>The <xslt-function-name>get-sources</xslt-function-name> is used to load a set of
+                <p>The <spfe-xslt-function>get-sources</spfe-xslt-function> is used to load a set of
                     XML source files into a variable. It takes a string value that contains a set of
                     file paths separated by semicolons. The function will fix directory separators
                     characters in the file paths. You should use the
-                    <xslt-function-name>get-sources</xslt-function-name> function to load source
+                    <spfe-xslt-function>get-sources</spfe-xslt-function> function to load source
                     files, irrespective of whether you are loading one file or several. This makes
                     your script resilient if the number of source files should change, and also
                     allows for more flexibility in downstream processes, allowing them to produce
@@ -156,7 +156,7 @@
                 <parameter>
                     <name>load-message</name>
                     <description>
-                        <p>A string containing an optional message to be displayed by the script when loading a file. If specified, the message will be prepended to the name of each file as it is loaded, and displayed by a call to the <xslt-function-name>info</xslt-function-name> function.</p>
+                        <p>A string containing an optional message to be displayed by the script when loading a file. If specified, the message will be prepended to the name of each file as it is loaded, and displayed by a call to the <spfe-xslt-function>info</spfe-xslt-function> function.</p>
                     </description>
                 </parameter>
             </parameters>
@@ -166,8 +166,8 @@
             <!-- Keep this description in sync with index-of-shortest-string -->
             <name>index-of-longest-string</name>
             <description>
-                <p>The <xslt-function-name>index-of-longest-string</xslt-function-name> function returns the index of the longest string in a sequence of strings. To get the index of the shortest string, use <xslt-function-name>index-of-shortest-string</xslt-function-name>.</p>
-                <p>For XSLT geeks: <xslt-function-name>index-of-longest-string</xslt-function-name> is a recursive polymorphic function. There is a version with one parameter, <code>strings</code>, that is the one you call from your code, and a version with four parameters, that is called by the first version, and which calls itself recursively, to do the work. It is unlikely you will ever want to call the second version yourself.</p>
+                <p>The <spfe-xslt-function>index-of-longest-string</spfe-xslt-function> function returns the index of the longest string in a sequence of strings. To get the index of the shortest string, use <spfe-xslt-function>index-of-shortest-string</spfe-xslt-function>.</p>
+                <p>For XSLT geeks: <spfe-xslt-function>index-of-longest-string</spfe-xslt-function> is a recursive polymorphic function. There is a version with one parameter, <code>strings</code>, that is the one you call from your code, and a version with four parameters, that is called by the first version, and which calls itself recursively, to do the work. It is unlikely you will ever want to call the second version yourself.</p>
             </description>
             <return-value>
                 <description>
@@ -206,8 +206,8 @@
             <!-- Keep this description in sync with index-of-longest-string -->
             <name>index-of-shortest-string</name>
             <description>
-                <p>The <xslt-function-name>index-of-shortest-string</xslt-function-name> function returns the index of the shortest string in a sequence of strings. To get the index of the longest string, use <xslt-function-name>index-of-longest-string</xslt-function-name>.</p>
-                <p>For XSLT geeks: <xslt-function-name>index-of-shortest-string</xslt-function-name> is a recursive polymorphic function. There is a version with one parameter, <code>strings</code>, that is the one you call from your code, and a version with four parameters, that is called by the first version, and which calls itself recursively, to do the work. It is unlikely you will ever want to call the second version yourself.</p>
+                <p>The <spfe-xslt-function>index-of-shortest-string</spfe-xslt-function> function returns the index of the shortest string in a sequence of strings. To get the index of the longest string, use <spfe-xslt-function>index-of-longest-string</spfe-xslt-function>.</p>
+                <p>For XSLT geeks: <spfe-xslt-function>index-of-shortest-string</spfe-xslt-function> is a recursive polymorphic function. There is a version with one parameter, <code>strings</code>, that is the one you call from your code, and a version with four parameters, that is called by the first version, and which calls itself recursively, to do the work. It is unlikely you will ever want to call the second version yourself.</p>
             </description>
             <return-value>
                 <description>
@@ -245,12 +245,12 @@
         <function-description>
             <name>path-after-protocol-part</name>
             <description>
-                <p>The <xslt-function-name>path-after-protocol-part</xslt-function-name> function takes a URL containing a protocol  (file, http, etc) and returns the part after the protocol. For example, if will turn a URL like this:</p>
+                <p>The <spfe-xslt-function>path-after-protocol-part</spfe-xslt-function> function takes a URL containing a protocol  (file, http, etc) and returns the part after the protocol. For example, if will turn a URL like this:</p>
                 <codeblock>file:/c:/Users/Joe/spfe-open-toolkit/spfe-ot/spfe.bat</codeblock>
                 <p>into</p>
                 <codeblock>c:/Users/Joe/spfe-open-toolkit/spfe-ot/spfe.bat</codeblock>
                 <p>This is mostly useful for taking local file URLs returned by some tools and turning them into the local paths accepted by other tools.</p>
-                <p>Note that this function does not do URL decoding. If the URL you are using may be URL encoded (that is, if it uses %20 for spaces, and similar % encodings for other special characters), use <xslt-function-name>local-path-from-uri</xslt-function-name>.</p>
+                <p>Note that this function does not do URL decoding. If the URL you are using may be URL encoded (that is, if it uses %20 for spaces, and similar % encodings for other special characters), use <spfe-xslt-function>local-path-from-uri</spfe-xslt-function>.</p>
             </description>
             <return-value>
                 <description>
@@ -269,12 +269,12 @@
         <function-description>
             <name>local-path-from-uri</name>
             <description>
-                <p>The <xslt-function-name>local-path-from-uri</xslt-function-name> function takes a URL containing a protocol  (file, http, etc) and returns the part after the protocol, decoding the URL if required. For example, if will turn a URL like this:</p>
+                <p>The <spfe-xslt-function>local-path-from-uri</spfe-xslt-function> function takes a URL containing a protocol  (file, http, etc) and returns the part after the protocol, decoding the URL if required. For example, if will turn a URL like this:</p>
                 <codeblock>file:/c:/Users/Joe%20Blogs/spfe-open-toolkit/spfe-ot/spfe.bat</codeblock>
                 <p>into</p>
                 <codeblock>c:/Users/Joe Blogs/spfe-open-toolkit/spfe-ot/spfe.bat</codeblock>
                 <p>This is mostly useful for taking local file URIs returned by some tools and turning them into the local paths accepted by other tools.</p>
-                <p>This function is similar to <xslt-function-name>path-after-protocol-part</xslt-function-name>, except that <xslt-function-name>path-after-protocol-part</xslt-function-name> does not do URL decoding. This function calls <xslt-function-name>path-after-protocol-part</xslt-function-name> to do its work, after decoding the URI. Calling this function on a URI that is not URL encoded will work fine, so you can always call this function rather than <xslt-function-name>path-after-protocol-part</xslt-function-name>.</p>
+                <p>This function is similar to <spfe-xslt-function>path-after-protocol-part</spfe-xslt-function>, except that <spfe-xslt-function>path-after-protocol-part</spfe-xslt-function> does not do URL decoding. This function calls <spfe-xslt-function>path-after-protocol-part</spfe-xslt-function> to do its work, after decoding the URI. Calling this function on a URI that is not URL encoded will work fine, so you can always call this function rather than <spfe-xslt-function>path-after-protocol-part</spfe-xslt-function>.</p>
             </description>
             <return-value>
                 <description>
@@ -293,7 +293,7 @@
         <function-description>
             <name>hex-to-dec</name>
             <description>
-                <p>The <xslt-function-name>hex-to-dec</xslt-function-name> function takes are string representing a hexadecimal number and converts it to a decimal number.</p>
+                <p>The <spfe-xslt-function>hex-to-dec</spfe-xslt-function> function takes are string representing a hexadecimal number and converts it to a decimal number.</p>
             </description>
             <return-value>
                 <description>
@@ -382,7 +382,7 @@
         &lt;plural>Configuration settings&lt;/plural>
     &lt;/aliases>
                 </codeblock>
-                <p>The <xslt-function-name>get-topic-type-alias-singular</xslt-function-name> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <spfe-build-function>get-topic-type-alias-plural</spfe-build-function>.</p>
+                <p>The <spfe-xslt-function>sf:get-topic-type-alias-singular</spfe-xslt-function> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <spfe-xslt-function>sf:get-topic-type-alias-plural</spfe-xslt-function>.</p>
             </description>
             <return-value>
                 <description>
@@ -428,7 +428,7 @@
         &lt;plural>Configuration settings&lt;/plural>
     &lt;/aliases>
                 </codeblock>
-                <p>The <xslt-function-name>get-topic-type-alias-plural</xslt-function-name> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <xslt-function-name>get-topic-type-alias-singular</xslt-function-name>.</p>
+                <p>The <spfe-xslt-function>get-topic-type-alias-plural</spfe-xslt-function> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <spfe-xslt-function>get-topic-type-alias-singular</spfe-xslt-function>.</p>
             </description>
             <return-value>
                 <description>
@@ -465,7 +465,7 @@
             <name>get-subject-type-alias-singular</name>
             <!-- keep this in sync with otehr get-alias functions -->
             <description>
-                <p>Gets the singular version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quotes>xslt-function-name</quotes>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>content set configuration file</feature>, in the setting <config-setting>/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <p>Gets the singular version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quotes>spfe-xslt-function</quotes>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>content set configuration file</feature>, in the setting <config-setting>/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
                 <codeblock language="XML" namespace="http://spfeopentoolkit.org/ns/spfe-ot/config">
 &lt;spfe xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
@@ -481,7 +481,7 @@
             &lt;/subject-type>
         &lt;/subject-types>
                 </codeblock>
-                <p>The <xslt-function-name>get-subject-type-alias-singular</xslt-function-name> function looks up the singular version of the subject type alias in the configuration and returns it. To get the plural version of the alias, use the <xslt-function-name>get-subject-type-alias-plural</xslt-function-name>.</p>
+                <p>The <spfe-xslt-function>get-subject-type-alias-singular</spfe-xslt-function> function looks up the singular version of the subject type alias in the configuration and returns it. To get the plural version of the alias, use the <spfe-xslt-function>get-subject-type-alias-plural</spfe-xslt-function>.</p>
             </description>
             <return-value>
                 <description>
@@ -520,7 +520,7 @@
             <name>get-subject-type-alias-plural</name>
             <!-- keep this in sync with otehr get-alias functions -->
             <description>
-                <p>Gets the plural version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quotes>xslt-function-name</quotes>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>content set configuration file</feature>, in the setting <config-setting>/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <p>Gets the plural version of a <feature>subject type alias</feature>. Subject types are the categories of subjects that a topic set discusses and which form the types of <feature>topic index</feature> entries and <feature>subject affinity markup</feature>. For example, the formal subject name for an XSLT function is <quotes>spfe-xslt-function</quotes>. Because they are XML names, the formal subject type names cannot contain spaces, so they are not suitable for displaying to the reader. If you want to display the name of a subject type publicly, for instance in a list of topics on a subject of a particular type, you will need a human readable name for the subject type: the subject type alias. Subject type aliases are defined in the <feature>content set configuration file</feature>, in the setting <config-setting>/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
                 <codeblock language="XML" namespace="http://spfeopentoolkit.org/ns/spfe-ot/config">
 &lt;spfe xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
@@ -536,7 +536,7 @@
             &lt;/subject-type>
         &lt;/subject-types>
                 </codeblock>
-                <p>The <xslt-function-name>get-subject-type-alias-plural</xslt-function-name> function looks up the plural version of the subject type alias in the configuration and returns it. To get the singlusr version of the alias, use the <xslt-function-name>get-subject-type-alias-singular</xslt-function-name>.</p>
+                <p>The <spfe-xslt-function>get-subject-type-alias-plural</spfe-xslt-function> function looks up the plural version of the subject type alias in the configuration and returns it. To get the singlusr version of the alias, use the <spfe-xslt-function>get-subject-type-alias-singular</spfe-xslt-function>.</p>
             </description>
             <return-value>
                 <description>
@@ -710,7 +710,7 @@ sf:process-placeholders('foo{bar}bas','lit','var')
         <function-description>
             <name>path-depth</name>
             <description>
-                <p>The <xslt-function-name>path-depth</xslt-function-name> calculates the depth of an XPath by counting the number of elements in the path. It uses tokenize to count but throws away the empty string item that would be created by a leading or trailing slash. Thus <code>foo/bar</code>, <code>/foo/bar</code>, and <code>/foo/bar/</code>, are all counted as having a path depth of 2. Will count a concluding attribute on a path as part of the depth. Presumably works for file paths as well, as long as they are in UNIX form, but it won't distinguish path elements from drive letters or the protocol parts of a URI.</p>
+                <p>The <spfe-xslt-function>path-depth</spfe-xslt-function> calculates the depth of an XPath by counting the number of elements in the path. It uses tokenize to count but throws away the empty string item that would be created by a leading or trailing slash. Thus <code>foo/bar</code>, <code>/foo/bar</code>, and <code>/foo/bar/</code>, are all counted as having a path depth of 2. Will count a concluding attribute on a path as part of the depth. Presumably works for file paths as well, as long as they are in UNIX form, but it won't distinguish path elements from drive letters or the protocol parts of a URI.</p>
             </description>
             <return-value>
                 <description>
@@ -729,7 +729,7 @@ sf:process-placeholders('foo{bar}bas','lit','var')
         <function-description>
             <name>satisfies-condition</name>
             <description>
-                <p>A recursive function that checks a series of conditions against a series of conditiont tokens and returns true if there is a match. It takes account of conditions joined by a plus sign, returning true only if both conditions are satisfied. This is a helper function for the <spfe-build-function>sf:conditions-met</spfe-build-function> function.</p>
+                <p>A recursive function that checks a series of conditions against a series of condition tokens and returns true if there is a match. It takes account of conditions joined by a plus sign, returning true only if both conditions are satisfied. This is a helper function for the <spfe-xslt-function>sf:conditions-met</spfe-xslt-function> function.</p>
             </description>
             <return-value>
                 <description>
@@ -760,7 +760,7 @@ sf:process-placeholders('foo{bar}bas','lit','var')
         <function-description>
             <name>string</name>
             <description>
-                <p>The <xslt-function-name>string</xslt-function-name> function is used to resolve <feature>strings</feature>.</p>
+                <p>The <spfe-xslt-function>string</spfe-xslt-function> function is used to resolve <feature>strings</feature>.</p>
             </description>
             <return-value>
                 <description>
