@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
+
+    <head>
+        <id>creating-a-topic</id>
+        <history>
+            <revision>
+                <date>2014-10-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>topic</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>topic type</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>EPPO simple</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Creating a topic</title>
+        <understanding>
+
+            <p> In common usage, the term <italic>topic</italic> refers to the subject of a work.
+                Here, we apply the term to a particular work -- a unit of content -- about a
+                particular subject. Using the <feature> SPFE Open Toolkit </feature>, a
+                topic is an XML document in the structure of a specific <feature> topic type
+            </feature>. </p>
+
+            <p> To be in the output of a <feature> content set </feature> build, a topic must be
+                included in a <feature> topic set </feature> sources list (configuration setting
+                <config-setting>/spfe/topic-set/sources</config-setting>). </p> 
+
+        </understanding>
+        <planning>
+
+            <p> Before creating the document for a topic, consider the document's purpose and 
+                select the <feature> topic type </feature> that best suits it. </p>
+
+            <p> The <feature> SPFE Open Toolkit</feature> provides a set of topic types that may be
+                used as a base for extended topic types in a particular deployment of the toolkit.
+                These base types, called <feature>EPPO simple</feature>, include the following: </p>
+
+            <ul> 
+
+                <li> <p> <feature>docset-home topic</feature> </p> </li>
+
+                <li> <p> <feature>essay</feature> </p> </li>
+
+                <li> <p> <feature>feature topic</feature> </p> </li>
+
+                <li> <p> <feature>generic topic</feature> </p> </li>
+
+                <li> <p> <feature>think-plan-do topic</feature> </p> </li>
+
+            </ul>
+
+            <p> Of these, the <feature>generic topic</feature> is most general and forms a base
+                for the others. </p>
+
+        </planning>
+        <doing>
+
+            <subhead>Select an editor</subhead>
+
+            <p> Create an XML file using editing software of your choice. Do not use a word
+                processing program such as Microsoft Word. The editor must save output in plain
+                text format.</p>
+
+            <p> Several editors provide aids, such as syntax highlighting and schema validation, for
+                editing XML markup.  Some cost and some are free. Features and support for XML vary.
+                A short list includes the following: </p>
+
+            <ul>
+
+                <li> <p> <link-external href="http://www.oxygenxml.com/">Oxygen XML</link-external>
+                        is a full-featured XML editor with schema support. In addition to direct
+                        text editing, the software provides an "Author" editor that may be easier
+                        for those more comfortable in a word-processing environment.  The software
+                        must be purchased, but is less expensive than most other full-featured XML
+                        editors. </p> </li>
+
+                <li> <p> <link-external href="http://komodoide.com/komodo-edit/">Komodo Edit
+                        </link-external> is a free editor with reasonable support for XML and
+                        several other code formats. In addition to syntax support, the editor
+                        verifies compliance with XML Schemas. </p> </li>
+
+            </ul>
+
+            <p> The above list is by no means comprehensive. You may likely find another editor more
+                suitable. Often, the editor that works best is not that with the most features, but
+                is the software you are most practiced and comfortable using. Finger habits are not
+                easily relearned. </p>
+
+            <subhead>Follow the topic type schema</subhead>
+
+            <p> Review the <feature> structure diagram </feature> or other specification for the
+                <feature> topic type </feature>. </p> 
+
+            <subhead>Example</subhead>
+
+            <fragment-ref id-ref="generic-topic-example" />
+
+        </doing>
+    </body>
+</think-plan-do-topic>
