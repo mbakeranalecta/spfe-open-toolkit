@@ -52,7 +52,6 @@ Main template
 -->
 
 	<xsl:template name="main" >
-		<xsl:message select="'Outputting synthesis to:', $output-directory"></xsl:message>
 		<!-- Create the root "synthesis element" -->
 
 				<xsl:apply-templates select="$topics">

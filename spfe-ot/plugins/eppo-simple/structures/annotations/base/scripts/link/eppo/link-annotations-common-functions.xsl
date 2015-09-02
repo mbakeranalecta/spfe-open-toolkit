@@ -207,7 +207,6 @@
 						</xsl:with-param>
 						
 					</xsl:call-template>		
-					<xsl:message select="$target-page"/>
 				</xsl:if>
 
 				<xsl:call-template name="make-link">
