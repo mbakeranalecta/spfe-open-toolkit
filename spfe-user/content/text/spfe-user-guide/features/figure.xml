@@ -3,7 +3,7 @@
 <feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
-    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
     
     <head>
         <id>figure</id>
@@ -43,9 +43,10 @@
             fragment </feature>, or <feature> fragment reference </feature> in the <feature> body
             content </feature> of a topic.</p>
 
-    <fig href="../../../graphics/figure-context.png">
+    <fig>
             <title>EPPO simple figure context</title>
             <caption> <p></p> </caption>
+        <graphic href="../../../graphics/figure-context.png"/>
         </fig>
         
         <section>
@@ -54,9 +55,10 @@
             <p> A figure has the structure shown in the following <feature>structure diagram
             </feature>:</p>
 
-            <fig href="../../../graphics/fig.png">
+            <fig>
                 <title>Figure structure diagram</title>
                 <caption><p></p></caption>
+                <graphic href="../../../graphics/fig.png"/>
             </fig>
 
         </section>
@@ -66,20 +68,22 @@
             <p> The following XML markup produces the figure that follows.</p>
             <codeblock>
 <![CDATA[
-        <fig href="../../../graphics/horse.png">
+        <fig>
             <title>James on his horse</title>
             <caption>
                 <p>See James ride.</p>
             </caption>
+            <graphic  href="../../../graphics/horse.png">
         </fig>    
 ]]>
             </codeblock>
             
-            <fig href="../../../graphics/horse.png">
+            <fig>
                 <title>James on his horse</title>
                 <caption>
                     <p>See James ride.</p>
                 </caption>
+                <graphic href="../../../graphics/horse.png"/>
             </fig>    
 
         </section>

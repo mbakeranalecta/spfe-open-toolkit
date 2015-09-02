@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
 
     <head>
         <id>what-are-xml-structure-diagrams</id>
@@ -45,20 +45,22 @@
         <section>
             <title>Structure diagrams</title>
 
-        <p> A box with a label, as shown in the first diagram in the figure <quote>How to read a
-                structure diagram</quote>, represents an <feature>XML</feature> element. The
+        <p> A box with a label, as shown in the first diagram in the figure <quotes>How to read a
+                structure diagram</quotes>, represents an <feature>XML</feature> element. The
             description inside the box, if any, indicates what the element may contain. A group of
             elements that work together is represented by a three-dimensional block, as shown in the
             second diagram in the figure. Find a group's detailed description in a separate
             diagram.</p>
 
-        <p> A number range indicates the number of occurances an element or a group may appear (its
+        <p> A number range indicates the number of occurrences an element or a group may appear (its
             <italic> multiplicity </italic>).  If no number range is shown, the required number of
-            occurances is one.</p>
+            occurrences is one.</p>
+         
 
-        <fig uri="legend" href="../../../graphics/legend.png">
+        <fig>
             <title>How to read a structure diagram</title>
             <caption><p></p></caption>
+            <graphic href="../../../graphics/legend.png" uri="legend"/>
         </fig>
 
         </section>
@@ -73,21 +75,25 @@
                 "History group," and "Index group" then provide the detailed structure for each
                 group.</p>
 
-            <fig href="../../../graphics/structure-diagram-example.png">
+            <fig>
                 <title>Diagram showing structure of a topic head element</title>
                 <caption><p></p></caption>
+                <graphic  href="../../../graphics/structure-diagram-example.png"/>
             </fig>
-            <fig href="../../../graphics/identity.png">
+            <fig>
                 <title>Identity group</title>
                 <caption><p></p></caption>
+                <graphic href="../../../graphics/identity.png"/>
             </fig>
-            <fig href="../../../graphics/history.png">
+            <fig>
                 <title>History group</title>
                 <caption><p></p></caption>
+                <graphic href="../../../graphics/history.png"/>
             </fig>
-            <fig href="../../../graphics/index.png">
+            <fig>
                 <title>Index group</title>
                 <caption><p></p></caption>
+                <graphic href="../../../graphics/index.png"/>
             </fig>
         </section>
         <section>

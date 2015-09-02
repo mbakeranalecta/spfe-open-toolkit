@@ -6,7 +6,7 @@
 <generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
-    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
  
     <head>
         <id>structured-content</id>
@@ -152,13 +152,14 @@
             <p> Though this is a generic document, it has structure. Its structure is illustrated
                 in the following <feature>structure diagram</feature>.</p>
             
-            <fig href="../../../graphics/generic-topic.png">
+            <fig>
                 <title>EPPO-simple generic-topic structure</title>
                 <caption>
                     <p> The tag <code>&lt;generic-topic&gt;</code> labels the <feature>root
                             element</feature> 
                         of a generic-topic document.</p>
                 </caption>
+                <graphic href="../../../graphics/generic-topic.png"/>
             </fig>
             
             <p> The <feature>head</feature> element holds the document

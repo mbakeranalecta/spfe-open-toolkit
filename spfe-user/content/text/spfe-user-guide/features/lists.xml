@@ -3,7 +3,7 @@
 <feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
-    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
     
     <head>
         <id>lists</id>
@@ -44,11 +44,12 @@
             <feature> fragment </feature>, or <feature> fragment reference </feature> in the
             <feature> body content </feature> of a topic.</p>
 
-        <fig href="../../../graphics/list-context.png">
+        <fig>
                 <title>EPPO-simple list context</title>
                 <caption>
                     <p></p>
                 </caption>
+            <graphic href="../../../graphics/list-context.png"/>
             </fig>
             
         <p> </p>
@@ -59,17 +60,19 @@
             <p> An ordered (<xml-element-name>ol</xml-element-name>) list has the structure shown in
                 the following <feature> structure diagram </feature>:</p>
 
-            <fig href="../../../graphics/ol.png">
+            <fig>
                 <title>Ordered list structure diagram</title>
                 <caption><p></p></caption>
+                <graphic href="../../../graphics/ol.png"/>
             </fig>
 
             <p> An unordered list (<xml-element-name>ul</xml-element-name>) list has the same
                 structure: </p>
 
-            <fig href="../../../graphics/ul.png">
+            <fig>
                 <title>Unordered list structure diagram</title>
                 <caption><p></p></caption>
+                <graphic  href="../../../graphics/ul.png"/>
             </fig>
 
         </section>

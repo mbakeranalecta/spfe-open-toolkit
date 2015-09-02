@@ -4,7 +4,7 @@
 <feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
-    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
     
     <head>
         <id>content-set-config</id>
@@ -52,12 +52,13 @@
         <section>
             <title>Structure</title>
             
-            <p> A <config-setting>/spfe/content-set</config-setting> configuration has the structure
+            <p> A <config-setting>/content-set</config-setting> configuration has the structure
                 shown in the following <feature>structure diagram</feature>.</p>
             
-        <fig href="../../../graphics/content-set.png">
+        <fig>
                 <title>SPFE content set structure</title>
                 <caption> <p></p> </caption>
+            <graphic href="../../../graphics/content-set.png"/>
             </fig>
             
         </section>

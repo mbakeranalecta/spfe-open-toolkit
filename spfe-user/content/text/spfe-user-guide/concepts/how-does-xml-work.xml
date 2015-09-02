@@ -3,7 +3,7 @@
 <generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
-    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
 
     <head>
         <id>how-does-xml-work</id>
@@ -116,7 +116,7 @@
 
             <p> With elements containing other elements, among them there must be some that don't
                 contain others and some that are not contained. We call the elements within a
-                containing element the element's <quote>children</quote> and call it the parent.
+                containing element the element's <quotes>children</quotes> and call it the parent.
                 Thus, among them all, some are both children and parent, some are children only, and
                 others are parents only.</p>
 
@@ -177,7 +177,7 @@
                 recognize a title element?</p>
 
             <p> To avoid such ambiguity, an XML document needs to follow certain rules to be valid.
-                These rules, called <quote>schemas,</quote> define which elements can go where and
+                These rules, called <quotes>schemas,</quotes> define which elements can go where and
                 what they can contain.  Thus a valid XML document has a defined
                 <feature>structure</feature>.  The SPFE Open Toolkit uses the <feature>XML
                     Schema</feature> standardized by W3C. To be processed, every XML file the

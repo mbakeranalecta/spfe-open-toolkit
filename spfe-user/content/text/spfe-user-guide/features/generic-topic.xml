@@ -3,7 +3,7 @@
 
 <feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
 
     <head>
         <id>generic-topic</id>
@@ -58,12 +58,13 @@
                 <feature>generic topic</feature> XML  document. A valid generic topic document has
                 the structure shown in the following <feature>structure diagram</feature>.</p>
 
-            <fig href="../../../graphics/generic-topic.png">
+            <fig>
                 <title>EPPO simple generic-topic structure</title>
                 <caption>
                     <p> The tag <code>&lt;generic-topic&gt;</code> labels the root element 
                         of a generic topic document.</p>
                 </caption>
+                <graphic href="../../../graphics/generic-topic.png"/>
             </fig>
 
             <p> The <xml-element-name>head</xml-element-name> element holds the document

@@ -33,7 +33,7 @@
                 <xsl:call-template name="sf:warning">
                     <xsl:with-param name="message">
                         <!-- FIXME: Should test for the two conditions subjected below. -->
-                        <xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/content-set configuration setting. External TOC files will be ignored. If topic set IDs specified in the <feature>content set configuration file</feature> do not match those defined in the topic set, that topic set will not be included.</xsl:text>
+                        <xsl:text>Topic set type order not specified. TOC will be in the order topic sets are listed in the /spfe/content-set configuration setting. External TOC files will be ignored. If topic set IDs specified in the content set configuration file do not match those defined in the topic set, that topic set will not be included.</xsl:text>
                     </xsl:with-param>
                 </xsl:call-template>
                 <xsl:for-each select="$config/config:content-set/config:topic-sets/config:topic-set">

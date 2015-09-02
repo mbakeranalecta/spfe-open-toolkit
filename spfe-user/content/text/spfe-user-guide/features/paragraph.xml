@@ -3,7 +3,7 @@
 <feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
-    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
     
     <head>
         <id>paragraph</id>
@@ -51,11 +51,12 @@
         <p> Paragraph elements are a common component of a topic's <feature>body content </feature>,
             as shown in the figure below.</p>
 
-    <fig href="../../../graphics/paragraph-context.png">
+    <fig>
                 <title>EPPO simple paragraph context</title>
                 <caption>
                     <p></p>
                 </caption>
+        <graphic href="../../../graphics/paragraph-context.png"/>
             </fig>
         
         <section>
@@ -86,23 +87,25 @@
                     <p> String elements allow strings to be identified so they can be reused.</p>
                 </li>
             </ul>
-            <fig href="../../../graphics/paragraph.png">
+            <fig>
                 <title>EPPO-simple paragraph structure</title>
                 <caption>
                     <p> Each component is optional and may appear any number of times, as indicated by 
-                        the <quote>0+</quote> annotations.
+                        the <quotes>0+</quotes> annotations.
                     </p>
                 </caption>
+                <graphic href="../../../graphics/paragraph.png"/>
             </fig>
         </section>
         <section>
             <title>Decorated text</title>
             <p>Text decorators affect how text is displayed.</p>
-            <fig href="../../../graphics/decorated-text.png">
+            <fig>
                 <title>EPPO-simple text decorators</title>
                 <caption>
                     <p></p>
                 </caption>
+                <graphic href="../../../graphics/decorated-text.png"/>
             </fig> 
             <subhead>Example</subhead>
             <p> The following XML-marked block of text uses text decorators.</p>
@@ -114,7 +117,7 @@
     may appear similar to the <bold>bold</bold> element, it's best to reserve it for text 
     that <italic>is</italic> code, such as the XML <code>&lt;bold&gt;</code> and 
     <code>&lt;quote&gt;</code> tags. Use the quote element to set off spoken language and 
-    titles of short works. Some people say, <quote>Well, OK,</quote> after reading 
+    titles of short works. Some people say, <quotes>Well, OK,</quotes> after reading 
     <quote>EPPO-simple paragraph.</quote>
 </p>  
             ]]>
@@ -126,8 +129,8 @@
                 may appear similar to the <bold>bold</bold> element, it's best to reserve it for text 
                 that <italic>is</italic> code, such as the XML <code>&lt;bold&gt;</code> and 
                 <code>&lt;quote&gt;</code> tags. Use the quote element to set off spoken language and 
-                titles of short works. Some people say, <quote>Well, OK,</quote> after reading 
-                <quote>EPPO-simple paragraph.</quote> </p>
+                titles of short works. Some people say, <quotes>Well, OK,</quotes> after reading 
+                <quotes>EPPO-simple paragraph.</quotes> </p>
         </section>
         
         <section>
@@ -137,9 +140,11 @@
                 The build system creates an index with a list of topics for each subject-annotation term. 
                 The lists are organized by subject type identified by the subject-annotation tag. </p>
             <p> Figure 4 lists the subject-annotation tags that EPPO-simple provides.</p>
-            <fig href="../../../graphics/subject-annotation.png">
+            <fig>
                 <title>EPPO-simple subject annotation elements</title>
                 <caption> <p></p> </caption>
+                <graphic href="../../../graphics/subject-annotation.png"/>
+                
             </fig>
 
         </section>
@@ -153,9 +158,10 @@
                 wraps a text string with a tag with an href attribute, which specifies a URI. The
                 &lt;url&gt; tag, on the other hand, simply wraps a web address.</p>
 
-            <fig href="../../../graphics/link.png">
+            <fig>
                 <title>EPPO-simple link elements</title>
                 <caption> <p></p> </caption>
+                <graphic href="../../../graphics/link.png"/>
             </fig>
             
         </section>

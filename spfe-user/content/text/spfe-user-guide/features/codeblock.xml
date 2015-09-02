@@ -3,7 +3,7 @@
 <feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
-    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
     
     <head>
         <id>codeblock</id>
@@ -43,11 +43,12 @@
             fragment </feature>, or <feature> fragment reference </feature> in the <feature> body
             content </feature> of a topic.</p>
 
-        <fig href="../../../graphics/codeblock-context.png">
+        <fig>
             <title>EPPO simple codeblock context</title>
                 <caption>
                     <p></p>
                 </caption>
+            <graphic href="../../../graphics/codeblock-context.png"/>
             </fig>
             
         <p> A codeblock elements sets preformatted text, which is convenient for presenting

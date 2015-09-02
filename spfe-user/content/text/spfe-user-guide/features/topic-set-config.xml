@@ -3,7 +3,7 @@
 
 <feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs  http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
     
     <head>
         <id>topic-set-config</id>
@@ -51,12 +51,13 @@
         <section>
             <title>Structure</title>
             
-            <p> A <config-setting>/spfe/topic-set</config-setting> configuration has the structure
+            <p> A <config-setting>/topic-set</config-setting> configuration has the structure
                 shown in the following <feature>structure diagram</feature>.</p>
             
-        <fig href="../../../graphics/topic-set.png">
+        <fig>
                 <title>SPFE topic set structure</title>
                 <caption> <p></p> </caption>
+            <graphic href="../../../graphics/topic-set.png"/>
             </fig>
             
         </section>

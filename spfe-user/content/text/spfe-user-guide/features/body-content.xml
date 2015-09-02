@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
 <feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/feature-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
 
 <head>
     <id>body-content</id>
@@ -50,11 +50,12 @@
             body </xml-element-name> or <xml-element-name>section</xml-element-name> title element,
         as shown in the <feature>structure diagram</feature> "Body content in context."</p>
 
-    <fig href="../../../graphics/body-content-context.png">
+    <fig>
         <title>Body content in context</title>
         <caption>
             <p></p>
         </caption>
+        <graphic href="../../../graphics/body-content-context.png"/>
     </fig>
     <section>
         <title>Structure</title>
@@ -64,13 +65,14 @@
             <feature>EPPO simple</feature> body content group will have the structure shown in
             figure 2.  </p>
 
-        <fig href="../../../graphics/body-content.png">
+        <fig>
             <title>EPPO simple body content structure</title>
             <caption>
                 <p> Each component is optional and may appear any number of times, as indicated by 
-                    the <quote>0+</quote> annotations.
+                    the <quotes>0+</quotes> annotations.
                 </p>
             </caption>
+            <graphic href="../../../graphics/body-content.png"/>
         </fig>
 
         <p> Begin a body of content with one or more <feature>paragraphs</feature>,
@@ -102,7 +104,7 @@
         <title>EPPO simple body content structure</title>
         <caption>
             <p> Each component is optional and may appear any number of times, as indicated by 
-                the <quote>0+</quote> annotations.
+                the <quotes>0+</quotes> annotations.
             </p>
         </caption>
     </fig>

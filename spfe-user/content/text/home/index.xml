@@ -2,10 +2,10 @@
 
 <?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css" title="SPFE Docs Stylesheet" alternate="no"?>
 
-<docset-home-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+<content-set-home-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
-    http://spfeopentoolkit.org/spfe-docs/topic-types/docset-home-topic/schemas/docset-home-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/content-set-home-topic/schemas/authoring/content-set-home-topic.xsd">
     <head>
         <id>index</id>
         <history>
@@ -55,4 +55,4 @@
         </ul>
         <p> Click the table-of-contents (TOC) link to begin exploring.</p>
     </body>
-</docset-home-topic>
+</content-set-home-topic>

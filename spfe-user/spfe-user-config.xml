@@ -1,134 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<?xml-stylesheet type="text/css" href="../spfe-docs/topic-types/common/authoring/css/spfe-docs.css" title="SPFE Docs Stylesheet" alternate="no"?>
-<spfe xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+<content-set  xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <content-set>
-        <content-set-id>spfe-user</content-set-id>
-        <title>Using the SPFE Open Toolkit</title>
-        <topic-set-type-order>
-            <topic-set-type>home</topic-set-type>
-            <topic-set-type>guide</topic-set-type>
-            <topic-set-type>eppo-simple</topic-set-type>
-            <topic-set-type>configuration</topic-set-type>
-            <topic-set-type>index</topic-set-type>
-        </topic-set-type-order>
-       
-        <home-topic-set>spfe-user-home</home-topic-set>
-        <topic-sets>
-
-            <topic-set>
-                <topic-set-id>spfe-configuration-reference</topic-set-id>
-                <href>topic-sets/spfe-configuration-reference.xml</href>
-            </topic-set>
-
-            <topic-set>
-                <topic-set-id>spfe-user-guide</topic-set-id>
-                <href>topic-sets/spfe-user-guide.xml</href>
-            </topic-set>
-
-            <topic-set>
-                <topic-set-id>spfe-user-home</topic-set-id>
-                <href>topic-sets/spfe-user-home.xml</href>
-            </topic-set>
-
-            <topic-set>
-                <topic-set-id>spfe-user-index</topic-set-id>
-                <href>topic-sets/spfe-user-index.xml</href>
-            </topic-set>
-
-        </topic-sets>
-
-        <subject-types>
-            <subject-type>
-                <id>config-setting</id>
-                <aliases>
-                    <singular>Configuration setting</singular>
-                    <plural>Configuration settings</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>spfe-build-property</id>
-                <aliases>
-                    <singular>Build property</singular>
-                    <plural>Build properties</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>feature</id>
-                <aliases>
-                    <singular>Feature</singular>
-                    <plural>Features</plural>
-                </aliases> 
-            </subject-type>
-            <subject-type>
-                <id>xslt-function-reference-entry</id>
-                <aliases>
-                    <singular>SPFE function</singular>
-                    <plural>SPFE functions</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>xslt-function-name</id>
-                <aliases>
-                    <singular>XSLT function</singular>
-                    <plural>XSLT functions</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>task</id>
-                <aliases>
-                    <singular>Task</singular>
-                    <plural>Tasks</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>file-name</id>
-                <aliases>
-                    <singular>File name</singular>
-                    <plural>File names</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>document-name</id>
-                <aliases>
-                    <singular>Document name</singular>
-                    <plural>Document names</plural>
-                </aliases>
-            </subject-type>
-            <subject-type>
-                <id>xml-element-name</id>
-                <aliases>
-                    <singular>XML element name</singular>
-                    <plural>XML element names</plural>
-                </aliases>
-            </subject-type>
-        </subject-types>
-
-        <messages>warning info</messages>
-        <output-formats>
-            <output-format>
-                <name>html</name>
-                <href>${SPFEOT_HOME}/plugins/eppo-simple/output-types/html/config.xml</href>
-            </output-format>
-        </output-formats>               
-        <wip-site>
-            <url>wip-site.href</url>
-            <ftp>
-                <url>wip-site.ftp.url</url>
-                <user>wip-site.ftp.user</user>
-                <password>wip-site.ftp.password</password>
-            </ftp>
-            <path>wip-site.ftp</path>
-        </wip-site>
-
-        <strings>
-            <string id="product">SPFE Open Toolkit</string>
-            <string id="product-release">1.0 (alpha 1)</string>
-            <string id="copyright">Copyright © 2013 Analecta Communications Inc.</string>
-        </strings>
-     </content-set>
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    <content-set-id>spfe-user</content-set-id>
+    <title>Using the SPFE Open Toolkit</title>
+    <home-topic-set>spfe-user-home</home-topic-set>
     
-</spfe>
+    <topic-set-groups>
+        <group>
+            <name>SPFE</name>
+            <group><name>Guides</name></group>
+            <group><name>References</name></group>
+            <group><name>Index</name></group>
+        </group>
+
+    </topic-set-groups>
+
+    <topic-sets>
+        <topic-set>
+            <topic-set-id>spfe-configuration-reference</topic-set-id>
+            <href>topic-sets/spfe-configuration-reference.xml</href>
+            <group>SPFE;References</group>
+        </topic-set>
+
+        <topic-set>
+            <topic-set-id>spfe-user-guide</topic-set-id>
+            <href>topic-sets/spfe-user-guide.xml</href>
+            <group>SPFE;Guides</group>
+        </topic-set>
+
+        <topic-set>
+            <topic-set-id>spfe-user-home</topic-set-id>
+            <href>topic-sets/spfe-user-home.xml</href>
+        </topic-set>
+
+        <topic-set>
+            <topic-set-id>spfe-user-index</topic-set-id>
+            <href>topic-sets/spfe-user-index.xml</href>
+            <group>SPFE;Index</group>
+        </topic-set>
+
+    </topic-sets>
+
+    <subject-types>
+        <subject-type>
+            <id>config-setting</id>
+            <aliases>
+                <singular>Configuration setting</singular>
+                <plural>Configuration settings</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>spfe-build-property</id>
+            <aliases>
+                <singular>Build property</singular>
+                <plural>Build properties</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>feature</id>
+            <aliases>
+                <singular>Feature</singular>
+                <plural>Features</plural>
+            </aliases> 
+        </subject-type>
+        <subject-type>
+            <id>xslt-function-reference-entry</id>
+            <aliases>
+                <singular>SPFE function</singular>
+                <plural>SPFE functions</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>xslt-function-name</id>
+            <aliases>
+                <singular>XSLT function</singular>
+                <plural>XSLT functions</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>task</id>
+            <aliases>
+                <singular>Task</singular>
+                <plural>Tasks</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>file-name</id>
+            <aliases>
+                <singular>File name</singular>
+                <plural>File names</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>document-name</id>
+            <aliases>
+                <singular>Document name</singular>
+                <plural>Document names</plural>
+            </aliases>
+        </subject-type>
+        <subject-type>
+            <id>xml-element-name</id>
+            <aliases>
+                <singular>XML element name</singular>
+                <plural>XML element names</plural>
+            </aliases>
+        </subject-type>
+    </subject-types>
+
+    <messages>warning info</messages>
+    <output-formats>
+        <output-format>
+            <name>xhtml</name>
+            <href>${SPFEOT_HOME}/plugins/eppo-simple/output-types/xhtml/config.xml</href>
+        </output-format>
+    </output-formats>               
+    <wip-site>
+        <url>wip-site.href</url>
+        <ftp>
+            <url>wip-site.ftp.url</url>
+            <user>wip-site.ftp.user</user>
+            <password>wip-site.ftp.password</password>
+        </ftp>
+        <path>wip-site.ftp</path>
+    </wip-site>
+
+    <strings>
+        <string id="product">SPFE Open Toolkit</string>
+        <string id="product-release">1.0 (alpha 1)</string>
+        <string id="copyright">Copyright © 2013 Analecta Communications Inc.</string>
+    </strings>
+ </content-set>
+    
+

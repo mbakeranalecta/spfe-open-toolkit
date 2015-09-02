@@ -47,7 +47,7 @@
 
             <p> To be in the output of a <feature> content set </feature> build, a topic must be
                 included in a <feature> topic set </feature> sources list (configuration setting
-                <config-setting>/spfe/topic-set/sources</config-setting>). </p> 
+                <config-setting>/topic-set/sources</config-setting>). </p> 
 
         </understanding>
         <planning>

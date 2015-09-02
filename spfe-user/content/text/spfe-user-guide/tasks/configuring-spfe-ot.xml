@@ -3,7 +3,7 @@
 <think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
-    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
 
     <head>
         <id>configuring-spfe-ot</id>
@@ -120,23 +120,21 @@
 
         <doing>
 
-            <subhead>Author tasks</subhead>
-
             <p> Create a <feature>content set</feature> configuration XML file
                 in the directory you will execute the <feature>spfe</feature> command to create
-                builds or any convenient location. Use the <config-setting> /spfe/content-set
+                builds or any convenient location. Use the <config-setting> /content-set
                 </config-setting> XML structure. </p>
 
             <p> Create a <feature>topic set</feature> configuration XML file for each topic set
-                using the <config-setting>/spfe/topic-set</config-setting> XML structure. </p>
+                using the <config-setting>/topic-set</config-setting> XML structure. </p>
 
             <subhead>Developer tasks</subhead>
 
             <p> Create a <feature>topic-type</feature> configuration XML file for each topic type
-                using the <config-setting>/spfe/topic-type</config-setting> XML structure. </p>
+                using the <config-setting>/topic-type</config-setting> XML structure. </p>
 
             <p> Create a <feature>output-format</feature> configuration XML file for each output
-                format using the <config-setting>/spfe/output-format</config-setting> XML structure.
+                format using the <config-setting>/output-format</config-setting> XML structure.
             </p>
 
         </doing>
