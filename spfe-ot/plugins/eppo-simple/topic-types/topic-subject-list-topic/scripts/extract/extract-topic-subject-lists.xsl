@@ -14,7 +14,6 @@
 	
 	Reads a set of link catalog files and finds all the references to a given subject and then assembles a list for that subject.
 	 
-	
 ===============================================================-->
 
 

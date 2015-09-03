@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
-<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
 
-<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+<essay xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
-    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/essay/schemas/authoring/essay.xsd">
  
     <head>
         <id>structured-content</id>
@@ -22,6 +21,12 @@
                 <author>jfmacdonald</author>
                 <comment>New topic</comment>
                 <status>Ready for technical review</status>
+            </revision>
+            <revision>
+                <date>2015-09-03</date>
+                <author>mbaker</author>
+                <comment>Converted to the essay schema</comment>
+                <status>In progress</status>
             </revision>
         </history>
         <index>
@@ -41,7 +46,12 @@
     </head>
     <body>
         <title>What is structured content?</title>
-
+        <byline>
+            <author-name>J. F. MacDonald</author-name>
+        </byline>
+        <precis>
+            <p>Structured content adds metadata to content to serve a specific and limited purpose in an automated content creation and delivery system.</p>
+        </precis>
         <p> Information is structured when its functional components are tagged with metadata
             such that computer programs may retain content structure and purpose when processing
             it.</p>
@@ -159,7 +169,7 @@
                             element</feature> 
                         of a generic-topic document.</p>
                 </caption>
-                <graphic href="../../../graphics/generic-topic.png"/>
+                <graphic href="../../graphics/generic-topic.png"/>
             </fig>
             
             <p> The <feature>head</feature> element holds the document
@@ -215,4 +225,4 @@
         </section>
         
     </body>
-</generic-topic>
+</essay>

@@ -17,7 +17,7 @@ version of Python that already includes the libraries, such as Anaconda (http://
 
 To build the SPFE docs:
 
-1. Go to the directory spfe/spfe-docs/build.
+1. Go to the directory spfe/spfe-docs/config.
 2. Enter: spfe build spfe-docs-config.xml final. 
 
 The build will create a directory spfebuild in your home directory. 
