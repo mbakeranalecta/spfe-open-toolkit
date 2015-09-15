@@ -371,7 +371,7 @@
         </function-description>
         <function-description>
             <name>get-topic-type-alias-singular</name>
-            <!-- keep this in sync with otehr get-alias functions -->
+            <!-- keep this in sync with other get-alias functions -->
             <description>
                 <p>Gets the singular version of a <feature>topic type alias</feature>. Topic types are formally named using their XML namespace URIs. However, if you want to display the name of a topic type publicly, for instance in a list of topics or in the visible metadata of a topic, you will need a human readable name for the topic type: the topic type alias. Topic type aliases are defined in the configuration of a topic type, in the setting <config-setting>/topic-type/aliases</config-setting>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
                 <codeblock language="XML">
@@ -413,6 +413,12 @@
                         <p>The id of the current topic set.</p>
                     </description>
                 </parameter>
+                <parameter>
+                    <name>config</name>
+                    <description>
+                        <fragment-ref id-ref="config-description"/>
+                    </description>
+                </parameter>
             </parameters>
         </function-description>
         <function-description>
@@ -428,7 +434,7 @@
         &lt;plural>Configuration settings&lt;/plural>
     &lt;/aliases>
                 </codeblock>
-                <p>The <spfe-xslt-function>get-topic-type-alias-plural</spfe-xslt-function> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <spfe-xslt-function>get-topic-type-alias-singular</spfe-xslt-function>.</p>
+                <p>The <spfe-xslt-function>sf:get-topic-type-alias-plural</spfe-xslt-function> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <spfe-xslt-function>get-topic-type-alias-singular</spfe-xslt-function>.</p>
             </description>
             <return-value>
                 <description>
@@ -457,6 +463,12 @@
                     <name>topic-set-id</name>
                     <description>
                         <p>The id of the current topic set.</p>
+                    </description>
+                </parameter>
+                <parameter>
+                    <name>config</name>
+                    <description>
+                        <fragment-ref id-ref="config-description"/>
                     </description>
                 </parameter>
             </parameters>
@@ -511,7 +523,9 @@
                 <parameter>
                     <name>config</name>
                     <description>
-                        <fragment id="config-description"><p>The config variable.</p></fragment>
+                        <fragment id="config-description">
+                                <p>A pointer to the configuration data. In a standard SPFE XSLT script, this is the variable <spfe-build-variable>$config</spfe-build-variable>.</p>
+                        </fragment>
                     </description>
                 </parameter>
             </parameters>

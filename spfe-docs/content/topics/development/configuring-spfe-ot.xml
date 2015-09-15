@@ -155,21 +155,6 @@
                 </planning-question-body>
             </planning-question>
 
-            <p> The SPFE build system will, by default, organize topics hierarchically with topic
-                sets in separate groups and topics organized by topic type within a topic set. The
-                build system will generate table of contents (TOC) with this organization to aid
-                navigation. These TOCs are not the only navigation aids the build system generates;
-                the system also creates subject-affinity links (<feature>soft links</feature>)
-                and subject index lists. Nevertheless, hierarchical navigation is one way that
-                content users will find what they want.</p>
-
-            <p> Source content may be identified in topic set configuration files with wildcards
-                in file pathnames. The asterisk "*" matches any set of characters except for the
-                path-hierarchy separator, so that <code> &lt;include&gt;
-                ../content/text/my-topic-set/*.xml &lt;/include&gt; </code> will include all the XML
-                files in the "my-topic-set" directory. Thus, best practice is to keep topic source
-                files in directories that correspond to topic sets.</p>
-
         </planning>
 
         <doing>
@@ -182,9 +167,7 @@
             <p> Create a <feature>topic set</feature> configuration XML file for each topic set
                 using the <config-setting>/topic-set</config-setting> XML structure. </p>
 
-            <subhead>Developer tasks</subhead>
-
-            <p> Create a <feature>topic-type</feature> configuration XML file for each topic type
+            <p> Create a <feature>topic type</feature> configuration XML file for each topic type
                 using the <config-setting>/topic-type</config-setting> XML structure. </p>
 
             <p> Create a <feature>output-format</feature> configuration XML file for each output

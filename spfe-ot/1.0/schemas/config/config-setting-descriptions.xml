@@ -465,9 +465,19 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
+            <index>
+                <entry>
+                    <type>feature</type>
+                    <term>subject type alias</term>
+                </entry>
+                <entry>
+                    <type>feature</type>
+                    <term>subject type aliases</term>
+                </entry>
+            </index>
             <xpath>/content-set/subject-types/subject-type/aliases</xpath>
             <description>
-                <p>A container for a pair of <feature>subject type aliases</feature>.</p>
+                <p>A container for a pair of <feature>subject type aliases</feature>. Subject type aliases provide a natural language name for the formal names of the subject types which are used to specify the type of an <feature>annotation</feature> or a <feature>topic index entry</feature>. Where you need to generate the name of a subject (such as <quotes>feature</quotes>, <quotes>API routine</quotes>, or <quotes>ingredient</quotes>) or their plural equivalents (such as <quotes>features</quotes>, <quotes>API routines</quotes>, or <quotes>ingredients</quotes>) from their type names ((such as <quotes>feature</quotes>, <quotes>api-routine</quotes>, or <quotes>ingredient</quotes>), you can do so using the <spfe-xslt-function>sf:get-subject-type-alias-singular</spfe-xslt-function> or <spfe-xslt-function>sf:get-subject-type-alias-plural</spfe-xslt-function> functions respectively. Those functions will look up the alias values from this configuration setting. </p>
             </description>
             <values/>
             <restrictions/>
@@ -4598,6 +4608,16 @@
             <attributes/>
         </config-setting-description>
         <config-setting-description>
+            <index>
+                <entry>
+                    <type>feature</type>
+                    <term>topic type alias</term>
+                </entry>
+                <entry>
+                    <type>feature</type>
+                    <term>topic type aliases</term>
+                </entry>
+            </index>
             <xpath>/topic-type/aliases</xpath>
             <description>
                 <p>A container element for a pair or <feature>topic type aliases</feature>,
@@ -4605,7 +4625,7 @@
                     <config-setting>plural</config-setting>. <feature>Topic types</feature> in SPFE
                     are formally identified by the namespace URI of the topic schema. In some cases,
                     however, we need to display the topic type to the user. For this purpose we need
-                    a user-friendly alias for the topic type.</p>
+                    a user-friendly alias for the topic type.  Topic type aliases provide a natural language name for the formal names of the topic types. Where you need to generate the name of a topic type (such as <quotes>API reference entry</quotes> or <quotes>Recipe</quotes>) or its plural equivalents (such as <quotes>API Reference Entry</quotes> or <quotes>API references</quotes>) from their type names ((such as <quotes>api-reference</quotes> or <quotes>recipie</quotes>), you can do so using the <spfe-xslt-function>sf:get-topic-type-alias-singular</spfe-xslt-function> or <spfe-xslt-function>sf:get-topic-type-alias -plural</spfe-xslt-function> functions respectively. Those functions will look up the alias values from this configuration setting. </p>
             </description>
             <values/>
             <restrictions/>
@@ -5530,7 +5550,7 @@
             <description>
                 <fragment-ref id-ref="structure-description">
                     <local-strings>
-                        <string id="container-type"><feature>topic-type</feature></string>
+                        <string id="container-type"><feature>topic type</feature></string>
                     </local-strings>
                 </fragment-ref>
             </description>

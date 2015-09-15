@@ -77,7 +77,7 @@
             <title>Watch out!</title>
             <p>This could hurt real bad.</p>
         </warning>
-        <p>All these forms are considered <feature>variants</feature> of the generic
+        <p>All these forms are considered <feature specifically="structure variants">variants</feature> of the generic
             admonition structure. Therefore the default synthesis scripts convert them to a generic
             admonition of the appropriate type.</p>
 

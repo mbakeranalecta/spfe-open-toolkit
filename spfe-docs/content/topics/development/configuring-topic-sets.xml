@@ -122,11 +122,6 @@
                 <li> <p> <config-setting> /topic-set/default-subject-scope </config-setting>:
                         (Optional) </p> </li>
 
-                <li> <p> <config-setting> /topic-set/build-rules </config-setting>: The
-                        <tool-name>Ant</tool-name> build file to be used for the topic set. If not
-                        set, the default <code>spfe-rules.xml</code> will be used. (Optional) </p>
-                </li>
-
                 <li> <p> <config-setting> /topic-set/strings </config-setting>: Identified
                         strings that may be referenced in topic set contents. (Optional) </p> </li>
 

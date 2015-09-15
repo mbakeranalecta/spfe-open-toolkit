@@ -99,11 +99,6 @@
                         will appear on the generated home page for the content set.</p>
                 </li>
                 <li>
-                    <p> <config-setting>/content-set/topic-set-type-order</config-setting>:
-                        Specify the order in which topic sets will appear in the generated table of
-                        contents.</p>
-                </li>
-                <li>
                     <p> <config-setting>/content-set/home-topic-set</config-setting>:
                         Set the topic that will be the home or first page in the content set's
                         output. The home topic set must be among the listed topic sets.</p>

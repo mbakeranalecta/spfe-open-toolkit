@@ -102,10 +102,10 @@
                 in the content model of an element or by defining a new element and giving it the
                 type fig. The second approach would allow you to give the structure element any name
                 you liked. Unless you have a good reason to change the name, however, it is better
-                to use the group. In the following example, the group fig is included in the group
-                text-general, which is a standard group in EPPO-simple that is used to define all
-                the elements that can occur at the <concept>general text level</concept> of a topic
-                types schema. This illustrates how groups are used to build a schema by nesting
+                to use the group. In the following example, the group <eppo-simple-group-name>fig</eppo-simple-group-name> is included in the group
+                <eppo-simple-group-name>text-general</eppo-simple-group-name>, which is a standard group in EPPO-simple that is used to define all
+                the elements that can occur at the general text level of a topic
+                types schema (that is, ordinary textual content inside a topic or section, but not in a list or a table or some other substructure that might have a more restrictive model. This illustrates how groups are used to build a schema by nesting
                 structures (defined by groups) one inside the other.</p>
             <codeblock>    &lt;xs:group name="text-general">
         &lt;xs:sequence>
@@ -225,7 +225,7 @@
         </section>
         <section>
             <title>Rewriting namespaces</title>
-            <p>SPFE makes use of <concept>namespaces</concept> when defining schemas. When you use a
+            <p>SPFE makes use of <feature>namespaces</feature> when defining schemas. When you use a
                 structure to define a topic type, you need to make sure that the structure comes in
                 using the correct namespace. You can use a structure to bring in elements in the
                 same namespace as your main schema or as a different namespace (see the

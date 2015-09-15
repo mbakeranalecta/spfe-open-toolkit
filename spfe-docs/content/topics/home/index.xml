@@ -34,7 +34,7 @@
             is designed to fill this gap.</p>
         <p>The SPFE-OT is also capable of creating
             <concept specifically="top-down information architecture">top-down</concept> and
-            <concept>hybrid top-down/bottom-up information architectures</concept>.</p>
+            hybrid <concept specifically="top-down information architecture">top-down</concept>/<concept specifically="bottom-up information architecture">bottom-up information architectures</concept>.</p>
         <section>
             <title>Writing in a SPFE Environment</title>
             <p>SPFE is intended to make structured writing as simple as possible for writers by
@@ -62,7 +62,7 @@
     <p>However, unlike the DocBook and DITA systems, SPFE is not based on a particular schema. Rather,
             SPFE is a modular content processing architecture that can be used with a variety of
             schemas. However, SPFE does make certain presumptions about how schemas will be
-                written. In particular it expects a <concept>declarative style of
+                written. In particular it expects a <concept specifically="declarative markup">declarative style of
                 markup</concept> in which the document markup does not contain any publishing or
             content management directives. </p>
         <p>To enable users to get up to speed quickly, and to provide a baseline of functionality
