@@ -77,11 +77,6 @@
                 Java Runtime Engine (JRE) installed, but that's not sufficient. You will need the 
                 Java Development Kit (JDK), Standard Edition, installed.</p>
 
-            <p> While Java is the engine that runs the SPFE Open Toolkit build system, Apache Ant
-                orchestrates it. Ant is a Java library and command-line tool that will manage the
-                sequence of operations needed to transform a content set to finished output.</p>
-
-
         </understanding>
 
         <planning>
@@ -98,8 +93,8 @@
                 PowerShell aliases common MS-DOS and Unix commands to PowerShell commands, so
                 command-line operation in that environment will be much like it is in Unix. </p>
 
-            <p> You may have Java and the Apache Ant build system installed. To check, execute
-                <code>java -version</code> and <code>ant -version</code> on the command line. If
+            <p> You may have Java installed. To check, execute
+                <code>java -version</code> on the command line. If
                 they are installed, you will get a response similar to that below. </p>
 
             <codeblock>
@@ -107,13 +102,10 @@
         java version "1.8.0_05"
         Java(TM) SE Runtime Environment (build 1.8.0_05-b13)
         Java HotSpot(TM) 64-Bit Server VM (build 25.5-b02, mixed mode)
-
-        &gt; ant -version
-        Apache Ant(TM) version 1.9.4 compiled on April 29 2014
             </codeblock>
 
-            <p> If you get a "command not found" response but know that they are installed, check
-                that their install locations are listed in your PATH environment variable.</p>
+            <p> If you get a "command not found" response but know that Java is not installed, check
+                that the install location is listed in your PATH environment variable.</p>
 
         </planning>
 
@@ -122,8 +114,8 @@
             <p> Installation involves the following tasks:</p>
 
             <ul>
-                <li><p>Installing the Java Development Kit</p></li>
-                <li><p>Installing Apache Ant</p></li>
+                <li><p>Installing the Java Runtime Environment</p></li>
+                <li><p>Installing Python 3</p></li>
                 <li><p>Installing the SPFE Open Toolkit</p></li>
                 <li><p>Configuring your environment</p></li>
                 <li><p>Testing the installation</p></li>
@@ -155,17 +147,7 @@
                 </li>
             </ul>
 
-            <subhead>Installing Apache Ant</subhead>
-
-            <p> Ant is open-source software that's freely available at
-                <link-external href="http://ant.apache.org">ant.apache.org</link-external>. Refer to
-                the installation instructions at <link-external
-                href="http://ant.apache.org/manual/install.html"> ant.apache.org/manual/install.html
-                </link-external>. To simplify the installation process for Microsoft Windows, you
-                may use the WinAnt installer available at <link-external
-                href="https://code.google.com/p/winant/"> code.google.com/p/winant </link-external>.
-            </p>
-
+           
             <subhead>Installing the SPFE Open Toolkit</subhead>
 
             <p> The latest version of the SPFE Open Tookit is available on GitHub at
@@ -197,7 +179,7 @@
 
             <subhead>Testing the installation</subhead>
 
-            <p> Execute the commands <code>java</code>, <code>ant</code>, and <code>spfe</code> to
+            <p> Execute the commands <code>java</code>, and <code>spfe</code> to
                 verify that they are installed in a directory listed in your PATH environment
                 variable.</p>
 
@@ -208,7 +190,7 @@
                 <li> <p> Open a command window and change directory to <code>
                             $SPFEOT_HOME/../spfe-docs/build </code></p> </li>
 
-                <li> <p> Issue the command <code>$SPFEOT_HOME/spfe spfe-docs-config.xml
+                <li> <p> Issue the command <code>$SPFEOT_HOME/spfe build spfe-docs-config.xml
                             final</code>. (If you have the <code>spfe</code> command on your path,
                         you may execute it directly.)</p> </li>
 

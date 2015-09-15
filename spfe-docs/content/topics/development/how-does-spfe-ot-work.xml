@@ -68,27 +68,23 @@
         <title>How does the SPFE Open Toolkit work?</title>
 
         <p> The <feature>SPFE Open Toolkit</feature> is a system for transforming
-            <feature>structured content</feature> XML to produce output in a desired format.  It
+            <feature>structured content</feature> to produce output in a desired format.  It
             works by processing source XML through a series of stages to produce the output:</p>
 
         <ol>
 
-            <li> <p> In a prepatory configuration stage, the toolkit creates or updates the build
-                    directory, collects and merges all configuration files, and creates the
-                    <tool-name> Ant </tool-name> build file that will govern the build process.</p>
-            </li>
 
-            <li> <p> The <feature>synthesis</feature> stage collects source <feature>topics
+            <li> <p> The <feature>synthesis stage</feature> collects source <feature>topics
             </feature>, pulling content together for further processing.</p> </li>
 
-            <li> <p> The <feature>presentation</feature> stage organizes and links topics,
+            <li> <p> The <feature>presentation stage</feature> organizes and links topics,
                     structuring content as needed for a particular output format.</p> </li>
 
-            <li> <p> The <feature>formatting</feature> stage produces an XML representation of the
+            <li> <p> The <feature>formatting stage</feature> produces an XML representation of the
                     format. If the output format is an XML format, such as XHTML, this will be the
                     final stage.</p> </li>
 
-            <li> <p> The <feature>encoding</feature> stage tranforms the XML representation to the
+            <li> <p> The <feature>encoding stage</feature> transforms the XML representation to the
                     output format when that format, such as PDF, is not XML.</p> </li>
 
         </ol>
@@ -96,28 +92,6 @@
         <p> Understanding the SPFE build process will help you use the toolkit and resolve problems
             when they occur.</p>
 
-        <section>
-            <title>Configuration stage</title>
-
-            <p> A toolkit build begins by creating or updating a subdirectory of the <feature>
-                    SPFE_BUILD_DIR</feature> directory for the content set and creating an
-                <tool-name> Ant</tool-name> build file, <code>$SPFE_BUILD_DIR/spfebuild.xml</code>.
-                The build directory for the content set,
-                <code>$SPFE_BUILD_DIR/&lt;content-set-id&gt;</code>, contains the following: </p>
-
-            <ul>
-
-                <li> <p> A merged SPFE configuration file, <code>config/spfe-config.xml</code>.</p>
-                </li>
-
-                <li> <p> A collection of XSLT scripts for each <feature>topic set</feature> that
-                        will be used in the build. The scripts are in subdirectories of <code>
-                            content-set-id/build/topic-sets/&lt;topic-set-id&gt;/</code>, with a
-                        subdirectory for scripts used in subsequent build stages.</p> </li>
-
-            </ul>
-
-        </section>
 
         <section>
             <title>Synthesis stage</title>
