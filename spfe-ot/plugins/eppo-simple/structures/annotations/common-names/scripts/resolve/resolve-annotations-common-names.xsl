@@ -16,7 +16,7 @@
                        ">
         <name>
             <xsl:attribute name="type" select="local-name()"/>
-            <xsl:attribute name="key" select="normalize-space(.)"/>
+            <xsl:attribute name="key" select="if (@specifically) then @specifially else normalize-space(.)"/>
             <xsl:apply-templates/>
         </name>
     </xsl:template>

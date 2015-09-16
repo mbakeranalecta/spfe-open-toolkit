@@ -123,12 +123,12 @@ Main template
 							<xsl:value-of select="."/>
 						</term>
 						<key>
-							<xsl:value-of select="."/>
+							<xsl:value-of select="lower-case(.)"/>
 						</key>
 					</xsl:for-each>
 					<xsl:for-each select="*:key">
 						<key>
-							<xsl:value-of select="."/>
+							<xsl:value-of select="lower-case(.)"/>
 						</key>
 					</xsl:for-each>
 				</target>
