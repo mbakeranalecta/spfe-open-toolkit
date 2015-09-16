@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+<essay xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/topic-types/essay/schemas/authoring/essay.xsd">
+    <head>
+        <id>every-page-is-page-one</id>
+        <history>
+            <revision>
+                <date>2015-09-16</date>
+                <author>mbaker</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>concept</type>
+                <term>Every Page is Page One</term>
+            </entry>
+            <entry>
+                <type>concept</type>
+                <term>Every Page is Page One topics</term>
+            </entry>
+            <entry>
+                <type>concept</type>
+                <term>EPPO</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Every Page is Page One</title>
+        <byline>
+            <author-name>Mark Baker</author-name>
+        </byline>
+        <precis>
+            <p>Every Page is Page One is an approach to information design and information
+                architecture that recognizes that readers may enter a content set at any point, and
+                so ensure that every page in the content set can function as page one for the
+                reader. </p>
+        </precis>
+        <p>In a <concept>bottom-up information architecture</concept> every page is a potential
+            entry point and also a hub of its local space within the <feature>content set</feature>.
+            A page is therefore not an end point, as it is in a
+            <concept>top-down information architecture</concept>, but a node in a network that the
+            reader can navigate in any order they please. This meas that the reader can arrive at
+            any page in the <feature>content set</feature> without any prior context being
+            established. Each page must therefore work as page one for the reader. This is true even
+            if the reader has visited several pages in the content set, since it is impossible to
+            anticipate which pages, and in which order, the reader will have read those pages. </p>
+        <p>Even in a top-down information architecture, however, it cannot be assumed that the
+            reader will read in the prescribed order. (Nor does top-down architecture always imply a
+            reading order -- it may be based on categorization rather than a curriculum.) The way in
+            which the reader reads is driven by their background, habits, and immediate needs.
+            Studies show that readers often skip around in material that was written to be read
+            linearly (and indeed, we provide  indexes to help them do so). Given this, unless we are
+            confident that the reader will actually read our content in linear order, we should
+            still treat every page as page one, even in a top-down information architecture. </p>
+        <p>Every Page is Page One is therefore an information design style based on creating small
+            units of content (<feature>topics</feature>) that meet individual needs for the reader
+            and that don't depend on being read in a particular order. In my book,
+            <link-external href="http://xmlpress.net/publications/eppo">Every Page is Page One: Topic-based Writing for Technical Communication and the Web</link-external>,
+            I lay out seven design principles for Every Page is Page One topics:</p>
+        <ll>
+            <li>
+                <label>Self-contained</label>
+                <p>An Every Page is Page One topic is self contained. It contains the content needed
+                    to fulfil its purpose for its intended audience and does not have linear
+                    dependencies on other topics. That is, there is no previous or next topic, and
+                    no parent or child topics. It may, however, link to topics that provide
+                    supporting or ancillary material.  </p>
+            </li>
+            <li>
+                <label>Specific and limited purpose</label>
+                <p>An Every Page is Page One topic serves a specific and limited purpose. This
+                    purpose is not necessarily the whole of any one user's task. Just as a traveller
+                    may need to take several vehicles to complete a complex individual journey, a
+                    reader may need to read several topics to complete a complex individual task.
+                    Just as a hotel shuttle may sever the specific and limited purpose of getting
+                    the traveller from the airport to the hotel, a topic should serve a specific and
+                    well defined purpose within the reader's overall task.</p>
+            </li>
+            <li>
+                <label>Establish context</label>
+                <p>Because we don't know what the reader has read before reading this topic, we
+                    cannot assume that they understand the context of the topic. A topic cannot
+                    assume that its context is established by its place in a larger narrative or in
+                    a hierarchical organizational scheme. It must establish its context for itself.
+                    Establishing context is also an important part of enabling the reader who is
+                    offered this topic as one of a set of search results to quickly establish that
+                    it is the most relevant topic in the list for their needs. Finally, if the
+                    reader is not actually reading the right topic, setting context helps them
+                    identify this quickly. Context setting material should also provide links to
+                    help readers who are not in quite the right place get where they need to go.
+                </p>
+            </li>
+            <li>
+                <label>Conform to a consistent pattern</label>
+                <p>When you write a self contained topic with a specific and limited purpose, topics
+                    on the same subject naturally contain the same types of information, generally
+                    presented in the same way and in the same order. Thus all recipes follow the
+                    same pattern. While patterns naturally emerge over time, a process we can see in
+                    accelerated form in Wikipedia in particular, you can and should develop
+                    consistent topics patterns deliberatly for your content. Having a consistent and
+                    appropriate topic pattern helps to make the content more readable, easier for
+                    the browsing reader to identify, and easier for the writer to make complete and
+                    consistent. </p>
+            </li>
+            <li>
+                <label>Stay on one level</label>
+                <p>Readers often need to change levels as they read. Some like to start with general
+                    principles and then see them illustrated by examples. Others like to start with
+                    examples and proceed to general principles later. Readers perusing specific
+                    goals often start with concrete instructions but find they need background
+                    information to understand how to the instructions apply to their task. Part of
+                    the curriculum design of a linear work is deciding when to change levels.
+                    However, when your are creating Every Page is Page One topics, that are designed
+                    to be accessed at random. the decision to change levels is firmly in the hands
+                    of the reader, not the writer. Writers should cede control over levels to the
+                    reader by keeping each topic they write on one level. Writers should also help
+                    readers to change levels when they need to by providing appropriate links.</p>
+            </li>
+            <li>
+                <label>Assume the reader is qualified</label>
+                <p>For an Every Page is Page One topic to effectively serve a specific and limited
+                    purpose, it must have a specific vision of the reader in mind.  A topic that
+                    attempted to server all possible readers would have to explain every word and
+                    idea that it mentioned, which would quickly become unwieldy. Instead, a topic
+                    should be written for the type of person who normally does this task. For
+                    example, a recipe is write for experienced cooks who know what terms like
+                    "whisk," "blanch," and "puree" mean. Explaining those terms in every recipe
+                    would make them inconvenient to use for the typical recipe user -- an
+                    experienced cook. Readers who are not qualified can find out how to whisk,
+                    blanch, or puree by searching or by following links in the recipe (if you
+                    provide such links).</p>
+            </li>
+            <li>
+                <label>Link richly</label>
+                <p>Because an Every Page is Page One topic is a navigational hub for topics on
+                    related subjects, and because it uses links to help readers establish context,
+                    switche levels, and access background material, it should be richy linked to
+                    surrounding material. </p>
+            </li>
+        </ll>
+        <p>In a <concept>structured writing</concept> environment such as SPFE, the rule that an
+            EPPO topic should follow a consistent pattern is supported by the creating of specific
+            topic types for each of the EPPO topic patterns you need for your content. Topic types
+            follow topic patterns, but they can be much more specific than topics patterns, and
+            enforce specific requirements and <concept>constraints</concept> to meet specific
+            business needs.</p>
+        <p>The <feature>EPPO-simple schema set</feature> is specifically designed to support the
+            development of highly specific EPPO topic types with minimal expense and overhead.</p>
+    </body>
+</essay>

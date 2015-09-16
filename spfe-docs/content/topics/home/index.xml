@@ -54,7 +54,7 @@
         </section>
 <section>
     <title>Schemas</title>
-    <p>As a <concept>structured writing system</concept>, SPFE works with content that conforms to a
+    <p>As a <concept>structured writing</concept> system, SPFE works with content that conforms to a
                 set of formal rules known as a <concept>schema</concept>. Schemas define which
                 content structures can be used in which situations. Successful
                 <task>processing of content</task> depends on the content conforming to both the

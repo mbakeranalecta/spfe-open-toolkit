@@ -88,15 +88,14 @@
                 <ol>
                     <li>
                         <p>Open a terminal window and change to the directory
-                            <directory-name>&lt;spfe-installation
-                            path>/spfe-docs/build</directory-name></p></li>
+                            <directory-name>$SPFEOT_HOME/spfe-docs/build</directory-name></p></li>
                     <li>
                         <p>Type <code>spfe build spfe-docs-config.xml draft</code></p>
                     </li>
                 </ol>
                 <p>The build system creates the  <directory-name>spfebuild</directory-name>
                 directory in your home directory. For example, in Windows the directory
-                    <directory-name><code>C:\Users\yourname\spfebuild\spfe-docs\output</code></directory-name>
+                    <directory-name specifically="">C:\Users\yourname\spfebuild\spfe-docs\output</directory-name>
                 contains the HTML files for the SPFE documentation set. Open the file
                     <file-name>spfebuild\spfe-docs\output\index.html</file-name> in any standard
                 browser. If you can view the SPFE documentation in your browser, you have

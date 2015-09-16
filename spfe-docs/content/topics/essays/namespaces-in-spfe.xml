@@ -158,7 +158,7 @@
                 this way. These public document types have very broad use and very firmly
                 established semantics. And they don't share much with other public standards. Having
                 unique namespaces for each of them makes sense because of the way they are used. </p>
-            <p>But if you are setting up a structured writing system, particularly a topic-based
+            <p>But if you are setting up a <concept>structured writing</concept> system, particularly a topic-based
                 structured writing system, you are going to have multiple topic types. But each of
                 those topic types is going to have a great many things in common. You are not going
                 to have a whole different way of doing tables or lists or procedures across a family

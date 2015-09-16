@@ -31,15 +31,19 @@
         </history>
         <index>
             <entry>
-                <type>feature</type>
+                <type>concept</type>
                 <term>structured content</term>
             </entry>
             <entry>
-                <type>feature</type>
+                <type>concept</type>
+                <term>structured writing</term>
+            </entry>
+            <entry>
+                <type>concept</type>
                 <term>metadata</term>
             </entry>
             <entry>
-                <type>feature</type>
+                <type>concept</type>
                 <term>markup</term>
             </entry>
         </index>

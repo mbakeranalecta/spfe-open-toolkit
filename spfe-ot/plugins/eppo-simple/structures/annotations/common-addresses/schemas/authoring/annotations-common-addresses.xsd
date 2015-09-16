@@ -21,7 +21,7 @@
 
                 </xs:complexType>
             </xs:element>
-            <xs:element name="url"/>
+            <xs:element name="url"  type="xs:string"/>
         </xs:choice>
     </xs:group>
 </xs:schema>

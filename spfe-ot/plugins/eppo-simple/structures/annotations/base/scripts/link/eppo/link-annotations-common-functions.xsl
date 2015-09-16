@@ -37,7 +37,7 @@
 	<xsl:function name="esf:target-exists" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
-		<xsl:value-of select="if ($catalogs//lc:target[@type=$type][lc:key=$target] or esf:multi-key-match($target, $type)) then true() else false()"/>
+		<xsl:value-of select="if ($catalogs//lc:target[@type=$type][lc:key=lower-case($target)] or esf:multi-key-match(lower-case($target), $type)) then true() else false()"/>
 	</xsl:function>
 	
 	<xsl:function name="esf:target-exists" as="xs:boolean">
@@ -46,14 +46,14 @@
 		<xsl:param name="namespace"/>
 		<xsl:value-of select="if ($catalogs//lc:target[@type=$type]
 														   [lc:namespace=$namespace]
-			                                               [lc:key=$target] or esf:multi-key-match($target, $type, $namespace)) then true() else false()"/>
+			                                               [lc:key=lower-case($target)] or esf:multi-key-match(lower-case($target), $type, $namespace)) then true() else false()"/>
 	</xsl:function>
 	
 	<xsl:function name="esf:target-exists-not-self" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
 		<xsl:param name="self"/>
-		<xsl:value-of select="if ($catalogs//lc:target[parent::lc:page/@full-name ne $self][@type=$type][lc:key=$target] or esf:multi-key-match($target, $type)) then true() else false()"/>
+		<xsl:value-of select="if ($catalogs//lc:target[parent::lc:page/@full-name ne $self][@type=$type][lc:key=lower-case($target)] or esf:multi-key-match(lower-case($target), $type)) then true() else false()"/>
 	</xsl:function>
 	
 	<xsl:function name="esf:multi-key-match" as="xs:boolean">
@@ -69,7 +69,7 @@
 		</xsl:variable>
 		<xsl:variable name="matching-keysets" as="xs:boolean*">
 			<xsl:for-each select="$in-scope-key-sets-of-this-type/lc:target">	
-				<xsl:value-of select="lf:try-key-set($target, lc:key-set)"/>
+				<xsl:value-of select="lf:try-key-set(lower-case($target), lc:key-set)"/>
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:value-of select="$matching-keysets=true()"/>
@@ -89,7 +89,7 @@
 		</xsl:variable>
 		<xsl:variable name="matching-keysets" as="xs:boolean*">
 			<xsl:for-each select="$in-scope-key-sets-of-this-type/lc:target">	
-				<xsl:value-of select="lf:try-key-set($target, lc:key-set)"/>
+				<xsl:value-of select="lf:try-key-set(lower-case($target), lc:key-set)"/>
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:value-of select="$matching-keysets=true()"/>
@@ -98,7 +98,7 @@
 	<xsl:function name="lf:try-key-set" as="xs:boolean">
 		<xsl:param name="target"/>
 		<xsl:param name="key-sets"/>
-		<xsl:value-of select="lf:try-key-set($target, $key-sets, 1)"/>
+		<xsl:value-of select="lf:try-key-set(lower-case($target), $key-sets, 1)"/>
 	</xsl:function>
 
 	<xsl:function name="lf:try-key-set" as="xs:boolean">
@@ -112,11 +112,11 @@
 			<xsl:when test="$index gt count($key-sets)">
 				<xsl:value-of select="true()"/>
 			</xsl:when>
-			<xsl:when test="not(lf:contains-any($target, $key-sets[$index]/lc:key))">
+			<xsl:when test="not(lf:contains-any(lower-case($target), $key-sets[$index]/lc:key))">
 				<xsl:value-of select="false()"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="lf:try-key-set($target, $key-sets, $index + 1)"/>
+				<xsl:value-of select="lf:try-key-set(lower-case($target), $key-sets, $index + 1)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -160,16 +160,16 @@
 			<xsl:sequence select="$catalogs/lc:catalog/lc:page[lc:target/@type=$type]
 				                  [if($namespace) then lc:target/lc:namespace=$namespace else true()]
 				                  [@full-name ne $current-page-name]
-				                  [lc:target/lc:key=$target]"/>	
+				                  [lc:target/lc:key=lower-case($target)]"/>	
 			
 			<!-- multi-key lookup -->
 			<xsl:sequence select="$catalogs/lc:catalog/lc:page[lc:target/@type=$type]
 				                                                        [if($namespace) then lc:target/lc:namespace=$namespace else true()]
-				                                                        [@full-name ne $current-page-name]/lc:target[lf:try-key-set($target, lc:key-set)]/.."/>	
+				                                                        [@full-name ne $current-page-name]/lc:target[lf:try-key-set(lower-case($target), lc:key-set)]/.."/>	
 		</xsl:variable>
 		
 		<!-- FIXME: Update this for namespaces? -->
-		<xsl:if test="count($target-page[1]/lc:target[@type=$type][lc:key=$target]) gt 1">
+		<xsl:if test="count($target-page[1]/lc:target[@type=$type][lc:key=lower-case($target)]) gt 1">
 			<xsl:call-template name="sf:warning">
 				<xsl:with-param name="message" select="'Detected a target page that contains more than one target of the same name and type. The name is: ', string($target), '. The type is: ', string($type), '. The topic is: ', string(ancestor::ss:topic/@full-name), '.'"/>
 
@@ -200,7 +200,7 @@
 							<xsl:text>More than one target page with the same link priority.&#x000A;</xsl:text>
 							<xsl:text>Target pages include:&#x000A;</xsl:text>
 							<xsl:value-of select="string-join($target-page[number(@link-priority) eq min($target-page/@link-priority)]/@full-name, ',&#x000A;')"/>
-							<xsl:value-of select="'&#x000A;The target is: ', $target"/>
+							<xsl:value-of select="'&#x000A;The target is: ', lower-case($target)"/>
 							<xsl:value-of select="'&#x000A;The type is: ', $type"/>
 							<xsl:value-of select="'&#x000A;The priority is: ', min($target-page/@link-priority)"/>
 							<xsl:text>&#x000A;Arbitrarily picking a page to link to.</xsl:text>
@@ -211,7 +211,7 @@
 
 				<xsl:call-template name="make-link">
 					<xsl:with-param name="target-page" select="$highest-priority-page"/>
-					<xsl:with-param name="target" select="$target"/>
+					<xsl:with-param name="target" select="lower-case($target)"/>
 					<xsl:with-param name="type" select="$type"/>
 					<xsl:with-param name="namespace" select="$namespace"/>
 					<xsl:with-param name="current-page-name" select="$current-page-name"/>
@@ -246,12 +246,12 @@
 		<xsl:variable name="target-topic-set" select="$target-page/parent::lc:catalog/@topic-set-id"/>	
 		<xsl:variable name="target-file"  select="string($target-page/@file)"/>		
 		
-		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][lc:namespace=$namespace][@type=$type][1]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][@type=$type][1]/@anchor) else ''"/>
+		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=lower-case($target)][lc:namespace=$namespace][@type=$type][1]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=lower-case($target)][@type=$type][1]/@anchor) else ''"/>
 
 		
 		<pe:link hint="{$type}">
 			<xsl:variable name="title">
-				<xsl:variable name="target-content" select="normalize-space(string($target-page/lc:target[lc:key=$target][@type=$type]/lc:label))"/>
+				<xsl:variable name="target-content" select="normalize-space(string($target-page/lc:target[lc:key=lower-case($target)][@type=$type]/lc:label))"/>
 				
 				<xsl:choose>
 					<xsl:when test="$target-content">
@@ -288,18 +288,18 @@
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
 				
-		<xsl:variable name="target-page" select="$catalogs/lc:catalog/lc:page[lc:target/@type=$type][lc:target/lc:key=$target]"/>
+		<xsl:variable name="target-page" select="$catalogs/lc:catalog/lc:page[lc:target/@type=$type][lc:target/lc:key=lower-case($target)]"/>
 				
 		<xsl:choose>
 			<xsl:when test="(count($target-page/lc:page/@file) > 1) or (count($catalogs/lc:catalog/lc:page[@full-name=$target-page/@full-name]) > 1)">
 				<xsl:call-template name="sf:error">
-					<xsl:with-param name="message">More than one destination found for the cross reference <xsl:value-of select="$target"/>. Unable to proceed.</xsl:with-param>
+					<xsl:with-param name="message">More than one destination found for the cross reference <xsl:value-of select="lower-case($target)"/>. Unable to proceed.</xsl:with-param>
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:call-template name="make-structure-reference">
 					<xsl:with-param name="target-page" select="$target-page"/>
-					<xsl:with-param name="target" select="$target"/>
+					<xsl:with-param name="target" select="lower-case($target)"/>
 					<xsl:with-param name="type" select="$type"/>
 				</xsl:call-template>
 			</xsl:otherwise>
@@ -331,14 +331,14 @@
 -->	
 		<xsl:variable name="target-file"  select="string($target-page/@file)"/>		
 		
-		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][@type=$type]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][@type=$type]/@anchor) else ''"/>
+		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=lower-case($target)][@type=$type]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=lower-case($target)][@type=$type]/@anchor) else ''"/>
 
 		<xsl:choose>
 			<!-- this book -->
 			<xsl:when test="$topic-set-id eq $target-topic-set">
 				<pe:structure-reference 
 					type="{$type}"
-					target="{$target}"/>
+					target="{lower-case($target)}"/>
 			</xsl:when>
 			
 			<!-- outside this book -->

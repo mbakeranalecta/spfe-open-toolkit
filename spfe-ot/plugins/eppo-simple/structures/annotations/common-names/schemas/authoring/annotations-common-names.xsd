@@ -15,12 +15,66 @@
 
     <xs:group name="annotations-common-names">
         <xs:choice>
-            <xs:element name="file-name"/>
-            <xs:element name="directory-name"/>
-            <xs:element name="document-name"/>
-            <xs:element name="product-name"/>
-            <xs:element name="tool-name"/>
-            <xs:element name="author-name"/>
+            <xs:element name="file-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="specifically"/>
+                            <xs:attribute name="namespace"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="directory-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="specifically"/>
+                            <xs:attribute name="namespace"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="document-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="specifically"/>
+                            <xs:attribute name="namespace"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="product-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="specifically"/>
+                            <xs:attribute name="namespace"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="tool-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="specifically"/>
+                            <xs:attribute name="namespace"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="author-name">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="specifically"/>
+                            <xs:attribute name="namespace"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
         </xs:choice>
     </xs:group>
 </xs:schema>
