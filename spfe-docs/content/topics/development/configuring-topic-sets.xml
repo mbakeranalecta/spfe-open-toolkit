@@ -3,7 +3,7 @@
 <think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
-    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
 
     <head>
         <id>configure-topic-sets</id>
@@ -46,8 +46,10 @@
         </understanding>
 
         <planning>
-
-            <p> The <feature>content set</feature> and <feature>topic set</feature> configuration
+            <planning-question>
+                <planning-question-title>Where do I locate the configuration files</planning-question-title>
+                <planning-question-body>
+                    <p> The <feature>content set</feature> and <feature>topic set</feature> configuration
                 files may reside anywhere in the filesystem that is convenient for the author.
                 References to configuration, source, and other files may be relative or absolute
                 path names. A common setup has the content set configuration file in the working
@@ -62,7 +64,10 @@
                     ../content/text/my-topic-set/*.xml &lt;/include&gt; </code> will include all the
                 XML files in the "my-topic-set" directory.  Thus, best practice is to keep topic
                 source files in directories that correspond to topic sets.</p>
-
+</planning-question-body>
+            </planning-question>
+            
+            
 
         </planning>
 
@@ -107,9 +112,9 @@
 
                 <li> <p> <config-setting> /topic-set/sources </config-setting>: A specification
                         of source files for the topic set. Include source files in these categories:
-                        <xml-element-name> authored-content </xml-element-name> for authored topics,
-                        <xml-element-name> graphics </xml-element-name> for authored graphics, or
-                        <xml-element-name> sources-to-extract-content-from </xml-element-name> for
+                    <config-setting>authored-content</config-setting> for authored topics,
+                    <config-setting>graphics</config-setting> for authored graphics, or
+                    <config-setting>sources-to-extract-content-from</config-setting> for
                         generated content. (Required) </p> </li>
 
                 <li> <p> <config-setting> /topic-set/condition-tokens </config-setting>: A list

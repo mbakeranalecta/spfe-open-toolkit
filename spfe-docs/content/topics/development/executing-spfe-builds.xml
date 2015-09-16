@@ -2,7 +2,7 @@
 <think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
-    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
 
     <head>
         <id>executing-spfe-builds</id>
@@ -60,6 +60,11 @@
         </understanding>
         <planning>
 
+
+
+        </planning>
+        <doing>
+
             <p> You must properly <task>install</task> the toolkit before executing the SPFE build system. 
             </p>
 
@@ -67,11 +72,6 @@
                 of a directory you want the build system to generate run files and output. The files
                 for each <feature> content set </feature> will go in a separate subdirectory with
                 the name of its <xml-element-name>content-set-id</xml-element-name>. </p>
-
-        </planning>
-        <doing>
-
-            <subhead>Executing builds</subhead>
 
             <p> Execute either the Windows <file-name>spfe.bat</file-name> or Unix Bash <file-name>
                     spfe.sh</file-name> script in the <feature>SPFEOT_HOME</feature> directory,

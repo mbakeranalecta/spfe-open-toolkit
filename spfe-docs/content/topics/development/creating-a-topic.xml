@@ -2,7 +2,7 @@
 <think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
-    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
 
     <head>
         <id>creating-a-topic</id>
@@ -51,36 +51,38 @@
 
         </understanding>
         <planning>
-
-            <p> Before creating the document for a topic, consider the document's purpose and 
-                select the <feature> topic type </feature> that best suits it. </p>
-
-            <p> The <feature> SPFE Open Toolkit</feature> provides a set of topic types that may be
-                used as a base for extended topic types in a particular deployment of the toolkit.
-                These base types, called <feature>EPPO simple</feature>, include the following: </p>
-
-            <ul> 
-
-                <li> <p> <feature>docset-home topic</feature> </p> </li>
-
-                <li> <p> <feature>essay</feature> </p> </li>
-
-                <li> <p> <feature>feature topic</feature> </p> </li>
-
-                <li> <p> <feature>generic topic</feature> </p> </li>
-
-                <li> <p> <feature>think-plan-do topic</feature> </p> </li>
-
-            </ul>
-
-            <p> Of these, the <feature>generic topic</feature> is most general and forms a base
-                for the others. </p>
+            <planning-question>
+                <planning-question-title>Which topic type should I use for my topic?</planning-question-title>
+                <planning-question-body>
+                    <p> Before creating the document for a topic, consider the document's purpose and 
+                        select the <feature> topic type </feature> that best suits it. </p>
+                    
+                    <p> The <feature> SPFE Open Toolkit</feature> provides a set of topic types that may be
+                        used as a base for extended topic types in a particular deployment of the toolkit.
+                        These base types, called <feature>EPPO simple</feature>, include the following: </p>
+                    
+                    <ul> 
+                        
+                        <li> <p> <feature>docset-home topic</feature> </p> </li>
+                        
+                        <li> <p> <feature>essay</feature> </p> </li>
+                        
+                        <li> <p> <feature>feature topic</feature> </p> </li>
+                        
+                        <li> <p> <feature>generic topic</feature> </p> </li>
+                        
+                        <li> <p> <feature>think-plan-do topic</feature> </p> </li>
+                        
+                    </ul>
+                </planning-question-body>
+            </planning-question>
+            
+            
 
         </planning>
         <doing>
 
-            <subhead>Select an editor</subhead>
-
+           
             <p> Create an XML file using editing software of your choice. Do not use a word
                 processing program such as Microsoft Word. The editor must save output in plain
                 text format.</p>

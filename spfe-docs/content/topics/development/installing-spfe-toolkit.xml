@@ -5,7 +5,7 @@
 <think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
-    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/think-plan-do-topic.xsd">
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
 
     <head>
         <id>installing-spfe-toolkit</id>
@@ -81,36 +81,36 @@
 
         <planning>
 
-            <p> To use the <feature>SPFE Open Toolkit</feature>, you will need to execute commands
-                on a terminal command line. You should be comfortable using commands to execute
-                programs, to create, move, and delete files and directories, and perform other
-                essential tasks.</p>
-
-            <p> In a Unix-like system, including OS X and Linux, you may use the toolkit with
-                any command shell, such as Bash or Tcsh.</p>
-
-            <p> In the Microsoft Windows environment, you may issue commands using PowerShell.
-                PowerShell aliases common MS-DOS and Unix commands to PowerShell commands, so
-                command-line operation in that environment will be much like it is in Unix. </p>
-
-            <p> You may have Java installed. To check, execute
-                <code>java -version</code> on the command line. If
-                they are installed, you will get a response similar to that below. </p>
-
-            <codeblock>
-        &gt; java -version
-        java version "1.8.0_05"
-        Java(TM) SE Runtime Environment (build 1.8.0_05-b13)
-        Java HotSpot(TM) 64-Bit Server VM (build 25.5-b02, mixed mode)
-            </codeblock>
-
-            <p> If you get a "command not found" response but know that Java is not installed, check
-                that the install location is listed in your PATH environment variable.</p>
 
         </planning>
 
         <doing>
-
+            
+            <p> To use the <feature>SPFE Open Toolkit</feature>, you will need to execute commands
+                on a terminal command line. You should be comfortable using commands to execute
+                programs, to create, move, and delete files and directories, and perform other
+                essential tasks.</p>
+            
+            <p> In a Unix-like system, including OS X and Linux, you may use the toolkit with
+                any command shell, such as Bash or Tcsh.</p>
+            
+            <p> In the Microsoft Windows environment, you may issue commands using PowerShell.
+                PowerShell aliases common MS-DOS and Unix commands to PowerShell commands, so
+                command-line operation in that environment will be much like it is in Unix. </p>
+            
+            <p> You may have Java installed. To check, execute
+                <code>java -version</code> on the command line. If
+                they are installed, you will get a response similar to that below. </p>
+            
+            <codeblock>
+                &gt; java -version
+                java version "1.8.0_05"
+                Java(TM) SE Runtime Environment (build 1.8.0_05-b13)
+                Java HotSpot(TM) 64-Bit Server VM (build 25.5-b02, mixed mode)
+            </codeblock>
+            
+            <p> If you get a "command not found" response but know that Java is not installed, check
+                that the install location is listed in your PATH environment variable.</p>
             <p> Installation involves the following tasks:</p>
 
             <ul>

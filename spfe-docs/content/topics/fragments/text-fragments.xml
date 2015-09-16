@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fragments xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
-    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd">
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs http://spfeopentoolkit.org/spfe-docs/structures/fragments/schemas/authoring/fragments-file.xsd">
     
     <head>
         <id>text-fragments</id>
@@ -28,11 +27,13 @@
                     kind aunt gave him this nice horse; and I am sure James takes good
                     care of her gift.</p>
                 
-                <fig href="../../graphics/horse.png">
+                <fig >
                     <title>James on his horse</title>
+                    
                     <caption>
                         <p>See James ride.</p>
                     </caption>
+                    <graphic href="../../graphics/horse.png"/>
                 </fig>    
             
         </fragment>

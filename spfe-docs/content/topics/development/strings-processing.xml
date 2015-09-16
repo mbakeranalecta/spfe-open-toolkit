@@ -27,7 +27,8 @@
     <body>
         <title>Processing strings</title>
         <understanding>
-            <p><feature>Strings</feature> are a means of inserting variable text into a topic. If you <task>design a topic type</task>, or <task>write your own <feature>resolve</feature> code</task> for a topic type, you may need to write code to process strings. In this case, you will need to understand how string processing works.</p>
+            
+            <p><feature>Strings</feature> are a means of inserting variable text into a topic. If you <task>design a topic type</task>, or <task>write your own resolve code</task> for a topic type, you may need to write code to process strings. In this case, you will need to understand how string processing works.</p>
             <p>Strings are a core feature of SPFE, but different plugins may extend the strings feature in different ways. This topic explains how strings are implemented in core SPFE and the EPPO-simple plugin.</p>
             <p>Core SPFE allows you to define strings in the configuration file. Strings can be specified at the <feature>content set</feature> level in <config-setting>/content-set/strings</config-setting> and at the <feature>topic set</feature> level in <config-setting>/topic-set/strings</config-setting>.</p>
             <p>In your scripts, you can retrieve strings directly from the <feature>$config variable</feature> or you can retrieve individual strings using the <spfe-xslt-function>sf:string</spfe-xslt-function> function.</p>
