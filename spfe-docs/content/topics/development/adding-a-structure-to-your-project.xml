@@ -35,10 +35,10 @@ http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/aut
             <p>A <feature>structure</feature> is a collection of document structure elements that
                 work together to provide some distinct text structure such as a
                     <eppo-simple-structure-name>list</eppo-simple-structure-name> or a
-                    <eppo-simple-structure-name>table</eppo-simple-structure-name>. A <feature>topic
-                    type</feature> is made up of an appropriate collection of structures.
+                    <eppo-simple-structure-name>table</eppo-simple-structure-name>. A
+                <feature>topic type</feature> is made up of an appropriate collection of structures.
                 EPPO-simple provides a selection of structures that you can use to create
-                    <feature>topic types</feature> for your <feature>content set</feature>. In some
+                <feature>topic types</feature> for your <feature>content set</feature>. In some
                 cases, however, you may want to create a new structure specifically for one or more
                 topic types in your content set. </p>
             <p>For example, the SPFE Docs include a demo topic type which is designed to show how
