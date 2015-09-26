@@ -17,6 +17,11 @@
 	<xsl:template match="p/subject">
 		<xsl:variable name="content" select="normalize-space(.)"/>
 			<xsl:choose>
+				<xsl:when test="normalize-space(@key)=''">
+					<!-- Do nothing if key is blank  -->
+					<!-- This is a bit of a hack that allows authors to use specifically='' to 
+						turn off linking for an annotation. -->
+				</xsl:when>
 				<xsl:when test="esf:target-exists(@key, @type)">
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="@key"/>
@@ -48,6 +53,11 @@
 		<xsl:variable name="content" select="normalize-space(.)"/>
 		<pe:name type="{@type}">
 			<xsl:choose>
+				<xsl:when test="normalize-space(@key)=''">
+					<!-- Do nothing if key is blank  -->
+					<!-- This is a bit of a hack that allows authors to use specifically='' to 
+						turn off linking for an annotation. -->
+				</xsl:when>
 				<xsl:when test="esf:target-exists(@key, @type)">
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="@key"/>
