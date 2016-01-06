@@ -8,6 +8,11 @@ import shutil
 from glob import glob
 from . import util
 
+import sys
+#FIXME: configurable path to samparser (or install samparser as python module)
+sys.path.append('../../sam')
+import samparser
+
 
 def build_content_set(config):
     topic_set_id_list = [config.setting('topic-set-id', x) for x in config.iter_config_subset('content-set/topic-set')]
@@ -71,18 +76,58 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
         topic_files = glob(merge_output_dir + '/*')
     elif 'extract' in executed_steps:
         topic_files = glob(extract_output_dir + '/*')
-    else:
-        for y in config.settings('sources/authored-content/include', ts_config):
-            topic_files += [posixpath.normpath(x) for x in glob(y)]
+    for y in config.settings('sources/authored-content/include', ts_config):
+        topic_files += [posixpath.normpath(x) for x in glob(y)]
+
+    xml_files = [x for x in topic_files if not x.upper().endswith('.SAM')]
+    sam_files = [x for x in topic_files if x.upper().endswith('.SAM')]
+
+    sam2xml_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('resolve', None)]), 'sam2xml')
+    try:
+        shutil.rmtree(sam2xml_dir)
+    except FileNotFoundError:
+        pass
+
+    for sam_file in sam_files:
+        sp = samparser.SamParser()
+        try:
+            with open(sam_file, "r") as myfile:
+                f = myfile.read()
+        except FileNotFoundError:
+            raise
+        sp.parse(samparser.StringSource(f))
+        base=os.path.basename(sam_file)
+        xml_version = os.path.splitext(base)[0] + '.xml'
+
+        outfile = posixpath.join(sam2xml_dir, xml_version)
+        os.makedirs(os.path.dirname(outfile), exist_ok=True)
+        try:
+            with open(outfile, "x") as outf:
+                for i in sp.serialize('xml'):
+                    outf.write(i)
+        except:
+            raise
+        xml_files.append(outfile)
+
     resolve_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('resolve', None)]),
                                         'out') if topic_set_id is not None else posixpath.join(
         config.content_set_build_dir, 'objects', set_id)
+
+    # TODO: Check topic_files for .sam extension and invoke samparser and transform to apt XML format
+    # TODO: Then update topic_files with XML equivalents of sam files.
+    # Question: Do we need a separate process to convert samparser XML output to
+    # same XML as content written in XML, or is this just part of the job of the
+    # resolve script? Given the generic nature of the SAM XML output, it seems
+    # like we need a separate step. Should this be baked into the SAM parser itself
+    # as a postprocessing step (using a supplied XSLT)? Seems like this post-processing
+    # could be considered part of making .sam files equivalent to parallel XML files.
+
     _build_resolve_step(config=config,
                         set_id=set_id,
                         set_type=set_type,
                         script=config.build_scripts[set_id][('resolve', None)],
                         output_dir=resolve_output_dir,
-                        topic_files=topic_files)
+                        topic_files=xml_files)
 
     # Call the toc step
     toc_output_dir = posixpath.join(config.content_set_build_dir, 'tocs')
