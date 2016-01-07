@@ -3,35 +3,40 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 
 <topic-set xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <topic-set-id>spfe-configuration-reference</topic-set-id>
     <title>SPFE Configuration Reference</title>
     <topic-set-type>reference</topic-set-type>
 
     <topic-types>
-            <topic-type>
-                <name>{http://spfeopentoolkit.org/ns/spfe-docs}spfe-configuration-reference-entry</name>
-                <href>../../topic-types/config-reference/config.xml</href>
-            </topic-type>
+        <topic-type>
+            <name>{http://spfeopentoolkit.org/ns/spfe-docs}spfe-configuration-reference-entry</name>
+            <href>../../topic-types/config-reference/config.xml</href>
+        </topic-type>
     </topic-types>
 
-    
+
     <presentation-types>
         <presentation-type>eppo</presentation-type>
-<!--            <presentation-type>dita</presentation-type>
--->        </presentation-types>
+        <!--            <presentation-type>dita</presentation-type>
+-->
+    </presentation-types>
     <output-formats>
         <output-format>
             <name>xhtml</name>
         </output-format>
-    </output-formats>        
+    </output-formats>
     <sources>
-        <authored-content>
-            <include>${SPFEOT_HOME}/1.0/schemas/config/config-setting-descriptions.xml</include>
-        </authored-content>
+        <authored-content-for-merge>
+            <files>
+                <include>${SPFEOT_HOME}/1.0/schemas/config/config-setting-descriptions.xml</include>
+            </files>
+        </authored-content-for-merge>
         <sources-to-extract-content-from>
-            <include>${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</include>
+            <files>
+                <include>${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</include>
+            </files>
         </sources-to-extract-content-from>
     </sources>
 
@@ -40,4 +45,3 @@
 
     <other name="schema-file">${SPFEOT_HOME}/1.0/schemas/config/spfe-config.xsd</other>
 </topic-set>
-

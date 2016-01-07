@@ -10,9 +10,10 @@ from . import util
 
 import sys
 #FIXME: configurable path to samparser (or install samparser as python module)
-sys.path.append('../../sam')
+sys.path.append(sys.path[0] + '/../../sam')
 import samparser
-
+sys.path.append(sys.path[0] + '/1.0/scripts/python')
+import spfelib
 
 def build_content_set(config):
     topic_set_id_list = [config.setting('topic-set-id', x) for x in config.iter_config_subset('content-set/topic-set')]
@@ -47,7 +48,7 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
     )
 
     executed_steps = []
-    if config.setting_exists('sources/sources-to-extract-content-from/include', ts_config):
+    if config.setting_exists('sources/sources-to-extract-content-from/files/include', ts_config):
         extract_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('extract', None)]), 'out')
         _build_extract_step(config=config,
                             set_id=set_id,
@@ -55,11 +56,11 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
                             output_dir=extract_output_dir)
         executed_steps.append('extract')
 
-        if config.setting_exists("sources/authored-content/include", ts_config):
+        if config.setting_exists("sources/authored-content-for-merge/files/include", ts_config):
             executed_steps.append('merge')
             extracted_files = glob(extract_output_dir + '/*')
             source_files = []
-            for y in config.settings("sources/authored-content/include", ts_config):
+            for y in config.settings("sources/authored-content-for-merge/files/include", ts_config):
                 source_files += (glob(y))
             merge_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('merge', None)]), 'out')
             _build_merge_step(config=config,
@@ -76,8 +77,14 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
         topic_files = glob(merge_output_dir + '/*')
     elif 'extract' in executed_steps:
         topic_files = glob(extract_output_dir + '/*')
-    for y in config.settings('sources/authored-content/include', ts_config):
-        topic_files += [posixpath.normpath(x) for x in glob(y)]
+    try:
+        for y in config.settings('sources/authored-content/files/include', ts_config):
+            topic_files += [posixpath.normpath(x) for x in glob(y)]
+    except spfelib.config.SPFEConfigSettingNotFound as e:
+        pass  # No authored topics for this topic set.
+
+    if not topic_files:
+        raise Exception("Set has no topics: " + set_id)
 
     xml_files = [x for x in topic_files if not x.upper().endswith('.SAM')]
     sam_files = [x for x in topic_files if x.upper().endswith('.SAM')]
@@ -92,13 +99,12 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
         sp = samparser.SamParser()
         try:
             with open(sam_file, "r") as myfile:
-                f = myfile.read()
+                sp.parse(myfile)
         except FileNotFoundError:
             raise
-        sp.parse(samparser.StringSource(f))
-        base=os.path.basename(sam_file)
-        xml_version = os.path.splitext(base)[0] + '.xml'
 
+
+        xml_version = os.path.splitext(os.path.basename(sam_file))[0] + '.xml'
         outfile = posixpath.join(sam2xml_dir, xml_version)
         os.makedirs(os.path.dirname(outfile), exist_ok=True)
         try:
@@ -109,18 +115,9 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
             raise
         xml_files.append(outfile)
 
-    resolve_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('resolve', None)]),
-                                        'out') if topic_set_id is not None else posixpath.join(
-        config.content_set_build_dir, 'objects', set_id)
-
-    # TODO: Check topic_files for .sam extension and invoke samparser and transform to apt XML format
-    # TODO: Then update topic_files with XML equivalents of sam files.
-    # Question: Do we need a separate process to convert samparser XML output to
-    # same XML as content written in XML, or is this just part of the job of the
-    # resolve script? Given the generic nature of the SAM XML output, it seems
-    # like we need a separate step. Should this be baked into the SAM parser itself
-    # as a postprocessing step (using a supplied XSLT)? Seems like this post-processing
-    # could be considered part of making .sam files equivalent to parallel XML files.
+    resolve_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('resolve', None)]), 'out') \
+                         if topic_set_id is not None \
+                         else posixpath.join(config.content_set_build_dir, 'objects', set_id)
 
     _build_resolve_step(config=config,
                         set_id=set_id,
@@ -167,7 +164,7 @@ def _build_extract_step(config, set_id, set_type, output_dir):
         'content-set/object-set[object-set-id="{osid}"]'.format(osid=set_id)
     )
     source_files = []
-    for x in config.settings('sources/sources-to-extract-content-from/include', ts_config):
+    for x in config.settings('sources/sources-to-extract-content-from/files/include', ts_config):
         source_files += (glob(x))
     infile = posixpath.join(config.content_set_config_dir, 'spfe-config.xml')
     outfile = posixpath.join(config.content_set_build_dir, set_type + 's', set_id, 'extracted.flag')

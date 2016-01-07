@@ -28,7 +28,7 @@
     
     <sources>
         <sources-to-extract-content-from>
-            <include>${CONTENT_SET_BUILD_DIR}/catalogs/*.catalog.xml</include>
+            <files><include>${CONTENT_SET_BUILD_DIR}/catalogs/*.catalog.xml</include></files>
         </sources-to-extract-content-from>
     </sources>
 

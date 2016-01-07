@@ -114,7 +114,7 @@
                         of source files for the topic set. Include source files in these categories:
                     <config-setting>authored-content</config-setting> for authored topics,
                     <config-setting>graphics</config-setting> for authored graphics, or
-                    <config-setting>sources-to-extract-content-from</config-setting> for
+                    <config-setting>sources-to-extract-content-from</config-setting> and <config-setting>authored-content-for-merge</config-setting>for
                         generated content. (Required) </p> </li>
 
                 <li> <p> <config-setting> /topic-set/condition-tokens </config-setting>: A list

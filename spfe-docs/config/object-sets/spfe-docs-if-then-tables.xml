@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object-set xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
     <object-set-id>spfe-docs-if-then-tables</object-set-id>
-    
+
     <object-types>
         <object-type>
             <name>{http://spfeopentoolkit.org/ns/eppo-simple/objects}if-then-table-object</name>
             <href>../../object-types/if-then-table/config.xml</href>
         </object-type>
     </object-types>
-    
+
     <sources>
         <sources-to-extract-content-from>
-            <include>../../content/data/state-detection/*.xml</include>
+            <files>
+                <include>../../content/data/state-detection/*.xml</include>
+            </files>
         </sources-to-extract-content-from>
-    </sources>                  
+    </sources>
 </object-set>
-
-

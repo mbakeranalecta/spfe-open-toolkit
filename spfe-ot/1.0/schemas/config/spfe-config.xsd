@@ -412,6 +412,7 @@
       <xs:element name="authored-content" type="fileset-type"/>
       <xs:element name="graphics" type="fileset-type"/>
       <xs:element name="sources-to-extract-content-from" type="fileset-type"/>
+      <xs:element name="authored-content-for-merge" type="fileset-type"/>
       <xs:element name="other" minOccurs="0">
         <xs:complexType>
           <xs:complexContent>
@@ -427,7 +428,13 @@
 
   <xs:complexType name="fileset-type">
     <xs:sequence>
-      <xs:element name="include" type="xs:anyURI" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element minOccurs="0" name="files">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="include" type="xs:anyURI" maxOccurs="unbounded" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
 

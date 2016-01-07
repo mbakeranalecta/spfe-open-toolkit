@@ -37,6 +37,6 @@ def run_XSLT2(script, env, infile=None, outfile=None, initial_template=None, **k
         else:
             return subprocess.check_output(process_call)
     except subprocess.CalledProcessError as err:
-        if err.returncode == 1:
-            exit("Build failed due to error reported by XSLT script.")
         raise
+            # exit("Build failed due to error reported by XSLT script.")
+

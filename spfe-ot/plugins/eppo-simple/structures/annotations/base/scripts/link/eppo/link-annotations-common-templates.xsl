@@ -23,6 +23,7 @@
 						turn off linking for an annotation. -->
 				</xsl:when>
 				<xsl:when test="esf:target-exists(@key, @type)">
+					<xsl:message select="$content, ' ', @key, ' ', @type, ' current page name: ', ancestor-or-self::ss:topic/@full-name"/>
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="@key"/>
 						<xsl:with-param name="type" select="@type"/>
