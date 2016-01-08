@@ -631,4 +631,18 @@
 		</xsl:analyze-string>
 	</xsl:function>
 	
+	<xsl:function name="sf:fixup-url">
+		<xsl:param name="url"/>
+		<xsl:analyze-string select="$url" regex="\w+://">
+			<xsl:matching-substring>
+				<xsl:value-of select="$url"/>
+			</xsl:matching-substring>
+			<xsl:non-matching-substring>
+				<xsl:value-of select="concat('http://',$url)"/>
+			</xsl:non-matching-substring>
+		</xsl:analyze-string>
+	</xsl:function>
+	
+	
+	
 </xsl:stylesheet>
