@@ -48,6 +48,8 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
     )
 
     executed_steps = []
+
+    # Extract step
     if config.setting_exists('sources/sources-to-extract-content-from/files/include', ts_config):
         extract_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('extract', None)]), 'out')
         _build_extract_step(config=config,
@@ -56,22 +58,29 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
                             output_dir=extract_output_dir)
         executed_steps.append('extract')
 
+    # Merge step
         if config.setting_exists("sources/authored-content-for-merge/files/include", ts_config):
             executed_steps.append('merge')
             extracted_files = glob(extract_output_dir + '/*')
-            source_files = []
+            authored_files = []
             for y in config.settings("sources/authored-content-for-merge/files/include", ts_config):
-                source_files += (glob(y))
+                authored_files += (glob(y))
+
+            xml_authored_files = [x for x in authored_files if not x.upper().endswith('.SAM')]
+            sam_authored_files = [x for x in authored_files if x.upper().endswith('.SAM')]
+            sam2xml_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('merge', None)]), 'sam2xml')
+            xml_authored_files.extend(_convert_sam_files(sam_authored_files, sam2xml_dir))
+
             merge_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('merge', None)]), 'out')
             _build_merge_step(config=config,
                               set_id=set_id,
                               set_type=set_type,
                               script=config.build_scripts[set_id][('merge', None)],
                               output_dir=merge_output_dir,
-                              authored_files=source_files,
+                              authored_files=xml_authored_files,
                               extracted_files=extracted_files)
 
-    # Call the resolve step
+    # Resolve step
     topic_files = []
     if 'merge' in executed_steps:
         topic_files = glob(merge_output_dir + '/*')
@@ -86,34 +95,11 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
     if not topic_files:
         raise Exception("Set has no topics: " + set_id)
 
-    xml_files = [x for x in topic_files if not x.upper().endswith('.SAM')]
-    sam_files = [x for x in topic_files if x.upper().endswith('.SAM')]
-
+    xml_topic_files = [x for x in topic_files if not x.upper().endswith('.SAM')]
+    sam_topic_files = [x for x in topic_files if x.upper().endswith('.SAM')]
     sam2xml_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('resolve', None)]), 'sam2xml')
-    try:
-        shutil.rmtree(sam2xml_dir)
-    except FileNotFoundError:
-        pass
 
-    for sam_file in sam_files:
-        sp = samparser.SamParser()
-        try:
-            with open(sam_file, "r") as myfile:
-                sp.parse(myfile)
-        except FileNotFoundError:
-            raise
-
-
-        xml_version = os.path.splitext(os.path.basename(sam_file))[0] + '.xml'
-        outfile = posixpath.join(sam2xml_dir, xml_version)
-        os.makedirs(os.path.dirname(outfile), exist_ok=True)
-        try:
-            with open(outfile, "x") as outf:
-                for i in sp.serialize('xml'):
-                    outf.write(i)
-        except:
-            raise
-        xml_files.append(outfile)
+    xml_topic_files.extend(_convert_sam_files(sam_topic_files, sam2xml_dir))
 
     resolve_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('resolve', None)]), 'out') \
                          if topic_set_id is not None \
@@ -124,9 +110,9 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
                         set_type=set_type,
                         script=config.build_scripts[set_id][('resolve', None)],
                         output_dir=resolve_output_dir,
-                        topic_files=xml_files)
+                        topic_files=xml_topic_files)
 
-    # Call the toc step
+    # TOC step
     toc_output_dir = posixpath.join(config.content_set_build_dir, 'tocs')
     synthesis_files = glob(resolve_output_dir + '/*')
     try:
@@ -141,7 +127,7 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
         pass
 
 
-    # Call the catalog step
+    # Catalog step
     catalog_output_dir = posixpath.join(config.content_set_build_dir, 'catalogs')
     synthesis_files = glob(resolve_output_dir + '/*')
     try:
@@ -357,3 +343,28 @@ def _build_encoding_stage(config, topic_set_id):
 
 def _build_encode_step(config):
     pass
+
+
+def _convert_sam_files(sam_files, sam2xml_dir):
+    converted_files = []
+    try:
+        shutil.rmtree(sam2xml_dir)
+    except FileNotFoundError:
+        pass
+    os.makedirs(sam2xml_dir, exist_ok=True)
+    for sam_file in sam_files:
+        sp = samparser.SamParser()
+        with open(sam_file, "r") as myfile:
+            sp.parse(myfile)
+
+        xml_version = os.path.splitext(os.path.basename(sam_file))[0] + '.xml'
+        outfile = posixpath.join(sam2xml_dir, xml_version)
+        #os.makedirs(os.path.dirname(outfile), exist_ok=True)
+        try:
+            with open(outfile, "x") as outf:
+                for i in sp.serialize('xml'):
+                    outf.write(i)
+        except:
+            raise
+        converted_files.append(outfile)
+    return converted_files

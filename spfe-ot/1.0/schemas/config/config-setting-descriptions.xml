@@ -28,7 +28,7 @@
         </history>
     </head>
     <body>
-        <config-setting-description>
+ <!--       <config-setting-description>
             <index>
                 <entry>
                     <type>feature</type>
@@ -69,7 +69,7 @@
                 </attribute>
             </attributes>
         </config-setting-description>
-        <config-setting-description>
+-->        <config-setting-description>
             <xpath>/content-set/condition-tokens</xpath>
             <description>
                 <p>Specifies the <feature>condition tokens</feature> that will be applied to this

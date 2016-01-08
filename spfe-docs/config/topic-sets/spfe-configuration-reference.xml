@@ -31,6 +31,7 @@
         <authored-content-for-merge>
             <files>
                 <include>${SPFEOT_HOME}/1.0/schemas/config/config-setting-descriptions.xml</include>
+                <include>${SPFEOT_HOME}/1.0/schemas/config/*.sam</include>
             </files>
         </authored-content-for-merge>
         <sources-to-extract-content-from>

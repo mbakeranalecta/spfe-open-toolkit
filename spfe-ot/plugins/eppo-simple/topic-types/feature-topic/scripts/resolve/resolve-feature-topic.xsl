@@ -17,6 +17,11 @@ exclude-result-prefixes="#all">
 	<xsl:template match="feature-topic">
 		<xsl:variable name="name" select="head/id"/>
 		<xsl:variable name="type" select="sf:name-in-clark-notation(.)"/>
+		<xsl:if test="not(head/id) or head/id = ''">
+			<xsl:call-template name="sf:error">
+				<xsl:with-param name="message">Found a feature topic with no ID.</xsl:with-param>
+			</xsl:call-template>
+		</xsl:if>
 		
 		<ss:topic 
 			type="{$type}" 
