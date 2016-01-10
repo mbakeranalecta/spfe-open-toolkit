@@ -118,15 +118,6 @@
         <content-set-id>spfe-docs</content-set-id>
         <title>SPFE Documentation</title>
    
-        <topic-set-type-order>
-            <topic-set-type>docset</topic-set-type>
-            <topic-set-type>guide</topic-set-type>
-            <topic-set-type>task</topic-set-type>
-            <topic-set-type>reference</topic-set-type>
-            <topic-set-type>essay</topic-set-type>
-            <topic-set-type>list</topic-set-type>
-        </topic-set-type-order>
-   
         <home-topic-set>spfe-docs-home</home-topic-set>
    
         <topic-sets>

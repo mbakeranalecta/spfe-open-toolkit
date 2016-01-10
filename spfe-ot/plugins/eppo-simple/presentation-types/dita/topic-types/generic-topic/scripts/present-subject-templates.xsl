@@ -92,17 +92,17 @@
 	<xsl:template match="link-external">
 	<!-- FIXME: support other protocols -->
 		<!-- FIXME: should detect format="pdf" where appropriate -->
-		<xref scope="external" href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}" format="html">
+		<link scope="external" href="http://{if (starts-with(@href, 'http://')) then substring-after(@href, 'http://') else @href}" format="html">
 			<xsl:apply-templates/>
-		</xref>	
+		</link>	
 	</xsl:template>
 
 	<xsl:template match="url">
 	<!-- FIXME: support other protocols -->
 		<!-- FIXME: should detect format="pdf" where appropriate -->
-		<xref scope="external" href="{if (starts-with(., 'http://')) then . else concat('http://',.)}" format="html">
+		<link scope="external" href="{if (starts-with(., 'http://')) then . else concat('http://',.)}" format="html">
 		 <xsl:apply-templates/>
-		</xref>	
+		</link>	
 	</xsl:template>
 
 	<xsl:template match="subject">
@@ -192,7 +192,7 @@
 				<xsl:with-param name="message" select="'No table/title element found for referenced table:', $table-id, '. A title is required for all referenced tables.'"/>
 			</xsl:call-template>
 		</xsl:if>
-		<xref target="{@id-ref}" type="table"/>
+		<link target="{@id-ref}" type="table"/>
 	</xsl:template>
 	
 	<xsl:template match="fig-id">
@@ -205,20 +205,20 @@
 		</xsl:if>
 		<xsl:choose>
 			<xsl:when test="$uri">
-				<xref target="{generate-id(ancestor::topic//fig[@uri=$uri]/@uri)}" type="fig"/>
+				<link target="{generate-id(ancestor::topic//fig[@uri=$uri]/@uri)}" type="fig"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xref target="{@id-ref}" type="fig"/>
+				<link target="{@id-ref}" type="fig"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="procedure-id">
-		<xref target="{@id-ref}" type="procedure"/>
+		<link target="{@id-ref}" type="procedure"/>
 	</xsl:template>
 
 	<xsl:template match="step-id">
-		<xref target="{@id-ref}" type="step"/>
+		<link target="{@id-ref}" type="step"/>
 	</xsl:template>
 		
 </xsl:stylesheet>

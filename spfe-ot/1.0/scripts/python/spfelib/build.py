@@ -23,8 +23,6 @@ def build_content_set(config):
         _build_synthesis_stage(config=config, topic_set_id=topic_set_id)
     for object_set_id in object_set_id_list:
         _build_synthesis_stage(config=config, object_set_id=object_set_id)
-    # FIXME: This is using step scripts to determine if stages should be run
-    # and might be fragile if steps were added to a stage.
     for topic_set_id in topic_set_id_list:
         if any(step == "present" for (step, _) in config.build_scripts[topic_set_id]):
             _build_presentation_stage(config, topic_set_id)

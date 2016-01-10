@@ -66,12 +66,12 @@
                 like <xml-element-name>title</xml-element-name>,
                 <xml-element-name>name</xml-element-name>,
                 <xml-element-name>section</xml-element-name>,
-                <xml-element-name>xref</xml-element-name>, or
+                <xml-element-name>link</xml-element-name>, or
                 <xml-element-name>table</xml-element-name>. By giving each of those vocabularies a
                 different namespace, you can tell which <xml-element-name>title</xml-element-name>,
                 <xml-element-name>name</xml-element-name>,
                 <xml-element-name>section</xml-element-name>,
-                <xml-element-name>xref</xml-element-name>, or
+                <xml-element-name>link</xml-element-name>, or
                 <xml-element-name>table</xml-element-name> you are looking at. Namespaces names are
                 intended to be globally unique, so there should be no confusion about which vocabulary
                 each element name belongs to. </p>
