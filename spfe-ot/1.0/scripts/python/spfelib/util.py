@@ -12,7 +12,7 @@ def run_XSLT2(script, env, infile=None, outfile=None, initial_template=None, **k
     :param outfile: The file name of the output to create.
     :param initial_template: The name of the initial XSLT template to run.
     :param kwargs: Any parameters to pass to the XSLT script.
-    :return: The output of the XSLT processes, unless output is specified.
+    :return: The output of the XSLT processes, unless outfile is specified.
     """
     try:
         process_call = ['java',

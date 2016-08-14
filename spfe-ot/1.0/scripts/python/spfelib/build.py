@@ -12,7 +12,8 @@ import sys
 #FIXME: configurable path to samparser (or install samparser as python module)
 sys.path.append(sys.path[0] + '/../../sam')
 import samparser
-sys.path.append(sys.path[0] + '/1.0/scripts/python')
+#FIXME: this path is not relative to the current file.
+# sys.path.append(sys.path[0] + '/1.0/scripts/python')
 import spfelib
 
 def build_content_set(config):
@@ -35,8 +36,7 @@ def build_content_set(config):
 
 
 def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
-    assert topic_set_id is None or object_set_id is None
-    assert topic_set_id is not None or object_set_id is not None
+    assert (topic_set_id is None) ^ (object_set_id is None)
     set_id = topic_set_id if topic_set_id is not None else object_set_id
     set_type = 'topic-set' if topic_set_id is not None else "object-set"
     print("Starting synthesis stage for " + set_id)
