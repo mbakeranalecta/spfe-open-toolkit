@@ -7,13 +7,16 @@
     version="2.0">
     
     <!-- FIXME: Should this be in a "link" structure? It is not an annotation at this point. -->
-    
+
     <xsl:template match="link | name">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
+
+
+
     
     
 </xsl:stylesheet>

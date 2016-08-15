@@ -14,7 +14,7 @@
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all">
 	
-	<xsl:template match="p/annotation">
+	<xsl:template match="p/annotation | p/phrase/annotation ">
 		<xsl:variable name="content" select="normalize-space(.)"/>
 			<xsl:choose>
 				<xsl:when test="normalize-space(@key)=''">

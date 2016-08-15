@@ -6,7 +6,7 @@
     xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     version="2.0">
     
-    <xsl:template match="p/annotation | string/annotation">
+    <xsl:template match="p/annotation | string/annotation | p/phrase/annotation | string/phrase/annotation">
         <annotation>
             <xsl:attribute name="type" select="@type"/>
             <xsl:attribute name="key" select="if (@specifically) then @specifically else normalize-space(.)"/>
