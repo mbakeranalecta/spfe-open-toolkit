@@ -1,0 +1,16 @@
+!namespace: http://spfeopentoolkit.org/ns/spfe-docs
+
+feature-topic: 
+    head:
+        id: a-test-topic
+        history:: date, author, comment, status
+                2016-01-07, mbaker, Test topic for SAM integration, New topic
+        index:: term, type
+                SAM, feature
+    body: A test topic about SAM
+	
+        SAM is a structured markup language. {SPFE}(tool) supports it as an alternative to {XML}(concept).
+        
+        note: This is a note
+            It contains some content.
+			

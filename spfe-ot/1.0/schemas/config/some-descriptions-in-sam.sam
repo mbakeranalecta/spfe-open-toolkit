@@ -1,0 +1,33 @@
+!namespace: http://spfeopentoolkit.org/ns/spfe-docs
+# This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.
+# (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. 
+config-setting-descriptions: 
+    head:
+        id:config-setting-descriptions
+        history:
+            revision:: date, author, comment, status
+                2012-04-04,Mark Baker,new,In progress
+                2013-07-12,jkeffer,Spelling and minor wording changes,In progress
+                2013-07-24,jkeffer,Match info in other topics and add subject affinities,In progress
+        history:
+    body:
+        config-setting-description:
+            index:
+                entry:: type, term
+                    feature,content set
+                    feature,content set configuration
+                    feature,content set configuration file
+            xpath: /content-set
+            description:
+                A container element for information on a {content set}(feature). A content set is a collection of {topic sets}(feature). To define a content set, you list the configuration files for each topic set in the content set using a {/content-set/topic-sets/topic-set}(config-setting) element.
+                    
+                To build a full content set, you simply run the {spfe}(tool-name) build tool on a {content-set}(config-setting "/content-set") file. The build tool will then run whichever build command you have specified on all the topic sets in the content set, as well as creating the files that belong to the content set as a whole.
+            
+            values:
+            restrictions:
+            attributes:
+                attribute:
+                    name:id
+                    description:
+                        An ID for the {content set}(feature). This value is used as the name of a directory containing the content set build inside the {build directory}(feature).
+

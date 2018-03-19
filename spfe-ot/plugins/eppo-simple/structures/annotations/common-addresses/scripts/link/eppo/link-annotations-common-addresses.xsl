@@ -9,7 +9,7 @@
 	
 	<xsl:template match="link-external">
 	<!-- FIXME: support other protocols -->
-		<pe:link href="sf:fixup-url(@href)">
+		<pe:link href="{sf:fixup-url(@href)}">
 			<xsl:apply-templates/>
 		</pe:link>	
 	</xsl:template>
