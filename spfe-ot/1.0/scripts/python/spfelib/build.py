@@ -360,7 +360,7 @@ def _convert_sam_files(sam_files, sam2xml_dir):
         #os.makedirs(os.path.dirname(outfile), exist_ok=True)
         try:
             with open(outfile, "x") as outf:
-                for i in sp.serialize('xml'):
+                for i in sp.doc.serialize_xml():
                     outf.write(i)
         except:
             raise
