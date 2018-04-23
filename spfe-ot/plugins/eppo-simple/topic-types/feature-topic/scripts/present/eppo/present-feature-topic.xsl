@@ -15,6 +15,11 @@
 	
 	<!-- topic -->
 	<xsl:template match="es:feature-topic">
+		<xsl:if test="ancestor::ss:topic/@local-name = ''">
+			<xsl:call-template name="sf:error">
+				<xsl:with-param name="message">The synthesis contains a topic with no name.</xsl:with-param>
+			</xsl:call-template>
+		</xsl:if>
 		<pe:page status="{es:head/es:history/es:revision[last()]/es:status}" name="{ancestor::ss:topic/@local-name}">
 			<xsl:call-template name="show-header"/>
 			<xsl:apply-templates /> 

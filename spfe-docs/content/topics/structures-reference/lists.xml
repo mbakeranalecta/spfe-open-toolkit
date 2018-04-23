@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
+    
+    <head>
+        <id>lists</id>
+        <history>
+            <revision>
+                <date>2014-11-01</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>list</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>ordered list</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>unordered list</term>
+            </entry>
+            
+        </index>
+    </head>
+    <body>
+        <title>EPPO simple list</title>
+        
+        <p> An ordered or unordered list may follow an initial <feature>paragraph</feature>,
+            <feature> fragment </feature>, or <feature> fragment reference </feature> in the
+            <feature> body content </feature> of a topic.</p>
+
+        <fig>
+                <title>EPPO-simple list context</title>
+                <caption>
+                    <p></p>
+                </caption>
+            <graphic href="../../../graphics/list-context.png"/>
+            </fig>
+            
+        <p> </p>
+
+        <section>
+            <title>Structure</title>
+
+            <p> An ordered (<xml-element-name>ol</xml-element-name>) list has the structure shown in
+                the following <feature> structure diagram </feature>:</p>
+
+            <fig>
+                <title>Ordered list structure diagram</title>
+                <caption><p></p></caption>
+                <graphic href="../../../graphics/ol.png"/>
+            </fig>
+
+            <p> An unordered list (<xml-element-name>ul</xml-element-name>) list has the same
+                structure: </p>
+
+            <fig>
+                <title>Unordered list structure diagram</title>
+                <caption><p></p></caption>
+                <graphic  href="../../../graphics/ul.png"/>
+            </fig>
+
+        </section>
+
+        <section>
+            <title>Example</title>
+            <p> The following XML markup produces the lists that follows.</p>
+            <codeblock>
+<![CDATA[
+        <p> Procedure for making french-press coffee:</p>
+        <ol>
+            <li> <p> Grind coffee beans. </p> </li>
+            <li> <p> Place ground coffee beans in french press. </p> </li>
+            <li> <p> Fill french press with hot water just off a boil. </p> </li>
+            <li> <p> Let steep for four minutes. </p> </li>
+            <li> <p> Pour yourself a fresh cup of <italic>hot</italic> coffee. </p> </li>
+        </ol>
+
+        <p> Fruit for the trip: </p>
+        <ul>
+            <li> <p> Apples </p> </li>
+            <li> <p> Oranges </p> </li>
+            <li> <p> Bananas </p> </li>
+        </ul>
+]]>
+            </codeblock>
+            
+            <p> Procedure for making french-press coffee:</p>
+            <ol>
+                <li> <p> Grind coffee beans. </p> </li>
+                <li> <p> Place ground coffee beans in french press. </p> </li>
+                <li> <p> Fill french press with hot water just off a boil. </p> </li>
+                <li> <p> Let steep for four minutes. </p> </li>
+                <li> <p> Pour yourself a fresh cup of <italic>hot</italic> coffee. </p> </li>
+            </ol>
+
+            <p> Fruit for the trip: </p>
+            <ul>
+                <li> <p> Apples </p> </li>
+                <li> <p> Oranges </p> </li>
+                <li> <p> Bananas </p> </li>
+            </ul>
+            
+        </section>
+        
+    </body>
+</feature-topic>
+

@@ -16,7 +16,7 @@
                 <xs:element name="body">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:group ref="fragments"/>
+                            <xs:group ref="fragments" maxOccurs="unbounded"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

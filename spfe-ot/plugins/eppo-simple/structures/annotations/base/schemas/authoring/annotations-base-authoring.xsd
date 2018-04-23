@@ -16,14 +16,14 @@
         <xs:choice>
             <xs:element name="name">
                 <xs:complexType>
-                    <xs:attribute name="canonical"/>
+                    <xs:attribute name="specifically"/>
                     <xs:attribute name="type"/>
                     <xs:attribute name="namespace"/>
                 </xs:complexType>
             </xs:element>
             <xs:element name="subject">
                 <xs:complexType>
-                    <xs:attribute name="canonical"/>
+                    <xs:attribute name="specifically"/>
                     <xs:attribute name="type"/>
                     <xs:attribute name="namespace"/>
                 </xs:complexType>
@@ -41,7 +41,7 @@
             </xs:element>
             <xs:element name="address">
                 <xs:complexType>
-                    <xs:attribute name="canonical"/>
+                    <xs:attribute name="specifically"/>
                     <xs:attribute name="type"/>
                     <xs:attribute name="namespace"/>
                 </xs:complexType>

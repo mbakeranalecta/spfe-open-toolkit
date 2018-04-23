@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.-->
+<!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
+
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
+
+    <head>
+        <id>installing-spfe-toolkit</id>
+        <history>
+            <revision>
+                <date>2014-10-28</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>install</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>getting started</term>
+            </entry>
+            <entry>
+                <type>task</type>
+                <term>{install} {SPFE Open Toolkit}</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>SPFE Open Toolkit</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe.bat</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe.sh</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>SPFEOT_HOME</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>SPFE_BUILD_DIR</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Installing SPFE Open Toolkit</title>
+
+        <understanding>
+
+            <p> You may install the <feature>SPFE Open Toolkit</feature> in a Microsoft Windows or a
+                Unix-like environment, including Mac OS X or Linux. The toolkit requies the Java
+                Development Kit (JDK) to be installed. The JDK is freely available for all systems
+                that the toolkit supports. Use these guidelines to install and test the SPFE Open
+                Toolkit and the third-party tools it will need.</p>
+
+            <p> The SPFE Open Toolkit uses Java to run its build scripts. You may have the 
+                Java Runtime Engine (JRE) installed, but that's not sufficient. You will need the 
+                Java Development Kit (JDK), Standard Edition, installed.</p>
+
+        </understanding>
+
+        <planning>
+
+
+        </planning>
+
+        <doing>
+            
+            <p> To use the <feature>SPFE Open Toolkit</feature>, you will need to execute commands
+                on a terminal command line. You should be comfortable using commands to execute
+                programs, to create, move, and delete files and directories, and perform other
+                essential tasks.</p>
+            
+            <p> In a Unix-like system, including OS X and Linux, you may use the toolkit with
+                any command shell, such as Bash or Tcsh.</p>
+            
+            <p> In the Microsoft Windows environment, you may issue commands using PowerShell.
+                PowerShell aliases common MS-DOS and Unix commands to PowerShell commands, so
+                command-line operation in that environment will be much like it is in Unix. </p>
+            
+            <p> You may have Java installed. To check, execute
+                <code>java -version</code> on the command line. If
+                they are installed, you will get a response similar to that below. </p>
+            
+            <codeblock>
+                &gt; java -version
+                java version "1.8.0_05"
+                Java(TM) SE Runtime Environment (build 1.8.0_05-b13)
+                Java HotSpot(TM) 64-Bit Server VM (build 25.5-b02, mixed mode)
+            </codeblock>
+            
+            <p> If you get a "command not found" response but know that Java is not installed, check
+                that the install location is listed in your PATH environment variable.</p>
+            <p> Installation involves the following tasks:</p>
+
+            <ul>
+                <li><p>Installing the Java Runtime Environment</p></li>
+                <li><p>Installing Python 3</p></li>
+                <li><p>Installing the SPFE Open Toolkit</p></li>
+                <li><p>Configuring your environment</p></li>
+                <li><p>Testing the installation</p></li>
+            </ul>
+
+
+            <subhead>Installing the Java Development Kit</subhead>
+
+            <p> To install the JDK, go to 
+                <link-external href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">
+                    oracle.com/technetwork/java/javase/downloads
+                </link-external> and follow the instructions for your operating system:</p>
+
+            <ul>
+                <li>
+                    <p> <link-external
+                    href="http://docs.oracle.com/javase/8/docs/technotes/guides/install/windows_jdk_install.html">
+                        JDK installation instructions for Microsoft Windows </link-external></p>
+                </li>
+                <li>
+                    <p> <link-external
+                    href="http://docs.oracle.com/javase/8/docs/technotes/guides/install/mac_jdk.html">
+                        JDK installation instructions for Mac OS X </link-external> </p>
+                </li>
+                <li>
+                    <p> <link-external
+                    href="http://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jdk.html">
+                        JDK installation instructions for Linux </link-external> </p>
+                </li>
+            </ul>
+
+           
+            <subhead>Installing the SPFE Open Toolkit</subhead>
+
+            <p> The latest version of the SPFE Open Tookit is available on GitHub at
+                <url>https://github.com/mbakeranalecta/spfe-open-toolkit</url>. Click on "Download
+                ZIP" and unpack the downloaded archive at a convenient location.</p>
+
+            <p> You will invoke the SPFE build system by running either the script
+                <code>spfe-open-toolkit\spfe-ot\spfe.bat</code> in a Windows environment or the
+                script <code>spfe-open-toolkit/spfe-ot/spfe.sh</code> in a Unix-like environment.
+                You may either add the spfe-ot directory to your PATH environment variable or create
+                a separate script that sets environment variables and executes the <file-name> spfe
+                </file-name> script.</p>
+
+            <subhead>Configuring your environment</subhead>
+
+            <p> Set the following environment variables to use the toolkit:</p>
+
+            <ul>
+                <li>
+                    <p> (Required) <code>SPFEOT_HOME</code>: Set the full path name of the <code>
+                        spfe-open-toolkit/spfe-ot </code> installed directory. </p>
+                </li>
+                <li>
+                    <p> (Optional) <code>SPFE_BUILD_DIR</code>: Set the full path name of the
+                        directory you want the toolkit to build output. The default location is
+                        <code> $HOME/spfebuild </code>. </p>
+                </li>
+            </ul>
+
+            <subhead>Testing the installation</subhead>
+
+            <p> Execute the commands <code>java</code>, and <code>spfe</code> to
+                verify that they are installed in a directory listed in your PATH environment
+                variable.</p>
+
+            <p> Build the SPFE Documentation that's distributed with the toolkit:</p>
+
+            <ol>
+
+                <li> <p> Open a command window and change directory to <code>
+                            $SPFEOT_HOME/../spfe-docs/build </code></p> </li>
+
+                <li> <p> Issue the command <code>$SPFEOT_HOME/spfe build spfe-docs-config.xml
+                            final</code>. (If you have the <code>spfe</code> command on your path,
+                        you may execute it directly.)</p> </li>
+
+                <li> <p> Watch the program log printed to the screen. If successful, it will
+                        conclude with the message "BUILD SUCCESSFUL."</p> </li>
+
+                <li> <p> Open the file <code>$SPFE_BUILD_DIR/spfe-docs/output/index.html</code> in a
+                        browser to view "SPFE Open Toolkit Documentation."</p> </li>
+
+            </ol>
+
+        </doing>
+
+    </body>
+</think-plan-do-topic>

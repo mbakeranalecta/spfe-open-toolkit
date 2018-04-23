@@ -14,9 +14,15 @@
 	xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
 	exclude-result-prefixes="#all">
 	
-	<xsl:template match="p/subject">
+	<xsl:template match="p/annotation | p/phrase/annotation ">
 		<xsl:variable name="content" select="normalize-space(.)"/>
 			<xsl:choose>
+				<xsl:when test="normalize-space(@key)=''">
+					<!-- Do nothing if key is blank  -->
+					<!-- This is a bit of a hack that allows authors to use specifically='' to 
+						turn off linking for an annotation. -->
+					<xsl:value-of select="$content"/>
+				</xsl:when>
 				<xsl:when test="esf:target-exists(@key, @type)">
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="@key"/>
@@ -48,6 +54,11 @@
 		<xsl:variable name="content" select="normalize-space(.)"/>
 		<pe:name type="{@type}">
 			<xsl:choose>
+				<xsl:when test="normalize-space(@key)=''">
+					<!-- Do nothing if key is blank  -->
+					<!-- This is a bit of a hack that allows authors to use specifically='' to 
+						turn off linking for an annotation. -->
+				</xsl:when>
 				<xsl:when test="esf:target-exists(@key, @type)">
 					<xsl:call-template name="output-link">
 						<xsl:with-param name="target" select="@key"/>

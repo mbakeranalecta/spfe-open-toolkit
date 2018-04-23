@@ -17,7 +17,7 @@
         <doctype-element-description>
             <name>pages</name>
             <description>
-                <p>The root element of the <feature>EPPO</feature> <feature>presentation</feature> schema. In an Every Page is Page One information design, we do not create a book, but simply a collection of pages. </p>
+                <p>The root element of the <feature>EPPO-simple</feature> <feature>presentation</feature> schema. In an Every Page is Page One information design, we do not create a book, but simply a collection of pages. </p>
             </description>
             <attributes>
             </attributes>
@@ -25,7 +25,7 @@
         <doctype-element-description>
             <name>page</name>
             <description>
-                <p>The container element for a page in <feature>EPPO</feature> output.</p>
+                <p>The container element for a page in <feature>EPPO-simple</feature> output.</p>
             </description>
             <attributes>
                 <attribute>

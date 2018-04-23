@@ -13,6 +13,12 @@
                 <comment>New topic</comment>
                 <status>In progress</status>
             </revision>
+            <revision>
+                <date>2018-04-23</date>
+                <author>mbaker</author>
+                <comment>Revised for initial publication</comment>
+                <status>In progress</status>
+            </revision>
         </history>
         <index>
             <entry>
@@ -34,7 +40,80 @@
             is designed to fill this gap.</p>
         <p>The SPFE-OT is also capable of creating
             <concept specifically="top-down information architecture">top-down</concept> and
-            <concept>hybrid top-down/bottom-up information architectures</concept>.</p>
+            hybrid <concept specifically="top-down information architecture">top-down</concept>/<concept specifically="bottom-up information architecture">bottom-up information architectures</concept>.</p>
+        <section>
+            <title>The current state of the SPFE documentation</title>
+            <p>The SPFE documentation has been developed to date as a testbed for the SPFE Open
+                Toolkit. It is not complete and it may contain information that no longer describes
+                the current state of the toolkit or the accompanying schemas. </p>
+            <p>The biggest questions you probably have about SPFE are why it was developed in the
+                first place given that we already have so many structured writing tools such as
+                DocBook, DITA, Markdown, reStructuredText, LaTeX, and ASCIIDoc. The best answers to
+                those questions are to be found in two books I have written. (Both books came about,
+                essentially, to explain why SPFE, and writing the two books has delayed work on SPFE
+                itself for a long time. The books are:</p>
+            <ul>
+                <li>
+                    <p><link-external href="https://xmlpress.net/publications/eppo/">Every Page is Page One: Topic-based Writing for Technical Communication and the Web</link-external>,
+                        XML Press, 2013.</p>
+                </li>
+                <li>
+                    <p>Structured Writing: Rhetoric and Process, XML Press, forthcoming 2018 (Check
+                        the XML Press site to see if it is out yet:
+                        <url>https://xmlpress.net</url>.</p>
+                </li>
+            </ul>
+            <p>The <italic>Every Page is Page One</italic> book describes an approach to information
+                design which I call <concept>bottom-up information architecture</concept>, which is
+                based on the user behavior of finding content principally by search, which can throw
+                the reader into any page in a content set (thus, Every Page is Page One). Fully
+                supporting this requires an approach that makes every page work as the first page
+                the reader sees and supports adequate navigational aids for readers to move onward
+                to other topics they may need. Wikipedia is an excellent example of a bottom-up
+                information architecture. Most current structured writing tools do not support
+                bottom-up information architecture well. (Wikis are bottom-up by nature, but also
+                unstructured.) SPFE is designed to support the creation of bottom-up information
+                architectures. </p>
+            <p>The <italic>Structured Writing</italic> book provided an overview of structured
+                writing techniques and systems, but it highlights an approach to structured writing
+                which I call the subject-domain approach. Most current structured writing systems
+                are either wholly or principally document-domain systems. The subject domain
+                approach has many advantages, both in terms of rhetoric and process, and it is
+                particularly advantageous when creating a bottom-up information architecture. SPFE
+                is designed to support the use of subject-domain structured writing. </p>
+            <p>The SPFE documentation is intended to be an example of bottom-up information
+                architecture, but it isn't there yet. My intention is to return to the SPFE
+                documentation once the <italic>Structured Writing</italic> book is complete. </p>
+        </section>
+        <section>
+            <title>The role of SAM</title>
+            <p>Along the way, the writing of the <italic>Structured Writing</italic> book gave birth
+                to another project, to develop a alternative markup language for structured writing.
+                The vast majority of structured writing today is done in XML using a structured XML
+                editor which presents a pseudo-WYSIWYG graphical editing environment to the writer.
+                This is inherently a document-domain writing environment. It has
+                <link-external href="https://everypageispageone.com/2016/01/28/why-does-xml-suck/">many problems</link-external>
+                even for working in the document domain, but it is even more difficult to work in
+                when writing in the subject domain. Many people today prefer to work in lightweight
+                markup languages such as MarkDown which you can create easily using a simple text
+                editor. However, all current lightweight markup languages are simple document domain
+                languages. There was no lightweight markup language that could be used to create
+                specific subject-domain semantics for writing about specific subjects. Something new
+                was needed to make writing in the subject domain easy for writers. </p>
+            <p>For this purpose, I created SAM (<italic>Semantic Authoring Markdown</italic>, or
+                <italic>Semantic Authoring Markup</italic> as you please). The
+                <italic>Structured Writing</italic> book is written SAM and used SAM for most of its
+                examples. You can find SAM at <url>https://mbakeranalecta.github.io/sam/</url>. SAM
+                is not intended to completely replace XML, which is more general than SAM and works
+                fine for most of the things it is used for. SAM is intended as a front-end authoring
+                language for structured writing systems that would still use XML internally. The
+                current version of SPFE is still basically and XML-based system and will remain XML
+                based in all of its internals. It has basic support for SAM as an input language,
+                and this will be expanded so that SAM will become the main way to write content in
+                SPFE. XML will always be supported as an authoring language as well, however. It is
+                part of the design intent for SPFE that it should be as catholic as possible in the
+                formats it accepts. </p>
+        </section>
         <section>
             <title>Writing in a SPFE Environment</title>
             <p>SPFE is intended to make structured writing as simple as possible for writers by
@@ -44,8 +123,8 @@
                 substantial knowledge of both the system itself and the whole corpus of content in
                 order to participate fully in content creation. SPFE is designed to avoid this by
                 creating a publish and content management environment that is driven by
-                <concept>metadata</concept> about the subject matter of the content -- something
-                that the author naturally understands.</p>
+                <concept>metadata</concept> about the subject matter of the content (subject-domain
+                markup) -- something that the author naturally understands.</p>
             <p>Structured authoring is also easier if the structures that authors are asked to
                 create are simple and related as specifically as possible to the subject matter they
                 are writing about. SPFE is designed to work best with small subject-specific
@@ -54,7 +133,7 @@
         </section>
 <section>
     <title>Schemas</title>
-    <p>As a <concept>structured writing system</concept>, SPFE works with content that conforms to a
+    <p>As a <concept>structured writing</concept> system, SPFE works with content that conforms to a
                 set of formal rules known as a <concept>schema</concept>. Schemas define which
                 content structures can be used in which situations. Successful
                 <task>processing of content</task> depends on the content conforming to both the
@@ -62,7 +141,7 @@
     <p>However, unlike the DocBook and DITA systems, SPFE is not based on a particular schema. Rather,
             SPFE is a modular content processing architecture that can be used with a variety of
             schemas. However, SPFE does make certain presumptions about how schemas will be
-                written. In particular it expects a <concept>declarative style of
+                written. In particular it expects a <concept specifically="declarative markup">declarative style of
                 markup</concept> in which the document markup does not contain any publishing or
             content management directives. </p>
         <p>To enable users to get up to speed quickly, and to provide a baseline of functionality

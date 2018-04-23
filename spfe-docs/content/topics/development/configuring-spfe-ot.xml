@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
+
+    <head>
+        <id>configuring-spfe-ot</id>
+        <history>
+            <revision>
+                <date>2014-11-26</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>configure</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>content set</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>topic set</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Configuring SPFE Open Toolkit</title>
+
+        <understanding>
+
+            <p> The <feature> SPFE Open Toolkit </feature> (SPFE-OT) must be configured to control
+                how it builds output from source XML markup. One or more configuration files
+                specifies which source content will be processed, how it will be processed, and how
+                it will be organized and linked. Together, the configuration files are the master
+                plan for a SPFE build. SPFE has a distributed configuration model. Every component
+                of the system has a configuration file, and you can assemble your configuration by
+                including the configuration file for the components you use.</p>
+
+            <p> SPFE Open Toolkit configuration consists of the following configuration  file
+                types:</p>
+            <ll>
+                <li>
+                    <label>Content set configuration file:</label>
+                    <p>The top-level configuration file used to build a
+                        <feature>content set</feature>. The
+                        <feature>content set configuration file</feature> specifies the
+                        <feature>topic sets</feature> to be included in the content set and the
+                        <feature>output formats</feature> to be built.  </p>
+                </li>
+                <li>
+                    <label>Topic set configuration file:</label>
+                    <p>The configuration for a <feature>topic set</feature>. It specifies the
+                        criteria for including topics in a topic set (generally this is not a fixed
+                        list of topics. A topic set configuration file does not have to be updated
+                        every time a new topic is created. All the topics that meet the specified
+                        criteria are included automatically.) The
+                        <feature>topic-set configuration file</feature> also specifies the
+                        <feature>topic types</feature> that can occur in the topic set and the
+                        <feature>type of outputs</feature> to create for it. (The content set
+                        specified specific output configurations for the content set; the topic set
+                        configuration specifies which of the available configuration to build for
+                        the individual content set.)</p>
+                </li>
+                <li>
+                    <label>Topic type configuration file</label>
+                    <p>The configuration for a <feature>topic type</feature>. Provides a name for
+                        the <feature>topic type</feature> and specifies the set of
+                        <feature>structures</feature> used in the topic type and the set of scripts
+                        used for <task>processing a topic</task> of this type through each of the
+                        <feature>SPFE processing stages</feature>.</p>
+                </li>
+                <li>
+                    <label>Output type configuration file</label>
+                    <p>The configuration of an <feature>output type</feature>. Specifies the name of
+                        the output type and scripts used to build the output. Note that you could
+                        configure more than one output type configuration for the same output type.
+                        For instance, you could configure two different styles of HTML output. You
+                        could then point whichever configuration you wanted to build from the
+                        content set <feature>configuration file</feature>. If both these
+                        configurations had the name <quotes>html</quotes>, topic set configuration
+                        files that specified <quotes>html</quotes> as an output format would not
+                        need to change when you built different HTML outputs. </p>
+                </li>
+                <li>
+                    <label>Structure configuration file</label>
+                    <p>The configuration file for a <feature>structure</feature>. Specifies the
+                        scripts to be used for processing a particular structure. Using structures
+                        make it easy to configure a topic type by including existing structures.
+                        Note that you may want to provide more than one configuration file for a
+                        structure, if you want the same structured to be processed differently in
+                        different circumstances. While a structure directory will generally include
+                        a  default structure configuration file, as well as default processing
+                        scripts, you are free to create your own structure configuration files for
+                        any structure that point to your own processing scripts for that structure.
+                        Some <feature>EPPO simple</feature> structures come with more than one
+                        structured configuration file for different purposes.</p>
+                </li>
+                <li>
+                    <label>Presentation type configuration</label>
+                    <p>The configuration file for the presentation stage of the SPFE build. Most
+                        <feature specifically="topic type configuration">topic type</feature> and
+                        <feature>structure configurations</feature> will contain the
+                        <feature>presentation configuration</feature> for the presentation types
+                        that the author of the topic type or structure was aware of at the time they
+                        wrote them. If you wanted to specify a new presentation format for an
+                        existing topic type or structure you could do so either by writing entirely
+                        new topic type and structure configurations, or by writing a separate
+                        presentation type configuration file. </p>
+                </li>
+                <li>
+                    <label>Object type configuration files</label>
+                    <p>The
+                        <feature specifically="object configration file">configuration file</feature>
+                        for an <feature>object</feature>. Does the same thing for object types that
+                        the <feature>topic type configuration file</feature> does for
+                        <feature>topic types</feature> and the
+                        <feature>structure configuration file</feature> does for
+                        <feature>structures</feature>. </p>
+                </li>
+            </ll>
+            <p/>
+
+            <p> To create a body of content, an author will need to be concerned with the first two,
+                content set and topic set configurations, which identify content sources.
+                Configuring topic types and output formats is not content specific and should be
+                done beforehand by a SPFE Open Toolkit developer.</p>
+
+        </understanding>
+
+        <planning>
+            <planning-question>
+                <planning-question-title>Where should the configuration files be located</planning-question-title>
+                <planning-question-body>
+                    <p>The content set and topic set configuration files may reside anywhere in the
+                        files system that is convenient. References to configuration, source, and
+                        other files may be relative or absolute path names. A common setup has the
+                        content set configuration file in the working directory, where the
+                        <code>spfe</code> command will be executed and log files kept, with topic
+                        set configuration files and content files in subdirectories and referenced
+                        with relative paths. This way the entire set can be relocated without
+                        needing to edit configuration files. </p>
+                </planning-question-body>
+            </planning-question>
+
+        </planning>
+
+        <doing>
+
+            <p> Create a <feature>content set</feature> configuration XML file
+                in the directory you will execute the <feature>spfe</feature> command to create
+                builds or any convenient location. Use the <config-setting> /content-set
+                </config-setting> XML structure. </p>
+
+            <p> Create a <feature>topic set</feature> configuration XML file for each topic set
+                using the <config-setting>/topic-set</config-setting> XML structure. </p>
+
+            <p> Create a <feature>topic type</feature> configuration XML file for each topic type
+                using the <config-setting>/topic-type</config-setting> XML structure. </p>
+
+            <p> Create a <feature>output-format</feature> configuration XML file for each output
+                format using the <config-setting>/output-format</config-setting> XML structure.
+            </p>
+
+        </doing>
+
+    </body> 
+</think-plan-do-topic>

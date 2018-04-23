@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../../../../spfe-docs/topic-types/common/authoring/css/spfe-docs.css"?>
+<feature-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/feature-topic/schemas/authoring/feature-topic.xsd">
+    
+    <head>
+        <id>figure</id>
+        <history>
+            <revision>
+                <date>2014-11-24</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>figure</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>graphics</term>
+            </entry>
+            <entry>
+                <type>xml-element-name</type>
+                <term>fig</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>EPPO simple figure</title>
+        
+        <p> A <code>fig</code> element may follow an initial <feature>paragraph</feature>, <feature>
+            fragment </feature>, or <feature> fragment reference </feature> in the <feature> body
+            content </feature> of a topic.</p>
+
+    <fig>
+            <title>EPPO simple figure context</title>
+            <caption> <p></p> </caption>
+        <graphic href="../../../graphics/figure-context.png"/>
+        </fig>
+        
+        <section>
+            <title>Structure</title>
+
+            <p> A figure has the structure shown in the following <feature>structure diagram
+            </feature>:</p>
+
+            <fig>
+                <title>Figure structure diagram</title>
+                <caption><p></p></caption>
+                <graphic href="../../../graphics/fig.png"/>
+            </fig>
+
+        </section>
+
+        <section>
+            <title>Example</title>
+            <p> The following XML markup produces the figure that follows.</p>
+            <codeblock>
+<![CDATA[
+        <fig>
+            <title>James on his horse</title>
+            <caption>
+                <p>See James ride.</p>
+            </caption>
+            <graphic  href="../../../graphics/horse.png">
+        </fig>    
+]]>
+            </codeblock>
+            
+            <fig>
+                <title>James on his horse</title>
+                <caption>
+                    <p>See James ride.</p>
+                </caption>
+                <graphic href="../../../graphics/horse.png"/>
+            </fig>    
+
+        </section>
+        
+    </body>
+</feature-topic>
+

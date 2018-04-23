@@ -31,17 +31,17 @@
 
         <pe:context-nav>
             <pe:home>
-                <pe:xref target="{$content-set-index-file}">Home</pe:xref>
+                <pe:link target="{$content-set-index-file}">Home</pe:link>
             </pe:home>
             <pe:breadcrumbs>
                 <pe:breadcrumb>
-                    <pe:xref target="{$content-set-toc-file}">TOC</pe:xref>
+                    <pe:link target="{$content-set-toc-file}">TOC</pe:link>
                 </pe:breadcrumb>
                 <xsl:if test="not($is-home-topic-set)">
                     <pe:breadcrumb>
-                        <pe:xref target="{normalize-space($topic-set-id)}-toc.html">
+                        <pe:link target="{normalize-space($topic-set-id)}-toc.html">
                             <xsl:value-of select="$topic-set-title"/>
-                        </pe:xref>
+                        </pe:link>
                     </pe:breadcrumb>
                 </xsl:if>
             </pe:breadcrumbs>
@@ -88,7 +88,7 @@
             </xsl:for-each>
         </xsl:variable>
 
-        <xsl:if test="$see-also-links/xref | $see-also-links/xref-set">
+        <xsl:if test="$see-also-links/link | $see-also-links/link-set">
             <pe:table hint="context">
                 <pe:tr>
                     <pe:td>
@@ -97,7 +97,7 @@
                     <pe:td>
                         <pe:ul>
                             <xsl:for-each-group
-                                select="$see-also-links/xref | $see-also-links/xref-set/xref"
+                                select="$see-also-links/link | $see-also-links/link-set/link"
                                 group-by="@target">
                                 <pe:li>
                                     <xsl:sequence select="."/>

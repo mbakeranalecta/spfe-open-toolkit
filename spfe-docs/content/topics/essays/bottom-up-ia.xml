@@ -21,6 +21,14 @@
             </entry>
             <entry>
                 <type>concept</type>
+                <term>top-down information architecture</term>
+            </entry>
+            <entry>
+                <type>concept</type>
+                <term>top-down information architectures</term>
+            </entry>
+            <entry>
+                <type>concept</type>
                 <term>bottom-up information architectures</term>
             </entry>
             <entry>
@@ -41,8 +49,8 @@
             is characterized by:</p>
         <ul>
             <li>
-                <p><feature>Topics</feature> or pages are written on the <feature>Every Page is Page
-                        One</feature> principle: Each page is a potential landing page and starting
+                <p><feature>Topics</feature> or pages are written on the <concept>Every Page is Page
+                        One</concept> principle: Each page is a potential landing page and starting
                     point for the user, and there is no one preferred path through the content
                     set.</p>
             </li>

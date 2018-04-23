@@ -29,8 +29,7 @@ def do_build(build_args):
         config.write_script_files()
         spfelib.build.build_content_set(config)
         end_time = datetime.now()
-        # \a to sound a beep on completion
-        print('\aBuild completed in : {}'.format(end_time - start_time))
+        print('Build completed in : {}'.format(end_time - start_time))
     else:
         print("Config file not found: " + build_args.config_file)
         sys.exit(1)

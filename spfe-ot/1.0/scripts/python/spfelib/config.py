@@ -59,20 +59,18 @@ class SPFEConfig:
         self.spfe_env = spfe_env
         self.content_set_build_root_dir = self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id
         self.content_set_build_dir = self.content_set_build_root_dir + '/build'
+        self.content_set_build_dir = self.content_set_build_root_dir + '/build'
+        self.content_set_config_dir = self.content_set_build_root_dir + '/config'
+        self.content_set_output_dir = self.content_set_build_root_dir + '/output'
         self.spfe_env.update(
             {'content_set_build_root_dir': self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id,
-             'content_set_build_dir': self.content_set_build_root_dir + '/build',
-             'content_set_config_dir': self.content_set_build_root_dir + '/config',
-             'content_set_output_dir': self.content_set_build_root_dir + '/output',
-             'content_set_home': self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id + '/output',
+             'content_set_build_dir': self.content_set_build_dir,
+             'content_set_config_dir': self.content_set_config_dir,
+             'content_set_output_dir': self.content_set_output_dir,
              'catalog_directory': self.content_set_build_dir + '/catalogs',
              'toc_directory': self.content_set_build_dir + '/tocs'
             }
         )
-        self.content_set_build_dir = self.content_set_build_root_dir + '/build'
-        self.content_set_config_dir = self.content_set_build_root_dir + '/config'
-        self.content_set_output_dir = self.content_set_build_root_dir + '/output'
-        self.content_set_home = self.spfe_env['spfe_build_dir'] + '/' + self.content_set_id + '/output'
         self.content_set_config = etree.XML(
             util.run_XSLT2(script=self.spfe_env['spfe_ot_home'] + '/1.0/scripts/config/load-config.xsl',
                             env=self.spfe_env,

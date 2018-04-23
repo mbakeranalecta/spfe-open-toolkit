@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
+
+    <head>
+        <id>configure-topic-sets</id>
+        <history>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for release review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>configure</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>topic set</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Configuring topic sets</title>
+
+        <understanding>
+
+            <p> The <feature>SPFE Open Toolkit</feature> (SPFE-OT) processes content in
+                topic sets. The topic set configuration selects topics to be included in topic set
+                content, selects resources that may be used, and specifies how each set will be
+                processed.</p>
+
+            <p> The <feature>content set</feature> configuration specifies the topic sets to
+                be included in a SPFE build and the order they will appear in the output
+                <feature>table of contents</feature>. </p>
+
+            <p> A <feature>topic set</feature> configuration is an XML file in the
+                <config-setting>/topic-set</config-setting> format. </p>
+
+        </understanding>
+
+        <planning>
+            <planning-question>
+                <planning-question-title>Where do I locate the configuration files</planning-question-title>
+                <planning-question-body>
+                    <p> The <feature>content set</feature> and <feature>topic set</feature> configuration
+                files may reside anywhere in the filesystem that is convenient for the author.
+                References to configuration, source, and other files may be relative or absolute
+                path names. A common setup has the content set configuration file in the working
+                directory, where the <file-name> spfe </file-name> command will be executed and log
+                files kept, with topic set configuration files and content files in subdirectories
+                and referenced with relative paths. This way the entire set can be relocated without
+                needing to edit configuration files.</p>
+
+            <p> Source content may be identified in topic set configuration
+                files with wildcards in file pathnames. The asterisk "*" matches any set of
+                characters except for the path-hierarchy separator, so that <code> &lt;include&gt;
+                    ../content/text/my-topic-set/*.xml &lt;/include&gt; </code> will include all the
+                XML files in the "my-topic-set" directory.  Thus, best practice is to keep topic
+                source files in directories that correspond to topic sets.</p>
+</planning-question-body>
+            </planning-question>
+            
+            
+
+        </planning>
+
+        <doing>
+
+            <p> Create a <feature>topic set</feature> configuration XML file for each topic set
+                in the <config-setting>/topic-set</config-setting> XML structure shown in
+                the example below. Set configuration entries in the order listed: </p>
+
+            <ul>
+
+                <li> <p> <config-setting> /topic-set/topic-set-id </config-setting>: A unique
+                        topic set identifier. (Required)</p> </li>
+
+                <li> <p> <config-setting> /topic-set/topic-set-type </config-setting>: A user
+                        defined type name that's used in the <feature> content set </feature>
+                        configuration to control the order in which topic sets appear in the output
+                        <feature> table of contents </feature>. (Required) </p> </li>
+
+                <li> <p> <config-setting> /topic-set/topic-set-link-priority </config-setting>:
+                        An integer that sets the priority of the topic set for soft linking. Lower
+                        values have higher priority. Default priority is 1. (Optional) </p> </li>
+
+                <li> <p> <config-setting> /topic-set/topic-types </config-setting>: A list of
+                        topic types to be included in output. Only those sources listed in the
+                        <config-setting> /topic-set/sources </config-setting> configuration
+                        with these types will be included. The order listed here will set the order
+                        of appearance in the topic set's <feature> table of contents </feature>.
+                        (Required)</p> </li>
+
+                <li> <p> <config-setting> /topic-set/object-types </config-setting>: A list of
+                        <feature> object types </feature>. (Optional) </p> </li>
+
+                <li> <p> <config-setting> /topic-set/presentation-types </config-setting>: A
+                        list of <feature> presentation </feature> types. A presentation type
+                        controls how each topic's structure will map into a structure needed for
+                        output formatting. (Required) </p> </li>
+
+                <li> <p> <config-setting> /topic-set/output-formats </config-setting>: The list
+                        of output media types to be generated for the topic set. (Required)</p>
+                </li>
+
+                <li> <p> <config-setting> /topic-set/sources </config-setting>: A specification
+                        of source files for the topic set. Include source files in these categories:
+                    <config-setting>authored-content</config-setting> for authored topics,
+                    <config-setting>graphics</config-setting> for authored graphics, or
+                    <config-setting>sources-to-extract-content-from</config-setting> and <config-setting>authored-content-for-merge</config-setting>for
+                        generated content. (Required) </p> </li>
+
+                <li> <p> <config-setting> /topic-set/condition-tokens </config-setting>: A list
+                        of tokens for conditional inclusion of topic fragments. (Optional) </p>
+                </li>
+
+                <li> <p> <config-setting> /topic-set/default-topic-scope </config-setting>:
+                        (Optional) </p> </li>
+
+                <li> <p> <config-setting> /topic-set/default-subject-scope </config-setting>:
+                        (Optional) </p> </li>
+
+                <li> <p> <config-setting> /topic-set/strings </config-setting>: Identified
+                        strings that may be referenced in topic set contents. (Optional) </p> </li>
+
+            </ul>
+
+            <subhead>Example topic set configuration</subhead>
+            <fragment-ref id-ref="topic-set-example" />
+
+            <p></p>
+        </doing>
+
+    </body> 
+</think-plan-do-topic>

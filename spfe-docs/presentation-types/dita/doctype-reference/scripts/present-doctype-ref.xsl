@@ -97,9 +97,9 @@
 					</xsl:if>
 				</xsl:variable>
 				<!-- FIXME: This should go through the link catalog instead. -->
-				<xref href="{$href}">
+				<link href="{$href}">
 					<xsl:value-of select="$link-text"/>
-				</xref>
+				</link>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -297,9 +297,9 @@
 					<xsl:for-each select="attributes/attribute">
 						<xsl:sort select="name"/>
 						<p>
-							<xref href="#{$topic-id}/{name}">
+							<link href="#{$topic-id}/{name}">
 								<keyword><xsl:value-of select="name"/></keyword>
-							</xref>
+							</link>
 						</p>
 					</xsl:for-each>
 				</dd>

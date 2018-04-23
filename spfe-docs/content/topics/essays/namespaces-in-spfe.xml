@@ -21,6 +21,10 @@
                 <type>feature</type>
                 <term>namespaces</term>
             </entry>
+            <entry>
+                <type>concept</type>
+                <term>chameleon schema pattern</term>
+            </entry>
         </index>
     </head>
     <body>
@@ -62,12 +66,12 @@
                 like <xml-element-name>title</xml-element-name>,
                 <xml-element-name>name</xml-element-name>,
                 <xml-element-name>section</xml-element-name>,
-                <xml-element-name>xref</xml-element-name>, or
+                <xml-element-name>link</xml-element-name>, or
                 <xml-element-name>table</xml-element-name>. By giving each of those vocabularies a
                 different namespace, you can tell which <xml-element-name>title</xml-element-name>,
                 <xml-element-name>name</xml-element-name>,
                 <xml-element-name>section</xml-element-name>,
-                <xml-element-name>xref</xml-element-name>, or
+                <xml-element-name>link</xml-element-name>, or
                 <xml-element-name>table</xml-element-name> you are looking at. Namespaces names are
                 intended to be globally unique, so there should be no confusion about which vocabulary
                 each element name belongs to. </p>
@@ -154,7 +158,7 @@
                 this way. These public document types have very broad use and very firmly
                 established semantics. And they don't share much with other public standards. Having
                 unique namespaces for each of them makes sense because of the way they are used. </p>
-            <p>But if you are setting up a structured writing system, particularly a topic-based
+            <p>But if you are setting up a <concept>structured writing</concept> system, particularly a topic-based
                 structured writing system, you are going to have multiple topic types. But each of
                 those topic types is going to have a great many things in common. You are not going
                 to have a whole different way of doing tables or lists or procedures across a family

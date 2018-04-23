@@ -8,6 +8,13 @@ import shutil
 from glob import glob
 from . import util
 
+import sys
+#FIXME: configurable path to samparser (or install samparser as python module)
+sys.path.append(sys.path[0] + '/../../sam')
+import samparser
+#FIXME: this path is not relative to the current file.
+# sys.path.append(sys.path[0] + '/1.0/scripts/python')
+import spfelib
 
 def build_content_set(config):
     topic_set_id_list = [config.setting('topic-set-id', x) for x in config.iter_config_subset('content-set/topic-set')]
@@ -17,8 +24,6 @@ def build_content_set(config):
         _build_synthesis_stage(config=config, topic_set_id=topic_set_id)
     for object_set_id in object_set_id_list:
         _build_synthesis_stage(config=config, object_set_id=object_set_id)
-    # FIXME: This is using step scripts to determine if stages should be run
-    # and might be fragile if steps were added to a stage.
     for topic_set_id in topic_set_id_list:
         if any(step == "present" for (step, _) in config.build_scripts[topic_set_id]):
             _build_presentation_stage(config, topic_set_id)
@@ -31,8 +36,7 @@ def build_content_set(config):
 
 
 def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
-    assert topic_set_id is None or object_set_id is None
-    assert topic_set_id is not None or object_set_id is not None
+    assert (topic_set_id is None) ^ (object_set_id is None)
     set_id = topic_set_id if topic_set_id is not None else object_set_id
     set_type = 'topic-set' if topic_set_id is not None else "object-set"
     print("Starting synthesis stage for " + set_id)
@@ -42,7 +46,9 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
     )
 
     executed_steps = []
-    if config.setting_exists('sources/sources-to-extract-content-from/include', ts_config):
+
+    # Extract step
+    if config.setting_exists('sources/sources-to-extract-content-from/files/include', ts_config):
         extract_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('extract', None)]), 'out')
         _build_extract_step(config=config,
                             set_id=set_id,
@@ -50,41 +56,61 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
                             output_dir=extract_output_dir)
         executed_steps.append('extract')
 
-        if config.setting_exists("sources/authored-content/include", ts_config):
+    # Merge step
+        if config.setting_exists("sources/authored-content-for-merge/files/include", ts_config):
             executed_steps.append('merge')
             extracted_files = glob(extract_output_dir + '/*')
-            source_files = []
-            for y in config.settings("sources/authored-content/include", ts_config):
-                source_files += (glob(y))
+            authored_files = []
+            for y in config.settings("sources/authored-content-for-merge/files/include", ts_config):
+                authored_files += (glob(y))
+
+            xml_authored_files = [x for x in authored_files if not x.upper().endswith('.SAM')]
+            sam_authored_files = [x for x in authored_files if x.upper().endswith('.SAM')]
+            sam2xml_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('merge', None)]), 'sam2xml')
+            xml_authored_files.extend(_convert_sam_files(sam_authored_files, sam2xml_dir))
+
             merge_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('merge', None)]), 'out')
             _build_merge_step(config=config,
                               set_id=set_id,
                               set_type=set_type,
                               script=config.build_scripts[set_id][('merge', None)],
                               output_dir=merge_output_dir,
-                              authored_files=source_files,
+                              authored_files=xml_authored_files,
                               extracted_files=extracted_files)
 
-    # Call the resolve step
+    # Resolve step
     topic_files = []
     if 'merge' in executed_steps:
         topic_files = glob(merge_output_dir + '/*')
     elif 'extract' in executed_steps:
         topic_files = glob(extract_output_dir + '/*')
-    else:
-        for y in config.settings('sources/authored-content/include', ts_config):
+    try:
+        for y in config.settings('sources/authored-content/files/include', ts_config):
             topic_files += [posixpath.normpath(x) for x in glob(y)]
-    resolve_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('resolve', None)]),
-                                        'out') if topic_set_id is not None else posixpath.join(
-        config.content_set_build_dir, 'objects', set_id)
+    except spfelib.config.SPFEConfigSettingNotFound as e:
+        pass  # No authored topics for this topic set.
+
+    if not topic_files:
+        raise Exception("Set has no topics: " + set_id)
+
+    xml_topic_files = [x for x in topic_files if not x.upper().endswith('.SAM')]
+    sam_topic_files = [x for x in topic_files if x.upper().endswith('.SAM')]
+    sam2xml_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('resolve', None)]), 'sam2xml')
+
+    xml_topic_files.extend(_convert_sam_files(sam_topic_files, sam2xml_dir))
+
+    resolve_output_dir = posixpath.join(posixpath.dirname(config.build_scripts[set_id][('resolve', None)]), 'out') \
+                         if topic_set_id is not None \
+                         else posixpath.join(config.content_set_build_dir, 'objects', set_id)
+
     _build_resolve_step(config=config,
                         set_id=set_id,
                         set_type=set_type,
                         script=config.build_scripts[set_id][('resolve', None)],
                         output_dir=resolve_output_dir,
-                        topic_files=topic_files)
+                        topic_files=xml_topic_files)
 
-    # Call the toc step
+    # TOC step
     toc_output_dir = posixpath.join(config.content_set_build_dir, 'tocs')
     synthesis_files = glob(resolve_output_dir + '/*')
     try:
@@ -99,7 +125,7 @@ def _build_synthesis_stage(config, *, topic_set_id=None, object_set_id=None):
         pass
 
 
-    # Call the catalog step
+    # Catalog step
     catalog_output_dir = posixpath.join(config.content_set_build_dir, 'catalogs')
     synthesis_files = glob(resolve_output_dir + '/*')
     try:
@@ -122,7 +148,7 @@ def _build_extract_step(config, set_id, set_type, output_dir):
         'content-set/object-set[object-set-id="{osid}"]'.format(osid=set_id)
     )
     source_files = []
-    for x in config.settings('sources/sources-to-extract-content-from/include', ts_config):
+    for x in config.settings('sources/sources-to-extract-content-from/files/include', ts_config):
         source_files += (glob(x))
     infile = posixpath.join(config.content_set_config_dir, 'spfe-config.xml')
     outfile = posixpath.join(config.content_set_build_dir, set_type + 's', set_id, 'extracted.flag')
@@ -252,9 +278,6 @@ def _build_formatting_stage(config, topic_set_id):
             format_output_dir = config.content_set_output_dir
         else:
             format_output_dir = posixpath.join(config.content_set_output_dir, topic_set_id)
-        presentation_type = config.setting(
-            'content-set/output-formats/output-format[name="{ft}"]/presentation-type'.format(
-                ft=format_type))
 
         presentation_type = config.setting(
             'content-set/output-formats/output-format[name="{ft}"]/presentation-type'.format(
@@ -315,3 +338,28 @@ def _build_encoding_stage(config, topic_set_id):
 
 def _build_encode_step(config):
     pass
+
+
+def _convert_sam_files(sam_files, sam2xml_dir):
+    converted_files = []
+    try:
+        shutil.rmtree(sam2xml_dir)
+    except FileNotFoundError:
+        pass
+    os.makedirs(sam2xml_dir, exist_ok=True)
+    for sam_file in sam_files:
+        sp = samparser.SamParser()
+        with open(sam_file, "r") as myfile:
+            sp.parse(myfile)
+
+        xml_version = os.path.splitext(os.path.basename(sam_file))[0] + '.xml'
+        outfile = posixpath.join(sam2xml_dir, xml_version)
+        #os.makedirs(os.path.dirname(outfile), exist_ok=True)
+        try:
+            with open(outfile, "wb") as outf:
+                for i in sp.doc.serialize_xml():
+                    outf.write(i)
+        except:
+            raise
+        converted_files.append(outfile)
+    return converted_files

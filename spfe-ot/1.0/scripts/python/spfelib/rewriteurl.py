@@ -64,7 +64,6 @@ class URLRewriter:
             self.catalogs = self._get_catalogs([catalogs])
         else:
             raise TypeError("catalogs must be a list or a string")
-        self.catalogs = self._get_catalogs(catalogs)
         self.rewrite_list = self._get_rewrite_list(self.catalogs)
 
     def _get_catalogs(self, catalogs, all_catalogs=set()):
@@ -97,7 +96,7 @@ class URLRewriter:
         elif isinstance(allowed_prefixes, str):
             prefixes = [allowed_prefixes]
         else:
-            prefixes=None
+            prefixes = None
 
         for rewrite in self.rewrite_list:
             if url.startswith(rewrite.start):
@@ -126,4 +125,4 @@ if __name__ == '__main__':
     try:
         print(re.rewrite_url('c:/Users/Mark/spfe-open-toolkit/spfe-ot/1.0/schemas/config/spfe-config.xsd'))
     except KeyError as e:
-        print("PASS" if str(e) == str("'uriStartString not found.'") else 'FAIL')
+        print("PASS" if "uriStartString not found for URL:" in str(e) else 'FAIL')

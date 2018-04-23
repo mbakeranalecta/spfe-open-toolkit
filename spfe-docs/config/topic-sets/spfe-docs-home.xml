@@ -3,18 +3,18 @@
 <!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. -->
 
 <topic-set xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd">
-    <topic-set-id>spfe-docs-lists</topic-set-id>
-    <title>Lists of Topics by Subject</title>
-    <topic-set-type>list</topic-set-type>
-    <topic-set-link-priority>0</topic-set-link-priority>
-
+    <topic-set-id>spfe-docs-home</topic-set-id>
+    <title>SPFE Documentation</title>
+    <topic-set-type>content-set-home</topic-set-type>
     <topic-types>
+
         <topic-type>
-            <name>{http://spfeopentoolkit.org/ns/spfe-docs}subject-topic-list</name>
-            <href>../../../spfe-docs/topic-types/topic-subject-list-topic/config.xml</href>
+            <name>{http://spfeopentoolkit.org/ns/spfe-docs}content-set-home-topic</name>
+            <href>../../topic-types/content-set-home-topic/config.xml</href>
         </topic-type>
+
     </topic-types>
     <presentation-types>
         <presentation-type>eppo</presentation-type>
@@ -25,16 +25,18 @@
             <name>xhtml</name>
         </output-format>
     </output-formats>
-    
-    <sources>
-        <sources-to-extract-content-from>
-            <include>${CONTENT_SET_BUILD_DIR}/catalogs/*.catalog.xml</include>
-        </sources-to-extract-content-from>
-    </sources>
 
-    
+
+    <sources>
+        <authored-content>
+            <files>
+                <include>../../content/topics/home/*.xml</include>
+                <include>../../content/topics/fragments/*.xml</include>
+            </files>
+        </authored-content>
+    </sources>
 
     <default-topic-scope>spfe</default-topic-scope>
     <default-subject-scope>spfe</default-subject-scope>
-</topic-set>
 
+</topic-set>

@@ -35,7 +35,7 @@
             </pe:home>
             <pe:breadcrumbs>
                 <pe:breadcrumb>
-                    <pe:link href="{$content-set-toc-file}">Contents</pe:link>
+                    <pe:link href="{$content-set-toc-file}">Collections</pe:link>
                 </pe:breadcrumb>
                 <xsl:if test="not($is-home-topic-set)">
                     <pe:breadcrumb>
@@ -44,6 +44,9 @@
                         </pe:link>
                     </pe:breadcrumb>
                 </xsl:if>
+                <pe:breadcrumb>
+                    <xsl:value-of select="ancestor::ss:topic/@title"/>
+                </pe:breadcrumb>
             </pe:breadcrumbs>
             <!-- FIXME: If used, this needs to be based on a set of topic-level realtionships derived in the link step. -->
 <!--            <xsl:if test="index/entry/term[normalize-space(.) ne '']">

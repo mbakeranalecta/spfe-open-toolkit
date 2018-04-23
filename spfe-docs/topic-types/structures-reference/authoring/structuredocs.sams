@@ -1,0 +1,31 @@
+samschema:(http://spfeopentoolkit.org/ns/spfe-docs)
+
+structure-docs:
+	description:
+		>>(#text-general)
+	*group:
+		description:
+			>>(#text-general)
+		+element:
+			type:(xs:string)
+			description:
+				>>(#text-general)
+
+#text-general:
+	*{
+		p:
+		ul:
+		ol:
+	}
+	
+!annotations:
+	element-name
+	group-name
+	
+!decorations:
+	bold
+	italic
+	quotes
+	pre
+
+	

@@ -1,0 +1,31 @@
+sam: http://spfeopentoolkit.org/schemas/authoring/sam/structure-docs.sams
+
+structure-docs: danger-warning-caution-note
+    description:
+    
+        An admonitions {structure}(feature) intended for {content sets}(feature) that require the danger, warning, caution, and note set of admonitions. 
+        
+    group: admonitions
+        description: 
+            >>>(#admonitions-description)
+            
+        element: danger
+            type: admonition
+            description:
+                An admonition of danger.
+                
+        element: warning
+            type: admonition
+            description:
+                A warning.
+                
+        element: caution
+            type: admonition
+             description:
+                An admonition of caution.
+
+       element: note
+            type: admonition
+            description:
+                A note.
+        

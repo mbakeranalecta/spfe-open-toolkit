@@ -14,7 +14,9 @@
     
     <sources>
         <authored-content>
-            <include>../../content/objects/misc-tables/*.xml</include>
+            <files>
+                <include>../../content/objects/misc-tables/*.xml</include>
+            </files>
         </authored-content>
     </sources>                  
 </object-set>

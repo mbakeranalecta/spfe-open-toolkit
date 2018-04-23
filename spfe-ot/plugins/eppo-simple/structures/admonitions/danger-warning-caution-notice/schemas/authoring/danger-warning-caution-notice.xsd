@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/admonitions/general/schemas/authoring/admonition-type.xsd"/>
 
-    <xs:complexType name="admonition">
-        <xs:sequence>
-            <xs:element name="title"/>
-            <xs:element name="body" type="text-nested"/>
-        </xs:sequence>
-    </xs:complexType>
+   
     <xs:group name="admonitions">
-
         <xs:choice>
             <xs:element name="danger" type="admonition"/>
             <xs:element name="warning" type="admonition"/>

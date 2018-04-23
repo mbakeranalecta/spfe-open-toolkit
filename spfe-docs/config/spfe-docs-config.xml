@@ -51,17 +51,7 @@
             <href>topic-sets/eppo-simple-writing.xml</href>
 		     <group>EPPO Simple; Guides</group>
         </topic-set>  
-
-		<!--			 <topic-set>
-		     <topic-set-id>eppo-graphic-record-doctype-reference</topic-set-id>
-		     <href>topic-sets/eppo-graphic-record-reference.xml</href>
-        </topic-set>  
--->            
-<!--			 <topic-set>
-		     <topic-set-id>eppo-generic-topic-reference</topic-set-id>
-		     <href>topic-sets/eppo-generic-topic-reference.xml</href>
-        </topic-set>  
--->            
+           
         <topic-set>
             <topic-set-id>spfe-function-reference</topic-set-id>
             <href>topic-sets/spfe-function-reference.xml</href>
@@ -77,7 +67,7 @@
         <topic-set>
             <topic-set-id>spfe-demos</topic-set-id>
             <href>topic-sets/spfe-demos.xml</href>
-            <group>SPFE; Guides</group>
+            <group>EPPO Simple; Guides</group>
         </topic-set>
         
         <topic-set>
@@ -182,20 +172,10 @@
             <href>../../spfe-ot/plugins/eppo-simple/output-types/xhtml/config.xml</href>
         </output-format>
     </output-formats>              
-    <wip-site>
-        <url>wip-site.href</url>
-        <ftp>
-            <url>wip-site.ftp.url</url>
-            <user>wip-site.ftp.user</user>
-            <password>wip-site.ftp.password</password>
-        </ftp>
-        <path>wip-site.ftp</path>
-    </wip-site>
-
     <strings>
         <string id="product">SPFE Open Toolkit</string>
         <string id="product-release">1.0 (alpha 1)</string>
-        <string id="copyright">Copyright © 2014 Analecta Communications Inc.</string>
+        <string id="copyright">Copyright © 2018 Analecta Communications Inc.</string>
     </strings>
  </content-set>
 

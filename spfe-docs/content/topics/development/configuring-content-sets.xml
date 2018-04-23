@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<think-plan-do-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/schemas/authoring/think-plan-do-topic.xsd">
+ 
+    <head>
+        <id>configuring-content-sets</id>
+        <history>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>task</type>
+                <term>configure</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>content set</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>Configuring content sets</title>
+
+        <understanding>
+
+            <p> The <feature>SPFE Open Toolkit</feature> (SPFE-OT) must be configured to
+                control how it builds output from source XML markup. The content set configuration
+                is an XML structure that specifies which content will be included in a SPFE-OT
+                build. </p>
+
+            <p> The content set configuration file will be the entry point for the build process; it
+                will be specified as the first argument of the <file-name>spfe</file-name> command
+                that starts the build process. The content set configuration file references
+                <feature> topic set </feature> configuration files that specify individual topics.
+                The SPFE build system processes each topic set as a unit. </p>
+            
+            <p> The SPFE build system will, by default, organize topics hierarchically with topic
+                sets in separate groups and topics organized by topic type within a topic set. The
+                build system will generate table of contents (TOC) with this organization to aid
+                navigation. These TOCs are not the only navigation aids the build system generates;
+                the system also creates subject-affinity links (<feature>soft links</feature>)
+                and subject index lists. Nevertheless, hierarchical navigation is one way that
+                content users will find what they want.</p>
+        
+        </understanding>
+
+        <planning>
+            <planning-question>
+                <planning-question-title>Where should the configuration files reside?</planning-question-title>
+                <planning-question-body><p> Content set and topic set configuration files may reside anywhere in the
+                filesystem that is convenient for the author. References to configuration, source,
+                and other files may be relative or absolute path names. A common setup has the
+                content set configuration file in the working directory, where the <code>spfe
+                </code> command will be executed and log files kept, with topic set configuration
+                files and content files in subdirectories and referenced with relative paths. This
+                way the entire set can be relocated without needing to edit configuration files.</p></planning-question-body>
+            </planning-question>
+            
+            
+
+           
+
+        </planning>
+
+        <doing>
+
+            <p> Create a <feature>content set</feature> configuration XML file
+                in the directory you will execute the <feature>spfe</feature> command to create
+                builds or any convenient location. Use the <config-setting> /content-set
+                </config-setting> XML structure shown in the example that follows. </p>
+
+            <subhead>Required settings</subhead>
+
+            <p> Set the following in the content set configuration in the order listed:</p>
+
+            <ul>
+                <li>
+                    <p> <config-setting>/content-set/content-set-id</config-setting>: A unique
+                        content set identifier, which will be the name of the sub-directory under
+                        the <feature>SPFE_BUILD_DIR</feature> directory where the content set will
+                        be generated. </p>
+                </li>
+                <li>
+                    <p> <config-setting>/content-set/title</config-setting>: The title that
+                        will appear on the generated home page for the content set.</p>
+                </li>
+                <li>
+                    <p> <config-setting>/content-set/home-topic-set</config-setting>:
+                        Set the topic that will be the home or first page in the content set's
+                        output. The home topic set must be among the listed topic sets.</p>
+                </li>
+                <li>
+                    <p> <config-setting>/content-set/topic-sets</config-setting>:
+                        List the topic sets to be included in the content set.</p>
+                </li>
+                <li>
+                    <p> <config-setting>/content-set/subject-types</config-setting>:
+                        Specify the <feature>subject-affinity</feature>tags that the build system
+                        may recognize in forming subject-affinity lists. Topics may include an index
+                        of terms, each of which is associated with a subject type defined in the
+                        content set configuration, so that they may become the target of <feature>
+                        soft linking</feature>.</p>
+                </li>
+            </ul>
+
+            <subhead>Optional settings</subhead>
+
+            <p> Set optional items in the content set configuration in the order listed. An option 
+                that is not used does not need to be set; just leave it out:</p>
+
+            <ul>
+                <li>
+                    <p> <config-setting>/content-set/condition-tokens</config-setting>:
+                        Specify tokens for conditional inclusion of content <feature>fragments
+                        </feature> in output.</p>
+                </li>
+                <li>
+                    <p> <config-setting>/content-set/messages</config-setting>: Specify
+                        the type of messages (info and warning) to include in the build log.</p>
+                </li>
+                <li>
+                    <p> <config-setting>/content-set/output-formats</config-setting>:
+                        Specify output formats.</p>
+                </li>
+                <li>
+                    <p> <config-setting>/content-set/strings</config-setting>:
+                        Identify strings that may be included in content when referenced.</p>
+                </li>
+            </ul>
+
+
+            <subhead>Content set example configuration</subhead>
+            <fragment-ref id-ref="content-set-example" />
+
+            <p></p>
+        </doing>
+
+    </body> 
+</think-plan-do-topic>

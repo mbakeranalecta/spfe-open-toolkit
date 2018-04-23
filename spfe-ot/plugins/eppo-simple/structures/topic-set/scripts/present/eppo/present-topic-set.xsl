@@ -86,4 +86,10 @@ Main template
 	</xsl:template>
 	<!-- Targets to absorb fields from the synthesis wrapper.  -->
 	<xsl:template match="ss:*"/>
+
+	<!-- FIXME: Need a proper solution for striping the phrase wrapper -->
+
+    <xsl:template match="*:p/*:phrase">
+            <xsl:apply-templates/>
+    </xsl:template>
 </xsl:stylesheet>

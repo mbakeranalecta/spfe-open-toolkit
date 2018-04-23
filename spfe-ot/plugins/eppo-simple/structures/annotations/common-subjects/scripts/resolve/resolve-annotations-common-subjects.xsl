@@ -6,36 +6,44 @@
     xpath-default-namespace="http://spfeopentoolkit.org/ns/eppo-simple"
     version="2.0">
     
+    <xsl:template match="p/annotation | string/annotation | p/phrase/annotation | string/phrase/annotation">
+        <annotation>
+            <xsl:attribute name="type" select="@type"/>
+            <xsl:attribute name="key" select="if (@specifically) then @specifically else normalize-space(.)"/>
+            <xsl:apply-templates/>
+        </annotation>
+    </xsl:template>
+    
     <xsl:template match="p/task | string/task">
-        <subject>
+        <annotation>
             <xsl:attribute name="type">task</xsl:attribute>
             <xsl:attribute name="key" select="if (@specifically) then @specifically else normalize-space(.)"/>
             <xsl:apply-templates/>
-        </subject>
+        </annotation>
     </xsl:template>
     
     <xsl:template match="p/term | string/term">
-        <subject>
+        <annotation>
             <xsl:attribute name="type">term</xsl:attribute>
             <xsl:attribute name="key" select="normalize-space(.)"/>
             <xsl:apply-templates/>
-        </subject>
+        </annotation>
     </xsl:template>
     
     <xsl:template match="p/feature | string/feature">
-        <subject>
+        <annotation>
             <xsl:attribute name="type">feature</xsl:attribute>
             <xsl:attribute name="key" select="if (@specifically) then @specifically else normalize-space(.)"/>
             <xsl:apply-templates/>
-        </subject>
+        </annotation>
     </xsl:template>
     
     <xsl:template match="p/concept | string/concept">
-        <subject>
+        <annotation>
             <xsl:attribute name="type">concept</xsl:attribute>
             <xsl:attribute name="key" select="if (@specifically) then @specifically else normalize-space(.)"/>
             <xsl:apply-templates/>
-        </subject>
+        </annotation>
     </xsl:template>
 
 </xsl:stylesheet>

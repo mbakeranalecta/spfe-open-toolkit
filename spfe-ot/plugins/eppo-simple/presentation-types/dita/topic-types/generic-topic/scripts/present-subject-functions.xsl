@@ -209,7 +209,7 @@
 					</xsl:call-template>					
 				</xsl:if>
 
-				<xsl:call-template name="make-xref">
+				<xsl:call-template name="make-link">
 					<xsl:with-param name="target-page" select="$highest-priority-page"/>
 					<xsl:with-param name="target" select="$target"/>
 					<xsl:with-param name="type" select="$type"/>
@@ -232,8 +232,8 @@
 		</xsl:choose>		
 	</xsl:template>
 	
-	<!--make-xref template-->
-	<xsl:template name="make-xref">
+	<!--make-link template-->
+	<xsl:template name="make-link">
 		<xsl:param name="target-page"/>
 		<xsl:param name="target"/>
 		<xsl:param name="type"/>
@@ -261,9 +261,9 @@
 		<xsl:variable name="target-anchor" select="if ($target-page[1]/lc:target[lc:key=$target][lc:namespace=$namespace][lc:type=$type][1]/@anchor) then concat('#', $target-page[1]/lc:target[lc:key=$target][lc:type=$type][1]/@anchor) else ''"/>
 
 		
-		<xref keyref="{$target-topic-set}.{$target-page[1]/@local-name}" type="topic" scope="local">
+		<link keyref="{$target-topic-set}.{$target-page[1]/@local-name}" type="topic" scope="local">
 			<xsl:sequence select="$content"/>
-		</xref>
+		</link>
 	</xsl:template>
 	
 
@@ -319,7 +319,7 @@
 		<xsl:choose>
 			<!-- this book -->
 			<xsl:when test="$topic-set-id eq $target-topic-set">
-				<xref 
+				<link 
 					type="{$type}"
 					target="{$target}"/>
 			</xsl:when>

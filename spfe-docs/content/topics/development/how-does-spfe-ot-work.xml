@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/authoring/generic-topic.xsd">
+
+    <head>
+        <id>how-does-spfe-ot-work</id>
+        <history>
+            <revision>
+                <date>2014-11-02</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>In progress</status>
+            </revision>
+            <revision>
+                <date>2014-11-30</date>
+                <author>jfmacdonald</author>
+                <comment>New topic</comment>
+                <status>Ready for technical review</status>
+            </revision>
+        </history>
+        <index>
+            <entry>
+                <type>feature</type>
+                <term>XML</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>XML Schema</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>XSLT</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>synthesis</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>presentation</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>formatting</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>encoding</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>spfe script</term>
+            </entry>
+            <entry>
+                <type>feature</type>
+                <term>SPFE Open Toolkit</term>
+            </entry>
+            <entry>
+                <type>file-name</type>
+                <term>spfe</term>
+            </entry>
+        </index>
+    </head>
+    <body>
+        <title>How does the SPFE Open Toolkit work?</title>
+
+        <p> The <feature>SPFE Open Toolkit</feature> is a system for transforming
+            <feature>structured content</feature> to produce output in a desired format.  It
+            works by processing source XML through a series of stages to produce the output:</p>
+
+        <ol>
+
+
+            <li> <p> The <feature>synthesis stage</feature> collects source <feature>topics
+            </feature>, pulling content together for further processing.</p> </li>
+
+            <li> <p> The <feature>presentation stage</feature> organizes and links topics,
+                    structuring content as needed for a particular output format.</p> </li>
+
+            <li> <p> The <feature>formatting stage</feature> produces an XML representation of the
+                    format. If the output format is an XML format, such as XHTML, this will be the
+                    final stage.</p> </li>
+
+            <li> <p> The <feature>encoding stage</feature> transforms the XML representation to the
+                    output format when that format, such as PDF, is not XML.</p> </li>
+
+        </ol>
+
+        <p> Understanding the SPFE build process will help you use the toolkit and resolve problems
+            when they occur.</p>
+
+
+        <section>
+            <title>Synthesis stage</title>
+
+            <p> The synthesis stage collects and identifies each component of content to ensure that
+                it's available for the build. References and conditionals are resolved, fragments
+                and other objects imported, and content from external sources is extracted.  The
+                synthesis stage also creates a table of contents and link catalog for each topic
+                set. </p>
+
+            <p> Link catalogs identify topics for <feature> subject-affinity linking </feature>.
+                Each <feature> topic set</feature> is processed in the order listed in the <feature>
+                    content set </feature> configuration. The order is signficant, because the link
+                catalogs produced for each topic set are available when processing subsequent topic
+                sets for <feature> soft linking </feature>. </p>
+
+            <p> The synthesis stage produces an XML file for each topic set with the synthesis
+                output of its topic's content, <code>
+                    content-set-id/build/topic-sets/&lt;topic-set-id&gt;/resolve/out/synthesis.xml
+                </code>, a link-catalog file, <code>
+                content-set-id/build/link-catalogs/&lt;topic-set-id&gt;.link-catalog.xml </code>,
+                and table-of-contents file, <code>
+                content-set-id/build/tocs/&lt;topic-set-id&gt;.toc.xml </code>. </p>
+
+        </section>
+        <section>
+
+            <title>Presentation stage</title>
+
+            <p> The presentation stage organizes and prepares topics for presentation in the
+                selected output format. The preparation here is structural; actual formatting occurs
+                in next stage. Here, the build process interprets each topic's <feature> metadata
+                </feature> according to its topic type that's set by its <feature> XML Schema
+                </feature> and maps the topic structure into structures appropriate for the output
+                media. If there are problems with the topic source structure, they will show up
+                here. </p>
+
+            <p> The presentation stage also resolves subject-affinity links. Using the link catalogs
+                created during the synthesis stage, <feature>soft links</feature> in source topics
+                become actual links.</p>
+
+            <p> The presentation stage produces an XML for each topic set with stage output for
+                content in the file <code>
+                content-set-id/build/topic-sets/&lt;topic-set-id&gt;/presentation-&lt;type&gt;/out/presentation.xml
+                </code>. </p>
+
+        </section>
+
+        <section>
+            <title>Formatting stage</title>
+
+            <p> The formatting stage produces each content page in an XML representation of the
+                output format. If the output format <italic>is</italic> XML, such as XHTML, then
+                this will be the final stage.</p>
+
+            <p> The formatting stage does not create its output in the build directory. Rather,
+                output content is created in the directory <code>
+                    $SPFE_BUILD_DIR/&lt;content-set-id&gt;/output </code>.</p>
+
+        </section>
+
+        <section>
+            <title>Encoding stage</title>
+
+            <p> If the output format is other than XML, such as PDF, then the XML produced in the
+                formatting stage will be encoded here. </p>
+
+        </section>
+
+    </body>
+</generic-topic>
+
