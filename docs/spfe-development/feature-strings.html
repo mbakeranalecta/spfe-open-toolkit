@@ -1,0 +1,29 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Strings</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Strings</p>
+         
+         
+            <h1>Strings</h1>
+            <p>
+               <a href="../spfe-docs-lists/feature_strings.html" class="default" title="A list of topics on a subject: Feature: strings">Strings</a> are a <a href="reuse-techniques.html" class="default" title="Concept: Reuse in SPFE and EPPO Simple">content reuse</a> feature of the EPPO-simple plugin.</p>
+            <p>A string is an arbitrary sequence of text that has been given an id so that it can be included by reference at other points in the content. Strings can also contain inline markup such as annotation markup or text decoration. Essentially, anything that can occur inside a paragraph can occur inside a string. You cannot insert a string or string reference inside other inline markup, so if you want to place a piece of text in a string, and aslo inside a piece of inline markup, you should place the markup inside the string. Thus if you want to substitute different animal names inot a sentence, and mark them up as animals, you should define your string like this:</p>
+            <pre>&lt;string id="animal-name"&gt;&lt;animal&gt;fox&lt;/animal&gt;&lt;/string&gt;</pre>
+            <p>And insert the string reference like this:</p>
+            <pre>&lt;p&gt;The quick brown &lt;string-ref ref-id="animal-name"/&gt;.&lt;/p&gt;</pre>
+            <p>This will resolve to:</p>
+            <pre>&lt;p&gt;The quick brown &lt;animal&gt;fox&lt;/animal&gt;.&lt;/p&gt;</pre>
+            <p>Strings can be defined inline in a topic file, or they can be defined in separate strings collections. If a string is defined inline, it is included where it occurs. Strings in string files are not included anywhere unless they are pulled in by a string reference. Strings can also be define in the configuration file as part of the content set configuration or the topic set configuration.</p>
+            <p>A string reference inserts a string by ID at the place it occurs in the text.</p>
+            <p>Strings are recursive. That is, strings can contain other strings and string references.</p>
+            <p>Because you often want to change some part of a text when it is being reused, <a href="../spfe-docs-lists/feature_fragments.html" class="default" title="A list of topics on a subject: Feature: fragments">fragments</a> and fragment references can both define local <a href="../spfe-docs-lists/feature_strings.html" class="default" title="A list of topics on a subject: Feature: strings">strings</a>. Any string references inside a fragment will be resolved by looking first at local-strings defined in the fragment reference, then at local strings defined in the fragment definition, and then at global strings. In effect, this means that you can define string substitutions whenever you insert a fragment into your content.</p>
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

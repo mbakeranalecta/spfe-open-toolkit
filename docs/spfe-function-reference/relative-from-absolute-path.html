@@ -1,0 +1,90 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: relative-from-absolute-path</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; relative-from-absolute-path</p>
+      <h1>Function: relative-from-absolute-path</h1>
+      <p>
+         <b class="decoration-bold">relative-from-absolute-path(path as item()*, base-path as item()*, prefix as xs:string) as xs:string</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>The <b class="decoration-bold">relative-from-absolute-path</b> function takes a full system path and returns the portion of that path relative to a base path. For example, given the path</p>
+                <pre>C:/Users/Joe/spfe-open-toolkit/spfe-ot/1.0/scripts/common/utility-functions.xsl</pre>
+                <p>and the base path</p>
+                <pre>C:/Users/Joe/spfe-open-toolkit/spfe-ot</pre>
+                <p>it returns the part of the path after the base path:</p>
+                <pre>/1.0/scripts/common/utility-functions.xsl</pre>
+                <p>Optionally, you can specify a prefix to be added to the returned path:</p>
+                <pre>&lt;xsl:value-of select="sf:relative-from-absolute-path(source-file, $config/config:spfeot-home,'$SPFEOT_HOME')"/&gt;
+                </pre>
+
+                <p>In this example, <tt class="decoration-code">source-file</tt> is an element containing the full path of a source file, <tt class="decoration-code">$config/config:spfeot-home</tt> pulls the local path of the spfe open toolkit on the users machine from the config file, and <tt class="decoration-code">'$SPFEOT_HOME'</tt> is a prefix string. Assuming that the value of <tt class="decoration-code">source-file</tt> is <tt class="decoration-code">file:/C:/Users/Joe/spfe-open-toolkit/spfe-ot/1.0/scripts/common/utility-functions.xsl</tt>, the return value will be:</p>
+                <pre>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</pre>
+                <p>The function does its best to normalize both the <tt class="decoration-code">path</tt> and <tt class="decoration-code">base-path</tt> parameters before comparing them. Any protocol part is removed from both strings (<tt class="decoration-code">file:/</tt> in the example above), directory separators are normalized to forward slashes, and URL decoding is applied (so that if spaces are represented by <tt class="decoration-code">%20</tt>, they will be replaced by regular spaces. This allows you to compare paths in different formats and encodings wihtout having to normalize them first.</p>
+                <p>As the example shows, the principal motivation for this function is to assist in generating documentation from source code. If you write an extraction routine that captures the file name of the file it is extracting from, that name will contain the path of the local machine on which the extraction is run. You can use this function to remove the local portion of the file path and substitute a placeholder such as <tt class="decoration-code">$SPFEOT_HOME</tt> in the example above.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: xs:string</p>
+                    <p>The function returns the portion of the <tt class="decoration-code">path</tt> parameter after the end of the <tt class="decoration-code">base-path</tt> parameter, prefixed with the value of the <tt class="decoration-code">prefix</tt> parameter.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>path</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>An absolute path from which the relative path is to be extracted.</p>
+                    </dd>
+      </dl>
+      <dl>
+         <dt>base-path</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>An absolute path which will be subtracted from the <tt class="decoration-code">path</tt> parameter to form the relative path.</p>
+                    </dd>
+      </dl>
+      <dl>
+         <dt>prefix</dt>
+         <dd>
+            <p>Type: xs:string</p>
+                        <p>The prefix to be added to the start of the returned string.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:relative-from-absolute-path"&nbsp;as="xs:string"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="path"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="base-path"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:value-of select="sf:relative-from-absolute-path($path, $base-path, '')"/&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+      <pre>
+            &lt;xsl:function name="sf:relative-from-absolute-path"&nbsp;as="xs:string"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="path"&nbsp;as="xs:string"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="base-path"&nbsp;as="xs:string"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="prefix"&nbsp;as="xs:string"/&gt;
+
+		             &nbsp;&nbsp;&lt;xsl:variable name="normalized-path"&nbsp;select=" <a href="path-after-protocol-part.html" class="default" title="SPFE XSLT library routine: path-after-protocol-part">sf:path-after-protocol-part</a>(translate(<a href="pct-decode.html" class="default" title="SPFE XSLT library routine: pct-decode">sf:pct-decode</a>($path), '\', '/'))"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:variable name="normalized-base-path"&nbsp;select="<a href="path-after-protocol-part.html" class="default" title="SPFE XSLT library routine: path-after-protocol-part">sf:path-after-protocol-part</a>(translate(<a href="pct-decode.html" class="default" title="SPFE XSLT library routine: pct-decode">sf:pct-decode</a>($base-path), '\', '/'))"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:value-of select="concat($prefix,substring-after($normalized-path, $normalized-base-path))"/&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Adding a new topic</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="eppo-simple-writing-toc.html" class="default" title="">Writing in EPPO-simple and Derivatives</a>
+             &gt; Adding a new topic</p>
+
+         
+         
+            <h1>Adding a new topic</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Think" class="default" title="">Think</a>
+         </li>
+         <li>
+            <a href="#Plan" class="default" title="">Plan</a>
+         </li>
+         <li>
+            <a href="#Do" class="default" title="">Do</a>
+         </li>
+      </ul>
+            
+         <a name="Think"> </a>
+         <h2>Think</h2>
+               <p>A <a href="../spfe-docs-lists/feature_topic.html" class="default" title="A list of topics on a subject: Feature: topic">topic</a> is the basic unit of content that is presented to the user. If you are trying to create a reusable content building block that is not a full topic, you should be creating a <a href="../spfe-development/feature-fragments.html" class="default" title="Feature: Fragments">fragment</a>, a <a href="../spfe-development/feature-strings.html" class="default" title="Feature: Strings">string</a>, or a <a href="../spfe-docs-lists/feature_object.html" class="default" title="A list of topics on a subject: Feature: object">object</a>.</p>
+            
+            
+         <a name="Plan"> </a>
+         <h2>Plan</h2>
+               <a name="Which20topic20type20should20I20use3F"> </a><dl>
+            
+                  <dt>Which topic type should I use?</dt>
+                  <dd>
+                     <p>Before you add a topic, you must decide what <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a> to
+                        create. You should choose the topic type that is most specific to the
+                        subject matter you are writing about. You should also be aware that each
+                        topic set only allows a specific set to topic types to be included. While
+                        you don't create topics for topic sets, but as independent entities, you
+                        don't want to be surprised by this requirement down the line.  Each
+                            topic set configuration file lists the topic types
+                        that are allowed in that topic set.  That list should reflect the type of
+                        content the topic set is supposed to contain, so if the best topic type for
+                        your subject matter is not one that a topic set that wants to include it
+                        supports, the chances are that the problem lies with how the topic set is
+                        defined rather than with the topic type chosen for the topic.</p>
+                  </dd>
+               </dl>
+            
+            
+         <a name="Do"> </a>
+         <h2>Do</h2>
+               <p>To add a new topic, create a file based on the schema for the topic type you have chosen.</p>
+               <p>Where you store your file will depend on the rules of the repository that you are
+                using. In the simplest case, you will store you file in a directory on the local
+                file system. One or more topic sets may be set up to pull files from that directory,
+                in which case you topic will then be included in those topic sets. In other cases,
+                the file may be included or excluded based on metadata it contains.</p>
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:32.</p></div></body></html>

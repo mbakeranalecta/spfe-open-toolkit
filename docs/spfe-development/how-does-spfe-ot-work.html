@@ -1,0 +1,135 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>How does the SPFE Open Toolkit work?</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; How does the SPFE Open Toolkit work?</p>
+
+         
+         
+            <h1>How does the SPFE Open Toolkit work?</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Synthesis20stage" class="default" title="">Synthesis stage</a>
+         </li>
+         <li>
+            <a href="#Presentation20stage" class="default" title="">Presentation stage</a>
+         </li>
+         <li>
+            <a href="#Formatting20stage" class="default" title="">Formatting stage</a>
+         </li>
+         <li>
+            <a href="#Encoding20stage" class="default" title="">Encoding stage</a>
+         </li>
+      </ul>
+
+            <p> The <a href="executing-spfe-builds.html" class="default" title="Task: Executing the SPFE build system">SPFE Open Toolkit</a> is a system for transforming
+            structured content to produce output in a desired format.  It
+            works by processing source XML through a series of stages to produce the output:</p>
+
+            <ol>
+
+
+               <li> 
+                  <p> The <a href="feature-synthesis.html" class="default" title="Feature: Synthesis">synthesis stage</a> collects source topics, pulling content together for further processing.</p> 
+               </li>
+
+               <li> 
+                  <p> The presentation stage organizes and links topics,
+                    structuring content as needed for a particular output format.</p> 
+               </li>
+
+               <li> 
+                  <p> The formatting stage produces an XML representation of the
+                    format. If the output format is an XML format, such as XHTML, this will be the
+                    final stage.</p> 
+               </li>
+
+               <li> 
+                  <p> The encoding stage transforms the XML representation to the
+                    output format when that format, such as PDF, is not XML.</p> 
+               </li>
+
+            </ol>
+
+            <p> Understanding the SPFE build process will help you use the toolkit and resolve problems
+            when they occur.</p>
+
+
+            
+         <a name="Synthesis20stage"> </a>
+               <h2>Synthesis stage</h2>
+
+               <p> The synthesis stage collects and identifies each component of content to ensure that
+                it's available for the build. References and conditionals are resolved, fragments
+                and other objects imported, and content from external sources is extracted.  The
+                synthesis stage also creates a table of contents and link catalog for each topic
+                set. </p>
+
+               <p> Link catalogs identify topics for subject-affinity linking.
+                Each <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> is processed in the order listed in the <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a> configuration. The order is signficant, because the link
+                catalogs produced for each topic set are available when processing subsequent topic
+                sets for <a href="feature-how-linking-works.html" class="default" title="Feature: How linking works">soft linking</a>. </p>
+
+               <p> The synthesis stage produces an XML file for each topic set with the synthesis
+                output of its topic's content, <tt class="decoration-code">
+                    content-set-id/build/topic-sets/&lt;topic-set-id&gt;/resolve/out/synthesis.xml
+                </tt>, a link-catalog file, <tt class="decoration-code">
+                content-set-id/build/link-catalogs/&lt;topic-set-id&gt;.link-catalog.xml </tt>,
+                and table-of-contents file, <tt class="decoration-code">
+                content-set-id/build/tocs/&lt;topic-set-id&gt;.toc.xml </tt>. </p>
+
+            
+            
+         <a name="Presentation20stage"> </a>
+
+               <h2>Presentation stage</h2>
+
+               <p> The presentation stage organizes and prepares topics for presentation in the
+                selected output format. The preparation here is structural; actual formatting occurs
+                in next stage. Here, the build process interprets each topic's metadata according to its topic type that's set by its XML Schema and maps the topic structure into structures appropriate for the output
+                media. If there are problems with the topic source structure, they will show up
+                here. </p>
+
+               <p> The presentation stage also resolves subject-affinity links. Using the link catalogs
+                created during the synthesis stage, soft links in source topics
+                become actual links.</p>
+
+               <p> The presentation stage produces an XML for each topic set with stage output for
+                content in the file <tt class="decoration-code">
+                content-set-id/build/topic-sets/&lt;topic-set-id&gt;/presentation-&lt;type&gt;/out/presentation.xml
+                </tt>. </p>
+
+            
+
+            
+         <a name="Formatting20stage"> </a>
+               <h2>Formatting stage</h2>
+
+               <p> The formatting stage produces each content page in an XML representation of the
+                output format. If the output format <em class="decoration-italic">is</em> XML, such as XHTML, then
+                this will be the final stage.</p>
+
+               <p> The formatting stage does not create its output in the build directory. Rather,
+                output content is created in the directory <tt class="decoration-code">
+                    $SPFE_BUILD_DIR/&lt;content-set-id&gt;/output </tt>.</p>
+
+            
+
+            
+         <a name="Encoding20stage"> </a>
+               <h2>Encoding stage</h2>
+
+               <p> If the output format is other than XML, such as PDF, then the XML produced in the
+                formatting stage will be encoded here. </p>
+
+            
+
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

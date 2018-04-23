@@ -1,0 +1,194 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Creating a topic</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Creating a topic</p>
+
+         
+         
+            <h1>Creating a topic</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Think" class="default" title="">Think</a>
+         </li>
+         <li>
+            <a href="#Plan" class="default" title="">Plan</a>
+         </li>
+         <li>
+            <a href="#Do" class="default" title="">Do</a>
+         </li>
+      </ul>
+            
+         <a name="Think"> </a>
+         <h2>Think</h2>
+
+               <p> In common usage, the term <em class="decoration-italic">topic</em> refers to the subject of a work.
+                Here, we apply the term to a particular work -- a unit of content -- about a
+                particular subject. Using the <a href="executing-spfe-builds.html" class="default" title="Task: Executing the SPFE build system">SPFE Open Toolkit</a>, a
+                topic is an XML document in the structure of a specific <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a>. </p>
+
+               <p> To be in the output of a <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a> build, a topic must be
+                included in a <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> sources list (configuration setting
+                <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_sources.html" class="default" title="Configuration setting: sources">/topic-set/sources</a></b>). </p> 
+
+            
+            
+         <a name="Plan"> </a>
+         <h2>Plan</h2>
+               <a name="Which20topic20type20should20I20use20for20my20topic3F"> </a><dl>
+            
+                  <dt>Which topic type should I use for my topic?</dt>
+                  <dd>
+                    <p> Before creating the document for a topic, consider the document's purpose and 
+                        select the <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a> that best suits it. </p>
+                    
+                    <p> The <a href="executing-spfe-builds.html" class="default" title="Task: Executing the SPFE build system">SPFE Open Toolkit</a> provides a set of topic types that may be
+                        used as a base for extended topic types in a particular deployment of the toolkit.
+                        These base types, called <a href="../eppo-simple-writing/eppo-simple-overview.html" class="default" title="Concept: EPPO Simple Overview">EPPO simple</a>, include the following: </p>
+                    
+                    <ul> 
+                        
+                        <li> 
+                           <p> docset-home topic </p> 
+                        </li>
+                        
+                        <li> 
+                           <p> essay </p> 
+                        </li>
+                        
+                        <li> 
+                           <p> feature topic </p> 
+                        </li>
+                        
+                        <li> 
+                           <p> generic topic </p> 
+                        </li>
+                        
+                        <li> 
+                           <p> think-plan-do topic </p> 
+                        </li>
+                        
+                    </ul>
+                  </dd>
+               </dl>
+            
+            
+
+            
+            
+         <a name="Do"> </a>
+         <h2>Do</h2>
+
+           
+               <p> Create an XML file using editing software of your choice. Do not use a word
+                processing program such as Microsoft Word. The editor must save output in plain
+                text format.</p>
+
+               <p> Several editors provide aids, such as syntax highlighting and schema validation, for
+                editing XML markup.  Some cost and some are free. Features and support for XML vary.
+                A short list includes the following: </p>
+
+               <ul>
+
+                  <li> 
+                     <p> 
+                        <a href="http://www.oxygenxml.com/" class="default" title="">Oxygen XML</a>
+                        is a full-featured XML editor with schema support. In addition to direct
+                        text editing, the software provides an "Author" editor that may be easier
+                        for those more comfortable in a word-processing environment.  The software
+                        must be purchased, but is less expensive than most other full-featured XML
+                        editors. </p> 
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <a href="http://komodoide.com/komodo-edit/" class="default" title="">Komodo Edit
+                        </a> is a free editor with reasonable support for XML and
+                        several other code formats. In addition to syntax support, the editor
+                        verifies compliance with XML Schemas. </p> 
+                  </li>
+
+               </ul>
+
+               <p> The above list is by no means comprehensive. You may likely find another editor more
+                suitable. Often, the editor that works best is not that with the most features, but
+                is the software you are most practiced and comfortable using. Finger habits are not
+                easily relearned. </p>
+
+               <h3>Follow the topic type schema</h3>
+
+               <p> Review the structure diagram or other specification for the
+                <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a>. </p> 
+
+               <h3>Example</h3>
+
+               <p> The XML code below shows the markup for a simple generic topic
+                document.</p>
+               <pre>
+                
+                
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;generic-topic xmlns="http://spfeopentoolkit.org/ns/spfe-docs"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-docs 
+    http://spfeopentoolkit.org/spfe-docs/topic-types/generic-topic/schemas/generic-topic.xsd"&gt;
+    
+    &lt;head&gt;
+        &lt;id&gt;nursery-lessons-in-words-of-one-syllable&lt;/id&gt;
+            &lt;history&gt;
+                &lt;revision&gt;
+                    &lt;date&gt;1838-06-06&lt;/date&gt;
+                    &lt;author&gt;Unknown&lt;/author&gt;
+                    &lt;comment&gt;Publisher Darton and Harvey, London&lt;/comment&gt;
+                    &lt;status&gt;In progress&lt;/status&gt;
+                &lt;/revision&gt;
+                &lt;revision&gt;
+                    &lt;date&gt;2014-11-01&lt;/date&gt;
+                    &lt;author&gt;jfmacdonald&lt;/author&gt;
+                    &lt;comment&gt;digital revision&lt;/comment&gt;
+                    &lt;status&gt;Ready for release review&lt;/status&gt;
+                &lt;/revision&gt;
+            &lt;/history&gt;
+            &lt;index&gt;
+                &lt;entry&gt;
+                    &lt;type&gt;term&lt;/type&gt;
+                    &lt;term&gt;nag&lt;/term&gt;
+                &lt;/entry&gt;
+                &lt;entry&gt;
+                    &lt;type&gt;task&lt;/type&gt;
+                    &lt;term&gt;reading&lt;/term&gt;
+                &lt;/entry&gt;
+            &lt;/index&gt;
+    &lt;/head&gt;
+    
+    &lt;body&gt;
+        &lt;title&gt;Nursery Lessons in Words of One Syllable&lt;/title&gt;
+        
+        &lt;p&gt; See! Here is a find nag. And that is a good boy who rides on it too; 
+            for he reads his book so well, and is so neat and clean, that his
+            kind aunt gave him this nice horse; and I am sure James takes good
+            care of her gift.&lt;/p&gt;
+
+        &lt;fig href="../../../graphics/horse.png"&gt;
+            &lt;title&gt;James on his horse&lt;/title&gt;
+            &lt;caption&gt;
+                &lt;p&gt;See James ride.&lt;/p&gt;
+            &lt;/caption&gt;
+        &lt;/fig&gt;
+        
+    &lt;/body&gt; 
+    
+&lt;/generic-topic&gt;            
+                
+         </pre>
+
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

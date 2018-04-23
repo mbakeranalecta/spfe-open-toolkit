@@ -1,0 +1,95 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: pct-decode</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; pct-decode</p>
+      <h1>Function: pct-decode</h1>
+      <p>
+         <b class="decoration-bold">pct-decode(in as xs:string, seq as xs:string*) as xs:string?</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>Takes a string encoded using <a href="http://en.wikipedia.org/wiki/Percent-encoding" class="default" title="">percent-encoding</a> (also know as URL encoding) and returns the decoded string. Adapted from code published by James A. Robinson at <a href="http://www.oxygenxml.com/archives/xsl-list/200911/msg00300.html" class="default" title="">http://www.oxygenxml.com/archives/xsl-list/200911/msg00300.html</a>. </p>
+                <p>This is a recursive polymorphic function. You call the version of the function that takes one parameter, <tt class="decoration-code">in</tt>. The second version of the function is called recursively by the first version to complete the decoding of the input string. It takes a second parameter, <tt class="decoration-code">seq</tt>. You should not call this version of the function from your code.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: xs:string?</p>
+                    <p>The decoded string.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>in</dt>
+         <dd>
+            <p>Type: xs:string</p>
+                        <p>The string to be decoded.</p>
+                    </dd>
+      </dl>
+      <dl>
+         <dt>seq</dt>
+         <dd>
+            <p>Type: xs:string*</p>
+                        <p>Used internally by the function during recursion. Do not use this parameter in your code.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:pct-decode"&nbsp;as="xs:string?"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="in"&nbsp;as="xs:string"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:sequence select="sf:pct-decode($in, ())"/&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+      <pre>
+            &lt;xsl:function name="sf:pct-decode"&nbsp;as="xs:string?"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="in"&nbsp;as="xs:string"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="seq"&nbsp;as="xs:string*"/&gt;
+
+		             &nbsp;&nbsp;&lt;xsl:choose &gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="not($in)"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:sequence select="string-join($seq, '')"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="starts-with($in, '%')"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:choose &gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="matches(substring($in, 2, 2), '^[0-9A-Fa-f][0-9A-Fa-f]$')"&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:variable name="s"&nbsp;as="xs:string"&nbsp;select="substring($in, 2, 2)"/&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:variable name="d"&nbsp;as="xs:integer"&nbsp;select="<a href="hex-to-dec.html" class="default" title="SPFE XSLT library routine: hex-to-dec">sf:hex-to-dec</a>(upper-case($s))"/&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:variable name="c"&nbsp;as="xs:string"&nbsp;select="codepoints-to-string($d)"/&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:sequence select="sf:pct-decode(substring($in, 4), ($seq, $c))"/&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="contains(substring($in, 2), '%')"&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:variable name="s"&nbsp;as="xs:string"&nbsp;select="substring-before(substring($in, 2), '%')"/&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:sequence select="sf:pct-decode(substring($in, 2 + string-length($s)), ($seq, '%', $s))"/&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:otherwise &gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:sequence select="string-join(($seq, $in), '')"/&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:otherwise&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:choose&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="contains($in, '%')"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:variable name="s"&nbsp;as="xs:string"&nbsp;select="substring-before($in, '%')"/&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:sequence select="sf:pct-decode(substring($in, string-length($s)+1), ($seq, $s))"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:otherwise &gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:sequence select="string-join(($seq, $in), '')"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:otherwise&gt;
+		             &nbsp;&nbsp;&lt;/xsl:choose&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

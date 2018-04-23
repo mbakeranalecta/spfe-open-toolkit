@@ -1,0 +1,63 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: hex-to-dec</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; hex-to-dec</p>
+      <h1>Function: hex-to-dec</h1>
+      <p>
+         <b class="decoration-bold">hex-to-dec(hex as xs:string) as xs:integer</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>The <b class="decoration-bold">hex-to-dec</b> function takes are string representing a hexadecimal number and converts it to a decimal number.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: xs:integer</p>
+                    <p>The interger value of the hexadecimal number.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>hex</dt>
+         <dd>
+            <p>Type: xs:string</p>
+                        <p>A string representing the hexadecimal number to be converted.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:hex-to-dec"&nbsp;as="xs:integer"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="hex"&nbsp;as="xs:string"/&gt;
+
+		             &nbsp;&nbsp;&lt;xsl:variable name="len"&nbsp;as="xs:integer"&nbsp;select="string-length($hex)"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:choose &gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="$len eq 0"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:sequence select="0"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="$len eq 1"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:sequence select="      if ($hex eq '0')       then 0      else if ($hex eq '1')       then 1      else if ($hex eq '2')       then 2      else if ($hex eq '3')       then 3      else if ($hex eq '4')       then 4      else if ($hex eq '5')       then 5      else if ($hex eq '6')       then 6      else if ($hex eq '7')       then 7      else if ($hex eq '8')       then 8      else if ($hex eq '9')       then 9      else if ($hex = ('A', 'a')) then 10      else if ($hex = ('B', 'b')) then 11      else if ($hex = ('C', 'c')) then 12      else if ($hex = ('D', 'd')) then 13      else if ($hex = ('E', 'e')) then 14      else if ($hex = ('F', 'f')) then 15      else error(xs:QName('sf:hex-to-dec'))      "/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:otherwise &gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:sequence select="      (16 * sf:hex-to-dec(substring($hex, 1, $len - 1)))      + sf:hex-to-dec(substring($hex, $len))"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:otherwise&gt;
+		             &nbsp;&nbsp;&lt;/xsl:choose&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

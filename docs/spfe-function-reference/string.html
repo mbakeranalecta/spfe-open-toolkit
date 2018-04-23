@@ -1,0 +1,64 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: string</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; string</p>
+      <h1>Function: string</h1>
+      <p>
+         <b class="decoration-bold">string(strings as element()*, id as item()*) as item()*</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>The <b class="decoration-bold">string</b> function is used to resolve <a href="../spfe-docs-lists/feature_strings.html" class="default" title="A list of topics on a subject: Feature: strings">strings</a>.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: item()*</p>
+                    <p>The string that corresponds to the string ID.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>strings</dt>
+         <dd>
+            <p>Type: element()*</p>
+                        <p>A sequence of string elements.</p>
+                    </dd>
+      </dl>
+      <dl>
+         <dt>id</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The ID of the string to return.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:string"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="strings"&nbsp;as="element()*"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="id"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:if test="not($strings/*:string[@id=$id])"&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:call-template name="<a href="error.html" class="default" title="SPFE XSLT library routine: error">sf:error</a>"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:with-param name="message"&gt;String lookup failed for string ID &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="$id"/&gt;. No matching string found.&lt;/xsl:with-param&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:call-template&gt;
+		             &nbsp;&nbsp;&lt;/xsl:if&gt;
+		             &nbsp;&nbsp;&lt;xsl:sequence select="$strings/*:string[@id=$id]/node()"/&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

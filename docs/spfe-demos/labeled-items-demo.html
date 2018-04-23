@@ -1,0 +1,67 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Labeled items demo</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-demos-toc.html" class="default" title="">EPPO-simple Demos</a>
+             &gt; Labeled items demo</p>
+         
+         
+            <h1>Labeled items demo</h1>
+            <p>The labeled items <a href="../spfe-docs-lists/feature_structure.html" class="default" title="A list of topics on a subject: Feature: structure">structure</a> is a construct in which a label is applied
+            to a short piece of text as a heading. It is similar to the definition list construct
+            found in DITA and HTML, except that in EPPO-simple it is not a list. That is, there is
+            no list wrapper around a labeled item or a set of labeled items. This is consistent with
+            the EPPO-simple principle of keeping structures as flat as possible. In the case of
+            labeled items, formatting is generally not affected by the fact that several labeled
+            items appear in sequence. For instance, first or last items in such a sequence do not
+            usually require special formatting. (In the case that they do, a list wrapper could be
+            applied to a set of labeled items at the formatting stage.)</p>
+            <p>The follow is an example of a labeled item:</p>
+            <dl>
+               <dt>This is the label of a labeled item.</dt>
+               <dd>
+                  <p>This is the item to which the label is applied. The
+                    <b class="decoration-bold">item</b> structure can contain structures from
+                    the text-nested group. </p>
+               </dd>
+            </dl>
+            <p>The following is the XML code for the labeled item above:</p>
+            <pre>&lt;labeled-item&gt;
+    &lt;label&gt;This is the label of a labeled item.&lt;/label&gt;
+    &lt;item&gt;
+        &lt;p&gt;This is the item to which the label is applied. The
+        &lt;xml-element-name&gt;item&lt;/xml-element-name&gt; structure can contain structures from
+        the &lt;feature&gt;text-nested group&lt;/feature&gt;. &lt;/p&gt;
+    &lt;/item&gt;
+&lt;/labeled-item&gt;</pre>
+            
+            <p>An alternate to the labeled item is the labeled list, or
+            <b class="decoration-bold">ll</b> element. The ll element is constructed on the
+            same model as the common <b class="decoration-bold">ol</b> and
+            <b class="decoration-bold">ul</b> list types, but rather than a number or a
+            bullet, it introduces the list items with a label. By default, the
+            <b class="decoration-bold">ll</b> element is limited to a single paragraph. </p>
+            <p>Here is an example of a labeled list:</p>
+            <ol class="labeled-list">
+               <li><p><b>Fred - </b>Fred Flintstone.</p></li>
+               <li><p><b>Wilma - </b>Wilma Flintstone.</p></li>
+            </ol>
+            <p>Here is the code that produced it:</p>
+            <pre>&lt;ll&gt;
+    &lt;li&gt;
+        &lt;label&gt;Fred&lt;/label&gt;
+        &lt;p&gt;Fred Flintstone.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;label&gt;Wilma&lt;/label&gt;
+        &lt;p&gt;Wilma Flintstone.&lt;/p&gt;
+    &lt;/li&gt;
+&lt;/ll&gt;</pre>
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:38.</p></div></body></html>

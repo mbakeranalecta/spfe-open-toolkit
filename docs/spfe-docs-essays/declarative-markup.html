@@ -1,0 +1,137 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Declarative markup</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-docs-essays-toc.html" class="default" title="">Essays on SPFE</a>
+             &gt; Declarative markup</p>
+         
+         
+            <h1>Declarative markup</h1>
+            <p xmlns="http://www.w3.org/1999/xhtml"><i>By </i>
+         
+         
+            <b xmlns="" class="decoration-bold">Mark Baker</b>
+         
+      </p>
+            <div xmlns="http://www.w3.org/1999/xhtml" class="precis">
+         <h3>Summary</h3>
+               <p xmlns="">SPFE is intended to support a declarative approach to markup -- one in which authors
+                use markup to declare what something is, rather than the give and instruction about
+                how something is to be handled. Some other systems rely on imperative markup (which
+                gives instructions). SPFE will allow for imperative markup, but is generally
+                intended to avoid the need for it. </p>
+            </div>
+            <p>In <a href="structured-content.html" class="default" title="Essay: What is structured content?">structured writing</a>, <a href="structured-content.html" class="default" title="Essay: What is structured content?">markup</a> is a means of
+            inserting <a href="structured-content.html" class="default" title="Essay: What is structured content?">metadata</a> into content so that the content can be identified
+            or manipulated by algorithms, and it ensure that the content meets a set of required
+            constraints. This metadata can be divided into two broad categories, declarative and
+            imperative.</p>
+            <ol class="labeled-list">
+               <li><p><b>Declarative markup - </b>Declares what a piece of content is, either its role in a document (such as
+                    paragraph or list item) or what subject matter it refers to (such a an
+                    ingredient in a recipe or a parameter in a API routine).</p></li>
+               <li><p><b>Imperative markup - </b>Gives an instruction about how to handle the content under certain conditions.
+                    For instance, a conditional statement that includes certain content when a
+                    condition is true, or an instructions to reuse a piece of content by inserting
+                    it at a particular point in a text. Links are also a form of imperative markup
+                    as they tell the algorithm where to link to. </p></li>
+            </ol>
+            <p>The main reason for using imperative markup is to make it easy for writers to specify
+            certain behaviors in the content without the need to create specific markup or
+            specialized algorithms to support them. The inclusion of a standard set of imperative
+            markup in a markup language, along with a corresponding set of algorithms to process the
+            imperative markup, can allow an organization to manipulate content in useful ways
+            without the need for additional structures or coding. DITA, in particular, makes
+            extensive use of imperative markup, largely as a means to do content reuse.</p>
+            <p>However, there are several downsides to the use of imperative markup:</p>
+            <ul>
+               <li>
+                  <p>Imperative markup does not make objectively true statements about the content.
+                    This make the content dependent on a particular markup and processing system.
+                    Purely declarative markup is objectively true, and therefore the markup is
+                    processable (with appropriate preprocessing) by any processing system. Content
+                    that includes imperative markup cannot be easily moved to another system. </p>
+               </li>
+               <li>
+                  <p>When imperatives are embedded in content, they are scattered through the content
+                    set. Any change in policy that requires a change in the embedded imperatives,
+                    which may involve editing many files scattered throughout the content set. For
+                    instance, a change in linking policy could require editing virtually every file
+                    in a content set. This involves a lot of work, is prone to errors and omissions,
+                    and may trigger costly review and approval cycles.</p>
+               </li>
+               <li>
+                  <p>A markup system that uses imperative markup requires all authors, editors, and
+                    maintainers of the content to understand the imperatives and their operation.
+                    This means that they need to become experts not only in their subject and in
+                    communicating about it, but in the publishing functions that are driven by the
+                    imperatives. </p>
+               </li>
+               <li>
+                  <p>Imperative markup is an instruction to be interpreted by an algorithm. That
+                    means, in effect, that the imperative markup constitutes a programming language
+                    embedded in the content. (This is not unusual. PHP and JavaScript are
+                    programming languages that are commonly embedded in web pages.) However, if you
+                    have more than one imperative element in your markup, you can run into issues
+                    with the interactions between different imperatives. This potentially makes life
+                    even more difficult for authors who now are being asked to think like
+                    programmers (and who may not understand how the imperatives they have created
+                    will be interpreted by the algorithm). It can also make like more difficult for
+                    people writing algorithms to process the content, who now have to make sure that
+                    the rules for handling then imperatives are clear, complete, and consistent,
+                    which can be quite difficult if the are many ways in which the effects of the
+                    imperatives can impinge on each other. </p>
+               </li>
+            </ul>
+            <p>Many (not all) of the effects that can be achieved using imperative markup can also be
+            achieved using declarative markup. Where imperative markup puts the instruction in the
+            content, declarative markup puts information needed to make a decision into the content,
+            but places the instructions itself in an algorithm. For example:</p>
+            <ul>
+               <li>
+                  <p>Instead of attaching a link instruction to a phrase in the content (and
+                    instruction to the processing software), declarative markup can specify the type
+                    and subject matter that the phrase refers to (a declaration about the subject
+                    matter) and leave it to an algorithm to find a resource to link to on that
+                    subject when the content is published (<a href="../spfe-development/feature-how-linking-works.html" class="default" title="Feature: How linking works">soft linking</a>).</p>
+               </li>
+               <li>
+                  <p>Instead of inserting an instruction to insert a reusable admonition component
+                    above a procedure that is dangerous (an instruction to the processing software),
+                    declarative markup can add an attribute to a procedure to state that it is
+                    dangerous (a declaration about the subject matter) and leave it to an algorithm
+                    to insert the appropriate admonition when the content is published.</p>
+               </li>
+            </ul>
+            <p>The SPFE architecture is designed to facilitate the use of declarative markup as much as
+            possible. Imperative markup can still be use (and if used is resolved in the
+            resolve step of the <a href="../spfe-development/feature-synthesis.html" class="default" title="Feature: Synthesis">synthesis stage</a>), but the use
+            of declarative markup is encouraged by the following features:</p>
+            <ul>
+               <li>
+                  <p>Soft linking support means that direct links (imperative) in the content can be
+                    replaced by annotations (declarative). Support for link resolution based on
+                    annotation is built into the default SPFE build and the default EPPO-simple
+                    scripts, so you don't need to write additional code to get soft linking. </p>
+               </li>
+               <li>
+                  <p>The declarative approach often involves the use of subject-specific markup,
+                    meaning you need to add additional markup and processing to your system to use
+                    the declarative approach. SPFE's structures make it easy to add new structures
+                    and their associates processing code to your system.</p>
+               </li>
+               <li>
+                  <p>SPFE's loosely coupled architecture and clear delineation of the role of each
+                    processing step and stage provides a clear separation of concerns that makes it
+                    easy to add processing code at the right place without having to worry about how
+                    it will interact with other parts of the processing system.</p>
+               </li>
+            </ul>
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:36.</p></div></body></html>

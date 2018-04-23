@@ -1,0 +1,79 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: url-to-local</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; url-to-local</p>
+      <h1>Function: url-to-local</h1>
+      <p>
+         <b class="decoration-bold">url-to-local(url as item()*) as item()*</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>Converts a file URL into a local system path.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: item()*</p>
+                  <p>The file URL as a local system path.</p>
+               </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>url</dt>
+         <dd>
+            <p>Type: item()*</p>
+                     <p>The URL to be converted to a system path.</p>
+                  </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:url-to-local"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="url"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:variable name="new-url"&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:choose &gt;
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="matches($url, '^file:/[a-zA-Z]:/')"&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="substring-after($url,'file:/')"/&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+				                 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="matches($url, '^[a-zA-Z]:/')"&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="$url"/&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+				                 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="matches($url, '^file:/')"&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="substring-after($url,'file:')"/&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+				                 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="matches($url, '^[a-zA-Z]+:/')"&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:message terminate="yes"&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:text &gt;ERROR: A URL with an unsupported protocol was specified. The URL is: &lt;/xsl:text&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="$url"/&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:message&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+				
+				                 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:otherwise &gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="$url"/&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:otherwise&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:choose&gt;
+		             &nbsp;&nbsp;&lt;/xsl:variable&gt;
+		             &nbsp;&nbsp;&lt;xsl:value-of select="replace($new-url, '%20', ' ')"/&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

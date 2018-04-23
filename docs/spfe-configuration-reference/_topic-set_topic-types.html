@@ -1,0 +1,83 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Element: topic-types</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-configuration-reference-toc.html" class="default" title="">SPFE Configuration Reference</a>
+             &gt; topic-types</p>
+      <h1>Element: topic-types</h1>
+      <dl>
+         <dt>Location</dt>
+         <dd>
+            <p>/<a href="_topic-set.html" class="default" title="Link to: /topic-set">topic-set</a>/<a href="_topic-set_topic-types.html" class="default" title="Link to: /topic-set/topic-types">topic-types</a>
+            </p>
+         </dd>
+      </dl>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>A container element for a list of topic types included in a topic set.</p>
+                <p>The list of topic types is used to locate the configuration file for each topic
+                    type, which in turn lists the scripts used to process topics of this type. The
+                    list is also used to determine the topic type order for a
+                    topic set, which determines the order in which topic types are listed in a
+                    generated <a href="../eppo-simple-writing/task-table-of-contents.html" class="default" title="Task: Tables of Contents">table of contents</a>.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Use</dt>
+         <dd>
+            <p>Required</p>
+         </dd>
+      </dl>
+      <dl>
+         <dt>Default</dt>
+         <dd>
+            <p>None</p>
+         </dd>
+      </dl>
+      <dl>
+         <dt>Values</dt>
+         <dd>
+            <p>N/A</p>
+         </dd>
+      </dl>
+      <dl>
+         <dt>Children</dt>
+         <dd>
+            <p>
+               <b class="decoration-bold"><a href="_topic-set_topic-types_topic-type.html" class="default" title="Link to: /topic-set/topic-types/topic-type">topic-type</a></b>
+            </p>
+         </dd>
+      </dl>
+      <dl>
+         <dt>Attributes</dt>
+         <dd>
+            <p>None</p>
+         </dd>
+      </dl>
+      <dl>
+         <dt>Restrictions</dt>
+         <dd>
+            <ul>
+               <li>
+                    <p>Every topic type occurring in the topic set must be listed here. If an
+                        unlisted topic type is included, an error will occur at the
+                        <a href="../spfe-development/feature-synthesis.html" class="default" title="Feature: Synthesis">synthesis stage</a> of the build when the
+                        synthesis scripts will be unable to find templates to process the topic
+                        type.</p>
+                    <p>Note that it is possible to write a resolve script that
+                        attempts to process an unrecognized topic type. In this case, the error
+                        described above may not occur. This is unwise, however, since such a script
+                        cannot be guaranteed to correctly interpret all the structure of an unknown
+                        type, which may result in unanticipated effects in the output. </p>
+                </li>
+            </ul>
+         </dd>
+      </dl>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:22.</p></div></body></html>

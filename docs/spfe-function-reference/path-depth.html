@@ -1,0 +1,52 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: path-depth</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; path-depth</p>
+      <h1>Function: path-depth</h1>
+      <p>
+         <b class="decoration-bold">path-depth(path as item()*) as xs:integer</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>The <b class="decoration-bold">path-depth</b> calculates the depth of an XPath by counting the number of elements in the path. It uses tokenize to count but throws away the empty string item that would be created by a leading or trailing slash. Thus <tt class="decoration-code">foo/bar</tt>, <tt class="decoration-code">/foo/bar</tt>, and <tt class="decoration-code">/foo/bar/</tt>, are all counted as having a path depth of 2. Will count a concluding attribute on a path as part of the depth. Presumably works for file paths as well, as long as they are in UNIX form, but it won't distinguish path elements from drive letters or the protocol parts of a URI.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: xs:integer</p>
+                    <p>The number of elements in an XPath expression.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>path</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The path expression.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:path-depth"&nbsp;as="xs:integer"&gt;
+		
+		&nbsp;&nbsp;&lt;xsl:param name="path"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:value-of select="count(tokenize($path, '/')[. ne ''])"/&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Procedures demo</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-demos-toc.html" class="default" title="">EPPO-simple Demos</a>
+             &gt; Procedures demo</p>
+         
+         
+            <h1>Procedures demo</h1>
+            <p>EPPO-simple provides two procedure structures. You may choose either
+            one or use them both. The two structures are
+            <b class="decoration-bold">procedure</b> and
+            <b class="decoration-bold">instructions</b>. The
+            <b class="decoration-bold">procedure</b> structure is intended for major procedure
+            that cover a significantly complicated procedure. Each step in a procedure has a title
+            and body, meaning that each step is a significant piece of work. Each step of a
+            procedure may itself contain an
+                <b class="decoration-bold">instructions</b> element with the
+            detailed steps for completing the <b class="decoration-bold">procedure</b>
+               <b class="decoration-bold">step</b>. Procedures generally accomplish some business
+            process. </p>
+            <p>An <b class="decoration-bold">instructions</b> structure is a simple set of steps
+            suitable for a straightforward do-this-then-this method. Instructions generally concern
+            the manipulation of a piece of machinery. Instructions are similar to numbered lists,
+            but the content model allows more sub-elements than numbered list. (But don't use
+            instructions to get round the limit on the content model of a numbered list. Create a
+            more permissive version of numbered list if that is what you need.) The following is an
+            example of an <b class="decoration-bold">instructions</b> element:</p>
+            <ol>
+               <li>
+                  <p>Turn on the widget wrangler.</p>
+                  <p>It is the big red button on the left.</p>
+               </li>
+               <li>
+                  <p>Press the green button and hold for five seconds.</p>
+               </li>
+            </ol>
+            <p>Here is the code for the list above:</p>
+            <pre>&lt;instructions&gt;
+    &lt;step&gt;
+        &lt;p&gt;Turn on the widget wrangler.&lt;/p&gt;
+        &lt;p&gt;It is the big red button on the left.&lt;/p&gt;
+    &lt;/step&gt;
+    &lt;step&gt;
+        &lt;p&gt;Press the green button and hold for five seconds.&lt;/p&gt;
+    &lt;/step&gt;
+&lt;/instructions&gt;</pre>
+            <p>A procedure consists of a procedure title followed by an introduction and a set of steps.
+            Each step has a title followed by text that elaborates on the step. Optionally, a
+            procedure may have the following elements between the introduction and the steps:</p>
+            <ul>
+               <li>
+                  <p>An admonitions element containing one or more admonitions.</p>
+               </li>
+               <li>
+                  <p>An inputs element containing one or more inputs.</p>
+               </li>
+            </ul>
+            <h3>Why is there no support for pre-requisites and post-requisites? </h3>
+            <p>In some structured vocabularies, part of the model of a procedure is a set of
+            pre-requisites (things you must do before the procedure or things you will need to do
+            the procedure) and post requisites (things you can or must do after the procedure). This
+            model does not fit with the Every Page is Page One philosophy that topic should be
+            self-contained. </p>
+            <p>The idea of “things you need to do before this” can be re-expressed (more
+            precisely) as “things you need to have in order to do this”. The
+            EPPO-simple procedure model provides an <b class="decoration-bold">inputs</b>
+            structure for this purpose. You can list each of the inputs (materials and tools) that
+            the reader will need to complete the procedure. (Think of this like the ingredients list
+            for a recipe.) You can use annotations within the body of a
+            input or output listing, which will generate links to topics that relate to those items,
+            thus providing the reader with links to procedures for creating any of the inputs that
+            they don't have on hand. </p>
+            <p>The idea that there are certain things that you can do after a procedure is usually based
+            on one of two ideas. The first is that once you have the output that the procedure
+            creates you can do a number of other things. This is not generally a significant use
+            case since most readers will do not a procedure at all without some end goal in mind.
+            However, by using annotations in the body of an output listing, you will allow
+            the build to produce links to any pages that discuss the use of those outputs. The
+            second reason for listing post-requisites is to chain procedures into a workflow. This
+            is not appropriate in Every Page is Page One design (and tends to hide the fact that a
+            workflow exists). A workflow should be expressed using a workflow topic.</p>
+            <p>This is a procedure:</p>
+            
+               <h3>Blowing down little pigs' houses</h3>
+               
+                  <p>This is how you blow down the house of a little pig.</p>
+               
+               
+                  <div class="admonition-warning">
+                     
+                     <p class="admonition-title"><span class="admonition-signal-word">Warning</span>: Do not attempt to blow down a brick house</p>
+                     <p>Brick houses cannot be blown down by wolf lungs. To blow down a brick house,
+                try high explosives.</p>
+                  </div>
+                  <div class="admonition-caution">
+                     
+                     <p class="admonition-title"><span class="admonition-signal-word">Caution</span>: Avoid inhaling straw dust</p>
+                     <p>Blowing down a straw house can create dust which may irritate the lungs. Use
+                caution when blowing down straw houses.</p>
+                  </div>
+               
+               <h3>Inputs</h3>
+         <ol class="labeled-list">
+                  <li><p><b>Pig's house - </b>You will need one pig's house
+                made of straw or bricks.</p></li>
+                  <li><p><b>Wolf - </b>You will need
+                one healthy wolf with a good pair of lungs. </p></li>
+               </ol>
+               <h3>Outputs</h3>
+         <ol class="labeled-list">
+                  <li><p><b>Pigs - </b>Once the house is blown down, you will have pigs.</p></li>
+               </ol>
+               
+                  
+                     <h4>Step&nbsp;1:&nbsp;Huff</h4>
+                     <p>To huff:</p>
+                     <ol>
+                        <li>
+                           <p>Open mouth.</p>
+                        </li>
+                        <li>
+                           <p>Draw in air.</p>
+                        </li>
+                     </ol>
+                  
+                  
+                     <h4>Step&nbsp;2:&nbsp;Puff</h4>
+                     <p>Puff</p>
+                  
+                  
+                     <h4>Step&nbsp;3:&nbsp;Blow the house down</h4>
+                     <p>Blow the house down.</p>
+                  
+               
+            
+            <p>Here is the code for the <b class="decoration-bold">procedure</b>
+            above:</p>
+            <pre>&lt;procedure&gt;
+    &lt;title&gt;Blowing down little pigs' houses&lt;/title&gt;
+    &lt;intro&gt;
+        &lt;p&gt;This is how you blow down the house of a little pig.&lt;/p&gt;
+    &lt;/intro&gt;
+    &lt;admonitions&gt;
+        &lt;warning&gt;
+            &lt;title&gt;Do not attempt to blow down a brick house&lt;/title&gt;
+            &lt;p&gt;Brick houses cannot be blown down by wolf lungs. To blow down a brick house,
+                try high explosives.&lt;/p&gt;
+        &lt;/warning&gt;
+        &lt;caution&gt;
+            &lt;title&gt;Avoid inhaling straw dust&lt;/title&gt;
+            &lt;p&gt;Blowing down a straw house can create dust which may irritate the lungs. Use
+                caution when blowing down straw houses.&lt;/p&gt;
+        &lt;/caution&gt;
+    &lt;/admonitions&gt;
+    &lt;inputs&gt;
+        &lt;input&gt;
+            &lt;name&gt;Pig's house&lt;/name&gt;
+            &lt;p&gt;You will need one pig's house
+                made of straw or bricks.&lt;/p&gt;
+        &lt;/input&gt;
+        &lt;input&gt;
+            &lt;name&gt;Wolf&lt;/name&gt;
+            &lt;p&gt;You will need
+                one healthy wolf with a good pair of lungs. &lt;/p&gt;
+        &lt;/input&gt;
+    &lt;/inputs&gt;
+    &lt;outputs&gt;
+        &lt;output&gt;
+            &lt;name&gt;Pigs&lt;/name&gt;
+            &lt;p&gt;Once the house is blown down, you will have pigs.&lt;/p&gt;
+        &lt;/output&gt;
+    &lt;/outputs&gt;
+    &lt;steps&gt;
+        &lt;step&gt;
+            &lt;title&gt;Huff&lt;/title&gt;
+            &lt;p&gt;To huff:&lt;/p&gt;
+            &lt;instructions&gt;
+                &lt;step&gt;
+                    &lt;p&gt;Open mouth.&lt;/p&gt;
+                &lt;/step&gt;
+                &lt;step&gt;
+                    &lt;p&gt;Draw in air.&lt;/p&gt;
+                &lt;/step&gt;
+              &lt;/instructions&gt;
+        &lt;/step&gt;
+        &lt;step&gt;
+            &lt;title&gt;Puff&lt;/title&gt;
+            &lt;p&gt;Puff&lt;/p&gt;
+        &lt;/step&gt;&lt;step&gt;
+            &lt;title&gt;Blow the house down&lt;/title&gt;
+            &lt;p&gt;Blow the house down.&lt;/p&gt;
+        &lt;/step&gt;
+    &lt;/steps&gt;
+&lt;/procedure&gt;</pre>
+            <p>Although the procedure above contains an
+            <b class="decoration-bold">instructions</b> element in the first
+            step, the <b class="decoration-bold">instructions</b> element is
+            not part of the <b class="decoration-bold">procedure</b>
+            structure. Rather, it is in independent structure that is, by default, part of the
+                <b class="decoration-bold">text-nested</b> group. It is
+            available in a <b class="decoration-bold">procedure</b>
+               <b class="decoration-bold">step</b> because the default content
+            model of <b class="decoration-bold">step</b> is the
+                <b class="decoration-bold">text-nested</b> group. </p>
+            
+         <a name="Reasons20to20develop20your20own20procedure20structure"> </a>
+               <h2>Reasons to develop your own procedure structure</h2>
+               <p>You might want to develop your own procedure structure if:</p>
+               <ul>
+                  <li>
+                    <p>You need a procedure with explicit prerequisite and postrequisite
+                        sections.</p>
+                  </li>
+                  <li>
+                    <p>You want greater semantic formality in the inputs and outputs section. This
+                        might involve explicitly defining semantic annotation structures for the
+                        inputs and outputs of your procedures and requiring that the terms be listed
+                        explicitly, rather than simply accommodated in the text of the description
+                        as in the default structure.</p>
+                  </li>
+               </ul>
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:38.</p></div></body></html>

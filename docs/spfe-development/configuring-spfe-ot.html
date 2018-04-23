@@ -1,0 +1,152 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Configuring SPFE Open Toolkit</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Configuring SPFE Open Toolkit</p>
+
+         
+         
+            <h1>Configuring SPFE Open Toolkit</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Think" class="default" title="">Think</a>
+         </li>
+         <li>
+            <a href="#Plan" class="default" title="">Plan</a>
+         </li>
+         <li>
+            <a href="#Do" class="default" title="">Do</a>
+         </li>
+      </ul>
+
+            
+         <a name="Think"> </a>
+         <h2>Think</h2>
+
+               <p> The <a href="executing-spfe-builds.html" class="default" title="Task: Executing the SPFE build system">SPFE Open Toolkit</a> (SPFE-OT) must be configured to control
+                how it builds output from source XML markup. One or more configuration files
+                specifies which source content will be processed, how it will be processed, and how
+                it will be organized and linked. Together, the configuration files are the master
+                plan for a SPFE build. SPFE has a distributed configuration model. Every component
+                of the system has a configuration file, and you can assemble your configuration by
+                including the configuration file for the components you use.</p>
+
+               <p> SPFE Open Toolkit configuration consists of the following configuration  file
+                types:</p>
+               <ol class="labeled-list">
+                  <li><p><b>Content set configuration file: - </b>The top-level configuration file used to build a
+                        <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a>. The
+                        content set configuration file specifies the
+                        <a href="feature-topic-sets.html" class="default" title="Feature: Topic sets">topic sets</a> to be included in the content set and the
+                        <a href="../spfe-configuration-reference/_output-format.html" class="default" title="Configuration setting: output-format">output formats</a> to be built.  </p></li>
+                  <li><p><b>Topic set configuration file: - </b>The configuration for a <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a>. It specifies the
+                        criteria for including topics in a topic set (generally this is not a fixed
+                        list of topics. A topic set configuration file does not have to be updated
+                        every time a new topic is created. All the topics that meet the specified
+                        criteria are included automatically.) The
+                        topic-set configuration file also specifies the
+                        <a href="../spfe-configuration-reference/_topic-type.html" class="default" title="Configuration setting: topic-type">topic types</a> that can occur in the topic set and the
+                        type of outputs to create for it. (The content set
+                        specified specific output configurations for the content set; the topic set
+                        configuration specifies which of the available configuration to build for
+                        the individual content set.)</p></li>
+                  <li><p><b>Topic type configuration file - </b>The configuration for a <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a>. Provides a name for
+                        the <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a> and specifies the set of
+                        <a href="feature-structures.html" class="default" title="Feature: Structures">structures</a> used in the topic type and the set of scripts
+                        used for processing a topic of this type through each of the
+                        SPFE processing stages.</p></li>
+                  <li><p><b>Output type configuration file - </b>The configuration of an output type. Specifies the name of
+                        the output type and scripts used to build the output. Note that you could
+                        configure more than one output type configuration for the same output type.
+                        For instance, you could configure two different styles of HTML output. You
+                        could then point whichever configuration you wanted to build from the
+                        content set <a href="configuration-file-overview.html" class="default" title="Concept: Configuration file overview">configuration file</a>. If both these
+                        configurations had the name “html”, topic set configuration
+                        files that specified “html” as an output format would not
+                        need to change when you built different HTML outputs. </p></li>
+                  <li><p><b>Structure configuration file - </b>The configuration file for a <a href="../spfe-docs-lists/feature_structure.html" class="default" title="A list of topics on a subject: Feature: structure">structure</a>. Specifies the
+                        scripts to be used for processing a particular structure. Using structures
+                        make it easy to configure a topic type by including existing structures.
+                        Note that you may want to provide more than one configuration file for a
+                        structure, if you want the same structured to be processed differently in
+                        different circumstances. While a structure directory will generally include
+                        a  default structure configuration file, as well as default processing
+                        scripts, you are free to create your own structure configuration files for
+                        any structure that point to your own processing scripts for that structure.
+                        Some <a href="../eppo-simple-writing/eppo-simple-overview.html" class="default" title="Concept: EPPO Simple Overview">EPPO simple</a> structures come with more than one
+                        structured configuration file for different purposes.</p></li>
+                  <li><p><b>Presentation type configuration - </b>The configuration file for the presentation stage of the SPFE build. Most
+                        <a href="../spfe-configuration-reference/_topic-type.html" class="default" title="Configuration setting: topic-type">topic type</a> and
+                        structure configurations will contain the
+                        presentation configuration for the presentation types
+                        that the author of the topic type or structure was aware of at the time they
+                        wrote them. If you wanted to specify a new presentation format for an
+                        existing topic type or structure you could do so either by writing entirely
+                        new topic type and structure configurations, or by writing a separate
+                        presentation type configuration file. </p></li>
+                  <li><p><b>Object type configuration files - </b>The
+                        configuration file
+                        for an <a href="../spfe-docs-lists/feature_object.html" class="default" title="A list of topics on a subject: Feature: object">object</a>. Does the same thing for object types that
+                        the <a href="../spfe-configuration-reference/_topic-type.html" class="default" title="Configuration setting: topic-type">topic type configuration file</a> does for
+                        <a href="../spfe-configuration-reference/_topic-type.html" class="default" title="Configuration setting: topic-type">topic types</a> and the
+                        structure configuration file does for
+                        <a href="feature-structures.html" class="default" title="Feature: Structures">structures</a>. </p></li>
+               </ol>
+               
+
+               <p> To create a body of content, an author will need to be concerned with the first two,
+                content set and topic set configurations, which identify content sources.
+                Configuring topic types and output formats is not content specific and should be
+                done beforehand by a SPFE Open Toolkit developer.</p>
+
+            
+
+            
+         <a name="Plan"> </a>
+         <h2>Plan</h2>
+               <a name="Where20should20the20configuration20files20be20located"> </a><dl>
+            
+                  <dt>Where should the configuration files be located</dt>
+                  <dd>
+                    <p>The content set and topic set configuration files may reside anywhere in the
+                        files system that is convenient. References to configuration, source, and
+                        other files may be relative or absolute path names. A common setup has the
+                        content set configuration file in the working directory, where the
+                        <tt class="decoration-code">spfe</tt> command will be executed and log files kept, with topic
+                        set configuration files and content files in subdirectories and referenced
+                        with relative paths. This way the entire set can be relocated without
+                        needing to edit configuration files. </p>
+                  </dd>
+               </dl>
+
+            
+
+            
+         <a name="Do"> </a>
+         <h2>Do</h2>
+
+               <p> Create a <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a> configuration XML file
+                in the directory you will execute the spfe command to create
+                builds or any convenient location. Use the <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set.html" class="default" title="Configuration setting: content-set">/content-set</a></b> XML structure. </p>
+
+               <p> Create a <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> configuration XML file for each topic set
+                using the <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set.html" class="default" title="Configuration setting: topic-set">/topic-set</a></b> XML structure. </p>
+
+               <p> Create a <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a> configuration XML file for each topic type
+                using the <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-type.html" class="default" title="Configuration setting: topic-type">/topic-type</a></b> XML structure. </p>
+
+               <p> Create a output-format configuration XML file for each output
+                format using the <b class="decoration-bold"><a href="../spfe-configuration-reference/_output-format.html" class="default" title="Configuration setting: output-format">/output-format</a></b> XML structure.
+            </p>
+
+            
+
+          
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

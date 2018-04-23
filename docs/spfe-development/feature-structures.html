@@ -1,0 +1,274 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Structures</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Structures</p>
+         
+         
+            <h1>Structures</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Using20a20structure20in20a20schema" class="default" title="">Using a structure in a schema</a>
+         </li>
+         <li>
+            <a href="#Adding20a20structure20to20processing20scripts" class="default" title="">Adding a structure to processing scripts</a>
+         </li>
+         <li>
+            <a href="#Using20a20structures20file" class="default" title="">Using a structures file</a>
+         </li>
+         <li>
+            <a href="#Rewriting20namespaces" class="default" title="">Rewriting namespaces</a>
+         </li>
+         <li>
+            <a href="#Using20CSS20files20from20a20structure" class="default" title="">Using CSS files from a structure</a>
+         </li>
+      </ul>
+            <p>Structures are a topic type definition feature of the
+                <a href="executing-spfe-builds.html" class="default" title="Task: Executing the SPFE build system">SPFE open toolkit</a>. You can rapidly define a new topic type by plugging together existing structures or you can create your own
+            structures to define multiple topic types. Structures package together schema
+            components, processing script components, and style components required to support the
+            authoring, publishing, and processing of common topic structures such as
+                <b class="decoration-bold">lists</b>,
+                <b class="decoration-bold">tables</b>,
+                <b class="decoration-bold">admonitions</b>, and
+                <b class="decoration-bold">annotations</b>. </p>
+            <p>An XML document consists entirely of nested element structures. In this sense, every
+            element is a separate structure. However, in practice there are a number of higher level
+            structures that recur at many places in a document type and across many document types.
+            XML schema languges recognize this fact by providing features such as complex types and
+            schema groups that encapsulate complex structures for reuse within and between schemas.
+            Examples of such reusable structure include lists and tables. SPFE Structures take this
+            concept one step further by packaging style and processing information with schema
+            structures to allow you to plug and play structures into your topic type
+            definitions.</p>
+            <p>Structures make it easy to create minimal topic types that contain the
+            minimal markup required for a specific topic type for your business. Creating minimal
+            topic types makes it easier to author content that meets your requirements and easier to
+            define reliable processing for publishing your content in as many forms as required. It
+            allows you to create topic models that express the specifics of the topic patterns that matter to your business. This supports greater automation
+            and validation of content, which leads to greater consistency and quality, as well as
+            supporting higher degrees of automation. </p>
+            <p>Using a structure in your topic type requires a slightly different procedure for schemas,
+            scripts, and styles. (Eventually these differences will be eliminated by
+            automation.)</p>
+            
+         <a name="Using20a20structure20in20a20schema"> </a>
+               <h2>Using a structure in a schema</h2>
+               <p>A structure can provide schemas for authoring, presentation, formatting, or encoding. </p>
+               <p>To use a structure in a schema, you simply import the appropriate schema file from
+                the structure directory. </p>
+               <pre>&lt;xs:include schemaLocation="http://spfeopentoolkit.org/spfe-ot/plugins/eppo-simple/structures/annotations/xslt/schemas/authoring/annotations-xslt.xsd"/&gt;</pre>
+               <p>However, to integrate the element structures defined by the structure schema into the
+                your topic type schema, you need to use either the group or type defined in the
+                structure schema in your topic type schema.</p>
+               <p>Each properly defined structure schema should define a schema group and a type
+                (simple or complex) that contain the XML elements that make up the structure. The
+                following example show the definition of the eppo-simple
+                <b class="decoration-bold">fig</b> structure, which
+                defines a complex type named fig and a group named fig, which is defined using the
+                fig type:</p>
+               <pre>    &lt;xs:group name="fig"&gt;
+        &lt;xs:choice&gt;
+            &lt;xs:element name="fig" type="fig"/&gt;
+        &lt;/xs:choice&gt;
+    &lt;/xs:group&gt;
+
+
+    &lt;xs:complexType name="fig"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="title" type="xs:string"/&gt;
+            &lt;xs:element name="caption" minOccurs="0"&gt;
+                &lt;xs:complexType&gt;
+                    &lt;xs:sequence&gt;
+                        &lt;xs:group ref="paragraph" minOccurs="0" maxOccurs="unbounded"/&gt;
+                    &lt;/xs:sequence&gt;
+                &lt;/xs:complexType&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:group ref="fig-content"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attributeGroup ref="conditions"/&gt;
+        &lt;xs:attribute name="id" type="xs:NMTOKEN"/&gt;
+    &lt;/xs:complexType&gt;
+</pre>
+               <p>Note that the group defines an element named
+                <b class="decoration-bold">fig</b> of type fig. This means
+                that you can incorporate this structure in your schema either by including the group
+                in the content model of an element or by defining a new element and giving it the
+                type fig. The second approach would allow you to give the structure element any name
+                you liked. Unless you have a good reason to change the name, however, it is better
+                to use the group. In the following example, the group <b class="decoration-bold">fig</b> is included in the group
+                <b class="decoration-bold">text-general</b>, which is a standard group in EPPO-simple that is used to define all
+                the elements that can occur at the general text level of a topic
+                types schema (that is, ordinary textual content inside a topic or section, but not in a list or a table or some other substructure that might have a more restrictive model. This illustrates how groups are used to build a schema by nesting
+                structures (defined by groups) one inside the other.</p>
+               <pre>    &lt;xs:group name="text-general"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:choice maxOccurs="1" minOccurs="1"&gt;
+                &lt;xs:group ref="paragraph"/&gt;
+                &lt;xs:group ref="fragments"/&gt;
+                &lt;xs:group ref="fragment-ref"/&gt;
+            &lt;/xs:choice&gt;
+            &lt;xs:choice maxOccurs="unbounded" minOccurs="0"&gt;
+                &lt;xs:group ref="paragraph"/&gt;
+                &lt;xs:group ref="subhead"/&gt;
+                &lt;xs:group ref="lists.ol-ul-ll"/&gt;
+                &lt;xs:group ref="codeblock"/&gt;
+                &lt;xs:group ref="fig"/&gt;
+                &lt;xs:group ref="fragments"/&gt;
+                &lt;xs:group ref="fragment-ref"/&gt;
+                &lt;xs:group ref="table"/&gt;
+                &lt;xs:group ref="object-ref"/&gt;
+                &lt;xs:group ref="admonitions"/&gt;
+                &lt;xs:group ref="comments-block"/&gt;
+                &lt;xs:group ref="labeled-item"/&gt;
+                &lt;xs:group ref="procedure"/&gt;
+                &lt;xs:group ref="instructions"/&gt;
+            &lt;/xs:choice&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:group&gt;</pre>
+            
+            
+         <a name="Adding20a20structure20to20processing20scripts"> </a>
+               <h2>Adding a structure to processing scripts</h2>
+               <p>The <a href="background-build-system.html" class="default" title="Feature: How the build system works">SPFE build</a> process automatically constructs processing scripts
+                for each step of the build. These scripts are assembled by including script
+                fragments identified by the configuration files for <a href="../spfe-configuration-reference/_topic-type.html" class="default" title="Configuration setting: topic-type">topic types</a>,
+                    <a href="../spfe-configuration-reference/_object-type.html" class="default" title="Configuration setting: object-type">object types</a>, and structures. Structures
+                are used to build topic types, so each topic type configuration should include the
+                structure configuration for each type it uses. The following example define a topic
+                type which included several structures. The scripts defined in the structure
+                configuration files will be added to those defined for the topic type itself to
+                create a complete processing script for the topic type.</p>
+               <pre>    &lt;topic-type&gt;
+        &lt;name&gt;{http://spfeopentoolkit.org/ns/spfe-docs}spfe-configuration-reference-entry&lt;/name&gt;
+        &lt;aliases&gt;
+            &lt;singular&gt;Configuration setting&lt;/singular&gt;
+            &lt;plural&gt;Configuration settings&lt;/plural&gt;
+        &lt;/aliases&gt;
+        &lt;structures&gt;
+            &lt;structure&gt;
+                &lt;name&gt;eppo-core&lt;/name&gt;
+                &lt;href&gt;${SPFEOT_HOME}/plugins/eppo-simple/structures/eppo-core/config.xml&lt;/href&gt;
+                &lt;rewrite-namespace&gt;
+                    &lt;from&gt;http://spfeopentoolkit.org/ns/eppo-simple&lt;/from&gt;
+                    &lt;to&gt;http://spfeopentoolkit.org/ns/spfe-docs&lt;/to&gt;
+                &lt;/rewrite-namespace&gt;  
+            &lt;/structure&gt;
+            &lt;structure&gt;
+                &lt;name&gt;spfe-docs-core&lt;/name&gt;
+                &lt;href&gt;../../structures/spfe-docs-core/config.xml&lt;/href&gt;
+            &lt;/structure&gt;
+            &lt;structure&gt;
+                &lt;name&gt;topic&lt;/name&gt;
+                &lt;href&gt;${SPFEOT_HOME}/plugins/eppo-simple/structures/topic/config-with-resolve-main.xml&lt;/href&gt;
+            &lt;/structure&gt;
+            &lt;structure&gt;
+                &lt;name&gt;topic-set&lt;/name&gt;
+                &lt;href&gt;${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config-with-topic-set-toc.xml&lt;/href&gt;
+                &lt;rewrite-namespace&gt;
+                    &lt;from&gt;http://spfeopentoolkit.org/ns/eppo-simple&lt;/from&gt;
+                    &lt;to&gt;http://spfeopentoolkit.org/ns/spfe-docs&lt;/to&gt;
+                &lt;/rewrite-namespace&gt;  
+            &lt;/structure&gt;
+        &lt;structure&gt;
+                &lt;name&gt;graphic-record&lt;/name&gt;
+                &lt;href&gt;${SPFEOT_HOME}/plugins/eppo-simple/structures/graphic-record/config.xml&lt;/href&gt;
+            &lt;/structure&gt;
+        &lt;/structures&gt;
+        
+        &lt;scripts&gt;
+            &lt;extract&gt;
+                &lt;script&gt;
+                    &lt;href&gt;scripts/extract/schema-defs.xsl&lt;/href&gt;
+                &lt;/script&gt;
+                &lt;script&gt;
+                    &lt;href&gt;${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl&lt;/href&gt;
+                &lt;/script&gt;
+            &lt;/extract&gt;
+            &lt;merge&gt;
+                &lt;script&gt;&lt;href&gt;scripts/merge/merge-config-ref.xsl&lt;/href&gt;&lt;/script&gt;
+                &lt;script&gt;&lt;href&gt;${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl&lt;/href&gt;&lt;/script&gt;
+            &lt;/merge&gt;
+            &lt;resolve&gt;
+                &lt;script&gt;
+                    &lt;href&gt;scripts/resolve/resolve-config-ref.xsl&lt;/href&gt;
+                &lt;/script&gt;
+                &lt;script&gt;
+                    &lt;href&gt;${SPFEOT_HOME}/1.0/scripts/common/utility-functions.xsl&lt;/href&gt;
+                &lt;/script&gt;               
+            &lt;/resolve&gt;
+            &lt;present type="eppo"&gt;
+                &lt;script&gt;
+                    &lt;href&gt;scripts/present/eppo/present-config-ref.xsl&lt;/href&gt;
+                &lt;/script&gt;
+            &lt;/present&gt;
+            &lt;toc&gt;
+                &lt;script&gt;
+                    &lt;href&gt;../../topic-types/config-reference/scripts/toc/schema-toc.xsl&lt;/href&gt;
+                &lt;/script&gt;
+            &lt;/toc&gt;
+        &lt;/scripts&gt;
+    &lt;/topic-type&gt;</pre>
+            
+            
+         <a name="Using20a20structures20file"> </a>
+               <h2>Using a structures file</h2>
+               <p>In many cases, you will want to define a common set of structures to be used across
+                many different topic types. Rather than include those structures separately in each
+                topic type configuration, you can define a structures configuration file, which is
+                simply a list of structures. In the example above, the structures eppo-core and
+                spfe-docs-core point to structures files rather than to individual structures.</p>
+            
+            
+         <a name="Rewriting20namespaces"> </a>
+               <h2>Rewriting namespaces</h2>
+               <p>SPFE makes use of <a href="../spfe-docs-essays/essay-namespaces.html" class="default" title="Essay:  Namespaces in SPFE">namespaces</a> when defining schemas. When you use a
+                structure to define a topic type, you need to make sure that the structure comes in
+                using the correct namespace. You can use a structure to bring in elements in the
+                same namespace as your main schema or as a different namespace (see the
+                    <b class="decoration-bold">graphic-record</b>
+                structure for an example of this). In most cases you will want the structures to
+                become part of the current namespace. </p>
+               <p>This is not a problem for schemas, since you can use the <a href="../spfe-docs-essays/essay-namespaces.html" class="default" title="Essay:  Namespaces in SPFE">chameleon schema pattern</a> to define structures. This is what the EPPO-simple structure
+                set does with most structures. Structures are defined without a namespace and take
+                on the namespace of whatever schema they are included into. (The
+                    <b class="decoration-bold">graphic-record</b>
+                structure is an exception to this. It is defined in its own namespace.)</p>
+               <p>XSLT scripts, however, do not support the chameleon pattern. Every xpath expression
+                in a script is matched in a specific namespace. All scrips in the EPPO-simple
+                structure sets that are paired with schemas that are in no namespace are match
+                element names in the EPPO-simple namespace
+                    (<b class="decoration-bold">http://spfeopentoolkit.org/ns/eppo-simple</b>).
+                If your schemas are in a different namespace, you need to tell the configuration
+                system to rewrite the namespaces in those scripts to the namespace of your schemas.
+                The SPFE docs are in the SPFE-docs namespace
+                    (<b class="decoration-bold">http://spfeopentoolkit.org/ns/spfe-docs</b>),
+                so when the SPFE docs use an EPPO simple structure, they need to rewrite the
+                namespace when they include the structure:</p>
+               <pre>            &lt;structure&gt;
+                &lt;name&gt;topic-set&lt;/name&gt;
+                &lt;href&gt;${SPFEOT_HOME}/plugins/eppo-simple/structures/topic-set/config-with-topic-set-toc.xml&lt;/href&gt;
+                &lt;rewrite-namespace&gt;
+                    &lt;from&gt;http://spfeopentoolkit.org/ns/eppo-simple&lt;/from&gt;
+                    &lt;to&gt;http://spfeopentoolkit.org/ns/spfe-docs&lt;/to&gt;
+                &lt;/rewrite-namespace&gt;  
+            &lt;/structure&gt;</pre>
+            
+            
+         <a name="Using20CSS20files20from20a20structure"> </a>
+               <h2>Using CSS files from a structure</h2>
+               <p>A structure can provide CSS files for both authoring and formatting output.</p>
+               <p>To use a CSS file from a structure, simply include it in your main CSS file:</p>
+               <pre>@import url("http://spfeopentoolkit.org/spfe-docs/structures/annotations/spfe-build/style/authoring/annotations-spfe-build.css");</pre>
+               <p>Selectors in a structure CSS file should be written to be as specific as possible to
+                avoid conflicts with other CSS files. </p>
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

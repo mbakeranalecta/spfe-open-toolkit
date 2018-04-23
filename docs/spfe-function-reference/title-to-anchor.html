@@ -1,0 +1,54 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: title-to-anchor</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; title-to-anchor</p>
+      <h1>Function: title-to-anchor</h1>
+      <p>
+         <b class="decoration-bold">title-to-anchor(title as item()*) as item()*</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>You can use the <b class="decoration-bold">title-to-anchor</b> function to convert a title text into a string that can be used as an anchor value. The function works by changing all characters not allowed in an anchor into underscores.</p>
+                <p>Typical uses for this function occur in the presentation stage where you want to create an anchor so that a link can be created to a point inside a topic. Where no other identifier is available, you can use title-to-anchor to create a suitable anchor value.</p>
+
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: item()*</p>
+                    <p>Returns a string in which the characters that would not be legal in an HTML anchor string have been converted to underscores.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>title</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The title parameter is used to pass in the text of the title that is to be coverted to an anchor string.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:title-to-anchor"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="title"/&gt;
+		             
+		&nbsp;&nbsp;&lt;xsl:value-of select="translate(encode-for-uri( normalize-space($title)), '%', '')"/&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

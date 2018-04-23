@@ -1,0 +1,81 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Adding a new topic set</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Adding a new topic set</p>
+
+         
+         
+            <h1>Adding a new topic set</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Think" class="default" title="">Think</a>
+         </li>
+         <li>
+            <a href="#Plan" class="default" title="">Plan</a>
+         </li>
+         <li>
+            <a href="#Do" class="default" title="">Do</a>
+         </li>
+      </ul>
+            
+         <a name="Think"> </a>
+         <h2>Think</h2>
+               <p>A topic set is a collection of related topics.</p>
+                
+               <p>A <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a> must have at least one topic set. </p>
+            
+            
+         <a name="Plan"> </a>
+         <h2>Plan</h2>
+               <a name="Do20I20need20more20than20one20topic20set3F"> </a><dl>
+            
+                  <dt>Do I need more than one topic set?</dt>
+                  <dd>
+                    <p>You could have a single topic set that contains all your topics. This approach is consistent with the Every Page is Page One approach. However, you may want to divide your content set into multiple topic sets for two reasons:</p>
+                    <ol>
+                        <li>
+                            <p>To provide top-down navigation for your readers. While the Every Page is Page One approach emphasizes a bottom-up approach to navigation, top down navigation still has significant value, particularly for smaller content sets where it can be used effectively. Dividing your content into topic sets provides a level of top-down structure to your content set that can be useful to your readers.</p>
+                        </li>
+                        <li>
+                            <p>To separate the processing of different types of content. In some cases, you will want to process different sets of topics in different ways. This is particularly true in cases where you are building topics from content extracted from external sources, especially when you are combining that material with authored content. Dividing your content into different topic sets allows you to define different processing for different sets of topics.</p>
+                        </li>
+                    </ol>
+               
+                  </dd>
+
+               </dl>
+               <a name="Can20I20include20more20than20one20topic20type20in20a20topic20set3F"> </a><dl>
+            
+                  <dt>Can I include more than one topic type in a topic set?</dt>
+                  <dd>
+                     <p>Yes, you can include more than one <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a> in a topic
+                        set. Each <a href="../spfe-configuration-reference/_topic-type.html" class="default" title="Configuration setting: topic-type">topic type configuration</a> can define specific <a href="../spfe-docs-lists/feature_synthesis.html" class="default" title="A list of topics on a subject: Feature: synthesis">synthesis</a> and <a href="../spfe-docs-lists/feature_presentation.html" class="default" title="A list of topics on a subject: Feature: presentation">presentation</a> scripts for that topic type.</p>
+                  </dd>
+               </dl>
+            
+            
+         <a name="Do"> </a>
+         <h2>Do</h2>        
+               <p>To add a topic set to the build:</p>
+               <ol>
+                  <li>
+                     <p>Create a topic set configuration file that describes the
+                        topic set. The composition of the topic set is determined entirely by the
+                        topic set configuration. Individual topics don't know what topic set (or
+                        topic sets) they belong to.</p>
+                  </li>
+                  <li>
+                     <p>Add a new <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_topic-sets_topic-set.html" class="default" title="Configuration setting: topic-set">/content-set/topic-sets/topic-set</a></b> to the appropriate content set configuration file. You can add a topic set to more than one content set.</p>
+                  </li>
+               </ol>
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

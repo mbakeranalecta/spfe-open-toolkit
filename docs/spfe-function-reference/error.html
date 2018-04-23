@@ -1,0 +1,66 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Template: error</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; error</p>
+      <h1>Template: error</h1>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                
+                <p>Used to report an error in a script. The error template terminates the script unless the <tt class="decoration-code">terminate-on-error</tt> parameter is set to false.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>message</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The error message to report. The template outputs this message prefixed with "ERROR: ".</p>
+                    </dd>
+      </dl>
+      <dl>
+         <dt>in</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        
+                     <p>A string describing the location where the error occurred. This might be a location in a data file or in a script, depending on what would be most useful to the user in identifying and fixing the source of the problem.</p>
+                  
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:template name="sf:error"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="message"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="in"&gt;Not specified.&lt;/xsl:param&gt;
+		             &nbsp;&nbsp;&lt;xsl:message &gt;**********************************************************&lt;/xsl:message&gt;
+		             &nbsp;&nbsp;&lt;xsl:message select="'ERROR: ', string-join($message,'')"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:message select="'In: ', string-join($in, '')"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:message &gt;**********************************************************&lt;/xsl:message&gt;
+		             &nbsp;&nbsp;&lt;xsl:message terminate="{$terminate-on-error}"/&gt;
+	           &lt;/xsl:template&gt;
+         
+            &lt;xsl:template name="sf:error"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="message"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="in"&gt;Not specified.&lt;/xsl:param&gt;
+		             &nbsp;&nbsp;&lt;xsl:message &gt;**********************************************************&lt;/xsl:message&gt;
+		             &nbsp;&nbsp;&lt;xsl:message select="'ERROR: ', string-join($message,'')"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:message select="'In: ', string-join($in, '')"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:message &gt;**********************************************************&lt;/xsl:message&gt;
+		             &nbsp;&nbsp;&lt;xsl:message terminate="{$terminate-on-error}"/&gt;
+	           &lt;/xsl:template&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

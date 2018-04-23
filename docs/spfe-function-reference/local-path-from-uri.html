@@ -1,0 +1,56 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: local-path-from-uri</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; local-path-from-uri</p>
+      <h1>Function: local-path-from-uri</h1>
+      <p>
+         <b class="decoration-bold">local-path-from-uri(uri as item()*) as item()*</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>The <b class="decoration-bold">local-path-from-uri</b> function takes a URL containing a protocol  (file, http, etc) and returns the part after the protocol, decoding the URL if required. For example, if will turn a URL like this:</p>
+                <pre>file:/c:/Users/Joe%20Blogs/spfe-open-toolkit/spfe-ot/spfe.bat</pre>
+                <p>into</p>
+                <pre>c:/Users/Joe Blogs/spfe-open-toolkit/spfe-ot/spfe.bat</pre>
+                <p>This is mostly useful for taking local file URIs returned by some tools and turning them into the local paths accepted by other tools.</p>
+                <p>This function is similar to <b class="decoration-bold"><a href="path-after-protocol-part.html" class="default" title="SPFE XSLT library routine: path-after-protocol-part">path-after-protocol-part</a></b>, except that <b class="decoration-bold"><a href="path-after-protocol-part.html" class="default" title="SPFE XSLT library routine: path-after-protocol-part">path-after-protocol-part</a></b> does not do URL decoding. This function calls <b class="decoration-bold"><a href="path-after-protocol-part.html" class="default" title="SPFE XSLT library routine: path-after-protocol-part">path-after-protocol-part</a></b> to do its work, after decoding the URI. Calling this function on a URI that is not URL encoded will work fine, so you can always call this function rather than <b class="decoration-bold"><a href="path-after-protocol-part.html" class="default" title="SPFE XSLT library routine: path-after-protocol-part">path-after-protocol-part</a></b>.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: item()*</p>
+                    <p>A URL-decoded version of the input URI with the protocol part removed.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>uri</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The input URI.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:local-path-from-uri"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="uri"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:value-of select="<a href="pct-decode.html" class="default" title="SPFE XSLT library routine: pct-decode">sf:pct-decode</a>(<a href="path-after-protocol-part.html" class="default" title="SPFE XSLT library routine: path-after-protocol-part">sf:path-after-protocol-part</a>($uri))"/&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

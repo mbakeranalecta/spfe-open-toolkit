@@ -1,0 +1,307 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Adding a new content set</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Adding a new content set</p>
+
+         
+         
+            <h1>Adding a new content set</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Think" class="default" title="">Think</a>
+         </li>
+         <li>
+            <a href="#Plan" class="default" title="">Plan</a>
+         </li>
+         <li>
+            <a href="#Do" class="default" title="">Do</a>
+         </li>
+      </ul>
+            
+         <a name="Think"> </a>
+         <h2>Think</h2>
+               <p>A <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a> is a collection of
+                one or more related <a href="feature-topic-sets.html" class="default" title="Feature: Topic sets">topic sets</a>. A content set generally contains all the content related to a single product, service, or site.</p>
+               <p>A content set is defined by a  content set configuration file
+                which points to a set of topic set configuration files that
+                define the content the topic sets that make up the content set. Topic source files
+                are not inherently tied to any one topic set or content set. Topics are included in
+                a topic set by a query or rule in the
+                topic set configuration file. It is possible to include the same
+                topic in many different topic set configurations, and to include the same topic set
+                configuration in more than one content set.  Therefore, you can define as many
+                content sets as you like, simply by writing new content set
+                <a href="configuration-file-overview.html" class="default" title="Concept: Configuration file overview">configuration files</a>. This makes it easy to <a href="reuse-techniques.html" class="default" title="Concept: Reuse in SPFE and EPPO Simple">reuse</a>
+                topics in different content sets. It also makes it easy to set up different build
+                configurations for use during the development process.</p>
+            
+            
+         <a name="Plan"> </a>
+         <h2>Plan</h2>
+               <a name="Do20I20need20a20content20set3F"> </a><dl>
+            
+                  <dt>Do I need a content set?</dt>
+                  <dd>
+                    <p>Yes. The SPFE build requires a content set as a build target.</p>
+                  </dd>
+               </dl>
+               <a name="Do20I20need20more20than20one20topic20set20in20my20content20set3F"> </a><dl>
+            
+                  <dt>Do I need more than one topic set in my content set?</dt>
+                  <dd>
+                    <p>No, you use a single <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> to include all your topics.
+                        Reasons to use multiple topic sets include clustering or categorization of
+                        content in the top-down navigation and creating different build scenarios
+                        for different topic types.  </p>
+                  </dd>
+               </dl>
+               <a name="How20do20I20create20a20TOC20for20my20content20set3F"> </a><dl>
+            
+                  <dt>How do I create a TOC for my content set?</dt>
+                  <dd>
+                    <p>The TOC for the content set is actually the TOC of the topic set that is
+                        designated the home topic set
+                        (<b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_home-topic-set.html" class="default" title="Configuration setting: home-topic-set">/content-set/home-topic-set</a></b>). The script
+                        used to create the TOC is specified in the topic set configuration of the
+                        home topic set. You select the appropriate script as part of the
+                        topic set configuration. </p>
+                  </dd>
+               </dl>
+               <a name="Do20I20always20have20to20build20the20entire20content20set3F"> </a><dl>
+            
+                  <dt>Do I always have to build the entire content set?</dt>
+                  <dd>
+                     <p>If your content set is large, it may take a long time to build. If you are working on a single topic set and you want to do frequent builds of that topic set, you may not want to have to build the entire content set each time. SPFE does not provide a way to build topic sets individually. However, because a content set is to inexpensive to set up, you can create a content set that contains just the topic set you are working on and build that.</p>
+                  </dd>
+               </dl>
+            
+            
+         <a name="Do"> </a>
+         <h2>Do</h2>        
+               <p>To add a content set, create a content set configuration file with
+                the root element <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set.html" class="default" title="Configuration setting: content-set">/content-set</a></b>. You need the
+                following mandatory attributes and elements: </p>
+               <ul>
+                  <li>
+                    <p>
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_content-set-id.html" class="default" title="Configuration setting: content-set-id">/content-set/content-set-id</a></b>: The ID of the
+                        content set. The build system uses the value to create a directory
+                        name and it must be a valid directory name in the operating system that runs
+                        the build system. </p>
+                  </li>
+                  <li>
+                    <p>
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_title.html" class="default" title="Configuration setting: title">/content-set/title</a></b>: The title of the
+                        content set to display in the output.</p>
+                  </li>
+                  <li>
+                    <p>
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_topic-sets.html" class="default" title="Configuration setting: topic-sets">/content-set/topic-sets</a></b>: The list of
+                        the topic sets to include in the content set. The value of the
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_topic-sets_topic-set_topic-set-id.html" class="default" title="Configuration setting: topic-set-id">/content-set/topic-sets/topic-set/topic-set-id</a></b>
+                        setting should match the
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-set-id.html" class="default" title="Configuration setting: topic-set-id">/topic-set/topic-set-id</a></b> for the topic set.
+                        The
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_topic-sets_topic-set_href.html" class="default" title="Configuration setting: href">/content-set/topic-sets/topic-set/href</a></b>
+                        attribute is the URL of the topic set configuration file.</p>
+                  </li>    
+               </ul>
+               <p>The following is an abbreviated version of  the content set configuration for
+                the SPFE content set:</p>
+               <pre>                &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!-- This file is part of the SPFE Open Toolkit. See the accompanying license.txt file for applicable licenses.--&gt;
+&lt;!-- (c) Copyright Analecta Communications Inc. 2012 All Rights Reserved. --&gt;
+
+&lt;content-set xmlns="http://spfeopentoolkit.org/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://spfeopentoolkit.org/ns/spfe-ot/config http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd"&gt;
+    &lt;content-set-id&gt;spfe-docs&lt;/content-set-id&gt;
+    &lt;title&gt;SPFE Documentation&lt;/title&gt;
+    &lt;home-topic-set&gt;spfe-docs-home&lt;/home-topic-set&gt;
+
+    &lt;topic-set-groups&gt;
+        &lt;group&gt;
+            &lt;name&gt;SPFE&lt;/name&gt;
+            &lt;group&gt;&lt;name&gt;Guides&lt;/name&gt;&lt;/group&gt;
+            &lt;group&gt;&lt;name&gt;References&lt;/name&gt;&lt;/group&gt;
+            &lt;group&gt;&lt;name&gt;Lists&lt;/name&gt;&lt;/group&gt;
+        &lt;/group&gt;
+        &lt;group&gt;
+            &lt;name&gt;EPPO Simple&lt;/name&gt;
+            &lt;group&gt;&lt;name&gt;Guides&lt;/name&gt;&lt;/group&gt;
+            &lt;group&gt;&lt;name&gt;References&lt;/name&gt;&lt;/group&gt;
+        &lt;/group&gt;
+    &lt;/topic-set-groups&gt;
+    &lt;topic-sets&gt;
+        &lt;topic-set&gt;
+            &lt;topic-set-id&gt;spfe-development&lt;/topic-set-id&gt;
+            &lt;href&gt;topic-sets/spfe-development.xml&lt;/href&gt;
+            &lt;group&gt;SPFE; Guides&lt;/group&gt;
+        &lt;/topic-set&gt;    
+        
+        &lt;topic-set&gt;
+            &lt;topic-set-id&gt;spfe-docs-home&lt;/topic-set-id&gt;
+            &lt;href&gt;topic-sets/spfe-docs-home.xml&lt;/href&gt;
+        &lt;/topic-set&gt;
+        
+        &lt;topic-set&gt;
+            &lt;topic-set-id&gt;spfe-configuration-reference&lt;/topic-set-id&gt;
+            &lt;href&gt;topic-sets/spfe-configuration-reference.xml&lt;/href&gt;
+            &lt;group&gt;SPFE; References&lt;/group&gt;
+        &lt;/topic-set&gt;  
+		
+		 &lt;topic-set&gt;
+            &lt;topic-set-id&gt;eppo-presentation-reference&lt;/topic-set-id&gt;
+            &lt;href&gt;topic-sets/eppo-presentation-reference.xml&lt;/href&gt;
+		     &lt;group&gt;EPPO Simple; References&lt;/group&gt;
+        &lt;/topic-set&gt;  
+        
+		 &lt;topic-set&gt;
+            &lt;topic-set-id&gt;eppo-simple-writing&lt;/topic-set-id&gt;
+            &lt;href&gt;topic-sets/eppo-simple-writing.xml&lt;/href&gt;
+		     &lt;group&gt;EPPO Simple; Guides&lt;/group&gt;
+        &lt;/topic-set&gt;  
+           
+        &lt;topic-set&gt;
+            &lt;topic-set-id&gt;spfe-function-reference&lt;/topic-set-id&gt;
+            &lt;href&gt;topic-sets/spfe-function-reference.xml&lt;/href&gt;
+            &lt;group&gt;SPFE; References&lt;/group&gt;
+        &lt;/topic-set&gt;
+        
+        &lt;topic-set&gt;
+            &lt;topic-set-id&gt;spfe-docs-essays&lt;/topic-set-id&gt;
+            &lt;href&gt;topic-sets/spfe-docs-essays.xml&lt;/href&gt;
+            &lt;group&gt;SPFE; Guides&lt;/group&gt;
+        &lt;/topic-set&gt;
+        
+        &lt;topic-set&gt;
+            &lt;topic-set-id&gt;spfe-demos&lt;/topic-set-id&gt;
+            &lt;href&gt;topic-sets/spfe-demos.xml&lt;/href&gt;
+            &lt;group&gt;EPPO Simple; Guides&lt;/group&gt;
+        &lt;/topic-set&gt;
+        
+        &lt;topic-set&gt;
+            &lt;topic-set-id&gt;spfe-docs-lists&lt;/topic-set-id&gt;
+            &lt;href&gt;topic-sets/spfe-docs-lists.xml&lt;/href&gt;
+            &lt;group&gt;SPFE; Lists&lt;/group&gt;
+        &lt;/topic-set&gt;
+    &lt;/topic-sets&gt;
+    
+    &lt;object-sets&gt;
+        &lt;object-set&gt;
+            &lt;object-set-id&gt;spfe-docs-misc-tables&lt;/object-set-id&gt;
+            &lt;href&gt;object-sets/spfe-docs-misc-tables.xml&lt;/href&gt;                 
+        &lt;/object-set&gt;
+        &lt;object-set&gt;
+            &lt;object-set-id&gt;spfe-docs-if-then-tables&lt;/object-set-id&gt;
+            &lt;href&gt;object-sets/spfe-docs-if-then-tables.xml&lt;/href&gt;                 
+        &lt;/object-set&gt;
+    &lt;/object-sets&gt;
+    
+    &lt;subject-types&gt;
+        &lt;subject-type&gt;
+            &lt;id&gt;config-setting&lt;/id&gt;
+            &lt;aliases&gt;
+                &lt;singular&gt;Configuration setting&lt;/singular&gt;
+                &lt;plural&gt;Configuration settings&lt;/plural&gt;
+            &lt;/aliases&gt;
+        &lt;/subject-type&gt;
+        &lt;subject-type&gt;
+            &lt;id&gt;feature&lt;/id&gt;
+            &lt;aliases&gt;
+                &lt;singular&gt;Feature&lt;/singular&gt;
+                &lt;plural&gt;Features&lt;/plural&gt;
+            &lt;/aliases&gt; 
+        &lt;/subject-type&gt;
+        &lt;subject-type&gt;
+            &lt;id&gt;xslt-library-reference-entry&lt;/id&gt;
+            &lt;aliases&gt;
+                &lt;singular&gt;SPFE function&lt;/singular&gt;
+                &lt;plural&gt;SPFE functions&lt;/plural&gt;
+            &lt;/aliases&gt;
+        &lt;/subject-type&gt;
+        &lt;subject-type&gt;
+            &lt;id&gt;spfe-xslt-function&lt;/id&gt;
+            &lt;aliases&gt;
+                &lt;singular&gt;XSLT function&lt;/singular&gt;
+                &lt;plural&gt;XSLT functions&lt;/plural&gt;
+            &lt;/aliases&gt;
+        &lt;/subject-type&gt;
+        &lt;subject-type&gt;
+            &lt;id&gt;xslt-template-name&lt;/id&gt;
+            &lt;aliases&gt;
+                &lt;singular&gt;XSLT template&lt;/singular&gt;
+                &lt;plural&gt;XSLT templates&lt;/plural&gt;
+            &lt;/aliases&gt;
+        &lt;/subject-type&gt;
+        
+        &lt;subject-type&gt;
+            &lt;id&gt;task&lt;/id&gt;
+            &lt;aliases&gt;
+                &lt;singular&gt;Task&lt;/singular&gt;
+                &lt;plural&gt;Tasks&lt;/plural&gt;
+            &lt;/aliases&gt;
+        &lt;/subject-type&gt;
+        &lt;subject-type&gt;
+            &lt;id&gt;file-name&lt;/id&gt;
+            &lt;aliases&gt;
+                &lt;singular&gt;File name&lt;/singular&gt;
+                &lt;plural&gt;File names&lt;/plural&gt;
+            &lt;/aliases&gt;
+        &lt;/subject-type&gt;
+        &lt;subject-type&gt;
+            &lt;id&gt;document-name&lt;/id&gt;
+            &lt;aliases&gt;
+                &lt;singular&gt;Document name&lt;/singular&gt;
+                &lt;plural&gt;Document names&lt;/plural&gt;
+            &lt;/aliases&gt;
+        &lt;/subject-type&gt;
+        &lt;subject-type&gt;
+            &lt;id&gt;xml-element-name&lt;/id&gt;
+            &lt;aliases&gt;
+                &lt;singular&gt;XML element name&lt;/singular&gt;
+                &lt;plural&gt;XML element names&lt;/plural&gt;
+            &lt;/aliases&gt;
+        &lt;/subject-type&gt;
+    &lt;/subject-types&gt;
+
+    &lt;messages&gt;warning info&lt;/messages&gt;
+ 
+    &lt;output-formats&gt;
+        &lt;output-format&gt;
+            &lt;name&gt;xhtml&lt;/name&gt;
+            &lt;href&gt;../../spfe-ot/plugins/eppo-simple/output-types/xhtml/config.xml&lt;/href&gt;
+        &lt;/output-format&gt;
+    &lt;/output-formats&gt;              
+
+    &lt;strings&gt;
+        &lt;string id="product"&gt;SPFE Open Toolkit&lt;/string&gt;
+        &lt;string id="product-release"&gt;1.0&lt;/string&gt;
+        &lt;string id="copyright"&gt;Copyright © 2015 Analecta Communications Inc.&lt;/string&gt;
+    &lt;/strings&gt;
+ &lt;/content-set&gt;
+
+            </pre>
+               <p>This content set includes three topic sets, each with their own configuration file,
+                which is specified by the
+                <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_topic-sets_topic-set_href.html" class="default" title="Configuration setting: href">/content-set/topic-sets/topic-set/href</a></b> setting. The
+                path is relative to the location of the configuration file that defines the
+                <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set.html" class="default" title="Configuration setting: content-set">/content-set</a></b> element. </p>
+               <p>To add an index page for the content set, you need to <a href="adding-a-topic-set.html" class="default" title="Task: Adding a new topic set">add a topic set</a> that includes an index topic and includes the topic set in the list
+                of topic sets. For example, the topic set <b class="decoration-bold">spfe-docs-home</b> contains the
+                index topic for the SPFE content set.</p>
+               <p>Run the <b class="decoration-bold"><a href="getting-started.html" class="default" title="Concept: Getting started with the SPFE build system">spfe</a></b> build tool and specify the configuration file
+                that contains the <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set.html" class="default" title="Configuration setting: content-set">/content-set</a></b> element as the first
+                parameter. If you see the topic sets that your content set includes in the table of
+                contents you have successfully added a content set.</p>
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

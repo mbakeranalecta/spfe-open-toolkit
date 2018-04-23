@@ -1,0 +1,128 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Fragments</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Fragments</p>
+         
+         
+            <h1>Fragments</h1>
+            <p>
+               <a href="../spfe-docs-lists/feature_fragments.html" class="default" title="A list of topics on a subject: Feature: fragments">Fragments</a> are a <a href="reuse-techniques.html" class="default" title="Concept: Reuse in SPFE and EPPO Simple">content reuse</a> feature of the EPPO-simple plugin.</p>
+            <p>A fragment is an arbitrary sequence of text structures (paragraphs, lists, etc.) that has been given an id so that it can be included by reference at other points in the content. </p>
+        
+            <p>Fragments can be defined inline in a topic file, or they can be defined in separate fragment collections. If a fragment is defined inline, it is included where it occurs. Fragments in fragment files are not included anywhere unless they are pulled in by a fragment reference.</p>
+            <p>A fragment reference inserts a fragment by ID at the place it occurs in the text.</p>
+            <p>Fragments are recursive. That is, fragments can contain other fragments and fragment references.</p>
+            <p>Because you often want to change some part of a text when it is being reused, fragments and fragment references can both define local <a href="../spfe-docs-lists/feature_strings.html" class="default" title="A list of topics on a subject: Feature: strings">strings</a>. Any string references inside a fragment will be resolved by looking first at local-strings defined in the fragment reference, then at local strings defined in the fragment definition, and then at global strings. In effect, this means that you can define string substitutions whenever you insert a fragment into your content.</p>
+            <p>The following sample show the definition of a fragment and its subsequent use within the
+            same file.</p>
+            <pre>&lt;fragment id="test-fragment"&gt;
+    &lt;local-strings&gt;
+        &lt;string id="test-string-1"&gt;&lt;bold&gt;test string one&lt;/bold&gt;&lt;/string&gt;
+        &lt;string id="test-string-2"&gt;&lt;italic&gt;test string two&lt;/italic&gt;&lt;/string&gt;
+    &lt;/local-strings&gt;
+    &lt;p&gt;This is a piece of text in a fragment. It includes references to local 
+       strings &lt;string-ref id-ref="test-string-1"/&gt; and 
+       &lt;string-ref id-ref="test-string-2"/&gt;. 
+       And to a global string &lt;string-ref id-ref="product"/&gt;&lt;/p&gt;
+&lt;/fragment&gt;
+&lt;p&gt;The following is a reference to the fragment defined above:&lt;/p&gt;
+&lt;fragment-ref id-ref="test-fragment"&gt;
+    &lt;local-strings&gt;
+        &lt;string id="test-string-1"&gt;&lt;code&gt;this is test string number one&lt;/code&gt;&lt;/string&gt;
+        &lt;string id="product"&gt;Acme Anvil&lt;/string&gt;
+    &lt;/local-strings&gt;
+&lt;/fragment-ref&gt;</pre>
+            <p>When the topic containing this fragment and fragment ref is resolved, and assuming that
+            there is a more globally defined string with the ID product and the value
+            “SPFE Open Toolkit”, the result will be as follows:</p>
+            <pre>&lt;p&gt;This is a piece of text in a fragment. It includes references to local 
+   strings &lt;bold&gt;test string one&lt;/bold&gt; and 
+   &lt;italic&gt;test string two&lt;/italic&gt;. 
+   And to a global string SPFE Open Toolkit.&lt;/p&gt;
+&lt;p&gt;The following is a reference to the fragment defined above:&lt;/p&gt;
+&lt;p&gt;This is a piece of text in a fragment. It includes references to local 
+   strings &lt;code&gt;this is test string number one&lt;/code&gt; and 
+   &lt;italic&gt;test string two&lt;/italic&gt;. 
+   And to a global string Acme Anvil.&lt;/p&gt;</pre>
+            <p>As the fragment itself was being resolved, it the string references it contains were
+            resolved using the local string definitions it contained and the global definition of
+            product. As the fragment ref was being resolved, the string references it contains were
+            resolved by first looking at the local string definitions it contained, than at the
+            local string definitions of the fragment, then at the global string definitions. In this
+            case, the fragment ref contained local definitions for the test-string-1 and product
+            strings, and use the value of test-string-2 from the fragment definition.</p>
+            <p>Note that inline fragment definitions can only be referenced by a fragment references in
+            the same file in which they occur. You cannot reference a fragment defined inline in
+            another topic in the topic set. You can reference external fragments that are defined in
+            an external fragments file. Also note that if you define a local fragment with the same
+            ID as a global fragment, the local fragment will be used by any fragment reference in
+            the file in which it occurs. </p>
+            
+         <a name="Fragments20vs.20conrefs"> </a>
+               <h2>Fragments vs. conrefs</h2>
+               <p>Fragments perform a function similar to that performed by conrefs in other systems.
+                Conrefs (content references) are a mechanism for reusing content by reference from
+                one file to another. The most commonly use application of conrefs today is in DITA.
+                If you are used to using conrefs, this section will explain the differences between
+                SPFE fragments and DITA conrefs. </p>
+               <p>Note that fragments are actually not a feature of SPFE proper. They are a feature of
+                the EPPO-simple schema set. The resolution of fragments is performed as part of the
+                schema resolve script for the EPPO-simple namespace. You could develop a schema
+                set that implements conrefs if you wanted to, and resolve the conrefs in the
+                resolve script of that schema set. </p>
+               <p>First, a fragment is defined by an elements that contains the content of the
+                fragment. Only defined fragments can be included by a fragment ref. The source of a
+                conref is not defined in any special way. Any element with an ID can be the source
+                of a conref. You create a conref by adding an attribute to any element that supports
+                the conref attribute and giving it the URL of the element you want to reference.
+                This means that the conref mechanism give no indication that an element is being
+                conrefed, or that editing it might change to meaning of the text that is conrefing
+                it, or that deleting it might break the conref. A fragment, by contrast, makes it
+                explicit that the text it contains is potentially being referenced elsewhere.</p>
+               <p>Second a conref can reference any element in any file. A fragment reference can only
+                reference a local fragment in the same file or a global fragment in a fragments
+                file. It cannot arbitrarily reference any content anywhere. This restriction
+                corresponds to a frequently recommended best practice for handling conrefs -- namely
+                to avoid arbitrary conrefs and only conref to material specificlly created for the
+                purpose.</p>
+               <p>Third, a conref can only reference an element of the same type as the element that
+                contains the conref. A fragment is an element in its own right, so it can contain
+                any content of any length.</p>
+               <p>Forth, a conref uses a URL, to point to a specific file. A fragment uses an ID. This
+                allows you to change which fragments are used by substituting a different fragments
+                file with the same set of IDs. Note, however, that DITA supports conkeyrefs, in
+                which the conref uses a key rather than a URL. This give you much the same
+                capability as fragments.</p>
+               <p>Fifth, a conref can be used at any level of the tree structure of a document. You can
+                conref a single word in a sentence. Fragments are supported only at the text
+                structure level of the EPPO simple schema. You can't use a fragment to replace a
+                single word in a sentence (though you can use <a href="feature-strings.html" class="default" title="Feature: Strings">string</a> for this).
+                You also can't use fragments to, for instance, reference a single step from a
+                procedure or a single item from a list. This is because the fragment can contain an
+                arbitrary sequence of elements that can occur at the text structure level of a
+                schema, but which might not be allowed in a list item or a step. This prevents you
+                from creating a fragment that produces invalid content when resolved. It should be
+                noted that it is often recommended to use conref at a low level because of the
+                complexity it creates in a document.</p>
+               <p>Sixth, fragments support the redefinition of local string in a fragment ref. Conrefs
+                do not. This allows for more flexible use of fragments.</p>
+               <p>Seventh, fragments can be recursively defined. Conrefs cannot (though you can conref
+                text that is part of a larger structure that is also being conreffed. </p>
+               <p>Eighth,  fragment IDs can shadow more gobal fragment IDs, allowing local redefinition
+                of a fragment. Conrefs cannot (though DITA conkeyref can accomplish something
+                similar).</p>
+               <p>Overall, the design of fragments is meant to emphasize safety and transparency over
+                maximizing reuse. At the same time, the ability to redefine local string and to nest
+                fragments and override their IDs with local definitions, gives a capacity for reuse
+                with variation not found in conrefs.</p>
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

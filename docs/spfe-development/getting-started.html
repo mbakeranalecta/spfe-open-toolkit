@@ -1,0 +1,83 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Getting started with the SPFE build system</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Getting started with the SPFE build system</p>
+         
+         
+            <h1>Getting started with the SPFE build system</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Installing20third-party20packages" class="default" title="">Installing third-party packages</a>
+         </li>
+         <li>
+            <a href="#Add20the20SPFE20OT20directory20to20your20path" class="default" title="">Add the SPFE OT directory to your path</a>
+         </li>
+         <li>
+            <a href="#Building20the20SPFE20documentation" class="default" title="">Building the SPFE documentation</a>
+         </li>
+      </ul>      
+            <p>You can run the SPFE build system on Windows or Linux. To begin building your documents
+            with SPFE, you need to download the SPFE Toolkit from GitHub at
+                <a href="http://github.com/mbakeranalecta/spfe-open-toolkit" class="default" title="">http://github.com/mbakeranalecta/spfe-open-toolkit</a>. You also need to
+            ensure that you have the required third-party packages installed on your computer and
+            that you set the required environment variables. </p>     
+            
+         <a name="Installing20third-party20packages"> </a>
+               <h2>Installing third-party packages</h2>           
+               <p>To use the SPFE build system, you need to install </p>
+               <ul>
+                  <li>
+                    <p>Python 3, with the libxml and regex packages installed. </p>
+                  </li>
+                  <li>
+                    <p>Java </p>
+                  </li>
+               </ul>
+               <p>Visit <a href="http://www.oracle.com/technetwork/java/javase/overview/index.html" class="default" title="">http://www.oracle.com/technetwork/java/javase/overview/index.html</a> to
+                get information about Java and to download the installer. If you use a Linux
+                distribution that includes a package management system, such as RedHat or Debian,
+                you may be able to install Java using the package manager. </p>
+               <p>You can download Python from <a href="https://www.python.org/" class="default" title="">https://www.python.org/</a> and install the
+                libxml and regex packages yourself. However, you may find it more convenient to
+                install a Python distribution that includes the libxml and regex packages, such as
+                Anaconda (<a href="https://store.continuum.io/cshop/anaconda/" class="default" title="">https://store.continuum.io/cshop/anaconda/</a>).</p> 
+            
+            
+         <a name="Add20the20SPFE20OT20directory20to20your20path"> </a>
+               <h2>Add the SPFE OT directory to your path</h2>
+               <p>Add the SPFE OT directory to your path.</p>
+            
+            
+         <a name="Building20the20SPFE20documentation"> </a>
+               <h2>Building the SPFE documentation</h2>
+               <p> To verify that you set up the build environment correctly, build the SPFE HTML
+                documentation.</p>
+                <ol>
+                    <li>
+                        <p>Open a terminal window and change to the directory
+                            <b class="decoration-bold">$SPFEOT_HOME/spfe-docs/build</b>
+                     </p>
+                  </li>
+                    <li>
+                        <p>Type <tt class="decoration-code">spfe build spfe-docs-config.xml draft</tt>
+                     </p>
+                    </li>
+                </ol>
+                <p>The build system creates the  <b class="decoration-bold"><a href="directory-structure.html" class="default" title="Concept: Build directory structure">spfebuild</a></b>
+                directory in your home directory. For example, in Windows the directory
+                    <b class="decoration-bold"></b>
+                contains the HTML files for the SPFE documentation set. Open the file
+                    <b class="decoration-bold">spfebuild\spfe-docs\output\index.html</b> in any standard
+                browser. If you can view the SPFE documentation in your browser, you have
+                successfully set up your build environment and built the SPFE documents.</p>
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

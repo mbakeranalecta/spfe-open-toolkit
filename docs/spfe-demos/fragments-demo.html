@@ -1,0 +1,51 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Fragments Demo</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-demos-toc.html" class="default" title="">EPPO-simple Demos</a>
+             &gt; Fragments Demo</p>
+         
+         
+            <h1>Fragments Demo</h1>
+            <p>This is a demo of <a href="../spfe-docs-lists/feature_fragments.html" class="default" title="A list of topics on a subject: Feature: fragments">fragments</a>. It also includes a demo of the related
+            feature stings. Fragments and strings are both <a href="../spfe-development/reuse-techniques.html" class="default" title="Concept: Reuse in SPFE and EPPO Simple">reuse</a>
+            features of SPFE and EPPO-simple. Both allow you to insert a piece of content defined
+            elsewhere into the current topic. Fragments insert content at the general text level. Strings insert text at the paragraph level. You
+            can also define local strings for use within the body of a fragment. This allows you to
+            substitute different strings into a fragment each time it is used. </p>
+            <h3>This is a test of the string feature</h3>
+
+            <p> What follows is a string defined inline with <tt class="decoration-code">&lt;string id="a-string"&gt;This is a string&lt;/string&gt;</tt>: This is a string</p>
+            <p>This is a reference to that inline string with <tt class="decoration-code">&lt;string-ref id-ref="a-string"/&gt;</tt>
+            This is a string</p>
+            <h3>This is a test of the fragment feature</h3>
+            <p>There are two fragment references to an externally define fragment. The first pulls in
+            the fragment without redefining any strings. The second pulls it in but redefines the
+            string "my-local-string".</p>
+        
+        
+                
+            <p>This is a fragment that contains the local string from the fragments file. It also references a global string, SPFE Open Toolkit</p>
+        
+      
+                
+            <p>This is a fragment that contains <em class="decoration-italic">a local string from the topic file</em>. It also references a global string, SPFE Open Toolkit</p>
+            <p>Next we have a locally defined fragment:</p>
+        
+            
+                
+            
+            <p>My favorite holiday is Christmas.</p>
+        
+            <p>And a reference to the locally defined fragment:</p>
+        
+                
+            <p>My favorite holiday is Easter.</p>        
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:38.</p></div></body></html>

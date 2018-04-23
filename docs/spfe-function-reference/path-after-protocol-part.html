@@ -1,0 +1,60 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: path-after-protocol-part</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; path-after-protocol-part</p>
+      <h1>Function: path-after-protocol-part</h1>
+      <p>
+         <b class="decoration-bold">path-after-protocol-part(path as item()*) as xs:string</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>The <b class="decoration-bold">path-after-protocol-part</b> function takes a URL containing a protocol  (file, http, etc) and returns the part after the protocol. For example, if will turn a URL like this:</p>
+                <pre>file:/c:/Users/Joe/spfe-open-toolkit/spfe-ot/spfe.bat</pre>
+                <p>into</p>
+                <pre>c:/Users/Joe/spfe-open-toolkit/spfe-ot/spfe.bat</pre>
+                <p>This is mostly useful for taking local file URLs returned by some tools and turning them into the local paths accepted by other tools.</p>
+                <p>Note that this function does not do URL decoding. If the URL you are using may be URL encoded (that is, if it uses %20 for spaces, and similar % encodings for other special characters), use <b class="decoration-bold"><a href="local-path-from-uri.html" class="default" title="SPFE XSLT library routine: local-path-from-uri">local-path-from-uri</a></b>.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: xs:string</p>
+                    <p>The path with the protocol part removed.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>path</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The path to be processed.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:path-after-protocol-part"&nbsp;as="xs:string"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="path"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:analyze-string select="$path"&nbsp;regex="^([a-zA-Z]{{2,}}://?/?)?(.+)"&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:matching-substring &gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="regex-group(2)"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:matching-substring&gt;
+		             &nbsp;&nbsp;&lt;/xsl:analyze-string&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

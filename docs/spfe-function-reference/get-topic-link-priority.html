@@ -1,0 +1,94 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: get-topic-link-priority</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; get-topic-link-priority</p>
+      <h1>Function: get-topic-link-priority</h1>
+      <p>
+         <b class="decoration-bold">get-topic-link-priority(topic-type-name as item()*, topic-set-id as item()*, config as item()*) as item()*</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>Gets the link priority of a topic. Link priority is used to determine which topic to link to when more than one topic is identified as a source for a subject. Lower numbers indicate a higher priority.</p>
+                <p>Link priority is calculated by adding the link priority of the <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a>, defined in <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-type_topic-type-link-priority.html" class="default" title="Configuration setting: topic-type-link-priority">/topic-type/topic-type-link-priority</a></b> to the link priority of the <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a>, defined in <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-set-link-priority.html" class="default" title="Configuration setting: topic-set-link-priority">/topic-set/topic-set-link-priority</a></b>.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: item()*</p>
+                    <p>The link priority of the topic.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>topic-type-name</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The name of the <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a>, as specified in its configuration file a <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-type_name.html" class="default" title="Configuration setting: name">/topic-type/name</a></b>. By default, the resolve step  places the topic type name of the topic in the <b class="decoration-bold">type</b> attribute of the <b class="decoration-bold">ss:topic</b> wrapper element.</p>
+                        <pre>
+&lt;ss:topic type="http://spfeopentoolkit.org/ns/eppo-simple"
+    topic-type-alias="Task"
+    full-name="http://spfeopentoolkit.org/spfe-docs/topic-types/think-plan-do-topic/adding-a-content-set"
+    local-name="adding-a-content-set" title="Adding a new content set"
+    excerpt="A content set (content-set) is a collection of one or more related topic sets, each of which can use different schemas. ..."&gt;
+
+                        </pre>
+                        <p>Since linking is done at the presentation stage, you can read the topic type namespace URI from this attribute for the topic you are processing.</p>
+                    </dd>
+      </dl>
+      <dl>
+         <dt>topic-set-id</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-set-id.html" class="default" title="Configuration setting: topic-set-id">topic-set-id</a></b> of the topic. The <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-set-id.html" class="default" title="Configuration setting: topic-set-id">topic-set-id</a></b> is passed as a parameter to every processing script.</p>
+                    </dd>
+      </dl>
+      <dl>
+         <dt>config</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>A pointer to the configuration data. In a standard SPFE XSLT script, this is the variable <b class="decoration-bold">$config</b>.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:get-topic-link-priority"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="topic-type-name"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="topic-set-id"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="config"/&gt;
+
+		             &nbsp;&nbsp;&lt;xsl:variable name="topic-type-link-priority"&nbsp;select="$config/config:content-set/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-type[config:name eq $topic-type-name]/config:topic-type-link-priority"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:if test="count($topic-type-link-priority) gt 1"&gt;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:message select="count($topic-type-link-priority), $topic-set-id, $topic-type-name, for $i in $topic-type-link-priority return generate-id($i)"/&gt;
+               &nbsp;&nbsp;&lt;/xsl:if&gt;
+		             &nbsp;&nbsp;&lt;xsl:variable name="topic-set-link-priority"&nbsp;select="$config/config:content-set/config:topic-set[config:topic-set-id eq $topic-set-id]/config:topic-set-link-priority"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:if test="normalize-space($topic-type-link-priority) eq ''"&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:call-template name="<a href="error.html" class="default" title="SPFE XSLT library routine: error">sf:error</a>"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:with-param name="message"&nbsp;select="'Topic type link priority not set for namespace ', $topic-type-name"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:call-template&gt;
+		             &nbsp;&nbsp;&lt;/xsl:if&gt;
+		             &nbsp;&nbsp;&lt;xsl:if test="normalize-space($topic-set-link-priority) eq ''"&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:call-template name="<a href="error.html" class="default" title="SPFE XSLT library routine: error">sf:error</a>"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:with-param name="message"&nbsp;select="'Topic set link priority not set for topic set ID ', $topic-set-id"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:call-template&gt;
+		             &nbsp;&nbsp;&lt;/xsl:if&gt;
+		
+		             &nbsp;&nbsp;&lt;xsl:value-of select="$topic-type-link-priority + $topic-set-link-priority"/&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

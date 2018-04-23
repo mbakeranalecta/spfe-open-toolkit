@@ -1,0 +1,228 @@
+#wrap
+{
+	margin:0 auto;
+}
+#draft-header
+{
+	clear:both;
+}
+
+#toc-container
+{
+	float:left;
+	width:20%;
+	overflow:auto;
+}
+
+#main
+{
+    margin: 1em 1em 1em 1em;
+}
+
+#main-container
+{
+
+}
+
+.precis
+{
+    background-color:#E9E9DF;
+}
+
+#footer
+{
+	clear:both;
+}
+
+#decoration-bold
+{
+    font-weight:bold;    
+}
+				
+ul.toc li 
+{
+
+}
+ul.toc a, ul.toc span 
+{
+
+}
+ul.toc a 
+{
+
+}
+ul.toc ol 
+{
+
+}
+
+h1, h2, h3, h4, h5, h6, dt
+{
+    font-family:calibri, arial, helvetica, sans-serif;
+    font-weight:bold;
+}
+
+p
+{
+    font-family:cambria, roman, 'times new roman', times, serif
+}
+
+table
+{
+    display:table;
+    border:1pt solid black;
+}
+
+table>caption
+{
+    display:table-caption;
+    font-weight:bold;
+}
+
+table>caption:before
+{
+    display:table-caption;
+    font-weight:bold;
+    content:"Table :"
+}
+
+table>thead
+{
+    display:table-row-group;
+}
+
+table>tbody
+{
+    display:table-row-group;
+}
+
+table>thead>tr
+{
+    display:table-row;
+}
+
+table>thead>tr>td
+{
+    display:table-cell;
+    border:1pt solid black;
+    font-weight:bold;
+    padding:2px;
+}
+
+table>tbody>tr
+{
+    display:table-row;
+}
+
+table>tbody>tr>td
+{
+    display:table-cell;
+    border:1pt solid black;
+    padding:2px;
+}
+
+div.admonition-caution
+{
+    display:block;
+    margin:5pt;
+    padding:5pt;
+    border:2pt solid orange;
+}
+div.admonition-warning
+{
+    display:block;
+    margin:5pt;
+    padding:5pt;
+    border:2pt solid red;
+}
+div.admonition-note
+{
+    display:block;
+    margin:5pt;
+    padding:5pt;
+    border:2pt solid green;
+}
+
+p.admonition-title
+{
+    display:block;
+    font-weight:bold;
+    font-size:larger;
+}
+
+span.comment-author-to-author
+{
+    display:inline;
+    background-color:lime;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+div.comment-author-to-author
+{
+    display:block;
+    background-color:lime;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+.comment-author-to-author:before
+{
+    content:"Comment author to author:";
+    font-weight:bold;
+    padding-left:5pt;
+    padding-right:5pt;
+}
+
+span.comment-author-to-reviewer
+{
+    display:inline;
+    background-color:yellow;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+div.comment-author-to-reviewer
+{
+    display:block;
+    background-color:yellow;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+.comment-author-to-reviewer:before
+{
+    content:"Comment author to reviewer:";
+    font-weight:bold;
+    padding-left:5pt;
+    padding-right:5pt;
+}
+
+span.comment-reviewer-to-author
+{
+    display:inline;
+    background-color:orange;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+div.comment-reviewer-to-author
+{
+    display:block;
+    background-color:orange;
+    margin-left:5pt;
+    margin-right:5pt;
+}
+
+.comment-reviewer-to-author:before
+{
+    content:"Comment reviewer to author:";
+    font-weight:bold;
+    padding-left:5pt;
+    padding-right:5pt;
+}
+
+ol.labeled-list
+{
+    list-style-type:none;
+}

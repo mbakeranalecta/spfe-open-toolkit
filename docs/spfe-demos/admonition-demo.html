@@ -1,0 +1,64 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Admonition Demo</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-demos-toc.html" class="default" title="">EPPO-simple Demos</a>
+             &gt; Admonition Demo</p>
+
+         
+         
+            <h1>Admonition Demo</h1>  
+            <p>This page demonstrates the use of admonitions. The admonitions shown
+            here are from the note-caution-warning set available in the EPPO-simple structures collection. This set contains the admonitions most often used
+            in software documentation The collection also includes the note set, which just contains
+            a note admonition, a danger-warning-caution-notice set, most often used in hardware
+            documentation, and a generic admonition. </p>
+            <p>The model of these admonitions is very simple. If you require more complex admonitions
+            you can create your own admonition structure to use in your topic types.</p>
+            <pre>&lt;note&gt;
+    &lt;title&gt;This is something to take note of&lt;/title&gt;
+    &lt;p&gt;Take note of this.&lt;/p&gt;
+&lt;/note&gt;</pre>
+            <p>The signal word “Note” (or whatever other word is specified by the script)
+            will be added at the presentation stage. Similarly, any graphic
+            associated with this class of admonition will be added (if specified) at the
+                presentation stage.</p>
+            <div class="admonition-note">
+               
+               <p class="admonition-title"><span class="admonition-signal-word">Note</span>: This is something to take note of</p>
+               <p>Take note of this.</p>
+            </div>
+            <p>The caution admonition is the same, except that the root element is
+            <b class="decoration-bold">caution</b>.</p>
+            <pre>&lt;caution&gt;
+    &lt;title&gt;Be cautious about this&lt;/title&gt;
+    &lt;p&gt;This is something to be cautious about.&lt;/p&gt;
+&lt;/caution&gt;</pre>
+            <div class="admonition-caution">
+               
+               <p class="admonition-title"><span class="admonition-signal-word">Caution</span>: Be cautious about this</p>
+               <p>This is something to be cautious about.</p>
+            </div>
+            <p>The caution admonition is the same, except that the root element is
+            <b class="decoration-bold">warning</b>.</p>
+            <pre>&lt;warning&gt;
+    &lt;title&gt;Watch out!&lt;/title&gt;
+    &lt;p&gt;This could hurt real bad.&lt;/p&gt;
+&lt;/warning&gt;</pre>
+            <div class="admonition-warning">
+               
+               <p class="admonition-title"><span class="admonition-signal-word">Warning</span>: Watch out!</p>
+               <p>This could hurt real bad.</p>
+            </div>
+            <p>All these forms are considered variants of the generic
+            admonition structure. Therefore the default synthesis scripts convert them to a generic
+            admonition of the appropriate type.</p>
+
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:38.</p></div></body></html>

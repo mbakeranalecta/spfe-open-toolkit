@@ -1,0 +1,88 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Tables of Contents</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="eppo-simple-writing-toc.html" class="default" title="">Writing in EPPO-simple and Derivatives</a>
+             &gt; Tables of Contents</p>
+         
+         
+            <h1>Tables of Contents</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Think" class="default" title="">Think</a>
+         </li>
+         <li>
+            <a href="#Plan" class="default" title="">Plan</a>
+         </li>
+         <li>
+            <a href="#Do" class="default" title="">Do</a>
+         </li>
+      </ul>
+            
+         <a name="Think"> </a>
+         <h2>Think</h2>
+               <p>Because SPFE is designed for <a href="../spfe-docs-essays/bottom-up-ia.html" class="default" title="Essay: Bottom-up Information Architecture">bottom-up information architectures</a>,
+                a table of contents is considered a secondary navigation tool. However, most
+                bottom-up information architectures should still have some form of table of
+                contents. This is not necessarily a single hierarchical table that encompasses the
+                entire <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a>. A typical arrangement might be to have one
+                table of contents for the <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a>, and individual tables of
+                contents for the <a href="../spfe-development/feature-topic-sets.html" class="default" title="Feature: Topic sets">topic sets</a>. This is the default configuration
+                for EPPO-simple and its derivatives. </p>
+               <p>In EPPO-simple, and by default in topic types derived from it, a table of content for
+                the <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a> is built automatically from the
+                topic type groups define in the SPFE
+                content set configuration file. Tables of contents for
+                <a href="../spfe-development/feature-topic-sets.html" class="default" title="Feature: Topic sets">topic sets</a> are built automatically by the
+                toc build step according to the logic of the specified
+                TOC script. The default TOC script groups the topics in a topic
+                set by topic type and lists them in alphabetical order within the
+                topic type groupings. The order in which topic types appear in a
+                topic set TOC is determined by the order in which the <a href="../spfe-configuration-reference/_topic-type.html" class="default" title="Configuration setting: topic-type">topic types</a>
+                in a <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> are listed in the setting
+                <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-types.html" class="default" title="Configuration setting: topic-types">/topic-set/topic-types</a></b>. </p>
+            
+            
+         <a name="Plan"> </a>
+         <h2>Plan</h2>
+               <a name="Do20you20need20to20change20the20default20TOC20generation3F"> </a><dl>
+            
+                  <dt>Do you need to change the default TOC generation?</dt>
+                  <dd>
+                    <p>If you are writing <a href="../spfe-docs-essays/every-page-is-page-one.html" class="default" title="Essay: Every Page is Page One">Every Page is Page One topics</a>, you
+                        probably don't need to change the default TOC generation. If you are
+                        creating a topic set that is designed as a continuous narrative (like a
+                        book) and need to create a TOC with a specified order of topics, you can
+                        specify the order in a TOC file. </p>
+                    <div class="admonition-note">
+                        
+                        <p class="admonition-title"><span class="admonition-signal-word">Note</span>: Pending feature</p>
+                        <p>Specifying an arbitrary TOC is a pending feature. It is not currently
+                            implemented.</p>
+                    </div>
+                  </dd>
+               </dl>
+            
+            
+         <a name="Do"> </a>
+         <h2>Do</h2>
+               <p>To configure the content set table of contents, use the
+                <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_topic-set-groups.html" class="default" title="Configuration setting: topic-set-groups">/content-set/topic-set-groups</a></b> setting. </p>
+               <p>To configure the order of topic set types in a topic set TOC, use
+                the setting <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-types.html" class="default" title="Configuration setting: topic-types">/topic-set/topic-types</a></b>. </p>
+               <p>To specify a different way of auto-generating a content set TOC,
+                write and
+                configure a new
+                content set TOC script for your <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a>. </p>
+               <p>To specify a different way of auto-generating a topic set TOC,
+                write and configure a new topic set TOC script for your
+                <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a>.</p>
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:32.</p></div></body></html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Configuration file overview</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Configuration file overview</p>
+
+         
+         
+            <h1>Configuration file overview</h1>  
+            <p>The SPFE <a href="background-build-system.html" class="default" title="Feature: How the build system works">build system</a> is configured by the SPFE configuration file.
+            Configuration file determines the behavior of the SPFE build. The first stage of the
+            build process is to run the configuration script, which reads the configuration files
+            and writes out the files that run the rest of the build. A version of the configuration
+            file produced by the configuration script is also passed as the main input to all
+            processing scripts, making the configuration information available at all stages of the
+            build. </p>
+        
+            <p>While you can define the entire configuration of a build in one file, it is usually better to divide the configuration into multiple files. Many of these partial configuration files can be reused for multiple content sets or topic sets. For instance, the configuration file for a topic type can be used in every topic set configuration that uses that topic type.</p>
+
+            <p>There are several sections to the complete configuration of a content set, each of which is commonly stored in one or more separate files: </p>
+            <ul>
+               <li>
+                  <p>The <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a> configuration, contained in the setting,
+                    <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set.html" class="default" title="Configuration setting: content-set">/content-set</a></b>: This defines the set of topic
+                    sets to be included in the topic set as well as other settings that are common
+                    to the entire content set.</p>
+               </li>
+               <li>
+                  <p>The <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> configuration for each topic set, contained in the setting <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set.html" class="default" title="Configuration setting: topic-set">/topic-set</a></b>: This defines the topics to include in each topic set and other setting that are common to a topic set. A topic set configuration is included in the content set configuration using the setting <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_topic-sets_topic-set.html" class="default" title="Configuration setting: topic-set">/content-set/topic-sets/topic-set</a></b>.</p>
+               </li>
+               <li>
+                  <p>The <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a> configuration for each topic type in a topic set, contained in the setting <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-type.html" class="default" title="Configuration setting: topic-type">/topic-type</a></b>: This defines the scripts to use to process topics of a particular topic type, as well as other setting common to a topic type. A topic type configuration file is usually created as part of defining a topic type. A topic type configuration is included in the topic set configuration using the setting <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-types_topic-type.html" class="default" title="Configuration setting: topic-type">/topic-set/topic-types/topic-type</a></b>.</p>
+               </li>
+               <li>
+                  <p>The <a href="../spfe-configuration-reference/_object-type.html" class="default" title="Configuration setting: object-type">object type</a> configuration for each <a href="../spfe-configuration-reference/_object-type.html" class="default" title="Configuration setting: object-type">object type</a> in a topic set, contained in the setting <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_object-types_object-type.html" class="default" title="Configuration setting: object-type">/topic-set/object-types/object-type</a></b>: This defines the scripts used to process objects of a particular type, as well as other settings related to objects.
+                </p>
+               </li>
+               <li>
+                  <p>The <a href="../spfe-configuration-reference/_output-format.html" class="default" title="Configuration setting: output-format">output format</a> configuration for each output format required
+                    for the content set, contained in the setting
+                    <b class="decoration-bold"><a href="../spfe-configuration-reference/_output-format.html" class="default" title="Configuration setting: output-format">/output-format</a></b>: This defines the scripts
+                    used to create an output of a particular type. An <a href="../spfe-configuration-reference/_output-format.html" class="default" title="Configuration setting: output-format">output format configuration file</a>
+                    is usually created as part of defining an output format. An <a href="../spfe-configuration-reference/_output-format.html" class="default" title="Configuration setting: output-format">output format configuration</a> is included in the content set configuration using the
+                    setting
+                    <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_output-formats_output-format.html" class="default" title="Configuration setting: output-format">/content-set/output-formats/output-format</a></b>.</p>
+               </li>
+            </ul>
+
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: get-sources</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; get-sources</p>
+      <h1>Function: get-sources</h1>
+      <p>
+         <b class="decoration-bold">get-sources(file-list as item()*, load-message as item()*) as item()*</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>The <b class="decoration-bold">get-sources</b> is used to load a set of
+                    XML source files into a variable. It takes a string value that contains a set of
+                    file paths separated by semicolons. The function will fix directory separators
+                    characters in the file paths. You should use the
+                    <b class="decoration-bold">get-sources</b> function to load source
+                    files, irrespective of whether you are loading one file or several. This makes
+                    your script resilient if the number of source files should change, and also
+                    allows for more flexibility in downstream processes, allowing them to produce
+                    one file or many.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: item()*</p>
+                    <p>Returns a sequence of XML documents named in the file list.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>file-list</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>A string containing a list of XML file paths separated by semi-colons.</p>
+                    </dd>
+      </dl>
+      <dl>
+         <dt>load-message</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>A string containing an optional message to be displayed by the script when loading a file. If specified, the message will be prepended to the name of each file as it is loaded, and displayed by a call to the <b class="decoration-bold"><a href="info.html" class="default" title="SPFE XSLT library routine: info">info</a></b> function.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:get-sources"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="file-list"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:sequence select="sf:get-sources($file-list, '')"/&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+      <pre>
+            &lt;xsl:function name="sf:get-sources"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="file-list"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="load-message"/&gt;
+		             
+		&nbsp;&nbsp;&lt;xsl:for-each select="tokenize(translate($file-list, '\', '/'), ';')"&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:variable name="one-file"&nbsp;select="<a href="local-to-url.html" class="default" title="SPFE XSLT library routine: local-to-url">sf:local-to-url</a>(.)"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:if test="normalize-space($load-message)"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:call-template name="<a href="info.html" class="default" title="SPFE XSLT library routine: info">sf:info</a>"&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:with-param name="message"&nbsp;select="$load-message, $one-file "/&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:call-template&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:if&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:if test="not(doc-available($one-file))"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:call-template name="<a href="error.html" class="default" title="SPFE XSLT library routine: error">sf:error</a>"&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:with-param name="message"&gt;File not found: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="$one-file"/&gt;
+                        &lt;/xsl:with-param&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:call-template&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:if&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:sequence select="document($one-file)"/&gt;
+		             &nbsp;&nbsp;&lt;/xsl:for-each&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

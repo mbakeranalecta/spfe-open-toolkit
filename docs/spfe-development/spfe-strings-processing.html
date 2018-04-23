@@ -1,0 +1,107 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Processing strings</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Processing strings</p>
+         
+         
+            <h1>Processing strings</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Think" class="default" title="">Think</a>
+         </li>
+         <li>
+            <a href="#Plan" class="default" title="">Plan</a>
+         </li>
+         <li>
+            <a href="#Do" class="default" title="">Do</a>
+         </li>
+      </ul>
+            
+         <a name="Think"> </a>
+         <h2>Think</h2>
+            
+               <p>
+                  <a href="../spfe-docs-lists/feature_strings.html" class="default" title="A list of topics on a subject: Feature: strings">Strings</a> are a means of inserting variable text into a topic. If you design a topic type, or write your own resolve code for a topic type, you may need to write code to process strings. In this case, you will need to understand how string processing works.</p>
+               <p>Strings are a core feature of SPFE, but different plugins may extend the strings feature in different ways. This topic explains how strings are implemented in core SPFE and the EPPO-simple plugin.</p>
+               <p>Core SPFE allows you to define strings in the configuration file. Strings can be specified at the <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a> level in <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_strings.html" class="default" title="Configuration setting: strings">/content-set/strings</a></b> and at the <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> level in <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_strings.html" class="default" title="Configuration setting: strings">/topic-set/strings</a></b>.</p>
+               <p>In your scripts, you can retrieve strings directly from the <b class="decoration-bold">$config</b> variable or you can retrieve individual strings using the <b class="decoration-bold">sf:string</b> function.</p>
+               <p>In EPPO-simple, SPFE's strings are treated as global strings and can be retrieved from anywhere in code or in content. In content, a string is retrieved using the string-ref element. Strings can be defined in content, in particular, they can be defined inside of fragment and fragment-ref elements as local-strings. A string defined locally within a fragment overrides a global string with the same id. A string defined in a fragment is carried over to all references to that fragement with the fragment-ref tag. However, local strings can also be defined in the fragment-ref tag, and these will override the strings defined in the original fragment. In effect, this allows you to call a fragment with a set of string substitutions.</p>
+               <p>Given an inline fragment definition like this:</p>
+               <pre>&lt;fragment id="my-fragment"&gt;
+    &lt;local-strings&gt;
+        &lt;string id="boy-name"&gt;Jack&lt;/string&gt;
+        &lt;string id="girl-name"&gt;Jill&lt;/string&gt;
+    &lt;local-strings&gt;
+    &lt;p&gt;&lt;string-ref id-ref="boy-name"/&gt; and &lt;string-ref id-ref="girl-name"/&gt;
+    went up the hill.&lt;/p&gt;
+&lt;/fragment&gt;                     </pre>
+        
+               <p>This will be resolved by the default EPPO-simple resolve scripts
+                into:</p>
+               <pre>&lt;p&gt;Jack and Jill went up the hill.&lt;/p&gt;</pre>
+               <p>But if this fragment is then inserted in a different place using &lt;fragment-ref&gt;, the
+            string values can be redefined locally for that use.</p>
+               <pre>&lt;fragment-ref id-ref="my-fragment"&gt;
+    &lt;local-strings&gt;
+        &lt;string id="girl-name"&gt;Emily&lt;/string&gt;
+    &lt;/local-strings&gt;
+&lt;/fragment-ref&gt;</pre>
+               <p>The default EPPO-simple synthesis routines will use the local value the
+                <tt class="decoration-code">girl-name</tt> string, rendering the fragment as:</p>
+               <pre>&lt;p&gt;Jack and Emily went up the hill.&lt;/p&gt;</pre>
+            
+            
+         <a name="Plan"> </a>
+         <h2>Plan</h2>
+               <a name="Do20I20need20to20do20something20to20support20string20processing20in20my20own20synthesis20routines3F"> </a><dl>
+            
+                  <dt>Do I need to do something to support string processing in my own synthesis routines?</dt>
+                  <dd>
+                    <p>Strings are resolved during the <a href="../spfe-docs-lists/feature_synthesis.html" class="default" title="A list of topics on a subject: Feature: synthesis">synthesis</a> process. If you
+                        write your own synthesis scripts you must provide support for string
+                        processing, if you want it for your topic type. However, if you use the
+                        standard EPPO-simple script modules that implement string processing, and
+                        you do not require any special string processing of your own, you will not
+                        need to do anything specific to support string processing.  </p>
+                    <p>If you are writing a synthesis script for a new topic type, make sure that
+                        the <b class="decoration-bold">$strings</b> variable is properly
+                        defined and that the
+                            <b class="decoration-bold">$in-scope-strings</b> variable is
+                        passed as a tunneling parameter to the top level content processing
+                        template. If you are not using schema componets that do this, you must do it
+                        yourself.</p>
+                  </dd>
+               </dl>
+               <a name="Why20would20I20want20to20do20custom20string20processing3F"> </a><dl>
+            
+                  <dt>Why would I want to do custom string processing?</dt>
+                  <dd>
+                    <p>In most cases, you will not want to do custom string processing. Custom
+                        string processing essentially allows you to control which definition of a
+                        string is used for string substitution. Unless you want to control string
+                        substitution in some way, there is no reason </p>
+                    <p>The most likely reason for wanting to do custom string processing is to
+                        create an element that creates a local string scope. In the default
+                        EPPO-simple schemas, two elements fragment, and fragment-ref create local
+                        string scopes. This is so that you can define a different set of string
+                        substitutions each time you use a fragment. If you wanted to create an
+                        element that has local string values defined, the best approach would be to
+                        copy the method used in fragment and fragment-ref.</p>
+                  </dd>
+               </dl>
+            
+            
+         <a name="Do"> </a>
+         <h2>Do</h2>
+               
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Function: get-topic-type-alias-singular</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; get-topic-type-alias-singular</p>
+      <h1>Function: get-topic-type-alias-singular</h1>
+      <p>
+         <b class="decoration-bold">get-topic-type-alias-singular(topic-set-id as item()*, topic-type-name as item()*, config as item()*) as item()*</b>
+      </p>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>Gets the singular version of a <a href="../spfe-configuration-reference/_topic-type_aliases.html" class="default" title="Configuration setting: aliases">topic type alias</a>. Topic types are formally named using their XML namespace URIs. However, if you want to display the name of a topic type publicly, for instance in a list of topics or in the visible metadata of a topic, you will need a human readable name for the topic type: the topic type alias. Topic type aliases are defined in the configuration of a topic type, in the setting <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-type_aliases.html" class="default" title="Configuration setting: aliases">/topic-type/aliases</a></b>. The topic type alias setting associates a singular and plural topic type alias with a topic type namespace URI: </p>
+                <pre>
+&lt;topic-type&gt;
+    &lt;xmlns&gt;http://spfeopentoolkit.org/ns/spfe-docs&lt;/xmlns&gt;
+    &lt;aliases&gt;
+        &lt;singular&gt;Configuration setting&lt;/singular&gt;
+        &lt;plural&gt;Configuration settings&lt;/plural&gt;
+    &lt;/aliases&gt;
+                </pre>
+                <p>The <b class="decoration-bold">sf:get-topic-type-alias-singular</b> function looks up the singular version of the topic type alias in the configuration and returns it. To get the plural version of the alias, use the <b class="decoration-bold">sf:get-topic-type-alias-plural</b>.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Return value</dt>
+         <dd>
+            <p>Return type: item()*</p>
+                    <p>The singular version of the topic type alias. An error occurs if a matching topic type alias is not found.</p>
+                </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>topic-set-id</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The id of the current topic set.</p>
+                    </dd>
+      </dl>
+      <dl>
+         <dt>topic-type-name</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The namespace URI of the topic type. This is the value declared in the <tt class="decoration-code">xmlns</tt> attribute of the topic source file:</p>
+                        <pre>
+&lt;function-and-template-descriptions
+    xmlns="http://spfeopentoolkit.org/ns/spfe-docs"                            
+                        </pre>
+                        
+                        <p>It is also the value declared in the <tt class="decoration-code">target-namespace</tt> attribute of the <tt class="decoration-code">xsd:schema</tt> element of the topic type schema:</p>
+                        <pre>
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	targetNamespace="http://spfeopentoolkit.org/ns/spfe-docs"&gt;                            
+                        </pre>
+                        <p>Note, however, that it is possible for a <a href="../spfe-development/feature-synthesis.html" class="default" title="Feature: Synthesis">synthesis stage</a> script to output a topic in a different namespace from the input sources. This may particularly be the case if the synthesis stage is combining content from multiple sources. In this case the namespace of a topic may be different at the presentation stage than it was when it was written. This should not cause a problem as long as namespace aliases are declared for a namespace at the time you call this function.</p>
+                    </dd>
+      </dl>
+      <dl>
+         <dt>config</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>A pointer to the configuration data. In a standard SPFE XSLT script, this is the variable <b class="decoration-bold">$config</b>.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:function name="sf:get-topic-type-alias-singular"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="topic-set-id"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="topic-type-name"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="config"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:choose &gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:when test="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular"&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="$config/config:content-set/config:topic-set[config:topic-set-id=$topic-set-id]/config:topic-type[config:name=$topic-type-name]/config:aliases/config:singular"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:when&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:otherwise &gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:call-template name="<a href="error.html" class="default" title="SPFE XSLT library routine: error">sf:error</a>"&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:with-param name="message"&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:text &gt;No singular topic type alias found for topic type &lt;/xsl:text&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="$topic-type-name"/&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:text &gt;. This setting should be defined in the configuration files at &lt;/xsl:text&gt;
+						                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:text &gt;/topic-type/aliases/singular.&lt;/xsl:text&gt;
+					                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:with-param&gt;
+				                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:call-template&gt;
+				                 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:value-of select="$topic-type-name"/&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsl:otherwise&gt;
+		             &nbsp;&nbsp;&lt;/xsl:choose&gt;
+	           &lt;/xsl:function&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

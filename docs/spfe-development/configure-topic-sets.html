@@ -1,0 +1,242 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Configuring topic sets</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Configuring topic sets</p>
+
+         
+         
+            <h1>Configuring topic sets</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Think" class="default" title="">Think</a>
+         </li>
+         <li>
+            <a href="#Plan" class="default" title="">Plan</a>
+         </li>
+         <li>
+            <a href="#Do" class="default" title="">Do</a>
+         </li>
+      </ul>
+
+            
+         <a name="Think"> </a>
+         <h2>Think</h2>
+
+               <p> The <a href="executing-spfe-builds.html" class="default" title="Task: Executing the SPFE build system">SPFE Open Toolkit</a> (SPFE-OT) processes content in
+                topic sets. The topic set configuration selects topics to be included in topic set
+                content, selects resources that may be used, and specifies how each set will be
+                processed.</p>
+
+               <p> The <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a> configuration specifies the topic sets to
+                be included in a SPFE build and the order they will appear in the output
+                <a href="../eppo-simple-writing/task-table-of-contents.html" class="default" title="Task: Tables of Contents">table of contents</a>. </p>
+
+               <p> A <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> configuration is an XML file in the
+                <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set.html" class="default" title="Configuration setting: topic-set">/topic-set</a></b> format. </p>
+
+            
+
+            
+         <a name="Plan"> </a>
+         <h2>Plan</h2>
+               <a name="Where20do20I20locate20the20configuration20files"> </a><dl>
+            
+                  <dt>Where do I locate the configuration files</dt>
+                  <dd>
+                    <p> The <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a> and <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> configuration
+                files may reside anywhere in the filesystem that is convenient for the author.
+                References to configuration, source, and other files may be relative or absolute
+                path names. A common setup has the content set configuration file in the working
+                directory, where the <b class="decoration-bold"><a href="../spfe-docs-lists/file-name_spfe.html" class="default" title="A list of topics on a subject: File name: spfe">spfe</a></b> command will be executed and log
+                files kept, with topic set configuration files and content files in subdirectories
+                and referenced with relative paths. This way the entire set can be relocated without
+                needing to edit configuration files.</p>
+
+                     <p> Source content may be identified in topic set configuration
+                files with wildcards in file pathnames. The asterisk "*" matches any set of
+                characters except for the path-hierarchy separator, so that <tt class="decoration-code"> &lt;include&gt;
+                    ../content/text/my-topic-set/*.xml &lt;/include&gt; </tt> will include all the
+                XML files in the "my-topic-set" directory.  Thus, best practice is to keep topic
+                source files in directories that correspond to topic sets.</p>
+                  </dd>
+               </dl>
+            
+            
+
+            
+
+            
+         <a name="Do"> </a>
+         <h2>Do</h2>
+
+               <p> Create a <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> configuration XML file for each topic set
+                in the <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set.html" class="default" title="Configuration setting: topic-set">/topic-set</a></b> XML structure shown in
+                the example below. Set configuration entries in the order listed: </p>
+
+               <ul>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-set-id.html" class="default" title="Configuration setting: topic-set-id">/topic-set/topic-set-id</a></b>: A unique
+                        topic set identifier. (Required)</p> 
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-set-type.html" class="default" title="Configuration setting: topic-set-type">/topic-set/topic-set-type</a></b>: A user
+                        defined type name that's used in the <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a>
+                        configuration to control the order in which topic sets appear in the output
+                        <a href="../eppo-simple-writing/task-table-of-contents.html" class="default" title="Task: Tables of Contents">table of contents</a>. (Required) </p> 
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-set-link-priority.html" class="default" title="Configuration setting: topic-set-link-priority">/topic-set/topic-set-link-priority</a></b>:
+                        An integer that sets the priority of the topic set for soft linking. Lower
+                        values have higher priority. Default priority is 1. (Optional) </p> 
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-types.html" class="default" title="Configuration setting: topic-types">/topic-set/topic-types</a></b>: A list of
+                        topic types to be included in output. Only those sources listed in the
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_sources.html" class="default" title="Configuration setting: sources">/topic-set/sources</a></b> configuration
+                        with these types will be included. The order listed here will set the order
+                        of appearance in the topic set's <a href="../eppo-simple-writing/task-table-of-contents.html" class="default" title="Task: Tables of Contents">table of contents</a>.
+                        (Required)</p> 
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_object-types.html" class="default" title="Configuration setting: object-types">/topic-set/object-types</a></b>: A list of
+                        <a href="../spfe-configuration-reference/_object-type.html" class="default" title="Configuration setting: object-type">object types</a>. (Optional) </p> 
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_presentation-types.html" class="default" title="Configuration setting: presentation-types">/topic-set/presentation-types</a></b>: A
+                        list of <a href="../spfe-docs-lists/feature_presentation.html" class="default" title="A list of topics on a subject: Feature: presentation">presentation</a> types. A presentation type
+                        controls how each topic's structure will map into a structure needed for
+                        output formatting. (Required) </p> 
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_output-formats.html" class="default" title="Configuration setting: output-formats">/topic-set/output-formats</a></b>: The list
+                        of output media types to be generated for the topic set. (Required)</p>
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_sources.html" class="default" title="Configuration setting: sources">/topic-set/sources</a></b>: A specification
+                        of source files for the topic set. Include source files in these categories:
+                    <b class="decoration-bold">authored-content</b> for authored topics,
+                    <b class="decoration-bold">graphics</b> for authored graphics, or
+                    <b class="decoration-bold">sources-to-extract-content-from</b> and <b class="decoration-bold">authored-content-for-merge</b>for
+                        generated content. (Required) </p> 
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_condition-tokens.html" class="default" title="Configuration setting: condition-tokens">/topic-set/condition-tokens</a></b>: A list
+                        of tokens for conditional inclusion of topic fragments. (Optional) </p>
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_default-topic-scope.html" class="default" title="Configuration setting: default-topic-scope">/topic-set/default-topic-scope</a></b>:
+                        (Optional) </p> 
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_default-subject-scope.html" class="default" title="Configuration setting: default-subject-scope">/topic-set/default-subject-scope</a></b>:
+                        (Optional) </p> 
+                  </li>
+
+                  <li> 
+                     <p> 
+                        <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_strings.html" class="default" title="Configuration setting: strings">/topic-set/strings</a></b>: Identified
+                        strings that may be referenced in topic set contents. (Optional) </p> 
+                  </li>
+
+               </ul>
+
+               <h3>Example topic set configuration</h3>
+               <p> The following shows the <a href="../spfe-docs-lists/feature_topic20set.html" class="default" title="A list of topics on a subject: Feature: topic set">topic set</a> configuration for a set in the
+                SPFE documentation.  </p>
+               <pre>
+                
+&lt;spfe 
+    xmlns="http://spfeopentoolkit/ns/spfe-ot/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://spfeopentoolkit/ns/spfe-ot/config 
+    http://spfeopentoolkit.org/spfe-ot/1.0/schemas/config/spfe-config.xsd"&gt;
+
+    &lt;topic-set&gt;
+        &lt;topic-set-id&gt;spfe-development&lt;/topic-set-id&gt;
+        &lt;topic-set-type&gt;guide&lt;/topic-set-type&gt;
+
+        &lt;topic-types&gt;
+            &lt;topic-type&gt;
+                &lt;name&gt;{http://spfeopentoolkit.org/ns/spfe-docs}think-plan-do-topic&lt;/name&gt;
+                &lt;href&gt;../../topic-types/think-plan-do-topic/config.xml&lt;/href&gt;
+            &lt;/topic-type&gt;
+            &lt;topic-type&gt;
+                &lt;name&gt;{http://spfeopentoolkit.org/ns/spfe-docs}generic-topic&lt;/name&gt;
+                &lt;href&gt;../../topic-types/generic-topic/config.xml&lt;/href&gt;
+            &lt;/topic-type&gt;
+            &lt;topic-type&gt;
+                &lt;name&gt;{http://spfeopentoolkit.org/ns/spfe-docs}feature-topic&lt;/name&gt;
+                &lt;href&gt;../../topic-types/feature-topic/config.xml&lt;/href&gt;
+            &lt;/topic-type&gt;    
+        &lt;/topic-types&gt;
+         
+        &lt;presentation-types&gt;
+            &lt;presentation-type&gt;
+                &lt;name&gt;eppo&lt;/name&gt;
+            &lt;/presentation-type&gt;
+        &lt;/presentation-types&gt;       
+
+        &lt;output-formats&gt;
+            &lt;output-format&gt;
+                &lt;name&gt;html&lt;/name&gt;
+            &lt;/output-format&gt;
+        &lt;/output-formats&gt;
+
+        &lt;sources&gt;
+            &lt;authored-content&gt;
+                &lt;files&gt;
+                    &lt;include&gt;../../content/text/development/*.xml&lt;/include&gt;
+                    &lt;include&gt;../../content/text/fragments/*.xml&lt;/include&gt;
+                &lt;/files&gt;
+            &lt;/authored-content&gt;
+        &lt;/sources&gt;
+
+        &lt;default-topic-scope&gt;spfe&lt;/default-topic-scope&gt;
+        &lt;default-subject-scope&gt;spfe&lt;/default-subject-scope&gt;
+
+        &lt;build-rules&gt;${SPFEOT_HOME}/1.0/build-tools/spfe-rules.xml&lt;/build-rules&gt;
+
+        &lt;strings&gt;
+            &lt;string id="eppo-simple-topic-set-title"&gt;SPFE Development&lt;/string&gt;
+        &lt;/strings&gt;
+
+    &lt;/topic-set&gt;
+&lt;/spfe&gt;
+                
+         </pre>
+
+               
+            
+
+          
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Build directory structure</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Build directory structure</p>
+    
+         
+         
+            <h1>Build directory structure</h1>
+
+            <p>The build systems produces a directory structure inside the build directory. Understanding the build directory structure can help you debug problems with the build.</p>
+        
+            <p>By default, the build directory is named <b class="decoration-bold">spfebuild</b> and is created in the user's home directory. You can change the location of the build directory by setting the environment variable <tt class="decoration-code">SPFE_BUILD_DIR</tt>.</p>
+        
+            <p>The build script creates a directory for the content set being built, which is named
+            using the content set id (configured in
+            <b class="decoration-bold"><a href="../spfe-configuration-reference/_content-set_content-set-id.html" class="default" title="Configuration setting: content-set-id">/content-set/content-set-id</a></b>). Inside this directory it
+            creates a directory named <b class="decoration-bold">config</b> which contains the
+            consolidated <a href="configuration-file-overview.html" class="default" title="Concept: Configuration file overview">configuration file</a>, with the name
+                <b class="decoration-bold">spfe-config.xml</b>.</p>
+        
+            <p>The build then creates two additional directories in the content set directory,
+                <b class="decoration-bold">build</b>, where all the temporary files used by the
+            build are created, and <b class="decoration-bold">output</b>, where the output is
+            created.</p>
+        
+            <p>Inside the <b class="decoration-bold">build</b> directory, there are three directories,
+                <b class="decoration-bold">catalogs</b>, where the <a href="feature-catalogs.html" class="default" title="Feature: Link Catalogs">link catalogs</a> are created, <b class="decoration-bold">topic-sets</b>, where
+            the each stage of the topic set build is created, and
+                <b class="decoration-bold">tocs</b>, where the temporary TOC files are created.
+            The link catalogs and temporary TOCs are located outside of the topic set directories
+            because they are used by all topic set builds.</p>
+        
+            <p>Inside the <b class="decoration-bold">topic-sets</b> directory, a directory is created for each topic set in the build, with its name matching the <b class="decoration-bold"><a href="../spfe-configuration-reference/_topic-set_topic-set-id.html" class="default" title="Configuration setting: topic-set-id">topic-set-id</a></b> of each topic set.</p>
+        
+            <p>Inside each of these topic set directories, the following files and directories are created:</p>
+        
+            <ul>
+               <li>
+                  <p>A build flag for each stage of the build. The build flag is used by the build for
+                    dependency checking purposes. </p>
+               </li>
+               <li>
+                  <p>A directory named after each step in the build process (extract, merge, resolve,
+                    presentation, etc.). Each directory contains the generated scripts for that step
+                    and an out directory that hold the result of the step (except for the steps that
+                    produce the final output, where the output goes to the content set output
+                    directory.  </p>
+               </li>
+               <li>
+                  <p>The <b class="decoration-bold">image-list.txt</b> file, which is used to copy image files used in the topic set to the output directory.</p>
+               </li>
+            
+            </ul>
+         
+    
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>

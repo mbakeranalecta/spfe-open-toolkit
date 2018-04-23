@@ -1,0 +1,50 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Template: info</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-function-reference-toc.html" class="default" title="">SPFE Function Reference</a>
+             &gt; info</p>
+      <h1>Template: info</h1>
+      <dl>
+         <dt>Description</dt>
+         <dd>
+                <p>Outputs a information message to the build console.</p>
+            </dd>
+      </dl>
+      <dl>
+         <dt>Source file</dt>
+         <dd>
+            <p>$SPFEOT_HOME/1.0/scripts/common/utility-functions.xsl</p>
+         </dd>
+      </dl>
+      <h3>Parameters</h3>
+      <dl>
+         <dt>message</dt>
+         <dd>
+            <p>Type: item()*</p>
+                        <p>The message to be output. The string "Info: " will be prefixed to the message.</p>
+                    </dd>
+      </dl>
+      <h3>Definition</h3>
+      <pre>
+            &lt;xsl:template name="sf:info"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="message"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:if test="$verbosity='info'"&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:message select="'Info: ', string-join($message, '')"/&gt;
+		             &nbsp;&nbsp;&lt;/xsl:if&gt;
+	           &lt;/xsl:template&gt;
+         
+            &lt;xsl:template name="sf:info"&gt;
+		             &nbsp;&nbsp;&lt;xsl:param name="message"/&gt;
+		             &nbsp;&nbsp;&lt;xsl:if test="$verbosity='info'"&gt;
+			               &nbsp;&nbsp;&nbsp;&nbsp;&lt;xsl:message select="'Info: ', string-join($message, '')"/&gt;
+		             &nbsp;&nbsp;&lt;/xsl:if&gt;
+	           &lt;/xsl:template&gt;
+         </pre>
+   </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:34.</p></div></body></html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>SPFE Open Toolkit Documentation</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; SPFE Open Toolkit Documentation</p>
+         
+         
+            <h1>SPFE Open Toolkit Documentation</h1>
+            <p>The SPFE Open Toolkit is a toolkit for building
+            content creation systems using the SPFE architecture. </p>
+            <p>The SPFE architecture is designed to facilitate the creation of structured writing
+            systems that use a <a href="spfe-docs-essays/bottom-up-ia.html" class="default" title="Essay: Bottom-up Information Architecture">bottom-up information architecture</a>. </p>
+            <p>Bottom-up information architectures are common on the Web. Both wikis and blogging
+            platforms, as well as many Web CMS work on the bottom-up pattern. However, there are no
+            bottom-up systems based on markup-based structured writing principles (some
+            database-based structured bottom-up systems exist). The SPFE Open Toolkit
+            is designed to fill this gap.</p>
+            <p>The SPFE-OT is also capable of creating
+            <a href="spfe-docs-essays/bottom-up-ia.html" class="default" title="Essay: Bottom-up Information Architecture">top-down</a> and
+            hybrid <a href="spfe-docs-essays/bottom-up-ia.html" class="default" title="Essay: Bottom-up Information Architecture">top-down</a>/<a href="spfe-docs-essays/bottom-up-ia.html" class="default" title="Essay: Bottom-up Information Architecture">bottom-up information architectures</a>.</p>
+            
+         <a name="The20current20state20of20the20SPFE20documentation"> </a>
+               <h2>The current state of the SPFE documentation</h2>
+               <p>The SPFE documentation has been developed to date as a testbed for the SPFE Open
+                Toolkit. It is not complete and it may contain information that no longer describes
+                the current state of the toolkit or the accompanying schemas. </p>
+               <p>The biggest questions you probably have about SPFE are why it was developed in the
+                first place given that we already have so many structured writing tools such as
+                DocBook, DITA, Markdown, reStructuredText, LaTeX, and ASCIIDoc. The best answers to
+                those questions are to be found in two books I have written. (Both books came about,
+                essentially, to explain why SPFE, and writing the two books has delayed work on SPFE
+                itself for a long time. The books are:</p>
+               <ul>
+                  <li>
+                    <p>
+                        <a href="https://xmlpress.net/publications/eppo/" class="default" title="">Every Page is Page One: Topic-based Writing for Technical Communication and the Web</a>,
+                        XML Press, 2013.</p>
+                  </li>
+                  <li>
+                    <p>Structured Writing: Rhetoric and Process, XML Press, forthcoming 2018 (Check
+                        the XML Press site to see if it is out yet:
+                        <a href="https://xmlpress.net" class="default" title="">https://xmlpress.net</a>.</p>
+                  </li>
+               </ul>
+               <p>The <em class="decoration-italic">Every Page is Page One</em> book describes an approach to information
+                design which I call <a href="spfe-docs-essays/bottom-up-ia.html" class="default" title="Essay: Bottom-up Information Architecture">bottom-up information architecture</a>, which is
+                based on the user behavior of finding content principally by search, which can throw
+                the reader into any page in a content set (thus, Every Page is Page One). Fully
+                supporting this requires an approach that makes every page work as the first page
+                the reader sees and supports adequate navigational aids for readers to move onward
+                to other topics they may need. Wikipedia is an excellent example of a bottom-up
+                information architecture. Most current structured writing tools do not support
+                bottom-up information architecture well. (Wikis are bottom-up by nature, but also
+                unstructured.) SPFE is designed to support the creation of bottom-up information
+                architectures. </p>
+               <p>The <em class="decoration-italic">Structured Writing</em> book provided an overview of structured
+                writing techniques and systems, but it highlights an approach to structured writing
+                which I call the subject-domain approach. Most current structured writing systems
+                are either wholly or principally document-domain systems. The subject domain
+                approach has many advantages, both in terms of rhetoric and process, and it is
+                particularly advantageous when creating a bottom-up information architecture. SPFE
+                is designed to support the use of subject-domain structured writing. </p>
+               <p>The SPFE documentation is intended to be an example of bottom-up information
+                architecture, but it isn't there yet. My intention is to return to the SPFE
+                documentation once the <em class="decoration-italic">Structured Writing</em> book is complete. </p>
+            
+            
+         <a name="The20role20of20SAM"> </a>
+               <h2>The role of SAM</h2>
+               <p>Along the way, the writing of the <em class="decoration-italic">Structured Writing</em> book gave birth
+                to another project, to develop a alternative markup language for structured writing.
+                The vast majority of structured writing today is done in XML using a structured XML
+                editor which presents a pseudo-WYSIWYG graphical editing environment to the writer.
+                This is inherently a document-domain writing environment. It has
+                <a href="https://everypageispageone.com/2016/01/28/why-does-xml-suck/" class="default" title="">many problems</a>
+                even for working in the document domain, but it is even more difficult to work in
+                when writing in the subject domain. Many people today prefer to work in lightweight
+                markup languages such as MarkDown which you can create easily using a simple text
+                editor. However, all current lightweight markup languages are simple document domain
+                languages. There was no lightweight markup language that could be used to create
+                specific subject-domain semantics for writing about specific subjects. Something new
+                was needed to make writing in the subject domain easy for writers. </p>
+               <p>For this purpose, I created SAM (<em class="decoration-italic">Semantic Authoring Markdown</em>, or
+                <em class="decoration-italic">Semantic Authoring Markup</em> as you please). The
+                <em class="decoration-italic">Structured Writing</em> book is written SAM and used SAM for most of its
+                examples. You can find SAM at <a href="https://mbakeranalecta.github.io/sam/" class="default" title="">https://mbakeranalecta.github.io/sam/</a>. SAM
+                is not intended to completely replace XML, which is more general than SAM and works
+                fine for most of the things it is used for. SAM is intended as a front-end authoring
+                language for structured writing systems that would still use XML internally. The
+                current version of SPFE is still basically and XML-based system and will remain XML
+                based in all of its internals. It has basic support for SAM as an input language,
+                and this will be expanded so that SAM will become the main way to write content in
+                SPFE. XML will always be supported as an authoring language as well, however. It is
+                part of the design intent for SPFE that it should be as catholic as possible in the
+                formats it accepts. </p>
+            
+            
+         <a name="Writing20in20a20SPFE20Environment"> </a>
+               <h2>Writing in a SPFE Environment</h2>
+               <p>SPFE is intended to make structured writing as simple as possible for writers by
+                minimizing how much they need to understand about the publishing system, and by
+                minimizing the need to understand to interact with the overall body of content that
+                an organization maintains. Traditional content management approaches of ten require
+                substantial knowledge of both the system itself and the whole corpus of content in
+                order to participate fully in content creation. SPFE is designed to avoid this by
+                creating a publish and content management environment that is driven by
+                <a href="spfe-docs-essays/structured-content.html" class="default" title="Essay: What is structured content?">metadata</a> about the subject matter of the content (subject-domain
+                markup) -- something that the author naturally understands.</p>
+               <p>Structured authoring is also easier if the structures that authors are asked to
+                create are simple and related as specifically as possible to the subject matter they
+                are writing about. SPFE is designed to work best with small subject-specific
+                structures, and to make it as easy as possible to
+                design and implement such structures.</p>
+            
+            
+         <a name="Schemas"> </a>
+               <h2>Schemas</h2>
+               <p>As a <a href="spfe-docs-essays/structured-content.html" class="default" title="Essay: What is structured content?">structured writing</a> system, SPFE works with content that conforms to a
+                set of formal rules known as a schema. Schemas define which
+                content structures can be used in which situations. Successful
+                processing of content depends on the content conforming to both the
+                letter and the spirit of the appropriate schema. </p>
+               <p>However, unlike the DocBook and DITA systems, SPFE is not based on a particular schema. Rather,
+            SPFE is a modular content processing architecture that can be used with a variety of
+            schemas. However, SPFE does make certain presumptions about how schemas will be
+                written. In particular it expects a <a href="spfe-docs-essays/declarative-markup.html" class="default" title="Essay: Declarative markup">declarative style of markup</a> in which the document markup does not contain any publishing or
+            content management directives. </p>
+               <p>To enable users to get up to speed quickly, and to provide a baseline of functionality
+            for building SPFE-compatible schemas, SPFE Open Toolkit includes the <a href="eppo-simple-writing/eppo-simple-overview.html" class="default" title="Concept: EPPO Simple Overview">EPPO Simple</a> schema set. EPPO Simple is a highly
+            modularized set of schemas and associated processing that you can use directly or as the
+            basis for creating your own schemas.</p>
+                
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:20.</p></div></body></html>

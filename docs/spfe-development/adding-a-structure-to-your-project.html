@@ -1,0 +1,173 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:lf="local-functions" xmlns:config="http://spfeopentoolkit.org/ns/spfe-ot/config" xmlns:gr="http://spfeopentoolkit.org/ns/eppo-simple/objects/graphics" xmlns:sf="http://spfeopentoolkit.org/spfe-ot/1.0/functions" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Adding a new structure</title><link rel="stylesheet" type="text/css" href="style/eppo-simple.css"><link rel="stylesheet" type="text/css" href="style/css-tree.css"></head><body><div id="main-container"><div id="main">
+      <p>
+            <a href="../index.html" class="default" title="">SPFE Documentation</a>
+            
+            | 
+            
+               <a href="../spfe-docs-home-toc.html" class="default" title="">Collections</a>
+             &gt; 
+               <a href="spfe-development-toc.html" class="default" title="">SPFE Development</a>
+             &gt; Adding a new structure</p>
+
+         
+         
+            <h1>Adding a new structure</h1>
+      <ul class="page-toc">
+         <li>
+            <a href="#Think" class="default" title="">Think</a>
+         </li>
+         <li>
+            <a href="#Plan" class="default" title="">Plan</a>
+         </li>
+         <li>
+            <a href="#Do" class="default" title="">Do</a>
+         </li>
+      </ul>
+            
+         <a name="Think"> </a>
+         <h2>Think</h2>
+               <p>A <a href="../spfe-docs-lists/feature_structure.html" class="default" title="A list of topics on a subject: Feature: structure">structure</a> is a collection of document structure elements that
+                work together to provide some distinct text structure such as a
+                    <b class="decoration-bold">list</b> or a
+                    <b class="decoration-bold">table</b>. A
+                <a href="../spfe-docs-lists/feature_topic20type.html" class="default" title="A list of topics on a subject: Feature: topic type">topic type</a> is made up of an appropriate collection of structures.
+                EPPO-simple provides a selection of structures that you can use to create
+                <a href="../spfe-configuration-reference/_topic-type.html" class="default" title="Configuration setting: topic-type">topic types</a> for your <a href="../spfe-docs-lists/feature_content20set.html" class="default" title="A list of topics on a subject: Feature: content set">content set</a>. In some
+                cases, however, you may want to create a new structure specifically for one or more
+                topic types in your content set. </p>
+               <p>For example, the SPFE Docs include a demo topic type which is designed to show how
+                various features of SPFE and EPPO-simple are used. Demo topics need to show samples
+                of the output produced by these features. To enable the formatting routines to set
+                these samples apart from ordinary text, it uses an output-sample structure. This
+                structure is not needed in most topic types in the SPFE docs, and is certainly not
+                needed by most content sets unless they describe structured text systems like
+                SPFE.</p>
+            
+            
+         <a name="Plan"> </a>
+         <h2>Plan</h2>
+               <a name="Do20I20need20a20custom20structure3F"> </a><dl>
+            
+                  <dt>Do I need a custom structure?</dt>
+                  <dd>
+                    <p>In many cases, it is possible to use an existing structure that will produce
+                        the output effect you are looking for, or something close enough to it.
+                        Given this, is it worth creating a custom structure. For instance, the SPFE
+                        Docs could have used a generic
+                        <b class="decoration-bold">blockquote</b> element to contain and
+                        output sample. Some reasons to create a custom structure are:</p>
+                    <ol class="labeled-list">
+                        <li><p><b>Greater clarity - </b>A custom structure more clearly expresses what the content it contain
+                                means. This helps authors, editors, and downstream processes to
+                                process the structure correctly.</p></li>
+                        <li><p><b>More specific structure - </b>You can express more precise structural requirements with a custom
+                                structure. Parts of a generic structure may be optional whereas you
+                                want them to be required in your custom structure. You can also
+                                require or allow the custom structure at more specific places in
+                                your topic type. This also makes it easier to audit and validate your content. </p></li>
+                    </ol>
+                    <ol class="labeled-list">
+                        <li><p><b>More formatting control - </b>Creating a custom structure makes it easy to specify specific formatting for the structure in different media.</p></li>
+                    </ol>
+                  </dd>
+               </dl>
+               <a name="Why20not20just20use20an20attribute20to20modify20the20handling20of20an20existing20structure"> </a><dl>
+            
+                  <dt>Why not just use an attribute to modify the handling of an existing structure</dt>
+                  <dd>
+                    <p>Many structured text vocabularies use generic structures and then use
+                        attributes on the root element of those structures to designate a more
+                        specific type. For instance, in DITA, admonitions are indicated with a
+                        generic note element with a type elements that indicates the type of
+                        admonition:
+                        <tt class="decoration-code">note | tip | fastpath | restriction | important | remember | attention | caution | danger | other</tt>.
+                        EPPO-simple, on the other hand, supplies different sets of admonition
+                        structures for different purposes. For instance, if you add the
+                            <b class="decoration-bold">admonitions.danger-warning-caution-notice</b>
+                        structure to your topic type, you will get for separate admonition
+                        structures: danger, warning, caution, and notice. There are a number of
+                        advantages to this approach:</p>
+                    <ol class="labeled-list">
+                        <li><p><b>Easier to author - </b>If an author wants to add a warning to a piece of text is easier to
+                                think “Warning” than to think
+                                “note with a warning attribute” and it is easier to
+                                create a warning element than to create a note element and add a
+                                warning attribute. </p></li>
+                        <li><p><b>Better guidance - </b>For any given subject matter, topic type, content set, or company
+                                style, only certain sets of admonitions are appropriate. You don't
+                                want authors to have to remember which are allowed and which are not
+                                allowed from a large set. You only want them to have the appropriate
+                                ones available. </p></li>
+                    </ol>
+                  </dd>
+               </dl>
+               <a name="Should20I20create20a20custom20structure20in20my20content20set20project20or20as20a20SPFE-OT20plugin"> </a><dl>
+            
+                  <dt>Should I create a custom structure in my content set project or as a SPFE-OT plugin</dt>
+                  <dd>
+                     <p>You can define a custom structure within you content project or you can make
+                        it a separate plugin. If the structure is unique to a particular content
+                        set, create it there. If it is potentially usuable for several content sets,
+                        make it a plugin. If you think it is potentially useful to others and you
+                        are willing to share, you could submit it to the SPFE Open Toolkit for possible inclusion in the standard structures
+                        distributed with the toolkit. </p>
+                  </dd>
+               </dl>
+            
+            
+         <a name="Do"> </a>
+         <h2>Do</h2>        
+               <p>To create a custom structure:</p>
+               
+                  <h3>Creating a custom structure</h3>
+                  
+                    <p>This is the high-level procedure for creating a custom structure.</p>
+                  
+                  
+                    
+                        <h4>Step&nbsp;1:&nbsp;Create the structure directory</h4>
+                        <p>Select the appropriate location for your structure and create a
+                                structure directory there. If you want to create
+                            more than one version of a structure, create a main structure directory
+                            for this class of structure and one subdirectory for each specific type
+                            of this class. For an example, see the EPPO-simple admonitions
+                            structure, which contains a variety of different specific admonitions
+                            structures for various collections of admonitions.</p>
+                        <p>Unless it is a parent directory for different variation on the structure,
+                            each structure directory contain a config file and three directories:
+                            schemas, scripts, and style. (But not every structure needs to define
+                            all these things, so you may not need all three directories in each
+                            case.)</p>
+                    
+                    
+                        <h4>Step&nbsp;2:&nbsp;Create an authoring schema for your structure</h4>
+                        
+                    
+                    
+                        <h4>Step&nbsp;3:&nbsp;Create one or more presentation schemas for your structure</h4>
+                        
+                    
+                    
+                        <h4>Step&nbsp;4:&nbsp;Create scripts for processing your structure</h4>
+                        
+                    
+                    
+                        <h4>Step&nbsp;5:&nbsp;Create CSS stylesheets for authoring and displaying your
+                            structure</h4>
+                        
+                    
+                    
+                        <h4>Step&nbsp;6:&nbsp;Create a configuration file for your structure</h4>
+                        
+                    
+                    
+                        <h4>Step&nbsp;7:&nbsp;Add your structure to your topic type</h4>
+                        
+                    
+                  
+               
+            
+         
+      </div></div><div id="footer"><br><br><hr><p>Generated on 2018-04-23 16:05:18.</p></div></body></html>
