@@ -278,9 +278,6 @@ def _build_formatting_stage(config, topic_set_id):
             format_output_dir = config.content_set_output_dir
         else:
             format_output_dir = posixpath.join(config.content_set_output_dir, topic_set_id)
-        presentation_type = config.setting(
-            'content-set/output-formats/output-format[name="{ft}"]/presentation-type'.format(
-                ft=format_type))
 
         presentation_type = config.setting(
             'content-set/output-formats/output-format[name="{ft}"]/presentation-type'.format(
@@ -359,7 +356,7 @@ def _convert_sam_files(sam_files, sam2xml_dir):
         outfile = posixpath.join(sam2xml_dir, xml_version)
         #os.makedirs(os.path.dirname(outfile), exist_ok=True)
         try:
-            with open(outfile, "x") as outf:
+            with open(outfile, "wb") as outf:
                 for i in sp.doc.serialize_xml():
                     outf.write(i)
         except:

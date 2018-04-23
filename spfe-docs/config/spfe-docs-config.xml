@@ -172,20 +172,10 @@
             <href>../../spfe-ot/plugins/eppo-simple/output-types/xhtml/config.xml</href>
         </output-format>
     </output-formats>              
-    <wip-site>
-        <url>wip-site.href</url>
-        <ftp>
-            <url>wip-site.ftp.url</url>
-            <user>wip-site.ftp.user</user>
-            <password>wip-site.ftp.password</password>
-        </ftp>
-        <path>wip-site.ftp</path>
-    </wip-site>
-
     <strings>
         <string id="product">SPFE Open Toolkit</string>
         <string id="product-release">1.0 (alpha 1)</string>
-        <string id="copyright">Copyright © 2014 Analecta Communications Inc.</string>
+        <string id="copyright">Copyright © 2018 Analecta Communications Inc.</string>
     </strings>
  </content-set>
 
