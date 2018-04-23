@@ -23,3 +23,4 @@ To build the SPFE docs:
 The build will create a directory spfebuild in your home directory. 
 The SPFE docs will be in \{home\}/spfebuild/spfe-docs/output.
 
+The SPFE docs are also avaialble online at http://mbakeranalecta.github.io/spfe-open-toolkit/

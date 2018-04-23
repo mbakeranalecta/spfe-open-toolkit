@@ -149,5 +149,10 @@
             /> includes the <feature>EPPO Simple</feature> schema set. EPPO Simple is a highly
             modularized set of schemas and associated processing that you can use directly or as the
             basis for <task>creating your own schemas</task>.</p>
-</section>    </body>
+</section>
+        <section>
+            <title>Installing the SPFE Open Toolkit</title>
+            <p>The SPFE Open Toolkit is available on GitHub at
+                <url>https://github.com/mbakeranalecta/spfe-open-toolkit</url>.</p>
+        </section>    </body>
 </content-set-home-topic>
