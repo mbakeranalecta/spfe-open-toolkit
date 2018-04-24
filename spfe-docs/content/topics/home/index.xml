@@ -100,7 +100,9 @@
                 languages. There was no lightweight markup language that could be used to create
                 specific subject-domain semantics for writing about specific subjects. Something new
                 was needed to make writing in the subject domain easy for writers. </p>
-            <p>For this purpose, I created SAM (<italic>Semantic Authoring Markdown</italic>, or
+            <p>For this purpose, I created
+                <link-external href="https://mbakeranalecta.github.io/sam/index.html">SAM</link-external>
+                (<italic>Semantic Authoring Markdown</italic>, or
                 <italic>Semantic Authoring Markup</italic> as you please). The
                 <italic>Structured Writing</italic> book is written SAM and used SAM for most of its
                 examples. You can find SAM at <url>https://mbakeranalecta.github.io/sam/</url>. SAM
